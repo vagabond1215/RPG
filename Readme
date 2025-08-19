@@ -1,1 +1,12 @@
+# Text RPG
 
+Initial project setup for a text-based RPG. Directories are prepared for assets and game data so they can be expanded over time.
+
+## Directory Layout
+- `assets/images/` – placeholder for game images
+- `data/` – placeholder for data files such as characters, items, etc.
+
+## Character
+`rpg/character.py` defines a basic `Character` class with attributes like `hp`, `mp`, `stamina`, regen values, `level`, and core stats (`str`, `dex`, `agi`, `con`, `int`, `wis`, `cha`, `luk`).
+
+It also declares equipment slots including `main hand`, `off hand`, `head`, `left ear`, `right ear`, `neck`, `body`, `hands`, `waist`, `legs`, `feet`, and `back`.
