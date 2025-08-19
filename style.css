@@ -1,0 +1,84 @@
+:root {
+  --ui-scale: 1;
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+html {
+  font-size: calc(16px * var(--ui-scale));
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.top-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--background);
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.top-menu button {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--foreground);
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+#dropdownMenu {
+  position: fixed;
+  top: 3.5rem;
+  left: 0;
+  width: 100%;
+  background: var(--background);
+  border-top: 1px solid var(--foreground);
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 90;
+}
+
+#dropdownMenu.active {
+  display: flex;
+}
+
+#dropdownMenu button {
+  padding: 1rem;
+  text-align: left;
+  border: none;
+  border-top: 1px solid var(--foreground);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 1rem;
+}
+
+body.theme-light {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+body.theme-sepia {
+  --background: #f4ecd8;
+  --foreground: #5b4636;
+}
+
+body.theme-dark {
+  --background: #222222;
+  --foreground: #eeeeee;
+}
