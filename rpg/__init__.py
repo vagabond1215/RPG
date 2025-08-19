@@ -6,6 +6,7 @@ from .character import (
     Character,
     EquipmentSlot,
     Nature,
+    Race,
     Sex,
     StandardClass,
 )
@@ -16,6 +17,7 @@ __all__ = [
     "Character",
     "EquipmentSlot",
     "Nature",
+    "Race",
     "Sex",
     "StandardClass",
 ]

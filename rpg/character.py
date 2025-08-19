@@ -35,6 +35,14 @@ class Nature(Enum):
     CHAOTIC = "chaotic"
 
 
+class Race(Enum):
+    """Common fantasy races."""
+    HUMAN = "Human"
+    ELF = "Elf"
+    DWARF = "Dwarf"
+    ORC = "Orc"
+
+
 class Sex(Enum):
     """Biological sex of the character."""
     MALE = "male"
@@ -62,6 +70,7 @@ class Character:
     luk: int = 0
     alignment: Alignment = Alignment.NEUTRAL
     nature: Nature = Nature.NEUTRAL
+    race: Race = Race.HUMAN
     sex: Sex = Sex.MALE
     base_class: StandardClass = StandardClass.FIGHTER
     advanced_class: Optional[AdvancedClass] = None
