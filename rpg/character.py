@@ -2,6 +2,8 @@ from dataclasses import dataclass, field
 from enum import Enum, auto
 from typing import Dict, Optional
 
+from .dnd_classes import AdvancedClass, StandardClass
+
 
 class EquipmentSlot(Enum):
     """All possible equipment slots for a character."""
@@ -17,6 +19,26 @@ class EquipmentSlot(Enum):
     LEGS = auto()
     FEET = auto()
     BACK = auto()
+
+
+class Alignment(Enum):
+    """Character alignment on the good-evil axis."""
+    GOOD = "good"
+    NEUTRAL = "neutral"
+    EVIL = "evil"
+
+
+class Nature(Enum):
+    """Character nature on the lawful-chaotic axis."""
+    LAWFUL = "lawful"
+    NEUTRAL = "neutral"
+    CHAOTIC = "chaotic"
+
+
+class Sex(Enum):
+    """Biological sex of the character."""
+    MALE = "male"
+    FEMALE = "female"
 
 
 @dataclass
@@ -38,6 +60,11 @@ class Character:
     wis: int = 0
     cha: int = 0
     luk: int = 0
+    alignment: Alignment = Alignment.NEUTRAL
+    nature: Nature = Nature.NEUTRAL
+    sex: Sex = Sex.MALE
+    base_class: StandardClass = StandardClass.FIGHTER
+    advanced_class: Optional[AdvancedClass] = None
     equipment: Dict[EquipmentSlot, Optional[str]] = field(
         default_factory=lambda: {slot: None for slot in EquipmentSlot}
     )
