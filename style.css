@@ -71,6 +71,21 @@ body {
   font-size: 1rem;
 }
 
+.no-character {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 4rem);
+  text-align: center;
+}
+
+.no-character button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
 body.theme-light {
   --background: #ffffff;
   --foreground: #000000;
