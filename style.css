@@ -2,6 +2,8 @@
   --ui-scale: 1;
   --background: #ffffff;
   --foreground: #000000;
+  --menu-color-dark: #003366;
+  --menu-color-light: #66a3ff;
 }
 
 html {
@@ -35,9 +37,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--foreground);
-  background: var(--background);
-  color: var(--foreground);
+  border: 2px solid var(--menu-color-light);
+  background: transparent;
+  color: var(--menu-color-dark);
+  -webkit-text-stroke: 1px var(--menu-color-light);
   cursor: pointer;
 }
 
@@ -74,8 +77,8 @@ body.theme-light {
 }
 
 body.theme-sepia {
-  --background: #f4ecd8;
-  --foreground: #5b4636;
+  --background: #e8dcc2;
+  --foreground: #4a3b2d;
 }
 
 body.theme-dark {

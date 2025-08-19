@@ -1,18 +1,23 @@
 const body = document.body;
 
-// Theme buttons
-const themeButtons = {
-  light: document.getElementById('theme-light'),
-  sepia: document.getElementById('theme-sepia'),
-  dark: document.getElementById('theme-dark')
+// Theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const themes = ['light', 'dark', 'sepia'];
+const themeIcons = { light: '☀', dark: '☾', sepia: '▤' };
+let currentThemeIndex = themes.indexOf(
+  [...body.classList].find(c => c.startsWith('theme-')).replace('theme-', '')
+);
+const setTheme = index => {
+  body.classList.remove('theme-light', 'theme-dark', 'theme-sepia');
+  const theme = themes[index];
+  body.classList.add(`theme-${theme}`);
+  themeToggle.textContent = themeIcons[theme];
 };
-
-Object.entries(themeButtons).forEach(([theme, btn]) => {
-  btn.addEventListener('click', () => {
-    body.classList.remove('theme-light', 'theme-sepia', 'theme-dark');
-    body.classList.add(`theme-${theme}`);
-  });
+themeToggle.addEventListener('click', () => {
+  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+  setTheme(currentThemeIndex);
 });
+setTheme(currentThemeIndex);
 
 // UI scale buttons
 let uiScale = 1;
@@ -28,18 +33,24 @@ document.getElementById('scale-inc').addEventListener('click', () => {
   updateScale();
 });
 
-// Layout buttons
-const layoutButtons = {
-  landscape: document.getElementById('layout-landscape'),
-  portrait: document.getElementById('layout-portrait'),
-  auto: document.getElementById('layout-auto')
+// Layout toggle
+const layoutToggle = document.getElementById('layout-toggle');
+const layouts = ['landscape', 'portrait', 'auto'];
+const layoutIcons = { landscape: '▭', portrait: '▯', auto: '⟳' };
+let currentLayoutIndex = layouts.indexOf(
+  [...body.classList].find(c => c.startsWith('layout-')).replace('layout-', '')
+);
+const setLayout = index => {
+  body.classList.remove('layout-landscape', 'layout-portrait', 'layout-auto');
+  const layout = layouts[index];
+  body.classList.add(`layout-${layout}`);
+  layoutToggle.textContent = layoutIcons[layout];
 };
-Object.entries(layoutButtons).forEach(([layout, btn]) => {
-  btn.addEventListener('click', () => {
-    body.classList.remove('layout-landscape', 'layout-portrait', 'layout-auto');
-    body.classList.add(`layout-${layout}`);
-  });
+layoutToggle.addEventListener('click', () => {
+  currentLayoutIndex = (currentLayoutIndex + 1) % layouts.length;
+  setLayout(currentLayoutIndex);
 });
+setLayout(currentLayoutIndex);
 
 // Dropdown menu
 const menuButton = document.getElementById('menu-button');
