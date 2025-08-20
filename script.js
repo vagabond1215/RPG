@@ -1,5 +1,6 @@
 const body = document.body;
 const main = document.querySelector('main');
+const backButton = document.getElementById('back-button');
 
 // --- Profile and save management ---
 const STORAGE_KEY = 'rpgProfiles';
@@ -10,6 +11,16 @@ let currentProfile = currentProfileId ? profiles[currentProfileId] : null;
 let currentCharacter = null;
 
 const saveProfiles = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
+
+const formatHeight = cm => {
+  const totalInches = Math.round(cm / 2.54);
+  const feet = Math.floor(totalInches / 12);
+  const inches = totalInches % 12;
+  return `${feet}' ${inches}"`;
+};
+
+const showBackButton = () => (backButton.style.display = 'inline-flex');
+const hideBackButton = () => (backButton.style.display = 'none');
 
 const savePreference = (key, value) => {
   if (!currentProfile) return;
@@ -59,15 +70,48 @@ function selectProfile() {
 
 function showCharacter() {
   if (!currentCharacter) return;
-  main.innerHTML = `<h1>Welcome, ${currentCharacter.name}</h1>`;
+  hideBackButton();
+  const portrait = currentCharacter.image
+    ? `<img src="${currentCharacter.image}" alt="portrait" class="main-portrait">`
+    : '';
+  main.innerHTML = `<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1>${portrait}</div>`;
 }
 
 function showNoCharacterUI() {
+  hideBackButton();
   main.innerHTML = `<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`;
   document.getElementById('new-character').addEventListener('click', startCharacterCreation);
 }
 
+function showMainUI() {
+  if (currentCharacter) {
+    showCharacter();
+  } else {
+    showNoCharacterUI();
+  }
+}
+
+function showCharacterUI() {
+  if (!currentCharacter) {
+    startCharacterCreation();
+    return;
+  }
+  showBackButton();
+  const c = currentCharacter;
+  const portrait = c.image ? `<img src="${c.image}" alt="portrait" style="width:10rem;height:10rem;">` : '';
+  const info = `<p>Race: ${c.race}</p><p>Sex: ${c.sex}</p><p>Hair Color: ${c.hairColor}</p><p>Eye Color: ${c.eyeColor}</p><p>Height: ${formatHeight(c.height)}</p>`;
+  main.innerHTML = `<div class="no-character"><h1>${c.name}</h1>${portrait}${info}<button id="delete-character">Delete Character</button></div>`;
+  document.getElementById('delete-character').addEventListener('click', () => {
+    delete currentProfile.characters[c.id];
+    currentProfile.lastCharacter = null;
+    currentCharacter = null;
+    saveProfiles();
+    showMainUI();
+  });
+}
+
 function startCharacterCreation() {
+  showBackButton();
   const character = {};
   const fields = [
     {
@@ -111,7 +155,7 @@ function startCharacterCreation() {
         inputHTML = '<input type="color" id="cc-input" value="#000000">';
       } else if (field.type === 'range') {
         const [min, max] = heightRanges[character.race] || [100, 200];
-        inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${min}"><span id="cc-value">${min}</span>`;
+        inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${min}"><span id="cc-value">${formatHeight(min)}</span>`;
       }
 
       main.innerHTML = `<div class="no-character"><h1>${field.label}</h1>${inputHTML}<button id="next-step">Next</button></div>`;
@@ -120,7 +164,7 @@ function startCharacterCreation() {
         const rangeInput = document.getElementById('cc-input');
         const valueSpan = document.getElementById('cc-value');
         rangeInput.addEventListener('input', () => {
-          valueSpan.textContent = rangeInput.value;
+          valueSpan.textContent = formatHeight(parseInt(rangeInput.value, 10));
         });
       }
 
@@ -132,20 +176,74 @@ function startCharacterCreation() {
         renderStep();
       });
     } else {
-      main.innerHTML = `<div class="no-character"><h1>Name your character...</h1><input type="text" id="name-input"><button id="complete-character">Complete</button></div>`;
-      document.getElementById('complete-character').addEventListener('click', () => {
+      main.innerHTML = `<div class="no-character"><h1>Name your character...</h1><input type="text" id="name-input"><button id="create-character">Create</button></div>`;
+      document.getElementById('create-character').addEventListener('click', () => {
         const name = document.getElementById('name-input').value.trim();
         if (!name) return;
-        const id = Date.now().toString();
-        const newChar = { id, name, ...character };
-        currentProfile.characters[id] = newChar;
-        currentProfile.lastCharacter = id;
-        currentCharacter = newChar;
-        saveProfiles();
-        showCharacter();
+        character.name = name;
+        generatePortraitOptions(character);
       });
     }
   }
+}
+
+async function generatePortraitOptions(character) {
+  main.innerHTML = `<div class="no-character"><h1>Generating portraits...</h1></div>`;
+  const prompt = `Dungeons & Dragons manual style portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()} with ${character.hairColor} hair and ${character.eyeColor} eyes, ${formatHeight(character.height)} tall.`;
+  try {
+    let apiKey = localStorage.getItem('openaiApiKey');
+    if (!apiKey) {
+      apiKey = prompt('Enter OpenAI API key:');
+      if (apiKey) localStorage.setItem('openaiApiKey', apiKey);
+    }
+    const res = await fetch('https://api.openai.com/v1/images/generations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-image-1',
+        prompt,
+        n: 4,
+        size: '256x256'
+      })
+    });
+    if (!res.ok) throw new Error('Image generation failed');
+    const data = await res.json();
+    const images = data.data.map(d => d.b64_json);
+    showPortraitSelection(character, images);
+  } catch (err) {
+    console.error(err);
+    const placeholders = [1, 2, 3, 4].map(n => `https://placehold.co/256x256?text=${n}`);
+    showPortraitSelection(character, placeholders);
+  }
+}
+
+function showPortraitSelection(character, images) {
+  const imgHTML = images
+    .map(img => {
+      const src = img.startsWith('http') ? img : `data:image/png;base64,${img}`;
+      return `<img src="${src}" class="portrait-option">`;
+    })
+    .join('');
+  main.innerHTML = `<div class="no-character"><h1>Select your portrait</h1><div class="portrait-grid">${imgHTML}</div></div>`;
+  document.querySelectorAll('.portrait-option').forEach(img => {
+    img.addEventListener('click', () => {
+      character.image = img.src;
+      finalizeCharacter(character);
+    });
+  });
+}
+
+function finalizeCharacter(character) {
+  const id = Date.now().toString();
+  const newChar = { id, ...character };
+  currentProfile.characters[id] = newChar;
+  currentProfile.lastCharacter = id;
+  currentCharacter = newChar;
+  saveProfiles();
+  showCharacter();
 }
 
 function loadCharacter() {
@@ -232,6 +330,25 @@ const menuButton = document.getElementById('menu-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
 menuButton.addEventListener('click', () => {
   dropdownMenu.classList.toggle('active');
+});
+
+dropdownMenu.addEventListener('click', e => {
+  const action = e.target.dataset.action;
+  if (!action) return;
+  dropdownMenu.classList.remove('active');
+  if (action === 'character') {
+    showCharacterUI();
+  } else if (action === 'new-character') {
+    startCharacterCreation();
+  } else {
+    showBackButton();
+    main.innerHTML = `<div class="no-character"><h1>${action} not implemented</h1></div>`;
+  }
+});
+
+backButton.addEventListener('click', () => {
+  dropdownMenu.classList.remove('active');
+  showMainUI();
 });
 
 // Initialization

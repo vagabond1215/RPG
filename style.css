@@ -71,6 +71,31 @@ body {
   font-size: 1rem;
 }
 
+.portrait-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.portrait-grid img {
+  width: 8rem;
+  height: 8rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.portrait-grid img:hover {
+  border-color: var(--foreground);
+}
+
+.main-portrait {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  margin-top: 1rem;
+}
+
 .no-character {
   display: flex;
   flex-direction: column;
