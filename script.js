@@ -501,21 +501,6 @@ const characterButton = document.getElementById('character-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const characterMenu = document.getElementById('characterMenu');
 
-const adjustMenuWidth = () => {
-  dropdownMenu.style.width = 'auto';
-  const buttons = Array.from(dropdownMenu.querySelectorAll('button'));
-  const margin = buttons.length
-    ? parseFloat(getComputedStyle(buttons[0]).marginLeft) +
-      parseFloat(getComputedStyle(buttons[0]).marginRight)
-    : 0;
-  buttons.forEach(b => (b.style.width = 'auto'));
-  const max = Math.max(...buttons.map(b => b.scrollWidth));
-  buttons.forEach(b => (b.style.width = `${max}px`));
-  dropdownMenu.style.width = `${max + margin}px`;
-};
-adjustMenuWidth();
-window.addEventListener('resize', adjustMenuWidth);
-
 menuButton.addEventListener('click', () => {
   dropdownMenu.classList.toggle('active');
   characterMenu.classList.remove('active');
