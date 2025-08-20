@@ -34,6 +34,8 @@ body {
 .top-menu button {
   width: 2.5rem;
   height: 2.5rem;
+  padding: 2px;
+  box-sizing: border-box;
   font-size: 1rem;
   display: flex;
   align-items: center;
@@ -45,8 +47,12 @@ body {
   cursor: pointer;
 }
 
-.top-menu .push-right {
-  margin-left: auto;
+.top-menu button svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
 }
 
 #dropdownMenu {
@@ -238,3 +244,50 @@ body.theme-dark {
     cursor: pointer;
     line-height: 1;
   }
+
+/* Orientation layouts */
+body.layout-landscape .top-menu {
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+}
+
+body.layout-landscape main {
+  margin-top: 4rem;
+  margin-left: 0;
+}
+
+body.layout-portrait .top-menu {
+  flex-direction: column;
+  width: 3.5rem;
+  height: 100vh;
+}
+
+body.layout-portrait main {
+  margin-top: 0;
+  margin-left: 3.5rem;
+}
+
+@media (orientation: portrait) {
+  body.layout-auto .top-menu {
+    flex-direction: column;
+    width: 3.5rem;
+    height: 100vh;
+  }
+  body.layout-auto main {
+    margin-top: 0;
+    margin-left: 3.5rem;
+  }
+}
+
+@media (orientation: landscape) {
+  body.layout-auto .top-menu {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+  }
+  body.layout-auto main {
+    margin-top: 4rem;
+    margin-left: 0;
+  }
+}
