@@ -264,7 +264,8 @@ async function generatePortrait(character, callback) {
         model: 'gpt-image-1',
         prompt,
         n: 1,
-        size: '256x256'
+        size: '256x256',
+        response_format: 'b64_json'
       })
     });
     if (!res.ok) throw new Error('Image generation failed');
@@ -356,7 +357,12 @@ document.getElementById('scale-inc').addEventListener('click', () => {
 // Layout toggle
 const layoutToggle = document.getElementById('layout-toggle');
 const layouts = ['landscape', 'portrait', 'auto'];
-const layoutIcons = { landscape: '▭', portrait: '▯', auto: '⟳' };
+const layoutIcons = {
+  landscape: '<span style="display:inline-block; transform: rotate(90deg);">📱</span>',
+  portrait: '📱',
+  auto:
+    '<span style="position:relative; display:inline-block;"><span>📱</span><span style="position:absolute; left:0; top:0; transform: rotate(90deg);">📱</span></span>'
+};
 let currentLayoutIndex = layouts.indexOf(
   [...body.classList].find(c => c.startsWith('layout-')).replace('layout-', '')
 );
@@ -364,7 +370,7 @@ const setLayout = index => {
   body.classList.remove('layout-landscape', 'layout-portrait', 'layout-auto');
   const layout = layouts[index];
   body.classList.add(`layout-${layout}`);
-  layoutToggle.textContent = layoutIcons[layout];
+  layoutToggle.innerHTML = layoutIcons[layout];
   savePreference('layout', layout);
 };
 layoutToggle.addEventListener('click', () => {
