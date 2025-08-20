@@ -13,6 +13,16 @@ let currentCharacter = null;
 
 const hairColorOptions = ['#000000', '#8B4513', '#D2B48C', '#A52A2A', '#808080', '#FFFFFF'];
 const eyeColorOptions = ['#5B3A21', '#0000FF', '#008000', '#8E7618', '#708090', '#FFBF00'];
+const skinColorOptionsByRace = {
+  Human: ['#f5cba7', '#d2a679', '#a5694f', '#8d5524'],
+  Elf: ['#ffdbac', '#f1c27d', '#e0ac69', '#c68642'],
+  'Dark Elf': ['#d1c4e9', '#b39ddb', '#9575cd', '#7e57c2'],
+  Dwarf: ['#f1c27d', '#e0ac69', '#c68642', '#8d5524'],
+  'Cait Sith': ['#f1e0c5', '#d9c3a5', '#b38b6d', '#8c5a2b'],
+  Salamander: ['#f4a460', '#d2691e', '#a0522d', '#8b4513'],
+  Gnome: ['#ffdead', '#f5deb3', '#deb887', '#d2b48c'],
+  Halfling: ['#f5cba7', '#e0ac69', '#c68642', '#8d5524']
+};
 
 // Default proficiency values for new characters
 const defaultProficiencies = {
@@ -131,7 +141,7 @@ function showCharacterUI() {
   showBackButton();
   const c = currentCharacter;
   const portrait = c.image ? `<img src="${c.image}" alt="portrait" style="width:10rem;height:10rem;">` : '';
-  const info = `<p>Race: ${c.race}</p><p>Sex: ${c.sex}</p><p>Hair Color: <span class="color-box" style="background:${c.hairColor}"></span></p><p>Eye Color: <span class="color-box" style="background:${c.eyeColor}"></span></p><p>Height: ${formatHeight(c.height)}</p>`;
+  const info = `<p>Race: ${c.race}</p><p>Sex: ${c.sex}</p><p>Skin Color: <span class="color-box" style="background:${c.skinColor}"></span></p><p>Hair Color: <span class="color-box" style="background:${c.hairColor}"></span></p><p>Eye Color: <span class="color-box" style="background:${c.eyeColor}"></span></p><p>Height: ${formatHeight(c.height)}</p>`;
   main.innerHTML = `<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}<button id="regenerate-portrait">Regenerate Portrait</button></div>${info}<button id="delete-character">Delete Character</button></div>`;
   document.getElementById('delete-character').addEventListener('click', () => {
     delete currentProfile.characters[c.id];
@@ -166,6 +176,7 @@ function startCharacterCreation() {
       type: 'select',
       options: ['Male', 'Female', 'Androgynous']
     },
+    { key: 'skinColor', label: 'Choose your skin color', type: 'color' },
     { key: 'hairColor', label: 'Choose your hair color', type: 'color' },
     { key: 'eyeColor', label: 'Choose your eye color', type: 'color' },
     { key: 'height', label: 'Choose your height', type: 'range' }
@@ -192,7 +203,14 @@ function startCharacterCreation() {
       if (field.type === 'select') {
         inputHTML = `<select id="cc-input">${field.options.map(o => `<option value="${o}" ${character[field.key] === o ? 'selected' : ''}>${o}</option>`).join('')}</select>`;
       } else if (field.type === 'color') {
-        const colors = field.key === 'hairColor' ? hairColorOptions : eyeColorOptions;
+        let colors = [];
+        if (field.key === 'hairColor') {
+          colors = hairColorOptions;
+        } else if (field.key === 'eyeColor') {
+          colors = eyeColorOptions;
+        } else if (field.key === 'skinColor') {
+          colors = skinColorOptionsByRace[character.race] || ['#f5cba7', '#d2a679', '#a5694f', '#8d5524'];
+        }
         const datalistId = `${field.key}-list`;
         const value = character[field.key] || colors[0];
         inputHTML = `<input type="color" id="cc-input" list="${datalistId}" value="${value}"><datalist id="${datalistId}">${colors.map(c => `<option value="${c}"></option>`).join('')}</datalist>`;
@@ -247,7 +265,7 @@ async function generatePortrait(character, callback) {
     progressBar.style.width = progress + '%';
   }, 100);
 
-  const prompt = `Dungeons & Dragons manual style portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()} with ${character.hairColor} hair and ${character.eyeColor} eyes, ${formatHeight(character.height)} tall.`;
+  const prompt = `Dungeons & Dragons manual style portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()} with ${character.skinColor} skin, ${character.hairColor} hair and ${character.eyeColor} eyes, ${formatHeight(character.height)} tall.`;
   try {
     let apiKey = localStorage.getItem('openaiApiKey');
     if (!apiKey) {
@@ -380,18 +398,21 @@ layoutToggle.addEventListener('click', () => {
 
 // Dropdown menu
 const menuButton = document.getElementById('menu-button');
+const characterButton = document.getElementById('character-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
 menuButton.addEventListener('click', () => {
   dropdownMenu.classList.toggle('active');
+});
+characterButton.addEventListener('click', () => {
+  dropdownMenu.classList.remove('active');
+  showCharacterUI();
 });
 
 dropdownMenu.addEventListener('click', e => {
   const action = e.target.dataset.action;
   if (!action) return;
   dropdownMenu.classList.remove('active');
-  if (action === 'character') {
-    showCharacterUI();
-  } else if (action === 'new-character') {
+  if (action === 'new-character') {
     startCharacterCreation();
   } else {
     showBackButton();
