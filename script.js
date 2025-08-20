@@ -234,7 +234,7 @@ function startCharacterCreation() {
         inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${val}"><span id="cc-value">${formatHeight(val)}</span>`;
       }
 
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="no-character"><h1>${field.label}</h1>${inputHTML}<button id="next-step">Next</button></div></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><h1>${field.label}</h1>${inputHTML}<button id="next-step">Next</button></div></div>`;
 
       if (field.type === 'range') {
         const rangeInput = document.getElementById('cc-input');
@@ -254,7 +254,7 @@ function startCharacterCreation() {
       });
     } else {
       const nameVal = character.name || '';
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="no-character"><h1>Name your character...</h1><input type="text" id="name-input" value="${nameVal}"><button id="create-character">Create</button></div></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><h1>Name your character...</h1><input type="text" id="name-input" value="${nameVal}"><button id="create-character">Create</button></div></div>`;
       document.getElementById('create-character').addEventListener('click', () => {
         const name = document.getElementById('name-input').value.trim();
         if (!name) return;
@@ -377,7 +377,14 @@ function loadPreferences() {
 // Theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 const themes = ['light', 'dark', 'sepia'];
-const themeIcons = { light: '☀', dark: '☾', sepia: '▤' };
+const themeIcons = {
+  light:
+    '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+  dark:
+    '<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+  sepia:
+    '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><rect x="11" y="13" width="2" height="8"/></svg>'
+};
 let currentThemeIndex = themes.indexOf(
   [...body.classList].find(c => c.startsWith('theme-')).replace('theme-', '')
 );
@@ -385,7 +392,7 @@ const setTheme = index => {
   body.classList.remove('theme-light', 'theme-dark', 'theme-sepia');
   const theme = themes[index];
   body.classList.add(`theme-${theme}`);
-  themeToggle.textContent = themeIcons[theme];
+  themeToggle.innerHTML = themeIcons[theme];
   savePreference('theme', theme);
 };
 themeToggle.addEventListener('click', () => {
@@ -412,10 +419,12 @@ document.getElementById('scale-inc').addEventListener('click', () => {
 const layoutToggle = document.getElementById('layout-toggle');
 const layouts = ['landscape', 'portrait', 'auto'];
 const layoutIcons = {
-  landscape: '<span style="display:inline-block; transform: rotate(90deg);">📱</span>',
-  portrait: '📱',
+  landscape:
+    '<svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"/></svg>',
+  portrait:
+    '<svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2" ry="2"/></svg>',
   auto:
-    '<span style="position:relative; display:inline-block;"><span>📱</span><span style="position:absolute; left:0; top:0; transform: rotate(90deg);">📱</span></span>'
+    '<svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2" ry="2"/><rect x="2" y="6" width="20" height="12" rx="2" ry="2"/></svg>'
 };
 let currentLayoutIndex = layouts.indexOf(
   [...body.classList].find(c => c.startsWith('layout-')).replace('layout-', '')
