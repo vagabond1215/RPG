@@ -234,7 +234,7 @@ function startCharacterCreation() {
         inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${val}"><span id="cc-value">${formatHeight(val)}</span>`;
       }
 
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="no-character"><h1>${field.label}</h1>${inputHTML}<button id="next-step">Next</button></div></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><h1>${field.label}</h1>${inputHTML}<button id="next-step">Next</button></div></div>`;
 
       if (field.type === 'range') {
         const rangeInput = document.getElementById('cc-input');
@@ -254,7 +254,7 @@ function startCharacterCreation() {
       });
     } else {
       const nameVal = character.name || '';
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="no-character"><h1>Name your character...</h1><input type="text" id="name-input" value="${nameVal}"><button id="create-character">Create</button></div></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><h1>Name your character...</h1><input type="text" id="name-input" value="${nameVal}"><button id="create-character">Create</button></div></div>`;
       document.getElementById('create-character').addEventListener('click', () => {
         const name = document.getElementById('name-input').value.trim();
         if (!name) return;
