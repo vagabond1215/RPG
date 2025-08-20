@@ -45,6 +45,10 @@ body {
   cursor: pointer;
 }
 
+.top-menu .push-right {
+  margin-left: auto;
+}
+
 #dropdownMenu {
   position: fixed;
   top: 3.5rem;
