@@ -64,16 +64,88 @@ function showCharacter() {
 
 function showNoCharacterUI() {
   main.innerHTML = `<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`;
-  document.getElementById('new-character').addEventListener('click', () => {
-    const name = prompt('Enter character name:');
-    if (!name) return;
-    const id = Date.now().toString();
-    currentProfile.characters[id] = { id, name };
-    currentProfile.lastCharacter = id;
-    currentCharacter = currentProfile.characters[id];
-    saveProfiles();
-    showCharacter();
-  });
+  document.getElementById('new-character').addEventListener('click', startCharacterCreation);
+}
+
+function startCharacterCreation() {
+  const character = {};
+  const fields = [
+    {
+      key: 'race',
+      label: 'Choose your race',
+      type: 'select',
+      options: ['Human', 'Elf', 'Dark Elf', 'Dwarf', 'Cait Sith', 'Salamander', 'Gnome', 'Halfling'], // Cait Sith are humanoid felines, Salamanders are reptilian humanoids
+    },
+    {
+      key: 'sex',
+      label: 'Choose your sex',
+      type: 'select',
+      options: ['Male', 'Female', 'Androgynous']
+    },
+    { key: 'hairColor', label: 'Choose your hair color', type: 'color' },
+    { key: 'eyeColor', label: 'Choose your eye color', type: 'color' },
+    { key: 'height', label: 'Choose your height', type: 'range' }
+  ];
+
+  const heightRanges = {
+    Human: [150, 200],
+    Elf: [150, 190],
+    'Dark Elf': [150, 190],
+    Dwarf: [120, 150],
+    'Cait Sith': [140, 180],
+    Salamander: [160, 210],
+    Gnome: [100, 130],
+    Halfling: [90, 120]
+  };
+
+  let step = 0;
+  renderStep();
+
+  function renderStep() {
+    if (step < fields.length) {
+      const field = fields[step];
+      let inputHTML = '';
+      if (field.type === 'select') {
+        inputHTML = `<select id="cc-input">${field.options.map(o => `<option value="${o}">${o}</option>`).join('')}</select>`;
+      } else if (field.type === 'color') {
+        inputHTML = '<input type="color" id="cc-input" value="#000000">';
+      } else if (field.type === 'range') {
+        const [min, max] = heightRanges[character.race] || [100, 200];
+        inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${min}"><span id="cc-value">${min}</span>`;
+      }
+
+      main.innerHTML = `<div class="no-character"><h1>${field.label}</h1>${inputHTML}<button id="next-step">Next</button></div>`;
+
+      if (field.type === 'range') {
+        const rangeInput = document.getElementById('cc-input');
+        const valueSpan = document.getElementById('cc-value');
+        rangeInput.addEventListener('input', () => {
+          valueSpan.textContent = rangeInput.value;
+        });
+      }
+
+      document.getElementById('next-step').addEventListener('click', () => {
+        const input = document.getElementById('cc-input');
+        const value = field.type === 'range' ? parseInt(input.value, 10) : input.value;
+        character[field.key] = value;
+        step++;
+        renderStep();
+      });
+    } else {
+      main.innerHTML = `<div class="no-character"><h1>Name your character...</h1><input type="text" id="name-input"><button id="complete-character">Complete</button></div>`;
+      document.getElementById('complete-character').addEventListener('click', () => {
+        const name = document.getElementById('name-input').value.trim();
+        if (!name) return;
+        const id = Date.now().toString();
+        const newChar = { id, name, ...character };
+        currentProfile.characters[id] = newChar;
+        currentProfile.lastCharacter = id;
+        currentCharacter = newChar;
+        saveProfiles();
+        showCharacter();
+      });
+    }
+  }
 }
 
 function loadCharacter() {
