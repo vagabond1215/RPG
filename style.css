@@ -218,16 +218,23 @@ body.theme-dark {
     margin-left: 0.5rem;
   }
 
+  .cc-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   #cc-cancel {
     margin-top: 2rem;
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
     border: 2px solid red;
-    background: #fff;
+    background: var(--background);
     color: red;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    line-height: 1;
   }
