@@ -14,6 +14,34 @@ let currentCharacter = null;
 const hairColorOptions = ['#000000', '#8B4513', '#D2B48C', '#A52A2A', '#808080', '#FFFFFF'];
 const eyeColorOptions = ['#5B3A21', '#0000FF', '#008000', '#8E7618', '#708090', '#FFBF00'];
 
+// Default proficiency values for new characters
+const defaultProficiencies = {
+  elementalMagic: 0,
+  lightMagic: 0,
+  darkMagic: 0,
+  reinforcementMagic: 0,
+  enfeeblingMagic: 0,
+  summoningMagic: 0,
+  singing: 0,
+  instrument: 0,
+  dancing: 0,
+  evasion: 0,
+  block: 0,
+  parry: 0,
+  sword: 0,
+  polearm: 0,
+  axe: 0,
+  staff: 0,
+  marksmanship: 0,
+  mage: 0,
+  dagger: 0,
+  shield: 0,
+  lightArmor: 0,
+  mediumArmor: 0,
+  heavyArmor: 0,
+  dualWield: 0
+};
+
 const saveProfiles = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
 
 const formatHeight = cm => {
@@ -254,7 +282,7 @@ async function generatePortrait(character, callback) {
 
 function finalizeCharacter(character) {
   const id = Date.now().toString();
-  const newChar = { id, ...character };
+  const newChar = { id, ...defaultProficiencies, ...character };
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;
   currentCharacter = newChar;
@@ -266,7 +294,7 @@ function finalizeCharacter(character) {
 function loadCharacter() {
   const charId = currentProfile?.lastCharacter;
   if (charId && currentProfile.characters && currentProfile.characters[charId]) {
-    currentCharacter = currentProfile.characters[charId];
+    currentCharacter = { ...defaultProficiencies, ...currentProfile.characters[charId] };
     showCharacter();
   } else if (localStorage.getItem(TEMP_CHARACTER_KEY)) {
     startCharacterCreation();
