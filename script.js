@@ -499,6 +499,7 @@ layoutToggle.addEventListener('click', () => {
 const menuButton = document.getElementById('menu-button');
 const characterButton = document.getElementById('character-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
+const characterMenu = document.getElementById('characterMenu');
 
 const adjustMenuWidth = () => {
   dropdownMenu.style.width = 'auto';
@@ -517,10 +518,11 @@ window.addEventListener('resize', adjustMenuWidth);
 
 menuButton.addEventListener('click', () => {
   dropdownMenu.classList.toggle('active');
+  characterMenu.classList.remove('active');
 });
 characterButton.addEventListener('click', () => {
   dropdownMenu.classList.remove('active');
-  showCharacterUI();
+  characterMenu.classList.toggle('active');
 });
 
 dropdownMenu.addEventListener('click', e => {
@@ -535,8 +537,21 @@ dropdownMenu.addEventListener('click', e => {
   }
 });
 
+characterMenu.addEventListener('click', e => {
+  const action = e.target.dataset.action;
+  if (!action) return;
+  characterMenu.classList.remove('active');
+  if (action === 'profile') {
+    showCharacterUI();
+  } else {
+    showBackButton();
+    main.innerHTML = `<div class="no-character"><h1>${action} not implemented</h1></div>`;
+  }
+});
+
 backButton.addEventListener('click', () => {
   dropdownMenu.classList.remove('active');
+  characterMenu.classList.remove('active');
   showMainUI();
 });
 
