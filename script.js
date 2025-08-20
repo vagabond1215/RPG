@@ -188,7 +188,15 @@ function startCharacterCreation() {
 }
 
 async function generatePortraitOptions(character) {
-  main.innerHTML = `<div class="no-character"><h1>Generating portraits...</h1></div>`;
+  main.innerHTML = `<div class="no-character"><h1>Generating portraits...</h1><div class="progress"><div class="progress-bar" id="portrait-progress"></div></div></div>`;
+
+  let progress = 0;
+  const progressBar = document.getElementById('portrait-progress');
+  const progressInterval = setInterval(() => {
+    progress = (progress + 1) % 101;
+    progressBar.style.width = progress + '%';
+  }, 100);
+
   const prompt = `Dungeons & Dragons manual style portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()} with ${character.hairColor} hair and ${character.eyeColor} eyes, ${formatHeight(character.height)} tall.`;
   try {
     let apiKey = localStorage.getItem('openaiApiKey');
@@ -211,10 +219,12 @@ async function generatePortraitOptions(character) {
     });
     if (!res.ok) throw new Error('Image generation failed');
     const data = await res.json();
+    clearInterval(progressInterval);
     const images = data.data.map(d => d.b64_json);
     showPortraitSelection(character, images);
   } catch (err) {
     console.error(err);
+    clearInterval(progressInterval);
     const placeholders = [1, 2, 3, 4].map(n => `https://placehold.co/256x256?text=${n}`);
     showPortraitSelection(character, placeholders);
   }
