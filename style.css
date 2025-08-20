@@ -162,9 +162,72 @@ body.theme-dark {
   margin-left: 0.25rem;
 }
 
-.portrait-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
+  .portrait-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .character-creation {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 1rem;
+  }
+
+  .progress-step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    cursor: default;
+  }
+
+  .progress-step.clickable {
+    cursor: pointer;
+  }
+
+  .progress-step .circle {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 2px solid var(--foreground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .progress-step.completed .circle {
+    background: var(--foreground);
+  }
+
+  .progress-step.current .circle::after {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--foreground);
+  }
+
+  .progress-step span {
+    margin-left: 0.5rem;
+  }
+
+  #cc-cancel {
+    margin-top: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 2px solid red;
+    background: #fff;
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }

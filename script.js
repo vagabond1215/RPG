@@ -182,6 +182,8 @@ function startCharacterCreation() {
     { key: 'height', label: 'Choose your height', type: 'range' }
   ];
 
+  const stepLabels = ['Race', 'Sex', 'Skin', 'Hair', 'Eyes', 'Height', 'Name'];
+
   const heightRanges = {
     Human: [150, 200],
     Elf: [150, 190],
@@ -197,6 +199,18 @@ function startCharacterCreation() {
   renderStep();
 
   function renderStep() {
+    const progressHTML = stepLabels
+      .map((label, i) => {
+        const hasValue = i < fields.length ? character[fields[i].key] : character.name;
+        let cls = '';
+        if (i === step) cls = 'current';
+        else if (hasValue) cls = 'completed';
+        if (i < step) cls += (cls ? ' ' : '') + 'clickable';
+        return `<div class="progress-step ${cls}" data-step="${i}"><div class="circle"></div><span>${label}</span></div>`;
+      })
+      .join('') +
+      '<button id="cc-cancel" title="Cancel">✖</button>';
+
     if (step < fields.length) {
       const field = fields[step];
       let inputHTML = '';
@@ -220,7 +234,7 @@ function startCharacterCreation() {
         inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${val}"><span id="cc-value">${formatHeight(val)}</span>`;
       }
 
-      main.innerHTML = `<div class="no-character"><h1>${field.label}</h1>${inputHTML}<button id="next-step">Next</button></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="no-character"><h1>${field.label}</h1>${inputHTML}<button id="next-step">Next</button></div></div>`;
 
       if (field.type === 'range') {
         const rangeInput = document.getElementById('cc-input');
@@ -240,10 +254,14 @@ function startCharacterCreation() {
       });
     } else {
       const nameVal = character.name || '';
-      main.innerHTML = `<div class="no-character"><h1>Name your character...</h1><input type="text" id="name-input" value="${nameVal}"><button id="create-character">Create</button></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="no-character"><h1>Name your character...</h1><input type="text" id="name-input" value="${nameVal}"><button id="create-character">Create</button></div></div>`;
       document.getElementById('create-character').addEventListener('click', () => {
         const name = document.getElementById('name-input').value.trim();
         if (!name) return;
+        if (fields.some(f => !character[f.key])) {
+          alert('Please complete all steps.');
+          return;
+        }
         character.name = name;
         localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         generatePortrait(character, img => {
@@ -252,6 +270,24 @@ function startCharacterCreation() {
         });
       });
     }
+
+    document.querySelectorAll('.progress-step').forEach(el => {
+      const index = parseInt(el.dataset.step, 10);
+      if (index < step) {
+        el.addEventListener('click', () => {
+          step = index;
+          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          renderStep();
+        });
+      }
+    });
+
+    document.getElementById('cc-cancel').addEventListener('click', () => {
+      if (confirm('Cancel character creation?')) {
+        localStorage.removeItem(TEMP_CHARACTER_KEY);
+        showMainUI();
+      }
+    });
   }
 }
 
