@@ -58,29 +58,73 @@ body {
 
 #dropdownMenu {
   position: fixed;
-  top: 3.5rem;
-  left: 0;
-  width: 100%;
   background: var(--background);
-  border-top: 1px solid var(--foreground);
-  display: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  z-index: 90;
+  z-index: 200;
+  pointer-events: none;
+  transition: transform 0.3s ease;
 }
 
 #dropdownMenu.active {
-  display: flex;
+  pointer-events: auto;
 }
 
 #dropdownMenu button {
-  padding: 1rem;
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
   text-align: left;
   border: none;
-  border-top: 1px solid var(--foreground);
   background: var(--background);
   color: var(--foreground);
   font-size: 1rem;
+}
+
+/* Landscape slide-down menu */
+body.layout-landscape #dropdownMenu {
+  top: 3.5rem;
+  left: 0;
+  transform: translateY(-100%);
+}
+
+body.layout-landscape #dropdownMenu.active {
+  transform: translateY(0);
+}
+
+/* Portrait slide-out menu */
+body.layout-portrait #dropdownMenu {
+  top: 0;
+  left: 3.5rem;
+  height: 100vh;
+  transform: translateX(-100%);
+}
+
+body.layout-portrait #dropdownMenu.active {
+  transform: translateX(0);
+}
+
+@media (orientation: landscape) {
+  body.layout-auto #dropdownMenu {
+    top: 3.5rem;
+    left: 0;
+    transform: translateY(-100%);
+  }
+  body.layout-auto #dropdownMenu.active {
+    transform: translateY(0);
+  }
+}
+
+@media (orientation: portrait) {
+  body.layout-auto #dropdownMenu {
+    top: 0;
+    left: 3.5rem;
+    height: 100vh;
+    transform: translateX(-100%);
+  }
+  body.layout-auto #dropdownMenu.active {
+    transform: translateX(0);
+  }
 }
 
 .portrait-grid {
