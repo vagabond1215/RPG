@@ -199,23 +199,32 @@ function startCharacterCreation() {
   renderStep();
 
   function renderStep() {
-    const progressHTML = stepLabels
-      .map((label, i) => {
-        const hasValue = i < fields.length ? character[fields[i].key] : character.name;
-        let cls = '';
-        if (i === step) cls = 'current';
-        else if (hasValue) cls = 'completed';
-        if (i < step) cls += (cls ? ' ' : '') + 'clickable';
-        return `<div class="progress-step ${cls}" data-step="${i}"><div class="circle"></div><span>${label}</span></div>`;
-      })
-      .join('') +
+    const isComplete = () =>
+      fields.every(f => character[f.key]) && character.name;
+    const progressHTML =
+      stepLabels
+        .map((label, i) => {
+          const hasValue = i < fields.length ? character[fields[i].key] : character.name;
+          let cls = 'clickable';
+          if (i === step) cls = 'current clickable';
+          else if (hasValue) cls = 'completed clickable';
+          return `<div class="progress-step ${cls}" data-step="${i}"><div class="circle"></div><span>${label}</span></div>`;
+        })
+        .join('') +
       '<button id="cc-cancel" title="Cancel">✖</button>';
 
     if (step < fields.length) {
       const field = fields[step];
       let inputHTML = '';
       if (field.type === 'select') {
-        inputHTML = `<select id="cc-input">${field.options.map(o => `<option value="${o}" ${character[field.key] === o ? 'selected' : ''}>${o}</option>`).join('')}</select>`;
+        inputHTML = `<div class="option-grid">${field.options
+          .map(
+            o =>
+              `<button class="option-button${
+                character[field.key] === o ? ' selected' : ''
+              }" data-value="${o}">${o}</button>`
+          )
+          .join('')}</div>`;
       } else if (field.type === 'color') {
         let colors = [];
         if (field.key === 'hairColor') {
@@ -227,59 +236,77 @@ function startCharacterCreation() {
         }
         const datalistId = `${field.key}-list`;
         const value = character[field.key] || colors[0];
-        inputHTML = `<input type="color" id="cc-input" list="${datalistId}" value="${value}"><datalist id="${datalistId}">${colors.map(c => `<option value="${c}"></option>`).join('')}</datalist>`;
+        inputHTML = `<input type="color" id="cc-input" list="${datalistId}" value="${value}"><datalist id="${datalistId}">${colors
+          .map(c => `<option value="${c}"></option>`)
+          .join('')}</datalist>`;
       } else if (field.type === 'range') {
         const [min, max] = heightRanges[character.race] || [100, 200];
         const val = character[field.key] || min;
-        inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${val}"><span id="cc-value">${formatHeight(val)}</span>`;
+        inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${val}"><span id="cc-value">${formatHeight(
+          val
+        )}</span>`;
       }
 
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><h1>${field.label}</h1>${inputHTML}<button id="next-step">Next</button></div></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column">${inputHTML}<button id="cc-complete" class="complete-button" ${
+        isComplete() ? '' : 'disabled'
+      }></button></div></div>`;
 
-      if (field.type === 'range') {
+      if (field.type === 'select') {
+        document.querySelectorAll('.option-button').forEach(btn => {
+          btn.addEventListener('click', () => {
+            character[field.key] = btn.dataset.value;
+            localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            renderStep();
+          });
+        });
+      } else if (field.type === 'color') {
+        const input = document.getElementById('cc-input');
+        input.addEventListener('change', () => {
+          character[field.key] = input.value;
+          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          renderStep();
+        });
+      } else if (field.type === 'range') {
         const rangeInput = document.getElementById('cc-input');
         const valueSpan = document.getElementById('cc-value');
         rangeInput.addEventListener('input', () => {
           valueSpan.textContent = formatHeight(parseInt(rangeInput.value, 10));
         });
-      }
-
-      document.getElementById('next-step').addEventListener('click', () => {
-        const input = document.getElementById('cc-input');
-        const value = field.type === 'range' ? parseInt(input.value, 10) : input.value;
-        character[field.key] = value;
-        step++;
-        localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-        renderStep();
-      });
-    } else {
-      const nameVal = character.name || '';
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><h1>Name your character...</h1><input type="text" id="name-input" value="${nameVal}"><button id="create-character">Create</button></div></div>`;
-      document.getElementById('create-character').addEventListener('click', () => {
-        const name = document.getElementById('name-input').value.trim();
-        if (!name) return;
-        if (fields.some(f => !character[f.key])) {
-          alert('Please complete all steps.');
-          return;
-        }
-        character.name = name;
-        localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-        generatePortrait(character, img => {
-          character.image = img;
-          finalizeCharacter(character);
-        });
-      });
-    }
-
-    document.querySelectorAll('.progress-step').forEach(el => {
-      const index = parseInt(el.dataset.step, 10);
-      if (index < step) {
-        el.addEventListener('click', () => {
-          step = index;
+        rangeInput.addEventListener('change', () => {
+          character[field.key] = parseInt(rangeInput.value, 10);
           localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         });
       }
+    } else {
+      const nameVal = character.name || '';
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"><button id="cc-complete" class="complete-button" ${
+        isComplete() ? '' : 'disabled'
+      }></button></div></div>`;
+      const nameInput = document.getElementById('name-input');
+      nameInput.addEventListener('input', () => {
+        character.name = nameInput.value.trim();
+        localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        renderStep();
+      });
+    }
+
+    document.getElementById('cc-complete').addEventListener('click', () => {
+      if (!isComplete()) return;
+      localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      generatePortrait(character, img => {
+        character.image = img;
+        finalizeCharacter(character);
+      });
+    });
+
+    document.querySelectorAll('.progress-step').forEach(el => {
+      const index = parseInt(el.dataset.step, 10);
+      el.addEventListener('click', () => {
+        step = index;
+        localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        renderStep();
+      });
     });
 
     document.getElementById('cc-cancel').addEventListener('click', () => {
