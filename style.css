@@ -125,3 +125,19 @@ body.theme-dark {
   --background: #222222;
   --foreground: #eeeeee;
 }
+
+.progress {
+  width: 80%;
+  height: 1rem;
+  background: #ccc;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--foreground);
+  transition: width 0.1s linear;
+}
