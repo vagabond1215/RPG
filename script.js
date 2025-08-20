@@ -11,17 +11,37 @@ let currentProfileId = localStorage.getItem(LAST_PROFILE_KEY);
 let currentProfile = currentProfileId ? profiles[currentProfileId] : null;
 let currentCharacter = null;
 
-const hairColorOptions = ['#000000', '#8B4513', '#D2B48C', '#A52A2A', '#808080', '#FFFFFF'];
-const eyeColorOptions = ['#5B3A21', '#0000FF', '#008000', '#8E7618', '#708090', '#FFBF00'];
+const hairColorOptions = [
+  '#000000', '#2c1b10', '#4b2e1f', '#663300', '#8b4513', '#a0522d',
+  '#b5651d', '#c68642', '#d2b48c', '#deb887', '#e6bea0', '#f5deb3',
+  '#fff5e1', '#800000', '#b22222', '#ffffff'
+];
+
+const eyeColorOptions = [
+  '#000000', '#2b2c30', '#3b3024', '#5b3a21', '#6b4423', '#8b4513',
+  '#a0522d', '#8e7618', '#8b8f45', '#355e3b', '#2f4f4f', '#0000ff',
+  '#1e90ff', '#708090', '#9932cc', '#ffbf00'
+];
+
+const generateColorScale = (start, end, steps = 16) => {
+  const s = start.match(/\w\w/g).map(h => parseInt(h, 16));
+  const e = end.match(/\w\w/g).map(h => parseInt(h, 16));
+  return Array.from({ length: steps }, (_, i) => {
+    const t = i / (steps - 1);
+    const rgb = s.map((sv, idx) => Math.round(sv + (e[idx] - sv) * t));
+    return '#' + rgb.map(v => v.toString(16).padStart(2, '0')).join('');
+  });
+};
+
 const skinColorOptionsByRace = {
-  Human: ['#f5cba7', '#d2a679', '#a5694f', '#8d5524'],
-  Elf: ['#ffdbac', '#f1c27d', '#e0ac69', '#c68642'],
-  'Dark Elf': ['#d1c4e9', '#b39ddb', '#9575cd', '#7e57c2'],
-  Dwarf: ['#f1c27d', '#e0ac69', '#c68642', '#8d5524'],
-  'Cait Sith': ['#f1e0c5', '#d9c3a5', '#b38b6d', '#8c5a2b'],
-  Salamander: ['#f4a460', '#d2691e', '#a0522d', '#8b4513'],
-  Gnome: ['#ffdead', '#f5deb3', '#deb887', '#d2b48c'],
-  Halfling: ['#f5cba7', '#e0ac69', '#c68642', '#8d5524']
+  Human: generateColorScale('#f5cba7', '#8d5524'),
+  Elf: generateColorScale('#ffdbac', '#c68642'),
+  'Dark Elf': generateColorScale('#d1c4e9', '#7e57c2'),
+  Dwarf: generateColorScale('#f1c27d', '#8d5524'),
+  'Cait Sith': generateColorScale('#f1e0c5', '#8c5a2b'),
+  Salamander: generateColorScale('#f4a460', '#8b4513'),
+  Gnome: generateColorScale('#ffdead', '#d2b48c'),
+  Halfling: generateColorScale('#f5cba7', '#8d5524')
 };
 
 // Default proficiency values for new characters
@@ -211,6 +231,7 @@ function startCharacterCreation() {
           return `<div class="progress-step ${cls}" data-step="${i}"><div class="circle"></div><span>${label}</span></div>`;
         })
         .join('') +
+      `<button id="cc-complete" class="complete-button" ${isComplete() ? '' : 'disabled'}></button>` +
       '<button id="cc-cancel" title="Cancel">✖</button>';
 
     if (step < fields.length) {
@@ -247,9 +268,7 @@ function startCharacterCreation() {
         )}</span>`;
       }
 
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column">${inputHTML}<button id="cc-complete" class="complete-button" ${
-        isComplete() ? '' : 'disabled'
-      }></button></div></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column">${inputHTML}</div></div>`;
 
       if (field.type === 'select') {
         document.querySelectorAll('.option-button').forEach(btn => {
@@ -280,9 +299,7 @@ function startCharacterCreation() {
       }
     } else {
       const nameVal = character.name || '';
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"><button id="cc-complete" class="complete-button" ${
-        isComplete() ? '' : 'disabled'
-      }></button></div></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div></div>`;
       const nameInput = document.getElementById('name-input');
       nameInput.addEventListener('input', () => {
         character.name = nameInput.value.trim();
