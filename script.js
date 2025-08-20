@@ -5,10 +5,14 @@ const backButton = document.getElementById('back-button');
 // --- Profile and save management ---
 const STORAGE_KEY = 'rpgProfiles';
 const LAST_PROFILE_KEY = 'rpgLastProfile';
+const TEMP_CHARACTER_KEY = 'rpgTempCharacter';
 let profiles = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 let currentProfileId = localStorage.getItem(LAST_PROFILE_KEY);
 let currentProfile = currentProfileId ? profiles[currentProfileId] : null;
 let currentCharacter = null;
+
+const hairColorOptions = ['#000000', '#8B4513', '#D2B48C', '#A52A2A', '#808080', '#FFFFFF'];
+const eyeColorOptions = ['#5B3A21', '#0000FF', '#008000', '#8E7618', '#708090', '#FFBF00'];
 
 const saveProfiles = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
 
@@ -99,8 +103,8 @@ function showCharacterUI() {
   showBackButton();
   const c = currentCharacter;
   const portrait = c.image ? `<img src="${c.image}" alt="portrait" style="width:10rem;height:10rem;">` : '';
-  const info = `<p>Race: ${c.race}</p><p>Sex: ${c.sex}</p><p>Hair Color: ${c.hairColor}</p><p>Eye Color: ${c.eyeColor}</p><p>Height: ${formatHeight(c.height)}</p>`;
-  main.innerHTML = `<div class="no-character"><h1>${c.name}</h1>${portrait}${info}<button id="delete-character">Delete Character</button></div>`;
+  const info = `<p>Race: ${c.race}</p><p>Sex: ${c.sex}</p><p>Hair Color: <span class="color-box" style="background:${c.hairColor}"></span></p><p>Eye Color: <span class="color-box" style="background:${c.eyeColor}"></span></p><p>Height: ${formatHeight(c.height)}</p>`;
+  main.innerHTML = `<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}<button id="regenerate-portrait">Regenerate Portrait</button></div>${info}<button id="delete-character">Delete Character</button></div>`;
   document.getElementById('delete-character').addEventListener('click', () => {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
@@ -108,11 +112,19 @@ function showCharacterUI() {
     saveProfiles();
     showMainUI();
   });
+  document.getElementById('regenerate-portrait').addEventListener('click', () => {
+    generatePortrait(currentCharacter, img => {
+      currentCharacter.image = img;
+      saveProfiles();
+      showCharacterUI();
+    });
+  });
 }
 
 function startCharacterCreation() {
   showBackButton();
-  const character = {};
+  const saved = JSON.parse(localStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
+  const character = saved.character || {};
   const fields = [
     {
       key: 'race',
@@ -142,7 +154,7 @@ function startCharacterCreation() {
     Halfling: [90, 120]
   };
 
-  let step = 0;
+  let step = saved.step || 0;
   renderStep();
 
   function renderStep() {
@@ -150,12 +162,16 @@ function startCharacterCreation() {
       const field = fields[step];
       let inputHTML = '';
       if (field.type === 'select') {
-        inputHTML = `<select id="cc-input">${field.options.map(o => `<option value="${o}">${o}</option>`).join('')}</select>`;
+        inputHTML = `<select id="cc-input">${field.options.map(o => `<option value="${o}" ${character[field.key] === o ? 'selected' : ''}>${o}</option>`).join('')}</select>`;
       } else if (field.type === 'color') {
-        inputHTML = '<input type="color" id="cc-input" value="#000000">';
+        const colors = field.key === 'hairColor' ? hairColorOptions : eyeColorOptions;
+        const datalistId = `${field.key}-list`;
+        const value = character[field.key] || colors[0];
+        inputHTML = `<input type="color" id="cc-input" list="${datalistId}" value="${value}"><datalist id="${datalistId}">${colors.map(c => `<option value="${c}"></option>`).join('')}</datalist>`;
       } else if (field.type === 'range') {
         const [min, max] = heightRanges[character.race] || [100, 200];
-        inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${min}"><span id="cc-value">${formatHeight(min)}</span>`;
+        const val = character[field.key] || min;
+        inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${val}"><span id="cc-value">${formatHeight(val)}</span>`;
       }
 
       main.innerHTML = `<div class="no-character"><h1>${field.label}</h1>${inputHTML}<button id="next-step">Next</button></div>`;
@@ -173,22 +189,28 @@ function startCharacterCreation() {
         const value = field.type === 'range' ? parseInt(input.value, 10) : input.value;
         character[field.key] = value;
         step++;
+        localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         renderStep();
       });
     } else {
-      main.innerHTML = `<div class="no-character"><h1>Name your character...</h1><input type="text" id="name-input"><button id="create-character">Create</button></div>`;
+      const nameVal = character.name || '';
+      main.innerHTML = `<div class="no-character"><h1>Name your character...</h1><input type="text" id="name-input" value="${nameVal}"><button id="create-character">Create</button></div>`;
       document.getElementById('create-character').addEventListener('click', () => {
         const name = document.getElementById('name-input').value.trim();
         if (!name) return;
         character.name = name;
-        generatePortraitOptions(character);
+        localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        generatePortrait(character, img => {
+          character.image = img;
+          finalizeCharacter(character);
+        });
       });
     }
   }
 }
 
-async function generatePortraitOptions(character) {
-  main.innerHTML = `<div class="no-character"><h1>Generating portraits...</h1><div class="progress"><div class="progress-bar" id="portrait-progress"></div></div></div>`;
+async function generatePortrait(character, callback) {
+  main.innerHTML = `<div class="no-character"><h1>Generating portrait...</h1><div class="progress"><div class="progress-bar" id="portrait-progress"></div></div></div>`;
 
   let progress = 0;
   const progressBar = document.getElementById('portrait-progress');
@@ -213,37 +235,21 @@ async function generatePortraitOptions(character) {
       body: JSON.stringify({
         model: 'gpt-image-1',
         prompt,
-        n: 4,
+        n: 1,
         size: '256x256'
       })
     });
     if (!res.ok) throw new Error('Image generation failed');
     const data = await res.json();
     clearInterval(progressInterval);
-    const images = data.data.map(d => d.b64_json);
-    showPortraitSelection(character, images);
+    const img = data.data[0].b64_json;
+    const src = img.startsWith('http') ? img : `data:image/png;base64,${img}`;
+    callback(src);
   } catch (err) {
     console.error(err);
     clearInterval(progressInterval);
-    const placeholders = [1, 2, 3, 4].map(n => `https://placehold.co/256x256?text=${n}`);
-    showPortraitSelection(character, placeholders);
+    callback('https://placehold.co/256x256?text=Portrait');
   }
-}
-
-function showPortraitSelection(character, images) {
-  const imgHTML = images
-    .map(img => {
-      const src = img.startsWith('http') ? img : `data:image/png;base64,${img}`;
-      return `<img src="${src}" class="portrait-option">`;
-    })
-    .join('');
-  main.innerHTML = `<div class="no-character"><h1>Select your portrait</h1><div class="portrait-grid">${imgHTML}</div></div>`;
-  document.querySelectorAll('.portrait-option').forEach(img => {
-    img.addEventListener('click', () => {
-      character.image = img.src;
-      finalizeCharacter(character);
-    });
-  });
 }
 
 function finalizeCharacter(character) {
@@ -254,6 +260,7 @@ function finalizeCharacter(character) {
   currentCharacter = newChar;
   saveProfiles();
   showCharacter();
+  localStorage.removeItem(TEMP_CHARACTER_KEY);
 }
 
 function loadCharacter() {
@@ -261,6 +268,8 @@ function loadCharacter() {
   if (charId && currentProfile.characters && currentProfile.characters[charId]) {
     currentCharacter = currentProfile.characters[charId];
     showCharacter();
+  } else if (localStorage.getItem(TEMP_CHARACTER_KEY)) {
+    startCharacterCreation();
   } else {
     showNoCharacterUI();
   }
