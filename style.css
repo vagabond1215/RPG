@@ -82,6 +82,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-size: 1rem;
+  position: relative;
 }
 
 #characterMenu {
@@ -113,6 +114,26 @@ body {
   color: var(--foreground);
   font-size: 1rem;
   text-align: left;
+  position: relative;
+}
+
+#dropdownMenu button:hover,
+#dropdownMenu button.selected,
+#characterMenu button:hover,
+#characterMenu button.selected {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+#dropdownMenu button:not(:last-child)::after,
+#characterMenu button:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.25rem;
+  height: 1px;
+  background: linear-gradient(to right, var(--background), var(--foreground) 50%, var(--background));
 }
 
 #characterMenu button svg,
@@ -335,6 +356,11 @@ body.theme-dark {
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
+  }
+
+  .option-grid button:hover {
+    background: var(--foreground);
+    color: var(--background);
   }
 
   .option-grid button.selected {
