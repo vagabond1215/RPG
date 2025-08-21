@@ -14,6 +14,9 @@ let currentProfileId = localStorage.getItem(LAST_PROFILE_KEY);
 let currentProfile = currentProfileId ? profiles[currentProfileId] : null;
 let currentCharacter = null;
 
+const regenerateIcon = '<svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.13-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.13 3.36L1 14"/></svg>';
+const pictureIcon = '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+
 const hairColorOptions = [
   '#000000', '#2c1b10', '#4b2e1f', '#663300', '#8b4513', '#a0522d',
   '#b5651d', '#c68642', '#d2b48c', '#deb887', '#e6bea0', '#f5deb3',
@@ -346,9 +349,10 @@ function showCharacterUI() {
   }
   showBackButton();
   const c = currentCharacter;
-  const portrait = c.image ? `<img src="${c.image}" alt="portrait" style="width:10rem;height:10rem;">` : '';
-  const info = `<p>Race: ${c.race}</p><p>Sex: ${c.sex}</p><p>Skin Color: <span class="color-box" style="background:${c.skinColor}"></span></p><p>Hair Color: <span class="color-box" style="background:${c.hairColor}"></span></p><p>Eye Color: <span class="color-box" style="background:${c.eyeColor}"></span></p><p>Height: ${formatHeight(c.height)}</p>`;
-  main.innerHTML = `<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}<button id="regenerate-portrait">Regenerate Portrait</button></div>${info}<button id="delete-character">Delete Character</button></div>`;
+  const portrait = `<img src="${c.image || ''}" alt="portrait" style="width:10rem;height:10rem;${c.image ? '' : 'display:none;'}">`;
+  const info = `<p>Race: ${c.race}</p><p>Sex: ${c.sex}</p><p>Skin Color: <span class=\"color-box\" style=\"background:${c.skinColor}\"></span></p><p>Hair Color: <span class=\"color-box\" style=\"background:${c.hairColor}\"></span></p><p>Eye Color: <span class=\"color-box\" style=\"background:${c.eyeColor}\"></span></p><p>Height: ${formatHeight(c.height)}</p>`;
+  const regenerateBtn = `<button id="regenerate-portrait" class="icon-button" title="Regenerate portrait">${regenerateIcon}</button>`;
+  main.innerHTML = `<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}${regenerateBtn}</div>${info}<button id="delete-character">Delete Character</button></div>`;
   document.getElementById('delete-character').addEventListener('click', () => {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
@@ -356,12 +360,29 @@ function showCharacterUI() {
     saveProfiles();
     showMainUI();
   });
-  document.getElementById('regenerate-portrait').addEventListener('click', () => {
-    generatePortrait(currentCharacter, img => {
-      currentCharacter.image = img;
-      saveProfiles();
-      showCharacterUI();
-    });
+  const regenButton = document.getElementById('regenerate-portrait');
+  regenButton.addEventListener('click', async function handleGenerate() {
+    regenButton.disabled = true;
+    try {
+      const img = await generateCharacterImage(currentCharacter);
+      const imgEl = document.querySelector('.portrait-wrapper img');
+      if (imgEl) {
+        imgEl.src = img;
+        imgEl.style.display = 'block';
+      }
+      regenButton.disabled = false;
+      regenButton.innerHTML = pictureIcon;
+      regenButton.removeEventListener('click', handleGenerate);
+      regenButton.addEventListener('click', function handleApply() {
+        downloadImage(img, `${currentCharacter.name || 'portrait'}.png`);
+        currentCharacter.image = img;
+        saveProfiles();
+        showCharacterUI();
+      }, { once: true });
+    } catch (e) {
+      console.error(e);
+      regenButton.disabled = false;
+    }
   });
 }
 
@@ -548,6 +569,43 @@ function startCharacterCreation() {
   }
 }
 
+async function generateCharacterImage(character) {
+  const location = character.location || 'a small town plaza';
+  const prompt = `Full body portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()} with ${character.skinColor} skin, ${character.hairColor} hair and ${character.eyeColor} eyes, ${formatHeight(character.height)} tall, standing in ${location}.`;
+  let apiKey = localStorage.getItem('openaiApiKey');
+  if (!apiKey) {
+    apiKey = prompt('Enter OpenAI API key:');
+    if (apiKey) localStorage.setItem('openaiApiKey', apiKey);
+  }
+  const res = await fetch('https://api.openai.com/v1/images/generations', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: 'gpt-image-1',
+      prompt,
+      n: 1,
+      size: '512x512',
+      response_format: 'b64_json'
+    })
+  });
+  if (!res.ok) throw new Error('Image generation failed');
+  const data = await res.json();
+  const img = data.data[0].b64_json;
+  return img.startsWith('http') ? img : `data:image/png;base64,${img}`;
+}
+
+function downloadImage(src, filename) {
+  const link = document.createElement('a');
+  link.href = src;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
 async function generatePortrait(character, callback) {
   main.innerHTML = `<div class="no-character"><h1>Generating portrait...</h1><div class="progress"><div class="progress-bar" id="portrait-progress"></div></div></div>`;
 
@@ -558,37 +616,14 @@ async function generatePortrait(character, callback) {
     progressBar.style.width = progress + '%';
   }, 100);
 
-  const prompt = `Dungeons & Dragons manual style portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()} with ${character.skinColor} skin, ${character.hairColor} hair and ${character.eyeColor} eyes, ${formatHeight(character.height)} tall.`;
   try {
-    let apiKey = localStorage.getItem('openaiApiKey');
-    if (!apiKey) {
-      apiKey = prompt('Enter OpenAI API key:');
-      if (apiKey) localStorage.setItem('openaiApiKey', apiKey);
-    }
-    const res = await fetch('https://api.openai.com/v1/images/generations', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: 'gpt-image-1',
-        prompt,
-        n: 1,
-        size: '256x256',
-        response_format: 'b64_json'
-      })
-    });
-    if (!res.ok) throw new Error('Image generation failed');
-    const data = await res.json();
+    const src = await generateCharacterImage(character);
     clearInterval(progressInterval);
-    const img = data.data[0].b64_json;
-    const src = img.startsWith('http') ? img : `data:image/png;base64,${img}`;
     callback(src);
   } catch (err) {
     console.error(err);
     clearInterval(progressInterval);
-    callback('https://placehold.co/256x256?text=Portrait');
+    callback('https://placehold.co/512x512?text=Portrait');
   }
 }
 

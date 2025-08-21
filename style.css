@@ -281,9 +281,34 @@ body.theme-dark {
 
   .portrait-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  .icon-button {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--foreground);
+    background: var(--background);
+    color: var(--foreground);
+    cursor: pointer;
+  }
+
+  .icon-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .icon-button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
   }
 
   .character-creation {
