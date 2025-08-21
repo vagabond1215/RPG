@@ -72,11 +72,14 @@ const defaultProficiencies = {
   block: 0,
   parry: 0,
   sword: 0,
+  greatsword: 0,
   polearm: 0,
   axe: 0,
+  greataxe: 0,
   staff: 0,
   marksmanship: 0,
-  mage: 0,
+  crossbow: 0,
+  wand: 0,
   dagger: 0,
   shield: 0,
   lightArmor: 0,
@@ -84,6 +87,14 @@ const defaultProficiencies = {
   heavyArmor: 0,
   dualWield: 0
 };
+
+function migrateProficiencies(character) {
+  if ('mage' in character && !('wand' in character)) {
+    character.wand = character.mage;
+    delete character.mage;
+  }
+  return character;
+}
 
 const proficiencyCategories = {
   Magical: [
@@ -106,11 +117,14 @@ const proficiencyCategories = {
     'block',
     'parry',
     'sword',
+    'greatsword',
     'polearm',
     'axe',
+    'greataxe',
     'staff',
     'marksmanship',
-    'mage',
+    'crossbow',
+    'wand',
     'dagger',
     'shield',
     'lightArmor',
@@ -327,7 +341,10 @@ function showCharacterSelectUI() {
     btn.addEventListener('click', () => {
       const id = btn.dataset.id;
       currentProfile.lastCharacter = id;
-      currentCharacter = { ...defaultProficiencies, ...currentProfile.characters[id] };
+      currentCharacter = migrateProficiencies({
+        ...defaultProficiencies,
+        ...currentProfile.characters[id]
+      });
       saveProfiles();
       showMainUI();
     });
@@ -629,7 +646,7 @@ async function generatePortrait(character, callback) {
 
 function finalizeCharacter(character) {
   const id = Date.now().toString();
-  const newChar = { id, ...defaultProficiencies, ...character };
+  const newChar = migrateProficiencies({ id, ...defaultProficiencies, ...character });
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;
   currentCharacter = newChar;
@@ -641,7 +658,10 @@ function finalizeCharacter(character) {
 function loadCharacter() {
   const charId = currentProfile?.lastCharacter;
   if (charId && currentProfile.characters && currentProfile.characters[charId]) {
-    currentCharacter = { ...defaultProficiencies, ...currentProfile.characters[charId] };
+    currentCharacter = migrateProficiencies({
+      ...defaultProficiencies,
+      ...currentProfile.characters[charId]
+    });
     showCharacter();
   } else if (localStorage.getItem(TEMP_CHARACTER_KEY)) {
     startCharacterCreation();
