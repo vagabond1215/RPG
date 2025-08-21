@@ -1,5 +1,8 @@
 import { SPELLBOOK } from "./spells.js";
+import { WEAPON_SKILLS } from "./weapon_skills.js";
+
 window.SPELLBOOK = SPELLBOOK;
+window.WEAPON_SKILLS = WEAPON_SKILLS;
 
 const body = document.body;
 const main = document.querySelector('main');
