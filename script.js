@@ -1,6 +1,7 @@
 import { SPELLBOOK } from "./spells.js";
 import { WEAPON_SKILLS } from "./weapon_skills.js";
 import { characterTemplate, gainProficiency } from "./core.js";
+import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./race_attrs.js";
 
 window.SPELLBOOK = SPELLBOOK;
 window.WEAPON_SKILLS = WEAPON_SKILLS;
@@ -253,6 +254,7 @@ function selectProfile() {
 function showCharacter() {
   if (!currentCharacter) return;
   hideBackButton();
+  updateCharacterButton();
   const portrait = currentCharacter.image
     ? `<img src="${currentCharacter.image}" alt="portrait" class="main-portrait">`
     : '';
@@ -261,6 +263,7 @@ function showCharacter() {
 
 function showNoCharacterUI() {
   hideBackButton();
+  updateCharacterButton();
   main.innerHTML = `<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`;
   document.getElementById('new-character').addEventListener('click', startCharacterCreation);
 }
@@ -312,8 +315,13 @@ function showCharacterUI() {
   const c = currentCharacter;
   const portrait = `<img src="${c.image || ''}" alt="portrait" style="width:10rem;height:10rem;${c.image ? '' : 'display:none;'}">`;
   const info = `<p>Race: ${c.race}</p><p>Sex: ${c.sex}</p><p>Skin Color: <span class=\"color-box\" style=\"background:${c.skinColor}\"></span></p><p>Hair Color: <span class=\"color-box\" style=\"background:${c.hairColor}\"></span></p><p>Eye Color: <span class=\"color-box\" style=\"background:${c.eyeColor}\"></span></p><p>Height: ${formatHeight(c.height)}</p>`;
+  const stats = c.attributes?.current || {};
+  const statsList = ['STR','DEX','CON','VIT','AGI','INT','WIS','CHA','LCK']
+    .map(attr => `<li>${attr}: ${stats[attr] ?? 0}</li>`)
+    .join('');
+  const statsHTML = `<h2>Current Stats</h2><ul class="stats-list">${statsList}</ul>`;
   const regenerateBtn = `<button id="regenerate-portrait" class="icon-button" title="Regenerate portrait">${regenerateIcon}</button>`;
-  main.innerHTML = `<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}${regenerateBtn}</div>${info}<button id="delete-character">Delete Character</button></div>`;
+  main.innerHTML = `<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}${regenerateBtn}</div>${info}${statsHTML}<button id="delete-character">Delete Character</button></div>`;
   document.getElementById('delete-character').addEventListener('click', () => {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
@@ -420,6 +428,16 @@ function startCharacterCreation() {
       `<button id="cc-complete" class="complete-button" ${isComplete() ? '' : 'disabled'}></button>` +
       '<button id="cc-cancel" title="Cancel">✖</button>';
 
+    const raceInfoHTML = (() => {
+      if (!character.race) return '';
+      const attrs = getRaceStartingAttributes(character.race);
+      const statsList = Object.entries({ ...attrs, LCK: 10 })
+        .map(([k, v]) => `<li>${k}: ${v}</li>`)
+        .join('');
+      const desc = RACE_DESCRIPTIONS[character.race] || '';
+      return `<div class="race-info"><p>${desc}</p><h3>Starting Stats</h3><ul>${statsList}</ul></div>`;
+    })();
+
     if (step < fields.length) {
       const field = fields[step];
       let inputHTML = '';
@@ -454,7 +472,7 @@ function startCharacterCreation() {
         )}</span>`;
       }
 
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column">${inputHTML}</div></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column">${inputHTML}${raceInfoHTML}</div></div>`;
 
       if (field.type === 'select') {
         document.querySelectorAll('.option-button').forEach(btn => {
@@ -485,7 +503,7 @@ function startCharacterCreation() {
       }
     } else {
       const nameVal = character.name || '';
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div></div>`;
+      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><input type="text" id="name-input" value="${nameVal}" placeholder="Name">${raceInfoHTML}</div></div>`;
       const nameInput = document.getElementById('name-input');
       const updateName = () => {
         character.name = nameInput.value.trim();
@@ -592,10 +610,13 @@ async function generatePortrait(character, callback) {
 function finalizeCharacter(character) {
   const id = Date.now().toString();
   const template = JSON.parse(JSON.stringify(characterTemplate));
+  const attrs = getRaceStartingAttributes(character.race);
+  const attrBlock = { ...attrs, LCK: 10 };
   const newChar = migrateProficiencies({
     ...template,
     ...defaultProficiencies,
     ...character,
+    attributes: { base: { ...attrBlock }, current: { ...attrBlock } },
     id,
   });
   currentProfile.characters[id] = newChar;
@@ -716,6 +737,10 @@ const menuButton = document.getElementById('menu-button');
 const characterButton = document.getElementById('character-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const characterMenu = document.getElementById('characterMenu');
+
+function updateCharacterButton() {
+  characterButton.style.display = currentCharacter ? 'inline-flex' : 'none';
+}
 
 menuButton.addEventListener('click', () => {
   dropdownMenu.classList.toggle('active');
