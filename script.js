@@ -72,6 +72,35 @@ const defaultProficiencies = {
   dualWield: 0
 };
 
+const proficiencyCategories = {
+  Magical: [
+    'elementalMagic',
+    'lightMagic',
+    'darkMagic',
+    'reinforcementMagic',
+    'enfeeblingMagic',
+    'summoningMagic'
+  ],
+  Combat: [
+    'evasion',
+    'block',
+    'parry',
+    'sword',
+    'polearm',
+    'axe',
+    'staff',
+    'marksmanship',
+    'mage',
+    'dagger',
+    'shield',
+    'lightArmor',
+    'mediumArmor',
+    'heavyArmor',
+    'dualWield'
+  ],
+  'Non Combat': ['singing', 'instrument', 'dancing']
+};
+
 const saveProfiles = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
 
 const formatHeight = cm => {
@@ -177,6 +206,23 @@ function showCharacterUI() {
       showCharacterUI();
     });
   });
+}
+
+function showProficienciesUI() {
+  if (!currentCharacter) return;
+  showBackButton();
+  let html = '<div class="no-character"><h1>Proficiencies</h1>';
+  for (const [type, list] of Object.entries(proficiencyCategories)) {
+    html += `<h2>${type}</h2><ul>`;
+    list.forEach(key => {
+      const value = currentCharacter[key] ?? 0;
+      const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+      html += `<li>${name}: ${value}</li>`;
+    });
+    html += '</ul>';
+  }
+  html += '</div>';
+  main.innerHTML = html;
 }
 
 function startCharacterCreation() {
@@ -528,6 +574,8 @@ characterMenu.addEventListener('click', e => {
   characterMenu.classList.remove('active');
   if (action === 'profile') {
     showCharacterUI();
+  } else if (action === 'proficiencies') {
+    showProficienciesUI();
   } else {
     showBackButton();
     main.innerHTML = `<div class="no-character"><h1>${action} not implemented</h1></div>`;
