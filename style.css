@@ -60,35 +60,47 @@ body {
 .settings-group {
   display: flex;
   gap: 0.5rem;
+  position: relative;
 }
 
 #settings-panel {
   display: flex;
   gap: 0.5rem;
   overflow: hidden;
-  max-width: 0;
-  max-height: 0;
-  transition: max-width 0.3s ease, max-height 0.3s ease;
+  position: absolute;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+  z-index: 350;
 }
 
-body.layout-landscape #settings-panel,
-body.layout-auto #settings-panel {
+#settings-panel.active {
+  pointer-events: auto;
+}
+
+body.layout-landscape #settings-panel {
   flex-direction: row;
+  top: 0;
+  left: 100%;
+  margin-left: 0.5rem;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+body.layout-landscape #settings-panel.active {
+  transform: scaleX(1);
 }
 
 body.layout-portrait #settings-panel {
   flex-direction: column;
-}
-
-body.layout-landscape #settings-panel.active,
-body.layout-auto #settings-panel.active {
-  max-width: 12rem;
-  max-height: 3rem;
+  top: 100%;
+  left: 0;
+  margin-top: 0.5rem;
+  transform: scaleY(0);
+  transform-origin: top;
 }
 
 body.layout-portrait #settings-panel.active {
-  max-width: 3rem;
-  max-height: 12rem;
+  transform: scaleY(1);
 }
 
 #dropdownMenu {
@@ -536,10 +548,14 @@ body.layout-portrait main {
   }
   body.layout-auto #settings-panel {
     flex-direction: column;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    transform: scaleY(0);
+    transform-origin: top;
   }
   body.layout-auto #settings-panel.active {
-    max-width: 3rem;
-    max-height: 12rem;
+    transform: scaleY(1);
   }
 }
 
@@ -555,9 +571,13 @@ body.layout-portrait main {
   }
   body.layout-auto #settings-panel {
     flex-direction: row;
+    top: 0;
+    left: 100%;
+    margin-left: 0.5rem;
+    transform: scaleX(0);
+    transform-origin: left;
   }
   body.layout-auto #settings-panel.active {
-    max-width: 12rem;
-    max-height: 3rem;
+    transform: scaleX(1);
   }
 }
