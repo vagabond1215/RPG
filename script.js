@@ -46,9 +46,16 @@ const skinColorOptionsByRace = {
 
 // Default proficiency values for new characters
 const defaultProficiencies = {
-  elementalMagic: 0,
-  lightMagic: 0,
+  stoneMagic: 0,
+  waterMagic: 0,
+  windMagic: 0,
+  fireMagic: 0,
+  iceMagic: 0,
+  thunderMagic: 0,
   darkMagic: 0,
+  lightMagic: 0,
+  destructiveMagic: 0,
+  healingMagic: 0,
   reinforcementMagic: 0,
   enfeeblingMagic: 0,
   summoningMagic: 0,
@@ -74,9 +81,16 @@ const defaultProficiencies = {
 
 const proficiencyCategories = {
   Magical: [
-    'elementalMagic',
-    'lightMagic',
+    'stoneMagic',
+    'waterMagic',
+    'windMagic',
+    'fireMagic',
+    'iceMagic',
+    'thunderMagic',
     'darkMagic',
+    'lightMagic',
+    'destructiveMagic',
+    'healingMagic',
     'reinforcementMagic',
     'enfeeblingMagic',
     'summoningMagic'
@@ -100,6 +114,119 @@ const proficiencyCategories = {
   ],
   'Non Combat': ['singing', 'instrument', 'dancing']
 };
+
+const elementalProficiencyMap = {
+  stone: 'stoneMagic',
+  water: 'waterMagic',
+  wind: 'windMagic',
+  fire: 'fireMagic',
+  ice: 'iceMagic',
+  thunder: 'thunderMagic',
+  dark: 'darkMagic',
+  light: 'lightMagic'
+};
+
+const proficiencyCap = (L, A0, A, r) => A0 + A + r * L;
+
+function gainProficiencyWithChance({
+  P,
+  L,
+  A0,
+  A,
+  r,
+  g0,
+  F_context = 1,
+  F_level = 1,
+  F_attr = 1,
+  F_repeat = 1,
+  F_unlock_dist = 1,
+  F_post = 1,
+  F_capgap = 1,
+  F_variety = 1,
+  isNewSpellUse = false,
+  success = true,
+  M_new = 1,
+  p_partial_fail = 0,
+  fail_partial_factor = 0,
+  τ_high = 1,
+  τ_low = 0,
+  p_small_min = 0,
+  rand = Math.random
+}) {
+  const Cap = proficiencyCap(L, A0, A, r);
+  const ΔP_raw =
+    g0 *
+    F_context *
+    F_level *
+    F_attr *
+    F_repeat *
+    F_unlock_dist *
+    F_post *
+    F_capgap *
+    F_variety;
+
+  const ΔP_success = isNewSpellUse
+    ? Math.min(ΔP_raw * M_new, Cap - P)
+    : Math.min(ΔP_raw, Cap - P);
+
+  if (!success) {
+    if (rand() < p_partial_fail) {
+      return Math.round(P + ΔP_success * fail_partial_factor, 2);
+    }
+    return Math.round(P, 2);
+  }
+
+  let p_gain;
+  if (isNewSpellUse) {
+    p_gain = 0.95;
+  } else if (ΔP_success >= τ_high) {
+    p_gain = 1;
+  } else if (ΔP_success <= τ_low) {
+    p_gain = p_small_min;
+  } else {
+    const t = (ΔP_success - τ_low) / (τ_high - τ_low);
+    p_gain = p_small_min + (1 - p_small_min) * t;
+  }
+
+  const ΔP_final = rand() < p_gain ? ΔP_success : 0;
+  return Math.round(P + ΔP_final, 2);
+}
+
+function applySpellProficiencyGain(character, spell, params) {
+  if (!character || !spell) return;
+  const elemKey = elementalProficiencyMap[spell.element?.toLowerCase()];
+  if (elemKey) {
+    character[elemKey] = gainProficiencyWithChance({
+      P: character[elemKey],
+      ...params,
+    });
+  }
+
+  if (spell.isDamage) {
+    character.destructiveMagic = gainProficiencyWithChance({
+      P: character.destructiveMagic,
+      ...params,
+    });
+  }
+  if (spell.isBuff) {
+    character.reinforcementMagic = gainProficiencyWithChance({
+      P: character.reinforcementMagic,
+      ...params,
+    });
+  }
+  if (spell.isHeal) {
+    character.healingMagic = gainProficiencyWithChance({
+      P: character.healingMagic,
+      ...params,
+    });
+  }
+  if (spell.isControl) {
+    character.enfeeblingMagic = gainProficiencyWithChance({
+      P: character.enfeeblingMagic,
+      ...params,
+    });
+  }
+}
 
 const saveProfiles = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
 
