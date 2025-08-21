@@ -174,6 +174,33 @@ function showNoCharacterUI() {
   document.getElementById('new-character').addEventListener('click', startCharacterCreation);
 }
 
+function showCharacterSelectUI() {
+  showBackButton();
+  const characters = currentProfile?.characters || {};
+  const ids = Object.keys(characters);
+  let html = '<div class="no-character"><h1>Select Character</h1><div class="option-grid">';
+  if (ids.length === 0) {
+    html += '<p>No characters available</p>';
+  } else {
+    ids.forEach(id => {
+      const c = characters[id];
+      const cls = currentCharacter && currentCharacter.id === id ? 'selected' : '';
+      html += `<button data-id="${id}" class="${cls}">${c.name}</button>`;
+    });
+  }
+  html += '</div></div>';
+  main.innerHTML = html;
+  main.querySelectorAll('.option-grid button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      currentProfile.lastCharacter = id;
+      currentCharacter = { ...defaultProficiencies, ...currentProfile.characters[id] };
+      saveProfiles();
+      showMainUI();
+    });
+  });
+}
+
 function showMainUI() {
   if (currentCharacter) {
     showCharacter();
@@ -562,6 +589,8 @@ dropdownMenu.addEventListener('click', e => {
   dropdownMenu.classList.remove('active');
   if (action === 'new-character') {
     startCharacterCreation();
+  } else if (action === 'character-select') {
+    showCharacterSelectUI();
   } else {
     showBackButton();
     main.innerHTML = `<div class="no-character"><h1>${action} not implemented</h1></div>`;
