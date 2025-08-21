@@ -77,8 +77,9 @@ const defaultProficiencies = {
   axe: 0,
   greataxe: 0,
   staff: 0,
-  marksmanship: 0,
+  bow: 0,
   crossbow: 0,
+  martial: 0,
   wand: 0,
   dagger: 0,
   shield: 0,
@@ -92,6 +93,10 @@ function migrateProficiencies(character) {
   if ('mage' in character && !('wand' in character)) {
     character.wand = character.mage;
     delete character.mage;
+  }
+  if ('marksmanship' in character && !('bow' in character)) {
+    character.bow = character.marksmanship;
+    delete character.marksmanship;
   }
   return character;
 }
@@ -122,8 +127,9 @@ const proficiencyCategories = {
     'axe',
     'greataxe',
     'staff',
-    'marksmanship',
+    'bow',
     'crossbow',
+    'martial',
     'wand',
     'dagger',
     'shield',
@@ -406,15 +412,16 @@ function showCharacterUI() {
 function showProficienciesUI() {
   if (!currentCharacter) return;
   showBackButton();
-  let html = '<div class="no-character"><h1>Proficiencies</h1>';
+  let html = '<div class="proficiencies-screen"><h1>Proficiencies</h1>';
   for (const [type, list] of Object.entries(proficiencyCategories)) {
-    html += `<h2>${type}</h2><ul>`;
+    html += `<h2>${type}</h2><div class="proficiency-grid">`;
     list.forEach(key => {
       const value = currentCharacter[key] ?? 0;
       const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
-      html += `<li>${name}: ${value}</li>`;
+      const capped = value >= 100 ? ' capped' : '';
+      html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}">${value}</span></div>`;
     });
-    html += '</ul>';
+    html += '</div>';
   }
   html += '</div>';
   main.innerHTML = html;
@@ -685,6 +692,12 @@ function loadPreferences() {
   updateScale();
   setLayout(currentLayoutIndex);
 }
+
+const settingsButton = document.getElementById('settings-button');
+const settingsPanel = document.getElementById('settings-panel');
+settingsButton.addEventListener('click', () => {
+  settingsPanel.classList.toggle('active');
+});
 
 // Theme toggle
 const themeToggle = document.getElementById('theme-toggle');
