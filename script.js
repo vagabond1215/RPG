@@ -1,3 +1,6 @@
+import { SPELLBOOK } from "./spells.js";
+window.SPELLBOOK = SPELLBOOK;
+
 const body = document.body;
 const main = document.querySelector('main');
 const backButton = document.getElementById('back-button');
