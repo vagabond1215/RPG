@@ -17,17 +17,26 @@
       <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
     </svg>
   </button>
-  <button id="theme-toggle" aria-label="Toggle theme"></button>
-  <button id="layout-toggle" aria-label="Toggle layout"></button>
-  <button id="scale-dec" aria-label="Decrease UI size">-</button>
-  <button id="scale-inc" aria-label="Increase UI size">+</button>
+  <div class="settings-group">
+    <button id="settings-button" aria-label="Settings">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9A1.65 1.65 0 0 0 10.51 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9A1.65 1.65 0 0 0 20.91 10.51H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+      </svg>
+    </button>
+    <div id="settings-panel">
+      <button id="theme-toggle" aria-label="Toggle theme"></button>
+      <button id="layout-toggle" aria-label="Toggle layout"></button>
+      <button id="scale-dec" aria-label="Decrease UI size">-</button>
+      <button id="scale-inc" aria-label="Increase UI size">+</button>
+    </div>
+  </div>
 </nav>
 
 <div id="dropdownMenu">
     <button data-action="character-select">Character Select</button>
     <button data-action="new-character">New Character</button>
     <button data-action="map">Map</button>
-    <button data-action="settings">Settings</button>
   </div>
 
 <div id="characterMenu">

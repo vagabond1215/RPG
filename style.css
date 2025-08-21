@@ -6,6 +6,7 @@
   --menu-color-dark: #333333;
   --menu-color-light: #333333;
   --range-color: #555555;
+  --capped-color: #2e8b57;
 }
 
 html {
@@ -54,6 +55,40 @@ body {
   stroke: currentColor;
   fill: none;
   stroke-width: 2;
+}
+
+.settings-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#settings-panel {
+  display: flex;
+  gap: 0.5rem;
+  overflow: hidden;
+  max-width: 0;
+  max-height: 0;
+  transition: max-width 0.3s ease, max-height 0.3s ease;
+}
+
+body.layout-landscape #settings-panel,
+body.layout-auto #settings-panel {
+  flex-direction: row;
+}
+
+body.layout-portrait #settings-panel {
+  flex-direction: column;
+}
+
+body.layout-landscape #settings-panel.active,
+body.layout-auto #settings-panel.active {
+  max-width: 12rem;
+  max-height: 3rem;
+}
+
+body.layout-portrait #settings-panel.active {
+  max-width: 3rem;
+  max-height: 12rem;
 }
 
 #dropdownMenu {
@@ -236,6 +271,7 @@ body.theme-light {
   --menu-color-dark: #333333;
   --menu-color-light: #333333;
   --range-color: #555555;
+  --capped-color: #2e8b57;
 }
 
 body.theme-sepia {
@@ -244,6 +280,7 @@ body.theme-sepia {
   --menu-color-dark: #4a3b2d;
   --menu-color-light: #4a3b2d;
   --range-color: #4a3b2d;
+  --capped-color: #1e90ff;
 }
 
 body.theme-dark {
@@ -252,6 +289,7 @@ body.theme-dark {
   --menu-color-dark: #cccccc;
   --menu-color-light: #cccccc;
   --range-color: #aaaaaa;
+  --capped-color: #9370db;
 }
 
 .progress {
@@ -438,6 +476,31 @@ body.theme-dark {
     accent-color: var(--range-color);
   }
 
+.proficiency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.5rem 1rem;
+  width: 100%;
+}
+
+.proficiency-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.proficiency-name {
+  text-align: left;
+}
+
+.proficiency-value {
+  text-align: right;
+}
+
+.proficiency-value.capped {
+  color: var(--capped-color);
+}
+
 /* Orientation layouts */
 body.layout-landscape .top-menu {
   flex-direction: row;
@@ -471,6 +534,13 @@ body.layout-portrait main {
     margin-top: 0;
     margin-left: 3.5rem;
   }
+  body.layout-auto #settings-panel {
+    flex-direction: column;
+  }
+  body.layout-auto #settings-panel.active {
+    max-width: 3rem;
+    max-height: 12rem;
+  }
 }
 
 @media (orientation: landscape) {
@@ -482,5 +552,12 @@ body.layout-portrait main {
   body.layout-auto main {
     margin-top: 4rem;
     margin-left: 0;
+  }
+  body.layout-auto #settings-panel {
+    flex-direction: row;
+  }
+  body.layout-auto #settings-panel.active {
+    max-width: 12rem;
+    max-height: 3rem;
   }
 }
