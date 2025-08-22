@@ -738,6 +738,10 @@ function startCharacterCreation() {
     let field;
     if (step < fields.length) field = fields[step];
     else if (step === fields.length + 1) field = locationField;
+    if (field && field.key === 'race' && !character.race) {
+      character.race = field.options[0];
+      localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+    }
     if (step === fields.length + 1 && !character.location) {
       character.location = locationField.options[0];
     }
@@ -787,6 +791,20 @@ function startCharacterCreation() {
               <button class="loc-arrow right" aria-label="Next">&#x203A;</button>
             </div>
             <div class="location-indicator">${index + 1} / ${options.length}</div>`;
+        } else if (field.key === 'race') {
+          const options = field.options;
+          let index = options.indexOf(character.race);
+          if (index === -1) {
+            index = 0;
+            character.race = options[0];
+          }
+          inputHTML = `
+            <div class="race-carousel">
+              <button class="race-arrow left" aria-label="Previous">&#x2039;</button>
+              <button class="option-button race-button">${character.race}</button>
+              <button class="race-arrow right" aria-label="Next">&#x203A;</button>
+            </div>
+            <div class="race-indicator">${index + 1} / ${options.length}</div>`;
         } else {
           inputHTML = `<div class="option-grid">${field.options
             .map(
@@ -841,6 +859,17 @@ function startCharacterCreation() {
         };
         document.querySelector('.loc-arrow.left').addEventListener('click', () => change(-1));
         document.querySelector('.loc-arrow.right').addEventListener('click', () => change(1));
+      } else if (field.key === 'race') {
+        const options = field.options;
+        let index = options.indexOf(character.race);
+        const change = dir => {
+          index = (index + dir + options.length) % options.length;
+          character.race = options[index];
+          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          renderStep();
+        };
+        document.querySelector('.race-arrow.left').addEventListener('click', () => change(-1));
+        document.querySelector('.race-arrow.right').addEventListener('click', () => change(1));
       } else if (field.type === 'select') {
         document.querySelectorAll('.option-button').forEach(btn => {
           btn.addEventListener('click', () => {

@@ -204,6 +204,11 @@ main {
   color: var(--background);
 }
 
+button:not(:disabled):hover,
+.clickable:hover {
+  filter: drop-shadow(0 0 0.5rem currentColor);
+}
+
 #dropdownMenu button:not(:last-child)::after,
 #characterMenu button:not(:last-child)::after {
   content: "";
@@ -579,21 +584,24 @@ body.theme-dark {
     color: var(--background);
   }
 
-  .location-select {
+  .location-select,
+  .race-select {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
   }
 
-  .location-carousel {
+  .location-carousel,
+  .race-carousel {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
   }
 
-  .location-button {
+  .location-button,
+  .race-button {
     position: relative;
     padding: 0.5rem 1rem;
     background: transparent;
@@ -603,7 +611,9 @@ body.theme-dark {
   }
 
   .location-button::before,
-  .location-button::after {
+  .location-button::after,
+  .race-button::before,
+  .race-button::after {
     content: '';
     position: absolute;
     left: 0;
@@ -612,15 +622,18 @@ body.theme-dark {
     background: linear-gradient(to right, var(--background), var(--foreground), var(--background));
   }
 
-  .location-button::before {
+  .location-button::before,
+  .race-button::before {
     top: 0;
   }
 
-  .location-button::after {
+  .location-button::after,
+  .race-button::after {
     bottom: 0;
   }
 
-  .loc-arrow {
+  .loc-arrow,
+  .race-arrow {
     background: transparent;
     border: none;
     color: var(--foreground);
@@ -630,11 +643,13 @@ body.theme-dark {
     cursor: pointer;
   }
 
-  .loc-arrow:hover {
+  .loc-arrow:hover,
+  .race-arrow:hover {
     filter: drop-shadow(0 0 0.5rem currentColor);
   }
 
-  .location-indicator {
+  .location-indicator,
+  .race-indicator {
     text-align: center;
   }
 
