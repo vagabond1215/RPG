@@ -427,21 +427,21 @@ body.theme-dark {
   .cc-column {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    width: fit-content;
+    align-items: stretch;
+    width: 100%;
   }
 
   .cc-top {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    width: fit-content;
+    width: 100%;
   }
 
   .cc-options,
-  .race-stats {
-    flex: 0 0 auto;
-    width: fit-content;
+  .race-stats,
+  .race-description {
+    flex: 1 1 12rem;
   }
 
   .race-stats ul {
@@ -465,7 +465,7 @@ body.theme-dark {
   }
 
   .race-description {
-    margin-top: 0.5rem;
+    margin-top: 0;
   }
 
   .option-grid {
@@ -564,5 +564,60 @@ body.theme-dark {
 .proficiency-value.capped {
   color: var(--capped-color);
 }
+
+/* Equipment screen */
+ .equipment-screen {
+   width: 100%;
+ }
+
+ .equipment-section {
+   margin-bottom: 1rem;
+ }
+
+ .equipment-header {
+   background: var(--foreground);
+   color: var(--background);
+   padding: 0.25rem 0.5rem;
+ }
+
+ .equipment-list {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+ }
+
+ .equipment-slot {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   position: relative;
+   padding: 0.25rem 0;
+ }
+
+ .equipment-slot:not(:last-child)::after {
+   content: '';
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   height: 1px;
+   background: linear-gradient(to right, var(--background), var(--foreground) 50%, var(--background));
+ }
+
+ .equipment-slot svg {
+   width: 1.5rem;
+   height: 1.5rem;
+   stroke: currentColor;
+   fill: none;
+   stroke-width: 2;
+ }
+
+ .slot-name {
+   flex: 0 0 6rem;
+ }
+
+ .slot-item {
+   flex: 1;
+ }
 
 /* Orientation layouts removed: top menu remains horizontal for all layouts */
