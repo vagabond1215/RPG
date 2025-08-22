@@ -3,8 +3,8 @@ import { WEAPON_SKILLS } from "./assets/data/weapon_skills.js";
 import { characterTemplate, gainProficiency } from "./core.js";
 import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./assets/data/race_attrs.js";
 import { maxHP, maxMP, maxStamina } from "./resources.js";
-import { DENOMINATIONS, CURRENCY_VALUES, convertCurrency, toIron, fromIron } from "./currency.js";
-import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./equipment.js";
+import { DENOMINATIONS, CURRENCY_VALUES, convertCurrency, toIron, fromIron } from "./assets/data/currency.js";
+import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipment.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);

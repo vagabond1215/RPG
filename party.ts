@@ -1,8 +1,8 @@
 // party.ts — party structs (up to 8), resources, effects, and NPC proficiency policy
 
 import { initGrowth, onLevelUp } from "./attr_growth.js";
-import type { Equipment } from "./equipment.js";
-import { createEmptyEquipment } from "./equipment.js";
+import type { Equipment } from "./assets/data/equipment.js";
+import { createEmptyEquipment } from "./assets/data/equipment.js";
 
 /* ========================= Core Types ========================= */
 

@@ -134,14 +134,16 @@ main {
   display: flex;
   flex-direction: column;
   transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   z-index: 200;
   pointer-events: none;
+  opacity: 0;
 }
 
 #dropdownMenu.active {
   transform: translateX(0);
   pointer-events: auto;
+  opacity: 1;
 }
 
 #dropdownMenu button {
@@ -165,14 +167,16 @@ main {
   display: flex;
   flex-direction: column;
   transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   z-index: 200;
   pointer-events: none;
+  opacity: 0;
 }
 
 #characterMenu.active {
   transform: translateX(0);
   pointer-events: auto;
+  opacity: 1;
 }
 
 #characterMenu button {
