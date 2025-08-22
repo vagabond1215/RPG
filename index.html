@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="theme-light layout-auto">
-
+  <div id="app">
 <nav class="top-menu">
   <button id="menu-button" aria-label="Menu">☰</button>
   <button id="back-button" aria-label="Back" style="display:none;">←</button>
@@ -31,7 +31,7 @@
       <button id="scale-inc" aria-label="Increase UI size">+</button>
     </div>
   </div>
-</nav>
+  </nav>
 
 <div id="dropdownMenu">
     <button data-action="character-select">Character Select</button>
@@ -85,9 +85,10 @@
     </svg>
     Quests
   </button>
-</div>
+  </div>
 
-<main style="margin-top:4rem; padding:1rem;"></main>
+<main style="padding:1rem;"></main>
+  </div>
 
 <script type="module" src="script.js"></script>
 </body>
