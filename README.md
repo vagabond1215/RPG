@@ -12,12 +12,12 @@ No build steps are required. After publishing the repository with GitHub Pages, 
 - `style.css` – basic styles and themes
 - `script.js` – behaviour for the menu and layout controls
   and core mechanics such as proficiency gain
-- `weapon_skills.js` – weapon skill data and effects
 - `resources.js` – dynamic HP/MP/Stamina calculations based on stats
 - `combat.ts` – single function to resolve combat, accounting for level, attributes, proficiencies and active skill effects
 - `party.ts` – party structs, resources, effects, and NPC proficiency policy
-- `assets/images/` – image assets
-- `assets/data/` – data assets
+- `assets/images/Race Photos/` – race reference images
+- `assets/images/Maps/` – map images
+- `assets/data/` – data assets such as `weapon_skills.js`, `spells.js`, and `race_attrs.js`
 
 Additional functionality will be added over time.
 
@@ -27,4 +27,4 @@ Characters now track separate proficiencies for Stone, Water, Wind, Fire, Ice, T
 
 ### Weapon Skills
 
-Weapon attacks and specials are defined in `weapon_skills.js`. Each weapon line contains single-target, area, ultimate and special abilities with structured effect payloads so the game engine can compute damage, disables and enhancements consistently.
+Weapon attacks and specials are defined in `assets/data/weapon_skills.js`. Each weapon line contains single-target, area, ultimate and special abilities with structured effect payloads so the game engine can compute damage, disables and enhancements consistently.

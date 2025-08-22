@@ -201,7 +201,7 @@ export function gainDanceProficiency(input: DanceGainInput, cfg: DanceProgressio
 }
 
 /* ========================= Example usage =========================
-import { gainDanceProficiency } from "./dance_proficiency";
+import { gainDanceProficiency } from "./assets/data/dance_proficiency";
 
 // Maintain a dance for ~6s during battle vs slightly higher-level enemies:
 let P = 24.17, cap = 54;

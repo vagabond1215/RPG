@@ -387,7 +387,7 @@ export function generateWeaponSkills() {
 export const WEAPON_SKILLS = generateWeaponSkills();
 
 /* ------------------------------- Usage ---------------------------------
-import { WEAPON_SKILLS } from "./weapon_skills.js";
+import { WEAPON_SKILLS } from "./assets/data/weapon_skills.js";
 
 // Example: list all Dagger specials with their effects
 const daggerSpecials = WEAPON_SKILLS.filter(s => s.weapon==="Dagger" && s.family==="special");

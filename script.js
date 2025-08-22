@@ -1,7 +1,7 @@
-import { SPELLBOOK } from "./spells.js";
-import { WEAPON_SKILLS } from "./weapon_skills.js";
+import { SPELLBOOK } from "./assets/data/spells.js";
+import { WEAPON_SKILLS } from "./assets/data/weapon_skills.js";
 import { characterTemplate, gainProficiency } from "./core.js";
-import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./race_attrs.js";
+import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./assets/data/race_attrs.js";
 import { maxHP, maxMP, maxStamina } from "./resources.js";
 import { DENOMINATIONS, CURRENCY_VALUES, convertCurrency, toIron, fromIron } from "./currency.js";
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./equipment.js";
@@ -100,14 +100,14 @@ const skinColorOptionsByRace = {
 };
 
 const RACE_IMAGES = {
-  Human: 'assets/images/Human%20Male%20and%20Female.png',
-  Elf: 'assets/images/Elven%20Male%20and%20Female.png',
-  'Dark Elf': 'assets/images/Dark%20Elf%20Male%20and%20Female.png',
-  Dwarf: 'assets/images/Dwarven%20Male%20and%20Female.png',
-  'Cait Sith': 'assets/images/Cait%20Sith%20Male%20and%20Female.png',
-  Salamander: 'assets/images/Salamander%20Male%20and%20Female.png',
-  Gnome: 'assets/images/Gnome%20Male%20and%20Female.png',
-  Halfling: 'assets/images/Halfling%20Male%20and%20Female.png'
+  Human: 'assets/images/Race%20Photos/Human%20Male%20and%20Female.png',
+  Elf: 'assets/images/Race%20Photos/Elven%20Male%20and%20Female.png',
+  'Dark Elf': 'assets/images/Race%20Photos/Dark%20Elf%20Male%20and%20Female.png',
+  Dwarf: 'assets/images/Race%20Photos/Dwarven%20Male%20and%20Female.png',
+  'Cait Sith': 'assets/images/Race%20Photos/Cait%20Sith%20Male%20and%20Female.png',
+  Salamander: 'assets/images/Race%20Photos/Salamander%20Male%20and%20Female.png',
+  Gnome: 'assets/images/Race%20Photos/Gnome%20Male%20and%20Female.png',
+  Halfling: 'assets/images/Race%20Photos/Halfling%20Male%20and%20Female.png'
 };
 
 // Default proficiency values for new characters
@@ -347,10 +347,7 @@ function showCharacter() {
   if (!currentCharacter) return;
   hideBackButton();
   updateCharacterButton();
-  const portrait = currentCharacter.image
-    ? `<img src="${currentCharacter.image}" alt="portrait" class="main-portrait">`
-    : '';
-  setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1>${portrait}</div>`);
+  setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1></div>`);
 }
 
 function showNoCharacterUI() {
