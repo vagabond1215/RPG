@@ -700,8 +700,34 @@ body.theme-dark {
    flex: 0 0 6rem;
  }
 
- .slot-item {
-   flex: 1;
- }
+.slot-item {
+  flex: 1;
+}
 
 /* Orientation layouts removed: top menu remains horizontal for all layouts */
+
+#map-container {
+  position: fixed;
+  top: var(--menu-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--background);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 250;
+}
+
+#map-container img {
+  max-width: 100%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+#map-container .map-description {
+  margin-top: 1rem;
+  text-align: center;
+}

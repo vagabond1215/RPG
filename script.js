@@ -5,6 +5,7 @@ import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./assets/data/race
 import { maxHP, maxMP, maxStamina } from "./assets/data/resources.js";
 import { DENOMINATIONS, CURRENCY_VALUES, convertCurrency, toIron, fromIron } from "./assets/data/currency.js";
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipment.js";
+import { LOCATIONS } from "./assets/data/locations.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -21,6 +22,7 @@ window.CURRENCY_VALUES = CURRENCY_VALUES;
 window.convertCurrency = convertCurrency;
 window.toIron = toIron;
 window.fromIron = fromIron;
+window.LOCATIONS = LOCATIONS;
 
 const body = document.body;
 const main = document.querySelector('main');
@@ -470,18 +472,22 @@ function showCharacter() {
   if (!currentCharacter) return;
   hideBackButton();
   updateCharacterButton();
-  setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1></div>`);
+  updateMapButton();
+  const town = currentCharacter.location || '';
+  setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1><p>You awaken in the town of ${town}.</p></div>`);
 }
 
 function showNoCharacterUI() {
   hideBackButton();
   updateCharacterButton();
+  updateMapButton();
   setMainHTML(`<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`);
   document.getElementById('new-character').addEventListener('click', startCharacterCreation);
 }
 
 function showCharacterSelectUI() {
   showBackButton();
+  updateMapButton();
   const characters = currentProfile?.characters || {};
   const ids = Object.keys(characters);
   let html = '<div class="no-character"><h1>Select Character</h1><div class="option-grid">';
@@ -662,6 +668,8 @@ function showEquipmentUI() {
 
 function startCharacterCreation() {
   showBackButton();
+  mapButton.style.display = 'none';
+  mapContainer.style.display = 'none';
   const saved = JSON.parse(localStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
   const character = saved.character || {};
   const fields = [
@@ -670,6 +678,12 @@ function startCharacterCreation() {
       label: 'Choose your race',
       type: 'select',
       options: ['Human', 'Elf', 'Dark Elf', 'Dwarf', 'Cait Sith', 'Salamander', 'Gnome', 'Halfling'], // Cait Sith are humanoid felines, Salamanders are reptilian humanoids
+    },
+    {
+      key: 'location',
+      label: 'Choose your starting location',
+      type: 'select',
+      options: Object.keys(LOCATIONS).filter(l => l !== 'Duvilia Kingdom')
     },
     {
       key: 'sex',
@@ -683,7 +697,7 @@ function startCharacterCreation() {
     { key: 'height', label: 'Choose your height', type: 'range' }
   ];
 
-  const stepLabels = ['Race', 'Sex', 'Skin', 'Hair', 'Eyes', 'Height', 'Name'];
+  const stepLabels = ['Race', 'Location', 'Sex', 'Skin', 'Hair', 'Eyes', 'Height', 'Name'];
 
   const heightRanges = {
     Human: [150, 200],
@@ -715,7 +729,16 @@ function startCharacterCreation() {
       `<button id="cc-complete" class="complete-button" ${isComplete() ? '' : 'disabled'}></button>` +
       '<button id="cc-cancel" title="Cancel">✖</button>';
 
-    const raceData = (() => {
+    let field;
+    if (step < fields.length) field = fields[step];
+    const displayData = (() => {
+      if (field && field.key === 'location' && character.location) {
+        const loc = LOCATIONS[character.location];
+        if (!loc) return {};
+        const imageHTML = `<img class="race-image" src="${loc.map}" alt="${character.location}">`;
+        const descHTML = `<div class="race-description">${loc.description || ''}</div>`;
+        return { imageHTML, descHTML };
+      }
       if (!character.race) return {};
       const attrs = getRaceStartingAttributes(character.race);
       const resources = {
@@ -735,10 +758,9 @@ function startCharacterCreation() {
       const descHTML = `<div class="race-description">${RACE_DESCRIPTIONS[character.race] || ''}</div>`;
       return { statsHTML, imageHTML, descHTML };
     })();
-    const { statsHTML = '', imageHTML = '', descHTML = '' } = raceData;
+    const { statsHTML = '', imageHTML = '', descHTML = '' } = displayData;
 
     if (step < fields.length) {
-      const field = fields[step];
       let inputHTML = '';
       if (field.type === 'select') {
         inputHTML = `<div class="option-grid">${field.options
@@ -914,6 +936,8 @@ function finalizeCharacter(character) {
     ...template,
     ...defaultProficiencies,
     ...character,
+    homeTown: character.location,
+    location: character.location,
     attributes: { base: { ...attrBlock }, current: { ...attrBlock } },
     maxHP: resources.maxHP,
     hp: resources.maxHP,
@@ -1051,11 +1075,19 @@ layoutToggle.addEventListener('click', () => {
 // Dropdown menu
 const menuButton = document.getElementById('menu-button');
 const characterButton = document.getElementById('character-button');
+const mapButton = document.getElementById('map-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const characterMenu = document.getElementById('characterMenu');
+const mapContainer = document.createElement('div');
+mapContainer.id = 'map-container';
+body.appendChild(mapContainer);
 
 function updateCharacterButton() {
   characterButton.style.display = currentCharacter ? 'inline-flex' : 'none';
+}
+function updateMapButton() {
+  mapButton.style.display = currentCharacter ? 'inline-flex' : 'none';
+  if (!currentCharacter) mapContainer.style.display = 'none';
 }
 
 menuButton.addEventListener('click', () => {
@@ -1065,6 +1097,17 @@ menuButton.addEventListener('click', () => {
 characterButton.addEventListener('click', () => {
   dropdownMenu.classList.remove('active');
   characterMenu.classList.toggle('active');
+});
+mapButton.addEventListener('click', () => {
+  if (!currentCharacter) return;
+  if (mapContainer.style.display === 'flex') {
+    mapContainer.style.display = 'none';
+    return;
+  }
+  const locName = currentCharacter.location;
+  const loc = LOCATIONS[locName] || LOCATIONS['Duvilia Kingdom'];
+  mapContainer.innerHTML = `<img src="${loc.map}" alt="${loc.name}"><div class="map-description">${loc.description || ''}</div>`;
+  mapContainer.style.display = 'flex';
 });
 
 dropdownMenu.addEventListener('click', e => {
