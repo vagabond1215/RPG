@@ -150,7 +150,7 @@ main {
 }
 
 #dropdownMenu button {
-  margin: 0.25rem;
+  margin: 0;
   padding: 0.5rem 1rem;
   text-align: left;
   border: none;
@@ -183,7 +183,7 @@ main {
 }
 
 #characterMenu button {
-  margin: 0.25rem;
+  margin: 0;
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
@@ -215,9 +215,9 @@ button:not(:disabled):hover,
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -0.25rem;
-  height: 1px;
-  background: linear-gradient(to right, var(--background), var(--foreground) 50%, var(--background));
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--background), var(--foreground), var(--background));
 }
 
 #dropdownMenu button[data-action="new-character"],
@@ -758,8 +758,8 @@ body.theme-dark {
    left: 0;
    right: 0;
    bottom: 0;
-   height: 1px;
-   background: linear-gradient(to right, var(--background), var(--foreground) 50%, var(--background));
+   height: 2px;
+   background: linear-gradient(to right, var(--background), var(--foreground), var(--background));
  }
 
  .equipment-slot svg {
