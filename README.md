@@ -14,6 +14,7 @@ No build steps are required. After publishing the repository with GitHub Pages, 
   and core mechanics such as proficiency gain
 - `weapon_skills.js` – weapon skill data and effects
 - `resources.js` – dynamic HP/MP/Stamina calculations based on stats
+- `combat.ts` – single function to resolve combat, accounting for level, attributes, proficiencies and active skill effects
 - `party.ts` – party structs, resources, effects, and NPC proficiency policy
 - `assets/images/` – image assets
 - `assets/data/` – data assets
