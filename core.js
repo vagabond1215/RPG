@@ -1,6 +1,6 @@
 // Core game constants, enums, templates and helper functions
 
-import { createEmptyEquipment } from "./equipment.js";
+import { createEmptyEquipment } from "./assets/data/equipment.js";
 
 // ---- Global Tunables & Tables ----
 export const PROF_MILESTONES = [10,20,30,40,50,60,70,80,90,100];
