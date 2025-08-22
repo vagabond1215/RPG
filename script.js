@@ -672,18 +672,19 @@ function startCharacterCreation() {
   mapContainer.style.display = 'none';
   const saved = JSON.parse(localStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
   const character = saved.character || {};
+  const locationField = {
+    key: 'location',
+    label: 'Choose your starting location',
+    type: 'select',
+    options: Object.keys(LOCATIONS).filter(l => l !== 'Duvilia Kingdom')
+  };
+
   const fields = [
     {
       key: 'race',
       label: 'Choose your race',
       type: 'select',
       options: ['Human', 'Elf', 'Dark Elf', 'Dwarf', 'Cait Sith', 'Salamander', 'Gnome', 'Halfling'], // Cait Sith are humanoid felines, Salamanders are reptilian humanoids
-    },
-    {
-      key: 'location',
-      label: 'Choose your starting location',
-      type: 'select',
-      options: Object.keys(LOCATIONS).filter(l => l !== 'Duvilia Kingdom')
     },
     {
       key: 'sex',
@@ -697,7 +698,7 @@ function startCharacterCreation() {
     { key: 'height', label: 'Choose your height', type: 'range' }
   ];
 
-  const stepLabels = ['Race', 'Location', 'Sex', 'Skin', 'Hair', 'Eyes', 'Height', 'Name'];
+  const stepLabels = ['Race', 'Sex', 'Skin', 'Hair', 'Eyes', 'Height', 'Name', 'Location'];
 
   const heightRanges = {
     Human: [150, 200],
@@ -715,11 +716,16 @@ function startCharacterCreation() {
 
   function renderStep() {
     const isComplete = () =>
-      fields.every(f => character[f.key]) && character.name;
+      fields.every(f => character[f.key]) && character.name && character.location;
     const progressHTML =
       stepLabels
         .map((label, i) => {
-          const hasValue = i < fields.length ? character[fields[i].key] : character.name;
+          const hasValue =
+            i < fields.length
+              ? character[fields[i].key]
+              : i === fields.length
+              ? character.name
+              : character.location;
           let cls = 'clickable';
           if (i === step) cls = 'current clickable';
           else if (hasValue) cls = 'completed clickable';
@@ -731,8 +737,9 @@ function startCharacterCreation() {
 
     let field;
     if (step < fields.length) field = fields[step];
-    if (field && field.key === 'location' && !character.location) {
-      character.location = field.options[0];
+    else if (step === fields.length + 1) field = locationField;
+    if (step === fields.length + 1 && !character.location) {
+      character.location = locationField.options[0];
     }
     const displayData = (() => {
       if (field && field.key === 'location' && character.location) {
@@ -763,7 +770,7 @@ function startCharacterCreation() {
     })();
     const { statsHTML = '', imageHTML = '', descHTML = '' } = displayData;
 
-    if (step < fields.length) {
+    if (field) {
       let inputHTML = '';
       if (field.type === 'select') {
         if (field.key === 'location') {
@@ -870,14 +877,14 @@ function startCharacterCreation() {
         character.name = nameInput.value.trim();
         localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         const completeBtn = document.getElementById('cc-complete');
-        const lastStep = document.querySelector('.progress-step:last-child');
+        const nameStepEl = document.querySelector(`.progress-step[data-step="${fields.length}"]`);
         if (character.name) {
-          completeBtn.removeAttribute('disabled');
-          lastStep?.classList.add('completed');
+          nameStepEl?.classList.add('completed');
         } else {
-          completeBtn.setAttribute('disabled', '');
-          lastStep?.classList.remove('completed');
+          nameStepEl?.classList.remove('completed');
         }
+        if (isComplete()) completeBtn.removeAttribute('disabled');
+        else completeBtn.setAttribute('disabled', '');
       };
       nameInput.addEventListener('input', updateName);
       updateName();
