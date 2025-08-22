@@ -13,6 +13,7 @@ No build steps are required. After publishing the repository with GitHub Pages, 
 - `script.js` – behaviour for the menu and layout controls
   and core mechanics such as proficiency gain
 - `weapon_skills.js` – weapon skill data and effects
+- `resources.js` – dynamic HP/MP/Stamina calculations based on stats
 - `assets/images/` – image assets
 - `assets/data/` – data assets
 
