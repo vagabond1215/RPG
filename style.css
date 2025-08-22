@@ -7,6 +7,8 @@
   --menu-color-light: #333333;
   --range-color: #555555;
   --capped-color: #2e8b57;
+  --new-char-bg: #333333;
+  --new-char-color: #f0f0f0;
 }
 
 html {
@@ -27,6 +29,7 @@ body {
   width: 100%;
   background: var(--background);
   display: flex;
+  flex-direction: row;
   gap: 0.5rem;
   padding: 0.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -71,13 +74,6 @@ body {
   pointer-events: none;
   transition: transform 0.3s ease;
   z-index: 350;
-}
-
-#settings-panel.active {
-  pointer-events: auto;
-}
-
-body.layout-landscape #settings-panel {
   flex-direction: row;
   top: 0;
   left: 100%;
@@ -86,21 +82,9 @@ body.layout-landscape #settings-panel {
   transform-origin: left;
 }
 
-body.layout-landscape #settings-panel.active {
+#settings-panel.active {
+  pointer-events: auto;
   transform: scaleX(1);
-}
-
-body.layout-portrait #settings-panel {
-  flex-direction: column;
-  top: 100%;
-  left: 0;
-  margin-top: 0.5rem;
-  transform: scaleY(0);
-  transform-origin: top;
-}
-
-body.layout-portrait #settings-panel.active {
-  transform: scaleY(1);
 }
 
 #dropdownMenu {
@@ -183,6 +167,13 @@ body.layout-portrait #settings-panel.active {
   background: linear-gradient(to right, var(--background), var(--foreground) 50%, var(--background));
 }
 
+#dropdownMenu button[data-action="new-character"],
+#dropdownMenu button[data-action="new-character"]:hover,
+#dropdownMenu button[data-action="new-character"].selected {
+  background: var(--new-char-bg);
+  color: var(--new-char-color);
+}
+
 #characterMenu button svg,
 #characterMenu .letter-icon {
   width: 1.5rem;
@@ -205,36 +196,11 @@ body.layout-portrait #settings-panel.active {
 }
 
 /* Positions for slide-out menus */
-body.layout-landscape #dropdownMenu,
-body.layout-landscape #characterMenu {
+#dropdownMenu,
+#characterMenu {
   top: 3.5rem;
   left: 0;
   height: calc(100vh - 3.5rem);
-}
-
-body.layout-portrait #dropdownMenu,
-body.layout-portrait #characterMenu {
-  top: 0;
-  left: 3.5rem;
-  height: 100vh;
-}
-
-@media (orientation: landscape) {
-  body.layout-auto #dropdownMenu,
-  body.layout-auto #characterMenu {
-    top: 3.5rem;
-    left: 0;
-    height: calc(100vh - 3.5rem);
-  }
-}
-
-@media (orientation: portrait) {
-  body.layout-auto #dropdownMenu,
-  body.layout-auto #characterMenu {
-    top: 0;
-    left: 3.5rem;
-    height: 100vh;
-  }
 }
 
 .portrait-grid {
@@ -275,6 +241,8 @@ body.layout-portrait #characterMenu {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
+  background: var(--new-char-bg);
+  color: var(--new-char-color);
 }
 
 body.theme-light {
@@ -284,6 +252,8 @@ body.theme-light {
   --menu-color-light: #333333;
   --range-color: #555555;
   --capped-color: #2e8b57;
+  --new-char-bg: #333333;
+  --new-char-color: #f0f0f0;
 }
 
 body.theme-sepia {
@@ -293,6 +263,8 @@ body.theme-sepia {
   --menu-color-light: #4a3b2d;
   --range-color: #4a3b2d;
   --capped-color: #1e90ff;
+  --new-char-bg: #4a3b2d;
+  --new-char-color: #e8dcc2;
 }
 
 body.theme-dark {
@@ -302,6 +274,8 @@ body.theme-dark {
   --menu-color-light: #cccccc;
   --range-color: #aaaaaa;
   --capped-color: #9370db;
+  --new-char-bg: #444444;
+  --new-char-color: #eeeeee;
 }
 
 .progress {
@@ -513,71 +487,4 @@ body.theme-dark {
   color: var(--capped-color);
 }
 
-/* Orientation layouts */
-body.layout-landscape .top-menu {
-  flex-direction: row;
-  width: 100%;
-  height: auto;
-}
-
-body.layout-landscape main {
-  margin-top: 4rem;
-  margin-left: 0;
-}
-
-body.layout-portrait .top-menu {
-  flex-direction: column;
-  width: 3.5rem;
-  height: 100vh;
-}
-
-body.layout-portrait main {
-  margin-top: 0;
-  margin-left: 3.5rem;
-}
-
-@media (orientation: portrait) {
-  body.layout-auto .top-menu {
-    flex-direction: column;
-    width: 3.5rem;
-    height: 100vh;
-  }
-  body.layout-auto main {
-    margin-top: 0;
-    margin-left: 3.5rem;
-  }
-  body.layout-auto #settings-panel {
-    flex-direction: column;
-    top: 100%;
-    left: 0;
-    margin-top: 0.5rem;
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-  body.layout-auto #settings-panel.active {
-    transform: scaleY(1);
-  }
-}
-
-@media (orientation: landscape) {
-  body.layout-auto .top-menu {
-    flex-direction: row;
-    width: 100%;
-    height: auto;
-  }
-  body.layout-auto main {
-    margin-top: 4rem;
-    margin-left: 0;
-  }
-  body.layout-auto #settings-panel {
-    flex-direction: row;
-    top: 0;
-    left: 100%;
-    margin-left: 0.5rem;
-    transform: scaleX(0);
-    transform-origin: left;
-  }
-  body.layout-auto #settings-panel.active {
-    transform: scaleX(1);
-  }
-}
+/* Orientation layouts removed: top menu remains horizontal for all layouts */
