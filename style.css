@@ -596,7 +596,8 @@ body.theme-dark {
   .location-button {
     position: relative;
     padding: 0.5rem 1rem;
-    background: var(--background);
+    background: transparent;
+    border: none;
     color: var(--foreground);
     cursor: pointer;
   }
