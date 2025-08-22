@@ -23,6 +23,21 @@ function setMainHTML(html) {
   if (main) main.innerHTML = html;
 }
 
+function normalizeOptionButtonWidths() {
+  const grid = document.querySelector('.option-grid');
+  if (!grid) return;
+  const buttons = Array.from(grid.querySelectorAll('button'));
+  let maxWidth = 0;
+  buttons.forEach(btn => {
+    btn.style.width = 'auto';
+    const w = btn.getBoundingClientRect().width;
+    if (w > maxWidth) maxWidth = w;
+  });
+  buttons.forEach(btn => {
+    btn.style.width = `${maxWidth}px`;
+  });
+}
+
 // --- Profile and save management ---
 const STORAGE_KEY = 'rpgProfiles';
 const LAST_PROFILE_KEY = 'rpgLastProfile';
@@ -66,6 +81,17 @@ const skinColorOptionsByRace = {
   Salamander: generateColorScale('#f4a460', '#8b4513'),
   Gnome: generateColorScale('#ffdead', '#d2b48c'),
   Halfling: generateColorScale('#f5cba7', '#8d5524')
+};
+
+const RACE_IMAGES = {
+  Human: 'assets/images/Human%20Male%20and%20Female.png',
+  Elf: 'assets/images/Elven%20Male%20and%20Female.png',
+  'Dark Elf': 'assets/images/Dark%20Elf%20Male%20and%20Female.png',
+  Dwarf: 'assets/images/Dwarven%20Male%20and%20Female.png',
+  'Cait Sith': 'assets/images/Cait%20Sith%20Male%20and%20Female.png',
+  Salamander: 'assets/images/Salamander%20Male%20and%20Female.png',
+  Gnome: 'assets/images/Gnome%20Male%20and%20Female.png',
+  Halfling: 'assets/images/Halfling%20Male%20and%20Female.png'
 };
 
 // Default proficiency values for new characters
@@ -492,20 +518,27 @@ function startCharacterCreation() {
       `<button id="cc-complete" class="complete-button" ${isComplete() ? '' : 'disabled'}></button>` +
       '<button id="cc-cancel" title="Cancel">✖</button>';
 
-    const raceInfoHTML = (() => {
-      if (!character.race) return '';
+    const raceData = (() => {
+      if (!character.race) return {};
       const attrs = getRaceStartingAttributes(character.race);
       const resources = {
         HP: maxHP(attrs.VIT, 1),
         MP: maxMP(attrs.WIS, 1),
         Stamina: maxStamina(attrs.CON, 1)
       };
-      const statsList = Object.entries({ ...attrs, LCK: 10, ...resources })
+      const attrList = Object.entries({ ...attrs, LCK: 10 })
         .map(([k, v]) => `<li>${k}: ${v}</li>`)
         .join('');
-      const desc = RACE_DESCRIPTIONS[character.race] || '';
-      return `<div class="race-info"><p>${desc}</p><h3>Starting Stats</h3><ul>${statsList}</ul></div>`;
+      const resList = Object.entries(resources)
+        .map(([k, v]) => `<li>${k}: ${v}</li>`)
+        .join('');
+      const statsHTML = `<div class="race-stats"><h3>Starting Stats</h3><ul>${attrList}</ul><ul>${resList}</ul></div>`;
+      const imageSrc = RACE_IMAGES[character.race];
+      const imageHTML = imageSrc ? `<img class="race-image" src="${imageSrc}" alt="${character.race}">` : '';
+      const descHTML = `<p class="race-description">${RACE_DESCRIPTIONS[character.race] || ''}</p>`;
+      return { statsHTML, imageHTML, descHTML };
     })();
+    const { statsHTML = '', imageHTML = '', descHTML = '' } = raceData;
 
     if (step < fields.length) {
       const field = fields[step];
@@ -541,7 +574,9 @@ function startCharacterCreation() {
         )}</span>`;
       }
 
-      setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column">${inputHTML}${raceInfoHTML}</div></div>`);
+      setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options">${inputHTML}</div>${statsHTML}</div>${imageHTML}${descHTML}</div></div>`);
+
+      normalizeOptionButtonWidths();
 
       if (field.type === 'select') {
         document.querySelectorAll('.option-button').forEach(btn => {
@@ -572,7 +607,8 @@ function startCharacterCreation() {
       }
     } else {
       const nameVal = character.name || '';
-      setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><input type="text" id="name-input" value="${nameVal}" placeholder="Name">${raceInfoHTML}</div></div>`);
+      setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div>${statsHTML}</div>${imageHTML}${descHTML}</div></div>`);
+      normalizeOptionButtonWidths();
       const nameInput = document.getElementById('name-input');
       const updateName = () => {
         character.name = nameInput.value.trim();
