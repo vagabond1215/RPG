@@ -428,25 +428,30 @@ body.theme-dark {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: fit-content;
   }
 
   .cc-top {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    width: 100%;
+    gap: 0.5rem;
+    width: fit-content;
   }
 
   .cc-options,
   .race-stats {
-    flex: 1 1 15rem;
+    flex: 0 0 auto;
+    width: fit-content;
   }
 
   .race-stats ul {
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+
+  .race-stats li {
+    white-space: nowrap;
   }
 
   .race-stats ul + ul {
