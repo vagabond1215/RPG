@@ -4,6 +4,14 @@ import { characterTemplate, gainProficiency } from "./core.js";
 import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./race_attrs.js";
 import { maxHP, maxMP, maxStamina } from "./resources.js";
 
+function totalXpForLevel(level) {
+  return Math.floor((4 * Math.pow(level, 3)) / 5);
+}
+
+function xpForNextLevel(level) {
+  return totalXpForLevel(level + 1) - totalXpForLevel(level);
+}
+
 window.SPELLBOOK = SPELLBOOK;
 window.WEAPON_SKILLS = WEAPON_SKILLS;
 
@@ -98,6 +106,43 @@ const defaultProficiencies = {
   heavyArmor: 0,
   dualWield: 0
 };
+
+function assignMagicAptitudes(character) {
+  const aptitude = character.magicAptitude || 'low';
+  const elemChance = aptitude === 'high' ? 0.3 : aptitude === 'med' ? 0.2 : 0.1;
+  const nonElemChance = aptitude === 'high' ? 0.9 : aptitude === 'med' ? 0.6 : 0.3;
+  const elemental = [
+    'stoneMagic',
+    'waterMagic',
+    'windMagic',
+    'fireMagic',
+    'iceMagic',
+    'thunderMagic',
+    'darkMagic',
+    'lightMagic'
+  ];
+  const nonElemental = [
+    'destructiveMagic',
+    'healingMagic',
+    'reinforcementMagic',
+    'enfeeblingMagic',
+    'summoningMagic'
+  ];
+  let anyElement = false;
+  for (const key of elemental) {
+    if (Math.random() < elemChance) {
+      character[key] = 1;
+      anyElement = true;
+    }
+  }
+  if (anyElement) {
+    for (const key of nonElemental) {
+      if (Math.random() < nonElemChance) {
+        character[key] = 1;
+      }
+    }
+  }
+}
 
 function migrateProficiencies(character) {
   if ('mage' in character && !('wand' in character)) {
@@ -332,10 +377,12 @@ function showCharacterUI() {
     const hpPct = c.maxHP ? (c.hp / c.maxHP) * 100 : 0;
     const mpPct = c.maxMP ? (c.mp / c.maxMP) * 100 : 0;
     const staPct = c.maxStamina ? (c.stamina / c.maxStamina) * 100 : 0;
+    const xpNeed = xpForNextLevel(c.level);
     return `
       <div class="resource-bar hp"><div class="fill" style="width:${hpPct}%"><span>${c.hp} / ${c.maxHP}</span></div></div>
       <div class="resource-bar mp"><div class="fill" style="width:${mpPct}%"><span>${c.mp} / ${c.maxMP}</span></div></div>
       <div class="resource-bar stamina"><div class="fill" style="width:${staPct}%"><span>${c.stamina} / ${c.maxStamina}</span></div></div>
+      <p class="xp-display">XP: ${c.xp} / ${xpNeed}</p>
     `;
   })();
   setMainHTML(`<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}${regenerateBtn}</div>${resourceBars}${info}${statsHTML}<button id="delete-character">Delete Character</button></div>`);
@@ -652,6 +699,7 @@ function finalizeCharacter(character) {
     stamina: resources.maxStamina,
     id,
   });
+  assignMagicAptitudes(newChar);
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;
   currentCharacter = newChar;
