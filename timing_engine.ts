@@ -5,7 +5,7 @@
    copy the needed types/guards or remove the imports and adapt signatures.
 */
 // import { Party, Member, TimedEffect, startChannel, stopChannel, recomputeResources } from "./party";
-// import { resolveSummon, SummonDef, SummonResolved } from "./summons";
+// import { resolveSummon, SummonDef, SummonResolved } from "./assets/data/summons";
 
 /* ========================= Core Types ========================= */
 
