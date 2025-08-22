@@ -9,6 +9,7 @@
   --capped-color: #2e8b57;
   --new-char-bg: #333333;
   --new-char-color: #f0f0f0;
+  --menu-height: 3.5rem;
 }
 
 html {
@@ -125,7 +126,7 @@ main {
 
 #dropdownMenu {
   position: absolute;
-  top: 3.5rem;
+  top: var(--menu-height);
   left: 0;
   width: 14rem;
   background: var(--background);
@@ -156,7 +157,7 @@ main {
 
 #characterMenu {
   position: absolute;
-  top: 3.5rem;
+  top: var(--menu-height);
   left: 0;
   width: 14rem;
   background: var(--background);
@@ -238,9 +239,9 @@ main {
 /* Positions for slide-out menus */
 #dropdownMenu,
 #characterMenu {
-  top: 3.5rem;
+  top: var(--menu-height);
   left: 0;
-  height: calc(100vh - 3.5rem);
+  height: calc(100vh - var(--menu-height));
 }
 
 .portrait-grid {
