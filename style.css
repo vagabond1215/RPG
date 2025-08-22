@@ -22,10 +22,46 @@ body {
   color: var(--foreground);
 }
 
+body.layout-landscape,
+body.layout-portrait {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+body.layout-auto {
+  display: block;
+}
+
+#app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+body.layout-portrait #app {
+  aspect-ratio: 9 / 16;
+  width: min(100vw, calc(100vh * 9 / 16));
+  height: min(100vh, calc(100vw * 16 / 9));
+}
+
+body.layout-landscape #app {
+  aspect-ratio: 16 / 9;
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+}
+
+main {
+  flex: 1;
+  overflow: auto;
+}
+
 .top-menu {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
   width: 100%;
   background: var(--background);
   display: flex;
@@ -88,7 +124,9 @@ body {
 }
 
 #dropdownMenu {
-  position: fixed;
+  position: absolute;
+  top: 3.5rem;
+  left: 0;
   width: 14rem;
   background: var(--background);
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
@@ -117,7 +155,9 @@ body {
 }
 
 #characterMenu {
-  position: fixed;
+  position: absolute;
+  top: 3.5rem;
+  left: 0;
   width: 14rem;
   background: var(--background);
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
@@ -373,6 +413,21 @@ body.theme-dark {
 
   .xp-display {
     margin-top: 0.25rem;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 0.25rem 1rem;
+  }
+
+  .stats-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+    gap: 0.25rem 1rem;
   }
 
   .character-creation {

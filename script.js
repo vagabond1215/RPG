@@ -399,7 +399,16 @@ function showCharacterUI() {
   showBackButton();
   const c = currentCharacter;
   const portrait = `<img src="${c.image || ''}" alt="portrait" style="width:10rem;height:10rem;${c.image ? '' : 'display:none;'}">`;
-  const info = `<p>Race: ${c.race}</p><p>Sex: ${c.sex}</p><p>Skin Color: <span class=\"color-box\" style=\"background:${c.skinColor}\"></span></p><p>Hair Color: <span class=\"color-box\" style=\"background:${c.hairColor}\"></span></p><p>Eye Color: <span class=\"color-box\" style=\"background:${c.eyeColor}\"></span></p><p>Height: ${formatHeight(c.height)}</p>`;
+  const info = `
+    <div class="info-grid">
+      <div>Race: ${c.race}</div>
+      <div>Sex: ${c.sex}</div>
+      <div>Skin Color: <span class="color-box" style="background:${c.skinColor}"></span></div>
+      <div>Hair Color: <span class="color-box" style="background:${c.hairColor}"></span></div>
+      <div>Eye Color: <span class="color-box" style="background:${c.eyeColor}"></span></div>
+      <div>Height: ${formatHeight(c.height)}</div>
+    </div>
+  `;
   const stats = c.attributes?.current || {};
   const statsList = ['STR','DEX','CON','VIT','AGI','INT','WIS','CHA','LCK']
     .map(attr => `<li>${attr}: ${stats[attr] ?? 0}</li>`)
