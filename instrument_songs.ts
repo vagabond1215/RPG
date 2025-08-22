@@ -40,6 +40,10 @@ export interface Song {
 
 /** clamp helper */
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
+/** round to 2 decimals */
+const r2 = (x: number) => Math.round(x * 100) / 100;
+/** attribute-based variance multiplier */
+export const VARIANCE_ALPHA = 0.02;
 
 /** Duration scaling rule (standardized across all songs):
  *  duration = base * (1 + (P - unlock) / 100)
@@ -134,6 +138,15 @@ export const INSTRUMENT_SONGS: Song[] = [
 ];
 /* ===================== Runtime Effect Resolvers ===================== */
 
+export interface EffectPayload {
+  kind: SongKind;
+  durationModel: "post-stop";
+  element?: Element;
+  modifiers?: Record<string, number>;
+  percent?: number;
+  tags?: string[];
+}
+
 export interface ResolvedEffect {
   /** final duration in seconds (integer) */
   durationSec: number;
@@ -141,33 +154,64 @@ export interface ResolvedEffect {
   magnitude: number;
   /** convenience: normalized per-5s amount for regen/dot (% of Max pool) */
   per5sPct?: number;
-  /** structured flags for your engine to route the effect */
-  route: { kind: SongKind; target: Target; side: Side; element?: Element; tags?: string[] };
+  /** final structured effect payload */
+  effect: EffectPayload;
 }
 
-/** Resolve a song at proficiency P into numbers your engine can apply */
-export function resolveSongEffect(song: Song, P: number): ResolvedEffect {
+const TAG_TO_MOD: Record<string, string> = {
+  ATK_UP: "ATK_PCT",
+  ATK_DOWN: "ATK_PCT",
+  MOVE_SPEED_UP: "MOVE_SPEED_PCT",
+  MOVE_SPEED_DOWN: "MOVE_SPEED_PCT",
+  DEF_UP: "DEF_PCT",
+  DEF_DOWN: "DEF_PCT",
+  DMG_TAKEN_UP: "DMG_TAKEN_PCT",
+  DMG_TAKEN_DOWN: "DMG_TAKEN_PCT",
+  ALL_STATS_UP: "ALL_STATS_PCT",
+  ALL_STATS_DOWN: "ALL_STATS_PCT",
+  CONTROL_RESIST_UP: "CONTROL_RESIST_PCT",
+  HP_SHIELD_PCTMAX: "HP_SHIELD_PCTMAX"
+};
+
+/** Resolve a song at proficiency P and attribute value into numbers your engine can apply */
+export function resolveSongEffect(song: Song, P: number, attrVal = 10): ResolvedEffect {
   const durationSec = computeSongDurationSec(song, P);
-  const magnitude = computeSongMagnitude(song, P);
+  const baseMag = computeSongMagnitude(song, P);
+  const magnitude = r2(baseMag * (1 + VARIANCE_ALPHA * (attrVal - 10)));
 
-  const route = { kind: song.kind, target: song.target, side: song.side, element: song.element, tags: song.tags };
+  const effect: EffectPayload = {
+    kind: song.kind,
+    durationModel: "post-stop",
+    element: song.element,
+    tags: song.tags
+  };
 
-  // Convenience sugar for regen/DoT (% per 5s)
+  let per5sPct: number | undefined;
   if (song.kind === "regen" || song.tags?.includes("HP_REGEN") || song.tags?.includes("MP_REGEN") || song.tags?.includes("STAM_REGEN")) {
-    return { durationSec, magnitude, per5sPct: magnitude, route };
+    per5sPct = magnitude;
+    effect.percent = Math.abs(magnitude);
+  } else if (song.kind === "dot" || song.tags?.includes("HP_DOT") || song.tags?.includes("MP_DOT")) {
+    per5sPct = magnitude;
+    effect.percent = Math.abs(magnitude);
+  } else if (song.kind === "resist" || song.kind === "weakness") {
+    effect.percent = Math.abs(magnitude);
+  } else if (song.kind === "ultimate") {
+    effect.modifiers = { ALL_STATS_PCT: magnitude };
+  } else if (song.kind === "buff" || song.kind === "debuff") {
+    const tag = song.tags?.[0];
+    if (tag) {
+      const key = TAG_TO_MOD[tag] || tag;
+      effect.modifiers = { [key]: magnitude };
+    }
   }
-  if (song.kind === "dot" || song.tags?.includes("HP_DOT") || song.tags?.includes("MP_DOT")) {
-    return { durationSec, magnitude, per5sPct: magnitude, route };
-  }
-  return { durationSec, magnitude, route };
+
+  return { durationSec, magnitude, per5sPct, effect };
 }
 /* ===================== Instrument Proficiency Progression ===================== */
 
 /** Instrument proficiency is “active support”: practice works but is weak.
  *  Spar/Battle with equal+ foes is much better. Anti-spam, unlock choke, cap taper.
  */
-const r2 = (x: number) => Math.round(x * 100) / 100;
-
 export type Context = "practice" | "spar" | "battle";
 export type PerfOutcome = "success" | "partial" | "fail";
 
