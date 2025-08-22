@@ -12,9 +12,9 @@ No build steps are required. After publishing the repository with GitHub Pages, 
 - `style.css` – basic styles and themes
 - `script.js` – behaviour for the menu and layout controls
   and core mechanics such as proficiency gain
-- `resources.js` – dynamic HP/MP/Stamina calculations based on stats
-- `combat.ts` – single function to resolve combat, accounting for level, attributes, proficiencies and active skill effects
-- `party.ts` – party structs, resources, effects, and NPC proficiency policy
+- `assets/data/resources.js` – dynamic HP/MP/Stamina calculations based on stats
+- `assets/data/combat.ts` – single function to resolve combat, accounting for level, attributes, proficiencies and active skill effects
+- `assets/data/party.ts` – party structs, resources, effects, and NPC proficiency policy
 - `assets/images/Race Photos/` – race reference images
 - `assets/images/Maps/` – map images
 - `assets/data/` – data assets such as `weapon_skills.js`, `spells.js`, and `race_attrs.js`

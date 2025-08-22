@@ -7,5 +7,5 @@
     "strict": false,
     "esModuleInterop": true
   },
-  "include": ["*.ts", "assets/data/**/*.ts"]
+  "include": ["assets/data/**/*.ts"]
 }
