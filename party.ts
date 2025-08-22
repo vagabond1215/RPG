@@ -1,5 +1,7 @@
 // party.ts — party structs (up to 8), resources, effects, and NPC proficiency policy
 
+import { initGrowth, onLevelUp } from "./attr_growth.js";
+
 /* ========================= Core Types ========================= */
 
 export type Attr = "STR"|"DEX"|"CON"|"VIT"|"AGI"|"INT"|"WIS"|"CHA";
@@ -31,6 +33,18 @@ export interface Resources {
 }
 
 export type Faction = "playerParty" | "enemy" | "neutral";
+
+export interface GrowthState {
+  attrs: AttrBlock;
+  acc: AttrBlock;
+  choicePool: number;
+}
+
+export interface GrowthData {
+  state: GrowthState;
+  rates: AttrBlock;
+  choicePerLevel: number;
+}
 
 /* ===== Status, Effects, and Maintenance (songs/dances/singing) ===== */
 
@@ -79,6 +93,7 @@ export interface Member {
   attributes: AttrBlock;             // current integer attributes (after auto + manual)
   startingAttributes: AttrBlock;     // their level-1 racial baseline (used by cap resolvers etc.)
   manualPool?: number;               // unspent manual attribute points (for ally assignment)
+  growth?: GrowthData;               // automatic attribute progression state
   resources: Resources;
 
   proficiencies: Proficiencies;      // see NPC policy below
@@ -128,6 +143,23 @@ export function recomputeResources(m: Member): void {
   m.resources.HP = Math.min(m.resources.HP, m.resources.HPMax);
   m.resources.MP = Math.min(m.resources.MP, m.resources.MPMax);
   m.resources.Stamina = Math.min(m.resources.Stamina, m.resources.StaminaMax);
+}
+
+/** Level up a member and apply automatic attribute growth. */
+export function levelUpMember(member: Member, levels = 1): void {
+  if (!member.growth) {
+    const g = initGrowth(member.startingAttributes, member.race?.toLowerCase() === "human");
+    g.state.attrs = { ...member.attributes };
+    g.state.choicePool = member.manualPool ?? 0;
+    member.growth = { state: g.state, rates: g.perLevel.rates, choicePerLevel: g.perLevel.choicePerLevel };
+  }
+  for (let i = 0; i < levels; i++) {
+    onLevelUp(member.growth.state, member.growth.rates, member.growth.choicePerLevel);
+    member.level += 1;
+  }
+  member.attributes = { ...member.growth.state.attrs };
+  member.manualPool = member.growth.state.choicePool;
+  recomputeResources(member);
 }
 
 /* ========================= NPC proficiency policy ========================= */
@@ -290,10 +322,15 @@ export function makeMember(params: {
   const base = params.startingAttributes;
   const cur: AttrBlock = { ...base, ...params.currentAttributes };
 
+  const growthInit = initGrowth(base, params.race?.toLowerCase() === "human");
+  growthInit.state.attrs = { ...cur };
+  growthInit.state.choicePool = params.manualPool ?? 0;
+
   const member: Member = {
     id: params.id, name: params.name, level: params.level, race: params.race,
     faction: "playerParty", isPlayer, isNPC, controllable,
     attributes: cur, startingAttributes: base, manualPool: params.manualPool ?? 0,
+    growth: { state: growthInit.state, rates: growthInit.perLevel.rates, choicePerLevel: growthInit.perLevel.choicePerLevel },
     resources: { HP:0, MP:0, Stamina:0, HPMax:0, MPMax:0, StaminaMax:0 },
     proficiencies: params.proficiencies ?? {},
     equipment: params.equipment,
