@@ -731,6 +731,9 @@ function startCharacterCreation() {
 
     let field;
     if (step < fields.length) field = fields[step];
+    if (field && field.key === 'location' && !character.location) {
+      character.location = field.options[0];
+    }
     const displayData = (() => {
       if (field && field.key === 'location' && character.location) {
         const loc = LOCATIONS[character.location];
@@ -763,14 +766,30 @@ function startCharacterCreation() {
     if (step < fields.length) {
       let inputHTML = '';
       if (field.type === 'select') {
-        inputHTML = `<div class="option-grid">${field.options
-          .map(
-            o =>
-              `<button class="option-button${
-                character[field.key] === o ? ' selected' : ''
-              }" data-value="${o}">${o}</button>`
-          )
-          .join('')}</div>`;
+        if (field.key === 'location') {
+          const options = field.options;
+          let index = options.indexOf(character.location);
+          if (index === -1) {
+            index = 0;
+            character.location = options[0];
+          }
+          inputHTML = `
+            <div class="location-carousel">
+              <button class="loc-arrow left" aria-label="Previous">&#x2039;</button>
+              <button class="option-button location-button">${character.location}</button>
+              <button class="loc-arrow right" aria-label="Next">&#x203A;</button>
+            </div>
+            <div class="location-indicator">${index + 1} / ${options.length}</div>`;
+        } else {
+          inputHTML = `<div class="option-grid">${field.options
+            .map(
+              o =>
+                `<button class="option-button${
+                  character[field.key] === o ? ' selected' : ''
+                }" data-value="${o}">${o}</button>`
+            )
+            .join('')}</div>`;
+        }
       } else if (field.type === 'color') {
         let colors = [];
         if (field.key === 'hairColor') {
@@ -793,11 +812,29 @@ function startCharacterCreation() {
         )}</span>`;
       }
 
-      setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options">${inputHTML}</div>${statsHTML}${descHTML}</div>${imageHTML}</div></div>`);
+      if (field.key === 'location') {
+        setMainHTML(
+          `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="location-select">${inputHTML}${descHTML}${imageHTML}</div></div></div>`
+        );
+      } else {
+        setMainHTML(
+          `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options">${inputHTML}</div>${statsHTML}${descHTML}</div>${imageHTML}</div></div>`
+        );
+        normalizeOptionButtonWidths();
+      }
 
-      normalizeOptionButtonWidths();
-
-      if (field.type === 'select') {
+      if (field.key === 'location') {
+        const options = field.options;
+        let index = options.indexOf(character.location);
+        const change = dir => {
+          index = (index + dir + options.length) % options.length;
+          character.location = options[index];
+          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          renderStep();
+        };
+        document.querySelector('.loc-arrow.left').addEventListener('click', () => change(-1));
+        document.querySelector('.loc-arrow.right').addEventListener('click', () => change(1));
+      } else if (field.type === 'select') {
         document.querySelectorAll('.option-button').forEach(btn => {
           btn.addEventListener('click', () => {
             character[field.key] = btn.dataset.value;
