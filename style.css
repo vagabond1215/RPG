@@ -428,23 +428,56 @@ body.theme-dark {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-  }
-
-.option-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
     width: 100%;
   }
 
+  .cc-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .cc-options,
+  .race-stats {
+    flex: 1 1 15rem;
+  }
+
+  .race-stats ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .race-stats ul + ul {
+    margin-top: 0.5rem;
+  }
+
+  .race-image {
+    width: 100%;
+    height: auto;
+    margin-top: 1rem;
+  }
+
+  .race-description {
+    margin-top: 0.5rem;
+  }
+
+  .option-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
   .option-grid button {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     border: 2px solid var(--foreground);
     background: var(--background);
     color: var(--foreground);
     cursor: pointer;
-    width: 100%;
     box-sizing: border-box;
+    white-space: nowrap;
   }
 
   .option-grid button:hover {
