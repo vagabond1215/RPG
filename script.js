@@ -2,6 +2,7 @@ import { SPELLBOOK } from "./spells.js";
 import { WEAPON_SKILLS } from "./weapon_skills.js";
 import { characterTemplate, gainProficiency } from "./core.js";
 import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./race_attrs.js";
+import { maxHP, maxMP, maxStamina } from "./resources.js";
 
 window.SPELLBOOK = SPELLBOOK;
 window.WEAPON_SKILLS = WEAPON_SKILLS;
@@ -321,7 +322,17 @@ function showCharacterUI() {
     .join('');
   const statsHTML = `<h2>Current Stats</h2><ul class="stats-list">${statsList}</ul>`;
   const regenerateBtn = `<button id="regenerate-portrait" class="icon-button" title="Regenerate portrait">${regenerateIcon}</button>`;
-  main.innerHTML = `<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}${regenerateBtn}</div>${info}${statsHTML}<button id="delete-character">Delete Character</button></div>`;
+  const resourceBars = (() => {
+    const hpPct = c.maxHP ? (c.hp / c.maxHP) * 100 : 0;
+    const mpPct = c.maxMP ? (c.mp / c.maxMP) * 100 : 0;
+    const staPct = c.maxStamina ? (c.stamina / c.maxStamina) * 100 : 0;
+    return `
+      <div class="resource-bar hp"><div class="fill" style="width:${hpPct}%"><span>${c.hp} / ${c.maxHP}</span></div></div>
+      <div class="resource-bar mp"><div class="fill" style="width:${mpPct}%"><span>${c.mp} / ${c.maxMP}</span></div></div>
+      <div class="resource-bar stamina"><div class="fill" style="width:${staPct}%"><span>${c.stamina} / ${c.maxStamina}</span></div></div>
+    `;
+  })();
+  main.innerHTML = `<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}${regenerateBtn}</div>${resourceBars}${info}${statsHTML}<button id="delete-character">Delete Character</button></div>`;
   document.getElementById('delete-character').addEventListener('click', () => {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
@@ -431,7 +442,12 @@ function startCharacterCreation() {
     const raceInfoHTML = (() => {
       if (!character.race) return '';
       const attrs = getRaceStartingAttributes(character.race);
-      const statsList = Object.entries({ ...attrs, LCK: 10 })
+      const resources = {
+        HP: maxHP(attrs.VIT, 1),
+        MP: maxMP(attrs.WIS, 1),
+        Stamina: maxStamina(attrs.CON, 1)
+      };
+      const statsList = Object.entries({ ...attrs, LCK: 10, ...resources })
         .map(([k, v]) => `<li>${k}: ${v}</li>`)
         .join('');
       const desc = RACE_DESCRIPTIONS[character.race] || '';
@@ -612,11 +628,22 @@ function finalizeCharacter(character) {
   const template = JSON.parse(JSON.stringify(characterTemplate));
   const attrs = getRaceStartingAttributes(character.race);
   const attrBlock = { ...attrs, LCK: 10 };
+  const resources = {
+    maxHP: maxHP(attrBlock.VIT, 1),
+    maxMP: maxMP(attrBlock.WIS, 1),
+    maxStamina: maxStamina(attrBlock.CON, 1)
+  };
   const newChar = migrateProficiencies({
     ...template,
     ...defaultProficiencies,
     ...character,
     attributes: { base: { ...attrBlock }, current: { ...attrBlock } },
+    maxHP: resources.maxHP,
+    hp: resources.maxHP,
+    maxMP: resources.maxMP,
+    mp: resources.maxMP,
+    maxStamina: resources.maxStamina,
+    stamina: resources.maxStamina,
     id,
   });
   currentProfile.characters[id] = newChar;
