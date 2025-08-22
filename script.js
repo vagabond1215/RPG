@@ -25,6 +25,15 @@ window.fromIron = fromIron;
 const body = document.body;
 const main = document.querySelector('main');
 const backButton = document.getElementById('back-button');
+const topMenu = document.querySelector('.top-menu');
+
+function updateMenuHeight() {
+  if (!topMenu) return;
+  const height = topMenu.offsetHeight;
+  document.documentElement.style.setProperty('--menu-height', `${height}px`);
+}
+window.addEventListener('resize', updateMenuHeight);
+updateMenuHeight();
 
 function setMainHTML(html) {
   if (main) main.innerHTML = html;
@@ -890,6 +899,7 @@ let uiScale = 1;
 const updateScale = () => {
   document.documentElement.style.setProperty('--ui-scale', uiScale);
   savePreference('uiScale', uiScale);
+  updateMenuHeight();
 };
 document.getElementById('scale-dec').addEventListener('click', () => {
   uiScale = Math.max(0.5, uiScale - 0.1);
@@ -920,6 +930,7 @@ const setLayout = index => {
   body.classList.add(`layout-${layout}`);
   layoutToggle.innerHTML = layoutIcons[layout];
   savePreference('layout', layout);
+  updateMenuHeight();
   if (screen.orientation) {
     if (layout === 'landscape') {
       screen.orientation.lock('landscape').catch(() => {});
