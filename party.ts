@@ -1,6 +1,8 @@
 // party.ts — party structs (up to 8), resources, effects, and NPC proficiency policy
 
 import { initGrowth, onLevelUp } from "./attr_growth.js";
+import type { Equipment } from "./equipment.js";
+import { createEmptyEquipment } from "./equipment.js";
 
 /* ========================= Core Types ========================= */
 
@@ -71,13 +73,6 @@ export interface MaintainedChannel {
   effectIds: string[];
   /** true while the performer is actively maintaining */
   active: boolean;
-}
-
-export interface Equipment {
-  mainHand?: string;
-  offHand?: string;
-  armor?: string;
-  trinkets?: string[];
 }
 
 export interface Member {
@@ -333,7 +328,7 @@ export function makeMember(params: {
     growth: { state: growthInit.state, rates: growthInit.perLevel.rates, choicePerLevel: growthInit.perLevel.choicePerLevel },
     resources: { HP:0, MP:0, Stamina:0, HPMax:0, MPMax:0, StaminaMax:0 },
     proficiencies: params.proficiencies ?? {},
-    equipment: params.equipment,
+    equipment: params.equipment ?? createEmptyEquipment(),
     alive: true,
     status: [],
     channels: [],

@@ -1,5 +1,7 @@
 // Core game constants, enums, templates and helper functions
 
+import { createEmptyEquipment } from "./equipment.js";
+
 // ---- Global Tunables & Tables ----
 export const PROF_MILESTONES = [10,20,30,40,50,60,70,80,90,100];
 export const RACIAL_START_MULTIPLIER = {};
@@ -200,14 +202,7 @@ export const characterTemplate = {
     unlockHistory: {},
     varietyBuffer: {}
   },
-  equipment: {
-    mainHand: null,
-    offHand: null,
-    ranged: null,
-    ammo: null,
-    armor: null,
-    trinkets: []
-  },
+  equipment: createEmptyEquipment(),
   status: {
     activeEffects: [],
     cooldowns: {},
