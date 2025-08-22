@@ -843,6 +843,15 @@ const setLayout = index => {
   body.classList.add(`layout-${layout}`);
   layoutToggle.innerHTML = layoutIcons[layout];
   savePreference('layout', layout);
+  if (screen.orientation) {
+    if (layout === 'landscape') {
+      screen.orientation.lock('landscape').catch(() => {});
+    } else if (layout === 'portrait') {
+      screen.orientation.lock('portrait').catch(() => {});
+    } else if (screen.orientation.unlock) {
+      screen.orientation.unlock();
+    }
+  }
 };
 layoutToggle.addEventListener('click', () => {
   currentLayoutIndex = (currentLayoutIndex + 1) % layouts.length;
