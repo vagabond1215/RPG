@@ -519,6 +519,8 @@ function showCharacterSelectUI() {
 }
 
 function showMainUI() {
+  creationScaleOffset = 0;
+  updateScale();
   if (currentCharacter) {
     showCharacter();
   } else {
@@ -667,6 +669,8 @@ function showEquipmentUI() {
 }
 
 function startCharacterCreation() {
+  creationScaleOffset = 0.1;
+  updateScale();
   showBackButton();
   mapButton.style.display = 'none';
   mapContainer.style.display = 'none';
@@ -1025,6 +1029,8 @@ function finalizeCharacter(character) {
   currentProfile.lastCharacter = id;
   currentCharacter = newChar;
   saveProfiles();
+  creationScaleOffset = 0;
+  updateScale();
   showCharacter();
   localStorage.removeItem(TEMP_CHARACTER_KEY);
 }
@@ -1095,8 +1101,12 @@ themeToggle.addEventListener('click', () => {
 
 // UI scale buttons
 let uiScale = 1;
+let creationScaleOffset = 0;
 const updateScale = () => {
-  document.documentElement.style.setProperty('--ui-scale', uiScale);
+  document.documentElement.style.setProperty(
+    '--ui-scale',
+    uiScale + creationScaleOffset
+  );
   savePreference('uiScale', uiScale);
   updateMenuHeight();
 };
