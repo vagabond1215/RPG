@@ -579,6 +579,64 @@ body.theme-dark {
     color: var(--background);
   }
 
+  .location-select {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .location-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .location-button {
+    position: relative;
+    padding: 0.5rem 1rem;
+    background: var(--background);
+    color: var(--foreground);
+    cursor: pointer;
+  }
+
+  .location-button::before,
+  .location-button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--background), var(--foreground), var(--background));
+  }
+
+  .location-button::before {
+    top: 0;
+  }
+
+  .location-button::after {
+    bottom: 0;
+  }
+
+  .loc-arrow {
+    background: transparent;
+    border: none;
+    color: var(--foreground);
+    font-size: 2rem;
+    line-height: 1;
+    padding: 0 0.5rem;
+    cursor: pointer;
+  }
+
+  .loc-arrow:hover {
+    filter: drop-shadow(0 0 0.5rem currentColor);
+  }
+
+  .location-indicator {
+    text-align: center;
+  }
+
   .complete-button {
     margin-top: 1rem;
     width: 2rem;
