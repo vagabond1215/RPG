@@ -429,7 +429,21 @@ function showCharacterUI() {
       <p class="xp-display">XP: ${c.xp} / ${xpNeed}</p>
     `;
   })();
-  setMainHTML(`<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}</div>${resourceBars}${info}${statsHTML}<button id="delete-character">Delete Character</button></div>`);
+  setMainHTML(`
+    <div class="character-profile">
+      <h1>${c.name}</h1>
+      <div class="profile-grid">
+        <div class="portrait-section">
+          <div class="portrait-wrapper">${portrait}</div>
+          ${resourceBars}
+        </div>
+        <div>
+          ${info}
+          ${statsHTML}
+        </div>
+      </div>
+      <button id="delete-character">Delete Character</button>
+    </div>`);
   document.getElementById('delete-character').addEventListener('click', () => {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
