@@ -18,6 +18,7 @@ No build steps are required. After publishing the repository with GitHub Pages, 
 - `assets/images/Race Photos/` – race reference images
 - `assets/images/Maps/` – map images
 - `assets/data/` – data assets such as `weapon_skills.js`, `spells.js`, and `race_attrs.js`
+- `assets/data/locations.ts` – city and region definitions with map references
 
 Additional functionality will be added over time.
 
