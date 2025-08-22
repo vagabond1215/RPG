@@ -222,15 +222,95 @@ export function computeDamage({ basePower }) {
 export function computeHeal({ baseCoeff, attribute }) {
   return baseCoeff * attribute;
 }
-export function applyShield() {}
-export function applyBuffs() {}
-export function applyDebuffs() {}
-export function applyDisable() {}
-export function runDotTick() { return 0; }
-export function hasResources() { return true; }
-export function spendResources() {}
-export function startCooldown() {}
-export function isOnCooldown() { return false; }
+let _effectSeq = 0;
+function nextEffectId(prefix = "eff") {
+  _effectSeq += 1;
+  return `${prefix}:${Date.now()}:${_effectSeq}`;
+}
+
+/** Apply a temporary shield absorbing a fixed amount of damage. */
+export function applyShield(target, amount, durationSec, sourceId = "system") {
+  const id = nextEffectId("shield");
+  const start = now();
+  const end = start + durationSec;
+  target.status.activeEffects.push({ id, kind: "shield", data: { amount }, start, end, sourceId });
+  target.status.shield = (target.status.shield || 0) + amount;
+  return id;
+}
+
+/** Apply stat modifiers as buffs. */
+export function applyBuffs(target, modifiers, durationSec, sourceId = "system") {
+  const id = nextEffectId("buff");
+  const start = now();
+  const end = start + durationSec;
+  target.status.activeEffects.push({ id, kind: "buff", data: { modifiers }, start, end, sourceId });
+  for (const [k, v] of Object.entries(modifiers)) {
+    target[k] = (target[k] || 0) + Number(v);
+  }
+  return id;
+}
+
+/** Apply stat modifiers as debuffs. */
+export function applyDebuffs(target, modifiers, durationSec, sourceId = "system") {
+  const id = nextEffectId("debuff");
+  const start = now();
+  const end = start + durationSec;
+  target.status.activeEffects.push({ id, kind: "debuff", data: { modifiers }, start, end, sourceId });
+  for (const [k, v] of Object.entries(modifiers)) {
+    target[k] = (target[k] || 0) - Number(v);
+  }
+  return id;
+}
+
+/** Apply a disable/control effect such as stun or silence. */
+export function applyDisable(target, controlType, durationSec, sourceId = "system") {
+  const id = nextEffectId("disable");
+  const start = now();
+  const end = start + durationSec;
+  target.status.activeEffects.push({ id, kind: "control", data: { controlType }, start, end, sourceId });
+  target.status.tags.push(controlType);
+  return id;
+}
+
+/** Apply a DoT/HoT tick based on percent-per-5s. Positive values damage, negative heal. */
+export function runDotTick(target, per5sPct, resource = "HP") {
+  const poolKey = resource.toLowerCase();
+  const maxKey = `max${poolKey[0].toUpperCase()}${poolKey.slice(1)}`;
+  const max = target[maxKey] || 0;
+  const amt = (max * per5sPct) / 5 / 100;
+  const cur = target[poolKey] || 0;
+  const next = per5sPct >= 0 ? Math.max(0, cur - amt) : Math.min(max, cur - amt);
+  target[poolKey] = next;
+  return amt;
+}
+
+/** Check if actor has sufficient resources for a cost object. */
+export function hasResources(target, cost) {
+  const mpOk = cost.mp ? target.mp >= cost.mp : true;
+  const staminaOk = cost.stamina ? target.stamina >= cost.stamina : true;
+  const hpOk = cost.hp ? target.hp >= cost.hp : true;
+  return mpOk && staminaOk && hpOk;
+}
+
+/** Spend resources as specified. */
+export function spendResources(target, cost) {
+  if (cost.mp) target.mp = Math.max(0, target.mp - cost.mp);
+  if (cost.stamina) target.stamina = Math.max(0, target.stamina - cost.stamina);
+  if (cost.hp) target.hp = Math.max(0, target.hp - cost.hp);
+}
+
+/** Start a cooldown timer for an action. */
+export function startCooldown(target, actionId, cdSec) {
+  const end = now() + cdSec;
+  target.status.cooldowns[actionId] = end;
+  return end;
+}
+
+/** Check if an action is on cooldown. */
+export function isOnCooldown(target, actionId) {
+  const end = target.status.cooldowns[actionId] || 0;
+  return end > now();
+}
 export function getTargetsInRadius() { return []; }
 export function getTargetsInCone() { return []; }
 export function lineTrace() { return []; }
