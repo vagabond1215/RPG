@@ -1,5 +1,5 @@
-import { WEAPON_SKILLS } from "./assets/data/weapon_skills.js";
-import { SPELLBOOK } from "./assets/data/spells.js";
+import { WEAPON_SKILLS } from "./weapon_skills.js";
+import { SPELLBOOK } from "./spells.js";
 
 export interface Actor {
   level: number;

@@ -237,7 +237,7 @@ export function gainSingingProficiency(input: SingingGainInput, cfg: SingingProg
 }
 
 /* ========================= Example usage =========================
-import { gainSingingProficiency } from "./assets/data/singing_proficiency";
+import { gainSingingProficiency } from "./singing_proficiency";
 
 // Maintain a chorus for ~5s during battle vs slightly higher-level enemies:
 let P = 37.42, cap = 68;
