@@ -155,6 +155,8 @@ export const characterTemplate = {
   name: "",
   race: "",
   class: "",
+  homeTown: "",
+  location: "",
   level: 1,
   xp: 0,
   attributes: {
