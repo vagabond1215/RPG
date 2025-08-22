@@ -63,9 +63,6 @@ let currentProfileId = localStorage.getItem(LAST_PROFILE_KEY);
 let currentProfile = currentProfileId ? profiles[currentProfileId] : null;
 let currentCharacter = null;
 
-const regenerateIcon = '<svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.13-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.13 3.36L1 14"/></svg>';
-const pictureIcon = '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
-
 const hairColorOptions = [
   '#000000', '#2c1b10', '#4b2e1f', '#663300', '#8b4513', '#a0522d',
   '#b5651d', '#c68642', '#d2b48c', '#deb887', '#e6bea0', '#f5deb3',
@@ -420,7 +417,6 @@ function showCharacterUI() {
     .map(attr => `<li>${attr}: ${stats[attr] ?? 0}</li>`)
     .join('');
   const statsHTML = `<h2>Current Stats</h2><ul class="stats-list">${statsList}</ul>`;
-  const regenerateBtn = `<button id="regenerate-portrait" class="icon-button" title="Regenerate portrait">${regenerateIcon}</button>`;
   const resourceBars = (() => {
     const hpPct = c.maxHP ? (c.hp / c.maxHP) * 100 : 0;
     const mpPct = c.maxMP ? (c.mp / c.maxMP) * 100 : 0;
@@ -433,37 +429,13 @@ function showCharacterUI() {
       <p class="xp-display">XP: ${c.xp} / ${xpNeed}</p>
     `;
   })();
-  setMainHTML(`<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}${regenerateBtn}</div>${resourceBars}${info}${statsHTML}<button id="delete-character">Delete Character</button></div>`);
+  setMainHTML(`<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}</div>${resourceBars}${info}${statsHTML}<button id="delete-character">Delete Character</button></div>`);
   document.getElementById('delete-character').addEventListener('click', () => {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
     currentCharacter = null;
     saveProfiles();
     showMainUI();
-  });
-  const regenButton = document.getElementById('regenerate-portrait');
-  regenButton.addEventListener('click', async function handleGenerate() {
-    regenButton.disabled = true;
-    try {
-      const img = await generateCharacterImage(currentCharacter);
-      const imgEl = document.querySelector('.portrait-wrapper img');
-      if (imgEl) {
-        imgEl.src = img;
-        imgEl.style.display = 'block';
-      }
-      regenButton.disabled = false;
-      regenButton.innerHTML = pictureIcon;
-      regenButton.removeEventListener('click', handleGenerate);
-      regenButton.addEventListener('click', function handleApply() {
-        downloadImage(img, `${currentCharacter.name || 'portrait'}.png`);
-        currentCharacter.image = img;
-        saveProfiles();
-        showCharacterUI();
-      }, { once: true });
-    } catch (e) {
-      console.error(e);
-      regenButton.disabled = false;
-    }
   });
 }
 
@@ -488,16 +460,16 @@ function showProficienciesUI() {
 const SLOT_ICONS = {
   mainHand: '<svg viewBox="0 0 24 24"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5" /><line x1="13" y1="19" x2="19" y2="13" /><line x1="16" y1="16" x2="20" y2="20" /><line x1="19" y1="21" x2="21" y2="19" /></svg>',
   offHand: '<svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></svg>',
-  ranged: '<svg viewBox="0 0 24 24"><path d="M7 2a15 15 0 0 0 0 20"/><path d="M17 2a15 15 0 0 1 0 20"/><line x1="7" y1="12" x2="17" y2="12"/></svg>',
+  ranged: '<svg viewBox="0 0 24 24"><path d="M17 3h4v4"/><path d="M18.575 11.082a13 13 0 0 1 1.048 9.027 1.17 1.17 0 0 1-1.914.597L14 17"/><path d="M7 10 3.29 6.29a1.17 1.17 0 0 1 .6-1.91 13 13 0 0 1 9.03 1.05"/><path d="M7 14a1.7 1.7 0 0 0-1.207.5l-2.646 2.646A.5.5 0 0 0 3.5 18H5a1 1 0 0 1 1 1v1.5a.5.5 0 0 0 .854.354L9.5 18.207A1.7 1.7 0 0 0 10 17v-2a1 1 0 0 0-1-1z"/><path d="M9.707 14.293 21 3"/></svg>',
   instrument: '<svg viewBox="0 0 24 24"><circle cx="8" cy="17" r="5"/><path d="M11 14 20 5"/><path d="M19 6v4"/><path d="M15 2h4v4"/></svg>',
   ammo: '<svg viewBox="0 0 24 24"><path d="M3 12h14"/><polyline points="3 9 6 12 3 15"/><polyline points="17 7 23 12 17 17"/></svg>',
   head: '<svg viewBox="0 0 24 24"><path d="M2 10l4-2 3 3 3-6 3 6 3-3 4 2v8H2z"/></svg>',
   body: '<svg viewBox="0 0 24 24"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" /></svg>',
   back: '<svg viewBox="0 0 24 24"><path d="M6 2l12 4v16l-6-4-6 4V2z"/></svg>',
   hands: '<svg viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>',
-  waist: '<svg viewBox="0 0 24 24"><rect x="2" y="11" width="20" height="2"/><rect x="9" y="9" width="6" height="6"/></svg>',
+  waist: '<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="5"/><rect x="8" y="9" width="8" height="6" rx="1"/><path d="M8 12h8"/></svg>',
   legs: '<svg viewBox="0 0 24 24"><path d="M6 2h12l-2 20h-4l-2-10-2 10H8z"/></svg>',
-  feet: '<svg viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg>',
+  feet: '<svg viewBox="0 0 24 24"><path d="M5 3v6H3v7h8v-4l4-5-2-1-3 2H8V3H5z"/><g transform="translate(24,0) scale(-1,1)"><path d="M5 3v6H3v7h8v-4l4-5-2-1-3 2H8V3H5z"/></g></svg>',
   lEar: '<svg viewBox="0 0 24 24"><g transform="scale(-1,1) translate(-24,0)"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></g></svg>',
   neck: '<svg viewBox="0 0 24 24"><path d="M4 5a8 8 0 0 0 16 0"/><circle cx="12" cy="13" r="2"/><path d="M12 15v4"/></svg>',
   lRing: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" /></svg>',
@@ -763,15 +735,6 @@ async function generateCharacterImage(character) {
   const data = await res.json();
   const img = data.data[0].b64_json;
   return img.startsWith('http') ? img : `data:image/png;base64,${img}`;
-}
-
-function downloadImage(src, filename) {
-  const link = document.createElement('a');
-  link.href = src;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
 }
 
 async function generatePortrait(character, callback) {
