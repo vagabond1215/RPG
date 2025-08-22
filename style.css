@@ -392,36 +392,45 @@ body.theme-dark {
 
   .resource-bar.hp .fill {
     background: var(--hp-color);
-    color: #00ffff;
+    color: #000;
   }
 
   .resource-bar.mp .fill {
     background: var(--mp-color);
-    color: #ffff00;
+    color: #000;
   }
 
   .resource-bar.stamina .fill {
     background: var(--stamina-color);
-    color: #6532cd;
+    color: #000;
   }
 
   .xp-display {
     margin-top: 0.25rem;
   }
 
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: 0.25rem 1rem;
+  .info-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .physical-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 0.5rem;
   }
 
   .stats-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
-    gap: 0.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .character-profile {
