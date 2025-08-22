@@ -546,7 +546,7 @@ function startCharacterCreation() {
       key: 'sex',
       label: 'Choose your sex',
       type: 'select',
-      options: ['Male', 'Female', 'Androgynous']
+      options: ['Male', 'Female']
     },
     { key: 'skinColor', label: 'Choose your skin color', type: 'color' },
     { key: 'hairColor', label: 'Choose your hair color', type: 'color' },
