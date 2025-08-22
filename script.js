@@ -63,19 +63,145 @@ let currentProfileId = localStorage.getItem(LAST_PROFILE_KEY);
 let currentProfile = currentProfileId ? profiles[currentProfileId] : null;
 let currentCharacter = null;
 
-const hairColorOptions = [
-  '#000000', '#2c1b10', '#4b2e1f', '#663300', '#8b4513', '#a0522d',
-  '#b5651d', '#c68642', '#d2b48c', '#deb887', '#e6bea0', '#f5deb3',
-  '#fff5e1', '#800000', '#b22222', '#ffffff'
+const humanHairColors = [
+  '#000000', '#1c1c1c', '#2c1b10', '#3a2518', '#4b2e1f',
+  '#5c3a23', '#663300', '#7b481b', '#8b4513', '#a0522d',
+  '#b5651d', '#c68642', '#d2b48c', '#deb887', '#e6c68a',
+  '#f0d59c', '#f5deb3', '#fff5e1', '#d8b9a8', '#c04000',
+  '#b22222', '#a52a2a', '#808080', '#c0c0c0', '#ffffff'
 ];
 
-const eyeColorOptions = [
-  '#000000', '#2b2c30', '#3b3024', '#5b3a21', '#6b4423', '#8b4513',
-  '#a0522d', '#8e7618', '#8b8f45', '#355e3b', '#2f4f4f', '#0000ff',
-  '#1e90ff', '#708090', '#9932cc', '#ffbf00'
+const elfHairColors = [
+  '#000000', '#2c1b10', '#4b2e1f', '#663300', '#8b4513',
+  '#a0522d', '#b5651d', '#c68642', '#d2b48c', '#deb887',
+  '#e6c68a', '#f0d59c', '#f5deb3', '#fff5e1', '#c0c0c0',
+  '#e0e0e0', '#ffffff', '#c8a2c8', '#b19cd9', '#87cefa',
+  '#6495ed', '#98fb98', '#6b8e23', '#dda0dd', '#9370db'
 ];
 
-const generateColorScale = (start, end, steps = 16) => {
+const darkElfHairColors = [
+  '#000000', '#1c1c1c', '#2f2f2f', '#4b4b4b', '#696969',
+  '#808080', '#a9a9a9', '#c0c0c0', '#dcdcdc', '#ffffff',
+  '#d8bfd8', '#dda0dd', '#ee82ee', '#ba55d3', '#9370db',
+  '#8a2be2', '#7b68ee', '#6a5acd', '#483d8b', '#4169e1',
+  '#4682b4', '#5f9ea0', '#708090', '#b0c4de', '#e6e6fa'
+];
+
+const dwarfHairColors = [
+  '#2c1b10', '#3a2518', '#4b2e1f', '#5c3a23', '#663300',
+  '#7b481b', '#8b4513', '#a0522d', '#b5651d', '#c68642',
+  '#d2b48c', '#deb887', '#e6c68a', '#c04000', '#a52a2a',
+  '#b22222', '#8b0000', '#800000', '#cd5c5c', '#d2691e',
+  '#f4a460', '#808080', '#a9a9a9', '#c0c0c0', '#ffffff'
+];
+
+const caitSithHairColors = [
+  '#000000', '#1c1c1c', '#2f2f2f', '#4b4b4b', '#696969',
+  '#808080', '#a9a9a9', '#c0c0c0', '#dcdcdc', '#ffffff',
+  '#2c1b10', '#4b2e1f', '#663300', '#8b4513', '#a0522d',
+  '#b5651d', '#c68642', '#d2b48c', '#deb887', '#e6c68a',
+  '#ff8c00', '#ffa500', '#ffd700', '#f4a460', '#d2691e'
+];
+
+const salamanderHairColors = [
+  '#000000', '#1c1c1c', '#2c1b10', '#3b1b0b', '#4b1f0f',
+  '#5c1f0f', '#6b220f', '#7b240f', '#8b250f', '#a52a2a',
+  '#b22222', '#c04000', '#cd5c5c', '#d2691e', '#e25822',
+  '#e9967a', '#f4a460', '#ffa500', '#ff8c00', '#ff7f00',
+  '#ffd700', '#ffff00', '#ffffe0', '#808080', '#c0c0c0'
+];
+
+const gnomeHairColors = [
+  '#000000', '#2c1b10', '#4b2e1f', '#663300', '#8b4513',
+  '#a0522d', '#b5651d', '#c68642', '#d2b48c', '#deb887',
+  '#e6c68a', '#f0d59c', '#f5deb3', '#fff5e1', '#ff69b4',
+  '#ff1493', '#ffa07a', '#98fb98', '#00ced1', '#1e90ff',
+  '#9932cc', '#8a2be2', '#dda0dd', '#808080', '#ffffff'
+];
+
+const halflingHairColors = humanHairColors;
+
+const hairColorOptionsByRace = {
+  Human: humanHairColors,
+  Elf: elfHairColors,
+  'Dark Elf': darkElfHairColors,
+  Dwarf: dwarfHairColors,
+  'Cait Sith': caitSithHairColors,
+  Salamander: salamanderHairColors,
+  Gnome: gnomeHairColors,
+  Halfling: halflingHairColors
+};
+
+const humanEyeColors = [
+  '#000000', '#2c1b10', '#3b3024', '#4e3826', '#5b3a21',
+  '#6b4423', '#8b4513', '#a0522d', '#b8860b', '#8e7618',
+  '#8b8f45', '#556b2f', '#355e3b', '#2e8b57', '#000080',
+  '#0000ff', '#1e90ff', '#87cefa', '#708090', '#778899',
+  '#8b0000', '#9932cc', '#8a2be2', '#daa520', '#ffbf00'
+];
+
+const elfEyeColors = [
+  '#000000', '#2c1b10', '#3b3024', '#4e3826', '#5b3a21',
+  '#8b4513', '#a0522d', '#b8860b', '#daa520', '#8e7618',
+  '#8b8f45', '#556b2f', '#355e3b', '#2e8b57', '#0000ff',
+  '#1e90ff', '#87cefa', '#6495ed', '#7fffd4', '#98fb98',
+  '#dda0dd', '#9932cc', '#8a2be2', '#c0c0c0', '#ffffff'
+];
+
+const darkElfEyeColors = [
+  '#000000', '#1c1c1c', '#2f2f2f', '#4b4b4b', '#696969',
+  '#808080', '#a9a9a9', '#c0c0c0', '#dcdcdc', '#ffffff',
+  '#8b0000', '#b22222', '#c04000', '#cd5c5c', '#800080',
+  '#8b008b', '#9932cc', '#8a2be2', '#9370db', '#708090',
+  '#778899', '#ba55d3', '#dda0dd', '#e6e6fa', '#ff1493'
+];
+
+const dwarfEyeColors = [
+  '#000000', '#2c1b10', '#3b3024', '#4e3826', '#5b3a21',
+  '#6b4423', '#8b4513', '#a0522d', '#b8860b', '#8e7618',
+  '#8b8f45', '#556b2f', '#355e3b', '#2e8b57', '#2f4f4f',
+  '#000080', '#0000ff', '#1e90ff', '#708090', '#778899',
+  '#8b0000', '#a52a2a', '#b22222', '#c0c0c0', '#ffffff'
+];
+
+const caitSithEyeColors = [
+  '#000000', '#2c1b10', '#3b3024', '#4e3826', '#5b3a21',
+  '#6b4423', '#8b4513', '#a0522d', '#b8860b', '#daa520',
+  '#ffd700', '#ffbf00', '#ffa500', '#adff2f', '#7fff00',
+  '#7fffd4', '#00ced1', '#1e90ff', '#0000ff', '#000080',
+  '#355e3b', '#2e8b57', '#556b2f', '#708090', '#ffffff'
+];
+
+const salamanderEyeColors = [
+  '#000000', '#1c1c1c', '#2c1b10', '#3b1b0b', '#4b1f0f',
+  '#5c1f0f', '#6b220f', '#7b240f', '#8b250f', '#a52a2a',
+  '#b22222', '#c04000', '#cd5c5c', '#d2691e', '#e25822',
+  '#e9967a', '#f4a460', '#ffa500', '#ff8c00', '#ff7f00',
+  '#ffd700', '#ffff00', '#ffffe0', '#c0c0c0', '#ffffff'
+];
+
+const gnomeEyeColors = [
+  '#000000', '#2c1b10', '#3b3024', '#4e3826', '#5b3a21',
+  '#6b4423', '#8b4513', '#a0522d', '#b8860b', '#8e7618',
+  '#8b8f45', '#556b2f', '#355e3b', '#2e8b57', '#00ced1',
+  '#1e90ff', '#0000ff', '#8a2be2', '#9932cc', '#dda0dd',
+  '#ff1493', '#ff69b4', '#708090', '#778899', '#ffffff'
+];
+
+const halflingEyeColors = humanEyeColors;
+
+const eyeColorOptionsByRace = {
+  Human: humanEyeColors,
+  Elf: elfEyeColors,
+  'Dark Elf': darkElfEyeColors,
+  Dwarf: dwarfEyeColors,
+  'Cait Sith': caitSithEyeColors,
+  Salamander: salamanderEyeColors,
+  Gnome: gnomeEyeColors,
+  Halfling: halflingEyeColors
+};
+
+const generateColorScale = (start, end, steps = 25) => {
   const s = start.match(/\w\w/g).map(h => parseInt(h, 16));
   const e = end.match(/\w\w/g).map(h => parseInt(h, 16));
   return Array.from({ length: steps }, (_, i) => {
@@ -626,9 +752,9 @@ function startCharacterCreation() {
       } else if (field.type === 'color') {
         let colors = [];
         if (field.key === 'hairColor') {
-          colors = hairColorOptions;
+          colors = hairColorOptionsByRace[character.race] || humanHairColors;
         } else if (field.key === 'eyeColor') {
-          colors = eyeColorOptions;
+          colors = eyeColorOptionsByRace[character.race] || humanEyeColors;
         } else if (field.key === 'skinColor') {
           colors = skinColorOptionsByRace[character.race] || ['#f5cba7', '#d2a679', '#a5694f', '#8d5524'];
         }
