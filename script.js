@@ -11,6 +11,10 @@ const body = document.body;
 const main = document.querySelector('main');
 const backButton = document.getElementById('back-button');
 
+function setMainHTML(html) {
+  if (main) main.innerHTML = html;
+}
+
 // --- Profile and save management ---
 const STORAGE_KEY = 'rpgProfiles';
 const LAST_PROFILE_KEY = 'rpgLastProfile';
@@ -259,13 +263,13 @@ function showCharacter() {
   const portrait = currentCharacter.image
     ? `<img src="${currentCharacter.image}" alt="portrait" class="main-portrait">`
     : '';
-  main.innerHTML = `<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1>${portrait}</div>`;
+  setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1>${portrait}</div>`);
 }
 
 function showNoCharacterUI() {
   hideBackButton();
   updateCharacterButton();
-  main.innerHTML = `<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`;
+  setMainHTML(`<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`);
   document.getElementById('new-character').addEventListener('click', startCharacterCreation);
 }
 
@@ -284,19 +288,21 @@ function showCharacterSelectUI() {
     });
   }
   html += '</div></div>';
-  main.innerHTML = html;
-  main.querySelectorAll('.option-grid button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      currentProfile.lastCharacter = id;
-      currentCharacter = migrateProficiencies({
-        ...defaultProficiencies,
-        ...currentProfile.characters[id]
+  setMainHTML(html);
+  if (main) {
+    main.querySelectorAll('.option-grid button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        currentProfile.lastCharacter = id;
+        currentCharacter = migrateProficiencies({
+          ...defaultProficiencies,
+          ...currentProfile.characters[id]
+        });
+        saveProfiles();
+        showMainUI();
       });
-      saveProfiles();
-      showMainUI();
     });
-  });
+  }
 }
 
 function showMainUI() {
@@ -332,7 +338,7 @@ function showCharacterUI() {
       <div class="resource-bar stamina"><div class="fill" style="width:${staPct}%"><span>${c.stamina} / ${c.maxStamina}</span></div></div>
     `;
   })();
-  main.innerHTML = `<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}${regenerateBtn}</div>${resourceBars}${info}${statsHTML}<button id="delete-character">Delete Character</button></div>`;
+  setMainHTML(`<div class="no-character"><h1>${c.name}</h1><div class="portrait-wrapper">${portrait}${regenerateBtn}</div>${resourceBars}${info}${statsHTML}<button id="delete-character">Delete Character</button></div>`);
   document.getElementById('delete-character').addEventListener('click', () => {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
@@ -381,7 +387,7 @@ function showProficienciesUI() {
     html += '</div>';
   }
   html += '</div>';
-  main.innerHTML = html;
+  setMainHTML(html);
 }
 
 function startCharacterCreation() {
@@ -488,7 +494,7 @@ function startCharacterCreation() {
         )}</span>`;
       }
 
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column">${inputHTML}${raceInfoHTML}</div></div>`;
+      setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column">${inputHTML}${raceInfoHTML}</div></div>`);
 
       if (field.type === 'select') {
         document.querySelectorAll('.option-button').forEach(btn => {
@@ -519,7 +525,7 @@ function startCharacterCreation() {
       }
     } else {
       const nameVal = character.name || '';
-      main.innerHTML = `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><input type="text" id="name-input" value="${nameVal}" placeholder="Name">${raceInfoHTML}</div></div>`;
+      setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><input type="text" id="name-input" value="${nameVal}" placeholder="Name">${raceInfoHTML}</div></div>`);
       const nameInput = document.getElementById('name-input');
       const updateName = () => {
         character.name = nameInput.value.trim();
@@ -603,7 +609,7 @@ function downloadImage(src, filename) {
 }
 
 async function generatePortrait(character, callback) {
-  main.innerHTML = `<div class="no-character"><h1>Generating portrait...</h1><div class="progress"><div class="progress-bar" id="portrait-progress"></div></div></div>`;
+  setMainHTML(`<div class="no-character"><h1>Generating portrait...</h1><div class="progress"><div class="progress-bar" id="portrait-progress"></div></div></div>`);
 
   let progress = 0;
   const progressBar = document.getElementById('portrait-progress');
@@ -788,7 +794,7 @@ dropdownMenu.addEventListener('click', e => {
     showCharacterSelectUI();
   } else {
     showBackButton();
-    main.innerHTML = `<div class="no-character"><h1>${action} not implemented</h1></div>`;
+    setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
   }
 });
 
@@ -802,7 +808,7 @@ characterMenu.addEventListener('click', e => {
     showProficienciesUI();
   } else {
     showBackButton();
-    main.innerHTML = `<div class="no-character"><h1>${action} not implemented</h1></div>`;
+    setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
   }
 });
 

@@ -104,8 +104,8 @@ const ELEMENTAL_BASE: Omit<Song, "id">[] = [
       Stone:"Stoneguard Tune", Water:"Flowing Harmony", Wind:"Tempest Chant", Fire:"Ember Hymn",
       Ice:"Frostsong", Thunder:"Storm Resonance", Dark:"Shadow Lament", Light:"Radiant Canticle"
     } as Record<Element,string>)[el],
-    category:"elemental", kind:"resist" as const, element: el,
-    target:"AoE", side:"ally", unlock:33, baseDurationSec:20,
+    category:"elemental" as const, kind:"resist" as const, element: el,
+    target:"AoE" as Target, side:"ally" as Side, unlock:33, baseDurationSec:20,
     scale:{ m0:+15, m100:+25, unit:"pct" }, tags:["ELEMENT_RESIST_UP"]
   })),
   // Weakness @66
@@ -114,16 +114,16 @@ const ELEMENTAL_BASE: Omit<Song, "id">[] = [
       Stone:"Shattering Note", Water:"Drowning Dirge", Wind:"Cutting Gale Song", Fire:"Scorching Refrain",
       Ice:"Piercing Chill", Thunder:"Overload Symphony", Dark:"Umbral Chant", Light:"Blinding Hymn"
     } as Record<Element,string>)[el],
-    category:"elemental", kind:"weakness" as const, element: el,
-    target:"AoE", side:"enemy", unlock:66, baseDurationSec:20,
+    category:"elemental" as const, kind:"weakness" as const, element: el,
+    target:"AoE" as Target, side:"enemy" as Side, unlock:66, baseDurationSec:20,
     scale:{ m0:-15, m100:-25, unit:"pct" }, tags:["ELEMENT_RESIST_DOWN"]
   })),
 ];
 
 /** Ultimate @100 */
 const ULTIMATE: Omit<Song,"id"> = {
-  name:"Eternal Overture", category:"ultimate", kind:"ultimate",
-  target:"AoE", side:"ally", unlock:100, baseDurationSec:20,
+  name:"Eternal Overture", category:"ultimate" as const, kind:"ultimate",
+  target:"AoE" as Target, side:"ally" as Side, unlock:100, baseDurationSec:20,
   scale:{ m0:0, m100:0, unit:"pct" }, tags:["ALL_STATS_UP_PARTY"]
 };
 
