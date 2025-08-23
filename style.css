@@ -32,6 +32,7 @@ body.layout-portrait {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 body.layout-auto {
@@ -48,14 +49,10 @@ body.layout-auto {
 
 body.layout-portrait #app {
   aspect-ratio: 9 / 16;
-  width: min(100vw, calc(100vh * 9 / 16));
-  height: min(100vh, calc(100vw * 16 / 9));
 }
 
 body.layout-landscape #app {
   aspect-ratio: 16 / 9;
-  width: min(100vw, calc(100vh * 16 / 9));
-  height: min(100vh, calc(100vw * 9 / 16));
 }
 
 main {
@@ -286,7 +283,7 @@ button:not(:disabled):hover,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 4rem);
+  min-height: calc(100vh - var(--menu-height) - 2rem);
   text-align: center;
 }
 
