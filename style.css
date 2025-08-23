@@ -523,12 +523,15 @@ body.theme-dark {
   .cc-top {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem;
+    gap: 0.125rem;
     width: 100%;
   }
 
   .cc-options,
-  .race-stats,
+  .race-stats {
+    flex: 0 0 12rem;
+  }
+
   .race-description {
     flex: 1 1 12rem;
   }

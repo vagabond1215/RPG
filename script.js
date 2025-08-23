@@ -847,7 +847,7 @@ function startCharacterCreation() {
         );
       } else {
         setMainHTML(
-          `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options">${inputHTML}</div>${statsHTML}${descHTML}</div>${imageHTML}</div></div>`
+          `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options">${inputHTML}</div>${descHTML}</div>${imageHTML}</div></div>`
         );
         normalizeOptionButtonWidths();
       }
@@ -903,7 +903,7 @@ function startCharacterCreation() {
       }
     } else {
       const nameVal = character.name || '';
-      setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div>${statsHTML}${descHTML}</div>${imageHTML}</div></div>`);
+      setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div>${descHTML}</div>${imageHTML}</div></div>`);
       normalizeOptionButtonWidths();
       const nameInput = document.getElementById('name-input');
       const updateName = () => {
