@@ -28,11 +28,35 @@ const body = document.body;
 const main = document.querySelector('main');
 const backButton = document.getElementById('back-button');
 const topMenu = document.querySelector('.top-menu');
+const app = document.getElementById('app');
+
+function updateLayoutSize() {
+  if (!app) return;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  let width = vw;
+  let height = vh;
+  if (body.classList.contains('layout-landscape')) {
+    const aspect = 16 / 9;
+    width = Math.min(vw, vh * aspect);
+    height = width / aspect;
+  } else if (body.classList.contains('layout-portrait')) {
+    const aspect = 9 / 16;
+    width = Math.min(vw, vh * aspect);
+    height = width / aspect;
+  } else {
+    width = vw;
+    height = vh;
+  }
+  app.style.width = `${width}px`;
+  app.style.height = `${height}px`;
+}
 
 function updateMenuHeight() {
   if (!topMenu) return;
   const height = topMenu.offsetHeight;
   document.documentElement.style.setProperty('--menu-height', `${height}px`);
+  updateLayoutSize();
 }
 window.addEventListener('resize', updateMenuHeight);
 updateMenuHeight();
@@ -483,6 +507,7 @@ function showNoCharacterUI() {
   updateMapButton();
   setMainHTML(`<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`);
   document.getElementById('new-character').addEventListener('click', startCharacterCreation);
+  updateMenuHeight();
 }
 
 function showCharacterSelectUI() {
