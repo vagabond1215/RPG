@@ -12,7 +12,8 @@
   --hp-color: #ff0000;
   --mp-color: #0000ff;
   --stamina-color: #00ff00;
-  --menu-height: 2.5rem;
+  --menu-button-size: 2.5rem;
+  --menu-height: calc(var(--menu-button-size) + 4px);
 }
 
 html {
@@ -68,16 +69,16 @@ main {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  padding: 0 0.5rem;
-  height: 2.5rem;
+  padding: 2px 0.5rem;
+  height: var(--menu-button-size);
   align-items: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 300;
 }
 
 .top-menu button {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: var(--menu-button-size);
+  height: var(--menu-button-size);
   padding: 2px;
   box-sizing: border-box;
   font-size: 1rem;
@@ -252,7 +253,7 @@ button:not(:disabled):hover,
 #characterMenu {
   top: var(--menu-height);
   left: 0;
-  height: calc(100vh - var(--menu-height));
+  height: calc(100% - var(--menu-height));
 }
 
 .portrait-grid {
@@ -285,7 +286,7 @@ button:not(:disabled):hover,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - var(--menu-height) - 2rem);
+  min-height: calc(100% - 2rem);
   text-align: center;
 }
 
