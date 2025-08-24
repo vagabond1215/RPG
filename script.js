@@ -398,6 +398,14 @@ const elementalProficiencyMap = {
   light: 'lightMagic'
 };
 const ELEMENTAL_MAGIC_KEYS = Object.values(elementalProficiencyMap);
+const schoolProficiencyMap = {
+  Destructive: 'destructiveMagic',
+  Healing: 'healingMagic',
+  Reinforcement: 'reinforcementMagic',
+  Enfeebling: 'enfeeblingMagic',
+  Summoning: 'summoningMagic'
+};
+const SCHOOL_MAGIC_KEYS = Object.values(schoolProficiencyMap);
 
 function applySpellProficiencyGain(character, spell, params) {
   if (!character || !spell) return;
@@ -408,28 +416,10 @@ function applySpellProficiencyGain(character, spell, params) {
       ...params,
     });
   }
-
-  if (spell.isDamage) {
-    character.destructiveMagic = gainProficiency({
-      P: character.destructiveMagic,
-      ...params,
-    });
-  }
-  if (spell.isBuff) {
-    character.reinforcementMagic = gainProficiency({
-      P: character.reinforcementMagic,
-      ...params,
-    });
-  }
-  if (spell.isHeal) {
-    character.healingMagic = gainProficiency({
-      P: character.healingMagic,
-      ...params,
-    });
-  }
-  if (spell.isControl) {
-    character.enfeeblingMagic = gainProficiency({
-      P: character.enfeeblingMagic,
+  const schoolKey = schoolProficiencyMap[spell.school];
+  if (schoolKey) {
+    character[schoolKey] = gainProficiency({
+      P: character[schoolKey],
       ...params,
     });
   }
@@ -625,8 +615,10 @@ function showSpellbookUI() {
   const elements = ['Stone','Water','Wind','Fire','Ice','Thunder','Dark','Light'];
   for (const spell of SPELLBOOK) {
     const profKey = elementalProficiencyMap[spell.element.toLowerCase()];
-    const profValue = currentCharacter[profKey] ?? 0;
-    if (profValue >= spell.proficiency) {
+    const schoolKey = schoolProficiencyMap[spell.school];
+    const elemValue = currentCharacter[profKey] ?? 0;
+    const schoolValue = currentCharacter[schoolKey] ?? 0;
+    if (elemValue >= spell.proficiency && schoolValue >= spell.proficiency) {
       (spellsByElement[spell.element] ||= []).push(spell);
     }
   }

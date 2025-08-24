@@ -221,6 +221,7 @@ function buildElement(elementName, names) {
       id: `${elementName}:ATK:${tier}`,
       name,
       element: elementName,
+      school: "Destructive",
       family: "attack",
       type: "Attack",
       subtype: ultimate ? "Ultimate" : (target === "AoE" ? "AoE" : "Single"),
@@ -247,6 +248,7 @@ function buildElement(elementName, names) {
       id: `${elementName}:CTRL:${tier}`,
       name,
       element: elementName,
+      school: "Enfeebling",
       family: "control",
       type: (i === 1 ? "DoT" : "Control"),
       subtype: null,
@@ -271,12 +273,14 @@ function buildElement(elementName, names) {
     const basePower = r4(supp.bp[i]);
     // Subtype hint (optional)
     const subtypeMap = ["Buff","Shield","Regen/Heal","Resist","Shield"];
+    const isHeal = /heal|grace|recovery|cauterize|cleansing/i.test(name);
     return {
       id: `${elementName}:SUP:${tier}`,
       name,
       element: elementName,
+      school: isHeal ? "Healing" : "Reinforcement",
       family: "support",
-      type: (/heal|grace/i.test(name) ? "Heal" : "Buff"),
+      type: (isHeal ? "Heal" : "Buff"),
       subtype: subtypeMap[i] || null,
       proficiency: prof,
       target,

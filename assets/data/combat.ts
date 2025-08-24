@@ -34,6 +34,13 @@ const elementProfKey: Record<string, string> = {
   Dark: "darkMagic",
   Light: "lightMagic",
 };
+const schoolProfKey: Record<string, string> = {
+  Destructive: "destructiveMagic",
+  Healing: "healingMagic",
+  Reinforcement: "reinforcementMagic",
+  Enfeebling: "enfeeblingMagic",
+  Summoning: "summoningMagic",
+};
 
 function clamp(x: number, min: number, max: number) {
   return Math.max(min, Math.min(max, x));
@@ -57,8 +64,11 @@ function proficiencyForSkill(actor: Actor, skill: any, type: "weapon" | "spell")
     const key = skill.weapon?.toLowerCase();
     return actor.proficiencies[key] || 0;
   }
-  const key = elementProfKey[skill.element] || "";
-  return actor.proficiencies[key] || 0;
+  const elemKey = elementProfKey[skill.element] || "";
+  const schoolKey = schoolProfKey[skill.school] || "";
+  const elemP = actor.proficiencies[elemKey] || 0;
+  const schoolP = actor.proficiencies[schoolKey] || 0;
+  return Math.min(elemP, schoolP);
 }
 
 function nonCombatBonus(actor: Actor, kind: "offense" | "defense" | "evasion") {
