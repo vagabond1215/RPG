@@ -583,10 +583,13 @@ function showCharacterUI() {
     const mpPct = c.maxMP ? (c.mp / c.maxMP) * 100 : 0;
     const staPct = c.maxStamina ? (c.stamina / c.maxStamina) * 100 : 0;
     const xpNeed = xpForNextLevel(c.level);
+    const hpColor = hpPct > 0 ? '#fff' : '#000';
+    const mpColor = mpPct > 0 ? '#fff' : '#000';
+    const stColor = staPct > 0 ? '#fff' : '#000';
     return `
-      <div class="resource-bar hp"><div class="fill" style="width:${hpPct}%"><span>${c.hp} / ${c.maxHP}</span></div></div>
-      <div class="resource-bar mp"><div class="fill" style="width:${mpPct}%"><span>${c.mp} / ${c.maxMP}</span></div></div>
-      <div class="resource-bar stamina"><div class="fill" style="width:${staPct}%"><span>${c.stamina} / ${c.maxStamina}</span></div></div>
+      <div class="resource-bar hp"><div class="fill" style="width:${hpPct}%"></div><span class="value" style="color:${hpColor}">HP: ${c.hp} / ${c.maxHP}</span></div>
+      <div class="resource-bar mp"><div class="fill" style="width:${mpPct}%"></div><span class="value" style="color:${mpColor}">MP: ${c.mp} / ${c.maxMP}</span></div>
+      <div class="resource-bar stamina"><div class="fill" style="width:${staPct}%"></div><span class="value" style="color:${stColor}">ST: ${c.stamina} / ${c.maxStamina}</span></div>
       <p class="xp-display">XP: ${c.xp} / ${xpNeed}</p>
     `;
   })();
@@ -787,7 +790,7 @@ function startCharacterCreation() {
       const resources = {
         HP: maxHP(attrs.VIT, 1),
         MP: maxMP(attrs.WIS, 1),
-        Stamina: maxStamina(attrs.CON, 1)
+        ST: maxStamina(attrs.CON, 1)
       };
       const attrList = Object.entries({ ...attrs, LCK: 10 })
         .map(([k, v]) => `<li>${k}: ${v}</li>`)
