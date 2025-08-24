@@ -733,6 +733,10 @@ body.theme-dark {
   width: 100%;
 }
 
+.proficiency-grid + .proficiency-grid {
+  margin-top: 1rem;
+}
+
 .proficiency-item {
   display: flex;
   justify-content: space-between;
@@ -832,4 +836,27 @@ body.theme-dark {
 #map-container .map-description {
   margin-top: 1rem;
   text-align: center;
+}
+
+/* Spellbook screen */
+.spellbook-element {
+  margin-bottom: 1rem;
+}
+
+.spell-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.spell-item {
+  margin-bottom: 0.25rem;
+}
+
+.spell-name {
+  font-weight: bold;
+}
+
+.spell-desc {
+  font-size: 0.9rem;
 }
