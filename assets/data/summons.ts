@@ -613,11 +613,31 @@ export function resolveSummon(def: SummonDef, input: SummonResolveInput): Summon
 
 /* ========================= Convenience ========================= */
 
+const ELEMENT_PROF_KEY: Record<Element, string> = {
+  Stone: "stoneMagic",
+  Water: "waterMagic",
+  Wind: "windMagic",
+  Fire: "fireMagic",
+  Ice: "iceMagic",
+  Thunder: "thunderMagic",
+  Dark: "darkMagic",
+  Light: "lightMagic",
+};
+
 export function summonsForElement(el: Element): SummonDef[] {
   return SUMMONS.filter(s => s.element === el);
 }
 
-export function summonsAvailable(summoningP: number, elementP: number): SummonDef[] {
-  return SUMMONS.filter(s => isUnlocked(s, summoningP, elementP));
+export function summonsAvailable(
+  summoningP: number,
+  elementP: number | Record<string, number>
+): SummonDef[] {
+  return SUMMONS.filter(s => {
+    const p =
+      typeof elementP === "number"
+        ? elementP
+        : elementP[ELEMENT_PROF_KEY[s.element]] || 0;
+    return isUnlocked(s, summoningP, p);
+  });
 }
 
