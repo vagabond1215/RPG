@@ -397,6 +397,7 @@ const elementalProficiencyMap = {
   dark: 'darkMagic',
   light: 'lightMagic'
 };
+const ELEMENTAL_MAGIC_KEYS = Object.values(elementalProficiencyMap);
 
 function applySpellProficiencyGain(character, spell, params) {
   if (!character || !spell) return;
@@ -617,19 +618,74 @@ function showCharacterUI() {
   });
 }
 
+function showSpellbookUI() {
+  if (!currentCharacter) return;
+  showBackButton();
+  const spellsByElement = {};
+  const elements = ['Stone','Water','Wind','Fire','Ice','Thunder','Dark','Light'];
+  for (const spell of SPELLBOOK) {
+    const profKey = elementalProficiencyMap[spell.element.toLowerCase()];
+    const profValue = currentCharacter[profKey] ?? 0;
+    if (profValue >= spell.proficiency) {
+      (spellsByElement[spell.element] ||= []).push(spell);
+    }
+  }
+  let html = '<div class="spellbook-screen"><h1>Spellbook</h1>';
+  let any = false;
+  elements.forEach(el => {
+    const spells = spellsByElement[el];
+    if (!spells || !spells.length) return;
+    any = true;
+    spells.sort((a, b) => a.proficiency - b.proficiency);
+    html += `<section class="spellbook-element"><h2>${el}</h2><ul class="spell-list">`;
+    spells.forEach(spell => {
+      const family = spell.family.charAt(0).toUpperCase() + spell.family.slice(1);
+      const desc = `${family} ${spell.type} - ${spell.target}`;
+      html += `<li class="spell-item"><span class="spell-name">${spell.name}</span> <span class="spell-req">(P${spell.proficiency})</span><div class="spell-desc">${desc}</div></li>`;
+    });
+    html += '</ul></section>';
+  });
+  if (!any) {
+    html += '<p>No spells known.</p>';
+  }
+  html += '</div>';
+  setMainHTML(html);
+}
+
 function showProficienciesUI() {
   if (!currentCharacter) return;
   showBackButton();
   let html = '<div class="proficiencies-screen"><h1>Proficiencies</h1>';
   for (const [type, list] of Object.entries(proficiencyCategories)) {
-    html += `<h2>${type}</h2><div class="proficiency-grid">`;
-    list.forEach(key => {
-      const value = currentCharacter[key] ?? 0;
-      const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
-      const capped = value >= 100 ? ' capped' : '';
-      html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}">${value}</span></div>`;
-    });
-    html += '</div>';
+    html += `<h2>${type}</h2>`;
+    if (type === 'Magical') {
+      const elemental = list.filter(k => ELEMENTAL_MAGIC_KEYS.includes(k));
+      const other = list.filter(k => !ELEMENTAL_MAGIC_KEYS.includes(k));
+      html += '<div class="proficiency-grid">';
+      elemental.forEach(key => {
+        const value = currentCharacter[key] ?? 0;
+        const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+        const capped = value >= 100 ? ' capped' : '';
+        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}">${value}</span></div>`;
+      });
+      html += '</div><div class="proficiency-grid">';
+      other.forEach(key => {
+        const value = currentCharacter[key] ?? 0;
+        const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+        const capped = value >= 100 ? ' capped' : '';
+        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}">${value}</span></div>`;
+      });
+      html += '</div>';
+    } else {
+      html += '<div class="proficiency-grid">';
+      list.forEach(key => {
+        const value = currentCharacter[key] ?? 0;
+        const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+        const capped = value >= 100 ? ' capped' : '';
+        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}">${value}</span></div>`;
+      });
+      html += '</div>';
+    }
   }
   html += '</div>';
   setMainHTML(html);
@@ -1243,6 +1299,8 @@ characterMenu.addEventListener('click', e => {
     showCharacterUI();
   } else if (action === 'equipment') {
     showEquipmentUI();
+  } else if (action === 'spellbook') {
+    showSpellbookUI();
   } else if (action === 'proficiencies') {
     showProficienciesUI();
   } else {
