@@ -614,14 +614,14 @@ export function resolveSummon(def: SummonDef, input: SummonResolveInput): Summon
 /* ========================= Convenience ========================= */
 
 const ELEMENT_PROF_KEY: Record<Element, string> = {
-  Stone: "stoneMagic",
-  Water: "waterMagic",
-  Wind: "windMagic",
-  Fire: "fireMagic",
-  Ice: "iceMagic",
-  Thunder: "thunderMagic",
-  Dark: "darkMagic",
-  Light: "lightMagic",
+  Stone: "stone",
+  Water: "water",
+  Wind: "wind",
+  Fire: "fire",
+  Ice: "ice",
+  Thunder: "thunder",
+  Dark: "dark",
+  Light: "light",
 };
 
 export function summonsForElement(el: Element): SummonDef[] {

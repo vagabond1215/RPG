@@ -25,21 +25,21 @@ export interface CombatOptions {
 }
 
 const elementProfKey: Record<string, string> = {
-  Stone: "stoneMagic",
-  Water: "waterMagic",
-  Wind: "windMagic",
-  Fire: "fireMagic",
-  Ice: "iceMagic",
-  Thunder: "thunderMagic",
-  Dark: "darkMagic",
-  Light: "lightMagic",
+  Stone: "stone",
+  Water: "water",
+  Wind: "wind",
+  Fire: "fire",
+  Ice: "ice",
+  Thunder: "thunder",
+  Dark: "dark",
+  Light: "light",
 };
 const schoolProfKey: Record<string, string> = {
-  Destructive: "destructiveMagic",
-  Healing: "healingMagic",
-  Reinforcement: "reinforcementMagic",
-  Enfeebling: "enfeeblingMagic",
-  Summoning: "summoningMagic",
+  Destructive: "destructive",
+  Healing: "healing",
+  Reinforcement: "reinforcement",
+  Enfeebling: "enfeebling",
+  Summoning: "summoning",
 };
 
 function clamp(x: number, min: number, max: number) {
