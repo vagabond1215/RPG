@@ -261,19 +261,19 @@ const RACE_IMAGES = {
 
 // Default proficiency values for new characters
 const defaultProficiencies = {
-  stoneMagic: 0,
-  waterMagic: 0,
-  windMagic: 0,
-  fireMagic: 0,
-  iceMagic: 0,
-  thunderMagic: 0,
-  darkMagic: 0,
-  lightMagic: 0,
-  destructiveMagic: 0,
-  healingMagic: 0,
-  reinforcementMagic: 0,
-  enfeeblingMagic: 0,
-  summoningMagic: 0,
+  stone: 0,
+  water: 0,
+  wind: 0,
+  fire: 0,
+  ice: 0,
+  thunder: 0,
+  dark: 0,
+  light: 0,
+  destructive: 0,
+  healing: 0,
+  reinforcement: 0,
+  enfeebling: 0,
+  summoning: 0,
   singing: 0,
   instrument: 0,
   dancing: 0,
@@ -303,21 +303,21 @@ function assignMagicAptitudes(character) {
   const elemChance = aptitude === 'high' ? 0.3 : aptitude === 'med' ? 0.2 : 0.1;
   const nonElemChance = aptitude === 'high' ? 0.9 : aptitude === 'med' ? 0.6 : 0.3;
   const elemental = [
-    'stoneMagic',
-    'waterMagic',
-    'windMagic',
-    'fireMagic',
-    'iceMagic',
-    'thunderMagic',
-    'darkMagic',
-    'lightMagic'
+    'stone',
+    'water',
+    'wind',
+    'fire',
+    'ice',
+    'thunder',
+    'dark',
+    'light'
   ];
   const nonElemental = [
-    'destructiveMagic',
-    'healingMagic',
-    'reinforcementMagic',
-    'enfeeblingMagic',
-    'summoningMagic'
+    'destructive',
+    'healing',
+    'reinforcement',
+    'enfeebling',
+    'summoning'
   ];
   let anyElement = false;
   for (const key of elemental) {
@@ -344,24 +344,45 @@ function migrateProficiencies(character) {
     character.bow = character.marksmanship;
     delete character.marksmanship;
   }
+  const magicMap = {
+    stoneMagic: 'stone',
+    waterMagic: 'water',
+    windMagic: 'wind',
+    fireMagic: 'fire',
+    iceMagic: 'ice',
+    thunderMagic: 'thunder',
+    darkMagic: 'dark',
+    lightMagic: 'light',
+    destructiveMagic: 'destructive',
+    healingMagic: 'healing',
+    reinforcementMagic: 'reinforcement',
+    enfeeblingMagic: 'enfeebling',
+    summoningMagic: 'summoning',
+  };
+  for (const [oldKey, newKey] of Object.entries(magicMap)) {
+    if (oldKey in character) {
+      if (!(newKey in character)) character[newKey] = character[oldKey];
+      delete character[oldKey];
+    }
+  }
   return character;
 }
 
 const proficiencyCategories = {
   Magical: [
-    'stoneMagic',
-    'waterMagic',
-    'windMagic',
-    'fireMagic',
-    'iceMagic',
-    'thunderMagic',
-    'darkMagic',
-    'lightMagic',
-    'destructiveMagic',
-    'healingMagic',
-    'reinforcementMagic',
-    'enfeeblingMagic',
-    'summoningMagic'
+    'stone',
+    'water',
+    'wind',
+    'fire',
+    'ice',
+    'thunder',
+    'dark',
+    'light',
+    'destructive',
+    'healing',
+    'reinforcement',
+    'enfeebling',
+    'summoning'
   ],
   Combat: [
     'evasion',
@@ -388,22 +409,22 @@ const proficiencyCategories = {
 };
 
 const elementalProficiencyMap = {
-  stone: 'stoneMagic',
-  water: 'waterMagic',
-  wind: 'windMagic',
-  fire: 'fireMagic',
-  ice: 'iceMagic',
-  thunder: 'thunderMagic',
-  dark: 'darkMagic',
-  light: 'lightMagic'
+  stone: 'stone',
+  water: 'water',
+  wind: 'wind',
+  fire: 'fire',
+  ice: 'ice',
+  thunder: 'thunder',
+  dark: 'dark',
+  light: 'light'
 };
 const ELEMENTAL_MAGIC_KEYS = Object.values(elementalProficiencyMap);
 const schoolProficiencyMap = {
-  Destructive: 'destructiveMagic',
-  Healing: 'healingMagic',
-  Reinforcement: 'reinforcementMagic',
-  Enfeebling: 'enfeeblingMagic',
-  Summoning: 'summoningMagic'
+  Destructive: 'destructive',
+  Healing: 'healing',
+  Reinforcement: 'reinforcement',
+  Enfeebling: 'enfeebling',
+  Summoning: 'summoning'
 };
 const SCHOOL_MAGIC_KEYS = Object.values(schoolProficiencyMap);
 
