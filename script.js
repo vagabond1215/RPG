@@ -1,6 +1,6 @@
 import { SPELLBOOK } from "./assets/data/spells.js";
 import { WEAPON_SKILLS } from "./assets/data/weapon_skills.js";
-import { characterTemplate, gainProficiency } from "./assets/data/core.js";
+import { characterTemplate, gainProficiency, proficiencyCap } from "./assets/data/core.js";
 import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./assets/data/race_attrs.js";
 import { maxHP, maxMP, maxStamina } from "./assets/data/resources.js";
 import { DENOMINATIONS, CURRENCY_VALUES, convertCurrency, toIron, fromIron } from "./assets/data/currency.js";
@@ -647,6 +647,7 @@ function showSpellbookUI() {
 function showProficienciesUI() {
   if (!currentCharacter) return;
   showBackButton();
+  const profCap = proficiencyCap(currentCharacter.level);
   let html = '<div class="proficiencies-screen"><h1>Proficiencies</h1>';
   for (const [type, list] of Object.entries(proficiencyCategories)) {
     html += `<h2>${type}</h2>`;
@@ -658,14 +659,14 @@ function showProficienciesUI() {
         const value = currentCharacter[key] ?? 0;
         const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
         const capped = value >= 100 ? ' capped' : '';
-        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}">${value}</span></div>`;
+        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}" data-cap="${profCap}">${value}</span></div>`;
       });
       html += '</div><div class="proficiency-grid">';
       other.forEach(key => {
         const value = currentCharacter[key] ?? 0;
         const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
         const capped = value >= 100 ? ' capped' : '';
-        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}">${value}</span></div>`;
+        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}" data-cap="${profCap}">${value}</span></div>`;
       });
       html += '</div>';
     } else {
@@ -674,14 +675,55 @@ function showProficienciesUI() {
         const value = currentCharacter[key] ?? 0;
         const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
         const capped = value >= 100 ? ' capped' : '';
-        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}">${value}</span></div>`;
+        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}" data-cap="${profCap}">${value}</span></div>`;
       });
       html += '</div>';
     }
   }
   html += '</div>';
   setMainHTML(html);
+  setupProficiencyTooltips();
 }
+
+let capTooltipEl = null;
+let capTooltipTimer = null;
+
+function setupProficiencyTooltips() {
+  const values = main.querySelectorAll('.proficiency-value');
+  values.forEach(v => {
+    v.addEventListener('click', showCapTooltip);
+    v.addEventListener('mouseenter', showCapTooltip);
+    v.addEventListener('touchstart', showCapTooltip);
+  });
+}
+
+function showCapTooltip(e) {
+  e.stopPropagation();
+  const cap = e.currentTarget.dataset.cap;
+  if (!cap) return;
+  removeCapTooltip();
+  capTooltipEl = document.createElement('div');
+  capTooltipEl.className = 'cap-tooltip';
+  capTooltipEl.textContent = `Cap: ${cap}`;
+  document.body.appendChild(capTooltipEl);
+  const rect = e.currentTarget.getBoundingClientRect();
+  capTooltipEl.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`;
+  capTooltipEl.style.top = `${rect.top + window.scrollY}px`;
+  capTooltipTimer = setTimeout(removeCapTooltip, 10000);
+}
+
+function removeCapTooltip() {
+  if (capTooltipEl) {
+    capTooltipEl.remove();
+    capTooltipEl = null;
+  }
+  if (capTooltipTimer) {
+    clearTimeout(capTooltipTimer);
+    capTooltipTimer = null;
+  }
+}
+
+document.addEventListener('click', removeCapTooltip);
 
 const SLOT_ICONS = {
   mainHand: '<svg viewBox="0 0 24 24"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5" /><line x1="13" y1="19" x2="19" y2="13" /><line x1="16" y1="16" x2="20" y2="20" /><line x1="19" y1="21" x2="21" y2="19" /></svg>',

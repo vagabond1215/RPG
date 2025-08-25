@@ -729,7 +729,7 @@ body.theme-dark {
 
 .proficiency-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem 1rem;
   width: 100%;
 }
@@ -745,15 +745,30 @@ body.theme-dark {
 }
 
 .proficiency-name {
+  flex: 1;
   text-align: left;
+  padding-right: 0.5rem;
 }
 
 .proficiency-value {
+  width: 3ch;
   text-align: right;
 }
 
 .proficiency-value.capped {
   color: var(--capped-color);
+}
+
+.cap-tooltip {
+  position: absolute;
+  background: var(--foreground);
+  color: var(--background);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -100%);
+  white-space: nowrap;
 }
 
 /* Equipment screen */
