@@ -191,8 +191,104 @@ function buildSupportEffect(element, spellName, target, basePower, idx /*0..4*/)
   }
 }
 
-/** Build one element's 20-spell kit */
+/** Build one element's spell kit including level 1 cantrips */
 function buildElement(elementName, names) {
+  const baseAtk = 0.25; // quarter of tier-1 power
+  const baseCtrl = 0.05;
+  const baseSupp = 0.25;
+
+  const cantrips = [
+    {
+      id: `${elementName}:CAN:DES`,
+      name: `${elementName} Spark`,
+      element: elementName,
+      school: "Destructive",
+      family: "attack",
+      type: "Attack",
+      subtype: "Single",
+      proficiency: 1,
+      target: "ST",
+      basePower: baseAtk,
+      proficiencyFactor: 1.0,
+      unlockTierId: "CANTRIP",
+      mpCost: 1,
+      ultimate: false,
+      starter: true,
+    },
+    {
+      id: `${elementName}:CAN:ENF`,
+      name: `${elementName} Jinx`,
+      element: elementName,
+      school: "Enfeebling",
+      family: "control",
+      type: "Control",
+      subtype: null,
+      proficiency: 1,
+      target: "ST",
+      basePower: baseCtrl,
+      proficiencyFactor: 1.0,
+      unlockTierId: "CANTRIP",
+      mpCost: 1,
+      ultimate: false,
+      starter: true,
+      effect: buildControlEffect(`${elementName} Jinx`, "ST", baseCtrl, 0),
+    },
+    {
+      id: `${elementName}:CAN:REIN`,
+      name: `${elementName} Ward`,
+      element: elementName,
+      school: "Reinforcement",
+      family: "support",
+      type: "Buff",
+      subtype: "Buff",
+      proficiency: 1,
+      target: "ST",
+      basePower: baseSupp,
+      proficiencyFactor: 1.0,
+      unlockTierId: "CANTRIP",
+      mpCost: 1,
+      ultimate: false,
+      starter: true,
+      effect: buildSupportEffect(elementName, `${elementName} Ward`, "ST", baseSupp, 0),
+    },
+    {
+      id: `${elementName}:CAN:HEAL`,
+      name: `${elementName} Heal`,
+      element: elementName,
+      school: "Healing",
+      family: "support",
+      type: "Heal",
+      subtype: "Heal",
+      proficiency: 1,
+      target: "ST",
+      basePower: baseSupp,
+      proficiencyFactor: 1.0,
+      unlockTierId: "CANTRIP",
+      mpCost: 1,
+      ultimate: false,
+      starter: true,
+      effect: buildSupportEffect(elementName, `${elementName} Heal`, "ST", baseSupp, 2),
+    },
+    {
+      id: `${elementName}:CAN:SUM`,
+      name: `Summon ${elementName} Sprite`,
+      element: elementName,
+      school: "Summoning",
+      family: "summon",
+      type: "Summon",
+      subtype: null,
+      proficiency: 1,
+      target: "Self",
+      basePower: 0,
+      proficiencyFactor: 1.0,
+      unlockTierId: "CANTRIP",
+      mpCost: 1,
+      ultimate: false,
+      starter: true,
+      effect: { kind: "summon", summonId: `${elementName}:Elemental` },
+    },
+  ];
+
   // Families: Attack(10 tiers), Control(5), Support(5)
   const atk = buildBasePowers(10, mpCost, 1.00);
   const ctrl = buildBasePowers(5, mpCost, 0.20);
@@ -299,10 +395,10 @@ function buildElement(elementName, names) {
   [...attack, ...control, ...support].forEach(spell => {
     byMilestone.get(spell.proficiency).push(spell);
   });
-  return MILESTONES.flatMap(m => byMilestone.get(m));
+  return [...cantrips, ...MILESTONES.flatMap(m => byMilestone.get(m))];
 }
 
-/** Build the full 8-element spellbook (160 spells total) */
+/** Build the full 8-element spellbook (200 spells total) */
 function generateSpellbook() {
   const elements = Object.keys(NAMES);
   const all = [];
