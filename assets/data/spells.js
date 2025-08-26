@@ -271,7 +271,7 @@ function buildElement(elementName, names) {
     },
     {
       id: `${elementName}:CAN:SUM`,
-      name: `Summon ${elementName} Sprite`,
+      name: `${elementName} Sprite`,
       element: elementName,
       school: "Summoning",
       family: "summon",
