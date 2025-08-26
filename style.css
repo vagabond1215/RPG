@@ -874,6 +874,9 @@ body.theme-dark {
   border: none;
   color: inherit;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-size: 1em;
 }
 
 .sort-buttons {
@@ -913,6 +916,64 @@ body.theme-dark {
 
 .school-icon {
   margin-right: 0.25rem;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.type-icon .cw {
+  color: #3c8;
+}
+
+.type-icon .ccw {
+  color: #c83;
+}
+
+.icon.enfeeble .arrow {
+  color: red;
+}
+
+.icon.reinforce .arrow {
+  color: blue;
+}
+
+.icon.heal .arrow {
+  color: green;
+}
+
+.icon .humanoid {
+  font-size: 0.8em;
+  margin-left: -0.1em;
+}
+
+.icon.slime {
+  display: inline-block;
+  width: 1em;
+  height: 0.8em;
+  background: #6f6;
+  border-radius: 50% 50% 40% 40%;
+  position: relative;
+}
+
+.icon.slime::before,
+.icon.slime::after {
+  content: '';
+  position: absolute;
+  top: 0.25em;
+  width: 0.15em;
+  height: 0.15em;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.icon.slime::before {
+  left: 0.3em;
+}
+
+.icon.slime::after {
+  right: 0.3em;
 }
 
 .spell-name {

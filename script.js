@@ -450,13 +450,26 @@ const elementIcons = {
 
 const schoolIcons = {
   Destructive: '💥',
-  Enfeebling: '⛓️',
-  Reinforcement: '🛡️',
-  Healing: '➕',
-  Summoning: '✨'
+  Enfeebling:
+    '<span class="icon enfeeble"><span class="arrow">⬇</span><span class="humanoid">👤</span></span>',
+  Reinforcement:
+    '<span class="icon reinforce"><span class="arrow">⬆</span><span class="humanoid">👤</span></span>',
+  Healing:
+    '<span class="icon heal"><span class="arrow">+</span><span class="humanoid">👤</span></span>',
+  Summoning: '<span class="icon slime"></span>'
 };
 
-const spellSortModes = {};
+let spellSortModes = {};
+
+function getProficiencySortIcon(dir) {
+  const arrow = dir === 'desc' ? '↓' : '↑';
+  return `#${arrow}`;
+}
+
+function getTypeSortIcon(dir) {
+  const arrow = dir === 'desc' ? '↓' : '↑';
+  return `<span class="type-icon"><span class="cw">↻</span><span class="ccw">↺</span>${arrow}</span>`;
+}
 
 function applySpellProficiencyGain(character, spell, params) {
   if (!character || !spell) return;
@@ -578,6 +591,7 @@ function showCharacterSelectUI() {
           ...defaultProficiencies,
           ...currentProfile.characters[id]
         });
+        spellSortModes = currentCharacter.spellSort || {};
         saveProfiles();
         showMainUI();
       });
@@ -654,6 +668,7 @@ function showCharacterUI() {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
     currentCharacter = null;
+    spellSortModes = {};
     saveProfiles();
     showMainUI();
   });
@@ -695,39 +710,48 @@ function showSpellbookUI() {
     const spells = spellsByElement[el];
     if (!spells || !spells.length) return;
     any = true;
-    const mode = spellSortModes[el] || 'prof';
+    const state = spellSortModes[el] || { mode: 'prof', dir: 'asc' };
+    const mode = state.mode;
+    const dir = state.dir;
     const eIcon = elementIcons[el] || '';
     const profActive = mode === 'prof' ? ' active' : '';
     const typeActive = mode === 'school' ? ' active' : '';
-    html += `<section class="spellbook-element"><h2><span class="element-title"><span class="element-icon">${eIcon}</span>${el}</span><span class="sort-buttons"><button class="sort-button${profActive}" data-el="${el}" data-mode="prof" aria-label="Sort by proficiency">#</button><button class="sort-button${typeActive}" data-el="${el}" data-mode="school" aria-label="Sort by type">🏫</button></span></h2>`;
+    const profIcon = getProficiencySortIcon(mode === 'prof' ? dir : 'asc');
+    const typeIcon = getTypeSortIcon(mode === 'school' ? dir : 'asc');
+    html += `<section class="spellbook-element"><h2><span class="element-title"><span class="element-icon">${eIcon}</span>${el}</span><span class="sort-buttons"><button class="sort-button${profActive}" data-el="${el}" data-mode="prof" aria-label="Sort by proficiency">${profIcon}</button><button class="sort-button${typeActive}" data-el="${el}" data-mode="school" aria-label="Sort by type">${typeIcon}</button></span></h2>`;
 
     let grouped = {};
     if (mode === 'school') {
       spells.sort((a, b) => a.school.localeCompare(b.school) || a.proficiency - b.proficiency);
+      if (dir === 'desc') spells.reverse();
       for (const spell of spells) {
         (grouped[spell.school] ||= []).push(spell);
       }
-      Object.keys(grouped).sort().forEach(key => {
-        html += `<h3 class="spell-subheading">${key}</h3><ul class="spell-list">`;
-        grouped[key].forEach(spell => {
-          const sIcon = schoolIcons[spell.school] || '';
-          html += `<li class="spell-item"><span class="school-icon">${sIcon}</span><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
+      Object.keys(grouped)
+        .sort((a, b) => (dir === 'asc' ? a.localeCompare(b) : b.localeCompare(a)))
+        .forEach(key => {
+          const sIcon = schoolIcons[key] || '';
+          html += `<h3 class="spell-subheading"><span class="school-icon">${sIcon}</span>${key}</h3><ul class="spell-list">`;
+          grouped[key].forEach(spell => {
+            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
+          });
+          html += '</ul>';
         });
-        html += '</ul>';
-      });
     } else {
-      spells.sort((a, b) => a.proficiency - b.proficiency);
+      spells.sort((a, b) => (dir === 'asc' ? a.proficiency - b.proficiency : b.proficiency - a.proficiency));
       for (const spell of spells) {
         (grouped[spell.proficiency] ||= []).push(spell);
       }
-      Object.keys(grouped).map(Number).sort((a, b) => a - b).forEach(key => {
-        html += `<h3 class="spell-subheading">P${key}</h3><ul class="spell-list">`;
-        grouped[key].forEach(spell => {
-          const sIcon = schoolIcons[spell.school] || '';
-          html += `<li class="spell-item"><span class="school-icon">${sIcon}</span><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
+      Object.keys(grouped)
+        .map(Number)
+        .sort((a, b) => (dir === 'asc' ? a - b : b - a))
+        .forEach(key => {
+          html += `<h3 class="spell-subheading">P${key}</h3><ul class="spell-list">`;
+          grouped[key].forEach(spell => {
+            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
+          });
+          html += '</ul>';
         });
-        html += '</ul>';
-      });
     }
     html += '</section>';
   });
@@ -745,7 +769,18 @@ function showSpellbookUI() {
     const el = btn.dataset.el;
     const mode = btn.dataset.mode;
     btn.addEventListener('click', () => {
-      spellSortModes[el] = mode;
+      const state = spellSortModes[el] || { mode: 'prof', dir: 'asc' };
+      if (state.mode === mode) {
+        state.dir = state.dir === 'asc' ? 'desc' : 'asc';
+      } else {
+        state.mode = mode;
+        state.dir = 'asc';
+      }
+      spellSortModes[el] = state;
+      if (currentCharacter) {
+        currentCharacter.spellSort = spellSortModes;
+        saveProfiles();
+      }
       showSpellbookUI();
     });
   });
@@ -1252,7 +1287,9 @@ function finalizeCharacter(character) {
   assignMagicAptitudes(newChar);
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;
+  newChar.spellSort = {};
   currentCharacter = newChar;
+  spellSortModes = newChar.spellSort;
   saveProfiles();
   creationScaleOffset = 0;
   updateScale();
@@ -1268,6 +1305,7 @@ function loadCharacter() {
       ...defaultProficiencies,
       ...currentProfile.characters[charId]
     });
+    spellSortModes = currentCharacter.spellSort || {};
     showCharacter();
   } else if (localStorage.getItem(TEMP_CHARACTER_KEY)) {
     startCharacterCreation();
