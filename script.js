@@ -437,6 +437,27 @@ const schoolProficiencyMap = {
 };
 const SCHOOL_MAGIC_KEYS = Object.values(schoolProficiencyMap);
 
+const elementIcons = {
+  Stone: '🪨',
+  Water: '💧',
+  Wind: '🌬️',
+  Fire: '🔥',
+  Ice: '❄️',
+  Thunder: '⚡',
+  Dark: '🌑',
+  Light: '☀️'
+};
+
+const schoolIcons = {
+  Destructive: '💥',
+  Enfeebling: '⛓️',
+  Reinforcement: '🛡️',
+  Healing: '➕',
+  Summoning: '✨'
+};
+
+const spellSortModes = {};
+
 function applySpellProficiencyGain(character, spell, params) {
   if (!character || !spell) return;
   const elemKey = elementalProficiencyMap[spell.element?.toLowerCase()];
@@ -638,6 +659,22 @@ function showCharacterUI() {
   });
 }
 
+function showSpellDetails(spell) {
+  if (!spell) return;
+  const overlay = document.createElement('div');
+  overlay.className = 'spell-detail-modal';
+  const content = document.createElement('div');
+  content.className = 'spell-detail-content';
+  const desc = `${spell.type} - ${spell.target}`;
+  content.innerHTML = `<h3>${spell.name}</h3><p>${desc}</p><p>Element: ${spell.element}</p><p>School: ${spell.school}</p><p>Base Power: ${spell.basePower}</p><p>MP Cost: ${spell.mpCost}</p>`;
+  const close = document.createElement('button');
+  close.textContent = 'Close';
+  close.addEventListener('click', () => overlay.remove());
+  content.appendChild(close);
+  overlay.appendChild(content);
+  document.body.appendChild(overlay);
+}
+
 function showSpellbookUI() {
   if (!currentCharacter) return;
   showBackButton();
@@ -658,12 +695,20 @@ function showSpellbookUI() {
     const spells = spellsByElement[el];
     if (!spells || !spells.length) return;
     any = true;
-    spells.sort((a, b) => a.proficiency - b.proficiency);
-    html += `<section class="spellbook-element"><h2>${el}</h2><ul class="spell-list">`;
+    const mode = spellSortModes[el] || 'profAsc';
+    if (mode === 'profDesc') {
+      spells.sort((a, b) => b.proficiency - a.proficiency);
+    } else if (mode === 'school') {
+      spells.sort((a, b) => a.school.localeCompare(b.school));
+    } else {
+      spells.sort((a, b) => a.proficiency - b.proficiency);
+    }
+    const eIcon = elementIcons[el] || '';
+    const sortIcon = mode === 'profDesc' ? '↓' : (mode === 'school' ? '🏫' : '↑');
+    html += `<section class="spellbook-element"><h2><span class="element-title"><span class="element-icon">${eIcon}</span>${el}</span><button class="sort-button" data-el="${el}" aria-label="Sort">${sortIcon}</button></h2><ul class="spell-list">`;
     spells.forEach(spell => {
-      const family = spell.family.charAt(0).toUpperCase() + spell.family.slice(1);
-      const desc = `${family} ${spell.type} - ${spell.target}`;
-      html += `<li class="spell-item"><span class="spell-name">${spell.name}</span> <span class="spell-req">(P${spell.proficiency})</span><div class="spell-desc">${desc}</div></li>`;
+      const sIcon = schoolIcons[spell.school] || '';
+      html += `<li class="spell-item"><span class="school-icon">${sIcon}</span><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
     });
     html += '</ul></section>';
   });
@@ -672,6 +717,20 @@ function showSpellbookUI() {
   }
   html += '</div>';
   setMainHTML(html);
+  document.querySelectorAll('.spell-name').forEach(btn => {
+    const id = btn.dataset.spellId;
+    const spell = SPELLBOOK.find(s => s.id === id);
+    btn.addEventListener('click', () => showSpellDetails(spell));
+  });
+  document.querySelectorAll('.sort-button').forEach(btn => {
+    const el = btn.dataset.el;
+    btn.addEventListener('click', () => {
+      const modes = ['profAsc', 'profDesc', 'school'];
+      const idx = modes.indexOf(spellSortModes[el] || 'profAsc');
+      spellSortModes[el] = modes[(idx + 1) % modes.length];
+      showSpellbookUI();
+    });
+  });
 }
 
 function showProficienciesUI() {

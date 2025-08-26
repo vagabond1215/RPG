@@ -851,6 +851,31 @@ body.theme-dark {
   margin-bottom: 1rem;
 }
 
+.spellbook-element h2 {
+  background: var(--foreground);
+  color: var(--background);
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.element-title {
+  display: flex;
+  align-items: center;
+}
+
+.element-icon {
+  margin-right: 0.25rem;
+}
+
+.sort-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
 .spell-list {
   list-style: none;
   padding: 0;
@@ -858,13 +883,49 @@ body.theme-dark {
 }
 
 .spell-item {
-  margin-bottom: 0.25rem;
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.spell-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--background), var(--foreground), var(--background));
+}
+
+.school-icon {
+  margin-right: 0.25rem;
 }
 
 .spell-name {
+  background: none;
+  border: none;
+  color: inherit;
   font-weight: bold;
+  cursor: pointer;
+  padding: 0;
 }
 
-.spell-desc {
-  font-size: 0.9rem;
+.spell-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spell-detail-content {
+  background: var(--background);
+  color: var(--foreground);
+  padding: 1rem;
+  border: 1px solid var(--foreground);
+  max-width: 90%;
 }
