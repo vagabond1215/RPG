@@ -876,6 +876,20 @@ body.theme-dark {
   cursor: pointer;
 }
 
+.sort-buttons {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.sort-button.active {
+  text-decoration: underline;
+}
+
+.spell-subheading {
+  margin: 0.5rem 0 0.25rem;
+  font-weight: bold;
+}
+
 .spell-list {
   list-style: none;
   padding: 0;
