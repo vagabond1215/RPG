@@ -695,22 +695,41 @@ function showSpellbookUI() {
     const spells = spellsByElement[el];
     if (!spells || !spells.length) return;
     any = true;
-    const mode = spellSortModes[el] || 'profAsc';
-    if (mode === 'profDesc') {
-      spells.sort((a, b) => b.proficiency - a.proficiency);
-    } else if (mode === 'school') {
-      spells.sort((a, b) => a.school.localeCompare(b.school));
+    const mode = spellSortModes[el] || 'prof';
+    const eIcon = elementIcons[el] || '';
+    const profActive = mode === 'prof' ? ' active' : '';
+    const typeActive = mode === 'school' ? ' active' : '';
+    html += `<section class="spellbook-element"><h2><span class="element-title"><span class="element-icon">${eIcon}</span>${el}</span><span class="sort-buttons"><button class="sort-button${profActive}" data-el="${el}" data-mode="prof" aria-label="Sort by proficiency">#</button><button class="sort-button${typeActive}" data-el="${el}" data-mode="school" aria-label="Sort by type">🏫</button></span></h2>`;
+
+    let grouped = {};
+    if (mode === 'school') {
+      spells.sort((a, b) => a.school.localeCompare(b.school) || a.proficiency - b.proficiency);
+      for (const spell of spells) {
+        (grouped[spell.school] ||= []).push(spell);
+      }
+      Object.keys(grouped).sort().forEach(key => {
+        html += `<h3 class="spell-subheading">${key}</h3><ul class="spell-list">`;
+        grouped[key].forEach(spell => {
+          const sIcon = schoolIcons[spell.school] || '';
+          html += `<li class="spell-item"><span class="school-icon">${sIcon}</span><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
+        });
+        html += '</ul>';
+      });
     } else {
       spells.sort((a, b) => a.proficiency - b.proficiency);
+      for (const spell of spells) {
+        (grouped[spell.proficiency] ||= []).push(spell);
+      }
+      Object.keys(grouped).map(Number).sort((a, b) => a - b).forEach(key => {
+        html += `<h3 class="spell-subheading">P${key}</h3><ul class="spell-list">`;
+        grouped[key].forEach(spell => {
+          const sIcon = schoolIcons[spell.school] || '';
+          html += `<li class="spell-item"><span class="school-icon">${sIcon}</span><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
+        });
+        html += '</ul>';
+      });
     }
-    const eIcon = elementIcons[el] || '';
-    const sortIcon = mode === 'profDesc' ? '↓' : (mode === 'school' ? '🏫' : '↑');
-    html += `<section class="spellbook-element"><h2><span class="element-title"><span class="element-icon">${eIcon}</span>${el}</span><button class="sort-button" data-el="${el}" aria-label="Sort">${sortIcon}</button></h2><ul class="spell-list">`;
-    spells.forEach(spell => {
-      const sIcon = schoolIcons[spell.school] || '';
-      html += `<li class="spell-item"><span class="school-icon">${sIcon}</span><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
-    });
-    html += '</ul></section>';
+    html += '</section>';
   });
   if (!any) {
     html += '<p>No spells known.</p>';
@@ -724,10 +743,9 @@ function showSpellbookUI() {
   });
   document.querySelectorAll('.sort-button').forEach(btn => {
     const el = btn.dataset.el;
+    const mode = btn.dataset.mode;
     btn.addEventListener('click', () => {
-      const modes = ['profAsc', 'profDesc', 'school'];
-      const idx = modes.indexOf(spellSortModes[el] || 'profAsc');
-      spellSortModes[el] = modes[(idx + 1) % modes.length];
+      spellSortModes[el] = mode;
       showSpellbookUI();
     });
   });
