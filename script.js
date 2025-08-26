@@ -42,11 +42,8 @@ function updateLayoutSize() {
     height = width / aspect;
   } else if (body.classList.contains('layout-portrait')) {
     const aspect = 9 / 16;
-    width = Math.min(vw, vh * aspect);
-    height = width / aspect;
-  } else {
-    width = vw;
     height = vh;
+    width = Math.min(vw, vh * aspect);
   }
   app.style.width = `${width}px`;
   app.style.height = `${height}px`;
@@ -1202,7 +1199,6 @@ function loadPreferences() {
     currentLayoutIndex = layouts.indexOf(prefs.layout);
   }
   setTheme(currentThemeIndex);
-  updateScale();
   setLayout(currentLayoutIndex);
 }
 
@@ -1242,9 +1238,12 @@ themeToggle.addEventListener('click', () => {
 let uiScale = 1;
 let creationScaleOffset = 0;
 const updateScale = () => {
+  const baseScale = body.classList.contains('layout-landscape')
+    ? uiScale * 1.25
+    : uiScale;
   document.documentElement.style.setProperty(
     '--ui-scale',
-    uiScale + creationScaleOffset
+    baseScale + creationScaleOffset
   );
   savePreference('uiScale', uiScale);
   updateMenuHeight();
@@ -1278,7 +1277,7 @@ const setLayout = index => {
   body.classList.add(`layout-${layout}`);
   layoutToggle.innerHTML = layoutIcons[layout];
   savePreference('layout', layout);
-  updateMenuHeight();
+  updateScale();
   if (screen.orientation) {
     if (layout === 'landscape') {
       screen.orientation.lock('landscape').catch(() => {});
