@@ -33,3 +33,43 @@ export const ARMOR_SLOTS: ArmorSlot[];
 export const TRINKET_SLOTS: TrinketSlot[];
 
 export function createEmptyEquipment(): Equipment;
+
+export interface EquipmentItemStats {
+  damage: number;
+  defense: number;
+}
+
+export interface EquipmentItem {
+  id?: string;
+  name?: string;
+  slot: WeaponSlot | ArmorSlot | TrinketSlot | string;
+  type: string;
+  baseStats: EquipmentItemStats;
+  abilities: string[];
+  effects: string[];
+  marketPrice: number;
+  condition: number;
+  weight: number;
+  rarity?: string;
+  attributes: Record<string, number>;
+  meta: Record<string, any>;
+}
+
+export interface EquipmentItemParams {
+  id?: string;
+  name?: string;
+  slot: WeaponSlot | ArmorSlot | TrinketSlot | string;
+  type: string;
+  damage?: number;
+  defense?: number;
+  abilities?: string[];
+  effects?: string[];
+  marketPrice?: number;
+  condition?: number;
+  weight?: number;
+  rarity?: string;
+  attributes?: Record<string, number>;
+  meta?: Record<string, any>;
+}
+
+export function createEquipmentItem(params: EquipmentItemParams): EquipmentItem;
