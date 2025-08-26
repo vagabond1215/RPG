@@ -298,7 +298,6 @@ const defaultProficiencies = {
 function assignMagicAptitudes(character) {
   const aptitude = character.magicAptitude || 'low';
   const elemChance = aptitude === 'high' ? 0.3 : aptitude === 'med' ? 0.2 : 0.1;
-  const nonElemChance = aptitude === 'high' ? 0.9 : aptitude === 'med' ? 0.6 : 0.3;
   const elemental = [
     'stone',
     'water',
@@ -309,24 +308,37 @@ function assignMagicAptitudes(character) {
     'dark',
     'light'
   ];
-  const nonElemental = [
-    'destructive',
-    'healing',
-    'reinforcement',
-    'enfeebling',
-    'summoning'
-  ];
-  let anyElement = false;
-  for (const key of elemental) {
-    if (Math.random() < elemChance) {
-      character[key] = 1;
-      anyElement = true;
+  const schoolChances = {
+    destructive: 0.33,
+    reinforcement: 0.33,
+    enfeebling: 0.33,
+    healing: 0.2,
+    summoning: 0.1,
+  };
+
+  // Determine if the character already has an elemental proficiency
+  let hasElement = elemental.some(k => character[k] > 0);
+
+  // Roll for elemental proficiencies if none are present
+  if (!hasElement) {
+    for (const key of elemental) {
+      if (Math.random() < elemChance) {
+        character[key] = 1;
+        hasElement = true;
+      }
     }
   }
-  if (anyElement) {
-    for (const key of nonElemental) {
-      if (Math.random() < nonElemChance) {
-        character[key] = 1;
+
+  // Ensure at least one school is unlocked when any element is present
+  if (hasElement) {
+    const schoolKeys = Object.keys(schoolChances);
+    let hasSchool = schoolKeys.some(k => character[k] > 0);
+    while (!hasSchool) {
+      for (const key of schoolKeys) {
+        if (Math.random() < schoolChances[key]) {
+          character[key] = 1;
+          hasSchool = true;
+        }
       }
     }
   }
