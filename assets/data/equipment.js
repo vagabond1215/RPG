@@ -53,3 +53,36 @@ export function createEmptyEquipment() {
     }
   };
 }
+
+export function createEquipmentItem({
+  id = "",
+  name = "",
+  slot,
+  type,
+  damage = 0,
+  defense = 0,
+  abilities = [],
+  effects = [],
+  marketPrice = 0,
+  condition = 100,
+  weight = 0,
+  rarity = "common",
+  attributes = {},
+  meta = {},
+} = {}) {
+  return {
+    id,
+    name,
+    slot,
+    type,
+    baseStats: { damage, defense },
+    abilities,
+    effects,
+    marketPrice,
+    condition,
+    weight,
+    rarity,
+    attributes,
+    meta,
+  };
+}
