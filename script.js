@@ -77,6 +77,20 @@ function normalizeOptionButtonWidths() {
   });
 }
 
+function normalizeProficiencyNameWidths() {
+  const names = Array.from(document.querySelectorAll('.proficiency-name'));
+  if (!names.length) return;
+  let maxWidth = 0;
+  names.forEach(n => {
+    n.style.width = 'auto';
+    const w = n.getBoundingClientRect().width;
+    if (w > maxWidth) maxWidth = w;
+  });
+  names.forEach(n => {
+    n.style.width = `${maxWidth}px`;
+  });
+}
+
 // --- Profile and save management ---
 const STORAGE_KEY = 'rpgProfiles';
 const LAST_PROFILE_KEY = 'rpgLastProfile';
@@ -815,6 +829,7 @@ function showProficienciesUI() {
   }
   html += '</div>';
   setMainHTML(html);
+  normalizeProficiencyNameWidths();
   setupProficiencyTooltips();
 }
 

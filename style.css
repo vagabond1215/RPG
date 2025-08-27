@@ -793,6 +793,7 @@ body.theme-dark {
   max-width: 12rem;
   text-align: left;
   padding-right: 0.5rem;
+  box-sizing: border-box;
 }
 
 .proficiency-value {
