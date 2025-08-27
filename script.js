@@ -1106,12 +1106,11 @@ function startCharacterCreation() {
           colors = skinColorOptionsByRace[character.race] || ['#f5cba7', '#d2a679', '#a5694f', '#8d5524'];
         }
         colors = colors.slice().sort();
-        let index = colors.indexOf(character[field.key]);
-        if (index === -1) {
-          index = 0;
-          character[field.key] = colors[0];
+        let value = character[field.key];
+        if (value === undefined) {
+          value = colors[0];
+          character[field.key] = value;
         }
-        const value = character[field.key];
         const pickerId = `${field.key}-picker`;
         inputHTML = `
           <div class="color-carousel wheel-selector" data-field="${field.key}">
@@ -1123,7 +1122,12 @@ function startCharacterCreation() {
           </div>`;
       } else if (field.type === 'range') {
         const [min, max] = heightRanges[character.race] || [100, 200];
-        const val = character[field.key] || min;
+        let val = character[field.key];
+        if (val === undefined) {
+          val = Math.round((min + max) / 2);
+          character[field.key] = val;
+          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        }
         inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${val}"><span id="cc-value">${formatHeight(
           val
         )}</span>`;
@@ -1131,14 +1135,18 @@ function startCharacterCreation() {
 
       if (field.key === 'location') {
         setMainHTML(
-          `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="location-select">${inputHTML}${descHTML}${imageHTML}</div></div></div>`
+          `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options">${inputHTML}</div>${descHTML}</div>${imageHTML}</div></div>`
         );
       } else {
         setMainHTML(
           `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options">${inputHTML}</div>${descHTML}</div>${imageHTML}</div></div>`
         );
-        normalizeOptionButtonWidths();
       }
+      normalizeOptionButtonWidths();
+
+      const currentStepEl = document.querySelector('.progress-step.current');
+      const optionsEl = document.querySelector('.cc-options');
+      if (currentStepEl && optionsEl) currentStepEl.appendChild(optionsEl);
 
       if (field.key === 'location') {
         const options = field.options;
@@ -1192,11 +1200,7 @@ function startCharacterCreation() {
         }
         colors = colors.slice().sort();
         let index = colors.indexOf(character[field.key]);
-        if (index === -1) {
-          colors.push(character[field.key]);
-          colors.sort();
-          index = colors.indexOf(character[field.key]);
-        }
+        if (index === -1) index = 0;
         const carousel = document.querySelector(`.color-carousel[data-field="${field.key}"]`);
         const btn = carousel.querySelector('.color-button');
         const pickerInput = carousel.querySelector('input[type="color"]');
@@ -1216,11 +1220,6 @@ function startCharacterCreation() {
         carousel.querySelector('.color-picker').addEventListener('click', () => pickerInput.click());
         pickerInput.addEventListener('input', () => {
           character[field.key] = pickerInput.value;
-          if (!colors.includes(pickerInput.value)) {
-            colors.push(pickerInput.value);
-            colors.sort();
-          }
-          index = colors.indexOf(pickerInput.value);
           update();
         });
       } else if (field.type === 'range') {
@@ -1239,6 +1238,9 @@ function startCharacterCreation() {
       const nameVal = character.name || '';
       setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div>${descHTML}</div>${imageHTML}</div></div>`);
       normalizeOptionButtonWidths();
+      const currentStepEl = document.querySelector('.progress-step.current');
+      const optionsEl = document.querySelector('.cc-options');
+      if (currentStepEl && optionsEl) currentStepEl.appendChild(optionsEl);
       const nameInput = document.getElementById('name-input');
       const updateName = () => {
         character.name = nameInput.value.trim();

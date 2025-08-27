@@ -514,7 +514,7 @@ body.theme-dark {
   }
 
   .progress-step.current {
-    margin-bottom: 3rem;
+    margin-bottom: 0.5rem;
   }
 
   .progress-step span {
@@ -535,7 +535,6 @@ body.theme-dark {
     width: 100%;
   }
 
-  .cc-options,
   .race-stats {
     flex: 0 0 12rem;
   }
@@ -573,14 +572,6 @@ body.theme-dark {
     align-items: center;
   }
 
-  body.layout-portrait .cc-options {
-    order: -1;
-    align-self: center;
-  }
-
-  body.layout-portrait .cc-options .option-grid {
-    align-items: center;
-  }
 
   .option-grid {
     display: flex;
@@ -685,6 +676,12 @@ body.theme-dark {
   }
 
   .wheel-selector {
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .progress-step input {
     margin-left: 0.5rem;
   }
 
