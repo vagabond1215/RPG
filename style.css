@@ -580,14 +580,23 @@ body.theme-dark {
     align-items: flex-start;
   }
 
-  .option-grid button {
+  .option-button {
+    width: 8rem;
+    height: 2rem;
     padding: 0.5rem;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .option-grid button {
     border: 2px solid var(--foreground);
     background: var(--background);
     color: var(--foreground);
     cursor: pointer;
-    box-sizing: border-box;
-    white-space: nowrap;
   }
 
   .option-grid button:hover {
@@ -615,14 +624,13 @@ body.theme-dark {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0;
   }
 
   .location-button,
   .race-button,
   .sex-button {
     position: relative;
-    padding: 0.5rem 1rem;
     background: transparent;
     border: none;
     color: var(--foreground);
@@ -664,7 +672,12 @@ body.theme-dark {
     color: var(--foreground);
     font-size: 2rem;
     line-height: 1;
-    padding: 0 0.5rem;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
 
@@ -705,6 +718,7 @@ body.theme-dark {
     cursor: pointer;
     font-size: 1.5rem;
     line-height: 1;
+    margin-left: 0.5rem;
   }
 
   .complete-button {

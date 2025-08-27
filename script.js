@@ -1036,7 +1036,7 @@ function startCharacterCreation() {
       const resList = Object.entries(resources)
         .map(([k, v]) => `<li>${k}: ${v}</li>`)
         .join('');
-      const statsHTML = `<div class="race-stats"><h3>Starting Stats</h3><ul>${attrList}</ul><ul>${resList}</ul></div>`;
+      const statsHTML = `<div class="race-stats"><ul>${attrList}</ul><ul>${resList}</ul></div>`;
       const imageSrc = RACE_IMAGES[character.race];
       const imageHTML = imageSrc ? `<img class="race-image" src="${imageSrc}" alt="${character.race}">` : '';
       const descHTML = `<div class="race-description">${RACE_DESCRIPTIONS[character.race] || ''}</div>`;
