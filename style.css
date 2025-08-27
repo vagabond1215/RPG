@@ -477,7 +477,7 @@ body.theme-dark {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
   }
 
   .progress-step {
@@ -511,6 +511,10 @@ body.theme-dark {
     height: 0.5rem;
     border-radius: 50%;
     background: var(--foreground);
+  }
+
+  .progress-step.current {
+    margin-bottom: 3rem;
   }
 
   .progress-step span {
@@ -614,7 +618,9 @@ body.theme-dark {
   }
 
   .location-carousel,
-  .race-carousel {
+  .race-carousel,
+  .sex-carousel,
+  .color-carousel {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -622,7 +628,8 @@ body.theme-dark {
   }
 
   .location-button,
-  .race-button {
+  .race-button,
+  .sex-button {
     position: relative;
     padding: 0.5rem 1rem;
     background: transparent;
@@ -634,7 +641,9 @@ body.theme-dark {
   .location-button::before,
   .location-button::after,
   .race-button::before,
-  .race-button::after {
+  .race-button::after,
+  .sex-button::before,
+  .sex-button::after {
     content: '';
     position: absolute;
     left: 0;
@@ -644,17 +653,21 @@ body.theme-dark {
   }
 
   .location-button::before,
-  .race-button::before {
+  .race-button::before,
+  .sex-button::before {
     top: 0;
   }
 
   .location-button::after,
-  .race-button::after {
+  .race-button::after,
+  .sex-button::after {
     bottom: 0;
   }
 
   .loc-arrow,
-  .race-arrow {
+  .race-arrow,
+  .sex-arrow,
+  .color-arrow {
     background: transparent;
     border: none;
     color: var(--foreground);
@@ -665,13 +678,30 @@ body.theme-dark {
   }
 
   .loc-arrow:hover,
-  .race-arrow:hover {
+  .race-arrow:hover,
+  .sex-arrow:hover,
+  .color-arrow:hover {
     filter: drop-shadow(0 0 0.5rem currentColor);
   }
 
-  .location-indicator,
-  .race-indicator {
-    text-align: center;
+  .wheel-selector {
+    margin-left: 0.5rem;
+  }
+
+  .color-button {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid var(--foreground);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .color-picker {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
   }
 
   .complete-button {

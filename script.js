@@ -1055,12 +1055,11 @@ function startCharacterCreation() {
             character.location = options[0];
           }
           inputHTML = `
-            <div class="location-carousel">
+            <div class="location-carousel wheel-selector">
               <button class="loc-arrow left" aria-label="Previous">&#x2039;</button>
               <button class="option-button location-button">${character.location}</button>
               <button class="loc-arrow right" aria-label="Next">&#x203A;</button>
-            </div>
-            <div class="location-indicator">${index + 1} / ${options.length}</div>`;
+            </div>`;
         } else if (field.key === 'race') {
           const options = field.options;
           let index = options.indexOf(character.race);
@@ -1069,12 +1068,24 @@ function startCharacterCreation() {
             character.race = options[0];
           }
           inputHTML = `
-            <div class="race-carousel">
+            <div class="race-carousel wheel-selector">
               <button class="race-arrow left" aria-label="Previous">&#x2039;</button>
               <button class="option-button race-button">${character.race}</button>
               <button class="race-arrow right" aria-label="Next">&#x203A;</button>
-            </div>
-            <div class="race-indicator">${index + 1} / ${options.length}</div>`;
+            </div>`;
+        } else if (field.key === 'sex') {
+          const options = field.options;
+          let index = options.indexOf(character.sex);
+          if (index === -1) {
+            index = 0;
+            character.sex = options[0];
+          }
+          inputHTML = `
+            <div class="sex-carousel wheel-selector">
+              <button class="sex-arrow left" aria-label="Previous">&#x2039;</button>
+              <button class="option-button sex-button">${character.sex}</button>
+              <button class="sex-arrow right" aria-label="Next">&#x203A;</button>
+            </div>`;
         } else {
           inputHTML = `<div class="option-grid">${field.options
             .map(
@@ -1094,11 +1105,22 @@ function startCharacterCreation() {
         } else if (field.key === 'skinColor') {
           colors = skinColorOptionsByRace[character.race] || ['#f5cba7', '#d2a679', '#a5694f', '#8d5524'];
         }
-        const datalistId = `${field.key}-list`;
-        const value = character[field.key] || colors[0];
-        inputHTML = `<input type="color" id="cc-input" list="${datalistId}" value="${value}"><datalist id="${datalistId}">${colors
-          .map(c => `<option value="${c}"></option>`)
-          .join('')}</datalist>`;
+        colors = colors.slice().sort();
+        let index = colors.indexOf(character[field.key]);
+        if (index === -1) {
+          index = 0;
+          character[field.key] = colors[0];
+        }
+        const value = character[field.key];
+        const pickerId = `${field.key}-picker`;
+        inputHTML = `
+          <div class="color-carousel wheel-selector" data-field="${field.key}">
+            <button class="color-arrow left" aria-label="Previous">&#x2039;</button>
+            <button class="color-button" style="background:${value}" aria-label="${value}"></button>
+            <button class="color-arrow right" aria-label="Next">&#x203A;</button>
+            <button class="color-picker" aria-label="Pick color">🎨</button>
+            <input type="color" id="${pickerId}" value="${value}" style="display:none;">
+          </div>`;
       } else if (field.type === 'range') {
         const [min, max] = heightRanges[character.race] || [100, 200];
         const val = character[field.key] || min;
@@ -1140,6 +1162,17 @@ function startCharacterCreation() {
         };
         document.querySelector('.race-arrow.left').addEventListener('click', () => change(-1));
         document.querySelector('.race-arrow.right').addEventListener('click', () => change(1));
+      } else if (field.key === 'sex') {
+        const options = field.options;
+        let index = options.indexOf(character.sex);
+        const change = dir => {
+          index = (index + dir + options.length) % options.length;
+          character.sex = options[index];
+          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          renderStep();
+        };
+        document.querySelector('.sex-arrow.left').addEventListener('click', () => change(-1));
+        document.querySelector('.sex-arrow.right').addEventListener('click', () => change(1));
       } else if (field.type === 'select') {
         document.querySelectorAll('.option-button').forEach(btn => {
           btn.addEventListener('click', () => {
@@ -1149,11 +1182,46 @@ function startCharacterCreation() {
           });
         });
       } else if (field.type === 'color') {
-        const input = document.getElementById('cc-input');
-        input.addEventListener('change', () => {
-          character[field.key] = input.value;
+        let colors = [];
+        if (field.key === 'hairColor') {
+          colors = hairColorOptionsByRace[character.race] || humanHairColors;
+        } else if (field.key === 'eyeColor') {
+          colors = eyeColorOptionsByRace[character.race] || humanEyeColors;
+        } else if (field.key === 'skinColor') {
+          colors = skinColorOptionsByRace[character.race] || ['#f5cba7', '#d2a679', '#a5694f', '#8d5524'];
+        }
+        colors = colors.slice().sort();
+        let index = colors.indexOf(character[field.key]);
+        if (index === -1) {
+          colors.push(character[field.key]);
+          colors.sort();
+          index = colors.indexOf(character[field.key]);
+        }
+        const carousel = document.querySelector(`.color-carousel[data-field="${field.key}"]`);
+        const btn = carousel.querySelector('.color-button');
+        const pickerInput = carousel.querySelector('input[type="color"]');
+        const update = () => {
+          btn.style.background = character[field.key];
+          btn.setAttribute('aria-label', character[field.key]);
+          pickerInput.value = character[field.key];
           localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          renderStep();
+        };
+        const change = dir => {
+          index = (index + dir + colors.length) % colors.length;
+          character[field.key] = colors[index];
+          update();
+        };
+        carousel.querySelector('.color-arrow.left').addEventListener('click', () => change(-1));
+        carousel.querySelector('.color-arrow.right').addEventListener('click', () => change(1));
+        carousel.querySelector('.color-picker').addEventListener('click', () => pickerInput.click());
+        pickerInput.addEventListener('input', () => {
+          character[field.key] = pickerInput.value;
+          if (!colors.includes(pickerInput.value)) {
+            colors.push(pickerInput.value);
+            colors.sort();
+          }
+          index = colors.indexOf(pickerInput.value);
+          update();
         });
       } else if (field.type === 'range') {
         const rangeInput = document.getElementById('cc-input');
