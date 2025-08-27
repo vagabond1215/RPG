@@ -676,13 +676,19 @@ body.theme-dark {
   }
 
   .wheel-selector {
-    margin-left: 0.5rem;
+    margin-left: 0;
     display: flex;
     align-items: center;
   }
 
-  .progress-step input {
-    margin-left: 0.5rem;
+  .progress-current-detail {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0 0.5rem 1.5rem;
+  }
+
+  .progress-current-detail input {
+    margin-left: 0;
   }
 
   .color-button {

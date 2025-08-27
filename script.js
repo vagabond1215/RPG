@@ -1146,7 +1146,12 @@ function startCharacterCreation() {
 
       const currentStepEl = document.querySelector('.progress-step.current');
       const optionsEl = document.querySelector('.cc-options');
-      if (currentStepEl && optionsEl) currentStepEl.appendChild(optionsEl);
+      if (currentStepEl && optionsEl) {
+        const detailEl = document.createElement('div');
+        detailEl.className = 'progress-current-detail';
+        currentStepEl.after(detailEl);
+        detailEl.appendChild(optionsEl);
+      }
 
       if (field.key === 'location') {
         const options = field.options;
@@ -1240,7 +1245,12 @@ function startCharacterCreation() {
       normalizeOptionButtonWidths();
       const currentStepEl = document.querySelector('.progress-step.current');
       const optionsEl = document.querySelector('.cc-options');
-      if (currentStepEl && optionsEl) currentStepEl.appendChild(optionsEl);
+      if (currentStepEl && optionsEl) {
+        const detailEl = document.createElement('div');
+        detailEl.className = 'progress-current-detail';
+        currentStepEl.after(detailEl);
+        detailEl.appendChild(optionsEl);
+      }
       const nameInput = document.getElementById('name-input');
       const updateName = () => {
         character.name = nameInput.value.trim();
