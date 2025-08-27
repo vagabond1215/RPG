@@ -746,21 +746,45 @@ body.theme-dark {
     accent-color: var(--range-color);
   }
 
-.proficiency-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem 1rem;
+.proficiencies-screen {
   width: 100%;
 }
 
-.proficiency-grid + .proficiency-grid {
-  margin-top: 1rem;
+.proficiency-section {
+  margin-bottom: 1rem;
+}
+
+.proficiency-section h2 {
+  background: var(--foreground);
+  color: var(--background);
+  padding: 0.25rem 0.5rem;
+}
+
+.proficiency-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.proficiency-list + .proficiency-list {
+  margin-top: 0.5rem;
 }
 
 .proficiency-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.proficiency-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--background), var(--foreground), var(--background));
 }
 
 .proficiency-name {
@@ -770,6 +794,7 @@ body.theme-dark {
 }
 
 .proficiency-value {
+  margin-left: auto;
   width: 3ch;
   text-align: right;
 }
@@ -982,11 +1007,6 @@ body.theme-dark {
 
 .icon.heal .arrow {
   color: green;
-}
-
-.icon .humanoid {
-  font-size: 0.8em;
-  margin-left: -0.1em;
 }
 
 .icon.slime {
