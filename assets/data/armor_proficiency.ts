@@ -1,21 +1,21 @@
-// armor_proficiency.ts — light armor proficiency progression using evasion as reference
+// armor_proficiency.ts — armor proficiency progression using evasion as reference
 
 /** Round to 2 decimals */
 const r2 = (x: number) => Math.round(x * 100) / 100;
 
-export interface LightArmorGainInput {
-  P: number;              // current proficiency (0..cap)
-  cap: number;            // proficiency cap
-  actorLevel: number;     // character level
-  enemyLevel: number;     // defeated enemy level
-  STR: number;            // actor strength
-  DEX: number;            // actor dexterity
-  AGI: number;            // actor agility
-  lightPieces: number;    // number of equipped light armor pieces
-  hasChest: boolean;      // true if chest/body piece is light armor
+export interface ArmorGainInput {
+  P: number;             // current proficiency (0..cap)
+  cap: number;           // proficiency cap
+  actorLevel: number;    // character level
+  enemyLevel: number;    // defeated enemy level
+  STR: number;           // actor strength
+  DEX: number;           // actor dexterity
+  AGI: number;           // actor agility
+  pieces: number;        // number of equipped armor pieces of this type
+  hasChest: boolean;     // true if chest/body piece is this armor type
 }
 
-export interface LightArmorProgressionConfig {
+export interface ArmorProgressionConfig {
   g0: number;                   // base gain per qualifying defeat
   levelFloorEqual: number;      // factor at equal level
   levelSlope: number;           // scale from level difference
@@ -30,7 +30,7 @@ export interface LightArmorProgressionConfig {
   rng: () => number;            // RNG
 }
 
-export const LIGHT_ARMOR_CFG: LightArmorProgressionConfig = {
+export const LIGHT_ARMOR_CFG: ArmorProgressionConfig = {
   g0: 0.04,
   levelFloorEqual: 0.2,
   levelSlope: 0.15,
@@ -45,7 +45,15 @@ export const LIGHT_ARMOR_CFG: LightArmorProgressionConfig = {
   rng: () => Math.random(),
 };
 
-function levelFactor(actorL: number, enemyL: number, cfg: LightArmorProgressionConfig): number {
+export const MEDIUM_ARMOR_CFG: ArmorProgressionConfig = {
+  ...LIGHT_ARMOR_CFG,
+};
+
+export const HEAVY_ARMOR_CFG: ArmorProgressionConfig = {
+  ...LIGHT_ARMOR_CFG,
+};
+
+function levelFactor(actorL: number, enemyL: number, cfg: ArmorProgressionConfig): number {
   const d = enemyL - actorL;
   if (d < 0) return 0; // no gain vs weaker foes
   if (d === 0) return cfg.levelFloorEqual;
@@ -53,23 +61,20 @@ function levelFactor(actorL: number, enemyL: number, cfg: LightArmorProgressionC
   return Math.min(cfg.levelCap, f);
 }
 
-function attrFactor(STR: number, DEX: number, AGI: number, cfg: LightArmorProgressionConfig): number {
+function attrFactor(STR: number, DEX: number, AGI: number, cfg: ArmorProgressionConfig): number {
   const avg = (STR + DEX + AGI) / 3;
   const f = cfg.attrBase + cfg.attrSlope * avg;
   return Math.min(cfg.attrMax, Math.max(cfg.attrBase, f));
 }
 
-/** Compute next light armor proficiency (2 decimals).
- * Should be invoked once per defeated enemy while wearing light armor.
- */
-export function gainLightArmorProficiency(
-  input: LightArmorGainInput,
-  cfg: LightArmorProgressionConfig = LIGHT_ARMOR_CFG
+function gainArmorProficiency(
+  input: ArmorGainInput,
+  cfg: ArmorProgressionConfig
 ): number {
-  const { P, cap, actorLevel, enemyLevel, STR, DEX, AGI, lightPieces, hasChest } = input;
+  const { P, cap, actorLevel, enemyLevel, STR, DEX, AGI, pieces, hasChest } = input;
 
-  // Equipment requirement: at least four light pieces including chest/body
-  if (lightPieces < 4 || !hasChest) return r2(P);
+  // Equipment requirement: at least four pieces including chest/body
+  if (pieces < 4 || !hasChest) return r2(P);
 
   const F_level = levelFactor(actorLevel, enemyLevel, cfg);
   if (F_level <= 0) return r2(P);
@@ -95,5 +100,31 @@ export function gainLightArmorProficiency(
 
   const nextP = Math.min(cap, P + gain);
   return r2(nextP);
+}
+
+/** Compute next light armor proficiency (2 decimals).
+ * Should be invoked once per defeated enemy while wearing light armor.
+ */
+export function gainLightArmorProficiency(
+  input: ArmorGainInput,
+  cfg: ArmorProgressionConfig = LIGHT_ARMOR_CFG
+): number {
+  return gainArmorProficiency(input, cfg);
+}
+
+/** Medium armor proficiency progression */
+export function gainMediumArmorProficiency(
+  input: ArmorGainInput,
+  cfg: ArmorProgressionConfig = MEDIUM_ARMOR_CFG
+): number {
+  return gainArmorProficiency(input, cfg);
+}
+
+/** Heavy armor proficiency progression */
+export function gainHeavyArmorProficiency(
+  input: ArmorGainInput,
+  cfg: ArmorProgressionConfig = HEAVY_ARMOR_CFG
+): number {
+  return gainArmorProficiency(input, cfg);
 }
 
