@@ -468,7 +468,13 @@ function getProficiencySortIcon(dir) {
 
 function getTypeSortIcon(dir) {
   const arrow = dir === 'desc' ? '↓' : '↑';
-  return `<span class="type-icon"><span class="cw">↻</span><span class="ccw">↺</span>${arrow}</span>`;
+  return (
+    `<span class="type-icon">` +
+    `<svg viewBox="0 0 24 24">` +
+    `<g class="cw"><polyline points="23 4 23 10 17 10"/><path d="M3.51 9a9 9 0 0 1 14.13-5.36L23 10"/></g>` +
+    `<g class="ccw"><polyline points="1 20 1 14 7 14"/><path d="M20.49 15a9 9 0 0 1-14.13 5.36L1 14"/></g>` +
+    `</svg>${arrow}</span>`
+  );
 }
 
 function applySpellProficiencyGain(character, spell, params) {

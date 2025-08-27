@@ -923,12 +923,26 @@ body.theme-dark {
   align-items: center;
 }
 
+.type-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.type-icon svg {
+  width: 1em;
+  height: 1em;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .type-icon .cw {
-  color: #3c8;
+  stroke: #3c8;
 }
 
 .type-icon .ccw {
-  color: #c83;
+  stroke: #c83;
 }
 
 .icon.enfeeble .arrow {
