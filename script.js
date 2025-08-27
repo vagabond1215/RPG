@@ -451,11 +451,11 @@ const elementIcons = {
 const schoolIcons = {
   Destructive: '💥',
   Enfeebling:
-    '<span class="icon enfeeble"><span class="arrow">⬇</span><span class="humanoid">👤</span></span>',
+    '<span class="icon enfeeble"><span class="arrow">⬇</span></span>',
   Reinforcement:
-    '<span class="icon reinforce"><span class="arrow">⬆</span><span class="humanoid">👤</span></span>',
+    '<span class="icon reinforce"><span class="arrow">⬆</span></span>',
   Healing:
-    '<span class="icon heal"><span class="arrow">+</span><span class="humanoid">👤</span></span>',
+    '<span class="icon heal"><span class="arrow">+</span></span>',
   Summoning: '<span class="icon slime"></span>'
 };
 
@@ -796,37 +796,39 @@ function showProficienciesUI() {
   if (!currentCharacter) return;
   showBackButton();
   const profCap = proficiencyCap(currentCharacter.level);
-  let html = '<div class="proficiencies-screen"><h1>Proficiencies</h1>';
+  let html = '<div class="proficiencies-screen">';
   for (const [type, list] of Object.entries(proficiencyCategories)) {
+    html += '<section class="proficiency-section">';
     html += `<h2>${type}</h2>`;
     if (type === 'Magical') {
       const elemental = list.filter(k => ELEMENTAL_MAGIC_KEYS.includes(k));
       const other = list.filter(k => !ELEMENTAL_MAGIC_KEYS.includes(k));
-      html += '<div class="proficiency-grid">';
+      html += '<ul class="proficiency-list">';
       elemental.forEach(key => {
         const value = currentCharacter[key] ?? 0;
         const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
         const capped = value >= 100 ? ' capped' : '';
-        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}" data-cap="${profCap}">${value}</span></div>`;
+        html += `<li class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}" data-cap="${profCap}">${value}</span></li>`;
       });
-      html += '</div><div class="proficiency-grid">';
+      html += '</ul><ul class="proficiency-list">';
       other.forEach(key => {
         const value = currentCharacter[key] ?? 0;
         const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
         const capped = value >= 100 ? ' capped' : '';
-        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}" data-cap="${profCap}">${value}</span></div>`;
+        html += `<li class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}" data-cap="${profCap}">${value}</span></li>`;
       });
-      html += '</div>';
+      html += '</ul>';
     } else {
-      html += '<div class="proficiency-grid">';
+      html += '<ul class="proficiency-list">';
       list.forEach(key => {
         const value = currentCharacter[key] ?? 0;
         const name = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
         const capped = value >= 100 ? ' capped' : '';
-        html += `<div class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}" data-cap="${profCap}">${value}</span></div>`;
+        html += `<li class="proficiency-item"><span class="proficiency-name">${name}</span><span class="proficiency-value${capped}" data-cap="${profCap}">${value}</span></li>`;
       });
-      html += '</div>';
+      html += '</ul>';
     }
+    html += '</section>';
   }
   html += '</div>';
   setMainHTML(html);
