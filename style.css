@@ -773,6 +773,7 @@ body.theme-dark {
 .proficiency-item {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
   position: relative;
   padding: 0.25rem 0;
 }
@@ -788,13 +789,13 @@ body.theme-dark {
 }
 
 .proficiency-name {
-  flex: 1;
+  flex: 0 0 auto;
+  max-width: 12rem;
   text-align: left;
   padding-right: 0.5rem;
 }
 
 .proficiency-value {
-  margin-left: auto;
   width: 3ch;
   text-align: right;
 }
