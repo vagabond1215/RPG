@@ -62,6 +62,13 @@ function setMainHTML(html) {
   if (main) main.innerHTML = html;
 }
 
+function isPortraitLayout() {
+  return (
+    body.classList.contains('layout-portrait') ||
+    (body.classList.contains('layout-auto') && window.innerHeight > window.innerWidth)
+  );
+}
+
 function normalizeOptionButtonWidths() {
   const grid = document.querySelector('.option-grid');
   if (!grid) return;
@@ -1133,14 +1140,27 @@ function startCharacterCreation() {
         )}</span>`;
       }
 
+      const portrait = isPortraitLayout();
       if (field.key === 'location') {
-        setMainHTML(
-          `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options">${inputHTML}</div>${descHTML}</div>${imageHTML}</div></div>`
-        );
+        if (portrait) {
+          setMainHTML(
+            `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-info">${descHTML}${imageHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options">${inputHTML}</div></div></div></div>`
+          );
+        } else {
+          setMainHTML(
+            `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options">${inputHTML}</div>${descHTML}</div>${imageHTML}</div></div>`
+          );
+        }
       } else {
-        setMainHTML(
-          `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options">${inputHTML}</div>${descHTML}</div>${imageHTML}</div></div>`
-        );
+        if (portrait) {
+          setMainHTML(
+            `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-info">${descHTML}${imageHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options">${inputHTML}</div></div></div></div>`
+          );
+        } else {
+          setMainHTML(
+            `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options">${inputHTML}</div>${descHTML}</div>${imageHTML}</div></div>`
+          );
+        }
       }
       normalizeOptionButtonWidths();
 
@@ -1241,7 +1261,12 @@ function startCharacterCreation() {
       }
     } else {
       const nameVal = character.name || '';
-      setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div>${descHTML}</div>${imageHTML}</div></div>`);
+      const portrait = isPortraitLayout();
+      if (portrait) {
+        setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-info">${descHTML}${imageHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div></div></div></div>`);
+      } else {
+        setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div>${descHTML}</div>${imageHTML}</div></div>`);
+      }
       normalizeOptionButtonWidths();
       const currentStepEl = document.querySelector('.progress-step.current');
       const optionsEl = document.querySelector('.cc-options');
