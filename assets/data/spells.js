@@ -116,7 +116,7 @@ function generateHybridNames(base) {
       `${base} Prison`
     ],
     support: [
-      `${base} Ward`,
+      `${base} Guard`,
       `${base} Aegis`,
       `${base} Blessing`,
       `${base} Bulwark`,
@@ -139,7 +139,7 @@ function generateHybridNames(base) {
     cantrips: {
       destructive: `${base} Spark`,
       enfeebling: `${base} Snare`,
-      reinforcement: `${base} Ward`,
+      reinforcement: `${base} Guard`,
       healing: `${base} Mending`,
       summoning: `${base} Wisp`
     }
@@ -153,13 +153,13 @@ const NAMES = {
     attackAoE: ["Rockfall","Quake","Cataclysm"],
     ultimate: "Gaia’s Judgment",
     control: ["Stone Shackles","Gravel Skin","Tremor Lock","Dust Blind","Earthen Prison"],
-    support: ["Stone Skin","Bulwark","Rocky Endurance","Guardian’s Ward","Titan’s Fortitude"],
+    support: ["Stone Skin","Bulwark","Rocky Endurance","Guardian’s Bastion","Titan’s Fortitude"],
     healing: ["Gaia's Touch","Crag Remedy","Bedrock Salve","Terra Resurgence","Lithic Renewal"],
     summoning: ["Stone Golem","Terra Guardian","Earth Elemental","Gaia Colossus","Titan of Bedrock"],
     cantrips: {
       destructive: "Pebble Burst",
       enfeebling: "Gravel Snare",
-      reinforcement: "Stone Ward",
+      reinforcement: "Earthen Bulwark",
       healing: "Earthen Mending",
       summoning: "Pebble Sprite"
     }
@@ -175,7 +175,7 @@ const NAMES = {
     cantrips: {
       destructive: "Splash Dart",
       enfeebling: "Tide Snare",
-      reinforcement: "Mist Ward",
+      reinforcement: "Vapor Shield",
       healing: "Droplet Mending",
       summoning: "Mist Wisp"
     }
@@ -185,13 +185,13 @@ const NAMES = {
     attackAoE: ["Gale Vortex","Tempest","Hurricane’s Eye"],
     ultimate: "Eternal Tempest",
     control: ["Gale Tangle","Vacuum Lock","Air Seal","Slipstream Trip","Suffocating Draft"],
-    support: ["Wind Barrier","Tailwind","Featherfall","Eye of the Storm","Aeolian Ward"],
+    support: ["Wind Barrier","Tailwind","Featherfall","Eye of the Storm","Aeolian Aegis"],
     healing: ["Breeze of Relief","Skyward Grace","Vortex Rejuvenation","Tempest Renewal","Aerial Restoration"],
     summoning: ["Air Sylph","Sky Seraph","Gale Djinn","Tempest Avatar","Wind Titan"],
     cantrips: {
       destructive: "Breeze Dart",
       enfeebling: "Gale Snare",
-      reinforcement: "Wind Ward",
+      reinforcement: "Gale Guard",
       healing: "Zephyr Mending",
       summoning: "Gust Sprite"
     }
@@ -207,7 +207,7 @@ const NAMES = {
     cantrips: {
       destructive: "Cinder Snap",
       enfeebling: "Ember Snare",
-      reinforcement: "Flame Ward",
+      reinforcement: "Ember Shield",
       healing: "Ember Mending",
       summoning: "Spark Sprite"
     }
@@ -217,13 +217,13 @@ const NAMES = {
     attackAoE: ["Ice Nova","Whiteout Maelstrom","Avalanche"],
     ultimate: "Absolute Winter",
     control: ["Ice Bind","Brittle Hex","Permafrost Field","Hoarfrost Chains","Absolute Zero"],
-    support: ["Frozen Ward","Cold Adaptation","Crystal Skin","Mirror Ice","Arctic Recovery"],
+    support: ["Frostguard","Cold Adaptation","Crystal Skin","Mirror Ice","Arctic Recovery"],
     healing: ["Chill Renewal","Icy Restoration","Glacial Relief","Hailstone Resurgence","Winter's Grace"],
     summoning: ["Ice Golem","Frost Wraith","Glacier Giant","Hoarfrost Titan","Ymir"],
     cantrips: {
       destructive: "Shard Burst",
       enfeebling: "Rime Snare",
-      reinforcement: "Ice Ward",
+      reinforcement: "Frost Shield",
       healing: "Rime Mending",
       summoning: "Snow Sprite"
     }
@@ -233,13 +233,13 @@ const NAMES = {
     attackAoE: ["Chain Lightning","Boltfront","Heaven’s Thunder"],
     ultimate: "Divine Thunder",
     control: ["Shock Jolt","Static Cage","Magnetic Disarm","Overload","Nerve Jolt"],
-    support: ["Charge Up","Capacitor Shield","Grounding Ward","Quickening","Ion Guard"],
+    support: ["Charge Up","Capacitor Shield","Grounding Barrier","Quickening","Ion Guard"],
     healing: ["Thunder's Embrace","Volt Renewal","Thunder Rejuvenation","Magnetic Recovery","Ion Restoration"],
     summoning: ["Volt Hound","Magnetron","Thunder Roc","Lightning Elemental","Raijin"],
     cantrips: {
       destructive: "Spark Dart",
       enfeebling: "Static Snare",
-      reinforcement: "Charge Ward",
+      reinforcement: "Static Guard",
       healing: "Static Mending",
       summoning: "Volt Sprite"
     }
@@ -249,13 +249,13 @@ const NAMES = {
     attackAoE: ["Dark Mist","Dark Eruption","Shadow Plague"],
     ultimate: "Oblivion",
     control: ["Shadow Grasp","Dread Shackles","Curse of Decay","Nightmare Veil","Soul Siphon"],
-    support: ["Veil of Dusk","Profane Ward","Life Leech Blessing","Shade Step","Omen"],
+    support: ["Veil of Dusk","Profane Bulwark","Life Leech Blessing","Shade Step","Omen"],
     healing: ["Umbral Mend","Night Restoration","Void Renewal","Abyssal Grace","Ebon Rejuvenation"],
     summoning: ["Shadow Fiend","Nightmare Steed","Void Walker","Abyssal Wraith","Nether Lord"],
     cantrips: {
       destructive: "Shade Bolt",
       enfeebling: "Gloom Snare",
-      reinforcement: "Duskward",
+      reinforcement: "Umbral Guard",
       healing: "Shadow Mending",
       summoning: "Shade Sprite"
     }
@@ -271,7 +271,7 @@ const NAMES = {
     cantrips: {
       destructive: "Glimmer Dart",
       enfeebling: "Halo Snare",
-      reinforcement: "Light Ward",
+      reinforcement: "Radiant Shield",
       healing: "Radiant Mending",
       summoning: "Light Sprite"
     }

@@ -30,7 +30,7 @@ export interface TimedEffect {
 }
 
 export interface MaintainedChannel {
-  id: Id;                         // "song:Swift Step", "dance:Stone Ward", "summon:Stone"
+  id: Id;                         // "song:Swift Step", "dance:Earthen Shield", "summon:Stone"
   sourceMemberId: Id;
   effectIds: Id[];                // effects frozen by this channel
   active: boolean;                // true while maintaining (no countdown for post-stop)
