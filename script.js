@@ -6,6 +6,7 @@ import { maxHP, maxMP, maxStamina } from "./assets/data/resources.js";
 import { DENOMINATIONS, CURRENCY_VALUES, convertCurrency, toIron, fromIron } from "./assets/data/currency.js";
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipment.js";
 import { LOCATIONS } from "./assets/data/locations.js";
+import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -474,6 +475,7 @@ const schoolProficiencyMap = {
   Summoning: 'summoning'
 };
 const SCHOOL_MAGIC_KEYS = Object.values(schoolProficiencyMap);
+const HYBRID_MAP = Object.fromEntries(HYBRID_RELATIONS.map(r => [r.name, r]));
 
 const elementIcons = {
   Stone: '🪨',
@@ -517,12 +519,14 @@ function getTypeSortIcon(dir) {
 
 function applySpellProficiencyGain(character, spell, params) {
   if (!character || !spell) return;
-  const elemKey = elementalProficiencyMap[spell.element?.toLowerCase()];
-  if (elemKey) {
-    character[elemKey] = gainProficiency({
-      P: character[elemKey],
-      ...params,
-    });
+  if (!HYBRID_MAP[spell.element]) {
+    const elemKey = elementalProficiencyMap[spell.element?.toLowerCase()];
+    if (elemKey) {
+      character[elemKey] = gainProficiency({
+        P: character[elemKey],
+        ...params,
+      });
+    }
   }
   const schoolKey = schoolProficiencyMap[spell.school];
   if (schoolKey) {
@@ -738,13 +742,26 @@ function showSpellbookUI() {
   if (!currentCharacter) return;
   showBackButton();
   const spellsByElement = {};
-  const elements = ['Stone','Water','Wind','Fire','Ice','Thunder','Dark','Light'];
+  const baseElements = ['Stone','Water','Wind','Fire','Ice','Thunder','Dark','Light'];
+  const elements = baseElements.concat(HYBRID_RELATIONS.map(r => r.name));
   for (const spell of SPELLBOOK) {
-    const profKey = elementalProficiencyMap[spell.element.toLowerCase()];
+    const relation = HYBRID_MAP[spell.element];
     const schoolKey = schoolProficiencyMap[spell.school];
-    const elemValue = currentCharacter[profKey] ?? 0;
     const schoolValue = currentCharacter[schoolKey] ?? 0;
-    if (elemValue >= spell.proficiency && schoolValue >= spell.proficiency) {
+    let elemValue = 0;
+    let parentUnlocked = true;
+    if (relation) {
+      const p1Key = elementalProficiencyMap[relation.parents[0].toLowerCase()];
+      const p2Key = elementalProficiencyMap[relation.parents[1].toLowerCase()];
+      const p1 = currentCharacter[p1Key] ?? 0;
+      const p2 = currentCharacter[p2Key] ?? 0;
+      elemValue = Math.min(p1, p2);
+      parentUnlocked = p1 > 0 && p2 > 0;
+    } else {
+      const profKey = elementalProficiencyMap[spell.element.toLowerCase()];
+      elemValue = currentCharacter[profKey] ?? 0;
+    }
+    if (parentUnlocked && elemValue >= spell.proficiency && schoolValue >= spell.proficiency) {
       (spellsByElement[spell.element] ||= []).push(spell);
     }
   }
