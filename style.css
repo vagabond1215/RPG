@@ -528,6 +528,12 @@ body.theme-dark {
     width: 100%;
   }
 
+  .cc-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .cc-top {
     display: flex;
     flex-wrap: wrap;
