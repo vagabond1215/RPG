@@ -17,7 +17,7 @@ export const HYBRID_RELATIONS = [
   { name:"Wildfire", parents:["Fire","Wind"], strong:["Wood"], weak:["Water"] },
   { name:"Ash", parents:["Fire","Ice"], strong:["Light"], weak:["Wind"] },
   { name:"Plasma", parents:["Fire","Thunder"], strong:["Metal"], weak:["Water"] },
-  { name:"Sunfire", parents:["Fire","Light"], strong:["Dark"], weak:["Water"] },
+  { name:"Sacred Flame", parents:["Fire","Light"], strong:["Dark"], weak:["Water"] },
   { name:"Hellfire", parents:["Fire","Dark"], strong:["Light"], weak:["Ice"] },
 
   { name:"Blizzard", parents:["Wind","Ice"], strong:["Fire"], weak:["Stone"] },
