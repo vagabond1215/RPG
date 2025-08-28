@@ -66,7 +66,7 @@ export interface TimedEffect {
 }
 
 export interface MaintainedChannel {
-  /** e.g., "song:Swift Step", "dance:Stone Ward Dance", "sing:Fire Overture" */
+  /** e.g., "song:Swift Step", "dance:Earthen Shield Dance", "sing:Fire Overture" */
   id: string;
   sourceMemberId: string;
   /** list of TimedEffect ids being held up by this channel */

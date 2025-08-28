@@ -59,56 +59,56 @@ export const ELEMENTAL_DANCES: Omit<Dance, "id">[] = [
 
   // Shields @66: varying defensive/reactive effects
   {
-    name: "Stone Ward Dance", category: "elemental", kind: "elementalDefense", element: "Stone",
+    name: "Earthen Shield Dance", category: "elemental", kind: "elementalDefense", element: "Stone",
     target: "AoE", side: "ally", unlock: 66, baseDurationSec: 20,
     scale: { m0: +12, m100: +22, unit: "pct" },
     tags: ["DMG_REDUCTION","THORNS"],
     keyAttribute: "CON", maintenance: { maintainable: true, durationCountdown: "afterStop" }
   } as Omit<Dance, "id">,
   {
-    name: "Water Ward Dance", category: "elemental", kind: "elementalDefense", element: "Water",
+    name: "Tidal Shield Dance", category: "elemental", kind: "elementalDefense", element: "Water",
     target: "AoE", side: "ally", unlock: 66, baseDurationSec: 20,
     scale: { m0: +12, m100: +22, unit: "pct" },
     tags: ["DMG_REDUCTION","SLOW_ON_HIT"],
     keyAttribute: "WIS", maintenance: { maintainable: true, durationCountdown: "afterStop" }
   } as Omit<Dance, "id">,
   {
-    name: "Wind Ward Dance", category: "elemental", kind: "elementalDefense", element: "Wind",
+    name: "Gale Shield Dance", category: "elemental", kind: "elementalDefense", element: "Wind",
     target: "AoE", side: "ally", unlock: 66, baseDurationSec: 20,
     scale: { m0: +12, m100: +22, unit: "pct" },
     tags: ["EVADE_UP","KNOCKBACK"],
     keyAttribute: "AGI", maintenance: { maintainable: true, durationCountdown: "afterStop" }
   } as Omit<Dance, "id">,
   {
-    name: "Fire Ward Dance", category: "elemental", kind: "elementalDefense", element: "Fire",
+    name: "Flame Shield Dance", category: "elemental", kind: "elementalDefense", element: "Fire",
     target: "AoE", side: "ally", unlock: 66, baseDurationSec: 20,
     scale: { m0: +12, m100: +22, unit: "pct" },
     tags: ["DMG_REDUCTION","BURN_REFLECT"],
     keyAttribute: "STR", maintenance: { maintainable: true, durationCountdown: "afterStop" }
   } as Omit<Dance, "id">,
   {
-    name: "Ice Ward Dance", category: "elemental", kind: "elementalDefense", element: "Ice",
+    name: "Frost Shield Dance", category: "elemental", kind: "elementalDefense", element: "Ice",
     target: "AoE", side: "ally", unlock: 66, baseDurationSec: 20,
     scale: { m0: +12, m100: +22, unit: "pct" },
     tags: ["DMG_ABSORB","PARALYZE_ON_HIT"],
     keyAttribute: "INT", maintenance: { maintainable: true, durationCountdown: "afterStop" }
   } as Omit<Dance, "id">,
   {
-    name: "Thunder Ward Dance", category: "elemental", kind: "elementalDefense", element: "Thunder",
+    name: "Storm Shield Dance", category: "elemental", kind: "elementalDefense", element: "Thunder",
     target: "AoE", side: "ally", unlock: 66, baseDurationSec: 20,
     scale: { m0: +12, m100: +22, unit: "pct" },
     tags: ["DMG_ABSORB","STUN_ON_HIT"],
     keyAttribute: "INT", maintenance: { maintainable: true, durationCountdown: "afterStop" }
   } as Omit<Dance, "id">,
   {
-    name: "Dark Ward Dance", category: "elemental", kind: "elementalDefense", element: "Dark",
+    name: "Shade Shield Dance", category: "elemental", kind: "elementalDefense", element: "Dark",
     target: "AoE", side: "ally", unlock: 66, baseDurationSec: 20,
     scale: { m0: +12, m100: +22, unit: "pct" },
     tags: ["DMG_REDUCTION","LIFESTEAL_ON_HIT"],
     keyAttribute: "CHA", maintenance: { maintainable: true, durationCountdown: "afterStop" }
   } as Omit<Dance, "id">,
   {
-    name: "Light Ward Dance", category: "elemental", kind: "elementalDefense", element: "Light",
+    name: "Radiant Shield Dance", category: "elemental", kind: "elementalDefense", element: "Light",
     target: "AoE", side: "ally", unlock: 66, baseDurationSec: 20,
     scale: { m0: +12, m100: +22, unit: "pct" },
     tags: ["DMG_REDUCTION","ALLY_HEAL_ON_HIT"],
