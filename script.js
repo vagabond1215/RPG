@@ -725,7 +725,7 @@ function showSpellDetails(spell) {
   const content = document.createElement('div');
   content.className = 'spell-detail-content';
   const desc = `${spell.type} - ${spell.target}`;
-  content.innerHTML = `<h3>${spell.name}</h3><p>${desc}</p><p>Element: ${spell.element}</p><p>School: ${spell.school}</p><p>Base Power: ${spell.basePower}</p><p>MP Cost: ${spell.mpCost}</p>`;
+  content.innerHTML = `<h3>${spell.name}</h3><p>${desc}</p><p>${spell.description}</p><p>Element: ${spell.element}</p><p>School: ${spell.school}</p><p>Base Power: ${spell.basePower}</p><p>MP Cost: ${spell.mpCost}</p>`;
   const close = document.createElement('button');
   close.textContent = 'Close';
   close.addEventListener('click', () => overlay.remove());
