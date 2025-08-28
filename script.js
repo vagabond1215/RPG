@@ -1159,7 +1159,7 @@ function startCharacterCreation() {
       if (field.key === 'location') {
         if (portrait) {
           setMainHTML(
-            `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-info">${descHTML}${imageHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options">${inputHTML}</div></div></div></div>`
+            `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top"><div class="cc-options">${inputHTML}</div></div></div><div class="cc-info">${descHTML}${imageHTML}</div></div>`
           );
         } else {
           setMainHTML(
@@ -1169,7 +1169,7 @@ function startCharacterCreation() {
       } else {
         if (portrait) {
           setMainHTML(
-            `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-info">${descHTML}${imageHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options">${inputHTML}</div></div></div></div>`
+            `<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options">${inputHTML}</div></div></div><div class="cc-info">${descHTML}${imageHTML}</div></div>`
           );
         } else {
           setMainHTML(
@@ -1278,7 +1278,7 @@ function startCharacterCreation() {
       const nameVal = character.name || '';
       const portrait = isPortraitLayout();
       if (portrait) {
-        setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-info">${descHTML}${imageHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div></div></div></div>`);
+        setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div></div></div><div class="cc-info">${descHTML}${imageHTML}</div></div>`);
       } else {
         setMainHTML(`<div class="character-creation"><div class="progress-container">${progressHTML}</div><div class="cc-column"><div class="cc-top">${statsHTML}<div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div>${descHTML}</div>${imageHTML}</div></div>`);
       }
