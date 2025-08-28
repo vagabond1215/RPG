@@ -318,7 +318,12 @@ const defaultProficiencies = {
 
 function assignMagicAptitudes(character) {
   const aptitude = character.magicAptitude || 'low';
-  const elemChance = aptitude === 'high' ? 0.3 : aptitude === 'med' ? 0.2 : 0.1;
+  const intStat = character.attributes?.current?.INT ?? 0;
+  const wisStat = character.attributes?.current?.WIS ?? 0;
+  const avgStat = (intStat + wisStat) / 2;
+  // Stats at or below 10 reduce the chance while higher stats boost it
+  const statMod = Math.max(0.5, 1 + (avgStat - 10) * 0.05);
+  const elemChance = (aptitude === 'high' ? 0.3 : aptitude === 'med' ? 0.2 : 0.1) * statMod;
   const elemental = [
     'stone',
     'water',
@@ -329,24 +334,34 @@ function assignMagicAptitudes(character) {
     'dark',
     'light'
   ];
-  const schoolChances = {
+  const baseSchoolChances = {
     destructive: 0.33,
     reinforcement: 0.33,
     enfeebling: 0.33,
     healing: 0.2,
     summoning: 0.1,
   };
+  const schoolChances = {};
+  for (const [key, chance] of Object.entries(baseSchoolChances)) {
+    schoolChances[key] = chance * statMod;
+  }
 
   // Determine if the character already has an elemental proficiency
   let hasElement = elemental.some(k => character[k] > 0);
 
-  // Roll for elemental proficiencies if none are present
+  // Roll for elemental proficiencies; ensure at least one is granted
   if (!hasElement) {
     for (const key of elemental) {
       if (Math.random() < elemChance) {
         character[key] = 1;
         hasElement = true;
       }
+    }
+    // If none were assigned by chance, grant one random element
+    if (!hasElement) {
+      const randKey = elemental[Math.floor(Math.random() * elemental.length)];
+      character[randKey] = 1;
+      hasElement = true;
     }
   }
 
