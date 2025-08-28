@@ -473,11 +473,31 @@ body.theme-dark {
     align-items: flex-start;
   }
 
+  body.layout-portrait .character-creation {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .progress-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-right: 0.5rem;
+  }
+
+  body.layout-portrait .progress-container {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+    order: 0;
+  }
+
+  body.layout-portrait .cc-column {
+    order: 1;
+  }
+
+  body.layout-portrait .cc-info {
+    order: 2;
+    margin-top: 0.5rem;
   }
 
   .progress-step {
