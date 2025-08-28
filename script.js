@@ -1,4 +1,4 @@
-import { SPELLBOOK } from "./assets/data/spells.js";
+import { SPELLBOOK, MILESTONES } from "./assets/data/spells.js";
 import { WEAPON_SKILLS } from "./assets/data/weapon_skills.js";
 import { characterTemplate, gainProficiency, proficiencyCap } from "./assets/data/core.js";
 import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./assets/data/race_attrs.js";
@@ -485,7 +485,36 @@ const elementIcons = {
   Ice: '❄️',
   Thunder: '⚡',
   Dark: '🌑',
-  Light: '☀️'
+  Light: '☀️',
+  Wood: '🌲',
+  Magma: '🌋',
+  Sand: '🏜️',
+  Crystal: '🔮',
+  Metal: '⚙️',
+  'Radiant Earth': '🌎',
+  Obsidian: '🗿',
+  Steam: '♨️',
+  Storm: '🌩️',
+  Frost: '🧊',
+  'Storm Surge': '🌊',
+  'Holy Water': '💧',
+  Poison: '☠️',
+  Wildfire: '🔥',
+  Ash: '🌫️',
+  Plasma: '🧪',
+  'Sacred Flame': '🔥',
+  Hellfire: '😈',
+  Blizzard: '🌨️',
+  Cyclone: '🌪️',
+  Skyfire: '☄️',
+  'Umbral Gale': '🌬️',
+  Hailstorm: '🌧️',
+  Prism: '🔷',
+  Shadowfrost: '❄️',
+  'Holy Storm': '⚡',
+  Doomstorm: '⚡',
+  Order: '⚖️',
+  Chaos: '🌀'
 };
 
 const schoolIcons = {
@@ -515,6 +544,12 @@ function getTypeSortIcon(dir) {
     `<g class="ccw"><polyline points="1 20 1 14 7 14"/><path d="M20.49 15a9 9 0 0 1-14.13 5.36L1 14"/></g>` +
     `</svg>${arrow}</span>`
   );
+}
+
+function proficiencyToTierLabel(prof) {
+  if (prof === 1) return 'Cantrips';
+  const idx = MILESTONES.indexOf(Number(prof));
+  return idx >= 0 ? `Tier ${idx + 1}` : `P${prof}`;
 }
 
 function applySpellProficiencyGain(character, spell, params) {
@@ -794,7 +829,8 @@ function showSpellbookUI() {
           const sIcon = schoolIcons[key] || '';
           html += `<h3 class="spell-subheading"><span class="school-icon">${sIcon}</span>${key}</h3><ul class="spell-list">`;
           grouped[key].forEach(spell => {
-            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
+            const reqLabel = proficiencyToTierLabel(spell.proficiency);
+            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(${reqLabel})</span></li>`;
           });
           html += '</ul>';
         });
@@ -807,9 +843,11 @@ function showSpellbookUI() {
         .map(Number)
         .sort((a, b) => (dir === 'asc' ? a - b : b - a))
         .forEach(key => {
-          html += `<h3 class="spell-subheading"><span class="prof-icon">⭐</span>P${key}</h3><ul class="spell-list">`;
+          const label = proficiencyToTierLabel(key);
+          html += `<h3 class="spell-subheading">${label}</h3><ul class="spell-list">`;
           grouped[key].forEach(spell => {
-            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
+            const reqLabel = proficiencyToTierLabel(spell.proficiency);
+            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(${reqLabel})</span></li>`;
           });
           html += '</ul>';
         });
