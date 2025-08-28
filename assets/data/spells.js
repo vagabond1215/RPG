@@ -1,5 +1,7 @@
 // spells.js — spellbook generator with effect payloads (ES module)
 
+import { HYBRID_RELATIONS } from "./hybrid_relations.js";
+
 /**
  * MP cost per family tier:
  * MP = ceil(3 * (1 + log2(tier)))
@@ -94,6 +96,56 @@ const EFFECT = {
   HEAL_BASE_COEFF_PER_BP: 1.0        // heal scales off INT * coeff
 };
 
+function generateHybridNames(base) {
+  return {
+    attackST: [
+      `${base} Slash`,
+      `${base} Burst`,
+      `${base} Lance`,
+      `${base} Surge`,
+      `${base} Rend`,
+      `${base} Cataclysm`
+    ],
+    attackAoE: [`${base} Wave`, `${base} Tempest`, `${base} Maelstrom`],
+    ultimate: `${base} Apothesis`,
+    control: [
+      `${base} Snare`,
+      `${base} Bind`,
+      `${base} Shackle`,
+      `${base} Veil`,
+      `${base} Prison`
+    ],
+    support: [
+      `${base} Ward`,
+      `${base} Aegis`,
+      `${base} Blessing`,
+      `${base} Bulwark`,
+      `${base} Bastion`
+    ],
+    healing: [
+      `${base} Whisper`,
+      `${base} Renewal`,
+      `${base} Grace`,
+      `${base} Resurgence`,
+      `${base} Benediction`
+    ],
+    summoning: [
+      `${base} Sprite`,
+      `${base} Spirit`,
+      `${base} Elemental`,
+      `${base} Avatar`,
+      `${base} Colossus`
+    ],
+    cantrips: {
+      destructive: `${base} Spark`,
+      enfeebling: `${base} Snare`,
+      reinforcement: `${base} Ward`,
+      healing: `${base} Mending`,
+      summoning: `${base} Wisp`
+    }
+  };
+}
+
 /** Element spell name dictionaries (per element, per family) */
 const NAMES = {
   Stone: {
@@ -130,12 +182,12 @@ const NAMES = {
   },
   Wind: {
     attackST: ["Gust Slash","Wind Cutter","Wind Spear","Sky Piercer","Zephyr Strike","Tempest Blade"],
-    attackAoE: ["Cyclone","Tempest","Hurricane’s Eye"],
+    attackAoE: ["Gale Vortex","Tempest","Hurricane’s Eye"],
     ultimate: "Eternal Tempest",
     control: ["Gale Tangle","Vacuum Lock","Air Seal","Slipstream Trip","Suffocating Draft"],
     support: ["Wind Barrier","Tailwind","Featherfall","Eye of the Storm","Aeolian Ward"],
-    healing: ["Breeze of Relief","Skyward Grace","Cyclone Rejuvenation","Tempest Renewal","Aerial Restoration"],
-    summoning: ["Air Sylph","Sky Seraph","Storm Djinn","Tempest Avatar","Wind Titan"],
+    healing: ["Breeze of Relief","Skyward Grace","Vortex Rejuvenation","Tempest Renewal","Aerial Restoration"],
+    summoning: ["Air Sylph","Sky Seraph","Gale Djinn","Tempest Avatar","Wind Titan"],
     cantrips: {
       destructive: "Breeze Dart",
       enfeebling: "Gale Snare",
@@ -148,7 +200,7 @@ const NAMES = {
     attackST: ["Ember Flicker","Flame Burst","Flare Lance","Flame Reaver","Pyroclast","Sunbrand"],
     attackAoE: ["Fireball","Inferno","Meteor Swarm"],
     ultimate: "Phoenix Rebirth",
-    control: ["Searing Grasp","Magma Chains","Ashen Choke","Cindershroud","Brand of Weakness"],
+    control: ["Searing Grasp","Lava Shackles","Cinder Choke","Cindershroud","Brand of Weakness"],
     support: ["Blazing Rage","Heat Mirage","Cauterize","Flameguard","Phoenix Blessing"],
     healing: ["Flame Recovery","Cinder Restoration","Blaze Renewal","Phoenix Grace","Inferno Rebirth"],
     summoning: ["Fire Imp","Salamander","Flame Efreet","Inferno Djinn","Phoenix"],
@@ -161,8 +213,8 @@ const NAMES = {
     }
   },
   Ice: {
-    attackST: ["Frost Shard","Ice Spike","Glacial Blade","Cryo Lance","Hailpiercer","Shiver Edge"],
-    attackAoE: ["Ice Nova","Blizzard Storm","Avalanche"],
+    attackST: ["Glacier Shard","Ice Spike","Glacial Blade","Cryo Lance","Hailpiercer","Shiver Edge"],
+    attackAoE: ["Ice Nova","Whiteout Maelstrom","Avalanche"],
     ultimate: "Absolute Winter",
     control: ["Ice Bind","Brittle Hex","Permafrost Field","Hoarfrost Chains","Absolute Zero"],
     support: ["Frozen Ward","Cold Adaptation","Crystal Skin","Mirror Ice","Arctic Recovery"],
@@ -170,20 +222,20 @@ const NAMES = {
     summoning: ["Ice Golem","Frost Wraith","Glacier Giant","Hoarfrost Titan","Ymir"],
     cantrips: {
       destructive: "Shard Burst",
-      enfeebling: "Frost Snare",
+      enfeebling: "Rime Snare",
       reinforcement: "Ice Ward",
-      healing: "Frost Mending",
+      healing: "Rime Mending",
       summoning: "Snow Sprite"
     }
   },
   Thunder: {
-    attackST: ["Spark Bolt","Thunder Shock","Thunder Fang","Volt Breaker","Arc Lance","Stormstrike"],
-    attackAoE: ["Chain Lightning","Stormfront","Heaven’s Thunder"],
+    attackST: ["Spark Bolt","Thunder Shock","Thunder Fang","Volt Breaker","Arc Lance","Voltstrike"],
+    attackAoE: ["Chain Lightning","Boltfront","Heaven’s Thunder"],
     ultimate: "Divine Thunder",
     control: ["Shock Jolt","Static Cage","Magnetic Disarm","Overload","Nerve Jolt"],
     support: ["Charge Up","Capacitor Shield","Grounding Ward","Quickening","Ion Guard"],
-    healing: ["Storm's Embrace","Volt Renewal","Thunder Rejuvenation","Magnetic Recovery","Ion Restoration"],
-    summoning: ["Storm Hound","Magnetron","Thunder Roc","Lightning Elemental","Raijin"],
+    healing: ["Thunder's Embrace","Volt Renewal","Thunder Rejuvenation","Magnetic Recovery","Ion Restoration"],
+    summoning: ["Volt Hound","Magnetron","Thunder Roc","Lightning Elemental","Raijin"],
     cantrips: {
       destructive: "Spark Dart",
       enfeebling: "Static Snare",
@@ -225,6 +277,10 @@ const NAMES = {
     }
   }
 };
+
+HYBRID_RELATIONS.forEach(rel => {
+  NAMES[rel.name] = generateHybridNames(rel.name);
+});
 
 /** Build standardized EFFECT objects for control/DoT and support/heal */
 function buildControlEffect(spellName, target, basePower, idx /*0..4*/) {
