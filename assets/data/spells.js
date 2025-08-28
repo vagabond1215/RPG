@@ -26,6 +26,40 @@ function buildBasePowers(tierCount, mpFn, basePowerT1) {
 const r2 = (x) => Math.round(x * 1e2) / 1e2;
 const r4 = (x) => Math.round(x * 1e4) / 1e4;
 
+const ADJECTIVES = ["Greater","Grand","Supreme","Elder","Mythic"];
+function expandNames(baseNames) {
+  return baseNames.concat(baseNames.map((n, i) => `${ADJECTIVES[i]} ${n}`));
+}
+
+function describeSpell(spell) {
+  const elem = spell.element.toLowerCase();
+  const targetEnemy = spell.target === "AoE" ? "all foes" : "a single foe";
+  const targetAlly = spell.target === "AoE" ? "all allies" : (spell.target === "Self" ? "the caster" : "an ally");
+  switch (spell.school) {
+    case "Destructive":
+      return `Unleashes ${elem} energy to strike ${targetEnemy}.`;
+    case "Enfeebling":
+      if (spell.type === "DoT") {
+        return `Afflicts ${targetEnemy} with a lingering ${elem} curse.`;
+      }
+      return `Uses ${elem} forces to ${spell.effect.controlType} ${targetEnemy}.`;
+    case "Reinforcement":
+      if (spell.effect.kind === "shield") {
+        return `Envelops ${targetAlly} in a ${elem} barrier that absorbs harm.`;
+      }
+      return `Bolsters ${targetAlly} with ${elem}-forged resilience.`;
+    case "Healing":
+      if (spell.effect.kind === "heal") {
+        return `Channels ${elem} vitality to restore ${targetAlly}'s wounds.`;
+      }
+      return `Infuses ${targetAlly} with ${elem} energy that regenerates over time.`;
+    case "Summoning":
+      return `Summons ${spell.name}, a ${elem} ally, to fight at your side.`;
+    default:
+      return `A ${elem} spell.`;
+  }
+}
+
 /** Proficiency milestones (two unlocks per 10) */
 const MILESTONES = [10,20,30,40,50,60,70,80,90,100];
 
@@ -67,56 +101,128 @@ const NAMES = {
     attackAoE: ["Rockfall","Quake","Cataclysm"],
     ultimate: "Gaia’s Judgment",
     control: ["Stone Shackles","Gravel Skin","Tremor Lock","Dust Blind","Earthen Prison"],
-    support: ["Stone Skin","Bulwark","Rocky Endurance","Guardian’s Ward","Titan’s Fortitude"]
+    support: ["Stone Skin","Bulwark","Rocky Endurance","Guardian’s Ward","Titan’s Fortitude"],
+    healing: ["Gaia's Touch","Crag Remedy","Bedrock Salve","Terra Resurgence","Lithic Renewal"],
+    summoning: ["Stone Golem","Terra Guardian","Earth Elemental","Gaia Colossus","Titan of Bedrock"],
+    cantrips: {
+      destructive: "Pebble Burst",
+      enfeebling: "Gravel Snare",
+      reinforcement: "Stone Ward",
+      healing: "Earthen Mending",
+      summoning: "Pebble Sprite"
+    }
   },
   Water: {
     attackST: ["Water Jet","Water Surge","Tidal Crush","Aqua Lance","Riptide Blade","Abyss Flood"],
     attackAoE: ["Water Wave","Maelstrom","Leviathan’s Wrath"],
     ultimate: "Ocean’s End",
     control: ["Tidebind","Drowning Grip","Pressure Crush","Mist Muffle","Undertow Prison"],
-    support: ["Water Veil","Aqua Armor","Flowstate","Cleansing Rain","Tidal Aegis"]
+    support: ["Water Veil","Aqua Armor","Flowstate","Cleansing Rain","Tidal Aegis"],
+    healing: ["Soothing Current","Aqua Reprieve","Mist Restoration","Tidal Renewal","Leviathan's Grace"],
+    summoning: ["Water Nymph","Tidecaller","Sea Serpent","Leviathan","Ocean Guardian"],
+    cantrips: {
+      destructive: "Splash Dart",
+      enfeebling: "Tide Snare",
+      reinforcement: "Mist Ward",
+      healing: "Droplet Mending",
+      summoning: "Mist Wisp"
+    }
   },
   Wind: {
     attackST: ["Gust Slash","Wind Cutter","Wind Spear","Sky Piercer","Zephyr Strike","Tempest Blade"],
     attackAoE: ["Cyclone","Tempest","Hurricane’s Eye"],
     ultimate: "Eternal Tempest",
     control: ["Gale Tangle","Vacuum Lock","Air Seal","Slipstream Trip","Suffocating Draft"],
-    support: ["Wind Barrier","Tailwind","Featherfall","Eye of the Storm","Aeolian Ward"]
+    support: ["Wind Barrier","Tailwind","Featherfall","Eye of the Storm","Aeolian Ward"],
+    healing: ["Breeze of Relief","Skyward Grace","Cyclone Rejuvenation","Tempest Renewal","Aerial Restoration"],
+    summoning: ["Air Sylph","Sky Seraph","Storm Djinn","Tempest Avatar","Wind Titan"],
+    cantrips: {
+      destructive: "Breeze Dart",
+      enfeebling: "Gale Snare",
+      reinforcement: "Wind Ward",
+      healing: "Zephyr Mending",
+      summoning: "Gust Sprite"
+    }
   },
   Fire: {
     attackST: ["Ember Flicker","Flame Burst","Flare Lance","Flame Reaver","Pyroclast","Sunbrand"],
     attackAoE: ["Fireball","Inferno","Meteor Swarm"],
     ultimate: "Phoenix Rebirth",
     control: ["Searing Grasp","Magma Chains","Ashen Choke","Cindershroud","Brand of Weakness"],
-    support: ["Blazing Rage","Heat Mirage","Cauterize","Flameguard","Phoenix Blessing"]
+    support: ["Blazing Rage","Heat Mirage","Cauterize","Flameguard","Phoenix Blessing"],
+    healing: ["Flame Recovery","Cinder Restoration","Blaze Renewal","Phoenix Grace","Inferno Rebirth"],
+    summoning: ["Fire Imp","Salamander","Flame Efreet","Inferno Djinn","Phoenix"],
+    cantrips: {
+      destructive: "Cinder Snap",
+      enfeebling: "Ember Snare",
+      reinforcement: "Flame Ward",
+      healing: "Ember Mending",
+      summoning: "Spark Sprite"
+    }
   },
   Ice: {
     attackST: ["Frost Shard","Ice Spike","Glacial Blade","Cryo Lance","Hailpiercer","Shiver Edge"],
     attackAoE: ["Ice Nova","Blizzard Storm","Avalanche"],
     ultimate: "Absolute Winter",
     control: ["Ice Bind","Brittle Hex","Permafrost Field","Hoarfrost Chains","Absolute Zero"],
-    support: ["Frozen Ward","Cold Adaptation","Crystal Skin","Mirror Ice","Arctic Recovery"]
+    support: ["Frozen Ward","Cold Adaptation","Crystal Skin","Mirror Ice","Arctic Recovery"],
+    healing: ["Chill Renewal","Icy Restoration","Glacial Relief","Hailstone Resurgence","Winter's Grace"],
+    summoning: ["Ice Golem","Frost Wraith","Glacier Giant","Hoarfrost Titan","Ymir"],
+    cantrips: {
+      destructive: "Shard Burst",
+      enfeebling: "Frost Snare",
+      reinforcement: "Ice Ward",
+      healing: "Frost Mending",
+      summoning: "Snow Sprite"
+    }
   },
   Thunder: {
     attackST: ["Spark Bolt","Thunder Shock","Thunder Fang","Volt Breaker","Arc Lance","Stormstrike"],
     attackAoE: ["Chain Lightning","Stormfront","Heaven’s Thunder"],
     ultimate: "Divine Thunder",
     control: ["Shock Jolt","Static Cage","Magnetic Disarm","Overload","Nerve Jolt"],
-    support: ["Charge Up","Capacitor Shield","Grounding Ward","Quickening","Ion Guard"]
+    support: ["Charge Up","Capacitor Shield","Grounding Ward","Quickening","Ion Guard"],
+    healing: ["Storm's Embrace","Volt Renewal","Thunder Rejuvenation","Magnetic Recovery","Ion Restoration"],
+    summoning: ["Storm Hound","Magnetron","Thunder Roc","Lightning Elemental","Raijin"],
+    cantrips: {
+      destructive: "Spark Dart",
+      enfeebling: "Static Snare",
+      reinforcement: "Charge Ward",
+      healing: "Static Mending",
+      summoning: "Volt Sprite"
+    }
   },
   Dark: {
     attackST: ["Umbral Touch","Dark Slash","Abyssal Rend","Eclipse Fang","Night Cutter","Void Lance"],
     attackAoE: ["Dark Mist","Dark Eruption","Shadow Plague"],
     ultimate: "Oblivion",
     control: ["Shadow Grasp","Dread Shackles","Curse of Decay","Nightmare Veil","Soul Siphon"],
-    support: ["Veil of Dusk","Profane Ward","Life Leech Blessing","Shade Step","Omen"]
+    support: ["Veil of Dusk","Profane Ward","Life Leech Blessing","Shade Step","Omen"],
+    healing: ["Umbral Mend","Night Restoration","Void Renewal","Abyssal Grace","Ebon Rejuvenation"],
+    summoning: ["Shadow Fiend","Nightmare Steed","Void Walker","Abyssal Wraith","Nether Lord"],
+    cantrips: {
+      destructive: "Shade Bolt",
+      enfeebling: "Gloom Snare",
+      reinforcement: "Duskward",
+      healing: "Shadow Mending",
+      summoning: "Shade Sprite"
+    }
   },
   Light: {
     attackST: ["Radiant Ray","Holy Strike","Judgment Ray","Divine Spear","Sunlance","Sacred Edge"],
     attackAoE: ["Holy Burst","Sanctified Wave","Seraphic Storm"],
     ultimate: "Ascension",
     control: ["Blinding Glow","Binding Halo","Purge Seal","Revelation","Sanctuary Lock"],
-    support: ["Healing Light","Blessed Shield","Aegis of Dawn","Divine Grace","Beacon"]
+    support: ["Blessed Shield","Aegis of Dawn","Divine Rampart","Solar Guard","Luminous Bastion"],
+    healing: ["Dawn's Grace","Sunlit Restoration","Halo Renewal","Seraphic Benediction","Celestial Reprieve"],
+    summoning: ["Winged Cherub","Radiant Guardian","Solar Archon","Seraph","Empyreal Avatar"],
+    cantrips: {
+      destructive: "Glimmer Dart",
+      enfeebling: "Halo Snare",
+      reinforcement: "Light Ward",
+      healing: "Radiant Mending",
+      summoning: "Light Sprite"
+    }
   }
 };
 
@@ -200,7 +306,7 @@ function buildElement(elementName, names) {
   const cantrips = [
     {
       id: `${elementName}:CAN:DES`,
-      name: `${elementName} Spark`,
+      name: names.cantrips.destructive,
       element: elementName,
       school: "Destructive",
       family: "attack",
@@ -217,7 +323,7 @@ function buildElement(elementName, names) {
     },
     {
       id: `${elementName}:CAN:ENF`,
-      name: `${elementName} Jinx`,
+      name: names.cantrips.enfeebling,
       element: elementName,
       school: "Enfeebling",
       family: "control",
@@ -231,11 +337,11 @@ function buildElement(elementName, names) {
       mpCost: 1,
       ultimate: false,
       starter: true,
-      effect: buildControlEffect(`${elementName} Jinx`, "ST", baseCtrl, 0),
+      effect: buildControlEffect(names.cantrips.enfeebling, "ST", baseCtrl, 0),
     },
     {
       id: `${elementName}:CAN:REIN`,
-      name: `${elementName} Ward`,
+      name: names.cantrips.reinforcement,
       element: elementName,
       school: "Reinforcement",
       family: "support",
@@ -249,11 +355,11 @@ function buildElement(elementName, names) {
       mpCost: 1,
       ultimate: false,
       starter: true,
-      effect: buildSupportEffect(elementName, `${elementName} Ward`, "ST", baseSupp, 0),
+      effect: buildSupportEffect(elementName, names.cantrips.reinforcement, "ST", baseSupp, 0),
     },
     {
       id: `${elementName}:CAN:HEAL`,
-      name: `${elementName} Heal`,
+      name: names.cantrips.healing,
       element: elementName,
       school: "Healing",
       family: "support",
@@ -267,11 +373,11 @@ function buildElement(elementName, names) {
       mpCost: 1,
       ultimate: false,
       starter: true,
-      effect: buildSupportEffect(elementName, `${elementName} Heal`, "ST", baseSupp, 2),
+      effect: buildSupportEffect(elementName, names.cantrips.healing, "ST", baseSupp, 2),
     },
     {
       id: `${elementName}:CAN:SUM`,
-      name: `${elementName} Sprite`,
+      name: names.cantrips.summoning,
       element: elementName,
       school: "Summoning",
       family: "summon",
@@ -285,35 +391,44 @@ function buildElement(elementName, names) {
       mpCost: 1,
       ultimate: false,
       starter: true,
-      effect: { kind: "summon", summonId: `${elementName}:Elemental` },
+      effect: { kind: "summon", summonId: `${elementName}:${names.cantrips.summoning.replace(/\s+/g, '')}` },
     },
   ];
 
-  // Families: Attack(10 tiers), Control(5), Support(5)
+  cantrips.forEach(s => { s.description = describeSpell(s); });
+
+  // Families: Attack(10 tiers), Control(10), Support-Reinforce(10), Support-Heal(10), Summon(10)
   const atk = buildBasePowers(10, mpCost, 1.00);
-  const ctrl = buildBasePowers(5, mpCost, 0.20);
-  const supp = buildBasePowers(5, mpCost, 1.00);
+  const ctrl = buildBasePowers(10, mpCost, 0.20);
+  const supp = buildBasePowers(10, mpCost, 1.00);
+  const PF_CONTROL_EXT = PF_CONTROL.concat(PF_CONTROL);
+  const PF_SUPPORT_EXT = PF_SUPPORT.concat(PF_SUPPORT);
+
+  const ctrlNames = expandNames(names.control);
+  const reinfNames = expandNames(names.support);
+  const healNames = expandNames(names.healing);
+  const summonNames = expandNames(names.summoning);
 
   // Attack names over 10 tiers (6 ST + 3 AoE + 1 Ultimate)
   const attackNamesByTier = [
-    names.attackST[0],                 // t1 ST
-    names.attackST[1],                 // t2 ST
-    names.attackAoE[0],                // t3 AoE
-    names.attackST[2],                 // t4 ST
-    names.attackAoE[1],                // t5 AoE
-    names.attackST[3],                 // t6 ST
-    names.attackAoE[2],                // t7 AoE
-    names.attackST[4],                 // t8 ST
-    names.attackST[5],                 // t9 ST
-    names.ultimate                     // t10 Ultimate (ST/AoE)
+    names.attackST[0],
+    names.attackST[1],
+    names.attackAoE[0],
+    names.attackST[2],
+    names.attackAoE[1],
+    names.attackST[3],
+    names.attackAoE[2],
+    names.attackST[4],
+    names.attackST[5],
+    names.ultimate
   ];
 
   const attack = attackNamesByTier.map((name, i) => {
     const tier = i + 1;
-    const prof = MILESTONES[i];  // 10..100
+    const prof = MILESTONES[i];
     const target = ATTACK_TARGET_BY_TIER[tier];
-    const ultimate = (tier === 10);
-    return {
+    const ultimate = tier === 10;
+    const spell = {
       id: `${elementName}:ATK:${tier}`,
       name,
       element: elementName,
@@ -329,76 +444,132 @@ function buildElement(elementName, names) {
       mpCost: atk.mp[i],
       ultimate,
       starter: (prof === 10)
-      // No "effect" for attack here — damage formula uses basePower, INT, prof, resists later
     };
+    spell.description = describeSpell(spell);
+    return spell;
   });
 
-  // Control unlocks at milestones 10,30,50,70,90 (C1..C5)
-  const control = names.control.map((name, i) => {
-    const tier = i + 1; // 1..5
-    const prof = [10,30,50,70,90][i];
-    // ST, ST(DoT), AoE, AoE, ST
-    const target = (i === 2 || i === 3) ? "AoE" : "ST";
+  const ctrlIdxSeq = [0,1,2,3,4,0,1,2,3,4];
+  const control = ctrlNames.map((name, i) => {
+    const tier = i + 1;
+    const prof = MILESTONES[i];
+    const idx = ctrlIdxSeq[i];
+    const target = (idx === 2 || idx === 3) ? "AoE" : "ST";
     const basePower = r4(ctrl.bp[i]);
-    return {
-      id: `${elementName}:CTRL:${tier}`,
+    const spell = {
+      id: `${elementName}:ENF:${tier}`,
       name,
       element: elementName,
       school: "Enfeebling",
       family: "control",
-      type: (i === 1 ? "DoT" : "Control"),
+      type: (idx === 1 ? "DoT" : "Control"),
       subtype: null,
       proficiency: prof,
       target,
-      basePower,                         // potency driver for durations/magnitudes
-      proficiencyFactor: PF_CONTROL[i],
-      unlockTierId: `CTRL-${tier}`,
+      basePower,
+      proficiencyFactor: PF_CONTROL_EXT[i],
+      unlockTierId: `ENF-${tier}`,
       mpCost: ctrl.mp[i],
       ultimate: false,
       starter: (prof === 10),
-      effect: buildControlEffect(name, target, basePower, i)
+      effect: buildControlEffect(name, target, basePower, idx)
     };
+    spell.description = describeSpell(spell);
+    return spell;
   });
 
-  // Support unlocks at milestones 20,40,60,80,100 (S1..S5)
-  const support = names.support.map((name, i) => {
-    const tier = i + 1; // 1..5
-    const prof = [20,40,60,80,100][i];
-    // ST / AoE alternation: ST, AoE, ST, AoE, AoE
-    const target = (i === 1 || i === 3 || i === 4) ? "AoE" : "ST";
+  const reinfIdxSeq = [0,1,3,4,0,1,3,4,0,1];
+  const reinfTargetSeq = ["ST","AoE","ST","AoE","AoE","ST","AoE","ST","AoE","AoE"];
+  const reinforcement = reinfNames.map((name, i) => {
+    const tier = i + 1;
+    const prof = MILESTONES[i];
+    const idx = reinfIdxSeq[i];
+    const target = reinfTargetSeq[i];
     const basePower = r4(supp.bp[i]);
-    // Subtype hint (optional)
-    const subtypeMap = ["Buff","Shield","Regen/Heal","Resist","Shield"];
-    const isHeal = /heal|grace|recovery|cauterize|cleansing/i.test(name);
-    return {
-      id: `${elementName}:SUP:${tier}`,
+    const spell = {
+      id: `${elementName}:REIN:${tier}`,
       name,
       element: elementName,
-      school: isHeal ? "Healing" : "Reinforcement",
+      school: "Reinforcement",
       family: "support",
-      type: (isHeal ? "Heal" : "Buff"),
-      subtype: subtypeMap[i] || null,
+      type: "Buff",
+      subtype: null,
       proficiency: prof,
       target,
       basePower,
-      proficiencyFactor: PF_SUPPORT[i],
-      unlockTierId: `SUP-${tier}`,
+      proficiencyFactor: PF_SUPPORT_EXT[i],
+      unlockTierId: `REIN-${tier}`,
       mpCost: supp.mp[i],
       ultimate: false,
       starter: false,
-      effect: buildSupportEffect(elementName, name, target, basePower, i)
+      effect: buildSupportEffect(elementName, name, target, basePower, idx)
     };
+    spell.description = describeSpell(spell);
+    return spell;
+  });
+
+  const healTargetSeq = ["ST","AoE","ST","AoE","AoE","ST","AoE","ST","AoE","AoE"];
+  const healing = healNames.map((name, i) => {
+    const tier = i + 1;
+    const prof = MILESTONES[i];
+    const target = healTargetSeq[i];
+    const basePower = r4(supp.bp[i]);
+    const spell = {
+      id: `${elementName}:HEAL:${tier}`,
+      name,
+      element: elementName,
+      school: "Healing",
+      family: "support",
+      type: "Heal",
+      subtype: "Heal",
+      proficiency: prof,
+      target,
+      basePower,
+      proficiencyFactor: PF_SUPPORT_EXT[i],
+      unlockTierId: `HEAL-${tier}`,
+      mpCost: supp.mp[i],
+      ultimate: false,
+      starter: false,
+      effect: buildSupportEffect(elementName, name, target, basePower, 2)
+    };
+    spell.description = describeSpell(spell);
+    return spell;
+  });
+
+  const summoning = summonNames.map((name, i) => {
+    const tier = i + 1;
+    const prof = MILESTONES[i];
+    const spell = {
+      id: `${elementName}:SUM:${tier}`,
+      name,
+      element: elementName,
+      school: "Summoning",
+      family: "summon",
+      type: "Summon",
+      subtype: null,
+      proficiency: prof,
+      target: "Self",
+      basePower: 0,
+      proficiencyFactor: 1.0,
+      unlockTierId: `SUM-${tier}`,
+      mpCost: mpCost(tier),
+      ultimate: false,
+      starter: false,
+      effect: { kind: "summon", summonId: `${elementName}:${name.replace(/\s+/g,'')}` }
+    };
+    spell.description = describeSpell(spell);
+    return spell;
   });
 
   // Merge families and return ordered by milestone (two unlocks per 10)
   const byMilestone = new Map(MILESTONES.map(m => [m, []]));
-  [...attack, ...control, ...support].forEach(spell => {
+  [...attack, ...control, ...reinforcement, ...healing, ...summoning].forEach(spell => {
     byMilestone.get(spell.proficiency).push(spell);
   });
   return [...cantrips, ...MILESTONES.flatMap(m => byMilestone.get(m))];
 }
 
-/** Build the full 8-element spellbook (200 spells total) */
+/** Build the full 8-element spellbook (440 spells total) */
 function generateSpellbook() {
   const elements = Object.keys(NAMES);
   const all = [];
