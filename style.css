@@ -470,12 +470,21 @@ body.theme-dark {
 
   .character-creation {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
   }
 
   body.layout-portrait .character-creation {
-    flex-direction: column;
     align-items: stretch;
+  }
+
+  .cc-top-row {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  body.layout-portrait .cc-top-row {
+    flex-direction: column;
   }
 
   .progress-container {
@@ -488,16 +497,6 @@ body.theme-dark {
   body.layout-portrait .progress-container {
     margin-right: 0;
     margin-bottom: 0.5rem;
-    order: 0;
-  }
-
-  body.layout-portrait .cc-column {
-    order: 1;
-  }
-
-  body.layout-portrait .cc-info {
-    order: 2;
-    margin-top: 0.5rem;
   }
 
   .progress-step {
@@ -541,24 +540,11 @@ body.theme-dark {
     margin-left: 0.5rem;
   }
 
-  .cc-column {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-  }
-
   .cc-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .cc-top {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.125rem;
-    width: 100%;
+    margin-top: 0.5rem;
   }
 
   .race-stats {
@@ -591,11 +577,6 @@ body.theme-dark {
 
   .race-description {
     margin-top: 0;
-  }
-
-  body.layout-portrait .cc-top {
-    flex-direction: column;
-    align-items: center;
   }
 
 
