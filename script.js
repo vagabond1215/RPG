@@ -648,7 +648,6 @@ function showCharacterSelectUI() {
 }
 
 function showMainUI() {
-  creationScaleOffset = 0;
   updateScale();
   if (currentCharacter) {
     showCharacter();
@@ -740,6 +739,7 @@ function showSpellDetails(spell) {
 
 function showSpellbookUI() {
   if (!currentCharacter) return;
+  updateScale();
   showBackButton();
   const spellsByElement = {};
   const baseElements = ['Stone','Water','Wind','Fire','Ice','Thunder','Dark','Light'];
@@ -765,7 +765,7 @@ function showSpellbookUI() {
       (spellsByElement[spell.element] ||= []).push(spell);
     }
   }
-  let html = '<div class="spellbook-screen"><h1>Spellbook</h1>';
+  let html = '<div class="spellbook-screen"><h1><span class="spellbook-icon">📖</span>Spellbook</h1>';
   let any = false;
   elements.forEach(el => {
     const spells = spellsByElement[el];
@@ -807,7 +807,7 @@ function showSpellbookUI() {
         .map(Number)
         .sort((a, b) => (dir === 'asc' ? a - b : b - a))
         .forEach(key => {
-          html += `<h3 class="spell-subheading">P${key}</h3><ul class="spell-list">`;
+          html += `<h3 class="spell-subheading"><span class="prof-icon">⭐</span>P${key}</h3><ul class="spell-list">`;
           grouped[key].forEach(spell => {
             html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(P${spell.proficiency})</span></li>`;
           });
@@ -916,15 +916,15 @@ const SLOT_ICONS = {
   mainHand: '<svg viewBox="0 0 24 24"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5" /><line x1="13" y1="19" x2="19" y2="13" /><line x1="16" y1="16" x2="20" y2="20" /><line x1="19" y1="21" x2="21" y2="19" /></svg>',
   offHand: '<svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></svg>',
   ranged: '<svg viewBox="0 0 24 24"><path d="M17 3h4v4"/><path d="M18.575 11.082a13 13 0 0 1 1.048 9.027 1.17 1.17 0 0 1-1.914.597L14 17"/><path d="M7 10 3.29 6.29a1.17 1.17 0 0 1 .6-1.91 13 13 0 0 1 9.03 1.05"/><path d="M7 14a1.7 1.7 0 0 0-1.207.5l-2.646 2.646A.5.5 0 0 0 3.5 18H5a1 1 0 0 1 1 1v1.5a.5.5 0 0 0 .854.354L9.5 18.207A1.7 1.7 0 0 0 10 17v-2a1 1 0 0 0-1-1z"/><path d="M9.707 14.293 21 3"/></svg>',
-  instrument: '<svg viewBox="0 0 24 24"><circle cx="8" cy="17" r="5"/><path d="M11 14 20 5"/><path d="M19 6v4"/><path d="M15 2h4v4"/></svg>',
+  instrument: '<svg viewBox="0 0 24 24"><path d="M6 3c4 9 10 12 10 19H6Z"/><path d="M6 7h8"/><path d="M6 11h9"/><path d="M6 15h8"/><path d="M6 19h6"/></svg>',
   ammo: '<svg viewBox="0 0 24 24"><path d="M3 12h14"/><polyline points="3 9 6 12 3 15"/><polyline points="17 7 23 12 17 17"/></svg>',
   head: '<svg viewBox="0 0 24 24"><path d="M2 10l4-2 3 3 3-6 3 6 3-3 4 2v8H2z"/></svg>',
   body: '<svg viewBox="0 0 24 24"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" /></svg>',
-  back: '<svg viewBox="0 0 24 24"><path d="M6 2l12 4v16l-6-4-6 4V2z"/></svg>',
+  back: '<svg viewBox="0 0 24 24"><path d="M12 2c3 1 5 4 5 8v12l-5-3-5 3V10c0-4 2-7 5-8z"/></svg>',
   hands: '<svg viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>',
-  waist: '<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="5"/><rect x="8" y="9" width="8" height="6" rx="1"/><path d="M8 12h8"/></svg>',
-  legs: '<svg viewBox="0 0 24 24"><path d="M6 2h12l-2 20h-4l-2-10-2 10H8z"/></svg>',
-  feet: '<svg viewBox="0 0 24 24"><path d="M5 3v6H3v7h8v-4l4-5-2-1-3 2H8V3H5z"/><g transform="translate(24,0) scale(-1,1)"><path d="M5 3v6H3v7h8v-4l4-5-2-1-3 2H8V3H5z"/></g></svg>',
+  waist: '<svg viewBox="0 0 24 24"><path d="M2 10h20v4H2z"/><rect x="8" y="8" width="8" height="8" rx="1"/><path d="M14 12h4"/></svg>',
+  legs: '<svg viewBox="0 0 24 24"><path d="M7 2h10l1 6h-5l1 14h-4l1-14H6z"/><path d="M12 8v14"/></svg>',
+  feet: '<svg viewBox="0 0 24 24"><path d="M6 3v8H4v5h9l4 4h5v-4h-3l-3-3h-5V3H6z"/></svg>',
   lEar: '<svg viewBox="0 0 24 24"><g transform="scale(-1,1) translate(-24,0)"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></g></svg>',
   neck: '<svg viewBox="0 0 24 24"><path d="M4 5a8 8 0 0 0 16 0"/><circle cx="12" cy="13" r="2"/><path d="M12 15v4"/></svg>',
   lRing: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" /></svg>',
@@ -956,6 +956,7 @@ function equipmentSection(title, items) {
 
 function showEquipmentUI() {
   if (!currentCharacter) return;
+  updateScale();
   showBackButton();
   const { equipment } = currentCharacter;
   const buildList = (slots, group) =>
@@ -974,7 +975,6 @@ function showEquipmentUI() {
 }
 
 function startCharacterCreation() {
-  creationScaleOffset = 0.1;
   updateScale();
   showBackButton();
   mapButton.style.display = 'none';
@@ -1412,7 +1412,6 @@ function finalizeCharacter(character) {
   currentCharacter = newChar;
   spellSortModes = newChar.spellSort;
   saveProfiles();
-  creationScaleOffset = 0;
   updateScale();
   showCharacter();
   localStorage.removeItem(TEMP_CHARACTER_KEY);
@@ -1484,15 +1483,11 @@ themeToggle.addEventListener('click', () => {
 
 // UI scale buttons
 let uiScale = 1;
-let creationScaleOffset = 0;
 const updateScale = () => {
   const baseScale = body.classList.contains('layout-landscape')
     ? uiScale * 1.25
     : uiScale;
-  document.documentElement.style.setProperty(
-    '--ui-scale',
-    baseScale + creationScaleOffset
-  );
+  document.documentElement.style.setProperty('--ui-scale', baseScale);
   savePreference('uiScale', uiScale);
   updateMenuHeight();
 };

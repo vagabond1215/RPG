@@ -999,6 +999,11 @@ body.theme-dark {
   margin-right: 0.25rem;
 }
 
+.spellbook-icon,
+.prof-icon {
+  margin-right: 0.25rem;
+}
+
 .icon {
   display: inline-flex;
   align-items: center;
