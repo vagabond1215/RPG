@@ -829,8 +829,7 @@ function showSpellbookUI() {
           const sIcon = schoolIcons[key] || '';
           html += `<h3 class="spell-subheading"><span class="school-icon">${sIcon}</span>${key}</h3><ul class="spell-list">`;
           grouped[key].forEach(spell => {
-            const reqLabel = proficiencyToTierLabel(spell.proficiency);
-            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(${reqLabel})</span></li>`;
+            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button></li>`;
           });
           html += '</ul>';
         });
@@ -846,8 +845,7 @@ function showSpellbookUI() {
           const label = proficiencyToTierLabel(key);
           html += `<h3 class="spell-subheading">${label}</h3><ul class="spell-list">`;
           grouped[key].forEach(spell => {
-            const reqLabel = proficiencyToTierLabel(spell.proficiency);
-            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button> <span class="spell-req">(${reqLabel})</span></li>`;
+            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button></li>`;
           });
           html += '</ul>';
         });
