@@ -488,6 +488,19 @@ const elementIcons = {
   Light: '☀️'
 };
 
+// Add icons for hybrid elements by combining parent icons or using special symbols
+HYBRID_RELATIONS.forEach(rel => {
+  if (rel.name === 'Order') {
+    elementIcons[rel.name] = '⚖️';
+  } else if (rel.name === 'Chaos') {
+    elementIcons[rel.name] = '🌀';
+  } else {
+    const p1 = elementIcons[rel.parents[0]] || '';
+    const p2 = elementIcons[rel.parents[1]] || '';
+    elementIcons[rel.name] = `${p1}${p2}`;
+  }
+});
+
 const schoolIcons = {
   Destructive: '💥',
   Enfeebling:
