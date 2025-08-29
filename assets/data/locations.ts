@@ -22,6 +22,12 @@ export interface Location {
       imports: string[];
     };
   };
+  population?: {
+    estimate: number;
+    range: [number, number];
+    districts: Record<string, { estimate: number; notes: string }>;
+    hinterland?: { estimate: number; notes: string };
+  };
 }
 
 export function createLocation(
@@ -41,6 +47,7 @@ export function createLocation(
       tradeRoutes: [],
       resources: { domestic: [], exports: [], imports: [] },
     },
+    population: undefined,
   };
 }
 
@@ -67,6 +74,46 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
     "The High Road District (East Gate Approach)",
     "The Farmlands Beyond the Walls",
   ],
+  population: {
+    estimate: 31500,
+    range: [28000, 34000],
+    districts: {
+      "Port District": {
+        estimate: 6000,
+        notes:
+          "dockworkers, fishers, chandlers, coopers, ropewalkers, shipwright families",
+      },
+      "Little Terns": {
+        estimate: 9000,
+        notes:
+          "artisans: smiths, carpenters and lumber yards, tailors, potters, tanners, cobblers, mills",
+      },
+      "Lower Gardens": {
+        estimate: 5500,
+        notes:
+          "market gardeners, brewers, herbalists, arena staff, service trades",
+      },
+      "Upper Ward": {
+        estimate: 3000,
+        notes:
+          "administration, noble households, guards, high-end merchants",
+      },
+      "Greensoul Hill": {
+        estimate: 3500,
+        notes: "clergy, healers, scribes, arcanists, students",
+      },
+      "High Road District": {
+        estimate: 4500,
+        notes:
+          "caravan trades, armourers, wagonwrights, leatherworkers, teamsters",
+      },
+    },
+    hinterland: {
+      estimate: 7500,
+      notes:
+        "farmsteads, mills, brickworks, and quarries outside the walls",
+    },
+  },
   pointsOfInterest: {
     buildings: [
       "Dockmaster's Hall",
