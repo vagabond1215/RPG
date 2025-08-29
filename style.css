@@ -878,6 +878,8 @@ body.theme-dark {
 /* Equipment screen */
  .equipment-screen {
    width: 100%;
+   max-width: 40rem;
+   margin: 0 auto;
  }
 
  .equipment-section {
@@ -959,17 +961,35 @@ body.theme-dark {
 }
 
 /* Spellbook screen */
+.spellbook-screen {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.spellbook-screen h1 {
+  display: flex;
+  align-items: center;
+}
+
+.spellbook-screen .global-sort {
+  margin-left: 0.5rem;
+}
+
 .spellbook-element {
   margin-bottom: 1rem;
 }
 
 .spellbook-element h2 {
-  background: var(--foreground);
   color: var(--background);
   padding: 0.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+}
+
+.spellbook-element.collapsed .spellbook-content {
+  display: none;
 }
 
 .element-title {
@@ -979,6 +999,11 @@ body.theme-dark {
 
 .element-icon {
   margin-right: 0.25rem;
+  filter: brightness(0) saturate(100%) invert(1);
+}
+
+body.theme-dark .element-icon {
+  filter: brightness(0) saturate(100%);
 }
 
 .sort-button {
