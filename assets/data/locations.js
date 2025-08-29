@@ -258,11 +258,57 @@ Coral Keep is also a city of exchange. Caravans arrive from the lumber-rich high
             imports: ["timber", "spices", "silks", "gems"],
         },
     } });
+
+const TIMBER_GROVE = Object.assign(Object.assign({}, createLocation("Timber Grove", "Timber Grove.png", `Timber Grove – The Mountain Lumberstead
+
+Nestled along a bend in the mountain river, Timber Grove is a modest but vital settlement, its small wooden homes clustered beside water and forest alike. Known primarily as the chief harvester of great timbers in the western range, the town supplies the beams, masts, and keels shipped downriver to Coral Keep, fueling both construction and shipbuilding across the kingdom. The air is rich with the scent of pine and cedar, while the rhythmic thud of axes and saws blends with the chatter of the river.
+
+Though small, Timber Grove is also known for its secondary trades. Its forests yield luxury mushrooms, nuts, and tree saps, which are carefully harvested and sold as delicacies or ingredients for medicines and enchantments. The river provides rare freshwater fish, crawfish, and amphibians valued by herbalists and alchemists. From the nearby highland mine, the town occasionally turns up raw crystal and ore, some of which are rare enough to serve as material for magical enchantments. With its small population, Timber Grove relies on outside labor—many hands come seasonally from Creekside or Coral Keep, often through contracts or adventuring guild requests. For travelers, the town also serves as a waystop on the road between Creekside and Coral Keep, where one can rest, resupply, and find work before continuing on.`)), { subdivisions: [
+        "Central Plaza",
+        "Fishing Bridges",
+        "The Lumberworks",
+        "Fields & Orchards",
+        "The Mine",
+        "Farms & Homesteads",
+    ], position: {
+        general: "western mountain river bend",
+        relative: "between Creekside and Coral Keep",
+    }, travel: { routes: ["road to Creekside", "river to Coral Keep"], connections: ["Creekside", "Coral Keep"] }, population: {
+        estimate: 210,
+        range: [210, 400],
+        districts: {
+            "Town Proper": { estimate: 210, notes: "families of loggers, millers, fishermen, and farmers" },
+            "Seasonal Camps": { estimate: 75, notes: "outside laborers from Creekside and Coral Keep" },
+            "Waystop Travelers": { estimate: 45, notes: "daily adventurers, traders, and pilgrims" },
+        },
+        hinterland: { estimate: 60, notes: "scattered farms and homesteads around the town" },
+    }, pointsOfInterest: {
+        buildings: [
+            "Central Plaza",
+            "Fishing Bridges",
+            "The Lumberworks",
+            "Fields & Orchards",
+            "The Mine",
+            "Shrine of the Forest Father",
+            "Wayside Shrine of the River-Mother",
+            "The Timberhall",
+            "The Crystalsong Lodge",
+            "The Forest Rest Inn",
+            "The Logger's Flask Tavern",
+            "The Riverhouse",
+        ],
+        tradeRoutes: ["river barge to Coral Keep", "road caravans to Creekside"],
+        resources: {
+            domestic: ["timber", "grain", "nuts", "mushrooms", "tree sap", "freshwater fish", "crystals"],
+            exports: ["timber", "mushrooms", "saps", "crystals", "freshwater fish"],
+            imports: ["labor", "finished goods"],
+        },
+    } });
 export const LOCATIONS = {
     "Duvilia Kingdom": createLocation("Duvilia Kingdom", "Duvilia Kingdom.png"),
     "Wave's Break": WAVES_BREAK,
     "Coral Keep": CORAL_KEEP,
-    "Timber Grove": createLocation("Timber Grove", "Timber Grove.png", "Primary harvester of large lumber, plus rare freshwater fauna, crystals, mushrooms, and orchard fruits."),
+    "Timber Grove": TIMBER_GROVE,
     "Creekside": createLocation("Creekside", "Creekside.png", "Militarized former Wetlands Pass waypoint providing freshwater catch, cattle, dairy, leather, and sugar."),
     "Warm Springs": createLocation("Warm Springs", "Warm Springs.png", "Mining town exporting metals, reagents, and coveted hot spring mineral water with an alchemy guild branch."),
     "Dancing Pines": createLocation("Dancing Pines", "Dancing Pines.png", "Supplies small timber, metals, gemstones, game, and pelts; home to a renowned light-armor leatherworker."),
