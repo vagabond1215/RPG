@@ -44,16 +44,117 @@ export function createLocation(
   };
 }
 
+const WAVES_BREAK: Location = {
+  ...createLocation(
+    "Wave's Break",
+    "Wave's Break.png",
+    `The City of Wave's Break
+
+Where Salt Meets Stone, and East Meets West
+
+Nestled between the jagged peaks of the coastal mountains and the restless sea, Wave's Break thrives as the crossroads of land and ocean. The treacherous Wetland Pass has long been impassable, leaving the city as the primary artery of trade between the Eastern farmlands and the Western kingdoms.
+
+The city is famed for its fish and sea-goods sent eastward, while caravans bring in grain, wine, and livestock from the fertile plains beyond. Ships from distant southern ports and inland caravans alike make Wave's Break their anchor point, ensuring the city is never quiet, never still.
+
+Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-armed crafters, scroll-burdened sages, and faith-driven priests. The city thrives on motion—goods, people, and ideas all collide here, leaving behind a place of markets, temples, shrines, and secrets.`
+  ),
+  subdivisions: [
+    "The Port District",
+    "The Upper Ward",
+    "Little Terns",
+    "Greensoul Hill",
+    "The Lower Gardens",
+    "The High Road District (East Gate Approach)",
+    "The Farmlands Beyond the Walls",
+  ],
+  pointsOfInterest: {
+    buildings: [
+      "Dockmaster's Hall",
+      "Warehouse Row",
+      "Shipwrights' Yards",
+      "The Ropewalk",
+      "The Cooper's Yard",
+      "Saltworks",
+      "Fishmongers' Row",
+      "Shrine of the Deep Current",
+      "Statue of the Sea-Mother",
+      "The Salty Gull",
+      "The Tideway Inn",
+      "Governor's Keep",
+      "Hall of Records",
+      "Mercantile Exchange",
+      "Temple of the Tides",
+      "Grand Library of Wave's Break",
+      "Plaza of Banners",
+      "Master Jeweler's Guildhall",
+      "Goldleaf Atelier",
+      "Engravers' Guild",
+      "Glassmakers' Hall",
+      "The Argent Griffin Inn",
+      "Guild of Smiths",
+      "Carvers' and Fletchers' Hall",
+      "Lumber Yard and Carpenter's Hall",
+      "Threadneedle Hall",
+      "Pottery Kilns",
+      "Tanners' Yard",
+      "Cobbler's Square",
+      "Grain Mills",
+      "The Emberflask Alchemist",
+      "Shrine of the Craftfather",
+      "The Wandering Coin Tavern",
+      "Greensoul Monastery",
+      "The Arcanists' Enclave",
+      "Ink and Quill Hall",
+      "Candlewrights' Guild",
+      "Glass Eel Glassworks",
+      "Herbal Conservatory",
+      "Shrine of the Dawnfather",
+      "The Whispering Garden",
+      "The Glass Eel Tavern",
+      "The Grand Arena",
+      "South Gate Market",
+      "Herbalists' Quarter",
+      "Apiaries and Beekeepers",
+      "Oil Presses and Mills",
+      "Brewmasters' Hall",
+      "Stonecutters' Guild",
+      "Shrine of the Harvestmother",
+      "Public Baths",
+      "Flower Gardens and Orchard Walks",
+      "The Sunleaf Inn",
+      "Stonebridge Caravanserai",
+      "Adventurers' Guildhall",
+      "Iron Key Smithy",
+      "Wagonwright's Yard",
+      "Leatherworkers' Hall",
+      "Armourer's Row",
+      "Shrine of the Roadwarden",
+      "Caravan Square",
+      "Gatewatch Barracks",
+      "Wayfarer's Rest Tavern",
+      "Grain Farms and Mills",
+      "Vineyards and Wineries",
+      "Cattle and Wool Yards",
+      "Brickworks",
+      "Stone Quarries",
+      "Outer Watchtowers",
+      "Wayside Shrines",
+    ],
+    tradeRoutes: [],
+    resources: {
+      domestic: ["fish", "salt", "sea-goods"],
+      exports: ["fish", "salt", "sea-goods"],
+      imports: ["grain", "wine", "livestock"],
+    },
+  },
+};
+
 export const LOCATIONS: Record<string, Location> = {
   "Duvilia Kingdom": createLocation(
     "Duvilia Kingdom",
     "Duvilia Kingdom.png"
   ),
-  "Wave's Break": createLocation(
-    "Wave's Break",
-    "Wave's Break.png",
-    "Main hub for trade between east and west; major supplier of fish, ocean goods, and western-bound produce."
-  ),
+  "Wave's Break": WAVES_BREAK,
   "Coral Keep": createLocation(
     "Coral Keep",
     "Coral Keep.png",
