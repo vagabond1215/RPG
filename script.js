@@ -684,14 +684,18 @@ function showNavigation() {
     (building.interactions || []).forEach(i => {
       buttons.push(`<button data-type="interaction" data-action="${i.action}">${i.name}</button>`);
     });
-    setMainHTML(`<div class="navigation"><h2>${pos.building}</h2><div class="option-grid">${buttons.join('')}</div></div>`);
+    setMainHTML(
+      `<div class="navigation"><h1 class="city-name">${pos.city}</h1><h2>${pos.building}</h2><div class="option-grid">${buttons.join('')}</div></div>`
+    );
   } else {
     const district = cityData.districts[pos.district];
     const buttons = district.points.map(pt => {
       const prompt = pt.type === 'district' ? 'Travel to' : district.travelPrompt || 'Walk to';
       return `<button data-type="${pt.type}" data-target="${pt.target}">${prompt} ${pt.name}</button>`;
     });
-    setMainHTML(`<div class="navigation"><h2>${pos.district}</h2><div class="option-grid">${buttons.join('')}</div></div>`);
+    setMainHTML(
+      `<div class="navigation"><h1 class="city-name">${pos.city}</h1><h2>${pos.district}</h2><div class="option-grid">${buttons.join('')}</div></div>`
+    );
   }
   normalizeOptionButtonWidths();
   updateMenuHeight();

@@ -642,6 +642,11 @@ body.theme-dark {
     color: var(--background);
   }
 
+  .navigation .city-name {
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+  }
+
   .location-select,
   .race-select {
     display: flex;
