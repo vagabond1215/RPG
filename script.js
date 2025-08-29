@@ -544,6 +544,27 @@ const elementIcons = {
   Chaos: '🌀'
 };
 
+const elementColors = {
+  Stone: '#7d7c7a',
+  Water: '#3b82f6',
+  Wind: '#22c55e',
+  Fire: '#ef4444',
+  Ice: '#60a5fa',
+  Thunder: '#eab308',
+  Dark: '#4b5563',
+  Light: '#facc15'
+};
+
+function getElementBackground(el) {
+  const rel = HYBRID_MAP[el];
+  if (rel) {
+    const c1 = elementColors[rel.parents[0]] || '#000';
+    const c2 = elementColors[rel.parents[1]] || '#000';
+    return `linear-gradient(to right, ${c1}, ${c2})`;
+  }
+  return elementColors[el] || 'var(--foreground)';
+}
+
 const schoolIcons = {
   Destructive: '💥',
   Enfeebling:
@@ -555,7 +576,7 @@ const schoolIcons = {
   Summoning: '<span class="icon slime"></span>'
 };
 
-let spellSortModes = {};
+let spellSort = { mode: 'prof', dir: 'asc' };
 
 function getProficiencySortIcon(dir) {
   const arrow = dir === 'desc' ? '↓' : '↑';
@@ -768,7 +789,7 @@ function showCharacterSelectUI() {
           ...defaultProficiencies,
           ...currentProfile.characters[id]
         });
-        spellSortModes = currentCharacter.spellSort || {};
+        spellSort = currentCharacter.spellSort && 'mode' in currentCharacter.spellSort ? currentCharacter.spellSort : { mode: 'prof', dir: 'asc' };
         saveProfiles();
         showMainUI();
       });
@@ -844,7 +865,7 @@ function showCharacterUI() {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
     currentCharacter = null;
-    spellSortModes = {};
+    spellSort = { mode: 'prof', dir: 'asc' };
     saveProfiles();
     showMainUI();
   });
@@ -894,31 +915,29 @@ function showSpellbookUI() {
       (spellsByElement[spell.element] ||= []).push(spell);
     }
   }
-  let html = '<div class="spellbook-screen"><h1><span class="spellbook-icon">📖</span>Spellbook</h1>';
+  const profActive = spellSort.mode === 'prof' ? ' active' : '';
+  const typeActive = spellSort.mode === 'school' ? ' active' : '';
+  const profIcon = getProficiencySortIcon(spellSort.mode === 'prof' ? spellSort.dir : 'asc');
+  const typeIcon = getTypeSortIcon(spellSort.mode === 'school' ? spellSort.dir : 'asc');
+  let html = `<div class="spellbook-screen"><h1><span class="spellbook-icon">📖</span>Spellbook<span class="sort-buttons global-sort"><button class="sort-button${profActive}" data-mode="prof" aria-label="Sort by proficiency">${profIcon}</button><button class="sort-button${typeActive}" data-mode="school" aria-label="Sort by type">${typeIcon}</button></span></h1>`;
   let any = false;
   elements.forEach(el => {
     const spells = spellsByElement[el];
     if (!spells || !spells.length) return;
     any = true;
-    const state = spellSortModes[el] || { mode: 'prof', dir: 'asc' };
-    const mode = state.mode;
-    const dir = state.dir;
     const eIcon = elementIcons[el] || '';
-    const profActive = mode === 'prof' ? ' active' : '';
-    const typeActive = mode === 'school' ? ' active' : '';
-    const profIcon = getProficiencySortIcon(mode === 'prof' ? dir : 'asc');
-    const typeIcon = getTypeSortIcon(mode === 'school' ? dir : 'asc');
-    html += `<section class="spellbook-element"><h2><span class="element-title"><span class="element-icon">${eIcon}</span>${el}</span><span class="sort-buttons"><button class="sort-button${profActive}" data-el="${el}" data-mode="prof" aria-label="Sort by proficiency">${profIcon}</button><button class="sort-button${typeActive}" data-el="${el}" data-mode="school" aria-label="Sort by type">${typeIcon}</button></span></h2>`;
+    const bg = getElementBackground(el);
+    html += `<section class="spellbook-element"><h2 data-el="${el}" style="background:${bg};"><span class="element-title"><span class="element-icon">${eIcon}</span>${el}</span></h2><div class="spellbook-content">`;
 
     let grouped = {};
-    if (mode === 'school') {
+    if (spellSort.mode === 'school') {
       spells.sort((a, b) => a.school.localeCompare(b.school) || a.proficiency - b.proficiency);
-      if (dir === 'desc') spells.reverse();
+      if (spellSort.dir === 'desc') spells.reverse();
       for (const spell of spells) {
         (grouped[spell.school] ||= []).push(spell);
       }
       Object.keys(grouped)
-        .sort((a, b) => (dir === 'asc' ? a.localeCompare(b) : b.localeCompare(a)))
+        .sort((a, b) => (spellSort.dir === 'asc' ? a.localeCompare(b) : b.localeCompare(a)))
         .forEach(key => {
           const sIcon = schoolIcons[key] || '';
           html += `<h3 class="spell-subheading"><span class="school-icon">${sIcon}</span>${key}</h3><ul class="spell-list">`;
@@ -928,13 +947,13 @@ function showSpellbookUI() {
           html += '</ul>';
         });
     } else {
-      spells.sort((a, b) => (dir === 'asc' ? a.proficiency - b.proficiency : b.proficiency - a.proficiency));
+      spells.sort((a, b) => (spellSort.dir === 'asc' ? a.proficiency - b.proficiency : b.proficiency - a.proficiency));
       for (const spell of spells) {
         (grouped[spell.proficiency] ||= []).push(spell);
       }
       Object.keys(grouped)
         .map(Number)
-        .sort((a, b) => (dir === 'asc' ? a - b : b - a))
+        .sort((a, b) => (spellSort.dir === 'asc' ? a - b : b - a))
         .forEach(key => {
           const label = proficiencyToTierLabel(key);
           html += `<h3 class="spell-subheading">${label}</h3><ul class="spell-list">`;
@@ -944,7 +963,7 @@ function showSpellbookUI() {
           html += '</ul>';
         });
     }
-    html += '</section>';
+    html += '</div></section>';
   });
   if (!any) {
     html += '<p>No spells known.</p>';
@@ -956,23 +975,25 @@ function showSpellbookUI() {
     const spell = SPELLBOOK.find(s => s.id === id);
     btn.addEventListener('click', () => showSpellDetails(spell));
   });
-  document.querySelectorAll('.sort-button').forEach(btn => {
-    const el = btn.dataset.el;
+  document.querySelectorAll('.global-sort .sort-button').forEach(btn => {
     const mode = btn.dataset.mode;
     btn.addEventListener('click', () => {
-      const state = spellSortModes[el] || { mode: 'prof', dir: 'asc' };
-      if (state.mode === mode) {
-        state.dir = state.dir === 'asc' ? 'desc' : 'asc';
+      if (spellSort.mode === mode) {
+        spellSort.dir = spellSort.dir === 'asc' ? 'desc' : 'asc';
       } else {
-        state.mode = mode;
-        state.dir = 'asc';
+        spellSort.mode = mode;
+        spellSort.dir = 'asc';
       }
-      spellSortModes[el] = state;
       if (currentCharacter) {
-        currentCharacter.spellSort = spellSortModes;
+        currentCharacter.spellSort = spellSort;
         saveProfiles();
       }
       showSpellbookUI();
+    });
+  });
+  document.querySelectorAll('.spellbook-element h2').forEach(h => {
+    h.addEventListener('click', () => {
+      h.parentElement.classList.toggle('collapsed');
     });
   });
 }
@@ -1538,9 +1559,9 @@ function finalizeCharacter(character) {
   assignMagicAptitudes(newChar);
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;
-  newChar.spellSort = {};
+  newChar.spellSort = { mode: 'prof', dir: 'asc' };
   currentCharacter = newChar;
-  spellSortModes = newChar.spellSort;
+  spellSort = newChar.spellSort;
   saveProfiles();
   updateScale();
   showCharacter();
@@ -1555,7 +1576,7 @@ function loadCharacter() {
       ...defaultProficiencies,
       ...currentProfile.characters[charId]
     });
-    spellSortModes = currentCharacter.spellSort || {};
+    spellSort = currentCharacter.spellSort && 'mode' in currentCharacter.spellSort ? currentCharacter.spellSort : { mode: 'prof', dir: 'asc' };
     showCharacter();
   } else if (localStorage.getItem(TEMP_CHARACTER_KEY)) {
     startCharacterCreation();
