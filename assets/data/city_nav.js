@@ -263,5 +263,194 @@ export const CITY_NAV = {
         interactions: []
       }
     }
+  },
+  "Creekside": {
+    districts: {
+      "Greenford": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Everrise Bridge", type: "district", target: "Everrise Bridge" },
+          { name: "Stoneknot", type: "district", target: "Stoneknot" },
+          { name: "Farmland Estates", type: "building", target: "Farmland Estates" },
+          { name: "Cattle Yards", type: "building", target: "Cattle Yards" },
+          { name: "The Creamery Hall", type: "building", target: "The Creamery Hall" },
+          { name: "Leatherworkers' Guildhouse", type: "building", target: "Leatherworkers' Guildhouse" },
+          { name: "Shrine of the Harvestmother", type: "building", target: "Shrine of the Harvestmother" },
+          { name: "The Plowman's Rest Tavern", type: "building", target: "The Plowman's Rest Tavern" }
+        ]
+      },
+      "Everrise Bridge": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Greenford", type: "district", target: "Greenford" },
+          { name: "Stoneknot", type: "district", target: "Stoneknot" },
+          { name: "The Everrise Bridge", type: "building", target: "The Everrise Bridge" },
+          { name: "Fishermen's Guild", type: "building", target: "Fishermen's Guild" },
+          { name: "Fishmongers' Market", type: "building", target: "Fishmongers' Market" },
+          { name: "Riverside Warehouses", type: "building", target: "Riverside Warehouses" },
+          { name: "Shrine of the River-Mother", type: "building", target: "Shrine of the River-Mother" },
+          { name: "The Waterwheel Mill", type: "building", target: "The Waterwheel Mill" },
+          { name: "The Oaken Net Tavern", type: "building", target: "The Oaken Net Tavern" }
+        ]
+      },
+      "Stoneknot": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Greenford", type: "district", target: "Greenford" },
+          { name: "Everrise Bridge", type: "district", target: "Everrise Bridge" },
+          { name: "The Grand Guildhall of Creekside", type: "building", target: "The Grand Guildhall of Creekside" },
+          { name: "Military Barracks and Armory", type: "building", target: "Military Barracks and Armory" },
+          { name: "The Muster Yard", type: "building", target: "The Muster Yard" },
+          { name: "Shrine of the Twin Watchers", type: "building", target: "Shrine of the Twin Watchers" },
+          { name: "Stonecutters' Guild", type: "building", target: "Stonecutters' Guild" },
+          { name: "Butchers' Row", type: "building", target: "Butchers' Row" },
+          { name: "The Iron Kettle Tavern", type: "building", target: "The Iron Kettle Tavern" },
+          { name: "The Traveler's Hearth Inn", type: "building", target: "The Traveler's Hearth Inn" }
+        ]
+      },
+      "Surrounding Farmlands & Orchards": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Greenford", type: "district", target: "Greenford" },
+          { name: "Sugar Cane and Beet Fields", type: "building", target: "Sugar Cane and Beet Fields" },
+          { name: "Fruit Orchards", type: "building", target: "Fruit Orchards" },
+          { name: "Goat and Sheep Farms", type: "building", target: "Goat and Sheep Farms" },
+          { name: "Outlying Watchtowers", type: "building", target: "Outlying Watchtowers" },
+          { name: "Roadside Shrine of the Forest Father", type: "building", target: "Roadside Shrine of the Forest Father" }
+        ]
+      }
+    },
+    buildings: {
+      "Farmland Estates": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Greenford", target: "Greenford" } ],
+        interactions: []
+      },
+      "Cattle Yards": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Greenford", target: "Greenford" } ],
+        interactions: []
+      },
+      "The Creamery Hall": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Greenford", target: "Greenford" } ],
+        interactions: []
+      },
+      "Leatherworkers' Guildhouse": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Greenford", target: "Greenford" } ],
+        interactions: []
+      },
+      "Shrine of the Harvestmother": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Greenford", target: "Greenford" } ],
+        interactions: []
+      },
+      "The Plowman's Rest Tavern": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Greenford", target: "Greenford" } ],
+        interactions: [ { name: "Rest", action: "rest" } ]
+      },
+      "The Everrise Bridge": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
+        interactions: []
+      },
+      "Fishermen's Guild": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
+        interactions: []
+      },
+      "Fishmongers' Market": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
+        interactions: []
+      },
+      "Riverside Warehouses": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
+        interactions: []
+      },
+      "Shrine of the River-Mother": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
+        interactions: []
+      },
+      "The Waterwheel Mill": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
+        interactions: []
+      },
+      "The Oaken Net Tavern": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
+        interactions: [ { name: "Rest", action: "rest" } ]
+      },
+      "The Grand Guildhall of Creekside": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
+        interactions: []
+      },
+      "Military Barracks and Armory": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
+        interactions: []
+      },
+      "The Muster Yard": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
+        interactions: []
+      },
+      "Shrine of the Twin Watchers": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
+        interactions: []
+      },
+      "Stonecutters' Guild": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
+        interactions: []
+      },
+      "Butchers' Row": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
+        interactions: []
+      },
+      "The Iron Kettle Tavern": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
+        interactions: [ { name: "Rest", action: "rest" } ]
+      },
+      "The Traveler's Hearth Inn": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
+        interactions: [ { name: "Rest", action: "rest" } ]
+      },
+      "Sugar Cane and Beet Fields": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
+        interactions: []
+      },
+      "Fruit Orchards": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
+        interactions: []
+      },
+      "Goat and Sheep Farms": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
+        interactions: []
+      },
+      "Outlying Watchtowers": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
+        interactions: []
+      },
+      "Roadside Shrine of the Forest Father": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
+        interactions: []
+      }
+    }
   }
 };
