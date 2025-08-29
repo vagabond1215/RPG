@@ -698,9 +698,10 @@ function showNavigation() {
   if (pos.building) {
     const building = cityData.buildings[pos.building];
     const buttons = [];
-    const prompt = building.travelPrompt || 'Exit to';
     building.exits.forEach(e => {
-      buttons.push(`<button data-type="exit" data-target="${e.target}">${prompt} ${e.name}</button>`);
+      const prompt = e.prompt || building.travelPrompt || 'Exit to';
+      const type = e.type || 'exit';
+      buttons.push(`<button data-type="${type}" data-target="${e.target}">${prompt} ${e.name}</button>`);
     });
     (building.interactions || []).forEach(i => {
       buttons.push(`<button data-type="interaction" data-action="${i.action}">${i.name}</button>`);
@@ -733,6 +734,14 @@ function showNavigation() {
         } else if (type === 'exit') {
           pos.building = null;
           pos.district = target;
+        } else if (type === 'location') {
+          currentCharacter.location = target;
+          const city = CITY_NAV[target];
+          currentCharacter.position = {
+            city: target,
+            district: city ? Object.keys(city.districts)[0] : null,
+            building: null,
+          };
         } else if (type === 'interaction') {
           showBackButton();
           setMainHTML(`<div class="no-character"><h1>${btn.textContent} not implemented</h1></div>`);

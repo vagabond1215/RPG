@@ -4,6 +4,10 @@ export const CITY_NAV = {
       "Port District": {
         travelPrompt: "Walk to",
         points: [
+          { name: "Harbor Guard Naval Yard", type: "building", target: "Harbor Guard Naval Yard" },
+          { name: "Nobles' Quay", type: "building", target: "Nobles' Quay" },
+          { name: "Merchants' Wharf", type: "building", target: "Merchants' Wharf" },
+          { name: "Fisherman's Pier", type: "building", target: "Fisherman's Pier" },
           { name: "Tideway Inn", type: "building", target: "Tideway Inn" },
           { name: "Upper Ward", type: "district", target: "Upper Ward" },
           { name: "Little Terns", type: "district", target: "Little Terns" }
@@ -86,6 +90,92 @@ export const CITY_NAV = {
       "Hall of Records": {
         travelPrompt: "Exit to",
         exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
+        interactions: []
+      },
+      "Harbor Guard Naval Yard": {
+        travelPrompt: "Exit to",
+        exits: [
+          { name: "Port District", target: "Port District" },
+          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
+        ],
+        interactions: []
+      },
+      "Nobles' Quay": {
+        travelPrompt: "Exit to",
+        exits: [
+          { name: "Port District", target: "Port District" },
+          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
+        ],
+        interactions: []
+      },
+      "Merchants' Wharf": {
+        travelPrompt: "Exit to",
+        exits: [
+          { name: "Port District", target: "Port District" },
+          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
+        ],
+        interactions: []
+      },
+      "Fisherman's Pier": {
+        travelPrompt: "Exit to",
+        exits: [
+          { name: "Port District", target: "Port District" },
+          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
+        ],
+        interactions: []
+      }
+    }
+  },
+  "Coral Keep": {
+    districts: {
+      "South Docks & Steel Docks": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Steel Watch Naval Docks", type: "building", target: "Steel Watch Naval Docks" },
+          { name: "Coral Court Quay", type: "building", target: "Coral Court Quay" },
+          { name: "Glassmarket Wharf", type: "building", target: "Glassmarket Wharf" },
+          { name: "Pearl Commons Pier", type: "building", target: "Pearl Commons Pier" },
+          { name: "Military Ward", type: "district", target: "Military Ward" }
+        ]
+      },
+      "Military Ward": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "South Docks & Steel Docks", type: "district", target: "South Docks & Steel Docks" }
+        ]
+      }
+    },
+    buildings: {
+      "Steel Watch Naval Docks": {
+        travelPrompt: "Exit to",
+        exits: [
+          { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
+        ],
+        interactions: []
+      },
+      "Coral Court Quay": {
+        travelPrompt: "Exit to",
+        exits: [
+          { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
+        ],
+        interactions: []
+      },
+      "Glassmarket Wharf": {
+        travelPrompt: "Exit to",
+        exits: [
+          { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
+        ],
+        interactions: []
+      },
+      "Pearl Commons Pier": {
+        travelPrompt: "Exit to",
+        exits: [
+          { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
+        ],
         interactions: []
       }
     }

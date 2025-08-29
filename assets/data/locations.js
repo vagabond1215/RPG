@@ -31,7 +31,7 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
         "The Lower Gardens",
         "The High Road District (East Gate Approach)",
         "The Farmlands Beyond the Walls",
-    ], population: {
+    ], travel: { routes: ["sea route to Coral Keep"], connections: ["Coral Keep"] }, population: {
         estimate: 31500,
         range: [28000, 34000],
         districts: {
@@ -69,6 +69,10 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
             "Dockmaster's Hall",
             "Warehouse Row",
             "Shipwrights' Yards",
+            "Harbor Guard Naval Yard",
+            "Nobles' Quay",
+            "Merchants' Wharf",
+            "Fisherman's Pier",
             "The Ropewalk",
             "The Cooper's Yard",
             "Saltworks",
@@ -157,7 +161,7 @@ Coral Keep is also a city of exchange. Caravans arrive from the lumber-rich high
         "Greywind's Edge",
         "Starrise Shade",
         "Fairy Hook",
-    ], population: {
+    ], travel: { routes: ["sea route to Wave's Break"], connections: ["Wave's Break"] }, population: {
         estimate: 27000,
         range: [24000, 30000],
         districts: {
@@ -210,6 +214,10 @@ Coral Keep is also a city of exchange. Caravans arrive from the lumber-rich high
             "The Pearl Crown Inn",
             "The Captain's Rest",
             "Dockmaster's Hall",
+            "Steel Watch Naval Docks",
+            "Coral Court Quay",
+            "Glassmarket Wharf",
+            "Pearl Commons Pier",
             "Warehouse Row",
             "The Glassworkers' Guildhall",
             "The Pearl Divers' Guild",
