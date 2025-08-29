@@ -511,8 +511,8 @@ const elementIcons = {
   Fire: '🔥',
   Ice: '❄️',
   Thunder: '⚡',
-  Dark: '🌑',
-  Light: '☀️',
+  Dark: '☁️',
+  Light: '✦',
   Wood: '🌲',
   Magma: '🌋',
   Sand: '🏜️',
@@ -529,8 +529,8 @@ const elementIcons = {
   Wildfire: '🔥',
   Ash: '🌫️',
   Plasma: '🧪',
-  'Sacred Flame': '🔥',
-  Hellfire: '😈',
+  'Sacred Flame': '<span class="icon sacred-flame"></span>',
+  Hellfire: '<span class="icon hellfire"></span>',
   Blizzard: '🌨️',
   Cyclone: '🌪️',
   Skyfire: '☄️',
@@ -551,8 +551,8 @@ const elementColors = {
   Fire: '#ef4444',
   Ice: '#60a5fa',
   Thunder: '#eab308',
-  Dark: '#4b5563',
-  Light: '#facc15'
+  Dark: '#1e1b4b',
+  Light: '#e5e4e2'
 };
 
 function getElementBackground(el) {

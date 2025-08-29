@@ -1126,6 +1126,43 @@ body.theme-dark .element-icon {
   right: 0.3em;
 }
 
+.icon.sacred-flame {
+  position: relative;
+  display: inline-block;
+}
+
+.icon.sacred-flame::before {
+  content: '🔥';
+}
+
+.icon.sacred-flame::after {
+  content: '⭕';
+  position: absolute;
+  top: -0.35em;
+  left: 50%;
+  transform: translateX(-50%) scale(0.6);
+}
+
+.icon.hellfire {
+  position: relative;
+  display: inline-block;
+}
+
+.icon.hellfire::before {
+  content: '🔱';
+  position: absolute;
+  top: -0.2em;
+  left: -0.15em;
+  transform: rotate(-45deg);
+  z-index: 0;
+}
+
+.icon.hellfire::after {
+  content: '🔥';
+  position: relative;
+  z-index: 1;
+}
+
 .spell-name {
   background: none;
   border: none;
