@@ -519,6 +519,101 @@ The city thrives on industry, practicality, and defense. Its dense, stone-and-wo
   },
 };
 
+const WARM_SPRINGS: Location = {
+  ...createLocation(
+    "Warm Springs",
+    "Warm Springs.png",
+    `Warm Springs – The Alchemists’ Refuge
+
+Perched high in the mountain range, Warm Springs is a quiet village of steam, stone, and secrets. Known primarily for its mines and mineral springs, the settlement exports not only iron, gold, silver, and semi-precious stones, but also rare reagents distilled from the hot mineral waters themselves. Alchemists from across the kingdom prize the sulfur, salts, and crystalline precipitates gathered here, and many of the finest practitioners of the craft maintain their homes and workshops in Warm Springs despite the town’s small size. What the settlement lacks in numbers it more than makes up for in influence: its gems, minerals, and alchemical waters are vital to the prosperity of larger cities like Coral Keep and Corona.
+
+The town also carries a reputation for healing and quiet retreat. Many ailing nobles, merchants, or adventurers have made the difficult journey up the mountain passes to bathe in the steaming springs or to consult with the elite alchemists who call Warm Springs home. Though some rumors exaggerate the miraculous properties of the waters, there is truth to their restorative effects. The town, however, has little to offer in the way of excitement—quests are few, dangers minimal, and most contracts are low-risk tasks taken by locals or beginner adventurers. As a result, Warm Springs remains small and insulated, self-sufficient in food but reliant on Creekside for goods such as textiles, tools, and bottles. Its rare fish and shellfish, prized for their vivid colors, exquisite flavors, and alchemical uses, are yet another treasure hidden in this quiet mountain basin.`
+  ),
+  subdivisions: [
+    "Central Plaza",
+    "The Springs",
+    "The Mines",
+    "Craft Halls",
+    "Riverfront",
+    "Farms and Orchards",
+  ],
+  travel: { routes: ["mountain path to Creekside"], connections: ["Creekside"] },
+  pointsOfInterest: {
+    buildings: [
+      "Central Plaza Fountain",
+      "Market Stalls",
+      "Terraced Hot Springs",
+      "Mine Entrances",
+      "Warm Springs Alchemists' Hall",
+      "The Distillery",
+      "Glassblowers' Cottage",
+      "Shrine of the River-Mother",
+      "Shrine of the Flame-Heart",
+      "Stone Circle of Ancestors",
+      "Copper Tankard Tavern",
+      "Springrest Inn",
+      "Village Storehouse",
+      "Butchers' Hut and Smokehouse",
+      "Three Wooden Bridges",
+    ],
+    tradeRoutes: [
+      "mineral and reagent exports to Coral Keep",
+      "mineral and reagent exports to Corona",
+      "imports of textiles, tools, and bottles from Creekside",
+    ],
+    resources: {
+      domestic: [
+        "grain",
+        "vegetables",
+        "goat milk and meat",
+        "berries and nuts",
+        "mineral water",
+        "fish and shellfish",
+      ],
+      exports: [
+        "iron",
+        "gold",
+        "silver",
+        "semi-precious stones",
+        "mineral salts and reagents",
+        "rare fish and shellfish",
+      ],
+      imports: ["textiles", "tools", "bottles"],
+    },
+  },
+  population: {
+    estimate: 200,
+    range: [200, 300],
+    districts: {
+      "Miners' Quarter": {
+        estimate: 60,
+        notes: "miners and smiths",
+      },
+      "Springs Terrace": {
+        estimate: 40,
+        notes: "alchemists, healers, and bath attendants",
+      },
+      Farmsteads: {
+        estimate: 50,
+        notes: "farmers and herders",
+      },
+      Riverfront: {
+        estimate: 30,
+        notes: "fishers and bridge keepers",
+      },
+      "Market Row": {
+        estimate: 20,
+        notes: "tavern, inn, and merchants",
+      },
+    },
+    hinterland: {
+      estimate: 60,
+      notes:
+        "seasonal visitors, patients seeking healing, and traveling merchants",
+    },
+  },
+};
+
 export const LOCATIONS: Record<string, Location> = {
   "Duvilia Kingdom": createLocation(
     "Duvilia Kingdom",
@@ -528,11 +623,7 @@ export const LOCATIONS: Record<string, Location> = {
   "Coral Keep": CORAL_KEEP,
   "Timber Grove": TIMBER_GROVE,
   "Creekside": CREEKSIDE,
-  "Warm Springs": createLocation(
-    "Warm Springs",
-    "Warm Springs.png",
-    "Mining town exporting metals, reagents, and coveted hot spring mineral water with an alchemy guild branch."
-  ),
+  "Warm Springs": WARM_SPRINGS,
   "Dancing Pines": createLocation(
     "Dancing Pines",
     "Dancing Pines.png",
