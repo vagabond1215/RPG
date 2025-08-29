@@ -314,7 +314,19 @@ const defaultProficiencies = {
   lightArmor: 0,
   mediumArmor: 0,
   heavyArmor: 0,
-  dualWield: 0
+  dualWield: 0,
+  cooking: 0,
+  rope: 0,
+  calligraphy: 0,
+  carpentry: 0,
+  herbalism: 0,
+  brewing: 0,
+  drawing: 0,
+  alchemy: 0,
+  gardening: 0,
+  farming: 0,
+  weaving: 0,
+  fletching: 0
 };
 
 function assignMagicAptitudes(character) {
@@ -453,7 +465,21 @@ const proficiencyCategories = {
     'heavyArmor',
     'dualWield'
   ],
-  'Non Combat': ['singing', 'instrument', 'dancing']
+  'Non Combat': ['singing', 'instrument', 'dancing'],
+  Crafting: [
+    'alchemy',
+    'brewing',
+    'carpentry',
+    'weaving',
+    'fletching',
+    'rope',
+    'calligraphy',
+    'drawing',
+    'herbalism',
+    'gardening',
+    'farming',
+    'cooking'
+  ]
 };
 
 const elementalProficiencyMap = {
