@@ -14,6 +14,7 @@ export type ProficiencyKind =
   | "Element_Ice"|"Element_Thunder"|"Element_Dark"|"Element_Light"
   | "Weapon_Sword"|"Weapon_Axe"|"Weapon_Spear"|"Weapon_Dagger"|"Weapon_Mace"|"Weapon_Bow"|"Weapon_Staff"|"Weapon_Shield"|"Weapon_Wand"|"Weapon_Unarmed"
   | "Instrument"|"Dance"|"Singing"
+  | "Craft_Alchemy"|"Craft_Brewing"|"Craft_Carpentry"|"Craft_Weaving"|"Craft_Fletching"|"Craft_Rope"|"Craft_Calligraphy"|"Craft_Drawing"|"Craft_Herbalism"|"Craft_Gardening"|"Craft_Farming"|"Craft_Cooking"
   | "Evasion"|"Parry"|"Block";
 
 export interface ProfBlock {
