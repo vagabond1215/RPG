@@ -7,6 +7,7 @@ import { DENOMINATIONS, CURRENCY_VALUES, convertCurrency, toIron, fromIron } fro
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipment.js";
 import { LOCATIONS } from "./assets/data/locations.js";
 import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
+import { CITY_NAV } from "./assets/data/city_nav.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -656,19 +657,82 @@ function selectProfile() {
   }
 }
 
+function showNavigation() {
+  if (!currentCharacter) return;
+  if (!currentCharacter.position) {
+    const city = currentCharacter.location;
+    const cityData = CITY_NAV[city];
+    currentCharacter.position = {
+      city,
+      district: cityData ? Object.keys(cityData.districts)[0] : null,
+      building: null,
+    };
+  }
+  const pos = currentCharacter.position;
+  const cityData = CITY_NAV[pos.city];
+  if (!cityData) {
+    setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1><p>You are in ${pos.city}.</p></div>`);
+    return;
+  }
+  if (pos.building) {
+    const building = cityData.buildings[pos.building];
+    const buttons = [];
+    const prompt = building.travelPrompt || 'Exit to';
+    building.exits.forEach(e => {
+      buttons.push(`<button data-type="exit" data-target="${e.target}">${prompt} ${e.name}</button>`);
+    });
+    (building.interactions || []).forEach(i => {
+      buttons.push(`<button data-type="interaction" data-action="${i.action}">${i.name}</button>`);
+    });
+    setMainHTML(`<div class="navigation"><h2>${pos.building}</h2><div class="option-grid">${buttons.join('')}</div></div>`);
+  } else {
+    const district = cityData.districts[pos.district];
+    const buttons = district.points.map(pt => {
+      const prompt = pt.type === 'district' ? 'Travel to' : district.travelPrompt || 'Walk to';
+      return `<button data-type="${pt.type}" data-target="${pt.target}">${prompt} ${pt.name}</button>`;
+    });
+    setMainHTML(`<div class="navigation"><h2>${pos.district}</h2><div class="option-grid">${buttons.join('')}</div></div>`);
+  }
+  normalizeOptionButtonWidths();
+  updateMenuHeight();
+  if (main) {
+    main.querySelectorAll('.option-grid button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.type;
+        const target = btn.dataset.target;
+        if (type === 'building') {
+          pos.building = target;
+        } else if (type === 'district') {
+          pos.district = target;
+          pos.building = null;
+        } else if (type === 'exit') {
+          pos.building = null;
+          pos.district = target;
+        } else if (type === 'interaction') {
+          showBackButton();
+          setMainHTML(`<div class="no-character"><h1>${btn.textContent} not implemented</h1></div>`);
+          return;
+        }
+        showNavigation();
+      });
+    });
+  }
+}
+
 function showCharacter() {
   if (!currentCharacter) return;
   hideBackButton();
   updateCharacterButton();
   updateMapButton();
-  const town = currentCharacter.location || '';
-  setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1><p>You awaken in the town of ${town}.</p></div>`);
+  updateActionButton();
+  showNavigation();
 }
 
 function showNoCharacterUI() {
   hideBackButton();
   updateCharacterButton();
   updateMapButton();
+  updateActionButton();
   setMainHTML(`<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`);
   document.getElementById('new-character').addEventListener('click', startCharacterCreation);
   updateMenuHeight();
@@ -1601,9 +1665,11 @@ layoutToggle.addEventListener('click', () => {
 // Dropdown menu
 const menuButton = document.getElementById('menu-button');
 const characterButton = document.getElementById('character-button');
+const actionButton = document.getElementById('action-button');
 const mapButton = document.getElementById('map-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const characterMenu = document.getElementById('characterMenu');
+const actionMenu = document.getElementById('actionMenu');
 const mapContainer = document.createElement('div');
 mapContainer.id = 'map-container';
 body.appendChild(mapContainer);
@@ -1615,14 +1681,24 @@ function updateMapButton() {
   mapButton.style.display = currentCharacter ? 'inline-flex' : 'none';
   if (!currentCharacter) mapContainer.style.display = 'none';
 }
+function updateActionButton() {
+  actionButton.style.display = currentCharacter ? 'inline-flex' : 'none';
+}
 
 menuButton.addEventListener('click', () => {
   dropdownMenu.classList.toggle('active');
   characterMenu.classList.remove('active');
+  actionMenu.classList.remove('active');
 });
 characterButton.addEventListener('click', () => {
   dropdownMenu.classList.remove('active');
   characterMenu.classList.toggle('active');
+  actionMenu.classList.remove('active');
+});
+actionButton.addEventListener('click', () => {
+  dropdownMenu.classList.remove('active');
+  characterMenu.classList.remove('active');
+  actionMenu.classList.toggle('active');
 });
 mapButton.addEventListener('click', () => {
   if (!currentCharacter) return;
@@ -1630,6 +1706,7 @@ mapButton.addEventListener('click', () => {
     mapContainer.style.display = 'none';
     return;
   }
+  actionMenu.classList.remove('active');
   const locName = currentCharacter.location;
   const loc = LOCATIONS[locName] || LOCATIONS['Duvilia Kingdom'];
   mapContainer.innerHTML = `<img src="${loc.map}" alt="${loc.name}"><div class="map-description">${loc.description || ''}</div>`;
@@ -1668,9 +1745,18 @@ characterMenu.addEventListener('click', e => {
   }
 });
 
+actionMenu.addEventListener('click', e => {
+  const action = e.target.dataset.action;
+  if (!action) return;
+  actionMenu.classList.remove('active');
+  showBackButton();
+  setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
+});
+
 backButton.addEventListener('click', () => {
   dropdownMenu.classList.remove('active');
   characterMenu.classList.remove('active');
+  actionMenu.classList.remove('active');
   showMainUI();
 });
 
