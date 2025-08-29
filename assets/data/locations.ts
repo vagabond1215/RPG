@@ -614,6 +614,120 @@ The town also carries a reputation for healing and quiet retreat. Many ailing no
   },
 };
 
+const DANCING_PINES: Location = {
+  ...createLocation(
+    "Dancing Pines",
+    "Dancing Pines.png",
+    `Dancing Pines – The Southern Diamond Outpost
+
+Far in the southeastern corner of the kingdom lies Dancing Pines, a frontier outpost cradled by mountain forests and swift rivers. Though small and newly established, the town has already proven invaluable: its lumberyards supply planks for fishing boats and wagons in Wave's Break, while its diamond mines make it the single greatest source of precious gemstones in the realm. Semi-precious stones, quartz, and other crystals round out its mineral wealth, ensuring steady trade caravans wind their way down the rough mountain tracks to haul riches toward the coast.
+
+The wilderness surrounding Dancing Pines is equally bountiful. Rare pelts from mountain-dwelling beasts are prized by merchants and nobles, while the outpost's hunters also gather wild poultry unique to the region. Most famously, the settlement is home to a master leatherworker, whose fine light armor and commissioned pieces carry such prestige that nobles across the kingdom boast of owning them. Despite its prosperity, the town remains rugged: its river is too shallow for deep transport, forcing goods to be carted a day downhill to barge ports. The remoteness gives Dancing Pines a frontier charm but also a sense of isolation, though it is shielded by patrols from Corona and Wave's Break. For now, the little outpost thrives quietly, its lumber mills and gem mines humming beneath the endless canopy of whispering pines.`
+  ),
+  subdivisions: [
+    "Central Plaza",
+    "Lumberworks",
+    "Diamond Mines",
+    "Hunter's Quarter",
+    "Shrine Row",
+    "Riverfront",
+    "Outlying Camps",
+  ],
+  position: {
+    general: "southeastern mountain frontier",
+    relative: "upstream from the coastal barge dock and south of Wave's Break",
+  },
+  travel: {
+    routes: [
+      "cart track to downriver barge dock",
+      "mountain paths to Corona and Wave's Break",
+    ],
+    connections: ["Corona", "Wave's Break"],
+  },
+  pointsOfInterest: {
+    buildings: [
+      "Central Plaza Totem",
+      "Sawmill and Waterwheels",
+      "Timber Yards",
+      "Carpenter Sheds",
+      "Diamond Mine Entrances",
+      "Stonecutters' Guildhouse",
+      "Miners' Barracks",
+      "Hunter's Lodge",
+      "Leatherwright's Atelier",
+      "Smokehouses",
+      "Shrine of the Forest Father",
+      "Riverside Shrine of the River-Mother",
+      "The Pinehall",
+      "Miners' Respite Tavern",
+      "Dancing Lantern Inn",
+      "Market Stalls",
+      "River Bridges",
+      "Cart Track to Foothills",
+      "Barge Dock",
+      "Logging Camps",
+      "Hunting Grounds",
+      "Scouts' Cabin",
+    ],
+    tradeRoutes: [
+      "caravans to Wave's Break",
+      "caravans to Corona",
+      "cart track to coastal barge dock",
+    ],
+    resources: {
+      domestic: [
+        "lumber",
+        "trout",
+        "shellfish",
+        "wild poultry",
+        "game meat",
+        "pelts",
+      ],
+      exports: [
+        "diamonds",
+        "semi-precious stones",
+        "quartz and crystals",
+        "lumber planks",
+        "wagon frames and furniture",
+        "rare pelts",
+        "wild poultry",
+        "fine leather armor",
+      ],
+      imports: ["grain", "tools", "luxuries"],
+    },
+  },
+  population: {
+    estimate: 100,
+    range: [100, 200],
+    districts: {
+      "Timber Yards": {
+        estimate: 25,
+        notes: "loggers, sawyers, and carpenters",
+      },
+      "Miners' Barracks": {
+        estimate: 30,
+        notes: "diamond miners and stonecutters",
+      },
+      "Hunter's Row": {
+        estimate: 20,
+        notes: "hunters, trappers, and tannery hands",
+      },
+      "Market Plaza": {
+        estimate: 15,
+        notes: "inn, tavern, and visiting traders",
+      },
+      "Shrine Quarter": {
+        estimate: 10,
+        notes: "woodcarvers and spiritual keepers",
+      },
+    },
+    hinterland: {
+      estimate: 50,
+      notes: "logging camps, hunting parties, and scouts in the surrounding mountains",
+    },
+  },
+};
+
 export const LOCATIONS: Record<string, Location> = {
   "Duvilia Kingdom": createLocation(
     "Duvilia Kingdom",
@@ -624,11 +738,7 @@ export const LOCATIONS: Record<string, Location> = {
   "Timber Grove": TIMBER_GROVE,
   "Creekside": CREEKSIDE,
   "Warm Springs": WARM_SPRINGS,
-  "Dancing Pines": createLocation(
-    "Dancing Pines",
-    "Dancing Pines.png",
-    "Supplies small timber, metals, gemstones, game, and pelts; home to a renowned light-armor leatherworker."
-  ),
+  "Dancing Pines": DANCING_PINES,
   "Mountain Top": createLocation(
     "Mountain Top",
     "Mountain Top.png",
