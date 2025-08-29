@@ -89,5 +89,89 @@ export const CITY_NAV = {
         interactions: []
       }
     }
+  },
+  "Timber Grove": {
+    districts: {
+      "Central Plaza": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Fishing Bridges", type: "district", target: "Fishing Bridges" },
+          { name: "The Lumberworks", type: "district", target: "The Lumberworks" },
+          { name: "Fields & Orchards", type: "district", target: "Fields & Orchards" },
+          { name: "Shrine of the Forest Father", type: "building", target: "Shrine of the Forest Father" },
+          { name: "The Timberhall", type: "building", target: "The Timberhall" },
+          { name: "Forest Rest Inn", type: "building", target: "Forest Rest Inn" },
+          { name: "The Riverhouse", type: "building", target: "The Riverhouse" }
+        ]
+      },
+      "Fishing Bridges": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Central Plaza", type: "district", target: "Central Plaza" },
+          { name: "The Mine", type: "district", target: "The Mine" },
+          { name: "Wayside Shrine of the River-Mother", type: "building", target: "Wayside Shrine of the River-Mother" }
+        ]
+      },
+      "The Lumberworks": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Central Plaza", type: "district", target: "Central Plaza" },
+          { name: "Fields & Orchards", type: "district", target: "Fields & Orchards" },
+          { name: "Logger's Flask Tavern", type: "building", target: "Logger's Flask Tavern" }
+        ]
+      },
+      "Fields & Orchards": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "The Lumberworks", type: "district", target: "The Lumberworks" },
+          { name: "The Mine", type: "district", target: "The Mine" }
+        ]
+      },
+      "The Mine": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Fields & Orchards", type: "district", target: "Fields & Orchards" },
+          { name: "Fishing Bridges", type: "district", target: "Fishing Bridges" },
+          { name: "Crystalsong Lodge", type: "building", target: "Crystalsong Lodge" }
+        ]
+      }
+    },
+    buildings: {
+      "Shrine of the Forest Father": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Central Plaza", target: "Central Plaza" } ],
+        interactions: []
+      },
+      "The Timberhall": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Central Plaza", target: "Central Plaza" } ],
+        interactions: []
+      },
+      "Forest Rest Inn": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Central Plaza", target: "Central Plaza" } ],
+        interactions: [ { name: "Rest", action: "rest" } ]
+      },
+      "The Riverhouse": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Central Plaza", target: "Central Plaza" } ],
+        interactions: []
+      },
+      "Wayside Shrine of the River-Mother": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Fishing Bridges", target: "Fishing Bridges" } ],
+        interactions: []
+      },
+      "Logger's Flask Tavern": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "The Lumberworks", target: "The Lumberworks" } ],
+        interactions: []
+      },
+      "Crystalsong Lodge": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "The Mine", target: "The Mine" } ],
+        interactions: []
+      }
+    }
   }
 };
