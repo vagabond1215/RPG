@@ -191,6 +191,8 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
       "Stone Quarries",
       "Outer Watchtowers",
       "Wayside Shrines",
+      "City Bakery",
+      "Central Granary",
     ],
     tradeRoutes: [],
     resources: {
@@ -496,6 +498,8 @@ The city thrives on industry, practicality, and defense. Its dense, stone-and-wo
       "Goat and Sheep Farms",
       "Outlying Watchtowers",
       "Roadside Shrine of the Forest Father",
+      "City Bakery",
+      "Central Granary",
     ],
     tradeRoutes: ["caravans to Timber Grove", "flatboats to Coral Keep"],
     resources: {
