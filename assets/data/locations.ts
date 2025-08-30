@@ -836,6 +836,114 @@ Mountain Top thrives as a trade hub between Corona and Wave's Break, dividing th
   },
 };
 
+const CORONA: Location = {
+  ...createLocation(
+    "Corona",
+    "Corona.png",
+    `Corona – The Bastion of the East
+
+Sprawling across fertile plains at the heart of the eastern lands, Corona is the seat of the human kingdom's power and the largest city in the realm. Its high walls, bustling streets, and endless fields of crops and textile plants make it both the breadbasket and the fortress capital of the kingdom. Every caravan heading to Mountain Top, Corner Stone, or the frontier outpost of Whiteheart passes through Corona, ensuring its markets never sleep and its plazas never stand empty. Beyond the walls stretch orderly farmlands and grazing herds, feeding not only the city itself but much of the eastern realm.
+
+Corona is also a city of steel and stone, with a vast garrison of soldiers housed both within the city and in the Crenelated Barricade, a fortress wall sealing the Wetlands Pass to the south. Adventurers flock here in droves, for Corona serves as the primary launching point for expeditions into the wetlands. Treasure-seekers, mercenaries, and explorers alike come to prove themselves or perish in the mists. The city also serves as the headquarters for all the Main Guild Branches, making it the administrative and logistical core of the kingdom's labor and craft network. While the inner city is organized and bustling, the outer sprawl of slums, rowdy barracks, and laborer quarters reflects the grittier side of Corona: a city of opportunity and ambition, but also hardship and hunger.`
+  ),
+  subdivisions: [
+    "The Citadel Quarter",
+    "Brightshade",
+    "Greatwood Gate District",
+    "West Corona",
+    "Western Slums",
+    "Underway Village",
+    "The Wetlands Wall",
+  ],
+  position: {
+    general: "fertile plains at the heart of the eastern lands",
+    relative: "central hub between Mountain Top, Corner Stone, and Whiteheart",
+  },
+  travel: {
+    routes: [
+      "road to Mountain Top",
+      "road to Corner Stone",
+      "road to Whiteheart",
+    ],
+    connections: ["Mountain Top", "Corner Stone", "Whiteheart"],
+  },
+  pointsOfInterest: {
+    buildings: [
+      "The High Citadel",
+      "Hall of Governance",
+      "Main Barracks of the Eastern Host",
+      "Royal Treasury",
+      "Shrine of the Crowned Sun",
+      "The Beacon Hall",
+      "The Great Market of Brightshade",
+      "Dairy Hall",
+      "Shrine of the Harvestmother",
+      "The Loomhouse Row",
+      "The Shepherd's Rest Inn",
+      "Gate Fortress",
+      "Caravanserai of the Greatwood",
+      "Smiths' Yard",
+      "The Steel Flagon Tavern",
+      "The Artisan's Hall",
+      "Shrine of the Craftfather",
+      "The Glasswrights' Guildhouse",
+      "The Crescent Forge",
+      "The Golden Anvil Inn",
+      "Shanty Markets",
+      "The Rat's Tail Tavern",
+      "Shrine of the Forgotten",
+      "Laborer's Row",
+      "Traveler's Rest Caravanserai",
+      "The Wayfarer's Market",
+      "Road Shrine of the River-Mother",
+      "The Bastion Fort",
+      "The Watchfires",
+      "Mustering Grounds",
+      "The Blackthorn Gate",
+    ],
+    tradeRoutes: [
+      "caravans to Mountain Top",
+      "caravans to Corner Stone",
+      "caravans to Whiteheart",
+    ],
+    resources: {
+      domestic: ["grain", "fruits", "livestock", "textiles", "dairy"],
+      exports: ["grain", "fruits", "livestock", "textiles", "dairy"],
+      imports: ["luxuries", "rare goods"],
+    },
+  },
+  population: {
+    estimate: 42000,
+    range: [42000, 45000],
+    districts: {
+      "The Citadel Quarter": {
+        estimate: 8000,
+        notes: "royal family, military command, garrison",
+      },
+      "Brightshade": {
+        estimate: 9000,
+        notes: "farmers, market-goers, and weavers",
+      },
+      "Greatwood Gate District": {
+        estimate: 7000,
+        notes: "caravan traffic, guards, and smithies",
+      },
+      "West Corona": {
+        estimate: 8000,
+        notes: "artisans, smaller markets, guildhalls",
+      },
+      "Western Slums": {
+        estimate: 10000,
+        notes: "laborers, barracks overflow, and the destitute",
+      },
+    },
+    hinterland: {
+      estimate: 15000,
+      notes: "Underway Village, outer farms, and the Wetlands Wall garrison",
+    },
+  },
+};
+
 export const LOCATIONS: Record<string, Location> = {
   "Duvilia Kingdom": createLocation(
     "Duvilia Kingdom",
@@ -848,11 +956,7 @@ export const LOCATIONS: Record<string, Location> = {
   "Warm Springs": WARM_SPRINGS,
   "Dancing Pines": DANCING_PINES,
   "Mountain Top": MOUNTAIN_TOP,
-  "Corona": createLocation(
-    "Corona",
-    "Corona.png",
-    "Capital producing eastern crops, cattle, dairy, and basic goods; seat of human power hosting major guilds."
-  ),
+  "Corona": CORONA,
   "Corner Stone": createLocation(
     "Corner Stone",
     "Corner Stone.png",
