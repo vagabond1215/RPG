@@ -143,8 +143,8 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
         ],
         tradeRoutes: [],
         resources: {
-            domestic: ["fish", "salt", "sea-goods"],
-            exports: ["fish", "salt", "sea-goods"],
+            domestic: ["fish", "salt", "sea-goods", "tools"],
+            exports: ["fish", "salt", "sea-goods", "tools"],
             imports: ["grain", "wine", "livestock"],
         },
     } });
@@ -261,8 +261,8 @@ Coral Keep is also a city of exchange. Caravans arrive from the lumber-rich high
         ],
         tradeRoutes: [],
         resources: {
-            domestic: ["pearls", "sponges", "coral", "glass", "fish"],
-            exports: ["pearls", "coral", "glass", "lumber", "luxury crafts"],
+            domestic: ["pearls", "sponges", "coral", "glass", "fish", "tools"],
+            exports: ["pearls", "coral", "glass", "lumber", "luxury crafts", "tools"],
             imports: ["timber", "spices", "silks", "gems"],
         },
     } });
@@ -390,11 +390,14 @@ The city thrives on industry, practicality, and defense. Its dense, stone-and-wo
             "The Muster Yard",
             "Shrine of the Twin Watchers",
             "Stonecutters' Guild",
+            "Glass Factory",
+            "Glassblowers' Guild",
             "Butchers' Row",
             "The Iron Kettle Tavern",
             "The Traveler's Hearth Inn",
             "Sugar Cane and Beet Fields",
             "Fruit Orchards",
+            "Vineyards and Wineries",
             "Goat and Sheep Farms",
             "Outlying Watchtowers",
             "Roadside Shrine of the Forest Father",
@@ -409,6 +412,9 @@ The city thrives on industry, practicality, and defense. Its dense, stone-and-wo
                 "leather",
                 "freshwater fish",
                 "fruit",
+                "wine",
+                "glass",
+                "glass bottles",
             ],
             exports: [
                 "grain",
@@ -418,6 +424,9 @@ The city thrives on industry, practicality, and defense. Its dense, stone-and-wo
                 "leather",
                 "freshwater fish",
                 "fruit",
+                "wine",
+                "glass ingots",
+                "glass bottles",
             ],
             imports: ["tools", "luxuries"],
         },
@@ -442,6 +451,7 @@ The town also carries a reputation for healing and quiet retreat. Many ailing no
             "Warm Springs Alchemists' Hall",
             "The Distillery",
             "Glassblowers' Cottage",
+            "Herbal Gardens",
             "Shrine of the River-Mother",
             "Shrine of the Flame-Heart",
             "Stone Circle of Ancestors",
@@ -464,6 +474,7 @@ The town also carries a reputation for healing and quiet retreat. Many ailing no
                 "berries and nuts",
                 "mineral water",
                 "fish and shellfish",
+                "spices and herbs",
             ],
             exports: [
                 "iron",
@@ -472,6 +483,7 @@ The town also carries a reputation for healing and quiet retreat. Many ailing no
                 "semi-precious stones",
                 "mineral salts and reagents",
                 "rare fish and shellfish",
+                "spices and herbs",
             ],
             imports: ["textiles", "tools", "bottles"],
         },
@@ -643,6 +655,7 @@ Mountain Top thrives as a trade hub between Corona and Wave's Break, dividing th
             "Rice Paddies",
             "Potato Fields",
             "Tea Gardens",
+            "Herbal Terraces",
             "The Farmer's Market",
             "The Leatherwright's Hall",
             "Tea-Brewers' Guildhouse",
@@ -661,6 +674,8 @@ Mountain Top thrives as a trade hub between Corona and Wave's Break, dividing th
                 "luxury teas",
                 "freshwater fish",
                 "shellfish",
+                "spices and herbs",
+                "tools",
             ],
             exports: [
                 "rice",
@@ -669,8 +684,10 @@ Mountain Top thrives as a trade hub between Corona and Wave's Break, dividing th
                 "freshwater fish",
                 "shellfish",
                 "diamonds",
+                "spices and herbs",
+                "tools",
             ],
-            imports: ["diamonds", "tools", "luxuries"],
+            imports: ["diamonds", "luxuries"],
         },
     }, population: {
         estimate: 2500,
@@ -702,7 +719,121 @@ Mountain Top thrives as a trade hub between Corona and Wave's Break, dividing th
             notes: "weekly visitors: caravan merchants, adventurers, diamond couriers",
         },
     } });
+const CORONA = Object.assign(Object.assign({}, createLocation("Corona", "Corona.png", `Corona – The Bastion of the East
 
+Sprawling across fertile plains at the heart of the eastern lands, Corona is the seat of the human kingdom's power and the largest city in the realm. Its high walls, bustling streets, and endless fields of crops and textile plants make it both the breadbasket and the fortress capital of the kingdom. Every caravan heading to Mountain Top, Corner Stone, or the frontier outpost of Whiteheart passes through Corona, ensuring its markets never sleep and its plazas never stand empty. Beyond the walls stretch orderly farmlands and grazing herds, feeding not only the city itself but much of the eastern realm.
+
+Corona is also a city of steel and stone, with a vast garrison of soldiers housed both within the city and in the Crenelated Barricade, a fortress wall sealing the Wetlands Pass to the south. Adventurers flock here in droves, for Corona serves as the primary launching point for expeditions into the wetlands. Treasure-seekers, mercenaries, and explorers alike come to prove themselves or perish in the mists. The city also serves as the headquarters for all the Main Guild Branches, making it the administrative and logistical core of the kingdom's labor and craft network. While the inner city is organized and bustling, the outer sprawl of slums, rowdy barracks, and laborer quarters reflects the grittier side of Corona: a city of opportunity and ambition, but also hardship and hunger.`)), { subdivisions: [
+        "The Citadel Quarter",
+        "Brightshade",
+        "Greatwood Gate District",
+        "West Corona",
+        "Western Slums",
+        "Underway Village",
+        "The Wetlands Wall",
+    ], position: {
+        general: "fertile plains at the heart of the eastern lands",
+        relative: "central hub between Mountain Top, Corner Stone, and Whiteheart",
+    }, travel: {
+        routes: [
+            "road to Mountain Top",
+            "road to Corner Stone",
+            "road to Whiteheart",
+        ],
+        connections: ["Mountain Top", "Corner Stone", "Whiteheart"],
+    }, pointsOfInterest: {
+        buildings: [
+            "The High Citadel",
+            "Hall of Governance",
+            "Main Barracks of the Eastern Host",
+            "Royal Treasury",
+            "Shrine of the Crowned Sun",
+            "The Beacon Hall",
+            "The Great Market of Brightshade",
+            "Dairy Hall",
+            "Mulberry Orchards",
+            "Shrine of the Harvestmother",
+            "The Loomhouse Row",
+            "Silkworks",
+            "The Shepherd's Rest Inn",
+            "Gate Fortress",
+            "Caravanserai of the Greatwood",
+            "Smiths' Yard",
+            "The Steel Flagon Tavern",
+            "The Artisan's Hall",
+            "Shrine of the Craftfather",
+            "The Glasswrights' Guildhouse",
+            "The Crescent Forge",
+            "The Golden Anvil Inn",
+            "Shanty Markets",
+            "The Rat's Tail Tavern",
+            "Shrine of the Forgotten",
+            "Laborer's Row",
+            "Traveler's Rest Caravanserai",
+            "The Wayfarer's Market",
+            "Road Shrine of the River-Mother",
+            "The Bastion Fort",
+            "The Watchfires",
+            "Mustering Grounds",
+            "The Blackthorn Gate",
+        ],
+        tradeRoutes: [
+            "caravans to Mountain Top",
+            "caravans to Corner Stone",
+            "caravans to Whiteheart",
+        ],
+        resources: {
+            domestic: [
+                "grain",
+                "fruits",
+                "livestock",
+                "textiles",
+                "dairy",
+                "mulberries",
+                "silk",
+                "tools",
+            ],
+            exports: [
+                "grain",
+                "fruits",
+                "livestock",
+                "textiles",
+                "dairy",
+                "silk",
+                "tools",
+            ],
+            imports: ["luxuries", "rare goods"],
+        },
+    }, population: {
+        estimate: 42000,
+        range: [42000, 45000],
+        districts: {
+            "The Citadel Quarter": {
+                estimate: 8000,
+                notes: "royal family, military command, garrison",
+            },
+            "Brightshade": {
+                estimate: 9000,
+                notes: "farmers, market-goers, and weavers",
+            },
+            "Greatwood Gate District": {
+                estimate: 7000,
+                notes: "caravan traffic, guards, and smithies",
+            },
+            "West Corona": {
+                estimate: 8000,
+                notes: "artisans, smaller markets, guildhalls",
+            },
+            "Western Slums": {
+                estimate: 10000,
+                notes: "laborers, barracks overflow, and the destitute",
+            },
+        },
+        hinterland: {
+            estimate: 15000,
+            notes: "Underway Village, outer farms, and the Wetlands Wall garrison",
+        },
+    } });
 const CORNER_STONE = Object.assign(Object.assign({}, createLocation("Corner Stone", "Corner Stone.png", `Corner Stone – The Jewel of Craftsmanship
 
 Rising on the banks of the kingdom's great rivers and set on the side of a mountain secluded in the north far from the wetlands, Corner Stone is the most fortified and opulent city of the human realm. Built from the very quarries and crystal veins beneath its foundations, its broad avenues, towering walls, and polished stone plazas gleam with craftsmanship unrivaled elsewhere. Here reside the master jewelers, smiths, glasswrights, and artificers of the kingdom, many descended from guild lines stretching back centuries. Unlike Corona or Wave's Break, which bustle with common labor, Corner Stone attracts the wealthy, the ambitious, and the noble, who pay dearly for apartments and workshops within its high walls.
@@ -741,6 +872,7 @@ Corner Stone is also unique in its cultural makeup: it is the only human city wh
             "The Mithril Hall",
             "Smiths' Guildhouse",
             "Coopers' Yard & Metalworkers' Row",
+            "Brewmasters' Hall",
             "The Emberwell Foundry",
             "The Smelter's Rest Tavern",
             "The Forgemaster's Hearth Inn",
@@ -777,6 +909,8 @@ Corner Stone is also unique in its cultural makeup: it is the only human city wh
                 "adamantine goods",
                 "glassware",
                 "coinage",
+                "brewed ales",
+                "tools",
             ],
             exports: [
                 "jewelry",
@@ -784,6 +918,8 @@ Corner Stone is also unique in its cultural makeup: it is the only human city wh
                 "adamantine goods",
                 "glassware",
                 "coinage",
+                "brewed ales",
+                "tools",
             ],
             imports: ["food", "livestock", "raw gems", "timber"],
         },
@@ -825,18 +961,147 @@ Corner Stone is also unique in its cultural makeup: it is the only human city wh
             notes: "outer farmland support villages; garrison of 2,500 and daily visitors up to 2,500",
         },
     } });
-
 const DRAGONS_REACH_ROAD = Object.assign(Object.assign({}, createLocation("Dragon's Reach Road", "Dragon's Reach Road.png", `Dragon's Reach Road – The Northern Frontier Outpost
 
 At the northern edge of the kingdom, deep within ancient forests and just before the rising plateaus where dragons still roost, lies Dragon's Reach Road. Though small, the village stands as the last human settlement before the dragonlands, a place of preparation, recovery, and rumor. Adventurers from across the kingdom travel here to test their courage against the fabled dragons that haunt the peaks, while scavengers and bold hunters sometimes return with scales, horns, or shed remnants of dragons — treasures highly coveted by the master craftsmen of Corner Stone. For many, Dragon's Reach Road is not a home but a proving ground: the last stop before stepping into legend.
 
-Despite its danger-fueled reputation, the outpost also supports itself with quieter trades. The surrounding woodlands yield rare pelts, lumber, and game, while its orchards produce small but prized quantities of exotic fruits found nowhere else in the kingdom. The village sits around a central plaza and lakeside, with fields and paddocks just beyond the palisade wall. While its economy is modest, its role as a gathering place for adventurers, dragon scavengers, and craftsmen seeking rare materials makes Dragon's Reach Road a settlement of outsized importance compared to its population.`)), { subdivisions: ["The Central Plaza", "The Lakeside Quarter", "The Artisan's Lane", "The Outskirts & Farmlands"], position: { general: "northern frontier village by a lake", relative: "last settlement before the dragonlands, north of Corner Stone" }, travel: { routes: ["road to Corner Stone", "northern road into dragonlands"], connections: ["Corner Stone"] }, population: { estimate: 400, range: [400, 1000], districts: { "The Central Plaza": { estimate: 80, notes: "caravans, guild post, quest boards, and the Shrine of the Flame-Heart" }, "The Lakeside Quarter": { estimate: 120, notes: "fishermen, scavengers, the Silver Scale Tavern, and the Drakesong Inn" }, "The Artisan's Lane": { estimate: 100, notes: "workshops for leatherwrights, fletchers, fruit pressers, and stonewrights" }, "The Outskirts & Farmlands": { estimate: 100, notes: "orchards, fields, paddocks, and hunting camps" } }, hinterland: { estimate: 250, notes: "150-300 seasonal adventurers with 40-60 daily travelers; festival peaks up to 800-1,000" } }, pointsOfInterest: { buildings: ["The Guild Post", "Quest Boards", "Shrine of the Flame-Heart", "The Fishermen's Docks", "The Scavenger's Hall", "The Silver Scale Tavern", "The Drakesong Inn", "The Leatherwright's Cabin", "The Fletcher's Hut", "The Exotic Fruit Press", "Stonewright's Shed", "Fruit Orchards", "Hunting Grounds", "Fields & Paddocks", "The Northern Road Gate"], tradeRoutes: ["caravans to Corner Stone", "expeditions into the dragonlands"], resources: { domestic: ["rare pelts", "lumber", "game", "exotic fruits", "dragon remnants"], exports: ["rare pelts", "lumber", "exotic fruits", "dragon remnants"], imports: ["grain", "tools", "finished goods"] } });
-
+Despite its danger-fueled reputation, the outpost also supports itself with quieter trades. The surrounding woodlands yield rare pelts, lumber, and game, while its orchards produce small but prized quantities of exotic fruits found nowhere else in the kingdom. The village sits around a central plaza and lakeside, with fields and paddocks just beyond the palisade wall. While its economy is modest, its role as a gathering place for adventurers, dragon scavengers, and craftsmen seeking rare materials makes Dragon's Reach Road a settlement of outsized importance compared to its population.`)), { subdivisions: [
+        "The Central Plaza",
+        "The Lakeside Quarter",
+        "The Artisan's Lane",
+        "The Outskirts & Farmlands",
+    ], position: {
+        general: "northern frontier village by a lake",
+        relative: "last settlement before the dragonlands, north of Corner Stone",
+    }, travel: {
+        routes: ["road to Corner Stone", "northern road into dragonlands"],
+        connections: ["Corner Stone"],
+    }, population: {
+        estimate: 400,
+        range: [400, 1000],
+        districts: {
+            "The Central Plaza": {
+                estimate: 80,
+                notes: "caravans, guild post, quest boards, and the Shrine of the Flame-Heart",
+            },
+            "The Lakeside Quarter": {
+                estimate: 120,
+                notes: "fishermen, scavengers, the Silver Scale Tavern, and the Drakesong Inn",
+            },
+            "The Artisan's Lane": {
+                estimate: 100,
+                notes: "workshops for leatherwrights, fletchers, fruit pressers, and stonewrights",
+            },
+            "The Outskirts & Farmlands": {
+                estimate: 100,
+                notes: "orchards, fields, paddocks, and hunting camps",
+            },
+        },
+        hinterland: {
+            estimate: 250,
+            notes: "150-300 seasonal adventurers with 40-60 daily travelers; festival peaks up to 800-1,000",
+        },
+    }, pointsOfInterest: {
+        buildings: [
+            "The Guild Post",
+            "Quest Boards",
+            "Shrine of the Flame-Heart",
+            "The Fishermen's Docks",
+            "The Scavenger's Hall",
+            "The Silver Scale Tavern",
+            "The Drakesong Inn",
+            "The Leatherwright's Cabin",
+            "The Fletcher's Hut",
+            "The Exotic Fruit Press",
+            "Stonewright's Shed",
+            "Fruit Orchards",
+            "Hunting Grounds",
+            "Fields & Paddocks",
+            "The Northern Road Gate",
+        ],
+        tradeRoutes: [
+            "caravans to Corner Stone",
+            "expeditions into the dragonlands",
+        ],
+        resources: {
+            domestic: [
+                "rare pelts",
+                "lumber",
+                "game",
+                "exotic fruits",
+                "dragon remnants",
+            ],
+            exports: ["rare pelts", "lumber", "exotic fruits", "dragon remnants"],
+            imports: ["grain", "tools", "finished goods"],
+        },
+    } });
 const WHITEHEART = Object.assign(Object.assign({}, createLocation("Whiteheart", "Whiteheart.png", `Whiteheart – The Eastern Frontier Outpost
 
 Tucked deep within the forested lands between Corona and Corner Stone, Whiteheart is the newest and smallest of the kingdom’s settlements. Founded by the guilds as a frontier experiment, the outpost serves several vital roles: as a logging station for lumber, as a halfway rest for caravans traveling the forest road, and most importantly as a base of operations for scouting and quelling monsters that have begun appearing in unusual numbers from the East. Its name comes from both the pale-barked trees that dominate the forest and the symbolic role it hopes to play as a "heart of the wilderness", taming and expanding human settlement in dangerous lands.
 
-At present, Whiteheart is little more than a guild hall, barracks, and a scattering of homes for hunters, crafters, and laborers. Still, it is expected to grow: guild leaders in Corona see the outpost as a means to relieve overcrowding in the capital by relocating laborers, farmers, and families here. Already plans are underway for farmland expansion, better road patrols, and new defenses against bandits and monsters. For adventurers, Whiteheart offers modest pay but steady work: monster culls, bandit suppression, and forest scouting. Though small, it holds great symbolic importance as the easternmost human presence and the spearpoint of civilization pushing into the deep, ancient woods.`)), { subdivisions: ["The Central Plaza", "The Barracks", "Residences & Community"], position: { general: "forest frontier outpost between Corona and Corner Stone", relative: "midpoint along the forest road and easternmost human presence" }, travel: { routes: ["forest road to Corona", "forest road to Corner Stone"], connections: ["Corona", "Corner Stone"] }, population: { estimate: 150, range: [150, 300], districts: { "The Central Plaza": { estimate: 20, notes: "gathering clearing with guild hall and watchtower" }, "The Barracks": { estimate: 70, notes: "50-75 soldiers patrolling the road" }, "Residences & Community": { estimate: 60, notes: "hunter cabins, crafters' hut, foragers' lodge, communal longhouse" } }, hinterland: { estimate: 40, notes: "logging camps and daily caravans; peaks up to 250-300 visitors" } }, pointsOfInterest: { buildings: ["The Central Plaza", "The Guild Hall", "The Watchtower", "The Muster Post", "The Barracks", "Armory Shed", "Training Yard", "Hunter Cabins", "Crafter's Hut", "Forager's Lodge", "Communal Longhouse", "Shrine of the Forest Father", "Wayside Shrine of the River-Mother", "The White Boar Inn", "The Timber Exchange", "The Roadside Market", "Logging Camps", "Cleared Farmland Patches", "Forest Trails"], tradeRoutes: ["caravans between Corona and Corner Stone", "timber shipments to Corner Stone"], resources: { domestic: ["timber", "game", "pelts", "herbs and mushrooms"], exports: ["timber", "pelts", "forest materials"], imports: ["grain", "tools", "supplies"] } });
+At present, Whiteheart is little more than a guild hall, barracks, and a scattering of homes for hunters, crafters, and laborers. Still, it is expected to grow: guild leaders in Corona see the outpost as a means to relieve overcrowding in the capital by relocating laborers, farmers, and families here. Already plans are underway for farmland expansion, better road patrols, and new defenses against bandits and monsters. For adventurers, Whiteheart offers modest pay but steady work: monster culls, bandit suppression, and forest scouting. Though small, it holds great symbolic importance as the easternmost human presence and the spearpoint of civilization pushing into the deep, ancient woods.`)), { subdivisions: [
+        "The Central Plaza",
+        "The Barracks",
+        "Residences & Community",
+    ], position: {
+        general: "forest frontier outpost between Corona and Corner Stone",
+        relative: "midpoint along the forest road and easternmost human presence",
+    }, travel: {
+        routes: ["forest road to Corona", "forest road to Corner Stone"],
+        connections: ["Corona", "Corner Stone"],
+    }, population: {
+        estimate: 150,
+        range: [150, 300],
+        districts: {
+            "The Central Plaza": {
+                estimate: 20,
+                notes: "gathering clearing with guild hall and watchtower",
+            },
+            "The Barracks": {
+                estimate: 70,
+                notes: "50-75 soldiers patrolling the road",
+            },
+            "Residences & Community": {
+                estimate: 60,
+                notes: "hunter cabins, crafters' hut, foragers' lodge, communal longhouse",
+            },
+        },
+        hinterland: {
+            estimate: 40,
+            notes: "logging camps and daily caravans; peaks up to 250-300 visitors",
+        },
+    }, pointsOfInterest: {
+        buildings: [
+            "The Central Plaza",
+            "The Guild Hall",
+            "The Watchtower",
+            "The Muster Post",
+            "The Barracks",
+            "Armory Shed",
+            "Training Yard",
+            "Hunter Cabins",
+            "Crafter's Hut",
+            "Forager's Lodge",
+            "Communal Longhouse",
+            "Shrine of the Forest Father",
+            "Wayside Shrine of the River-Mother",
+            "The White Boar Inn",
+            "The Timber Exchange",
+            "The Roadside Market",
+            "Logging Camps",
+            "Cleared Farmland Patches",
+            "Forest Trails",
+        ],
+        tradeRoutes: [
+            "caravans between Corona and Corner Stone",
+            "timber shipments to Corner Stone",
+        ],
+        resources: {
+            domestic: ["timber", "game", "pelts", "herbs and mushrooms"],
+            exports: ["timber", "pelts", "forest materials"],
+            imports: ["grain", "tools", "supplies"],
+        },
+    } });
 export const LOCATIONS = {
     "Duvilia Kingdom": createLocation("Duvilia Kingdom", "Duvilia Kingdom.png"),
     "Wave's Break": WAVES_BREAK,
@@ -846,7 +1111,7 @@ export const LOCATIONS = {
     "Warm Springs": WARM_SPRINGS,
     "Dancing Pines": DANCING_PINES,
     "Mountain Top": MOUNTAIN_TOP,
-    "Corona": createLocation("Corona", "Corona.png", "Capital producing eastern crops, cattle, dairy, and basic goods; seat of human power hosting major guilds."),
+    "Corona": CORONA,
     "Corner Stone": CORNER_STONE,
     "Dragon's Reach Road": DRAGONS_REACH_ROAD,
     "Whiteheart": WHITEHEART,
