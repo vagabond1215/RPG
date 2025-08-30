@@ -587,7 +587,7 @@ const schoolIcons = {
   Enfeebling:
     '<span class="icon enfeeble"><span class="arrow">⬇</span></span>',
   Reinforcement:
-    '<span class="icon reinforce"><span class="arrow">⬆</span></span>',
+    '<span class="icon reinforce"><svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 5-3.5 8.5-7 9-3.5-.5-7-4-7-9V7l7-4z"/></svg></span>',
   Healing:
     '<span class="icon heal"><span class="arrow">+</span></span>',
   Summoning: '<span class="icon slime"></span>'
@@ -597,7 +597,10 @@ let spellSort = { mode: 'prof', dir: 'asc' };
 
 function getProficiencySortIcon(dir) {
   const arrow = dir === 'desc' ? '↓' : '↑';
-  return `#${arrow}`;
+  return (
+    `<span class="prof-icon">` +
+    `<svg viewBox="0 0 24 24"><path d="M10 3v18M14 3v18M3 10h18M3 14h18"/></svg>${arrow}</span>`
+  );
 }
 
 function getTypeSortIcon(dir) {
