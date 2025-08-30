@@ -702,6 +702,174 @@ Mountain Top thrives as a trade hub between Corona and Wave's Break, dividing th
             notes: "weekly visitors: caravan merchants, adventurers, diamond couriers",
         },
     } });
+const CORONA = Object.assign(Object.assign({}, createLocation("Corona", "Corona.png", `Corona – The Bastion of the East
+
+Sprawling across fertile plains at the heart of the eastern lands, Corona is the seat of the human kingdom's power and the largest city in the realm. Its high walls, bustling streets, and endless fields of crops and textile plants make it both the breadbasket and the fortress capital of the kingdom. Every caravan heading to Mountain Top, Corner Stone, or the frontier outpost of Whiteheart passes through Corona, ensuring its markets never sleep and its plazas never stand empty. Beyond the walls stretch orderly farmlands and grazing herds, feeding not only the city itself but much of the eastern realm.
+
+Corona is also a city of steel and stone, with a vast garrison of soldiers housed both within the city and in the Crenelated Barricade, a fortress wall sealing the Wetlands Pass to the south. Adventurers flock here in droves, for Corona serves as the primary launching point for expeditions into the wetlands. Treasure-seekers, mercenaries, and explorers alike come to prove themselves or perish in the mists. The city also serves as the headquarters for all the Main Guild Branches, making it the administrative and logistical core of the kingdom's labor and craft network. While the inner city is organized and bustling, the outer sprawl of slums, rowdy barracks, and laborer quarters reflects the grittier side of Corona: a city of opportunity and ambition, but also hardship and hunger.`)), { subdivisions: [
+        "The Citadel Quarter",
+        "Brightshade",
+        "Greatwood Gate District",
+        "West Corona",
+        "Western Slums",
+        "Underway Village",
+        "The Wetlands Wall",
+    ], position: {
+        general: "fertile plains at the heart of the eastern lands",
+        relative: "central hub between Mountain Top, Corner Stone, and Whiteheart",
+    }, travel: {
+        routes: [
+            "road to Mountain Top",
+            "road to Corner Stone",
+            "road to Whiteheart",
+        ],
+        connections: ["Mountain Top", "Corner Stone", "Whiteheart"],
+    }, pointsOfInterest: {
+        buildings: [
+            "The High Citadel",
+            "Hall of Governance",
+            "Main Barracks of the Eastern Host",
+            "Royal Treasury",
+            "Shrine of the Crowned Sun",
+            "The Beacon Hall",
+            "The Great Market of Brightshade",
+            "Dairy Hall",
+            "Shrine of the Harvestmother",
+            "The Loomhouse Row",
+            "The Shepherd's Rest Inn",
+            "Gate Fortress",
+            "Caravanserai of the Greatwood",
+            "Smiths' Yard",
+            "The Steel Flagon Tavern",
+            "The Artisan's Hall",
+            "Shrine of the Craftfather",
+            "The Glasswrights' Guildhouse",
+            "The Crescent Forge",
+            "The Golden Anvil Inn",
+            "Shanty Markets",
+            "The Rat's Tail Tavern",
+            "Shrine of the Forgotten",
+            "Laborer's Row",
+            "Traveler's Rest Caravanserai",
+            "The Wayfarer's Market",
+            "Road Shrine of the River-Mother",
+            "The Bastion Fort",
+            "The Watchfires",
+            "Mustering Grounds",
+            "The Blackthorn Gate",
+        ],
+        tradeRoutes: [
+            "caravans to Mountain Top",
+            "caravans to Corner Stone",
+            "caravans to Whiteheart",
+        ],
+        resources: {
+            domestic: ["grain", "fruits", "livestock", "textiles", "dairy"],
+            exports: ["grain", "fruits", "livestock", "textiles", "dairy"],
+            imports: ["luxuries", "rare goods"],
+        },
+    }, population: {
+        estimate: 42000,
+        range: [42000, 45000],
+        districts: {
+            "The Citadel Quarter": {
+                estimate: 8000,
+                notes: "royal family, military command, garrison",
+            },
+            "Brightshade": {
+                estimate: 9000,
+                notes: "farmers, market-goers, and weavers",
+            },
+            "Greatwood Gate District": {
+                estimate: 7000,
+                notes: "caravan traffic, guards, and smithies",
+            },
+            "West Corona": {
+                estimate: 8000,
+                notes: "artisans, smaller markets, guildhalls",
+            },
+            "Western Slums": {
+                estimate: 10000,
+                notes: "laborers, barracks overflow, and the destitute",
+            },
+        },
+        hinterland: {
+            estimate: 15000,
+            notes: "Underway Village, outer farms, and the Wetlands Wall garrison",
+        },
+    } });
+const DRAGONS_REACH_ROAD = Object.assign(Object.assign({}, createLocation("Dragon's Reach Road", "Dragon's Reach Road.png", `Dragon's Reach Road – The Northern Frontier Outpost
+
+At the northern edge of the kingdom, deep within ancient forests and just before the rising plateaus where dragons still roost, lies Dragon's Reach Road. Though small, the village stands as the last human settlement before the dragonlands, a place of preparation, recovery, and rumor. Adventurers from across the kingdom travel here to test their courage against the fabled dragons that haunt the peaks, while scavengers and bold hunters sometimes return with scales, horns, or shed remnants of dragons — treasures highly coveted by the master craftsmen of Corner Stone. For many, Dragon's Reach Road is not a home but a proving ground: the last stop before stepping into legend.
+
+Despite its danger-fueled reputation, the outpost also supports itself with quieter trades. The surrounding woodlands yield rare pelts, lumber, and game, while its orchards produce small but prized quantities of exotic fruits found nowhere else in the kingdom. The village sits around a central plaza and lakeside, with fields and paddocks just beyond the palisade wall. While its economy is modest, its role as a gathering place for adventurers, dragon scavengers, and craftsmen seeking rare materials makes Dragon's Reach Road a settlement of outsized importance compared to its population.`)), { subdivisions: [
+        "The Central Plaza",
+        "The Lakeside Quarter",
+        "The Artisan's Lane",
+        "The Outskirts & Farmlands",
+    ], position: {
+        general: "northern edge of the kingdom amid ancient forests before the dragon plateaus",
+        relative: "last human outpost north of Corner Stone before the dragonlands",
+    }, travel: {
+        routes: ["road to Corner Stone", "northern road to the dragonlands"],
+        connections: ["Corner Stone"],
+    }, pointsOfInterest: {
+        buildings: [
+            "The Guild Post",
+            "Quest Boards",
+            "Shrine of the Flame-Heart",
+            "The Fishermen's Docks",
+            "The Scavenger's Hall",
+            "The Silver Scale Tavern",
+            "The Drakesong Inn",
+            "The Leatherwright's Cabin",
+            "The Fletcher's Hut",
+            "The Exotic Fruit Press",
+            "Stonewright's Shed",
+            "The Northern Road Gate",
+        ],
+        tradeRoutes: [
+            "caravans to Corner Stone",
+            "expeditions into the dragonlands",
+        ],
+        resources: {
+            domestic: [
+                "exotic fruit",
+                "pelts",
+                "lumber",
+                "game",
+                "fish",
+                "dragon remnants",
+            ],
+            exports: ["dragon materials", "exotic fruits", "pelts", "lumber"],
+            imports: ["supplies", "crafted goods"],
+        },
+    }, population: {
+        estimate: 400,
+        range: [400, 1000],
+        districts: {
+            "Central Plaza": {
+                estimate: 100,
+                notes: "merchants, guild hands, and visiting caravans",
+            },
+            "Lakeside Quarter": {
+                estimate: 80,
+                notes: "fishers, scavengers, and tavern keeps",
+            },
+            "Artisan's Lane": {
+                estimate: 70,
+                notes: "leatherwrights, fletchers, fruit pressers, stonewrights",
+            },
+            "Outskirts & Farmlands": {
+                estimate: 150,
+                notes: "farmers, hunters, and herders",
+            },
+        },
+        hinterland: {
+            estimate: 275,
+            notes: "adventurers and seasonal visitors (150–300) plus daily travelers (40–60); peaks to 800–1000 during festivals or dragon-slaying events",
+        },
+    } });
 export const LOCATIONS = {
     "Duvilia Kingdom": createLocation("Duvilia Kingdom", "Duvilia Kingdom.png"),
     "Wave's Break": WAVES_BREAK,
@@ -711,8 +879,8 @@ export const LOCATIONS = {
     "Warm Springs": WARM_SPRINGS,
     "Dancing Pines": DANCING_PINES,
     "Mountain Top": MOUNTAIN_TOP,
-    "Corona": createLocation("Corona", "Corona.png", "Capital producing eastern crops, cattle, dairy, and basic goods; seat of human power hosting major guilds."),
+    "Corona": CORONA,
     "Corner Stone": createLocation("Corner Stone", "Corner Stone.png", "Premier crafting city rich in crystal, quartz, stone, and rare metals like mithril and adamantine; home to master artisans and the Commerce Guild."),
-    "Dragon's Reach Road": createLocation("Dragon's Reach Road", "Dragon's Reach Road.png", "Northern frontier stop before the dragon plateaus, yielding fruit, game, lumber, pelts, and scarce dragon materials."),
+    "Dragon's Reach Road": DRAGONS_REACH_ROAD,
     "Whiteheart": createLocation("Whiteheart", "Whiteheart.png", "Guild-founded outpost for lumber and exploration, serving as midpoint between Corona and Corner Stone to expand eastern agriculture and curb bandits."),
 };

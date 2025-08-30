@@ -944,6 +944,93 @@ Corona is also a city of steel and stone, with a vast garrison of soldiers house
   },
 };
 
+const DRAGONS_REACH_ROAD: Location = {
+  ...createLocation(
+    "Dragon's Reach Road",
+    "Dragon's Reach Road.png",
+    `Dragon's Reach Road – The Northern Frontier Outpost
+
+At the northern edge of the kingdom, deep within ancient forests and just before the rising plateaus where dragons still roost, lies Dragon's Reach Road. Though small, the village stands as the last human settlement before the dragonlands, a place of preparation, recovery, and rumor. Adventurers from across the kingdom travel here to test their courage against the fabled dragons that haunt the peaks, while scavengers and bold hunters sometimes return with scales, horns, or shed remnants of dragons — treasures highly coveted by the master craftsmen of Corner Stone. For many, Dragon's Reach Road is not a home but a proving ground: the last stop before stepping into legend.
+
+Despite its danger-fueled reputation, the outpost also supports itself with quieter trades. The surrounding woodlands yield rare pelts, lumber, and game, while its orchards produce small but prized quantities of exotic fruits found nowhere else in the kingdom. The village sits around a central plaza and lakeside, with fields and paddocks just beyond the palisade wall. While its economy is modest, its role as a gathering place for adventurers, dragon scavengers, and craftsmen seeking rare materials makes Dragon's Reach Road a settlement of outsized importance compared to its population.`
+  ),
+  subdivisions: [
+    "The Central Plaza",
+    "The Lakeside Quarter",
+    "The Artisan's Lane",
+    "The Outskirts & Farmlands",
+  ],
+  position: {
+    general:
+      "northern edge of the kingdom amid ancient forests before the dragon plateaus",
+    relative:
+      "last human outpost north of Corner Stone before the dragonlands",
+  },
+  travel: {
+    routes: ["road to Corner Stone", "northern road to the dragonlands"],
+    connections: ["Corner Stone"],
+  },
+  pointsOfInterest: {
+    buildings: [
+      "The Guild Post",
+      "Quest Boards",
+      "Shrine of the Flame-Heart",
+      "The Fishermen's Docks",
+      "The Scavenger's Hall",
+      "The Silver Scale Tavern",
+      "The Drakesong Inn",
+      "The Leatherwright's Cabin",
+      "The Fletcher's Hut",
+      "The Exotic Fruit Press",
+      "Stonewright's Shed",
+      "The Northern Road Gate",
+    ],
+    tradeRoutes: [
+      "caravans to Corner Stone",
+      "expeditions into the dragonlands",
+    ],
+    resources: {
+      domestic: [
+        "exotic fruit",
+        "pelts",
+        "lumber",
+        "game",
+        "fish",
+        "dragon remnants",
+      ],
+      exports: ["dragon materials", "exotic fruits", "pelts", "lumber"],
+      imports: ["supplies", "crafted goods"],
+    },
+  },
+  population: {
+    estimate: 400,
+    range: [400, 1000],
+    districts: {
+      "Central Plaza": {
+        estimate: 100,
+        notes: "merchants, guild hands, and visiting caravans",
+      },
+      "Lakeside Quarter": {
+        estimate: 80,
+        notes: "fishers, scavengers, and tavern keeps",
+      },
+      "Artisan's Lane": {
+        estimate: 70,
+        notes: "leatherwrights, fletchers, fruit pressers, stonewrights",
+      },
+      "Outskirts & Farmlands": {
+        estimate: 150,
+        notes: "farmers, hunters, and herders",
+      },
+    },
+    hinterland: {
+      estimate: 275,
+      notes:
+        "adventurers and seasonal visitors (150–300) plus daily travelers (40–60); peaks to 800–1000 during festivals or dragon-slaying events",
+    },
+  },
+};
+
 export const LOCATIONS: Record<string, Location> = {
   "Duvilia Kingdom": createLocation(
     "Duvilia Kingdom",
@@ -962,11 +1049,7 @@ export const LOCATIONS: Record<string, Location> = {
     "Corner Stone.png",
     "Premier crafting city rich in crystal, quartz, stone, and rare metals like mithril and adamantine; home to master artisans and the Commerce Guild."
   ),
-  "Dragon's Reach Road": createLocation(
-    "Dragon's Reach Road",
-    "Dragon's Reach Road.png",
-    "Northern frontier stop before the dragon plateaus, yielding fruit, game, lumber, pelts, and scarce dragon materials."
-  ),
+  "Dragon's Reach Road": DRAGONS_REACH_ROAD,
   "Whiteheart": createLocation(
     "Whiteheart",
     "Whiteheart.png",
