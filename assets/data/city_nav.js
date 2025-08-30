@@ -43,6 +43,8 @@ export const CITY_NAV = {
       "The Lower Gardens": {
         travelPrompt: "Walk to",
         points: [
+          { name: "City Bakery", type: "building", target: "City Bakery" },
+          { name: "Central Granary", type: "building", target: "Central Granary" },
           { name: "Greensoul Hill", type: "district", target: "Greensoul Hill" },
           { name: "The High Road District", type: "district", target: "The High Road District" }
         ]
@@ -123,6 +125,16 @@ export const CITY_NAV = {
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
         ],
         interactions: []
+      },
+      "City Bakery": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Central Granary": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
       }
     }
   },
@@ -276,7 +288,9 @@ export const CITY_NAV = {
           { name: "The Creamery Hall", type: "building", target: "The Creamery Hall" },
           { name: "Leatherworkers' Guildhouse", type: "building", target: "Leatherworkers' Guildhouse" },
           { name: "Shrine of the Harvestmother", type: "building", target: "Shrine of the Harvestmother" },
-          { name: "The Plowman's Rest Tavern", type: "building", target: "The Plowman's Rest Tavern" }
+          { name: "The Plowman's Rest Tavern", type: "building", target: "The Plowman's Rest Tavern" },
+          { name: "City Bakery", type: "building", target: "City Bakery" },
+          { name: "Central Granary", type: "building", target: "Central Granary" }
         ]
       },
       "Everrise Bridge": {
@@ -353,6 +367,16 @@ export const CITY_NAV = {
         travelPrompt: "Exit to",
         exits: [ { name: "Greenford", target: "Greenford" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
+      },
+      "City Bakery": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Greenford", target: "Greenford" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Central Granary": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Greenford", target: "Greenford" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
       },
       "The Everrise Bridge": {
         travelPrompt: "Exit to",
