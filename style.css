@@ -644,6 +644,17 @@ body.theme-dark {
     color: var(--background);
   }
 
+  .business-hours {
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .option-grid .group-separator {
+    width: 100%;
+    height: 0.5rem;
+  }
+
   .navigation .city-name {
     margin: 0 0 0.5rem 0;
     text-align: center;

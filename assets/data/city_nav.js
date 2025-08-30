@@ -1,3 +1,5 @@
+import { LOCATIONS } from "./locations.js";
+
 export const CITY_NAV = {
   "Wave's Break": {
     districts: {
@@ -696,3 +698,35 @@ export const CITY_NAV = {
     }
   }
 };
+
+function defaultBusinessHours(cityName, buildingName) {
+  const population = LOCATIONS[cityName]?.population?.estimate || 0;
+  const name = buildingName.toLowerCase();
+  if (/(inn|tavern)/.test(name)) {
+    return population >= 15000
+      ? { open: "00:00", close: "24:00" }
+      : { open: "06:00", close: "24:00" };
+  }
+  if (/(temple|shrine|church|monastery)/.test(name)) {
+    return { open: "06:00", close: "22:00" };
+  }
+  if (/(shop|market|exchange|wharf|pier|yard|bakery|granary)/.test(name)) {
+    return { open: "06:00", close: "18:00" };
+  }
+  if (/(forge|workshop|lodge|shed|lab|sanctum|guild|hall|keep)/.test(name)) {
+    return { open: "08:00", close: "20:00" };
+  }
+  return { open: "09:00", close: "17:00" };
+}
+
+function applyBusinessHours(nav) {
+  Object.entries(nav).forEach(([cityName, city]) => {
+    Object.entries(city.buildings).forEach(([buildingName, building]) => {
+      if (!building.hours) {
+        building.hours = defaultBusinessHours(cityName, buildingName);
+      }
+    });
+  });
+}
+
+applyBusinessHours(CITY_NAV);
