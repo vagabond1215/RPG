@@ -303,6 +303,8 @@ export const CITY_NAV = {
           { name: "The Muster Yard", type: "building", target: "The Muster Yard" },
           { name: "Shrine of the Twin Watchers", type: "building", target: "Shrine of the Twin Watchers" },
           { name: "Stonecutters' Guild", type: "building", target: "Stonecutters' Guild" },
+          { name: "Glass Factory", type: "building", target: "Glass Factory" },
+          { name: "Glassblowers' Guild", type: "building", target: "Glassblowers' Guild" },
           { name: "Butchers' Row", type: "building", target: "Butchers' Row" },
           { name: "The Iron Kettle Tavern", type: "building", target: "The Iron Kettle Tavern" },
           { name: "The Traveler's Hearth Inn", type: "building", target: "The Traveler's Hearth Inn" }
@@ -314,6 +316,7 @@ export const CITY_NAV = {
           { name: "Greenford", type: "district", target: "Greenford" },
           { name: "Sugar Cane and Beet Fields", type: "building", target: "Sugar Cane and Beet Fields" },
           { name: "Fruit Orchards", type: "building", target: "Fruit Orchards" },
+          { name: "Vineyards and Wineries", type: "building", target: "Vineyards and Wineries" },
           { name: "Goat and Sheep Farms", type: "building", target: "Goat and Sheep Farms" },
           { name: "Outlying Watchtowers", type: "building", target: "Outlying Watchtowers" },
           { name: "Roadside Shrine of the Forest Father", type: "building", target: "Roadside Shrine of the Forest Father" }
@@ -411,6 +414,16 @@ export const CITY_NAV = {
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: []
       },
+      "Glass Factory": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
+        interactions: []
+      },
+      "Glassblowers' Guild": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
+        interactions: []
+      },
       "Butchers' Row": {
         travelPrompt: "Exit to",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
@@ -432,6 +445,11 @@ export const CITY_NAV = {
         interactions: []
       },
       "Fruit Orchards": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
+        interactions: []
+      },
+      "Vineyards and Wineries": {
         travelPrompt: "Exit to",
         exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
         interactions: []
