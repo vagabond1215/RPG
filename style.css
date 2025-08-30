@@ -1289,3 +1289,23 @@ body.theme-dark .element-icon {
   color: var(--foreground);
   font-size: 1.25rem;
 }
+
+.quest-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quest-item {
+  margin-bottom: 0.5rem;
+}
+
+.quest-item h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.quest-item p {
+  margin: 0;
+  font-size: 0.9rem;
+}

@@ -1258,6 +1258,58 @@ function removeCapTooltip() {
 
 document.addEventListener('click', removeCapTooltip);
 
+function showQuestBoardsUI() {
+  if (!currentCharacter) return;
+  showBackButton();
+  const loc = LOCATIONS[currentCharacter.location];
+  if (!loc) {
+    setMainHTML('<div class="no-character"><h1>No quest boards found.</h1></div>');
+    return;
+  }
+  const boards = Object.keys(loc.questBoards || {});
+  if (!boards.length) {
+    setMainHTML(`<div class="no-character"><h1>No quest boards in ${loc.name}</h1></div>`);
+    return;
+  }
+  const createItem = name => {
+    return `<div class="nav-item"><button data-board="${name}" aria-label="${name}"><span class="nav-icon">🪧</span></button><span class="street-sign">${name}</span></div>`;
+  };
+  const buttons = boards.map(createItem).join('');
+  setMainHTML(`<div class="navigation"><h1 class="city-name">${loc.name}</h1><h2>Quest Boards</h2><div class="option-grid">${buttons}</div></div>`);
+  normalizeOptionButtonWidths();
+  updateMenuHeight();
+  if (main) {
+    main.querySelectorAll('.option-grid button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const board = btn.dataset.board;
+        showQuestBoardDetails(board);
+      });
+    });
+  }
+}
+
+function showQuestBoardDetails(boardName) {
+  if (!currentCharacter) return;
+  showBackButton();
+  const loc = LOCATIONS[currentCharacter.location];
+  const quests = loc.questBoards[boardName] || [];
+  let html = `<div class="questboard-detail navigation"><h1 class="city-name">${loc.name}</h1><h2>${boardName}</h2>`;
+  if (quests.length) {
+    html += '<ul class="quest-list">';
+    quests.forEach(q => {
+      html += `<li class="quest-item"><h3>${q.title}</h3><p>${q.description}</p></li>`;
+    });
+    html += '</ul>';
+  } else {
+    html += '<p>No quests available.</p>';
+  }
+  html += '<div class="option-grid"><button id="return-questboards">Back to Boards</button></div></div>';
+  setMainHTML(html);
+  updateMenuHeight();
+  const backBtn = document.getElementById('return-questboards');
+  if (backBtn) backBtn.addEventListener('click', showQuestBoardsUI);
+}
+
 const SLOT_ICONS = {
   mainHand: '<svg viewBox="0 0 24 24"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5" /><line x1="13" y1="19" x2="19" y2="13" /><line x1="16" y1="16" x2="20" y2="20" /><line x1="19" y1="21" x2="21" y2="19" /></svg>',
   offHand: '<svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></svg>',
@@ -1972,6 +2024,8 @@ characterMenu.addEventListener('click', e => {
     showSpellbookUI();
   } else if (action === 'proficiencies') {
     showProficienciesUI();
+  } else if (action === 'quests') {
+    showQuestBoardsUI();
   } else {
     showBackButton();
     setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
