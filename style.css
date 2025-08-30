@@ -999,8 +999,20 @@ body.theme-dark {
   align-items: center;
 }
 
-.element-icon {
+
+.element-icon,
+.school-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  font-size: 1em;
+  line-height: 1;
   margin-right: 0.25rem;
+}
+
+.element-icon {
   filter: brightness(0) saturate(100%) invert(1);
 }
 
@@ -1023,9 +1035,7 @@ body.theme-dark .element-icon {
   gap: 0.25rem;
 }
 
-.sort-button.active {
-  text-decoration: underline;
-}
+
 
 .spell-subheading {
   margin: 0.5rem 0 0.25rem;
@@ -1053,10 +1063,6 @@ body.theme-dark .element-icon {
   background: linear-gradient(to right, var(--background), var(--foreground), var(--background));
 }
 
-.school-icon {
-  margin-right: 0.25rem;
-}
-
 .spellbook-icon {
   margin-right: 0.25rem;
 }
@@ -1064,20 +1070,26 @@ body.theme-dark .element-icon {
 .icon {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
 }
 
-.type-icon {
+.type-icon,
+.prof-icon {
   display: inline-flex;
   align-items: center;
 }
 
-.type-icon svg {
+.type-icon svg,
+.prof-icon svg {
   width: 1em;
   height: 1em;
   fill: none;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke: currentColor;
 }
 
 .type-icon .cw {
@@ -1092,8 +1104,9 @@ body.theme-dark .element-icon {
   color: red;
 }
 
-.icon.reinforce .arrow {
-  color: blue;
+.icon.reinforce svg {
+  fill: #3b82f6;
+  stroke: #2563eb;
 }
 
 .icon.heal .arrow {
@@ -1103,7 +1116,7 @@ body.theme-dark .element-icon {
 .icon.slime {
   display: inline-block;
   width: 1em;
-  height: 0.8em;
+  height: 1em;
   background: #6f6;
   border-radius: 50% 50% 40% 40%;
   position: relative;
