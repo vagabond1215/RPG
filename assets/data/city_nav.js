@@ -28,6 +28,13 @@ export const CITY_NAV = {
       "Little Terns": {
         travelPrompt: "Walk to",
         points: [
+          { name: "Glassblowing Academy", type: "building", target: "Glassblowing Academy" },
+          { name: "Smithing Academy", type: "building", target: "Smithing Academy" },
+          { name: "Carpentry Academy", type: "building", target: "Carpentry Academy" },
+          { name: "Tailors' Academy", type: "building", target: "Tailors' Academy" },
+          { name: "Leatherworking School", type: "building", target: "Leatherworking School" },
+          { name: "Alchemy Academy", type: "building", target: "Alchemy Academy" },
+          { name: "Enchanters' Academy", type: "building", target: "Enchanters' Academy" },
           { name: "Port District", type: "district", target: "Port District" },
           { name: "Greensoul Hill", type: "district", target: "Greensoul Hill" }
         ]
@@ -116,6 +123,41 @@ export const CITY_NAV = {
         ],
         interactions: []
       },
+      "Glassblowing Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Practice Glassblowing", action: "train-glassblowing" } ]
+      },
+      "Smithing Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Practice Blacksmithing", action: "train-blacksmithing" } ]
+      },
+      "Carpentry Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Practice Carpentry", action: "train-carpentry" } ]
+      },
+      "Tailors' Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Practice Tailoring", action: "train-tailoring" } ]
+      },
+      "Leatherworking School": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Practice Leatherworking", action: "train-leatherworking" } ]
+      },
+      "Alchemy Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Practice Alchemy", action: "train-alchemy" } ]
+      },
+      "Enchanters' Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Practice Enchanting", action: "train-enchanting" } ]
+      },
       "Fisherman's Pier": {
         travelPrompt: "Exit to",
         exits: [
@@ -134,7 +176,15 @@ export const CITY_NAV = {
           { name: "Steel Watch Naval Docks", type: "building", target: "Steel Watch Naval Docks" },
           { name: "Coral Court Quay", type: "building", target: "Coral Court Quay" },
           { name: "Glassmarket Wharf", type: "building", target: "Glassmarket Wharf" },
+          { name: "Glassblowing Academy", type: "building", target: "Glassblowing Academy" },
           { name: "Pearl Commons Pier", type: "building", target: "Pearl Commons Pier" },
+          { name: "Pearl Diver School", type: "building", target: "Pearl Diver School" },
+          { name: "Smithing Academy", type: "building", target: "Smithing Academy" },
+          { name: "Carpentry Academy", type: "building", target: "Carpentry Academy" },
+          { name: "Tailors' Academy", type: "building", target: "Tailors' Academy" },
+          { name: "Leatherworking School", type: "building", target: "Leatherworking School" },
+          { name: "Alchemy Academy", type: "building", target: "Alchemy Academy" },
+          { name: "Enchanters' Academy", type: "building", target: "Enchanters' Academy" },
           { name: "Military Ward", type: "district", target: "Military Ward" }
         ]
       },
@@ -177,6 +227,46 @@ export const CITY_NAV = {
           { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
         ],
         interactions: []
+      },
+      "Glassblowing Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        interactions: [ { name: "Practice Glassblowing", action: "train-glassblowing" } ]
+      },
+      "Pearl Diver School": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        interactions: [ { name: "Take Diving Lessons", action: "train-pearl-diving" } ]
+      },
+      "Smithing Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        interactions: [ { name: "Practice Blacksmithing", action: "train-blacksmithing" } ]
+      },
+      "Carpentry Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        interactions: [ { name: "Practice Carpentry", action: "train-carpentry" } ]
+      },
+      "Tailors' Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        interactions: [ { name: "Practice Tailoring", action: "train-tailoring" } ]
+      },
+      "Leatherworking School": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        interactions: [ { name: "Practice Leatherworking", action: "train-leatherworking" } ]
+      },
+      "Alchemy Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        interactions: [ { name: "Practice Alchemy", action: "train-alchemy" } ]
+      },
+      "Enchanters' Academy": {
+        travelPrompt: "Exit to",
+        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        interactions: [ { name: "Practice Enchanting", action: "train-enchanting" } ]
       }
     }
   },
