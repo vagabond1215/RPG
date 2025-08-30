@@ -28,6 +28,15 @@ export interface Location {
     districts: Record<string, { estimate: number; notes: string }>;
     hinterland?: { estimate: number; notes: string };
   };
+  questBoards: Record<string, Quest[]>;
+}
+
+export interface Quest {
+  title: string;
+  description: string;
+  repeatable?: boolean;
+  highPriority?: boolean;
+  requiresCheckIn?: boolean;
 }
 
 export function createLocation(
@@ -48,7 +57,112 @@ export function createLocation(
       resources: { domestic: [], exports: [], imports: [] },
     },
     population: undefined,
+    questBoards: {},
   };
+}
+
+function createQuest(
+  title: string,
+  description: string,
+  opts: Partial<Quest> = {},
+): Quest {
+  return { title, description, ...opts };
+}
+
+function addQuestBoards(loc: Location) {
+  const boards: Record<string, Quest[]> = {};
+
+  const banditPatrol = createQuest(
+    "Patrol the main road",
+    "Help the guards keep bandits away.",
+    { repeatable: true, highPriority: true },
+  );
+
+  const prototypeBlade = createQuest(
+    "Test prototype blade",
+    "Check with Master Smith before testing.",
+    { requiresCheckIn: true },
+  );
+
+  if (loc.population?.districts) {
+    Object.keys(loc.population.districts).forEach((d) => {
+      boards[`${d} Quest Board`] = [
+        createQuest(
+          `Assist ${d} locals`,
+          `Handle tasks for residents of ${d}.`,
+        ),
+      ];
+    });
+  }
+
+  boards["Town Plaza Quest Board"] = [
+    createQuest(
+      "Help set up market stalls",
+      "Assist merchants in preparing stalls.",
+    ),
+    banditPatrol,
+    prototypeBlade,
+  ];
+
+  boards["Church Quest Board"] = [
+    createQuest(
+      "Collect healing herbs",
+      "Gather herbs requested by the clergy.",
+    ),
+  ];
+
+  boards["City Gate Quest Board"] = [
+    createQuest(
+      "Escort departing caravan",
+      "Guard caravan until next waypoint.",
+    ),
+    banditPatrol,
+  ];
+
+  loc.pointsOfInterest.buildings.forEach((b) => {
+    const lower = b.toLowerCase();
+    if (lower.indexOf("smith") !== -1) {
+      boards[`${b} Quest Board`] = [
+        createQuest("Gather iron ore", "Bring quality ore for smelting."),
+        prototypeBlade,
+      ];
+    } else if (
+      lower.indexOf("carpenter") !== -1 ||
+      lower.indexOf("carver") !== -1 ||
+      lower.indexOf("fletcher") !== -1
+    ) {
+      boards[`${b} Quest Board`] = [
+        createQuest(
+          "Harvest fine timber",
+          "Collect seasoned wood from nearby forest.",
+        ),
+      ];
+    } else if (lower.indexOf("alchemist") !== -1) {
+      boards[`${b} Quest Board`] = [
+        createQuest(
+          "Collect rare herbs",
+          "Fetch ingredients for experimental potion.",
+        ),
+      ];
+    } else if (lower.indexOf("enchant") !== -1) {
+      boards[`${b} Quest Board`] = [
+        createQuest(
+          "Gather arcane crystals",
+          "Acquire crystals from old ruins.",
+        ),
+      ];
+    } else if (lower.indexOf("guild") !== -1) {
+      boards[`${b} Quest Board`] = [
+        createQuest(
+          `Assist ${b}`,
+          `Help with tasks at ${b}.`,
+        ),
+      ];
+    }
+  });
+
+  loc.questBoards = boards;
+  loc.pointsOfInterest.buildings.push(...Object.keys(boards));
 }
 
 const WAVES_BREAK: Location = {
@@ -1329,4 +1443,6 @@ export const LOCATIONS: Record<string, Location> = {
     "Dragon's Reach Road": DRAGONS_REACH_ROAD,
     "Whiteheart": WHITEHEART,
   };
+
+Object.keys(LOCATIONS).forEach((name) => addQuestBoards(LOCATIONS[name]));
 
