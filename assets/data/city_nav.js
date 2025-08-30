@@ -66,7 +66,8 @@ export const CITY_NAV = {
       "The Farmlands Beyond the Walls": {
         travelPrompt: "Walk to",
         points: [
-          { name: "The High Road District", type: "district", target: "The High Road District" }
+          { name: "The High Road District", type: "district", target: "The High Road District" },
+          { name: "East Road to Mountain Top", type: "location", target: "Mountain Top" }
         ]
       }
     },
@@ -231,7 +232,15 @@ export const CITY_NAV = {
       "Military Ward": {
         travelPrompt: "Walk to",
         points: [
-          { name: "South Docks & Steel Docks", type: "district", target: "South Docks & Steel Docks" }
+          { name: "South Docks & Steel Docks", type: "district", target: "South Docks & Steel Docks" },
+          { name: "Greywind's Edge", type: "district", target: "Greywind's Edge" }
+        ]
+      },
+      "Greywind's Edge": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Military Ward", type: "district", target: "Military Ward" },
+          { name: "West Road to Timber Grove", type: "location", target: "Timber Grove" }
         ]
       }
     },
@@ -345,7 +354,8 @@ export const CITY_NAV = {
           { name: "Shrine of the Forest Father", type: "building", target: "Shrine of the Forest Father" },
           { name: "The Timberhall", type: "building", target: "The Timberhall" },
           { name: "Forest Rest Inn", type: "building", target: "Forest Rest Inn" },
-          { name: "The Riverhouse", type: "building", target: "The Riverhouse" }
+          { name: "The Riverhouse", type: "building", target: "The Riverhouse" },
+          { name: "Town Gates", type: "district", target: "Town Gates" }
         ]
       },
       "Fishing Bridges": {
@@ -377,6 +387,14 @@ export const CITY_NAV = {
           { name: "Fields & Orchards", type: "district", target: "Fields & Orchards" },
           { name: "Fishing Bridges", type: "district", target: "Fishing Bridges" },
           { name: "Crystalsong Lodge", type: "building", target: "Crystalsong Lodge" }
+        ]
+      },
+      "Town Gates": {
+        travelPrompt: "Walk to",
+        points: [
+          { name: "Central Plaza", type: "district", target: "Central Plaza" },
+          { name: "West Road to Creekside", type: "location", target: "Creekside" },
+          { name: "River Barge to Coral Keep", type: "location", target: "Coral Keep" }
         ]
       }
     },
@@ -477,7 +495,9 @@ export const CITY_NAV = {
           { name: "Vineyards and Wineries", type: "building", target: "Vineyards and Wineries" },
           { name: "Goat and Sheep Farms", type: "building", target: "Goat and Sheep Farms" },
           { name: "Outlying Watchtowers", type: "building", target: "Outlying Watchtowers" },
-          { name: "Roadside Shrine of the Forest Father", type: "building", target: "Roadside Shrine of the Forest Father" }
+          { name: "Roadside Shrine of the Forest Father", type: "building", target: "Roadside Shrine of the Forest Father" },
+          { name: "Road to Timber Grove", type: "location", target: "Timber Grove" },
+          { name: "River to Coral Keep", type: "location", target: "Coral Keep" }
         ]
       }
     },

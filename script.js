@@ -47,13 +47,19 @@ function updateLayoutSize() {
     height = vh;
     width = Math.min(vw, vh * aspect);
   }
-  app.style.width = `${width}px`;
-  app.style.height = `${height}px`;
+  const scale = parseFloat(
+    getComputedStyle(document.documentElement).getPropertyValue('--ui-scale')
+  ) || 1;
+  app.style.width = `${width / scale}px`;
+  app.style.height = `${height / scale}px`;
 }
 
 function updateMenuHeight() {
   if (!topMenu) return;
-  const height = topMenu.offsetHeight;
+  const scale = parseFloat(
+    getComputedStyle(document.documentElement).getPropertyValue('--ui-scale')
+  ) || 1;
+  const height = topMenu.offsetHeight * scale;
   document.documentElement.style.setProperty('--menu-height', `${height}px`);
   updateLayoutSize();
 }
@@ -81,6 +87,8 @@ function normalizeOptionButtonWidths() {
     const w = btn.getBoundingClientRect().width;
     if (w > maxWidth) maxWidth = w;
   });
+  const gridWidth = grid.getBoundingClientRect().width;
+  maxWidth = Math.min(maxWidth, gridWidth);
   buttons.forEach(btn => {
     btn.style.width = `${maxWidth}px`;
   });
