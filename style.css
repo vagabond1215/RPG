@@ -1193,3 +1193,21 @@ body.theme-dark .element-icon {
   border: 1px solid var(--foreground);
   max-width: 90%;
 }
+
+.name-entry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.name-entry input {
+  flex: 1;
+}
+
+.dice-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--foreground);
+  font-size: 1.25rem;
+}
