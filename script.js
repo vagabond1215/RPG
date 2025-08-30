@@ -723,18 +723,42 @@ function showNavigation() {
       const type = e.type || 'exit';
       buttons.push(`<button data-type="${type}" data-target="${e.target}">${prompt} ${e.name}</button>`);
     });
+    if (building.exits.length && (building.interactions || []).length) {
+      buttons.push('<div class="group-separator"></div>');
+    }
     (building.interactions || []).forEach(i => {
       buttons.push(`<button data-type="interaction" data-action="${i.action}">${i.name}</button>`);
     });
+    const hours = building.hours;
+    const hoursText = hours
+      ? hours.open === '00:00' && hours.close === '24:00'
+        ? 'Open 24 hours'
+        : `Open ${hours.open}–${hours.close}`
+      : '';
     setMainHTML(
-      `<div class="navigation"><h1 class="city-name">${pos.city}</h1><h2>${pos.building}</h2><div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h1 class="city-name">${pos.city}</h1><h2>${pos.building}</h2>${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
     );
   } else {
     const district = cityData.districts[pos.district];
-    const buttons = district.points.map(pt => {
+    const exits = [];
+    const districts = [];
+    const locals = [];
+    district.points.forEach(pt => {
+      if (pt.type === 'location') exits.push(pt);
+      else if (pt.type === 'district') districts.push(pt);
+      else locals.push(pt);
+    });
+    const makeButton = pt => {
       const prompt = pt.type === 'district' ? 'Travel to' : district.travelPrompt || 'Walk to';
       return `<button data-type="${pt.type}" data-target="${pt.target}">${prompt} ${pt.name}</button>`;
-    });
+    };
+    const buttons = [
+      ...exits.map(makeButton),
+      ...(exits.length && (districts.length || locals.length) ? ['<div class="group-separator"></div>'] : []),
+      ...districts.map(makeButton),
+      ...(districts.length && locals.length ? ['<div class="group-separator"></div>'] : []),
+      ...locals.map(makeButton)
+    ];
     setMainHTML(
       `<div class="navigation"><h1 class="city-name">${pos.city}</h1><h2>${pos.district}</h2><div class="option-grid">${buttons.join('')}</div></div>`
     );
