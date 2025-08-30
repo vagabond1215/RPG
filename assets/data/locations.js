@@ -825,6 +825,13 @@ Corner Stone is also unique in its cultural makeup: it is the only human city wh
             notes: "outer farmland support villages; garrison of 2,500 and daily visitors up to 2,500",
         },
     } });
+
+const DRAGONS_REACH_ROAD = Object.assign(Object.assign({}, createLocation("Dragon's Reach Road", "Dragon's Reach Road.png", `Dragon's Reach Road – The Northern Frontier Outpost
+
+At the northern edge of the kingdom, deep within ancient forests and just before the rising plateaus where dragons still roost, lies Dragon's Reach Road. Though small, the village stands as the last human settlement before the dragonlands, a place of preparation, recovery, and rumor. Adventurers from across the kingdom travel here to test their courage against the fabled dragons that haunt the peaks, while scavengers and bold hunters sometimes return with scales, horns, or shed remnants of dragons — treasures highly coveted by the master craftsmen of Corner Stone. For many, Dragon's Reach Road is not a home but a proving ground: the last stop before stepping into legend.
+
+Despite its danger-fueled reputation, the outpost also supports itself with quieter trades. The surrounding woodlands yield rare pelts, lumber, and game, while its orchards produce small but prized quantities of exotic fruits found nowhere else in the kingdom. The village sits around a central plaza and lakeside, with fields and paddocks just beyond the palisade wall. While its economy is modest, its role as a gathering place for adventurers, dragon scavengers, and craftsmen seeking rare materials makes Dragon's Reach Road a settlement of outsized importance compared to its population.`)), { subdivisions: ["The Central Plaza", "The Lakeside Quarter", "The Artisan's Lane", "The Outskirts & Farmlands"], position: { general: "northern frontier village by a lake", relative: "last settlement before the dragonlands, north of Corner Stone" }, travel: { routes: ["road to Corner Stone", "northern road into dragonlands"], connections: ["Corner Stone"] }, population: { estimate: 400, range: [400, 1000], districts: { "The Central Plaza": { estimate: 80, notes: "caravans, guild post, quest boards, and the Shrine of the Flame-Heart" }, "The Lakeside Quarter": { estimate: 120, notes: "fishermen, scavengers, the Silver Scale Tavern, and the Drakesong Inn" }, "The Artisan's Lane": { estimate: 100, notes: "workshops for leatherwrights, fletchers, fruit pressers, and stonewrights" }, "The Outskirts & Farmlands": { estimate: 100, notes: "orchards, fields, paddocks, and hunting camps" } }, hinterland: { estimate: 250, notes: "150-300 seasonal adventurers with 40-60 daily travelers; festival peaks up to 800-1,000" } }, pointsOfInterest: { buildings: ["The Guild Post", "Quest Boards", "Shrine of the Flame-Heart", "The Fishermen's Docks", "The Scavenger's Hall", "The Silver Scale Tavern", "The Drakesong Inn", "The Leatherwright's Cabin", "The Fletcher's Hut", "The Exotic Fruit Press", "Stonewright's Shed", "Fruit Orchards", "Hunting Grounds", "Fields & Paddocks", "The Northern Road Gate"], tradeRoutes: ["caravans to Corner Stone", "expeditions into the dragonlands"], resources: { domestic: ["rare pelts", "lumber", "game", "exotic fruits", "dragon remnants"], exports: ["rare pelts", "lumber", "exotic fruits", "dragon remnants"], imports: ["grain", "tools", "finished goods"] } });
+
 export const LOCATIONS = {
     "Duvilia Kingdom": createLocation("Duvilia Kingdom", "Duvilia Kingdom.png"),
     "Wave's Break": WAVES_BREAK,
@@ -836,6 +843,6 @@ export const LOCATIONS = {
     "Mountain Top": MOUNTAIN_TOP,
     "Corona": createLocation("Corona", "Corona.png", "Capital producing eastern crops, cattle, dairy, and basic goods; seat of human power hosting major guilds."),
     "Corner Stone": CORNER_STONE,
-    "Dragon's Reach Road": createLocation("Dragon's Reach Road", "Dragon's Reach Road.png", "Northern frontier stop before the dragon plateaus, yielding fruit, game, lumber, pelts, and scarce dragon materials."),
+    "Dragon's Reach Road": DRAGONS_REACH_ROAD,
     "Whiteheart": createLocation("Whiteheart", "Whiteheart.png", "Guild-founded outpost for lumber and exploration, serving as midpoint between Corona and Corner Stone to expand eastern agriculture and curb bandits."),
 };
