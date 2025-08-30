@@ -723,11 +723,14 @@ function showNavigation() {
     setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1><p>You are in ${pos.city}.</p></div>`);
     return;
   }
-  const createNavItem = ({ type, target, name, action, prompt }) => {
-    const icon = NAV_ICONS[type] || '📍';
+  const createNavItem = ({ type, target, name, action, prompt, icon }) => {
+    const defaultIcon = NAV_ICONS[type] || '📍';
+    const iconHTML = icon
+      ? `<img src="${icon}" alt="" class="nav-icon">`
+      : `<span class="nav-icon">${defaultIcon}</span>`;
     const attrs = action ? `data-action="${action}"` : `data-target="${target}"`;
     const aria = prompt ? `${prompt} ${name}` : name;
-    return `<div class="nav-item"><button data-type="${type}" ${attrs} aria-label="${aria}"><span class="nav-icon">${icon}</span></button><span class="street-sign">${name}</span></div>`;
+    return `<div class="nav-item"><button data-type="${type}" ${attrs} aria-label="${aria}">${iconHTML}</button><span class="street-sign">${name}</span></div>`;
   };
   if (pos.building) {
     const building = cityData.buildings[pos.building];
@@ -736,7 +739,7 @@ function showNavigation() {
       const prompt = e.prompt || building.travelPrompt || 'Exit to';
       const type = e.type || 'exit';
       buttons.push(
-        createNavItem({ type, target: e.target, name: e.name, prompt })
+        createNavItem({ type, target: e.target, name: e.name, prompt, icon: e.icon })
       );
     });
     if (building.exits.length && (building.interactions || []).length) {
@@ -744,7 +747,7 @@ function showNavigation() {
     }
     (building.interactions || []).forEach(i => {
       buttons.push(
-        createNavItem({ type: 'interaction', action: i.action, name: i.name })
+        createNavItem({ type: 'interaction', action: i.action, name: i.name, icon: i.icon })
       );
     });
     const hours = building.hours;
@@ -773,6 +776,7 @@ function showNavigation() {
         target: pt.target,
         name: pt.name,
         prompt,
+        icon: pt.icon,
       });
     };
     const buttons = [

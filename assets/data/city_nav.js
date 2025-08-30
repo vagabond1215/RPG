@@ -9,7 +9,7 @@ export const CITY_NAV = {
           { name: "Harbor Guard Naval Yard", type: "building", target: "Harbor Guard Naval Yard" },
           { name: "Nobles' Quay", type: "building", target: "Nobles' Quay" },
           { name: "Merchants' Wharf", type: "building", target: "Merchants' Wharf" },
-          { name: "Fisherman's Pier", type: "building", target: "Fisherman's Pier" },
+          { name: "Fisherman's Pier", type: "building", target: "Fisherman's Pier", icon: "assets/images/icons/pier.svg" },
           { name: "Tideway Inn", type: "building", target: "Tideway Inn" },
           { name: "Upper Ward", type: "district", target: "Upper Ward" },
           { name: "Little Terns", type: "district", target: "Little Terns" }
@@ -31,7 +31,7 @@ export const CITY_NAV = {
         travelPrompt: "Walk to",
         points: [
           { name: "Glassblowing Trainer's Workshop", type: "building", target: "Glassblowing Trainer's Workshop" },
-          { name: "Smithing Trainer's Forge", type: "building", target: "Smithing Trainer's Forge" },
+          { name: "Smithing Trainer's Forge", type: "building", target: "Smithing Trainer's Forge", icon: "assets/images/icons/blacksmith.svg" },
           { name: "Carpentry Trainer's Lodge", type: "building", target: "Carpentry Trainer's Lodge" },
           { name: "Tailoring Trainer's Shop", type: "building", target: "Tailoring Trainer's Shop" },
           { name: "Leatherworking Trainer's Shed", type: "building", target: "Leatherworking Trainer's Shed" },
