@@ -320,14 +320,20 @@ const defaultProficiencies = {
   rope: 0,
   calligraphy: 0,
   carpentry: 0,
+  blacksmithing: 0,
+  tailoring: 0,
+  leatherworking: 0,
   herbalism: 0,
   brewing: 0,
   drawing: 0,
   alchemy: 0,
+  enchanting: 0,
   gardening: 0,
   farming: 0,
   weaving: 0,
-  fletching: 0
+  fletching: 0,
+  glassblowing: 0,
+  pearlDiving: 0
 };
 
 function assignMagicAptitudes(character) {
@@ -473,6 +479,8 @@ const proficiencyCategories = {
     'carpentry',
     'weaving',
     'fletching',
+    'glassblowing',
+    'pearlDiving',
     'rope',
     'calligraphy',
     'drawing',
@@ -743,9 +751,124 @@ function showNavigation() {
             building: null,
           };
         } else if (type === 'interaction') {
-          showBackButton();
-          setMainHTML(`<div class="no-character"><h1>${btn.textContent} not implemented</h1></div>`);
-          return;
+          const action = btn.dataset.action;
+          if (action === 'train-glassblowing') {
+            currentCharacter.glassblowing = gainProficiency({
+              P: currentCharacter.glassblowing || 0,
+              L: currentCharacter.level,
+              A0: 1,
+              A: 0,
+              r: 1,
+            });
+            saveProfiles();
+            showBackButton();
+            setMainHTML(
+              `<div class="no-character"><h1>You practice glassblowing.</h1><p>Proficiency: ${currentCharacter.glassblowing.toFixed(2)}</p></div>`
+            );
+            return;
+          } else if (action === 'train-pearl-diving') {
+            currentCharacter.pearlDiving = gainProficiency({
+              P: currentCharacter.pearlDiving || 0,
+              L: currentCharacter.level,
+              A0: 1,
+              A: 0,
+              r: 1,
+            });
+            saveProfiles();
+            showBackButton();
+            setMainHTML(
+              `<div class="no-character"><h1>You practice pearl diving.</h1><p>Proficiency: ${currentCharacter.pearlDiving.toFixed(2)}</p></div>`
+            );
+            return;
+          } else if (action === 'train-blacksmithing') {
+            currentCharacter.blacksmithing = gainProficiency({
+              P: currentCharacter.blacksmithing || 0,
+              L: currentCharacter.level,
+              A0: 1,
+              A: 0,
+              r: 1,
+            });
+            saveProfiles();
+            showBackButton();
+            setMainHTML(
+              `<div class="no-character"><h1>You practice blacksmithing.</h1><p>Proficiency: ${currentCharacter.blacksmithing.toFixed(2)}</p></div>`
+            );
+            return;
+          } else if (action === 'train-carpentry') {
+            currentCharacter.carpentry = gainProficiency({
+              P: currentCharacter.carpentry || 0,
+              L: currentCharacter.level,
+              A0: 1,
+              A: 0,
+              r: 1,
+            });
+            saveProfiles();
+            showBackButton();
+            setMainHTML(
+              `<div class="no-character"><h1>You practice carpentry.</h1><p>Proficiency: ${currentCharacter.carpentry.toFixed(2)}</p></div>`
+            );
+            return;
+          } else if (action === 'train-tailoring') {
+            currentCharacter.tailoring = gainProficiency({
+              P: currentCharacter.tailoring || 0,
+              L: currentCharacter.level,
+              A0: 1,
+              A: 0,
+              r: 1,
+            });
+            saveProfiles();
+            showBackButton();
+            setMainHTML(
+              `<div class="no-character"><h1>You practice tailoring.</h1><p>Proficiency: ${currentCharacter.tailoring.toFixed(2)}</p></div>`
+            );
+            return;
+          } else if (action === 'train-leatherworking') {
+            currentCharacter.leatherworking = gainProficiency({
+              P: currentCharacter.leatherworking || 0,
+              L: currentCharacter.level,
+              A0: 1,
+              A: 0,
+              r: 1,
+            });
+            saveProfiles();
+            showBackButton();
+            setMainHTML(
+              `<div class="no-character"><h1>You practice leatherworking.</h1><p>Proficiency: ${currentCharacter.leatherworking.toFixed(2)}</p></div>`
+            );
+            return;
+          } else if (action === 'train-alchemy') {
+            currentCharacter.alchemy = gainProficiency({
+              P: currentCharacter.alchemy || 0,
+              L: currentCharacter.level,
+              A0: 1,
+              A: 0,
+              r: 1,
+            });
+            saveProfiles();
+            showBackButton();
+            setMainHTML(
+              `<div class="no-character"><h1>You practice alchemy.</h1><p>Proficiency: ${currentCharacter.alchemy.toFixed(2)}</p></div>`
+            );
+            return;
+          } else if (action === 'train-enchanting') {
+            currentCharacter.enchanting = gainProficiency({
+              P: currentCharacter.enchanting || 0,
+              L: currentCharacter.level,
+              A0: 1,
+              A: 0,
+              r: 1,
+            });
+            saveProfiles();
+            showBackButton();
+            setMainHTML(
+              `<div class="no-character"><h1>You practice enchanting.</h1><p>Proficiency: ${currentCharacter.enchanting.toFixed(2)}</p></div>`
+            );
+            return;
+          } else {
+            showBackButton();
+            setMainHTML(`<div class="no-character"><h1>${btn.textContent} not implemented</h1></div>`);
+            return;
+          }
         }
         showNavigation();
       });
