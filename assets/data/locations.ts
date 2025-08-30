@@ -944,6 +944,141 @@ Corona is also a city of steel and stone, with a vast garrison of soldiers house
   },
 };
 
+const CORNER_STONE: Location = {
+  ...createLocation(
+    "Corner Stone",
+    "Corner Stone.png",
+    `Corner Stone – The Jewel of Craftsmanship
+
+Rising on the banks of the kingdom's great rivers and set on the side of a mountain secluded in the north far from the wetlands, Corner Stone is the most fortified and opulent city of the human realm. Built from the very quarries and crystal veins beneath its foundations, its broad avenues, towering walls, and polished stone plazas gleam with craftsmanship unrivaled elsewhere. Here reside the master jewelers, smiths, glasswrights, and artificers of the kingdom, many descended from guild lines stretching back centuries. Unlike Corona or Wave's Break, which bustle with common labor, Corner Stone attracts the wealthy, the ambitious, and the noble, who pay dearly for apartments and workshops within its high walls.
+
+Corner Stone is also unique in its cultural makeup: it is the only human city where dwarves dwell openly, serving as the primary surface trade partner with the hidden underground dwarven metropolis. While dwarves import much of their food from the surrounding human lands, they provide Corner Stone with steady access to mithril, adamantine, and perfected dwarven craft techniques, elevating the city's reputation as a center of artistry and innovation. The Commerce Guild—headquartered here—mints and regulates the kingdom's coinage, further cementing the city's role as the economic and symbolic heart of trade. Though living costs are high, the wealth and prestige flowing through Corner Stone make it the ultimate destination for artisans and merchants seeking fame, fortune, and refinement.`
+  ),
+  subdivisions: [
+    "Crown District",
+    "Misty Crossing",
+    "Cherry Rock",
+    "Stonecrest Town",
+    "New Gardens",
+    "Cattlebridge Quarter",
+    "The Hill",
+  ],
+  position: {
+    general: "northern river city built into a mountain",
+    relative: "upstream from Corona and north of Whiteheart",
+  },
+  travel: {
+    routes: ["road to Corona", "road to Whiteheart"],
+    connections: ["Corona", "Whiteheart"],
+  },
+  pointsOfInterest: {
+    buildings: [
+      "The Guild Palace",
+      "The Royal Exchange",
+      "Crystal Court Plaza",
+      "Luxury Apartments",
+      "Shrine of the Crowned Sun",
+      "The Gilded Chalice Inn",
+      "The Coin & Scepter Tavern",
+      "Great Stone Bridge",
+      "Merchant's Guildhall",
+      "Jewelers' Row",
+      "Crystalwrights' Hall",
+      "The Silvershade Market",
+      "The Sapphire Cup",
+      "The River Pearl Inn",
+      "The Adamantine Forge",
+      "The Mithril Hall",
+      "Smiths' Guildhouse",
+      "Coopers' Yard & Metalworkers' Row",
+      "The Emberwell Foundry",
+      "The Smelter's Rest Tavern",
+      "The Forgemaster's Hearth Inn",
+      "Artisans' Hall",
+      "The Guild of Engravers & Sealwrights",
+      "The Stonecutters' Guildhouse",
+      "Shrine of the Craftfather",
+      "The Cobbled Market",
+      "The Mason's Mug",
+      "The Cornerstone Rest Inn",
+      "Botanical Gardens",
+      "The Tea Conservatory",
+      "Shrine of the Dawnfather",
+      "Noble Estates",
+      "Tanners' Guildhouse",
+      "The River Docks",
+      "Fishers' Guild",
+      "Laborers' Market",
+      "Shrine of the River-Mother",
+      "Southern Gatehouse",
+      "Caravanserai of the Hill",
+      "The Hill Market",
+      "The Iron Cup Tavern",
+    ],
+    tradeRoutes: [
+      "caravans to Corona",
+      "caravans to Whiteheart",
+      "river trade with dwarven metropolis",
+    ],
+    resources: {
+      domestic: [
+        "jewelry",
+        "mithril goods",
+        "adamantine goods",
+        "glassware",
+        "coinage",
+      ],
+      exports: [
+        "jewelry",
+        "mithril goods",
+        "adamantine goods",
+        "glassware",
+        "coinage",
+      ],
+      imports: ["food", "livestock", "raw gems", "timber"],
+    },
+  },
+  population: {
+    estimate: 36000,
+    range: [36000, 38000],
+    districts: {
+      "Crown District": {
+        estimate: 4000,
+        notes: "nobles, guild officials, master artisans",
+      },
+      "Misty Crossing": {
+        estimate: 6000,
+        notes: "river merchants, jewelers, guildhalls",
+      },
+      "Cherry Rock": {
+        estimate: 7000,
+        notes: "smiths, metalworkers, dwarves",
+      },
+      "Stonecrest Town": {
+        estimate: 9000,
+        notes: "residences, artisans, markets",
+      },
+      "New Gardens": {
+        estimate: 3000,
+        notes: "botanical gardens and noble estates",
+      },
+      "Cattlebridge Quarter": {
+        estimate: 4000,
+        notes: "dockworkers, tanners, laborers",
+      },
+      "The Hill": {
+        estimate: 3000,
+        notes: "gate guards, caravanserai, travelers",
+      },
+    },
+    hinterland: {
+      estimate: 10000,
+      notes:
+        "outer farmland support villages; garrison of 2,500 and daily visitors up to 2,500",
+    },
+  },
+};
+
 export const LOCATIONS: Record<string, Location> = {
   "Duvilia Kingdom": createLocation(
     "Duvilia Kingdom",
@@ -957,11 +1092,7 @@ export const LOCATIONS: Record<string, Location> = {
   "Dancing Pines": DANCING_PINES,
   "Mountain Top": MOUNTAIN_TOP,
   "Corona": CORONA,
-  "Corner Stone": createLocation(
-    "Corner Stone",
-    "Corner Stone.png",
-    "Premier crafting city rich in crystal, quartz, stone, and rare metals like mithril and adamantine; home to master artisans and the Commerce Guild."
-  ),
+  "Corner Stone": CORNER_STONE,
   "Dragon's Reach Road": createLocation(
     "Dragon's Reach Road",
     "Dragon's Reach Road.png",
