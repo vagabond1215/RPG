@@ -1,25 +1,9 @@
-"use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.LOCATIONS = void 0;
-exports.createLocation = createLocation;
-var MAP_BASE_PATH = "assets/images/Maps";
-function createLocation(name, mapFile, description) {
-    if (description === void 0) { description = ""; }
+const MAP_BASE_PATH = "assets/images/Maps";
+export function createLocation(name, mapFile, description = "") {
     return {
-        name: name,
-        description: description,
-        map: "".concat(MAP_BASE_PATH, "/").concat(mapFile),
+        name,
+        description,
+        map: `${MAP_BASE_PATH}/${mapFile}`,
         subdivisions: [],
         position: {},
         travel: { routes: [], connections: [] },
@@ -31,7 +15,15 @@ function createLocation(name, mapFile, description) {
         population: undefined,
     };
 }
-var WAVES_BREAK = __assign(__assign({}, createLocation("Wave's Break", "Wave's Break.png", "The City of Wave's Break\n\nWhere Salt Meets Stone, and East Meets West\n\nNestled between the jagged peaks of the coastal mountains and the restless sea, Wave's Break thrives as the crossroads of land and ocean. The treacherous Wetland Pass has long been impassable, leaving the city as the primary artery of trade between the Eastern farmlands and the Western kingdoms.\n\nThe city is famed for its fish and sea-goods sent eastward, while caravans bring in grain, wine, and livestock from the fertile plains beyond. Ships from distant southern ports and inland caravans alike make Wave's Break their anchor point, ensuring the city is never quiet, never still.\n\nIts people are diverse: salt-stained sailors, silver-tongued merchants, hammer-armed crafters, scroll-burdened sages, and faith-driven priests. The city thrives on motion\u2014goods, people, and ideas all collide here, leaving behind a place of markets, temples, shrines, and secrets.")), { subdivisions: [
+const WAVES_BREAK = Object.assign(Object.assign({}, createLocation("Wave's Break", "Wave's Break.png", `The City of Wave's Break
+
+Where Salt Meets Stone, and East Meets West
+
+Nestled between the jagged peaks of the coastal mountains and the restless sea, Wave's Break thrives as the crossroads of land and ocean. The treacherous Wetland Pass has long been impassable, leaving the city as the primary artery of trade between the Eastern farmlands and the Western kingdoms.
+
+The city is famed for its fish and sea-goods sent eastward, while caravans bring in grain, wine, and livestock from the fertile plains beyond. Ships from distant southern ports and inland caravans alike make Wave's Break their anchor point, ensuring the city is never quiet, never still.
+
+Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-armed crafters, scroll-burdened sages, and faith-driven priests. The city thrives on motion—goods, people, and ideas all collide here, leaving behind a place of markets, temples, shrines, and secrets.`)), { subdivisions: [
         "The Port District",
         "The Upper Ward",
         "Little Terns",
@@ -156,7 +148,11 @@ var WAVES_BREAK = __assign(__assign({}, createLocation("Wave's Break", "Wave's B
             imports: ["grain", "wine", "livestock"],
         },
     } });
-var CORAL_KEEP = __assign(__assign({}, createLocation("Coral Keep", "Coral Keep.png", "The Shining Port of the West\n\nIf Wave's Break is the beating heart of east\u2013west commerce, Coral Keep is its gleaming face to the sea. Built upon a rocky headland reinforced by coral-white stone, the city owes its name to the reefs just offshore that teem with pearls, sponges, and rare corals prized by nobles and artisans across the kingdom. Divers, pearl-hunters, and fisherfolk ply their trades in dangerous waters, supplying luxuries found nowhere else. Its wealth has made Coral Keep a center of glassmaking, jewelcraft, and maritime trade, with its forges blazing day and night to transform sand and coral ash into stained windows, beads, and the finest blown glass in the realm.\n\nCoral Keep is also a city of exchange. Caravans arrive from the lumber-rich highlands to the west, where massive timbers are harvested for beams, keels, and great halls. From here they are loaded onto ships bound for the eastern cities, while imported spices, silks, and gems are offloaded in return. Sister to Wave's Break, Coral Keep mirrors its counterpart's importance, but with a sharper focus on luxury goods and refined crafts. It is a city of opportunity and danger\u2014its Northern Slums hide thieves and smugglers, while its Forge District hums with industry, and its Old City holds both forgotten shrines and the bustling markets of centuries past.")), { subdivisions: [
+const CORAL_KEEP = Object.assign(Object.assign({}, createLocation("Coral Keep", "Coral Keep.png", `The Shining Port of the West
+
+If Wave's Break is the beating heart of east–west commerce, Coral Keep is its gleaming face to the sea. Built upon a rocky headland reinforced by coral-white stone, the city owes its name to the reefs just offshore that teem with pearls, sponges, and rare corals prized by nobles and artisans across the kingdom. Divers, pearl-hunters, and fisherfolk ply their trades in dangerous waters, supplying luxuries found nowhere else. Its wealth has made Coral Keep a center of glassmaking, jewelcraft, and maritime trade, with its forges blazing day and night to transform sand and coral ash into stained windows, beads, and the finest blown glass in the realm.
+
+Coral Keep is also a city of exchange. Caravans arrive from the lumber-rich highlands to the west, where massive timbers are harvested for beams, keels, and great halls. From here they are loaded onto ships bound for the eastern cities, while imported spices, silks, and gems are offloaded in return. Sister to Wave's Break, Coral Keep mirrors its counterpart's importance, but with a sharper focus on luxury goods and refined crafts. It is a city of opportunity and danger—its Northern Slums hide thieves and smugglers, while its Forge District hums with industry, and its Old City holds both forgotten shrines and the bustling markets of centuries past.`)), { subdivisions: [
         "The Military Ward",
         "The South Docks & Steel Docks",
         "The Forge District",
@@ -270,7 +266,11 @@ var CORAL_KEEP = __assign(__assign({}, createLocation("Coral Keep", "Coral Keep.
             imports: ["timber", "spices", "silks", "gems"],
         },
     } });
-var TIMBER_GROVE = __assign(__assign({}, createLocation("Timber Grove", "Timber Grove.png", "Timber Grove \u2013 The Mountain Lumberstead\n\nNestled along a bend in the mountain river, Timber Grove is a modest but vital settlement, its small wooden homes clustered beside water and forest alike. Known primarily as the chief harvester of great timbers in the western range, the town supplies the beams, masts, and keels shipped downriver to Coral Keep, fueling both construction and shipbuilding across the kingdom. The air is rich with the scent of pine and cedar, while the rhythmic thud of axes and saws blends with the chatter of the river.\n\nThough small, Timber Grove is also known for its secondary trades. Its forests yield luxury mushrooms, nuts, and tree saps, which are carefully harvested and sold as delicacies or ingredients for medicines and enchantments. The river provides rare freshwater fish, crawfish, and amphibians valued by herbalists and alchemists. From the nearby highland mine, the town occasionally turns up raw crystal and ore, some of which are rare enough to serve as material for magical enchantments. With its small population, Timber Grove relies on outside labor\u2014many hands come seasonally from Creekside or Coral Keep, often through contracts or adventuring guild requests. For travelers, the town also serves as a waystop on the road between Creekside and Coral Keep, where one can rest, resupply, and find work before continuing on.")), { subdivisions: [
+const TIMBER_GROVE = Object.assign(Object.assign({}, createLocation("Timber Grove", "Timber Grove.png", `Timber Grove – The Mountain Lumberstead
+
+Nestled along a bend in the mountain river, Timber Grove is a modest but vital settlement, its small wooden homes clustered beside water and forest alike. Known primarily as the chief harvester of great timbers in the western range, the town supplies the beams, masts, and keels shipped downriver to Coral Keep, fueling both construction and shipbuilding across the kingdom. The air is rich with the scent of pine and cedar, while the rhythmic thud of axes and saws blends with the chatter of the river.
+
+Though small, Timber Grove is also known for its secondary trades. Its forests yield luxury mushrooms, nuts, and tree saps, which are carefully harvested and sold as delicacies or ingredients for medicines and enchantments. The river provides rare freshwater fish, crawfish, and amphibians valued by herbalists and alchemists. From the nearby highland mine, the town occasionally turns up raw crystal and ore, some of which are rare enough to serve as material for magical enchantments. With its small population, Timber Grove relies on outside labor—many hands come seasonally from Creekside or Coral Keep, often through contracts or adventuring guild requests. For travelers, the town also serves as a waystop on the road between Creekside and Coral Keep, where one can rest, resupply, and find work before continuing on.`)), { subdivisions: [
         "Central Plaza",
         "Fishing Bridges",
         "The Lumberworks",
@@ -334,7 +334,11 @@ var TIMBER_GROVE = __assign(__assign({}, createLocation("Timber Grove", "Timber 
             imports: ["labor", "finished goods"],
         },
     } });
-var CREEKSIDE = __assign(__assign({}, createLocation("Creekside", "Creekside.png", "Creekside \u2013 Bastion of the Basin\n\nCreekside sits within the fertile heart of a mountain basin, a crossroads between fertile farmland, tangled river bends, and the looming danger of the Wetlands Pass. The valley's soil is some of the richest in the western kingdoms, producing grain, sugar beets, cane, and fruit orchards, while broad pastures support the largest herds of cattle in the west. Dairy, beef, and leather flow outward from Creekside in massive quantities, carried overland toward Timber Grove or downriver toward Coral Keep. Though the river links to the gulf, its narrow bends make it impassable for heavy shipping, so Creekside depends on caravans and flatboats to move its wealth outward.\n\nThe city thrives on industry, practicality, and defense. Its dense, stone-and-wood buildings rise close together, prioritizing durability over beauty. A sprawling Guildhall in the center of town hosts representatives of every major craft and adventurers' association, issuing contracts and quests in constant supply. Creekside also maintains a strong military garrison, tasked with scouting the Wetlands and holding back the monstrous threats that spill forth during floods. Patrols are constant, and adventurers find no shortage of work culling creatures or guarding farmsteads. Creekside's people are pragmatic, hardworking, and ever watchful, but the wealth generated by sugar, cattle, leather, and freshwater fisheries makes it one of the most vital western cities. Its busy taverns, quest boards, and marketplaces draw people from across the kingdom seeking coin, security, or opportunity.")), { subdivisions: [
+const CREEKSIDE = Object.assign(Object.assign({}, createLocation("Creekside", "Creekside.png", `Creekside – Bastion of the Basin
+
+Creekside sits within the fertile heart of a mountain basin, a crossroads between fertile farmland, tangled river bends, and the looming danger of the Wetlands Pass. The valley's soil is some of the richest in the western kingdoms, producing grain, sugar beets, cane, and fruit orchards, while broad pastures support the largest herds of cattle in the west. Dairy, beef, and leather flow outward from Creekside in massive quantities, carried overland toward Timber Grove or downriver toward Coral Keep. Though the river links to the gulf, its narrow bends make it impassable for heavy shipping, so Creekside depends on caravans and flatboats to move its wealth outward.
+
+The city thrives on industry, practicality, and defense. Its dense, stone-and-wood buildings rise close together, prioritizing durability over beauty. A sprawling Guildhall in the center of town hosts representatives of every major craft and adventurers' association, issuing contracts and quests in constant supply. Creekside also maintains a strong military garrison, tasked with scouting the Wetlands and holding back the monstrous threats that spill forth during floods. Patrols are constant, and adventurers find no shortage of work culling creatures or guarding farmsteads. Creekside's people are pragmatic, hardworking, and ever watchful, but the wealth generated by sugar, cattle, leather, and freshwater fisheries makes it one of the most vital western cities. Its busy taverns, quest boards, and marketplaces draw people from across the kingdom seeking coin, security, or opportunity.`)), { subdivisions: [
         "Greenford",
         "Everrise Bridge",
         "Stoneknot",
@@ -418,7 +422,11 @@ var CREEKSIDE = __assign(__assign({}, createLocation("Creekside", "Creekside.png
             imports: ["tools", "luxuries"],
         },
     } });
-var WARM_SPRINGS = __assign(__assign({}, createLocation("Warm Springs", "Warm Springs.png", "Warm Springs \u2013 The Alchemists\u2019 Refuge\n\nPerched high in the mountain range, Warm Springs is a quiet village of steam, stone, and secrets. Known primarily for its mines and mineral springs, the settlement exports not only iron, gold, silver, and semi-precious stones, but also rare reagents distilled from the hot mineral waters themselves. Alchemists from across the kingdom prize the sulfur, salts, and crystalline precipitates gathered here, and many of the finest practitioners of the craft maintain their homes and workshops in Warm Springs despite the town\u2019s small size. What the settlement lacks in numbers it more than makes up for in influence: its gems, minerals, and alchemical waters are vital to the prosperity of larger cities like Coral Keep and Corona.\n\nThe town also carries a reputation for healing and quiet retreat. Many ailing nobles, merchants, or adventurers have made the difficult journey up the mountain passes to bathe in the steaming springs or to consult with the elite alchemists who call Warm Springs home. Though some rumors exaggerate the miraculous properties of the waters, there is truth to their restorative effects. The town, however, has little to offer in the way of excitement\u2014quests are few, dangers minimal, and most contracts are low-risk tasks taken by locals or beginner adventurers. As a result, Warm Springs remains small and insulated, self-sufficient in food but reliant on Creekside for goods such as textiles, tools, and bottles. Its rare fish and shellfish, prized for their vivid colors, exquisite flavors, and alchemical uses, are yet another treasure hidden in this quiet mountain basin.")), { subdivisions: [
+const WARM_SPRINGS = Object.assign(Object.assign({}, createLocation("Warm Springs", "Warm Springs.png", `Warm Springs – The Alchemists’ Refuge
+
+Perched high in the mountain range, Warm Springs is a quiet village of steam, stone, and secrets. Known primarily for its mines and mineral springs, the settlement exports not only iron, gold, silver, and semi-precious stones, but also rare reagents distilled from the hot mineral waters themselves. Alchemists from across the kingdom prize the sulfur, salts, and crystalline precipitates gathered here, and many of the finest practitioners of the craft maintain their homes and workshops in Warm Springs despite the town’s small size. What the settlement lacks in numbers it more than makes up for in influence: its gems, minerals, and alchemical waters are vital to the prosperity of larger cities like Coral Keep and Corona.
+
+The town also carries a reputation for healing and quiet retreat. Many ailing nobles, merchants, or adventurers have made the difficult journey up the mountain passes to bathe in the steaming springs or to consult with the elite alchemists who call Warm Springs home. Though some rumors exaggerate the miraculous properties of the waters, there is truth to their restorative effects. The town, however, has little to offer in the way of excitement—quests are few, dangers minimal, and most contracts are low-risk tasks taken by locals or beginner adventurers. As a result, Warm Springs remains small and insulated, self-sufficient in food but reliant on Creekside for goods such as textiles, tools, and bottles. Its rare fish and shellfish, prized for their vivid colors, exquisite flavors, and alchemical uses, are yet another treasure hidden in this quiet mountain basin.`)), { subdivisions: [
         "Central Plaza",
         "The Springs",
         "The Mines",
@@ -497,7 +505,11 @@ var WARM_SPRINGS = __assign(__assign({}, createLocation("Warm Springs", "Warm Sp
             notes: "seasonal visitors, patients seeking healing, and traveling merchants",
         },
     } });
-var DANCING_PINES = __assign(__assign({}, createLocation("Dancing Pines", "Dancing Pines.png", "Dancing Pines \u2013 The Southern Diamond Outpost\n\nFar in the southeastern corner of the kingdom lies Dancing Pines, a frontier outpost cradled by mountain forests and swift rivers. Though small and newly established, the town has already proven invaluable: its lumberyards supply planks for fishing boats and wagons in Wave's Break, while its diamond mines make it the single greatest source of precious gemstones in the realm. Semi-precious stones, quartz, and other crystals round out its mineral wealth, ensuring steady trade caravans wind their way down the rough mountain tracks to haul riches toward the coast.\n\nThe wilderness surrounding Dancing Pines is equally bountiful. Rare pelts from mountain-dwelling beasts are prized by merchants and nobles, while the outpost's hunters also gather wild poultry unique to the region. Most famously, the settlement is home to a master leatherworker, whose fine light armor and commissioned pieces carry such prestige that nobles across the kingdom boast of owning them. Despite its prosperity, the town remains rugged: its river is too shallow for deep transport, forcing goods to be carted a day downhill to barge ports. The remoteness gives Dancing Pines a frontier charm but also a sense of isolation, though it is shielded by patrols from Corona and Wave's Break. For now, the little outpost thrives quietly, its lumber mills and gem mines humming beneath the endless canopy of whispering pines.")), { subdivisions: [
+const DANCING_PINES = Object.assign(Object.assign({}, createLocation("Dancing Pines", "Dancing Pines.png", `Dancing Pines – The Southern Diamond Outpost
+
+Far in the southeastern corner of the kingdom lies Dancing Pines, a frontier outpost cradled by mountain forests and swift rivers. Though small and newly established, the town has already proven invaluable: its lumberyards supply planks for fishing boats and wagons in Wave's Break, while its diamond mines make it the single greatest source of precious gemstones in the realm. Semi-precious stones, quartz, and other crystals round out its mineral wealth, ensuring steady trade caravans wind their way down the rough mountain tracks to haul riches toward the coast.
+
+The wilderness surrounding Dancing Pines is equally bountiful. Rare pelts from mountain-dwelling beasts are prized by merchants and nobles, while the outpost's hunters also gather wild poultry unique to the region. Most famously, the settlement is home to a master leatherworker, whose fine light armor and commissioned pieces carry such prestige that nobles across the kingdom boast of owning them. Despite its prosperity, the town remains rugged: its river is too shallow for deep transport, forcing goods to be carted a day downhill to barge ports. The remoteness gives Dancing Pines a frontier charm but also a sense of isolation, though it is shielded by patrols from Corona and Wave's Break. For now, the little outpost thrives quietly, its lumber mills and gem mines humming beneath the endless canopy of whispering pines.`)), { subdivisions: [
         "Central Plaza",
         "Lumberworks",
         "Diamond Mines",
@@ -595,7 +607,102 @@ var DANCING_PINES = __assign(__assign({}, createLocation("Dancing Pines", "Danci
             notes: "logging camps, hunting parties, and scouts in the surrounding mountains",
         },
     } });
-exports.LOCATIONS = {
+const MOUNTAIN_TOP = Object.assign(Object.assign({}, createLocation("Mountain Top", "Mountain Top.png", `Mountain Top – The Southern Gate of the Wetlands
+
+Built high upon a defensible plateau at the southern edge of the wetlands, Mountain Top is both fortress and market, sentinel and sanctuary. The town sits on a jutting mountain plateau with a large freshwater spring feeding a waterfall that cuts the land between the wetlands and civilized lands. As such, it guards one of only two viable gateways between the wetlands and the eastern cities, making it an indispensable stronghold and a lifeline for merchants, pilgrims, and soldiers who must pass through the frontier.
+
+Mountain Top thrives as a trade hub between Corona and Wave's Break, dividing the 20-day caravan route into two manageable legs of 10 days each. Its role is both strategic and economic: caravans gather in the city's central plaza, adventurers are hired to scout or cull threats in the wetlands, and merchants find safe lodging and fresh supplies before pushing on. The surrounding terraces and farmlands produce rice, potatoes, and luxury teas, goods found nowhere else in the kingdom, while the large spring fed lake yields freshwater fish and shellfish. Together with small shipments of diamonds from Dancing Pines funneled through Mountain Top to Corona, these exports add prosperity to its reputation for vigilance. A garrison nearly as large as Creekside's secures the nearby lands, its beacon tower ever ready to light a warning across the horizon should the wetlands stir with greater threats.`)), { subdivisions: [
+        "Central Plaza",
+        "Fortress Quarter",
+        "Reservoir Quarter",
+        "Terraces & Farms",
+        "Artisan's Row",
+    ], position: {
+        general: "mountain plateau at southern edge of the wetlands",
+        relative: "between Corona and Wave's Break guarding the southern gateway",
+    }, travel: {
+        routes: ["road to Corona", "road to Wave's Break"],
+        connections: ["Corona", "Wave's Break"],
+    }, pointsOfInterest: {
+        buildings: [
+            "The Grand Guildhall",
+            "The Merchant's Exchange",
+            "Quest Boards & Muster Posts",
+            "Statue of the Twin Guardians",
+            "The Breakwater Inn",
+            "The Silver Lantern Tavern",
+            "The Restful Cup",
+            "The Southern Gatehouse",
+            "Barracks of the Iron Watch",
+            "The Armory & Smiths' Yard",
+            "Beacon Tower",
+            "The Spring Reservoir",
+            "Shrine of the River-Mother",
+            "Public Baths",
+            "Fishers' Quay",
+            "Rice Paddies",
+            "Potato Fields",
+            "Tea Gardens",
+            "The Farmer's Market",
+            "The Leatherwright's Hall",
+            "Tea-Brewers' Guildhouse",
+            "The Stonemason's Lodge",
+            "Weavers' Hall",
+        ],
+        tradeRoutes: [
+            "caravans to Corona",
+            "caravans to Wave's Break",
+            "diamond shipments from Dancing Pines to Corona",
+        ],
+        resources: {
+            domestic: [
+                "rice",
+                "potatoes",
+                "luxury teas",
+                "freshwater fish",
+                "shellfish",
+            ],
+            exports: [
+                "rice",
+                "potatoes",
+                "luxury teas",
+                "freshwater fish",
+                "shellfish",
+                "diamonds",
+            ],
+            imports: ["diamonds", "tools", "luxuries"],
+        },
+    }, population: {
+        estimate: 2500,
+        range: [2500, 3000],
+        districts: {
+            "Central Plaza": {
+                estimate: 600,
+                notes: "merchants, inns, and caravan services",
+            },
+            "Fortress Quarter": {
+                estimate: 800,
+                notes: "garrison of the Iron Watch (~500 soldiers)",
+            },
+            "Reservoir Quarter": {
+                estimate: 400,
+                notes: "fishers, shrine keepers, and bath attendants",
+            },
+            "Terraces & Farms": {
+                estimate: 500,
+                notes: "rice paddies, potato fields, and tea gardens",
+            },
+            "Artisan's Row": {
+                estimate: 200,
+                notes: "leatherwrights, tea-brewers, stonemasons, and weavers",
+            },
+        },
+        hinterland: {
+            estimate: 300,
+            notes: "weekly visitors: caravan merchants, adventurers, diamond couriers",
+        },
+    } });
+export const LOCATIONS = {
     "Duvilia Kingdom": createLocation("Duvilia Kingdom", "Duvilia Kingdom.png"),
     "Wave's Break": WAVES_BREAK,
     "Coral Keep": CORAL_KEEP,
@@ -603,7 +710,7 @@ exports.LOCATIONS = {
     "Creekside": CREEKSIDE,
     "Warm Springs": WARM_SPRINGS,
     "Dancing Pines": DANCING_PINES,
-    "Mountain Top": createLocation("Mountain Top", "Mountain Top.png", "Trade hub between Corona and Wave's Break growing flax and cotton while guarding the Wetlands choke point."),
+    "Mountain Top": MOUNTAIN_TOP,
     "Corona": createLocation("Corona", "Corona.png", "Capital producing eastern crops, cattle, dairy, and basic goods; seat of human power hosting major guilds."),
     "Corner Stone": createLocation("Corner Stone", "Corner Stone.png", "Premier crafting city rich in crystal, quartz, stone, and rare metals like mithril and adamantine; home to master artisans and the Commerce Guild."),
     "Dragon's Reach Road": createLocation("Dragon's Reach Road", "Dragon's Reach Road.png", "Northern frontier stop before the dragon plateaus, yielding fruit, game, lumber, pelts, and scarce dragon materials."),

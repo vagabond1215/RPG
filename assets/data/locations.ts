@@ -728,6 +728,114 @@ The wilderness surrounding Dancing Pines is equally bountiful. Rare pelts from m
   },
 };
 
+const MOUNTAIN_TOP: Location = {
+  ...createLocation(
+    "Mountain Top",
+    "Mountain Top.png",
+    `Mountain Top – The Southern Gate of the Wetlands
+
+Built high upon a defensible plateau at the southern edge of the wetlands, Mountain Top is both fortress and market, sentinel and sanctuary. The town sits on a jutting mountain plateau with a large freshwater spring feeding a waterfall that cuts the land between the wetlands and civilized lands. As such, it guards one of only two viable gateways between the wetlands and the eastern cities, making it an indispensable stronghold and a lifeline for merchants, pilgrims, and soldiers who must pass through the frontier.
+
+Mountain Top thrives as a trade hub between Corona and Wave's Break, dividing the 20-day caravan route into two manageable legs of 10 days each. Its role is both strategic and economic: caravans gather in the city's central plaza, adventurers are hired to scout or cull threats in the wetlands, and merchants find safe lodging and fresh supplies before pushing on. The surrounding terraces and farmlands produce rice, potatoes, and luxury teas, goods found nowhere else in the kingdom, while the large spring fed lake yields freshwater fish and shellfish. Together with small shipments of diamonds from Dancing Pines funneled through Mountain Top to Corona, these exports add prosperity to its reputation for vigilance. A garrison nearly as large as Creekside's secures the nearby lands, its beacon tower ever ready to light a warning across the horizon should the wetlands stir with greater threats.`
+  ),
+  subdivisions: [
+    "Central Plaza",
+    "Fortress Quarter",
+    "Reservoir Quarter",
+    "Terraces & Farms",
+    "Artisan's Row",
+  ],
+  position: {
+    general: "mountain plateau at southern edge of the wetlands",
+    relative: "between Corona and Wave's Break guarding the southern gateway",
+  },
+  travel: {
+    routes: ["road to Corona", "road to Wave's Break"],
+    connections: ["Corona", "Wave's Break"],
+  },
+  pointsOfInterest: {
+    buildings: [
+      "The Grand Guildhall",
+      "The Merchant's Exchange",
+      "Quest Boards & Muster Posts",
+      "Statue of the Twin Guardians",
+      "The Breakwater Inn",
+      "The Silver Lantern Tavern",
+      "The Restful Cup",
+      "The Southern Gatehouse",
+      "Barracks of the Iron Watch",
+      "The Armory & Smiths' Yard",
+      "Beacon Tower",
+      "The Spring Reservoir",
+      "Shrine of the River-Mother",
+      "Public Baths",
+      "Fishers' Quay",
+      "Rice Paddies",
+      "Potato Fields",
+      "Tea Gardens",
+      "The Farmer's Market",
+      "The Leatherwright's Hall",
+      "Tea-Brewers' Guildhouse",
+      "The Stonemason's Lodge",
+      "Weavers' Hall",
+    ],
+    tradeRoutes: [
+      "caravans to Corona",
+      "caravans to Wave's Break",
+      "diamond shipments from Dancing Pines to Corona",
+    ],
+    resources: {
+      domestic: [
+        "rice",
+        "potatoes",
+        "luxury teas",
+        "freshwater fish",
+        "shellfish",
+      ],
+      exports: [
+        "rice",
+        "potatoes",
+        "luxury teas",
+        "freshwater fish",
+        "shellfish",
+        "diamonds",
+      ],
+      imports: ["diamonds", "tools", "luxuries"],
+    },
+  },
+  population: {
+    estimate: 2500,
+    range: [2500, 3000],
+    districts: {
+      "Central Plaza": {
+        estimate: 600,
+        notes: "merchants, inns, and caravan services",
+      },
+      "Fortress Quarter": {
+        estimate: 800,
+        notes: "garrison of the Iron Watch (~500 soldiers)",
+      },
+      "Reservoir Quarter": {
+        estimate: 400,
+        notes: "fishers, shrine keepers, and bath attendants",
+      },
+      "Terraces & Farms": {
+        estimate: 500,
+        notes: "rice paddies, potato fields, and tea gardens",
+      },
+      "Artisan's Row": {
+        estimate: 200,
+        notes: "leatherwrights, tea-brewers, stonemasons, and weavers",
+      },
+    },
+    hinterland: {
+      estimate: 300,
+      notes:
+        "weekly visitors: caravan merchants, adventurers, diamond couriers",
+    },
+  },
+};
+
 export const LOCATIONS: Record<string, Location> = {
   "Duvilia Kingdom": createLocation(
     "Duvilia Kingdom",
@@ -739,11 +847,7 @@ export const LOCATIONS: Record<string, Location> = {
   "Creekside": CREEKSIDE,
   "Warm Springs": WARM_SPRINGS,
   "Dancing Pines": DANCING_PINES,
-  "Mountain Top": createLocation(
-    "Mountain Top",
-    "Mountain Top.png",
-    "Trade hub between Corona and Wave's Break growing flax and cotton while guarding the Wetlands choke point."
-  ),
+  "Mountain Top": MOUNTAIN_TOP,
   "Corona": createLocation(
     "Corona",
     "Corona.png",
