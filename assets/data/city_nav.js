@@ -28,13 +28,13 @@ export const CITY_NAV = {
       "Little Terns": {
         travelPrompt: "Walk to",
         points: [
-          { name: "Glassblowing Academy", type: "building", target: "Glassblowing Academy" },
-          { name: "Smithing Academy", type: "building", target: "Smithing Academy" },
-          { name: "Carpentry Academy", type: "building", target: "Carpentry Academy" },
-          { name: "Tailors' Academy", type: "building", target: "Tailors' Academy" },
-          { name: "Leatherworking School", type: "building", target: "Leatherworking School" },
-          { name: "Alchemy Academy", type: "building", target: "Alchemy Academy" },
-          { name: "Enchanters' Academy", type: "building", target: "Enchanters' Academy" },
+          { name: "Glassblowing Trainer's Workshop", type: "building", target: "Glassblowing Trainer's Workshop" },
+          { name: "Smithing Trainer's Forge", type: "building", target: "Smithing Trainer's Forge" },
+          { name: "Carpentry Trainer's Lodge", type: "building", target: "Carpentry Trainer's Lodge" },
+          { name: "Tailoring Trainer's Shop", type: "building", target: "Tailoring Trainer's Shop" },
+          { name: "Leatherworking Trainer's Shed", type: "building", target: "Leatherworking Trainer's Shed" },
+          { name: "Alchemy Trainer's Lab", type: "building", target: "Alchemy Trainer's Lab" },
+          { name: "Enchanting Trainer's Sanctum", type: "building", target: "Enchanting Trainer's Sanctum" },
           { name: "Port District", type: "district", target: "Port District" },
           { name: "Greensoul Hill", type: "district", target: "Greensoul Hill" }
         ]
@@ -134,52 +134,52 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["trade shipments"], luxuries: [] },
         consumes: { resources: [], commodities: ["imports"], luxuries: [] }
       },
-      "Glassblowing Academy": {
+      "Glassblowing Trainer's Workshop": {
         travelPrompt: "Exit to",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
-        interactions: [ { name: "Practice Glassblowing", action: "train-glassblowing" } ],
+        interactions: [ { name: "Train Glassblowing (Master)", action: "train-glassblowing", tier: "master" } ],
         produces: { resources: [], commodities: ["glassware"], luxuries: ["art glass"] },
         consumes: { resources: ["sand", "fuel"], commodities: [], luxuries: [] }
       },
-      "Smithing Academy": {
+      "Smithing Trainer's Forge": {
         travelPrompt: "Exit to",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
-        interactions: [ { name: "Practice Blacksmithing", action: "train-blacksmithing" } ],
+        interactions: [ { name: "Train Blacksmithing (Journeyman)", action: "train-blacksmithing", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["metal goods"], luxuries: [] },
         consumes: { resources: ["ore", "coal"], commodities: [], luxuries: [] }
       },
-      "Carpentry Academy": {
+      "Carpentry Trainer's Lodge": {
         travelPrompt: "Exit to",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
-        interactions: [ { name: "Practice Carpentry", action: "train-carpentry" } ],
+        interactions: [ { name: "Train Carpentry (Journeyman)", action: "train-carpentry", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["woodcraft"], luxuries: [] },
         consumes: { resources: ["timber"], commodities: [], luxuries: [] }
       },
-      "Tailors' Academy": {
+      "Tailoring Trainer's Shop": {
         travelPrompt: "Exit to",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
-        interactions: [ { name: "Practice Tailoring", action: "train-tailoring" } ],
+        interactions: [ { name: "Train Tailoring (Apprentice)", action: "train-tailoring", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["garments"], luxuries: [] },
         consumes: { resources: [], commodities: ["cloth"], luxuries: [] }
       },
-      "Leatherworking School": {
+      "Leatherworking Trainer's Shed": {
         travelPrompt: "Exit to",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
-        interactions: [ { name: "Practice Leatherworking", action: "train-leatherworking" } ],
+        interactions: [ { name: "Train Leatherworking (Apprentice)", action: "train-leatherworking", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["leather goods"], luxuries: [] },
         consumes: { resources: ["hides"], commodities: [], luxuries: [] }
       },
-      "Alchemy Academy": {
+      "Alchemy Trainer's Lab": {
         travelPrompt: "Exit to",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
-        interactions: [ { name: "Practice Alchemy", action: "train-alchemy" } ],
+        interactions: [ { name: "Train Alchemy (Journeyman)", action: "train-alchemy", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["potions"], luxuries: ["elixirs"] },
         consumes: { resources: ["herbs", "reagents"], commodities: [], luxuries: [] }
       },
-      "Enchanters' Academy": {
+      "Enchanting Trainer's Sanctum": {
         travelPrompt: "Exit to",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
-        interactions: [ { name: "Practice Enchanting", action: "train-enchanting" } ],
+        interactions: [ { name: "Train Enchanting (Initiate)", action: "train-enchanting", tier: "initiate" } ],
         produces: { resources: [], commodities: [], luxuries: ["enchanted items"] },
         consumes: { resources: ["mana crystals"], commodities: [], luxuries: [] }
       },
@@ -217,15 +217,15 @@ export const CITY_NAV = {
           { name: "Steel Watch Naval Docks", type: "building", target: "Steel Watch Naval Docks" },
           { name: "Coral Court Quay", type: "building", target: "Coral Court Quay" },
           { name: "Glassmarket Wharf", type: "building", target: "Glassmarket Wharf" },
-          { name: "Glassblowing Academy", type: "building", target: "Glassblowing Academy" },
+          { name: "Glassblowing Trainer's Workshop", type: "building", target: "Glassblowing Trainer's Workshop" },
           { name: "Pearl Commons Pier", type: "building", target: "Pearl Commons Pier" },
-          { name: "Pearl Diver School", type: "building", target: "Pearl Diver School" },
-          { name: "Smithing Academy", type: "building", target: "Smithing Academy" },
-          { name: "Carpentry Academy", type: "building", target: "Carpentry Academy" },
-          { name: "Tailors' Academy", type: "building", target: "Tailors' Academy" },
-          { name: "Leatherworking School", type: "building", target: "Leatherworking School" },
-          { name: "Alchemy Academy", type: "building", target: "Alchemy Academy" },
-          { name: "Enchanters' Academy", type: "building", target: "Enchanters' Academy" },
+          { name: "Pearl Diving Trainer's Dock", type: "building", target: "Pearl Diving Trainer's Dock" },
+          { name: "Smithing Trainer's Forge", type: "building", target: "Smithing Trainer's Forge" },
+          { name: "Carpentry Trainer's Lodge", type: "building", target: "Carpentry Trainer's Lodge" },
+          { name: "Tailoring Trainer's Shop", type: "building", target: "Tailoring Trainer's Shop" },
+          { name: "Leatherworking Trainer's Shed", type: "building", target: "Leatherworking Trainer's Shed" },
+          { name: "Alchemy Trainer's Lab", type: "building", target: "Alchemy Trainer's Lab" },
+          { name: "Enchanting Trainer's Sanctum", type: "building", target: "Enchanting Trainer's Sanctum" },
           { name: "Military Ward", type: "district", target: "Military Ward" }
         ]
       },
@@ -285,59 +285,59 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: [], luxuries: ["pearls"] },
         consumes: { resources: ["diving gear"], commodities: [], luxuries: [] }
       },
-      "Glassblowing Academy": {
+      "Glassblowing Trainer's Workshop": {
         travelPrompt: "Exit to",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
-        interactions: [ { name: "Practice Glassblowing", action: "train-glassblowing" } ],
+        interactions: [ { name: "Train Glassblowing (Apprentice)", action: "train-glassblowing", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["glassware"], luxuries: ["art glass"] },
         consumes: { resources: ["sand", "fuel"], commodities: [], luxuries: [] }
       },
-      "Pearl Diver School": {
+      "Pearl Diving Trainer's Dock": {
         travelPrompt: "Exit to",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
-        interactions: [ { name: "Take Diving Lessons", action: "train-pearl-diving" } ],
+        interactions: [ { name: "Train Pearl Diving (Journeyman)", action: "train-pearl-diving", tier: "journeyman" } ],
         produces: { resources: [], commodities: [], luxuries: ["pearls"] },
         consumes: { resources: ["diving gear"], commodities: [], luxuries: [] }
       },
-      "Smithing Academy": {
+      "Smithing Trainer's Forge": {
         travelPrompt: "Exit to",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
-        interactions: [ { name: "Practice Blacksmithing", action: "train-blacksmithing" } ],
+        interactions: [ { name: "Train Blacksmithing (Apprentice)", action: "train-blacksmithing", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["metal goods"], luxuries: [] },
         consumes: { resources: ["ore", "coal"], commodities: [], luxuries: [] }
       },
-      "Carpentry Academy": {
+      "Carpentry Trainer's Lodge": {
         travelPrompt: "Exit to",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
-        interactions: [ { name: "Practice Carpentry", action: "train-carpentry" } ],
+        interactions: [ { name: "Train Carpentry (Apprentice)", action: "train-carpentry", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["woodcraft"], luxuries: [] },
         consumes: { resources: ["timber"], commodities: [], luxuries: [] }
       },
-      "Tailors' Academy": {
+      "Tailoring Trainer's Shop": {
         travelPrompt: "Exit to",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
-        interactions: [ { name: "Practice Tailoring", action: "train-tailoring" } ],
+        interactions: [ { name: "Train Tailoring (Apprentice)", action: "train-tailoring", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["garments"], luxuries: [] },
         consumes: { resources: [], commodities: ["cloth"], luxuries: [] }
       },
-      "Leatherworking School": {
+      "Leatherworking Trainer's Shed": {
         travelPrompt: "Exit to",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
-        interactions: [ { name: "Practice Leatherworking", action: "train-leatherworking" } ],
+        interactions: [ { name: "Train Leatherworking (Initiate)", action: "train-leatherworking", tier: "initiate" } ],
         produces: { resources: [], commodities: ["leather goods"], luxuries: [] },
         consumes: { resources: ["hides"], commodities: [], luxuries: [] }
       },
-      "Alchemy Academy": {
+      "Alchemy Trainer's Lab": {
         travelPrompt: "Exit to",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
-        interactions: [ { name: "Practice Alchemy", action: "train-alchemy" } ],
+        interactions: [ { name: "Train Alchemy (Apprentice)", action: "train-alchemy", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["potions"], luxuries: ["elixirs"] },
         consumes: { resources: ["herbs", "reagents"], commodities: [], luxuries: [] }
       },
-      "Enchanters' Academy": {
+      "Enchanting Trainer's Sanctum": {
         travelPrompt: "Exit to",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
-        interactions: [ { name: "Practice Enchanting", action: "train-enchanting" } ],
+        interactions: [ { name: "Train Enchanting (Initiate)", action: "train-enchanting", tier: "initiate" } ],
         produces: { resources: [], commodities: [], luxuries: ["enchanted items"] },
         consumes: { resources: ["mana crystals"], commodities: [], luxuries: [] }
       }
