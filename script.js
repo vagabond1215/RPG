@@ -8,6 +8,7 @@ import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipmen
 import { LOCATIONS } from "./assets/data/locations.js";
 import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
 import { CITY_NAV } from "./assets/data/city_nav.js";
+import { DEFAULT_NAMES } from "./assets/data/names.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -1565,8 +1566,13 @@ function startCharacterCreation() {
       }
     } else {
       const nameVal = character.name || '';
+      const nameList =
+        DEFAULT_NAMES[character.race]?.[
+          character.sex === 'Male' ? 'male' : 'female'
+        ] || [];
+      const placeholderName = nameList[0] || 'Name';
       setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div>${statsHTML}</div><div class="cc-options"><input type="text" id="name-input" value="${nameVal}" placeholder="Name"></div><div class="cc-info">${descHTML}${imageHTML}</div></div>`
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div>${statsHTML}</div><div class="cc-options name-entry"><input type="text" id="name-input" value="${nameVal}" placeholder="${placeholderName}"><button id="name-random" class="dice-button" aria-label="Randomize Name">🎲</button></div><div class="cc-info">${descHTML}${imageHTML}</div></div>`
       );
       normalizeOptionButtonWidths();
       const currentStepEl = document.querySelector('.progress-step.current');
@@ -1578,6 +1584,7 @@ function startCharacterCreation() {
         detailEl.appendChild(optionsEl);
       }
       const nameInput = document.getElementById('name-input');
+      const randomBtn = document.getElementById('name-random');
       const updateName = () => {
         character.name = nameInput.value.trim();
         localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
@@ -1591,6 +1598,13 @@ function startCharacterCreation() {
         if (isComplete()) completeBtn.removeAttribute('disabled');
         else completeBtn.setAttribute('disabled', '');
       };
+      const randomizeName = () => {
+        if (!nameList.length) return;
+        const newName = nameList[Math.floor(Math.random() * nameList.length)];
+        nameInput.value = newName;
+        updateName();
+      };
+      randomBtn.addEventListener('click', randomizeName);
       nameInput.addEventListener('input', updateName);
       updateName();
     }
