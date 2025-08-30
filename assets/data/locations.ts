@@ -1170,6 +1170,88 @@ Despite its danger-fueled reputation, the outpost also supports itself with quie
   },
 };
 
+const WHITEHEART: Location = {
+  ...createLocation(
+    "Whiteheart",
+    "Whiteheart.png",
+    `Whiteheart – The Eastern Frontier Outpost
+
+Tucked deep within the forested lands between Corona and Corner Stone, Whiteheart is the newest and smallest of the kingdom’s settlements. Founded by the guilds as a frontier experiment, the outpost serves several vital roles: as a logging station for lumber, as a halfway rest for caravans traveling the forest road, and most importantly as a base of operations for scouting and quelling monsters that have begun appearing in unusual numbers from the East. Its name comes from both the pale-barked trees that dominate the forest and the symbolic role it hopes to play as a "heart of the wilderness", taming and expanding human settlement in dangerous lands.
+
+At present, Whiteheart is little more than a guild hall, barracks, and a scattering of homes for hunters, crafters, and laborers. Still, it is expected to grow: guild leaders in Corona see the outpost as a means to relieve overcrowding in the capital by relocating laborers, farmers, and families here. Already plans are underway for farmland expansion, better road patrols, and new defenses against bandits and monsters. For adventurers, Whiteheart offers modest pay but steady work: monster culls, bandit suppression, and forest scouting. Though small, it holds great symbolic importance as the easternmost human presence and the spearpoint of civilization pushing into the deep, ancient woods.`
+  ),
+  subdivisions: [
+    "The Central Plaza",
+    "The Barracks",
+    "Residences & Community",
+  ],
+  position: {
+    general: "forest frontier outpost between Corona and Corner Stone",
+    relative:
+      "midpoint along the forest road and easternmost human presence",
+  },
+  travel: {
+    routes: ["forest road to Corona", "forest road to Corner Stone"],
+    connections: ["Corona", "Corner Stone"],
+  },
+  population: {
+    estimate: 150,
+    range: [150, 300],
+    districts: {
+      "The Central Plaza": {
+        estimate: 20,
+        notes: "gathering clearing with guild hall and watchtower",
+      },
+      "The Barracks": {
+        estimate: 70,
+        notes: "50-75 soldiers patrolling the road",
+      },
+      "Residences & Community": {
+        estimate: 60,
+        notes:
+          "hunter cabins, crafters' hut, foragers' lodge, communal longhouse",
+      },
+    },
+    hinterland: {
+      estimate: 40,
+      notes:
+        "logging camps and daily caravans; peaks up to 250-300 visitors",
+    },
+  },
+  pointsOfInterest: {
+    buildings: [
+      "The Central Plaza",
+      "The Guild Hall",
+      "The Watchtower",
+      "The Muster Post",
+      "The Barracks",
+      "Armory Shed",
+      "Training Yard",
+      "Hunter Cabins",
+      "Crafter's Hut",
+      "Forager's Lodge",
+      "Communal Longhouse",
+      "Shrine of the Forest Father",
+      "Wayside Shrine of the River-Mother",
+      "The White Boar Inn",
+      "The Timber Exchange",
+      "The Roadside Market",
+      "Logging Camps",
+      "Cleared Farmland Patches",
+      "Forest Trails",
+    ],
+    tradeRoutes: [
+      "caravans between Corona and Corner Stone",
+      "timber shipments to Corner Stone",
+    ],
+    resources: {
+      domestic: ["timber", "game", "pelts", "herbs and mushrooms"],
+      exports: ["timber", "pelts", "forest materials"],
+      imports: ["grain", "tools", "supplies"],
+    },
+  },
+};
+
 export const LOCATIONS: Record<string, Location> = {
   "Duvilia Kingdom": createLocation(
     "Duvilia Kingdom",
@@ -1182,13 +1264,9 @@ export const LOCATIONS: Record<string, Location> = {
   "Warm Springs": WARM_SPRINGS,
   "Dancing Pines": DANCING_PINES,
   "Mountain Top": MOUNTAIN_TOP,
-  "Corona": CORONA,
-  "Corner Stone": CORNER_STONE,
-  "Dragon's Reach Road": DRAGONS_REACH_ROAD,
-  "Whiteheart": createLocation(
-    "Whiteheart",
-    "Whiteheart.png",
-    "Guild-founded outpost for lumber and exploration, serving as midpoint between Corona and Corner Stone to expand eastern agriculture and curb bandits."
-  ),
-};
+    "Corona": CORONA,
+    "Corner Stone": CORNER_STONE,
+    "Dragon's Reach Road": DRAGONS_REACH_ROAD,
+    "Whiteheart": WHITEHEART,
+  };
 
