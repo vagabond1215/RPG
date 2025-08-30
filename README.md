@@ -22,6 +22,14 @@ No build steps are required. After publishing the repository with GitHub Pages, 
 
 Additional functionality will be added over time.
 
+### Trainers
+
+Crafting is now learned from tiered trainers rather than academies. Trainers range from *initiate* through *master* and may only instruct characters of lower rank. Each craft has exactly one master trainer located in the city most renowned for that discipline, while lower tier trainers appear in cities based on resources and opportunity.
+
+### Outdoor Skills
+
+New activity skills – **Swimming**, **Sailing** and **Horseback Riding** – progress through time spent performing their respective activities. Progression helpers for these skills live in `assets/data/outdoor_skills.ts`.
+
 ### Magical Proficiencies
 
 Characters now track separate proficiencies for Stone, Water, Wind, Fire, Ice, Thunder, Dark, Light, Destructive, Healing, Reinforcement, Enfeebling and Summoning. The `gainProficiencyWithChance` function in `script.js` calculates how these values increase when spells are cast. The spellbook requires a character to meet the proficiency threshold in both a spell's element and its school before it can be used.
