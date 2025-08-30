@@ -6,10 +6,30 @@ export const CITY_NAV = {
       "Port District": {
         travelPrompt: "Walk to",
         points: [
-          { name: "Harbor Guard Naval Yard", type: "building", target: "Harbor Guard Naval Yard" },
-          { name: "Nobles' Quay", type: "building", target: "Nobles' Quay" },
-          { name: "Merchants' Wharf", type: "building", target: "Merchants' Wharf" },
-          { name: "Fisherman's Pier", type: "building", target: "Fisherman's Pier", icon: "assets/images/icons/pier.svg" },
+          {
+            name: "Harbor Guard Naval Yard",
+            type: "building",
+            target: "Harbor Guard Naval Yard",
+            icon: "assets/images/icons/naval-yard.svg",
+          },
+          {
+            name: "Nobles' Quay",
+            type: "building",
+            target: "Nobles' Quay",
+            icon: "assets/images/icons/nobles-quay.svg",
+          },
+          {
+            name: "Merchants' Wharf",
+            type: "building",
+            target: "Merchants' Wharf",
+            icon: "assets/images/icons/merchants-wharf.svg",
+          },
+          {
+            name: "Fisherman's Pier",
+            type: "building",
+            target: "Fisherman's Pier",
+            icon: "assets/images/icons/fishing-pier.svg",
+          },
           { name: "Tideway Inn", type: "building", target: "Tideway Inn" },
           { name: "Upper Ward", type: "district", target: "Upper Ward" },
           { name: "Little Terns", type: "district", target: "Little Terns" }
