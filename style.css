@@ -660,6 +660,49 @@ body.theme-dark {
     text-align: center;
   }
 
+  .navigation .option-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .navigation .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .navigation .nav-item button {
+    width: 5rem;
+    height: 5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+
+  .navigation .nav-item button:hover {
+    background: var(--foreground);
+    color: var(--background);
+  }
+
+  .navigation .nav-icon {
+    font-size: 2.5rem;
+  }
+
+  .navigation .street-sign {
+    background: #2e8b57;
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    white-space: nowrap;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #2e8b57;
+  }
+
   .location-select,
   .race-select {
     display: flex;
