@@ -27,6 +27,14 @@ window.toIron = toIron;
 window.fromIron = fromIron;
 window.LOCATIONS = LOCATIONS;
 
+const NAV_ICONS = {
+  location: '🗺️',
+  district: '🏙️',
+  building: '🏠',
+  exit: '🚪',
+  interaction: '⚙️',
+};
+
 const body = document.body;
 const main = document.querySelector('main');
 const backButton = document.getElementById('back-button');
@@ -715,19 +723,29 @@ function showNavigation() {
     setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1><p>You are in ${pos.city}.</p></div>`);
     return;
   }
+  const createNavItem = ({ type, target, name, action, prompt }) => {
+    const icon = NAV_ICONS[type] || '📍';
+    const attrs = action ? `data-action="${action}"` : `data-target="${target}"`;
+    const aria = prompt ? `${prompt} ${name}` : name;
+    return `<div class="nav-item"><button data-type="${type}" ${attrs} aria-label="${aria}"><span class="nav-icon">${icon}</span></button><span class="street-sign">${name}</span></div>`;
+  };
   if (pos.building) {
     const building = cityData.buildings[pos.building];
     const buttons = [];
     building.exits.forEach(e => {
       const prompt = e.prompt || building.travelPrompt || 'Exit to';
       const type = e.type || 'exit';
-      buttons.push(`<button data-type="${type}" data-target="${e.target}">${prompt} ${e.name}</button>`);
+      buttons.push(
+        createNavItem({ type, target: e.target, name: e.name, prompt })
+      );
     });
     if (building.exits.length && (building.interactions || []).length) {
       buttons.push('<div class="group-separator"></div>');
     }
     (building.interactions || []).forEach(i => {
-      buttons.push(`<button data-type="interaction" data-action="${i.action}">${i.name}</button>`);
+      buttons.push(
+        createNavItem({ type: 'interaction', action: i.action, name: i.name })
+      );
     });
     const hours = building.hours;
     const hoursText = hours
@@ -750,7 +768,12 @@ function showNavigation() {
     });
     const makeButton = pt => {
       const prompt = pt.type === 'district' ? 'Travel to' : district.travelPrompt || 'Walk to';
-      return `<button data-type="${pt.type}" data-target="${pt.target}">${prompt} ${pt.name}</button>`;
+      return createNavItem({
+        type: pt.type,
+        target: pt.target,
+        name: pt.name,
+        prompt,
+      });
     };
     const buttons = [
       ...exits.map(makeButton),
