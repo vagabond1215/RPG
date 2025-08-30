@@ -1,0 +1,62 @@
+import type { Backstory } from "./waves_break_backstories";
+
+export const CORAL_KEEP_BACKSTORIES: Backstory[] = [
+  {
+    district: "The Military Ward",
+    background: "Junior quartermaster",
+    past: "Grew up in the shadow of the Coral Citadel counting crates and polishing armor.",
+    items: ["ledger", "stub of chalk"],
+    money: "5 cp",
+    skills: ["inventory", "marching drills"],
+    combat: "Spear proficiency 10 (beginner)",
+    startingLocation: "Supply depot loft",
+    narrative: "You wake atop a stack of crates in the supply depot, morning horns echoing off the coral-white walls.",
+  },
+  {
+    district: "The South Docks & Steel Docks",
+    background: "Pearl diver",
+    past: "Descended from a line of shellfishers, you scour reefs for luminous pearls.",
+    items: ["diving knife", "string of shells"],
+    money: "2 sp",
+    skills: ["free diving", "reef navigation"],
+    combat: "Knife proficiency 10 (beginner)",
+    startingLocation: "Steel Watch Naval Docks bunk",
+    narrative: "Salt spray stings your face as you rouse on a coil of rope beside the Steel Watch Docks.",
+  },
+  {
+    district: "The Forge District",
+    background: "Glassblower's apprentice",
+    past: "Sweeps floors at the Great Glassworks dreaming of shaping molten art.",
+    items: ["blowpipe", "leather gloves"],
+    money: "6 cp",
+    skills: ["glass blowing", "kiln tending"],
+    combat: "Untrained",
+    craftProficiencies: { glass: 10 },
+    startingLocation: "Great Glassworks dormitory",
+    narrative: "You wake in the heat-hazed dormitory of the Great Glassworks, embers still glowing in the furnaces below.",
+  },
+  {
+    district: "The Old City",
+    background: "Street performer",
+    past: "Played lute for market crowds until debts pushed you to filching purses.",
+    items: ["lute", "pouch of copper rings"],
+    money: "4 cp",
+    skills: ["busking", "pickpocketing"],
+    combat: "Dagger proficiency 10 (beginner)",
+    startingLocation: "Old Market Square stall",
+    narrative: "You blink awake beneath your stall in Old Market Square as merchants raise their awnings.",
+  },
+  {
+    district: "The Northern Slums",
+    background: "Smuggler's runner",
+    past: "Carries contraband through night bazaars for a cut of the take.",
+    items: ["hidden satchel", "cheap cloak"],
+    money: "3 cp",
+    skills: ["sneaking", "streetwise"],
+    combat: "Club proficiency 10 (beginner)",
+    startingLocation: "Thieves' Market shanty",
+    narrative: "You stir in a damp shanty behind the Thieves' Market, clutching the satchel you must deliver before dawn.",
+  },
+];
+
+export default CORAL_KEEP_BACKSTORIES;
