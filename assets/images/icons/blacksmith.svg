@@ -1,8 +1,0 @@
-<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <g fill="currentColor">
-    <path d="M8 40h48v-4l-12-8h-8l-4-4H20l-8 4v12z"/>
-    <rect x="20" y="40" width="24" height="8"/>
-    <rect x="36" y="8" width="20" height="8" transform="rotate(45 46 12)"/>
-    <rect x="30" y="20" width="8" height="20" transform="rotate(45 34 30)"/>
-  </g>
-</svg>
