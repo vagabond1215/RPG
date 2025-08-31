@@ -644,6 +644,11 @@ body.theme-dark {
     color: var(--background);
   }
 
+  .building-description {
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+  }
+
   .business-hours {
     margin: 0 0 0.5rem 0;
     text-align: center;
