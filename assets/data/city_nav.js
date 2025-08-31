@@ -31,7 +31,7 @@ export const CITY_NAV = {
             icon: "assets/images/icons/Fishing Dock 1.png",
           },
           { name: "Tideway Inn", type: "building", target: "Tideway Inn", icon: "assets/images/icons/Tidewater Inn.webp" },
-          { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/Upper Ward 1.jpg" },
+          { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/Upper Ward District.png" },
           { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/Little Terns District.png" }
           ]
         },
@@ -43,8 +43,8 @@ export const CITY_NAV = {
             { name: "Mercantile Exchange", type: "building", target: "Mercantile Exchange" },
             { name: "Temple of the Tides", type: "building", target: "Temple of the Tides" },
             { name: "Hall of Records", type: "building", target: "Hall of Records" },
-            { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/Merchant Pier.png" },
-            { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/Public Park.png" }
+            { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/Port District.png" },
+            { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/Greensoul Hill District.png" }
           ]
         },
         "Little Terns": {
@@ -57,14 +57,14 @@ export const CITY_NAV = {
             { name: "Leatherworking Shed", type: "building", target: "Leatherworking Shed", icon: "assets/images/icons/Leatherworking Station.png" },
             { name: "Alchemy Lab", type: "building", target: "Alchemy Lab", icon: "assets/images/icons/Alchemy Shop.png" },
             { name: "Enchanting Sanctum", type: "building", target: "Enchanting Sanctum", icon: "assets/images/icons/Enchanting Shop.png" },
-            { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/Fishing Dock 2.png" },
-            { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/Public Park.png" }
+              { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/Port District.png" },
+              { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/Greensoul Hill District.png" }
           ]
         },
         "Greensoul Hill": {
           travelPrompt: "Walk to",
           points: [
-            { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/Upper Ward 2.jpg" },
+              { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/Upper Ward District.png" },
             { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/Little Terns District.png" },
             { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/Lower Gardens District.png" }
           ]
@@ -74,7 +74,7 @@ export const CITY_NAV = {
           points: [
             { name: "City Bakery", type: "building", target: "City Bakery", icon: "assets/images/icons/Bakery.jpg" },
             { name: "Central Granary", type: "building", target: "Central Granary", icon: "assets/images/icons/Small Granary.png" },
-            { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/Public Park.png" },
+              { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/Greensoul Hill District.png" },
             { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/Small Bridge.png" }
           ]
         },
