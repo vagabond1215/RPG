@@ -96,21 +96,25 @@ export const CITY_NAV = {
     buildings: {
       "Tideway Inn": {
         travelPrompt: "Exit to",
+        description: "Warm lantern light and the murmur of sailors greet you.",
         exits: [ { name: "Port District", target: "Port District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "Governor's Keep": {
         travelPrompt: "Exit to",
+        description: "Banners hang above polished stone halls bustling with officials.",
         exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
         interactions: []
       },
       "Crafting Quarter": {
         travelPrompt: "Exit to",
+        description: "Workbenches overflow with tools while artisans hammer and sew.",
         exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
         interactions: []
       },
       "Mercantile Exchange": {
         travelPrompt: "Exit to",
+        description: "Traders haggle beneath high arches stacked with crates and ledgers.",
         exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
         interactions: [],
         produces: { resources: [], commodities: ["trade contracts"], luxuries: [] },
@@ -118,16 +122,19 @@ export const CITY_NAV = {
       },
       "Temple of the Tides": {
         travelPrompt: "Exit to",
+        description: "Salt-scented incense drifts around statues carved from sea stone.",
         exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
         interactions: []
       },
       "Hall of Records": {
         travelPrompt: "Exit to",
+        description: "Tall shelves of scrolls rise in orderly rows under hushed silence.",
         exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
         interactions: []
       },
       "Harbor Guard Naval Yard": {
         travelPrompt: "Exit to",
+        description: "Ship hulls and disciplined marines line the busy dockside yard.",
         exits: [
           { name: "Port District", target: "Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
@@ -138,6 +145,7 @@ export const CITY_NAV = {
       },
       "Nobles' Quay": {
         travelPrompt: "Exit to",
+        description: "Gilded barges bob beside polished piers watched by cloaked attendants.",
         exits: [
           { name: "Port District", target: "Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
@@ -148,6 +156,7 @@ export const CITY_NAV = {
       },
       "Merchants' Wharf": {
         travelPrompt: "Exit to",
+        description: "Crates and shouting dockworkers crowd the bustling commercial pier.",
         exits: [
           { name: "Port District", target: "Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
@@ -158,6 +167,7 @@ export const CITY_NAV = {
       },
       "Glassblowing Workshop": {
         travelPrompt: "Exit to",
+        description: "Furnaces roar as molten glass twists into shimmering shapes.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Glassblowing (Master)", action: "train-glassblowing", tier: "master" } ],
         produces: { resources: [], commodities: ["glassware"], luxuries: ["art glass"] },
@@ -165,6 +175,7 @@ export const CITY_NAV = {
       },
       "Smithing Forge": {
         travelPrompt: "Exit to",
+        description: "Anvils ring amid showers of sparks and the smell of hot iron.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Blacksmithing (Journeyman)", action: "train-blacksmithing", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["metal goods"], luxuries: [] },
@@ -172,6 +183,7 @@ export const CITY_NAV = {
       },
       "Carpentry Lodge": {
         travelPrompt: "Exit to",
+        description: "Stacks of timber and the scent of fresh sawdust fill the hall.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Carpentry (Journeyman)", action: "train-carpentry", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["woodcraft"], luxuries: [] },
@@ -179,6 +191,7 @@ export const CITY_NAV = {
       },
       "Tailoring Shop": {
         travelPrompt: "Exit to",
+        description: "Bolts of cloth and neatly labeled threads await deft hands.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Tailoring (Apprentice)", action: "train-tailoring", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["garments"], luxuries: [] },
@@ -186,6 +199,7 @@ export const CITY_NAV = {
       },
       "Leatherworking Shed": {
         travelPrompt: "Exit to",
+        description: "Hides hang from beams while craftsmen stitch sturdy gear.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Leatherworking (Apprentice)", action: "train-leatherworking", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["leather goods"], luxuries: [] },
@@ -193,6 +207,7 @@ export const CITY_NAV = {
       },
       "Alchemy Lab": {
         travelPrompt: "Exit to",
+        description: "Bubbling flasks and acrid fumes swirl among cluttered tables.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Alchemy (Journeyman)", action: "train-alchemy", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["potions"], luxuries: ["elixirs"] },
@@ -200,6 +215,7 @@ export const CITY_NAV = {
       },
       "Enchanting Sanctum": {
         travelPrompt: "Exit to",
+        description: "Runed crystals glow softly over circles etched in the floor.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Enchanting (Initiate)", action: "train-enchanting", tier: "initiate" } ],
         produces: { resources: [], commodities: [], luxuries: ["enchanted items"] },
@@ -207,6 +223,7 @@ export const CITY_NAV = {
       },
       "Fisherman's Pier": {
         travelPrompt: "Exit to",
+        description: "Nets dry on posts as gulls cry over baskets of fish.",
         exits: [
           { name: "Port District", target: "Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
@@ -217,6 +234,7 @@ export const CITY_NAV = {
       },
       "City Bakery": {
         travelPrompt: "Exit to",
+        description: "Ovens radiate warmth while fresh loaves cool on wide shelves.",
         exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["bread"], luxuries: [] },
@@ -224,6 +242,7 @@ export const CITY_NAV = {
       },
       "Central Granary": {
         travelPrompt: "Exit to",
+        description: "Massive bins overflow with grain guarded by stoic stewards.",
         exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: [], luxuries: [] },
@@ -269,6 +288,7 @@ export const CITY_NAV = {
     buildings: {
       "Steel Watch Naval Docks": {
         travelPrompt: "Exit to",
+        description: "Warships rest in ordered rows while crews drill with precision.",
         exits: [
           { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
           { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
@@ -279,6 +299,7 @@ export const CITY_NAV = {
       },
       "Coral Court Quay": {
         travelPrompt: "Exit to",
+        description: "Bright coral inlays gleam along piers reserved for the nobility.",
         exits: [
           { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
           { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
@@ -289,6 +310,7 @@ export const CITY_NAV = {
       },
       "Glassmarket Wharf": {
         travelPrompt: "Exit to",
+        description: "Casks of gleaming glassware sparkle in the sun between traders.",
         exits: [
           { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
           { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
@@ -299,6 +321,7 @@ export const CITY_NAV = {
       },
       "Pearl Commons Pier": {
         travelPrompt: "Exit to",
+        description: "Divers unload shell baskets beside market stalls glittering with pearls.",
         exits: [
           { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
           { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
@@ -309,6 +332,7 @@ export const CITY_NAV = {
       },
       "Glassblowing Workshop": {
         travelPrompt: "Exit to",
+        description: "Furnaces roar as molten glass twists into shimmering shapes.",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Glassblowing (Apprentice)", action: "train-glassblowing", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["glassware"], luxuries: ["art glass"] },
@@ -316,6 +340,7 @@ export const CITY_NAV = {
       },
       "Pearl Diving Dock": {
         travelPrompt: "Exit to",
+        description: "Ropes and air pumps clutter the pier where divers ready themselves.",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Pearl Diving (Journeyman)", action: "train-pearl-diving", tier: "journeyman" } ],
         produces: { resources: [], commodities: [], luxuries: ["pearls"] },
@@ -323,6 +348,7 @@ export const CITY_NAV = {
       },
       "Smithing Forge": {
         travelPrompt: "Exit to",
+        description: "Anvils ring amid showers of sparks and the smell of hot iron.",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Blacksmithing (Apprentice)", action: "train-blacksmithing", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["metal goods"], luxuries: [] },
@@ -330,6 +356,7 @@ export const CITY_NAV = {
       },
       "Carpentry Lodge": {
         travelPrompt: "Exit to",
+        description: "Stacks of timber and the scent of fresh sawdust fill the hall.",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Carpentry (Apprentice)", action: "train-carpentry", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["woodcraft"], luxuries: [] },
@@ -337,6 +364,7 @@ export const CITY_NAV = {
       },
       "Tailoring Shop": {
         travelPrompt: "Exit to",
+        description: "Bolts of cloth and neatly labeled threads await deft hands.",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Tailoring (Apprentice)", action: "train-tailoring", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["garments"], luxuries: [] },
@@ -344,6 +372,7 @@ export const CITY_NAV = {
       },
       "Leatherworking Shed": {
         travelPrompt: "Exit to",
+        description: "Hides hang from beams while craftsmen stitch sturdy gear.",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Leatherworking (Initiate)", action: "train-leatherworking", tier: "initiate" } ],
         produces: { resources: [], commodities: ["leather goods"], luxuries: [] },
@@ -351,6 +380,7 @@ export const CITY_NAV = {
       },
       "Alchemy Lab": {
         travelPrompt: "Exit to",
+        description: "Bubbling flasks and acrid fumes swirl among cluttered tables.",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Alchemy (Apprentice)", action: "train-alchemy", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["potions"], luxuries: ["elixirs"] },
@@ -358,6 +388,7 @@ export const CITY_NAV = {
       },
       "Enchanting Sanctum": {
         travelPrompt: "Exit to",
+        description: "Runed crystals glow softly over circles etched in the floor.",
         exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Enchanting (Initiate)", action: "train-enchanting", tier: "initiate" } ],
         produces: { resources: [], commodities: [], luxuries: ["enchanted items"] },
@@ -423,36 +454,43 @@ export const CITY_NAV = {
     buildings: {
       "Shrine of the Forest Father": {
         travelPrompt: "Exit to",
+        description: "Moss-covered stones ring a serene altar beneath towering pines.",
         exits: [ { name: "Central Plaza", target: "Central Plaza" } ],
         interactions: []
       },
       "The Timberhall": {
         travelPrompt: "Exit to",
+        description: "Rough-hewn beams frame a bustling hall rich with resin scent.",
         exits: [ { name: "Central Plaza", target: "Central Plaza" } ],
         interactions: []
       },
       "Forest Rest Inn": {
         travelPrompt: "Exit to",
+        description: "A crackling hearth and sturdy wooden beds offer weary lumberjacks respite.",
         exits: [ { name: "Central Plaza", target: "Central Plaza" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "The Riverhouse": {
         travelPrompt: "Exit to",
+        description: "Water laps softly beneath the stilts of this tranquil riverside house.",
         exits: [ { name: "Central Plaza", target: "Central Plaza" } ],
         interactions: []
       },
       "Wayside Shrine of the River-Mother": {
         travelPrompt: "Exit to",
+        description: "Offerings drift in bowls beside a gentle stream-fed shrine.",
         exits: [ { name: "Fishing Bridges", target: "Fishing Bridges" } ],
         interactions: []
       },
       "Logger's Flask Tavern": {
         travelPrompt: "Exit to",
+        description: "Loud laughter mingles with the aroma of pine ale and smoke.",
         exits: [ { name: "The Lumberworks", target: "The Lumberworks" } ],
         interactions: []
       },
       "Crystalsong Lodge": {
         travelPrompt: "Exit to",
+        description: "Glittering crystals line the walls, casting prismatic light over miners.",
         exits: [ { name: "The Mine", target: "The Mine" } ],
         interactions: [],
         produces: { resources: [], commodities: [], luxuries: ["crystals"] },
@@ -526,6 +564,7 @@ export const CITY_NAV = {
     buildings: {
       "Farmland Estates": {
         travelPrompt: "Exit to",
+        description: "Rolling fields stretch outside windows while workers tend waving crops.",
         exits: [ { name: "Greenford", target: "Greenford" } ],
         interactions: [],
         produces: { resources: ["grain"], commodities: [], luxuries: [] },
@@ -533,6 +572,7 @@ export const CITY_NAV = {
       },
       "Cattle Yards": {
         travelPrompt: "Exit to",
+        description: "Lowing herds shuffle between sturdy pens and feed troughs.",
         exits: [ { name: "Greenford", target: "Greenford" } ],
         interactions: [],
         produces: { resources: ["livestock"], commodities: ["meat"], luxuries: [] },
@@ -540,6 +580,7 @@ export const CITY_NAV = {
       },
       "The Creamery Hall": {
         travelPrompt: "Exit to",
+        description: "Churns clatter rhythmically amid the sweet scent of fresh dairy.",
         exits: [ { name: "Greenford", target: "Greenford" } ],
         interactions: [],
         produces: { resources: [], commodities: ["cheese", "butter"], luxuries: [] },
@@ -547,6 +588,7 @@ export const CITY_NAV = {
       },
       "Leatherworkers' Guildhouse": {
         travelPrompt: "Exit to",
+        description: "Tanned hides and finished saddles line walls in neat rows.",
         exits: [ { name: "Greenford", target: "Greenford" } ],
         interactions: [],
         produces: { resources: [], commodities: ["leather goods"], luxuries: [] },
@@ -554,16 +596,19 @@ export const CITY_NAV = {
       },
       "Shrine of the Harvestmother": {
         travelPrompt: "Exit to",
+        description: "Painted reliefs celebrate bountiful harvests within the humble shrine.",
         exits: [ { name: "Greenford", target: "Greenford" } ],
         interactions: []
       },
       "The Plowman's Rest Tavern": {
         travelPrompt: "Exit to",
+        description: "Mud-spattered boots crowd around tables laden with hearty stew.",
         exits: [ { name: "Greenford", target: "Greenford" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "City Bakery": {
         travelPrompt: "Exit to",
+        description: "Ovens radiate warmth while fresh loaves cool on wide shelves.",
         exits: [ { name: "Greenford", target: "Greenford" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["bread"], luxuries: [] },
@@ -571,6 +616,7 @@ export const CITY_NAV = {
       },
       "Central Granary": {
         travelPrompt: "Exit to",
+        description: "Massive bins overflow with grain guarded by stoic stewards.",
         exits: [ { name: "Greenford", target: "Greenford" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: [], luxuries: [] },
@@ -578,11 +624,13 @@ export const CITY_NAV = {
       },
       "The Everrise Bridge": {
         travelPrompt: "Exit to",
+        description: "Stone arches span the river, offering a sweeping view of both banks.",
         exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
         interactions: []
       },
       "Fishermen's Guild": {
         travelPrompt: "Exit to",
+        description: "Nets and river charts cover the walls where captains share tales.",
         exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
         interactions: [],
         produces: { resources: ["fish"], commodities: [], luxuries: [] },
@@ -590,6 +638,7 @@ export const CITY_NAV = {
       },
       "Fishmongers' Market": {
         travelPrompt: "Exit to",
+        description: "Stalls overflow with fresh catch, scales flashing in the light.",
         exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
         interactions: [],
         produces: { resources: [], commodities: ["processed fish"], luxuries: [] },
@@ -597,6 +646,7 @@ export const CITY_NAV = {
       },
       "Riverside Warehouses": {
         travelPrompt: "Exit to",
+        description: "Crates stack high beneath rafters where merchants tally inventory.",
         exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
         interactions: [],
         produces: { resources: [], commodities: [], luxuries: [] },
@@ -604,11 +654,13 @@ export const CITY_NAV = {
       },
       "Shrine of the River-Mother": {
         travelPrompt: "Exit to",
+        description: "Cool mist drifts around the waterside altar adorned with river shells.",
         exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
         interactions: []
       },
       "The Waterwheel Mill": {
         travelPrompt: "Exit to",
+        description: "A great wheel groans, turning gears that grind grain to flour.",
         exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
         interactions: [],
         produces: { resources: [], commodities: ["flour"], luxuries: [] },
@@ -616,31 +668,37 @@ export const CITY_NAV = {
       },
       "The Oaken Net Tavern": {
         travelPrompt: "Exit to",
+        description: "Rough-hewn tables sit beneath nets strung from the rafters.",
         exits: [ { name: "Everrise Bridge", target: "Everrise Bridge" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "The Grand Guildhall of Creekside": {
         travelPrompt: "Exit to",
+        description: "Guild banners flutter above marble floors buzzing with negotiation.",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: []
       },
       "Military Barracks and Armory": {
         travelPrompt: "Exit to",
+        description: "Racks of polished weapons flank disciplined rows of bunks.",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: []
       },
       "The Muster Yard": {
         travelPrompt: "Exit to",
+        description: "Wide packed earth hosts squads drilling in crisp formation.",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: []
       },
       "Shrine of the Twin Watchers": {
         travelPrompt: "Exit to",
+        description: "Twin statues gaze outward, their eyes set with vigilant gems.",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: []
       },
       "Stonecutters' Guild": {
         travelPrompt: "Exit to",
+        description: "Blocks of stone and chiseled dust fill the workshop's open yard.",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: [],
         produces: { resources: [], commodities: ["cut stone"], luxuries: [] },
@@ -648,6 +706,7 @@ export const CITY_NAV = {
       },
       "Glass Factory": {
         travelPrompt: "Exit to",
+        description: "Kilns blaze while molten sheets slide along careful rollers.",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: [],
         produces: { resources: [], commodities: ["glass"], luxuries: [] },
@@ -655,6 +714,7 @@ export const CITY_NAV = {
       },
       "Glassblowers' Guild": {
         travelPrompt: "Exit to",
+        description: "Finished vases and panes glimmer on displays under vaulted ceilings.",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: [],
         produces: { resources: [], commodities: ["glassware"], luxuries: ["art glass"] },
@@ -662,6 +722,7 @@ export const CITY_NAV = {
       },
       "Butchers' Row": {
         travelPrompt: "Exit to",
+        description: "Hooks laden with fresh cuts hang above sawdust-covered floors.",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: [],
         produces: { resources: [], commodities: ["meat cuts"], luxuries: [] },
@@ -669,16 +730,19 @@ export const CITY_NAV = {
       },
       "The Iron Kettle Tavern": {
         travelPrompt: "Exit to",
+        description: "Heavy iron pots simmer stews that scent the loud common room.",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "The Traveler's Hearth Inn": {
         travelPrompt: "Exit to",
+        description: "Maps and travel gear adorn walls welcoming road-weary guests.",
         exits: [ { name: "Stoneknot", target: "Stoneknot" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "Sugar Cane and Beet Fields": {
         travelPrompt: "Exit to",
+        description: "Tall cane and beet rows sway under the watch of farmhands.",
         exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
         interactions: [],
         produces: { resources: ["sugar cane", "beets"], commodities: ["sugar"], luxuries: [] },
@@ -686,6 +750,7 @@ export const CITY_NAV = {
       },
       "Fruit Orchards": {
         travelPrompt: "Exit to",
+        description: "Trees heavy with fruit form shaded lanes buzzing with bees.",
         exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
         interactions: [],
         produces: { resources: ["fruit"], commodities: [], luxuries: [] },
@@ -693,6 +758,7 @@ export const CITY_NAV = {
       },
       "Vineyards and Wineries": {
         travelPrompt: "Exit to",
+        description: "Barrels line cool cellars where fermenting grapes perfume the air.",
         exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
         interactions: [],
         produces: { resources: [], commodities: ["wine"], luxuries: ["vintage wines"] },
@@ -700,6 +766,7 @@ export const CITY_NAV = {
       },
       "Goat and Sheep Farms": {
         travelPrompt: "Exit to",
+        description: "Bleating flocks wander past sheds stacked with fresh hay.",
         exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
         interactions: [],
         produces: { resources: ["wool", "milk"], commodities: ["cheese"], luxuries: [] },
@@ -707,11 +774,13 @@ export const CITY_NAV = {
       },
       "Outlying Watchtowers": {
         travelPrompt: "Exit to",
+        description: "Lonely towers rise over fields, their beacon fires ready.",
         exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
         interactions: []
       },
       "Roadside Shrine of the Forest Father": {
         travelPrompt: "Exit to",
+        description: "A weathered carving watches travelers offering simple twig charms.",
         exits: [ { name: "Surrounding Farmlands & Orchards", target: "Surrounding Farmlands & Orchards" } ],
         interactions: []
       }

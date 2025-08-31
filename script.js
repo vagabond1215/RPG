@@ -751,13 +751,14 @@ function showNavigation() {
       );
     });
     const hours = building.hours;
+    const descriptionHTML = building.description ? `<p class="building-description">${building.description}</p>` : '';
     const hoursText = hours
       ? hours.open === '00:00' && hours.close === '24:00'
         ? 'Open 24 hours'
         : `Open ${hours.open}–${hours.close}`
       : '';
     setMainHTML(
-      `<div class="navigation"><h1 class="city-name">${pos.city}</h1><h2>${pos.building}</h2>${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h1 class="city-name">${pos.city}</h1><h2>${pos.building}</h2>${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
     );
   } else {
     const district = cityData.districts[pos.district];
