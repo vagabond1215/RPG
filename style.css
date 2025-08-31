@@ -80,10 +80,14 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--menu-color-light);
-  background: transparent;
+  border-radius: 50%;
+  border: none;
+  background: #e0e0e0;
   color: var(--menu-color-dark);
   -webkit-text-stroke: 1px var(--menu-color-light);
+  box-shadow: inset 2px 2px 4px rgba(255,255,255,0.6),
+              inset -2px -2px 4px rgba(0,0,0,0.2);
+  transition: box-shadow 0.3s ease, background 0.3s ease;
   cursor: pointer;
 }
 
@@ -93,6 +97,13 @@ main {
   stroke: currentColor;
   fill: none;
   stroke-width: 2;
+}
+
+.top-menu button:hover,
+.top-menu button:active {
+  box-shadow: 0 0 8px rgba(255,255,255,0.8),
+              inset 2px 2px 4px rgba(255,255,255,0.6),
+              inset -2px -2px 4px rgba(0,0,0,0.2);
 }
 
 .settings-group {
