@@ -1,9 +1,0 @@
-<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" fill="var(--foreground)" stroke="var(--background)" stroke-width="4"/>
-  <g fill="var(--background)">
-    <polygon points="8,40 56,40 48,52 16,52"/>
-    <rect x="30" y="16" width="4" height="20"/>
-    <polygon points="34,16 50,26 34,26"/>
-    <rect x="34" y="12" width="10" height="4"/>
-  </g>
-</svg>
