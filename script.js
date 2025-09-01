@@ -733,6 +733,7 @@ function showNavigation() {
       district: cityData ? Object.keys(cityData.districts)[0] : null,
       building: null,
     };
+    saveProfiles();
   }
   const pos = currentCharacter.position;
   const cityData = CITY_NAV[pos.city];
@@ -951,6 +952,7 @@ function showNavigation() {
             return;
           }
         }
+        saveProfiles();
         showNavigation();
       });
     });
