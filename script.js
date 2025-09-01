@@ -89,6 +89,23 @@ function isPortraitLayout() {
 function normalizeOptionButtonWidths() {
   const grid = document.querySelector('.option-grid');
   if (!grid) return;
+  const images = Array.from(grid.querySelectorAll('img'));
+  let pending = images.filter(img => !img.complete).length;
+  if (pending) {
+    images.forEach(img => {
+      if (!img.complete) {
+        img.addEventListener(
+          'load',
+          () => {
+            pending--;
+            if (pending === 0) normalizeOptionButtonWidths();
+          },
+          { once: true }
+        );
+      }
+    });
+    return;
+  }
   const buttons = Array.from(grid.querySelectorAll('button'));
   let maxWidth = 0;
   buttons.forEach(btn => {
