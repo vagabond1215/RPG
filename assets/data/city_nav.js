@@ -50,13 +50,13 @@ export const CITY_NAV = {
         "Little Terns": {
           travelPrompt: "Walk to",
           points: [
-            { name: "Glassblowing Workshop", type: "building", target: "Glassblowing Workshop" },
-            { name: "Smithing Forge", type: "building", target: "Smithing Forge", icon: "assets/images/icons/waves_break/Smithing Forge.png" },
-            { name: "Carpentry Lodge", type: "building", target: "Carpentry Lodge", icon: "assets/images/icons/waves_break/Carpentry Lodge.png" },
-            { name: "Tailoring Shop", type: "building", target: "Tailoring Shop" },
-            { name: "Leatherworking Shed", type: "building", target: "Leatherworking Shed" },
-            { name: "Alchemy Lab", type: "building", target: "Alchemy Lab" },
-            { name: "Enchanting Sanctum", type: "building", target: "Enchanting Sanctum", icon: "assets/images/icons/waves_break/Enchanting Sanctum.png" },
+            { name: "Crystal Tide Glassworks", type: "building", target: "Crystal Tide Glassworks" },
+            { name: "Tidefire Forge", type: "building", target: "Tidefire Forge", icon: "assets/images/icons/waves_break/Tidefire Forge.png" },
+            { name: "Timberwave Carpenters' Guild", type: "building", target: "Timberwave Carpenters' Guild", icon: "assets/images/icons/waves_break/Timberwave Carpenters' Guild.png" },
+            { name: "The Gilded Needle Clothiers", type: "building", target: "The Gilded Needle Clothiers" },
+            { name: "Salted Hide Tannery", type: "building", target: "Salted Hide Tannery" },
+            { name: "Tideglass Alchemical Atelier", type: "building", target: "Tideglass Alchemical Atelier" },
+            { name: "Arc Runes Enchantery", type: "building", target: "Arc Runes Enchantery", icon: "assets/images/icons/waves_break/Arc Runes Enchantery.png" },
               { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/waves_break/Port District.png" },
               { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" }
           ]
@@ -72,8 +72,8 @@ export const CITY_NAV = {
         "The Lower Gardens": {
           travelPrompt: "Walk to",
           points: [
-            { name: "City Bakery", type: "building", target: "City Bakery" },
-            { name: "Central Granary", type: "building", target: "Central Granary", icon: "assets/images/icons/waves_break/Small Granary.png" },
+            { name: "Harbor Hearth Bakery", type: "building", target: "Harbor Hearth Bakery" },
+            { name: "Tidehold Granary & Provisioners", type: "building", target: "Tidehold Granary & Provisioners", icon: "assets/images/icons/waves_break/Small Granary.png" },
               { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" },
             { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/Small Bridge.png" }
           ]
@@ -165,7 +165,7 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["trade shipments"], luxuries: [] },
         consumes: { resources: [], commodities: ["imports"], luxuries: [] }
       },
-      "Glassblowing Workshop": {
+      "Crystal Tide Glassworks": {
         travelPrompt: "Exit to",
         description: "Furnaces roar as molten glass twists into shimmering shapes.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
@@ -173,7 +173,7 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["glassware"], luxuries: ["art glass"] },
         consumes: { resources: ["sand", "fuel"], commodities: [], luxuries: [] }
       },
-      "Smithing Forge": {
+      "Tidefire Forge": {
         travelPrompt: "Exit to",
         description: "Anvils ring amid showers of sparks and the smell of hot iron.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
@@ -181,7 +181,7 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["metal goods"], luxuries: [] },
         consumes: { resources: ["ore", "coal"], commodities: [], luxuries: [] }
       },
-      "Carpentry Lodge": {
+      "Timberwave Carpenters' Guild": {
         travelPrompt: "Exit to",
         description: "Stacks of timber and the scent of fresh sawdust fill the hall.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
@@ -189,7 +189,7 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["woodcraft"], luxuries: [] },
         consumes: { resources: ["timber"], commodities: [], luxuries: [] }
       },
-      "Tailoring Shop": {
+      "The Gilded Needle Clothiers": {
         travelPrompt: "Exit to",
         description: "Bolts of cloth and neatly labeled threads await deft hands.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
@@ -197,7 +197,7 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["garments"], luxuries: [] },
         consumes: { resources: [], commodities: ["cloth"], luxuries: [] }
       },
-      "Leatherworking Shed": {
+      "Salted Hide Tannery": {
         travelPrompt: "Exit to",
         description: "Hides hang from beams while craftsmen stitch sturdy gear.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
@@ -205,7 +205,7 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["leather goods"], luxuries: [] },
         consumes: { resources: ["hides"], commodities: [], luxuries: [] }
       },
-      "Alchemy Lab": {
+      "Tideglass Alchemical Atelier": {
         travelPrompt: "Exit to",
         description: "Bubbling flasks and acrid fumes swirl among cluttered tables.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
@@ -213,7 +213,7 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["potions"], luxuries: ["elixirs"] },
         consumes: { resources: ["herbs", "reagents"], commodities: [], luxuries: [] }
       },
-      "Enchanting Sanctum": {
+      "Arc Runes Enchantery": {
         travelPrompt: "Exit to",
         description: "Runed crystals glow softly over circles etched in the floor.",
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
@@ -232,7 +232,7 @@ export const CITY_NAV = {
         produces: { resources: ["fish"], commodities: [], luxuries: [] },
         consumes: { resources: ["nets", "boats"], commodities: [], luxuries: [] }
       },
-      "City Bakery": {
+      "Harbor Hearth Bakery": {
         travelPrompt: "Exit to",
         description: "Ovens radiate warmth while fresh loaves cool on wide shelves.",
         exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
@@ -240,7 +240,7 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["bread"], luxuries: [] },
         consumes: { resources: ["grain"], commodities: [], luxuries: [] }
       },
-      "Central Granary": {
+      "Tidehold Granary & Provisioners": {
         travelPrompt: "Exit to",
         description: "Massive bins overflow with grain guarded by stoic stewards.",
         exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],

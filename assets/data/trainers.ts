@@ -51,12 +51,12 @@ export const TRAINERS: Trainer[] = [
 
   // Journeyman and apprentice examples in populated cities
   { craft: 'glassblowing', tier: 'journeyman', name: 'Jorin Sandshaper', city: 'Coral Keep', location: "Glassblowing Workshop" },
-  { craft: 'blacksmithing', tier: 'journeyman', name: 'Brakka Ironbent', city: "Wave's Break", location: "Smithing Forge" },
-  { craft: 'carpentry', tier: 'journeyman', name: 'Tella Woodhand', city: "Wave's Break", location: "Carpentry Lodge" },
-  { craft: 'tailoring', tier: 'apprentice', name: 'Nimble Nia', city: "Wave's Break", location: "Tailoring Shop" },
-  { craft: 'leatherworking', tier: 'apprentice', name: 'Pell the Tanner', city: "Wave's Break", location: "Leatherworking Shed" },
-  { craft: 'alchemy', tier: 'journeyman', name: 'Iris Flaskbinder', city: "Wave's Break", location: "Alchemy Lab" },
-  { craft: 'enchanting', tier: 'initiate', name: 'Sira Glowtouch', city: "Wave's Break", location: "Enchanting Sanctum" },
+  { craft: 'blacksmithing', tier: 'journeyman', name: 'Brakka Ironbent', city: "Wave's Break", location: "Tidefire Forge" },
+  { craft: 'carpentry', tier: 'journeyman', name: 'Tella Woodhand', city: "Wave's Break", location: "Timberwave Carpenters' Guild" },
+  { craft: 'tailoring', tier: 'apprentice', name: 'Nimble Nia', city: "Wave's Break", location: "The Gilded Needle Clothiers" },
+  { craft: 'leatherworking', tier: 'apprentice', name: 'Pell the Tanner', city: "Wave's Break", location: "Salted Hide Tannery" },
+  { craft: 'alchemy', tier: 'journeyman', name: 'Iris Flaskbinder', city: "Wave's Break", location: "Tideglass Alchemical Atelier" },
+  { craft: 'enchanting', tier: 'initiate', name: 'Sira Glowtouch', city: "Wave's Break", location: "Arc Runes Enchantery" },
   { craft: 'pearl-diving', tier: 'journeyman', name: 'Doran Deepbreath', city: 'Coral Keep', location: "Pearl Diving Dock" },
 ];
 
