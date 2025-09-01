@@ -318,11 +318,37 @@ const elfSkinColors = [
   '#ebccb4', // Maple Silk
   '#ecd1b7'  // Autumn Glow
 ];
+const darkElfSkinColors = [
+  '#4C3D57', // Twilight Lilac
+  '#52465A', // Duskmire
+  '#574C63', // Moonveil
+  '#5A4E54', // Umbral Rose
+  '#5F4D62', // Nether Plum
+  '#63525E', // Ashen Violet
+  '#645760', // Duskwood
+  '#67595D', // Shadow Ember
+  '#695D64', // Veilstone
+  '#6A5668', // Obsidian Bloom
+  '#6D606E', // Fogshade
+  '#70606A', // Eclipse Gray
+  '#73646F', // Starless Ash
+  '#766873', // Moonshadow
+  '#796974', // Pale Obsidian
+  '#7C6F78', // Duskwraith
+  '#7F7072', // Iron Vein
+  '#81697C', // Veiled Amethyst
+  '#856C7A', // Blood-Tide Mauve
+  '#886E77', // Ashblood
+  '#8A707E', // Nightshade Bloom
+  '#8D7179', // Faded Obsidian
+  '#907683', // Moonlit Ash
+  '#92727B'  // Shadow Orchid
+];
 
 const skinColorOptionsByRace = {
   Human: generateColorScale('#f5cba7', '#8d5524'),
   Elf: elfSkinColors,
-  'Dark Elf': generateColorScale('#d1c4e9', '#7e57c2'),
+  'Dark Elf': darkElfSkinColors,
   Dwarf: generateColorScale('#f1c27d', '#8d5524'),
   'Cait Sith': generateColorScale('#f1e0c5', '#8c5a2b'),
   Salamander: generateColorScale('#f4a460', '#8b4513'),
