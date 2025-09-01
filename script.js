@@ -674,6 +674,68 @@ const skinColorOptionsByRace = {
   Halfling: halflingSkinColors
 };
 
+const caitSithAccentColors = [
+  '#fce2f1', // Rose Mist
+  '#fbdada', // Petal Fade
+  '#f5e8bb', // Sun Parchment
+  '#f1f0c2', // Pale Meadow
+  '#e3f7c2', // Spring Green
+  '#c8f4da', // Mint Gleam
+  '#a6efd4', // Aqua Fern
+  '#87d7f7', // Skytint
+  '#71bdf5', // Clear Sky
+  '#5d96db', // Deep Azure
+  '#4a7eb8', // Riversteel
+  '#9a8edb', // Twilight Violet
+  '#c3a6f5', // Fey Amethyst
+  '#e0b4f2', // Orchid Fade
+  '#f5b9cc', // Wild Rose
+  '#e4828f', // Blood Petal
+  '#d9665e', // Crimson Mark
+  '#c14b4b', // Emberclaw Red
+  '#b24d7c', // Mystic Plum
+  '#9d5fa9', // Arcane Violet
+  '#816a9f', // Duskwisp
+  '#615678', // Shadewood
+  '#4b3f52', // Smokestone
+  '#312a35'  // Night Violet
+];
+
+const salamanderScaleColors = [
+  '#fff0c9', // Pale Emberlight
+  '#f7e7a7', // Dunesun
+  '#f9e494', // Solar Glow
+  '#f4d87d', // Gold Ash
+  '#e7f79a', // Sulfur Bloom
+  '#c7f78c', // Acid Green
+  '#94f79b', // Virid Flame
+  '#67f5da', // Aqua Pyre
+  '#4ecce0', // Crystal Flame
+  '#3a9be3', // Azure Ember
+  '#366ed6', // Deep Cobalt
+  '#4c58b5', // Obsidian Blue
+  '#6a64d6', // Arcane Indigo
+  '#8c6ce6', // Magma Violet
+  '#ae73f7', // Runestone Purple
+  '#d181f5', // Elemental Lilac
+  '#f58edc', // Magma Bloom
+  '#f5a8c1', // Ember Rose
+  '#d7767d', // Ashfire Red
+  '#b95664', // Coal Ruby
+  '#9d4e5c', // Deep Lava Rose
+  '#77525f', // Ashwood Plum
+  '#544253', // Cindershade
+  '#352c38'  // Netherstone
+];
+
+const accentColorOptionsByRace = {
+  'Cait Sith': caitSithAccentColors
+};
+
+const scaleColorOptionsByRace = {
+  Salamander: salamanderScaleColors
+};
+
 const RACE_IMAGES = {
   Human: 'assets/images/Race%20Photos/Human%20Male%20and%20Female.png',
   Elf: 'assets/images/Race%20Photos/Elven%20Male%20and%20Female.png',
@@ -1412,6 +1474,8 @@ function showCharacterUI() {
       <div>Sex: ${c.sex}</div>
       <div class="physical-group">
         <div>Skin Color: <span class="color-box" style="background:${c.skinColor}"></span></div>
+        ${c.accentColor ? `<div>Accents: <span class="color-box" style="background:${c.accentColor}"></span></div>` : ''}
+        ${c.scaleColor ? `<div>Scales: <span class="color-box" style="background:${c.scaleColor}"></span></div>` : ''}
         <div>Hair Color: <span class="color-box" style="background:${c.hairColor}"></span></div>
         <div>Eye Color: <span class="color-box" style="background:${c.eyeColor}"></span></div>
         <div>Height: ${formatHeight(c.height)}</div>
@@ -1797,12 +1861,23 @@ function startCharacterCreation() {
       options: ['Male', 'Female']
     },
     { key: 'skinColor', label: 'Choose your skin color', type: 'color' },
+    { key: 'accentColor', label: 'Choose your accent color', type: 'color', races: ['Cait Sith'] },
+    { key: 'scaleColor', label: 'Choose your scale color', type: 'color', races: ['Salamander'] },
     { key: 'hairColor', label: 'Choose your hair color', type: 'color' },
     { key: 'eyeColor', label: 'Choose your eye color', type: 'color' },
     { key: 'height', label: 'Choose your height', type: 'range' }
   ];
 
-  const stepLabels = ['Race', 'Sex', 'Skin', 'Hair', 'Eyes', 'Height', 'Name', 'Location'];
+  const FIELD_STEP_LABELS = {
+    race: 'Race',
+    sex: 'Sex',
+    skinColor: 'Skin',
+    accentColor: 'Accents',
+    scaleColor: 'Scales',
+    hairColor: 'Hair',
+    eyeColor: 'Eyes',
+    height: 'Height'
+  };
 
   const heightRanges = {
     Human: [150, 200],
@@ -1819,15 +1894,22 @@ function startCharacterCreation() {
   renderStep();
 
   function renderStep() {
+    const activeFields = fields.filter(
+      f => !f.races || f.races.includes(character.race)
+    );
+    const stepLabels = activeFields
+      .map(f => FIELD_STEP_LABELS[f.key])
+      .concat(['Name', 'Location']);
+    if (step > activeFields.length + 1) step = activeFields.length + 1;
     const isComplete = () =>
-      fields.every(f => character[f.key]) && character.name && character.location;
+      activeFields.every(f => character[f.key]) && character.name && character.location;
     const progressHTML =
       stepLabels
         .map((label, i) => {
           const hasValue =
-            i < fields.length
-              ? character[fields[i].key]
-              : i === fields.length
+            i < activeFields.length
+              ? character[activeFields[i].key]
+              : i === activeFields.length
               ? character.name
               : character.location;
           let cls = 'clickable';
@@ -1840,13 +1922,13 @@ function startCharacterCreation() {
       '<button id="cc-cancel" title="Cancel">✖</button>';
 
     let field;
-    if (step < fields.length) field = fields[step];
-    else if (step === fields.length + 1) field = locationField;
+    if (step < activeFields.length) field = activeFields[step];
+    else if (step === activeFields.length + 1) field = locationField;
     if (field && field.key === 'race' && !character.race) {
       character.race = field.options[0];
       localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
     }
-    if (step === fields.length + 1 && !character.location) {
+    if (step === activeFields.length + 1 && !character.location) {
       character.location = locationField.options[0];
     }
     const displayData = (() => {
@@ -1938,6 +2020,10 @@ function startCharacterCreation() {
           colors = eyeColorOptionsByRace[character.race] || humanEyeColors;
         } else if (field.key === 'skinColor') {
           colors = skinColorOptionsByRace[character.race] || humanSkinColors;
+        } else if (field.key === 'accentColor') {
+          colors = accentColorOptionsByRace[character.race] || [];
+        } else if (field.key === 'scaleColor') {
+          colors = scaleColorOptionsByRace[character.race] || [];
         }
         colors = colors.slice().sort();
         let value = character[field.key];
@@ -1998,6 +2084,8 @@ function startCharacterCreation() {
         const change = dir => {
           index = (index + dir + options.length) % options.length;
           character.race = options[index];
+          if (character.race !== 'Cait Sith') delete character.accentColor;
+          if (character.race !== 'Salamander') delete character.scaleColor;
           localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         };
@@ -2030,6 +2118,10 @@ function startCharacterCreation() {
           colors = eyeColorOptionsByRace[character.race] || humanEyeColors;
         } else if (field.key === 'skinColor') {
           colors = skinColorOptionsByRace[character.race] || humanSkinColors;
+        } else if (field.key === 'accentColor') {
+          colors = accentColorOptionsByRace[character.race] || [];
+        } else if (field.key === 'scaleColor') {
+          colors = scaleColorOptionsByRace[character.race] || [];
         }
         colors = colors.slice().sort();
         let index = colors.indexOf(character[field.key]);
@@ -2092,7 +2184,7 @@ function startCharacterCreation() {
         character.name = nameInput.value.trim();
         localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         const completeBtn = document.getElementById('cc-complete');
-        const nameStepEl = document.querySelector(`.progress-step[data-step="${fields.length}"]`);
+        const nameStepEl = document.querySelector(`.progress-step[data-step="${activeFields.length}"]`);
         if (character.name) {
           nameStepEl?.classList.add('completed');
         } else {
@@ -2141,7 +2233,13 @@ function startCharacterCreation() {
 
 async function generateCharacterImage(character) {
   const location = character.location || 'a small town plaza';
-  const prompt = `Full body portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()} with ${character.skinColor} skin, ${character.hairColor} hair and ${character.eyeColor} eyes, ${formatHeight(character.height)} tall, standing in ${location}.`;
+  let skinDesc = `${character.skinColor} skin`;
+  if (character.race === 'Cait Sith' && character.accentColor) {
+    skinDesc += ` and ${character.accentColor} accents`;
+  } else if (character.race === 'Salamander' && character.scaleColor) {
+    skinDesc += ` and ${character.scaleColor} scales`;
+  }
+  const prompt = `Full body portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()} with ${skinDesc}, ${character.hairColor} hair and ${character.eyeColor} eyes, ${formatHeight(character.height)} tall, standing in ${location}.`;
   let apiKey = localStorage.getItem('openaiApiKey');
   if (!apiKey) {
     apiKey = prompt('Enter OpenAI API key:');
