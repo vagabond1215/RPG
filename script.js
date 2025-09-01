@@ -89,6 +89,7 @@ function isPortraitLayout() {
 function normalizeOptionButtonWidths() {
   const grid = document.querySelector('.option-grid');
   if (!grid) return;
+  if (grid.closest('.navigation')) return; // skip nav grids
   const images = Array.from(grid.querySelectorAll('img'));
   let pending = images.filter(img => !img.complete).length;
   if (pending) {
