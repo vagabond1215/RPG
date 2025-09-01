@@ -95,7 +95,7 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
         estimate: 31500,
         range: [28000, 34000],
         districts: {
-            "Port District": {
+            "The Port District": {
                 estimate: 6000,
                 notes: "dockworkers, fishers, chandlers, coopers, ropewalkers, shipwright families",
             },
@@ -103,11 +103,11 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
                 estimate: 9000,
                 notes: "artisans: smiths, carpenters and lumber yards, tailors, potters, tanners, cobblers, mills",
             },
-            "Lower Gardens": {
+            "The Lower Gardens": {
                 estimate: 5500,
                 notes: "market gardeners, brewers, herbalists, arena staff, service trades",
             },
-            "Upper Ward": {
+            "The Upper Ward": {
                 estimate: 3000,
                 notes: "administration, noble households, guards, high-end merchants",
             },
@@ -115,7 +115,7 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
                 estimate: 3500,
                 notes: "clergy, healers, scribes, arcanists, students",
             },
-            "High Road District": {
+            "The High Road District": {
                 estimate: 4500,
                 notes: "caravan trades, armourers, wagonwrights, leatherworkers, teamsters",
             },
@@ -234,23 +234,23 @@ Coral Keep is also a city of exchange. Caravans arrive from the lumber-rich high
         estimate: 27000,
         range: [24000, 30000],
         districts: {
-            "Military Ward": {
+            "The Military Ward": {
                 estimate: 2500,
                 notes: "governor's fortress, council hall, justice hall, sea-father temple, watchtowers",
             },
-            "South Docks & Steel Docks": {
+            "The South Docks & Steel Docks": {
                 estimate: 6500,
                 notes: "dockworkers, divers, shipwrights, glassworkers and pearl guilds, fishmongers",
             },
-            "Forge District": {
+            "The Forge District": {
                 estimate: 4000,
                 notes: "glassmakers, smiths, masons, jewelers, tanners, potters",
             },
-            "Old City": {
+            "The Old City": {
                 estimate: 5200,
                 notes: "markets, shrines, baths, tailors, candlewrights",
             },
-            "Northern Slums": {
+            "The Northern Slums": {
                 estimate: 2700,
                 notes: "thieves, smugglers, destitute folk, night bazaars",
             },

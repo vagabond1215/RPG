@@ -3,7 +3,7 @@ import { LOCATIONS } from "./locations.js";
 export const CITY_NAV = {
   "Wave's Break": {
     districts: {
-      "Port District": {
+      "The Port District": {
         travelPrompt: "Walk to",
         points: [
           {
@@ -31,11 +31,11 @@ export const CITY_NAV = {
             icon: "assets/images/icons/waves_break/Fisherman's Pier.png",
           },
           { name: "Tideway Inn", type: "building", target: "Tideway Inn", icon: "assets/images/icons/waves_break/Tideway Inn.png" },
-          { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" },
+          { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" },
           { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" }
           ]
         },
-        "Upper Ward": {
+        "The Upper Ward": {
           travelPrompt: "Walk to",
           points: [
             { name: "Governor's Keep", type: "building", target: "Governor's Keep", icon: "assets/images/icons/waves_break/Governor's Keep.png" },
@@ -43,7 +43,7 @@ export const CITY_NAV = {
             { name: "Mercantile Exchange", type: "building", target: "Mercantile Exchange", icon: "assets/images/icons/waves_break/Mercantile Exchange.png" },
             { name: "Temple of the Tides", type: "building", target: "Temple of the Tides", icon: "assets/images/icons/waves_break/Temple of the Tides.png" },
             { name: "Hall of Records", type: "building", target: "Hall of Records", icon: "assets/images/icons/waves_break/Hall of Records.png" },
-            { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/waves_break/Port District.png" },
+            { name: "The Port District", type: "district", target: "The Port District", icon: "assets/images/icons/waves_break/Port District.png" },
             { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" }
           ]
         },
@@ -57,14 +57,14 @@ export const CITY_NAV = {
             { name: "Salted Hide Tannery", type: "building", target: "Salted Hide Tannery" },
             { name: "Tideglass Alchemical Atelier", type: "building", target: "Tideglass Alchemical Atelier" },
             { name: "Arc Runes Enchantery", type: "building", target: "Arc Runes Enchantery", icon: "assets/images/icons/waves_break/Arc Runes Enchantery.png" },
-              { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/waves_break/Port District.png" },
+              { name: "The Port District", type: "district", target: "The Port District", icon: "assets/images/icons/waves_break/Port District.png" },
               { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" }
           ]
         },
         "Greensoul Hill": {
           travelPrompt: "Walk to",
           points: [
-              { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" },
+              { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" },
             { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" },
             { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" }
           ]
@@ -97,25 +97,25 @@ export const CITY_NAV = {
       "Tideway Inn": {
         travelPrompt: "Exit to",
         description: "Warm lantern light and the murmur of sailors greet you.",
-        exits: [ { name: "Port District", target: "Port District" } ],
+        exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "Governor's Keep": {
         travelPrompt: "Exit to",
         description: "Banners hang above polished stone halls bustling with officials.",
-        exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
+        exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Crafting Quarter": {
         travelPrompt: "Exit to",
         description: "Workbenches overflow with tools while artisans hammer and sew.",
-        exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
+        exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Mercantile Exchange": {
         travelPrompt: "Exit to",
         description: "Traders haggle beneath high arches stacked with crates and ledgers.",
-        exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
+        exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: [],
         produces: { resources: [], commodities: ["trade contracts"], luxuries: [] },
         consumes: { resources: [], commodities: ["market goods"], luxuries: ["rare items"] }
@@ -123,20 +123,20 @@ export const CITY_NAV = {
       "Temple of the Tides": {
         travelPrompt: "Exit to",
         description: "Salt-scented incense drifts around statues carved from sea stone.",
-        exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
+        exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Hall of Records": {
         travelPrompt: "Exit to",
         description: "Tall shelves of scrolls rise in orderly rows under hushed silence.",
-        exits: [ { name: "Upper Ward", target: "Upper Ward" } ],
+        exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Harbor Guard Naval Yard": {
         travelPrompt: "Exit to",
         description: "Ship hulls and disciplined marines line the busy dockside yard.",
         exits: [
-          { name: "Port District", target: "Port District" },
+          { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
         ],
         interactions: [],
@@ -147,7 +147,7 @@ export const CITY_NAV = {
         travelPrompt: "Exit to",
         description: "Gilded barges bob beside polished piers watched by cloaked attendants.",
         exits: [
-          { name: "Port District", target: "Port District" },
+          { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
         ],
         interactions: [],
@@ -158,7 +158,7 @@ export const CITY_NAV = {
         travelPrompt: "Exit to",
         description: "Crates and shouting dockworkers crowd the bustling commercial pier.",
         exits: [
-          { name: "Port District", target: "Port District" },
+          { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
         ],
         interactions: [],
@@ -225,7 +225,7 @@ export const CITY_NAV = {
         travelPrompt: "Exit to",
         description: "Nets dry on posts as gulls cry over baskets of fish.",
         exits: [
-          { name: "Port District", target: "Port District" },
+          { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
         ],
         interactions: [],
@@ -252,7 +252,7 @@ export const CITY_NAV = {
   },
   "Coral Keep": {
     districts: {
-      "South Docks & Steel Docks": {
+        "The South Docks & Steel Docks": {
         travelPrompt: "Walk to",
         points: [
           { name: "Steel Watch Naval Docks", type: "building", target: "Steel Watch Naval Docks" },
@@ -267,20 +267,20 @@ export const CITY_NAV = {
           { name: "Leatherworking Shed", type: "building", target: "Leatherworking Shed" },
           { name: "Alchemy Lab", type: "building", target: "Alchemy Lab" },
           { name: "Enchanting Sanctum", type: "building", target: "Enchanting Sanctum" },
-          { name: "Military Ward", type: "district", target: "Military Ward", icon: "assets/images/icons/waves_break/Military Ward District.png" }
+            { name: "The Military Ward", type: "district", target: "The Military Ward", icon: "assets/images/icons/waves_break/Military Ward District.png" }
         ]
       },
-      "Military Ward": {
+        "The Military Ward": {
         travelPrompt: "Walk to",
         points: [
-          { name: "South Docks & Steel Docks", type: "district", target: "South Docks & Steel Docks" },
+            { name: "The South Docks & Steel Docks", type: "district", target: "The South Docks & Steel Docks" },
           { name: "Greywind's Edge", type: "district", target: "Greywind's Edge" }
         ]
       },
       "Greywind's Edge": {
         travelPrompt: "Walk to",
         points: [
-          { name: "Military Ward", type: "district", target: "Military Ward", icon: "assets/images/icons/waves_break/Military Ward District.png" },
+            { name: "The Military Ward", type: "district", target: "The Military Ward", icon: "assets/images/icons/waves_break/Military Ward District.png" },
           { name: "West Road to Timber Grove", type: "location", target: "Timber Grove" }
         ]
       }
@@ -290,7 +290,7 @@ export const CITY_NAV = {
         travelPrompt: "Exit to",
         description: "Warships rest in ordered rows while crews drill with precision.",
         exits: [
-          { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
+          { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
           { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
         ],
         interactions: [],
@@ -301,7 +301,7 @@ export const CITY_NAV = {
         travelPrompt: "Exit to",
         description: "Bright coral inlays gleam along piers reserved for the nobility.",
         exits: [
-          { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
+          { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
           { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
         ],
         interactions: [],
@@ -312,7 +312,7 @@ export const CITY_NAV = {
         travelPrompt: "Exit to",
         description: "Casks of gleaming glassware sparkle in the sun between traders.",
         exits: [
-          { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
+          { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
           { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
         ],
         interactions: [],
@@ -323,7 +323,7 @@ export const CITY_NAV = {
         travelPrompt: "Exit to",
         description: "Divers unload shell baskets beside market stalls glittering with pearls.",
         exits: [
-          { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" },
+          { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
           { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
         ],
         interactions: [],
@@ -333,7 +333,7 @@ export const CITY_NAV = {
       "Glassblowing Workshop": {
         travelPrompt: "Exit to",
         description: "Furnaces roar as molten glass twists into shimmering shapes.",
-        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        exits: [ { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Glassblowing (Apprentice)", action: "train-glassblowing", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["glassware"], luxuries: ["art glass"] },
         consumes: { resources: ["sand", "fuel"], commodities: [], luxuries: [] }
@@ -341,7 +341,7 @@ export const CITY_NAV = {
       "Pearl Diving Dock": {
         travelPrompt: "Exit to",
         description: "Ropes and air pumps clutter the pier where divers ready themselves.",
-        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        exits: [ { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Pearl Diving (Journeyman)", action: "train-pearl-diving", tier: "journeyman" } ],
         produces: { resources: [], commodities: [], luxuries: ["pearls"] },
         consumes: { resources: ["diving gear"], commodities: [], luxuries: [] }
@@ -349,7 +349,7 @@ export const CITY_NAV = {
       "Smithing Forge": {
         travelPrompt: "Exit to",
         description: "Anvils ring amid showers of sparks and the smell of hot iron.",
-        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        exits: [ { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Blacksmithing (Apprentice)", action: "train-blacksmithing", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["metal goods"], luxuries: [] },
         consumes: { resources: ["ore", "coal"], commodities: [], luxuries: [] }
@@ -357,7 +357,7 @@ export const CITY_NAV = {
       "Carpentry Lodge": {
         travelPrompt: "Exit to",
         description: "Stacks of timber and the scent of fresh sawdust fill the hall.",
-        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        exits: [ { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Carpentry (Apprentice)", action: "train-carpentry", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["woodcraft"], luxuries: [] },
         consumes: { resources: ["timber"], commodities: [], luxuries: [] }
@@ -365,7 +365,7 @@ export const CITY_NAV = {
       "Tailoring Shop": {
         travelPrompt: "Exit to",
         description: "Bolts of cloth and neatly labeled threads await deft hands.",
-        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        exits: [ { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Tailoring (Apprentice)", action: "train-tailoring", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["garments"], luxuries: [] },
         consumes: { resources: [], commodities: ["cloth"], luxuries: [] }
@@ -373,7 +373,7 @@ export const CITY_NAV = {
       "Leatherworking Shed": {
         travelPrompt: "Exit to",
         description: "Hides hang from beams while craftsmen stitch sturdy gear.",
-        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        exits: [ { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Leatherworking (Initiate)", action: "train-leatherworking", tier: "initiate" } ],
         produces: { resources: [], commodities: ["leather goods"], luxuries: [] },
         consumes: { resources: ["hides"], commodities: [], luxuries: [] }
@@ -381,7 +381,7 @@ export const CITY_NAV = {
       "Alchemy Lab": {
         travelPrompt: "Exit to",
         description: "Bubbling flasks and acrid fumes swirl among cluttered tables.",
-        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        exits: [ { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Alchemy (Apprentice)", action: "train-alchemy", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["potions"], luxuries: ["elixirs"] },
         consumes: { resources: ["herbs", "reagents"], commodities: [], luxuries: [] }
@@ -389,7 +389,7 @@ export const CITY_NAV = {
       "Enchanting Sanctum": {
         travelPrompt: "Exit to",
         description: "Runed crystals glow softly over circles etched in the floor.",
-        exits: [ { name: "South Docks & Steel Docks", target: "South Docks & Steel Docks" } ],
+        exits: [ { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" } ],
         interactions: [ { name: "Train Enchanting (Initiate)", action: "train-enchanting", tier: "initiate" } ],
         produces: { resources: [], commodities: [], luxuries: ["enchanted items"] },
         consumes: { resources: ["mana crystals"], commodities: [], luxuries: [] }
