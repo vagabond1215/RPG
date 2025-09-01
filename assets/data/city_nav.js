@@ -30,7 +30,7 @@ export const CITY_NAV = {
             target: "Fisherman's Pier",
             icon: "assets/images/icons/Fishing Dock 1.png",
           },
-          { name: "Tideway Inn", type: "building", target: "Tideway Inn", icon: "assets/images/icons/Tidewater Inn.webp" },
+          { name: "Tideway Inn", type: "building", target: "Tideway Inn", icon: "assets/images/icons/Tideway Inn.png" },
           { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/Upper Ward District.png" },
           { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/Little Terns District.png" }
           ]
@@ -267,7 +267,7 @@ export const CITY_NAV = {
           { name: "Leatherworking Shed", type: "building", target: "Leatherworking Shed" },
           { name: "Alchemy Lab", type: "building", target: "Alchemy Lab" },
           { name: "Enchanting Sanctum", type: "building", target: "Enchanting Sanctum" },
-          { name: "Military Ward", type: "district", target: "Military Ward" }
+          { name: "Military Ward", type: "district", target: "Military Ward", icon: "assets/images/icons/Military Ward District.png" }
         ]
       },
       "Military Ward": {
@@ -280,7 +280,7 @@ export const CITY_NAV = {
       "Greywind's Edge": {
         travelPrompt: "Walk to",
         points: [
-          { name: "Military Ward", type: "district", target: "Military Ward" },
+          { name: "Military Ward", type: "district", target: "Military Ward", icon: "assets/images/icons/Military Ward District.png" },
           { name: "West Road to Timber Grove", type: "location", target: "Timber Grove" }
         ]
       }

@@ -96,9 +96,25 @@ main {
     width: 70%;
     height: 70%;
     stroke: currentColor;
-    fill: none;
     stroke-width: 2;
+    fill: currentColor;
     display: block;
+  }
+  #menu-button,
+  #scale-dec,
+  #scale-inc {
+    -webkit-text-stroke: 0;
+  }
+
+  #scale-dec,
+  #scale-inc {
+    font-size: calc(var(--menu-button-size) * 0.9);
+  }
+
+  body.theme-dark #menu-button,
+  body.theme-dark #scale-dec,
+  body.theme-dark #scale-inc {
+    color: var(--menu-color-light);
   }
 
 .top-menu button:hover,
@@ -723,8 +739,8 @@ body.theme-dark .top-menu button {
     }
 
     .navigation .nav-item button .nav-icon {
-      width: 80%;
-      height: 80%;
+      width: 100%;
+      height: 100%;
       display: block;
       object-fit: contain;
     }
