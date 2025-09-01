@@ -10,85 +10,85 @@ export const CITY_NAV = {
             name: "Harbor Guard Naval Yard",
             type: "building",
             target: "Harbor Guard Naval Yard",
-            icon: "assets/images/icons/Military Pier.png",
+            icon: "assets/images/icons/waves_break/Harbor Guard Naval Yard.png",
           },
           {
             name: "Nobles' Quay",
             type: "building",
             target: "Nobles' Quay",
-            icon: "assets/images/icons/Noble's Quay.png",
+            icon: "assets/images/icons/waves_break/Noble's Quay.png",
           },
           {
             name: "Merchants' Wharf",
             type: "building",
             target: "Merchants' Wharf",
-            icon: "assets/images/icons/Merchant Pier.png",
+            icon: "assets/images/icons/waves_break/Merchant's Wharf.png",
           },
           {
             name: "Fisherman's Pier",
             type: "building",
             target: "Fisherman's Pier",
-            icon: "assets/images/icons/Fishing Dock 1.png",
+            icon: "assets/images/icons/waves_break/Fisherman's Pier.png",
           },
-          { name: "Tideway Inn", type: "building", target: "Tideway Inn", icon: "assets/images/icons/Tideway Inn.png" },
-          { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/Upper Ward District.png" },
-          { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/Little Terns District.png" }
+          { name: "Tideway Inn", type: "building", target: "Tideway Inn", icon: "assets/images/icons/waves_break/Tideway Inn.png" },
+          { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" },
+          { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" }
           ]
         },
         "Upper Ward": {
           travelPrompt: "Walk to",
           points: [
-            { name: "Governor's Keep", type: "building", target: "Governor's Keep" },
-            { name: "Crafting Quarter", type: "building", target: "Crafting Quarter", icon: "assets/images/icons/Crafting Yard.png" },
-            { name: "Mercantile Exchange", type: "building", target: "Mercantile Exchange" },
-            { name: "Temple of the Tides", type: "building", target: "Temple of the Tides" },
-            { name: "Hall of Records", type: "building", target: "Hall of Records" },
-            { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/Port District.png" },
-            { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/Greensoul Hill District.png" }
+            { name: "Governor's Keep", type: "building", target: "Governor's Keep", icon: "assets/images/icons/waves_break/Governor's Keep.png" },
+            { name: "Crafting Quarter", type: "building", target: "Crafting Quarter", icon: "assets/images/icons/waves_break/Crafting Quarter.png" },
+            { name: "Mercantile Exchange", type: "building", target: "Mercantile Exchange", icon: "assets/images/icons/waves_break/Mercantile Exchange.png" },
+            { name: "Temple of the Tides", type: "building", target: "Temple of the Tides", icon: "assets/images/icons/waves_break/Temple of the Tides.png" },
+            { name: "Hall of Records", type: "building", target: "Hall of Records", icon: "assets/images/icons/waves_break/Hall of Records.png" },
+            { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/waves_break/Port District.png" },
+            { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" }
           ]
         },
         "Little Terns": {
           travelPrompt: "Walk to",
           points: [
             { name: "Glassblowing Workshop", type: "building", target: "Glassblowing Workshop" },
-            { name: "Smithing Forge", type: "building", target: "Smithing Forge", icon: "assets/images/icons/Blacksmith Yard.png" },
-            { name: "Carpentry Lodge", type: "building", target: "Carpentry Lodge", icon: "assets/images/icons/Lumber Yard.png" },
+            { name: "Smithing Forge", type: "building", target: "Smithing Forge", icon: "assets/images/icons/waves_break/Smithing Forge.png" },
+            { name: "Carpentry Lodge", type: "building", target: "Carpentry Lodge", icon: "assets/images/icons/waves_break/Carpentry Lodge.png" },
             { name: "Tailoring Shop", type: "building", target: "Tailoring Shop" },
-            { name: "Leatherworking Shed", type: "building", target: "Leatherworking Shed", icon: "assets/images/icons/Leatherworking Station.png" },
-            { name: "Alchemy Lab", type: "building", target: "Alchemy Lab", icon: "assets/images/icons/Alchemy Shop.png" },
-            { name: "Enchanting Sanctum", type: "building", target: "Enchanting Sanctum", icon: "assets/images/icons/Enchanting Shop.png" },
-              { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/Port District.png" },
-              { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/Greensoul Hill District.png" }
+            { name: "Leatherworking Shed", type: "building", target: "Leatherworking Shed" },
+            { name: "Alchemy Lab", type: "building", target: "Alchemy Lab" },
+            { name: "Enchanting Sanctum", type: "building", target: "Enchanting Sanctum", icon: "assets/images/icons/waves_break/Enchanting Sanctum.png" },
+              { name: "Port District", type: "district", target: "Port District", icon: "assets/images/icons/waves_break/Port District.png" },
+              { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" }
           ]
         },
         "Greensoul Hill": {
           travelPrompt: "Walk to",
           points: [
-              { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/Upper Ward District.png" },
-            { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/Little Terns District.png" },
-            { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/Lower Gardens District.png" }
+              { name: "Upper Ward", type: "district", target: "Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" },
+            { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" },
+            { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" }
           ]
         },
         "The Lower Gardens": {
           travelPrompt: "Walk to",
           points: [
-            { name: "City Bakery", type: "building", target: "City Bakery", icon: "assets/images/icons/Bakery.jpg" },
-            { name: "Central Granary", type: "building", target: "Central Granary", icon: "assets/images/icons/Small Granary.png" },
-              { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/Greensoul Hill District.png" },
-            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/Small Bridge.png" }
+            { name: "City Bakery", type: "building", target: "City Bakery" },
+            { name: "Central Granary", type: "building", target: "Central Granary", icon: "assets/images/icons/waves_break/Small Granary.png" },
+              { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" },
+            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/Small Bridge.png" }
           ]
         },
         "The High Road District": {
           travelPrompt: "Walk to",
           points: [
-            { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/Lower Gardens District.png" },
-            { name: "The Farmlands Beyond the Walls", type: "district", target: "The Farmlands Beyond the Walls", icon: "assets/images/icons/Small Garden.png" }
+            { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" },
+            { name: "The Farmlands Beyond the Walls", type: "district", target: "The Farmlands Beyond the Walls", icon: "assets/images/icons/waves_break/Small Garden.png" }
           ]
         },
         "The Farmlands Beyond the Walls": {
           travelPrompt: "Walk to",
           points: [
-            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/Small Bridge.png" },
+            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/Small Bridge.png" },
             { name: "East Road to Mountain Top", type: "location", target: "Mountain Top" }
           ]
         }
@@ -267,7 +267,7 @@ export const CITY_NAV = {
           { name: "Leatherworking Shed", type: "building", target: "Leatherworking Shed" },
           { name: "Alchemy Lab", type: "building", target: "Alchemy Lab" },
           { name: "Enchanting Sanctum", type: "building", target: "Enchanting Sanctum" },
-          { name: "Military Ward", type: "district", target: "Military Ward", icon: "assets/images/icons/Military Ward District.png" }
+          { name: "Military Ward", type: "district", target: "Military Ward", icon: "assets/images/icons/waves_break/Military Ward District.png" }
         ]
       },
       "Military Ward": {
@@ -280,7 +280,7 @@ export const CITY_NAV = {
       "Greywind's Edge": {
         travelPrompt: "Walk to",
         points: [
-          { name: "Military Ward", type: "district", target: "Military Ward", icon: "assets/images/icons/Military Ward District.png" },
+          { name: "Military Ward", type: "district", target: "Military Ward", icon: "assets/images/icons/waves_break/Military Ward District.png" },
           { name: "West Road to Timber Grove", type: "location", target: "Timber Grove" }
         ]
       }
