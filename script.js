@@ -292,9 +292,36 @@ const generateColorScale = (start, end, steps = 25) => {
   });
 };
 
+const elfSkinColors = [
+  '#d6c8b2', // Moonlit Ivory
+  '#d6ccb8', // Morning Mist
+  '#d7d2c4', // Pale Starlight
+  '#d8bda3', // Sandborn
+  '#d9c3a8', // Sun-Kissed Dune
+  '#dabfad', // Rose Ash
+  '#dbcdbf', // Winter Glow
+  '#dcc5a2', // Amberlight
+  '#ddcab4', // Driftwood
+  '#deb8a1', // Faded Terracotta
+  '#dfc6b0', // Elven Rose
+  '#e0cbb8', // Silver Dawn
+  '#e1c1a9', // Dappled Fawn
+  '#e2c7ab', // Wheatveil
+  '#e3cdb3', // Dawn Ember
+  '#e4c1a1', // Peachwood
+  '#e5bfa5', // Warm Clay
+  '#e6d0b6', // Candlelight
+  '#e7c8a2', // Sandlily
+  '#e8cbb5', // Blush Oak
+  '#e9c9b1', // Soft Umber
+  '#eac6a6', // Golden Parchment
+  '#ebccb4', // Maple Silk
+  '#ecd1b7'  // Autumn Glow
+];
+
 const skinColorOptionsByRace = {
   Human: generateColorScale('#f5cba7', '#8d5524'),
-  Elf: generateColorScale('#ffdbac', '#c68642'),
+  Elf: elfSkinColors,
   'Dark Elf': generateColorScale('#d1c4e9', '#7e57c2'),
   Dwarf: generateColorScale('#f1c27d', '#8d5524'),
   'Cait Sith': generateColorScale('#f1e0c5', '#8c5a2b'),
