@@ -97,7 +97,7 @@ main {
     height: 70%;
     stroke: currentColor;
     stroke-width: 2;
-    fill: currentColor;
+    fill: none;
     display: block;
   }
   #menu-button,
