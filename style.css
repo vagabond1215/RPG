@@ -101,9 +101,11 @@ main {
     display: block;
   }
   #menu-button,
+  #back-button,
   #scale-dec,
   #scale-inc {
     -webkit-text-stroke: 0;
+    line-height: 1;
   }
 
   #scale-dec,
@@ -115,6 +117,10 @@ main {
   body.theme-dark #scale-dec,
   body.theme-dark #scale-inc {
     color: var(--menu-color-dark);
+  }
+
+  body.theme-dark #back-button {
+    color: #555555;
   }
 
 .top-menu button:hover,
