@@ -212,62 +212,220 @@ const hairColorOptionsByRace = {
 };
 
 const humanEyeColors = [
-  '#000000', '#2c1b10', '#3b3024', '#4e3826', '#5b3a21',
-  '#6b4423', '#8b4513', '#a0522d', '#b8860b', '#8e7618',
-  '#8b8f45', '#556b2f', '#355e3b', '#2e8b57', '#000080',
-  '#0000ff', '#1e90ff', '#87cefa', '#708090', '#778899',
-  '#8b0000', '#9932cc', '#8a2be2', '#daa520', '#ffbf00'
+  '#3a6ea5', // Ocean Blue
+  '#577fae', // River Blue
+  '#9ab7d4', // Clouded Blue
+  '#6ca06f', // Forest Green
+  '#8ab98e', // Meadow Green
+  '#b1d1b2', // Pale Green
+  '#a67c52', // Hazelwood
+  '#c7a368', // Golden Hazel
+  '#e1c47c', // Honey Amber
+  '#c2b280', // Amberstone
+  '#dbc9a6', // Pale Amber
+  '#7c4a2d', // Chestnut Brown
+  '#5d4638', // Walnut Brown
+  '#4a3528', // Bark Brown
+  '#2b2b2b', // Deep Onyx
+  '#1e1d1c', // Night Black
+  '#857f7a', // Mist Gray
+  '#a89f9a', // Ash Gray
+  '#d0c8c3', // Pale Gray
+  '#5c788a', // Steel Blue
+  '#364d5c', // Iron Blue
+  '#7d5a49', // Autumn Brown
+  '#9b7053', // Copper Hazel
+  '#d79f7a'  // Soft Amber Brown
 ];
 
 const elfEyeColors = [
-  '#000000', '#2c1b10', '#3b3024', '#4e3826', '#5b3a21',
-  '#8b4513', '#a0522d', '#b8860b', '#daa520', '#8e7618',
-  '#8b8f45', '#556b2f', '#355e3b', '#2e8b57', '#0000ff',
-  '#1e90ff', '#87cefa', '#6495ed', '#7fffd4', '#98fb98',
-  '#dda0dd', '#9932cc', '#8a2be2', '#c0c0c0', '#ffffff'
+  '#e6f7ff', // Starlit Ice
+  '#a8c9ff', // Moonlight Azure
+  '#7ed4c7', // Sylvan Teal
+  '#4b6ea9', // Deep Skyblue
+  '#c9f0a4', // Springleaf
+  '#8fb28e', // Mossgreen
+  '#f0e68c', // Sunspire Gold
+  '#f6d88f', // Golden Lily
+  '#e9c982', // Amber Dawn
+  '#dda0dd', // Twilight Lilac
+  '#c6a2d6', // Fey Lavender
+  '#b892d2', // Orchid Bloom
+  '#9f7fb8', // Arcane Violet
+  '#6f5d9b', // Nightshade Purple
+  '#e2d6c5', // Moon Pearl
+  '#d1bfa3', // Sandwood Glow
+  '#a3836a', // Elm Brown
+  '#85654f', // Rootwood
+  '#6b584c', // Barkshadow
+  '#514440', // Duskwood
+  '#393434', // Forest Night
+  '#2c2b2b', // Deep Twilight
+  '#1f1e1e', // Starless Shadow
+  '#151515'  // Void Black
 ];
 
 const darkElfEyeColors = [
-  '#000000', '#1c1c1c', '#2f2f2f', '#4b4b4b', '#696969',
-  '#808080', '#a9a9a9', '#c0c0c0', '#dcdcdc', '#ffffff',
-  '#8b0000', '#b22222', '#c04000', '#cd5c5c', '#800080',
-  '#8b008b', '#9932cc', '#8a2be2', '#9370db', '#708090',
-  '#778899', '#ba55d3', '#dda0dd', '#e6e6fa', '#ff1493'
+  '#e0e0e0', // Pale Silver
+  '#c2bbd9', // Dim Lilac
+  '#b799d6', // Moonshade Lilac
+  '#8e82cc', // Nether Violet
+  '#5d4b99', // Umbral Indigo
+  '#3f2f78', // Deep Amethyst
+  '#2e2e2e', // Void Black
+  '#1c1b23', // Starless Obsidian
+  '#f4c542', // Ember Gold
+  '#e6a832', // Smolder Gold
+  '#d49526', // Dusk Amber
+  '#f26b5b', // Bloodfire Red
+  '#d94842', // Crimson Ash
+  '#bb2d26', // Dark Flame
+  '#a9d7f2', // Ghostlight Blue
+  '#82bde0', // Moonlit Azure
+  '#5388a6', // Abyssal Blue
+  '#46687d', // Drowsteel
+  '#918f8c', // Ashen Gray
+  '#6f6d6a', // Stone Veil
+  '#5b5350', // Obsidian Ash
+  '#473f3d', // Cave Shadow
+  '#322d2c', // Nether Coal
+  '#1f1c1b'  // Abyss Black
 ];
 
 const dwarfEyeColors = [
-  '#000000', '#2c1b10', '#3b3024', '#4e3826', '#5b3a21',
-  '#6b4423', '#8b4513', '#a0522d', '#b8860b', '#8e7618',
-  '#8b8f45', '#556b2f', '#355e3b', '#2e8b57', '#2f4f4f',
-  '#000080', '#0000ff', '#1e90ff', '#708090', '#778899',
-  '#8b0000', '#a52a2a', '#b22222', '#c0c0c0', '#ffffff'
+  '#c69c6d', // Bronzeale
+  '#d8b88a', // Malt Amber
+  '#e0b454', // Forgelight Gold
+  '#f2d181', // Bright Ale
+  '#6a7b8c', // Steel Gray-Blue
+  '#8599a6', // Forge Blue
+  '#aab8c1', // Pale Iron
+  '#e0e5e9', // Stone Silver
+  '#a35239', // Emberstone Red
+  '#c36753', // Smelted Red
+  '#de8a6c', // Molten Rose
+  '#f2b19a', // Ash Glow
+  '#8b5e3c', // Ore Brown
+  '#a27454', // Quarry Oak
+  '#bb8a69', // Alewood
+  '#d7c99f', // Quarry Tan
+  '#ede1c1', // Pale Sandstone
+  '#4f4a47', // Deep Iron
+  '#5d5653', // Rockshade
+  '#6e6662', // Charcoal Gray
+  '#3a3330', // Coalblack
+  '#2e2320', // Deep Cavern
+  '#201916', // Forge Shadow
+  '#14100e'  // Ore Void
 ];
 
 const caitSithEyeColors = [
-  '#000000', '#2c1b10', '#3b3024', '#4e3826', '#5b3a21',
-  '#6b4423', '#8b4513', '#a0522d', '#b8860b', '#daa520',
-  '#ffd700', '#ffbf00', '#ffa500', '#adff2f', '#7fff00',
-  '#7fffd4', '#00ced1', '#1e90ff', '#0000ff', '#000080',
-  '#355e3b', '#2e8b57', '#556b2f', '#708090', '#ffffff'
+  '#f6e07a', // Cat's Eye Gold
+  '#ffeeb0', // Pale Gold
+  '#d1b95a', // Wild Amber
+  '#94c973', // Wild Green
+  '#b9e2a4', // Meadowlight
+  '#6db4d9', // Sky Pupil
+  '#9ccde7', // Pale Sky
+  '#c8e9f5', // Frost Blue
+  '#f2994b', // Fire Amber
+  '#f7b678', // Flame Orange
+  '#c13f3f', // Crimson Fang
+  '#d56c6c', // Rosefang
+  '#e6e6e6', // Frost Silver
+  '#ffffff', // Pure Light
+  '#9e82c9', // Mystic Violet
+  '#c1a4e6', // Fey Lilac
+  '#785744', // Earth Brown
+  '#9d7b60', // Burrownut
+  '#bfa084', // Sandpaw Tan
+  '#dac6a6', // Creamhide
+  '#4b3a33', // Coal Whisker
+  '#322825', // Dark Fang
+  '#1a1a1a', // Panther Black
+  '#0d0c0c'  // Night Pupil
 ];
 
 const salamanderEyeColors = [
-  '#000000', '#1c1c1c', '#2c1b10', '#3b1b0b', '#4b1f0f',
-  '#5c1f0f', '#6b220f', '#7b240f', '#8b250f', '#a52a2a',
-  '#b22222', '#c04000', '#cd5c5c', '#d2691e', '#e25822',
-  '#e9967a', '#f4a460', '#ffa500', '#ff8c00', '#ff7f00',
-  '#ffd700', '#ffff00', '#ffffe0', '#c0c0c0', '#ffffff'
+  '#f6a13c', // Lava Gold
+  '#f7bb5a', // Firelight Amber
+  '#f7dd72', // Ember Yellow
+  '#ffeab0', // Sun Scaled
+  '#d94b2b', // Flame Red
+  '#e66749', // Blazestone
+  '#f25c8c', // Magma Rose
+  '#f598b3', // Firepetal
+  '#c9416f', // Ash Violet
+  '#a7305a', // Obsidian Rose
+  '#7cc9c6', // Sulfur Teal
+  '#a6e3e2', // Steam Blue
+  '#c8f2f1', // Vapor Mist
+  '#ffefe0', // Fireglow White
+  '#e1d4c6', // Ashwhite
+  '#b8a8a0', // Stone Veil
+  '#927c74', // Cinder Gray
+  '#6f5c54', // Smoked Brown
+  '#4e403a', // Burnt Rock
+  '#2d2d2d', // Obsidian Black
+  '#242424', // Nightscale
+  '#1c1c1c', // Deep Forge
+  '#141414', // Voidscale
+  '#0b0b0b'  // Abyssal Black
 ];
 
 const gnomeEyeColors = [
-  '#000000', '#2c1b10', '#3b3024', '#4e3826', '#5b3a21',
-  '#6b4423', '#8b4513', '#a0522d', '#b8860b', '#8e7618',
-  '#8b8f45', '#556b2f', '#355e3b', '#2e8b57', '#00ced1',
-  '#1e90ff', '#0000ff', '#8a2be2', '#9932cc', '#dda0dd',
-  '#ff1493', '#ff69b4', '#708090', '#778899', '#ffffff'
+  '#d98282', // Rosetint
+  '#eaa0a0', // Bloom Rose
+  '#f6c0b8', // Blushfire
+  '#f2b880', // Copper Glow
+  '#f7d29a', // Gold Spark
+  '#f7e07e', // Goldenbright
+  '#e6ed9b', // Sunpetal Green
+  '#89a86e', // Leafgreen
+  '#aed59f', // Meadow Glow
+  '#7db5b2', // Aqua Gleam
+  '#a1d5d2', // Mist Aqua
+  '#c6ecea', // Soft Fey Blue
+  '#9b6ea3', // Violet Spark
+  '#b792bb', // Amethyst Tint
+  '#d2b5d6', // Pastel Orchid
+  '#543b58', // Plumshade
+  '#6a4c6d', // Twilight Violet
+  '#8d6f70', // Ember Rose
+  '#af8a73', // Hearthwood Glow
+  '#c9a98a', // Copper Oak
+  '#e0c8a1', // Claygold
+  '#f2e2be', // Pale Ale Cream
+  '#5c514a', // Tinker's Brown
+  '#382f29'  // Deep Earth
 ];
 
-const halflingEyeColors = humanEyeColors;
+const halflingEyeColors = [
+  '#6d8ba4', // Skyhill Blue
+  '#8aaec4', // River Mist
+  '#b1cddc', // Cloudbright
+  '#7fa66c', // Meadow Green
+  '#a2c48b', // Spring Barley
+  '#c4e1b3', // Pale Oat Green
+  '#cbb47b', // Wheatgold
+  '#e0cc95', // Oat Amber
+  '#efe3b9', // Cream Ale
+  '#8d6e4f', // Hazel Nut
+  '#a37e5e', // Alebrown
+  '#b99678', // Honey Amber
+  '#d1c6aa', // Oat Cream
+  '#e6ddc5', // Hearth Cream
+  '#4b3d2e', // Hearthwood
+  '#614c36', // Dark Loam
+  '#785f45', // Burrow Brown
+  '#947b62', // Orchard Nut
+  '#b38f6e', // Warm Ale
+  '#d8b98f', // Caramel Cream
+  '#f2d6b7', // Light Amber Ale
+  '#684b34', // Pipe Oak
+  '#543d2c', // Rootshadow
+  '#3c2c21'  // Deep Hearthwood
+];
 
 const eyeColorOptionsByRace = {
   Human: humanEyeColors,
