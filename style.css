@@ -4,7 +4,7 @@
   --foreground: #333333;
   /* Menu button colors default to the light theme */
   --menu-color-dark: #333333;
-  --menu-color-light: #f0f0f0;
+    --menu-color-light: #d3d3d3;
   --range-color: #555555;
   --capped-color: #2e8b57;
   --new-char-bg: #333333;
@@ -71,33 +71,35 @@ main {
   z-index: 300;
 }
 
-.top-menu button {
-  width: var(--menu-button-size);
-  height: var(--menu-button-size);
-  padding: 2px;
-  box-sizing: border-box;
-  font-size: calc(var(--menu-button-size) * 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: none;
-  background: #e0e0e0;
-  color: var(--menu-color-light);
-  -webkit-text-stroke: 1px var(--menu-color-dark);
-  box-shadow: inset 2px 2px 4px rgba(255,255,255,0.6),
-              inset -2px -2px 4px rgba(0,0,0,0.2);
-  transition: box-shadow 0.3s ease, background 0.3s ease;
-  cursor: pointer;
-}
+  .top-menu button {
+    width: var(--menu-button-size);
+    height: var(--menu-button-size);
+    padding: 0;
+    box-sizing: border-box;
+    font-size: calc(var(--menu-button-size) * 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    border-radius: 50%;
+    border: none;
+    background: #e0e0e0;
+    color: var(--menu-color-light);
+    -webkit-text-stroke: 1px var(--menu-color-dark);
+    box-shadow: inset 2px 2px 4px rgba(255,255,255,0.6),
+                inset -2px -2px 4px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+  }
 
-.top-menu button svg {
-  width: 70%;
-  height: 70%;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-}
+  .top-menu button svg {
+    width: 70%;
+    height: 70%;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    display: block;
+  }
 
 .top-menu button:hover,
 .top-menu button:active {
@@ -334,7 +336,7 @@ body.theme-light {
   --background: #f0f0f0;
   --foreground: #333333;
   --menu-color-dark: #333333;
-  --menu-color-light: #f0f0f0;
+    --menu-color-light: #d3d3d3;
   --range-color: #555555;
   --capped-color: #2e8b57;
   --new-char-bg: #333333;
@@ -356,6 +358,12 @@ body.theme-sepia {
   --hp-color: #800000;
   --mp-color: #000080;
   --stamina-color: #008000;
+}
+
+body.theme-light .top-menu button,
+body.theme-sepia .top-menu button {
+  background: var(--menu-color-dark);
+  color: var(--menu-color-light);
 }
 
 body.theme-dark {
@@ -695,46 +703,39 @@ body.theme-dark .top-menu button {
     gap: 0.5rem;
   }
 
-  .navigation .nav-item button {
-    width: 5rem;
-    height: 5rem;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: none;
-    background: #e0e0e0;
-    color: var(--foreground);
-    box-shadow: inset 2px 2px 4px rgba(255,255,255,0.6),
-                inset -2px -2px 4px rgba(0,0,0,0.2);
-    transition: box-shadow 0.3s ease, background 0.3s ease;
-  }
+    .navigation .nav-item button {
+      width: 5rem;
+      height: 5rem;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: none;
+      box-shadow: none;
+      color: var(--foreground);
+    }
 
-  .navigation .nav-item button:hover,
-  .navigation .nav-item button:active {
-    background: var(--foreground);
-    color: var(--background);
-    box-shadow: 0 0 8px var(--foreground),
-                inset 2px 2px 4px rgba(255,255,255,0.6),
-                inset -2px -2px 4px rgba(0,0,0,0.2);
-  }
+    .navigation .nav-item button:hover,
+    .navigation .nav-item button:active {
+      background: none;
+      box-shadow: none;
+    }
 
-  .navigation .nav-item button .nav-icon {
-    width: 70%;
-    height: 70%;
-  }
+    .navigation .nav-item button .nav-icon {
+      width: 80%;
+      height: 80%;
+      display: block;
+      object-fit: contain;
+    }
 
-  .navigation .nav-item button span.nav-icon {
-    font-size: 3.5rem;
-    line-height: 3.5rem;
-  }
-
-  .navigation .nav-item button img.nav-icon {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+    .navigation .nav-item button span.nav-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      line-height: 1;
+    }
 
   .navigation .street-sign {
     background: #2e8b57;
