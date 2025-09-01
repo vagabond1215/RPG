@@ -100,6 +100,12 @@ main {
     fill: none;
     display: block;
   }
+  #back-button svg {
+    width: 80%;
+    height: 80%;
+    stroke: none;
+    fill: currentColor;
+  }
   #menu-button,
   #back-button,
   #scale-dec,
@@ -835,8 +841,9 @@ body.theme-dark .top-menu button {
     line-height: 1;
     padding: 0;
     width: 2rem;
-    height: 2rem;
-    display: inline-flex;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -852,7 +859,7 @@ body.theme-dark .top-menu button {
   .wheel-selector {
     margin-left: 0;
     display: flex;
-    align-items: center;
+    align-items: stretch;
   }
 
   .progress-current-detail {

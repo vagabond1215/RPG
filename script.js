@@ -1897,10 +1897,22 @@ function startCharacterCreation() {
     const activeFields = fields.filter(
       f => !f.races || f.races.includes(character.race)
     );
+    if (step > activeFields.length + 1) step = activeFields.length + 1;
+
+    let field;
+    if (step < activeFields.length) field = activeFields[step];
+    else if (step === activeFields.length + 1) field = locationField;
+    if (field && field.key === 'race' && !character.race) {
+      character.race = field.options[0];
+      localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+    }
+    if (field && field.key === 'location' && !character.location) {
+      character.location = locationField.options[0];
+    }
+
     const stepLabels = activeFields
       .map(f => FIELD_STEP_LABELS[f.key])
       .concat(['Name', 'Location']);
-    if (step > activeFields.length + 1) step = activeFields.length + 1;
     const isComplete = () =>
       activeFields.every(f => character[f.key]) && character.name && character.location;
     const progressHTML =
@@ -1920,17 +1932,6 @@ function startCharacterCreation() {
         .join('') +
       `<button id="cc-complete" class="complete-button" ${isComplete() ? '' : 'disabled'}></button>` +
       '<button id="cc-cancel" title="Cancel">✖</button>';
-
-    let field;
-    if (step < activeFields.length) field = activeFields[step];
-    else if (step === activeFields.length + 1) field = locationField;
-    if (field && field.key === 'race' && !character.race) {
-      character.race = field.options[0];
-      localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-    }
-    if (step === activeFields.length + 1 && !character.location) {
-      character.location = locationField.options[0];
-    }
     const displayData = (() => {
       if (field && field.key === 'location' && character.location) {
         const loc = LOCATIONS[character.location];
