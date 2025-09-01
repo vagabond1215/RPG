@@ -372,15 +372,150 @@ const darkElfSkinColors = [
   '#92727B'  // Shadow Orchid
 ];
 
+const dwarfSkinColors = [
+  '#EFE0D2', // Granite Ivory
+  '#EBD7C6', // Hearthstone
+  '#E7CDB8', // Pale Quarry
+  '#E3C4AA', // Sandstone
+  '#DFBB9D', // Copper Ash
+  '#DBB290', // Amber Clay
+  '#D7A984', // Tawny Stone
+  '#D4A078', // Burnished Hearth
+  '#D0976C', // Molten Bronze
+  '#CC8E60', // Forged Copper
+  '#C88555', // Ale-Tide
+  '#C47C4A', // Ironbrew
+  '#C07340', // Emberforge
+  '#BC6A36', // Bronzebeard
+  '#B6612E', // Fired Oak
+  '#AF5928', // Deep Ale
+  '#A75224', // Ore-Brown
+  '#9F4A20', // Mountain Clay
+  '#97431D', // Hearthbrick
+  '#8F3D1A', // Forgestone
+  '#873717', // Cavern Ember
+  '#7F3114', // Smoked Oak
+  '#762B11', // Ore-Burnt
+  '#6D250E'  // Deep Forge
+];
+
+const caitSithSkinColors = [
+  '#F7F2EA', // Moonpelt
+  '#F4EDE1', // Creamwhisker
+  '#F1E5D6', // Pale Fang
+  '#EEDCC9', // Sandpaw
+  '#EBD4BC', // Fawnshade
+  '#E8CDAA', // Golden Pelt
+  '#E5C399', // Hearthfur
+  '#E2B987', // Tawny Fang
+  '#DFA06F', // Emberstripe
+  '#DC9563', // Fireclaw
+  '#D88958', // Ambermane
+  '#D27C4D', // Rusttail
+  '#CB7143', // Foxglow
+  '#C56A3C', // Flamehide
+  '#B98536', // Goldwhisker
+  '#A97D3B', // Oakpelt
+  '#8D6E4F', // Burrowmane
+  '#7F6B63', // Ashstripe
+  '#72655E', // Shadowpaw
+  '#665D56', // Duskfang
+  '#595450', // Coalwhisker
+  '#494442', // Onyx Pelt
+  '#3A3635', // Nightfur
+  '#2C2929'  // Voidfang
+];
+
+const salamanderSkinColors = [
+  '#F6E27C', // Solar Scale
+  '#F3D35E', // Molten Gold
+  '#F0C646', // Sunfang
+  '#EEA944', // Emberhide
+  '#EC933D', // Firecrest
+  '#EA7E36', // Lava Claw
+  '#E8692F', // Pyre Fang
+  '#E55429', // Flamehide
+  '#E03F22', // Inferno Scale
+  '#D83B2B', // Charblood
+  '#C8372D', // Volcanic Ember
+  '#B7332F', // Magma Vein
+  '#A62E2D', // Ashfang
+  '#95342E', // Smolderhide
+  '#83442F', // Burnt Clay
+  '#72512E', // Earthscale
+  '#615C33', // Sulfurhide
+  '#555837', // Mossback
+  '#4A4E3D', // Ashen Fang
+  '#403B38', // Charcoal Scale
+  '#353030', // Obsidian Hide
+  '#2B2728', // Nightscale
+  '#221F20', // Deep Forge
+  '#191617'  // Voidscale
+];
+
+const gnomeSkinColors = [
+  '#F6E4DA', // Petal Ivory
+  '#F4DED2', // Hearthmilk
+  '#F2D7C8', // Rosewood Cream
+  '#F0D1BE', // Candle Peach
+  '#EDCAB3', // Dappled Dawn
+  '#EBC4A9', // Clay Petal
+  '#E9BE9F', // Warm Almond
+  '#E6B794', // Spiced Honey
+  '#E4B18A', // Tawny Hearth
+  '#E1AA80', // Rustic Peach
+  '#DFA276', // Copperleaf
+  '#DC9C6C', // Orchard Amber
+  '#DA9562', // Hearthspice
+  '#D78F59', // Russet Glow
+  '#D48850', // Ember Maple
+  '#D18247', // Brickleaf
+  '#CE7B3F', // Burnished Copper
+  '#CB7537', // Chestnut Ale
+  '#C86F30', // Autumn Ember
+  '#C3682B', // Oakfire
+  '#B96227', // Terracotta Brew
+  '#AE5B23', // Ironoak
+  '#A2541F', // Earthen Ale
+  '#964D1B'  // Deep Rootwood
+];
+
+const halflingSkinColors = [
+  '#F4E3D4', // Hearth Ivory
+  '#F2DDCB', // Buttercream Glow
+  '#F0D6C2', // Oatmilk Beige
+  '#EED0B9', // Barley Gold
+  '#ECC9AF', // Honeyed Oats
+  '#EAC3A6', // Rustic Cream
+  '#E8BD9D', // Apricot Toast
+  '#E6B793', // Warm Chestnut
+  '#E3B08A', // Mulled Amber
+  '#E1AA80', // Orchard Tan
+  '#DFA477', // Autumn Wheat
+  '#DC9D6E', // Hearthglow
+  '#DA9765', // Toasted Oats
+  '#D8915C', // Honey Loaf
+  '#D68A54', // Hearthbread
+  '#D2834B', // Rustic Amber
+  '#CF7D43', // Baked Clay
+  '#CC763B', // Maple Hearth
+  '#C96F34', // Golden Crust
+  '#C4692E', // Spiced Earth
+  '#B86329', // Roasted Chestnut
+  '#AC5C25', // Ember Loaf
+  '#9F5521', // Brownstone
+  '#924E1D'  // Hearth Oak
+];
+
 const skinColorOptionsByRace = {
   Human: humanSkinColors,
   Elf: elfSkinColors,
   'Dark Elf': darkElfSkinColors,
-  Dwarf: generateColorScale('#f1c27d', '#8d5524'),
-  'Cait Sith': generateColorScale('#f1e0c5', '#8c5a2b'),
-  Salamander: generateColorScale('#f4a460', '#8b4513'),
-  Gnome: generateColorScale('#ffdead', '#d2b48c'),
-  Halfling: generateColorScale('#f5cba7', '#8d5524')
+  Dwarf: dwarfSkinColors,
+  'Cait Sith': caitSithSkinColors,
+  Salamander: salamanderSkinColors,
+  Gnome: gnomeSkinColors,
+  Halfling: halflingSkinColors
 };
 
 const RACE_IMAGES = {
