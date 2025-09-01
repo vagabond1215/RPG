@@ -665,7 +665,12 @@ function applySpellProficiencyGain(character, spell, params) {
   }
 }
 
-const saveProfiles = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
+const saveProfiles = () => {
+  if (currentProfile && currentCharacter) {
+    currentProfile.characters[currentCharacter.id] = currentCharacter;
+  }
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
+};
 
 const formatHeight = cm => {
   const totalInches = Math.round(cm / 2.54);
