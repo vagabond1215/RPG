@@ -292,6 +292,33 @@ const generateColorScale = (start, end, steps = 25) => {
   });
 };
 
+const humanSkinColors = [
+  '#F1E0D1', // Frosted Ivory
+  '#EFD8C7', // Winter Rose
+  '#EDD2C0', // Candle Cream
+  '#EBCDB8', // Pale Sand
+  '#E9C7AC', // Warm Dune
+  '#E7C1A2', // Peach Clay
+  '#E5BB98', // Golden Parchment
+  '#E3B58E', // Hearthlight
+  '#E1AF85', // Amber Drift
+  '#DFA87B', // Desert Glow
+  '#DCA272', // Earthen Clay
+  '#DA9C68', // Harvest Tan
+  '#D8955F', // Honeyed Bronze
+  '#D48E56', // Burnt Sienna
+  '#D2874E', // Clay Hearth
+  '#CE8147', // Bronze Veil
+  '#C77A40', // Copper Oak
+  '#C1733A', // Rustic Ember
+  '#B96B34', // Autumn Bronze
+  '#B0642F', // Ironwood
+  '#A65C29', // Deep Terracotta
+  '#995425', // Ember Brown
+  '#8C4C21', // Hearth Oak
+  '#7F431D'  // Earthshadow
+];
+
 const elfSkinColors = [
   '#d6c8b2', // Moonlit Ivory
   '#d6ccb8', // Morning Mist
@@ -346,7 +373,7 @@ const darkElfSkinColors = [
 ];
 
 const skinColorOptionsByRace = {
-  Human: generateColorScale('#f5cba7', '#8d5524'),
+  Human: humanSkinColors,
   Elf: elfSkinColors,
   'Dark Elf': darkElfSkinColors,
   Dwarf: generateColorScale('#f1c27d', '#8d5524'),
@@ -1619,7 +1646,7 @@ function startCharacterCreation() {
         } else if (field.key === 'eyeColor') {
           colors = eyeColorOptionsByRace[character.race] || humanEyeColors;
         } else if (field.key === 'skinColor') {
-          colors = skinColorOptionsByRace[character.race] || ['#f5cba7', '#d2a679', '#a5694f', '#8d5524'];
+          colors = skinColorOptionsByRace[character.race] || humanSkinColors;
         }
         colors = colors.slice().sort();
         let value = character[field.key];
@@ -1711,7 +1738,7 @@ function startCharacterCreation() {
         } else if (field.key === 'eyeColor') {
           colors = eyeColorOptionsByRace[character.race] || humanEyeColors;
         } else if (field.key === 'skinColor') {
-          colors = skinColorOptionsByRace[character.race] || ['#f5cba7', '#d2a679', '#a5694f', '#8d5524'];
+          colors = skinColorOptionsByRace[character.race] || humanSkinColors;
         }
         colors = colors.slice().sort();
         let index = colors.indexOf(character[field.key]);
