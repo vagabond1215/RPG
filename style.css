@@ -372,6 +372,12 @@ body.theme-dark {
   --stamina-color: #008000;
 }
 
+/* Ensure menu icons blend with the background in dark mode */
+body.theme-dark .top-menu button {
+  color: var(--menu-color-dark);
+  -webkit-text-stroke: 1px var(--menu-color-light);
+}
+
 .progress {
   width: 80%;
   height: 1rem;
