@@ -114,7 +114,7 @@ main {
   body.theme-dark #menu-button,
   body.theme-dark #scale-dec,
   body.theme-dark #scale-inc {
-    color: var(--menu-color-light);
+    color: var(--menu-color-dark);
   }
 
 .top-menu button:hover,
