@@ -91,7 +91,7 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
         "Little Terns",
         "Greensoul Hill",
         "The Lower Gardens",
-        "The High Road District (East Gate Approach)",
+        "The High Road District",
         "The Farmlands Beyond the Walls",
     ], travel: { routes: ["sea route to Coral Keep"], connections: ["Coral Keep"] }, population: {
         estimate: 31500,

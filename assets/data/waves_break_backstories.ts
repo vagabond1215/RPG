@@ -189,7 +189,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     narrative: "You stretch within the gardeners' tool shed, dawn light spilling across beds awaiting your care.",
   },
   {
-    district: "The High Road District (East Gate Approach)",
+    district: "The High Road District",
     background: "Wagoneer",
     past: "Teamster who guides caravans through the gate while searching for his missing father.",
     items: ["sturdy gloves", "horse brush"],
@@ -200,7 +200,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     narrative: "You wake atop a wagon in the caravan yard, horses stamping nearby as travelers ready for the road.",
   },
   {
-    district: "The High Road District (East Gate Approach)",
+    district: "The High Road District",
     background: "Caravan merchant",
     past: "Runs a trinket stall in Caravan Square, trading in curiosities from distant roads.",
     items: ["merchant's ledger", "lockbox"],
@@ -211,7 +211,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     narrative: "You flip open the awning of your Caravan Square stall, coins already jingling as merchants begin to haggle.",
   },
   {
-    district: "The High Road District (East Gate Approach)",
+    district: "The High Road District",
     background: "Gate guard",
     past: "Son of a veteran mason, joined the watch to protect the east gate.",
     items: ["iron cap", "short sword"],
