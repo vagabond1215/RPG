@@ -81,6 +81,17 @@ export const CITY_NAV = {
         "The High Road District": {
           travelPrompt: "Walk to",
           points: [
+            { name: "The Sunleaf Inn", type: "building", target: "The Sunleaf Inn", icon: "assets/images/icons/waves_break/The Sunleaf Inn.png" },
+            { name: "Stonebridge Caravanserai", type: "building", target: "Stonebridge Caravanserai", icon: "assets/images/icons/waves_break/Stonebridge Caravanserai.png" },
+            { name: "Adventurers' Guildhall", type: "building", target: "Adventurers' Guildhall", icon: "assets/images/icons/waves_break/Adventurers' Guildhall.png" },
+            { name: "Iron Key Smithy", type: "building", target: "Iron Key Smithy", icon: "assets/images/icons/waves_break/Iron Key Smithy.png" },
+            { name: "Rolling Wave Coachworks", type: "building", target: "Rolling Wave Coachworks", icon: "assets/images/icons/waves_break/Rolling Wave Coachworks.png" },
+            { name: "Wavehide Leather Guild", type: "building", target: "Wavehide Leather Guild", icon: "assets/images/icons/waves_break/Wavehide Leather Guild.png" },
+            { name: "Shield & Sail Armsmiths", type: "building", target: "Shield & Sail Armsmiths", icon: "assets/images/icons/waves_break/Shield & Sail Armsmiths.png" },
+            { name: "Shrine of the Roadwarden", type: "building", target: "Shrine of the Roadwarden", icon: "assets/images/icons/waves_break/Shrine of the Roadwarden.png" },
+            { name: "Caravan Square", type: "building", target: "Caravan Square", icon: "assets/images/icons/waves_break/Caravan Square.png" },
+            { name: "Gatewatch Barracks", type: "building", target: "Gatewatch Barracks", icon: "assets/images/icons/waves_break/Gatewatch Barracks.png" },
+            { name: "Wayfarer's Rest Tavern", type: "building", target: "Wayfarer's Rest Tavern", icon: "assets/images/icons/waves_break/Wayfarer's Rest Tavern.png" },
             { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" },
             { name: "The Farmlands Beyond the Walls", type: "district", target: "The Farmlands Beyond the Walls", icon: "assets/images/icons/waves_break/The Farmlands.png" }
           ]
@@ -102,6 +113,13 @@ export const CITY_NAV = {
             { name: "Copperbrook Forge", type: "building", target: "Copperbrook Forge", icon: "assets/images/icons/waves_break/Copperbrook Forge.png" },
             { name: "Tidewatcher Lighthouse", type: "building", target: "Tidewatcher Lighthouse", icon: "assets/images/icons/waves_break/Tidewatcher Lighthouse.png" },
             { name: "Netmaker's Co-op", type: "building", target: "Netmaker's Co-op", icon: "assets/images/icons/waves_break/Netmaker's Co-op.png" },
+            { name: "Grain Farms and Mills", type: "building", target: "Grain Farms and Mills", icon: "assets/images/icons/waves_break/Grain Farms and Mills.png" },
+            { name: "Vineyards and Wineries", type: "building", target: "Vineyards and Wineries", icon: "assets/images/icons/waves_break/Vineyards and Wineries.png" },
+            { name: "Cattle and Wool Yards", type: "building", target: "Cattle and Wool Yards", icon: "assets/images/icons/waves_break/Cattle and Wool Yards.png" },
+            { name: "Brickworks", type: "building", target: "Brickworks", icon: "assets/images/icons/waves_break/Brickworks.png" },
+            { name: "Stone Quarries", type: "building", target: "Stone Quarries", icon: "assets/images/icons/waves_break/Stone Quarries.png" },
+            { name: "Outer Watchtowers", type: "building", target: "Outer Watchtowers", icon: "assets/images/icons/waves_break/Outer Watchtowers.png" },
+            { name: "Wayside Shrines", type: "building", target: "Wayside Shrines", icon: "assets/images/icons/waves_break/Wayside Shrines.png" },
             { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" },
             { name: "East Road to Mountain Top", type: "location", target: "Mountain Top" }
           ]
@@ -373,6 +391,114 @@ export const CITY_NAV = {
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["nets"], luxuries: [] },
         consumes: { resources: ["flax"], commodities: [], luxuries: [] }
+      },
+      "The Sunleaf Inn": {
+        travelPrompt: "Exit to",
+        description: "Sunlit common rooms welcome weary travelers by the gate.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: [ { name: "Rest", action: "rest" } ]
+      },
+      "Stonebridge Caravanserai": {
+        travelPrompt: "Exit to",
+        description: "Caravan yards and stables ring a fortified lodging house.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Adventurers' Guildhall": {
+        travelPrompt: "Exit to",
+        description: "Trophy-lined walls and quest boards beckon bold souls.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: []
+      },
+      "Iron Key Smithy": {
+        travelPrompt: "Exit to",
+        description: "Hard-won steel clinks beneath the smith's watchful eye.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Rolling Wave Coachworks": {
+        travelPrompt: "Exit to",
+        description: "Carriages and wagons stand ready for long road journeys.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Wavehide Leather Guild": {
+        travelPrompt: "Exit to",
+        description: "Cured hides and fine saddles fill the bustling guildhouse.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Shield & Sail Armsmiths": {
+        travelPrompt: "Exit to",
+        description: "Rows of gleaming gear equip guards and sailors alike.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Shrine of the Roadwarden": {
+        travelPrompt: "Exit to",
+        description: "Travelers leave coins and prayers for safe passage ahead.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: []
+      },
+      "Caravan Square": {
+        travelPrompt: "Exit to",
+        description: "Wagons crowd a lively market of goods and gossip.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Gatewatch Barracks": {
+        travelPrompt: "Exit to",
+        description: "Drilled soldiers guard the city’s massive eastern gate.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: []
+      },
+      "Wayfarer's Rest Tavern": {
+        travelPrompt: "Exit to",
+        description: "Hearty stews and road tales fill this rustic tavern.",
+        exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: [ { name: "Rest", action: "rest" } ]
+      },
+      "Grain Farms and Mills": {
+        travelPrompt: "Exit to",
+        description: "Golden fields feed stout mills that grind the city’s bread.",
+        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Vineyards and Wineries": {
+        travelPrompt: "Exit to",
+        description: "Terraced vines produce casks of bright coastal wine.",
+        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Cattle and Wool Yards": {
+        travelPrompt: "Exit to",
+        description: "Pens bustle with livestock awaiting shearers and drovers.",
+        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Brickworks": {
+        travelPrompt: "Exit to",
+        description: "Smoky kilns bake clay into bricks for city walls and homes.",
+        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Stone Quarries": {
+        travelPrompt: "Exit to",
+        description: "Quarried blocks await transport from the rocky hillsides.",
+        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Outer Watchtowers": {
+        travelPrompt: "Exit to",
+        description: "Wooden towers scan the horizon for approaching threats.",
+        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        interactions: []
+      },
+      "Wayside Shrines": {
+        travelPrompt: "Exit to",
+        description: "Small roadside altars offer quiet moments of prayer.",
+        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        interactions: []
       }
     }
   },
