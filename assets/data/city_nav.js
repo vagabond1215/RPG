@@ -7,6 +7,24 @@ export const CITY_NAV = {
         travelPrompt: "Walk to",
         points: [
           {
+            name: "Harborwatch Trading House",
+            type: "building",
+            target: "Harborwatch Trading House",
+            icon: "assets/images/icons/waves_break/Harborwatch Trading House.png",
+          },
+          {
+            name: "Warehouse Row",
+            type: "building",
+            target: "Warehouse Row",
+            icon: "assets/images/icons/waves_break/Warehouse Row.png",
+          },
+          {
+            name: "Stormkeel Shipwrights",
+            type: "building",
+            target: "Stormkeel Shipwrights",
+            icon: "assets/images/icons/waves_break/Stormkeel Shipwrights.png",
+          },
+          {
             name: "Harbor Guard Naval Yard",
             type: "building",
             target: "Harbor Guard Naval Yard",
@@ -30,7 +48,49 @@ export const CITY_NAV = {
             target: "Fisherman's Pier",
             icon: "assets/images/icons/waves_break/Fisherman's Pier.png",
           },
-          { name: "Tideway Inn", type: "building", target: "Tideway Inn", icon: "assets/images/icons/waves_break/Tideway Inn.png" },
+          {
+            name: "The Ropewalk",
+            type: "building",
+            target: "The Ropewalk",
+            icon: "assets/images/icons/waves_break/The Ropewalk.png",
+          },
+          {
+            name: "Brinebarrel Coopers",
+            type: "building",
+            target: "Brinebarrel Coopers",
+            icon: "assets/images/icons/waves_break/Brinebarrel Coopers.png",
+          },
+          {
+            name: "Saltworks",
+            type: "building",
+            target: "Saltworks",
+            icon: "assets/images/icons/waves_break/Saltworks.png",
+          },
+          {
+            name: "Fishmongers' Row",
+            type: "building",
+            target: "Fishmongers' Row",
+            icon: "assets/images/icons/waves_break/Fishmongers' Row.png",
+          },
+          {
+            name: "Shrine of the Deep Current",
+            type: "building",
+            target: "Shrine of the Deep Current",
+            icon: "assets/images/icons/waves_break/Shrine of the Deep Current.png",
+          },
+          {
+            name: "Statue of the Sea-Mother",
+            type: "building",
+            target: "Statue of the Sea-Mother",
+            icon: "assets/images/icons/waves_break/Statue of the Sea-Mother.png",
+          },
+          {
+            name: "The Salty Gull",
+            type: "building",
+            target: "The Salty Gull",
+            icon: "assets/images/icons/waves_break/The Salty Gull.png",
+          },
+          { name: "The Tideway Inn", type: "building", target: "The Tideway Inn", icon: "assets/images/icons/waves_break/The Tideway Inn.png" },
           { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" },
           { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" }
           ]
@@ -126,7 +186,67 @@ export const CITY_NAV = {
         }
       },
     buildings: {
-      "Tideway Inn": {
+      "Harborwatch Trading House": {
+        travelPrompt: "Exit to",
+        description: "Traders shout deals across ledgers in this busy waterfront exchange.",
+        exits: [ { name: "The Port District", target: "The Port District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Warehouse Row": {
+        travelPrompt: "Exit to",
+        description: "Long storehouses line the street, stacked with salted cargo.",
+        exits: [ { name: "The Port District", target: "The Port District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Stormkeel Shipwrights": {
+        travelPrompt: "Exit to",
+        description: "The ring of mallets echoes from ships rising on wooden frames.",
+        exits: [ { name: "The Port District", target: "The Port District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "The Ropewalk": {
+        travelPrompt: "Exit to",
+        description: "Workers stride backward twisting hemp into endless rope.",
+        exits: [ { name: "The Port District", target: "The Port District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Brinebarrel Coopers": {
+        travelPrompt: "Exit to",
+        description: "Coopers hammer iron hoops over casks reeking of brine.",
+        exits: [ { name: "The Port District", target: "The Port District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Saltworks": {
+        travelPrompt: "Exit to",
+        description: "Shallow pans glisten as seawater dries into piles of salt.",
+        exits: [ { name: "The Port District", target: "The Port District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Fishmongers' Row": {
+        travelPrompt: "Exit to",
+        description: "Stalls drip with fresh catch while gulls wheel overhead.",
+        exits: [ { name: "The Port District", target: "The Port District" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Shrine of the Deep Current": {
+        travelPrompt: "Exit to",
+        description: "A stone basin bubbles with seawater offerings to the unseen tide.",
+        exits: [ { name: "The Port District", target: "The Port District" } ],
+        interactions: []
+      },
+      "Statue of the Sea-Mother": {
+        travelPrompt: "Exit to",
+        description: "Barnacle-dotted statue gazes serenely over the harbor.",
+        exits: [ { name: "The Port District", target: "The Port District" } ],
+        interactions: []
+      },
+      "The Salty Gull": {
+        travelPrompt: "Exit to",
+        description: "Laughter and sea shanties spill from this weathered dockside tavern.",
+        exits: [ { name: "The Port District", target: "The Port District" } ],
+        interactions: [ { name: "Rest", action: "rest" } ]
+      },
+      "The Tideway Inn": {
         travelPrompt: "Exit to",
         description: "Warm lantern light and the murmur of sailors greet you.",
         exits: [ { name: "The Port District", target: "The Port District" } ],
