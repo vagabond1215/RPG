@@ -50,12 +50,12 @@ export const CITY_NAV = {
         "Little Terns": {
           travelPrompt: "Walk to",
           points: [
-            { name: "Crystal Tide Glassworks", type: "building", target: "Crystal Tide Glassworks" },
+            { name: "Crystal Tide Glassworks", type: "building", target: "Crystal Tide Glassworks", icon: "assets/images/icons/waves_break/Crystal Tide Glassworks.png" },
             { name: "Tidefire Forge", type: "building", target: "Tidefire Forge", icon: "assets/images/icons/waves_break/Tidefire Forge.png" },
             { name: "Timberwave Carpenters' Guild", type: "building", target: "Timberwave Carpenters' Guild", icon: "assets/images/icons/waves_break/Timberwave Carpenters' Guild.png" },
-            { name: "The Gilded Needle Clothiers", type: "building", target: "The Gilded Needle Clothiers" },
-            { name: "Salted Hide Tannery", type: "building", target: "Salted Hide Tannery" },
-            { name: "Tideglass Alchemical Atelier", type: "building", target: "Tideglass Alchemical Atelier" },
+            { name: "The Gilded Needle Clothiers", type: "building", target: "The Gilded Needle Clothiers", icon: "assets/images/icons/waves_break/The Gilded Needle Clothiers.png" },
+            { name: "Salted Hide Tannery", type: "building", target: "Salted Hide Tannery", icon: "assets/images/icons/waves_break/Salted Hide Tannery.png" },
+            { name: "Tideglass Alchemical Atelier", type: "building", target: "Tideglass Alchemical Atelier", icon: "assets/images/icons/waves_break/Tideglass Alchemical Atelier.png" },
             { name: "Arc Runes Enchantery", type: "building", target: "Arc Runes Enchantery", icon: "assets/images/icons/waves_break/Arc Runes Enchantery.png" },
               { name: "The Port District", type: "district", target: "The Port District", icon: "assets/images/icons/waves_break/Port District.png" },
               { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" }
@@ -72,23 +72,23 @@ export const CITY_NAV = {
         "The Lower Gardens": {
           travelPrompt: "Walk to",
           points: [
-            { name: "Harbor Hearth Bakery", type: "building", target: "Harbor Hearth Bakery" },
-            { name: "Tidehold Granary & Provisioners", type: "building", target: "Tidehold Granary & Provisioners", icon: "assets/images/icons/waves_break/Small Granary.png" },
+            { name: "Harbor Hearth Bakery", type: "building", target: "Harbor Hearth Bakery", icon: "assets/images/icons/waves_break/Harbor Hearth Bakery.png" },
+            { name: "Tidehold Granary & Provisioners", type: "building", target: "Tidehold Granary & Provisioners", icon: "assets/images/icons/waves_break/Tidehold Granary and Provisioners.png" },
               { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" },
-            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/Small Bridge.png" }
+            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" }
           ]
         },
         "The High Road District": {
           travelPrompt: "Walk to",
           points: [
             { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" },
-            { name: "The Farmlands Beyond the Walls", type: "district", target: "The Farmlands Beyond the Walls", icon: "assets/images/icons/waves_break/Small Garden.png" }
+            { name: "The Farmlands Beyond the Walls", type: "district", target: "The Farmlands Beyond the Walls", icon: "assets/images/icons/waves_break/The Farmlands.png" }
           ]
         },
         "The Farmlands Beyond the Walls": {
           travelPrompt: "Walk to",
           points: [
-            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/Small Bridge.png" },
+            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" },
             { name: "East Road to Mountain Top", type: "location", target: "Mountain Top" }
           ]
         }
