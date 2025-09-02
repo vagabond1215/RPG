@@ -181,7 +181,7 @@ export const CITY_NAV = {
             { name: "Outer Watchtowers", type: "building", target: "Outer Watchtowers", icon: "assets/images/icons/waves_break/Outer Watchtowers.png" },
             { name: "Wayside Shrines", type: "building", target: "Wayside Shrines", icon: "assets/images/icons/waves_break/Wayside Shrines.png" },
             { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" },
-            { name: "East Road to Mountain Top", type: "location", target: "Mountain Top" }
+            { name: "East Road to Mountain Top", type: "location", target: "Mountain Top", icon: "assets/images/icons/waves_break/The East Road to Mountain Top.png" }
           ]
         }
       },
@@ -289,7 +289,7 @@ export const CITY_NAV = {
         description: "Ship hulls and disciplined marines line the busy dockside yard.",
         exits: [
           { name: "The Port District", target: "The Port District" },
-          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
+          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: ["ships"], luxuries: [] },
@@ -300,7 +300,7 @@ export const CITY_NAV = {
         description: "Gilded barges bob beside polished piers watched by cloaked attendants.",
         exits: [
           { name: "The Port District", target: "The Port District" },
-          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
+          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: [], luxuries: ["imported finery"] },
@@ -311,7 +311,7 @@ export const CITY_NAV = {
         description: "Crates and shouting dockworkers crowd the bustling commercial pier.",
         exits: [
           { name: "The Port District", target: "The Port District" },
-          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
+          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: ["trade shipments"], luxuries: [] },
@@ -378,7 +378,7 @@ export const CITY_NAV = {
         description: "Nets dry on posts as gulls cry over baskets of fish.",
         exits: [
           { name: "The Port District", target: "The Port District" },
-          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to" }
+          { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
         ],
         interactions: [],
         produces: { resources: ["fish"], commodities: [], luxuries: [] },
@@ -663,7 +663,7 @@ export const CITY_NAV = {
         description: "Warships rest in ordered rows while crews drill with precision.",
         exits: [
           { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
-          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Wave's Break.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: ["ships"], luxuries: [] },
@@ -674,7 +674,7 @@ export const CITY_NAV = {
         description: "Bright coral inlays gleam along piers reserved for the nobility.",
         exits: [
           { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
-          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Wave's Break.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: [], luxuries: ["coral goods"] },
@@ -685,7 +685,7 @@ export const CITY_NAV = {
         description: "Casks of gleaming glassware sparkle in the sun between traders.",
         exits: [
           { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
-          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Wave's Break.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: ["glass trade"], luxuries: [] },
@@ -696,7 +696,7 @@ export const CITY_NAV = {
         description: "Divers unload shell baskets beside market stalls glittering with pearls.",
         exits: [
           { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
-          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to" }
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Wave's Break.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: [], luxuries: ["pearls"] },
