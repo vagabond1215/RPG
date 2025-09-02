@@ -35,6 +35,40 @@ const NAV_ICONS = {
   interaction: '⚙️',
 };
 
+const CITY_HEADERS = {
+  "Wave's Break": "assets/images/icons/waves_break/Wave's Break.png",
+};
+
+const CITY_SLUGS = { "Wave's Break": "waves_break" };
+
+function citySlug(name) {
+  return CITY_SLUGS[name] || name.toLowerCase().replace(/'s/g, 's').replace(/[^a-z0-9]+/g, '_');
+}
+
+function districtFileName(name) {
+  let base = name;
+  if (!base.endsWith(' District')) base += ' District';
+  if (base.startsWith('The ') && base !== 'The High Road District') base = base.slice(4);
+  return `${base}.png`;
+}
+
+function getDistrictIcon(city, district) {
+  return `assets/images/icons/${citySlug(city)}/${districtFileName(district)}`;
+}
+
+function getDistrictsEnvelope(city) {
+  return `assets/images/icons/${citySlug(city)}/Districts Envelope.png`;
+}
+
+function cityHeaderHTML(city) {
+  const header = CITY_HEADERS[city];
+  return header ? `<img src="${header}" alt="${city}" class="city-header">` : city;
+}
+
+let showDistricts = false;
+let lastCity = null;
+let lastDistrict = null;
+
 const body = document.body;
 const main = document.querySelector('main');
 const backButton = document.getElementById('back-button');
@@ -1097,6 +1131,8 @@ function applySpellProficiencyGain(character, spell, params) {
       ...params,
     });
   }
+  lastCity = pos.city;
+  lastDistrict = pos.district;
 }
 
 const saveProfiles = () => {
@@ -1176,6 +1212,9 @@ function showNavigation() {
   }
   const pos = currentCharacter.position;
   const cityData = CITY_NAV[pos.city];
+  if (pos.city !== lastCity || pos.district !== lastDistrict) {
+    showDistricts = false;
+  }
   if (!cityData) {
     setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1><p>You are in ${pos.city}.</p></div>`);
     return;
@@ -1193,11 +1232,23 @@ function showNavigation() {
     const building = cityData.buildings[pos.building];
     const buttons = [];
     building.exits.forEach(e => {
-      const prompt = e.prompt || building.travelPrompt || 'Exit to';
-      const type = e.type || 'exit';
-      buttons.push(
-        createNavItem({ type, target: e.target, name: e.name, prompt, icon: e.icon })
-      );
+      if (e.type === 'location') {
+        buttons.push(
+          createNavItem({
+            type: 'location',
+            target: e.target,
+            name: e.name,
+            prompt: e.prompt || 'Travel to',
+            icon: e.icon,
+          })
+        );
+      } else {
+        const prompt = e.prompt || building.travelPrompt || 'Travel to';
+        const icon = e.icon || getDistrictIcon(pos.city, e.name);
+        buttons.push(
+          createNavItem({ type: 'district', target: e.target, name: e.name, prompt, icon })
+        );
+      }
     });
     if (building.exits.length && (building.interactions || []).length) {
       buttons.push('<div class="group-separator"></div>');
@@ -1215,7 +1266,7 @@ function showNavigation() {
         : `Open ${hours.open}–${hours.close}`
       : '';
     setMainHTML(
-      `<div class="navigation"><h1 class="city-name">${pos.city}</h1><h2>${pos.building}</h2>${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${pos.building}</h2>${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
     );
   } else {
     const district = cityData.districts[pos.district];
@@ -1237,15 +1288,33 @@ function showNavigation() {
         icon: pt.icon,
       });
     };
-    const buttons = [
-      ...exits.map(makeButton),
-      ...(exits.length && (districts.length || locals.length) ? ['<div class="group-separator"></div>'] : []),
-      ...districts.map(makeButton),
-      ...(districts.length && locals.length ? ['<div class="group-separator"></div>'] : []),
-      ...locals.map(makeButton)
-    ];
+    const groups = [];
+    if (exits.length) groups.push(exits.map(makeButton));
+    const hasMultipleDistricts = Object.keys(cityData.districts).length > 1;
+    if (hasMultipleDistricts) {
+      const districtButtons = [
+        createNavItem({
+          type: 'district-toggle',
+          action: 'toggle-districts',
+          name: 'Districts',
+          icon: getDistrictsEnvelope(pos.city),
+        }),
+      ];
+      if (showDistricts) districtButtons.push(...districts.map(makeButton));
+      groups.push(districtButtons);
+    } else if (districts.length) {
+      groups.push(districts.map(makeButton));
+    }
+    if (locals.length) groups.push(locals.map(makeButton));
+    const buttons = [];
+    groups.forEach(g => {
+      if (g.length) {
+        if (buttons.length) buttons.push('<div class="group-separator"></div>');
+        buttons.push(...g);
+      }
+    });
     setMainHTML(
-      `<div class="navigation"><h1 class="city-name">${pos.city}</h1><h2>${pos.district}</h2><div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${pos.district}</h2><div class="option-grid">${buttons.join('')}</div></div>`
     );
   }
   normalizeOptionButtonWidths();
@@ -1253,6 +1322,12 @@ function showNavigation() {
   if (main) {
     main.querySelectorAll('.option-grid button').forEach(btn => {
       btn.addEventListener('click', () => {
+        const action = btn.dataset.action;
+        if (action === 'toggle-districts') {
+          showDistricts = !showDistricts;
+          showNavigation();
+          return;
+        }
         const type = btn.dataset.type;
         const target = btn.dataset.target;
         if (type === 'building') {
@@ -1272,7 +1347,6 @@ function showNavigation() {
             building: null,
           };
         } else if (type === 'interaction') {
-          const action = btn.dataset.action;
           if (action === 'train-glassblowing') {
             currentCharacter.glassblowing = gainProficiency({
               P: currentCharacter.glassblowing || 0,
@@ -1736,7 +1810,7 @@ function showQuestBoardsUI() {
     return `<div class="nav-item"><button data-board="${name}" aria-label="${name}"><span class="nav-icon">🪧</span></button><span class="street-sign">${name}</span></div>`;
   };
   const buttons = boards.map(createItem).join('');
-  setMainHTML(`<div class="navigation"><h1 class="city-name">${loc.name}</h1><h2>Quest Boards</h2><div class="option-grid">${buttons}</div></div>`);
+  setMainHTML(`<div class="navigation"><h1 class="city-name">${cityHeaderHTML(loc.name)}</h1><h2>Quest Boards</h2><div class="option-grid">${buttons}</div></div>`);
   normalizeOptionButtonWidths();
   updateMenuHeight();
   if (main) {
@@ -1754,7 +1828,7 @@ function showQuestBoardDetails(boardName) {
   showBackButton();
   const loc = LOCATIONS[currentCharacter.location];
   const quests = loc.questBoards[boardName] || [];
-  let html = `<div class="questboard-detail navigation"><h1 class="city-name">${loc.name}</h1><h2>${boardName}</h2>`;
+  let html = `<div class="questboard-detail navigation"><h1 class="city-name">${cityHeaderHTML(loc.name)}</h1><h2>${boardName}</h2>`;
   if (quests.length) {
     html += '<ul class="quest-list">';
     quests.forEach(q => {
