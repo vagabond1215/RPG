@@ -20,10 +20,10 @@ function createQuest(title, description, opts = {}) {
     return Object.assign({ title, description }, opts);
 }
 function addQuestBoards(loc) {
+    var _a;
     const boards = {};
     const banditPatrol = createQuest("Patrol the main road", "Help the guards keep bandits away.", { repeatable: true, highPriority: true });
     const prototypeBlade = createQuest("Test prototype blade", "Check with Master Smith before testing.", { requiresCheckIn: true });
-    var _a;
     if ((_a = loc.population) === null || _a === void 0 ? void 0 : _a.districts) {
         Object.keys(loc.population.districts).forEach((d) => {
             boards[`${d} Quest Board`] = [
@@ -51,7 +51,9 @@ function addQuestBoards(loc) {
                 prototypeBlade,
             ];
         }
-        else if (lower.indexOf("carpenter") !== -1 || lower.indexOf("carver") !== -1 || lower.indexOf("fletcher") !== -1) {
+        else if (lower.indexOf("carpenter") !== -1 ||
+            lower.indexOf("carver") !== -1 ||
+            lower.indexOf("fletcher") !== -1) {
             boards[`${b} Quest Board`] = [
                 createQuest("Harvest fine timber", "Collect seasoned wood from nearby forest."),
             ];
@@ -126,15 +128,15 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
         },
     }, pointsOfInterest: {
         buildings: [
-              "Harborwatch Trading House",
+            "Harborwatch Trading House",
             "Warehouse Row",
-              "Stormkeel Shipwrights",
+            "Stormkeel Shipwrights",
             "Harbor Guard Naval Yard",
             "Nobles' Quay",
             "Merchants' Wharf",
             "Fisherman's Pier",
             "The Ropewalk",
-              "Brinebarrel Coopers",
+            "Brinebarrel Coopers",
             "Saltworks",
             "Fishmongers' Row",
             "Shrine of the Deep Current",
@@ -151,26 +153,26 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
             "Goldleaf Atelier",
             "Engravers' Guild",
             "Glassmakers' Hall",
-              "Crystal Tide Glassworks",
+            "Crystal Tide Glassworks",
             "The Argent Griffin Inn",
             "Guild of Smiths",
-              "Tidefire Forge",
+            "Tidefire Forge",
             "Carvers' and Fletchers' Hall",
             "Lumber Yard and Carpenter's Hall",
-              "Timberwave Carpenters' Guild",
+            "Timberwave Carpenters' Guild",
             "Threadneedle Hall",
-              "The Gilded Needle Clothiers",
-              "Seastone Ceramics",
-              "Brine & Bark Tannery",
+            "The Gilded Needle Clothiers",
+            "Seastone Ceramics",
+            "Brine & Bark Tannery",
             "Cobbler's Square",
             "Grain Mills",
             "The Emberflask Alchemist",
-              "Tideglass Alchemical Atelier",
+            "Tideglass Alchemical Atelier",
             "Shrine of the Craftfather",
             "The Wandering Coin Tavern",
             "Greensoul Monastery",
             "The Arcanists' Enclave",
-              "Arc Runes Enchantery",
+            "Arc Runes Enchantery",
             "Ink and Quill Hall",
             "Candlewrights' Guild",
             "Glass Eel Glassworks",
@@ -183,7 +185,7 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
             "Herbalists' Quarter",
             "Apiaries and Beekeepers",
             "Oil Presses and Mills",
-              "Anchor's Toast Brewery",
+            "Anchor's Toast Brewery",
             "Stonecutters' Guild",
             "Shrine of the Harvestmother",
             "Public Baths",
@@ -192,10 +194,10 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
             "Stonebridge Caravanserai",
             "Adventurers' Guildhall",
             "Iron Key Smithy",
-              "Rolling Wave Coachworks",
-              "Wavehide Leather Guild",
-              "Salted Hide Tannery",
-              "Shield & Sail Armsmiths",
+            "Rolling Wave Coachworks",
+            "Wavehide Leather Guild",
+            "Salted Hide Tannery",
+            "Shield & Sail Armsmiths",
             "Shrine of the Roadwarden",
             "Caravan Square",
             "Gatewatch Barracks",
@@ -207,8 +209,22 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
             "Stone Quarries",
             "Outer Watchtowers",
             "Wayside Shrines",
-              "Harbor Hearth Bakery",
-              "Tidehold Granary & Provisioners",
+            "Harbor Hearth Bakery",
+            "Tidehold Granary & Provisioners",
+            "Brackenshore Croft",
+            "Greenridge Polder",
+            "Harborwind Dairy",
+            "Mistflower Apiary",
+            "Cliffblossom Hives",
+            "Gulls' Orchard",
+            "Sunmellow Grove",
+            "Driftfell Meadow",
+            "Moorlight Flats",
+            "Gullwind Mill",
+            "Saltmarsh Granary",
+            "Copperbrook Forge",
+            "Tidewatcher Lighthouse",
+            "Netmaker's Co-op",
         ],
         tradeRoutes: [],
         resources: {
@@ -1195,5 +1211,4 @@ export const LOCATIONS = {
     "Dragon's Reach Road": DRAGONS_REACH_ROAD,
     "Whiteheart": WHITEHEART,
 };
-
 Object.keys(LOCATIONS).forEach((name) => addQuestBoards(LOCATIONS[name]));
