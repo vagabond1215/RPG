@@ -795,9 +795,16 @@ body.theme-dark .top-menu button {
   }
 
   .navigation .district-nav .nav-item.current-district button {
-    box-shadow: 0 0 10px 2px var(--foreground);
     pointer-events: none;
     cursor: default;
+  }
+
+  .navigation .district-nav .nav-item.current-district img.nav-icon {
+    filter: drop-shadow(0 0 10px var(--foreground));
+  }
+
+  .navigation .district-nav .nav-item.current-district span.nav-icon {
+    text-shadow: 0 0 10px var(--foreground);
   }
 
   .navigation .district-nav .nav-item button:disabled {
