@@ -786,6 +786,26 @@ body.theme-dark .top-menu button {
       font-size: calc(4rem * var(--location-scale));
     }
 
+  .navigation .district-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .navigation .district-nav .nav-item.current-district button {
+    box-shadow: 0 0 10px 2px var(--foreground);
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .navigation .district-nav .nav-item button:disabled {
+    background: none;
+    color: var(--foreground);
+    opacity: 1;
+  }
+
   .navigation .street-sign {
     background: #2e8b57;
     color: #fff;
