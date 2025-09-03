@@ -143,11 +143,11 @@ export const CITY_NAV = {
           points: [
             { name: "The Sunleaf Inn", type: "building", target: "The Sunleaf Inn", icon: "assets/images/icons/waves_break/The Sunleaf Inn.png" },
             { name: "Stonebridge Caravanserai", type: "building", target: "Stonebridge Caravanserai", icon: "assets/images/icons/waves_break/Stonebridge Caravanserai.png" },
-            { name: "Adventurers' Guildhall", type: "building", target: "Adventurers' Guildhall", icon: "assets/images/icons/waves_break/Adventurers' Guildhall.png" },
+            { name: "Adventurers' Guildhall", type: "building", target: "Adventurers' Guildhall", icon: "assets/images/icons/waves_break/Adventurer's Guild.png" },
             { name: "Iron Key Smithy", type: "building", target: "Iron Key Smithy", icon: "assets/images/icons/waves_break/Iron Key Smithy.png" },
             { name: "Rolling Wave Coachworks", type: "building", target: "Rolling Wave Coachworks", icon: "assets/images/icons/waves_break/Rolling Wave Coachworks.png" },
             { name: "Wavehide Leather Guild", type: "building", target: "Wavehide Leather Guild", icon: "assets/images/icons/waves_break/Wavehide Leather Guild.png" },
-            { name: "Shield & Sail Armsmiths", type: "building", target: "Shield & Sail Armsmiths", icon: "assets/images/icons/waves_break/Shield & Sail Armsmiths.png" },
+            { name: "Shield & Sail Armsmiths", type: "building", target: "Shield & Sail Armsmiths", icon: "assets/images/icons/waves_break/Shield and Sail Armsmiths.png" },
             { name: "Shrine of the Roadwarden", type: "building", target: "Shrine of the Roadwarden", icon: "assets/images/icons/waves_break/Shrine of the Roadwarden.png" },
             { name: "Caravan Square", type: "building", target: "Caravan Square", icon: "assets/images/icons/waves_break/Caravan Square.png" },
             { name: "Gatewatch Barracks", type: "building", target: "Gatewatch Barracks", icon: "assets/images/icons/waves_break/Gatewatch Barracks.png" },
