@@ -10,13 +10,13 @@ export const CITY_NAV = {
             name: "Harborwatch Trading House",
             type: "building",
             target: "Harborwatch Trading House",
-            icon: "assets/images/icons/waves_break/Default.png",
+            icon: "assets/images/icons/waves_break/Harborwatch Trading House.png",
           },
           {
             name: "Warehouse Row",
             type: "building",
             target: "Warehouse Row",
-            icon: "assets/images/icons/waves_break/Default.png",
+            icon: "assets/images/icons/waves_break/Warehouse Row.png",
           },
           {
             name: "Stormkeel Shipwrights",
