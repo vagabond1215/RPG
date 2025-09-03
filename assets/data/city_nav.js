@@ -159,29 +159,34 @@ export const CITY_NAV = {
         "The Farmlands Beyond the Walls": {
           travelPrompt: "Walk to",
           points: [
-            { name: "Brackenshore Croft", type: "building", target: "Brackenshore Croft", icon: "assets/images/icons/waves_break/Brackenshore Croft.png" },
-            { name: "Greenridge Polder", type: "building", target: "Greenridge Polder", icon: "assets/images/icons/waves_break/Greenridge Polder.png" },
-            { name: "Harborwind Dairy", type: "building", target: "Harborwind Dairy", icon: "assets/images/icons/waves_break/Harborwind Dairy.png" },
-            { name: "Mistflower Apiary", type: "building", target: "Mistflower Apiary", icon: "assets/images/icons/waves_break/Mistflower Apiary.png" },
-            { name: "Cliffblossom Hives", type: "building", target: "Cliffblossom Hives", icon: "assets/images/icons/waves_break/Cliffblossom Hives.png" },
-            { name: "Gulls' Orchard", type: "building", target: "Gulls' Orchard", icon: "assets/images/icons/waves_break/Gulls' Orchard.png" },
-            { name: "Sunmellow Grove", type: "building", target: "Sunmellow Grove", icon: "assets/images/icons/waves_break/Sunmellow Grove.png" },
-            { name: "Driftfell Meadow", type: "building", target: "Driftfell Meadow", icon: "assets/images/icons/waves_break/Driftfell Meadow.png" },
-            { name: "Moorlight Flats", type: "building", target: "Moorlight Flats", icon: "assets/images/icons/waves_break/Moorlight Flats.png" },
-            { name: "Gullwind Mill", type: "building", target: "Gullwind Mill", icon: "assets/images/icons/waves_break/Gullwind Mill.png" },
-            { name: "Saltmarsh Granary", type: "building", target: "Saltmarsh Granary", icon: "assets/images/icons/waves_break/Saltmarsh Granary.png" },
-            { name: "Copperbrook Forge", type: "building", target: "Copperbrook Forge", icon: "assets/images/icons/waves_break/Copperbrook Forge.png" },
-            { name: "Tidewatcher Lighthouse", type: "building", target: "Tidewatcher Lighthouse", icon: "assets/images/icons/waves_break/Tidewatcher Lighthouse.png" },
-            { name: "Netmaker's Co-op", type: "building", target: "Netmaker's Co-op", icon: "assets/images/icons/waves_break/Netmaker's Co-op.png" },
-            { name: "Grain Farms and Mills", type: "building", target: "Grain Farms and Mills", icon: "assets/images/icons/waves_break/Grain Farms and Mills.png" },
-            { name: "Vineyards and Wineries", type: "building", target: "Vineyards and Wineries", icon: "assets/images/icons/waves_break/Vineyards and Wineries.png" },
-            { name: "Cattle and Wool Yards", type: "building", target: "Cattle and Wool Yards", icon: "assets/images/icons/waves_break/Cattle and Wool Yards.png" },
-            { name: "Brickworks", type: "building", target: "Brickworks", icon: "assets/images/icons/waves_break/Brickworks.png" },
-            { name: "Stone Quarries", type: "building", target: "Stone Quarries", icon: "assets/images/icons/waves_break/Stone Quarries.png" },
-            { name: "Outer Watchtowers", type: "building", target: "Outer Watchtowers", icon: "assets/images/icons/waves_break/Outer Watchtowers.png" },
-            { name: "Wayside Shrines", type: "building", target: "Wayside Shrines", icon: "assets/images/icons/waves_break/Wayside Shrines.png" },
-            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" },
-            { name: "East Road to Mountain Top", type: "location", target: "Mountain Top", icon: "assets/images/icons/waves_break/The East Road to Mountain Top.png" }
+              { name: "Brackenshore Croft", type: "building", target: "Brackenshore Croft", icon: "assets/images/icons/waves_break/Brackenshore Croft.png" },
+              { name: "Greenridge Polder", type: "building", target: "Greenridge Polder", icon: "assets/images/icons/waves_break/Greenridge Polder.png" },
+              { name: "Harborwind Dairy", type: "building", target: "Harborwind Dairy", icon: "assets/images/icons/waves_break/Harborwind Dairy.png" },
+              { name: "Saltmeadow Potato Farm", type: "building", target: "Saltmeadow Potato Farm", icon: "assets/images/icons/waves_break/Saltmeadow Potato Farm.png" },
+              { name: "Foamfield Flax Farm", type: "building", target: "Foamfield Flax Farm", icon: "assets/images/icons/waves_break/Foamfield Flax Farm.png" },
+              { name: "Mistflower Apiary", type: "building", target: "Mistflower Apiary", icon: "assets/images/icons/waves_break/Mistflower Apiary.png" },
+              { name: "Cliffblossom Hives", type: "building", target: "Cliffblossom Hives", icon: "assets/images/icons/waves_break/Cliffblossom Hives.png" },
+              { name: "Gulls' Orchard", type: "building", target: "Gulls' Orchard", icon: "assets/images/icons/waves_break/Gulls' Orchard.png" },
+              { name: "Sunmellow Grove", type: "building", target: "Sunmellow Grove", icon: "assets/images/icons/waves_break/Sunmellow Grove.png" },
+              { name: "Seawisp Plum Orchard", type: "building", target: "Seawisp Plum Orchard", icon: "assets/images/icons/waves_break/Seawisp Plum Orchard.png" },
+              { name: "Driftfell Meadow", type: "building", target: "Driftfell Meadow", icon: "assets/images/icons/waves_break/Driftfell Meadow.png" },
+              { name: "Moorlight Flats", type: "building", target: "Moorlight Flats", icon: "assets/images/icons/waves_break/Moorlight Flats.png" },
+              { name: "Gullwind Mill", type: "building", target: "Gullwind Mill", icon: "assets/images/icons/waves_break/Gullwind Mill.png" },
+              { name: "Tidewheel Watermill", type: "building", target: "Tidewheel Watermill", icon: "assets/images/icons/waves_break/Tidewheel Watermill.png" },
+              { name: "Saltmarsh Granary", type: "building", target: "Saltmarsh Granary", icon: "assets/images/icons/waves_break/Saltmarsh Granary.png" },
+              { name: "Copperbrook Forge", type: "building", target: "Copperbrook Forge", icon: "assets/images/icons/waves_break/Copperbrook Forge.png" },
+              { name: "Tidewatcher Lighthouse", type: "building", target: "Tidewatcher Lighthouse", icon: "assets/images/icons/waves_break/Tidewatcher Lighthouse.png" },
+              { name: "Netmaker's Co-op", type: "building", target: "Netmaker's Co-op", icon: "assets/images/icons/waves_break/Netmaker's Co-op.png" },
+              { name: "Seabreeze Oat Farm", type: "building", target: "Seabreeze Oat Farm", icon: "assets/images/icons/waves_break/Seabreeze Oat Farm.png" },
+              { name: "Saltcrest Vineyard & Winery", type: "building", target: "Saltcrest Vineyard & Winery", icon: "assets/images/icons/waves_break/Saltcrest Vineyard & Winery.png" },
+              { name: "Windward Berry Vineyard & Winery", type: "building", target: "Windward Berry Vineyard & Winery", icon: "assets/images/icons/waves_break/Windward Berry Vineyard & Winery.png" },
+              { name: "Tideflock Stockyards", type: "building", target: "Tideflock Stockyards", icon: "assets/images/icons/waves_break/Tideflock Stockyards.png" },
+              { name: "Bayside Brickworks", type: "building", target: "Bayside Brickworks", icon: "assets/images/icons/waves_break/Bayside Brickworks.png" },
+              { name: "Cliffbreak Quarry", type: "building", target: "Cliffbreak Quarry", icon: "assets/images/icons/waves_break/Cliffbreak Quarry.png" },
+              { name: "Wavecut Stoneworks", type: "building", target: "Wavecut Stoneworks", icon: "assets/images/icons/waves_break/Wavecut Stoneworks.png" },
+              { name: "Coast Road Watchtower", type: "building", target: "Coast Road Watchtower", icon: "assets/images/icons/waves_break/Coast Road Watchtower.png" },
+              { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" },
+              { name: "East Road to Mountain Top", type: "location", target: "Mountain Top", icon: "assets/images/icons/waves_break/The East Road to Mountain Top.png" }
           ]
         }
       },
@@ -416,17 +421,33 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["vegetables"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
       },
-      "Harborwind Dairy": {
-        travelPrompt: "Exit to",
-        description: "Coastal pastures yield sea-salt-sweetened milk.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: [ { name: "Trade", action: "trade" } ],
-        produces: { resources: [], commodities: ["dairy"], luxuries: [] },
-        consumes: { resources: [], commodities: [], luxuries: [] }
-      },
-      "Mistflower Apiary": {
-        travelPrompt: "Exit to",
-        description: "Hives nestled among herb gardens heavy with morning fog.",
+        "Harborwind Dairy": {
+          travelPrompt: "Exit to",
+          description: "Coastal pastures yield sea-salt-sweetened milk.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ],
+          produces: { resources: [], commodities: ["dairy"], luxuries: [] },
+          consumes: { resources: [], commodities: [], luxuries: [] }
+        },
+        "Saltmeadow Potato Farm": {
+          travelPrompt: "Exit to",
+          description: "Salt-kissed plots yield hearty potatoes.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ],
+          produces: { resources: [], commodities: ["potatoes"], luxuries: [] },
+          consumes: { resources: [], commodities: [], luxuries: [] }
+        },
+        "Foamfield Flax Farm": {
+          travelPrompt: "Exit to",
+          description: "Wind-swept rows of flax ripple toward the shore.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ],
+          produces: { resources: ["flax"], commodities: [], luxuries: [] },
+          consumes: { resources: [], commodities: [], luxuries: [] }
+        },
+        "Mistflower Apiary": {
+          travelPrompt: "Exit to",
+          description: "Hives nestled among herb gardens heavy with morning fog.",
         exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["honey"], luxuries: [] },
@@ -448,17 +469,25 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["fruit"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
       },
-      "Sunmellow Grove": {
-        travelPrompt: "Exit to",
-        description: "Stone-warmed plums and apricots pressed into honeyed wine.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: [ { name: "Trade", action: "trade" } ],
-        produces: { resources: [], commodities: ["fruit"], luxuries: ["honeyed wine"] },
-        consumes: { resources: [], commodities: [], luxuries: [] }
-      },
-      "Driftfell Meadow": {
-        travelPrompt: "Exit to",
-        description: "Breezy downs where cattle and sheep graze in rotation.",
+        "Sunmellow Grove": {
+          travelPrompt: "Exit to",
+          description: "Stone-warmed plums and apricots pressed into honeyed wine.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ],
+          produces: { resources: [], commodities: ["fruit"], luxuries: ["honeyed wine"] },
+          consumes: { resources: [], commodities: [], luxuries: [] }
+        },
+        "Seawisp Plum Orchard": {
+          travelPrompt: "Exit to",
+          description: "Mist-shrouded plum trees yield tart coastal fruit.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ],
+          produces: { resources: [], commodities: ["fruit"], luxuries: [] },
+          consumes: { resources: [], commodities: [], luxuries: [] }
+        },
+        "Driftfell Meadow": {
+          travelPrompt: "Exit to",
+          description: "Breezy downs where cattle and sheep graze in rotation.",
         exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["wool", "meat"], luxuries: [] },
@@ -472,22 +501,30 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: ["milk", "fiber"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
       },
-      "Gullwind Mill": {
-        travelPrompt: "Exit to",
-        description: "Wind-driven sails grind grain for nearby farms.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: [ { name: "Trade", action: "trade" } ],
-        produces: { resources: [], commodities: ["flour"], luxuries: [] },
-        consumes: { resources: [], commodities: ["grain"], luxuries: [] }
-      },
-      "Saltmarsh Granary": {
-        travelPrompt: "Exit to",
-        description: "Stilted storehouse keeping harvest dry above marshy ground.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: [],
-        produces: { resources: [], commodities: [], luxuries: [] },
-        consumes: { resources: [], commodities: ["grain"], luxuries: [] }
-      },
+        "Gullwind Mill": {
+          travelPrompt: "Exit to",
+          description: "Wind-driven sails grind grain for nearby farms.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ],
+          produces: { resources: [], commodities: ["flour"], luxuries: [] },
+          consumes: { resources: [], commodities: ["grain"], luxuries: [] }
+        },
+        "Tidewheel Watermill": {
+          travelPrompt: "Exit to",
+          description: "A tidal waterwheel grinds grain into flour.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ],
+          produces: { resources: [], commodities: ["flour"], luxuries: [] },
+          consumes: { resources: [], commodities: ["grain"], luxuries: [] }
+        },
+        "Saltmarsh Granary": {
+          travelPrompt: "Exit to",
+          description: "Stilted storehouse keeping harvest dry above marshy ground.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [],
+          produces: { resources: [], commodities: [], luxuries: [] },
+          consumes: { resources: [], commodities: ["grain"], luxuries: [] }
+        },
       "Copperbrook Forge": {
         travelPrompt: "Exit to",
         description: "Small smithy by the brook repairing tools and shoeing beasts.",
@@ -578,48 +615,54 @@ export const CITY_NAV = {
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
-      "Grain Farms and Mills": {
-        travelPrompt: "Exit to",
-        description: "Golden fields feed stout mills that grind the city’s bread.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: [ { name: "Trade", action: "trade" } ]
-      },
-      "Vineyards and Wineries": {
-        travelPrompt: "Exit to",
-        description: "Terraced vines produce casks of bright coastal wine.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: [ { name: "Trade", action: "trade" } ]
-      },
-      "Cattle and Wool Yards": {
-        travelPrompt: "Exit to",
-        description: "Pens bustle with livestock awaiting shearers and drovers.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: [ { name: "Trade", action: "trade" } ]
-      },
-      "Brickworks": {
-        travelPrompt: "Exit to",
-        description: "Smoky kilns bake clay into bricks for city walls and homes.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: [ { name: "Trade", action: "trade" } ]
-      },
-      "Stone Quarries": {
-        travelPrompt: "Exit to",
-        description: "Quarried blocks await transport from the rocky hillsides.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: [ { name: "Trade", action: "trade" } ]
-      },
-      "Outer Watchtowers": {
-        travelPrompt: "Exit to",
-        description: "Wooden towers scan the horizon for approaching threats.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: []
-      },
-      "Wayside Shrines": {
-        travelPrompt: "Exit to",
-        description: "Small roadside altars offer quiet moments of prayer.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
-        interactions: []
-      }
+        "Seabreeze Oat Farm": {
+          travelPrompt: "Exit to",
+          description: "Sea-breezed oat fields rustle outside the city walls.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ]
+        },
+        "Saltcrest Vineyard & Winery": {
+          travelPrompt: "Exit to",
+          description: "Salt-kissed grapes ferment into crisp coastal wine.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ]
+        },
+        "Windward Berry Vineyard & Winery": {
+          travelPrompt: "Exit to",
+          description: "Hillside berries are pressed into rich, dark wines.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ]
+        },
+        "Tideflock Stockyards": {
+          travelPrompt: "Exit to",
+          description: "Pens bustle with cattle and sheep awaiting drovers.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ]
+        },
+        "Bayside Brickworks": {
+          travelPrompt: "Exit to",
+          description: "Smoky bayside kilns bake clay into hardy bricks.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ]
+        },
+        "Cliffbreak Quarry": {
+          travelPrompt: "Exit to",
+          description: "Workers hew stone from the seaside cliffs.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ]
+        },
+        "Wavecut Stoneworks": {
+          travelPrompt: "Exit to",
+          description: "Masons carve cliffstone into sturdy blocks.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: [ { name: "Trade", action: "trade" } ]
+        },
+        "Coast Road Watchtower": {
+          travelPrompt: "Exit to",
+          description: "A lone tower keeps vigil along the coastal road.",
+          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          interactions: []
+        }
     }
   },
   "Coral Keep": {
