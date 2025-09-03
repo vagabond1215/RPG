@@ -1131,8 +1131,6 @@ function applySpellProficiencyGain(character, spell, params) {
       ...params,
     });
   }
-  lastCity = pos.city;
-  lastDistrict = pos.district;
 }
 
 const saveProfiles = () => {
@@ -1470,6 +1468,8 @@ function showNavigation() {
       });
     });
   }
+  lastCity = pos.city;
+  lastDistrict = pos.district;
 }
 
 function showCharacter() {
