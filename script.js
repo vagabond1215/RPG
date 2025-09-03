@@ -65,9 +65,8 @@ function cityHeaderHTML(city) {
   return header ? `<img src="${header}" alt="${city}" class="city-header">` : city;
 }
 
-let showDistricts = false;
-let lastCity = null;
-let lastDistrict = null;
+const SHOW_DISTRICTS_KEY = 'rpgShowDistricts';
+let showDistricts = localStorage.getItem(SHOW_DISTRICTS_KEY) === 'true';
 
 const body = document.body;
 const main = document.querySelector('main');
@@ -123,7 +122,7 @@ function isPortraitLayout() {
 function normalizeOptionButtonWidths() {
   const grid = document.querySelector('.option-grid');
   if (!grid) return;
-  if (grid.closest('.navigation')) return; // skip nav grids
+  const isNav = !!grid.closest('.navigation');
   const images = Array.from(grid.querySelectorAll('img'));
   let pending = images.filter(img => !img.complete).length;
   if (pending) {
@@ -143,16 +142,27 @@ function normalizeOptionButtonWidths() {
   }
   const buttons = Array.from(grid.querySelectorAll('button'));
   let maxWidth = 0;
+  let maxHeight = 0;
   buttons.forEach(btn => {
-    btn.style.width = 'auto';
-    const w = btn.getBoundingClientRect().width;
-    if (w > maxWidth) maxWidth = w;
+    btn.style.width = isNav ? '' : 'auto';
+    if (isNav) btn.style.height = '';
+    const rect = btn.getBoundingClientRect();
+    if (rect.width > maxWidth) maxWidth = rect.width;
+    if (isNav && rect.height > maxHeight) maxHeight = rect.height;
   });
   const gridWidth = grid.getBoundingClientRect().width;
-  maxWidth = Math.min(maxWidth, gridWidth);
-  buttons.forEach(btn => {
-    btn.style.width = `${maxWidth}px`;
-  });
+  if (isNav) {
+    const size = Math.min(Math.max(maxWidth, maxHeight), gridWidth);
+    buttons.forEach(btn => {
+      btn.style.width = `${size}px`;
+      btn.style.height = `${size}px`;
+    });
+  } else {
+    maxWidth = Math.min(maxWidth, gridWidth);
+    buttons.forEach(btn => {
+      btn.style.width = `${maxWidth}px`;
+    });
+  }
 }
 
 function normalizeProficiencyNameWidths() {
@@ -1210,9 +1220,6 @@ function showNavigation() {
   }
   const pos = currentCharacter.position;
   const cityData = CITY_NAV[pos.city];
-  if (pos.city !== lastCity || pos.district !== lastDistrict) {
-    showDistricts = false;
-  }
   if (!cityData) {
     setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1><p>You are in ${pos.city}.</p></div>`);
     return;
@@ -1323,6 +1330,7 @@ function showNavigation() {
         const action = btn.dataset.action;
         if (action === 'toggle-districts') {
           showDistricts = !showDistricts;
+          localStorage.setItem(SHOW_DISTRICTS_KEY, showDistricts);
           showNavigation();
           return;
         }
@@ -1468,8 +1476,6 @@ function showNavigation() {
       });
     });
   }
-  lastCity = pos.city;
-  lastDistrict = pos.district;
 }
 
 function showCharacter() {
