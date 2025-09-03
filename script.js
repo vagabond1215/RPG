@@ -1224,14 +1224,16 @@ function showNavigation() {
     setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1><p>You are in ${pos.city}.</p></div>`);
     return;
   }
-  const createNavItem = ({ type, target, name, action, prompt, icon }) => {
+  const createNavItem = ({ type, target, name, action, prompt, icon, disabled, extraClass }) => {
     const defaultIcon = NAV_ICONS[type] || '📍';
     const iconHTML = icon
       ? `<img src="${icon}" alt="" class="nav-icon">`
       : `<span class="nav-icon">${defaultIcon}</span>`;
     const attrs = action ? `data-action="${action}"` : `data-target="${target}"`;
     const aria = prompt ? `${prompt} ${name}` : name;
-    return `<div class="nav-item"><button data-type="${type}" ${attrs} aria-label="${aria}">${iconHTML}</button><span class="street-sign">${name}</span></div>`;
+    const dis = disabled ? 'disabled' : '';
+    const cls = extraClass ? ` ${extraClass}` : '';
+    return `<div class="nav-item${cls}"><button data-type="${type}" ${attrs} aria-label="${aria}" ${dis}>${iconHTML}</button><span class="street-sign">${name}</span></div>`;
   };
   if (pos.building) {
     const building = cityData.buildings[pos.building];
@@ -1296,19 +1298,32 @@ function showNavigation() {
     const groups = [];
     if (exits.length) groups.push(exits.map(makeButton));
     const hasMultipleDistricts = Object.keys(cityData.districts).length > 1;
+    const buildDistrictNav = () => {
+      const neighborButtons = districts.map(makeButton);
+      const currentButton = createNavItem({
+        type: 'district',
+        target: pos.district,
+        name: pos.district,
+        icon: getDistrictIcon(pos.city, pos.district),
+        disabled: true,
+        extraClass: 'current-district',
+      });
+      const mid = Math.ceil(neighborButtons.length / 2);
+      neighborButtons.splice(mid, 0, currentButton);
+      return [`<div class="district-nav">${neighborButtons.join('')}</div>`];
+    };
     if (hasMultipleDistricts) {
-      const districtButtons = [
+      groups.push([
         createNavItem({
           type: 'district-toggle',
           action: 'toggle-districts',
           name: 'Districts',
           icon: getDistrictsEnvelope(pos.city),
         }),
-      ];
-      if (showDistricts) districtButtons.push(...districts.map(makeButton));
-      groups.push(districtButtons);
-    } else if (districts.length) {
-      groups.push(districts.map(makeButton));
+      ]);
+      if (showDistricts) groups.push(buildDistrictNav());
+    } else {
+      groups.push(buildDistrictNav());
     }
     if (locals.length) groups.push(locals.map(makeButton));
     const buttons = [];
@@ -1325,7 +1340,7 @@ function showNavigation() {
   normalizeOptionButtonWidths();
   updateMenuHeight();
   if (main) {
-    main.querySelectorAll('.option-grid button').forEach(btn => {
+    main.querySelectorAll('.option-grid button:not(:disabled)').forEach(btn => {
       btn.addEventListener('click', () => {
         const action = btn.dataset.action;
         if (action === 'toggle-districts') {
