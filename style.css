@@ -1,5 +1,6 @@
 :root {
   --ui-scale: 1;
+  --location-scale: calc((var(--ui-scale) + 1) / var(--ui-scale));
   --background: #f0f0f0;
   --foreground: #333333;
   /* Menu button colors default to the light theme */
@@ -680,6 +681,12 @@ body.theme-dark .top-menu button {
     white-space: nowrap;
   }
 
+  .option-button.location-button {
+    width: calc(8rem * var(--location-scale));
+    height: calc(2rem * var(--location-scale));
+    font-size: calc(1rem * var(--location-scale));
+  }
+
   .option-grid button {
     border: 2px solid var(--foreground);
     background: var(--background);
@@ -768,6 +775,15 @@ body.theme-dark .top-menu button {
       justify-content: center;
       font-size: 4rem;
       line-height: 1;
+    }
+
+    .navigation .nav-item button[data-type="location"] {
+      width: calc(5rem * var(--location-scale));
+      height: calc(5rem * var(--location-scale));
+    }
+
+    .navigation .nav-item button[data-type="location"] span.nav-icon {
+      font-size: calc(4rem * var(--location-scale));
     }
 
   .navigation .street-sign {
