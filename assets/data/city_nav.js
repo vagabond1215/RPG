@@ -104,7 +104,8 @@ export const CITY_NAV = {
             { name: "Temple of the Tides", type: "building", target: "Temple of the Tides", icon: "assets/images/icons/waves_break/Temple of the Tides.png" },
             { name: "Hall of Records", type: "building", target: "Hall of Records", icon: "assets/images/icons/waves_break/Hall of Records.png" },
             { name: "The Port District", type: "district", target: "The Port District", icon: "assets/images/icons/waves_break/Port District.png" },
-            { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" }
+            { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" },
+            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" }
           ]
         },
         "Little Terns": {
@@ -118,15 +119,18 @@ export const CITY_NAV = {
             { name: "Tideglass Alchemical Atelier", type: "building", target: "Tideglass Alchemical Atelier", icon: "assets/images/icons/waves_break/Tideglass Alchemical Atelier.png" },
             { name: "Arc Runes Enchantery", type: "building", target: "Arc Runes Enchantery", icon: "assets/images/icons/waves_break/Arc Runes Enchantery.png" },
               { name: "The Port District", type: "district", target: "The Port District", icon: "assets/images/icons/waves_break/Port District.png" },
-              { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" }
+              { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" },
+              { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" }
           ]
         },
         "Greensoul Hill": {
           travelPrompt: "Walk to",
           points: [
-              { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" },
-            { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" },
-            { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" }
+            { name: "Greensoul Monastery", type: "building", target: "Greensoul Monastery", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Royal Botanical Gardens", type: "building", target: "Royal Botanical Gardens", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Skyline Academy", type: "building", target: "Skyline Academy", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Greensoul Amphitheater", type: "building", target: "Greensoul Amphitheater", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" }
           ]
         },
         "The Lower Gardens": {
@@ -134,8 +138,9 @@ export const CITY_NAV = {
           points: [
             { name: "Harbor Hearth Bakery", type: "building", target: "Harbor Hearth Bakery", icon: "assets/images/icons/waves_break/Harbor Hearth Bakery.png" },
             { name: "Tidehold Granary & Provisioners", type: "building", target: "Tidehold Granary & Provisioners", icon: "assets/images/icons/waves_break/Tidehold Granary and Provisioners.png" },
-              { name: "Greensoul Hill", type: "district", target: "Greensoul Hill", icon: "assets/images/icons/waves_break/Greensoul Hill District.png" },
-            { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" }
+            { name: "Bloomstage Theater", type: "building", target: "Bloomstage Theater", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "The Velvet Petal Brothel", type: "building", target: "The Velvet Petal Brothel", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" }
           ]
         },
         "The High Road District": {
@@ -151,9 +156,11 @@ export const CITY_NAV = {
             { name: "Shrine of the Roadwarden", type: "building", target: "Shrine of the Roadwarden", icon: "assets/images/icons/waves_break/Shrine of the Roadwarden.png" },
             { name: "Caravan Square", type: "building", target: "Caravan Square", icon: "assets/images/icons/waves_break/Caravan Square.png" },
             { name: "Gatewatch Barracks", type: "building", target: "Gatewatch Barracks", icon: "assets/images/icons/waves_break/Gatewatch Barracks.png" },
+            { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/Default.png" },
             { name: "Wayfarer's Rest Tavern", type: "building", target: "Wayfarer's Rest Tavern", icon: "assets/images/icons/waves_break/Wayfarer's Rest Tavern.png" },
-            { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" },
-            { name: "The Farmlands Beyond the Walls", type: "district", target: "The Farmlands Beyond the Walls", icon: "assets/images/icons/waves_break/The Farmlands.png" }
+            { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" },
+            { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" }
           ]
         },
         "The Farmlands Beyond the Walls": {
@@ -185,7 +192,8 @@ export const CITY_NAV = {
               { name: "Cliffbreak Quarry", type: "building", target: "Cliffbreak Quarry", icon: "assets/images/icons/waves_break/Cliffbreak Quarry.png" },
               { name: "Wavecut Stoneworks", type: "building", target: "Wavecut Stoneworks", icon: "assets/images/icons/waves_break/Wavecut Stoneworks.png" },
               { name: "Coast Road Watchtower", type: "building", target: "Coast Road Watchtower", icon: "assets/images/icons/waves_break/Coast Road Watchtower.png" },
-              { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" },
+              { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/Default.png" },
               { name: "East Road to Mountain Top", type: "location", target: "Mountain Top", icon: "assets/images/icons/waves_break/The East Road to Mountain Top.png" }
           ]
         }
@@ -378,6 +386,30 @@ export const CITY_NAV = {
         produces: { resources: [], commodities: [], luxuries: ["enchanted items"] },
         consumes: { resources: ["mana crystals"], commodities: [], luxuries: [] }
       },
+      "Greensoul Monastery": {
+        travelPrompt: "Exit to",
+        description: "Quiet cloisters overlook the city from this serene retreat.",
+        exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
+        interactions: []
+      },
+      "Royal Botanical Gardens": {
+        travelPrompt: "Exit to",
+        description: "Manicured beds showcase rare flora tended for noble study.",
+        exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
+        interactions: []
+      },
+      "Skyline Academy": {
+        travelPrompt: "Exit to",
+        description: "Scholars debate philosophy in sunlit lecture courts.",
+        exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
+        interactions: []
+      },
+      "Greensoul Amphitheater": {
+        travelPrompt: "Exit to",
+        description: "Open-air performances entertain Wave's Break's elite.",
+        exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
+        interactions: []
+      },
       "Fisherman's Pier": {
         travelPrompt: "Exit to",
         description: "Nets dry on posts as gulls cry over baskets of fish.",
@@ -404,6 +436,18 @@ export const CITY_NAV = {
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: [], luxuries: [] },
         consumes: { resources: ["grain"], commodities: [], luxuries: [] }
+      },
+      "Bloomstage Theater": {
+        travelPrompt: "Exit to",
+        description: "A simple stage hosts lively performances for common folk.",
+        exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
+        interactions: []
+      },
+      "The Velvet Petal Brothel": {
+        travelPrompt: "Exit to",
+        description: "Lantern-lit rooms offer discreet companionship and drink.",
+        exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
+        interactions: []
       },
       "Brackenshore Croft": {
         travelPrompt: "Exit to",
@@ -607,6 +651,24 @@ export const CITY_NAV = {
         travelPrompt: "Exit to",
         description: "Drilled soldiers guard the city’s massive eastern gate.",
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
+        interactions: []
+      },
+      "North Gate": {
+        travelPrompt: "Exit to",
+        description: "Sturdy gatehouse opening to the northern farmlands.",
+        exits: [
+          { name: "The High Road District", target: "The High Road District" },
+          { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" }
+        ],
+        interactions: []
+      },
+      "South Gate": {
+        travelPrompt: "Exit to",
+        description: "Weathered gates lead toward fields south of the city.",
+        exits: [
+          { name: "The High Road District", target: "The High Road District" },
+          { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" }
+        ],
         interactions: []
       },
       "Wayfarer's Rest Tavern": {
