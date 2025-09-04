@@ -1,6 +1,6 @@
 // crafting_proficiency.ts — crafting proficiency progression tied to successful crafts
 
-import { F_repeat, W_unlock_window, POST_UNLOCK_CHOKE_K } from "./core.js";
+import { F_repeat, W_unlock_window, POST_UNLOCK_CHOKE_K } from "./proficiency_base.js";
 
 const r2 = (x: number) => Math.round(x * 100) / 100;
 

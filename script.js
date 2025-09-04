@@ -1,6 +1,7 @@
 import { SPELLBOOK, MILESTONES } from "./assets/data/spells.js";
 import { WEAPON_SKILLS } from "./assets/data/weapon_skills.js";
-import { characterTemplate, gainProficiency, proficiencyCap } from "./assets/data/core.js";
+import { characterTemplate } from "./assets/data/core.js";
+import { gainProficiency, proficiencyCap } from "./assets/data/proficiency_base.js";
 import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./assets/data/race_attrs.js";
 import { maxHP, maxMP, maxStamina } from "./assets/data/resources.js";
 import { DENOMINATIONS, CURRENCY_VALUES, convertCurrency, toIron, fromIron } from "./assets/data/currency.js";
