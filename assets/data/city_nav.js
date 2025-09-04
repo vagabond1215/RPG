@@ -253,67 +253,80 @@ export const CITY_NAV = {
     buildings: {
       "Harborwatch Trading House": {
         travelPrompt: "Exit to",
-        description: "Traders shout deals across ledgers in this busy waterfront exchange.",
+        description: `As you enter the Harborwatch Trading House, the din of haggling merchants crashes over you like a breaking wave.
+Ledger-scribbling clerks dart between crates piled high, and the salt tang mingles with exotic spices.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Warehouse Row": {
         travelPrompt: "Exit to",
-        description: "Long storehouses line the street, stacked with salted cargo.",
+        description: `Shouldering past a laden cart, you slip into Warehouse Row.
+Rows of doors stretch like the ribs of a sleeping beast, each hiding cargo bound for distant ports.
+Rats scurry between crates, wary of your tread.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Stormkeel Shipwrights": {
         travelPrompt: "Exit to",
-        description: "The ring of mallets echoes from ships rising on wooden frames.",
+        description: `Duck under a half-sawn beam to enter Stormkeel Shipwrights.
+Fresh-cut timbers perfume the air while mallets ring in steady rhythm.
+Half-built hulls loom above like skeletons waiting for the tide.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "The Ropewalk": {
         travelPrompt: "Exit to",
-        description: "Workers stride backward twisting hemp into endless rope.",
+        description: `Walking the long hall of the Ropewalk, you feel the floor hum beneath workers twisting fibers.
+Length after length of hemp stretches into the distance, smelling of tar and seawater.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Brinebarrel Coopers": {
         travelPrompt: "Exit to",
-        description: "Coopers hammer iron hoops over casks reeking of brine.",
+        description: `As the door swings open at Brinebarrel Coopers, the scent of wet wood and salt hits your nose.
+Coopers hammer iron hoops onto staves, their rhythmic blows echoing through rows of barrels.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Saltworks": {
         travelPrompt: "Exit to",
-        description: "Shallow pans glisten as seawater dries into piles of salt.",
+        description: `Cracking open the gate to the Saltworks, you step into glare off shallow pans.
+Evaporating seawater leaves glittering crusts while workers rake crystals into mounds.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Fishmongers' Row": {
         travelPrompt: "Exit to",
-        description: "Stalls drip with fresh catch while gulls wheel overhead.",
+        description: `Threading through the crowd, you arrive at Fishmongers' Row.
+Slabs of fresh catch gleam on ice, and gulls shriek for scraps as vendors holler prices.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Shrine of the Deep Current": {
         travelPrompt: "Exit to",
-        description: "A stone basin bubbles with seawater offerings to the unseen tide.",
+        description: `Kneeling at the Shrine of the Deep Current, you hear seawater bubbling within a stone basin.
+The air carries a chill, as if the unseen tide itself waits for your offering.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: []
       },
       "Statue of the Sea-Mother": {
         travelPrompt: "Exit to",
-        description: "Barnacle-dotted statue gazes serenely over the harbor.",
+        description: `Approaching the Statue of the Sea-Mother, you brush barnacles from the stone plinth.
+Her weathered gaze watches the harbor, and a calm settles over you like mist.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: []
       },
       "The Salty Gull": {
         travelPrompt: "Exit to",
-        description: "Laughter and sea shanties spill from this weathered dockside tavern.",
+        description: `Pushing open the warped door of the Salty Gull, you are met with laughter and thick ale-fumes.
+Sailors clap you on the back as sea shanties rise above the crackle of the hearth.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "The Tideway Inn": {
         travelPrompt: "Exit to",
-        description: "Warm lantern light and the murmur of sailors greet you.",
+        description: `Sliding out of the drizzle into the Tideway Inn, you find lantern light pooling on worn floorboards.
+The murmur of tired sailors and the promise of a warm bed wrap around you like a blanket.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
@@ -351,7 +364,8 @@ export const CITY_NAV = {
       },
       "Harbor Guard Naval Yard": {
         travelPrompt: "Exit to",
-        description: "Ship hulls and disciplined marines line the busy dockside yard.",
+        description: `Marching past a row of polished spears, you enter the Harbor Guard Naval Yard.
+Ship hulls rise on their stocks while disciplined marines drill between coils of rope and cannon.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
@@ -362,7 +376,8 @@ export const CITY_NAV = {
       },
       "Nobles' Quay": {
         travelPrompt: "Exit to",
-        description: "Gilded barges bob beside polished piers watched by cloaked attendants.",
+        description: `Gliding down the marble steps onto Nobles' Quay, you catch reflections of gilded barges in the water.
+Cloaked attendants whisper greetings as perfumed breezes mingle with salt spray.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
@@ -373,7 +388,8 @@ export const CITY_NAV = {
       },
       "Merchants' Wharf": {
         travelPrompt: "Exit to",
-        description: "Crates and shouting dockworkers crowd the bustling commercial pier.",
+        description: `Weaving through shouting stevedores, you step onto Merchants' Wharf.
+Crates teeter in precarious stacks and the air buzzes with deals sealed over the creak of mooring lines.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
@@ -464,7 +480,8 @@ export const CITY_NAV = {
       },
       "Fisherman's Pier": {
         travelPrompt: "Exit to",
-        description: "Nets dry on posts as gulls cry over baskets of fish.",
+        description: `With a careful stride you tread onto Fisherman's Pier.
+Nets hang drying from every post, and the slap of waves mixes with the clatter of baskets brimming with today's catch.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
