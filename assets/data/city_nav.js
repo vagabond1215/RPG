@@ -5,6 +5,10 @@ export const CITY_NAV = {
     districts: {
       "The Port District": {
         travelPrompt: "Walk to",
+        descriptions: {
+          "The Upper Ward": "You descend from the regal calm of the Upper Ward, where marble balustrades and watchful guards keep the world in line. Ahead, the Port District erupts in salty spray and shouting dockhands, its tangle of masts and warehouses swallowing you in sea-soaked hustle.",
+          "Little Terns": "The clang of hammers and scent of sawdust from Little Terns fade as you follow the cobbles downhill. The air grows briny and gulls wheel overhead while the Port District's boardwalks and shipyards spread out before you in a chaos of ropes and sails."
+        },
         points: [
           {
             name: "Harborwatch Trading House",
@@ -97,6 +101,11 @@ export const CITY_NAV = {
         },
         "The Upper Ward": {
           travelPrompt: "Walk to",
+          descriptions: {
+            "The Port District": "You leave behind the smell of tar and fish in the Port District as you climb the stair to the hills. The noise of gulls fades and the polished stone avenues of the Upper Ward stretch before you, lined with stately halls and well-armed guards.",
+            "Greensoul Hill": "Leaving the incense-laden cloisters of Greensoul Hill, you descend toward the city's heart. The spiritual hush gives way to the ordered bustle of the Upper Ward, where merchants bow to magistrates beneath banners snapping in the breeze.",
+            "The High Road District": "Dusty caravan squares and hammering armorers of the High Road District recede as you pass beneath a stone arch. The Upper Ward opens in stately terraces, home to nobles and archivists who watch the city from their high balconies."
+          },
           points: [
             { name: "Governor's Keep", type: "building", target: "Governor's Keep", icon: "assets/images/icons/waves_break/Governor's Keep.png" },
             { name: "Crafting Quarter", type: "building", target: "Crafting Quarter", icon: "assets/images/icons/waves_break/Crafting Quarter.png" },
@@ -110,6 +119,11 @@ export const CITY_NAV = {
         },
         "Little Terns": {
           travelPrompt: "Walk to",
+          descriptions: {
+            "The Port District": "You leave the salty spray and crowded piers of the Port District, trudging up a cobbled rise. Under a wrought-iron arch proclaiming Little Terns, the scent shifts to sawdust and dye as workshops and guild halls cluster along the street.",
+            "The Lower Gardens": "Leaving the perfumed alleys and orchard walks of the Lower Gardens, you cross a narrow bridge. Little Terns rises ahead in a patchwork of smoke-streaked chimneys and stacked timber, its people bent over workbenches instead of flower beds.",
+            "The High Road District": "The rumble of caravans and the call of teamsters from the High Road District fade behind you. Little Terns narrows into lanes lined with forges and looms, the air warm with metal and dye as artisans labor over wares."
+          },
           points: [
             { name: "Crystal Tide Glassworks", type: "building", target: "Crystal Tide Glassworks", icon: "assets/images/icons/waves_break/Crystal Tide Glassworks.png" },
             { name: "Tidefire Forge", type: "building", target: "Tidefire Forge", icon: "assets/images/icons/waves_break/Tidefire Forge.png" },
@@ -125,6 +139,9 @@ export const CITY_NAV = {
         },
         "Greensoul Hill": {
           travelPrompt: "Walk to",
+          descriptions: {
+            "The Upper Ward": "You depart the orderly boulevards of the Upper Ward, following a path lined with cypress. Greensoul Hill rises serene and green ahead, its cloisters and libraries inviting quiet reflection above the city's din."
+          },
           points: [
             { name: "Greensoul Monastery", type: "building", target: "Greensoul Monastery", icon: "assets/images/icons/waves_break/Default.png" },
             { name: "Royal Botanical Gardens", type: "building", target: "Royal Botanical Gardens", icon: "assets/images/icons/waves_break/Default.png" },
@@ -135,6 +152,9 @@ export const CITY_NAV = {
         },
         "The Lower Gardens": {
           travelPrompt: "Walk to",
+          descriptions: {
+            "Little Terns": "The clang of hammers in Little Terns softens as you follow a brook-swept path. Soon, the Lower Gardens surround you with verdant plots and the heady smell of fermenting hops and freshly plucked petals."
+          },
           points: [
             { name: "Harbor Hearth Bakery", type: "building", target: "Harbor Hearth Bakery", icon: "assets/images/icons/waves_break/Harbor Hearth Bakery.png" },
             { name: "Tidehold Granary & Provisioners", type: "building", target: "Tidehold Granary & Provisioners", icon: "assets/images/icons/waves_break/Tidehold Granary and Provisioners.png" },
@@ -145,6 +165,11 @@ export const CITY_NAV = {
         },
         "The High Road District": {
           travelPrompt: "Walk to",
+          descriptions: {
+            "The Upper Ward": "Leaving the Upper Ward's polished serenity, you descend toward grittier streets. The High Road District greets you with clangs of armor, horses stamping near the gates, and traders hawking goods to passing caravans.",
+            "Little Terns": "The smoke from Little Terns' forges trails behind as you take a broader thoroughfare. Soon the High Road District envelops you in wagon ruts and the smell of oiled leather, its inns bustling with travelers.",
+            "The Farmlands": "Returning from the wide Farmlands, you approach the sturdy city walls and slip through the gate. The High Road District stands ready with its caravan yards and bustling market, the hum of urban life replacing the whisper of grain."
+          },
           points: [
             { name: "The Sunleaf Inn", type: "building", target: "The Sunleaf Inn", icon: "assets/images/icons/waves_break/The Sunleaf Inn.png" },
             { name: "Stonebridge Caravanserai", type: "building", target: "Stonebridge Caravanserai", icon: "assets/images/icons/waves_break/Stonebridge Caravanserai.png" },
@@ -165,6 +190,9 @@ export const CITY_NAV = {
         },
         "The Farmlands": {
           travelPrompt: "Walk to",
+          descriptions: {
+            "The High Road District": "You slip out of the High Road District's gatehouses, leaving behind the clatter of wheels and barked orders. Immediately the Farmlands envelop you in open sky, buzzing insects, and the rhythmic creak of distant watermills."
+          },
           points: [
               { name: "Brackenshore Croft", type: "building", target: "Brackenshore Croft", icon: "assets/images/icons/waves_break/Brackenshore Croft.png" },
               { name: "Greenridge Polder", type: "building", target: "Greenridge Polder", icon: "assets/images/icons/waves_break/Greenridge Polder.png" },
