@@ -400,7 +400,9 @@ Crates teeter in precarious stacks and the air buzzes with deals sealed over the
       },
       "Crystal Tide Glassworks": {
         travelPrompt: "Exit to",
-        description: "Furnaces roar as molten glass twists into shimmering shapes.",
+        description: `Sliding through a heat-hazed doorway, you step into the Crystal Tide Glassworks.
+Furnaces roar as molten glass winds along pipes in dazzling streams.
+Heat prickles your skin while artisans spin glowing vessels to life.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Glassblowing (Master)", action: "train-glassblowing", tier: "master" } ],
         produces: { resources: [], commodities: ["glassware"], luxuries: ["art glass"] },
@@ -408,7 +410,9 @@ Crates teeter in precarious stacks and the air buzzes with deals sealed over the
       },
       "Tidefire Forge": {
         travelPrompt: "Exit to",
-        description: "Anvils ring amid showers of sparks and the smell of hot iron.",
+        description: `Shouldering aside a curtain of chain, you enter Tidefire Forge.
+Anvils ring amid showers of sparks and the smell of hot iron.
+Sweat-streaked smiths shape blades that glow like captured suns.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Blacksmithing (Journeyman)", action: "train-blacksmithing", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["metal goods"], luxuries: [] },
@@ -416,7 +420,9 @@ Crates teeter in precarious stacks and the air buzzes with deals sealed over the
       },
       "Timberwave Carpenters' Guild": {
         travelPrompt: "Exit to",
-        description: "Stacks of timber and the scent of fresh sawdust fill the hall.",
+        description: `Pushing through the workshop doors, you arrive at the Timberwave Carpenters' Guild.
+Stacks of timber tower overhead while saws sing through grain.
+Sawdust drifts around you as carpenters chisel beams into form.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Carpentry (Journeyman)", action: "train-carpentry", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["woodcraft"], luxuries: [] },
@@ -424,7 +430,9 @@ Crates teeter in precarious stacks and the air buzzes with deals sealed over the
       },
       "The Gilded Needle Clothiers": {
         travelPrompt: "Exit to",
-        description: "Bolts of cloth and neatly labeled threads await deft hands.",
+        description: `Brushing past hanging tapestries, you slip into The Gilded Needle Clothiers.
+Bolts of fabric bloom across tables under lamplight.
+Seamstresses murmur measurements as needles flash and thread gleams.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Tailoring (Apprentice)", action: "train-tailoring", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["garments"], luxuries: [] },
@@ -432,7 +440,9 @@ Crates teeter in precarious stacks and the air buzzes with deals sealed over the
       },
       "Salted Hide Tannery": {
         travelPrompt: "Exit to",
-        description: "Hides hang from beams while craftsmen stitch sturdy gear.",
+        description: `Covering your nose, you edge into the Salted Hide Tannery.
+Racks of curing leather line damp walls, heavy with brine.
+Workers scrape hides smooth, knives rasping in steady rhythm.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Leatherworking (Apprentice)", action: "train-leatherworking", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["leather goods"], luxuries: [] },
@@ -440,7 +450,9 @@ Crates teeter in precarious stacks and the air buzzes with deals sealed over the
       },
       "Tideglass Alchemical Atelier": {
         travelPrompt: "Exit to",
-        description: "Bubbling flasks and acrid fumes swirl among cluttered tables.",
+        description: `Tapping on a stained oak door, you ease into the Tideglass Alchemical Atelier.
+Glassware burbles and colored vapors curl above cluttered benches.
+Alchemists mutter formulas while stirring shimmering concoctions.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Alchemy (Journeyman)", action: "train-alchemy", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["potions"], luxuries: ["elixirs"] },
@@ -448,7 +460,9 @@ Crates teeter in precarious stacks and the air buzzes with deals sealed over the
       },
       "Arc Runes Enchantery": {
         travelPrompt: "Exit to",
-        description: "Runed crystals glow softly over circles etched in the floor.",
+        description: `Tracing a finger along carved sigils, you pass into Arc Runes Enchantery.
+Crystals hum atop etched circles, bathing the room in pale light.
+Enchanters chant softly as glyphs flare to life around you.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Enchanting (Initiate)", action: "train-enchanting", tier: "initiate" } ],
         produces: { resources: [], commodities: [], luxuries: ["enchanted items"] },
