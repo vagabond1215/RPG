@@ -1,4 +1,4 @@
-import { gainProficiency } from "./core.js";
+import { gainProficiency } from "./proficiency_base.js";
 import { HYBRID_RELATIONS } from "./hybrid_relations.js";
 
 export const elementalProficiencyMap = {
