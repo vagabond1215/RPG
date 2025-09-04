@@ -9,6 +9,12 @@ import { LOCATIONS } from "./assets/data/locations.js";
 import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
 import { CITY_NAV } from "./assets/data/city_nav.js";
 import { DEFAULT_NAMES } from "./assets/data/names.js";
+import {
+  elementalProficiencyMap,
+  schoolProficiencyMap,
+  HYBRID_MAP,
+  applySpellProficiencyGain,
+} from "./assets/data/spell_proficiency.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -836,6 +842,9 @@ const defaultProficiencies = {
   tailoring: 0,
   leatherworking: 0,
   herbalism: 0,
+  mining: 0,
+  foraging: 0,
+  logging: 0,
   brewing: 0,
   drawing: 0,
   alchemy: 0,
@@ -992,37 +1001,22 @@ const proficiencyCategories = {
     'weaving',
     'fletching',
     'glassblowing',
-    'pearlDiving',
     'rope',
     'calligraphy',
     'drawing',
-    'herbalism',
-    'gardening',
-    'farming',
     'cooking'
+  ],
+  Gathering: [
+    'mining',
+    'foraging',
+    'logging',
+    'herbalism',
+    'pearlDiving',
+    'gardening',
+    'farming'
   ]
 };
 
-const elementalProficiencyMap = {
-  stone: 'stone',
-  water: 'water',
-  wind: 'wind',
-  fire: 'fire',
-  ice: 'ice',
-  thunder: 'thunder',
-  dark: 'dark',
-  light: 'light'
-};
-const ELEMENTAL_MAGIC_KEYS = Object.values(elementalProficiencyMap);
-const schoolProficiencyMap = {
-  Destructive: 'destructive',
-  Healing: 'healing',
-  Reinforcement: 'reinforcement',
-  Enfeebling: 'enfeebling',
-  Summoning: 'summoning'
-};
-const SCHOOL_MAGIC_KEYS = Object.values(schoolProficiencyMap);
-const HYBRID_MAP = Object.fromEntries(HYBRID_RELATIONS.map(r => [r.name, r]));
 
 const elementIcons = {
   Stone: '🪨',
@@ -1123,25 +1117,6 @@ function proficiencyToTierLabel(prof) {
   return idx >= 0 ? `Tier ${idx + 1}` : `P${prof}`;
 }
 
-function applySpellProficiencyGain(character, spell, params) {
-  if (!character || !spell) return;
-  if (!HYBRID_MAP[spell.element]) {
-    const elemKey = elementalProficiencyMap[spell.element?.toLowerCase()];
-    if (elemKey) {
-      character[elemKey] = gainProficiency({
-        P: character[elemKey],
-        ...params,
-      });
-    }
-  }
-  const schoolKey = schoolProficiencyMap[spell.school];
-  if (schoolKey) {
-    character[schoolKey] = gainProficiency({
-      P: character[schoolKey],
-      ...params,
-    });
-  }
-}
 
 const saveProfiles = () => {
   if (currentProfile && currentCharacter) {

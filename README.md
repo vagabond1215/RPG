@@ -10,8 +10,8 @@ No build steps are required. After publishing the repository with GitHub Pages, 
 
 - `index.html` – entry point for the game UI
 - `style.css` – basic styles and themes
-- `script.js` – behaviour for the menu and layout controls
-  and core mechanics such as proficiency gain
+- `script.js` – behaviour for the menu and layout controls;
+  progression helpers live in dedicated modules under `assets/data`
 - `assets/data/resources.js` – dynamic HP/MP/Stamina calculations based on stats
 - `assets/data/combat.ts` – single function to resolve combat, accounting for level, attributes, proficiencies and active skill effects
 - `assets/data/party.ts` – party structs, resources, effects, and NPC proficiency policy
@@ -30,9 +30,13 @@ Crafting is now learned from tiered trainers rather than academies. Trainers ran
 
 New activity skills – **Swimming**, **Sailing** and **Horseback Riding** – progress through time spent performing their respective activities. Progression helpers for these skills live in `assets/data/outdoor_skills.ts`.
 
+### Gathering
+
+Resource collection skills such as **Mining**, **Foraging**, **Logging**, **Herbalism**, **Pearl Diving**, **Gardening**, and **Farming** now belong to a dedicated Gathering category.
+
 ### Magical Proficiencies
 
-Characters now track separate proficiencies for Stone, Water, Wind, Fire, Ice, Thunder, Dark, Light, Destructive, Healing, Reinforcement, Enfeebling and Summoning. The `gainProficiencyWithChance` function in `script.js` calculates how these values increase when spells are cast. The spellbook requires a character to meet the proficiency threshold in both a spell's element and its school before it can be used.
+Characters now track separate proficiencies for Stone, Water, Wind, Fire, Ice, Thunder, Dark, Light, Destructive, Healing, Reinforcement, Enfeebling and Summoning. The `applySpellProficiencyGain` helper in `assets/data/spell_proficiency.js` calculates how these values increase when spells are cast. The spellbook requires a character to meet the proficiency threshold in both a spell's element and its school before it can be used.
 
 ### Weapon Skills
 
