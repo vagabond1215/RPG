@@ -30,6 +30,10 @@ Crafting is now learned from tiered trainers rather than academies. Trainers ran
 
 New activity skills – **Swimming**, **Sailing** and **Horseback Riding** – progress through time spent performing their respective activities. Progression helpers for these skills live in `assets/data/outdoor_skills.ts`.
 
+### Gathering
+
+Resource collection skills such as **Mining**, **Foraging**, **Logging**, **Herbalism**, **Pearl Diving**, **Gardening**, and **Farming** now belong to a dedicated Gathering category.
+
 ### Magical Proficiencies
 
 Characters now track separate proficiencies for Stone, Water, Wind, Fire, Ice, Thunder, Dark, Light, Destructive, Healing, Reinforcement, Enfeebling and Summoning. The `gainProficiencyWithChance` function in `script.js` calculates how these values increase when spells are cast. The spellbook requires a character to meet the proficiency threshold in both a spell's element and its school before it can be used.

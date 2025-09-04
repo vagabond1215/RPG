@@ -836,6 +836,9 @@ const defaultProficiencies = {
   tailoring: 0,
   leatherworking: 0,
   herbalism: 0,
+  mining: 0,
+  foraging: 0,
+  logging: 0,
   brewing: 0,
   drawing: 0,
   alchemy: 0,
@@ -992,14 +995,19 @@ const proficiencyCategories = {
     'weaving',
     'fletching',
     'glassblowing',
-    'pearlDiving',
     'rope',
     'calligraphy',
     'drawing',
-    'herbalism',
-    'gardening',
-    'farming',
     'cooking'
+  ],
+  Gathering: [
+    'mining',
+    'foraging',
+    'logging',
+    'herbalism',
+    'pearlDiving',
+    'gardening',
+    'farming'
   ]
 };
 
