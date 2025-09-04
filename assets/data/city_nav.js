@@ -68,7 +68,7 @@ export const CITY_NAV = {
             name: "Saltworks",
             type: "building",
             target: "Saltworks",
-            icon: "assets/images/icons/waves_break/Default.png",
+            icon: "assets/images/icons/waves_break/The Saltworks.png",
           },
           {
             name: "Fishmongers' Row",
@@ -92,7 +92,7 @@ export const CITY_NAV = {
             name: "The Salty Gull",
             type: "building",
             target: "The Salty Gull",
-            icon: "assets/images/icons/waves_break/Default.png",
+            icon: "assets/images/icons/waves_break/The Salty Gull.png",
           },
           { name: "The Tideway Inn", type: "building", target: "The Tideway Inn", icon: "assets/images/icons/waves_break/The Tideway Inn.png" },
           { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" },
@@ -143,10 +143,10 @@ export const CITY_NAV = {
             "The Upper Ward": "You depart the orderly boulevards of the Upper Ward, following a path lined with cypress. Greensoul Hill rises serene and green ahead, its cloisters and libraries inviting quiet reflection above the city's din."
           },
           points: [
-            { name: "Greensoul Monastery", type: "building", target: "Greensoul Monastery", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Royal Botanical Gardens", type: "building", target: "Royal Botanical Gardens", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Skyline Academy", type: "building", target: "Skyline Academy", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Greensoul Amphitheater", type: "building", target: "Greensoul Amphitheater", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Greensoul Monastery", type: "building", target: "Greensoul Monastery", icon: "assets/images/icons/waves_break/Greensoul Monastery.png" },
+              { name: "Royal Botanical Gardens", type: "building", target: "Royal Botanical Gardens", icon: "assets/images/icons/waves_break/Royal Botanical Gardens.png" },
+              { name: "Skyline Academy", type: "building", target: "Skyline Academy", icon: "assets/images/icons/waves_break/Skyline Academy.png" },
+              { name: "Greensoul Amphitheater", type: "building", target: "Greensoul Amphitheater", icon: "assets/images/icons/waves_break/Greensoul Amphitheater.png" },
             { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" }
           ]
         },
@@ -158,9 +158,9 @@ export const CITY_NAV = {
           points: [
             { name: "Harbor Hearth Bakery", type: "building", target: "Harbor Hearth Bakery", icon: "assets/images/icons/waves_break/Harbor Hearth Bakery.png" },
             { name: "Tidehold Granary & Provisioners", type: "building", target: "Tidehold Granary & Provisioners", icon: "assets/images/icons/waves_break/Tidehold Granary and Provisioners.png" },
-            { name: "Bloomstage Theater", type: "building", target: "Bloomstage Theater", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "The Velvet Petal Brothel", type: "building", target: "The Velvet Petal Brothel", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" }
+              { name: "Bloomstage Theater", type: "building", target: "Bloomstage Theater", icon: "assets/images/icons/waves_break/Blooomstage Theater.png" },
+              { name: "The Velvet Petal Brothel", type: "building", target: "The Velvet Petal Brothel", icon: "assets/images/icons/waves_break/The Velvet Petal Brothel.png" },
+              { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" }
           ]
         },
         "The High Road District": {
@@ -181,9 +181,10 @@ export const CITY_NAV = {
             { name: "Shrine of the Roadwarden", type: "building", target: "Shrine of the Roadwarden", icon: "assets/images/icons/waves_break/Shrine of the Roadwarden.png" },
             { name: "Caravan Square", type: "building", target: "Caravan Square", icon: "assets/images/icons/waves_break/Caravan Square.png" },
             { name: "Gatewatch Barracks", type: "building", target: "Gatewatch Barracks", icon: "assets/images/icons/waves_break/Gatewatch Barracks.png" },
-            { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Wayfarer's Rest Tavern", type: "building", target: "Wayfarer's Rest Tavern", icon: "assets/images/icons/waves_break/Wayfarer's Rest Tavern.png" },
+              { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
+              { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
+              { name: "Wayfarer's Rest Tavern", type: "building", target: "Wayfarer's Rest Tavern", icon: "assets/images/icons/waves_break/Wayfarer's Rest Tavern.png" },
+            { name: "The Farmlands", type: "district", target: "The Farmlands", icon: "assets/images/icons/waves_break/Farmlands District.png" },
             { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" },
             { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" }
           ]
@@ -220,8 +221,8 @@ export const CITY_NAV = {
               { name: "Cliffbreak Quarry", type: "building", target: "Cliffbreak Quarry", icon: "assets/images/icons/waves_break/Cliffbreak Quarry.png" },
               { name: "Wavecut Stoneworks", type: "building", target: "Wavecut Stoneworks", icon: "assets/images/icons/waves_break/Wavecut Stoneworks.png" },
               { name: "Coast Road Watchtower", type: "building", target: "Coast Road Watchtower", icon: "assets/images/icons/waves_break/Coast Road Watchtower.png" },
-              { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/Default.png" },
-              { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
+              { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
               { name: "East Road to Mountain Top", type: "location", target: "Mountain Top", icon: "assets/images/icons/waves_break/The East Road to Mountain Top.png" }
           ]
         }
