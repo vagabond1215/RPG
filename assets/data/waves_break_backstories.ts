@@ -222,7 +222,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     narrative: "You wake at the east gate watchtower, dawn patrol handing you a steaming mug as you take your post.",
   },
   {
-    district: "The Farmlands Beyond the Walls",
+    district: "The Farmlands",
     background: "Young farmhand",
     past: "Fresh from basic schooling, works the family plot while dreaming of city life.",
     items: ["hoe", "seed pouch"],
@@ -234,7 +234,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     narrative: "You wake on your family's farmstead beyond the walls, morning chores calling before the city beckons.",
   },
   {
-    district: "The Farmlands Beyond the Walls",
+    district: "The Farmlands",
     background: "Reed gatherer",
     past: "Collects river reeds for weaving baskets sold within Wave's Break.",
     items: ["bundle of reeds", "small knife"],
@@ -246,7 +246,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     narrative: "You crawl from your riverbank lean-to, reeds swaying as the current whispers toward Wave's Break.",
   },
   {
-    district: "The Farmlands Beyond the Walls",
+    district: "The Farmlands",
     background: "Fledgling adventurer",
     past: "Left her family's dairy to seek the Adventurers' Guild, hoping for grand quests.",
     items: ["short bow", "small pack"],

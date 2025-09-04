@@ -186,7 +186,7 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
     "Greensoul Hill",
     "The Lower Gardens",
     "The High Road District",
-    "The Farmlands Beyond the Walls",
+    "The Farmlands",
   ],
   travel: { routes: ["sea route to Coral Keep"], connections: ["Coral Keep"] },
   population: {

@@ -163,7 +163,7 @@ export const CITY_NAV = {
             { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" }
           ]
         },
-        "The Farmlands Beyond the Walls": {
+        "The Farmlands": {
           travelPrompt: "Walk to",
           points: [
               { name: "Brackenshore Croft", type: "building", target: "Brackenshore Croft", icon: "assets/images/icons/waves_break/Brackenshore Croft.png" },
@@ -452,7 +452,7 @@ export const CITY_NAV = {
       "Brackenshore Croft": {
         travelPrompt: "Exit to",
         description: "Terraced grain fields carved into the tidal bluff.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["grain"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
@@ -460,7 +460,7 @@ export const CITY_NAV = {
       "Greenridge Polder": {
         travelPrompt: "Exit to",
         description: "Marsh-drained vegetable fields held by sturdy dikes.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["vegetables"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
@@ -468,7 +468,7 @@ export const CITY_NAV = {
         "Harborwind Dairy": {
           travelPrompt: "Exit to",
           description: "Coastal pastures yield sea-salt-sweetened milk.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["dairy"], luxuries: [] },
           consumes: { resources: [], commodities: [], luxuries: [] }
@@ -476,7 +476,7 @@ export const CITY_NAV = {
         "Saltmeadow Potato Farm": {
           travelPrompt: "Exit to",
           description: "Salt-kissed plots yield hearty potatoes.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["potatoes"], luxuries: [] },
           consumes: { resources: [], commodities: [], luxuries: [] }
@@ -484,7 +484,7 @@ export const CITY_NAV = {
         "Foamfield Flax Farm": {
           travelPrompt: "Exit to",
           description: "Wind-swept rows of flax ripple toward the shore.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: ["flax"], commodities: [], luxuries: [] },
           consumes: { resources: [], commodities: [], luxuries: [] }
@@ -492,7 +492,7 @@ export const CITY_NAV = {
         "Mistflower Apiary": {
           travelPrompt: "Exit to",
           description: "Hives nestled among herb gardens heavy with morning fog.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["honey"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
@@ -500,7 +500,7 @@ export const CITY_NAV = {
       "Cliffblossom Hives": {
         travelPrompt: "Exit to",
         description: "Bee boxes cling to sea cliffs blooming with rare flowers.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["honey"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
@@ -508,7 +508,7 @@ export const CITY_NAV = {
       "Gulls' Orchard": {
         travelPrompt: "Exit to",
         description: "Creekside rows of apples and pears beneath circling seabirds.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["fruit"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
@@ -516,7 +516,7 @@ export const CITY_NAV = {
         "Sunmellow Grove": {
           travelPrompt: "Exit to",
           description: "Stone-warmed plums and apricots pressed into honeyed wine.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["fruit"], luxuries: ["honeyed wine"] },
           consumes: { resources: [], commodities: [], luxuries: [] }
@@ -524,7 +524,7 @@ export const CITY_NAV = {
         "Seawisp Plum Orchard": {
           travelPrompt: "Exit to",
           description: "Mist-shrouded plum trees yield tart coastal fruit.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["fruit"], luxuries: [] },
           consumes: { resources: [], commodities: [], luxuries: [] }
@@ -532,7 +532,7 @@ export const CITY_NAV = {
         "Driftfell Meadow": {
           travelPrompt: "Exit to",
           description: "Breezy downs where cattle and sheep graze in rotation.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["wool", "meat"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
@@ -540,7 +540,7 @@ export const CITY_NAV = {
       "Moorlight Flats": {
         travelPrompt: "Exit to",
         description: "Goat and wool-fowl fields lit by shoreline phosphorescence.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["milk", "fiber"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
@@ -548,7 +548,7 @@ export const CITY_NAV = {
         "Gullwind Mill": {
           travelPrompt: "Exit to",
           description: "Wind-driven sails grind grain for nearby farms.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["flour"], luxuries: [] },
           consumes: { resources: [], commodities: ["grain"], luxuries: [] }
@@ -556,7 +556,7 @@ export const CITY_NAV = {
         "Tidewheel Watermill": {
           travelPrompt: "Exit to",
           description: "A tidal waterwheel grinds grain into flour.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["flour"], luxuries: [] },
           consumes: { resources: [], commodities: ["grain"], luxuries: [] }
@@ -564,7 +564,7 @@ export const CITY_NAV = {
         "Saltmarsh Granary": {
           travelPrompt: "Exit to",
           description: "Stilted storehouse keeping harvest dry above marshy ground.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [],
           produces: { resources: [], commodities: [], luxuries: [] },
           consumes: { resources: [], commodities: ["grain"], luxuries: [] }
@@ -572,7 +572,7 @@ export const CITY_NAV = {
       "Copperbrook Forge": {
         travelPrompt: "Exit to",
         description: "Small smithy by the brook repairing tools and shoeing beasts.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["tools"], luxuries: [] },
         consumes: { resources: ["ore", "fuel"], commodities: [], luxuries: [] }
@@ -580,7 +580,7 @@ export const CITY_NAV = {
       "Tidewatcher Lighthouse": {
         travelPrompt: "Exit to",
         description: "Decommissioned beacon repurposed as a coastal watchtower.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [],
         produces: { resources: [], commodities: [], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
@@ -588,7 +588,7 @@ export const CITY_NAV = {
       "Netmaker's Co-op": {
         travelPrompt: "Exit to",
         description: "Workshop weaving flax into ropes and fishing nets.",
-        exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["nets"], luxuries: [] },
         consumes: { resources: ["flax"], commodities: [], luxuries: [] }
@@ -658,7 +658,7 @@ export const CITY_NAV = {
         description: "Sturdy gatehouse opening to the northern farmlands.",
         exits: [
           { name: "The High Road District", target: "The High Road District" },
-          { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" }
+          { name: "The Farmlands", target: "The Farmlands" }
         ],
         interactions: []
       },
@@ -667,7 +667,7 @@ export const CITY_NAV = {
         description: "Weathered gates lead toward fields south of the city.",
         exits: [
           { name: "The High Road District", target: "The High Road District" },
-          { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" }
+          { name: "The Farmlands", target: "The Farmlands" }
         ],
         interactions: []
       },
@@ -680,49 +680,49 @@ export const CITY_NAV = {
         "Seabreeze Oat Farm": {
           travelPrompt: "Exit to",
           description: "Sea-breezed oat fields rustle outside the city walls.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Saltcrest Vineyard & Winery": {
           travelPrompt: "Exit to",
           description: "Salt-kissed grapes ferment into crisp coastal wine.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Windward Berry Vineyard & Winery": {
           travelPrompt: "Exit to",
           description: "Hillside berries are pressed into rich, dark wines.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Tideflock Stockyards": {
           travelPrompt: "Exit to",
           description: "Pens bustle with cattle and sheep awaiting drovers.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Bayside Brickworks": {
           travelPrompt: "Exit to",
           description: "Smoky bayside kilns bake clay into hardy bricks.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Cliffbreak Quarry": {
           travelPrompt: "Exit to",
           description: "Workers hew stone from the seaside cliffs.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Wavecut Stoneworks": {
           travelPrompt: "Exit to",
           description: "Masons carve cliffstone into sturdy blocks.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Coast Road Watchtower": {
           travelPrompt: "Exit to",
           description: "A lone tower keeps vigil along the coastal road.",
-          exits: [ { name: "The Farmlands Beyond the Walls", target: "The Farmlands Beyond the Walls" } ],
+          exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: []
         }
     }
