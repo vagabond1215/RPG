@@ -22,7 +22,7 @@ export const CITY_NAV = {
             name: "Stormkeel Shipwrights",
             type: "building",
             target: "Stormkeel Shipwrights",
-            icon: "assets/images/icons/waves_break/Default.png",
+            icon: "assets/images/icons/waves_break/Stormkeel Shipwrights.png",
           },
           {
             name: "Harbor Guard Naval Yard",
@@ -52,13 +52,13 @@ export const CITY_NAV = {
             name: "The Ropewalk",
             type: "building",
             target: "The Ropewalk",
-            icon: "assets/images/icons/waves_break/Default.png",
+            icon: "assets/images/icons/waves_break/The Ropewalk.png",
           },
           {
             name: "Brinebarrel Coopers",
             type: "building",
             target: "Brinebarrel Coopers",
-            icon: "assets/images/icons/waves_break/Default.png",
+            icon: "assets/images/icons/waves_break/Brinebarrel Coopers.png",
           },
           {
             name: "Saltworks",
@@ -70,19 +70,19 @@ export const CITY_NAV = {
             name: "Fishmongers' Row",
             type: "building",
             target: "Fishmongers' Row",
-            icon: "assets/images/icons/waves_break/Default.png",
+            icon: "assets/images/icons/waves_break/Fishmonger's Row.png",
           },
           {
             name: "Shrine of the Deep Current",
             type: "building",
             target: "Shrine of the Deep Current",
-            icon: "assets/images/icons/waves_break/Default.png",
+            icon: "assets/images/icons/waves_break/Shrine of the Deep Current.png",
           },
           {
             name: "Statue of the Sea-Mother",
             type: "building",
             target: "Statue of the Sea-Mother",
-            icon: "assets/images/icons/waves_break/Default.png",
+            icon: "assets/images/icons/waves_break/Statue of the Sea-Mother.png",
           },
           {
             name: "The Salty Gull",
