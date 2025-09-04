@@ -151,18 +151,11 @@ function normalizeOptionButtonWidths() {
     if (isNav && rect.height > maxHeight) maxHeight = rect.height;
   });
   const gridWidth = grid.getBoundingClientRect().width;
-  if (isNav) {
-    const size = Math.min(Math.max(maxWidth, maxHeight), gridWidth);
-    buttons.forEach(btn => {
-      btn.style.width = `${size}px`;
-      btn.style.height = `${size}px`;
-    });
-  } else {
-    maxWidth = Math.min(maxWidth, gridWidth);
-    buttons.forEach(btn => {
-      btn.style.width = `${maxWidth}px`;
-    });
-  }
+  if (isNav) return;
+  maxWidth = Math.min(maxWidth, gridWidth);
+  buttons.forEach(btn => {
+    btn.style.width = `${maxWidth}px`;
+  });
 }
 
 function normalizeProficiencyNameWidths() {
@@ -1309,6 +1302,44 @@ function showNavigation() {
     if (exits.length) groups.push(exits.map(makeButton));
     const hasMultipleDistricts = Object.keys(cityData.districts).length > 1;
     const buildDistrictNav = () => {
+      const layout = cityData.layout;
+      const allNames = Object.keys(cityData.districts);
+      if (layout && layout.positions) {
+        const accessible = new Set(districts.map(d => d.name).concat(pos.district));
+        const fontSize =
+          parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+        const size = 5 * fontSize;
+        const nodes = allNames.map(name => {
+          const coords = layout.positions[name] || [0, 0];
+          const [row, col] = coords;
+          const disabled = !accessible.has(name);
+          const extraClass = name === pos.district ? 'current-district' : '';
+          return `<div class="district-node" style="left:${col * size}px;top:${row * size}px;">${createNavItem({
+            type: 'district',
+            target: name,
+            name,
+            icon: getDistrictIcon(pos.city, name),
+            disabled,
+            extraClass,
+          })}</div>`;
+        });
+        const lines = (layout.connections || [])
+          .map(([a, b]) => {
+            const [r1, c1] = layout.positions[a];
+            const [r2, c2] = layout.positions[b];
+            const x1 = c1 * size + size / 2;
+            const y1 = r1 * size + size / 2;
+            const x2 = c2 * size + size / 2;
+            const y2 = r2 * size + size / 2;
+            return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" />`;
+          })
+          .join('');
+        const width = layout.cols * size;
+        const height = layout.rows * size;
+        return [
+          `<div class="district-map" style="width:${width}px;height:${height}px;"><svg class="district-connections" width="${width}" height="${height}">${lines}</svg>${nodes.join('')}</div>`,
+        ];
+      }
       const neighborButtons = districts.map(makeButton);
       const currentButton = createNavItem({
         type: 'district',

@@ -813,6 +813,48 @@ body.theme-dark .top-menu button {
     opacity: 1;
   }
 
+  .navigation .district-map {
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .navigation .district-map .district-node {
+    position: absolute;
+    z-index: 1;
+  }
+
+  .navigation .district-map .district-connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .navigation .district-map .district-connections line {
+    stroke: var(--foreground);
+    stroke-width: 2;
+  }
+
+  .navigation .district-map .nav-item.current-district button {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .navigation .district-map .nav-item.current-district img.nav-icon {
+    filter: drop-shadow(0 0 10px var(--foreground));
+  }
+
+  .navigation .district-map .nav-item.current-district span.nav-icon {
+    text-shadow: 0 0 10px var(--foreground);
+  }
+
+  .navigation .district-map .nav-item button:disabled {
+    opacity: 0.5;
+    background: none;
+    color: var(--foreground);
+  }
+
   .navigation .street-sign {
     background: #2e8b57;
     color: #fff;
