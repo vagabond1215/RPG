@@ -1234,7 +1234,8 @@ function showNavigation() {
     const aria = prompt ? `${prompt} ${name}` : name;
     const dis = disabled ? 'disabled' : '';
     const cls = extraClass ? ` ${extraClass}` : '';
-    return `<div class="nav-item${cls}"><button data-type="${type}" ${attrs} aria-label="${aria}" ${dis}>${iconHTML}</button><span class="street-sign">${name}</span></div>`;
+    const labelHTML = icon ? '' : `<span class="street-sign">${name}</span>`;
+    return `<div class="nav-item${cls}"><button data-type="${type}" ${attrs} aria-label="${aria}" ${dis}>${iconHTML}</button>${labelHTML}</div>`;
   };
   if (pos.building) {
     const building = cityData.buildings[pos.building];
