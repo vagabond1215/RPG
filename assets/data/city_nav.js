@@ -181,8 +181,8 @@ export const CITY_NAV = {
             { name: "Shrine of the Roadwarden", type: "building", target: "Shrine of the Roadwarden", icon: "assets/images/icons/waves_break/Shrine of the Roadwarden.png" },
             { name: "Caravan Square", type: "building", target: "Caravan Square", icon: "assets/images/icons/waves_break/Caravan Square.png" },
             { name: "Gatewatch Barracks", type: "building", target: "Gatewatch Barracks", icon: "assets/images/icons/waves_break/Gatewatch Barracks.png" },
-              { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
-              { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
+              { name: "North Gate", type: "location", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
+              { name: "South Gate", type: "location", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
               { name: "Wayfarer's Rest Tavern", type: "building", target: "Wayfarer's Rest Tavern", icon: "assets/images/icons/waves_break/Wayfarer's Rest Tavern.png" },
             { name: "The Farmlands", type: "district", target: "The Farmlands", icon: "assets/images/icons/waves_break/Farmlands District.png" },
             { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" },
@@ -221,8 +221,8 @@ export const CITY_NAV = {
               { name: "Cliffbreak Quarry", type: "building", target: "Cliffbreak Quarry", icon: "assets/images/icons/waves_break/Cliffbreak Quarry.png" },
               { name: "Wavecut Stoneworks", type: "building", target: "Wavecut Stoneworks", icon: "assets/images/icons/waves_break/Wavecut Stoneworks.png" },
               { name: "Coast Road Watchtower", type: "building", target: "Coast Road Watchtower", icon: "assets/images/icons/waves_break/Coast Road Watchtower.png" },
-              { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
-              { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
+              { name: "North Gate", type: "location", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
+              { name: "South Gate", type: "location", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
               { name: "East Road to Mountain Top", type: "location", target: "Mountain Top", icon: "assets/images/icons/waves_break/The East Road to Mountain Top.png" }
           ]
         }
@@ -242,7 +242,6 @@ export const CITY_NAV = {
       connections: [
         ["The Port District", "The Upper Ward"],
         ["The Port District", "Little Terns"],
-        ["The Upper Ward", "Little Terns"],
         ["The Upper Ward", "The High Road District"],
         ["The Upper Ward", "Greensoul Hill"],
         ["Little Terns", "The High Road District"],
