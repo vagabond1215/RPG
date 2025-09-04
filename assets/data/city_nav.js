@@ -227,6 +227,29 @@ export const CITY_NAV = {
           ]
         }
       },
+    layout: {
+      rows: 3,
+      cols: 3,
+      positions: {
+        "The Port District": [0, 0],
+        "The Upper Ward": [0, 1],
+        "Greensoul Hill": [0, 2],
+        "Little Terns": [1, 0],
+        "The High Road District": [1, 1],
+        "The Lower Gardens": [2, 0],
+        "The Farmlands": [2, 1],
+      },
+      connections: [
+        ["The Port District", "The Upper Ward"],
+        ["The Port District", "Little Terns"],
+        ["The Upper Ward", "Little Terns"],
+        ["The Upper Ward", "The High Road District"],
+        ["The Upper Ward", "Greensoul Hill"],
+        ["Little Terns", "The High Road District"],
+        ["Little Terns", "The Lower Gardens"],
+        ["The High Road District", "The Farmlands"],
+      ],
+    },
     buildings: {
       "Harborwatch Trading House": {
         travelPrompt: "Exit to",
@@ -790,8 +813,8 @@ export const CITY_NAV = {
           { name: "West Road to Timber Grove", type: "location", target: "Timber Grove" }
         ]
       }
-    },
-    buildings: {
+  },
+  buildings: {
       "Steel Watch Naval Docks": {
         travelPrompt: "Exit to",
         description: "Warships rest in ordered rows while crews drill with precision.",
