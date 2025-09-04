@@ -1215,6 +1215,7 @@ function showNavigation() {
       city,
       district: cityData ? Object.keys(cityData.districts)[0] : null,
       building: null,
+      previousDistrict: null,
     };
     saveProfiles();
   }
@@ -1333,8 +1334,12 @@ function showNavigation() {
         buttons.push(...g);
       }
     });
+    const description = pos.previousDistrict && district.descriptions
+      ? district.descriptions[pos.previousDistrict]
+      : null;
+    const heading = description || pos.district;
     setMainHTML(
-      `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${pos.district}</h2><div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${heading}</h2><div class="option-grid">${buttons.join('')}</div></div>`
     );
   }
   normalizeOptionButtonWidths();
@@ -1354,9 +1359,11 @@ function showNavigation() {
         if (type === 'building') {
           pos.building = target;
         } else if (type === 'district') {
+          pos.previousDistrict = pos.district;
           pos.district = target;
           pos.building = null;
         } else if (type === 'exit') {
+          pos.previousDistrict = pos.district;
           pos.building = null;
           pos.district = target;
         } else if (type === 'location') {
@@ -1366,6 +1373,7 @@ function showNavigation() {
             city: target,
             district: city ? Object.keys(city.districts)[0] : null,
             building: null,
+            previousDistrict: null,
           };
         } else if (type === 'interaction') {
           if (action === 'train-glassblowing') {
