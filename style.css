@@ -807,10 +807,10 @@ body.theme-dark .top-menu button {
     text-shadow: 0 0 10px var(--foreground);
   }
 
-  .navigation .district-nav .nav-item button:disabled {
+  .navigation .district-nav .nav-item:not(.current-district) button:disabled {
     background: none;
     color: var(--foreground);
-    opacity: 1;
+    filter: grayscale(100%) brightness(0.5);
   }
 
   .navigation .district-map {
@@ -849,10 +849,10 @@ body.theme-dark .top-menu button {
     text-shadow: 0 0 10px var(--foreground);
   }
 
-  .navigation .district-map .nav-item button:disabled {
-    opacity: 0.5;
+  .navigation .district-map .nav-item:not(.current-district) button:disabled {
     background: none;
     color: var(--foreground);
+    filter: grayscale(100%) brightness(0.5);
   }
 
   .navigation .street-sign {
