@@ -12,7 +12,7 @@ export type Element = "Stone"|"Water"|"Wind"|"Fire"|"Ice"|"Thunder"|"Dark"|"Ligh
 export type ProficiencyKind =
   | "Element_Stone"|"Element_Water"|"Element_Wind"|"Element_Fire"
   | "Element_Ice"|"Element_Thunder"|"Element_Dark"|"Element_Light"
-  | "Weapon_Sword"|"Weapon_Axe"|"Weapon_Spear"|"Weapon_Dagger"|"Weapon_Mace"|"Weapon_Bow"|"Weapon_Staff"|"Weapon_Shield"|"Weapon_Wand"|"Weapon_Unarmed"
+  | "Weapon_Sword"|"Weapon_Greatsword"|"Weapon_Axe"|"Weapon_Greataxe"|"Weapon_Spear"|"Weapon_Dagger"|"Weapon_Mace"|"Weapon_Bow"|"Weapon_Crossbow"|"Weapon_Staff"|"Weapon_Shield"|"Weapon_Wand"|"Weapon_Unarmed"
   | "Instrument"|"Dance"|"Singing"
   | "Craft_Alchemy"|"Craft_Brewing"|"Craft_Carpentry"|"Craft_Weaving"|"Craft_Fletching"|"Craft_Rope"|"Craft_Calligraphy"|"Craft_Drawing"|"Craft_Cooking"
   | "Gather_Mining"|"Gather_Foraging"|"Gather_Logging"|"Gather_Herbalism"|"Gather_Gardening"|"Gather_Farming"|"Gather_PearlDiving"

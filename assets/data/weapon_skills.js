@@ -173,6 +173,23 @@ const WEAPON_DEFS = {
   }
 };
 
+// Mapping weapon names to their corresponding ProficiencyKind entries
+const WEAPON_PROFICIENCY_KIND = {
+  Sword: "Weapon_Sword",
+  Greatsword: "Weapon_Greatsword",
+  Dagger: "Weapon_Dagger",
+  Axe: "Weapon_Axe",
+  Greataxe: "Weapon_Greataxe",
+  Spear: "Weapon_Spear",
+  Bow: "Weapon_Bow",
+  Crossbow: "Weapon_Crossbow",
+  Mace: "Weapon_Mace",
+  Staff: "Weapon_Staff",
+  Shield: "Weapon_Shield",
+  Wand: "Weapon_Wand",
+  Unarmed: "Weapon_Unarmed",
+};
+
 /* --------------------------- Effect Builders --------------------------- */
 
 function buildDisableEffect(kind, target, basePower, extra = {}) {
@@ -268,6 +285,7 @@ function buildWeaponSkills(weaponName, def) {
     return {
       id: `${weaponName}:DMG:${tier}`,
       weapon: weaponName,
+      proficiencyKind: WEAPON_PROFICIENCY_KIND[weaponName],
       name,
       family: "damage",
       type: "Attack",
@@ -348,6 +366,7 @@ function buildWeaponSkills(weaponName, def) {
     return {
       id: `${weaponName}:SPC:${tier}`,
       weapon: weaponName,
+      proficiencyKind: WEAPON_PROFICIENCY_KIND[weaponName],
       name,
       family: "special",
       type,
