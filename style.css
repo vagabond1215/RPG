@@ -197,8 +197,7 @@ main {
 }
 
 
-#characterMenu,
-#actionMenu {
+#characterMenu {
   position: absolute;
   top: var(--menu-height);
   width: 14rem;
@@ -217,21 +216,13 @@ main {
   transform: translateX(-100%);
 }
 
-#actionMenu {
-  right: 0;
-  transform: translateX(100%);
-  box-shadow: -2px 0 4px rgba(0, 0, 0, 0.2);
-}
-
-#characterMenu.active,
-#actionMenu.active {
+#characterMenu.active {
   transform: translateX(0);
   pointer-events: auto;
   opacity: 1;
 }
 
-#characterMenu button,
-#actionMenu button {
+#characterMenu button {
   margin: 0;
   padding: 0.5rem 1rem;
   display: flex;
@@ -248,9 +239,7 @@ main {
 #dropdownMenu button:hover,
 #dropdownMenu button.selected,
 #characterMenu button:hover,
-#characterMenu button.selected,
-#actionMenu button:hover,
-#actionMenu button.selected {
+#characterMenu button.selected {
   background: var(--foreground);
   color: var(--background);
 }
@@ -261,8 +250,7 @@ button:not(:disabled):hover,
 }
 
 #dropdownMenu button:not(:last-child)::after,
-#characterMenu button:not(:last-child)::after,
-#actionMenu button:not(:last-child)::after {
+#characterMenu button:not(:last-child)::after {
   content: "";
   position: absolute;
   left: 0;
@@ -280,16 +268,13 @@ button:not(:disabled):hover,
 }
 
 #characterMenu button svg,
-#characterMenu .letter-icon,
-#actionMenu button svg,
-#actionMenu .letter-icon {
+#characterMenu .letter-icon {
   width: 1.5rem;
   height: 1.5rem;
   flex-shrink: 0;
 }
 
-#characterMenu .letter-icon,
-#actionMenu .letter-icon {
+#characterMenu .letter-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -297,8 +282,7 @@ button:not(:disabled):hover,
   font-size: 1.2rem;
 }
 
-#characterMenu button svg,
-#actionMenu button svg {
+#characterMenu button svg {
   stroke: currentColor;
   fill: none;
   stroke-width: 2;
@@ -312,11 +296,6 @@ button:not(:disabled):hover,
   height: calc(100% - var(--menu-height));
 }
 
-#actionMenu {
-  top: var(--menu-height);
-  right: 0;
-  height: calc(100% - var(--menu-height));
-}
 
 .portrait-grid {
   display: flex;
