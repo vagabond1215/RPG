@@ -331,19 +331,25 @@ The murmur of tired sailors and the promise of a warm bed wrap around you like a
       },
       "Governor's Keep": {
         travelPrompt: "Exit to",
-        description: "Banners hang above polished stone halls bustling with officials.",
+        description: `Striding through the iron-bound gates, you enter Governor's Keep.
+Marble corridors echo with the footsteps of officials and whispered decisions.
+Sunlight spills through stained glass, casting patterns over polished stone.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Crafting Quarter": {
         travelPrompt: "Exit to",
-        description: "Workbenches overflow with tools while artisans hammer and sew.",
+        description: `Weaving between tool-laden benches, you step into the Crafting Quarter.
+Hammers ring and needles flash as artisans labor over every surface.
+The air carries the sharp tang of oil and hot metal.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Mercantile Exchange": {
         travelPrompt: "Exit to",
-        description: "Traders haggle beneath high arches stacked with crates and ledgers.",
+        description: `Sliding under vaulted arches, you arrive at the Mercantile Exchange.
+Clerks shout bids while parchment rustles like wings of a restless flock.
+Coins clink in a constant rhythm that sets the market's pulse.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: [],
         produces: { resources: [], commodities: ["trade contracts"], luxuries: [] },
@@ -351,13 +357,17 @@ The murmur of tired sailors and the promise of a warm bed wrap around you like a
       },
       "Temple of the Tides": {
         travelPrompt: "Exit to",
-        description: "Salt-scented incense drifts around statues carved from sea stone.",
+        description: `Pushing aside a curtain of beads, the Temple of the Tides opens around you.
+Salt-sweet incense curls through pews carved of driftwood.
+Soft chants ebb and flow like the pull of the moonlit sea.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Hall of Records": {
         travelPrompt: "Exit to",
-        description: "Tall shelves of scrolls rise in orderly rows under hushed silence.",
+        description: `Pulling open a weighty door, you step into the Hall of Records.
+Scrolls and ledgers tower in endless shelves, dust motes swirling in the still air.
+A lone scribe peers up, quill poised, before returning to meticulous notes.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
