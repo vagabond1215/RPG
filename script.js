@@ -4,7 +4,16 @@ import { characterTemplate } from "./assets/data/core.js";
 import { gainProficiency, proficiencyCap } from "./assets/data/proficiency_base.js";
 import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./assets/data/race_attrs.js";
 import { maxHP, maxMP, maxStamina } from "./assets/data/resources.js";
-import { DENOMINATIONS, CURRENCY_VALUES, convertCurrency, toIron, fromIron } from "./assets/data/currency.js";
+import {
+  DENOMINATIONS,
+  CURRENCY_VALUES,
+  convertCurrency,
+  toIron,
+  fromIron,
+  parseCurrency,
+  createEmptyCurrency,
+  formatCurrency,
+} from "./assets/data/currency.js";
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipment.js";
 import { LOCATIONS } from "./assets/data/locations.js";
 import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
@@ -42,6 +51,8 @@ window.CURRENCY_VALUES = CURRENCY_VALUES;
 window.convertCurrency = convertCurrency;
 window.toIron = toIron;
 window.fromIron = fromIron;
+window.parseCurrency = parseCurrency;
+window.formatCurrency = formatCurrency;
 window.LOCATIONS = LOCATIONS;
 window.ADVENTURERS_GUILD_RANKS = ADVENTURERS_GUILD_RANKS;
 
@@ -1652,6 +1663,7 @@ function showCharacterUI() {
       </div>
       ${c.guildRank && c.guildRank !== 'None' ? `<div>Guild Rank: ${c.guildRank}</div>` : ''}
       ${c.adventurersGuildRank && c.adventurersGuildRank !== 'None' ? `<div>Adventurer Rank: ${c.adventurersGuildRank}</div>` : ''}
+      <div>Funds: ${formatCurrency(c.money || createEmptyCurrency())}</div>
     </div>
   `;
   const stats = c.attributes?.current || {};
@@ -1917,7 +1929,8 @@ function showBuildingsUI() {
   } else {
     html += '<ul>';
     list.forEach(b => {
-      html += `<li>${b.name} (${b.location}) - Cost: ${b.dailyCost} - Profit: ${b.dailyProfit}</li>`;
+      const funds = formatCurrency(b.money || createEmptyCurrency());
+      html += `<li>${b.name} (${b.location}) - Funds: ${funds} - Cost: ${b.dailyCost} - Profit: ${b.dailyProfit}</li>`;
     });
     html += '</ul></div>';
   }
@@ -2558,6 +2571,9 @@ function finalizeCharacter(character) {
       past: replaceCharacterRefs(raw.past, newChar),
       narrative: replaceCharacterRefs(raw.narrative, newChar),
     };
+    newChar.money = raw.money
+      ? { ...createEmptyCurrency(), ...parseCurrency(raw.money) }
+      : createEmptyCurrency();
     if (raw.businesses) {
       newChar.buildings = raw.businesses.map(b => ({
         name: b.name,
@@ -2567,6 +2583,9 @@ function finalizeCharacter(character) {
         dailyCost: b.dailyCost || 0,
         dailyProfit: b.dailyProfit || 0,
         jobRoles: getJobRolesForBuilding(b.name),
+        money: b.money
+          ? { ...createEmptyCurrency(), ...parseCurrency(b.money) }
+          : createEmptyCurrency(),
       }));
     }
     if (raw.employment) {

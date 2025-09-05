@@ -1,5 +1,17 @@
 export const WAVES_BREAK_BACKSTORIES = [
     {
+        district: "The High Road District",
+        background: "Coming-of-age orphan",
+        past: "Raised without family, you scraped by on odd jobs around Wave's Break. Now, on your eighteenth birthday, you're ready to join the Adventurers' Guild.",
+        items: ["patched cloak", "worn boots"],
+        money: "20 st",
+        skills: ["labor", "streetwise"],
+        combat: "Untrained",
+        startingLocation: "Adventurers' Guildhall",
+        adventurersGuildRank: 'Cold Iron',
+        narrative: "You stand before the Adventurers' Guildhall on your eighteenth birthday, steel coins from years of toil clutched in hand, your old life behind you.",
+    },
+    {
         district: "The Port District",
         background: "Fishmonger's assistant",
         past: "[Race] daughter of seasoned sailors, grew up gutting and selling catch on Fishmongers' Row.",
