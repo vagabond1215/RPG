@@ -17,6 +17,7 @@ import {
   applySpellProficiencyGain,
 } from "./assets/data/spell_proficiency.js";
 import { trainCraftSkill } from "./assets/data/trainer_proficiency.js";
+import { performGathering } from "./assets/data/gathering_proficiency.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -1394,7 +1395,7 @@ function showNavigation() {
               );
               return;
             } else if (action === 'train-pearl-diving') {
-              const prof = trainCraftSkill(currentCharacter, 'pearlDiving');
+              const prof = performGathering(currentCharacter, 'pearlDiving');
               saveProfiles();
               showBackButton();
               setMainHTML(
