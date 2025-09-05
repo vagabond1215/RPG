@@ -9,6 +9,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Knife proficiency 10 (beginner)",
         craftProficiencies: { cooking: 10 },
         startingLocation: "Fishmongers' Row stall",
+        employment: [{ building: "Fishmongers' Row stall", location: "The Port District", role: 'Laborer' }],
         narrative: "You wake before dawn on a damp crate in Fishmongers' Row, gulls crying as the scent of brine clings to your skin.",
     },
     {
@@ -21,6 +22,8 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "No real experience",
         craftProficiencies: { rope: 20 },
         startingLocation: "Ropewalk loft",
+        employment: [{ building: "The Ropewalk", location: "The Port District", role: 'Craftsman' }],
+        guildRank: 'Apprentice',
         narrative: "You stretch awake in the drafty loft above the Ropewalk, fingers already twitching to mend another net.",
     },
     {
@@ -35,6 +38,54 @@ export const WAVES_BREAK_BACKSTORIES = [
         narrative: "You blink up at the carved ceiling of the Shrine of the Deep Current, priests murmuring nearby as you clutch your lone locket.",
     },
     {
+        district: "The Port District",
+        background: "Dock laborer",
+        past: "Loads cargo at the Tidal Docks, dreaming of the open sea.",
+        items: ["rope coil", "dock hook"],
+        money: "3 cp",
+        skills: ["lifting", "swimming"],
+        combat: "Untrained",
+        startingLocation: "Tidal Docks",
+        employment: [{ building: "Tidal Docks", location: "The Port District", role: 'Dock Hand' }],
+        narrative: "You awaken atop a coil of rope on the Tidal Docks, muscles stiff from yesterday's haul.",
+    },
+    {
+        district: "The Port District",
+        background: "Tide fisherman",
+        past: "Wades into the shallows each dawn to net the morning catch.",
+        items: ["casting net", "waterproof satchel"],
+        money: "4 cp",
+        skills: ["net casting", "swimming"],
+        combat: "Spear proficiency 5 (novice)",
+        startingLocation: "Fishing Jetty",
+        employment: [{ building: "Fishing Jetty", location: "The Port District", role: 'Fisherman' }],
+        narrative: "You wake to gull cries on the Fishing Jetty, checking the knots of your casting net.",
+    },
+    {
+        district: "The Port District",
+        background: "Pearl diver",
+        past: "Collects pearls from reef shallows to sell in the market.",
+        items: ["weighted belt", "mesh bag"],
+        money: "6 cp",
+        skills: ["breath holding", "swimming"],
+        combat: "Knife proficiency 5 (novice)",
+        startingLocation: "Salvage Shack",
+        employment: [{ building: "Salvage Shack", location: "The Port District", role: 'Diver' }],
+        narrative: "You emerge from uneasy sleep in your Salvage Shack, lungs still burning from yesterday's dives.",
+    },
+    {
+        district: "The Port District",
+        background: "Greenhorn sailor",
+        past: "Signed onto a coastal ship, swabs decks and learns rigging.",
+        items: ["salt-crusted cap", "deck knife"],
+        money: "3 cp",
+        skills: ["sailing", "knot tying"],
+        combat: "Knife proficiency 5 (novice)",
+        startingLocation: "Moored Ship",
+        employment: [{ building: "Moored Ship", location: "The Port District", role: 'Sailor' }],
+        narrative: "You wake in the cramped berth of a moored ship, the gentle rocking reminding you of last night's watch.",
+    },
+    {
         district: "The Upper Ward",
         background: "Ostracized noble",
         past: "Cast out for defying his family's plans, survives on etiquette lessons and a fading signet ring.",
@@ -44,6 +95,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Rapier proficiency 10 (beginner)",
         craftProficiencies: { calligraphy: 10 },
         startingLocation: "Rented attic in the Upper Ward",
+        businesses: [{ name: "Rented attic", location: "The Upper Ward", ownership: 'renter', dailyCost: 1, dailyProfit: 0 }],
         narrative: "You rouse in a cramped attic overlooking manicured streets, your tarnished signet ring the last token of a cast-off name.",
     },
     {
@@ -55,6 +107,8 @@ export const WAVES_BREAK_BACKSTORIES = [
         skills: ["record keeping", "languages"],
         combat: "Beginner",
         startingLocation: "Hall of Records scriptorium",
+        employment: [{ building: "Hall of Records", location: "The Upper Ward", role: 'Attendant' }],
+        guildRank: 'Apprentice',
         narrative: "You wake slumped over a ledger in the Hall of Records, fingers stiff from a night of copying.",
     },
     {
@@ -66,6 +120,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         skills: ["spear drills", "watchfulness"],
         combat: "Spear proficiency 10 (beginner)",
         startingLocation: "Gatewatch Barracks bunk",
+        employment: [{ building: "Gatewatch Barracks", location: "The Upper Ward", role: 'Guard' }],
         narrative: "You jerk awake on a straw pallet in the Gatewatch Barracks as the morning horn blares for drill.",
     },
     {
@@ -77,6 +132,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         skills: ["climbing", "sneaking"],
         combat: "Dagger proficiency 10 (beginner)",
         startingLocation: "Rooftop hideout in Little Terns",
+        adventurersGuildRank: 'Cold Iron',
         narrative: "You awaken on a rooftop hideout, city breeze ruffling your patched cloak as you clutch your worn dagger.",
     },
     {
@@ -89,6 +145,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Hammer proficiency 10 (beginner)",
         craftProficiencies: { carpentry: 10 },
         startingLocation: "Cooper's Yard shed",
+        employment: [{ building: "Cooper's Yard", location: "Little Terns", role: 'Laborer' }],
         narrative: "You rise among stacked staves in the Cooper's Yard shed, the scent of fresh tar and wood filling the air.",
     },
     {
@@ -100,6 +157,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         skills: ["teaching", "arithmetic"],
         combat: "Untrained",
         startingLocation: "Alleyway classroom",
+        employment: [{ building: "Alleyway classroom", location: "Little Terns", role: 'Attendant' }],
         narrative: "You wake on a bench in your improvised alley classroom, yesterday's sums still chalked across the stone wall.",
     },
     {
@@ -112,6 +170,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Knife proficiency 10 (beginner)",
         craftProficiencies: { herbalism: 10, brewing: 10 },
         startingLocation: "Greensoul Hill herb clearing",
+        employment: [{ building: "Greensoul Hill herb clearing", location: "Greensoul Hill", role: 'Gatherer' }],
         narrative: "You greet the sunrise in a dew-laden clearing on Greensoul Hill, satchel ready for the morning's harvest.",
     },
     {
@@ -124,6 +183,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Staff proficiency 10 (beginner)",
         craftProficiencies: { brewing: 10 },
         startingLocation: "Greensoul Monastery cell",
+        employment: [{ building: "Greensoul Monastery", location: "Greensoul Hill", role: 'Attendant' }],
         narrative: "You rise from a simple cot in Greensoul Monastery as bells toll the call to morning meditation.",
     },
     {
@@ -148,6 +208,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Beginner",
         craftProficiencies: { brewing: 20 },
         startingLocation: "Tea stall by the Sunleaf Inn",
+        businesses: [{ name: "Tea stall", location: "The Lower Gardens", ownership: 'owner', dailyCost: 2, dailyProfit: 5 }],
         narrative: "You unroll the shutters of your tea stall beside the Sunleaf Inn, kettles quiet after yesterday's trade.",
     },
     {
@@ -160,6 +221,8 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Untrained",
         craftProficiencies: { alchemy: 20 },
         startingLocation: "Emberflask workshop cot",
+        employment: [{ building: "Emberflask Alchemist", location: "The Lower Gardens", role: 'Craftsman' }],
+        guildRank: 'Apprentice',
         narrative: "You wake amid clinking glass on a cot in the Emberflask workshop, fumes of last night's mixtures stinging your nose.",
     },
     {
@@ -172,6 +235,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Beginner",
         craftProficiencies: { gardening: 10 },
         startingLocation: "Gardener's tool shed",
+        employment: [{ building: "Royal Botanical Gardens", location: "The Lower Gardens", role: 'Laborer' }],
         narrative: "You stretch within the gardeners' tool shed, dawn light spilling across beds awaiting your care.",
     },
     {
@@ -183,6 +247,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         skills: ["animal handling", "driving wagons"],
         combat: "Beginner",
         startingLocation: "Caravan staging yard wagon",
+        employment: [{ building: "Caravan staging yard", location: "The High Road District", role: 'Laborer' }],
         narrative: "You wake atop a wagon in the caravan yard, horses stamping nearby as travelers ready for the road.",
     },
     {
@@ -194,6 +259,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         skills: ["appraisal", "negotiation"],
         combat: "Beginner",
         startingLocation: "Caravan Square stall",
+        businesses: [{ name: "Caravan Square stall", location: "The High Road District", ownership: 'owner', dailyCost: 3, dailyProfit: 7 }],
         narrative: "You flip open the awning of your Caravan Square stall, coins already jingling as merchants begin to haggle.",
     },
     {
@@ -205,6 +271,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         skills: ["sword drills", "gate protocols"],
         combat: "Sword proficiency 10 (beginner)",
         startingLocation: "East Gate watchtower",
+        employment: [{ building: "East Gate watchtower", location: "The High Road District", role: 'Guard' }],
         narrative: "You wake at the east gate watchtower, dawn patrol handing you a steaming mug as you take your post.",
     },
     {
@@ -217,6 +284,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Untrained",
         craftProficiencies: { farming: 10 },
         startingLocation: "Family farmstead",
+        employment: [{ building: "Family farmstead", location: "The Farmlands", role: 'Laborer' }],
         narrative: "You wake on your family's farmstead beyond the walls, morning chores calling before the city beckons.",
     },
     {
@@ -229,6 +297,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Knife proficiency 10 (beginner)",
         craftProficiencies: { weaving: 10 },
         startingLocation: "Riverbank lean-to",
+        employment: [{ building: "Riverbank lean-to", location: "The Farmlands", role: 'Gatherer' }],
         narrative: "You crawl from your riverbank lean-to, reeds swaying as the current whispers toward Wave's Break.",
     },
     {
@@ -241,6 +310,7 @@ export const WAVES_BREAK_BACKSTORIES = [
         combat: "Bow proficiency 10 (beginner)",
         craftProficiencies: { fletching: 10 },
         startingLocation: "Roadside camp near the city",
+        adventurersGuildRank: 'Cold Iron',
         narrative: "You wake at a roadside camp with Wave's Break on the horizon, bow and pack ready for your first adventure.",
     },
 ];

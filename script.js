@@ -20,6 +20,12 @@ import {
 import { trainCraftSkill } from "./assets/data/trainer_proficiency.js";
 import { performGathering } from "./assets/data/gathering_proficiency.js";
 import { performOutdoorActivity } from "./assets/data/outdoor_skills.js";
+import {
+  ADVENTURERS_GUILD_RANKS,
+  determineOwnership,
+  getJobRolesForBuilding,
+  JOB_ROLE_DATA,
+} from "./assets/data/buildings.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -37,6 +43,7 @@ window.convertCurrency = convertCurrency;
 window.toIron = toIron;
 window.fromIron = fromIron;
 window.LOCATIONS = LOCATIONS;
+window.ADVENTURERS_GUILD_RANKS = ADVENTURERS_GUILD_RANKS;
 
 const NAV_ICONS = {
   location: '🗺️',
@@ -1629,9 +1636,11 @@ function showCharacterUI() {
         ${c.accentColor ? `<div>Accents: <span class="color-box" style="background:${c.accentColor}"></span></div>` : ''}
         ${c.scaleColor ? `<div>Scales: <span class="color-box" style="background:${c.scaleColor}"></span></div>` : ''}
         <div>Hair Color: <span class="color-box" style="background:${c.hairColor}"></span></div>
-        <div>Eye Color: <span class="color-box" style="background:${c.eyeColor}"></span></div>
-        <div>Height: ${formatHeight(c.height)}</div>
+      <div>Eye Color: <span class="color-box" style="background:${c.eyeColor}"></span></div>
+      <div>Height: ${formatHeight(c.height)}</div>
       </div>
+      ${c.guildRank && c.guildRank !== 'None' ? `<div>Guild Rank: ${c.guildRank}</div>` : ''}
+      ${c.adventurersGuildRank && c.adventurersGuildRank !== 'None' ? `<div>Adventurer Rank: ${c.adventurersGuildRank}</div>` : ''}
     </div>
   `;
   const stats = c.attributes?.current || {};
@@ -1641,6 +1650,17 @@ function showCharacterUI() {
   const statsHTML = `<h2>Current Stats</h2><ul class="stats-list">${statsList}</ul>`;
   const backstoryHTML = c.backstory
     ? `<div class="backstory-block"><h2>Backstory</h2><p><strong>${c.backstory.background}</strong> - ${c.backstory.past}</p><p>${c.backstory.narrative}</p></div>`
+    : '';
+  const employmentHTML = (c.employment && c.employment.length)
+    ? `<div class="employment-block"><h2>Employment</h2><ul>${c.employment.map(e => {
+        const data = JOB_ROLE_DATA[e.role] || {};
+        const schedule = e.schedule || data.schedule;
+        const quota = e.quota || data.quota;
+        let extra = '';
+        if (schedule) extra = `Hours: ${schedule}`;
+        else if (quota != null) extra = `Quota: ${(e.progress || 0)} / ${quota}`;
+        return `<li>${e.role} at ${e.building} (${e.location})${extra ? ' - ' + extra : ''}</li>`;
+      }).join('')}</ul></div>`
     : '';
   const resourceBars = (() => {
     const hpPct = c.maxHP ? (c.hp / c.maxHP) * 100 : 0;
@@ -1669,6 +1689,7 @@ function showCharacterUI() {
           ${info}
           ${statsHTML}
           ${backstoryHTML}
+          ${employmentHTML}
         </div>
       </div>
       <button id="delete-character">Delete Character</button>
@@ -1874,6 +1895,23 @@ function removeCapTooltip() {
 }
 
 document.addEventListener('click', removeCapTooltip);
+
+function showBuildingsUI() {
+  if (!currentCharacter) return;
+  showBackButton();
+  const list = currentCharacter.buildings || [];
+  let html = '<div class="buildings-screen"><h1>Buildings</h1>';
+  if (!list.length) {
+    html += '<p>No owned or rented businesses.</p></div>';
+  } else {
+    html += '<ul>';
+    list.forEach(b => {
+      html += `<li>${b.name} (${b.location}) - Cost: ${b.dailyCost} - Profit: ${b.dailyProfit}</li>`;
+    });
+    html += '</ul></div>';
+  }
+  setMainHTML(html);
+}
 
 function showQuestBoardsUI() {
   if (!currentCharacter) return;
@@ -2477,6 +2515,27 @@ function finalizeCharacter(character) {
       past: replaceCharacterRefs(raw.past, newChar),
       narrative: replaceCharacterRefs(raw.narrative, newChar),
     };
+    if (raw.businesses) {
+      newChar.buildings = raw.businesses.map(b => ({
+        name: b.name,
+        location: b.location,
+        ownership: b.ownership || 'owner',
+        ownershipType: determineOwnership(b.name),
+        dailyCost: b.dailyCost || 0,
+        dailyProfit: b.dailyProfit || 0,
+        jobRoles: getJobRolesForBuilding(b.name),
+      }));
+    }
+    if (raw.employment) {
+      newChar.employment = raw.employment.map(job => ({
+        ...job,
+        schedule: job.schedule || JOB_ROLE_DATA[job.role]?.schedule || null,
+        quota: job.quota || JOB_ROLE_DATA[job.role]?.quota || null,
+        progress: job.progress || 0,
+      }));
+    }
+    if (raw.guildRank) newChar.guildRank = raw.guildRank;
+    if (raw.adventurersGuildRank) newChar.adventurersGuildRank = raw.adventurersGuildRank;
     const cityData = CITY_NAV[character.location];
     if (cityData) {
       const district = newChar.backstory.district;
@@ -2706,6 +2765,8 @@ characterMenu.addEventListener('click', e => {
     showSpellbookUI();
   } else if (action === 'proficiencies') {
     showProficienciesUI();
+  } else if (action === 'buildings') {
+    showBuildingsUI();
   } else if (action === 'quests') {
     showQuestBoardsUI();
   } else {

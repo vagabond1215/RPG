@@ -113,6 +113,10 @@ export const characterTemplate = {
     cooldowns: {},
     tags: []
   },
+  buildings: [],
+  employment: [],
+  guildRank: 'None',
+  adventurersGuildRank: 'None',
   backstory: null,
   spawnInfoShown: false,
   position: null
