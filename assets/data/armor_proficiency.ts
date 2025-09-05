@@ -1,5 +1,7 @@
 // armor_proficiency.ts — armor proficiency progression using evasion as reference
 
+import { proficiencyCap } from "./proficiency_base.js";
+
 /** Round to 2 decimals */
 const r2 = (x: number) => Math.round(x * 100) / 100;
 
@@ -126,5 +128,70 @@ export function gainHeavyArmorProficiency(
   cfg: ArmorProgressionConfig = HEAVY_ARMOR_CFG
 ): number {
   return gainArmorProficiency(input, cfg);
+}
+
+// ---- Character-based helpers ----
+
+export type ArmorProficiencyKey = 'lightArmor' | 'mediumArmor' | 'heavyArmor';
+
+const ARMOR_CFG_MAP: Record<ArmorProficiencyKey, ArmorProgressionConfig> = {
+  lightArmor: LIGHT_ARMOR_CFG,
+  mediumArmor: MEDIUM_ARMOR_CFG,
+  heavyArmor: HEAVY_ARMOR_CFG,
+};
+
+export interface ApplyArmorGainParams {
+  enemyLevel: number; // defeated enemy level
+  pieces: number;     // number of equipped armor pieces of this type
+  hasChest: boolean;  // true if chest/body piece is this armor type
+  cap?: number;       // optional proficiency cap override
+  cfg?: ArmorProgressionConfig; // optional config override
+}
+
+function applyArmorProficiencyGain(
+  character: any,
+  key: ArmorProficiencyKey,
+  params: ApplyArmorGainParams
+): number {
+  if (!character) return 0;
+  const { enemyLevel, pieces, hasChest, cap, cfg } = params;
+  const attrs = character.attributes?.current || {};
+  const next = gainArmorProficiency(
+    {
+      P: character[key] || 0,
+      cap: cap ?? proficiencyCap(character.level ?? 1),
+      actorLevel: character.level ?? 1,
+      enemyLevel,
+      STR: attrs.STR ?? 0,
+      DEX: attrs.DEX ?? 0,
+      AGI: attrs.AGI ?? 0,
+      pieces,
+      hasChest,
+    },
+    cfg || ARMOR_CFG_MAP[key]
+  );
+  character[key] = next;
+  return next;
+}
+
+export function applyLightArmorProficiencyGain(
+  character: any,
+  params: ApplyArmorGainParams
+): number {
+  return applyArmorProficiencyGain(character, 'lightArmor', params);
+}
+
+export function applyMediumArmorProficiencyGain(
+  character: any,
+  params: ApplyArmorGainParams
+): number {
+  return applyArmorProficiencyGain(character, 'mediumArmor', params);
+}
+
+export function applyHeavyArmorProficiencyGain(
+  character: any,
+  params: ApplyArmorGainParams
+): number {
+  return applyArmorProficiencyGain(character, 'heavyArmor', params);
 }
 
