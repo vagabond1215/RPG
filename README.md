@@ -37,6 +37,7 @@ Resource collection skills such as **Mining**, **Foraging**, **Logging**, **Herb
 ### Magical Proficiencies
 
 Characters now track separate proficiencies for Stone, Water, Wind, Fire, Ice, Thunder, Dark, Light, Destructive, Healing, Reinforcement, Enfeebling and Summoning. The `applySpellProficiencyGain` helper in `assets/data/spell_proficiency.js` calculates how these values increase when spells are cast. The spellbook requires a character to meet the proficiency threshold in both a spell's element and its school before it can be used.
+Elemental gains pass through a `gainElementProficiency` wrapper, enabling per-element tuning before calling the base `gainProficiency` utility.
 
 ### Weapon Skills
 

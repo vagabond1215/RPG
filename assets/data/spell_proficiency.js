@@ -14,6 +14,20 @@ export const elementalProficiencyMap = {
 
 export const ELEMENTAL_MAGIC_KEYS = Object.values(elementalProficiencyMap);
 
+const DEFAULT_ELEMENT_GAIN_FN = params => gainProficiency(params);
+export const ELEMENT_GAIN_FUNCTIONS = ELEMENTAL_MAGIC_KEYS.reduce(
+  (acc, key) => {
+    acc[key] = DEFAULT_ELEMENT_GAIN_FN;
+    return acc;
+  },
+  {}
+);
+
+export function gainElementProficiency(element, params) {
+  const fn = ELEMENT_GAIN_FUNCTIONS[element] || DEFAULT_ELEMENT_GAIN_FN;
+  return fn(params);
+}
+
 export const schoolProficiencyMap = {
   Destructive: "destructive",
   Healing: "healing",
@@ -33,7 +47,7 @@ export function applySpellProficiencyGain(character, spell, params) {
   if (!HYBRID_MAP[spell.element]) {
     const elemKey = elementalProficiencyMap[spell.element?.toLowerCase()];
     if (elemKey) {
-      character[elemKey] = gainProficiency({
+      character[elemKey] = gainElementProficiency(elemKey, {
         P: character[elemKey],
         ...params,
       });
