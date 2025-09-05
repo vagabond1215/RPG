@@ -1584,7 +1584,6 @@ function showCharacter() {
   hideBackButton();
   updateCharacterButton();
   updateMapButton();
-  updateActionButton();
   showNavigation();
 }
 
@@ -1592,7 +1591,6 @@ function showNoCharacterUI() {
   hideBackButton();
   updateCharacterButton();
   updateMapButton();
-  updateActionButton();
   setMainHTML(`<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`);
   document.getElementById('new-character').addEventListener('click', startCharacterCreation);
   updateMenuHeight();
@@ -2739,11 +2737,9 @@ layoutToggle.addEventListener('click', () => {
 // Dropdown menu
 const menuButton = document.getElementById('menu-button');
 const characterButton = document.getElementById('character-button');
-const actionButton = document.getElementById('action-button');
 const mapButton = document.getElementById('map-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const characterMenu = document.getElementById('characterMenu');
-const actionMenu = document.getElementById('actionMenu');
 const mapContainer = document.createElement('div');
 mapContainer.id = 'map-container';
 body.appendChild(mapContainer);
@@ -2755,24 +2751,14 @@ function updateMapButton() {
   mapButton.style.display = currentCharacter ? 'inline-flex' : 'none';
   if (!currentCharacter) mapContainer.style.display = 'none';
 }
-function updateActionButton() {
-  actionButton.style.display = currentCharacter ? 'inline-flex' : 'none';
-}
 
 menuButton.addEventListener('click', () => {
   dropdownMenu.classList.toggle('active');
   characterMenu.classList.remove('active');
-  actionMenu.classList.remove('active');
 });
 characterButton.addEventListener('click', () => {
   dropdownMenu.classList.remove('active');
   characterMenu.classList.toggle('active');
-  actionMenu.classList.remove('active');
-});
-actionButton.addEventListener('click', () => {
-  dropdownMenu.classList.remove('active');
-  characterMenu.classList.remove('active');
-  actionMenu.classList.toggle('active');
 });
 mapButton.addEventListener('click', () => {
   if (!currentCharacter) return;
@@ -2780,7 +2766,6 @@ mapButton.addEventListener('click', () => {
     mapContainer.style.display = 'none';
     return;
   }
-  actionMenu.classList.remove('active');
   const locName = currentCharacter.location;
   const loc = LOCATIONS[locName] || LOCATIONS['Duvilia Kingdom'];
   mapContainer.innerHTML = `<img src="${loc.map}" alt="${loc.name}"><div class="map-description">${loc.description || ''}</div>`;
@@ -2823,18 +2808,9 @@ characterMenu.addEventListener('click', e => {
   }
 });
 
-actionMenu.addEventListener('click', e => {
-  const action = e.target.dataset.action;
-  if (!action) return;
-  actionMenu.classList.remove('active');
-  showBackButton();
-  setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
-});
-
 backButton.addEventListener('click', () => {
   dropdownMenu.classList.remove('active');
   characterMenu.classList.remove('active');
-  actionMenu.classList.remove('active');
   showMainUI();
 });
 
