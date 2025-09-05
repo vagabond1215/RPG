@@ -1271,7 +1271,7 @@ function showNavigation() {
       });
     };
     const groups = [];
-    if (exits.length) groups.push(exits.map(makeButton));
+    const exitGroup = exits.map(makeButton);
     const hasMultipleDistricts = Object.keys(cityData.districts).length > 1;
     const buildDistrictNav = () => {
       const layout = cityData.layout;
@@ -1326,18 +1326,22 @@ function showNavigation() {
       return [`<div class="district-nav">${neighborButtons.join('')}</div>`];
     };
     if (hasMultipleDistricts) {
-      groups.push([
-        createNavItem({
-          type: 'district-toggle',
-          action: 'toggle-districts',
-          name: 'Districts',
-          icon: getDistrictsEnvelope(pos.city),
-        }),
-      ]);
+      const districtToggle = createNavItem({
+        type: 'district-toggle',
+        action: 'toggle-districts',
+        name: 'Districts',
+        icon: getDistrictsEnvelope(pos.city),
+      });
+      if (exitGroup.length) {
+        exitGroup.unshift(districtToggle);
+      } else {
+        groups.push([districtToggle]);
+      }
       if (showDistricts) groups.push(buildDistrictNav());
     } else {
       groups.push(buildDistrictNav());
     }
+    if (exitGroup.length) groups.push(exitGroup);
     if (locals.length) groups.push(locals.map(makeButton));
     const buttons = [];
     groups.forEach(g => {

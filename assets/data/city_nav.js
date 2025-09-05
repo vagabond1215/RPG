@@ -228,16 +228,16 @@ export const CITY_NAV = {
         }
       },
     layout: {
-      rows: 3,
-      cols: 3,
+      rows: 4,
+      cols: 4,
       positions: {
-        "The Port District": [0, 0],
-        "The Upper Ward": [0, 1],
-        "Greensoul Hill": [0, 2],
-        "Little Terns": [1, 0],
-        "The High Road District": [1, 1],
-        "The Lower Gardens": [2, 0],
-        "The Farmlands": [2, 1],
+        "The Port District": [1, 0],
+        "Greensoul Hill": [0, 1],
+        "The Upper Ward": [1, 1],
+        "Little Terns": [2, 1],
+        "The Lower Gardens": [3, 1],
+        "The High Road District": [2, 2],
+        "The Farmlands": [2, 3],
       },
       connections: [
         ["The Port District", "The Upper Ward"],
