@@ -11,7 +11,7 @@ export const WARM_SPRINGS_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { alchemy: 5 },
     startingLocation: "Terraced Hot Springs",
-    narrative: "Steam curls around you as you rise from your pallet beside the terraced pools.",
+    narrative: "Steam curls around you as you rise from your pallet beside the terraced pools at daybreak. A bundle of towels and a vial of spring water wait in a chest with four coppers in your sash; the first travelers arrive with sunrise.",
   },
   {
     district: "The Mines",
@@ -22,7 +22,7 @@ export const WARM_SPRINGS_BACKSTORIES: Backstory[] = [
     skills: ["tunneling", "endurance"],
     combat: "Pick proficiency 10 (beginner)",
     startingLocation: "Mine entrance barrack",
-    narrative: "You wake to the clatter of carts outside the mine barrack, lantern already sputtering.",
+    narrative: "You wake to the clatter of carts outside the mine barrack, lantern already sputtering in the pre-dawn gloom. Short pick hangs from a peg with three coppers in your pocket; the shift descends at first bell.",
   },
   {
     district: "Craft Halls",
@@ -34,7 +34,7 @@ export const WARM_SPRINGS_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { alchemy: 20 },
     startingLocation: "Alchemists' Hall bunk",
-    narrative: "You stir amid shelves of glass as morning light filters into the Alchemists' Hall.",
+    narrative: "You stir amid shelves of glass as morning light filters into the Alchemists' Hall. Mixing spoon and pouch of salts sit on your bunk beside two silver pieces; the master expects restorative salves brewed before noon.",
   },
 ];
 

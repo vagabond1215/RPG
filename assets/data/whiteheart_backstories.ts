@@ -10,7 +10,7 @@ export const WHITEHEART_BACKSTORIES: Backstory[] = [
     skills: ["tracking", "mapping"],
     combat: "Bow proficiency 10 (beginner)",
     startingLocation: "Barracks bunk",
-    narrative: "You wake on a narrow bunk in the Whiteheart barracks, gear already packed for patrol.",
+    narrative: "You wake on a narrow bunk in the Whiteheart barracks as dawn seeps through the shutters. Short bow and worn boots are already packed with three coppers in your pouch; patrol sets out at first light.",
   },
   {
     district: "Residences & Community",
@@ -22,7 +22,7 @@ export const WHITEHEART_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { herbalism: 15 },
     startingLocation: "Forager's Lodge",
-    narrative: "You rise from the Forager's Lodge, the morning forest humming with unseen life.",
+    narrative: "You rise from the Forager's Lodge, the morning forest humming with unseen life. Foraging knife and basket hang by the door with two coppers tied in a cloth; the elders await you in the grove before sunrise.",
   },
 ];
 

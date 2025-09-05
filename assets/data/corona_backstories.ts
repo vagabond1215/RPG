@@ -10,7 +10,7 @@ export const CORONA_BACKSTORIES: Backstory[] = [
     skills: ["swift running", "protocol"],
     combat: "Untrained",
     startingLocation: "Hall of Governance corridor",
-    narrative: "You jerk awake on a bench in the Hall of Governance, another scroll tucked beneath your arm.",
+    narrative: "You jerk awake on a bench in the Hall of Governance as first light glints off polished floors. Your satchel and signet token lie across your lap with five coppers in a pocket; the commanders expect their sealed notes delivered before the second bell.",
   },
   {
     district: "Brightshade",
@@ -22,7 +22,7 @@ export const CORONA_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { gardening: 15 },
     startingLocation: "Great Market stall",
-    narrative: "Sunlight filters through awnings as you arrange fresh greens on your Brightshade market stall.",
+    narrative: "Sunlight filters through awnings as you arrange fresh greens on your Brightshade market stall at the cool break of day. A hand rake rests against the cart, bundled produce and six coppers tucked in your apron; opening at six each morning has become routine.",
   },
   {
     district: "Greatwood Gate District",
@@ -34,7 +34,7 @@ export const CORONA_BACKSTORIES: Backstory[] = [
     combat: "Hammer proficiency 10 (beginner)",
     craftProficiencies: { smithing: 20 },
     startingLocation: "Smiths' Yard forge",
-    narrative: "You wake beside the warm coals of the Smiths' Yard forge, hammer still in your grip.",
+    narrative: "You wake beside the warm coals of the Smiths' Yard forge while a crisp dawn breeze slips under the door. Smith's hammer and bundle of nails lie ready with eight coppers in your belt; caravans arrive by midmorning expecting new hinges and spearheads.",
   },
   {
     district: "West Corona",
@@ -46,7 +46,7 @@ export const CORONA_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { glass: 10 },
     startingLocation: "Glasswrights' Guildhouse dormitory",
-    narrative: "You awaken in the Guildhouse dormitory, heat from the furnace seeping through the floorboards.",
+    narrative: "You awaken in the Guildhouse dormitory, furnace heat seeping through the floorboards as pale light filters through shutters. Your blowpipe and goggles hang nearby with four coppers in a pouch; the glassblowers begin work at sunrise and you hurry to join them.",
   },
   {
     district: "Western Slums",
@@ -57,7 +57,7 @@ export const CORONA_BACKSTORIES: Backstory[] = [
     skills: ["sneaking", "streetwise"],
     combat: "Knife proficiency 10 (beginner)",
     startingLocation: "Shanty Markets alley",
-    narrative: "You wake curled beneath a tarp in the Shanty Markets, the smell of cheap ale in the air.",
+    narrative: "You wake curled beneath a tarp in the Shanty Markets with a light drizzle tapping the canvas. Patched cloak and rusty knife are clutched close with two coppers hidden in a heel; the Rat's Tail Tavern runner expects you before the streets grow busy.",
   },
   {
     district: "The Wetlands Wall",
@@ -68,7 +68,7 @@ export const CORONA_BACKSTORIES: Backstory[] = [
     skills: ["tracking", "endurance"],
     combat: "Spear proficiency 30 (adept)",
     startingLocation: "Bastion Fort ramparts",
-    narrative: "You stand from your post on the Bastion Fort, dawn burning off the wetlands fog below.",
+    narrative: "You stand from your post on the Bastion Fort as dawn burns away the wetlands fog below. Long spear in hand and weathered cloak about your shoulders, one silver rests in your purse; the next patrol begins at seventh bell.",
   },
 ];
 
