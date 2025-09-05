@@ -10,6 +10,7 @@ import { LOCATIONS } from "./assets/data/locations.js";
 import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
 import { CITY_NAV } from "./assets/data/city_nav.js";
 import { DEFAULT_NAMES } from "./assets/data/names.js";
+import { WAVES_BREAK_BACKSTORIES } from "./assets/data/waves_break_backstories.js";
 import {
   elementalProficiencyMap,
   schoolProficiencyMap,
@@ -50,6 +51,10 @@ const CITY_HEADERS = {
 };
 
 const CITY_SLUGS = { "Wave's Break": "waves_break" };
+
+const BACKSTORY_MAP = {
+  "Wave's Break": WAVES_BREAK_BACKSTORIES,
+};
 
 function citySlug(name) {
   return CITY_SLUGS[name] || name.toLowerCase().replace(/'s/g, 's').replace(/[^a-z0-9]+/g, '_');
@@ -1355,9 +1360,16 @@ function showNavigation() {
       ? district.descriptions[pos.previousDistrict]
       : null;
     const heading = description || pos.district;
+    const spawnInfo = (!currentCharacter.spawnInfoShown && currentCharacter.backstory)
+      ? `<div class="spawn-info"><p>${currentCharacter.backstory.narrative}</p><p><strong>Background:</strong> ${currentCharacter.backstory.background}. ${currentCharacter.backstory.past}</p></div>`
+      : '';
     setMainHTML(
-      `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${heading}</h2><div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${heading}</h2>${spawnInfo}<div class="option-grid">${buttons.join('')}</div></div>`
     );
+    if (!currentCharacter.spawnInfoShown && currentCharacter.backstory) {
+      currentCharacter.spawnInfoShown = true;
+      saveProfiles();
+    }
   }
   normalizeOptionButtonWidths();
   updateMenuHeight();
@@ -1559,6 +1571,9 @@ function showCharacterUI() {
     .map(attr => `<li>${attr}: ${stats[attr] ?? 0}</li>`)
     .join('');
   const statsHTML = `<h2>Current Stats</h2><ul class="stats-list">${statsList}</ul>`;
+  const backstoryHTML = c.backstory
+    ? `<div class="backstory-block"><h2>Backstory</h2><p><strong>${c.backstory.background}</strong> - ${c.backstory.past}</p><p>${c.backstory.narrative}</p></div>`
+    : '';
   const resourceBars = (() => {
     const hpPct = c.maxHP ? (c.hp / c.maxHP) * 100 : 0;
     const mpPct = c.maxMP ? (c.mp / c.maxMP) * 100 : 0;
@@ -1585,6 +1600,7 @@ function showCharacterUI() {
         <div>
           ${info}
           ${statsHTML}
+          ${backstoryHTML}
         </div>
       </div>
       <button id="delete-character">Delete Character</button>
@@ -2384,6 +2400,10 @@ function finalizeCharacter(character) {
     stamina: resources.maxStamina,
     id,
   });
+  const bs = BACKSTORY_MAP[character.location];
+  if (bs && bs.length) {
+    newChar.backstory = bs[Math.floor(Math.random() * bs.length)];
+  }
   assignMagicAptitudes(newChar);
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;

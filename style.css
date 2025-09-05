@@ -1447,3 +1447,11 @@ body.theme-dark .element-icon {
   margin: 0;
   font-size: 0.9rem;
 }
+
+.spawn-info {
+  margin: 1rem 0;
+}
+
+.backstory-block {
+  margin-top: 1rem;
+}

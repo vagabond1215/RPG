@@ -111,7 +111,9 @@ export const characterTemplate = {
     activeEffects: [],
     cooldowns: {},
     tags: []
-  }
+  },
+  backstory: null,
+  spawnInfoShown: false
 };
 
 // ---- Combat / Utility Function Stubs ----

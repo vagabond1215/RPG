@@ -206,7 +206,6 @@ export const CITY_NAV = {
               { name: "North Gate", type: "location", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
               { name: "South Gate", type: "location", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
               { name: "Wayfarer's Rest Tavern", type: "building", target: "Wayfarer's Rest Tavern", icon: "assets/images/icons/waves_break/Wayfarer's Rest Tavern.png" },
-            { name: "The Farmlands", type: "district", target: "The Farmlands", icon: "assets/images/icons/waves_break/Farmlands District.png" },
             { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" },
             { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" }
           ]
@@ -268,7 +267,6 @@ export const CITY_NAV = {
         ["The Upper Ward", "Greensoul Hill"],
         ["Little Terns", "The High Road District"],
         ["Little Terns", "The Lower Gardens"],
-        ["The High Road District", "The Farmlands"],
       ],
     },
     buildings: {
