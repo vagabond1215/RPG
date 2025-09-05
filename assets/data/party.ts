@@ -13,6 +13,7 @@ export type ProficiencyKind =
   | "Element_Stone"|"Element_Water"|"Element_Wind"|"Element_Fire"
   | "Element_Ice"|"Element_Thunder"|"Element_Dark"|"Element_Light"
   | "Weapon_Sword"|"Weapon_Axe"|"Weapon_Spear"|"Weapon_Dagger"|"Weapon_Mace"|"Weapon_Bow"|"Weapon_Staff"|"Weapon_Shield"|"Weapon_Wand"|"Weapon_Unarmed"
+  | "Armor_Light"|"Armor_Medium"|"Armor_Heavy"
   | "Instrument"|"Dance"|"Singing"
   | "Craft_Alchemy"|"Craft_Brewing"|"Craft_Carpentry"|"Craft_Weaving"|"Craft_Fletching"|"Craft_Rope"|"Craft_Calligraphy"|"Craft_Drawing"|"Craft_Cooking"
   | "Gather_Mining"|"Gather_Foraging"|"Gather_Logging"|"Gather_Herbalism"|"Gather_Gardening"|"Gather_Farming"|"Gather_PearlDiving"
