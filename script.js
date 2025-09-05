@@ -18,6 +18,7 @@ import {
 } from "./assets/data/spell_proficiency.js";
 import { trainCraftSkill } from "./assets/data/trainer_proficiency.js";
 import { performGathering } from "./assets/data/gathering_proficiency.js";
+import { performOutdoorActivity } from "./assets/data/outdoor_skills.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -990,6 +991,7 @@ const proficiencyCategories = {
     'dualWield'
   ],
   'Non Combat': ['singing', 'instrument', 'dancing'],
+  Outdoor: ['swimming', 'sailing', 'riding'],
   Crafting: [
     'alchemy',
     'brewing',

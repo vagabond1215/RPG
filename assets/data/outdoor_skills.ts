@@ -1,5 +1,7 @@
 // outdoor_skills.ts — activity based progression for swimming, sailing and horseback riding
 
+import { proficiencyCap } from "./proficiency_base.js";
+
 const r2 = (x: number) => Math.round(x * 100) / 100;
 
 export interface ActivityGainInput {
@@ -25,3 +27,27 @@ export const gainSailing = (input: ActivityGainInput): number =>
 
 export const gainRiding = (input: ActivityGainInput): number =>
   gainActivity(0.055, input); // horseback riding progression
+
+export const OUTDOOR_GAIN_FUNCTIONS = {
+  swimming: gainSwimming,
+  sailing: gainSailing,
+  riding: gainRiding,
+};
+
+export interface OutdoorActivityOpts {
+  duration: number;
+  difficulty?: number;
+}
+
+export function performOutdoorActivity(
+  character: { level: number; [k: string]: number },
+  skillKey: keyof typeof OUTDOOR_GAIN_FUNCTIONS,
+  opts: OutdoorActivityOpts
+): number {
+  const fn = OUTDOOR_GAIN_FUNCTIONS[skillKey];
+  if (!fn) return character[skillKey] || 0;
+  const current = character[skillKey] || 0;
+  const cap = proficiencyCap(character.level);
+  character[skillKey] = fn({ P: current, cap, ...opts });
+  return character[skillKey];
+}
