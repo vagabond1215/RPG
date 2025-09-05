@@ -56,6 +56,58 @@ const BACKSTORY_MAP = {
   "Wave's Break": WAVES_BREAK_BACKSTORIES,
 };
 
+function matchCase(word, pattern) {
+  if (pattern.toUpperCase() === pattern) return word.toUpperCase();
+  if (pattern[0].toUpperCase() === pattern[0]) return word[0].toUpperCase() + word.slice(1);
+  return word;
+}
+
+function swapGenderedTerms(text, sex) {
+  if (!text || !sex) return text;
+  if (sex === 'Male') {
+    text = text.replace(/\bdaughter\b/gi, m => matchCase('son', m));
+    text = text.replace(/\bgirl\b/gi, m => matchCase('boy', m));
+    text = text.replace(/\bmother\b/gi, m => matchCase('father', m));
+    text = text.replace(/\bsister\b/gi, m => matchCase('brother', m));
+    text = text.replace(/\bwomen\b/gi, m => matchCase('men', m));
+    text = text.replace(/\bwoman\b/gi, m => matchCase('man', m));
+    text = text.replace(/\bshe\b/gi, m => matchCase('he', m));
+    text = text.replace(/\bherself\b/gi, m => matchCase('himself', m));
+    text = text.replace(/\bher\b(?=\s+[a-z])/gi, m => matchCase('his', m));
+    text = text.replace(/\bher\b/gi, m => matchCase('him', m));
+  } else {
+    text = text.replace(/\bson\b/gi, m => matchCase('daughter', m));
+    text = text.replace(/\bboy\b/gi, m => matchCase('girl', m));
+    text = text.replace(/\bfather\b/gi, m => matchCase('mother', m));
+    text = text.replace(/\bbrother\b/gi, m => matchCase('sister', m));
+    text = text.replace(/\bmen\b/gi, m => matchCase('women', m));
+    text = text.replace(/\bman\b/gi, m => matchCase('woman', m));
+    text = text.replace(/\bhe\b/gi, m => matchCase('she', m));
+    text = text.replace(/\bhimself\b/gi, m => matchCase('herself', m));
+    text = text.replace(/\bhis\b(?=\s+[a-z])/gi, m => matchCase('her', m));
+    text = text.replace(/\bhis\b/gi, m => matchCase('hers', m));
+    text = text.replace(/\bhim\b/gi, m => matchCase('her', m));
+  }
+  return text;
+}
+
+function capitalize(str) {
+  return str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+}
+
+function replaceCharacterRefs(text, character) {
+  if (!text) return text;
+  let result = text;
+  if (character.race) {
+    result = result.replace(/\[race\]/gi, character.race.toLowerCase());
+    result = result.replace(/\[Race\]/g, capitalize(character.race));
+  }
+  if (character.sex) {
+    result = swapGenderedTerms(result, character.sex);
+  }
+  return result;
+}
+
 function citySlug(name) {
   return CITY_SLUGS[name] || name.toLowerCase().replace(/'s/g, 's').replace(/[^a-z0-9]+/g, '_');
 }
@@ -2414,7 +2466,13 @@ function finalizeCharacter(character) {
   });
   const bs = BACKSTORY_MAP[character.location];
   if (bs && bs.length) {
-    newChar.backstory = bs[Math.floor(Math.random() * bs.length)];
+    const raw = bs[Math.floor(Math.random() * bs.length)];
+    newChar.backstory = {
+      ...raw,
+      background: replaceCharacterRefs(raw.background, newChar),
+      past: replaceCharacterRefs(raw.past, newChar),
+      narrative: replaceCharacterRefs(raw.narrative, newChar),
+    };
     const cityData = CITY_NAV[character.location];
     if (cityData) {
       const district = newChar.backstory.district;
