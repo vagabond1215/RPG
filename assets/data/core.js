@@ -56,6 +56,7 @@ export const characterTemplate = {
   id: "",
   name: "",
   race: "",
+  sex: "",
   class: "",
   homeTown: "",
   location: "",

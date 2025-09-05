@@ -69,6 +69,8 @@ function swapGenderedTerms(text, sex) {
     text = text.replace(/\bgirl\b/gi, m => matchCase('boy', m));
     text = text.replace(/\bmother\b/gi, m => matchCase('father', m));
     text = text.replace(/\bsister\b/gi, m => matchCase('brother', m));
+    text = text.replace(/\bniece\b/gi, m => matchCase('nephew', m));
+    text = text.replace(/\baunt\b/gi, m => matchCase('uncle', m));
     text = text.replace(/\bwomen\b/gi, m => matchCase('men', m));
     text = text.replace(/\bwoman\b/gi, m => matchCase('man', m));
     text = text.replace(/\bshe\b/gi, m => matchCase('he', m));
@@ -80,6 +82,8 @@ function swapGenderedTerms(text, sex) {
     text = text.replace(/\bboy\b/gi, m => matchCase('girl', m));
     text = text.replace(/\bfather\b/gi, m => matchCase('mother', m));
     text = text.replace(/\bbrother\b/gi, m => matchCase('sister', m));
+    text = text.replace(/\bnephew\b/gi, m => matchCase('niece', m));
+    text = text.replace(/\buncle\b/gi, m => matchCase('aunt', m));
     text = text.replace(/\bmen\b/gi, m => matchCase('women', m));
     text = text.replace(/\bman\b/gi, m => matchCase('woman', m));
     text = text.replace(/\bhe\b/gi, m => matchCase('she', m));
@@ -99,8 +103,8 @@ function replaceCharacterRefs(text, character) {
   if (!text) return text;
   let result = text;
   if (character.race) {
-    result = result.replace(/\[race\]/gi, character.race.toLowerCase());
     result = result.replace(/\[Race\]/g, capitalize(character.race));
+    result = result.replace(/\[race\]/g, character.race.toLowerCase());
   }
   if (character.sex) {
     result = swapGenderedTerms(result, character.sex);
