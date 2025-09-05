@@ -16,6 +16,7 @@ export type ProficiencyKind =
   | "Instrument"|"Dance"|"Singing"
   | "Craft_Alchemy"|"Craft_Brewing"|"Craft_Carpentry"|"Craft_Weaving"|"Craft_Fletching"|"Craft_Rope"|"Craft_Calligraphy"|"Craft_Drawing"|"Craft_Cooking"
   | "Gather_Mining"|"Gather_Foraging"|"Gather_Logging"|"Gather_Herbalism"|"Gather_Gardening"|"Gather_Farming"|"Gather_PearlDiving"
+  | "Swimming"|"Sailing"|"Riding"
   | "Evasion"|"Parry"|"Block";
 
 export interface ProfBlock {
