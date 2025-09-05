@@ -877,7 +877,8 @@ body.theme-dark .top-menu button {
 
   .location-button,
   .race-button,
-  .sex-button {
+  .sex-button,
+  .backstory-button {
     position: relative;
     background: transparent;
     border: none;
@@ -890,7 +891,9 @@ body.theme-dark .top-menu button {
   .race-button::before,
   .race-button::after,
   .sex-button::before,
-  .sex-button::after {
+  .sex-button::after,
+  .backstory-button::before,
+  .backstory-button::after {
     content: '';
     position: absolute;
     left: 0;
@@ -901,19 +904,23 @@ body.theme-dark .top-menu button {
 
   .location-button::before,
   .race-button::before,
-  .sex-button::before {
+  .sex-button::before,
+  .backstory-button::before {
     top: 0;
   }
 
   .location-button::after,
   .race-button::after,
-  .sex-button::after {
+  .sex-button::after,
+  .backstory-button::after {
     bottom: 0;
   }
 
   .loc-arrow,
   .race-arrow,
   .sex-arrow,
+  .backstory-arrow,
+  .character-arrow,
   .color-arrow {
     background: transparent;
     border: none;
@@ -933,6 +940,8 @@ body.theme-dark .top-menu button {
   .loc-arrow:hover,
   .race-arrow:hover,
   .sex-arrow:hover,
+  .backstory-arrow:hover,
+  .character-arrow:hover,
   .color-arrow:hover {
     filter: drop-shadow(0 0 0.5rem currentColor);
   }
