@@ -1,6 +1,7 @@
 // Core game constants, enums, templates and helper functions
 
 import { createEmptyEquipment } from "./equipment.js";
+import { createEmptyCurrency } from "./currency.js";
 
 // ---- Cost & Scaling ----
 export function mpCost(tier) {
@@ -113,6 +114,7 @@ export const characterTemplate = {
     cooldowns: {},
     tags: []
   },
+  money: createEmptyCurrency(),
   buildings: [],
   employment: [],
   guildRank: 'None',
