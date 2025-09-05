@@ -687,67 +687,89 @@ Nets hang drying from every post, and the slap of waves mixes with the clatter o
       },
       "The Sunleaf Inn": {
         travelPrompt: "Exit to",
-        description: "Sunlit common rooms welcome weary travelers by the gate.",
+        description: `As you duck beneath the awning of The Sunleaf Inn, warm light spills over you.
+Smells of citrus tea and fresh bread beckon from the common room.
+Travelers lounge by open windows, trading tales with easy smiles.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "Stonebridge Caravanserai": {
         travelPrompt: "Exit to",
-        description: "Caravan yards and stables ring a fortified lodging house.",
+        description: `Rolling your pack across the cobbled yard, you arrive at the Stonebridge Caravanserai.
+Pack animals snort in shaded stables while guards watch from the walls.
+Merchants haggle over maps at rough tables, plotting routes beyond the gate.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Adventurers' Guildhall": {
         travelPrompt: "Exit to",
-        description: "Trophy-lined walls and quest boards beckon bold souls.",
+        description: `Pushing open the heavy door to the Adventurers' Guildhall, a hush of expectation greets you.
+Banners of retired companies hang above quest-strewn boards.
+A scarred clerk sizes you up, quill poised to record your next deed.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: []
       },
       "Iron Key Smithy": {
         travelPrompt: "Exit to",
-        description: "Hard-won steel clinks beneath the smith's watchful eye.",
+        description: `A blast of heat washes over you as you step into the Iron Key Smithy.
+Sparks dance around the anvil where tempered blades take shape.
+The smith glances up, soot-streaked brow lifting in quiet appraisal.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Rolling Wave Coachworks": {
         travelPrompt: "Exit to",
-        description: "Carriages and wagons stand ready for long road journeys.",
+        description: `Wiping dust from your boots, you stride into the Rolling Wave Coachworks.
+Wheelwrights fit iron to spokes while lacquer scents the air.
+Half-built coaches line the yard, promising journeys yet taken.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Wavehide Leather Guild": {
         travelPrompt: "Exit to",
-        description: "Cured hides and fine saddles fill the bustling guildhouse.",
+        description: `Shouldering through a curtain of hides, you enter the Wavehide Leather Guild.
+Tanners stretch supple skins across frames, dyeing them in earthy hues.
+Finished saddles gleam on racks, ready for riders bound for distant roads.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Shield & Sail Armsmiths": {
         travelPrompt: "Exit to",
-        description: "Rows of gleaming gear equip guards and sailors alike.",
+        description: `As you cross the threshold of Shield & Sail Armsmiths, hammers ring like bells.
+Walls display polished shields and cutlasses meant for land and sea.
+An apprentice wipes sweat from his brow, offering a cautious nod.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Shrine of the Roadwarden": {
         travelPrompt: "Exit to",
-        description: "Travelers leave coins and prayers for safe passage ahead.",
+        description: `Kneeling at the Shrine of the Roadwarden, you touch fingers to the worn altar.
+Incense coils lazily upward, carrying whispered prayers for safe travel.
+A bronze helm watches over the offerings, its visor permanently lowered.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: []
       },
       "Caravan Square": {
         travelPrompt: "Exit to",
-        description: "Wagons crowd a lively market of goods and gossip.",
+        description: `Jostled by a passing mule, you edge into bustling Caravan Square.
+Vendors shout over clattering wagons while spices and dust mingle in the air.
+Children weave between wheels, laughing as they chase a stray chicken.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Gatewatch Barracks": {
         travelPrompt: "Exit to",
-        description: "Drilled soldiers guard the city’s massive eastern gate.",
+        description: `Marching past drill formations, you enter Gatewatch Barracks.
+Armor gleams on racks beside bunks stacked with neatly folded uniforms.
+A captain's barked orders cut through the courtyard, leaving no room for doubt.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: []
       },
       "North Gate": {
         travelPrompt: "Exit to",
-        description: "Sturdy gatehouse opening to the northern farmlands.",
+        description: `Stepping under the shadow of the North Gate, you run a hand along weathered stone.
+Beyond, rolling fields beckon while sentries scan the road with patient eyes.
+The portcullis creaks overhead, ready to drop at a moment's alarm.`,
         exits: [
           { name: "The High Road District", target: "The High Road District" },
           { name: "The Farmlands", target: "The Farmlands" }
@@ -756,7 +778,9 @@ Nets hang drying from every post, and the slap of waves mixes with the clatter o
       },
       "South Gate": {
         travelPrompt: "Exit to",
-        description: "Weathered gates lead toward fields south of the city.",
+        description: `Approaching the South Gate, you feel the city's murmur fade behind you.
+Sea breezes slip through the archway, carrying scents of distant orchards.
+Guards lean on spears, their gazes tracking every traveler who passes.`,
         exits: [
           { name: "The High Road District", target: "The High Road District" },
           { name: "The Farmlands", target: "The Farmlands" }
@@ -765,7 +789,9 @@ Nets hang drying from every post, and the slap of waves mixes with the clatter o
       },
       "Wayfarer's Rest Tavern": {
         travelPrompt: "Exit to",
-        description: "Hearty stews and road tales fill this rustic tavern.",
+        description: `Kicking dust from your boots, you push into Wayfarer's Rest Tavern.
+Hearthfire crackles under a mantle of travel-stained trophies.
+Tankards clink as road-weary guests swap news from the frontier.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
