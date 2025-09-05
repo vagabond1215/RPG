@@ -978,8 +978,18 @@ A captain's barked orders cut through the courtyard, leaving no room for doubt.`
 Beyond, rolling fields beckon while sentries scan the road with patient eyes.
 The portcullis creaks overhead, ready to drop at a moment's alarm.`,
         exits: [
-          { name: "The High Road District", target: "The High Road District" },
-          { name: "The Farmlands", target: "The Farmlands" }
+          {
+            name: "The High Road District",
+            target: "The High Road District",
+            type: "district",
+            icon: "assets/images/icons/waves_break/The High Road District.png"
+          },
+          {
+            name: "The Farmlands",
+            target: "The Farmlands",
+            type: "district",
+            icon: "assets/images/icons/waves_break/Farmlands District.png"
+          }
         ],
         interactions: []
       },
@@ -991,8 +1001,18 @@ Roads diverge here—one bending back toward the High Road District's busy yards
 the other spilling out into the open Farmlands.
 Guards lean on spears, their gazes tracking every traveler who passes.`,
         exits: [
-          { name: "The High Road District", target: "The High Road District" },
-          { name: "The Farmlands", target: "The Farmlands" }
+          {
+            name: "The High Road District",
+            target: "The High Road District",
+            type: "district",
+            icon: "assets/images/icons/waves_break/The High Road District.png"
+          },
+          {
+            name: "The Farmlands",
+            target: "The Farmlands",
+            type: "district",
+            icon: "assets/images/icons/waves_break/Farmlands District.png"
+          }
         ],
         interactions: []
       },
