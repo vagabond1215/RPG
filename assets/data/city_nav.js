@@ -253,85 +253,104 @@ export const CITY_NAV = {
     buildings: {
       "Harborwatch Trading House": {
         travelPrompt: "Exit to",
-        description: "Traders shout deals across ledgers in this busy waterfront exchange.",
+        description: `As you enter the Harborwatch Trading House, the din of haggling merchants crashes over you like a breaking wave.
+Ledger-scribbling clerks dart between crates piled high, and the salt tang mingles with exotic spices.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Warehouse Row": {
         travelPrompt: "Exit to",
-        description: "Long storehouses line the street, stacked with salted cargo.",
+        description: `Shouldering past a laden cart, you slip into Warehouse Row.
+Rows of doors stretch like the ribs of a sleeping beast, each hiding cargo bound for distant ports.
+Rats scurry between crates, wary of your tread.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Stormkeel Shipwrights": {
         travelPrompt: "Exit to",
-        description: "The ring of mallets echoes from ships rising on wooden frames.",
+        description: `Duck under a half-sawn beam to enter Stormkeel Shipwrights.
+Fresh-cut timbers perfume the air while mallets ring in steady rhythm.
+Half-built hulls loom above like skeletons waiting for the tide.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "The Ropewalk": {
         travelPrompt: "Exit to",
-        description: "Workers stride backward twisting hemp into endless rope.",
+        description: `Walking the long hall of the Ropewalk, you feel the floor hum beneath workers twisting fibers.
+Length after length of hemp stretches into the distance, smelling of tar and seawater.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Brinebarrel Coopers": {
         travelPrompt: "Exit to",
-        description: "Coopers hammer iron hoops over casks reeking of brine.",
+        description: `As the door swings open at Brinebarrel Coopers, the scent of wet wood and salt hits your nose.
+Coopers hammer iron hoops onto staves, their rhythmic blows echoing through rows of barrels.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Saltworks": {
         travelPrompt: "Exit to",
-        description: "Shallow pans glisten as seawater dries into piles of salt.",
+        description: `Cracking open the gate to the Saltworks, you step into glare off shallow pans.
+Evaporating seawater leaves glittering crusts while workers rake crystals into mounds.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Fishmongers' Row": {
         travelPrompt: "Exit to",
-        description: "Stalls drip with fresh catch while gulls wheel overhead.",
+        description: `Threading through the crowd, you arrive at Fishmongers' Row.
+Slabs of fresh catch gleam on ice, and gulls shriek for scraps as vendors holler prices.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Shrine of the Deep Current": {
         travelPrompt: "Exit to",
-        description: "A stone basin bubbles with seawater offerings to the unseen tide.",
+        description: `Kneeling at the Shrine of the Deep Current, you hear seawater bubbling within a stone basin.
+The air carries a chill, as if the unseen tide itself waits for your offering.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: []
       },
       "Statue of the Sea-Mother": {
         travelPrompt: "Exit to",
-        description: "Barnacle-dotted statue gazes serenely over the harbor.",
+        description: `Approaching the Statue of the Sea-Mother, you brush barnacles from the stone plinth.
+Her weathered gaze watches the harbor, and a calm settles over you like mist.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: []
       },
       "The Salty Gull": {
         travelPrompt: "Exit to",
-        description: "Laughter and sea shanties spill from this weathered dockside tavern.",
+        description: `Pushing open the warped door of the Salty Gull, you are met with laughter and thick ale-fumes.
+Sailors clap you on the back as sea shanties rise above the crackle of the hearth.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "The Tideway Inn": {
         travelPrompt: "Exit to",
-        description: "Warm lantern light and the murmur of sailors greet you.",
+        description: `Sliding out of the drizzle into the Tideway Inn, you find lantern light pooling on worn floorboards.
+The murmur of tired sailors and the promise of a warm bed wrap around you like a blanket.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "Governor's Keep": {
         travelPrompt: "Exit to",
-        description: "Banners hang above polished stone halls bustling with officials.",
+        description: `Striding through the iron-bound gates, you enter Governor's Keep.
+Marble corridors echo with the footsteps of officials and whispered decisions.
+Sunlight spills through stained glass, casting patterns over polished stone.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Crafting Quarter": {
         travelPrompt: "Exit to",
-        description: "Workbenches overflow with tools while artisans hammer and sew.",
+        description: `Weaving between tool-laden benches, you step into the Crafting Quarter.
+Hammers ring and needles flash as artisans labor over every surface.
+The air carries the sharp tang of oil and hot metal.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Mercantile Exchange": {
         travelPrompt: "Exit to",
-        description: "Traders haggle beneath high arches stacked with crates and ledgers.",
+        description: `Sliding under vaulted arches, you arrive at the Mercantile Exchange.
+Clerks shout bids while parchment rustles like wings of a restless flock.
+Coins clink in a constant rhythm that sets the market's pulse.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: [],
         produces: { resources: [], commodities: ["trade contracts"], luxuries: [] },
@@ -339,19 +358,24 @@ export const CITY_NAV = {
       },
       "Temple of the Tides": {
         travelPrompt: "Exit to",
-        description: "Salt-scented incense drifts around statues carved from sea stone.",
+        description: `Pushing aside a curtain of beads, the Temple of the Tides opens around you.
+Salt-sweet incense curls through pews carved of driftwood.
+Soft chants ebb and flow like the pull of the moonlit sea.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Hall of Records": {
         travelPrompt: "Exit to",
-        description: "Tall shelves of scrolls rise in orderly rows under hushed silence.",
+        description: `Pulling open a weighty door, you step into the Hall of Records.
+Scrolls and ledgers tower in endless shelves, dust motes swirling in the still air.
+A lone scribe peers up, quill poised, before returning to meticulous notes.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Harbor Guard Naval Yard": {
         travelPrompt: "Exit to",
-        description: "Ship hulls and disciplined marines line the busy dockside yard.",
+        description: `Marching past a row of polished spears, you enter the Harbor Guard Naval Yard.
+Ship hulls rise on their stocks while disciplined marines drill between coils of rope and cannon.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
@@ -362,7 +386,8 @@ export const CITY_NAV = {
       },
       "Nobles' Quay": {
         travelPrompt: "Exit to",
-        description: "Gilded barges bob beside polished piers watched by cloaked attendants.",
+        description: `Gliding down the marble steps onto Nobles' Quay, you catch reflections of gilded barges in the water.
+Cloaked attendants whisper greetings as perfumed breezes mingle with salt spray.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
@@ -373,7 +398,8 @@ export const CITY_NAV = {
       },
       "Merchants' Wharf": {
         travelPrompt: "Exit to",
-        description: "Crates and shouting dockworkers crowd the bustling commercial pier.",
+        description: `Weaving through shouting stevedores, you step onto Merchants' Wharf.
+Crates teeter in precarious stacks and the air buzzes with deals sealed over the creak of mooring lines.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
@@ -384,7 +410,9 @@ export const CITY_NAV = {
       },
       "Crystal Tide Glassworks": {
         travelPrompt: "Exit to",
-        description: "Furnaces roar as molten glass twists into shimmering shapes.",
+        description: `Sliding through a heat-hazed doorway, you step into the Crystal Tide Glassworks.
+Furnaces roar as molten glass winds along pipes in dazzling streams.
+Heat prickles your skin while artisans spin glowing vessels to life.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Glassblowing (Master)", action: "train-glassblowing", tier: "master" } ],
         produces: { resources: [], commodities: ["glassware"], luxuries: ["art glass"] },
@@ -392,7 +420,9 @@ export const CITY_NAV = {
       },
       "Tidefire Forge": {
         travelPrompt: "Exit to",
-        description: "Anvils ring amid showers of sparks and the smell of hot iron.",
+        description: `Shouldering aside a curtain of chain, you enter Tidefire Forge.
+Anvils ring amid showers of sparks and the smell of hot iron.
+Sweat-streaked smiths shape blades that glow like captured suns.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Blacksmithing (Journeyman)", action: "train-blacksmithing", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["metal goods"], luxuries: [] },
@@ -400,7 +430,9 @@ export const CITY_NAV = {
       },
       "Timberwave Carpenters' Guild": {
         travelPrompt: "Exit to",
-        description: "Stacks of timber and the scent of fresh sawdust fill the hall.",
+        description: `Pushing through the workshop doors, you arrive at the Timberwave Carpenters' Guild.
+Stacks of timber tower overhead while saws sing through grain.
+Sawdust drifts around you as carpenters chisel beams into form.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Carpentry (Journeyman)", action: "train-carpentry", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["woodcraft"], luxuries: [] },
@@ -408,7 +440,9 @@ export const CITY_NAV = {
       },
       "The Gilded Needle Clothiers": {
         travelPrompt: "Exit to",
-        description: "Bolts of cloth and neatly labeled threads await deft hands.",
+        description: `Brushing past hanging tapestries, you slip into The Gilded Needle Clothiers.
+Bolts of fabric bloom across tables under lamplight.
+Seamstresses murmur measurements as needles flash and thread gleams.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Tailoring (Apprentice)", action: "train-tailoring", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["garments"], luxuries: [] },
@@ -416,7 +450,9 @@ export const CITY_NAV = {
       },
       "Salted Hide Tannery": {
         travelPrompt: "Exit to",
-        description: "Hides hang from beams while craftsmen stitch sturdy gear.",
+        description: `Covering your nose, you edge into the Salted Hide Tannery.
+Racks of curing leather line damp walls, heavy with brine.
+Workers scrape hides smooth, knives rasping in steady rhythm.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Leatherworking (Apprentice)", action: "train-leatherworking", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["leather goods"], luxuries: [] },
@@ -424,7 +460,9 @@ export const CITY_NAV = {
       },
       "Tideglass Alchemical Atelier": {
         travelPrompt: "Exit to",
-        description: "Bubbling flasks and acrid fumes swirl among cluttered tables.",
+        description: `Tapping on a stained oak door, you ease into the Tideglass Alchemical Atelier.
+Glassware burbles and colored vapors curl above cluttered benches.
+Alchemists mutter formulas while stirring shimmering concoctions.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Alchemy (Journeyman)", action: "train-alchemy", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["potions"], luxuries: ["elixirs"] },
@@ -432,7 +470,9 @@ export const CITY_NAV = {
       },
       "Arc Runes Enchantery": {
         travelPrompt: "Exit to",
-        description: "Runed crystals glow softly over circles etched in the floor.",
+        description: `Tracing a finger along carved sigils, you pass into Arc Runes Enchantery.
+Crystals hum atop etched circles, bathing the room in pale light.
+Enchanters chant softly as glyphs flare to life around you.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Enchanting (Initiate)", action: "train-enchanting", tier: "initiate" } ],
         produces: { resources: [], commodities: [], luxuries: ["enchanted items"] },
@@ -440,31 +480,40 @@ export const CITY_NAV = {
       },
       "Greensoul Monastery": {
         travelPrompt: "Exit to",
-        description: "Quiet cloisters overlook the city from this serene retreat.",
+        description: `Climbing the worn steps, you enter Greensoul Monastery.
+Cloister bells murmur above shelves of vellum and pools of incense.
+City noise fades to a tranquil hush that settles over your shoulders.`,
         exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
         interactions: []
       },
       "Royal Botanical Gardens": {
         travelPrompt: "Exit to",
-        description: "Manicured beds showcase rare flora tended for noble study.",
+        description: `As you step into the Royal Botanical Gardens, humid air wraps around you.
+Glasshouses sparkle while rare blossoms tilt toward the sun, tended by meticulous hands.
+Gravel paths crunch softly beneath your boots as you explore.`,
         exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
         interactions: []
       },
       "Skyline Academy": {
         travelPrompt: "Exit to",
-        description: "Scholars debate philosophy in sunlit lecture courts.",
+        description: `Pushing open the oak doors of Skyline Academy, you catch echoes of debate.
+Sunlit courtyards ring with the chatter of scholars trading philosophies.
+Ink-stained students glance up, surprised by your arrival.`,
         exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
         interactions: []
       },
       "Greensoul Amphitheater": {
         travelPrompt: "Exit to",
-        description: "Open-air performances entertain Wave's Break's elite.",
+        description: `Wandering through arching hedges, you find the Greensoul Amphitheater.
+Stone benches climb the hillside as performers rehearse beneath open sky.
+A soft breeze carries distant applause across the stage.`,
         exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
         interactions: []
       },
       "Fisherman's Pier": {
         travelPrompt: "Exit to",
-        description: "Nets dry on posts as gulls cry over baskets of fish.",
+        description: `With a careful stride you tread onto Fisherman's Pier.
+Nets hang drying from every post, and the slap of waves mixes with the clatter of baskets brimming with today's catch.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
@@ -475,7 +524,9 @@ export const CITY_NAV = {
       },
       "Harbor Hearth Bakery": {
         travelPrompt: "Exit to",
-        description: "Ovens radiate warmth while fresh loaves cool on wide shelves.",
+        description: `Pushing through a door dusted with flour, you enter Harbor Hearth Bakery.
+Ovens roar along the wall while crusty loaves crackle on cooling racks.
+A baker slides you a heel of bread with a knowing grin.`,
         exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["bread"], luxuries: [] },
@@ -483,7 +534,9 @@ export const CITY_NAV = {
       },
       "Tidehold Granary & Provisioners": {
         travelPrompt: "Exit to",
-        description: "Massive bins overflow with grain guarded by stoic stewards.",
+        description: `As you climb the ladder into Tidehold Granary & Provisioners, grain scent fills your lungs.
+Stoic stewards watch from catwalks above bins piled like golden dunes.
+The rustle of kernels echoes beneath the timber roof.`,
         exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: [], luxuries: [] },
@@ -491,19 +544,23 @@ export const CITY_NAV = {
       },
       "Bloomstage Theater": {
         travelPrompt: "Exit to",
-        description: "A simple stage hosts lively performances for common folk.",
+        description: `Drawing aside a patched curtain, you slip into Bloomstage Theater.
+Local players belt out lines on a creaking platform while kids cheer from rough benches.`,
         exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
         interactions: []
       },
       "The Velvet Petal Brothel": {
         travelPrompt: "Exit to",
-        description: "Lantern-lit rooms offer discreet companionship and drink.",
+        description: `Walking into The Velvet Petal Brothel, velvet drapes mute the street's clamor.
+Lanterns cast amber pools over plush cushions where patrons laugh in hushed tones.
+Perfumed air promises indulgence behind every beaded veil.`,
         exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
         interactions: []
       },
       "Brackenshore Croft": {
         travelPrompt: "Exit to",
-        description: "Terraced grain fields carved into the tidal bluff.",
+        description: `Following the bluffside path, you reach Brackenshore Croft.
+Terraced grain fields cascade toward the sea, rippling with every salt breeze.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["grain"], luxuries: [] },
@@ -511,7 +568,8 @@ export const CITY_NAV = {
       },
       "Greenridge Polder": {
         travelPrompt: "Exit to",
-        description: "Marsh-drained vegetable fields held by sturdy dikes.",
+        description: `Picking your way along earthen dikes, you enter Greenridge Polder.
+Drained marshland reveals neat rows of vegetables guarded from the tide.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["vegetables"], luxuries: [] },
@@ -519,7 +577,8 @@ export const CITY_NAV = {
       },
         "Harborwind Dairy": {
           travelPrompt: "Exit to",
-          description: "Coastal pastures yield sea-salt-sweetened milk.",
+          description: `As you unlatch the pasture gate of Harborwind Dairy, cows shuffle in salty grass.
+Sea mist beads on their hides while churns clatter in the open-aired barn.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["dairy"], luxuries: [] },
@@ -527,7 +586,8 @@ export const CITY_NAV = {
         },
         "Saltmeadow Potato Farm": {
           travelPrompt: "Exit to",
-          description: "Salt-kissed plots yield hearty potatoes.",
+          description: `Trudging along sandy furrows, you arrive at Saltmeadow Potato Farm.
+Workers dig up hearty tubers while gulls keen overhead.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["potatoes"], luxuries: [] },
@@ -535,7 +595,8 @@ export const CITY_NAV = {
         },
         "Foamfield Flax Farm": {
           travelPrompt: "Exit to",
-          description: "Wind-swept rows of flax ripple toward the shore.",
+          description: `Breezes tug your clothes as you step into Foamfield Flax Farm.
+Rows of flax sway toward the shore, blue blossoms nodding with the tide.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: ["flax"], commodities: [], luxuries: [] },
@@ -543,7 +604,8 @@ export const CITY_NAV = {
         },
         "Mistflower Apiary": {
           travelPrompt: "Exit to",
-          description: "Hives nestled among herb gardens heavy with morning fog.",
+          description: `Wading through morning mist, you find Mistflower Apiary.
+Bees drift between herb-laden boxes, humming over dew-soaked petals.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["honey"], luxuries: [] },
@@ -551,7 +613,8 @@ export const CITY_NAV = {
       },
       "Cliffblossom Hives": {
         travelPrompt: "Exit to",
-        description: "Bee boxes cling to sea cliffs blooming with rare flowers.",
+        description: `Peering over the cliff edge, you spot Cliffblossom Hives clinging to rock.
+Rare flowers bloom around the boxes while waves crash far below.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["honey"], luxuries: [] },
@@ -559,7 +622,8 @@ export const CITY_NAV = {
       },
       "Gulls' Orchard": {
         travelPrompt: "Exit to",
-        description: "Creekside rows of apples and pears beneath circling seabirds.",
+        description: `As you wander into Gulls' Orchard, wings beat overhead.
+Apple and pear trees line the creek, their fruit pecked by curious birds.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["fruit"], luxuries: [] },
@@ -567,7 +631,8 @@ export const CITY_NAV = {
       },
         "Sunmellow Grove": {
           travelPrompt: "Exit to",
-          description: "Stone-warmed plums and apricots pressed into honeyed wine.",
+          description: `Sun-warmed stones guide you into Sunmellow Grove.
+Plums and apricots gleam on low branches, destined for sweet honeyed wine.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["fruit"], luxuries: ["honeyed wine"] },
@@ -575,7 +640,8 @@ export const CITY_NAV = {
         },
         "Seawisp Plum Orchard": {
           travelPrompt: "Exit to",
-          description: "Mist-shrouded plum trees yield tart coastal fruit.",
+          description: `Mist curls around you as you step into Seawisp Plum Orchard.
+Tart fruit dangles from shadowed limbs, dripping with sea dew.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["fruit"], luxuries: [] },
@@ -583,7 +649,8 @@ export const CITY_NAV = {
         },
         "Driftfell Meadow": {
           travelPrompt: "Exit to",
-          description: "Breezy downs where cattle and sheep graze in rotation.",
+          description: `Crossing a stile, you arrive at Driftfell Meadow.
+Cattle and sheep graze lazily as larks trill above the swaying grass.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["wool", "meat"], luxuries: [] },
@@ -591,7 +658,8 @@ export const CITY_NAV = {
       },
       "Moorlight Flats": {
         travelPrompt: "Exit to",
-        description: "Goat and wool-fowl fields lit by shoreline phosphorescence.",
+        description: `Following the phosphorescent glow, you reach Moorlight Flats.
+Goats and wool-fowl graze in fields lit by the shimmer of shoreline algae.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["milk", "fiber"], luxuries: [] },
@@ -599,7 +667,8 @@ export const CITY_NAV = {
       },
         "Gullwind Mill": {
           travelPrompt: "Exit to",
-          description: "Wind-driven sails grind grain for nearby farms.",
+          description: `Rounding a knoll, you behold Gullwind Mill turning lazily.
+Its sails creak as they grind grain for farms scattered across the horizon.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["flour"], luxuries: [] },
@@ -607,7 +676,8 @@ export const CITY_NAV = {
         },
         "Tidewheel Watermill": {
           travelPrompt: "Exit to",
-          description: "A tidal waterwheel grinds grain into flour.",
+          description: `Splashing along the channel, you arrive at Tidewheel Watermill.
+A tidal wheel churns steadily, grinding grain with every returning wave.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ],
           produces: { resources: [], commodities: ["flour"], luxuries: [] },
@@ -615,7 +685,8 @@ export const CITY_NAV = {
         },
         "Saltmarsh Granary": {
           travelPrompt: "Exit to",
-          description: "Stilted storehouse keeping harvest dry above marshy ground.",
+          description: `Stepping onto wooden stilts, you enter Saltmarsh Granary.
+Harvest piles high above the soggy ground, safe from creeping tides.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [],
           produces: { resources: [], commodities: [], luxuries: [] },
@@ -623,7 +694,8 @@ export const CITY_NAV = {
         },
       "Copperbrook Forge": {
         travelPrompt: "Exit to",
-        description: "Small smithy by the brook repairing tools and shoeing beasts.",
+        description: `Duck under a low lintel to reach Copperbrook Forge.
+A brook babbles nearby as the smith hammers life back into tired tools.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["tools"], luxuries: [] },
@@ -631,7 +703,8 @@ export const CITY_NAV = {
       },
       "Tidewatcher Lighthouse": {
         travelPrompt: "Exit to",
-        description: "Decommissioned beacon repurposed as a coastal watchtower.",
+        description: `Scaling the spiral stair of Tidewatcher Lighthouse, you scan the coast.
+Though the beacon is dark, watchmen keep vigilant eyes on the waves.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [],
         produces: { resources: [], commodities: [], luxuries: [] },
@@ -639,7 +712,8 @@ export const CITY_NAV = {
       },
       "Netmaker's Co-op": {
         travelPrompt: "Exit to",
-        description: "Workshop weaving flax into ropes and fishing nets.",
+        description: `Pushing into Netmaker's Co-op, you find flax fibers stretched on frames.
+Hands fly as workers braid ropes and weave fishing nets for the fleet.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: ["nets"], luxuries: [] },
@@ -647,67 +721,89 @@ export const CITY_NAV = {
       },
       "The Sunleaf Inn": {
         travelPrompt: "Exit to",
-        description: "Sunlit common rooms welcome weary travelers by the gate.",
+        description: `As you duck beneath the awning of The Sunleaf Inn, warm light spills over you.
+Smells of citrus tea and fresh bread beckon from the common room.
+Travelers lounge by open windows, trading tales with easy smiles.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "Stonebridge Caravanserai": {
         travelPrompt: "Exit to",
-        description: "Caravan yards and stables ring a fortified lodging house.",
+        description: `Rolling your pack across the cobbled yard, you arrive at the Stonebridge Caravanserai.
+Pack animals snort in shaded stables while guards watch from the walls.
+Merchants haggle over maps at rough tables, plotting routes beyond the gate.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Adventurers' Guildhall": {
         travelPrompt: "Exit to",
-        description: "Trophy-lined walls and quest boards beckon bold souls.",
+        description: `Pushing open the heavy door to the Adventurers' Guildhall, a hush of expectation greets you.
+Banners of retired companies hang above quest-strewn boards.
+A scarred clerk sizes you up, quill poised to record your next deed.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: []
       },
       "Iron Key Smithy": {
         travelPrompt: "Exit to",
-        description: "Hard-won steel clinks beneath the smith's watchful eye.",
+        description: `A blast of heat washes over you as you step into the Iron Key Smithy.
+Sparks dance around the anvil where tempered blades take shape.
+The smith glances up, soot-streaked brow lifting in quiet appraisal.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Rolling Wave Coachworks": {
         travelPrompt: "Exit to",
-        description: "Carriages and wagons stand ready for long road journeys.",
+        description: `Wiping dust from your boots, you stride into the Rolling Wave Coachworks.
+Wheelwrights fit iron to spokes while lacquer scents the air.
+Half-built coaches line the yard, promising journeys yet taken.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Wavehide Leather Guild": {
         travelPrompt: "Exit to",
-        description: "Cured hides and fine saddles fill the bustling guildhouse.",
+        description: `Shouldering through a curtain of hides, you enter the Wavehide Leather Guild.
+Tanners stretch supple skins across frames, dyeing them in earthy hues.
+Finished saddles gleam on racks, ready for riders bound for distant roads.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Shield & Sail Armsmiths": {
         travelPrompt: "Exit to",
-        description: "Rows of gleaming gear equip guards and sailors alike.",
+        description: `As you cross the threshold of Shield & Sail Armsmiths, hammers ring like bells.
+Walls display polished shields and cutlasses meant for land and sea.
+An apprentice wipes sweat from his brow, offering a cautious nod.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Shrine of the Roadwarden": {
         travelPrompt: "Exit to",
-        description: "Travelers leave coins and prayers for safe passage ahead.",
+        description: `Kneeling at the Shrine of the Roadwarden, you touch fingers to the worn altar.
+Incense coils lazily upward, carrying whispered prayers for safe travel.
+A bronze helm watches over the offerings, its visor permanently lowered.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: []
       },
       "Caravan Square": {
         travelPrompt: "Exit to",
-        description: "Wagons crowd a lively market of goods and gossip.",
+        description: `Jostled by a passing mule, you edge into bustling Caravan Square.
+Vendors shout over clattering wagons while spices and dust mingle in the air.
+Children weave between wheels, laughing as they chase a stray chicken.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Gatewatch Barracks": {
         travelPrompt: "Exit to",
-        description: "Drilled soldiers guard the city’s massive eastern gate.",
+        description: `Marching past drill formations, you enter Gatewatch Barracks.
+Armor gleams on racks beside bunks stacked with neatly folded uniforms.
+A captain's barked orders cut through the courtyard, leaving no room for doubt.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: []
       },
       "North Gate": {
         travelPrompt: "Exit to",
-        description: "Sturdy gatehouse opening to the northern farmlands.",
+        description: `Stepping under the shadow of the North Gate, you run a hand along weathered stone.
+Beyond, rolling fields beckon while sentries scan the road with patient eyes.
+The portcullis creaks overhead, ready to drop at a moment's alarm.`,
         exits: [
           { name: "The High Road District", target: "The High Road District" },
           { name: "The Farmlands", target: "The Farmlands" }
@@ -716,7 +812,9 @@ export const CITY_NAV = {
       },
       "South Gate": {
         travelPrompt: "Exit to",
-        description: "Weathered gates lead toward fields south of the city.",
+        description: `Approaching the South Gate, you feel the city's murmur fade behind you.
+Sea breezes slip through the archway, carrying scents of distant orchards.
+Guards lean on spears, their gazes tracking every traveler who passes.`,
         exits: [
           { name: "The High Road District", target: "The High Road District" },
           { name: "The Farmlands", target: "The Farmlands" }
@@ -725,55 +823,65 @@ export const CITY_NAV = {
       },
       "Wayfarer's Rest Tavern": {
         travelPrompt: "Exit to",
-        description: "Hearty stews and road tales fill this rustic tavern.",
+        description: `Kicking dust from your boots, you push into Wayfarer's Rest Tavern.
+Hearthfire crackles under a mantle of travel-stained trophies.
+Tankards clink as road-weary guests swap news from the frontier.`,
         exits: [ { name: "The High Road District", target: "The High Road District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
         "Seabreeze Oat Farm": {
           travelPrompt: "Exit to",
-          description: "Sea-breezed oat fields rustle outside the city walls.",
+          description: `Walking between swaying heads, you reach Seabreeze Oat Farm.
+The ocean's breath rustles the crop like waves rolling across the field.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Saltcrest Vineyard & Winery": {
           travelPrompt: "Exit to",
-          description: "Salt-kissed grapes ferment into crisp coastal wine.",
+          description: `As you stroll into Saltcrest Vineyard & Winery, grapevines glisten with sea mist.
+Barrels line the porch, awaiting the press that yields crisp coastal wine.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Windward Berry Vineyard & Winery": {
           travelPrompt: "Exit to",
-          description: "Hillside berries are pressed into rich, dark wines.",
+          description: `Climbing the hillside, you find Windward Berry Vineyard & Winery.
+Rich berries tumble into vats, staining hands as vintners laugh at the breeze.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Tideflock Stockyards": {
           travelPrompt: "Exit to",
-          description: "Pens bustle with cattle and sheep awaiting drovers.",
+          description: `Stepping through the gate of Tideflock Stockyards, a chorus of bleats surrounds you.
+Drovers tally cattle and sheep while the smell of hay hangs thick in the air.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Bayside Brickworks": {
           travelPrompt: "Exit to",
-          description: "Smoky bayside kilns bake clay into hardy bricks.",
+          description: `Passing smoking kilns, you enter Bayside Brickworks.
+Stacks of fresh bricks radiate heat while workers shovel clay with practiced rhythm.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Cliffbreak Quarry": {
           travelPrompt: "Exit to",
-          description: "Workers hew stone from the seaside cliffs.",
+          description: `The clang of picks greets you at Cliffbreak Quarry.
+Workers pry stone from the cliff face, sending echoes tumbling toward the surf.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Wavecut Stoneworks": {
           travelPrompt: "Exit to",
-          description: "Masons carve cliffstone into sturdy blocks.",
+          description: `Entering Wavecut Stoneworks, you sidestep blocks being chiseled smooth.
+Masons trade jokes over the rhythm of mallets and chisels.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: [ { name: "Trade", action: "trade" } ]
         },
         "Coast Road Watchtower": {
           travelPrompt: "Exit to",
-          description: "A lone tower keeps vigil along the coastal road.",
+          description: `Climbing the narrow steps of the Coast Road Watchtower, wind whips your cloak.
+From its height, scouts survey both the sea and the road beyond the fields.`,
           exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
           interactions: []
         }
