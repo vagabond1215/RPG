@@ -253,85 +253,104 @@ export const CITY_NAV = {
     buildings: {
       "Harborwatch Trading House": {
         travelPrompt: "Exit to",
-        description: "Traders shout deals across ledgers in this busy waterfront exchange.",
+        description: `As you enter the Harborwatch Trading House, the din of haggling merchants crashes over you like a breaking wave.
+Ledger-scribbling clerks dart between crates piled high, and the salt tang mingles with exotic spices.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Warehouse Row": {
         travelPrompt: "Exit to",
-        description: "Long storehouses line the street, stacked with salted cargo.",
+        description: `Shouldering past a laden cart, you slip into Warehouse Row.
+Rows of doors stretch like the ribs of a sleeping beast, each hiding cargo bound for distant ports.
+Rats scurry between crates, wary of your tread.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Stormkeel Shipwrights": {
         travelPrompt: "Exit to",
-        description: "The ring of mallets echoes from ships rising on wooden frames.",
+        description: `Duck under a half-sawn beam to enter Stormkeel Shipwrights.
+Fresh-cut timbers perfume the air while mallets ring in steady rhythm.
+Half-built hulls loom above like skeletons waiting for the tide.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "The Ropewalk": {
         travelPrompt: "Exit to",
-        description: "Workers stride backward twisting hemp into endless rope.",
+        description: `Walking the long hall of the Ropewalk, you feel the floor hum beneath workers twisting fibers.
+Length after length of hemp stretches into the distance, smelling of tar and seawater.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Brinebarrel Coopers": {
         travelPrompt: "Exit to",
-        description: "Coopers hammer iron hoops over casks reeking of brine.",
+        description: `As the door swings open at Brinebarrel Coopers, the scent of wet wood and salt hits your nose.
+Coopers hammer iron hoops onto staves, their rhythmic blows echoing through rows of barrels.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Saltworks": {
         travelPrompt: "Exit to",
-        description: "Shallow pans glisten as seawater dries into piles of salt.",
+        description: `Cracking open the gate to the Saltworks, you step into glare off shallow pans.
+Evaporating seawater leaves glittering crusts while workers rake crystals into mounds.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Fishmongers' Row": {
         travelPrompt: "Exit to",
-        description: "Stalls drip with fresh catch while gulls wheel overhead.",
+        description: `Threading through the crowd, you arrive at Fishmongers' Row.
+Slabs of fresh catch gleam on ice, and gulls shriek for scraps as vendors holler prices.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Shrine of the Deep Current": {
         travelPrompt: "Exit to",
-        description: "A stone basin bubbles with seawater offerings to the unseen tide.",
+        description: `Kneeling at the Shrine of the Deep Current, you hear seawater bubbling within a stone basin.
+The air carries a chill, as if the unseen tide itself waits for your offering.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: []
       },
       "Statue of the Sea-Mother": {
         travelPrompt: "Exit to",
-        description: "Barnacle-dotted statue gazes serenely over the harbor.",
+        description: `Approaching the Statue of the Sea-Mother, you brush barnacles from the stone plinth.
+Her weathered gaze watches the harbor, and a calm settles over you like mist.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: []
       },
       "The Salty Gull": {
         travelPrompt: "Exit to",
-        description: "Laughter and sea shanties spill from this weathered dockside tavern.",
+        description: `Pushing open the warped door of the Salty Gull, you are met with laughter and thick ale-fumes.
+Sailors clap you on the back as sea shanties rise above the crackle of the hearth.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "The Tideway Inn": {
         travelPrompt: "Exit to",
-        description: "Warm lantern light and the murmur of sailors greet you.",
+        description: `Sliding out of the drizzle into the Tideway Inn, you find lantern light pooling on worn floorboards.
+The murmur of tired sailors and the promise of a warm bed wrap around you like a blanket.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
         interactions: [ { name: "Rest", action: "rest" } ]
       },
       "Governor's Keep": {
         travelPrompt: "Exit to",
-        description: "Banners hang above polished stone halls bustling with officials.",
+        description: `Striding through the iron-bound gates, you enter Governor's Keep.
+Marble corridors echo with the footsteps of officials and whispered decisions.
+Sunlight spills through stained glass, casting patterns over polished stone.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Crafting Quarter": {
         travelPrompt: "Exit to",
-        description: "Workbenches overflow with tools while artisans hammer and sew.",
+        description: `Weaving between tool-laden benches, you step into the Crafting Quarter.
+Hammers ring and needles flash as artisans labor over every surface.
+The air carries the sharp tang of oil and hot metal.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Mercantile Exchange": {
         travelPrompt: "Exit to",
-        description: "Traders haggle beneath high arches stacked with crates and ledgers.",
+        description: `Sliding under vaulted arches, you arrive at the Mercantile Exchange.
+Clerks shout bids while parchment rustles like wings of a restless flock.
+Coins clink in a constant rhythm that sets the market's pulse.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: [],
         produces: { resources: [], commodities: ["trade contracts"], luxuries: [] },
@@ -339,19 +358,24 @@ export const CITY_NAV = {
       },
       "Temple of the Tides": {
         travelPrompt: "Exit to",
-        description: "Salt-scented incense drifts around statues carved from sea stone.",
+        description: `Pushing aside a curtain of beads, the Temple of the Tides opens around you.
+Salt-sweet incense curls through pews carved of driftwood.
+Soft chants ebb and flow like the pull of the moonlit sea.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Hall of Records": {
         travelPrompt: "Exit to",
-        description: "Tall shelves of scrolls rise in orderly rows under hushed silence.",
+        description: `Pulling open a weighty door, you step into the Hall of Records.
+Scrolls and ledgers tower in endless shelves, dust motes swirling in the still air.
+A lone scribe peers up, quill poised, before returning to meticulous notes.`,
         exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
         interactions: []
       },
       "Harbor Guard Naval Yard": {
         travelPrompt: "Exit to",
-        description: "Ship hulls and disciplined marines line the busy dockside yard.",
+        description: `Marching past a row of polished spears, you enter the Harbor Guard Naval Yard.
+Ship hulls rise on their stocks while disciplined marines drill between coils of rope and cannon.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
@@ -362,7 +386,8 @@ export const CITY_NAV = {
       },
       "Nobles' Quay": {
         travelPrompt: "Exit to",
-        description: "Gilded barges bob beside polished piers watched by cloaked attendants.",
+        description: `Gliding down the marble steps onto Nobles' Quay, you catch reflections of gilded barges in the water.
+Cloaked attendants whisper greetings as perfumed breezes mingle with salt spray.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
@@ -373,7 +398,8 @@ export const CITY_NAV = {
       },
       "Merchants' Wharf": {
         travelPrompt: "Exit to",
-        description: "Crates and shouting dockworkers crowd the bustling commercial pier.",
+        description: `Weaving through shouting stevedores, you step onto Merchants' Wharf.
+Crates teeter in precarious stacks and the air buzzes with deals sealed over the creak of mooring lines.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
@@ -384,7 +410,9 @@ export const CITY_NAV = {
       },
       "Crystal Tide Glassworks": {
         travelPrompt: "Exit to",
-        description: "Furnaces roar as molten glass twists into shimmering shapes.",
+        description: `Sliding through a heat-hazed doorway, you step into the Crystal Tide Glassworks.
+Furnaces roar as molten glass winds along pipes in dazzling streams.
+Heat prickles your skin while artisans spin glowing vessels to life.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Glassblowing (Master)", action: "train-glassblowing", tier: "master" } ],
         produces: { resources: [], commodities: ["glassware"], luxuries: ["art glass"] },
@@ -392,7 +420,9 @@ export const CITY_NAV = {
       },
       "Tidefire Forge": {
         travelPrompt: "Exit to",
-        description: "Anvils ring amid showers of sparks and the smell of hot iron.",
+        description: `Shouldering aside a curtain of chain, you enter Tidefire Forge.
+Anvils ring amid showers of sparks and the smell of hot iron.
+Sweat-streaked smiths shape blades that glow like captured suns.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Blacksmithing (Journeyman)", action: "train-blacksmithing", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["metal goods"], luxuries: [] },
@@ -400,7 +430,9 @@ export const CITY_NAV = {
       },
       "Timberwave Carpenters' Guild": {
         travelPrompt: "Exit to",
-        description: "Stacks of timber and the scent of fresh sawdust fill the hall.",
+        description: `Pushing through the workshop doors, you arrive at the Timberwave Carpenters' Guild.
+Stacks of timber tower overhead while saws sing through grain.
+Sawdust drifts around you as carpenters chisel beams into form.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Carpentry (Journeyman)", action: "train-carpentry", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["woodcraft"], luxuries: [] },
@@ -408,7 +440,9 @@ export const CITY_NAV = {
       },
       "The Gilded Needle Clothiers": {
         travelPrompt: "Exit to",
-        description: "Bolts of cloth and neatly labeled threads await deft hands.",
+        description: `Brushing past hanging tapestries, you slip into The Gilded Needle Clothiers.
+Bolts of fabric bloom across tables under lamplight.
+Seamstresses murmur measurements as needles flash and thread gleams.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Tailoring (Apprentice)", action: "train-tailoring", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["garments"], luxuries: [] },
@@ -416,7 +450,9 @@ export const CITY_NAV = {
       },
       "Salted Hide Tannery": {
         travelPrompt: "Exit to",
-        description: "Hides hang from beams while craftsmen stitch sturdy gear.",
+        description: `Covering your nose, you edge into the Salted Hide Tannery.
+Racks of curing leather line damp walls, heavy with brine.
+Workers scrape hides smooth, knives rasping in steady rhythm.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Leatherworking (Apprentice)", action: "train-leatherworking", tier: "apprentice" } ],
         produces: { resources: [], commodities: ["leather goods"], luxuries: [] },
@@ -424,7 +460,9 @@ export const CITY_NAV = {
       },
       "Tideglass Alchemical Atelier": {
         travelPrompt: "Exit to",
-        description: "Bubbling flasks and acrid fumes swirl among cluttered tables.",
+        description: `Tapping on a stained oak door, you ease into the Tideglass Alchemical Atelier.
+Glassware burbles and colored vapors curl above cluttered benches.
+Alchemists mutter formulas while stirring shimmering concoctions.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Alchemy (Journeyman)", action: "train-alchemy", tier: "journeyman" } ],
         produces: { resources: [], commodities: ["potions"], luxuries: ["elixirs"] },
@@ -432,7 +470,9 @@ export const CITY_NAV = {
       },
       "Arc Runes Enchantery": {
         travelPrompt: "Exit to",
-        description: "Runed crystals glow softly over circles etched in the floor.",
+        description: `Tracing a finger along carved sigils, you pass into Arc Runes Enchantery.
+Crystals hum atop etched circles, bathing the room in pale light.
+Enchanters chant softly as glyphs flare to life around you.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: [ { name: "Train Enchanting (Initiate)", action: "train-enchanting", tier: "initiate" } ],
         produces: { resources: [], commodities: [], luxuries: ["enchanted items"] },
@@ -464,7 +504,8 @@ export const CITY_NAV = {
       },
       "Fisherman's Pier": {
         travelPrompt: "Exit to",
-        description: "Nets dry on posts as gulls cry over baskets of fish.",
+        description: `With a careful stride you tread onto Fisherman's Pier.
+Nets hang drying from every post, and the slap of waves mixes with the clatter of baskets brimming with today's catch.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
