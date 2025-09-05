@@ -10,7 +10,7 @@ export const DANCING_PINES_BACKSTORIES: Backstory[] = [
     skills: ["timber cutting", "balance"],
     combat: "Axe proficiency 10 (beginner)",
     startingLocation: "Sawmill bunkhouse",
-    narrative: "You wake to the hum of waterwheels and scent of fresh-cut pine in the Sawmill bunkhouse.",
+    narrative: "You wake to the hum of waterwheels and scent of fresh-cut pine in the Sawmill bunkhouse just before dawn. Your earplugs and sawblade rest atop your bedroll with three coppers in a pouch; the mill whistle will sound soon to start the day's cutting.",
   },
   {
     district: "Diamond Mines",
@@ -21,7 +21,7 @@ export const DANCING_PINES_BACKSTORIES: Backstory[] = [
     skills: ["scouting", "stone sense"],
     combat: "Dagger proficiency 10 (beginner)",
     startingLocation: "Diamond Mine entrance",
-    narrative: "You shake off sleep at the mine mouth, chalk tucked behind your ear and lantern in hand.",
+    narrative: "You shake off sleep at the mine mouth, morning chill seeping through the rock as you spark your hooded lantern. Chalk line slips behind your ear and five coppers jingle in your pocket; miners wait for your signal before they descend.",
   },
   {
     district: "Hunter's Quarter",
@@ -33,7 +33,7 @@ export const DANCING_PINES_BACKSTORIES: Backstory[] = [
     combat: "Bow proficiency 10 (beginner)",
     craftProficiencies: { tanning: 10 },
     startingLocation: "Hunter's Lodge bunk",
-    narrative: "You rise from a cot in the Hunter's Lodge, the smell of smoked meat lingering in the air.",
+    narrative: "You rise from a cot in the Hunter's Lodge while the smell of smoked meat mingles with the crisp dawn air. Snare wire and a fur-lined cloak hang from a peg, four coppers tucked inside; you must set your lines before the sun climbs.",
   },
 ];
 

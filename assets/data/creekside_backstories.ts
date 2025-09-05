@@ -10,7 +10,7 @@ export const CREEKSIDE_BACKSTORIES: Backstory[] = [
     skills: ["animal handling", "whistling"],
     combat: "Staff proficiency 10 (beginner)",
     startingLocation: "Cattle Yards corral",
-    narrative: "You wake leaning against a fence in the Cattle Yards, dawn fog drifting over lowing herds.",
+    narrative: "You wake leaning against a fence in the Cattle Yards while dawn fog drifts over the lowing herds. Your crook and leather satchel holding four coppers hang on the rail; the drive to market leaves at sunrise.",
   },
   {
     district: "Everrise Bridge",
@@ -21,7 +21,7 @@ export const CREEKSIDE_BACKSTORIES: Backstory[] = [
     skills: ["river navigation", "bartering"],
     combat: "Untrained",
     startingLocation: "Riverside Warehouses dock",
-    narrative: "You roll off a coiled rope on the docks as the Everrise Bridge glows in morning light.",
+    narrative: "You roll off a coiled rope on the docks as the Everrise Bridge glows in morning light. Pole and river charts are tucked beside a pouch of three silvers; you must ferry goods across before the first bell tolls.",
   },
   {
     district: "Stoneknot",
@@ -33,7 +33,7 @@ export const CREEKSIDE_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { writing: 10 },
     startingLocation: "Grand Guildhall archives",
-    narrative: "You blink away sleep amid stacks of parchment in the Guildhall archives.",
+    narrative: "You blink away sleep amid stacks of parchment in the Grand Guildhall archives, lantern smoke curling in the still air. An ink pot and quest ledger sit next to six coppers in your drawer; the clerk's desk opens at sunrise to post new contracts.",
   },
   {
     district: "Surrounding Farmlands & Orchards",
@@ -44,7 +44,7 @@ export const CREEKSIDE_BACKSTORIES: Backstory[] = [
     skills: ["harvesting", "climbing"],
     combat: "Sling proficiency 10 (beginner)",
     startingLocation: "Fruit orchard camp",
-    narrative: "You wake beneath a laden apple tree, basket already half-filled for market.",
+    narrative: "You wake beneath a laden apple tree, dew soaking your clothes as birds chirp in the dawn. Your fruit knife and woven basket lie nearby with five coppers tied in a cloth; the wagon to market departs at third bell.",
   },
 ];
 

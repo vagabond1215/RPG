@@ -11,7 +11,7 @@ export const CORNER_STONE_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { engraving: 15 },
     startingLocation: "Guild Palace workshop",
-    narrative: "You rub your eyes beside the mint's presses, yesterday's coin dies cooling on the bench.",
+    narrative: "You rub your eyes beside the mint's presses as a faint grey dawn filters through the high windows. Oil-slicked gears stand silent while your engraving chisel and wax tablet rest near a pouch holding one silver; the master engraver arrives at sunrise to review the dies.",
   },
   {
     district: "Misty Crossing",
@@ -22,7 +22,7 @@ export const CORNER_STONE_BACKSTORIES: Backstory[] = [
     skills: ["negotiation", "river navigation"],
     combat: "Untrained",
     startingLocation: "Great Stone Bridge dock",
-    narrative: "You wake on your barge tied beneath the Great Stone Bridge, river mist seeping into your clothes.",
+    narrative: "You wake on your barge tied beneath the Great Stone Bridge, river mist beading on your clothes in the early morning chill. Gripping your pole and tucking the ledger beside three silvers into a chest, you must shove off before first bell to catch the market rush.",
   },
   {
     district: "Cherry Rock",
@@ -34,7 +34,7 @@ export const CORNER_STONE_BACKSTORIES: Backstory[] = [
     combat: "Hammer proficiency 10 (beginner)",
     craftProficiencies: { smithing: 20 },
     startingLocation: "Mithril Hall forge",
-    narrative: "You wake to the glow of the Mithril Hall forge, your master's anvil already ringing.",
+    narrative: "You wake to the glow of the Mithril Hall forge, your dwarven master's anvil already ringing as dawn light seeps down the chimney. Tongs and a fragment of mithril lie on your workbench with seven coppers in your apron; the day's hammering begins at sunrise.",
   },
   {
     district: "Stonecrest Town",
@@ -46,7 +46,7 @@ export const CORNER_STONE_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { drawing: 15 },
     startingLocation: "Crystal Court Plaza",
-    narrative: "You stretch beside your easel in Crystal Court Plaza as early shoppers pause to watch.",
+    narrative: "You stretch beside your easel in Crystal Court Plaza while morning shoppers drift past under a clear sky. Charcoal sticks, a folded easel, and five coppers wait in your bag; you must sketch quickly to entice a patron before the plaza grows crowded.",
   },
   {
     district: "The Hill",
@@ -57,7 +57,7 @@ export const CORNER_STONE_BACKSTORIES: Backstory[] = [
     skills: ["guarding", "intimidation"],
     combat: "Sword proficiency 20 (novice)",
     startingLocation: "Caravanserai of the Hill bunk",
-    narrative: "You wake on a cot in the Hill's caravanserai, hand already seeking your sword belt.",
+    narrative: "You wake on a cot in the Hill's caravanserai, hand already seeking your short sword and travel cloak as dawn cools the stone hall. Eight coppers jingle in your belt pouch; the merchant train musters at sunrise and you rush to join your post.",
   },
 ];
 

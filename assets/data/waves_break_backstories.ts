@@ -23,7 +23,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Knife proficiency 10 (beginner)",
     craftProficiencies: { cooking: 10 },
     startingLocation: "Fishmongers' Row stall",
-    narrative: "You wake before dawn on a damp crate in Fishmongers' Row, gulls crying as the scent of brine clings to your skin.",
+    narrative: "You wake before dawn on a damp crate in Fishmongers' Row as gulls cry over the foggy harbor. Your scale-stained apron and gutting knife lie folded beside a pouch holding five coppers; the stall must be readied before the first boats dock.",
   },
   {
     district: "The Port District",
@@ -35,7 +35,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "No real experience",
     craftProficiencies: { rope: 20 },
     startingLocation: "Ropewalk loft",
-    narrative: "You stretch awake in the drafty loft above the Ropewalk, fingers already twitching to mend another net.",
+    narrative: "You stretch awake in the drafty loft above the Ropewalk while rain taps the long roof at daybreak. A bone needle and spool of twine lie at your side with two coppers in your pocket; the foreman expects nets mended by the six o'clock whistle.",
   },
   {
     district: "The Port District",
@@ -46,7 +46,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     skills: ["swimming", "sea songs"],
     combat: "Untrained",
     startingLocation: "Shrine of the Deep Current",
-    narrative: "You blink up at the carved ceiling of the Shrine of the Deep Current, priests murmuring nearby as you clutch your lone locket.",
+    narrative: "You blink up at the carved ceiling of the Shrine of the Deep Current, incense smoke drifting through the dawn stillness. Clutching the weathered locket—the only thing you own—you hear the distant surf and know the priests will send you out once prayers end.",
   },
   {
     district: "The Upper Ward",
@@ -58,7 +58,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Rapier proficiency 10 (beginner)",
     craftProficiencies: { calligraphy: 10 },
     startingLocation: "Rented attic in the Upper Ward",
-    narrative: "You rouse in a cramped attic overlooking manicured streets, your tarnished signet ring the last token of a cast-off name.",
+    narrative: "You rouse in a cramped attic overlooking manicured streets as the sun climbs over the Upper Ward. Your tarnished signet ring and travel cloak sit atop a chest beside a lone silver coin; today you are due at the etiquette tutor's door by ninth bell to beg for work.",
   },
   {
     district: "The Upper Ward",
@@ -69,7 +69,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     skills: ["record keeping", "languages"],
     combat: "Beginner",
     startingLocation: "Hall of Records scriptorium",
-    narrative: "You wake slumped over a ledger in the Hall of Records, fingers stiff from a night of copying.",
+    narrative: "You wake slumped over a ledger in the Hall of Records, dawn light slanting through tall windows. Ink-stained gloves cling to your quill set and a single silver piece rests in your purse; the head scribe's bell for copying duty will ring within the hour.",
   },
   {
     district: "The Upper Ward",
@@ -80,7 +80,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     skills: ["spear drills", "watchfulness"],
     combat: "Spear proficiency 10 (beginner)",
     startingLocation: "Gatewatch Barracks bunk",
-    narrative: "You jerk awake on a straw pallet in the Gatewatch Barracks as the morning horn blares for drill.",
+    narrative: "You jerk awake on a straw pallet in the Gatewatch Barracks as the morning horn blares for drill. Your dented shield leans against the bunk, short spear across your knees, and three coppers jingle in your belt pouch as you scramble for muster.",
   },
   {
     district: "Little Terns",
@@ -91,7 +91,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     skills: ["climbing", "sneaking"],
     combat: "Dagger proficiency 10 (beginner)",
     startingLocation: "Rooftop hideout in Little Terns",
-    narrative: "You awaken on a rooftop hideout, city breeze ruffling your patched cloak as you clutch your worn dagger.",
+    narrative: "You awaken on a rooftop hideout, the city breeze ruffling your patched cloak while dawn paints the sky. A worn dagger rests under your hand with four copper coins in a tin; the alley gang expects you at first light to scout for treasure.",
   },
   {
     district: "Little Terns",
@@ -103,7 +103,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Hammer proficiency 10 (beginner)",
     craftProficiencies: { carpentry: 10 },
     startingLocation: "Cooper's Yard shed",
-    narrative: "You rise among stacked staves in the Cooper's Yard shed, the scent of fresh tar and wood filling the air.",
+    narrative: "You rise among stacked staves in the Cooper's Yard shed as the morning fog curls over Little Terns. Hammer and barrel-hoop belt hang ready with six coppers tucked in your pocket; the bell will toll soon to start loading barrels.",
   },
   {
     district: "Little Terns",
@@ -114,7 +114,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     skills: ["teaching", "arithmetic"],
     combat: "Untrained",
     startingLocation: "Alleyway classroom",
-    narrative: "You wake on a bench in your improvised alley classroom, yesterday's sums still chalked across the stone wall.",
+    narrative: "You wake on a bench in your improvised alley classroom, yesterday's sums still chalked across the stone wall. Chalk and primer book sit beside your lone copper piece as the dawn chill creeps in; the children will arrive by sunrise for lessons.",
   },
   {
     district: "Greensoul Hill",
@@ -126,7 +126,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Knife proficiency 10 (beginner)",
     craftProficiencies: { herbalism: 10, brewing: 10 },
     startingLocation: "Greensoul Hill herb clearing",
-    narrative: "You greet the sunrise in a dew-laden clearing on Greensoul Hill, satchel ready for the morning's harvest.",
+    narrative: "You greet the sunrise in a dew-laden clearing on Greensoul Hill, birdsong mingling with distant city bells. Your herb satchel and small knife lie ready with two coppers tucked inside; the apothecary expects fresh sprigs before the market opens.",
   },
   {
     district: "Greensoul Hill",
@@ -138,7 +138,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Staff proficiency 10 (beginner)",
     craftProficiencies: { brewing: 10 },
     startingLocation: "Greensoul Monastery cell",
-    narrative: "You rise from a simple cot in Greensoul Monastery as bells toll the call to morning meditation.",
+    narrative: "You rise from a simple cot in Greensoul Monastery as bells toll the call to meditation. Prayer beads loop around your neck and a walking staff stands nearby; with no coin to your name you join the line for first light prayers.",
   },
   {
     district: "Greensoul Hill",
@@ -150,7 +150,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { drawing: 10 },
     startingLocation: "Monastery healing ward",
-    narrative: "You awake in the monastery's healing ward, the scorched pendant warm against your chest yet your past a void.",
+    narrative: "You awake in the monastery's healing ward, sunlight warming the shutters while the scent of herbs drifts in. The scorched pendant on your chest is your only belonging, and the monks will ask again at midday if any memories return.",
   },
   {
     district: "The Lower Gardens",
@@ -162,7 +162,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Beginner",
     craftProficiencies: { brewing: 20 },
     startingLocation: "Tea stall by the Sunleaf Inn",
-    narrative: "You unroll the shutters of your tea stall beside the Sunleaf Inn, kettles quiet after yesterday's trade.",
+    narrative: "You unroll the shutters of your tea stall beside the Sunleaf Inn just as a golden dawn breaks over the Lower Gardens. Tea tins and ledger sit arranged on the counter and an eight-silver cache rests in a lockbox beneath; opening at six each morning has become routine.",
   },
   {
     district: "The Lower Gardens",
@@ -174,7 +174,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { alchemy: 20 },
     startingLocation: "Emberflask workshop cot",
-    narrative: "You wake amid clinking glass on a cot in the Emberflask workshop, fumes of last night's mixtures stinging your nose.",
+    narrative: "You wake amid clinking glass on a cot in the Emberflask workshop, fumes from last night's mixtures stinging your nose. A mixing kit and stained gloves lie beside a purse with three silvers; the master demands the morning tonic brewed before the third bell.",
   },
   {
     district: "The Lower Gardens",
@@ -186,7 +186,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Beginner",
     craftProficiencies: { gardening: 10 },
     startingLocation: "Gardener's tool shed",
-    narrative: "You stretch within the gardeners' tool shed, dawn light spilling across beds awaiting your care.",
+    narrative: "You stretch within the gardeners' tool shed as dawn light spills across beds awaiting your care. Spade and straw hat lean against the wall with five coppers in a small tin box; the head gardener expects irrigation to begin by sunrise.",
   },
   {
     district: "The High Road District",
@@ -197,7 +197,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     skills: ["animal handling", "driving wagons"],
     combat: "Beginner",
     startingLocation: "Caravan staging yard wagon",
-    narrative: "You wake atop a wagon in the caravan yard, horses stamping nearby as travelers ready for the road.",
+    narrative: "You wake atop a wagon in the caravan yard, horses stamping nearby while a cool pre-dawn breeze carries dust. Sturdy gloves and a horse brush sit on the seat next to a pouch with seven copper coins; the caravan forms up at first light and you ready the reins.",
   },
   {
     district: "The High Road District",
@@ -208,7 +208,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     skills: ["appraisal", "negotiation"],
     combat: "Beginner",
     startingLocation: "Caravan Square stall",
-    narrative: "You flip open the awning of your Caravan Square stall, coins already jingling as merchants begin to haggle.",
+    narrative: "You flip open the awning of your Caravan Square stall as sunlight creeps over the High Road District. A merchant's ledger lies beside a locked box holding one silver and ten coppers; haggling begins at eighth bell so you arrange trinkets in neat rows.",
   },
   {
     district: "The High Road District",
@@ -219,7 +219,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     skills: ["sword drills", "gate protocols"],
     combat: "Sword proficiency 10 (beginner)",
     startingLocation: "East Gate watchtower",
-    narrative: "You wake at the east gate watchtower, dawn patrol handing you a steaming mug as you take your post.",
+    narrative: "You wake at the east gate watchtower, dawn patrol handing you a steaming mug while the sky pales. Iron cap and short sword rest on a rack with two coppers in your pouch; your watch begins at sunrise as travelers queue outside.",
   },
   {
     district: "The Farmlands",
@@ -231,7 +231,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { farming: 10 },
     startingLocation: "Family farmstead",
-    narrative: "You wake on your family's farmstead beyond the walls, morning chores calling before the city beckons.",
+    narrative: "You wake on your family's farmstead beyond the walls, rooster crows echoing through the misty fields. Hoe and seed pouch sit beside your single copper piece; morning chores must be finished before you can head toward the city.",
   },
   {
     district: "The Farmlands",
@@ -243,7 +243,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Knife proficiency 10 (beginner)",
     craftProficiencies: { weaving: 10 },
     startingLocation: "Riverbank lean-to",
-    narrative: "You crawl from your riverbank lean-to, reeds swaying as the current whispers toward Wave's Break.",
+    narrative: "You crawl from your riverbank lean-to as reeds sway in the early breeze, the water whispering toward Wave's Break. A bundle of reeds and small knife are at hand with three coppers wrapped in cloth; the barge leaves at second bell so you hurry to harvest more.",
   },
   {
     district: "The Farmlands",
@@ -255,7 +255,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
     combat: "Bow proficiency 10 (beginner)",
     craftProficiencies: { fletching: 10 },
     startingLocation: "Roadside camp near the city",
-    narrative: "You wake at a roadside camp with Wave's Break on the horizon, bow and pack ready for your first adventure.",
+    narrative: "You wake at a roadside camp with Wave's Break on the horizon, dawn light glinting off your short bow. A small pack lies open with two silver coins tucked inside; you plan to reach the Adventurers' Guild before midday for your first quest.",
   },
 ];
 

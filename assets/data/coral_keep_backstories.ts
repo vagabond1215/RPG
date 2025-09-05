@@ -10,7 +10,7 @@ export const CORAL_KEEP_BACKSTORIES: Backstory[] = [
     skills: ["inventory", "marching drills"],
     combat: "Spear proficiency 10 (beginner)",
     startingLocation: "Supply depot loft",
-    narrative: "You wake atop a stack of crates in the supply depot, morning horns echoing off the coral-white walls.",
+    narrative: "You wake atop a stack of crates in the supply depot loft as pre-dawn horns echo against the coral-white walls. Damp sea air drifts through the slats while you scoop up your ledger and stub of chalk beside a pouch of five coppers; quartermaster muster begins at first bell.",
   },
   {
     district: "The South Docks & Steel Docks",
@@ -21,7 +21,7 @@ export const CORAL_KEEP_BACKSTORIES: Backstory[] = [
     skills: ["free diving", "reef navigation"],
     combat: "Knife proficiency 10 (beginner)",
     startingLocation: "Steel Watch Naval Docks bunk",
-    narrative: "Salt spray stings your face as you rouse on a coil of rope beside the Steel Watch Docks.",
+    narrative: "Salt spray stings your face as you rouse on a coil of rope beside the Steel Watch Docks. The grey dawn promises calm seas while your diving knife and string of shells hang from your belt with two silvers in a pocket; you must catch the tide before the patrol ship departs.",
   },
   {
     district: "The Forge District",
@@ -33,7 +33,7 @@ export const CORAL_KEEP_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { glass: 10 },
     startingLocation: "Great Glassworks dormitory",
-    narrative: "You wake in the heat-hazed dormitory of the Great Glassworks, embers still glowing in the furnaces below.",
+    narrative: "Heat from the furnaces seeps into the Great Glassworks dormitory where you wake before sunrise. Embers glow below as you pull on leather gloves, take up your blowpipe, and pocket six coppers; the foreman rings the bell soon to begin shaping glass.",
   },
   {
     district: "The Old City",
@@ -44,7 +44,7 @@ export const CORAL_KEEP_BACKSTORIES: Backstory[] = [
     skills: ["busking", "pickpocketing"],
     combat: "Dagger proficiency 10 (beginner)",
     startingLocation: "Old Market Square stall",
-    narrative: "You blink awake beneath your stall in Old Market Square as merchants raise their awnings.",
+    narrative: "You blink awake beneath your stall in Old Market Square as merchants raise awnings in the cool dawn. Your lute and pouch of copper rings sit beside four coppers and threadbare clothes; crowds gather soon and you must tune before the square fills.",
   },
   {
     district: "The Northern Slums",
@@ -55,7 +55,7 @@ export const CORAL_KEEP_BACKSTORIES: Backstory[] = [
     skills: ["sneaking", "streetwise"],
     combat: "Club proficiency 10 (beginner)",
     startingLocation: "Thieves' Market shanty",
-    narrative: "You stir in a damp shanty behind the Thieves' Market, clutching the satchel you must deliver before dawn.",
+    narrative: "You stir in a damp shanty behind the Thieves' Market, clutching the hidden satchel that holds contraband and three coppers. A chill breeze slips through the boards while you pull on your cheap cloak; the contact expects the delivery before sunrise.",
   },
 ];
 

@@ -10,7 +10,7 @@ export const DRAGONS_REACH_ROAD_BACKSTORIES: Backstory[] = [
     skills: ["reading", "rumor gathering"],
     combat: "Untrained",
     startingLocation: "Guild Post steps",
-    narrative: "You wake on the steps of the Guild Post as dawn caravans creak into the plaza.",
+    narrative: "You wake on the steps of the Guild Post as dawn caravans creak into the plaza, the chill air filled with hoofbeats. A bundle of nails and quest parchment lie in your lap with four coppers in a pouch; notices must be posted before the guild opens.",
   },
   {
     district: "The Lakeside Quarter",
@@ -21,7 +21,7 @@ export const DRAGONS_REACH_ROAD_BACKSTORIES: Backstory[] = [
     skills: ["fishing", "scavenging"],
     combat: "Spear proficiency 10 (beginner)",
     startingLocation: "Fishermen's Docks",
-    narrative: "You yawn beside your boat at the Fishermen's Docks, lake mist drifting over the water.",
+    narrative: "You yawn beside your boat at the Fishermen's Docks, lake mist drifting over the water in the early light. Net and scale pouch rest at your feet with three coppers tied in a cord; you must cast off before the sun burns away the fog.",
   },
   {
     district: "The Artisan's Lane",
@@ -33,7 +33,7 @@ export const DRAGONS_REACH_ROAD_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { cooking: 10 },
     startingLocation: "Exotic Fruit Press",
-    narrative: "You wake to sticky sweet aromas in your workshop along the Artisan's Lane.",
+    narrative: "You wake to sticky sweet aromas in your workshop along the Artisan's Lane as sunlight filters through slatted shutters. A wooden press and bottle of syrup sit on the table with two silvers locked in a drawer; a caravan arrives by midday for the next batch.",
   },
 ];
 

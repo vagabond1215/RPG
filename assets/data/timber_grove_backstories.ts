@@ -10,7 +10,7 @@ export const TIMBER_GROVE_BACKSTORIES: Backstory[] = [
     skills: ["log rolling", "river sense"],
     combat: "Axe proficiency 10 (beginner)",
     startingLocation: "Riverside log jam",
-    narrative: "You wake on a damp log by the Lumberworks, river mist curling around your peavey hook.",
+    narrative: "You wake on a damp log by the Lumberworks while river mist curls around your peavey hook. Waterlogged boots drip beside a pouch of three coppers; the jam must be cleared before the sun climbs.",
   },
   {
     district: "The Mine",
@@ -21,7 +21,7 @@ export const TIMBER_GROVE_BACKSTORIES: Backstory[] = [
     skills: ["mining", "stone appraisal"],
     combat: "Pick proficiency 10 (beginner)",
     startingLocation: "Mine entrance camp",
-    narrative: "The scent of earth greets you as you rise from your bedroll near the mine entrance.",
+    narrative: "The scent of earth greets you as you rise from your bedroll near the mine entrance, dawn chill nipping your nose. Pickaxe and glowstone shard fit into your pack with five coppers in a pocket; the tunneling crew assembles at first light.",
   },
   {
     district: "Fields & Orchards",
@@ -33,7 +33,7 @@ export const TIMBER_GROVE_BACKSTORIES: Backstory[] = [
     combat: "Untrained",
     craftProficiencies: { cooking: 5 },
     startingLocation: "Orchard shed",
-    narrative: "You rouse in an orchard shed, sticky with sap and the buzz of waking insects.",
+    narrative: "You rouse in an orchard shed, sticky with sap as buzzing insects herald the warm morning. A drill and bucket of sap stand ready with two coppers in your belt; trees must be tapped before the day heats.",
   },
 ];
 
