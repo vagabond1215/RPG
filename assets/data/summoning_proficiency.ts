@@ -1,5 +1,8 @@
 // summoning_proficiency.ts — progression for Summoning based on effective use (TS/JS)
 
+// Key for accessing this proficiency on a member record
+export const SUMMONING_PROFICIENCY_KEY = "Summoning";
+
 /* ========================= Types ========================= */
 
 const r2 = (x: number) => Math.round(x * 100) / 100;
