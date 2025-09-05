@@ -14,6 +14,7 @@ export interface ArmorGainInput {
   DEX: number;           // actor dexterity
   AGI: number;           // actor agility
   pieces: number;        // number of equipped armor pieces of this type
+  totalPieces: number;   // total number of equipped armor pieces
   hasChest: boolean;     // true if chest/body piece is this armor type
 }
 
@@ -73,10 +74,10 @@ function gainArmorProficiency(
   input: ArmorGainInput,
   cfg: ArmorProgressionConfig
 ): number {
-  const { P, cap, actorLevel, enemyLevel, STR, DEX, AGI, pieces, hasChest } = input;
+  const { P, cap, actorLevel, enemyLevel, STR, DEX, AGI, pieces, totalPieces, hasChest } = input;
 
-  // Equipment requirement: at least four pieces including chest/body
-  if (pieces < 4 || !hasChest) return r2(P);
+  // Equipment requirement: majority of worn pieces including the chest/body
+  if (!hasChest || pieces <= totalPieces / 2) return r2(P);
 
   const F_level = levelFactor(actorLevel, enemyLevel, cfg);
   if (F_level <= 0) return r2(P);
@@ -143,6 +144,7 @@ const ARMOR_CFG_MAP: Record<ArmorProficiencyKey, ArmorProgressionConfig> = {
 export interface ApplyArmorGainParams {
   enemyLevel: number; // defeated enemy level
   pieces: number;     // number of equipped armor pieces of this type
+  totalPieces: number; // total number of equipped armor pieces
   hasChest: boolean;  // true if chest/body piece is this armor type
   cap?: number;       // optional proficiency cap override
   cfg?: ArmorProgressionConfig; // optional config override
@@ -154,7 +156,7 @@ function applyArmorProficiencyGain(
   params: ApplyArmorGainParams
 ): number {
   if (!character) return 0;
-  const { enemyLevel, pieces, hasChest, cap, cfg } = params;
+  const { enemyLevel, pieces, totalPieces, hasChest, cap, cfg } = params;
   const attrs = character.attributes?.current || {};
   const next = gainArmorProficiency(
     {
@@ -166,6 +168,7 @@ function applyArmorProficiencyGain(
       DEX: attrs.DEX ?? 0,
       AGI: attrs.AGI ?? 0,
       pieces,
+      totalPieces,
       hasChest,
     },
     cfg || ARMOR_CFG_MAP[key]
