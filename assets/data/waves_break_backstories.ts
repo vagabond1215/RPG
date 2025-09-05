@@ -16,7 +16,7 @@ export const WAVES_BREAK_BACKSTORIES: Backstory[] = [
   {
     district: "The Port District",
     background: "Fishmonger's assistant",
-    past: "Daughter of seasoned sailors, grew up gutting and selling catch on Fishmongers' Row.",
+    past: "[Race] daughter of seasoned sailors, grew up gutting and selling catch on Fishmongers' Row.",
     items: ["scale-stained apron", "gutting knife"],
     money: "5 cp",
     skills: ["filleting", "haggling"],
