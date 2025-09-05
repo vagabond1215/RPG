@@ -1157,16 +1157,6 @@ const elementColors = {
   Light: '#e5e4e2'
 };
 
-function getElementBackground(el) {
-  const rel = HYBRID_MAP[el];
-  if (rel) {
-    const c1 = elementColors[rel.parents[0]] || '#000';
-    const c2 = elementColors[rel.parents[1]] || '#000';
-    return `linear-gradient(to right, ${c1}, ${c2})`;
-  }
-  return elementColors[el] || 'var(--foreground)';
-}
-
 const schoolIcons = {
   Destructive: '💥',
   Enfeebling:
@@ -1177,27 +1167,11 @@ const schoolIcons = {
     '<span class="icon heal"><span class="arrow">+</span></span>',
   Summoning: '<span class="icon slime"></span>'
 };
-
-let spellSort = { mode: 'prof', dir: 'asc' };
-
-function getProficiencySortIcon(dir) {
-  const arrow = dir === 'desc' ? '↓' : '↑';
-  return (
-    `<span class="prof-icon">` +
-    `<svg viewBox="0 0 24 24"><path d="M10 3v18M14 3v18M3 10h18M3 14h18"/></svg>${arrow}</span>`
-  );
-}
-
-function getTypeSortIcon(dir) {
-  const arrow = dir === 'desc' ? '↓' : '↑';
-  return (
-    `<span class="type-icon">` +
-    `<svg viewBox="0 0 24 24">` +
-    `<g class="cw"><polyline points="23 4 23 10 17 10"/><path d="M3.51 9a9 9 0 0 1 14.13-5.36L23 10"/></g>` +
-    `<g class="ccw"><polyline points="1 20 1 14 7 14"/><path d="M20.49 15a9 9 0 0 1-14.13 5.36L1 14"/></g>` +
-    `</svg>${arrow}</span>`
-  );
-}
+const elementOrder = ['Stone', 'Water', 'Wind', 'Fire', 'Ice', 'Thunder', 'Light', 'Dark'];
+let spellFilters = {
+  elements: Object.fromEntries(elementOrder.map(e => [e, true])),
+  schools: Object.fromEntries(Object.keys(schoolIcons).map(s => [s, true])),
+};
 
 function proficiencyToTierLabel(prof) {
   if (prof === 1) return 'Cantrips';
@@ -1622,7 +1596,6 @@ function showCharacterSelectUI() {
           ...defaultProficiencies,
           ...currentProfile.characters[id]
         });
-        spellSort = currentCharacter.spellSort && 'mode' in currentCharacter.spellSort ? currentCharacter.spellSort : { mode: 'prof', dir: 'asc' };
         saveProfiles();
         showMainUI();
       });
@@ -1719,7 +1692,6 @@ function showCharacterUI() {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
     currentCharacter = null;
-    spellSort = { mode: 'prof', dir: 'asc' };
     saveProfiles();
     showMainUI();
   });
@@ -1745,9 +1717,8 @@ function showSpellbookUI() {
   if (!currentCharacter) return;
   updateScale();
   showBackButton();
-  const spellsByElement = {};
-  const baseElements = ['Stone','Water','Wind','Fire','Ice','Thunder','Dark','Light'];
-  const elements = baseElements.concat(HYBRID_RELATIONS.map(r => r.name));
+
+  const unlocked = [];
   for (const spell of SPELLBOOK) {
     const relation = HYBRID_MAP[spell.element];
     const schoolKey = schoolProficiencyMap[spell.school];
@@ -1766,88 +1737,62 @@ function showSpellbookUI() {
       elemValue = currentCharacter[profKey] ?? 0;
     }
     if (parentUnlocked && elemValue >= spell.proficiency && schoolValue >= spell.proficiency) {
-      (spellsByElement[spell.element] ||= []).push(spell);
+      unlocked.push(spell);
     }
   }
-  const profActive = spellSort.mode === 'prof' ? ' active' : '';
-  const typeActive = spellSort.mode === 'school' ? ' active' : '';
-  const profIcon = getProficiencySortIcon(spellSort.mode === 'prof' ? spellSort.dir : 'asc');
-  const typeIcon = getTypeSortIcon(spellSort.mode === 'school' ? spellSort.dir : 'asc');
-  let html = `<div class="spellbook-screen"><h1><span class="spellbook-icon">📖</span>Spellbook<span class="sort-buttons global-sort"><button class="sort-button${profActive}" data-mode="prof" aria-label="Sort by proficiency">${profIcon}</button><button class="sort-button${typeActive}" data-mode="school" aria-label="Sort by type">${typeIcon}</button></span></h1>`;
-  let any = false;
-  elements.forEach(el => {
-    const spells = spellsByElement[el];
-    if (!spells || !spells.length) return;
-    any = true;
-    const eIcon = elementIcons[el] || '';
-    const bg = getElementBackground(el);
-    html += `<section class="spellbook-element"><h2 data-el="${el}" style="background:${bg};"><span class="element-title"><span class="element-icon">${eIcon}</span>${el}</span></h2><div class="spellbook-content">`;
 
-    let grouped = {};
-    if (spellSort.mode === 'school') {
-      spells.sort((a, b) => a.school.localeCompare(b.school) || a.proficiency - b.proficiency);
-      if (spellSort.dir === 'desc') spells.reverse();
-      for (const spell of spells) {
-        (grouped[spell.school] ||= []).push(spell);
-      }
-      Object.keys(grouped)
-        .sort((a, b) => (spellSort.dir === 'asc' ? a.localeCompare(b) : b.localeCompare(a)))
-        .forEach(key => {
-          const sIcon = schoolIcons[key] || '';
-          html += `<h3 class="spell-subheading"><span class="school-icon">${sIcon}</span>${key}</h3><ul class="spell-list">`;
-          grouped[key].forEach(spell => {
-            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button></li>`;
-          });
-          html += '</ul>';
-        });
-    } else {
-      spells.sort((a, b) => (spellSort.dir === 'asc' ? a.proficiency - b.proficiency : b.proficiency - a.proficiency));
-      for (const spell of spells) {
-        (grouped[spell.proficiency] ||= []).push(spell);
-      }
-      Object.keys(grouped)
-        .map(Number)
-        .sort((a, b) => (spellSort.dir === 'asc' ? a - b : b - a))
-        .forEach(key => {
-          const label = proficiencyToTierLabel(key);
-          html += `<h3 class="spell-subheading">${label}</h3><ul class="spell-list">`;
-          grouped[key].forEach(spell => {
-            html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}</button></li>`;
-          });
-          html += '</ul>';
-        });
-    }
-    html += '</div></section>';
+  const filtered = unlocked.filter(
+    s => (spellFilters.elements[s.element] ?? true) && (spellFilters.schools[s.school] ?? true)
+  );
+
+  filtered.sort((a, b) => {
+    if (a.proficiency !== b.proficiency) return a.proficiency - b.proficiency;
+    const ai = elementOrder.indexOf(a.element);
+    const bi = elementOrder.indexOf(b.element);
+    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
   });
-  if (!any) {
+
+  let html = `<div class="spellbook-screen"><div class="spellbook-list"><h1><span class="spellbook-icon">📖</span>Spellbook</h1>`;
+  if (filtered.length) {
+    html += '<ul class="spell-list">';
+    filtered.forEach(spell => {
+      const eIcon = elementIcons[spell.element] || '';
+      const sIcon = schoolIcons[spell.school] || '';
+      html += `<li class="spell-item"><button class="spell-name" data-spell-id="${spell.id}">${spell.name}<span class="element-icon">${eIcon}</span><span class="school-icon">${sIcon}</span></button></li>`;
+    });
+    html += '</ul>';
+  } else {
     html += '<p>No spells known.</p>';
   }
-  html += '</div>';
+  html += '</div><div class="spellbook-filters"><div class="filter-group">';
+  elementOrder.forEach(el => {
+    const eIcon = elementIcons[el] || '';
+    const active = spellFilters.elements[el];
+    const cls = active ? 'filter-toggle' : 'filter-toggle off';
+    html += `<button class="${cls}" data-filter-type="element" data-filter="${el}" aria-label="${el}">${eIcon}</button>`;
+  });
+  html += '</div><div class="filter-group">';
+  Object.keys(schoolIcons).forEach(sc => {
+    const sIcon = schoolIcons[sc];
+    const active = spellFilters.schools[sc];
+    const cls = active ? 'filter-toggle' : 'filter-toggle off';
+    html += `<button class="${cls}" data-filter-type="school" data-filter="${sc}" aria-label="${sc}">${sIcon}</button>`;
+  });
+  html += '</div></div></div>';
   setMainHTML(html);
+
   document.querySelectorAll('.spell-name').forEach(btn => {
     const id = btn.dataset.spellId;
     const spell = SPELLBOOK.find(s => s.id === id);
     btn.addEventListener('click', () => showSpellDetails(spell));
   });
-  document.querySelectorAll('.global-sort .sort-button').forEach(btn => {
-    const mode = btn.dataset.mode;
+
+  document.querySelectorAll('.filter-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
-      if (spellSort.mode === mode) {
-        spellSort.dir = spellSort.dir === 'asc' ? 'desc' : 'asc';
-      } else {
-        spellSort.mode = mode;
-        spellSort.dir = 'asc';
-      }
-      if (currentCharacter) {
-        currentCharacter.spellSort = spellSort;
-        saveProfiles();
-      }
+      const type = btn.dataset.filterType;
+      const key = btn.dataset.filter;
+      spellFilters[type + 's'][key] = !spellFilters[type + 's'][key];
       showSpellbookUI();
-    });
-  });
-  document.querySelectorAll('.spellbook-element h2').forEach(h => {
-    h.addEventListener('click', () => {
-      h.parentElement.classList.toggle('collapsed');
     });
   });
 }
@@ -2606,9 +2551,7 @@ function finalizeCharacter(character) {
   assignMagicAptitudes(newChar);
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;
-  newChar.spellSort = { mode: 'prof', dir: 'asc' };
   currentCharacter = newChar;
-  spellSort = newChar.spellSort;
   saveProfiles();
   updateScale();
   showCharacter();
@@ -2623,7 +2566,6 @@ function loadCharacter() {
       ...defaultProficiencies,
       ...currentProfile.characters[charId]
     });
-    spellSort = currentCharacter.spellSort && 'mode' in currentCharacter.spellSort ? currentCharacter.spellSort : { mode: 'prof', dir: 'asc' };
     showCharacter();
   } else if (localStorage.getItem(TEMP_CHARACTER_KEY)) {
     startCharacterCreation();
