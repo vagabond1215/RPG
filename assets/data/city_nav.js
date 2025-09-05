@@ -110,6 +110,11 @@ export const CITY_NAV = {
             { name: "Governor's Keep", type: "building", target: "Governor's Keep", icon: "assets/images/icons/waves_break/Governor's Keep.png" },
             { name: "Crafting Quarter", type: "building", target: "Crafting Quarter", icon: "assets/images/icons/waves_break/Crafting Quarter.png" },
             { name: "Mercantile Exchange", type: "building", target: "Mercantile Exchange", icon: "assets/images/icons/waves_break/Mercantile Exchange.png" },
+            { name: "Navigator's Trust & Chart House", type: "building", target: "Navigator's Trust & Chart House", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Highward Vintners' Salon", type: "building", target: "Highward Vintners' Salon", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Marble Finch Supper Club", type: "building", target: "Marble Finch Supper Club", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Aurelian Apothecarium & Perfumery", type: "building", target: "Aurelian Apothecarium & Perfumery", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Highward Terraces", type: "building", target: "Highward Terraces", icon: "assets/images/icons/waves_break/Default.png" },
             { name: "Temple of the Tides", type: "building", target: "Temple of the Tides", icon: "assets/images/icons/waves_break/Temple of the Tides.png" },
             { name: "Hall of Records", type: "building", target: "Hall of Records", icon: "assets/images/icons/waves_break/Hall of Records.png" },
             { name: "The Port District", type: "district", target: "The Port District", icon: "assets/images/icons/waves_break/Port District.png" },
@@ -132,6 +137,16 @@ export const CITY_NAV = {
             { name: "Salted Hide Tannery", type: "building", target: "Salted Hide Tannery", icon: "assets/images/icons/waves_break/Salted Hide Tannery.png" },
             { name: "Tideglass Alchemical Atelier", type: "building", target: "Tideglass Alchemical Atelier", icon: "assets/images/icons/waves_break/Tideglass Alchemical Atelier.png" },
             { name: "Arc Runes Enchantery", type: "building", target: "Arc Runes Enchantery", icon: "assets/images/icons/waves_break/Arc Runes Enchantery.png" },
+            { name: "Seawind Sailmakers' Hall", type: "building", target: "Seawind Sailmakers' Hall", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Brinemarrow Press", type: "building", target: "Brinemarrow Press", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Tern Hook Butchery", type: "building", target: "Tern Hook Butchery", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Driftwood Smokehouse", type: "building", target: "Driftwood Smokehouse", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Gull's Galley", type: "building", target: "Gull's Galley", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Quayside Greens Market", type: "building", target: "Quayside Greens Market", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Dockside Exchange Plaza", type: "building", target: "Dockside Exchange Plaza", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Saltroot Remedies", type: "building", target: "Saltroot Remedies", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Seastone Arena", type: "building", target: "Seastone Arena", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Tern Harbor Commons", type: "building", target: "Tern Harbor Commons", icon: "assets/images/icons/waves_break/Default.png" },
               { name: "The Port District", type: "district", target: "The Port District", icon: "assets/images/icons/waves_break/Port District.png" },
               { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" },
               { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" }
@@ -146,7 +161,12 @@ export const CITY_NAV = {
               { name: "Greensoul Monastery", type: "building", target: "Greensoul Monastery", icon: "assets/images/icons/waves_break/Greensoul Monastery.png" },
               { name: "Royal Botanical Gardens", type: "building", target: "Royal Botanical Gardens", icon: "assets/images/icons/waves_break/Royal Botanical Gardens.png" },
               { name: "Skyline Academy", type: "building", target: "Skyline Academy", icon: "assets/images/icons/waves_break/Skyline Academy.png" },
+              { name: "Greensoul Press & Papermill", type: "building", target: "Greensoul Press & Papermill", icon: "assets/images/icons/waves_break/Default.png" },
               { name: "Greensoul Amphitheater", type: "building", target: "Greensoul Amphitheater", icon: "assets/images/icons/waves_break/Greensoul Amphitheater.png" },
+              { name: "Sunleaf Terrace", type: "building", target: "Sunleaf Terrace", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Celestine Bathhouse & Springs", type: "building", target: "Celestine Bathhouse & Springs", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Aurora Amphitheater", type: "building", target: "Aurora Amphitheater", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Gilded Lyre Gallery", type: "building", target: "Gilded Lyre Gallery", icon: "assets/images/icons/waves_break/Default.png" },
             { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" }
           ]
         },
@@ -158,6 +178,8 @@ export const CITY_NAV = {
           points: [
             { name: "Harbor Hearth Bakery", type: "building", target: "Harbor Hearth Bakery", icon: "assets/images/icons/waves_break/Harbor Hearth Bakery.png" },
             { name: "Tidehold Granary & Provisioners", type: "building", target: "Tidehold Granary & Provisioners", icon: "assets/images/icons/waves_break/Tidehold Granary and Provisioners.png" },
+            { name: "Garden Gate Brewery & Taproom", type: "building", target: "Garden Gate Brewery & Taproom", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Wisteria Pavilion", type: "building", target: "Wisteria Pavilion", icon: "assets/images/icons/waves_break/Default.png" },
               { name: "Bloomstage Theater", type: "building", target: "Bloomstage Theater", icon: "assets/images/icons/waves_break/Blooomstage Theater.png" },
               { name: "The Velvet Petal Brothel", type: "building", target: "The Velvet Petal Brothel", icon: "assets/images/icons/waves_break/The Velvet Petal Brothel.png" },
               { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" }
@@ -355,6 +377,41 @@ Coins clink in a constant rhythm that sets the market's pulse.`,
         produces: { resources: [], commodities: ["trade contracts"], luxuries: [] },
         consumes: { resources: [], commodities: ["market goods"], luxuries: ["rare items"] }
       },
+      "Navigator's Trust & Chart House": {
+        travelPrompt: "Exit to",
+        description: `Map-lined walls chart shifting shoals while brokers tally risks by lamplight.
+Captains unfurl contracts beside ink-stained tables, weighing fortunes against the sea.`,
+        exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Highward Vintners' Salon": {
+        travelPrompt: "Exit to",
+        description: `Polished oak racks cradle bottles from distant vineyards and the city's own terraces.
+Stewards pour samples as merchants whisper over ledgers and crystal goblets.`,
+        exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Marble Finch Supper Club": {
+        travelPrompt: "Exit to",
+        description: `Gilded murals shimmer above linen-draped tables set for ten courses.
+        Laughter of magistrates mingles with the soft clink of crystal and silver.`,
+        exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Aurelian Apothecarium & Perfumery": {
+        travelPrompt: "Exit to",
+        description: `Glass decanters of rare oils line marble shelves in orderly rows.
+        A hush hangs as perfumers blend bespoke scents for discerning patrons.`,
+        exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Highward Terraces": {
+        travelPrompt: "Exit to",
+        description: `Ivy-clad townhouses enclose quiet courtyards shaded by cypress.
+        Guarded gates separate noble families from the bustle beyond.`,
+        exits: [ { name: "The Upper Ward", target: "The Upper Ward" } ],
+        interactions: []
+      },
       "Temple of the Tides": {
         travelPrompt: "Exit to",
         description: `Pushing aside a curtain of beads, the Temple of the Tides opens around you.
@@ -477,6 +534,76 @@ Enchanters chant softly as glyphs flare to life around you.`,
         produces: { resources: [], commodities: [], luxuries: ["enchanted items"] },
         consumes: { resources: ["mana crystals"], commodities: [], luxuries: [] }
       },
+      "Seawind Sailmakers' Hall": {
+        travelPrompt: "Exit to",
+        description: `Long lofts hang with canvas while salty breezes billow through open rafters.
+Riggers measure and stitch sailcloth, their needles flashing like gulls over the harbor.`,
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Brinemarrow Press": {
+        travelPrompt: "Exit to",
+        description: `Steam hisses from iron vats rendering fish bones into glistening oil and meal.
+Dockhands haul pungent barrels destined for lamps and fertilized fields.`,
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Tern Hook Butchery": {
+        travelPrompt: "Exit to",
+        description: `Hooks glint above brined slabs while cleavers thud in steady rhythm.
+        Sailors trade coin for cuts wrapped quick before the day's catch spoils.`,
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Driftwood Smokehouse": {
+        travelPrompt: "Exit to",
+        description: `Tar-stained sheds exhale fragrant plumes over hanging strips of fish and pork.
+        Smoke curls through rafters as salted meats cure for long voyages.`,
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Gull's Galley": {
+        travelPrompt: "Exit to",
+        description: `Steam from chowder pots fogs the windows while fried skate scents the air.
+        Stools crowd the counter where dockhands wolf down meals between tides.`,
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Quayside Greens Market": {
+        travelPrompt: "Exit to",
+        description: `Crates burst with leafy bundles and herb clutches fresh from nearby farms.
+        Vendors barter over dew-damp produce while gulls eye the spoils.`,
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Dockside Exchange Plaza": {
+        travelPrompt: "Exit to",
+        description: `Canvas awnings shade stalls stacked with rope, timber, spices, and curios.
+        Cart wheels creak over cobbles as deals are struck beneath flapping flags.`,
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Saltroot Remedies": {
+        travelPrompt: "Exit to",
+        description: `Shelves of jars and dried roots promise quick cures for bruises and sea sores.
+        A kindly herbalist measures tonics while gossip drifts with the scent of camphor.`,
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Seastone Arena": {
+        travelPrompt: "Exit to",
+        description: `Carved basalt walls ring a sand-strewn pit where fighters trade blows.
+        Crowds roar as bets change hands and champions chase fleeting glory.`,
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: []
+      },
+      "Tern Harbor Commons": {
+        travelPrompt: "Exit to",
+        description: `Weathered rowhouses cluster around shared wells and washing lines.
+        Children dart through narrow alleys while nets dry across quiet courtyards.`,
+        exits: [ { name: "Little Terns", target: "Little Terns" } ],
+        interactions: []
+      },
       "Greensoul Monastery": {
         travelPrompt: "Exit to",
         description: `Climbing the worn steps, you enter Greensoul Monastery.
@@ -501,11 +628,46 @@ Ink-stained students glance up, surprised by your arrival.`,
         exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
         interactions: []
       },
+      "Greensoul Press & Papermill": {
+        travelPrompt: "Exit to",
+        description: `Waterwheels churn pulped fibers into creamy sheets drying on lattice racks.
+Scribes browse ink and parchment where the scent of linen blends with river mist.`,
+        exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
       "Greensoul Amphitheater": {
         travelPrompt: "Exit to",
         description: `Wandering through arching hedges, you find the Greensoul Amphitheater.
 Stone benches climb the hillside as performers rehearse beneath open sky.
 A soft breeze carries distant applause across the stage.`,
+        exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
+        interactions: []
+      },
+      "Sunleaf Terrace": {
+        travelPrompt: "Exit to",
+        description: `Terraced lawns serve herb-laced dishes beneath swaying pergolas.
+        Scholars linger over tea while city vistas stretch toward the sea.`,
+        exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Celestine Bathhouse & Springs": {
+        travelPrompt: "Exit to",
+        description: `Mineral pools steam beneath domed ceilings painted with stars.
+        Attendants offer scented towels as patrons unwind in quiet alcoves.`,
+        exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Aurora Amphitheater": {
+        travelPrompt: "Exit to",
+        description: `Stone tiers face a hillside stage where orchestras play under open sky.
+        Nightfall paints the scene in hues of purple and gold.`,
+        exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
+        interactions: []
+      },
+      "Gilded Lyre Gallery": {
+        travelPrompt: "Exit to",
+        description: `Marble halls display canvases and lyres gilded in delicate filigree.
+        Patrons sip wine while chamber music echoes softly.`,
         exits: [ { name: "Greensoul Hill", target: "Greensoul Hill" } ],
         interactions: []
       },
@@ -540,6 +702,20 @@ The rustle of kernels echoes beneath the timber roof.`,
         interactions: [ { name: "Trade", action: "trade" } ],
         produces: { resources: [], commodities: [], luxuries: [] },
         consumes: { resources: ["grain"], commodities: [], luxuries: [] }
+      },
+      "Garden Gate Brewery & Taproom": {
+        travelPrompt: "Exit to",
+        description: `Copper kettles bubble behind a cedar bar, filling the air with malt and wildflower honey.
+Gardeners and actors toast under vine-strung beams as fresh ale foams in stoneware mugs.`,
+        exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
+      },
+      "Wisteria Pavilion": {
+        travelPrompt: "Exit to",
+        description: `Lantern-lit verandas overlook ponds draped in fragrant wisteria.
+        Servers pair seasonal fare with garden wines under swaying blossoms.`,
+        exits: [ { name: "The Lower Gardens", target: "The Lower Gardens" } ],
+        interactions: [ { name: "Trade", action: "trade" } ]
       },
       "Bloomstage Theater": {
         travelPrompt: "Exit to",
