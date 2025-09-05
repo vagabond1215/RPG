@@ -1625,12 +1625,8 @@ function showCharacterUI() {
       <div>Race: ${c.race}</div>
       <div>Sex: ${c.sex}</div>
       <div class="physical-group">
-        <div>Skin Color: <span class="color-box" style="background:${c.skinColor}"></span></div>
         ${c.accentColor ? `<div>Accents: <span class="color-box" style="background:${c.accentColor}"></span></div>` : ''}
         ${c.scaleColor ? `<div>Scales: <span class="color-box" style="background:${c.scaleColor}"></span></div>` : ''}
-        <div>Hair Color: <span class="color-box" style="background:${c.hairColor}"></span></div>
-      <div>Eye Color: <span class="color-box" style="background:${c.eyeColor}"></span></div>
-      <div>Height: ${formatHeight(c.height)}</div>
       </div>
       ${c.guildRank && c.guildRank !== 'None' ? `<div>Guild Rank: ${c.guildRank}</div>` : ''}
       ${c.adventurersGuildRank && c.adventurersGuildRank !== 'None' ? `<div>Adventurer Rank: ${c.adventurersGuildRank}</div>` : ''}
@@ -1641,21 +1637,6 @@ function showCharacterUI() {
   const statsList = ['STR','DEX','CON','VIT','AGI','INT','WIS','CHA','LCK']
     .map(attr => `<li>${attr}: ${stats[attr] ?? 0}</li>`)
     .join('');
-  const statsHTML = `<h2>Current Stats</h2><ul class="stats-list">${statsList}</ul>`;
-  const backstoryHTML = c.backstory
-    ? `<div class="backstory-block"><h2>Backstory</h2><p><strong>${c.backstory.background}</strong> - ${c.backstory.past}</p><p>${c.backstory.narrative}</p></div>`
-    : '';
-  const employmentHTML = (c.employment && c.employment.length)
-    ? `<div class="employment-block"><h2>Employment</h2><ul>${c.employment.map(e => {
-        const data = JOB_ROLE_DATA[e.role] || {};
-        const schedule = e.schedule || data.schedule;
-        const quota = e.quota || data.quota;
-        let extra = '';
-        if (schedule) extra = `Hours: ${schedule}`;
-        else if (quota != null) extra = `Quota: ${(e.progress || 0)} / ${quota}`;
-        return `<li>${e.role} at ${e.building} (${e.location})${extra ? ' - ' + extra : ''}</li>`;
-      }).join('')}</ul></div>`
-    : '';
   const resourceBars = (() => {
     const hpPct = c.maxHP ? (c.hp / c.maxHP) * 100 : 0;
     const mpPct = c.maxMP ? (c.mp / c.maxMP) * 100 : 0;
@@ -1671,13 +1652,27 @@ function showCharacterUI() {
       <p class="xp-display">XP: ${c.xp} / ${xpNeed}</p>
     `;
   })();
+  const statsHTML = `<h2>Current Stats</h2><div class="stats-resource-grid"><ul class="stats-list">${statsList}</ul><div class="resource-column">${resourceBars}</div></div>`;
+  const backstoryHTML = c.backstory
+    ? `<div class="backstory-block"><h2>Backstory</h2><p><strong>${c.backstory.background}</strong> - ${c.backstory.past}</p><p>${c.backstory.narrative}</p></div>`
+    : '';
+  const employmentHTML = (c.employment && c.employment.length)
+    ? `<div class="employment-block"><h2>Employment</h2><ul>${c.employment.map(e => {
+        const data = JOB_ROLE_DATA[e.role] || {};
+        const schedule = e.schedule || data.schedule;
+        const quota = e.quota || data.quota;
+        let extra = '';
+        if (schedule) extra = `Hours: ${schedule}`;
+        else if (quota != null) extra = `Quota: ${(e.progress || 0)} / ${quota}`;
+        return `<li>${e.role} at ${e.building} (${e.location})${extra ? ' - ' + extra : ''}</li>`;
+      }).join('')}</ul></div>`
+    : '';
   setMainHTML(`
     <div class="character-profile">
       <h1>${c.name}</h1>
       <div class="profile-grid">
         <div class="portrait-section">
           <div class="portrait-wrapper">${portrait}</div>
-          ${resourceBars}
         </div>
         <div>
           ${info}
