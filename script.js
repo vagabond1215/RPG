@@ -2084,16 +2084,12 @@ function startCharacterCreation() {
       type: 'select',
       options: ['Male', 'Female']
     },
-    { key: 'accentColor', label: 'Choose your accent color', type: 'color', races: ['Cait Sith'] },
-    { key: 'scaleColor', label: 'Choose your scale color', type: 'color', races: ['Salamander'] },
     { key: 'characterImage', label: 'Choose your character', type: 'select' }
   ];
 
   const FIELD_STEP_LABELS = {
     race: 'Race',
     sex: 'Sex',
-    accentColor: 'Accents',
-    scaleColor: 'Scales',
     characterImage: 'Character'
   };
 
@@ -2153,9 +2149,8 @@ function startCharacterCreation() {
       if (field && field.key === 'location' && character.location) {
         const loc = LOCATIONS[character.location];
         if (!loc) return {};
-        const imageHTML = `<img class="race-image" src="${loc.map}" alt="${character.location}">`;
         const descHTML = `<div class="race-description">${loc.description || ''}</div>`;
-        return { imageHTML, descHTML };
+        return { descHTML };
       }
       if (field && field.key === 'backstory' && character.backstory) {
         const bs = BACKSTORY_MAP[character.location] || [];
@@ -2179,12 +2174,11 @@ function startCharacterCreation() {
         .map(([k, v]) => `<li>${k}: ${v}</li>`)
         .join('');
       const statsHTML = `<div class="race-stats"><ul>${attrList}</ul><ul>${resList}</ul></div>`;
-      const imageSrc = RACE_IMAGES[character.race];
-      const imageHTML = imageSrc ? `<img class="race-image" src="${imageSrc}" alt="${character.race}">` : '';
       const descHTML = `<div class="race-description">${RACE_DESCRIPTIONS[character.race] || ''}</div>`;
-      return { statsHTML, imageHTML, descHTML };
+      return { statsHTML, descHTML };
     })();
-    const { statsHTML = '', imageHTML = '', descHTML = '' } = displayData;
+    const { statsHTML = '', descHTML = '' } = displayData;
+    const statsSection = field && field.key === 'race' ? statsHTML : '';
 
     if (field) {
       let inputHTML = '';
@@ -2277,10 +2271,6 @@ function startCharacterCreation() {
           colors = eyeColorOptionsByRace[character.race] || humanEyeColors;
         } else if (field.key === 'skinColor') {
           colors = skinColorOptionsByRace[character.race] || humanSkinColors;
-        } else if (field.key === 'accentColor') {
-          colors = accentColorOptionsByRace[character.race] || [];
-        } else if (field.key === 'scaleColor') {
-          colors = scaleColorOptionsByRace[character.race] || [];
         }
         colors = colors.slice().sort();
         let value = character[field.key];
@@ -2300,7 +2290,7 @@ function startCharacterCreation() {
       }
 
       setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-right"><div class="cc-options">${inputHTML}</div>${statsHTML}</div></div><div class="cc-info">${descHTML}${imageHTML}</div></div>`
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-right"><div class="cc-options">${inputHTML}</div>${statsSection}</div></div><div class="cc-info">${descHTML}</div></div>`
       );
       normalizeOptionButtonWidths();
 
@@ -2384,10 +2374,6 @@ function startCharacterCreation() {
           colors = eyeColorOptionsByRace[character.race] || humanEyeColors;
         } else if (field.key === 'skinColor') {
           colors = skinColorOptionsByRace[character.race] || humanSkinColors;
-        } else if (field.key === 'accentColor') {
-          colors = accentColorOptionsByRace[character.race] || [];
-        } else if (field.key === 'scaleColor') {
-          colors = scaleColorOptionsByRace[character.race] || [];
         }
         colors = colors.slice().sort();
         let index = colors.indexOf(character[field.key]);
@@ -2422,7 +2408,7 @@ function startCharacterCreation() {
         ] || [];
       const placeholderName = nameList[0] || 'Name';
       setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-right"><div class="cc-options name-entry"><input type="text" id="name-input" value="${nameVal}" placeholder="${placeholderName}"><button id="name-random" class="dice-button" aria-label="Randomize Name">🎲</button></div>${statsHTML}</div></div><div class="cc-info">${descHTML}${imageHTML}</div></div>`
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-right"><div class="cc-options name-entry"><input type="text" id="name-input" value="${nameVal}" placeholder="${placeholderName}"><button id="name-random" class="dice-button" aria-label="Randomize Name">🎲</button></div>${statsSection}</div></div><div class="cc-info">${descHTML}</div></div>`
       );
       normalizeOptionButtonWidths();
       const nameInput = document.getElementById('name-input');
