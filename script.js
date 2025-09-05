@@ -1278,7 +1278,8 @@ function showNavigation() {
         const accessible = new Set(districts.map(d => d.name).concat(pos.district));
         const fontSize =
           parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
-        const size = 5 * fontSize;
+        // Increase spacing so district nodes do not overlap and connection lines remain visible
+        const size = 12 * fontSize;
         const nodes = allNames.map(name => {
           const coords = layout.positions[name] || [0, 0];
           const [row, col] = coords;
