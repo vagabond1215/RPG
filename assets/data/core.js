@@ -113,7 +113,8 @@ export const characterTemplate = {
     tags: []
   },
   backstory: null,
-  spawnInfoShown: false
+  spawnInfoShown: false,
+  position: null
 };
 
 // ---- Combat / Utility Function Stubs ----

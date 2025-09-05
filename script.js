@@ -1246,15 +1246,25 @@ function showNavigation() {
       );
     });
     const hours = building.hours;
-    const descriptionHTML = building.description ? `<p class="building-description">${building.description}</p>` : '';
+    const descText = (!currentCharacter.spawnInfoShown && currentCharacter.backstory)
+      ? currentCharacter.backstory.narrative
+      : building.description;
+    const descriptionHTML = descText ? `<p class="building-description">${descText}</p>` : '';
+    const spawnInfo = (!currentCharacter.spawnInfoShown && currentCharacter.backstory)
+      ? `<div class="spawn-info"><p><strong>Background:</strong> ${currentCharacter.backstory.background}. ${currentCharacter.backstory.past}</p></div>`
+      : '';
     const hoursText = hours
       ? hours.open === '00:00' && hours.close === '24:00'
         ? 'Open 24 hours'
         : `Open ${hours.open}–${hours.close}`
       : '';
     setMainHTML(
-      `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${pos.building}</h2>${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${pos.building}</h2>${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}${spawnInfo}<div class="option-grid">${buttons.join('')}</div></div>`
     );
+    if (!currentCharacter.spawnInfoShown && currentCharacter.backstory) {
+      currentCharacter.spawnInfoShown = true;
+      saveProfiles();
+    }
   } else {
     const district = cityData.districts[pos.district];
     const exits = [];
@@ -1359,9 +1369,11 @@ function showNavigation() {
     const description = pos.previousDistrict && district.descriptions
       ? district.descriptions[pos.previousDistrict]
       : null;
-    const heading = description || pos.district;
+    const heading = (!currentCharacter.spawnInfoShown && currentCharacter.backstory)
+      ? currentCharacter.backstory.narrative
+      : (description || pos.district);
     const spawnInfo = (!currentCharacter.spawnInfoShown && currentCharacter.backstory)
-      ? `<div class="spawn-info"><p>${currentCharacter.backstory.narrative}</p><p><strong>Background:</strong> ${currentCharacter.backstory.background}. ${currentCharacter.backstory.past}</p></div>`
+      ? `<div class="spawn-info"><p><strong>Background:</strong> ${currentCharacter.backstory.background}. ${currentCharacter.backstory.past}</p></div>`
       : '';
     setMainHTML(
       `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${heading}</h2>${spawnInfo}<div class="option-grid">${buttons.join('')}</div></div>`
@@ -2403,6 +2415,26 @@ function finalizeCharacter(character) {
   const bs = BACKSTORY_MAP[character.location];
   if (bs && bs.length) {
     newChar.backstory = bs[Math.floor(Math.random() * bs.length)];
+    const cityData = CITY_NAV[character.location];
+    if (cityData) {
+      const district = newChar.backstory.district;
+      let building = null;
+      if (newChar.backstory.startingLocation && cityData.buildings) {
+        const startLower = newChar.backstory.startingLocation.toLowerCase();
+        for (const name of Object.keys(cityData.buildings)) {
+          if (startLower.includes(name.toLowerCase())) {
+            building = name;
+            break;
+          }
+        }
+      }
+      newChar.position = {
+        city: character.location,
+        district: district || (cityData ? Object.keys(cityData.districts)[0] : null),
+        building,
+        previousDistrict: null,
+      };
+    }
   }
   assignMagicAptitudes(newChar);
   currentProfile.characters[id] = newChar;
