@@ -987,6 +987,8 @@ The portcullis creaks overhead, ready to drop at a moment's alarm.`,
         travelPrompt: "Exit to",
         description: `Approaching the South Gate, you feel the city's murmur fade behind you.
 Sea breezes slip through the archway, carrying scents of distant orchards.
+Roads diverge here—one bending back toward the High Road District's busy yards,
+the other spilling out into the open Farmlands.
 Guards lean on spears, their gazes tracking every traveler who passes.`,
         exits: [
           { name: "The High Road District", target: "The High Road District" },
