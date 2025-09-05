@@ -862,6 +862,17 @@ const RACE_IMAGES = {
   Halfling: 'assets/images/Race%20Photos/Halfling%20Male%20and%20Female.png'
 };
 
+const CHARACTER_IMAGE_FILES = {
+  Human: { Male: ['1.png'], Female: ['1.png'] },
+  Elf: { Male: ['1.png'], Female: ['1.png'] },
+  'Dark Elf': { Male: ['1.png'], Female: ['1.png'] },
+  Dwarf: { Male: ['1.png'], Female: ['1.png'] },
+  'Cait Sith': { Male: ['1.png'], Female: ['1.png'] },
+  Salamander: { Male: ['1.png'], Female: ['1.png'] },
+  Gnome: { Male: ['1.png'], Female: ['1.png'] },
+  Halfling: { Male: ['1.png'], Female: ['1.png'] }
+};
+
 // Default proficiency values for new characters
 const defaultProficiencies = {
   stone: 0,
@@ -2041,6 +2052,12 @@ function startCharacterCreation() {
     options: Object.keys(LOCATIONS).filter(l => l !== 'Duvilia Kingdom')
   };
 
+  const backstoryField = {
+    key: 'backstory',
+    label: 'Choose your backstory',
+    type: 'select'
+  };
+
   const fields = [
     {
       key: 'race',
@@ -2054,34 +2071,17 @@ function startCharacterCreation() {
       type: 'select',
       options: ['Male', 'Female']
     },
-    { key: 'skinColor', label: 'Choose your skin color', type: 'color' },
     { key: 'accentColor', label: 'Choose your accent color', type: 'color', races: ['Cait Sith'] },
     { key: 'scaleColor', label: 'Choose your scale color', type: 'color', races: ['Salamander'] },
-    { key: 'hairColor', label: 'Choose your hair color', type: 'color' },
-    { key: 'eyeColor', label: 'Choose your eye color', type: 'color' },
-    { key: 'height', label: 'Choose your height', type: 'range' }
+    { key: 'characterImage', label: 'Choose your character', type: 'select' }
   ];
 
   const FIELD_STEP_LABELS = {
     race: 'Race',
     sex: 'Sex',
-    skinColor: 'Skin',
     accentColor: 'Accents',
     scaleColor: 'Scales',
-    hairColor: 'Hair',
-    eyeColor: 'Eyes',
-    height: 'Height'
-  };
-
-  const heightRanges = {
-    Human: [150, 200],
-    Elf: [150, 190],
-    'Dark Elf': [150, 190],
-    Dwarf: [120, 150],
-    'Cait Sith': [140, 180],
-    Salamander: [160, 210],
-    Gnome: [100, 130],
-    Halfling: [90, 120]
+    characterImage: 'Character'
   };
 
   let step = saved.step || 0;
@@ -2091,11 +2091,12 @@ function startCharacterCreation() {
     const activeFields = fields.filter(
       f => !f.races || f.races.includes(character.race)
     );
-    if (step > activeFields.length + 1) step = activeFields.length + 1;
+    if (step > activeFields.length + 2) step = activeFields.length + 2;
 
     let field;
     if (step < activeFields.length) field = activeFields[step];
     else if (step === activeFields.length + 1) field = locationField;
+    else if (step === activeFields.length + 2) field = backstoryField;
     if (field && field.key === 'race' && !character.race) {
       character.race = field.options[0];
       localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
@@ -2103,12 +2104,19 @@ function startCharacterCreation() {
     if (field && field.key === 'location' && !character.location) {
       character.location = locationField.options[0];
     }
+    if (field && field.key === 'backstory') {
+      const bs = BACKSTORY_MAP[character.location] || [];
+      if (!character.backstory && bs.length) {
+        character.backstory = bs[0].background;
+        localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      }
+    }
 
     const stepLabels = activeFields
       .map(f => FIELD_STEP_LABELS[f.key])
-      .concat(['Name', 'Location']);
+      .concat(['Name', 'Location', 'Backstory']);
     const isComplete = () =>
-      activeFields.every(f => character[f.key]) && character.name && character.location;
+      activeFields.every(f => character[f.key]) && character.name && character.location && character.backstory;
     const progressHTML =
       stepLabels
         .map((label, i) => {
@@ -2117,7 +2125,9 @@ function startCharacterCreation() {
               ? character[activeFields[i].key]
               : i === activeFields.length
               ? character.name
-              : character.location;
+              : i === activeFields.length + 1
+              ? character.location
+              : character.backstory;
           let cls = 'clickable';
           if (i === step) cls = 'current clickable';
           else if (hasValue) cls = 'completed clickable';
@@ -2133,6 +2143,14 @@ function startCharacterCreation() {
         const imageHTML = `<img class="race-image" src="${loc.map}" alt="${character.location}">`;
         const descHTML = `<div class="race-description">${loc.description || ''}</div>`;
         return { imageHTML, descHTML };
+      }
+      if (field && field.key === 'backstory' && character.backstory) {
+        const bs = BACKSTORY_MAP[character.location] || [];
+        const entry = bs.find(b => b.background === character.backstory);
+        const descHTML = entry
+          ? `<div class="race-description">${replaceCharacterRefs(entry.past, character)}</div>`
+          : '';
+        return { descHTML };
       }
       if (!character.race) return {};
       const attrs = getRaceStartingAttributes(character.race);
@@ -2197,6 +2215,37 @@ function startCharacterCreation() {
               <button class="option-button sex-button">${character.sex}</button>
               <button class="sex-arrow right" aria-label="Next">&#x203A;</button>
             </div>`;
+        } else if (field.key === 'backstory') {
+          const options = (BACKSTORY_MAP[character.location] || []).map(b => b.background);
+          let index = options.indexOf(character.backstory);
+          if (index === -1) {
+            index = 0;
+            character.backstory = options[0];
+          }
+          inputHTML = `
+            <div class="backstory-carousel wheel-selector">
+              <button class="backstory-arrow left" aria-label="Previous">&#x2039;</button>
+              <button class="option-button backstory-button">${character.backstory}</button>
+              <button class="backstory-arrow right" aria-label="Next">&#x203A;</button>
+            </div>`;
+        } else if (field.key === 'characterImage') {
+          const files =
+            (CHARACTER_IMAGE_FILES[character.race] || {})[character.sex] || [];
+          let index = files.indexOf(character.characterImage);
+          if (index === -1) {
+            index = 0;
+            character.characterImage = files[0];
+          }
+          const folder = `assets/images/Race%20Photos/${encodeURIComponent(
+            character.race
+          )}%20${encodeURIComponent(character.sex)}`;
+          const src = `${folder}/${character.characterImage}`;
+          inputHTML = `
+            <div class="character-carousel wheel-selector">
+              <button class="character-arrow left" aria-label="Previous">&#x2039;</button>
+              <img class="character-option" src="${src}" alt="Character">
+              <button class="character-arrow right" aria-label="Next">&#x203A;</button>
+            </div>`;
         } else {
           inputHTML = `<div class="option-grid">${field.options
             .map(
@@ -2235,32 +2284,12 @@ function startCharacterCreation() {
             <button class="color-picker" aria-label="Pick color">🎨</button>
             <input type="color" id="${pickerId}" value="${value}" style="display:none;">
           </div>`;
-      } else if (field.type === 'range') {
-        const [min, max] = heightRanges[character.race] || [100, 200];
-        let val = character[field.key];
-        if (val === undefined) {
-          val = Math.round((min + max) / 2);
-          character[field.key] = val;
-          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-        }
-        inputHTML = `<input type="range" id="cc-input" min="${min}" max="${max}" value="${val}"><span id="cc-value">${formatHeight(
-          val
-        )}</span>`;
       }
 
       setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div>${statsHTML}</div><div class="cc-options">${inputHTML}</div><div class="cc-info">${descHTML}${imageHTML}</div></div>`
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-right"><div class="cc-options">${inputHTML}</div>${statsHTML}</div></div><div class="cc-info">${descHTML}${imageHTML}</div></div>`
       );
       normalizeOptionButtonWidths();
-
-      const currentStepEl = document.querySelector('.progress-step.current');
-      const optionsEl = document.querySelector('.cc-options');
-      if (currentStepEl && optionsEl) {
-        const detailEl = document.createElement('div');
-        detailEl.className = 'progress-current-detail';
-        currentStepEl.after(detailEl);
-        detailEl.appendChild(optionsEl);
-      }
 
       if (field.key === 'location') {
         const options = field.options;
@@ -2268,6 +2297,7 @@ function startCharacterCreation() {
         const change = dir => {
           index = (index + dir + options.length) % options.length;
           character.location = options[index];
+          delete character.backstory;
           localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         };
@@ -2281,6 +2311,7 @@ function startCharacterCreation() {
           character.race = options[index];
           if (character.race !== 'Cait Sith') delete character.accentColor;
           if (character.race !== 'Salamander') delete character.scaleColor;
+          delete character.characterImage;
           localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         };
@@ -2292,11 +2323,38 @@ function startCharacterCreation() {
         const change = dir => {
           index = (index + dir + options.length) % options.length;
           character.sex = options[index];
+          delete character.characterImage;
           localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         };
         document.querySelector('.sex-arrow.left').addEventListener('click', () => change(-1));
         document.querySelector('.sex-arrow.right').addEventListener('click', () => change(1));
+      } else if (field.key === 'backstory') {
+        const options = (BACKSTORY_MAP[character.location] || []).map(b => b.background);
+        let index = options.indexOf(character.backstory);
+        const change = dir => {
+          index = (index + dir + options.length) % options.length;
+          character.backstory = options[index];
+          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          renderStep();
+        };
+        document.querySelector('.backstory-arrow.left').addEventListener('click', () => change(-1));
+        document.querySelector('.backstory-arrow.right').addEventListener('click', () => change(1));
+      } else if (field.key === 'characterImage') {
+        const files = (CHARACTER_IMAGE_FILES[character.race] || {})[character.sex] || [];
+        let index = files.indexOf(character.characterImage);
+        const change = dir => {
+          index = (index + dir + files.length) % files.length;
+          character.characterImage = files[index];
+          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          renderStep();
+        };
+        document
+          .querySelector('.character-arrow.left')
+          .addEventListener('click', () => change(-1));
+        document
+          .querySelector('.character-arrow.right')
+          .addEventListener('click', () => change(1));
       } else if (field.type === 'select') {
         document.querySelectorAll('.option-button').forEach(btn => {
           btn.addEventListener('click', () => {
@@ -2342,17 +2400,6 @@ function startCharacterCreation() {
           character[field.key] = pickerInput.value;
           update();
         });
-      } else if (field.type === 'range') {
-        const rangeInput = document.getElementById('cc-input');
-        const valueSpan = document.getElementById('cc-value');
-        rangeInput.addEventListener('input', () => {
-          valueSpan.textContent = formatHeight(parseInt(rangeInput.value, 10));
-        });
-        rangeInput.addEventListener('change', () => {
-          character[field.key] = parseInt(rangeInput.value, 10);
-          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          renderStep();
-        });
       }
     } else {
       const nameVal = character.name || '';
@@ -2362,17 +2409,9 @@ function startCharacterCreation() {
         ] || [];
       const placeholderName = nameList[0] || 'Name';
       setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div>${statsHTML}</div><div class="cc-options name-entry"><input type="text" id="name-input" value="${nameVal}" placeholder="${placeholderName}"><button id="name-random" class="dice-button" aria-label="Randomize Name">🎲</button></div><div class="cc-info">${descHTML}${imageHTML}</div></div>`
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-right"><div class="cc-options name-entry"><input type="text" id="name-input" value="${nameVal}" placeholder="${placeholderName}"><button id="name-random" class="dice-button" aria-label="Randomize Name">🎲</button></div>${statsHTML}</div></div><div class="cc-info">${descHTML}${imageHTML}</div></div>`
       );
       normalizeOptionButtonWidths();
-      const currentStepEl = document.querySelector('.progress-step.current');
-      const optionsEl = document.querySelector('.cc-options');
-      if (currentStepEl && optionsEl) {
-        const detailEl = document.createElement('div');
-        detailEl.className = 'progress-current-detail';
-        currentStepEl.after(detailEl);
-        detailEl.appendChild(optionsEl);
-      }
       const nameInput = document.getElementById('name-input');
       const randomBtn = document.getElementById('name-random');
       const updateName = () => {
@@ -2402,10 +2441,11 @@ function startCharacterCreation() {
     document.getElementById('cc-complete').addEventListener('click', () => {
       if (!isComplete()) return;
       localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-      generatePortrait(character, img => {
-        character.image = img;
-        finalizeCharacter(character);
-      });
+      const folder = `assets/images/Race%20Photos/${encodeURIComponent(
+        character.race
+      )}%20${encodeURIComponent(character.sex)}`;
+      character.image = `${folder}/${character.characterImage}`;
+      finalizeCharacter(character);
     });
 
     document.querySelectorAll('.progress-step').forEach(el => {
@@ -2428,13 +2468,16 @@ function startCharacterCreation() {
 
 async function generateCharacterImage(character) {
   const location = character.location || 'a small town plaza';
-  let skinDesc = `${character.skinColor} skin`;
+  let skinDesc = character.skinColor ? `${character.skinColor} skin` : '';
   if (character.race === 'Cait Sith' && character.accentColor) {
     skinDesc += ` and ${character.accentColor} accents`;
   } else if (character.race === 'Salamander' && character.scaleColor) {
     skinDesc += ` and ${character.scaleColor} scales`;
   }
-  const prompt = `Full body portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()} with ${skinDesc}, ${character.hairColor} hair and ${character.eyeColor} eyes, ${formatHeight(character.height)} tall, standing in ${location}.`;
+  const hair = character.hairColor || 'brown';
+  const eyes = character.eyeColor || 'brown';
+  const height = character.height ? formatHeight(character.height) : 'average height';
+  const prompt = `Full body portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()}${skinDesc ? ` with ${skinDesc}` : ''}, ${hair} hair and ${eyes} eyes, ${height} tall, standing in ${location}.`;
   let apiKey = localStorage.getItem('openaiApiKey');
   if (!apiKey) {
     apiKey = prompt('Enter OpenAI API key:');
@@ -2506,9 +2549,9 @@ function finalizeCharacter(character) {
     stamina: resources.maxStamina,
     id,
   });
-  const bs = BACKSTORY_MAP[character.location];
-  if (bs && bs.length) {
-    const raw = bs[Math.floor(Math.random() * bs.length)];
+  const bsList = BACKSTORY_MAP[character.location];
+  if (bsList && bsList.length) {
+    const raw = bsList.find(b => b.background === character.backstory) || bsList[0];
     newChar.backstory = {
       ...raw,
       background: replaceCharacterRefs(raw.background, newChar),

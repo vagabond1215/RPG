@@ -575,6 +575,12 @@ body.theme-dark .top-menu button {
     margin-right: 0.5rem;
   }
 
+  .cc-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   body.layout-portrait .progress-container {
     margin-right: 0;
     margin-bottom: 0.5rem;
@@ -937,14 +943,13 @@ body.theme-dark .top-menu button {
     align-items: stretch;
   }
 
-  .progress-current-detail {
-    display: flex;
-    flex-direction: column;
-    margin: 0.5rem 0 0.5rem 1.5rem;
+  .character-carousel {
+    align-items: center;
   }
 
-  .progress-current-detail input {
-    margin-left: 0;
+  .character-carousel img {
+    max-width: 8rem;
+    height: auto;
   }
 
   .color-button {
