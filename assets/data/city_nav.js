@@ -203,8 +203,8 @@ export const CITY_NAV = {
             { name: "Shrine of the Roadwarden", type: "building", target: "Shrine of the Roadwarden", icon: "assets/images/icons/waves_break/Shrine of the Roadwarden.png" },
             { name: "Caravan Square", type: "building", target: "Caravan Square", icon: "assets/images/icons/waves_break/Caravan Square.png" },
             { name: "Gatewatch Barracks", type: "building", target: "Gatewatch Barracks", icon: "assets/images/icons/waves_break/Gatewatch Barracks.png" },
-              { name: "North Gate", type: "location", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
-              { name: "South Gate", type: "location", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
+              { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
+              { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
               { name: "Wayfarer's Rest Tavern", type: "building", target: "Wayfarer's Rest Tavern", icon: "assets/images/icons/waves_break/Wayfarer's Rest Tavern.png" },
             { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" },
             { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" }
@@ -242,8 +242,8 @@ export const CITY_NAV = {
               { name: "Cliffbreak Quarry", type: "building", target: "Cliffbreak Quarry", icon: "assets/images/icons/waves_break/Cliffbreak Quarry.png" },
               { name: "Wavecut Stoneworks", type: "building", target: "Wavecut Stoneworks", icon: "assets/images/icons/waves_break/Wavecut Stoneworks.png" },
               { name: "Coast Road Watchtower", type: "building", target: "Coast Road Watchtower", icon: "assets/images/icons/waves_break/Coast Road Watchtower.png" },
-              { name: "North Gate", type: "location", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
-              { name: "South Gate", type: "location", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
+              { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
+              { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
               { name: "East Road to Mountain Top", type: "location", target: "Mountain Top", icon: "assets/images/icons/waves_break/The East Road to Mountain Top.png" }
           ]
         }
