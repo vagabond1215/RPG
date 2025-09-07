@@ -863,25 +863,45 @@ const scaleColorOptionsByRace = {
 };
 
 const RACE_IMAGES = {
-  Human: 'assets/images/Race%20Photos/Human%20Male%20and%20Female.png',
-  Elf: 'assets/images/Race%20Photos/Elven%20Male%20and%20Female.png',
-  'Dark Elf': 'assets/images/Race%20Photos/Dark%20Elf%20Male%20and%20Female.png',
-  Dwarf: 'assets/images/Race%20Photos/Dwarven%20Male%20and%20Female.png',
-  'Cait Sith': 'assets/images/Race%20Photos/Cait%20Sith%20Male%20and%20Female.png',
-  Salamander: 'assets/images/Race%20Photos/Salamander%20Male%20and%20Female.png',
-  Gnome: 'assets/images/Race%20Photos/Gnome%20Male%20and%20Female.png',
-  Halfling: 'assets/images/Race%20Photos/Halfling%20Male%20and%20Female.png'
+  Human: 'assets/images/Race Photos/Human Female',
+  Elf: 'assets/images/Race Photos/Elf Female',
+  'Dark Elf': 'assets/images/Race Photos/Dark Elf Female',
+  Dwarf: 'assets/images/Race Photos/Dwarf Female',
+  'Cait Sith': 'assets/images/Race Photos/Cait Sith Female',
+  Salamander: 'assets/images/Race Photos/Salamander Female',
+  Gnome: 'assets/images/Race Photos/Gnome Female',
+  Halfling: 'assets/images/Race Photos/Halfling Female'
 };
 
 const CHARACTER_IMAGE_FILES = {
-  Human: { Male: ['1.png'], Female: ['1.png'] },
-  Elf: { Male: ['1.png'], Female: ['1.png'] },
-  'Dark Elf': { Male: ['1.png'], Female: ['1.png'] },
-  Dwarf: { Male: ['1.png'], Female: ['1.png'] },
-  'Cait Sith': { Male: ['1.png'], Female: ['1.png'] },
-  Salamander: { Male: ['1.png'], Female: ['1.png'] },
-  Gnome: { Male: ['1.png'], Female: ['1.png'] },
-  Halfling: { Male: ['1.png'], Female: ['1.png'] }
+  Human: {
+    Male: [],
+    Female: [
+      '20250828_0009_Anime Adventurer Portrait_simple_compose_01k3qds40rfwtsbe2stz7fr502.png'
+    ]
+  },
+  Elf: {
+    Male: [],
+    Female: [
+      '20250828_0724_Elegantly Enchanted Elf_simple_compose_01k3r6n79yfb29yjmn2p3jsx39.png'
+    ]
+  },
+  'Dark Elf': { Male: [], Female: [] },
+  Dwarf: { Male: [], Female: [] },
+  'Cait Sith': {
+    Male: [],
+    Female: [
+      '20250827_2330_Tribal Cait Sith Warrior_simple_compose_01k3qbhpcqf8rascsy3b1cm7mq.png'
+    ]
+  },
+  Salamander: { Male: [], Female: [] },
+  Gnome: {
+    Male: [],
+    Female: [
+      '20250827_2358_Fantasy Gnome Portrait_simple_compose_01k3qd4gyweqyr1yxa85xa2624.png'
+    ]
+  },
+  Halfling: { Male: [], Female: [] }
 };
 
 // Default proficiency values for new characters
@@ -2181,9 +2201,7 @@ function startCharacterCreation() {
             index = 0;
             character.characterImage = files[0];
           }
-          const folder = `assets/images/Race%20Photos/${encodeURIComponent(
-            character.race
-          )}%20${encodeURIComponent(character.sex)}`;
+          const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
           const src = `${folder}/${character.characterImage}`;
           inputHTML = `
             <div class="character-carousel wheel-selector">
@@ -2378,9 +2396,7 @@ function startCharacterCreation() {
     document.getElementById('cc-complete').addEventListener('click', () => {
       if (!isComplete()) return;
       localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-      const folder = `assets/images/Race%20Photos/${encodeURIComponent(
-        character.race
-      )}%20${encodeURIComponent(character.sex)}`;
+      const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
       character.image = `${folder}/${character.characterImage}`;
       finalizeCharacter(character);
     });
