@@ -716,11 +716,6 @@ body.theme-dark .top-menu button {
     height: 0.5rem;
   }
 
-  .navigation .city-name {
-    margin: 0 0 0.5rem 0;
-    text-align: center;
-  }
-
   .navigation .option-grid {
     flex-direction: row;
     flex-wrap: wrap;
@@ -768,31 +763,31 @@ body.theme-dark .top-menu button {
       line-height: 1;
     }
 
+  .navigation .nav-item.current-district button {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .navigation .nav-item.current-district img.nav-icon {
+    filter: drop-shadow(0 0 10px var(--foreground));
+  }
+
+  .navigation .nav-item.current-district span.nav-icon {
+    text-shadow: 0 0 10px var(--foreground);
+  }
+
+  .navigation .nav-item:not(.current-district) button:disabled {
+    background: none;
+    color: var(--foreground);
+    filter: grayscale(100%) brightness(0.5);
+  }
+
   .navigation .district-nav {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
     width: 100%;
-  }
-
-  .navigation .district-nav .nav-item.current-district button {
-    pointer-events: none;
-    cursor: default;
-  }
-
-  .navigation .district-nav .nav-item.current-district img.nav-icon {
-    filter: drop-shadow(0 0 10px var(--foreground));
-  }
-
-  .navigation .district-nav .nav-item.current-district span.nav-icon {
-    text-shadow: 0 0 10px var(--foreground);
-  }
-
-  .navigation .district-nav .nav-item:not(.current-district) button:disabled {
-    background: none;
-    color: var(--foreground);
-    filter: grayscale(100%) brightness(0.5);
   }
 
   .navigation .district-map {
@@ -816,25 +811,6 @@ body.theme-dark .top-menu button {
   .navigation .district-map .district-connections line {
     stroke: var(--foreground);
     stroke-width: 2;
-  }
-
-  .navigation .district-map .nav-item.current-district button {
-    pointer-events: none;
-    cursor: default;
-  }
-
-  .navigation .district-map .nav-item.current-district img.nav-icon {
-    filter: drop-shadow(0 0 10px var(--foreground));
-  }
-
-  .navigation .district-map .nav-item.current-district span.nav-icon {
-    text-shadow: 0 0 10px var(--foreground);
-  }
-
-  .navigation .district-map .nav-item:not(.current-district) button:disabled {
-    background: none;
-    color: var(--foreground);
-    filter: grayscale(100%) brightness(0.5);
   }
 
   .navigation .street-sign {
