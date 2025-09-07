@@ -110,11 +110,11 @@ export const CITY_NAV = {
             { name: "Governor's Keep", type: "building", target: "Governor's Keep", icon: "assets/images/icons/waves_break/Governor's Keep.png" },
             { name: "Crafting Quarter", type: "building", target: "Crafting Quarter", icon: "assets/images/icons/waves_break/Crafting Quarter.png" },
             { name: "Mercantile Exchange", type: "building", target: "Mercantile Exchange", icon: "assets/images/icons/waves_break/Mercantile Exchange.png" },
-            { name: "Navigator's Trust & Chart House", type: "building", target: "Navigator's Trust & Chart House", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Highward Vintners' Salon", type: "building", target: "Highward Vintners' Salon", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Marble Finch Supper Club", type: "building", target: "Marble Finch Supper Club", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Aurelian Apothecarium & Perfumery", type: "building", target: "Aurelian Apothecarium & Perfumery", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Highward Terraces", type: "building", target: "Highward Terraces", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Navigator's Trust & Chart House", type: "building", target: "Navigator's Trust & Chart House", icon: "assets/images/icons/waves_break/Navigator's Trust & Chart House.png" },
+            { name: "Highward Vintners' Salon", type: "building", target: "Highward Vintners' Salon", icon: "assets/images/icons/waves_break/Highward Vintners' Salon.png" },
+            { name: "Marble Finch Supper Club", type: "building", target: "Marble Finch Supper Club", icon: "assets/images/icons/waves_break/Marble Finch Supper Club.png" },
+            { name: "Aurelian Apothecarium & Perfumery", type: "building", target: "Aurelian Apothecarium & Perfumery", icon: "assets/images/icons/waves_break/Aurelian Apothecarium & Perfumery.png" },
+            { name: "Highward Terraces", type: "building", target: "Highward Terraces", icon: "assets/images/icons/waves_break/Highward Terraces.png" },
             { name: "Temple of the Tides", type: "building", target: "Temple of the Tides", icon: "assets/images/icons/waves_break/Temple of the Tides.png" },
             { name: "Hall of Records", type: "building", target: "Hall of Records", icon: "assets/images/icons/waves_break/Hall of Records.png" },
             { name: "The Port District", type: "district", target: "The Port District", icon: "assets/images/icons/waves_break/Port District.png" },
@@ -137,16 +137,16 @@ export const CITY_NAV = {
             { name: "Salted Hide Tannery", type: "building", target: "Salted Hide Tannery", icon: "assets/images/icons/waves_break/Salted Hide Tannery.png" },
             { name: "Tideglass Alchemical Atelier", type: "building", target: "Tideglass Alchemical Atelier", icon: "assets/images/icons/waves_break/Tideglass Alchemical Atelier.png" },
             { name: "Arc Runes Enchantery", type: "building", target: "Arc Runes Enchantery", icon: "assets/images/icons/waves_break/Arc Runes Enchantery.png" },
-            { name: "Seawind Sailmakers' Hall", type: "building", target: "Seawind Sailmakers' Hall", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Brinemarrow Press", type: "building", target: "Brinemarrow Press", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Tern Hook Butchery", type: "building", target: "Tern Hook Butchery", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Driftwood Smokehouse", type: "building", target: "Driftwood Smokehouse", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Gull's Galley", type: "building", target: "Gull's Galley", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Quayside Greens Market", type: "building", target: "Quayside Greens Market", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Dockside Exchange Plaza", type: "building", target: "Dockside Exchange Plaza", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Saltroot Remedies", type: "building", target: "Saltroot Remedies", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Seawind Sailmakers' Hall", type: "building", target: "Seawind Sailmakers' Hall", icon: "assets/images/icons/waves_break/Seawind Sailmakers' Hall.png" },
+            { name: "Brinemarrow Press", type: "building", target: "Brinemarrow Press", icon: "assets/images/icons/waves_break/Brinemarrow Press.png" },
+            { name: "Tern Hook Butchery", type: "building", target: "Tern Hook Butchery", icon: "assets/images/icons/waves_break/Tern Hook Butchery.png" },
+            { name: "Driftwood Smokehouse", type: "building", target: "Driftwood Smokehouse", icon: "assets/images/icons/waves_break/Driftwood Smokehouse.png" },
+            { name: "Gull's Galley", type: "building", target: "Gull's Galley", icon: "assets/images/icons/waves_break/Gull's Galley.png" },
+            { name: "Quayside Greens Market", type: "building", target: "Quayside Greens Market", icon: "assets/images/icons/waves_break/Quayside Greens Market.png" },
+            { name: "Dockside Exchange Plaza", type: "building", target: "Dockside Exchange Plaza", icon: "assets/images/icons/waves_break/Dockside Exchange Plaza.png" },
+            { name: "Saltroot Remedies", type: "building", target: "Saltroot Remedies", icon: "assets/images/icons/waves_break/Saltroot Remedies.png" },
             { name: "Seastone Arena", type: "building", target: "Seastone Arena", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Tern Harbor Commons", type: "building", target: "Tern Harbor Commons", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Tern Harbor Commons", type: "building", target: "Tern Harbor Commons", icon: "assets/images/icons/waves_break/Tern Harbor Commons.png" },
               { name: "The Port District", type: "district", target: "The Port District", icon: "assets/images/icons/waves_break/Port District.png" },
               { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" },
               { name: "The High Road District", type: "district", target: "The High Road District", icon: "assets/images/icons/waves_break/The High Road District.png" }
@@ -161,12 +161,12 @@ export const CITY_NAV = {
               { name: "Greensoul Monastery", type: "building", target: "Greensoul Monastery", icon: "assets/images/icons/waves_break/Greensoul Monastery.png" },
               { name: "Royal Botanical Gardens", type: "building", target: "Royal Botanical Gardens", icon: "assets/images/icons/waves_break/Royal Botanical Gardens.png" },
               { name: "Skyline Academy", type: "building", target: "Skyline Academy", icon: "assets/images/icons/waves_break/Skyline Academy.png" },
-              { name: "Greensoul Press & Papermill", type: "building", target: "Greensoul Press & Papermill", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Greensoul Press & Papermill", type: "building", target: "Greensoul Press & Papermill", icon: "assets/images/icons/waves_break/Greensoul Press & Papermill.png" },
               { name: "Greensoul Amphitheater", type: "building", target: "Greensoul Amphitheater", icon: "assets/images/icons/waves_break/Greensoul Amphitheater.png" },
-              { name: "Sunleaf Terrace", type: "building", target: "Sunleaf Terrace", icon: "assets/images/icons/waves_break/Default.png" },
-              { name: "Celestine Bathhouse & Springs", type: "building", target: "Celestine Bathhouse & Springs", icon: "assets/images/icons/waves_break/Default.png" },
-              { name: "Aurora Amphitheater", type: "building", target: "Aurora Amphitheater", icon: "assets/images/icons/waves_break/Default.png" },
-              { name: "Gilded Lyre Gallery", type: "building", target: "Gilded Lyre Gallery", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Sunleaf Terrace", type: "building", target: "Sunleaf Terrace", icon: "assets/images/icons/waves_break/Sunleaf Terrace.png" },
+              { name: "Celestine Bathhouse & Springs", type: "building", target: "Celestine Bathhouse & Springs", icon: "assets/images/icons/waves_break/Celestine Bathhouse & Springs.png" },
+              { name: "Aurora Amphitheater", type: "building", target: "Aurora Amphitheater", icon: "assets/images/icons/waves_break/Aurora Amphitheater.png" },
+              { name: "Gilded Lyre Gallery", type: "building", target: "Gilded Lyre Gallery", icon: "assets/images/icons/waves_break/Gilded Lyre Gallery.png" },
             { name: "The Upper Ward", type: "district", target: "The Upper Ward", icon: "assets/images/icons/waves_break/Upper Ward District.png" }
           ]
         },
@@ -178,8 +178,8 @@ export const CITY_NAV = {
           points: [
             { name: "Harbor Hearth Bakery", type: "building", target: "Harbor Hearth Bakery", icon: "assets/images/icons/waves_break/Harbor Hearth Bakery.png" },
             { name: "Tidehold Granary & Provisioners", type: "building", target: "Tidehold Granary & Provisioners", icon: "assets/images/icons/waves_break/Tidehold Granary and Provisioners.png" },
-            { name: "Garden Gate Brewery & Taproom", type: "building", target: "Garden Gate Brewery & Taproom", icon: "assets/images/icons/waves_break/Default.png" },
-            { name: "Wisteria Pavilion", type: "building", target: "Wisteria Pavilion", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Garden Gate Brewery & Taproom", type: "building", target: "Garden Gate Brewery & Taproom", icon: "assets/images/icons/waves_break/Garden Gate Brewery & Taproom.png" },
+            { name: "Wisteria Pavilion", type: "building", target: "Wisteria Pavilion", icon: "assets/images/icons/waves_break/Wisteria Pavilion.png" },
               { name: "Bloomstage Theater", type: "building", target: "Bloomstage Theater", icon: "assets/images/icons/waves_break/Blooomstage Theater.png" },
               { name: "The Velvet Petal Brothel", type: "building", target: "The Velvet Petal Brothel", icon: "assets/images/icons/waves_break/The Velvet Petal Brothel.png" },
               { name: "Little Terns", type: "district", target: "Little Terns", icon: "assets/images/icons/waves_break/Little Terns District.png" }
@@ -1123,7 +1123,7 @@ From its height, scouts survey both the sea and the road beyond the fields.`,
         description: "Warships rest in ordered rows while crews drill with precision.",
         exits: [
           { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
-          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Wave's Break.png" }
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Default.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: ["ships"], luxuries: [] },
@@ -1134,7 +1134,7 @@ From its height, scouts survey both the sea and the road beyond the fields.`,
         description: "Bright coral inlays gleam along piers reserved for the nobility.",
         exits: [
           { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
-          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Wave's Break.png" }
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Default.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: [], luxuries: ["coral goods"] },
@@ -1145,7 +1145,7 @@ From its height, scouts survey both the sea and the road beyond the fields.`,
         description: "Casks of gleaming glassware sparkle in the sun between traders.",
         exits: [
           { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
-          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Wave's Break.png" }
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Default.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: ["glass trade"], luxuries: [] },
@@ -1156,7 +1156,7 @@ From its height, scouts survey both the sea and the road beyond the fields.`,
         description: "Divers unload shell baskets beside market stalls glittering with pearls.",
         exits: [
           { name: "The South Docks & Steel Docks", target: "The South Docks & Steel Docks" },
-          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Wave's Break.png" }
+          { name: "Wave's Break", target: "Wave's Break", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Default.png" }
         ],
         interactions: [],
         produces: { resources: [], commodities: [], luxuries: ["pearls"] },
