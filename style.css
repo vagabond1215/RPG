@@ -721,11 +721,6 @@ body.theme-dark .top-menu button {
     text-align: center;
   }
 
-  .navigation .city-name img {
-    max-width: 100%;
-    height: auto;
-  }
-
   .navigation .option-grid {
     flex-direction: row;
     flex-wrap: wrap;

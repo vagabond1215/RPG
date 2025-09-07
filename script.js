@@ -64,10 +64,6 @@ const NAV_ICONS = {
   interaction: '⚙️',
 };
 
-const CITY_HEADERS = {
-  "Wave's Break": "assets/images/icons/waves_break/Wave's Break.png",
-};
-
 const CITY_SLUGS = { "Wave's Break": "waves_break" };
 
 const BACKSTORY_MAP = {
@@ -149,9 +145,12 @@ function getDistrictsEnvelope(city) {
   return `assets/images/icons/${citySlug(city)}/Districts Envelope.png`;
 }
 
+function getCityIcon(city) {
+  return `assets/images/icons/${citySlug(city)}/${city} Icon.png`;
+}
+
 function cityHeaderHTML(city) {
-  const header = CITY_HEADERS[city];
-  return header ? `<img src="${header}" alt="${city}" class="city-header">` : city;
+  return city;
 }
 
 const SHOW_DISTRICTS_KEY = 'rpgShowDistricts';
@@ -1420,6 +1419,12 @@ function showNavigation() {
       neighborButtons.splice(mid, 0, currentButton);
       return [`<div class="district-nav">${neighborButtons.join('')}</div>`];
     };
+    const mapToggle = createNavItem({
+      type: 'map-toggle',
+      action: 'toggle-city-map',
+      name: 'City Map',
+      icon: getCityIcon(pos.city),
+    });
     if (hasMultipleDistricts) {
       const districtToggle = createNavItem({
         type: 'district-toggle',
@@ -1429,11 +1434,17 @@ function showNavigation() {
       });
       if (exitGroup.length) {
         exitGroup.unshift(districtToggle);
+        exitGroup.unshift(mapToggle);
       } else {
-        groups.push([districtToggle]);
+        groups.push([mapToggle, districtToggle]);
       }
       if (showDistricts) groups.push(buildDistrictNav());
     } else {
+      if (exitGroup.length) {
+        exitGroup.unshift(mapToggle);
+      } else {
+        groups.push([mapToggle]);
+      }
       groups.push(buildDistrictNav());
     }
     if (exitGroup.length) groups.push(exitGroup);
@@ -1472,6 +1483,9 @@ function showNavigation() {
           showDistricts = !showDistricts;
           localStorage.setItem(SHOW_DISTRICTS_KEY, showDistricts);
           showNavigation();
+          return;
+        } else if (action === 'toggle-city-map') {
+          mapButton.click();
           return;
         }
         const type = btn.dataset.type;
