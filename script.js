@@ -149,10 +149,6 @@ function getCityIcon(city) {
   return `assets/images/icons/${citySlug(city)}/${city} Icon.png`;
 }
 
-function cityHeaderHTML(city) {
-  return city;
-}
-
 const SHOW_DISTRICTS_KEY = 'rpgShowDistricts';
 let showDistricts = localStorage.getItem(SHOW_DISTRICTS_KEY) === 'true';
 
@@ -1342,7 +1338,7 @@ function showNavigation() {
         : `Open ${hours.open}–${hours.close}`
       : '';
     setMainHTML(
-      `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${pos.building}</h2>${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}${spawnInfo}<div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h2>${pos.building}</h2>${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}${spawnInfo}<div class="option-grid">${buttons.join('')}</div></div>`
     );
     if (!currentCharacter.spawnInfoShown && currentCharacter.backstory) {
       currentCharacter.spawnInfoShown = true;
@@ -1374,7 +1370,7 @@ function showNavigation() {
     const buildDistrictNav = () => {
       const layout = cityData.layout;
       const allNames = Object.keys(cityData.districts);
-      if (layout && layout.positions) {
+      if (showDistricts && layout && layout.positions) {
         const accessible = new Set(districts.map(d => d.name).concat(pos.district));
         const fontSize =
           parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
@@ -1420,9 +1416,7 @@ function showNavigation() {
         disabled: true,
         extraClass: 'current-district',
       });
-      const mid = Math.ceil(neighborButtons.length / 2);
-      neighborButtons.splice(mid, 0, currentButton);
-      return [`<div class="district-nav">${neighborButtons.join('')}</div>`];
+      return [currentButton, ...neighborButtons];
     };
     const mapToggle = createNavItem({
       type: 'map-toggle',
@@ -1437,20 +1431,31 @@ function showNavigation() {
         name: 'Districts',
         icon: getDistrictsEnvelope(pos.city),
       });
-      if (exitGroup.length) {
-        exitGroup.unshift(districtToggle);
-        exitGroup.unshift(mapToggle);
+      const districtNav = buildDistrictNav();
+      const districtGroup = [mapToggle, districtToggle];
+      if (showDistricts) {
+        if (exitGroup.length) {
+          exitGroup.unshift(...districtGroup);
+        } else {
+          groups.push(districtGroup);
+        }
+        if (districtNav.length) groups.push(districtNav);
       } else {
-        groups.push([mapToggle, districtToggle]);
+        districtGroup.push(...districtNav);
+        if (exitGroup.length) {
+          exitGroup.unshift(...districtGroup);
+        } else {
+          groups.push(districtGroup);
+        }
       }
-      if (showDistricts) groups.push(buildDistrictNav());
     } else {
+      const districtNav = buildDistrictNav();
       if (exitGroup.length) {
         exitGroup.unshift(mapToggle);
       } else {
         groups.push([mapToggle]);
       }
-      groups.push(buildDistrictNav());
+      if (districtNav.length) groups.push(districtNav);
     }
     if (exitGroup.length) groups.push(exitGroup);
     if (locals.length) groups.push(locals.map(makeButton));
@@ -1471,7 +1476,7 @@ function showNavigation() {
       ? `<div class="spawn-info"><p><strong>Background:</strong> ${currentCharacter.backstory.background}. ${currentCharacter.backstory.past}</p></div>`
       : '';
     setMainHTML(
-      `<div class="navigation"><h1 class="city-name">${cityHeaderHTML(pos.city)}</h1><h2>${heading}</h2>${spawnInfo}<div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h2>${heading}</h2>${spawnInfo}<div class="option-grid">${buttons.join('')}</div></div>`
     );
     if (!currentCharacter.spawnInfoShown && currentCharacter.backstory) {
       currentCharacter.spawnInfoShown = true;
@@ -1928,7 +1933,7 @@ function showQuestBoardsUI() {
     return `<div class="nav-item"><button data-board="${name}" aria-label="${name}"><span class="nav-icon">🪧</span></button><span class="street-sign">${name}</span></div>`;
   };
   const buttons = boards.map(createItem).join('');
-  setMainHTML(`<div class="navigation"><h1 class="city-name">${cityHeaderHTML(loc.name)}</h1><h2>Quest Boards</h2><div class="option-grid">${buttons}</div></div>`);
+  setMainHTML(`<div class="navigation"><h2>Quest Boards</h2><div class="option-grid">${buttons}</div></div>`);
   normalizeOptionButtonWidths();
   updateMenuHeight();
   if (main) {
@@ -1946,7 +1951,7 @@ function showQuestBoardDetails(boardName) {
   showBackButton();
   const loc = LOCATIONS[currentCharacter.location];
   const quests = loc.questBoards[boardName] || [];
-  let html = `<div class="questboard-detail navigation"><h1 class="city-name">${cityHeaderHTML(loc.name)}</h1><h2>${boardName}</h2>`;
+  let html = `<div class="questboard-detail navigation"><h2>${boardName}</h2>`;
   if (quests.length) {
     html += '<ul class="quest-list">';
     quests.forEach(q => {
