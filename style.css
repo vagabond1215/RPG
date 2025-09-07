@@ -1170,6 +1170,13 @@ body.theme-dark .top-menu button {
   text-align: center;
 }
 
+.map-toggle-floating {
+  position: fixed;
+  top: calc(var(--menu-height) + 0.5rem);
+  right: 0.5rem;
+  z-index: 275;
+}
+
 /* Spellbook screen */
 .spellbook-screen {
   display: flex;

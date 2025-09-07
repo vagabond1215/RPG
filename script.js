@@ -198,6 +198,11 @@ updateMenuHeight();
 
 function setMainHTML(html) {
   if (main) main.innerHTML = html;
+  if (typeof mapContainer !== "undefined") mapContainer.style.display = "none";
+  if (typeof mapToggleButton !== "undefined" && mapToggleButton) {
+    mapToggleButton.classList.remove("map-toggle-floating");
+    mapToggleButton = null;
+  }
 }
 
 function isPortraitLayout() {
@@ -1485,7 +1490,7 @@ function showNavigation() {
           showNavigation();
           return;
         } else if (action === 'toggle-city-map') {
-          mapButton.click();
+          toggleCityMap(btn);
           return;
         }
         const type = btn.dataset.type;
@@ -1591,14 +1596,12 @@ function showCharacter() {
   if (!currentCharacter) return;
   hideBackButton();
   updateCharacterButton();
-  updateMapButton();
   showNavigation();
 }
 
 function showNoCharacterUI() {
   hideBackButton();
   updateCharacterButton();
-  updateMapButton();
   setMainHTML(`<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`);
   document.getElementById('new-character').addEventListener('click', startCharacterCreation);
   updateMenuHeight();
@@ -1606,7 +1609,6 @@ function showNoCharacterUI() {
 
 function showCharacterSelectUI() {
   showBackButton();
-  updateMapButton();
   const characters = currentProfile?.characters || {};
   const ids = Object.keys(characters);
   let html = '<div class="no-character"><h1>Select Character</h1><div class="option-grid">';
@@ -2026,7 +2028,6 @@ function showEquipmentUI() {
 function startCharacterCreation() {
   updateScale();
   showBackButton();
-  mapButton.style.display = 'none';
   mapContainer.style.display = 'none';
   const saved = JSON.parse(localStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
   const character = saved.character || {};
@@ -2704,18 +2705,33 @@ layoutToggle.addEventListener('click', () => {
 // Dropdown menu
 const menuButton = document.getElementById('menu-button');
 const characterButton = document.getElementById('character-button');
-const mapButton = document.getElementById('map-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const characterMenu = document.getElementById('characterMenu');
 const mapContainer = document.createElement('div');
 mapContainer.id = 'map-container';
 body.appendChild(mapContainer);
+let mapToggleButton = null;
+function toggleCityMap(btn) {
+  if (!currentCharacter) return;
+  if (mapContainer.style.display === 'flex') {
+    mapContainer.style.display = 'none';
+    if (mapToggleButton) {
+      mapToggleButton.classList.remove('map-toggle-floating');
+      mapToggleButton = null;
+    }
+    return;
+  }
+  const locName = currentCharacter.location;
+  const loc = LOCATIONS[locName] || LOCATIONS['Duvilia Kingdom'];
+  mapContainer.innerHTML = `<img src="${loc.map}" alt="${loc.name}"><div class="map-description">${loc.description || ''}</div>`;
+  mapContainer.style.display = 'flex';
+  mapToggleButton = btn;
+  mapToggleButton.classList.add('map-toggle-floating');
+}
+
 
 function updateCharacterButton() {
   characterButton.style.display = currentCharacter ? 'inline-flex' : 'none';
-}
-function updateMapButton() {
-  mapButton.style.display = currentCharacter ? 'inline-flex' : 'none';
   if (!currentCharacter) mapContainer.style.display = 'none';
 }
 
@@ -2726,17 +2742,6 @@ menuButton.addEventListener('click', () => {
 characterButton.addEventListener('click', () => {
   dropdownMenu.classList.remove('active');
   characterMenu.classList.toggle('active');
-});
-mapButton.addEventListener('click', () => {
-  if (!currentCharacter) return;
-  if (mapContainer.style.display === 'flex') {
-    mapContainer.style.display = 'none';
-    return;
-  }
-  const locName = currentCharacter.location;
-  const loc = LOCATIONS[locName] || LOCATIONS['Duvilia Kingdom'];
-  mapContainer.innerHTML = `<img src="${loc.map}" alt="${loc.name}"><div class="map-description">${loc.description || ''}</div>`;
-  mapContainer.style.display = 'flex';
 });
 
 dropdownMenu.addEventListener('click', e => {
