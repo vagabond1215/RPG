@@ -1781,6 +1781,9 @@ function showSpellbookUI() {
     s => (spellFilters.elements[s.element] ?? true) && (spellFilters.schools[s.school] ?? true)
   );
 
+  const unlockedElements = new Set(unlocked.map(s => s.element));
+  const unlockedSchools = new Set(unlocked.map(s => s.school));
+
   filtered.sort((a, b) => {
     if (a.proficiency !== b.proficiency) return a.proficiency - b.proficiency;
     const ai = elementOrder.indexOf(a.element);
@@ -1788,7 +1791,36 @@ function showSpellbookUI() {
     return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
   });
 
-  let html = `<div class="spellbook-screen"><div class="spellbook-list"><h1><span class="spellbook-icon">📖</span>Spellbook</h1>`;
+  let html = '<div class="spellbook-screen">';
+
+  let filterHtml = '<div class="spellbook-filters">';
+  if (unlockedElements.size) {
+    filterHtml += '<div class="filter-group">';
+    elementOrder.forEach(el => {
+      if (!unlockedElements.has(el)) return;
+      const eIcon = elementIcons[el] || '';
+      const active = spellFilters.elements[el];
+      const cls = active ? 'filter-toggle' : 'filter-toggle off';
+      filterHtml += `<button class="${cls}" data-filter-type="element" data-filter="${el}" aria-label="${el}">${eIcon}</button>`;
+    });
+    filterHtml += '</div>';
+  }
+  if (unlockedSchools.size) {
+    filterHtml += '<div class="filter-group">';
+    Object.keys(schoolIcons).forEach(sc => {
+      if (!unlockedSchools.has(sc)) return;
+      const sIcon = schoolIcons[sc];
+      const active = spellFilters.schools[sc];
+      const cls = active ? 'filter-toggle' : 'filter-toggle off';
+      filterHtml += `<button class="${cls}" data-filter-type="school" data-filter="${sc}" aria-label="${sc}">${sIcon}</button>`;
+    });
+    filterHtml += '</div>';
+  }
+  filterHtml += '</div>';
+
+  html += filterHtml;
+
+  html += '<div class="spellbook-list"><h1><span class="spellbook-icon">📖</span>Spellbook</h1>';
   if (filtered.length) {
     html += '<ul class="spell-list">';
     filtered.forEach(spell => {
@@ -1800,21 +1832,8 @@ function showSpellbookUI() {
   } else {
     html += '<p>No spells known.</p>';
   }
-  html += '</div><div class="spellbook-filters"><div class="filter-group">';
-  elementOrder.forEach(el => {
-    const eIcon = elementIcons[el] || '';
-    const active = spellFilters.elements[el];
-    const cls = active ? 'filter-toggle' : 'filter-toggle off';
-    html += `<button class="${cls}" data-filter-type="element" data-filter="${el}" aria-label="${el}">${eIcon}</button>`;
-  });
-  html += '</div><div class="filter-group">';
-  Object.keys(schoolIcons).forEach(sc => {
-    const sIcon = schoolIcons[sc];
-    const active = spellFilters.schools[sc];
-    const cls = active ? 'filter-toggle' : 'filter-toggle off';
-    html += `<button class="${cls}" data-filter-type="school" data-filter="${sc}" aria-label="${sc}">${sIcon}</button>`;
-  });
-  html += '</div></div></div>';
+  html += '</div></div>';
+
   setMainHTML(html);
 
   document.querySelectorAll('.spell-name').forEach(btn => {
