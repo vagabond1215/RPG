@@ -29,6 +29,7 @@ import {
 import { trainCraftSkill } from "./assets/data/trainer_proficiency.js";
 import { performGathering } from "./assets/data/gathering_proficiency.js";
 import { performOutdoorActivity } from "./assets/data/outdoor_skills.js";
+import { performHunt } from "./assets/data/hunting_proficiency.js";
 import {
   ADVENTURERS_GUILD_RANKS,
   determineOwnership,
@@ -55,6 +56,7 @@ window.parseCurrency = parseCurrency;
 window.formatCurrency = formatCurrency;
 window.LOCATIONS = LOCATIONS;
 window.ADVENTURERS_GUILD_RANKS = ADVENTURERS_GUILD_RANKS;
+window.performHunt = performHunt;
 
 const NAV_ICONS = {
   location: '🗺️',
@@ -953,6 +955,7 @@ const defaultProficiencies = {
   weaving: 0,
   fletching: 0,
   glassblowing: 0,
+  hunting: 0,
   pearlDiving: 0
 };
 
@@ -1093,7 +1096,7 @@ const proficiencyCategories = {
     'dualWield'
   ],
   'Non Combat': ['singing', 'instrument', 'dancing'],
-  Outdoor: ['swimming', 'sailing', 'riding'],
+  Outdoor: ['swimming', 'sailing', 'riding', 'hunting'],
   Crafting: [
     'alchemy',
     'brewing',
