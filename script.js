@@ -863,14 +863,14 @@ const scaleColorOptionsByRace = {
 };
 
 const RACE_IMAGES = {
-  Human: 'assets/images/Race%20Photos/Human%20Female',
-  Elf: 'assets/images/Race%20Photos/Elf%20Female',
-  'Dark Elf': 'assets/images/Race%20Photos/Dark%20Elf%20Female',
-  Dwarf: 'assets/images/Race%20Photos/Dwarf%20Female',
-  'Cait Sith': 'assets/images/Race%20Photos/Cait%20Sith%20Female',
-  Salamander: 'assets/images/Race%20Photos/Salamander%20Female',
-  Gnome: 'assets/images/Race%20Photos/Gnome%20Female',
-  Halfling: 'assets/images/Race%20Photos/Halfling%20Female'
+  Human: 'assets/images/Race Photos/Human Female',
+  Elf: 'assets/images/Race Photos/Elf Female',
+  'Dark Elf': 'assets/images/Race Photos/Dark Elf Female',
+  Dwarf: 'assets/images/Race Photos/Dwarf Female',
+  'Cait Sith': 'assets/images/Race Photos/Cait Sith Female',
+  Salamander: 'assets/images/Race Photos/Salamander Female',
+  Gnome: 'assets/images/Race Photos/Gnome Female',
+  Halfling: 'assets/images/Race Photos/Halfling Female'
 };
 
 const CHARACTER_IMAGE_FILES = {};
@@ -880,10 +880,7 @@ async function getCharacterImages(race, sex) {
   if (CHARACTER_IMAGE_FILES[race][sex]) {
     return CHARACTER_IMAGE_FILES[race][sex];
   }
-  const folder =
-    `assets/images/Race%20Photos/${encodeURIComponent(race)}%20${encodeURIComponent(
-      sex
-    )}/`;
+  const folder = `assets/images/Race Photos/${race} ${sex}/`;
   try {
     const res = await fetch(folder);
     if (res.ok) {
@@ -2223,13 +2220,8 @@ function startCharacterCreation() {
             character.characterImage = files[0];
           }
           if (files.length) {
-            const folder =
-              `assets/images/Race%20Photos/${encodeURIComponent(
-                character.race
-              )}%20${encodeURIComponent(character.sex)}`;
-            const src = `${folder}/${encodeURIComponent(
-              character.characterImage || ''
-            )}`;
+            const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
+            const src = `${folder}/${character.characterImage || ''}`;
             inputHTML = `
               <div class="character-carousel wheel-selector">
                 <button class="character-arrow left" aria-label="Previous">&#x2039;</button>
@@ -2432,13 +2424,8 @@ function startCharacterCreation() {
     document.getElementById('cc-complete').addEventListener('click', () => {
       if (!isComplete()) return;
       localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-      const folder =
-        `assets/images/Race%20Photos/${encodeURIComponent(character.race)}%20${encodeURIComponent(
-          character.sex
-        )}`;
-      character.image = `${folder}/${encodeURIComponent(
-        character.characterImage || ''
-      )}`;
+      const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
+      character.image = `${folder}/${character.characterImage || ''}`;
       finalizeCharacter(character);
     });
 
