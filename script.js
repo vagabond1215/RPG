@@ -2719,7 +2719,7 @@ const dropdownMenu = document.getElementById('dropdownMenu');
 const characterMenu = document.getElementById('characterMenu');
 const mapContainer = document.createElement('div');
 mapContainer.id = 'map-container';
-body.appendChild(mapContainer);
+app.appendChild(mapContainer);
 let mapToggleButton = null;
 function toggleCityMap(btn) {
   if (!currentCharacter) return;
