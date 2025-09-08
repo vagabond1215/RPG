@@ -863,14 +863,14 @@ const scaleColorOptionsByRace = {
 };
 
 const RACE_IMAGES = {
-  Human: 'assets/images/Race Photos/Human Female',
-  Elf: 'assets/images/Race Photos/Elf Female',
-  'Dark Elf': 'assets/images/Race Photos/Dark Elf Female',
-  Dwarf: 'assets/images/Race Photos/Dwarf Female',
-  'Cait Sith': 'assets/images/Race Photos/Cait Sith Female',
-  Salamander: 'assets/images/Race Photos/Salamander Female',
-  Gnome: 'assets/images/Race Photos/Gnome Female',
-  Halfling: 'assets/images/Race Photos/Halfling Female'
+  Human: 'assets/images/Race%20Photos/Human%20Female',
+  Elf: 'assets/images/Race%20Photos/Elf%20Female',
+  'Dark Elf': 'assets/images/Race%20Photos/Dark%20Elf%20Female',
+  Dwarf: 'assets/images/Race%20Photos/Dwarf%20Female',
+  'Cait Sith': 'assets/images/Race%20Photos/Cait%20Sith%20Female',
+  Salamander: 'assets/images/Race%20Photos/Salamander%20Female',
+  Gnome: 'assets/images/Race%20Photos/Gnome%20Female',
+  Halfling: 'assets/images/Race%20Photos/Halfling%20Female'
 };
 
 const CHARACTER_IMAGE_FILES = {};
@@ -881,7 +881,7 @@ async function getCharacterImages(race, sex) {
     return CHARACTER_IMAGE_FILES[race][sex];
   }
   const folder =
-    `assets/images/Race Photos/${encodeURIComponent(race)}%20${encodeURIComponent(
+    `assets/images/Race%20Photos/${encodeURIComponent(race)}%20${encodeURIComponent(
       sex
     )}/`;
   try {
@@ -2224,7 +2224,7 @@ function startCharacterCreation() {
           }
           if (files.length) {
             const folder =
-              `assets/images/Race Photos/${encodeURIComponent(
+              `assets/images/Race%20Photos/${encodeURIComponent(
                 character.race
               )}%20${encodeURIComponent(character.sex)}`;
             const src = `${folder}/${encodeURIComponent(
@@ -2433,7 +2433,7 @@ function startCharacterCreation() {
       if (!isComplete()) return;
       localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
       const folder =
-        `assets/images/Race Photos/${encodeURIComponent(character.race)}%20${encodeURIComponent(
+        `assets/images/Race%20Photos/${encodeURIComponent(character.race)}%20${encodeURIComponent(
           character.sex
         )}`;
       character.image = `${folder}/${encodeURIComponent(
