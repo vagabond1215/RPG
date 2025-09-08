@@ -323,11 +323,12 @@ button:not(:disabled):hover,
 }
 
 .profile-portrait {
-  max-width: 10rem;
-  max-height: 10rem;
+  max-width: 20rem;
+  max-height: 20rem;
   width: auto;
   height: auto;
   object-fit: contain;
+  transform-origin: center;
 }
 
 .no-character {
@@ -428,9 +429,40 @@ body.theme-dark .top-menu button {
 
   .portrait-wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  .portrait-zoom {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .portrait-zoom button {
+    width: 3rem;
+    height: 3rem;
+    background: transparent;
+    border: 2px solid var(--foreground);
+    color: var(--foreground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .portrait-zoom button:hover {
+    filter: drop-shadow(0 0 0.5rem var(--foreground));
+  }
+
+  .portrait-zoom-dec,
+  .portrait-zoom-inc {
+    border-radius: 50%;
+  }
+
+  .portrait-zoom-reset {
+    border-radius: 0.25rem;
   }
 
   
@@ -937,7 +969,7 @@ body.theme-dark .top-menu button {
   }
 
   .character-carousel img {
-    max-width: 8rem;
+    max-width: 16rem;
     height: auto;
   }
 
