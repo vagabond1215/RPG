@@ -1694,7 +1694,13 @@ function showCharacterUI() {
       <h1>${c.name}</h1>
       <div class="profile-grid">
         <div class="portrait-section">
-          <div class="portrait-wrapper">${portrait}</div>
+          <div class="portrait-wrapper">${portrait}
+            <div class="portrait-zoom">
+              <button id="portrait-zoom-dec" class="portrait-zoom-dec" aria-label="Zoom out">-</button>
+              <button id="portrait-zoom-reset" class="portrait-zoom-reset" aria-label="Reset zoom">100%</button>
+              <button id="portrait-zoom-inc" class="portrait-zoom-inc" aria-label="Zoom in">+</button>
+            </div>
+          </div>
         </div>
         <div>
           ${info}
@@ -1705,6 +1711,34 @@ function showCharacterUI() {
       </div>
       <button id="delete-character">Delete Character</button>
     </div>`);
+
+  const portraitImg = document.querySelector('.profile-portrait');
+  const zoomDec = document.getElementById('portrait-zoom-dec');
+  const zoomInc = document.getElementById('portrait-zoom-inc');
+  const zoomReset = document.getElementById('portrait-zoom-reset');
+  let portraitZoom = 1;
+
+  function updatePortraitZoom() {
+    portraitImg.style.transform = `scale(${portraitZoom})`;
+    zoomReset.textContent = `${Math.round(portraitZoom * 100)}%`;
+  }
+
+  zoomDec.addEventListener('click', () => {
+    portraitZoom = Math.max(0.1, portraitZoom - 0.1);
+    updatePortraitZoom();
+  });
+
+  zoomInc.addEventListener('click', () => {
+    portraitZoom += 0.1;
+    updatePortraitZoom();
+  });
+
+  zoomReset.addEventListener('click', () => {
+    portraitZoom = 1;
+    updatePortraitZoom();
+  });
+
+  updatePortraitZoom();
   document.getElementById('delete-character').addEventListener('click', () => {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
