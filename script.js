@@ -874,28 +874,26 @@ const RACE_IMAGES = {
 };
 
 const CHARACTER_IMAGE_FILES = {};
+let racePhotoManifestPromise = null;
+
+async function loadRacePhotoManifest() {
+  if (!racePhotoManifestPromise) {
+    racePhotoManifestPromise = fetch('assets/images/race_photos.json')
+      .then(res => (res.ok ? res.json() : {}))
+      .catch(() => ({}));
+  }
+  return racePhotoManifestPromise;
+}
 
 async function getCharacterImages(race, sex) {
   CHARACTER_IMAGE_FILES[race] = CHARACTER_IMAGE_FILES[race] || {};
   if (CHARACTER_IMAGE_FILES[race][sex]) {
     return CHARACTER_IMAGE_FILES[race][sex];
   }
-  const folder = `assets/images/Race Photos/${race} ${sex}/`;
-  try {
-    const res = await fetch(folder);
-    if (res.ok) {
-      const text = await res.text();
-      const files = Array.from(
-        text.matchAll(/href="([^\"]+\.(?:png|webp))"/g)
-      ).map(m => decodeURIComponent(m[1].split('/').pop()));
-      CHARACTER_IMAGE_FILES[race][sex] = files;
-      return files;
-    }
-  } catch (err) {
-    // ignore errors and fall back to empty list
-  }
-  CHARACTER_IMAGE_FILES[race][sex] = [];
-  return [];
+  const manifest = await loadRacePhotoManifest();
+  const files = ((manifest[race] || {})[sex]) || [];
+  CHARACTER_IMAGE_FILES[race][sex] = files;
+  return files;
 }
 
 // Default proficiency values for new characters
@@ -2214,12 +2212,12 @@ function startCharacterCreation() {
             </div>`;
         } else if (field.key === 'characterImage') {
           const files = await getCharacterImages(character.race, character.sex);
-          let index = files.indexOf(character.characterImage);
-          if (index === -1) {
-            index = 0;
-            character.characterImage = files[0];
-          }
           if (files.length) {
+            let index = files.indexOf(character.characterImage);
+            if (index === -1) {
+              index = 0;
+              character.characterImage = files[0];
+            }
             const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
             const src = `${folder}/${character.characterImage || ''}`;
             inputHTML = `
@@ -2228,8 +2226,6 @@ function startCharacterCreation() {
                 <img class="character-option" src="${src}" alt="Character">
                 <button class="character-arrow right" aria-label="Next">&#x203A;</button>
               </div>`;
-          } else {
-            inputHTML = `<p>No images available</p>`;
           }
         } else {
           inputHTML = `<div class="option-grid">${field.options

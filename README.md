@@ -17,6 +17,7 @@ No build steps are required. After publishing the repository with GitHub Pages, 
 - `assets/data/party.ts` – party structs, resources, effects, and NPC proficiency policy
 - `assets/images/Race Photos/` – race reference images
 - `assets/images/Maps/` – map images
+- `assets/images/race_photos.json` – manifest of available character portraits (run `node scripts/updateRacePhotoManifest.js` after adding images)
 - `assets/data/` – data assets such as `weapon_skills.js`, `spells.js`, and `race_attrs.js`
 - `assets/data/locations.ts` – city and region definitions with map references
 
