@@ -120,7 +120,6 @@ export const characterTemplate = {
   guildRank: 'None',
   adventurersGuildRank: 'None',
   backstory: null,
-  spawnInfoShown: false,
   position: null
 };
 
