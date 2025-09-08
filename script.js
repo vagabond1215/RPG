@@ -880,7 +880,10 @@ async function getCharacterImages(race, sex) {
   if (CHARACTER_IMAGE_FILES[race][sex]) {
     return CHARACTER_IMAGE_FILES[race][sex];
   }
-  const folder = `assets/images/Race Photos/${race} ${sex}`;
+  const folder =
+    `assets/images/Race Photos/${encodeURIComponent(race)}%20${encodeURIComponent(
+      sex
+    )}/`;
   try {
     const res = await fetch(folder);
     if (res.ok) {
@@ -2220,8 +2223,13 @@ function startCharacterCreation() {
             character.characterImage = files[0];
           }
           if (files.length) {
-            const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
-            const src = `${folder}/${character.characterImage}`;
+            const folder =
+              `assets/images/Race Photos/${encodeURIComponent(
+                character.race
+              )}%20${encodeURIComponent(character.sex)}`;
+            const src = `${folder}/${encodeURIComponent(
+              character.characterImage || ''
+            )}`;
             inputHTML = `
               <div class="character-carousel wheel-selector">
                 <button class="character-arrow left" aria-label="Previous">&#x2039;</button>
@@ -2424,8 +2432,13 @@ function startCharacterCreation() {
     document.getElementById('cc-complete').addEventListener('click', () => {
       if (!isComplete()) return;
       localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-      const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
-      character.image = `${folder}/${character.characterImage}`;
+      const folder =
+        `assets/images/Race Photos/${encodeURIComponent(character.race)}%20${encodeURIComponent(
+          character.sex
+        )}`;
+      character.image = `${folder}/${encodeURIComponent(
+        character.characterImage || ''
+      )}`;
       finalizeCharacter(character);
     });
 
