@@ -713,6 +713,11 @@ body.theme-dark .top-menu button {
     text-align: center;
   }
 
+  .location-description {
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+
   .business-hours {
     margin: 0 0 0.5rem 0;
     text-align: center;
@@ -1157,7 +1162,7 @@ body.theme-dark .top-menu button {
 .map-toggle-floating {
   position: fixed;
   top: calc(var(--menu-height) + 0.5rem);
-  right: 0.5rem;
+  left: 0.5rem;
   z-index: 275;
 }
 

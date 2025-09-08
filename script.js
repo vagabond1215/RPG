@@ -1443,20 +1443,24 @@ function showNavigation() {
       if (districtNav.length) groups.push(districtNav);
     }
     if (exitGroup.length) groups.push(exitGroup);
-    if (locals.length) groups.push(locals.map(makeButton));
-    const buttons = [];
+    const navButtons = [];
     groups.forEach(g => {
       if (g.length) {
-        if (buttons.length) buttons.push('<div class="group-separator"></div>');
-        buttons.push(...g);
+        if (navButtons.length) navButtons.push('<div class="group-separator"></div>');
+        navButtons.push(...g);
       }
     });
     const description = pos.previousDistrict && district.descriptions
       ? district.descriptions[pos.previousDistrict]
       : null;
-    const heading = description || pos.district;
+    const localsHTML = locals.length
+      ? `<div class="option-grid">${locals.map(makeButton).join('')}</div>`
+      : '';
+    const descHTML = description
+      ? `<p class="location-description">${description}</p>`
+      : '';
     setMainHTML(
-      `<div class="navigation"><h2>${heading}</h2><div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h2>${pos.district}</h2><div class="option-grid">${navButtons.join('')}</div>${descHTML}${localsHTML}</div>`
     );
   }
   normalizeOptionButtonWidths();
