@@ -322,6 +322,14 @@ button:not(:disabled):hover,
   margin-top: 1rem;
 }
 
+.profile-portrait {
+  max-width: 10rem;
+  max-height: 10rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 .no-character {
   display: flex;
   flex-direction: column;
@@ -1384,10 +1392,6 @@ body.theme-dark .top-menu button {
 .quest-item p {
   margin: 0;
   font-size: 0.9rem;
-}
-
-.spawn-info {
-  margin: 1rem 0;
 }
 
 .backstory-block {

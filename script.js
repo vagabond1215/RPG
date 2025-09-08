@@ -873,36 +873,30 @@ const RACE_IMAGES = {
   Halfling: 'assets/images/Race Photos/Halfling Female'
 };
 
-const CHARACTER_IMAGE_FILES = {
-  Human: {
-    Male: [],
-    Female: [
-      '20250828_0009_Anime Adventurer Portrait_simple_compose_01k3qds40rfwtsbe2stz7fr502.png'
-    ]
-  },
-  Elf: {
-    Male: [],
-    Female: [
-      '20250828_0724_Elegantly Enchanted Elf_simple_compose_01k3r6n79yfb29yjmn2p3jsx39.png'
-    ]
-  },
-  'Dark Elf': { Male: [], Female: [] },
-  Dwarf: { Male: [], Female: [] },
-  'Cait Sith': {
-    Male: [],
-    Female: [
-      '20250827_2330_Tribal Cait Sith Warrior_simple_compose_01k3qbhpcqf8rascsy3b1cm7mq.png'
-    ]
-  },
-  Salamander: { Male: [], Female: [] },
-  Gnome: {
-    Male: [],
-    Female: [
-      '20250827_2358_Fantasy Gnome Portrait_simple_compose_01k3qd4gyweqyr1yxa85xa2624.png'
-    ]
-  },
-  Halfling: { Male: [], Female: [] }
-};
+const CHARACTER_IMAGE_FILES = {};
+
+async function getCharacterImages(race, sex) {
+  CHARACTER_IMAGE_FILES[race] = CHARACTER_IMAGE_FILES[race] || {};
+  if (CHARACTER_IMAGE_FILES[race][sex]) {
+    return CHARACTER_IMAGE_FILES[race][sex];
+  }
+  const folder = `assets/images/Race Photos/${race} ${sex}`;
+  try {
+    const res = await fetch(folder);
+    if (res.ok) {
+      const text = await res.text();
+      const files = Array.from(
+        text.matchAll(/href="([^\"]+\.(?:png|webp))"/g)
+      ).map(m => decodeURIComponent(m[1].split('/').pop()));
+      CHARACTER_IMAGE_FILES[race][sex] = files;
+      return files;
+    }
+  } catch (err) {
+    // ignore errors and fall back to empty list
+  }
+  CHARACTER_IMAGE_FILES[race][sex] = [];
+  return [];
+}
 
 // Default proficiency values for new characters
 const defaultProficiencies = {
@@ -1325,25 +1319,16 @@ function showNavigation() {
       );
     });
     const hours = building.hours;
-    const descText = (!currentCharacter.spawnInfoShown && currentCharacter.backstory)
-      ? currentCharacter.backstory.narrative
-      : building.description;
+    const descText = building.description;
     const descriptionHTML = descText ? `<p class="building-description">${descText}</p>` : '';
-    const spawnInfo = (!currentCharacter.spawnInfoShown && currentCharacter.backstory)
-      ? `<div class="spawn-info"><p><strong>Background:</strong> ${currentCharacter.backstory.background}. ${currentCharacter.backstory.past}</p></div>`
-      : '';
     const hoursText = hours
       ? hours.open === '00:00' && hours.close === '24:00'
         ? 'Open 24 hours'
         : `Open ${hours.open}–${hours.close}`
       : '';
     setMainHTML(
-      `<div class="navigation"><h2>${pos.building}</h2>${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}${spawnInfo}<div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h2>${pos.building}</h2>${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
     );
-    if (!currentCharacter.spawnInfoShown && currentCharacter.backstory) {
-      currentCharacter.spawnInfoShown = true;
-      saveProfiles();
-    }
   } else {
     const district = cityData.districts[pos.district];
     const exits = [];
@@ -1469,19 +1454,10 @@ function showNavigation() {
     const description = pos.previousDistrict && district.descriptions
       ? district.descriptions[pos.previousDistrict]
       : null;
-    const heading = (!currentCharacter.spawnInfoShown && currentCharacter.backstory)
-      ? currentCharacter.backstory.narrative
-      : (description || pos.district);
-    const spawnInfo = (!currentCharacter.spawnInfoShown && currentCharacter.backstory)
-      ? `<div class="spawn-info"><p><strong>Background:</strong> ${currentCharacter.backstory.background}. ${currentCharacter.backstory.past}</p></div>`
-      : '';
+    const heading = description || pos.district;
     setMainHTML(
-      `<div class="navigation"><h2>${heading}</h2>${spawnInfo}<div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation"><h2>${heading}</h2><div class="option-grid">${buttons.join('')}</div></div>`
     );
-    if (!currentCharacter.spawnInfoShown && currentCharacter.backstory) {
-      currentCharacter.spawnInfoShown = true;
-      saveProfiles();
-    }
   }
   normalizeOptionButtonWidths();
   updateMenuHeight();
@@ -1660,7 +1636,7 @@ function showCharacterUI() {
   }
   showBackButton();
   const c = currentCharacter;
-  const portrait = `<img src="${c.image || ''}" alt="portrait" style="width:10rem;height:10rem;${c.image ? '' : 'display:none;'}">`;
+  const portrait = `<img src="${c.image || ''}" alt="portrait" class="profile-portrait"${c.image ? '' : ' style="display:none;"'}>`;
   const info = `
     <div class="info-block">
       <div>Race: ${c.race}</div>
@@ -2093,7 +2069,7 @@ function startCharacterCreation() {
   let step = saved.step || 0;
   renderStep();
 
-  function renderStep() {
+  async function renderStep() {
     const activeFields = fields.filter(
       f => !f.races || f.races.includes(character.race)
     );
@@ -2233,21 +2209,24 @@ function startCharacterCreation() {
               <button class="backstory-arrow right" aria-label="Next">&#x203A;</button>
             </div>`;
         } else if (field.key === 'characterImage') {
-          const files =
-            (CHARACTER_IMAGE_FILES[character.race] || {})[character.sex] || [];
+          const files = await getCharacterImages(character.race, character.sex);
           let index = files.indexOf(character.characterImage);
           if (index === -1) {
             index = 0;
             character.characterImage = files[0];
           }
-          const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
-          const src = `${folder}/${character.characterImage}`;
-          inputHTML = `
-            <div class="character-carousel wheel-selector">
-              <button class="character-arrow left" aria-label="Previous">&#x2039;</button>
-              <img class="character-option" src="${src}" alt="Character">
-              <button class="character-arrow right" aria-label="Next">&#x203A;</button>
-            </div>`;
+          if (files.length) {
+            const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
+            const src = `${folder}/${character.characterImage}`;
+            inputHTML = `
+              <div class="character-carousel wheel-selector">
+                <button class="character-arrow left" aria-label="Previous">&#x2039;</button>
+                <img class="character-option" src="${src}" alt="Character">
+                <button class="character-arrow right" aria-label="Next">&#x203A;</button>
+              </div>`;
+          } else {
+            inputHTML = `<p>No images available</p>`;
+          }
         } else {
           inputHTML = `<div class="option-grid">${field.options
             .map(
@@ -2339,20 +2318,26 @@ function startCharacterCreation() {
         document.querySelector('.backstory-arrow.left').addEventListener('click', () => change(-1));
         document.querySelector('.backstory-arrow.right').addEventListener('click', () => change(1));
       } else if (field.key === 'characterImage') {
-        const files = (CHARACTER_IMAGE_FILES[character.race] || {})[character.sex] || [];
-        let index = files.indexOf(character.characterImage);
-        const change = dir => {
-          index = (index + dir + files.length) % files.length;
-          character.characterImage = files[index];
-          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          renderStep();
-        };
-        document
-          .querySelector('.character-arrow.left')
-          .addEventListener('click', () => change(-1));
-        document
-          .querySelector('.character-arrow.right')
-          .addEventListener('click', () => change(1));
+        const files =
+          (CHARACTER_IMAGE_FILES[character.race] || {})[character.sex] || [];
+        if (files.length) {
+          let index = files.indexOf(character.characterImage);
+          const change = dir => {
+            index = (index + dir + files.length) % files.length;
+            character.characterImage = files[index];
+            localStorage.setItem(
+              TEMP_CHARACTER_KEY,
+              JSON.stringify({ step, character })
+            );
+            renderStep();
+          };
+          document
+            .querySelector('.character-arrow.left')
+            .addEventListener('click', () => change(-1));
+          document
+            .querySelector('.character-arrow.right')
+            .addEventListener('click', () => change(1));
+        }
       } else if (field.type === 'select') {
         document.querySelectorAll('.option-button').forEach(btn => {
           btn.addEventListener('click', () => {
@@ -2541,6 +2526,7 @@ function finalizeCharacter(character) {
     stamina: resources.maxStamina,
     id,
   });
+  newChar.guildRank = 'None';
   const bsList = BACKSTORY_MAP[character.location];
   if (bsList && bsList.length) {
     const raw = bsList.find(b => b.background === character.backstory) || bsList[0];
