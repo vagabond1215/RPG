@@ -753,15 +753,15 @@ body.theme-dark .top-menu button {
   }
 
   .navigation .nav-header .nav-icon {
-    width: 10rem;
-    height: 10rem;
+    width: calc(10rem - 2.5rem);
+    height: calc(10rem - 2.5rem);
     display: block;
     object-fit: contain;
   }
 
   .navigation .nav-header button {
-    width: 10rem;
-    height: 10rem;
+    width: calc(10rem - 2.5rem);
+    height: calc(10rem - 2.5rem);
     padding: 0;
     border: none;
     background: none;
@@ -782,8 +782,8 @@ body.theme-dark .top-menu button {
   }
 
     .navigation .nav-item button {
-      width: 10rem;
-      height: 10rem;
+      width: calc(10rem - 2.5rem);
+      height: calc(10rem - 2.5rem);
       padding: 0;
       display: flex;
       align-items: center;
@@ -811,22 +811,15 @@ body.theme-dark .top-menu button {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 8rem;
+      font-size: calc(8rem - 2.5rem);
       line-height: 1;
     }
-
-  .navigation .nav-item.connected-district button {
-    width: calc(10rem - 2.5rem);
-    height: calc(10rem - 2.5rem);
-  }
-
-  .navigation .nav-item.connected-district button span.nav-icon {
-    font-size: calc(8rem - 2.5rem);
-  }
 
   .navigation .nav-item.current-district button {
     pointer-events: none;
     cursor: default;
+    width: 10rem;
+    height: 10rem;
   }
 
   .navigation .nav-item.current-district img.nav-icon {
@@ -835,6 +828,7 @@ body.theme-dark .top-menu button {
 
   .navigation .nav-item.current-district span.nav-icon {
     text-shadow: 0 0 10px var(--foreground);
+    font-size: 8rem;
   }
 
   .navigation .nav-item:not(.current-district) button:disabled {
@@ -859,15 +853,20 @@ body.theme-dark .top-menu button {
   .navigation .district-map .district-node {
     position: absolute;
     z-index: 1;
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .navigation .district-map .nav-item button {
-    width: 10rem;
-    height: 10rem;
+    width: calc(10rem - 2.5rem);
+    height: calc(10rem - 2.5rem);
   }
 
   .navigation .district-map .nav-item button span.nav-icon {
-    font-size: 8rem;
+    font-size: calc(8rem - 2.5rem);
   }
 
   .navigation .district-map .district-connections {
@@ -908,6 +907,11 @@ body.theme-dark .top-menu button {
       font-size: 3.5rem;
     }
 
+    .navigation .district-map .district-node {
+      width: 4.5rem;
+      height: 4.5rem;
+    }
+
     .navigation .nav-item.connected-district button {
       width: calc(4.5rem - 1rem);
       height: calc(4.5rem - 1rem);
@@ -915,6 +919,15 @@ body.theme-dark .top-menu button {
 
     .navigation .nav-item.connected-district button span.nav-icon {
       font-size: calc(3.5rem - 1rem);
+    }
+
+    .navigation .nav-item.current-district button {
+      width: 4.5rem;
+      height: 4.5rem;
+    }
+
+    .navigation .nav-item.current-district span.nav-icon {
+      font-size: 3.5rem;
     }
   }
 
