@@ -1122,14 +1122,14 @@ const proficiencyCategories = {
 
 
 const elementIcons = {
-  Stone: '🪨',
-  Water: '💧',
-  Wind: '🌬️',
-  Fire: '🔥',
-  Ice: '❄️',
-  Thunder: '⚡',
-  Dark: '☁️',
-  Light: '✦',
+  Stone: '<img src="assets/images/icons/Magic/Stone.png" alt="Stone" />',
+  Water: '<img src="assets/images/icons/Magic/Water.png" alt="Water" />',
+  Wind: '<img src="assets/images/icons/Magic/Wind.png" alt="Wind" />',
+  Fire: '<img src="assets/images/icons/Magic/Fire.png" alt="Fire" />',
+  Ice: '<img src="assets/images/icons/Magic/Ice.png" alt="Ice" />',
+  Thunder: '<img src="assets/images/icons/Magic/Lightning.png" alt="Thunder" />',
+  Dark: '<img src="assets/images/icons/Magic/Dark.png" alt="Dark" />',
+  Light: '<img src="assets/images/icons/Magic/Light.png" alt="Light" />',
   Wood: '🌲',
   Magma: '🌋',
   Sand: '🏜️',
@@ -1173,14 +1173,14 @@ const elementColors = {
 };
 
 const schoolIcons = {
-  Destructive: '💥',
-  Enfeebling:
-    '<span class="icon enfeeble"><span class="arrow">⬇</span></span>',
-  Reinforcement:
-    '<span class="icon reinforce"><svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 5-3.5 8.5-7 9-3.5-.5-7-4-7-9V7l7-4z"/></svg></span>',
-  Healing:
-    '<span class="icon heal"><span class="arrow">+</span></span>',
-  Summoning: '<span class="icon slime"></span>'
+  Destructive: '<img src="assets/images/icons/Magic/Destruction.png" alt="Destructive" />',
+  Enfeebling: '<img src="assets/images/icons/Magic/Enfeeble.png" alt="Enfeebling" />',
+  Reinforcement: '<img src="assets/images/icons/Magic/Enhance.png" alt="Reinforcement" />',
+  Healing: '<img src="assets/images/icons/Magic/Healing.png" alt="Healing" />',
+  Summoning: '<img src="assets/images/icons/Magic/Summoning.png" alt="Summoning" />',
+  Dance: '<img src="assets/images/icons/Magic/Dance.png" alt="Dance" />',
+  Instrument: '<img src="assets/images/icons/Magic/Instrument.png" alt="Instrument" />',
+  Voice: '<img src="assets/images/icons/Magic/Voice.png" alt="Voice" />'
 };
 const elementOrder = ['Stone', 'Water', 'Wind', 'Fire', 'Ice', 'Thunder', 'Light', 'Dark'];
 let spellFilters = {
