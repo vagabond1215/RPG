@@ -1284,19 +1284,21 @@ body.theme-dark .top-menu button {
   filter: grayscale(1);
 }
 
-.spellbook-filters > .filter-toggle.off {
-  filter: grayscale(1) drop-shadow(0 0 0.75rem var(--foreground));
-}
-
 .filter-toggle.off:hover {
   filter: grayscale(1) drop-shadow(0 0 0.5rem var(--foreground));
 }
 
+.spellbook-filters > .filter-toggle:not(.off) {
+  filter: drop-shadow(0 0 0.5rem var(--foreground));
+}
+
+.spellbook-filters > .filter-toggle:not(.off):hover {
+  filter: drop-shadow(0 0 0.75rem var(--foreground));
+}
+
 .filter-toggle img {
-  max-width: 4rem;
-  max-height: 4rem;
-  width: auto;
-  height: auto;
+  width: 4rem;
+  height: 4rem;
 }
 .element-icon,
 .school-icon {

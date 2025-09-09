@@ -1857,8 +1857,10 @@ function showSpellbookUI() {
 
   let filterHtml = '<div class="spellbook-filters">';
   const masterCls = allFiltersActive ? 'filter-toggle' : 'filter-toggle off';
-  const masterLabel = allFiltersActive ? 'ON' : 'OFF';
-  filterHtml += `<button class="${masterCls}" data-filter-type="all">${masterLabel}</button>`;
+  const masterIcon = allFiltersActive
+    ? '<img src="assets/images/icons/Magic/On.png" alt="Filters On" />'
+    : '<img src="assets/images/icons/Magic/Off.png" alt="Filters Off" />';
+  filterHtml += `<button class="${masterCls}" data-filter-type="all" aria-label="Toggle Filters">${masterIcon}</button>`;
   if (unlockedElements.size) {
     filterHtml += '<div class="filter-group">';
     elementOrder.forEach(el => {
