@@ -869,6 +869,19 @@ body.theme-dark .top-menu button {
     box-shadow: 0 0 0 2px #2e8b57;
   }
 
+  @media (orientation: portrait) {
+    .navigation .nav-header .nav-icon,
+    .navigation .nav-header button,
+    .navigation .nav-item button {
+      width: 5rem;
+      height: 5rem;
+    }
+
+    .navigation .nav-item button span.nav-icon {
+      font-size: 4rem;
+    }
+  }
+
   .location-select,
   .race-select {
     display: flex;
