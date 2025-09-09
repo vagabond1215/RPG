@@ -845,6 +845,15 @@ body.theme-dark .top-menu button {
     z-index: 1;
   }
 
+  .navigation .district-map .nav-item button {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .navigation .district-map .nav-item button span.nav-icon {
+    font-size: 4rem;
+  }
+
   .navigation .district-map .district-connections {
     position: absolute;
     top: 0;

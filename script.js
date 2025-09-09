@@ -1379,8 +1379,8 @@ function showNavigation() {
         const accessible = new Set(districts.map(d => d.name).concat(pos.district));
         const fontSize =
           parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
-        // Each district icon button is 10rem square, so space nodes accordingly
-        const size = 10 * fontSize;
+        // Each district icon button is 5rem square, so space nodes accordingly
+        const size = 5 * fontSize;
         const nodes = allNames.map(name => {
           const coords = layout.positions[name] || [0, 0];
           const [row, col] = coords;
