@@ -18,7 +18,7 @@ import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipmen
 import { LOCATIONS } from "./assets/data/locations.js";
 import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
 import { CITY_NAV } from "./assets/data/city_nav.js";
-import { themeColors } from "./assets/data/theme_colors.js";
+import { themeColors, getThemeColors } from "./assets/data/theme_colors.js";
 import { getThemeDescription } from "./assets/data/theme_descriptions.js";
 import { getRaceColors } from "./assets/data/race_colors.js";
 import { buildImagePrompt } from "./assets/data/image_prompts.js";
@@ -2571,10 +2571,10 @@ function startCharacterCreation() {
 }
 
 async function generateCharacterImage(character) {
-  const themeEntry = themeColors.find(t => t.name === character.theme);
-  const pictureTheme = themeEntry ? themeEntry.colors : ['beige', 'gray', 'white'];
+  const themeIndex = themeColors.find(t => t.name === character.theme)?.index;
+  const pictureTheme = getThemeColors(themeIndex);
   const descriptor = getThemeDescription(character.theme);
-  const raceCombo = themeEntry ? getRaceColors(character.race, themeEntry.index) : null;
+  const raceCombo = themeIndex ? getRaceColors(character.race, themeIndex) : null;
 
   const skinColor = character.skinColor || raceCombo?.skin;
   const skin = skinColor || '';
