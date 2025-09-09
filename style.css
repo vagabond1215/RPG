@@ -815,6 +815,15 @@ body.theme-dark .top-menu button {
       line-height: 1;
     }
 
+  .navigation .nav-item.connected-district button {
+    width: calc(10rem - 2.5rem);
+    height: calc(10rem - 2.5rem);
+  }
+
+  .navigation .nav-item.connected-district button span.nav-icon {
+    font-size: calc(8rem - 2.5rem);
+  }
+
   .navigation .nav-item.current-district button {
     pointer-events: none;
     cursor: default;
@@ -853,12 +862,12 @@ body.theme-dark .top-menu button {
   }
 
   .navigation .district-map .nav-item button {
-    width: 5rem;
-    height: 5rem;
+    width: 10rem;
+    height: 10rem;
   }
 
   .navigation .district-map .nav-item button span.nav-icon {
-    font-size: 4rem;
+    font-size: 8rem;
   }
 
   .navigation .district-map .district-connections {
@@ -897,6 +906,15 @@ body.theme-dark .top-menu button {
     .navigation .nav-item button span.nav-icon,
     .navigation .district-map .nav-item button span.nav-icon {
       font-size: 3.5rem;
+    }
+
+    .navigation .nav-item.connected-district button {
+      width: calc(4.5rem - 1rem);
+      height: calc(4.5rem - 1rem);
+    }
+
+    .navigation .nav-item.connected-district button span.nav-icon {
+      font-size: calc(3.5rem - 1rem);
     }
   }
 
