@@ -18,6 +18,11 @@ import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipmen
 import { LOCATIONS } from "./assets/data/locations.js";
 import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
 import { CITY_NAV } from "./assets/data/city_nav.js";
+import { themeColors } from "./assets/data/theme_colors.js";
+import { getThemeDescription } from "./assets/data/theme_descriptions.js";
+import { getRaceColors } from "./assets/data/race_colors.js";
+import { BASE_IMAGE_PROMPT, ADDON_IMAGE_PROMPT } from "./assets/data/image_prompt_templates.js";
+import { getRacialPrompt, getRaceProportion } from "./assets/data/race_prompts.js";
 import { DEFAULT_NAMES } from "./assets/data/names.js";
 import { WAVES_BREAK_BACKSTORIES } from "./assets/data/waves_break_backstories.js";
 import {
@@ -113,6 +118,10 @@ function swapGenderedTerms(text, sex) {
 
 function capitalize(str) {
   return str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+}
+
+function fillTemplate(template, data) {
+  return template.replace(/{{(\w+)}}/g, (_, key) => (key in data ? data[key] : ''));
 }
 
 function replaceCharacterRefs(text, character) {
@@ -2562,17 +2571,45 @@ function startCharacterCreation() {
 }
 
 async function generateCharacterImage(character) {
-  const location = character.location || 'a small town plaza';
-  let skinDesc = character.skinColor ? `${character.skinColor} skin` : '';
-  if (character.race === 'Cait Sith' && character.accentColor) {
-    skinDesc += ` and ${character.accentColor} accents`;
-  } else if (character.race === 'Salamander' && character.scaleColor) {
-    skinDesc += ` and ${character.scaleColor} scales`;
-  }
-  const hair = character.hairColor || 'brown';
-  const eyes = character.eyeColor || 'brown';
-  const height = character.height ? formatHeight(character.height) : 'average height';
-  const prompt = `Full body portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()}${skinDesc ? ` with ${skinDesc}` : ''}, ${hair} hair and ${eyes} eyes, ${height} tall, standing in ${location}.`;
+  const themeEntry = themeColors.find(t => t.name === character.theme);
+  const pictureTheme = themeEntry ? themeEntry.colors : ['beige', 'gray', 'white'];
+  const descriptor = getThemeDescription(character.theme);
+  const raceCombo = themeEntry ? getRaceColors(character.race, themeEntry.index) : null;
+
+  const skin = character.skinColor || raceCombo?.skin || '';
+  const hair = character.hairColor || raceCombo?.hair || '';
+  const eyes = character.eyeColor || raceCombo?.eyes || '';
+  const accent = character.accentColor || raceCombo?.accent;
+  const scales = character.scaleColor || raceCombo?.scales;
+
+  const hasFreckles = !['Salamander', 'Elf', 'Dark Elf', 'Halfling'].includes(character.race);
+  const skinText = hasFreckles && skin ? `${skin} with light freckles` : skin;
+  const themeText = `${pictureTheme.join(', ')}${descriptor ? ' – ' + descriptor : ''}`;
+  const sexPlural = character.sex === 'Male' ? 'men' : 'women';
+  const adjective = character.sex === 'Male' ? 'handsome' : 'beautiful';
+  const base = fillTemplate(BASE_IMAGE_PROMPT, {
+    adjective,
+    race: character.race.toLowerCase(),
+    sex: character.sex.toLowerCase(),
+    sexPlural,
+    proportion: getRaceProportion(character.race),
+    hair,
+    skin: skinText,
+    theme: themeText
+  });
+
+  let colorLines = `  - Skin: ${skin}\n  - Hair: ${hair}\n  - Eyes: ${eyes}`;
+  if (accent) colorLines += `\n  - Accent: ${accent}`;
+  if (scales) colorLines += `\n  - Scales: ${scales}`;
+  const addon = fillTemplate(ADDON_IMAGE_PROMPT, {
+    raceCap: character.race,
+    sexCap: character.sex,
+    themeName: character.theme,
+    colors: colorLines,
+    racialPrompt: getRacialPrompt(character.race) || 'None'
+  });
+
+  const prompt = `${base.trim()}\n\n${addon.trim()}`;
   let apiKey = localStorage.getItem('openaiApiKey');
   if (!apiKey) {
     apiKey = prompt('Enter OpenAI API key:');
