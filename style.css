@@ -1236,16 +1236,26 @@ body.theme-dark .top-menu button {
 .filter-toggle.off {
   filter: grayscale(1);
 }
+
+.filter-toggle img {
+  width: 5rem;
+  height: 5rem;
+}
 .element-icon,
 .school-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1em;
-  height: 1em;
-  font-size: 1em;
-  line-height: 1;
+  width: 5rem;
+  height: 5rem;
   margin-left: 0.25rem;
+}
+
+.element-icon img,
+.school-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 
