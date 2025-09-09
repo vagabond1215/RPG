@@ -1852,7 +1852,7 @@ function showSpellbookUI() {
 
   let filterHtml = '<div class="spellbook-filters">';
   const masterCls = allFiltersActive ? 'filter-toggle' : 'filter-toggle off';
-  const masterLabel = allFiltersActive ? 'Off' : 'On';
+  const masterLabel = allFiltersActive ? 'ON' : 'OFF';
   filterHtml += `<button class="${masterCls}" data-filter-type="all">${masterLabel}</button>`;
   if (unlockedElements.size) {
     filterHtml += '<div class="filter-group">';
