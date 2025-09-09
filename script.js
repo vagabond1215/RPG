@@ -1750,11 +1750,14 @@ function showCharacterUI() {
   const zoomDec = document.getElementById('portrait-zoom-dec');
   const zoomInc = document.getElementById('portrait-zoom-inc');
   const zoomReset = document.getElementById('portrait-zoom-reset');
+  const zoomControls = document.querySelector('.portrait-zoom');
   let portraitZoom = 1;
 
   function updatePortraitZoom() {
     portraitImg.style.transform = `scale(${portraitZoom})`;
     zoomReset.textContent = `${Math.round(portraitZoom * 100)}%`;
+    const offset = portraitImg.offsetHeight * (portraitZoom - 1);
+    zoomControls.style.marginTop = `${offset}px`;
   }
 
   zoomDec.addEventListener('click', () => {
@@ -1772,7 +1775,8 @@ function showCharacterUI() {
     updatePortraitZoom();
   });
 
-  updatePortraitZoom();
+  if (portraitImg.complete) updatePortraitZoom();
+  else portraitImg.addEventListener('load', updatePortraitZoom);
   document.getElementById('delete-character').addEventListener('click', () => {
     delete currentProfile.characters[c.id];
     currentProfile.lastCharacter = null;
@@ -2193,6 +2197,7 @@ function startCharacterCreation() {
   };
 
   let step = saved.step || 0;
+  let ccPortraitZoom = 1;
   renderStep();
 
   async function renderStep() {
@@ -2347,7 +2352,14 @@ function startCharacterCreation() {
             inputHTML = `
               <div class="character-carousel wheel-selector">
                 <button class="character-arrow left" aria-label="Previous">&#x2039;</button>
-                <img class="character-option" src="${src}" alt="Character">
+                <div class="portrait-wrapper">
+                  <img class="character-option" src="${src}" alt="Character">
+                  <div class="portrait-zoom">
+                    <button id="portrait-zoom-dec" class="portrait-zoom-dec" aria-label="Zoom out">-</button>
+                    <button id="portrait-zoom-reset" class="portrait-zoom-reset" aria-label="Reset zoom">100%</button>
+                    <button id="portrait-zoom-inc" class="portrait-zoom-inc" aria-label="Zoom in">+</button>
+                  </div>
+                </div>
                 <button class="character-arrow right" aria-label="Next">&#x203A;</button>
               </div>`;
           }
@@ -2449,6 +2461,7 @@ function startCharacterCreation() {
           const change = dir => {
             index = (index + dir + files.length) % files.length;
             character.characterImage = files[index];
+            ccPortraitZoom = 1;
             localStorage.setItem(
               TEMP_CHARACTER_KEY,
               JSON.stringify({ step, character })
@@ -2461,6 +2474,37 @@ function startCharacterCreation() {
           document
             .querySelector('.character-arrow.right')
             .addEventListener('click', () => change(1));
+
+          const portraitImg = document.querySelector('.character-option');
+          const zoomDec = document.getElementById('portrait-zoom-dec');
+          const zoomInc = document.getElementById('portrait-zoom-inc');
+          const zoomReset = document.getElementById('portrait-zoom-reset');
+          const zoomControls = document.querySelector('.portrait-zoom');
+
+          function updateZoom() {
+            portraitImg.style.transform = `scale(${ccPortraitZoom})`;
+            zoomReset.textContent = `${Math.round(ccPortraitZoom * 100)}%`;
+            const offset = portraitImg.offsetHeight * (ccPortraitZoom - 1);
+            zoomControls.style.marginTop = `${offset}px`;
+          }
+
+          zoomDec.addEventListener('click', () => {
+            ccPortraitZoom = Math.max(0.1, ccPortraitZoom - 0.1);
+            updateZoom();
+          });
+
+          zoomInc.addEventListener('click', () => {
+            ccPortraitZoom += 0.1;
+            updateZoom();
+          });
+
+          zoomReset.addEventListener('click', () => {
+            ccPortraitZoom = 1;
+            updateZoom();
+          });
+
+          if (portraitImg.complete) updateZoom();
+          else portraitImg.addEventListener('load', updateZoom);
         }
       } else if (field.type === 'select') {
         document.querySelectorAll('.option-button').forEach(btn => {
