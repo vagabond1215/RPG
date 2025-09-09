@@ -1198,6 +1198,17 @@ let spellFilters = {
   schools: Object.fromEntries(Object.keys(schoolIcons).map(s => [s, true])),
 };
 
+function handleFilterLongPress(type, key) {
+  const group = spellFilters[type + 's'];
+  const onlyThis = Object.entries(group).every(([k, v]) => (k === key ? v : !v));
+  if (onlyThis) {
+    Object.keys(group).forEach(k => (group[k] = true));
+  } else {
+    Object.keys(group).forEach(k => (group[k] = k === key));
+  }
+  showSpellbookUI();
+}
+
 function proficiencyToTierLabel(prof) {
   if (prof === 1) return 'Cantrips';
   const idx = MILESTONES.indexOf(Number(prof));
@@ -1839,7 +1850,14 @@ function showSpellbookUI() {
 
   let html = '<div class="spellbook-screen">';
 
+  const allFiltersActive =
+    Object.values(spellFilters.elements).every(Boolean) &&
+    Object.values(spellFilters.schools).every(Boolean);
+
   let filterHtml = '<div class="spellbook-filters">';
+  const masterCls = allFiltersActive ? 'filter-toggle' : 'filter-toggle off';
+  const masterLabel = allFiltersActive ? 'Off' : 'On';
+  filterHtml += `<button class="${masterCls}" data-filter-type="all">${masterLabel}</button>`;
   if (unlockedElements.size) {
     filterHtml += '<div class="filter-group">';
     elementOrder.forEach(el => {
@@ -1889,10 +1907,41 @@ function showSpellbookUI() {
   });
 
   document.querySelectorAll('.filter-toggle').forEach(btn => {
+    const type = btn.dataset.filterType;
+    let longPress = false;
+    if (type !== 'all') {
+      let timer;
+      const start = () => {
+        longPress = false;
+        timer = setTimeout(() => {
+          longPress = true;
+          handleFilterLongPress(type, btn.dataset.filter);
+        }, 500);
+      };
+      const cancel = () => clearTimeout(timer);
+      btn.addEventListener('mousedown', start);
+      btn.addEventListener('touchstart', start);
+      ['mouseup', 'mouseleave', 'touchend'].forEach(ev =>
+        btn.addEventListener(ev, cancel)
+      );
+    }
     btn.addEventListener('click', () => {
-      const type = btn.dataset.filterType;
-      const key = btn.dataset.filter;
-      spellFilters[type + 's'][key] = !spellFilters[type + 's'][key];
+      if (longPress) return;
+      if (type === 'all') {
+        const allActive =
+          Object.values(spellFilters.elements).every(Boolean) &&
+          Object.values(spellFilters.schools).every(Boolean);
+        const newState = !allActive;
+        Object.keys(spellFilters.elements).forEach(
+          e => (spellFilters.elements[e] = newState)
+        );
+        Object.keys(spellFilters.schools).forEach(
+          s => (spellFilters.schools[s] = newState)
+        );
+      } else {
+        const key = btn.dataset.filter;
+        spellFilters[type + 's'][key] = !spellFilters[type + 's'][key];
+      }
       showSpellbookUI();
     });
   });
