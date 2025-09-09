@@ -1314,7 +1314,7 @@ function showNavigation() {
             icon: e.icon,
           })
         );
-      } else {
+      } else if (e.target !== pos.district) {
         const prompt = e.prompt || building.travelPrompt || 'Travel to';
         const icon = e.icon || getDistrictIcon(pos.city, e.name);
         buttons.push(
@@ -1322,7 +1322,7 @@ function showNavigation() {
         );
       }
     });
-    if (building.exits.length && (building.interactions || []).length) {
+    if (buttons.length && (building.interactions || []).length) {
       buttons.push('<div class="group-separator"></div>');
     }
     (building.interactions || []).forEach(i => {
@@ -1340,7 +1340,9 @@ function showNavigation() {
       : '';
     const bIcon = getBuildingIcon(pos.city, pos.district, pos.building);
     const dIcon = getDistrictIcon(pos.city, pos.district);
-    const headerHTML = `<div class="nav-header">${bIcon ? `<img src="${bIcon}" alt="" class="nav-icon">` : ''}<img src="${dIcon}" alt="" class="nav-icon"></div>`;
+    const headerHTML = `<div class="nav-header">${
+      bIcon ? `<img src="${bIcon}" alt="" class="nav-icon">` : ''
+    }<button data-type="district" data-target="${pos.district}" aria-label="Return to ${pos.district}"><img src="${dIcon}" alt="" class="nav-icon"></button></div>`;
     setMainHTML(
       `<div class="navigation">${headerHTML}${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
     );
@@ -1490,8 +1492,10 @@ function showNavigation() {
   normalizeOptionButtonWidths();
   updateMenuHeight();
   if (main) {
-    main.querySelectorAll('.option-grid button:not(:disabled)').forEach(btn => {
-      btn.addEventListener('click', () => {
+    main
+      .querySelectorAll('.option-grid button:not(:disabled), .nav-header button:not(:disabled)')
+      .forEach(btn => {
+        btn.addEventListener('click', () => {
         const action = btn.dataset.action;
         if (action === 'toggle-districts') {
           showDistricts = !showDistricts;
