@@ -1,5 +1,5 @@
 export const BASE_IMAGE_PROMPT_TEMPLATE = "A hyper-detailed fantasy Anime-style full-body portrait of a handsome {sex} {race} dressed in tantalizing, tasteful garb in front of a neutral gray background. Reference facial features from the most attractive {sexPlural}. Human proportionality for height is about 7.5 heads tall. Hair: {hair}. Skin: {skin} with light freckles. Eyes: {eyes}. Clothing is vibrant, complementary colors contrasting hair and skin tones with accents, trim, and accessories. Dynamic composition, ultra high definition, delicate details. No hat. No weapon.";
-export const ADDON_IMAGE_PROMPT_TEMPLATE = "Picture Theme: {theme} — {colors}.";
+export const ADDON_IMAGE_PROMPT_TEMPLATE = "Picture Theme: {themeName} — {themeDesc} — {colors}.";
 
 export function getRacePrompt(race) {
   switch (race) {
@@ -22,7 +22,7 @@ export function getRacePrompt(race) {
   }
 }
 
-export function buildImagePrompt({ sex, sexPlural, race, hair, skin, eyes, theme, colors }) {
+export function buildImagePrompt({ sex, sexPlural, race, hair, skin, eyes, themeName, themeDesc, colors }) {
   const base = BASE_IMAGE_PROMPT_TEMPLATE
     .replace('{sex}', sex.toLowerCase())
     .replace('{race}', race.toLowerCase())
@@ -32,7 +32,8 @@ export function buildImagePrompt({ sex, sexPlural, race, hair, skin, eyes, theme
     .replace('{eyes}', eyes);
   const racePart = getRacePrompt(race);
   const addon = ADDON_IMAGE_PROMPT_TEMPLATE
-    .replace('{theme}', theme)
+    .replace('{themeName}', themeName)
+    .replace('{themeDesc}', themeDesc)
     .replace('{colors}', colors);
   return racePart ? `${base} ${racePart}. ${addon}` : `${base} ${addon}`;
 }
