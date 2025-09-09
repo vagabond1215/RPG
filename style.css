@@ -50,7 +50,7 @@ main {
   background: var(--background);
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;
+  gap: 0.25rem;
   padding: 2px 0.5rem;
   height: var(--menu-button-size);
   align-items: center;
@@ -125,13 +125,13 @@ main {
 
 .settings-group {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
   position: relative;
 }
 
 #settings-panel {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
   overflow: hidden;
   position: absolute;
   pointer-events: none;
@@ -140,7 +140,7 @@ main {
   flex-direction: row;
   top: 0;
   left: 100%;
-  margin-left: 0.5rem;
+  margin-left: 0.25rem;
   transform: scaleX(0);
   transform-origin: left;
 }
