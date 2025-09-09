@@ -18,10 +18,7 @@ import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipmen
 import { LOCATIONS } from "./assets/data/locations.js";
 import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
 import { CITY_NAV } from "./assets/data/city_nav.js";
-import { themeColors, getThemeColors } from "./assets/data/theme_colors.js";
-import { getThemeDescription } from "./assets/data/theme_descriptions.js";
-import { getRaceColors } from "./assets/data/race_colors.js";
-import { buildImagePrompt } from "./assets/data/image_prompts.js";
+import { composeImagePrompt } from "./assets/data/image_prompts.js";
 import { DEFAULT_NAMES } from "./assets/data/names.js";
 import { WAVES_BREAK_BACKSTORIES } from "./assets/data/waves_break_backstories.js";
 import {
@@ -2571,30 +2568,7 @@ function startCharacterCreation() {
 }
 
 async function generateCharacterImage(character) {
-  const themeIndex = themeColors.find(t => t.name === character.theme)?.index;
-  const pictureTheme = getThemeColors(themeIndex);
-  const descriptor = getThemeDescription(character.theme);
-  const raceCombo = themeIndex ? getRaceColors(character.race, themeIndex) : null;
-
-  const skinColor = character.skinColor || raceCombo?.skin;
-  const skin = skinColor || '';
-  const hair = character.hairColor || raceCombo?.hair || 'brown';
-  const eyes = character.eyeColor || raceCombo?.eyes || 'brown';
-  const sexPlural = character.sex === 'Male' ? 'men' : 'women';
-  const themeName = character.theme || '';
-  const themeDesc = descriptor || '';
-  const colors = pictureTheme.join(', ');
-  const prompt = buildImagePrompt({
-    sex: character.sex,
-    sexPlural,
-    race: character.race,
-    hair,
-    skin,
-    eyes,
-    themeName,
-    themeDesc,
-    colors
-  });
+  const prompt = composeImagePrompt(character);
   let apiKey = localStorage.getItem('openaiApiKey');
   if (!apiKey) {
     apiKey = prompt('Enter OpenAI API key:');
