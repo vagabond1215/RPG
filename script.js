@@ -1268,6 +1268,7 @@ function showNavigation() {
       district: cityData ? Object.keys(cityData.districts)[0] : null,
       building: null,
       previousDistrict: null,
+      previousBuilding: null,
     };
     saveProfiles();
   }
@@ -1451,9 +1452,18 @@ function showNavigation() {
         navButtons.push(...g);
       }
     });
-    const description = pos.previousDistrict && district.descriptions
-      ? district.descriptions[pos.previousDistrict]
-      : null;
+    let description = null;
+    if (pos.previousBuilding) {
+      description = `Leaving ${pos.previousBuilding}, you step back into ${pos.district}.`;
+      pos.previousBuilding = null;
+      saveProfiles();
+    } else if (
+      pos.previousDistrict &&
+      pos.previousDistrict !== pos.district &&
+      district.descriptions
+    ) {
+      description = district.descriptions[pos.previousDistrict];
+    }
     const localsHTML = locals.length
       ? `<div class="option-grid">${locals.map(makeButton).join('')}</div>`
       : '';
@@ -1482,12 +1492,15 @@ function showNavigation() {
         const type = btn.dataset.type;
         const target = btn.dataset.target;
         if (type === 'building') {
+          pos.previousBuilding = null;
           pos.building = target;
         } else if (type === 'district') {
+          if (pos.building) pos.previousBuilding = pos.building;
           pos.previousDistrict = pos.district;
           pos.district = target;
           pos.building = null;
         } else if (type === 'exit') {
+          if (pos.building) pos.previousBuilding = pos.building;
           pos.previousDistrict = pos.district;
           pos.building = null;
           pos.district = target;
@@ -1499,6 +1512,7 @@ function showNavigation() {
             district: city ? Object.keys(city.districts)[0] : null,
             building: null,
             previousDistrict: null,
+            previousBuilding: null,
           };
         } else if (type === 'interaction') {
             if (action === 'train-glassblowing') {
@@ -2618,6 +2632,7 @@ function finalizeCharacter(character) {
         district: district || (cityData ? Object.keys(cityData.districts)[0] : null),
         building,
         previousDistrict: null,
+        previousBuilding: null,
       };
     }
   }
