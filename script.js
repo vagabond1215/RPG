@@ -1880,7 +1880,7 @@ function showSpellbookUI() {
 
   html += filterHtml;
 
-  html += '<div class="spellbook-list"><h1><span class="spellbook-icon">📖</span>Spellbook</h1>';
+  html += '<div class="spellbook-list"><h1><img src="assets/images/icons/Magic/Spellbook.png" alt="Spellbook" class="spellbook-icon"></h1>';
   if (filtered.length) {
     html += '<ul class="spell-list">';
     filtered.forEach(spell => {

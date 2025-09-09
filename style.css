@@ -1240,6 +1240,7 @@ body.theme-dark .top-menu button {
 .spellbook-list h1 {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .spellbook-filters {
@@ -1263,6 +1264,10 @@ body.theme-dark .top-menu button {
 
 .filter-toggle.off {
   filter: grayscale(1);
+}
+
+.spellbook-filters > .filter-toggle.off {
+  filter: grayscale(1) drop-shadow(0 0 0.75rem var(--foreground));
 }
 
 .filter-toggle.off:hover {
@@ -1316,7 +1321,9 @@ body.theme-dark .top-menu button {
 }
 
 .spellbook-icon {
-  margin-right: 0.25rem;
+  margin-right: 0;
+  max-width: 4rem;
+  max-height: 4rem;
 }
 
 .icon {
