@@ -1299,6 +1299,7 @@ body.theme-dark .top-menu button {
 .filter-toggle img {
   width: 4rem;
   height: 4rem;
+  object-fit: contain;
 }
 .element-icon,
 .school-icon {
