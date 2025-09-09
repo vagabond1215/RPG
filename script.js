@@ -2581,7 +2581,8 @@ async function generateCharacterImage(character) {
   const hair = character.hairColor || raceCombo?.hair || 'brown';
   const eyes = character.eyeColor || raceCombo?.eyes || 'brown';
   const sexPlural = character.sex === 'Male' ? 'men' : 'women';
-  const theme = descriptor || character.theme || '';
+  const themeName = character.theme || '';
+  const themeDesc = descriptor || '';
   const colors = pictureTheme.join(', ');
   const prompt = buildImagePrompt({
     sex: character.sex,
@@ -2590,7 +2591,8 @@ async function generateCharacterImage(character) {
     hair,
     skin,
     eyes,
-    theme,
+    themeName,
+    themeDesc,
     colors
   });
   let apiKey = localStorage.getItem('openaiApiKey');
