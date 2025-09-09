@@ -1267,6 +1267,10 @@ body.theme-dark .top-menu button {
   filter: grayscale(1);
 }
 
+.filter-toggle.off:hover {
+  filter: grayscale(1) drop-shadow(0 0 0.5rem var(--foreground));
+}
+
 .filter-toggle img {
   max-width: 4rem;
   max-height: 4rem;
