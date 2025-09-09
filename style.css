@@ -315,7 +315,6 @@ button:not(:disabled):hover,
   width: auto;
   height: auto;
   object-fit: contain;
-  transform-origin: center;
 }
 
 .no-character {
@@ -419,6 +418,10 @@ body.theme-dark .top-menu button {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  .portrait-wrapper img {
+    transform-origin: top;
   }
 
   .portrait-zoom {
