@@ -145,7 +145,7 @@ export const CITY_NAV = {
             { name: "Quayside Greens Market", type: "building", target: "Quayside Greens Market", icon: "assets/images/icons/waves_break/Quayside Greens Market.png" },
             { name: "Dockside Exchange Plaza", type: "building", target: "Dockside Exchange Plaza", icon: "assets/images/icons/waves_break/Dockside Exchange Plaza.png" },
             { name: "Saltroot Remedies", type: "building", target: "Saltroot Remedies", icon: "assets/images/icons/waves_break/Saltroot Remedies.png" },
-            { name: "Seastone Arena", type: "building", target: "Seastone Arena", icon: "assets/images/icons/waves_break/Default.png" },
+            { name: "Seastone Arena", type: "building", target: "Seastone Arena", icon: "assets/images/icons/waves_break/Seastone Arena.png" },
             { name: "Tern Harbor Commons", type: "building", target: "Tern Harbor Commons", icon: "assets/images/icons/waves_break/Tern Harbor Commons.png" },
               { name: "The Port District", type: "district", target: "The Port District", icon: "assets/images/icons/waves_break/Port District.png" },
               { name: "The Lower Gardens", type: "district", target: "The Lower Gardens", icon: "assets/images/icons/waves_break/Lower Gardens District.png" },
@@ -590,7 +590,8 @@ Dockhands haul pungent barrels destined for lamps and fertilized fields.`,
       },
       "Seastone Arena": {
         travelPrompt: "Exit to",
-        description: `Carved basalt walls ring a sand-strewn pit where fighters trade blows.
+        description: `You shoulder through the throng and emerge into Seastone Arena.
+        Carved basalt walls ring a sand-strewn pit where fighters trade blows.
         Crowds roar as bets change hands and champions chase fleeting glory.`,
         exits: [ { name: "Little Terns", target: "Little Terns" } ],
         interactions: []

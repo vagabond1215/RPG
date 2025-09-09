@@ -1367,6 +1367,7 @@ function showNavigation() {
         name: pt.name,
         prompt,
         icon: pt.icon,
+        extraClass: pt.extraClass,
       });
     };
     const groups = [];
@@ -1379,8 +1380,10 @@ function showNavigation() {
         const accessible = new Set(districts.map(d => d.name).concat(pos.district));
         const fontSize =
           parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
-        // Each district icon button is 5rem square, so space nodes accordingly
-        const size = 5 * fontSize;
+        const isLandscape = window.innerWidth > window.innerHeight;
+        const iconRem = isLandscape ? 10 : 4.5;
+        // Each district icon button is iconRem rem square, so space nodes accordingly
+        const size = iconRem * fontSize;
         const nodes = allNames.map(name => {
           const coords = layout.positions[name] || [0, 0];
           const [row, col] = coords;
@@ -1412,7 +1415,9 @@ function showNavigation() {
           `<div class="district-map" style="width:${width}px;height:${height}px;"><svg class="district-connections" width="${width}" height="${height}">${lines}</svg>${nodes.join('')}</div>`,
         ];
       }
-      const neighborButtons = districts.map(makeButton);
+      const neighborButtons = districts.map(d =>
+        makeButton({ ...d, extraClass: 'connected-district' })
+      );
       const currentButton = createNavItem({
         type: 'district',
         target: pos.district,
