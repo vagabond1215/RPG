@@ -1240,7 +1240,7 @@ body.theme-dark .top-menu button {
 .spellbook-list h1 {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .spellbook-filters {
@@ -1322,8 +1322,15 @@ body.theme-dark .top-menu button {
 
 .spellbook-icon {
   margin-right: 0;
-  max-width: 4rem;
-  max-height: 4rem;
+  width: 10rem;
+  height: 10rem;
+}
+
+@media (orientation: portrait) {
+  .spellbook-icon {
+    width: 5rem;
+    height: 5rem;
+  }
 }
 
 .icon {
