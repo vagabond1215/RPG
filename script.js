@@ -1911,6 +1911,7 @@ function showSpellbookUI() {
     let longPress = false;
     if (type !== 'all') {
       let timer;
+      let lastTap = 0;
       const start = () => {
         longPress = false;
         timer = setTimeout(() => {
@@ -1924,6 +1925,20 @@ function showSpellbookUI() {
       ['mouseup', 'mouseleave', 'touchend'].forEach(ev =>
         btn.addEventListener(ev, cancel)
       );
+      btn.addEventListener('dblclick', () => {
+        longPress = true;
+        handleFilterLongPress(type, btn.dataset.filter);
+      });
+      btn.addEventListener('touchend', e => {
+        const now = Date.now();
+        const tapLen = now - lastTap;
+        if (tapLen > 0 && tapLen < 300) {
+          longPress = true;
+          handleFilterLongPress(type, btn.dataset.filter);
+          e.preventDefault();
+        }
+        lastTap = now;
+      });
     }
     btn.addEventListener('click', () => {
       if (longPress) return;
