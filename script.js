@@ -1340,9 +1340,9 @@ function showNavigation() {
       : '';
     const bIcon = getBuildingIcon(pos.city, pos.district, pos.building);
     const dIcon = getDistrictIcon(pos.city, pos.district);
-    const headerHTML = `<div class="nav-header">${
+    const headerHTML = `<div class="nav-header"><button data-type="district" data-target="${pos.district}" aria-label="Return to ${pos.district}"><img src="${dIcon}" alt="" class="nav-icon"></button>${
       bIcon ? `<img src="${bIcon}" alt="" class="nav-icon">` : ''
-    }<button data-type="district" data-target="${pos.district}" aria-label="Return to ${pos.district}"><img src="${dIcon}" alt="" class="nav-icon"></button></div>`;
+    }</div>`;
     setMainHTML(
       `<div class="navigation">${headerHTML}${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
     );

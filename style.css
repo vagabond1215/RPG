@@ -246,7 +246,7 @@ main {
 
 button:not(:disabled):hover,
 .clickable:hover {
-  filter: drop-shadow(0 0 0.5rem currentColor);
+  filter: drop-shadow(0 0 0.5rem var(--foreground));
 }
 
 #dropdownMenu button:not(:last-child)::after,
@@ -1268,16 +1268,18 @@ body.theme-dark .top-menu button {
 }
 
 .filter-toggle img {
-  width: 5rem;
-  height: 5rem;
+  max-width: 4rem;
+  max-height: 4rem;
+  width: auto;
+  height: auto;
 }
 .element-icon,
 .school-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 5rem;
-  height: 5rem;
+  width: 2.5rem;
+  height: 2.5rem;
   margin-left: 0.25rem;
 }
 
