@@ -193,8 +193,13 @@ function updateMenuHeight() {
   document.documentElement.style.setProperty('--menu-height', `${height}px`);
   updateLayoutSize();
 }
-window.addEventListener('resize', updateMenuHeight);
-updateMenuHeight();
+function handleResize() {
+  updateMenuHeight();
+  normalizeOptionButtonWidths();
+  normalizeProficiencyNameWidths();
+}
+window.addEventListener('resize', handleResize);
+handleResize();
 
 function setMainHTML(html) {
   if (main) main.innerHTML = html;
