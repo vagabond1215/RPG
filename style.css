@@ -881,13 +881,15 @@ body.theme-dark .top-menu button {
   @media (orientation: portrait) {
     .navigation .nav-header .nav-icon,
     .navigation .nav-header button,
-    .navigation .nav-item button {
-      width: 5rem;
-      height: 5rem;
+    .navigation .nav-item button,
+    .navigation .district-map .nav-item button {
+      width: 4.5rem;
+      height: 4.5rem;
     }
 
-    .navigation .nav-item button span.nav-icon {
-      font-size: 4rem;
+    .navigation .nav-item button span.nav-icon,
+    .navigation .district-map .nav-item button span.nav-icon {
+      font-size: 3.5rem;
     }
   }
 
