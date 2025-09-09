@@ -28,19 +28,6 @@ body {
   overflow-x: hidden;
 }
 
-body.layout-landscape,
-body.layout-portrait {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-body.layout-auto {
-  display: block;
-}
-
 #app {
   position: relative;
   display: flex;
@@ -555,9 +542,6 @@ body.theme-dark .top-menu button {
     align-items: flex-start;
   }
 
-  body.layout-portrait .stats-resource-grid {
-    grid-template-columns: 1fr;
-  }
 
   .character-profile {
     display: flex;
@@ -574,10 +558,6 @@ body.theme-dark .top-menu button {
     width: 100%;
   }
 
-  body.layout-landscape .profile-grid {
-    grid-template-columns: auto 1fr;
-    align-items: start;
-  }
 
   .portrait-section {
     display: flex;
@@ -591,18 +571,12 @@ body.theme-dark .top-menu button {
     align-items: flex-start;
   }
 
-  body.layout-portrait .character-creation {
-    align-items: stretch;
-  }
 
   .cc-top-row {
     display: flex;
     align-items: flex-start;
   }
 
-  body.layout-portrait .cc-top-row {
-    flex-direction: column;
-  }
 
   .progress-container {
     display: flex;
@@ -617,10 +591,6 @@ body.theme-dark .top-menu button {
     align-items: flex-start;
   }
 
-  body.layout-portrait .progress-container {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
-  }
 
   .progress-step {
     display: flex;
@@ -1192,9 +1162,6 @@ body.theme-dark .top-menu button {
 .slot-item {
   flex: 1;
 }
-
-/* Orientation layouts removed: top menu remains horizontal for all layouts */
-
 #map-container {
   position: fixed;
   top: var(--menu-height);

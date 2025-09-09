@@ -174,22 +174,11 @@ function updateLayoutSize() {
   if (!app) return;
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  let width = vw;
-  let height = vh;
-  if (body.classList.contains('layout-landscape')) {
-    const aspect = 16 / 9;
-    width = Math.min(vw, vh * aspect);
-    height = width / aspect;
-  } else if (body.classList.contains('layout-portrait')) {
-    const aspect = 9 / 16;
-    height = vh;
-    width = Math.min(vw, vh * aspect);
-  }
   const scale = parseFloat(
     getComputedStyle(document.documentElement).getPropertyValue('--ui-scale')
   ) || 1;
-  app.style.width = `${width / scale}px`;
-  app.style.height = `${height / scale}px`;
+  app.style.width = `${vw / scale}px`;
+  app.style.height = `${vh / scale}px`;
 }
 
 function updateMenuHeight() {
@@ -214,10 +203,7 @@ function setMainHTML(html) {
 }
 
 function isPortraitLayout() {
-  return (
-    body.classList.contains('layout-portrait') ||
-    (body.classList.contains('layout-auto') && window.innerHeight > window.innerWidth)
-  );
+  return window.innerHeight > window.innerWidth;
 }
 
 function normalizeOptionButtonWidths() {
@@ -2751,11 +2737,8 @@ function loadPreferences() {
   if (typeof prefs.uiScale === 'number') {
     uiScale = prefs.uiScale;
   }
-  if (prefs.layout && layouts.includes(prefs.layout)) {
-    currentLayoutIndex = layouts.indexOf(prefs.layout);
-  }
   setTheme(currentThemeIndex);
-  setLayout(currentLayoutIndex);
+  updateScale();
 }
 
 const settingsButton = document.getElementById('settings-button');
@@ -2793,10 +2776,7 @@ themeToggle.addEventListener('click', () => {
 // UI scale buttons
 let uiScale = 1;
 const updateScale = () => {
-  const baseScale = body.classList.contains('layout-landscape')
-    ? uiScale * 1.25
-    : uiScale;
-  document.documentElement.style.setProperty('--ui-scale', baseScale);
+  document.documentElement.style.setProperty('--ui-scale', uiScale);
   savePreference('uiScale', uiScale);
   updateMenuHeight();
 };
@@ -2807,42 +2787,6 @@ document.getElementById('scale-dec').addEventListener('click', () => {
 document.getElementById('scale-inc').addEventListener('click', () => {
   uiScale = Math.min(2, uiScale + 0.1);
   updateScale();
-});
-
-// Layout toggle
-const layoutToggle = document.getElementById('layout-toggle');
-const layouts = ['landscape', 'portrait', 'auto'];
-const layoutIcons = {
-  landscape:
-    '<svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"/></svg>',
-  portrait:
-    '<svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2" ry="2"/></svg>',
-  auto:
-    '<svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2" ry="2"/><rect x="2" y="6" width="20" height="12" rx="2" ry="2"/></svg>'
-};
-let currentLayoutIndex = layouts.indexOf(
-  [...body.classList].find(c => c.startsWith('layout-')).replace('layout-', '')
-);
-const setLayout = index => {
-  body.classList.remove('layout-landscape', 'layout-portrait', 'layout-auto');
-  const layout = layouts[index];
-  body.classList.add(`layout-${layout}`);
-  layoutToggle.innerHTML = layoutIcons[layout];
-  savePreference('layout', layout);
-  updateScale();
-  if (screen.orientation) {
-    if (layout === 'landscape') {
-      screen.orientation.lock('landscape').catch(() => {});
-    } else if (layout === 'portrait') {
-      screen.orientation.lock('portrait').catch(() => {});
-    } else if (screen.orientation.unlock) {
-      screen.orientation.unlock();
-    }
-  }
-};
-layoutToggle.addEventListener('click', () => {
-  currentLayoutIndex = (currentLayoutIndex + 1) % layouts.length;
-  setLayout(currentLayoutIndex);
 });
 
 // Dropdown menu
