@@ -427,8 +427,7 @@ body.theme-dark .top-menu button {
   }
 
   .portrait-zoom button {
-    width: 3rem;
-    height: 3rem;
+    height: 2rem;
     background: transparent;
     border: 2px solid var(--foreground);
     color: var(--foreground);
@@ -437,6 +436,7 @@ body.theme-dark .top-menu button {
     justify-content: center;
     cursor: pointer;
     font-size: 1rem;
+    padding: 0 0.5rem;
   }
 
   .portrait-zoom button:hover {
@@ -445,10 +445,14 @@ body.theme-dark .top-menu button {
 
   .portrait-zoom-dec,
   .portrait-zoom-inc {
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
+    padding: 0;
   }
 
   .portrait-zoom-reset {
+    height: 2rem;
     border-radius: 0.25rem;
   }
 
