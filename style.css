@@ -740,19 +740,18 @@ body.theme-dark .top-menu button {
     color: var(--background);
   }
 
-  .building-description {
-    margin: 0 0 0.5rem 0;
-    text-align: center;
-  }
-
+  .building-description,
   .location-description {
-    margin: 0.5rem 0;
-    text-align: center;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--foreground);
+    text-align: left;
   }
 
   .business-hours {
     margin: 0 0 0.5rem 0;
-    text-align: center;
+    text-align: left;
     font-size: 0.9rem;
   }
 
@@ -766,6 +765,21 @@ body.theme-dark .top-menu button {
     flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
+  }
+
+  .navigation .nav-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+  }
+
+  .navigation .nav-header .nav-icon {
+    width: 5rem;
+    height: 5rem;
+    display: block;
+    object-fit: contain;
   }
 
   .navigation .nav-item {

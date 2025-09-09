@@ -143,6 +143,16 @@ function getDistrictIcon(city, district) {
   return `assets/images/icons/${citySlug(city)}/${districtFileName(district)}`;
 }
 
+function getBuildingIcon(city, district, building) {
+  const cityData = CITY_NAV[city];
+  const districtData = cityData && cityData.districts[district];
+  if (!districtData) return "";
+  const point = districtData.points.find(
+    pt => pt.type === 'building' && (pt.target === building || pt.name === building)
+  );
+  return point && point.icon ? point.icon : "";
+}
+
 function getDistrictsEnvelope(city) {
   return `assets/images/icons/${citySlug(city)}/Districts Envelope.png`;
 }
@@ -1328,8 +1338,11 @@ function showNavigation() {
         ? 'Open 24 hours'
         : `Open ${hours.open}–${hours.close}`
       : '';
+    const bIcon = getBuildingIcon(pos.city, pos.district, pos.building);
+    const dIcon = getDistrictIcon(pos.city, pos.district);
+    const headerHTML = `<div class="nav-header">${bIcon ? `<img src="${bIcon}" alt="" class="nav-icon">` : ''}<img src="${dIcon}" alt="" class="nav-icon"></div>`;
     setMainHTML(
-      `<div class="navigation"><h2>${pos.building}</h2>${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation">${headerHTML}${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
     );
   } else {
     const district = cityData.districts[pos.district];
