@@ -18,6 +18,9 @@ import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipmen
 import { LOCATIONS } from "./assets/data/locations.js";
 import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
 import { CITY_NAV } from "./assets/data/city_nav.js";
+import { themeColors } from "./assets/data/theme_colors.js";
+import { getThemeDescription } from "./assets/data/theme_descriptions.js";
+import { getRaceColors } from "./assets/data/race_colors.js";
 import { DEFAULT_NAMES } from "./assets/data/names.js";
 import { WAVES_BREAK_BACKSTORIES } from "./assets/data/waves_break_backstories.js";
 import {
@@ -2563,16 +2566,25 @@ function startCharacterCreation() {
 
 async function generateCharacterImage(character) {
   const location = character.location || 'a small town plaza';
-  let skinDesc = character.skinColor ? `${character.skinColor} skin` : '';
-  if (character.race === 'Cait Sith' && character.accentColor) {
-    skinDesc += ` and ${character.accentColor} accents`;
-  } else if (character.race === 'Salamander' && character.scaleColor) {
-    skinDesc += ` and ${character.scaleColor} scales`;
+  const themeEntry = themeColors.find(t => t.name === character.theme);
+  const pictureTheme = themeEntry ? themeEntry.colors : ['beige', 'gray', 'white'];
+  const descriptor = getThemeDescription(character.theme);
+  const raceCombo = themeEntry ? getRaceColors(character.race, themeEntry.index) : null;
+
+  const skinColor = character.skinColor || raceCombo?.skin;
+  let skinDesc = skinColor ? `${skinColor} skin` : '';
+  if (character.race === 'Cait Sith') {
+    const accent = character.accentColor || raceCombo?.accent;
+    if (accent) skinDesc += ` and ${accent} accents`;
+  } else if (character.race === 'Salamander') {
+    const scales = character.scaleColor || raceCombo?.scales;
+    if (scales) skinDesc += ` and ${scales} scales`;
   }
-  const hair = character.hairColor || 'brown';
-  const eyes = character.eyeColor || 'brown';
+  const hair = character.hairColor || raceCombo?.hair || 'brown';
+  const eyes = character.eyeColor || raceCombo?.eyes || 'brown';
   const height = character.height ? formatHeight(character.height) : 'average height';
-  const prompt = `Full body portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()}${skinDesc ? ` with ${skinDesc}` : ''}, ${hair} hair and ${eyes} eyes, ${height} tall, standing in ${location}.`;
+  const themeText = `${pictureTheme.join(', ')}${descriptor ? ' – ' + descriptor : ''}`;
+  const prompt = `Full body portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()}${skinDesc ? \` with ${skinDesc}\` : ''}, ${hair} hair and ${eyes} eyes, ${height} tall, standing in ${location}. Picture Theme: ${themeText}.`;
   let apiKey = localStorage.getItem('openaiApiKey');
   if (!apiKey) {
     apiKey = prompt('Enter OpenAI API key:');

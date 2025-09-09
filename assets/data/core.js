@@ -59,6 +59,7 @@ export const characterTemplate = {
   race: "",
   sex: "",
   class: "",
+  theme: "",
   homeTown: "",
   location: "",
   level: 1,
