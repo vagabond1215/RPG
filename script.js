@@ -21,6 +21,7 @@ import { CITY_NAV } from "./assets/data/city_nav.js";
 import { themeColors } from "./assets/data/theme_colors.js";
 import { getThemeDescription } from "./assets/data/theme_descriptions.js";
 import { getRaceColors } from "./assets/data/race_colors.js";
+import { buildImagePrompt } from "./assets/data/image_prompts.js";
 import { DEFAULT_NAMES } from "./assets/data/names.js";
 import { WAVES_BREAK_BACKSTORIES } from "./assets/data/waves_break_backstories.js";
 import {
@@ -2584,7 +2585,16 @@ async function generateCharacterImage(character) {
   const eyes = character.eyeColor || raceCombo?.eyes || 'brown';
   const height = character.height ? formatHeight(character.height) : 'average height';
   const themeText = `${pictureTheme.join(', ')}${descriptor ? ' – ' + descriptor : ''}`;
-  const prompt = `Full body portrait of a ${character.sex.toLowerCase()} ${character.race.toLowerCase()}${skinDesc ? \` with ${skinDesc}\` : ''}, ${hair} hair and ${eyes} eyes, ${height} tall, standing in ${location}. Picture Theme: ${themeText}.`;
+  const prompt = buildImagePrompt({
+    sex: character.sex,
+    race: character.race,
+    skinDesc,
+    hair,
+    eyes,
+    height,
+    location,
+    themeText
+  });
   let apiKey = localStorage.getItem('openaiApiKey');
   if (!apiKey) {
     apiKey = prompt('Enter OpenAI API key:');
