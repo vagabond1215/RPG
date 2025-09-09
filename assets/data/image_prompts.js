@@ -1,5 +1,5 @@
-export const BASE_IMAGE_PROMPT_TEMPLATE = 'Full body portrait of a {sex} {race}{skinDesc}, {hair} hair and {eyes} eyes, {height} tall, standing in {location}';
-export const ADDON_IMAGE_PROMPT_TEMPLATE = 'Picture Theme: {themeText}.';
+export const BASE_IMAGE_PROMPT_TEMPLATE = "A hyper-detailed fantasy Anime-style full-body portrait of a handsome {sex} {race} dressed in tantalizing, tasteful garb in front of a neutral gray background. Reference facial features from the most attractive {sexPlural}. Human proportionality for height is about 7.5 heads tall. Hair: {hair}. Skin: {skin} with light freckles. Eyes: {eyes}. Clothing is vibrant, complementary colors contrasting hair and skin tones with accents, trim, and accessories. Dynamic composition, ultra high definition, delicate details. No hat. No weapon.";
+export const ADDON_IMAGE_PROMPT_TEMPLATE = "Picture Theme: {theme} — {colors}.";
 
 export function getRacePrompt(race) {
   switch (race) {
@@ -22,16 +22,17 @@ export function getRacePrompt(race) {
   }
 }
 
-export function buildImagePrompt({ sex, race, skinDesc, hair, eyes, height, location, themeText }) {
+export function buildImagePrompt({ sex, sexPlural, race, hair, skin, eyes, theme, colors }) {
   const base = BASE_IMAGE_PROMPT_TEMPLATE
     .replace('{sex}', sex.toLowerCase())
     .replace('{race}', race.toLowerCase())
-    .replace('{skinDesc}', skinDesc ? ` with ${skinDesc}` : '')
+    .replace('{sexPlural}', sexPlural.toLowerCase())
     .replace('{hair}', hair)
-    .replace('{eyes}', eyes)
-    .replace('{height}', height)
-    .replace('{location}', location);
+    .replace('{skin}', skin)
+    .replace('{eyes}', eyes);
   const racePart = getRacePrompt(race);
-  const addon = ADDON_IMAGE_PROMPT_TEMPLATE.replace('{themeText}', themeText);
-  return racePart ? `${base}, ${racePart}. ${addon}` : `${base}. ${addon}`;
+  const addon = ADDON_IMAGE_PROMPT_TEMPLATE
+    .replace('{theme}', theme)
+    .replace('{colors}', colors);
+  return racePart ? `${base} ${racePart}. ${addon}` : `${base} ${addon}`;
 }

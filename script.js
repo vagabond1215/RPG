@@ -2571,34 +2571,27 @@ function startCharacterCreation() {
 }
 
 async function generateCharacterImage(character) {
-  const location = character.location || 'a small town plaza';
   const themeEntry = themeColors.find(t => t.name === character.theme);
   const pictureTheme = themeEntry ? themeEntry.colors : ['beige', 'gray', 'white'];
   const descriptor = getThemeDescription(character.theme);
   const raceCombo = themeEntry ? getRaceColors(character.race, themeEntry.index) : null;
 
   const skinColor = character.skinColor || raceCombo?.skin;
-  let skinDesc = skinColor ? `${skinColor} skin` : '';
-  if (character.race === 'Cait Sith') {
-    const accent = character.accentColor || raceCombo?.accent;
-    if (accent) skinDesc += ` and ${accent} accents`;
-  } else if (character.race === 'Salamander') {
-    const scales = character.scaleColor || raceCombo?.scales;
-    if (scales) skinDesc += ` and ${scales} scales`;
-  }
+  const skin = skinColor || '';
   const hair = character.hairColor || raceCombo?.hair || 'brown';
   const eyes = character.eyeColor || raceCombo?.eyes || 'brown';
-  const height = character.height ? formatHeight(character.height) : 'average height';
-  const themeText = `${pictureTheme.join(', ')}${descriptor ? ' – ' + descriptor : ''}`;
+  const sexPlural = character.sex === 'Male' ? 'men' : 'women';
+  const theme = descriptor || character.theme || '';
+  const colors = pictureTheme.join(', ');
   const prompt = buildImagePrompt({
     sex: character.sex,
+    sexPlural,
     race: character.race,
-    skinDesc,
     hair,
+    skin,
     eyes,
-    height,
-    location,
-    themeText
+    theme,
+    colors
   });
   let apiKey = localStorage.getItem('openaiApiKey');
   if (!apiKey) {
