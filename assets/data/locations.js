@@ -1,3 +1,4 @@
+import { questHelper } from "./questHelper.js";
 const MAP_BASE_PATH = "assets/images/Maps";
 export function createLocation(name, mapFile, description = "") {
     return {
@@ -13,11 +14,12 @@ export function createLocation(name, mapFile, description = "") {
             resources: { domestic: [], exports: [], imports: [] },
         },
         population: undefined,
+        quests: [],
         questBoards: {},
     };
 }
 function createQuest(title, description, opts = {}) {
-    return Object.assign({ title, description }, opts);
+    return questHelper(Object.assign({ title, description }, opts));
 }
 function addQuestBoards(loc) {
     var _a;
@@ -76,6 +78,8 @@ function addQuestBoards(loc) {
     });
     loc.questBoards = boards;
     loc.pointsOfInterest.buildings.push(...Object.keys(boards));
+    const allQuests = Object.values(boards).reduce((arr, q) => arr.concat(q), []);
+    loc.quests.push(...allQuests);
 }
 const WAVES_BREAK = Object.assign(Object.assign({}, createLocation("Wave's Break", "Wave's Break.png", `The City of Wave's Break
 
