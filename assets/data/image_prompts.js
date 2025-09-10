@@ -1,5 +1,5 @@
 import { themeColors, getThemeColors } from "./theme_colors.js";
-import { getThemeDescription } from "./theme_descriptions.js";
+import { getBuildDescription } from "./character_builds.js";
 import { getRaceColors } from "./race_colors.js";
 
 export const BASE_IMAGE_PROMPT_TEMPLATE =
@@ -47,8 +47,10 @@ export function buildImagePrompt({ sex, sexPlural, race, hair, skin, eyes, theme
 export function composeImagePrompt(character) {
   const themeIndex = themeColors.find(t => t.name === character.theme)?.index;
   const pictureTheme = getThemeColors(themeIndex);
-  const descriptor = getThemeDescription(character.theme);
-  const raceCombo = themeIndex ? getRaceColors(character.race, themeIndex) : null;
+  const descriptor = getBuildDescription(character.theme);
+  const raceCombo = themeIndex
+    ? getRaceColors(character.race, themeIndex, character.useAltColors)
+    : null;
 
   const skinColor = character.skinColor || raceCombo?.skin;
   const skin = skinColor || '';
