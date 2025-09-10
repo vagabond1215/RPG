@@ -4,18 +4,16 @@ export const DENOMINATIONS = [
   'copper',
   'silver',
   'gold',
-  'platinum',
-  'diamond'
+  'platinum'
 ];
 
 export const CURRENCY_VALUES = {
   coldIron: 1,
   steel: 10,
   copper: 100,
-  silver: 1000,
-  gold: 10000,
-  platinum: 100000,
-  diamond: 1000000,
+  silver: 10000,
+  gold: 200000,
+  platinum: 1000000,
 };
 
 const ABBR_MAP = {
@@ -25,12 +23,10 @@ const ABBR_MAP = {
   sp: 'silver',
   gp: 'gold',
   pp: 'platinum',
-  d: 'diamond',
 };
 
-export function convertCurrency(amount, from, to, authorized = false) {
+export function convertCurrency(amount, from, to) {
   if (!CURRENCY_VALUES[from] || !CURRENCY_VALUES[to]) return null;
-  if ((from === 'diamond' || to === 'diamond') && !authorized) return null;
   return (amount * CURRENCY_VALUES[from]) / CURRENCY_VALUES[to];
 }
 
@@ -63,7 +59,7 @@ export function createEmptyCurrency() {
 export function parseCurrency(str) {
   const result = createEmptyCurrency();
   if (!str || str.trim() === '0') return result;
-  const regex = /(\d+)\s*(ci|st|cp|sp|gp|pp|d)/gi;
+  const regex = /(\d+)\s*(ci|st|cp|sp|gp|pp)/gi;
   let match;
   while ((match = regex.exec(str))) {
     const amount = parseInt(match[1], 10);
