@@ -68,14 +68,12 @@ main {
     align-items: center;
     justify-content: center;
     line-height: 1;
-    border-radius: 50%;
     border: none;
-    background: #e0e0e0;
+    background: none;
     color: var(--menu-color-light);
     -webkit-text-stroke: 1px var(--menu-color-dark);
-    box-shadow: inset 2px 2px 4px rgba(255,255,255,0.6),
-                inset -2px -2px 4px rgba(0,0,0,0.2);
-    transition: box-shadow 0.3s ease, background 0.3s ease;
+    filter: none;
+    transition: filter 0.3s ease;
     cursor: pointer;
   }
 
@@ -124,9 +122,7 @@ main {
 
 .top-menu button:hover,
 .top-menu button:active {
-  box-shadow: 0 0 8px rgba(255,255,255,0.8),
-              inset 2px 2px 4px rgba(255,255,255,0.6),
-              inset -2px -2px 4px rgba(0,0,0,0.2);
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
 }
 
 .settings-group {
@@ -370,7 +366,7 @@ body.theme-sepia {
 
 body.theme-light .top-menu button,
 body.theme-sepia .top-menu button {
-  background: var(--menu-color-dark);
+  background: none;
   color: var(--menu-color-light);
 }
 
