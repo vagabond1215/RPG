@@ -209,8 +209,12 @@ export const raceColors = {
   ]
 };
 
-export function getRaceColors(race, index) {
-  const list = raceColors[race];
+export const altRaceColors = Object.fromEntries(
+  Object.entries(raceColors).map(([race, combos]) => [race, [...combos].reverse()])
+);
+
+export function getRaceColors(race, index, useAlternate = false) {
+  const list = useAlternate ? altRaceColors[race] : raceColors[race];
   if (!list) return null;
   return list[index - 1] || null;
 }

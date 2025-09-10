@@ -37,6 +37,7 @@ import {
   getJobRolesForBuilding,
   JOB_ROLE_DATA,
 } from "./assets/data/buildings.js";
+import { characterBuilds } from "./assets/data/character_builds.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -2168,6 +2169,13 @@ function startCharacterCreation() {
   mapContainer.style.display = 'none';
   const saved = JSON.parse(localStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
   const character = saved.character || {};
+  const buildEntries = Object.values(characterBuilds);
+  const classField = {
+    key: 'class',
+    label: 'Choose your class',
+    type: 'select',
+    options: buildEntries.map(b => b.primary),
+  };
   const locationField = {
     key: 'location',
     label: 'Choose your starting location',
@@ -2194,12 +2202,14 @@ function startCharacterCreation() {
       type: 'select',
       options: ['Male', 'Female']
     },
+    classField,
     { key: 'characterImage', label: 'Choose your character', type: 'select' }
   ];
 
   const FIELD_STEP_LABELS = {
     race: 'Race',
     sex: 'Sex',
+    class: 'Class',
     characterImage: 'Character'
   };
 
@@ -2219,6 +2229,10 @@ function startCharacterCreation() {
     else if (step === activeFields.length + 2) field = backstoryField;
     if (field && field.key === 'race' && !character.race) {
       character.race = field.options[0];
+      localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+    }
+    if (field && field.key === 'class' && !character.class) {
+      character.class = classField.options[0];
       localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
     }
     if (field && field.key === 'location' && !character.location) {
@@ -2271,12 +2285,44 @@ function startCharacterCreation() {
           : '';
         return { descHTML };
       }
+      if (field && field.key === 'class' && character.class) {
+        const build = buildEntries.find(b => b.primary === character.class);
+        if (!build) return {};
+        const baseAttrs = { ...getRaceStartingAttributes(character.race), LCK: 10 };
+        for (const [k, v] of Object.entries(build.stats)) {
+          baseAttrs[k] = (baseAttrs[k] || 0) + v;
+        }
+        const resources = {
+          HP: maxHP(baseAttrs.VIT, 1),
+          MP: maxMP(baseAttrs.WIS, 1),
+          ST: maxStamina(baseAttrs.CON, 1),
+        };
+        const attrList = Object.entries(baseAttrs)
+          .map(([k, v]) => `<li>${k}: ${v}</li>`)
+          .join('');
+        const resourceBars = `
+          <div class="resource-bar hp"><div class="fill" style="width:100%"></div><span class="value">HP: ${resources.HP}</span></div>
+          <div class="resource-bar mp"><div class="fill" style="width:100%"></div><span class="value">MP: ${resources.MP}</span></div>
+          <div class="resource-bar stamina"><div class="fill" style="width:100%"></div><span class="value">ST: ${resources.ST}</span></div>
+        `;
+        const statsHTML = `<div class="race-stats"><h2>Starting Stats</h2><div class="stats-resource-grid"><ul class="stats-list">${attrList}</ul><div class="resource-column">${resourceBars}</div></div></div>`;
+        const strengths = Object.entries(build.stats)
+          .filter(([, v]) => v > 0)
+          .map(([k]) => k)
+          .join(', ') || 'None';
+        const weaknesses = Object.entries(build.stats)
+          .filter(([, v]) => v < 0)
+          .map(([k]) => k)
+          .join(', ') || 'None';
+        const descHTML = `<div class="race-description"><p><strong>Skills & Abilities:</strong> ${build.description}</p><p><strong>Strengths:</strong> ${strengths}</p><p><strong>Weaknesses:</strong> ${weaknesses}</p><p><strong>Advancement:</strong> ${build.advanced}</p></div>`;
+        return { statsHTML, descHTML };
+      }
       if (!character.race) return {};
       const attrs = getRaceStartingAttributes(character.race);
       const resources = {
         HP: maxHP(attrs.VIT, 1),
         MP: maxMP(attrs.WIS, 1),
-        ST: maxStamina(attrs.CON, 1)
+        ST: maxStamina(attrs.CON, 1),
       };
       const attrList = Object.entries({ ...attrs, LCK: 10 })
         .map(([k, v]) => `<li>${k}: ${v}</li>`)
@@ -2289,7 +2335,8 @@ function startCharacterCreation() {
       return { statsHTML, descHTML };
     })();
     const { statsHTML = '', descHTML = '' } = displayData;
-    const statsSection = field && field.key === 'race' ? statsHTML : '';
+    const statsSection =
+      field && (field.key === 'race' || field.key === 'class') ? statsHTML : '';
 
     if (field) {
       let inputHTML = '';
@@ -2332,6 +2379,19 @@ function startCharacterCreation() {
               <button class="sex-arrow left" aria-label="Previous">&#x2039;</button>
               <button class="option-button sex-button">${character.sex}</button>
               <button class="sex-arrow right" aria-label="Next">&#x203A;</button>
+            </div>`;
+        } else if (field.key === 'class') {
+          const options = field.options;
+          let index = options.indexOf(character.class);
+          if (index === -1) {
+            index = 0;
+            character.class = options[0];
+          }
+          inputHTML = `
+            <div class="class-carousel wheel-selector">
+              <button class="class-arrow left" aria-label="Previous">&#x2039;</button>
+              <button class="option-button class-button">${character.class}</button>
+              <button class="class-arrow right" aria-label="Next">&#x203A;</button>
             </div>`;
         } else if (field.key === 'backstory') {
           const options = (BACKSTORY_MAP[character.location] || []).map(b => b.background);
@@ -2449,6 +2509,17 @@ function startCharacterCreation() {
         };
         document.querySelector('.sex-arrow.left').addEventListener('click', () => change(-1));
         document.querySelector('.sex-arrow.right').addEventListener('click', () => change(1));
+      } else if (field.key === 'class') {
+        const options = field.options;
+        let index = options.indexOf(character.class);
+        const change = dir => {
+          index = (index + dir + options.length) % options.length;
+          character.class = options[index];
+          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          renderStep();
+        };
+        document.querySelector('.class-arrow.left').addEventListener('click', () => change(-1));
+        document.querySelector('.class-arrow.right').addEventListener('click', () => change(1));
       } else if (field.key === 'backstory') {
         const options = (BACKSTORY_MAP[character.location] || []).map(b => b.background);
         let index = options.indexOf(character.backstory);
@@ -2669,12 +2740,20 @@ async function generatePortrait(character, callback) {
 function finalizeCharacter(character) {
   const id = Date.now().toString();
   const template = JSON.parse(JSON.stringify(characterTemplate));
-  const attrs = getRaceStartingAttributes(character.race);
-  const attrBlock = { ...attrs, LCK: 10 };
+  const baseAttrs = getRaceStartingAttributes(character.race);
+  const attrBlock = { ...baseAttrs, LCK: 10 };
+  const buildEntry = Object.values(characterBuilds).find(
+    b => b.primary === character.class
+  );
+  if (buildEntry) {
+    for (const [k, v] of Object.entries(buildEntry.stats)) {
+      attrBlock[k] = (attrBlock[k] || 0) + v;
+    }
+  }
   const resources = {
     maxHP: maxHP(attrBlock.VIT, 1),
     maxMP: maxMP(attrBlock.WIS, 1),
-    maxStamina: maxStamina(attrBlock.CON, 1)
+    maxStamina: maxStamina(attrBlock.CON, 1),
   };
   const newChar = migrateProficiencies({
     ...template,
@@ -2689,6 +2768,7 @@ function finalizeCharacter(character) {
     mp: resources.maxMP,
     maxStamina: resources.maxStamina,
     stamina: resources.maxStamina,
+    advancedClass: buildEntry?.advanced,
     id,
   });
   newChar.guildRank = 'None';
