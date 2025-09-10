@@ -2953,8 +2953,19 @@ function toggleCityMap(btn) {
 
 
 function updateCharacterButton() {
-  characterButton.style.display = currentCharacter ? 'inline-flex' : 'none';
-  if (!currentCharacter) mapContainer.style.display = 'none';
+  if (!currentCharacter) {
+    characterButton.style.display = 'none';
+    mapContainer.style.display = 'none';
+    return;
+  }
+  const iconFile = currentCharacter.sex === 'Male'
+    ? 'Character Menu Male.png'
+    : 'Character Menu Female.png';
+  const characterIcon = document.getElementById('character-icon');
+  if (characterIcon) {
+    characterIcon.src = `assets/images/icons/${iconFile}`;
+  }
+  characterButton.style.display = 'inline-flex';
 }
 
 menuButton.addEventListener('click', () => {

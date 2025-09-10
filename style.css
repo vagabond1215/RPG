@@ -79,13 +79,19 @@ main {
     cursor: pointer;
   }
 
-  .top-menu button svg {
+  .top-menu button svg,
+  .top-menu button img {
     width: 70%;
     height: 70%;
+    display: block;
+  }
+  .top-menu button img {
+    object-fit: contain;
+  }
+  .top-menu button svg {
     stroke: currentColor;
     stroke-width: 2;
     fill: none;
-    display: block;
   }
   #back-button svg {
     width: 80%;
