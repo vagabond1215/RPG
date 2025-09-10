@@ -1,3 +1,4 @@
+import { questHelper } from "./questHelper.js";
 const MAP_BASE_PATH = "assets/images/Maps";
 
 export interface Location {
@@ -28,12 +29,19 @@ export interface Location {
     districts: Record<string, { estimate: number; notes: string }>;
     hinterland?: { estimate: number; notes: string };
   };
+  quests: Quest[];
   questBoards: Record<string, Quest[]>;
 }
 
 export interface Quest {
   title: string;
   description: string;
+  location: string | null;
+  requirements: string[] | null;
+  conditions: string[] | null;
+  timeline: string | null;
+  risks: string[] | null;
+  reward: string | null;
   repeatable?: boolean;
   highPriority?: boolean;
   requiresCheckIn?: boolean;
@@ -57,6 +65,7 @@ export function createLocation(
       resources: { domestic: [], exports: [], imports: [] },
     },
     population: undefined,
+    quests: [],
     questBoards: {},
   };
 }
@@ -66,7 +75,7 @@ function createQuest(
   description: string,
   opts: Partial<Quest> = {},
 ): Quest {
-  return { title, description, ...opts };
+  return questHelper({ title, description, ...opts }) as Quest;
 }
 
 function addQuestBoards(loc: Location) {
@@ -163,6 +172,11 @@ function addQuestBoards(loc: Location) {
 
   loc.questBoards = boards;
   loc.pointsOfInterest.buildings.push(...Object.keys(boards));
+  const allQuests: Quest[] = Object.values(boards).reduce(
+    (arr: Quest[], q) => arr.concat(q),
+    [] as Quest[],
+  );
+  loc.quests.push(...allQuests);
 }
 
 const WAVES_BREAK: Location = {

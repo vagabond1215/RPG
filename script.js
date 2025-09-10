@@ -2088,7 +2088,15 @@ function showQuestBoardDetails(boardName) {
   if (quests.length) {
     html += '<ul class="quest-list">';
     quests.forEach(q => {
-      html += `<li class="quest-item"><h3>${q.title}</h3><p>${q.description}</p></li>`;
+      html += `<li class="quest-item"><h3>${q.title}</h3><p>${q.description}</p>`;
+      html += '<ul class="quest-meta">';
+      if (q.location) html += `<li><strong>Location:</strong> ${q.location}</li>`;
+      if (q.requirements) html += `<li><strong>Requirements:</strong> ${Array.isArray(q.requirements) ? q.requirements.join(', ') : q.requirements}</li>`;
+      if (q.conditions) html += `<li><strong>Conditions:</strong> ${Array.isArray(q.conditions) ? q.conditions.join(', ') : q.conditions}</li>`;
+      if (q.timeline) html += `<li><strong>Timeline:</strong> ${q.timeline}</li>`;
+      if (q.risks) html += `<li><strong>Risks:</strong> ${Array.isArray(q.risks) ? q.risks.join(', ') : q.risks}</li>`;
+      if (q.reward) html += `<li><strong>Reward:</strong> ${q.reward}</li>`;
+      html += '</ul></li>';
     });
     html += '</ul>';
   } else {
