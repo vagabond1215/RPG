@@ -72,8 +72,6 @@ main {
     background: none;
     color: var(--menu-color-light);
     -webkit-text-stroke: 1px var(--menu-color-dark);
-    filter: none;
-    transition: filter 0.3s ease;
     cursor: pointer;
   }
 
@@ -82,6 +80,8 @@ main {
     width: 70%;
     height: 70%;
     display: block;
+    filter: none;
+    transition: filter 0.3s ease;
   }
   .top-menu button img {
     object-fit: contain;
@@ -97,22 +97,15 @@ main {
     stroke: none;
     fill: currentColor;
   }
-  #menu-button,
-  #back-button,
-  #scale-dec,
-  #scale-inc {
-    -webkit-text-stroke: 0;
-    line-height: 1;
-  }
+#menu-button,
+#back-button,
+#scale-dec,
+#scale-inc {
+  -webkit-text-stroke: 0;
+  line-height: 1;
+}
 
-  #scale-dec,
-  #scale-inc {
-    font-size: calc(var(--menu-button-size) * 0.9);
-  }
-
-  body.theme-dark #menu-button,
-  body.theme-dark #scale-dec,
-  body.theme-dark #scale-inc {
+  body.theme-dark #menu-button {
     color: var(--menu-color-dark);
   }
 
@@ -120,8 +113,10 @@ main {
     color: #555555;
   }
 
-.top-menu button:hover,
-.top-menu button:active {
+.top-menu button:hover svg,
+.top-menu button:hover img,
+.top-menu button:active svg,
+.top-menu button:active img {
   filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
 }
 
