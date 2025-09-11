@@ -98,21 +98,12 @@ main {
     fill: currentColor;
   }
   #menu-button,
-  #back-button,
-  #scale-dec,
-  #scale-inc {
+  #back-button {
     -webkit-text-stroke: 0;
     line-height: 1;
   }
 
-  #scale-dec,
-  #scale-inc {
-    font-size: calc(var(--menu-button-size) * 0.9);
-  }
-
-  body.theme-dark #menu-button,
-  body.theme-dark #scale-dec,
-  body.theme-dark #scale-inc {
+  body.theme-dark #menu-button {
     color: var(--menu-color-dark);
   }
 
