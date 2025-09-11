@@ -79,8 +79,8 @@ main {
 
   .top-menu button svg,
   .top-menu button img {
-    width: 70%;
-    height: 70%;
+    width: 52.5%;
+    height: 52.5%;
     display: block;
   }
   .top-menu button img {
@@ -92,8 +92,8 @@ main {
     fill: none;
   }
   #back-button svg {
-    width: 80%;
-    height: 80%;
+    width: 60%;
+    height: 60%;
     stroke: none;
     fill: currentColor;
   }
