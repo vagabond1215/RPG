@@ -12,7 +12,7 @@
   --hp-color: #ff0000;
   --mp-color: #0000ff;
   --stamina-color: #00ff00;
-  --menu-button-size: 2.5rem;
+  --menu-button-size: 5rem;
   --menu-height: calc(var(--menu-button-size) + 4px);
 }
 
