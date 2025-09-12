@@ -13,6 +13,7 @@ import {
   parseCurrency,
   createEmptyCurrency,
   formatCurrency,
+  cpToCoins,
 } from "./assets/data/currency.js";
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipment.js";
 import { LOCATIONS } from "./assets/data/locations.js";
@@ -56,6 +57,7 @@ window.toIron = toIron;
 window.fromIron = fromIron;
 window.parseCurrency = parseCurrency;
 window.formatCurrency = formatCurrency;
+window.cpToCoins = cpToCoins;
 window.LOCATIONS = LOCATIONS;
 window.ADVENTURERS_GUILD_RANKS = ADVENTURERS_GUILD_RANKS;
 window.performHunt = performHunt;
@@ -1268,8 +1270,21 @@ function selectProfile() {
       } else if (choice) {
         createProfile(choice);
       }
-    }
   }
+}
+}
+
+function canManageBuilding(city, building) {
+  const owned = (currentCharacter.buildings || []).some(
+    b => b.name === building && (b.ownership === 'owner' || b.ownership === 'manager'),
+  );
+  const employed = (currentCharacter.employment || []).some(
+    j =>
+      j.building === building &&
+      j.location === city &&
+      ['Owner', 'Manager', 'Administrator'].includes(j.role),
+  );
+  return owned || employed;
 }
 
 function showNavigation() {
@@ -1330,6 +1345,7 @@ function showNavigation() {
       buttons.push('<div class="group-separator"></div>');
     }
     (building.interactions || []).forEach(i => {
+      if (i.action === 'manage' && !canManageBuilding(pos.city, pos.building)) return;
       buttons.push(
         createNavItem({ type: 'interaction', action: i.action, name: i.name, icon: i.icon })
       );
@@ -1541,7 +1557,75 @@ function showNavigation() {
             previousBuilding: null,
           };
         } else if (type === 'interaction') {
-            if (action === 'train-glassblowing') {
+            if (action === 'shop') {
+              showBackButton();
+              setMainHTML('<div class="no-character"><h1>Shop not implemented</h1></div>');
+              return;
+            } else if (action === 'sell') {
+              showBackButton();
+              setMainHTML('<div class="no-character"><h1>Sell not implemented</h1></div>');
+              return;
+            } else if (action === 'manage') {
+              const bData = cityData.buildings[pos.building] || {};
+              const owned = (currentCharacter.buildings || []).find(b => b.name === pos.building);
+              function renderManage() {
+                const funds = formatCurrency(owned?.money || createEmptyCurrency());
+                const hours = bData.hours || { open: '09:00', close: '17:00' };
+                const staff = (bData.employees || [])
+                  .map((e, i) => `<li><button class="employee-btn" data-idx="${i}">${e.role}</button></li>`)
+                  .join('');
+                showBackButton();
+                setMainHTML(
+                  `<div class="no-character"><h1>Manage ${pos.building}</h1><p>Funds: ${funds}</p><div class="manage-hours"><label>Open <input type="time" id="building-open" value="${hours.open}"></label><label>Close <input type="time" id="building-close" value="${hours.close}"></label><button id="save-hours">Save Hours</button></div><ul>${staff}</ul></div>`
+                );
+                const btn = document.getElementById('save-hours');
+                if (btn) {
+                  btn.addEventListener('click', () => {
+                    const open = document.getElementById('building-open').value || '00:00';
+                    const close = document.getElementById('building-close').value || '24:00';
+                    bData.hours = { open, close };
+                    renderManage();
+                  });
+                }
+                document.querySelectorAll('.employee-btn').forEach(btn => {
+                  btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.dataset.idx, 10);
+                    renderEmployee(idx);
+                  });
+                });
+              }
+              function renderEmployee(idx) {
+                const emp = bData.employees[idx];
+                const quota = emp.quota;
+                const hours = emp.hours ? emp.hours.join(', ') : '';
+                showBackButton();
+                setMainHTML(
+                  `<div class="no-character"><h1>${emp.role}</h1><label>Schedule <input type="text" id="emp-schedule" value="${emp.schedule || ''}"></label><label>Hours <input type="text" id="emp-hours" value="${hours}"></label>${
+                    quota
+                      ? `<label>Quota <input type="number" id="emp-quota" min="0" value="${quota.amount}"/> ${quota.unit || ''}</label>`
+                      : ''
+                  }<button id="save-emp">Save</button></div>`
+                );
+                const btn = document.getElementById('save-emp');
+                if (btn) {
+                  btn.addEventListener('click', () => {
+                    emp.schedule = document.getElementById('emp-schedule').value || null;
+                    const hrsVal = document.getElementById('emp-hours').value.trim();
+                    emp.hours = hrsVal ? hrsVal.split(',').map(s => s.trim()) : null;
+                    if (quota) {
+                      const amt = parseInt(document.getElementById('emp-quota').value, 10) || 0;
+                      emp.quota.amount = amt;
+                      if (emp.baseQuota && emp.basePay != null) {
+                        emp.pay = Math.round(emp.basePay * (amt / emp.baseQuota));
+                      }
+                    }
+                    renderManage();
+                  });
+                }
+              }
+              renderManage();
+              return;
+            } else if (action === 'train-glassblowing') {
               const prof = trainCraftSkill(currentCharacter, 'glassblowing');
               saveProfiles();
               showBackButton();
@@ -1721,11 +1805,14 @@ function showCharacterUI() {
   const employmentHTML = (c.employment && c.employment.length)
     ? `<div class="employment-block"><h2>Employment</h2><ul>${c.employment.map(e => {
         const data = JOB_ROLE_DATA[e.role] || {};
-        const schedule = e.schedule || data.schedule;
+        const schedule = e.schedule != null ? e.schedule : data.schedule;
+        const hours = e.hours || data.hours;
         const quota = e.quota || data.quota;
         let extra = '';
-        if (schedule) extra = `Hours: ${schedule}`;
-        else if (quota != null) extra = `Quota: ${(e.progress || 0)} / ${quota}`;
+        if (schedule) extra = `Shift: ${schedule}`;
+        else if (quota && quota.amount != null)
+          extra = `Quota: ${(e.progress || 0)} / ${quota.amount} ${quota.unit || ''}`;
+        else if (hours) extra = `Hours: ${hours.join(', ')}`;
         return `<li>${e.role} at ${e.building} (${e.location})${extra ? ' - ' + extra : ''}</li>`;
       }).join('')}</ul></div>`
     : '';
@@ -2809,8 +2896,15 @@ function finalizeCharacter(character) {
     if (raw.employment) {
       newChar.employment = raw.employment.map(job => ({
         ...job,
-        schedule: job.schedule || JOB_ROLE_DATA[job.role]?.schedule || null,
-        quota: job.quota || JOB_ROLE_DATA[job.role]?.quota || null,
+        schedule:
+          job.schedule != null
+            ? job.schedule
+            : JOB_ROLE_DATA[job.role]?.schedule ?? null,
+        hours: job.hours || JOB_ROLE_DATA[job.role]?.hours || null,
+        quota: job.quota || null,
+        pay: job.pay || null,
+        baseQuota: job.baseQuota || job.quota?.amount || null,
+        basePay: job.basePay || job.pay || null,
         progress: job.progress || 0,
       }));
     }
