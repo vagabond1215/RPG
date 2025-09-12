@@ -1,6 +1,6 @@
 # Fantasy Economy Catalog
 
-This repository stores item and region policy data imported from the `Fantasy_Economy_Catalog_REBUILT.xlsx` workbook.
+This repository stores item, wage, and region policy data imported from the `Fantasy_Economy_Catalog_REBUILT.xlsx` workbook.
 
 ## Sheets
 
@@ -53,12 +53,6 @@ node tools/importers/import_economy_catalog.js --file Fantasy_Economy_Catalog_RE
 ```
 
 A report is written to `reports/import_economy_catalog_<timestamp>.json` summarising inserts, updates, skips and validation errors.
-
-Legacy baseline prices from `assets/data/cost_baseline.js` can be folded into the unified dataset with:
-
-```bash
-node tools/importers/merge_baseline_costs.js
-```
 
 ## Currency Helpers
 
