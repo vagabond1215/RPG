@@ -1,15 +1,8 @@
-import { HYBRID_RELATIONS } from "./hybrid_relations.js";
-
 // Base elements represented across the RPG
 export const BASE_ELEMENTS = [
   "Stone","Water","Wind","Fire",
   "Ice","Thunder","Dark","Light"
 ] as const;
-
-// Hybrid element names derived from HYBRID_RELATIONS
-export const HYBRID_ELEMENTS = HYBRID_RELATIONS.map(h => h.name);
-
-export const ALL_ELEMENTS = [...BASE_ELEMENTS, ...HYBRID_ELEMENTS];
 
 // Levels that require representation – every 10th level plus level 1
 export const SONG_LEVELS = [1,10,20,30,40,50,60,70,80,90,100] as const;
@@ -33,7 +26,7 @@ const INSTRUMENT_TITLES = [
 // Utility to build spell name maps for each performance discipline
 function buildNames(titles: readonly string[]) {
   const result: Record<string, { level: number; name: string }[]> = {};
-  ALL_ELEMENTS.forEach(el => {
+  BASE_ELEMENTS.forEach(el => {
     result[el] = SONG_LEVELS.map((lvl, idx) => ({ level: lvl, name: `${el} ${titles[idx]}` }));
   });
   return result;
