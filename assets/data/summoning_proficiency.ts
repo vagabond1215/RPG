@@ -143,7 +143,7 @@ export const SUMMON_CFG: SummoningProgressionConfig = {
 
 /* ========================= Internal helpers ========================= */
 
-function rng(cfg: SummoningProgressionConfig, override?: () => number) {
+function rng(override?: () => number) {
   return override ?? Math.random;
 }
 
@@ -214,7 +214,7 @@ export function gainSummoningProficiency(input: SummoningGainInput, cfg: Summoni
     P, cap, actorLevel, enemyLevelAvg, context, thresholds
   } = input;
 
-  const R = rng(cfg, input.rng);
+  const R = rng(input.rng);
   const W_ctx = cfg.contextWeight[context];
   if (W_ctx <= 0) return r2(P);
 

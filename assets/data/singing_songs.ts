@@ -111,9 +111,6 @@ const BUFF_REGEN: Omit<Song,"id">[] = [
 ];
 
 /* ========================= Elemental Songs (unique mechanics) ========================= */
-
-const ELEMENTS: Element[] = ["Stone","Water","Wind","Fire","Ice","Thunder","Dark","Light"];
-
 /** @33 — Elemental Overtures: periodic **pulses** with unique side effects (not resist/weakness/infusion/shield) */
 const ELEMENTAL_OVERTURES_33: Omit<Song,"id">[] = [
   {

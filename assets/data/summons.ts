@@ -114,8 +114,6 @@ function applyAttrVariance(base: number, attrs: Record<Attr, number>, keys: Attr
   return base * factor;
 }
 
-const clamp0 = (x:number)=>Math.max(0,x);
-
 /* ========================= The Summon List (24 entries) ========================= */
 
 function mkUnlock(form: Form): UnlockCondition {
