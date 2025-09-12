@@ -1,0 +1,32 @@
+{
+  "coastal": [],
+  "riverlands": [],
+  "lake": [],
+  "wetland": [],
+  "grassland": [
+    "cabbage"
+  ],
+  "farmland": [
+    "cabbage",
+    "apple-tree",
+    "peppercorn",
+    "saffron"
+  ],
+  "forest": [
+    "chanterelle",
+    "apple-tree",
+    "peppercorn"
+  ],
+  "hills": [
+    "chanterelle",
+    "apple-tree",
+    "saffron"
+  ],
+  "mountains": [],
+  "desert": [],
+  "tundra": [],
+  "urban": [
+    "cabbage",
+    "apple-tree"
+  ]
+}

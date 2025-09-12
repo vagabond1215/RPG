@@ -1,0 +1,14 @@
+{
+  "herbivore": [
+    "draft-horse"
+  ],
+  "carnivore": [],
+  "omnivore": [
+    "chicken"
+  ],
+  "insectivore": [
+    "chicken"
+  ],
+  "detritivore": [],
+  "filter_feeder": []
+}

@@ -1,0 +1,42 @@
+{
+  "food": {
+    "Low Inn": [
+      "cabbage",
+      "chanterelle",
+      "apple-tree"
+    ],
+    "Common": [
+      "cabbage",
+      "chanterelle",
+      "apple-tree"
+    ],
+    "Fine": [
+      "cabbage",
+      "chanterelle",
+      "apple-tree"
+    ],
+    "High Table": [
+      "cabbage",
+      "chanterelle",
+      "apple-tree"
+    ]
+  },
+  "luxury": {
+    "Common": [
+      "peppercorn",
+      "saffron"
+    ],
+    "Fine": [
+      "peppercorn",
+      "saffron"
+    ],
+    "Luxury": [
+      "peppercorn",
+      "saffron"
+    ],
+    "Arcane": [
+      "peppercorn",
+      "saffron"
+    ]
+  }
+}

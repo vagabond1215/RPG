@@ -1,0 +1,99 @@
+[
+  {
+    "id": "cabbage",
+    "common_name": "Cabbage",
+    "growth_form": "herb",
+    "regions": ["terrestrial","urban"],
+    "habitats": ["farmland","urban","grassland"],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": ["leaf"],
+    "medicinal": false,
+    "toxic": false,
+    "culinary_uses": ["stew","pickle","pottage"],
+    "byproducts": [
+      { "type": "leaf", "yield_unit": "heads/season", "avg_yield": 3, "harvest_season": "autumn" }
+    ],
+    "seasonality": "Sown spring; heads in late summer to autumn.",
+    "narrative": "Humble greens bound in tight heads; a staple for broth pots, salted barrels, and winter fare.",
+    "tiers": { "food_tier": ["Low Inn","Common","Fine","High Table"] }
+  },
+  {
+    "id": "chanterelle",
+    "common_name": "Chanterelle",
+    "alt_names": ["Golden chanterelle"],
+    "growth_form": "mushroom",
+    "regions": ["terrestrial"],
+    "habitats": ["forest","hills"],
+    "cultivated": false,
+    "edible": true,
+    "edible_parts": ["mushroom"],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Fruiting after rains; avoid false look-alikes.",
+    "byproducts": [
+      { "type": "mushroom", "yield_unit": "basket", "harvest_season": "summer" }
+    ],
+    "seasonality": "Summer to early autumn after wet weather.",
+    "narrative": "Golden trumpets rising from leaf-litter; a forest prize with a rich, peppery scent.",
+    "tiers": { "food_tier": ["Low Inn","Common","Fine","High Table"] }
+  },
+  {
+    "id": "apple-tree",
+    "common_name": "Apple Tree",
+    "growth_form": "tree",
+    "regions": ["terrestrial","urban"],
+    "habitats": ["farmland","forest","urban","hills"],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": ["fruit"],
+    "medicinal": false,
+    "toxic": false,
+    "culinary_uses": ["fruit","cider","pie"],
+    "byproducts": [
+      { "type": "fruit", "yield_unit": "dozen", "harvest_season": "autumn" },
+      { "type": "wood", "notes": "hardwood" }
+    ],
+    "seasonality": "Blossom in spring; fruit in late summer to autumn.",
+    "narrative": "Boughs bow with sweet red fruit come harvest, filling cellars and press alike.",
+    "tiers": { "food_tier": ["Low Inn","Common","Fine","High Table"] }
+  },
+  {
+    "id": "peppercorn",
+    "common_name": "Peppercorns",
+    "growth_form": "vine",
+    "regions": ["terrestrial"],
+    "habitats": ["forest","farmland"],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": ["seed"],
+    "medicinal": false,
+    "toxic": false,
+    "culinary_uses": ["spice"],
+    "byproducts": [
+      { "type": "spice", "yield_unit": "sack", "harvest_season": "summer" }
+    ],
+    "seasonality": "Harvested when berries redden, then dried.",
+    "narrative": "Dried berries from far-off vines, black and biting on the tongue; dear in any market.",
+    "tiers": { "luxury_tier": ["Common","Fine","Luxury","Arcane"] }
+  },
+  {
+    "id": "saffron",
+    "common_name": "Saffron",
+    "growth_form": "herb",
+    "regions": ["terrestrial"],
+    "habitats": ["farmland","hills"],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": ["flower"],
+    "medicinal": false,
+    "toxic": false,
+    "culinary_uses": ["spice"],
+    "byproducts": [
+      { "type": "spice", "yield_unit": "dram", "harvest_season": "autumn" }
+    ],
+    "seasonality": "Blooms in autumn, stigmas gathered by hand.",
+    "narrative": "Crimson threads dearer than gold, lending hue and scent to royal fare.",
+    "tiers": { "luxury_tier": ["Common","Fine","Luxury","Arcane"] }
+  }
+]

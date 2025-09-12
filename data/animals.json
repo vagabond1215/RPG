@@ -1,0 +1,146 @@
+[
+  {
+    "id": "chicken",
+    "common_name": "Chicken",
+    "alt_names": [
+      "Domestic fowl"
+    ],
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial",
+      "urban"
+    ],
+    "habitats": [
+      "farmland",
+      "urban",
+      "grassland",
+      "forest"
+    ],
+    "diet": [
+      "omnivore",
+      "insectivore"
+    ],
+    "food_sources": [
+      "seeds",
+      "kitchen scraps",
+      "insects",
+      "worms"
+    ],
+    "domestication": {
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Kept for eggs and meat; easy to pen."
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "none",
+      "nocturnal": false
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat",
+        "eggs"
+      ]
+    },
+    "disease_risks": [
+      "parasites"
+    ],
+    "byproducts": [
+      {
+        "type": "egg",
+        "notes": "Daily in season",
+        "yield_unit": "pcs/week",
+        "avg_yield": 5,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "meat",
+        "yield_unit": "kg",
+        "harvest_method": "either"
+      },
+      {
+        "type": "feather",
+        "harvest_method": "either"
+      },
+      {
+        "type": "bone",
+        "harvest_method": "either"
+      }
+    ],
+    "gendered": {
+      "male": "rooster",
+      "female": "hen",
+      "juvenile": "chick",
+      "collective": "flock"
+    },
+    "size_class": "small",
+    "narrative": "Common yard fowl scratching at dawn for seeds and beetles; prized for steady eggs and a pot on cold nights."
+  },
+  {
+    "id": "draft-horse",
+    "common_name": "Draft Horse",
+    "alt_names": [
+      "Cart horse",
+      "Plow horse"
+    ],
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial",
+      "highland",
+      "urban"
+    ],
+    "habitats": [
+      "farmland",
+      "hills",
+      "grassland",
+      "urban"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "food_sources": [
+      "hay",
+      "oats",
+      "pasture grasses"
+    ],
+    "domestication": {
+      "domesticated": true,
+      "trainable": true,
+      "draft_or_mount": true,
+      "notes": "Harnessed for plow, cart, and mill."
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [
+      {
+        "type": "labor",
+        "notes": "Draft power"
+      },
+      {
+        "type": "hide",
+        "harvest_method": "wild"
+      },
+      {
+        "type": "bone",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {
+      "male": "stallion",
+      "female": "mare",
+      "juvenile": "foal",
+      "collective": "team"
+    },
+    "size_class": "large",
+    "narrative": "Broad of shoulder and steady of gait, these giants pull the village’s weight from furrow to market."
+  }
+]

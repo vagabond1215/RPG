@@ -1,0 +1,57 @@
+[
+  {
+    "plant_id": "apple-tree",
+    "sku": "Apples",
+    "units": "dozen",
+    "tiers": [
+      "Low Inn",
+      "Common",
+      "Fine",
+      "High Table"
+    ]
+  },
+  {
+    "plant_id": "peppercorn",
+    "sku": "Peppercorns",
+    "units": "sack",
+    "luxury_tiers": [
+      "Common",
+      "Fine",
+      "Luxury",
+      "Arcane"
+    ]
+  },
+  {
+    "plant_id": "saffron",
+    "sku": "Saffron",
+    "units": "dram",
+    "luxury_tiers": [
+      "Common",
+      "Fine",
+      "Luxury",
+      "Arcane"
+    ]
+  },
+  {
+    "plant_id": "chanterelle",
+    "sku": "Chanterelles",
+    "units": "basket",
+    "tiers": [
+      "Low Inn",
+      "Common",
+      "Fine",
+      "High Table"
+    ]
+  },
+  {
+    "plant_id": "cabbage",
+    "sku": "Cabbage",
+    "units": "head",
+    "tiers": [
+      "Low Inn",
+      "Common",
+      "Fine",
+      "High Table"
+    ]
+  }
+]
