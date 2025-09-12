@@ -1,0 +1,27 @@
+{
+  "coastal": [],
+  "riverlands": [],
+  "lake": [],
+  "wetland": [],
+  "grassland": [
+    "chicken",
+    "draft-horse"
+  ],
+  "farmland": [
+    "chicken",
+    "draft-horse"
+  ],
+  "forest": [
+    "chicken"
+  ],
+  "hills": [
+    "draft-horse"
+  ],
+  "mountains": [],
+  "desert": [],
+  "tundra": [],
+  "urban": [
+    "chicken",
+    "draft-horse"
+  ]
+}

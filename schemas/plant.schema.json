@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id","common_name","growth_form","regions","habitats","cultivated","edible","byproducts","narrative"],
+  "properties": {
+    "id": {"type": "string"},
+    "common_name": {"type": "string"},
+    "alt_names": {"type": "array", "items": {"type": "string"}},
+    "growth_form": {"type": "string", "enum": ["tree","shrub","herb","grass","vine","bamboo","mushroom","fungus","algae","seaweed","lichen"]},
+    "regions": {"type": "array", "items": {"type": "string", "enum": ["terrestrial","aquatic_fresh","aquatic_salt","coastal","wetlands_transitional","highland","arid","cold","urban"]}},
+    "habitats": {"type": "array", "items": {"type": "string", "enum": ["coastal","riverlands","lake","wetland","grassland","farmland","forest","hills","mountains","desert","tundra","urban"]}},
+    "cultivated": {"type": "boolean"},
+    "edible": {"type": "boolean"},
+    "edible_parts": {"type": "array", "items": {"type": "string"}},
+    "medicinal": {"type": "boolean"},
+    "toxic": {"type": "boolean"},
+    "toxicity_notes": {"type": "string"},
+    "culinary_uses": {"type": "array", "items": {"type": "string"}},
+    "foraging_notes": {"type": "string"},
+    "byproducts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type"],
+        "properties": {
+          "type": {"type": "string", "enum": ["fruit","nut","seed","grain","leaf","root","tuber","bulb","flower","sap","resin","fiber","wood","bark","oil","spice","herb","dye","medicine","mushroom","algae","other"]},
+          "notes": {"type": "string"},
+          "yield_unit": {"type": "string"},
+          "avg_yield": {"type": "number"},
+          "harvest_season": {"type": "string"}
+        }
+      }
+    },
+    "seasonality": {"type": "string"},
+    "narrative": {"type": "string"},
+    "tiers": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "food_tier": {"type": "array", "items": {"type": "string", "enum": ["Low Inn","Common","Fine","High Table"]}},
+        "luxury_tier": {"type": "array", "items": {"type": "string", "enum": ["Common","Fine","Luxury","Arcane"]}}
+      }
+    }
+  }
+}
