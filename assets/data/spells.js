@@ -5,8 +5,11 @@
 // MP cost helper retained from original implementation
 const mpCost = (tier) => Math.ceil(3 * (1 + Math.log2(tier)));
 
-// Proficiency milestones for 15 spell tiers
-const MILESTONES = Array.from({ length: 15 }, (_, i) => (i + 1) * 10);
+// Proficiency milestones compressed into a 10–130 range.
+// The array provides unique tier breakpoints; adjacent schools may
+// intentionally reuse a value when building the spellbook so that some
+// spells share the same proficiency requirement.
+const MILESTONES = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 115, 130];
 
 // Status effect applied when a destructive spell crits
 const STATUS_ON_CRIT = {
@@ -311,14 +314,19 @@ const FAMILY_MAP = {
 function buildElement(element, lists) {
   const spells = [];
   const counters = { destruction: 0, control: 0, enfeebling: 0, reinforcement: 0 };
+  let profIndex = 0;
   for (const category of ["destruction", "control", "enfeebling", "reinforcement"]) {
     const names = lists[category] || [];
-    for (const name of names) {
+    for (let i = 0; i < names.length; i++) {
+      const name = names[i];
       const tier = spells.length + 1;
       counters[category]++;
       let basePower = 0;
       if (category === "destruction") {
         basePower = 20 + (counters[category] - 1) * 10;
+      }
+      if (!(i === 0 && spells.length > 0)) {
+        profIndex++;
       }
       const spell = {
         id: `${element}:${category.substring(0,3).toUpperCase()}:${tier}`,
@@ -328,7 +336,7 @@ function buildElement(element, lists) {
         family: FAMILY_MAP[category],
         type: TYPE_MAP[category],
         target: "ST",
-        proficiency: MILESTONES[tier - 1],
+        proficiency: MILESTONES[profIndex - 1],
         mpCost: mpCost(tier),
         basePower,
       };
