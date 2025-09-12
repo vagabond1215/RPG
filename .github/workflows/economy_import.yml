@@ -1,0 +1,31 @@
+name: Economy Import
+
+on:
+  pull_request:
+    paths:
+      - 'tools/importers/**'
+      - 'assets/economy/**'
+      - 'assets/data/economy_items.json'
+      - 'assets/data/region_policy.json'
+      - 'tests/economy_import/**'
+      - 'Fantasy_Economy_Catalog_REBUILT.xlsx'
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: node tools/importers/import_economy_catalog.js --file Fantasy_Economy_Catalog_REBUILT.xlsx --dry-run
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm test

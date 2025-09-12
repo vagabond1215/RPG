@@ -81,3 +81,30 @@ export function formatCurrency(obj) {
   }
   return parts.join(' ') || '0 cold iron';
 }
+
+export function toCp({pl=0,g=0,si=0,cp=0,st=0,ci=0}={}){
+  const iron = toIron({
+    platinum: pl,
+    gold: g,
+    silver: si,
+    copper: cp,
+    steel: st,
+    coldIron: ci,
+  });
+  return convertCurrency(iron, 'coldIron', 'copper');
+}
+
+export function cpToCoins(value, tidy=true){
+  const iron = Math.round(convertCurrency(value, 'copper', 'coldIron'));
+  const counts = fromIron(iron);
+  const order = ['platinum','gold','silver','copper','steel','coldIron'];
+  const abbr = {platinum:'pl', gold:'g', silver:'si', copper:'cp', steel:'st', coldIron:'ci'};
+  const result = [];
+  for (const denom of order){
+    const count = counts[denom] || 0;
+    if (count > 0 || (!tidy && result.length)){
+      if (count > 0 || !tidy) result.push(`${count}${abbr[denom]}`);
+    }
+  }
+  return result.length ? result.join(' ') : '0cp';
+}
