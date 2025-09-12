@@ -1,5 +1,4 @@
 import { gainProficiency } from "./proficiency_base.js";
-import { HYBRID_RELATIONS } from "./hybrid_relations.js";
 
 export const elementalProficiencyMap = {
   stone: "stone",
@@ -38,20 +37,14 @@ export const schoolProficiencyMap = {
 
 export const SCHOOL_MAGIC_KEYS = Object.values(schoolProficiencyMap);
 
-export const HYBRID_MAP = Object.fromEntries(
-  HYBRID_RELATIONS.map(r => [r.name, r])
-);
-
 export function applySpellProficiencyGain(character, spell, params) {
   if (!character || !spell) return;
-  if (!HYBRID_MAP[spell.element]) {
-    const elemKey = elementalProficiencyMap[spell.element?.toLowerCase()];
-    if (elemKey) {
-      character[elemKey] = gainElementProficiency(elemKey, {
-        P: character[elemKey],
-        ...params,
-      });
-    }
+  const elemKey = elementalProficiencyMap[spell.element?.toLowerCase()];
+  if (elemKey) {
+    character[elemKey] = gainElementProficiency(elemKey, {
+      P: character[elemKey],
+      ...params,
+    });
   }
   const schoolKey = schoolProficiencyMap[spell.school];
   if (schoolKey) {

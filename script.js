@@ -17,7 +17,6 @@ import {
 } from "./assets/data/currency.js";
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipment.js";
 import { LOCATIONS } from "./assets/data/locations.js";
-import { HYBRID_RELATIONS } from "./assets/data/hybrid_relations.js";
 import { CITY_NAV } from "./assets/data/city_nav.js";
 import { composeImagePrompt } from "./assets/data/image_prompts.js";
 import { DEFAULT_NAMES } from "./assets/data/names.js";
@@ -25,7 +24,6 @@ import { WAVES_BREAK_BACKSTORIES } from "./assets/data/waves_break_backstories.j
 import {
   elementalProficiencyMap,
   schoolProficiencyMap,
-  HYBRID_MAP,
   applySpellProficiencyGain,
 } from "./assets/data/spell_proficiency.js";
 import { trainCraftSkill } from "./assets/data/trainer_proficiency.js";
@@ -994,22 +992,39 @@ function assignMagicAptitudes(character) {
     schoolChances[key] = chance * statMod;
   }
 
+  const classMap = {
+    summoner: ['summoning'],
+    conjurer: ['summoning'],
+    dancer: ['dancing'],
+    performer: ['dancing'],
+    healer: ['healing'],
+    priest: ['healing'],
+    acolyte: ['healing'],
+    bard: ['singing','instrument'],
+    minstrel: ['singing','instrument']
+  };
+  const cls = character.class?.toLowerCase();
+  if (cls && classMap[cls]) {
+    for (const key of classMap[cls]) {
+      character[key] = Math.max(character[key] || 0, 1);
+    }
+  }
+
   // Determine if the character already has an elemental proficiency
   let hasElement = elemental.some(k => character[k] > 0);
 
   // Roll for elemental proficiencies; ensure at least one is granted
   if (!hasElement) {
-    for (const key of elemental) {
-      if (Math.random() < elemChance) {
-        character[key] = 1;
-        hasElement = true;
+    let firstPass = true;
+    while (!hasElement) {
+      for (const key of elemental) {
+        if (Math.random() < elemChance) {
+          character[key] = 1;
+          hasElement = true;
+          if (!firstPass) break;
+        }
       }
-    }
-    // If none were assigned by chance, grant one random element
-    if (!hasElement) {
-      const randKey = elemental[Math.floor(Math.random() * elemental.length)];
-      character[randKey] = 1;
-      hasElement = true;
+      if (!hasElement) firstPass = false;
     }
   }
 
@@ -1902,23 +1917,11 @@ function showSpellbookUI() {
 
   const unlocked = [];
   for (const spell of SPELLBOOK) {
-    const relation = HYBRID_MAP[spell.element];
     const schoolKey = schoolProficiencyMap[spell.school];
     const schoolValue = currentCharacter[schoolKey] ?? 0;
-    let elemValue = 0;
-    let parentUnlocked = true;
-    if (relation) {
-      const p1Key = elementalProficiencyMap[relation.parents[0].toLowerCase()];
-      const p2Key = elementalProficiencyMap[relation.parents[1].toLowerCase()];
-      const p1 = currentCharacter[p1Key] ?? 0;
-      const p2 = currentCharacter[p2Key] ?? 0;
-      elemValue = Math.min(p1, p2);
-      parentUnlocked = p1 > 0 && p2 > 0;
-    } else {
-      const profKey = elementalProficiencyMap[spell.element.toLowerCase()];
-      elemValue = currentCharacter[profKey] ?? 0;
-    }
-    if (parentUnlocked && elemValue >= spell.proficiency && schoolValue >= spell.proficiency) {
+    const profKey = elementalProficiencyMap[spell.element.toLowerCase()];
+    const elemValue = currentCharacter[profKey] ?? 0;
+    if (elemValue >= spell.proficiency && schoolValue >= spell.proficiency) {
       unlocked.push(spell);
     }
   }
