@@ -5,11 +5,26 @@
 // MP cost helper retained from original implementation
 const mpCost = (tier) => Math.ceil(3 * (1 + Math.log2(tier)));
 
-// Proficiency milestones compressed into a 10–130 range.
-// The array provides unique tier breakpoints; adjacent schools may
-// intentionally reuse a value when building the spellbook so that some
-// spells share the same proficiency requirement.
-const MILESTONES = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 115, 130];
+// Proficiency milestones now span 10–160.
+// The array provides unique tier breakpoints; only the earliest
+// school transition intentionally reuses a value so later spells can
+// reach higher proficiency requirements.
+const MILESTONES = [
+  10,
+  20,
+  30,
+  40,
+  50,
+  60,
+  70,
+  80,
+  90,
+  100,
+  115,
+  130,
+  145,
+  160,
+];
 
 // Status effect applied when a destructive spell crits
 const STATUS_ON_CRIT = {
@@ -315,6 +330,7 @@ function buildElement(element, lists) {
   const spells = [];
   const counters = { destruction: 0, control: 0, enfeebling: 0, reinforcement: 0 };
   let profIndex = 0;
+  let shared = 0;
   for (const category of ["destruction", "control", "enfeebling", "reinforcement"]) {
     const names = lists[category] || [];
     for (let i = 0; i < names.length; i++) {
@@ -325,7 +341,9 @@ function buildElement(element, lists) {
       if (category === "destruction") {
         basePower = 20 + (counters[category] - 1) * 10;
       }
-      if (!(i === 0 && spells.length > 0)) {
+      if (i === 0 && spells.length > 0 && shared < 1) {
+        shared++;
+      } else {
         profIndex++;
       }
       const spell = {
