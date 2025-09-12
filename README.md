@@ -19,8 +19,7 @@ No build steps are required. After publishing the repository with GitHub Pages, 
 - `assets/images/Maps/` – map images
 - `assets/images/race_photos.json` – manifest of available character portraits (run `node scripts/updateRacePhotoManifest.js` after adding images)
 - `assets/data/` – data assets such as `weapon_skills.js`, `spells.js`, and `race_attrs.js`
-- `assets/data/cost_baseline.js` – baseline commodity prices (source data)
-- `tools/importers/merge_baseline_costs.js` – converts baseline prices into the unified `economy_items.json` format
+- `assets/data/economy_items.json` – unified item pricing and wage data
 - `assets/data/locations.ts` – city and region definitions with map references
 
 Additional functionality will be added over time.
