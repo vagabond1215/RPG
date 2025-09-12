@@ -1,4 +1,5 @@
 import { LOCATIONS } from "./locations.js";
+import { defaultEmployeesForBuilding } from "./buildings.js";
 
 export const CITY_NAV = {
   "Wave's Break": {
@@ -1629,10 +1630,13 @@ function defaultBusinessHours(cityName, buildingName) {
       ? { open: "00:00", close: "24:00" }
       : { open: "06:00", close: "24:00" };
   }
-  if (/(temple|shrine|church|monastery)/.test(name)) {
-    return { open: "06:00", close: "22:00" };
+  if (/(adventurer|temple|shrine|church|monastery)/.test(name)) {
+    return { open: "00:00", close: "24:00" };
   }
-  if (/(shop|market|exchange|wharf|pier|yard|bakery|granary)/.test(name)) {
+  if (/(wharf|pier|dock|quay|warehouse|yard|naval|port)/.test(name)) {
+    return { open: "00:00", close: "24:00" };
+  }
+  if (/(shop|market|exchange|bakery|granary)/.test(name)) {
     return { open: "06:00", close: "18:00" };
   }
   if (/(forge|workshop|lodge|shed|lab|sanctum|guild|hall|keep)/.test(name)) {
@@ -1652,3 +1656,19 @@ function applyBusinessHours(nav) {
 }
 
 applyBusinessHours(CITY_NAV);
+
+function applyBusinessEmployees(nav) {
+  const city = nav["Wave's Break"];
+  if (!city) return;
+  Object.entries(city.buildings).forEach(([name, building]) => {
+    building.employees = defaultEmployeesForBuilding(name);
+    const baseInteractions = [
+      { name: "Shop", action: "shop" },
+      { name: "Sell", action: "sell" },
+      { name: "Manage", action: "manage" },
+    ];
+    building.interactions = baseInteractions.concat(building.interactions || []);
+  });
+}
+
+applyBusinessEmployees(CITY_NAV);
