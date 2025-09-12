@@ -288,7 +288,6 @@ export class TimingEngine {
   advance(dtMs: Ms, getMember?: (id:Id)=>{ resources:{HP:number;MP:number;Stamina:number;HPMax:number;MPMax:number;StaminaMax:number}}|undefined) {
     if (dtMs <= 0) return;
 
-    const prev = this.clock.now;
     this.clock.advance(dtMs);
 
     // Flush any scheduled completions
