@@ -41,6 +41,8 @@ export const HABITATS = [
   ...EXTREME_HABITATS,
   // Anthropogenic or legacy categories
   "farmland","forest","grassland","hills","urban",
+  // General habitat groupings for plants
+  "coastal","riverlands","lake","wetland","mountains","desert","tundra",
 ] as const;
 export type Habitat = typeof HABITATS[number];
 
