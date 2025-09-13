@@ -15,6 +15,25 @@
     "narrative": ""
   },
   {
+    "id": "agrimony",
+    "common_name": "Agrimony",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "alder",
     "common_name": "Alder",
     "growth_form": "tree",
@@ -197,6 +216,25 @@
     "fallow_notes": "Prune annually; replant after 25 years to rejuvenate grove"
   },
   {
+    "id": "apricot",
+    "common_name": "Apricot",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "arrowhead",
     "common_name": "Arrowhead",
     "growth_form": "herb",
@@ -300,6 +338,25 @@
     }
   },
   {
+    "id": "basil",
+    "common_name": "Basil",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "bay-laurel",
     "common_name": "Bay laurel",
     "growth_form": "tree",
@@ -360,6 +417,25 @@
     "narrative": ""
   },
   {
+    "id": "betony",
+    "common_name": "Betony",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "bilberry",
     "common_name": "Bilberry",
     "growth_form": "shrub",
@@ -387,6 +463,25 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "birch-polypore",
+    "common_name": "Birch polypore",
+    "growth_form": "mushroom",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "mushroom"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -450,6 +545,25 @@
     "narrative": ""
   },
   {
+    "id": "blackthorn-sloe",
+    "common_name": "Blackthorn (sloe)",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "bladderwrack",
     "common_name": "Bladderwrack",
     "growth_form": "seaweed",
@@ -477,6 +591,25 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "borage",
+    "common_name": "Borage",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -522,6 +655,25 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "broom-scotch-broom",
+    "common_name": "Broom (scotch broom)",
+    "growth_form": "shrub",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "hills"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -825,6 +977,25 @@
     }
   },
   {
+    "id": "chard",
+    "common_name": "Chard",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "cherries",
     "common_name": "Cherries",
     "growth_form": "tree",
@@ -915,6 +1086,25 @@
     "narrative": ""
   },
   {
+    "id": "chives",
+    "common_name": "Chives",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "citron",
     "common_name": "Citron",
     "growth_form": "tree",
@@ -957,6 +1147,25 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "club-rush-schoenoplectus",
+    "common_name": "Club-rush (Schoenoplectus)",
+    "growth_form": "grass",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "fiber"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -1017,6 +1226,25 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "common-reed-phragmites",
+    "common_name": "Common reed (Phragmites)",
+    "growth_form": "grass",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "fiber"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -1155,6 +1383,25 @@
     "narrative": ""
   },
   {
+    "id": "damson",
+    "common_name": "Damson",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "dandelion",
     "common_name": "Dandelion",
     "growth_form": "herb",
@@ -1197,6 +1444,25 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "death-cap",
+    "common_name": "Death cap",
+    "growth_form": "mushroom",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "mushroom"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -1275,6 +1541,44 @@
     "narrative": ""
   },
   {
+    "id": "eelgrass-zostera",
+    "common_name": "Eelgrass (Zostera)",
+    "growth_form": "grass",
+    "regions": [
+      "aquatic_salt"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "einkorn",
+    "common_name": "Einkorn",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "grain"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "elder",
     "common_name": "Elder",
     "growth_form": "tree",
@@ -1305,6 +1609,44 @@
     "narrative": ""
   },
   {
+    "id": "emmer",
+    "common_name": "Emmer",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "grain"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "ergot-rye-fungus",
+    "common_name": "Ergot (rye fungus)",
+    "growth_form": "fungus",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "mushroom"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "fennel",
     "common_name": "Fennel",
     "growth_form": "herb",
@@ -1317,6 +1659,25 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "fenugreek",
+    "common_name": "Fenugreek",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "seed"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -1418,6 +1779,25 @@
       ],
       "luxury_tier": []
     }
+  },
+  {
+    "id": "fly-agaric",
+    "common_name": "Fly agaric",
+    "growth_form": "mushroom",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "mushroom"
+      }
+    ],
+    "narrative": ""
   },
   {
     "id": "foxglove",
@@ -1538,6 +1918,25 @@
     "narrative": ""
   },
   {
+    "id": "gorse-furze",
+    "common_name": "Gorse (furze)",
+    "growth_form": "shrub",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "hills"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "grapes",
     "common_name": "Grapes",
     "growth_form": "vine",
@@ -1613,6 +2012,25 @@
     "narrative": ""
   },
   {
+    "id": "heather-ling",
+    "common_name": "Heather (ling)",
+    "growth_form": "shrub",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "hills"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "hemp",
     "common_name": "Hemp",
     "growth_form": "herb",
@@ -1670,6 +2088,25 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "hops",
+    "common_name": "Hops",
+    "growth_form": "vine",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -1883,6 +2320,25 @@
     "narrative": ""
   },
   {
+    "id": "lemon",
+    "common_name": "Lemon",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "lentil",
     "common_name": "Lentil",
     "alt_names": [],
@@ -1954,6 +2410,44 @@
     "narrative": ""
   },
   {
+    "id": "licorice",
+    "common_name": "Licorice",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "root"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "linden-lime-tree",
+    "common_name": "Linden (lime tree)",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "lingonberry",
     "common_name": "Lingonberry",
     "growth_form": "shrub",
@@ -2014,6 +2508,25 @@
     "narrative": ""
   },
   {
+    "id": "madder",
+    "common_name": "Madder",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "dye"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "mandrake",
     "common_name": "Mandrake",
     "growth_form": "herb",
@@ -2059,6 +2572,25 @@
     "narrative": ""
   },
   {
+    "id": "marjoram",
+    "common_name": "Marjoram",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "marsh-marigold",
     "common_name": "Marsh marigold",
     "growth_form": "herb",
@@ -2071,6 +2603,25 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "marshmallow-althaea",
+    "common_name": "Marshmallow (Althaea)",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "root"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -2254,6 +2805,25 @@
     "narrative": ""
   },
   {
+    "id": "nigella-black-cumin",
+    "common_name": "Nigella (black cumin)",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "seed"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "oats",
     "common_name": "Oats",
     "growth_form": "grass",
@@ -2400,6 +2970,44 @@
     "narrative": ""
   },
   {
+    "id": "orchil-lichen-roccella",
+    "common_name": "Orchil lichen (Roccella)",
+    "growth_form": "lichen",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "dye"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "oregano",
+    "common_name": "Oregano",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "oyster-mushroom",
     "common_name": "Oyster Mushroom",
     "alt_names": [
@@ -2464,6 +3072,25 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "parsley",
+    "common_name": "Parsley",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -2538,6 +3165,25 @@
       ],
       "luxury_tier": []
     }
+  },
+  {
+    "id": "peach",
+    "common_name": "Peach",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      }
+    ],
+    "narrative": ""
   },
   {
     "id": "pears",
@@ -2798,6 +3444,25 @@
     "narrative": ""
   },
   {
+    "id": "purslane",
+    "common_name": "Purslane",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "quinces",
     "common_name": "Quinces",
     "growth_form": "tree",
@@ -2825,6 +3490,25 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "ramsons-wild-garlic",
+    "common_name": "Ramsons (wild garlic)",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -2900,6 +3584,25 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "rice",
+    "common_name": "Rice",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "grain"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -3119,6 +3822,44 @@
     "narrative": ""
   },
   {
+    "id": "salad-burnet",
+    "common_name": "Salad burnet",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "salsify",
+    "common_name": "Salsify",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "root"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "samphire",
     "common_name": "Samphire",
     "growth_form": "herb",
@@ -3254,6 +3995,25 @@
     "narrative": ""
   },
   {
+    "id": "skirret",
+    "common_name": "Skirret",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "root"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "sorrel",
     "common_name": "Sorrel",
     "growth_form": "herb",
@@ -3281,6 +4041,25 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "spinach",
+    "common_name": "Spinach",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -3344,6 +4123,25 @@
     "narrative": ""
   },
   {
+    "id": "stone-pine-pine-nuts",
+    "common_name": "Stone pine (pine nuts)",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "seed"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "strawberries",
     "common_name": "Strawberries",
     "growth_form": "shrub",
@@ -3374,6 +4172,63 @@
     "narrative": ""
   },
   {
+    "id": "sweet-flag-acorus-calamus",
+    "common_name": "Sweet flag (Acorus calamus)",
+    "growth_form": "herb",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "root"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "sweet-gale-bog-myrtle",
+    "common_name": "Sweet gale (bog myrtle)",
+    "growth_form": "shrub",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "tansy",
+    "common_name": "Tansy",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "tarragon",
     "common_name": "Tarragon",
     "growth_form": "herb",
@@ -3401,6 +4256,25 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "tinder-fungus-amadou",
+    "common_name": "Tinder fungus (amadou)",
+    "growth_form": "fungus",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "mushroom"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -3567,6 +4441,25 @@
     "narrative": ""
   },
   {
+    "id": "water-chestnut-trapa-natans",
+    "common_name": "Water chestnut (Trapa natans)",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "lake"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "nut"
+      }
+    ],
+    "narrative": ""
+  },
+  {
     "id": "watercress",
     "common_name": "Watercress",
     "growth_form": "herb",
@@ -3579,6 +4472,25 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "weld-dyers-rocket",
+    "common_name": "Weld (dyer’s rocket)",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "dye"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -3714,6 +4626,44 @@
     "cultivated": false,
     "edible": true,
     "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "woad",
+    "common_name": "Woad",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "dye"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "wood-sorrel",
+    "common_name": "Wood sorrel",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
     "narrative": ""
   },
   {
