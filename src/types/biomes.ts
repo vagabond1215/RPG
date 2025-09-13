@@ -1,12 +1,52 @@
+export const AQUATIC_HABITATS = [
+  "deep_sea","open_ocean","coral_reefs","kelp_forests","continental_shelves",
+  "estuaries","ocean_shores","rivers","streams","lakes","ponds","springs",
+] as const;
+
+export const WETLANDS_TRANSITIONAL_HABITATS = [
+  "swamps","marshes","bogs","fens","floodplains","mangroves",
+  "brackish_marshlands","tidal_flats",
+] as const;
+
+export const TERRESTRIAL_HABITATS = [
+  "tropical_rainforest","temperate_rainforest","deciduous_forest","boreal_forest","dry_forest",
+  "savanna","prairie","steppe","pampas","meadow",
+  "hot_desert","cold_desert","semi_arid_scrublands","alpine_tundra","montane_forest",
+  "cliffs","scree_slopes","arctic_tundra","subarctic_tundra","permafrost_zones",
+] as const;
+
+export const COASTAL_HABITATS = [
+  "beaches","coastal_dunes","lagoons","barrier_islands",
+] as const;
+
+export const SUBTERRANEAN_HABITATS = [
+  "limestone_caves","lava_tubes","underground_rivers","underground_lakes","karst_systems",
+] as const;
+
+export const POLAR_ICE_HABITATS = [
+  "pack_ice","ice_shelves","glaciers","snowfields","polar_deserts",
+] as const;
+
+export const EXTREME_HABITATS = [
+  "volcanic_regions","geothermal_springs","high_altitude_plateaus","hyper_arid_salt_basins",
+] as const;
+
 export const HABITATS = [
-  "coastal","riverlands","lake","wetland","grassland",
-  "farmland","forest","hills","mountains","desert","tundra","urban",
+  ...AQUATIC_HABITATS,
+  ...WETLANDS_TRANSITIONAL_HABITATS,
+  ...TERRESTRIAL_HABITATS,
+  ...COASTAL_HABITATS,
+  ...SUBTERRANEAN_HABITATS,
+  ...POLAR_ICE_HABITATS,
+  ...EXTREME_HABITATS,
+  // Anthropogenic or legacy categories
+  "farmland","forest","grassland","hills","urban",
 ] as const;
 export type Habitat = typeof HABITATS[number];
 
 export const REGIONS = [
-  "terrestrial","aquatic_fresh","aquatic_salt","coastal","wetlands_transitional",
-  "highland","arid","cold","urban",
+  "aquatic","wetlands_transitional","terrestrial","coastal",
+  "subterranean","polar_ice","extreme","urban",
 ] as const;
 export type Region = typeof REGIONS[number];
 

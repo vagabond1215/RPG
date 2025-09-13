@@ -13,8 +13,8 @@
     "habitats": [
       "farmland",
       "urban",
-      "grassland",
-      "forest"
+      "meadow",
+      "deciduous_forest"
     ],
     "diet": [
       "omnivore",
@@ -89,14 +89,12 @@
     "taxon_group": "mammal",
     "regions": [
       "terrestrial",
-      "highland",
       "urban"
     ],
     "habitats": [
       "farmland",
-      "hills",
-      "grassland",
-      "urban"
+      "urban",
+      "meadow"
     ],
     "diet": [
       "herbivore"
