@@ -34,12 +34,6 @@
       }
     },
     "seasonality": {"type": "string"},
-    "sowing_season": {"type": "string"},
-    "harvest_season": {"type": "string"},
-    "growth_duration": {"type": "string"},
-    "companion_crops": {"type": "array", "items": {"type": "string"}},
-    "rotation_relationships": {"type": "string"},
-    "fallow_notes": {"type": "string"},
     "narrative": {"type": "string"},
     "tiers": {
       "type": "object",
