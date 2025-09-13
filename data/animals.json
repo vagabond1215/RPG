@@ -10,7 +10,7 @@
       "open_ocean"
     ],
     "diet": [
-      "filter_feeder"
+      "carnivore"
     ],
     "domestication": {
       "domesticated": false
@@ -24,13 +24,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -59,13 +56,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -94,13 +88,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -129,13 +120,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -164,13 +152,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -199,13 +184,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -234,13 +216,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -269,13 +248,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -304,13 +280,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -339,13 +312,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -374,13 +344,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -409,13 +376,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -444,13 +408,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -468,7 +429,10 @@
       "herbivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Domesticated species."
     },
     "behavior": {
       "aggressive": false,
@@ -479,13 +443,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -514,13 +475,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -549,13 +507,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -584,13 +539,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -602,32 +554,70 @@
       "terrestrial"
     ],
     "habitats": [
-      "urban"
+      "urban",
+      "farmland"
     ],
     "diet": [
       "carnivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Kept for pest control"
     },
     "behavior": {
       "aggressive": false,
-      "territorial": false,
-      "risk_to_humans": "low"
+      "territorial": true,
+      "risk_to_humans": "low",
+      "nocturnal": true,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Eaten only in famine",
+      "taboo_or_restricted": true
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "fur",
+        "notes": "Soft pelts",
+        "yield_unit": "kg",
+        "avg_yield": 1,
+        "harvest_method": "either"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "tom",
+      "female": "queen",
+      "juvenile": "kitten",
+      "collective": "clowder"
+    },
+    "narrative": "Cats slink along rooftops and keep granaries free of mice. Superstitious villagers leave cream at crossroads to win their favor, believing offending a cat brings bad harvests.",
+    "alt_names": [
+      "House cat"
+    ],
+    "food_sources": [
+      "mice",
+      "kitchen scraps"
+    ],
+    "disease_risks": [
+      "toxoplasmosis"
+    ],
+    "size_class": "small",
+    "mating_season": "spring",
+    "gestation_period": "65 days",
+    "incubation_period": "",
+    "reproduction_notes": "Queens bear litters of four several times a year",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "6 weeks",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "1 year"
   },
   {
     "id": "cattle",
@@ -637,32 +627,87 @@
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "grassland"
     ],
     "diet": [
-      "herbivore"
+      "herbivore",
+      "grazer"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": true,
+      "notes": "Bred for milk, meat, and draft"
     },
     "behavior": {
       "aggressive": false,
       "territorial": false,
-      "risk_to_humans": "low"
+      "risk_to_humans": "moderate",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
-        "meat"
-      ]
+        "meat",
+        "milk"
+      ],
+      "preparation_notes": "Beef roasted or salted; milk drunk fresh or soured",
+      "taboo_or_restricted": false
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "meat",
+        "notes": "Carcass from a two-year steer",
+        "yield_unit": "kg",
+        "avg_yield": 200,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "milk",
+        "notes": "Daily yield from a good cow",
+        "yield_unit": "L",
+        "avg_yield": 10,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "hide",
+        "notes": "Cured into leather",
+        "yield_unit": "kg",
+        "avg_yield": 35,
+        "harvest_method": "either"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "bull",
+      "female": "cow",
+      "juvenile": "calf",
+      "collective": "herd"
+    },
+    "narrative": "Lowing cattle fill the village commons, their bells chiming duskward. Dairymen pay tithe in wheels of cheese, while butchers eye fattened steers before harvest feasts. Old laws forbid slaughter of breeding cows, yet poachers sometimes spirit away a prized bull at night for rival herds.",
+    "alt_names": [
+      "Cow"
+    ],
+    "food_sources": [
+      "pasture grasses",
+      "hay",
+      "grain"
+    ],
+    "disease_risks": [
+      "bovine tuberculosis"
+    ],
+    "size_class": "large",
+    "mating_season": "spring",
+    "gestation_period": "283 days",
+    "incubation_period": "",
+    "reproduction_notes": "Cows bear a single calf yearly after a nine‑month gestation",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "10 months",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "2 years"
   },
   {
     "id": "chamois",
@@ -689,13 +734,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -707,67 +749,67 @@
     ],
     "taxon_group": "bird",
     "regions": [
-      "terrestrial",
-      "urban"
+      "terrestrial"
     ],
     "habitats": [
       "farmland",
-      "urban",
-      "meadow",
-      "deciduous_forest"
+      "grassland"
     ],
     "diet": [
       "omnivore",
       "insectivore"
     ],
     "food_sources": [
-      "seeds",
-      "kitchen scraps",
+      "grain",
       "insects",
-      "worms"
+      "kitchen scraps"
     ],
     "domestication": {
       "domesticated": true,
       "trainable": false,
       "draft_or_mount": false,
-      "notes": "Kept for eggs and meat; easy to pen."
+      "notes": "Kept primarily for eggs and meat"
     },
     "behavior": {
       "aggressive": false,
       "territorial": false,
-      "risk_to_humans": "none",
-      "nocturnal": false
+      "risk_to_humans": "low",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
         "meat",
-        "eggs"
-      ]
+        "egg"
+      ],
+      "preparation_notes": "Cook thoroughly to avoid illness",
+      "taboo_or_restricted": false
     },
     "disease_risks": [
-      "parasites"
+      "avian influenza"
     ],
     "byproducts": [
       {
         "type": "egg",
-        "notes": "Daily in season",
-        "yield_unit": "pcs/week",
-        "avg_yield": 5,
+        "notes": "Hens lay almost daily in warm seasons",
+        "yield_unit": "count",
+        "avg_yield": 280,
         "harvest_method": "domesticated"
       },
       {
         "type": "meat",
+        "notes": "Dressed weight from a six-month bird",
         "yield_unit": "kg",
+        "avg_yield": 1.8,
         "harvest_method": "either"
       },
       {
         "type": "feather",
-        "harvest_method": "either"
-      },
-      {
-        "type": "bone",
-        "harvest_method": "either"
+        "notes": "Collected after natural molting",
+        "yield_unit": "g",
+        "avg_yield": 50,
+        "harvest_method": "domesticated"
       }
     ],
     "gendered": {
@@ -777,7 +819,17 @@
       "collective": "flock"
     },
     "size_class": "small",
-    "narrative": "Common yard fowl scratching at dawn for seeds and beetles; prized for steady eggs and a pot on cold nights."
+    "narrative": "The barnyard chicken scratches through village yards from dawn, clucking in constant search of grain and grubs. Hens settle into roosts at dusk, guarded by notoriously irritable roosters. In spring the birds grow prized for their nearly daily eggs, and monks in the nearby abbey barter for surplus to temper their fasting. Yet a law forbids slaughtering laying hens before Midsummer, ensuring steady trade but drawing poachers who try to snatch prized champions for cockfights. Folklore claims their crowing wards off marsh spirits, so villagers place woven charms in each coop.",
+    "mating_season": "spring",
+    "gestation_period": "",
+    "incubation_period": "21 days",
+    "reproduction_notes": "Hens produce unfertilized eggs year-round; roosters needed for chicks",
+    "production_cycles": {
+      "egg_laying_frequency": "nearly daily",
+      "milk_production_duration": "",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "6 months"
   },
   {
     "id": "clam",
@@ -790,7 +842,7 @@
       "ocean_shores"
     ],
     "diet": [
-      "filter_feeder"
+      "carnivore"
     ],
     "domestication": {
       "domesticated": false
@@ -804,13 +856,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -825,7 +874,7 @@
       "ocean_shores"
     ],
     "diet": [
-      "filter_feeder"
+      "carnivore"
     ],
     "domestication": {
       "domesticated": false
@@ -839,13 +888,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -874,13 +920,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -909,13 +952,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -944,13 +984,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -979,13 +1016,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1014,13 +1048,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1049,13 +1080,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1084,13 +1112,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1119,50 +1144,99 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
   {
     "id": "deer",
-    "common_name": "Deer",
+    "common_name": "Red Deer",
     "taxon_group": "mammal",
     "regions": [
       "terrestrial"
     ],
     "habitats": [
-      "forest"
+      "forest",
+      "hills"
     ],
     "diet": [
-      "herbivore"
+      "herbivore",
+      "grazer"
     ],
     "domestication": {
-      "domesticated": false
+      "domesticated": false,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Hunted game"
     },
     "behavior": {
       "aggressive": false,
-      "territorial": false,
-      "risk_to_humans": "moderate"
+      "territorial": true,
+      "risk_to_humans": "moderate",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Venison roasted or smoked",
+      "taboo_or_restricted": false
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "meat",
+        "notes": "Dressed stag",
+        "yield_unit": "kg",
+        "avg_yield": 60,
+        "harvest_method": "wild"
+      },
+      {
+        "type": "hide",
+        "notes": "Tanned into buckskin",
+        "yield_unit": "kg",
+        "avg_yield": 15,
+        "harvest_method": "wild"
+      },
+      {
+        "type": "antler",
+        "notes": "Shed antlers carved",
+        "yield_unit": "kg",
+        "avg_yield": 5,
+        "harvest_method": "wild"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "stag",
+      "female": "hind",
+      "juvenile": "fawn",
+      "collective": "herd"
+    },
+    "narrative": "Foresters track deer through royal woods; only nobles may hunt with bow, prompting peasants to poach under cover of darkness. Antlers nailed above doors are said to ward off lightning.",
+    "alt_names": [],
+    "food_sources": [
+      "grass",
+      "leaves",
+      "acorns"
+    ],
+    "disease_risks": [
+      "lyme disease"
+    ],
+    "size_class": "medium",
+    "mating_season": "autumn",
+    "gestation_period": "230 days",
+    "incubation_period": "",
+    "reproduction_notes": "Hinds calve one fawn each spring",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "3 months",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "3 years"
   },
   {
     "id": "dog",
@@ -1172,32 +1246,73 @@
       "terrestrial"
     ],
     "habitats": [
-      "urban"
+      "farmland",
+      "urban",
+      "forest"
     ],
     "diet": [
-      "omnivore"
+      "omnivore",
+      "carnivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": true,
+      "draft_or_mount": false,
+      "notes": "Guarding and hunting companion"
     },
     "behavior": {
-      "aggressive": false,
-      "territorial": false,
-      "risk_to_humans": "low"
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "moderate",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Consumed in hardship; generally taboo",
+      "taboo_or_restricted": true
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "hide",
+        "notes": "Tanned for pelts",
+        "yield_unit": "kg",
+        "avg_yield": 5,
+        "harvest_method": "either"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "dog",
+      "female": "bitch",
+      "juvenile": "puppy",
+      "collective": "pack"
+    },
+    "narrative": "Dogs lounge by hearths yet leap to chase wolves from flocks. Guild rules require collars bearing the lord's seal, leading some outlaws to file counterfeit tags for their curs.",
+    "alt_names": [
+      "Hound"
+    ],
+    "food_sources": [
+      "kitchen scraps",
+      "game",
+      "carrion"
+    ],
+    "disease_risks": [
+      "rabies"
+    ],
+    "size_class": "medium",
+    "mating_season": "spring",
+    "gestation_period": "63 days",
+    "incubation_period": "",
+    "reproduction_notes": "Litters of six born twice yearly",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "2 months",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "3 years"
   },
   {
     "id": "dolphin",
@@ -1224,13 +1339,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1242,32 +1354,73 @@
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "hills",
+      "semi_arid_scrublands"
     ],
     "diet": [
-      "herbivore"
+      "herbivore",
+      "grazer"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": true,
+      "draft_or_mount": true,
+      "notes": "Sure-footed pack beast"
     },
     "behavior": {
       "aggressive": false,
       "territorial": false,
-      "risk_to_humans": "low"
+      "risk_to_humans": "moderate",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
-        "meat"
-      ]
+        "meat",
+        "milk"
+      ],
+      "preparation_notes": "Rarely eaten; milk prized for cures",
+      "taboo_or_restricted": true
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "hide",
+        "notes": "Used for drums",
+        "yield_unit": "kg",
+        "avg_yield": 20,
+        "harvest_method": "either"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "jack",
+      "female": "jenny",
+      "juvenile": "foal",
+      "collective": "drove"
+    },
+    "narrative": "Patient donkeys ferry goods along mountain paths where wagons cannot go. Some smugglers load them with contraband beneath sacks of grain, relying on their braying to signal danger.",
+    "alt_names": [
+      "Ass"
+    ],
+    "food_sources": [
+      "brush",
+      "hay"
+    ],
+    "disease_risks": [
+      "equine influenza"
+    ],
+    "size_class": "medium",
+    "mating_season": "summer",
+    "gestation_period": "12 months",
+    "incubation_period": "",
+    "reproduction_notes": "Jennies foal every other year",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "5 months",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "5 years"
   },
   {
     "id": "dove",
@@ -1294,13 +1447,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1308,53 +1458,69 @@
     "id": "draft-horse",
     "common_name": "Draft Horse",
     "alt_names": [
-      "Cart horse",
-      "Plow horse"
+      "Shire"
     ],
     "taxon_group": "mammal",
     "regions": [
-      "terrestrial",
-      "urban"
+      "terrestrial"
     ],
     "habitats": [
       "farmland",
-      "urban",
-      "meadow"
+      "grassland",
+      "forest"
     ],
     "diet": [
-      "herbivore"
+      "herbivore",
+      "grazer"
     ],
     "food_sources": [
       "hay",
-      "oats",
-      "pasture grasses"
+      "pasture grasses",
+      "grain"
     ],
     "domestication": {
       "domesticated": true,
       "trainable": true,
       "draft_or_mount": true,
-      "notes": "Harnessed for plow, cart, and mill."
+      "notes": "Bred for hauling heavy wagons and plows"
     },
     "behavior": {
       "aggressive": false,
       "territorial": false,
-      "risk_to_humans": "low"
+      "risk_to_humans": "moderate",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
-      "edible": false
+      "edible": true,
+      "parts": [
+        "meat",
+        "milk"
+      ],
+      "preparation_notes": "Meat often stewed; milk fermented as kumis",
+      "taboo_or_restricted": true
     },
     "byproducts": [
       {
-        "type": "labor",
-        "notes": "Draft power"
-      },
-      {
         "type": "hide",
-        "harvest_method": "wild"
+        "notes": "Tanned into durable leather",
+        "yield_unit": "kg",
+        "avg_yield": 40,
+        "harvest_method": "either"
       },
       {
         "type": "bone",
-        "harvest_method": "wild"
+        "notes": "Leg bones carved into tools",
+        "yield_unit": "kg",
+        "avg_yield": 15,
+        "harvest_method": "either"
+      },
+      {
+        "type": "milk",
+        "notes": "Mares milked for foal; surplus fermented",
+        "yield_unit": "L",
+        "avg_yield": 5,
+        "harvest_method": "domesticated"
       }
     ],
     "gendered": {
@@ -1364,42 +1530,108 @@
       "collective": "team"
     },
     "size_class": "large",
-    "narrative": "Broad of shoulder and steady of gait, these giants pull the village’s weight from furrow to market."
+    "narrative": "Towering draft horses haul merchant caravans across the kingdom's plains. Calm but immense, they move slowly until spurred, then drag wagons over muddy roads with relentless patience. Foals whelped in spring are raised by teamsters' guilds who auction the best pairs only once a year, drawing nobles and smugglers alike. Rumors say that a royal edict forbids exporting bloodlines abroad, yet black-market breeders secretly ferry mares through forest passes, risking steep fines and confiscated tack. Old legends warn that disrespecting such beasts invites wagon wheels to splinter at crossroads.",
+    "disease_risks": [
+      "glanders"
+    ],
+    "mating_season": "spring",
+    "gestation_period": "11 months",
+    "incubation_period": "",
+    "reproduction_notes": "Foals born late winter after spring breeding",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "6 months for foal",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "4 years"
   },
   {
     "id": "duck",
     "common_name": "Duck",
     "taxon_group": "bird",
     "regions": [
-      "terrestrial"
+      "wetlands_transitional"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "ponds"
     ],
     "diet": [
-      "omnivore"
+      "omnivore",
+      "insectivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Kept for eggs, meat, and down"
     },
     "behavior": {
       "aggressive": false,
       "territorial": false,
-      "risk_to_humans": "low"
+      "risk_to_humans": "low",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
-        "meat"
-      ]
+        "meat",
+        "egg"
+      ],
+      "preparation_notes": "Roast or stew",
+      "taboo_or_restricted": false
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "egg",
+        "notes": "Laying every other day",
+        "yield_unit": "count",
+        "avg_yield": 180,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "meat",
+        "notes": "Dressed duck",
+        "yield_unit": "kg",
+        "avg_yield": 1.5,
+        "harvest_method": "either"
+      },
+      {
+        "type": "feather",
+        "notes": "Down for bedding",
+        "yield_unit": "g",
+        "avg_yield": 80,
+        "harvest_method": "domesticated"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "drake",
+      "female": "duck",
+      "juvenile": "duckling",
+      "collective": "raft"
+    },
+    "narrative": "Village ponds teem with ducks that gobble slugs from gardens. A chartered fowler claims the right to all wild ducks on feast days, causing disputes when flocks mingle with tame birds.",
+    "alt_names": [],
+    "food_sources": [
+      "grains",
+      "water plants",
+      "insects"
+    ],
+    "disease_risks": [
+      "avian influenza"
+    ],
+    "size_class": "small",
+    "mating_season": "spring",
+    "gestation_period": "",
+    "incubation_period": "28 days",
+    "reproduction_notes": "Hens set on clutches in early spring",
+    "production_cycles": {
+      "egg_laying_frequency": "every other day",
+      "milk_production_duration": "",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "5 months"
   },
   {
     "id": "eagle",
@@ -1426,13 +1658,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1461,13 +1690,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1496,13 +1722,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1531,13 +1754,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1566,13 +1786,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1601,13 +1818,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1636,13 +1850,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1671,13 +1882,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1706,13 +1914,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1741,13 +1946,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1776,13 +1978,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1811,13 +2010,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1846,13 +2042,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1864,32 +2057,85 @@
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "hills"
     ],
     "diet": [
-      "herbivore"
+      "herbivore",
+      "browser"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Kept for milk, meat, and hides"
     },
     "behavior": {
       "aggressive": false,
       "territorial": false,
-      "risk_to_humans": "low"
+      "risk_to_humans": "low",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
-        "meat"
-      ]
+        "meat",
+        "milk"
+      ],
+      "preparation_notes": "Chevon stewed; milk made into tangy cheeses",
+      "taboo_or_restricted": false
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "milk",
+        "notes": "Milked twice daily",
+        "yield_unit": "L",
+        "avg_yield": 3,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "meat",
+        "notes": "Yearling carcass",
+        "yield_unit": "kg",
+        "avg_yield": 20,
+        "harvest_method": "either"
+      },
+      {
+        "type": "hide",
+        "notes": "Tough skin for parchment",
+        "yield_unit": "kg",
+        "avg_yield": 5,
+        "harvest_method": "either"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "buck",
+      "female": "doe",
+      "juvenile": "kid",
+      "collective": "tribe"
+    },
+    "narrative": "Goats clamber over stone fences and nibble any leaf within reach. Their hardy bellies make them favorites of hill folk, though town elders levy fines on herders who let them roam the herb gardens.",
+    "alt_names": [],
+    "food_sources": [
+      "shrubs",
+      "weeds",
+      "kitchen scraps"
+    ],
+    "disease_risks": [
+      "brucellosis"
+    ],
+    "size_class": "medium",
+    "mating_season": "autumn",
+    "gestation_period": "150 days",
+    "incubation_period": "",
+    "reproduction_notes": "Does commonly twin after five months",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "8 months",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "1 year"
   },
   {
     "id": "goldfinch",
@@ -1916,13 +2162,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -1931,35 +2174,87 @@
     "common_name": "Goose",
     "taxon_group": "bird",
     "regions": [
-      "terrestrial"
+      "wetlands_transitional"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "marshes"
     ],
     "diet": [
-      "omnivore"
+      "herbivore",
+      "grazer"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Raised for meat, eggs, and guard duty"
     },
     "behavior": {
-      "aggressive": false,
-      "territorial": false,
-      "risk_to_humans": "low"
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "low",
+      "nocturnal": false,
+      "migratory": true
     },
     "edibility": {
       "edible": true,
       "parts": [
-        "meat"
-      ]
+        "meat",
+        "egg"
+      ],
+      "preparation_notes": "Roasted for winter feasts",
+      "taboo_or_restricted": false
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "egg",
+        "notes": "Laid weekly",
+        "yield_unit": "count",
+        "avg_yield": 40,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "meat",
+        "notes": "Dressed goose",
+        "yield_unit": "kg",
+        "avg_yield": 3.5,
+        "harvest_method": "either"
+      },
+      {
+        "type": "feather",
+        "notes": "Quills for writing",
+        "yield_unit": "g",
+        "avg_yield": 120,
+        "harvest_method": "domesticated"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "gander",
+      "female": "goose",
+      "juvenile": "gosling",
+      "collective": "gaggle"
+    },
+    "narrative": "Geese patrol manor yards, honking at strangers and alerting guards. A royal decree exempts a white goose kept by the cathedral from all taxes, leading farmers to paint their birds before assessments.",
+    "alt_names": [],
+    "food_sources": [
+      "grass",
+      "grain"
+    ],
+    "disease_risks": [
+      "avian cholera"
+    ],
+    "size_class": "medium",
+    "mating_season": "spring",
+    "gestation_period": "",
+    "incubation_period": "30 days",
+    "reproduction_notes": "Pairs mate for life and defend nests fiercely",
+    "production_cycles": {
+      "egg_laying_frequency": "weekly",
+      "milk_production_duration": "",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "8 months"
   },
   {
     "id": "grayling",
@@ -1986,13 +2281,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2021,13 +2313,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2056,13 +2345,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2091,13 +2377,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2126,13 +2409,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2161,13 +2441,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2196,13 +2473,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2231,13 +2505,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2266,13 +2537,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2301,13 +2569,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2336,13 +2601,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2371,13 +2633,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2389,32 +2648,61 @@
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "forest"
     ],
     "diet": [
       "herbivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Kept in hives for honey and wax"
     },
     "behavior": {
-      "aggressive": false,
-      "territorial": false,
-      "risk_to_humans": "low"
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "moderate",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
-        "meat"
-      ]
+        "honey",
+        "larvae"
+      ],
+      "preparation_notes": "Honey eaten raw; larvae roasted",
+      "taboo_or_restricted": false
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
+    "byproducts": [],
+    "gendered": {
+      "male": "drone",
+      "female": "worker",
+      "juvenile": "larva",
+      "collective": "swarm"
+    },
+    "narrative": "Beekeepers in wicker masks tend skeps behind monastery walls, trading honey to apothecaries and wax to chandlers. Theft of a hive is punished by stocks, yet wandering bears still raid for sweet comb.",
+    "alt_names": [],
+    "food_sources": [
+      "nectar",
+      "pollen"
     ],
-    "gendered": {},
-    "narrative": ""
+    "disease_risks": [
+      "varroa mite"
+    ],
+    "size_class": "tiny",
+    "mating_season": "spring",
+    "gestation_period": "",
+    "incubation_period": "21 days",
+    "reproduction_notes": "Queens swarm in spring to found new hives",
+    "production_cycles": {
+      "egg_laying_frequency": "hundreds daily",
+      "milk_production_duration": "",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "1 year"
   },
   {
     "id": "horse",
@@ -2430,7 +2718,10 @@
       "herbivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Domesticated species."
     },
     "behavior": {
       "aggressive": false,
@@ -2441,13 +2732,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2476,13 +2764,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2511,13 +2796,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2546,13 +2828,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2581,13 +2860,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2616,13 +2892,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2651,13 +2924,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2686,13 +2956,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2721,13 +2988,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2756,13 +3020,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2791,13 +3052,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2826,13 +3084,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2861,13 +3116,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2896,13 +3148,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2931,13 +3180,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -2966,13 +3212,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3001,13 +3244,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3036,13 +3276,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3060,7 +3297,10 @@
       "herbivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Domesticated species."
     },
     "behavior": {
       "aggressive": false,
@@ -3071,13 +3311,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3106,13 +3343,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3127,7 +3361,7 @@
       "ocean_shores"
     ],
     "diet": [
-      "filter_feeder"
+      "carnivore"
     ],
     "domestication": {
       "domesticated": false
@@ -3141,13 +3375,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3176,13 +3407,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3211,13 +3439,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3246,13 +3471,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3281,13 +3503,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3302,7 +3521,7 @@
       "ocean_shores"
     ],
     "diet": [
-      "filter_feeder"
+      "carnivore"
     ],
     "domestication": {
       "domesticated": false
@@ -3316,13 +3535,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3351,13 +3567,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3375,7 +3588,10 @@
       "omnivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Domesticated species."
     },
     "behavior": {
       "aggressive": false,
@@ -3386,13 +3602,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3421,13 +3634,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3456,13 +3666,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3491,50 +3698,104 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
   {
     "id": "pig",
-    "common_name": "Pig",
+    "common_name": "Domestic Pig",
     "taxon_group": "mammal",
     "regions": [
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "forest"
     ],
     "diet": [
       "omnivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Kept for meat and rendered fat"
     },
     "behavior": {
       "aggressive": false,
       "territorial": false,
-      "risk_to_humans": "low"
+      "risk_to_humans": "moderate",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
-        "meat"
-      ]
+        "meat",
+        "fat"
+      ],
+      "preparation_notes": "Cook thoroughly to prevent trichinosis",
+      "taboo_or_restricted": false
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "meat",
+        "notes": "Dressed weight from a market hog",
+        "yield_unit": "kg",
+        "avg_yield": 70,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "fat",
+        "notes": "Rendered into lard",
+        "yield_unit": "kg",
+        "avg_yield": 25,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "hide",
+        "notes": "Cured skin for leather",
+        "yield_unit": "kg",
+        "avg_yield": 10,
+        "harvest_method": "either"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "boar",
+      "female": "sow",
+      "juvenile": "piglet",
+      "collective": "drove"
+    },
+    "narrative": "Village swine root through oak forests and harvest refuse behind inns. Guild law demands iron rings in their noses to keep them from uprooting crops, yet drovers often remove the rings for secret night forage. In winter the butchers' charter limits slaughter to one pig per household, so clandestine smokehouses bloom in barn lofts. Superstitious folk hang a boar's tooth above doorways to ward off famine spirits.",
+    "alt_names": [
+      "Hog",
+      "Swine"
+    ],
+    "food_sources": [
+      "acorns",
+      "kitchen scraps",
+      "roots",
+      "grain"
+    ],
+    "disease_risks": [
+      "swine fever",
+      "trichinosis"
+    ],
+    "size_class": "medium",
+    "mating_season": "winter",
+    "gestation_period": "114 days",
+    "incubation_period": "",
+    "reproduction_notes": "Sows bear litters of about ten piglets after three months, three weeks, and three days gestation",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "2 months for piglets",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "7 months"
   },
   {
     "id": "pigeon",
@@ -3550,7 +3811,10 @@
       "herbivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Domesticated species."
     },
     "behavior": {
       "aggressive": false,
@@ -3561,13 +3825,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3596,13 +3857,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3631,13 +3889,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3666,13 +3921,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3701,13 +3953,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3736,13 +3985,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3754,32 +4000,75 @@
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "grassland"
     ],
     "diet": [
       "herbivore"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Kept in warrens for meat and fur"
     },
     "behavior": {
       "aggressive": false,
       "territorial": false,
-      "risk_to_humans": "low"
+      "risk_to_humans": "low",
+      "nocturnal": true,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Stewed with herbs",
+      "taboo_or_restricted": false
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "meat",
+        "notes": "Fryer weight",
+        "yield_unit": "kg",
+        "avg_yield": 1.2,
+        "harvest_method": "either"
+      },
+      {
+        "type": "fur",
+        "notes": "Soft pelts",
+        "yield_unit": "kg",
+        "avg_yield": 0.3,
+        "harvest_method": "either"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "buck",
+      "female": "doe",
+      "juvenile": "kit",
+      "collective": "warren"
+    },
+    "narrative": "Convent gardens harbor countless rabbits for Lenten meals. Poachers snare them despite the reeve's traps, claiming spirits free any beast taken on a saint's day.",
+    "alt_names": [],
+    "food_sources": [
+      "clover",
+      "garden vegetables"
+    ],
+    "disease_risks": [
+      "myxomatosis"
+    ],
+    "size_class": "small",
+    "mating_season": "spring",
+    "gestation_period": "31 days",
+    "incubation_period": "",
+    "reproduction_notes": "Does kindle litters monthly in warm seasons",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "1 month",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "3 months"
   },
   {
     "id": "rat",
@@ -3806,13 +4095,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3841,13 +4127,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3876,13 +4159,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3911,13 +4191,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3946,13 +4223,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -3981,13 +4255,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4002,7 +4273,7 @@
       "open_ocean"
     ],
     "diet": [
-      "filter_feeder"
+      "carnivore"
     ],
     "domestication": {
       "domesticated": false
@@ -4016,13 +4287,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4037,7 +4305,7 @@
       "ocean_shores"
     ],
     "diet": [
-      "filter_feeder"
+      "carnivore"
     ],
     "domestication": {
       "domesticated": false
@@ -4051,13 +4319,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4086,13 +4351,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4121,13 +4383,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4156,13 +4415,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4191,50 +4447,102 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
   {
     "id": "sheep",
-    "common_name": "Sheep",
+    "common_name": "Domestic Sheep",
     "taxon_group": "mammal",
     "regions": [
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "grassland",
+      "hills"
     ],
     "diet": [
-      "herbivore"
+      "herbivore",
+      "grazer"
     ],
     "domestication": {
-      "domesticated": true
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Raised for wool, milk, and mutton"
     },
     "behavior": {
       "aggressive": false,
       "territorial": false,
-      "risk_to_humans": "low"
+      "risk_to_humans": "low",
+      "nocturnal": false,
+      "migratory": false
     },
     "edibility": {
       "edible": true,
       "parts": [
-        "meat"
-      ]
+        "meat",
+        "milk"
+      ],
+      "preparation_notes": "Lamb roasted or stewed",
+      "taboo_or_restricted": false
     },
     "byproducts": [
       {
-        "type": "other"
+        "type": "fur",
+        "notes": "Shorn once per year",
+        "yield_unit": "kg",
+        "avg_yield": 3,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "milk",
+        "notes": "Ewes milked after lambing",
+        "yield_unit": "L",
+        "avg_yield": 150,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "meat",
+        "notes": "Carcass from a yearling lamb",
+        "yield_unit": "kg",
+        "avg_yield": 25,
+        "harvest_method": "either"
       }
     ],
-    "gendered": {},
-    "narrative": ""
+    "gendered": {
+      "male": "ram",
+      "female": "ewe",
+      "juvenile": "lamb",
+      "collective": "flock"
+    },
+    "narrative": "Sheep graze the misty downs in docile flocks, watched by youths with slings. Each spring the shearers' guild travels village to village, trimming fleeces into billowy piles sold to dyers. Lords tax every tenth fleece, though smugglers felt-walk contraband bales across moors by night. Folktales warn that a lamb born with two heads foretells harsh winters, so shepherds keep a close count during lambing season.",
+    "alt_names": [],
+    "food_sources": [
+      "pasture grasses",
+      "hay",
+      "shrubs"
+    ],
+    "disease_risks": [
+      "foot rot",
+      "sheep pox"
+    ],
+    "size_class": "medium",
+    "mating_season": "autumn",
+    "gestation_period": "152 days",
+    "incubation_period": "",
+    "reproduction_notes": "Ewes usually birth one or two lambs in early spring after autumn breeding",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "4 months for lamb",
+      "wool_shearing_cycle": "yearly"
+    },
+    "butchering_age": "1 year"
   },
   {
     "id": "shrew",
@@ -4261,13 +4569,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4296,13 +4601,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4331,13 +4633,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4366,13 +4665,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4401,13 +4697,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4436,13 +4729,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4471,13 +4761,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4506,13 +4793,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4541,13 +4825,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4576,13 +4857,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4611,13 +4889,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4646,13 +4921,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4681,13 +4953,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4716,13 +4985,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4751,13 +5017,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4786,13 +5049,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4821,13 +5081,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4856,13 +5113,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4891,13 +5145,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4926,13 +5177,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4961,13 +5209,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -4996,13 +5241,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -5031,13 +5273,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -5052,7 +5291,7 @@
       "open_ocean"
     ],
     "diet": [
-      "filter_feeder"
+      "carnivore"
     ],
     "domestication": {
       "domesticated": false
@@ -5066,13 +5305,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -5101,13 +5337,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -5136,13 +5369,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -5171,13 +5401,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -5206,13 +5433,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   },
@@ -5241,13 +5465,10 @@
       "edible": true,
       "parts": [
         "meat"
-      ]
+      ],
+      "preparation_notes": "Cook thoroughly."
     },
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "gendered": {},
     "narrative": ""
   }

@@ -11,11 +11,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -30,11 +26,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -49,11 +41,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -68,11 +56,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -87,11 +71,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -106,11 +86,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -118,14 +94,11 @@
     "common_name": "Apple Tree",
     "growth_form": "tree",
     "regions": [
-      "terrestrial",
-      "urban"
+      "terrestrial"
     ],
     "habitats": [
       "farmland",
-      "forest",
-      "urban",
-      "hills"
+      "forest"
     ],
     "cultivated": true,
     "edible": true,
@@ -133,33 +106,50 @@
       "fruit"
     ],
     "medicinal": false,
-    "toxic": false,
+    "toxic": true,
     "culinary_uses": [
-      "fruit",
+      "fresh eating",
       "cider",
-      "pie"
+      "baking"
     ],
     "byproducts": [
       {
-        "type": "fruit",
-        "yield_unit": "dozen",
-        "harvest_season": "autumn"
+        "type": "wood",
+        "notes": "Pruned branches and old trunks used for carving and smoke",
+        "yield_unit": "kg",
+        "avg_yield": 30,
+        "harvest_season": "winter"
       },
       {
-        "type": "wood",
-        "notes": "hardwood"
+        "type": "leaf",
+        "notes": "Fallen leaves fed to livestock",
+        "yield_unit": "kg",
+        "avg_yield": 20,
+        "harvest_season": "autumn"
       }
     ],
-    "seasonality": "Blossom in spring; fruit in late summer to autumn.",
-    "narrative": "Boughs bow with sweet red fruit come harvest, filling cellars and press alike.",
+    "seasonality": "Deciduous; flowers in spring, fruit ripens in autumn",
+    "narrative": "Apple trees line the valley's terraces, their spring blossoms drawing bees from miles away. Farmers graft favored varieties onto hardy rootstock, tending the orchard for five years before the first true harvest. In autumn, the Fruit-Tenders Guild inspects every barrel of cider and collects a tithe, punishing smuggling with confiscation of presses. Local folklore says that burying a wormy apple beneath your doorstep wards off roving spirits, so villagers trade bruised fruit at market despite the guild's complaints. Some elders claim the practice keeps winter famine at bay.",
     "tiers": {
       "food_tier": [
-        "Low Inn",
-        "Common",
-        "Fine",
-        "High Table"
-      ]
-    }
+        "common",
+        "fine",
+        "high table"
+      ],
+      "luxury_tier": []
+    },
+    "alt_names": [],
+    "toxicity_notes": "Seeds contain cyanogenic glycosides; avoid large quantities",
+    "foraging_notes": "Grafted varieties persist in abandoned orchards",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "5 years to first fruit",
+    "companion_crops": [
+      "chives",
+      "clover"
+    ],
+    "rotation_relationships": "Orchards with legume ground cover enrich soil",
+    "fallow_notes": "Prune annually; replant after 25 years to rejuvenate grove"
   },
   {
     "id": "ash",
@@ -173,11 +163,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -192,11 +178,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -207,16 +189,55 @@
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "grassland"
     ],
     "cultivated": true,
     "edible": true,
     "byproducts": [
       {
-        "type": "other"
+        "type": "grain",
+        "notes": "Pearled barley",
+        "yield_unit": "g",
+        "avg_yield": 30,
+        "harvest_season": "summer"
+      },
+      {
+        "type": "fiber",
+        "notes": "Used for fodder or thatch",
+        "yield_unit": "g",
+        "avg_yield": 90,
+        "harvest_season": "summer"
       }
     ],
-    "narrative": ""
+    "narrative": "Barley brewers fill casks for taverns, while poorer folk bake coarse loaves. A levy on malt drives some to hide sacks beneath straw to dodge the ale-tax.",
+    "alt_names": [],
+    "edible_parts": [
+      "grain"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "ale",
+      "porridge"
+    ],
+    "foraging_notes": "Wild barley persists along field margins",
+    "seasonality": "Annual cereal; sown in spring and reaped in late summer",
+    "sowing_season": "spring",
+    "harvest_season": "summer",
+    "growth_duration": "4 months",
+    "companion_crops": [
+      "peas"
+    ],
+    "rotation_relationships": "Alternated with legumes",
+    "fallow_notes": "Fields rest after two grain years",
+    "tiers": {
+      "food_tier": [
+        "common"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "bay-laurel",
@@ -230,11 +251,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -249,11 +266,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -268,11 +281,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -287,11 +296,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -306,11 +311,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -325,11 +326,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -344,11 +341,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -363,11 +356,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -382,11 +371,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -401,11 +386,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -420,11 +401,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -439,11 +416,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -458,11 +431,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -477,11 +446,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -489,44 +454,59 @@
     "common_name": "Cabbage",
     "growth_form": "herb",
     "regions": [
-      "terrestrial",
-      "urban"
+      "terrestrial"
     ],
     "habitats": [
       "farmland",
-      "urban",
-      "grassland"
+      "hills"
     ],
     "cultivated": true,
     "edible": true,
     "edible_parts": [
       "leaf"
     ],
-    "medicinal": false,
+    "medicinal": true,
     "toxic": false,
     "culinary_uses": [
       "stew",
-      "pickle",
-      "pottage"
+      "pickle"
     ],
     "byproducts": [
       {
         "type": "leaf",
-        "yield_unit": "heads/season",
-        "avg_yield": 3,
+        "notes": "Outer leaves fed to livestock",
+        "yield_unit": "kg",
+        "avg_yield": 1,
         "harvest_season": "autumn"
+      },
+      {
+        "type": "seed",
+        "notes": "Saved for future plantings",
+        "yield_unit": "g",
+        "avg_yield": 5,
+        "harvest_season": "summer"
       }
     ],
-    "seasonality": "Sown spring; heads in late summer to autumn.",
-    "narrative": "Humble greens bound in tight heads; a staple for broth pots, salted barrels, and winter fare.",
+    "seasonality": "Biennial brassica harvested for heads in first year",
+    "narrative": "Cabbage patches ring many a cottage, their broad leaves glistening with morning dew. Housewives shred surplus heads for pickling crocks, while peddlers hawk brined leaves to travelers. The city levies a small tax on each cart entering the gate, so some farmers smuggle baskets hidden beneath firewood. Folklore insists a cabbage planted on the new moon grows sweetest.",
     "tiers": {
       "food_tier": [
-        "Low Inn",
-        "Common",
-        "Fine",
-        "High Table"
-      ]
-    }
+        "common"
+      ],
+      "luxury_tier": []
+    },
+    "alt_names": [],
+    "toxicity_notes": "",
+    "foraging_notes": "Wild forms cling to rocky coastal soils",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "4 months to heading",
+    "companion_crops": [
+      "dill",
+      "onion"
+    ],
+    "rotation_relationships": "Rotate with legumes and roots to deter pests",
+    "fallow_notes": "Avoid planting brassicas in same bed for three years"
   },
   {
     "id": "caraway",
@@ -540,12 +520,65 @@
     ],
     "cultivated": true,
     "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "carrot",
+    "common_name": "Carrot",
+    "alt_names": [],
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": [
+      "root"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "stew",
+      "raw"
+    ],
+    "foraging_notes": "Wild ancestors bear white roots",
     "byproducts": [
       {
-        "type": "other"
+        "type": "root",
+        "notes": "Sweet taproot",
+        "yield_unit": "kg",
+        "avg_yield": 0.2,
+        "harvest_season": "autumn"
+      },
+      {
+        "type": "seed",
+        "notes": "Saved for next sowing",
+        "yield_unit": "g",
+        "avg_yield": 2,
+        "harvest_season": "summer"
       }
     ],
-    "narrative": ""
+    "seasonality": "Biennial grown as annual",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "4 months",
+    "companion_crops": [
+      "onion"
+    ],
+    "rotation_relationships": "Alternated with legumes",
+    "fallow_notes": "",
+    "narrative": "Orange carrots are favored by nobles, though common folk still grow purple varieties. Carrot thieves often nibble tops to test sweetness before pilfering roots.",
+    "tiers": {
+      "food_tier": [
+        "common"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "carrots",
@@ -559,11 +592,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -578,11 +607,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -597,11 +622,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -621,26 +642,20 @@
     "cultivated": false,
     "edible": true,
     "edible_parts": [
-      "mushroom"
+      "fruiting body"
     ],
     "medicinal": false,
     "toxic": false,
     "foraging_notes": "Fruiting after rains; avoid false look-alikes.",
-    "byproducts": [
-      {
-        "type": "mushroom",
-        "yield_unit": "basket",
-        "harvest_season": "summer"
-      }
-    ],
+    "byproducts": [],
     "seasonality": "Summer to early autumn after wet weather.",
     "narrative": "Golden trumpets rising from leaf-litter; a forest prize with a rich, peppery scent.",
     "tiers": {
       "food_tier": [
-        "Low Inn",
-        "Common",
-        "Fine",
-        "High Table"
+        "common",
+        "common",
+        "fine",
+        "high table"
       ]
     }
   },
@@ -656,11 +671,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -675,11 +686,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -694,11 +701,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -713,11 +716,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -732,11 +731,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -751,11 +746,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -770,11 +761,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -789,11 +776,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -808,11 +791,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -827,11 +806,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -846,11 +821,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -865,11 +836,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -884,11 +851,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -903,11 +866,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -922,11 +881,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -941,11 +896,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -960,11 +911,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -979,11 +926,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -998,11 +941,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1017,11 +956,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1036,11 +971,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1055,11 +986,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1074,11 +1001,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1093,11 +1016,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1112,11 +1031,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1131,11 +1046,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1150,11 +1061,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1169,11 +1076,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1190,10 +1093,46 @@
     "edible": true,
     "byproducts": [
       {
-        "type": "other"
+        "type": "seed",
+        "notes": "Linseed",
+        "yield_unit": "g",
+        "avg_yield": 40,
+        "harvest_season": "summer"
+      },
+      {
+        "type": "fiber",
+        "notes": "Linen fiber",
+        "yield_unit": "g",
+        "avg_yield": 60,
+        "harvest_season": "summer"
       }
     ],
-    "narrative": ""
+    "narrative": "Flax fields bloom blue before harvest, then villagers soak bundles in ponds to loosen fibers. The reeve counts every bundle to tax linen weavers.",
+    "alt_names": [],
+    "edible_parts": [
+      "seed"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "oil",
+      "porridge"
+    ],
+    "foraging_notes": "Stems retted for linen",
+    "seasonality": "Annual herb",
+    "sowing_season": "spring",
+    "harvest_season": "summer",
+    "growth_duration": "3 months",
+    "companion_crops": [],
+    "rotation_relationships": "Exhausts soil; follow with manure",
+    "fallow_notes": "",
+    "tiers": {
+      "food_tier": [
+        "common"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "foxglove",
@@ -1207,11 +1146,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1228,10 +1163,49 @@
     "edible": true,
     "byproducts": [
       {
-        "type": "other"
+        "type": "bulb",
+        "notes": "Heads of cloves",
+        "yield_unit": "kg",
+        "avg_yield": 0.2,
+        "harvest_season": "summer"
+      },
+      {
+        "type": "leaf",
+        "notes": "Young scapes",
+        "yield_unit": "kg",
+        "avg_yield": 0.1,
+        "harvest_season": "spring"
       }
     ],
-    "narrative": ""
+    "narrative": "Garlic hangs in bundles over tavern doors to ward off night walkers. Apothecaries distill its juice into tonics sold at market fairs.",
+    "alt_names": [],
+    "edible_parts": [
+      "bulb"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "seasoning",
+      "medicine"
+    ],
+    "foraging_notes": "Strong odor reputed to repel evil",
+    "seasonality": "Planted in autumn, harvested midsummer",
+    "sowing_season": "autumn",
+    "harvest_season": "summer",
+    "growth_duration": "9 months",
+    "companion_crops": [
+      "roses"
+    ],
+    "rotation_relationships": "Repels soil pests",
+    "fallow_notes": "",
+    "tiers": {
+      "food_tier": [
+        "common",
+        "fine"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "gooseberry",
@@ -1245,11 +1219,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1264,11 +1234,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1283,11 +1249,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1302,11 +1264,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1321,11 +1279,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1340,11 +1294,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1359,11 +1309,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1378,11 +1324,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1397,11 +1339,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1416,11 +1354,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1435,11 +1369,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1454,11 +1384,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1473,11 +1399,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1492,11 +1414,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1511,11 +1429,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1530,11 +1444,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1549,11 +1459,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1568,11 +1474,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1587,11 +1489,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1606,11 +1504,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1625,11 +1519,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1644,12 +1534,64 @@
     ],
     "cultivated": true,
     "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "lentil",
+    "common_name": "Lentil",
+    "alt_names": [],
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland",
+      "forest"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": [
+      "seed"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "stew",
+      "bread"
+    ],
+    "foraging_notes": "Thrives in poor soils",
     "byproducts": [
       {
-        "type": "other"
+        "type": "seed",
+        "notes": "Dried lentils",
+        "yield_unit": "g",
+        "avg_yield": 35,
+        "harvest_season": "summer"
+      },
+      {
+        "type": "fiber",
+        "notes": "Fodder",
+        "yield_unit": "g",
+        "avg_yield": 50,
+        "harvest_season": "summer"
       }
     ],
-    "narrative": ""
+    "seasonality": "Annual legume",
+    "sowing_season": "spring",
+    "harvest_season": "summer",
+    "growth_duration": "4 months",
+    "companion_crops": [],
+    "rotation_relationships": "Restores nitrogen",
+    "fallow_notes": "",
+    "narrative": "Monks prize humble lentils for Lenten fare, selling surplus to traveling mercenaries who value the quick-cooking pulse.",
+    "tiers": {
+      "food_tier": [
+        "common"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "lentils",
@@ -1663,11 +1605,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1682,11 +1620,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1701,11 +1635,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1720,11 +1650,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1739,11 +1665,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1758,11 +1680,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1777,11 +1695,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1796,11 +1710,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1815,11 +1725,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1834,11 +1740,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1853,11 +1755,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1872,11 +1770,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1891,11 +1785,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1910,11 +1800,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1929,11 +1815,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1948,11 +1830,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -1963,16 +1841,55 @@
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "hills"
     ],
     "cultivated": true,
     "edible": true,
     "byproducts": [
       {
-        "type": "other"
+        "type": "grain",
+        "notes": "Groats",
+        "yield_unit": "g",
+        "avg_yield": 28,
+        "harvest_season": "summer"
+      },
+      {
+        "type": "fiber",
+        "notes": "Bedding for livestock",
+        "yield_unit": "g",
+        "avg_yield": 85,
+        "harvest_season": "summer"
       }
     ],
-    "narrative": ""
+    "narrative": "Breakfast gruels of oats sustain soldiers on campaign, though nobles sneer it as horse food. Traders sometimes water the grain to cheat weights.",
+    "alt_names": [],
+    "edible_parts": [
+      "grain"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "porridge",
+      "feed"
+    ],
+    "foraging_notes": "Often sown as horse fodder",
+    "seasonality": "Annual; thrives in cool damp soils",
+    "sowing_season": "spring",
+    "harvest_season": "late summer",
+    "growth_duration": "5 months",
+    "companion_crops": [
+      "vetch"
+    ],
+    "rotation_relationships": "Used as break crop",
+    "fallow_notes": "",
+    "tiers": {
+      "food_tier": [
+        "common"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "olives",
@@ -1986,12 +1903,66 @@
     ],
     "cultivated": true,
     "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "onion",
+    "common_name": "Onion",
+    "alt_names": [],
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": [
+      "bulb",
+      "leaf"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "stew",
+      "pickle"
+    ],
+    "foraging_notes": "Pungent smell deters pests",
     "byproducts": [
       {
-        "type": "other"
+        "type": "bulb",
+        "notes": "Storage onions",
+        "yield_unit": "kg",
+        "avg_yield": 0.3,
+        "harvest_season": "autumn"
+      },
+      {
+        "type": "seed",
+        "notes": "Black seed for planting",
+        "yield_unit": "g",
+        "avg_yield": 3,
+        "harvest_season": "summer"
       }
     ],
-    "narrative": ""
+    "seasonality": "Biennial grown as annual",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "5 months",
+    "companion_crops": [
+      "carrot"
+    ],
+    "rotation_relationships": "Rotated with legumes and roots",
+    "fallow_notes": "",
+    "narrative": "Onion braids hang under cottage eaves to dry. Travelers say smelling an onion before battle grants courage, so soldiers tuck bulbs into belts.",
+    "tiers": {
+      "food_tier": [
+        "common"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "onions",
@@ -2005,12 +1976,60 @@
     ],
     "cultivated": true,
     "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "oyster-mushroom",
+    "common_name": "Oyster Mushroom",
+    "alt_names": [
+      "Pleurotus ostreatus"
+    ],
+    "growth_form": "mushroom",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": [
+      "fruiting body"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "stew",
+      "saute"
+    ],
+    "foraging_notes": "Grows on fallen beech logs; avoid toxic look-alikes",
     "byproducts": [
       {
-        "type": "other"
+        "type": "mushroom",
+        "notes": "Spent substrate used to inoculate new logs",
+        "yield_unit": "kg",
+        "avg_yield": 0.1,
+        "harvest_season": "autumn"
       }
     ],
-    "narrative": ""
+    "seasonality": "Fruits in cool, damp weather; indoor beds yield year-round",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "6 weeks from inoculation",
+    "companion_crops": [],
+    "rotation_relationships": "Spent logs composted for vegetable beds",
+    "fallow_notes": "Logs produce for three years before replacement",
+    "narrative": "Oyster mushrooms bloom from damp logs like shelves of gray velvet. Woodland folk cut them with bone knives and carry the harvest to market in woven baskets. The Mycologists' Circle licenses growers, but forest hermits sometimes cultivate hidden beds to trade for salt. A superstition claims eating the first autumn flush grants prophetic dreams.",
+    "tiers": {
+      "food_tier": [
+        "common",
+        "fine"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "pansy",
@@ -2024,11 +2043,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2043,12 +2058,66 @@
     ],
     "cultivated": true,
     "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "pea",
+    "common_name": "Pea",
+    "alt_names": [],
+    "growth_form": "vine",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": [
+      "seed",
+      "fruit"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "pottage",
+      "stew"
+    ],
+    "foraging_notes": "Climbs simple trellises",
     "byproducts": [
       {
-        "type": "other"
+        "type": "seed",
+        "notes": "Dried peas",
+        "yield_unit": "g",
+        "avg_yield": 40,
+        "harvest_season": "summer"
+      },
+      {
+        "type": "fiber",
+        "notes": "Livestock fodder",
+        "yield_unit": "g",
+        "avg_yield": 60,
+        "harvest_season": "summer"
       }
     ],
-    "narrative": ""
+    "seasonality": "Cool-season legume",
+    "sowing_season": "spring",
+    "harvest_season": "summer",
+    "growth_duration": "3 months",
+    "companion_crops": [
+      "barley"
+    ],
+    "rotation_relationships": "Fixes nitrogen for cereals",
+    "fallow_notes": "",
+    "narrative": "Pea plots sprout near every cottage. During festivals children compete to spit peas furthest across the green.",
+    "tiers": {
+      "food_tier": [
+        "common"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "pears",
@@ -2062,11 +2131,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2081,11 +2146,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2100,11 +2161,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2128,21 +2185,15 @@
     "culinary_uses": [
       "spice"
     ],
-    "byproducts": [
-      {
-        "type": "spice",
-        "yield_unit": "sack",
-        "harvest_season": "summer"
-      }
-    ],
+    "byproducts": [],
     "seasonality": "Harvested when berries redden, then dried.",
     "narrative": "Dried berries from far-off vines, black and biting on the tongue; dear in any market.",
     "tiers": {
       "luxury_tier": [
-        "Common",
-        "Fine",
-        "Luxury",
-        "Arcane"
+        "common",
+        "fine",
+        "luxury",
+        "arcane"
       ]
     }
   },
@@ -2158,11 +2209,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2177,11 +2224,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2196,11 +2239,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2215,11 +2254,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2234,11 +2269,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2253,11 +2284,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2272,11 +2299,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2291,11 +2314,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2310,11 +2329,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2329,11 +2344,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2348,11 +2359,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2367,11 +2374,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2386,11 +2389,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2405,11 +2404,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2424,11 +2419,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2443,11 +2434,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2458,55 +2445,108 @@
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "hills"
     ],
     "cultivated": true,
     "edible": true,
     "byproducts": [
       {
-        "type": "other"
+        "type": "grain",
+        "notes": "Rye berries",
+        "yield_unit": "g",
+        "avg_yield": 25,
+        "harvest_season": "summer"
+      },
+      {
+        "type": "fiber",
+        "notes": "Dense thatch",
+        "yield_unit": "g",
+        "avg_yield": 80,
+        "harvest_season": "summer"
       }
     ],
-    "narrative": ""
+    "narrative": "Rye feeds upland villages where wheat fails. Millers watch for dark ergot kernels, lest cursed loaves bring dancer's madness.",
+    "alt_names": [],
+    "edible_parts": [
+      "grain"
+    ],
+    "medicinal": false,
+    "toxic": true,
+    "toxicity_notes": "Ergot-infected heads cause illness",
+    "culinary_uses": [
+      "bread",
+      "beer"
+    ],
+    "foraging_notes": "Hardy grain grown on poor soils",
+    "seasonality": "Winter cereal; sown in autumn and cut midsummer",
+    "sowing_season": "autumn",
+    "harvest_season": "summer",
+    "growth_duration": "8 months",
+    "companion_crops": [],
+    "rotation_relationships": "Follows legumes or fallow",
+    "fallow_notes": "Allows soil to recover from ergot",
+    "tiers": {
+      "food_tier": [
+        "common"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "saffron",
-    "common_name": "Saffron",
+    "common_name": "Saffron Crocus",
     "growth_form": "herb",
     "regions": [
       "terrestrial"
     ],
     "habitats": [
       "farmland",
-      "hills"
+      "grassland"
     ],
     "cultivated": true,
     "edible": true,
     "edible_parts": [
       "flower"
     ],
-    "medicinal": false,
+    "medicinal": true,
     "toxic": false,
     "culinary_uses": [
       "spice"
     ],
     "byproducts": [
       {
-        "type": "spice",
-        "yield_unit": "dram",
+        "type": "dye",
+        "notes": "Petals yield a faint yellow dye",
+        "yield_unit": "g",
+        "avg_yield": 2,
         "harvest_season": "autumn"
       }
     ],
-    "seasonality": "Blooms in autumn, stigmas gathered by hand.",
-    "narrative": "Crimson threads dearer than gold, lending hue and scent to royal fare.",
+    "seasonality": "Blooms in autumn after summer dormancy",
+    "narrative": "Autumn-blooming saffron crocus carpets terraced hillsides in a haze of purple. Each dawn, pickers pluck the three crimson stigmas by hand, racing the sun before petals wilt. Merchant caravans purchase the threads at a premium, yet the Harvesters' Consortium restricts sales to licensed factors, punishing unsanctioned trade. Legends whisper that a single stolen bulb carries a decade of misfortune, so poachers work under masks and false names. During lean winters, villages hoard dried strands to spice thin porridge. Some alchemists barter secret cures for a pinch of the spice.",
     "tiers": {
+      "food_tier": [
+        "high table"
+      ],
       "luxury_tier": [
-        "Common",
-        "Fine",
-        "Luxury",
-        "Arcane"
+        "luxury",
+        "arcane"
       ]
-    }
+    },
+    "alt_names": [
+      "Autumn crocus"
+    ],
+    "toxicity_notes": "",
+    "foraging_notes": "Harvest stigmas at dawn before petals close",
+    "sowing_season": "summer",
+    "harvest_season": "autumn",
+    "growth_duration": "8 weeks from sprout to harvest",
+    "companion_crops": [
+      "grapes"
+    ],
+    "rotation_relationships": "Rotate with cereals to prevent soil exhaustion",
+    "fallow_notes": "Fields rest after four years of continuous saffron"
   },
   {
     "id": "sage",
@@ -2520,11 +2560,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2539,11 +2575,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2558,11 +2590,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2577,11 +2605,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2596,11 +2620,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2615,11 +2635,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2634,11 +2650,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2653,11 +2665,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2672,11 +2680,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2691,11 +2695,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2710,11 +2710,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2729,11 +2725,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2748,11 +2740,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2767,12 +2755,66 @@
     ],
     "cultivated": false,
     "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "turnip",
+    "common_name": "Turnip",
+    "alt_names": [],
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": [
+      "root",
+      "leaf"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "stew",
+      "pickled"
+    ],
+    "foraging_notes": "Leaves fed to livestock",
     "byproducts": [
       {
-        "type": "other"
+        "type": "root",
+        "notes": "Bulbous root",
+        "yield_unit": "kg",
+        "avg_yield": 1,
+        "harvest_season": "autumn"
+      },
+      {
+        "type": "leaf",
+        "notes": "Greens",
+        "yield_unit": "kg",
+        "avg_yield": 0.5,
+        "harvest_season": "summer"
       }
     ],
-    "narrative": ""
+    "seasonality": "Biennial grown as annual",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "3 months",
+    "companion_crops": [
+      "rye"
+    ],
+    "rotation_relationships": "Break crop for cereals",
+    "fallow_notes": "",
+    "narrative": "Turnip lanterns light harvest festivals. The lord claims every tenth cart for his winter stores, so villagers stash roots in forest pits to escape levy.",
+    "tiers": {
+      "food_tier": [
+        "common"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "turnips",
@@ -2786,11 +2828,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2805,11 +2843,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2824,11 +2858,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2843,11 +2873,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2862,11 +2888,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2881,11 +2903,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2896,16 +2914,57 @@
       "terrestrial"
     ],
     "habitats": [
-      "farmland"
+      "farmland",
+      "grassland"
     ],
     "cultivated": true,
     "edible": true,
     "byproducts": [
       {
-        "type": "other"
+        "type": "grain",
+        "notes": "Kernel yield from a single plant",
+        "yield_unit": "g",
+        "avg_yield": 35,
+        "harvest_season": "summer"
+      },
+      {
+        "type": "fiber",
+        "notes": "Stems bundled for thatch or fodder",
+        "yield_unit": "g",
+        "avg_yield": 100,
+        "harvest_season": "summer"
       }
     ],
-    "narrative": ""
+    "narrative": "Rolling fields of wheat wave golden before the midsummer harvest. Village reeves tally each sheaf for the lord's tithe while millers bid on the rest. Smugglers sometimes cut grain at night to avoid the count, hiding sacks beneath straw carts. Tradition holds that the last bundle bound becomes the Harvest King's effigy, paraded at festivals then burned to bless next year's crop.",
+    "alt_names": [],
+    "edible_parts": [
+      "grain"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": [
+      "bread",
+      "porridge",
+      "ale"
+    ],
+    "foraging_notes": "Wild relatives persist along field margins",
+    "seasonality": "Annual cereal; sown in autumn and harvested in early summer",
+    "sowing_season": "autumn",
+    "harvest_season": "summer",
+    "growth_duration": "7 months to grain",
+    "companion_crops": [
+      "peas"
+    ],
+    "rotation_relationships": "Rotated with legumes to replenish soil",
+    "fallow_notes": "Fields lie fallow after two years of cereals",
+    "tiers": {
+      "food_tier": [
+        "common",
+        "fine"
+      ],
+      "luxury_tier": []
+    }
   },
   {
     "id": "wild-celery",
@@ -2919,11 +2978,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2938,11 +2993,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2957,11 +3008,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2976,11 +3023,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -2995,11 +3038,7 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   },
   {
@@ -3014,11 +3053,7 @@
     ],
     "cultivated": false,
     "edible": true,
-    "byproducts": [
-      {
-        "type": "other"
-      }
-    ],
+    "byproducts": [],
     "narrative": ""
   }
 ]
