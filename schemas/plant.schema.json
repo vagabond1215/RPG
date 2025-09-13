@@ -12,7 +12,7 @@
     "habitats": {"type": "array", "items": {"type": "string", "enum": ["coastal","riverlands","lake","wetland","grassland","farmland","forest","hills","mountains","desert","tundra","urban"]}},
     "cultivated": {"type": "boolean"},
     "edible": {"type": "boolean"},
-    "edible_parts": {"type": "array", "items": {"type": "string"}},
+    "edible_parts": {"type": "array", "items": {"type": "string", "enum": ["fruit","nut","seed","grain","leaf","root","tuber","bulb","flower","sap","resin","fiber","wood","bark","oil","spice","herb","dye","medicine","fruiting body"]}},
     "medicinal": {"type": "boolean"},
     "toxic": {"type": "boolean"},
     "toxicity_notes": {"type": "string"},
@@ -25,22 +25,28 @@
         "additionalProperties": false,
         "required": ["type"],
         "properties": {
-          "type": {"type": "string", "enum": ["fruit","nut","seed","grain","leaf","root","tuber","bulb","flower","sap","resin","fiber","wood","bark","oil","spice","herb","dye","medicine","mushroom","algae","other"]},
+          "type": {"type": "string", "enum": ["fruit","nut","seed","grain","leaf","root","tuber","bulb","flower","sap","resin","fiber","wood","bark","oil","spice","herb","dye","medicine","mushroom","algae"]},
           "notes": {"type": "string"},
-          "yield_unit": {"type": "string"},
+          "yield_unit": {"type": "string", "enum": ["kg","g","L","count","bundle","skein","m² thatch"]},
           "avg_yield": {"type": "number"},
           "harvest_season": {"type": "string"}
         }
       }
     },
     "seasonality": {"type": "string"},
+    "sowing_season": {"type": "string"},
+    "harvest_season": {"type": "string"},
+    "growth_duration": {"type": "string"},
+    "companion_crops": {"type": "array", "items": {"type": "string"}},
+    "rotation_relationships": {"type": "string"},
+    "fallow_notes": {"type": "string"},
     "narrative": {"type": "string"},
     "tiers": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "food_tier": {"type": "array", "items": {"type": "string", "enum": ["Low Inn","Common","Fine","High Table"]}},
-        "luxury_tier": {"type": "array", "items": {"type": "string", "enum": ["Common","Fine","Luxury","Arcane"]}}
+        "food_tier": {"type": "array", "items": {"type": "string", "enum": ["common","fine","high table","luxury","arcane"]}},
+        "luxury_tier": {"type": "array", "items": {"type": "string", "enum": ["common","fine","high table","luxury","arcane"]}}
       }
     }
   }
