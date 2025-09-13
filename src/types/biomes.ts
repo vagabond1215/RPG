@@ -40,7 +40,7 @@ export const HABITATS = [
   ...POLAR_ICE_HABITATS,
   ...EXTREME_HABITATS,
   // Anthropogenic or legacy categories
-  "farmland","forest","grassland","hills","urban",
+  "farmland","forest","grassland","hills","urban","riverlands","wetland",
 ] as const;
 export type Habitat = typeof HABITATS[number];
 

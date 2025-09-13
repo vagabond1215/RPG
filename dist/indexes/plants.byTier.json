@@ -3,22 +3,26 @@
     "Low Inn": [
       "cabbage",
       "chanterelle",
-      "apple-tree"
+      "apple-tree",
+      "rice"
     ],
     "Common": [
       "cabbage",
       "chanterelle",
-      "apple-tree"
+      "apple-tree",
+      "rice"
     ],
     "Fine": [
       "cabbage",
       "chanterelle",
-      "apple-tree"
+      "apple-tree",
+      "rice"
     ],
     "High Table": [
       "cabbage",
       "chanterelle",
-      "apple-tree"
+      "apple-tree",
+      "rice"
     ]
   },
   "luxury": {
