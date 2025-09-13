@@ -145,7 +145,7 @@
         "additionalProperties": false,
         "required": ["type"],
         "properties": {
-          "type": {"type": "string", "enum": ["hide","fur","feather","bone","antler","horn","tooth","fat","meat","milk","egg","venom","shell"]},
+          "type": {"type": "string", "enum": ["hide","fur","feather","bone","antler","horn","tooth","fat","meat","milk","egg","chicken egg","duck egg","goose egg","sheep wool","venom","shell"]},
           "notes": {"type": "string"},
           "yield_unit": {"type": "string", "enum": ["kg","g","L","count"]},
           "avg_yield": {"type": "number"},
