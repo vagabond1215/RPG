@@ -1,0 +1,144 @@
+[
+  {
+    "id": "chicken",
+    "common_name": "Chicken",
+    "alt_names": ["Domestic fowl"],
+    "taxon_group": "bird",
+    "regions": ["terrestrial"],
+    "habitats": ["farmland","grassland"],
+    "diet": ["omnivore","insectivore"],
+    "food_sources": ["grain","insects","kitchen scraps"],
+    "domestication": {
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Kept primarily for eggs and meat"
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low",
+      "nocturnal": false,
+      "migratory": false
+    },
+    "edibility": {
+      "edible": true,
+      "parts": ["meat","egg"],
+      "preparation_notes": "Cook thoroughly to avoid illness",
+      "taboo_or_restricted": false
+    },
+    "disease_risks": ["avian influenza"],
+    "byproducts": [
+      {
+        "type": "egg",
+        "notes": "Hens lay almost daily in warm seasons",
+        "yield_unit": "count",
+        "avg_yield": 280,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "meat",
+        "notes": "Dressed weight from a six-month bird",
+        "yield_unit": "kg",
+        "avg_yield": 1.8,
+        "harvest_method": "either"
+      },
+      {
+        "type": "feather",
+        "notes": "Collected after natural molting",
+        "yield_unit": "g",
+        "avg_yield": 50,
+        "harvest_method": "domesticated"
+      }
+    ],
+    "gendered": {
+      "male": "rooster",
+      "female": "hen",
+      "juvenile": "chick",
+      "collective": "flock"
+    },
+    "size_class": "small",
+    "mating_season": "spring",
+    "gestation_period": "",
+    "incubation_period": "21 days",
+    "reproduction_notes": "Hens produce unfertilized eggs year-round; roosters needed for chicks",
+    "production_cycles": {
+      "egg_laying_frequency": "nearly daily",
+      "milk_production_duration": "",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "6 months",
+    "narrative": "The barnyard chicken scratches through village yards from dawn, clucking in constant search of grain and grubs. Hens settle into roosts at dusk, guarded by notoriously irritable roosters. In spring the birds grow prized for their nearly daily eggs, and monks in the nearby abbey barter for surplus to temper their fasting. Yet a law forbids slaughtering laying hens before Midsummer, ensuring steady trade but drawing poachers who try to snatch prized champions for cockfights. Folklore claims their crowing wards off marsh spirits, so villagers place woven charms in each coop."
+  },
+  {
+    "id": "draft-horse",
+    "common_name": "Draft Horse",
+    "alt_names": ["Shire"],
+    "taxon_group": "mammal",
+    "regions": ["terrestrial"],
+    "habitats": ["farmland","grassland","forest"],
+    "diet": ["herbivore","grazer"],
+    "food_sources": ["hay","pasture grasses","grain"],
+    "domestication": {
+      "domesticated": true,
+      "trainable": true,
+      "draft_or_mount": true,
+      "notes": "Bred for hauling heavy wagons and plows"
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate",
+      "nocturnal": false,
+      "migratory": false
+    },
+    "edibility": {
+      "edible": true,
+      "parts": ["meat","milk"],
+      "preparation_notes": "Meat often stewed; milk fermented as kumis",
+      "taboo_or_restricted": true
+    },
+    "disease_risks": ["glanders"],
+    "byproducts": [
+      {
+        "type": "hide",
+        "notes": "Tanned into durable leather",
+        "yield_unit": "kg",
+        "avg_yield": 40,
+        "harvest_method": "either"
+      },
+      {
+        "type": "bone",
+        "notes": "Leg bones carved into tools",
+        "yield_unit": "kg",
+        "avg_yield": 15,
+        "harvest_method": "either"
+      },
+      {
+        "type": "milk",
+        "notes": "Mares milked for foal; surplus fermented",
+        "yield_unit": "L",
+        "avg_yield": 5,
+        "harvest_method": "domesticated"
+      }
+    ],
+    "gendered": {
+      "male": "stallion",
+      "female": "mare",
+      "juvenile": "foal",
+      "collective": "team"
+    },
+    "size_class": "large",
+    "mating_season": "spring",
+    "gestation_period": "11 months",
+    "incubation_period": "",
+    "reproduction_notes": "Foals born late winter after spring breeding",
+    "production_cycles": {
+      "egg_laying_frequency": "",
+      "milk_production_duration": "6 months for foal",
+      "wool_shearing_cycle": ""
+    },
+    "butchering_age": "4 years",
+    "narrative": "Towering draft horses haul merchant caravans across the kingdom's plains. Calm but immense, they move slowly until spurred, then drag wagons over muddy roads with relentless patience. Foals whelped in spring are raised by teamsters' guilds who auction the best pairs only once a year, drawing nobles and smugglers alike. Rumors say that a royal edict forbids exporting bloodlines abroad, yet black-market breeders secretly ferry mares through forest passes, risking steep fines and confiscated tack. Old legends warn that disrespecting such beasts invites wagon wheels to splinter at crossroads."
+  }
+]

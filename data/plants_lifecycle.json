@@ -1,0 +1,83 @@
+[
+  {
+    "id": "apple-tree",
+    "common_name": "Apple Tree",
+    "alt_names": [],
+    "growth_form": "tree",
+    "regions": ["terrestrial"],
+    "habitats": ["farmland","forest"],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": ["fruit"],
+    "medicinal": false,
+    "toxic": true,
+    "toxicity_notes": "Seeds contain cyanogenic glycosides; avoid large quantities",
+    "culinary_uses": ["fresh eating","cider","baking"],
+    "foraging_notes": "Grafted varieties persist in abandoned orchards",
+    "byproducts": [
+      {
+        "type": "timber",
+        "notes": "Pruned branches and old trunks used for carving and smoke",
+        "yield_unit": "kg",
+        "avg_yield": 30,
+        "harvest_season": "winter"
+      },
+      {
+        "type": "fodder",
+        "notes": "Fallen leaves fed to livestock",
+        "yield_unit": "kg",
+        "avg_yield": 20,
+        "harvest_season": "autumn"
+      }
+    ],
+    "seasonality": "Deciduous; flowers in spring, fruit ripens in autumn",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "5 years to first fruit",
+    "companion_crops": ["chives","clover"],
+    "rotation_relationships": "Orchards with legume ground cover enrich soil",
+    "fallow_notes": "Prune annually; replant after 25 years to rejuvenate grove",
+    "narrative": "Apple trees line the valley's terraces, their spring blossoms drawing bees from miles away. Farmers graft favored varieties onto hardy rootstock, tending the orchard for five years before the first true harvest. In autumn, the Fruit-Tenders Guild inspects every barrel of cider and collects a tithe, punishing smuggling with confiscation of presses. Local folklore says that burying a wormy apple beneath your doorstep wards off roving spirits, so villagers trade bruised fruit at market despite the guild's complaints. Some elders claim the practice keeps winter famine at bay.",
+    "tiers": {
+      "food_tier": ["common","fine","high table"],
+      "luxury_tier": []
+    }
+  },
+  {
+    "id": "saffron",
+    "common_name": "Saffron Crocus",
+    "alt_names": ["Autumn crocus"],
+    "growth_form": "herb",
+    "regions": ["terrestrial"],
+    "habitats": ["farmland","semi_arid_scrublands"],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": ["flower"],
+    "medicinal": true,
+    "toxic": false,
+    "toxicity_notes": "",
+    "culinary_uses": ["spice"],
+    "foraging_notes": "Harvest stigmas at dawn before petals close",
+    "byproducts": [
+      {
+        "type": "dye",
+        "notes": "Petals yield a faint yellow dye",
+        "yield_unit": "g",
+        "avg_yield": 2,
+        "harvest_season": "autumn"
+      }
+    ],
+    "seasonality": "Blooms in autumn after summer dormancy",
+    "sowing_season": "summer",
+    "harvest_season": "autumn",
+    "growth_duration": "8 weeks from sprout to harvest",
+    "companion_crops": ["grapes"],
+    "rotation_relationships": "Rotate with cereals to prevent soil exhaustion",
+    "fallow_notes": "Fields rest after four years of continuous saffron",
+    "narrative": "Autumn-blooming saffron crocus carpets terraced hillsides in a haze of purple. Each dawn, pickers pluck the three crimson stigmas by hand, racing the sun before petals wilt. Merchant caravans purchase the threads at a premium, yet the Harvesters' Consortium restricts sales to licensed factors, punishing unsanctioned trade. Legends whisper that a single stolen bulb carries a decade of misfortune, so poachers work under masks and false names. During lean winters, villages hoard dried strands to spice thin porridge. Some alchemists barter secret cures for a pinch of the spice.",
+    "tiers": {
+      "food_tier": ["high table"],
+      "luxury_tier": ["luxury","arcane"]
+    }
+  }
+]
