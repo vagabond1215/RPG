@@ -37,6 +37,7 @@ import {
   JOB_ROLE_DATA,
 } from "./assets/data/buildings.js";
 import { characterBuilds } from "./assets/data/character_builds.js";
+import { shopCategoriesForBuilding, itemsByCategory } from "./assets/data/shop.js";
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -1243,6 +1244,110 @@ const formatHeight = cm => {
 const showBackButton = () => (backButton.style.display = 'inline-flex');
 const hideBackButton = () => (backButton.style.display = 'none');
 
+function addItemToInventory(item) {
+  currentCharacter.inventory = currentCharacter.inventory || [];
+  const existing = currentCharacter.inventory.find(i => i.name === item.name);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    currentCharacter.inventory.push({ ...item, qty: 1 });
+  }
+}
+
+function removeItemFromInventory(name) {
+  const inv = currentCharacter.inventory || [];
+  const idx = inv.findIndex(i => i.name === name);
+  if (idx >= 0) {
+    if (inv[idx].qty > 1) inv[idx].qty -= 1;
+    else inv.splice(idx, 1);
+  }
+}
+
+function showInventoryUI() {
+  showBackButton();
+  const inv = currentCharacter.inventory || [];
+  let html = '<div class="inventory-screen"><h1>Inventory</h1>';
+  if (!inv.length) {
+    html += '<p>Inventory is empty.</p>';
+  } else {
+    html += '<ul>';
+    inv.forEach(item => {
+      html += `<li>${item.name} x${item.qty}</li>`;
+    });
+    html += '</ul>';
+  }
+  html += '</div>';
+  setMainHTML(html);
+}
+
+function renderShopUI(buildingName) {
+  showBackButton();
+  const categories = shopCategoriesForBuilding(buildingName).sells;
+  const sections = categories.map(cat => ({ cat, items: itemsByCategory(cat) }));
+  let html = `<div class="shop-screen"><h1>${buildingName} Shop</h1><p>Funds: ${formatCurrency(currentCharacter.money)}</p>`;
+  if (!sections.length) {
+    html += '<p>No goods for sale.</p></div>';
+    setMainHTML(html);
+    return;
+  }
+  sections.forEach((sec, sIdx) => {
+    html += `<h2>${sec.cat}</h2><ul>`;
+    sec.items.forEach((item, iIdx) => {
+      html += `<li>${item.name} - ${cpToCoins(item.price)} <button data-s="${sIdx}" data-i="${iIdx}">Buy</button></li>`;
+    });
+    html += '</ul>';
+  });
+  html += '</div>';
+  setMainHTML(html);
+  sections.forEach((sec, sIdx) => {
+    sec.items.forEach((item, iIdx) => {
+      const btn = document.querySelector(`button[data-s="${sIdx}"][data-i="${iIdx}"]`);
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const priceIron = convertCurrency(item.price, 'copper', 'coldIron');
+          if (toIron(currentCharacter.money) < priceIron) {
+            alert('Not enough funds');
+            return;
+          }
+          currentCharacter.money = fromIron(toIron(currentCharacter.money) - priceIron);
+          addItemToInventory({ name: item.name, category: sec.cat, price: item.price });
+          renderShopUI(buildingName);
+        });
+      }
+    });
+  });
+}
+
+function renderSellUI(buildingName) {
+  showBackButton();
+  const categories = shopCategoriesForBuilding(buildingName).buys;
+  const inv = currentCharacter.inventory || [];
+  const items = inv.filter(i => categories.includes(i.category));
+  let html = `<div class="shop-screen"><h1>Sell to ${buildingName}</h1><p>Funds: ${formatCurrency(currentCharacter.money)}</p>`;
+  if (!items.length) {
+    html += '<p>They are not interested in your goods.</p></div>';
+    setMainHTML(html);
+    return;
+  }
+  html += '<ul>';
+  items.forEach((item, idx) => {
+    html += `<li>${item.name} x${item.qty} - ${cpToCoins(item.price)} <button data-idx="${idx}">Sell</button></li>`;
+  });
+  html += '</ul></div>';
+  setMainHTML(html);
+  items.forEach((item, idx) => {
+    const btn = document.querySelector(`button[data-idx="${idx}"]`);
+    if (btn) {
+      btn.addEventListener('click', () => {
+        removeItemFromInventory(item.name);
+        const priceIron = convertCurrency(item.price, 'copper', 'coldIron');
+        currentCharacter.money = fromIron(toIron(currentCharacter.money) + priceIron);
+        renderSellUI(buildingName);
+      });
+    }
+  });
+}
+
 const savePreference = (key, value) => {
   if (!currentProfile) return;
   currentProfile.preferences = currentProfile.preferences || {};
@@ -1573,12 +1678,10 @@ function showNavigation() {
           };
         } else if (type === 'interaction') {
             if (action === 'shop') {
-              showBackButton();
-              setMainHTML('<div class="no-character"><h1>Shop not implemented</h1></div>');
+              renderShopUI(pos.building);
               return;
             } else if (action === 'sell') {
-              showBackButton();
-              setMainHTML('<div class="no-character"><h1>Sell not implemented</h1></div>');
+              renderSellUI(pos.building);
               return;
             } else if (action === 'manage') {
               const bData = cityData.buildings[pos.building] || {};
@@ -3087,6 +3190,8 @@ characterMenu.addEventListener('click', e => {
     showCharacterUI();
   } else if (action === 'equipment') {
     showEquipmentUI();
+  } else if (action === 'inventory') {
+    showInventoryUI();
   } else if (action === 'spellbook') {
     showSpellbookUI();
   } else if (action === 'proficiencies') {

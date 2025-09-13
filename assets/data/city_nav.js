@@ -1,5 +1,6 @@
 import { LOCATIONS } from "./locations.js";
 import { defaultEmployeesForBuilding } from "./buildings.js";
+import { shopCategoriesForBuilding } from "./shop.js";
 
 export const CITY_NAV = {
   "Wave's Break": {
@@ -1662,11 +1663,11 @@ function applyBusinessEmployees(nav) {
   if (!city) return;
   Object.entries(city.buildings).forEach(([name, building]) => {
     building.employees = defaultEmployeesForBuilding(name);
-    const baseInteractions = [
-      { name: "Shop", action: "shop" },
-      { name: "Sell", action: "sell" },
-      { name: "Manage", action: "manage" },
-    ];
+    const categories = shopCategoriesForBuilding(name);
+    const baseInteractions = [];
+    if (categories.sells.length) baseInteractions.push({ name: "Shop", action: "shop" });
+    if (categories.buys.length) baseInteractions.push({ name: "Sell", action: "sell" });
+    baseInteractions.push({ name: "Manage", action: "manage" });
     building.interactions = baseInteractions.concat(building.interactions || []);
   });
 }
