@@ -2,108 +2,143 @@
   {
     "id": "chicken",
     "common_name": "Chicken",
-    "alt_names": ["Domestic fowl"],
-    "taxon_group": "bird",
-    "regions": ["terrestrial","urban"],
-    "habitats": ["farmland","urban","meadow","deciduous_forest"],
-    "diet": ["omnivore","insectivore"],
-    "food_sources": ["seeds","kitchen scraps","insects","worms"],
-    "domestication": {"domesticated": true, "trainable": false, "draft_or_mount": false, "notes": "Kept for eggs and meat; easy to pen."},
-    "behavior": {"aggressive": false, "territorial": false, "risk_to_humans": "none", "nocturnal": false},
-    "edibility": {"edible": true, "parts": ["meat","eggs"]},
-    "disease_risks": ["parasites"],
-    "byproducts": [
-      {"type": "egg", "notes": "Daily in season", "yield_unit": "pcs/week", "avg_yield": 5, "harvest_method": "domesticated"},
-      {"type": "meat", "yield_unit": "kg", "harvest_method": "either"},
-      {"type": "feather", "harvest_method": "either"},
-      {"type": "bone", "harvest_method": "either"}
+    "alt_names": [
+      "Domestic fowl"
     ],
-    "gendered": {"male": "rooster", "female": "hen", "juvenile": "chick", "collective": "flock"},
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial",
+      "urban"
+    ],
+    "habitats": [
+      "farmland",
+      "urban",
+      "meadow",
+      "deciduous_forest"
+    ],
+    "diet": [
+      "omnivore",
+      "insectivore"
+    ],
+    "food_sources": [
+      "seeds",
+      "kitchen scraps",
+      "insects",
+      "worms"
+    ],
+    "domestication": {
+      "domesticated": true,
+      "trainable": false,
+      "draft_or_mount": false,
+      "notes": "Kept for eggs and meat; easy to pen."
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "none",
+      "nocturnal": false
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat",
+        "eggs"
+      ]
+    },
+    "disease_risks": [
+      "parasites"
+    ],
+    "byproducts": [
+      {
+        "type": "egg",
+        "notes": "Daily in season",
+        "yield_unit": "pcs/week",
+        "avg_yield": 5,
+        "harvest_method": "domesticated"
+      },
+      {
+        "type": "meat",
+        "yield_unit": "kg",
+        "harvest_method": "either"
+      },
+      {
+        "type": "feather",
+        "harvest_method": "either"
+      },
+      {
+        "type": "bone",
+        "harvest_method": "either"
+      }
+    ],
+    "gendered": {
+      "male": "rooster",
+      "female": "hen",
+      "juvenile": "chick",
+      "collective": "flock"
+    },
     "size_class": "small",
-    "mating_season": "spring (March–May)",
-    "gestation_period": "21 days",
-    "reproduction_notes": "Hens lay clutches of a dozen eggs; broody hens hatch in three weeks.",
-    "production_cycles": {"egg_laying_frequency": "nearly daily in spring and summer", "milk_production_duration": "", "wool_shearing_cycle": ""},
-    "butchering_age": "6–12 months for table birds",
-    "narrative": "From sunrise the village flock struts between huts, scratching dung heaps for beetles and spilled grain. Hens fill wicker baskets with eggs that tithe collectors count by the dozen, while roosters rule dunghill thrones and crow warnings at strangers. Winter feed is dear, so culls happen before Yule, and gossip claims poachers earn whipping posts for stealing church birds. Children charm tame hens with crumbs, yet tales tell of witches who borrow a black rooster for midnight rites. Come feast days, a plump capon simmered with herbs marks prosperity."
+    "narrative": "Common yard fowl scratching at dawn for seeds and beetles; prized for steady eggs and a pot on cold nights."
   },
   {
     "id": "draft-horse",
     "common_name": "Draft Horse",
-    "alt_names": ["Cart horse","Plow horse"],
-    "taxon_group": "mammal",
-    "regions": ["terrestrial","urban"],
-    "habitats": ["farmland","urban","meadow"],
-    "diet": ["herbivore"],
-    "food_sources": ["hay","oats","pasture grasses"],
-    "domestication": {"domesticated": true, "trainable": true, "draft_or_mount": true, "notes": "Harnessed for plow, cart, and mill."},
-    "behavior": {"aggressive": false, "territorial": false, "risk_to_humans": "low"},
-    "edibility": {"edible": false},
-    "byproducts": [
-      {"type": "labor", "notes": "Draft power"},
-      {"type": "hide", "harvest_method": "wild"},
-      {"type": "bone", "harvest_method": "wild"}
+    "alt_names": [
+      "Cart horse",
+      "Plow horse"
     ],
-    "gendered": {"male": "stallion", "female": "mare", "juvenile": "foal", "collective": "team"},
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial",
+      "urban"
+    ],
+    "habitats": [
+      "farmland",
+      "urban",
+      "meadow"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "food_sources": [
+      "hay",
+      "oats",
+      "pasture grasses"
+    ],
+    "domestication": {
+      "domesticated": true,
+      "trainable": true,
+      "draft_or_mount": true,
+      "notes": "Harnessed for plow, cart, and mill."
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [
+      {
+        "type": "labor",
+        "notes": "Draft power"
+      },
+      {
+        "type": "hide",
+        "harvest_method": "wild"
+      },
+      {
+        "type": "bone",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {
+      "male": "stallion",
+      "female": "mare",
+      "juvenile": "foal",
+      "collective": "team"
+    },
     "size_class": "large",
-    "mating_season": "late spring (April–June)",
-    "gestation_period": "340 days",
-    "reproduction_notes": "Mares foal once every other year when feed is plentiful.",
-    "production_cycles": {"egg_laying_frequency": "", "milk_production_duration": "6 months after foaling", "wool_shearing_cycle": ""},
-    "butchering_age": "15 years if lamed",
-    "narrative": "Broad-chested horses pull the plows that bite new furrows each spring, their iron-shod hooves churning mire to fertile loam. Guild charters decree which farms may hire them, and millers keep a stable for carts bearing grain and ale casks. A lame beast sells for glue and leather, so villagers bless harness bells against ill luck. Come autumn fairs, breeders parade towering stallions, demanding silver from nobles seeking war mounts. When famine strikes, whispers spread of desperate folk stewing horseflesh, a grim meal that invites clerical censure yet keeps freezing families alive."
-  },
-  {
-    "id": "arctic-hare",
-    "common_name": "Arctic Hare",
-    "alt_names": ["Polar hare"],
-    "taxon_group": "mammal",
-    "regions": ["polar_ice"],
-    "habitats": ["arctic_tundra","snowfields"],
-    "diet": ["herbivore"],
-    "food_sources": ["lichen","willow twigs","moss"],
-    "domestication": {"domesticated": false, "trainable": false, "draft_or_mount": false, "notes": "Hunted for meat and fur"},
-    "behavior": {"aggressive": false, "territorial": false, "risk_to_humans": "none", "nocturnal": false, "migratory": true},
-    "edibility": {"edible": true, "parts": ["meat"], "preparation_notes": "Stewed with root vegetables", "taboo_or_restricted": false},
-    "disease_risks": ["tularemia"],
-    "byproducts": [
-      {"type": "meat", "yield_unit": "kg", "avg_yield": 3, "harvest_method": "wild"},
-      {"type": "fur", "yield_unit": "pelt", "avg_yield": 1, "harvest_method": "wild"}
-    ],
-    "gendered": {"male": "buck", "female": "doe", "juvenile": "leveret", "collective": "drove"},
-    "size_class": "small",
-    "mating_season": "late winter (February–March)",
-    "gestation_period": "50 days",
-    "reproduction_notes": "2–4 leverets per litter; multiple litters during the brief summer.",
-    "production_cycles": {"egg_laying_frequency": "", "milk_production_duration": "1 month", "wool_shearing_cycle": ""},
-    "butchering_age": "first summer after birth",
-    "narrative": "Snowshoe-fast hares skim wind-scoured tundra, turning blue shadows as auroras dance overhead. Hunters stalk their tracks when meat runs thin, snaring them with rawhide lines and blessing pelts for warmth. The white fur fetches coin in southern fairs, so smugglers lurk on sled trails despite patrols by the jarl’s men. Folktales warn that spirits of starving winters ride in hare shapes to test hospitality; refusing a share curses a household with blight. When spring melts drifts, leverets scatter and disappear, leaving barren hills until the first flurries whisper their return."
-  },
-  {
-    "id": "river-carp",
-    "common_name": "River Carp",
-    "alt_names": ["Common carp"],
-    "taxon_group": "fish",
-    "regions": ["aquatic"],
-    "habitats": ["rivers","lakes","ponds"],
-    "diet": ["omnivore","detritivore"],
-    "food_sources": ["algae","insects","detritus"],
-    "domestication": {"domesticated": true, "trainable": false, "draft_or_mount": false, "notes": "Raised in monastery ponds"},
-    "behavior": {"aggressive": false, "territorial": false, "risk_to_humans": "none", "nocturnal": false, "migratory": false},
-    "edibility": {"edible": true, "parts": ["meat","roe"], "preparation_notes": "Smoked or stewed", "taboo_or_restricted": false},
-    "disease_risks": ["parasites"],
-    "byproducts": [
-      {"type": "meat", "yield_unit": "kg", "avg_yield": 2, "harvest_method": "domesticated"},
-      {"type": "egg", "notes": "Roe prized for feasts", "yield_unit": "g", "avg_yield": 200, "harvest_method": "domesticated"},
-      {"type": "bone", "harvest_method": "either"}
-    ],
-    "gendered": {"male": "milt", "female": "roe", "juvenile": "fry", "collective": "school"},
-    "size_class": "medium",
-    "mating_season": "spring (April–May)",
-    "gestation_period": "5 days",
-    "reproduction_notes": "Females scatter thousands of eggs among reeds; few survive to adulthood.",
-    "production_cycles": {"egg_laying_frequency": "once yearly in spring", "milk_production_duration": "", "wool_shearing_cycle": ""},
-    "butchering_age": "2 years in ponds",
-    "narrative": "Monastic ponds teem with sluggish carp fattened on barley mash, their scales flashing bronze beneath the water’s skin. On fasting days the brethren net them for stew, selling surplus at market where fishmongers bargain hard. Local law fines those who poach from abbey ponds, yet hungry peasants sneak at night, believing the carp grant luck if swallowed whole. Each spring, swollen rivers flood the ponds and release a breeding run; children gather stranded fry in baskets to restock. Merchants prize cured carp as cheap sustenance for long caravan roads."
+    "narrative": "Broad of shoulder and steady of gait, these giants pull the village’s weight from furrow to market."
   }
 ]

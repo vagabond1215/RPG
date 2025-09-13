@@ -11,16 +11,12 @@
     "medicinal": false,
     "toxic": false,
     "culinary_uses": ["stew","pickle","pottage"],
-    "byproducts": [{"type": "leaf", "yield_unit": "heads/season", "avg_yield": 3, "harvest_season": "autumn"}],
+    "byproducts": [
+      { "type": "leaf", "yield_unit": "heads/season", "avg_yield": 3, "harvest_season": "autumn" }
+    ],
     "seasonality": "Sown spring; heads in late summer to autumn.",
-    "sowing_season": "early spring (March–April)",
-    "harvest_season": "late summer to autumn (August–October)",
-    "growth_duration": "120 days",
-    "companion_crops": ["onions","dill"],
-    "rotation_relationships": "Follows legumes; precedes root crops",
-    "fallow_notes": "Beds rest a season after heavy feeding",
-    "narrative": "From tiny seedlings set in spring, cabbages swell into tight green drums guarding villages against winter hunger. Women gather leaves after first frost, shredding them into vats that guild coopers seal with brine, spawning barrels of sourkraut that fetch taxes in coin. Worms and blight strike hard in wet years, so fields are ringed with marigolds and ash. Old wives mutter that burying a cabbage stump wards off pox, though priests scoff. When famine hits, thieves raid cabbage patches by moonlight, risking stocks and hunger-driven justice.",
-    "tiers": {"food_tier": ["Low Inn","Common","Fine","High Table"]}
+    "narrative": "Humble greens bound in tight heads; a staple for broth pots, salted barrels, and winter fare.",
+    "tiers": { "food_tier": ["Low Inn","Common","Fine","High Table"] }
   },
   {
     "id": "chanterelle",
@@ -35,16 +31,12 @@
     "medicinal": false,
     "toxic": false,
     "foraging_notes": "Fruiting after rains; avoid false look-alikes.",
-    "byproducts": [{"type": "mushroom", "yield_unit": "basket", "harvest_season": "summer"}],
+    "byproducts": [
+      { "type": "mushroom", "yield_unit": "basket", "harvest_season": "summer" }
+    ],
     "seasonality": "Summer to early autumn after wet weather.",
-    "sowing_season": "spores spread in autumn",
-    "harvest_season": "mid-summer to early autumn (July–September)",
-    "growth_duration": "60 days from spore to fruit",
-    "companion_crops": ["oak","spruce"],
-    "rotation_relationships": "uncultivated; appears in mature forests",
-    "fallow_notes": "",
-    "narrative": "After warm rains the forest floor sprouts golden trumpets that glimmer like coin among leaf litter. Woodcutters whisper directions in exchange for ale, for guild foresters levy harsh fines on unmarked baskets. Nobles crave the peppery flesh at autumn banquets, so poachers creep at dawn to gather before patrols. Folklore claims fae leave chanterelles as trail markers for those who aid lost travelers; ignore them and you wake to a ring of toadstools around your bed. Spoiled mushrooms sicken greedy pickers, teaching caution amid the damp shadows.",
-    "tiers": {"food_tier": ["Low Inn","Common","Fine","High Table"]}
+    "narrative": "Golden trumpets rising from leaf-litter; a forest prize with a rich, peppery scent.",
+    "tiers": { "food_tier": ["Low Inn","Common","Fine","High Table"] }
   },
   {
     "id": "apple-tree",
@@ -59,18 +51,12 @@
     "toxic": false,
     "culinary_uses": ["fruit","cider","pie"],
     "byproducts": [
-      {"type": "fruit", "yield_unit": "dozen", "harvest_season": "autumn"},
-      {"type": "wood", "notes": "hardwood"}
+      { "type": "fruit", "yield_unit": "dozen", "harvest_season": "autumn" },
+      { "type": "wood", "notes": "hardwood" }
     ],
     "seasonality": "Blossom in spring; fruit in late summer to autumn.",
-    "sowing_season": "grafted in late winter or early spring",
-    "harvest_season": "late summer to autumn (August–October)",
-    "growth_duration": "5 years to first fruit",
-    "companion_crops": ["clover","garlic"],
-    "rotation_relationships": "perennial orchards; ground cropped with legumes or grazed",
-    "fallow_notes": "replanting beds rest one year",
-    "narrative": "Orchards ring hamlets with sweet blossom each spring, drawing bees whose hives the lord claims by tithe. Applewood presses groan come harvest as villagers churn cider for wages and winter stores. Children scramble up branches despite watchmen's threats, chasing the legend that a red apple eaten atop the tallest tree grants true love. Thieves covet dried rings and brandy casks, so guild factors seal cellars. When late frost kills blossom, prices soar and desperate folk trade heirlooms for a barrel. In good years, surplus fruit feeds swine and wandering pilgrims alike.",
-    "tiers": {"food_tier": ["Low Inn","Common","Fine","High Table"]}
+    "narrative": "Boughs bow with sweet red fruit come harvest, filling cellars and press alike.",
+    "tiers": { "food_tier": ["Low Inn","Common","Fine","High Table"] }
   },
   {
     "id": "peppercorn",
@@ -84,16 +70,12 @@
     "medicinal": false,
     "toxic": false,
     "culinary_uses": ["spice"],
-    "byproducts": [{"type": "spice", "yield_unit": "sack", "harvest_season": "summer"}],
+    "byproducts": [
+      { "type": "spice", "yield_unit": "sack", "harvest_season": "summer" }
+    ],
     "seasonality": "Harvested when berries redden, then dried.",
-    "sowing_season": "spring (March–April) in tropics",
-    "harvest_season": "summer (June–August)",
-    "growth_duration": "3 years to full yield",
-    "companion_crops": ["coffee","cardamom"],
-    "rotation_relationships": "climbs support trees, replaces spent vines every 7 years",
-    "fallow_notes": "soil left fallow two years after vine removal",
-    "narrative": "Pepper vines climb damp posts along coastal plantations, their berries turning from green to blood-red under monsoon sun. Merchants guilds guard the spice road fiercely; smugglers caught with untaxed sacks face branding. In manor kitchens, a single pinch seasons stews and signals wealth, while apothecaries grind pepper with honey for winter chills. Sailors swear the vines arose from dragon's breath, and carrying a pouch wards off seasickness. Crop failure during storms drives prices skyward, sparking dockside riots. Priests forbid pepper on fast days, yet nobles sprinkle it anyway, claiming the sharp heat cleanses sin.",
-    "tiers": {"luxury_tier": ["Common","Fine","Luxury","Arcane"]}
+    "narrative": "Dried berries from far-off vines, black and biting on the tongue; dear in any market.",
+    "tiers": { "luxury_tier": ["Common","Fine","Luxury","Arcane"] }
   },
   {
     "id": "saffron",
@@ -107,41 +89,11 @@
     "medicinal": false,
     "toxic": false,
     "culinary_uses": ["spice"],
-    "byproducts": [{"type": "spice", "yield_unit": "dram", "harvest_season": "autumn"}],
-    "seasonality": "Blooms in autumn, stigmas gathered by hand.",
-    "sowing_season": "late summer (August–September)",
-    "harvest_season": "autumn (October–November)",
-    "growth_duration": "90 days",
-    "companion_crops": ["garlic","onions"],
-    "rotation_relationships": "follows cereals to suppress weeds",
-    "fallow_notes": "beds fallow every fourth year to regain vigor",
-    "narrative": "Each autumn crocus fields purple the hills as farmers rise before dawn to pluck crimson stigmas with chilled fingers. Three tiny threads flavor a pot, so caravans guard their chests well, and counterfeiters risk the gallows. Apothecaries praise saffron for brightening melancholy, while superstition says a sachet beneath the pillow wards nightmares. Guild law reserves first harvest for the duke’s table, driving smugglers to hollow loaves with hidden strands. Bad weather can ruin a season, forcing villages to choose between seed corn and spice, a gamble whispered over evening fires.",
-    "tiers": {"luxury_tier": ["Common","Fine","Luxury","Arcane"]}
-  },
-  {
-    "id": "rice",
-    "common_name": "Rice",
-    "growth_form": "grass",
-    "regions": ["wetlands_transitional","aquatic_fresh"],
-    "habitats": ["wetland","farmland","riverlands"],
-    "cultivated": true,
-    "edible": true,
-    "edible_parts": ["grain"],
-    "medicinal": false,
-    "toxic": false,
-    "culinary_uses": ["porridge","rice wine","flatbread"],
     "byproducts": [
-      {"type": "grain", "yield_unit": "kg", "avg_yield": 300, "harvest_season": "autumn"},
-      {"type": "fiber", "notes": "straw for thatched roofs and mats", "yield_unit": "kg", "avg_yield": 500, "harvest_season": "autumn"}
+      { "type": "spice", "yield_unit": "dram", "harvest_season": "autumn" }
     ],
-    "seasonality": "Flooded paddies in spring; harvest in autumn",
-    "sowing_season": "spring (April–May)",
-    "harvest_season": "autumn (September–October)",
-    "growth_duration": "150 days",
-    "companion_crops": ["duckweed"],
-    "rotation_relationships": "follows pulse crops; paddies drained for barley in dry years",
-    "fallow_notes": "fields lie dry every third year to leech salts",
-    "narrative": "Rice paddies shimmer like mirrors, tamed by dikes that village elders open with carved keys each spring. Planters wade barefoot, pressing seedlings in lines while croaking frogs herald monsoon coming. Ducks forage among the shoots, eating pests and serving as living offerings to the water spirits who guard the levees. The grain feeds armies and tax collectors alike, yet drought or broken embankments invite famine and rebellion. Harvest feasts include rice wine and sticky cakes shared with travelers, but taking water out of turn earns exile, a punishment dreaded more than hunger.",
-    "tiers": {"food_tier": ["Low Inn","Common","Fine","High Table"]}
+    "seasonality": "Blooms in autumn, stigmas gathered by hand.",
+    "narrative": "Crimson threads dearer than gold, lending hue and scent to royal fare.",
+    "tiers": { "luxury_tier": ["Common","Fine","Luxury","Arcane"] }
   }
 ]

@@ -1,18 +1,14 @@
 {
   "herbivore": [
-    "draft-horse",
-    "arctic-hare"
+    "draft-horse"
   ],
   "carnivore": [],
   "omnivore": [
-    "chicken",
-    "river-carp"
+    "chicken"
   ],
   "insectivore": [
     "chicken"
   ],
-  "detritivore": [
-    "river-carp"
-  ],
+  "detritivore": [],
   "filter_feeder": []
 }

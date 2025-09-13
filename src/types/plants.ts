@@ -25,12 +25,6 @@ export interface Plant {
   foraging_notes?: string;
   byproducts: PlantByproduct[];
   seasonality?: string;
-  sowing_season?: string;
-  harvest_season?: string;
-  growth_duration?: string;
-  companion_crops?: string[];
-  rotation_relationships?: string;
-  fallow_notes?: string;
   narrative: string;
   tiers?: {
     food_tier?: FoodTier[];

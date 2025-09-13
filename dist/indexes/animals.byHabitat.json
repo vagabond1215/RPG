@@ -1,88 +1,27 @@
 {
-  "deep_sea": [],
-  "open_ocean": [],
-  "coral_reefs": [],
-  "kelp_forests": [],
-  "continental_shelves": [],
-  "estuaries": [],
-  "ocean_shores": [],
-  "rivers": [
-    "river-carp"
-  ],
-  "streams": [],
-  "lakes": [
-    "river-carp"
-  ],
-  "ponds": [
-    "river-carp"
-  ],
-  "springs": [],
-  "swamps": [],
-  "marshes": [],
-  "bogs": [],
-  "fens": [],
-  "floodplains": [],
-  "mangroves": [],
-  "brackish_marshlands": [],
-  "tidal_flats": [],
-  "tropical_rainforest": [],
-  "temperate_rainforest": [],
-  "deciduous_forest": [
-    "chicken"
-  ],
-  "boreal_forest": [],
-  "dry_forest": [],
-  "savanna": [],
-  "prairie": [],
-  "steppe": [],
-  "pampas": [],
-  "meadow": [
+  "coastal": [],
+  "riverlands": [],
+  "lake": [],
+  "wetland": [],
+  "grassland": [
     "chicken",
     "draft-horse"
   ],
-  "hot_desert": [],
-  "cold_desert": [],
-  "semi_arid_scrublands": [],
-  "alpine_tundra": [],
-  "montane_forest": [],
-  "cliffs": [],
-  "scree_slopes": [],
-  "arctic_tundra": [
-    "arctic-hare"
-  ],
-  "subarctic_tundra": [],
-  "permafrost_zones": [],
-  "beaches": [],
-  "coastal_dunes": [],
-  "lagoons": [],
-  "barrier_islands": [],
-  "limestone_caves": [],
-  "lava_tubes": [],
-  "underground_rivers": [],
-  "underground_lakes": [],
-  "karst_systems": [],
-  "pack_ice": [],
-  "ice_shelves": [],
-  "glaciers": [],
-  "snowfields": [
-    "arctic-hare"
-  ],
-  "polar_deserts": [],
-  "volcanic_regions": [],
-  "geothermal_springs": [],
-  "high_altitude_plateaus": [],
-  "hyper_arid_salt_basins": [],
   "farmland": [
     "chicken",
     "draft-horse"
   ],
-  "forest": [],
-  "grassland": [],
-  "hills": [],
+  "forest": [
+    "chicken"
+  ],
+  "hills": [
+    "draft-horse"
+  ],
+  "mountains": [],
+  "desert": [],
+  "tundra": [],
   "urban": [
     "chicken",
     "draft-horse"
-  ],
-  "riverlands": [],
-  "wetland": []
+  ]
 }
