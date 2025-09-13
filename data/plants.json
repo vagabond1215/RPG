@@ -1,99 +1,1124 @@
 [
   {
-    "id": "cabbage",
-    "common_name": "Cabbage",
+    "id": "angelica",
+    "common_name": "Angelica",
     "growth_form": "herb",
-    "regions": ["terrestrial","urban"],
-    "habitats": ["farmland","urban","grassland"],
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
     "cultivated": true,
     "edible": true,
-    "edible_parts": ["leaf"],
-    "medicinal": false,
-    "toxic": false,
-    "culinary_uses": ["stew","pickle","pottage"],
     "byproducts": [
-      { "type": "leaf", "yield_unit": "heads/season", "avg_yield": 3, "harvest_season": "autumn" }
+      {
+        "type": "other"
+      }
     ],
-    "seasonality": "Sown spring; heads in late summer to autumn.",
-    "narrative": "Humble greens bound in tight heads; a staple for broth pots, salted barrels, and winter fare.",
-    "tiers": { "food_tier": ["Low Inn","Common","Fine","High Table"] }
-  },
-  {
-    "id": "chanterelle",
-    "common_name": "Chanterelle",
-    "alt_names": ["Golden chanterelle"],
-    "growth_form": "mushroom",
-    "regions": ["terrestrial"],
-    "habitats": ["forest","hills"],
-    "cultivated": false,
-    "edible": true,
-    "edible_parts": ["mushroom"],
-    "medicinal": false,
-    "toxic": false,
-    "foraging_notes": "Fruiting after rains; avoid false look-alikes.",
-    "byproducts": [
-      { "type": "mushroom", "yield_unit": "basket", "harvest_season": "summer" }
-    ],
-    "seasonality": "Summer to early autumn after wet weather.",
-    "narrative": "Golden trumpets rising from leaf-litter; a forest prize with a rich, peppery scent.",
-    "tiers": { "food_tier": ["Low Inn","Common","Fine","High Table"] }
+    "narrative": ""
   },
   {
     "id": "apple-tree",
     "common_name": "Apple Tree",
     "growth_form": "tree",
-    "regions": ["terrestrial","urban"],
-    "habitats": ["farmland","forest","urban","hills"],
+    "regions": [
+      "terrestrial",
+      "urban"
+    ],
+    "habitats": [
+      "farmland",
+      "forest",
+      "urban",
+      "hills"
+    ],
     "cultivated": true,
     "edible": true,
-    "edible_parts": ["fruit"],
+    "edible_parts": [
+      "fruit"
+    ],
     "medicinal": false,
     "toxic": false,
-    "culinary_uses": ["fruit","cider","pie"],
+    "culinary_uses": [
+      "fruit",
+      "cider",
+      "pie"
+    ],
     "byproducts": [
-      { "type": "fruit", "yield_unit": "dozen", "harvest_season": "autumn" },
-      { "type": "wood", "notes": "hardwood" }
+      {
+        "type": "fruit",
+        "yield_unit": "dozen",
+        "harvest_season": "autumn"
+      },
+      {
+        "type": "wood",
+        "notes": "hardwood"
+      }
     ],
     "seasonality": "Blossom in spring; fruit in late summer to autumn.",
     "narrative": "Boughs bow with sweet red fruit come harvest, filling cellars and press alike.",
-    "tiers": { "food_tier": ["Low Inn","Common","Fine","High Table"] }
+    "tiers": {
+      "food_tier": [
+        "Low Inn",
+        "Common",
+        "Fine",
+        "High Table"
+      ]
+    }
+  },
+  {
+    "id": "barley",
+    "common_name": "Barley",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "beets",
+    "common_name": "Beets",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "blackberries",
+    "common_name": "Blackberries",
+    "growth_form": "shrub",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "broad-beans",
+    "common_name": "Broad beans",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "buckwheat",
+    "common_name": "Buckwheat",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "cabbage",
+    "common_name": "Cabbage",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial",
+      "urban"
+    ],
+    "habitats": [
+      "farmland",
+      "urban",
+      "grassland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "edible_parts": [
+      "leaf"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "culinary_uses": [
+      "stew",
+      "pickle",
+      "pottage"
+    ],
+    "byproducts": [
+      {
+        "type": "leaf",
+        "yield_unit": "heads/season",
+        "avg_yield": 3,
+        "harvest_season": "autumn"
+      }
+    ],
+    "seasonality": "Sown spring; heads in late summer to autumn.",
+    "narrative": "Humble greens bound in tight heads; a staple for broth pots, salted barrels, and winter fare.",
+    "tiers": {
+      "food_tier": [
+        "Low Inn",
+        "Common",
+        "Fine",
+        "High Table"
+      ]
+    }
+  },
+  {
+    "id": "carrots",
+    "common_name": "Carrots",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "chamomile",
+    "common_name": "Chamomile",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "chanterelle",
+    "common_name": "Chanterelle",
+    "alt_names": [
+      "Golden chanterelle"
+    ],
+    "growth_form": "mushroom",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "hills"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "edible_parts": [
+      "mushroom"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Fruiting after rains; avoid false look-alikes.",
+    "byproducts": [
+      {
+        "type": "mushroom",
+        "yield_unit": "basket",
+        "harvest_season": "summer"
+      }
+    ],
+    "seasonality": "Summer to early autumn after wet weather.",
+    "narrative": "Golden trumpets rising from leaf-litter; a forest prize with a rich, peppery scent.",
+    "tiers": {
+      "food_tier": [
+        "Low Inn",
+        "Common",
+        "Fine",
+        "High Table"
+      ]
+    }
+  },
+  {
+    "id": "cherries",
+    "common_name": "Cherries",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "chestnuts",
+    "common_name": "Chestnuts",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "chickpeas",
+    "common_name": "Chickpeas",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "figs",
+    "common_name": "Figs",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "flax",
+    "common_name": "Flax",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "garlic",
+    "common_name": "Garlic",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "grapes",
+    "common_name": "Grapes",
+    "growth_form": "vine",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "hazelnuts",
+    "common_name": "Hazelnuts",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "hemp",
+    "common_name": "Hemp",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "lavender",
+    "common_name": "Lavender",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "leeks",
+    "common_name": "Leeks",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "lentils",
+    "common_name": "Lentils",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "millet",
+    "common_name": "Millet",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "mint",
+    "common_name": "Mint",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "mulberries",
+    "common_name": "Mulberries",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "mustard",
+    "common_name": "Mustard",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "oats",
+    "common_name": "Oats",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "olives",
+    "common_name": "Olives",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "onions",
+    "common_name": "Onions",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "parsnips",
+    "common_name": "Parsnips",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "pears",
+    "common_name": "Pears",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "peas",
+    "common_name": "Peas",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
   },
   {
     "id": "peppercorn",
     "common_name": "Peppercorns",
     "growth_form": "vine",
-    "regions": ["terrestrial"],
-    "habitats": ["forest","farmland"],
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "farmland"
+    ],
     "cultivated": true,
     "edible": true,
-    "edible_parts": ["seed"],
+    "edible_parts": [
+      "seed"
+    ],
     "medicinal": false,
     "toxic": false,
-    "culinary_uses": ["spice"],
+    "culinary_uses": [
+      "spice"
+    ],
     "byproducts": [
-      { "type": "spice", "yield_unit": "sack", "harvest_season": "summer" }
+      {
+        "type": "spice",
+        "yield_unit": "sack",
+        "harvest_season": "summer"
+      }
     ],
     "seasonality": "Harvested when berries redden, then dried.",
     "narrative": "Dried berries from far-off vines, black and biting on the tongue; dear in any market.",
-    "tiers": { "luxury_tier": ["Common","Fine","Luxury","Arcane"] }
+    "tiers": {
+      "luxury_tier": [
+        "Common",
+        "Fine",
+        "Luxury",
+        "Arcane"
+      ]
+    }
+  },
+  {
+    "id": "plums",
+    "common_name": "Plums",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "poppy",
+    "common_name": "Poppy",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "quinces",
+    "common_name": "Quinces",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "radishes",
+    "common_name": "Radishes",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "raspberries",
+    "common_name": "Raspberries",
+    "growth_form": "shrub",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "rosemary",
+    "common_name": "Rosemary",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "rue",
+    "common_name": "Rue",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "rye",
+    "common_name": "Rye",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
   },
   {
     "id": "saffron",
     "common_name": "Saffron",
     "growth_form": "herb",
-    "regions": ["terrestrial"],
-    "habitats": ["farmland","hills"],
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland",
+      "hills"
+    ],
     "cultivated": true,
     "edible": true,
-    "edible_parts": ["flower"],
+    "edible_parts": [
+      "flower"
+    ],
     "medicinal": false,
     "toxic": false,
-    "culinary_uses": ["spice"],
+    "culinary_uses": [
+      "spice"
+    ],
     "byproducts": [
-      { "type": "spice", "yield_unit": "dram", "harvest_season": "autumn" }
+      {
+        "type": "spice",
+        "yield_unit": "dram",
+        "harvest_season": "autumn"
+      }
     ],
     "seasonality": "Blooms in autumn, stigmas gathered by hand.",
     "narrative": "Crimson threads dearer than gold, lending hue and scent to royal fare.",
-    "tiers": { "luxury_tier": ["Common","Fine","Luxury","Arcane"] }
+    "tiers": {
+      "luxury_tier": [
+        "Common",
+        "Fine",
+        "Luxury",
+        "Arcane"
+      ]
+    }
+  },
+  {
+    "id": "sage",
+    "common_name": "Sage",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "shallots",
+    "common_name": "Shallots",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "spelt",
+    "common_name": "Spelt",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "st-johns-wort",
+    "common_name": "St. John's Wort",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "strawberries",
+    "common_name": "Strawberries",
+    "growth_form": "shrub",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "thyme",
+    "common_name": "Thyme",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "turnips",
+    "common_name": "Turnips",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "walnuts",
+    "common_name": "Walnuts",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "wheat",
+    "common_name": "Wheat",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
+  },
+  {
+    "id": "yarrow",
+    "common_name": "Yarrow",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "narrative": ""
   }
 ]
