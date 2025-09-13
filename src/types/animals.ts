@@ -47,5 +47,14 @@ export interface Animal {
   byproducts: AnimalByproduct[];
   gendered: GenderedNames;
   size_class?: "tiny"|"small"|"medium"|"large"|"huge";
+  mating_season?: string;
+  gestation_period?: string;
+  reproduction_notes?: string;
+  production_cycles?: {
+    egg_laying_frequency?: string;
+    milk_production_duration?: string;
+    wool_shearing_cycle?: string;
+  };
+  butchering_age?: string;
   narrative: string;
 }

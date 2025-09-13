@@ -1,32 +1,90 @@
 {
-  "coastal": [],
-  "riverlands": [],
-  "lake": [],
-  "wetland": [],
-  "grassland": [
-    "cabbage"
-  ],
+  "deep_sea": [],
+  "open_ocean": [],
+  "coral_reefs": [],
+  "kelp_forests": [],
+  "continental_shelves": [],
+  "estuaries": [],
+  "ocean_shores": [],
+  "rivers": [],
+  "streams": [],
+  "lakes": [],
+  "ponds": [],
+  "springs": [],
+  "swamps": [],
+  "marshes": [],
+  "bogs": [],
+  "fens": [],
+  "floodplains": [],
+  "mangroves": [],
+  "brackish_marshlands": [],
+  "tidal_flats": [],
+  "tropical_rainforest": [],
+  "temperate_rainforest": [],
+  "deciduous_forest": [],
+  "boreal_forest": [],
+  "dry_forest": [],
+  "savanna": [],
+  "prairie": [],
+  "steppe": [],
+  "pampas": [],
+  "meadow": [],
+  "hot_desert": [],
+  "cold_desert": [],
+  "semi_arid_scrublands": [],
+  "alpine_tundra": [],
+  "montane_forest": [],
+  "cliffs": [],
+  "scree_slopes": [],
+  "arctic_tundra": [],
+  "subarctic_tundra": [],
+  "permafrost_zones": [],
+  "beaches": [],
+  "coastal_dunes": [],
+  "lagoons": [],
+  "barrier_islands": [],
+  "limestone_caves": [],
+  "lava_tubes": [],
+  "underground_rivers": [],
+  "underground_lakes": [],
+  "karst_systems": [],
+  "pack_ice": [],
+  "ice_shelves": [],
+  "glaciers": [],
+  "snowfields": [],
+  "polar_deserts": [],
+  "volcanic_regions": [],
+  "geothermal_springs": [],
+  "high_altitude_plateaus": [],
+  "hyper_arid_salt_basins": [],
   "farmland": [
     "cabbage",
     "apple-tree",
     "peppercorn",
-    "saffron"
+    "saffron",
+    "rice"
   ],
   "forest": [
     "chanterelle",
     "apple-tree",
     "peppercorn"
   ],
+  "grassland": [
+    "cabbage"
+  ],
   "hills": [
     "chanterelle",
     "apple-tree",
     "saffron"
   ],
-  "mountains": [],
-  "desert": [],
-  "tundra": [],
   "urban": [
     "cabbage",
     "apple-tree"
+  ],
+  "riverlands": [
+    "rice"
+  ],
+  "wetland": [
+    "rice"
   ]
 }

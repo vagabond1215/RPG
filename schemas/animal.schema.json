@@ -158,6 +158,19 @@
       }
     },
     "size_class": {"type": "string", "enum": ["tiny","small","medium","large","huge"]},
+    "mating_season": {"type": "string"},
+    "gestation_period": {"type": "string"},
+    "reproduction_notes": {"type": "string"},
+    "production_cycles": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "egg_laying_frequency": {"type": "string"},
+        "milk_production_duration": {"type": "string"},
+        "wool_shearing_cycle": {"type": "string"}
+      }
+    },
+    "butchering_age": {"type": "string"},
     "narrative": {"type": "string"}
   }
 }
