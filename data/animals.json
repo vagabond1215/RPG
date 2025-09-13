@@ -1,5 +1,320 @@
 [
   {
+    "id": "ant",
+    "common_name": "Ant",
+    "taxon_group": "insect",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "badger",
+    "common_name": "Badger",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "bear",
+    "common_name": "Bear",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "bison",
+    "common_name": "Bison",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "boar",
+    "common_name": "Boar",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "camel",
+    "common_name": "Camel",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "hot_desert"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "carp",
+    "common_name": "Carp",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "lakes"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "cat",
+    "common_name": "Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "cattle",
+    "common_name": "Cattle",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "chicken",
     "common_name": "Chicken",
     "alt_names": [
@@ -80,6 +395,216 @@
     "narrative": "Common yard fowl scratching at dawn for seeds and beetles; prized for steady eggs and a pot on cold nights."
   },
   {
+    "id": "cod",
+    "common_name": "Cod",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "crane",
+    "common_name": "Crane",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "marshes"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "deer",
+    "common_name": "Deer",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "dog",
+    "common_name": "Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "donkey",
+    "common_name": "Donkey",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "dove",
+    "common_name": "Dove",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "draft-horse",
     "common_name": "Draft Horse",
     "alt_names": [
@@ -140,5 +665,1195 @@
     },
     "size_class": "large",
     "narrative": "Broad of shoulder and steady of gait, these giants pull the village’s weight from furrow to market."
+  },
+  {
+    "id": "duck",
+    "common_name": "Duck",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "eagle",
+    "common_name": "Eagle",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "cliffs"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "earthworm",
+    "common_name": "Earthworm",
+    "taxon_group": "annelid",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "detritivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "eel",
+    "common_name": "Eel",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "rivers"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "elk",
+    "common_name": "Elk",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "falcon",
+    "common_name": "Falcon",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "fox",
+    "common_name": "Fox",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "frog",
+    "common_name": "Frog",
+    "taxon_group": "amphibian",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "marshes"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "goat",
+    "common_name": "Goat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "goose",
+    "common_name": "Goose",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "hare",
+    "common_name": "Hare",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "hawk",
+    "common_name": "Hawk",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "hedgehog",
+    "common_name": "Hedgehog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "herring",
+    "common_name": "Herring",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "honeybee",
+    "common_name": "Honeybee",
+    "taxon_group": "insect",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "horse",
+    "common_name": "Horse",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "lynx",
+    "common_name": "Lynx",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "mouse",
+    "common_name": "Mouse",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "mule",
+    "common_name": "Mule",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "owl",
+    "common_name": "Owl",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "peafowl",
+    "common_name": "Peafowl",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "pig",
+    "common_name": "Pig",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "pigeon",
+    "common_name": "Pigeon",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "rabbit",
+    "common_name": "Rabbit",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "rat",
+    "common_name": "Rat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "sheep",
+    "common_name": "Sheep",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "snail",
+    "common_name": "Snail",
+    "taxon_group": "mollusk",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "snake",
+    "common_name": "Snake",
+    "taxon_group": "reptile",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "squirrel",
+    "common_name": "Squirrel",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "swan",
+    "common_name": "Swan",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "lakes"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "toad",
+    "common_name": "Toad",
+    "taxon_group": "amphibian",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "marshes"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "trout",
+    "common_name": "Trout",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "rivers"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "wildcat",
+    "common_name": "Wildcat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "wolf",
+    "common_name": "Wolf",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ]
+    },
+    "byproducts": [
+      {
+        "type": "other"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
   }
 ]
