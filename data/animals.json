@@ -1,5 +1,41 @@
 [
   {
+    "id": "allis-shad",
+    "common_name": "Allis shad",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "anchovy",
     "common_name": "Anchovy",
     "taxon_group": "fish",
@@ -64,6 +100,42 @@
     "narrative": ""
   },
   {
+    "id": "arctic-char",
+    "common_name": "Arctic char",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "lakes"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "ass",
     "common_name": "Wild donkey",
     "taxon_group": "mammal",
@@ -92,6 +164,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "aurochs",
+    "common_name": "Aurochs",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -156,6 +264,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "barbel",
+    "common_name": "Barbel",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "rivers"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -288,6 +432,42 @@
     "narrative": ""
   },
   {
+    "id": "bezoar-goat",
+    "common_name": "Bezoar goat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "hills"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "bison",
     "common_name": "Bison",
     "taxon_group": "mammal",
@@ -384,6 +564,42 @@
     "narrative": ""
   },
   {
+    "id": "bleak",
+    "common_name": "Bleak",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "rivers"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "boar",
     "common_name": "Boar",
     "taxon_group": "mammal",
@@ -412,6 +628,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "brill",
+    "common_name": "Brill",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -1120,6 +1372,78 @@
     "narrative": ""
   },
   {
+    "id": "common-swift",
+    "common_name": "Common swift",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "conger-eel",
+    "common_name": "Conger eel",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "coot",
     "common_name": "Coot",
     "taxon_group": "bird",
@@ -1344,6 +1668,42 @@
     "narrative": ""
   },
   {
+    "id": "curlew",
+    "common_name": "Curlew",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "marshes"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "cuttlefish",
     "common_name": "Cuttlefish",
     "taxon_group": "mollusk",
@@ -1372,6 +1732,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "dab",
+    "common_name": "Dab",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -2114,6 +2510,42 @@
     "narrative": ""
   },
   {
+    "id": "eurasian-jay",
+    "common_name": "Eurasian jay",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "falcon",
     "common_name": "Falcon",
     "taxon_group": "bird",
@@ -2146,6 +2578,42 @@
     "narrative": ""
   },
   {
+    "id": "fallow-deer",
+    "common_name": "Fallow deer",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "ferret",
     "common_name": "Ferret",
     "taxon_group": "mammal",
@@ -2174,6 +2642,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "fieldfare",
+    "common_name": "Fieldfare",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -2306,6 +2810,42 @@
     "narrative": ""
   },
   {
+    "id": "freshwater-crayfish",
+    "common_name": "Freshwater crayfish",
+    "taxon_group": "crustacean",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "rivers"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "frog",
     "common_name": "Frog",
     "taxon_group": "amphibian",
@@ -2332,6 +2872,34 @@
         "meat"
       ],
       "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "gall-wasp-oak-gall",
+    "common_name": "Gall wasp (oak gall)",
+    "taxon_group": "insect",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
     },
     "byproducts": [],
     "gendered": {},
@@ -2366,6 +2934,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "garfish",
+    "common_name": "Garfish",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -2522,6 +3126,42 @@
     "butchering_age": "1 year"
   },
   {
+    "id": "golden-plover",
+    "common_name": "Golden plover",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "goldfinch",
     "common_name": "Goldfinch",
     "taxon_group": "bird",
@@ -2639,6 +3279,42 @@
       "wool_shearing_cycle": ""
     },
     "butchering_age": "8 months"
+  },
+  {
+    "id": "goose-barnacle",
+    "common_name": "Goose barnacle",
+    "taxon_group": "crustacean",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "ocean_shores"
+    ],
+    "diet": [
+      "detritivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
   },
   {
     "id": "goshawk",
@@ -2769,6 +3445,42 @@
     "narrative": ""
   },
   {
+    "id": "grey-mullet",
+    "common_name": "Grey mullet",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "greylag-goose",
     "common_name": "Greylag goose",
     "taxon_group": "bird",
@@ -2829,6 +3541,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "gudgeon",
+    "common_name": "Gudgeon",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "rivers"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -2957,6 +3705,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "hake",
+    "common_name": "Hake",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -3508,6 +4292,42 @@
     "narrative": ""
   },
   {
+    "id": "ide-orfe",
+    "common_name": "Ide (orfe)",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "rivers"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "jackdaw",
     "common_name": "Jackdaw",
     "taxon_group": "bird",
@@ -3572,6 +4392,34 @@
     "narrative": ""
   },
   {
+    "id": "kermes-scale-insect",
+    "common_name": "Kermes (scale insect)",
+    "taxon_group": "insect",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "kestrel",
     "common_name": "Kestrel",
     "taxon_group": "bird",
@@ -3600,6 +4448,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "kingfisher",
+    "common_name": "Kingfisher",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "rivers"
+    ],
+    "diet": [
+      "piscivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -3636,6 +4520,42 @@
     "narrative": ""
   },
   {
+    "id": "lapwing",
+    "common_name": "Lapwing",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "marshes"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "lark",
     "common_name": "Lark",
     "taxon_group": "bird",
@@ -3662,6 +4582,34 @@
         "meat"
       ],
       "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "leech",
+    "common_name": "Leech",
+    "taxon_group": "annelid",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "swamps"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
     },
     "byproducts": [],
     "gendered": {},
@@ -3696,6 +4644,78 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "limpet",
+    "common_name": "Limpet",
+    "taxon_group": "mollusk",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "ocean_shores"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "ling",
+    "common_name": "Ling",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -4084,6 +5104,42 @@
     "narrative": ""
   },
   {
+    "id": "monkfish-angler",
+    "common_name": "Monkfish (angler)",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "moorhen",
     "common_name": "Moorhen",
     "taxon_group": "bird",
@@ -4144,6 +5200,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "mouflon",
+    "common_name": "Mouflon",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "hills"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -4243,6 +5335,78 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "murex-purple-dye",
+    "common_name": "Murex (purple dye)",
+    "taxon_group": "mollusk",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "ocean_shores"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "musk-ox",
+    "common_name": "Musk ox",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "arctic_tundra"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -4698,6 +5862,42 @@
     "narrative": ""
   },
   {
+    "id": "periwinkle",
+    "common_name": "Periwinkle",
+    "taxon_group": "mollusk",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "ocean_shores"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "pheasant",
     "common_name": "Pheasant",
     "taxon_group": "bird",
@@ -4953,6 +6153,42 @@
     "narrative": ""
   },
   {
+    "id": "plaice",
+    "common_name": "Plaice",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "polecat",
     "common_name": "Polecat",
     "taxon_group": "mammal",
@@ -4981,6 +6217,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "pollock",
+    "common_name": "Pollock",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -5223,6 +6495,42 @@
     "narrative": ""
   },
   {
+    "id": "razor-clam",
+    "common_name": "Razor clam",
+    "taxon_group": "mollusk",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "tidal_flats"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "red-kite",
     "common_name": "Red kite",
     "taxon_group": "bird",
@@ -5315,6 +6623,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "roe-deer",
+    "common_name": "Roe deer",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -5537,6 +6881,34 @@
         "meat"
       ],
       "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "sea-sponge",
+    "common_name": "Sea sponge",
+    "taxon_group": "other",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "coral_reefs"
+    ],
+    "diet": [
+      "detritivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
     },
     "byproducts": [],
     "gendered": {},
@@ -5793,6 +7165,34 @@
     "narrative": ""
   },
   {
+    "id": "silkworm",
+    "common_name": "Silkworm",
+    "taxon_group": "insect",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "smelt",
     "common_name": "Smelt",
     "taxon_group": "fish",
@@ -5889,6 +7289,42 @@
     "narrative": ""
   },
   {
+    "id": "snipe",
+    "common_name": "Snipe",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "marshes"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "sole",
     "common_name": "Sole",
     "taxon_group": "fish",
@@ -5917,6 +7353,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "song-thrush",
+    "common_name": "Song thrush",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -5981,6 +7453,114 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "spider-crab",
+    "common_name": "Spider crab",
+    "taxon_group": "crustacean",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "ocean_shores"
+    ],
+    "diet": [
+      "scavenger"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "spiny-dogfish",
+    "common_name": "Spiny dogfish",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "sprat",
+    "common_name": "Sprat",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -6433,6 +8013,42 @@
     "narrative": ""
   },
   {
+    "id": "thornback-ray",
+    "common_name": "Thornback ray",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "tiger",
     "common_name": "Tiger",
     "taxon_group": "mammal",
@@ -6625,6 +8241,42 @@
     "narrative": ""
   },
   {
+    "id": "twaite-shad",
+    "common_name": "Twaite shad",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "walrus",
     "common_name": "Walrus",
     "taxon_group": "mammal",
@@ -6753,6 +8405,42 @@
     "narrative": ""
   },
   {
+    "id": "whelk",
+    "common_name": "Whelk",
+    "taxon_group": "mollusk",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "ocean_shores"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
     "id": "white-pelican",
     "common_name": "White pelican",
     "taxon_group": "bird",
@@ -6813,6 +8501,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "whiting",
+    "common_name": "Whiting",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
@@ -7005,6 +8729,42 @@
       "preparation_notes": "Cook thoroughly."
     },
     "byproducts": [],
+    "gendered": {},
+    "narrative": ""
+  },
+  {
+    "id": "woodcock",
+    "common_name": "Woodcock",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "meat"
+      }
+    ],
     "gendered": {},
     "narrative": ""
   },
