@@ -645,6 +645,10 @@
   {
     "id": "broad-beans",
     "common_name": "Broad beans",
+    "alt_names": [
+      "field bean",
+      "horse bean"
+    ],
     "growth_form": "herb",
     "regions": [
       "terrestrial"
@@ -2042,7 +2046,20 @@
     ],
     "cultivated": true,
     "edible": true,
-    "byproducts": [],
+    "byproducts": [
+      {
+        "type": "seed",
+        "notes": "Edible seeds"
+      },
+      {
+        "type": "oil",
+        "notes": "Hemp seed oil"
+      },
+      {
+        "type": "fiber",
+        "notes": "Bast fiber"
+      }
+    ],
     "narrative": ""
   },
   {
@@ -3952,6 +3969,9 @@
   {
     "id": "service-tree",
     "common_name": "Service tree",
+    "alt_names": [
+      "sorb apple"
+    ],
     "growth_form": "tree",
     "regions": [
       "terrestrial"
@@ -4720,6 +4740,216 @@
     ],
     "habitats": [
       "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "bitter-vetch",
+    "common_name": "Bitter vetch",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "bullace-plum",
+    "common_name": "Bullace plum",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "cherry",
+    "common_name": "Cherry",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "chickling-vetch",
+    "common_name": "Chickling vetch",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "fodder-vetch",
+    "common_name": "Fodder vetch",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "foxtail-millet",
+    "common_name": "Foxtail millet",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "ladys-bedstraw",
+    "common_name": "Lady's bedstraw",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "lupin",
+    "common_name": "Lupin",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "mulberry",
+    "common_name": "Mulberry",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "oak",
+    "common_name": "Oak",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "proso-millet",
+    "common_name": "Proso millet",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "self-heal",
+    "common_name": "Self-heal",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "sweet-woodruff",
+    "common_name": "Sweet woodruff",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [],
+    "narrative": ""
+  },
+  {
+    "id": "wild-thyme",
+    "common_name": "Wild thyme",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland"
     ],
     "cultivated": false,
     "edible": true,
