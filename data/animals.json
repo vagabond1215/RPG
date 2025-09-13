@@ -1161,7 +1161,7 @@
       "edible": true,
       "parts": [
         "meat",
-        "egg"
+        "chicken egg"
       ],
       "preparation_notes": "Cook thoroughly to avoid illness",
       "taboo_or_restricted": false
@@ -1171,7 +1171,7 @@
     ],
     "byproducts": [
       {
-        "type": "egg",
+        "type": "chicken egg",
         "notes": "Hens lay almost daily in warm seasons",
         "yield_unit": "count",
         "avg_yield": 280,
@@ -1199,7 +1199,7 @@
       "collective": "flock"
     },
     "size_class": "small",
-    "narrative": "The Chicken is a bird found in terrestrial regions where it prefers farmland and grassland habitats. As a omnivore and insectivore species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and egg; cooks typically note that it should be cooked thoroughly to avoid illness. Byproducts such as egg, meat and feather are collected by those seeking materials or trade goods. Observers value the Chicken for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
+    "narrative": "The Chicken is a bird found in terrestrial regions where it prefers farmland and grassland habitats. As a omnivore and insectivore species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and chicken eggs; cooks typically note that it should be cooked thoroughly to avoid illness. Byproducts such as chicken eggs, meat and feather are collected by those seeking materials or trade goods. Observers value the Chicken for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
     "mating_season": "spring",
     "gestation_period": "",
     "incubation_period": "21 days",
@@ -2229,14 +2229,14 @@
       "edible": true,
       "parts": [
         "meat",
-        "egg"
+        "duck egg"
       ],
       "preparation_notes": "Roast or stew",
       "taboo_or_restricted": false
     },
     "byproducts": [
       {
-        "type": "egg",
+        "type": "duck egg",
         "notes": "Laying every other day",
         "yield_unit": "count",
         "avg_yield": 180,
@@ -2263,7 +2263,7 @@
       "juvenile": "duckling",
       "collective": "raft"
     },
-    "narrative": "The Duck is a bird found in wetlands transitional regions where it prefers farmland and ponds habitats. As a omnivore and insectivore species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and egg; cooks typically note that it should be roast or stew. Byproducts such as egg, meat and feather are collected by those seeking materials or trade goods. Observers value the Duck for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
+    "narrative": "The Duck is a bird found in wetlands transitional regions where it prefers farmland and ponds habitats. As a omnivore and insectivore species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and duck eggs; cooks typically note that it should be roast or stew. Byproducts such as duck eggs, meat and feather are collected by those seeking materials or trade goods. Observers value the Duck for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
     "alt_names": [],
     "food_sources": [
       "grains",
@@ -3225,14 +3225,14 @@
       "edible": true,
       "parts": [
         "meat",
-        "egg"
+        "goose egg"
       ],
       "preparation_notes": "Roasted for winter feasts",
       "taboo_or_restricted": false
     },
     "byproducts": [
       {
-        "type": "egg",
+        "type": "goose egg",
         "notes": "Laid weekly",
         "yield_unit": "count",
         "avg_yield": 40,
@@ -3259,7 +3259,7 @@
       "juvenile": "gosling",
       "collective": "gaggle"
     },
-    "narrative": "The Goose is a bird found in wetlands transitional regions where it prefers farmland and marshes habitats. As a herbivore and grazer species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is often aggressive and highly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and egg; cooks typically note that it should be roasted for winter feasts. Byproducts such as egg, meat and feather are collected by those seeking materials or trade goods. Observers value the Goose for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
+    "narrative": "The Goose is a bird found in wetlands transitional regions where it prefers farmland and marshes habitats. As a herbivore and grazer species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is often aggressive and highly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and goose eggs; cooks typically note that it should be roasted for winter feasts. Byproducts such as goose eggs, meat and feather are collected by those seeking materials or trade goods. Observers value the Goose for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
     "alt_names": [],
     "food_sources": [
       "grass",
@@ -7018,7 +7018,7 @@
     },
     "byproducts": [
       {
-        "type": "fur",
+        "type": "sheep wool",
         "notes": "Shorn once per year",
         "yield_unit": "kg",
         "avg_yield": 3,
@@ -7045,7 +7045,7 @@
       "juvenile": "lamb",
       "collective": "flock"
     },
-    "narrative": "The Domestic Sheep is a mammal found in terrestrial regions where it prefers farmland, grassland and hills habitats. As a herbivore and grazer species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and milk; cooks typically note that it should be lamb roasted or stewed. Byproducts such as fur, milk and meat are collected by those seeking materials or trade goods. Observers value the Domestic Sheep for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
+    "narrative": "The Domestic Sheep is a mammal found in terrestrial regions where it prefers farmland, grassland and hills habitats. As a herbivore and grazer species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and milk; cooks typically note that it should be lamb roasted or stewed. Byproducts such as sheep wool, milk and meat are collected by those seeking materials or trade goods. Observers value the Domestic Sheep for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
     "alt_names": [],
     "food_sources": [
       "pasture grasses",
