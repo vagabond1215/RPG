@@ -213,8 +213,29 @@ export const altRaceColors = Object.fromEntries(
   Object.entries(raceColors).map(([race, combos]) => [race, [...combos].reverse()])
 );
 
+function complementHex(hex) {
+  const num = parseInt(hex.slice(1), 16);
+  const comp = 0xffffff - num;
+  return `#${comp.toString(16).padStart(6, '0')}`;
+}
+
+function complementCombo(combo) {
+  const result = {};
+  for (const [key, value] of Object.entries(combo)) {
+    result[key] = complementHex(value);
+  }
+  return result;
+}
+
 export function getRaceColors(race, index, useAlternate = false) {
   const list = useAlternate ? altRaceColors[race] : raceColors[race];
   if (!list) return null;
-  return list[index - 1] || null;
+  const baseLen = list.length;
+  if (index <= baseLen) {
+    return list[index - 1] || null;
+  }
+  if (index <= baseLen * 2) {
+    return complementCombo(list[index - baseLen - 1]);
+  }
+  return null;
 }
