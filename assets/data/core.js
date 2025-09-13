@@ -116,6 +116,7 @@ export const characterTemplate = {
     tags: []
   },
   money: createEmptyCurrency(),
+  inventory: [],
   buildings: [],
   employment: [],
   guildRank: 'None',
