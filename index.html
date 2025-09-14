@@ -102,7 +102,15 @@
 
 <main style="padding:1rem;"></main>
   </div>
-
-<script type="module" src="script.js"></script>
+<script>
+  if (/^https?:$/.test(window.location.protocol)) {
+    const s = document.createElement('script');
+    s.type = 'module';
+    s.src = 'script.js';
+    document.body.appendChild(s);
+  } else {
+    document.body.innerHTML = '<p>This application must be served over HTTP(S).<br>Use a local server or visit the GitHub Pages deployment.</p>';
+  }
+</script>
 </body>
 </html>
