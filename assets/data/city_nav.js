@@ -1665,8 +1665,18 @@ function applyBusinessEmployees(nav) {
     building.employees = defaultEmployeesForBuilding(name);
     const categories = shopCategoriesForBuilding(name);
     const baseInteractions = [];
-    if (categories.sells.length) baseInteractions.push({ name: "Shop", action: "shop" });
-    if (categories.buys.length) baseInteractions.push({ name: "Sell", action: "sell" });
+    if (categories.sells.length)
+      baseInteractions.push({
+        name: "Shop",
+        action: "shop",
+        icon: "assets/images/icons/Economy/Shop.png",
+      });
+    if (categories.buys.length)
+      baseInteractions.push({
+        name: "Sell",
+        action: "sell",
+        icon: "assets/images/icons/Economy/Sell.png",
+      });
     baseInteractions.push({ name: "Manage", action: "manage" });
     building.interactions = baseInteractions.concat(building.interactions || []);
   });

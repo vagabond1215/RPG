@@ -94,17 +94,53 @@ export function toCp({pl=0,g=0,si=0,cp=0,st=0,ci=0}={}){
   return convertCurrency(iron, 'coldIron', 'copper');
 }
 
-export function cpToCoins(value, tidy=true){
-  const iron = Math.round(convertCurrency(value, 'copper', 'coldIron'));
+export function cpToCoins(value, tidy = true, icons = false) {
+  const iron = Math.round(convertCurrency(value, "copper", "coldIron"));
   const counts = fromIron(iron);
-  const order = ['platinum','gold','silver','copper','steel','coldIron'];
-  const abbr = {platinum:'pl', gold:'g', silver:'si', copper:'cp', steel:'st', coldIron:'ci'};
+  const order = [
+    "platinum",
+    "gold",
+    "silver",
+    "copper",
+    "steel",
+    "coldIron",
+  ];
+  const abbr = {
+    platinum: "pl",
+    gold: "g",
+    silver: "si",
+    copper: "cp",
+    steel: "st",
+    coldIron: "ci",
+  };
+  const iconMap = {
+    platinum: "assets/images/icons/Economy/Platinum Coin.png",
+    gold: "assets/images/icons/Economy/Gold Coin.png",
+    silver: "assets/images/icons/Economy/Silver Coin.png",
+    copper: "assets/images/icons/Economy/Copper Coin.png",
+    steel: "assets/images/icons/Economy/Steel Coin.png",
+    coldIron: "assets/images/icons/Economy/Cold Iron Coin.png",
+  };
   const result = [];
-  for (const denom of order){
+  for (const denom of order) {
     const count = counts[denom] || 0;
-    if (count > 0 || (!tidy && result.length)){
-      if (count > 0 || !tidy) result.push(`${count}${abbr[denom]}`);
+    if (count > 0 || (!tidy && result.length)) {
+      if (icons) {
+        if (count > 0 || !tidy) {
+          result.push(
+            `<span class="coin"><span class="coin-amount">${count}</span><img src="${iconMap[denom]}" alt="${abbr[denom]}" class="coin-icon"></span>`
+          );
+        }
+      } else {
+        if (count > 0 || !tidy) result.push(`${count}${abbr[denom]}`);
+      }
     }
   }
-  return result.length ? result.join(' ') : '0cp';
+  if (!result.length) {
+    if (icons) {
+      return `<span class="coin"><span class="coin-amount">0</span><img src="${iconMap.copper}" alt="cp" class="coin-icon"></span>`;
+    }
+    return "0cp";
+  }
+  return icons ? `<span class="currency">${result.join(" ")}</span>` : result.join(" ");
 }

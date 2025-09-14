@@ -1555,6 +1555,11 @@ body.theme-dark .top-menu button {
   text-align: right;
 }
 
+.shop-item .item-price {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .shop-item .qty {
   width: 4rem;
   justify-self: center;
@@ -1563,6 +1568,27 @@ body.theme-dark .top-menu button {
 .shop-item .buy-btn {
   width: 4rem;
   justify-self: center;
+}
+
+.currency {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+}
+
+.currency .coin {
+  display: inline-flex;
+  align-items: center;
+}
+
+.currency .coin-amount {
+  margin-right: 0.1em;
+}
+
+.currency .coin-icon {
+  height: 1em;
+  width: auto;
+  vertical-align: middle;
 }
 
 .overlay {
