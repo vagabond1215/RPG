@@ -326,52 +326,102 @@ const FAMILY_MAP = {
   control: "control",
 };
 
-function buildElement(element, lists) {
-  const spells = [];
-  const counters = { destruction: 0, control: 0, enfeebling: 0, reinforcement: 0 };
-  let profIndex = 0;
-  let shared = 0;
-  for (const category of ["destruction", "control", "enfeebling", "reinforcement"]) {
-    const names = lists[category] || [];
-    for (let i = 0; i < names.length; i++) {
-      const name = names[i];
-      const tier = spells.length + 1;
-      counters[category]++;
-      let basePower = 0;
-      if (category === "destruction") {
-        basePower = 20 + (counters[category] - 1) * 10;
-      }
-      if (i === 0 && spells.length > 0 && shared < 1) {
-        shared++;
-      } else {
-        profIndex++;
-      }
-      const spell = {
-        id: `${element}:${category.substring(0,3).toUpperCase()}:${tier}`,
-        name,
-        element,
-        school: SCHOOL_MAP[category],
-        family: FAMILY_MAP[category],
-        type: TYPE_MAP[category],
-        target: "ST",
-        proficiency: MILESTONES[profIndex - 1],
-        mpCost: mpCost(tier),
-        basePower,
-      };
-      if (category === "enfeebling") {
-        const detail = ENFEEBLE_DETAILS[element]?.[name];
-        if (detail) {
-          spell.basePower = detail.basePower || 0;
-          spell.status = { name: detail.status, chance: detail.chance };
-        }
-      }
-      if (spell.basePower > 0) {
-        spell.statusOnCrit = STATUS_ON_CRIT[element];
-      }
-      spell.description = describeSpell(spell);
-      spells.push(spell);
+function distributeProficiencies(count) {
+  const profs = [];
+  if (count <= 0) return profs;
+  for (let i = 0; i < count; i++) {
+    const val = 10 + Math.round((150 * i) / (count - 1));
+    profs.push(val);
+  }
+  return profs;
+}
+
+function createSpell({ element, category, name, tier, counters, proficiency }) {
+  counters[category]++;
+  let basePower = 0;
+  if (category === "destruction") {
+    basePower = 20 + (counters[category] - 1) * 10;
+  }
+  const spell = {
+    id: `${element}:${category.substring(0, 3).toUpperCase()}:${tier}`,
+    name,
+    element,
+    school: SCHOOL_MAP[category],
+    family: FAMILY_MAP[category],
+    type: TYPE_MAP[category],
+    target: "ST",
+    proficiency,
+    mpCost: mpCost(tier),
+    basePower,
+  };
+  if (category === "enfeebling") {
+    const detail = ENFEEBLE_DETAILS[element]?.[name];
+    if (detail) {
+      spell.basePower = detail.basePower || 0;
+      spell.status = { name: detail.status, chance: detail.chance };
     }
   }
+  if (spell.basePower > 0) {
+    spell.statusOnCrit = STATUS_ON_CRIT[element];
+  }
+  spell.description = describeSpell(spell);
+  return spell;
+}
+
+function buildElement(element, lists) {
+  const categories = ["destruction", "control", "enfeebling", "reinforcement"];
+  const spells = [];
+  const counters = { destruction: 0, control: 0, enfeebling: 0, reinforcement: 0 };
+
+  const queues = {};
+  for (const cat of categories) {
+    const arr = lists[cat] ? [...lists[cat]] : [];
+    if (arr.length > 0) {
+      const name = arr.shift();
+      const tier = spells.length + 1;
+      spells.push(
+        createSpell({
+          element,
+          category: cat,
+          name,
+          tier,
+          counters,
+          proficiency: 0,
+        }),
+      );
+    }
+    queues[cat] = arr;
+  }
+
+  const remaining = categories.reduce((sum, c) => sum + queues[c].length, 0);
+  const profs = distributeProficiencies(remaining);
+
+  let prev = categories[categories.length - 1];
+  for (let i = 0; i < profs.length; i++) {
+    const options = categories
+      .filter((c) => queues[c].length > 0 && c !== prev)
+      .sort((a, b) => queues[b].length - queues[a].length);
+    let cat;
+    if (options.length > 0) {
+      cat = options[0];
+    } else {
+      cat = categories.find((c) => queues[c].length > 0);
+    }
+    const name = queues[cat].shift();
+    const tier = spells.length + 1;
+    spells.push(
+      createSpell({
+        element,
+        category: cat,
+        name,
+        tier,
+        counters,
+        proficiency: profs[i],
+      }),
+    );
+    prev = cat;
+  }
+
   return spells;
 }
 
