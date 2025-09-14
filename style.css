@@ -93,11 +93,10 @@ main {
     stroke-width: 2;
     fill: none;
   }
-  #back-button svg {
+  #back-button img {
     width: 60%;
     height: 60%;
-    stroke: none;
-    fill: currentColor;
+    object-fit: contain;
   }
   #menu-button,
   #back-button {
