@@ -271,7 +271,12 @@ function normalizeProficiencyNameWidths() {
 const STORAGE_KEY = 'rpgProfiles';
 const LAST_PROFILE_KEY = 'rpgLastProfile';
 const TEMP_CHARACTER_KEY = 'rpgTempCharacter';
-let profiles = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+let profiles = {};
+try {
+  profiles = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+} catch {
+  profiles = {};
+}
 let currentProfileId = localStorage.getItem(LAST_PROFILE_KEY);
 let currentProfile = currentProfileId ? profiles[currentProfileId] : null;
 let currentCharacter = null;
@@ -2386,7 +2391,12 @@ function startCharacterCreation() {
   updateScale();
   showBackButton();
   mapContainer.style.display = 'none';
-  const saved = JSON.parse(localStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
+  let saved = {};
+  try {
+    saved = JSON.parse(localStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
+  } catch {
+    saved = {};
+  }
   const character = saved.character || {};
   const buildEntries = Object.values(characterBuilds);
   const classField = {
