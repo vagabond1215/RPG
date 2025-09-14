@@ -50,7 +50,7 @@ main {
   background: var(--background);
   display: flex;
   flex-direction: row;
-  gap: 0.25rem;
+  gap: 0.125rem;
   padding: 2px 0.5rem;
   height: var(--menu-button-size);
   align-items: center;
@@ -118,13 +118,23 @@ main {
 
 .settings-group {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.125rem;
   position: relative;
+}
+
+@media (orientation: portrait) {
+  :root {
+    --menu-height: var(--menu-button-size);
+  }
+
+  .top-menu {
+    padding: 0 0.5rem;
+  }
 }
 
 #settings-panel {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.125rem;
   overflow: hidden;
   position: absolute;
   pointer-events: none;
@@ -133,7 +143,7 @@ main {
   flex-direction: row;
   top: 0;
   left: 100%;
-  margin-left: 0.25rem;
+  margin-left: 0.125rem;
   transform: scaleX(0);
   transform-origin: left;
 }
