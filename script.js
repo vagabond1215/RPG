@@ -3149,6 +3149,19 @@ function loadPreferences() {
   updateScale();
 }
 
+async function clearLocalData() {
+  if (!confirm('Clear all local data? This will reload the page.')) return;
+  try {
+    localStorage.clear();
+    if (typeof caches !== 'undefined') {
+      const keys = await caches.keys();
+      await Promise.all(keys.map(k => caches.delete(k)));
+    }
+  } finally {
+    location.reload();
+  }
+}
+
 const settingsButton = document.getElementById('settings-button');
 const settingsPanel = document.getElementById('settings-panel');
 settingsButton.addEventListener('click', () => {
@@ -3249,6 +3262,8 @@ dropdownMenu.addEventListener('click', e => {
     startCharacterCreation();
   } else if (action === 'character-select') {
     showCharacterSelectUI();
+  } else if (action === 'clear-data') {
+    clearLocalData();
   } else {
     showBackButton();
     setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
