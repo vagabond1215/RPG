@@ -105,42 +105,50 @@ export function cpToCoins(value, tidy = true, icons = false) {
     "steel",
     "coldIron",
   ];
-  const abbr = {
-    platinum: "pl",
-    gold: "g",
-    silver: "si",
-    copper: "cp",
-    steel: "st",
-    coldIron: "ci",
-  };
-  const iconMap = {
-    platinum: "assets/images/icons/Economy/Platinum Coin.png",
-    gold: "assets/images/icons/Economy/Gold Coin.png",
-    silver: "assets/images/icons/Economy/Silver Coin.png",
-    copper: "assets/images/icons/Economy/Copper Coin.png",
-    steel: "assets/images/icons/Economy/Steel Coin.png",
-    coldIron: "assets/images/icons/Economy/Cold Iron Coin.png",
-  };
-  const result = [];
-  for (const denom of order) {
-    const count = counts[denom] || 0;
-    if (count > 0 || (!tidy && result.length)) {
-      if (icons) {
+    const abbr = {
+      platinum: "pl",
+      gold: "g",
+      silver: "si",
+      copper: "cp",
+      steel: "st",
+      coldIron: "ci",
+    };
+    const iconMap = {
+      platinum: "assets/images/icons/Economy/Platinum Coin.png",
+      gold: "assets/images/icons/Economy/Gold Coin.png",
+      silver: "assets/images/icons/Economy/Silver Coin.png",
+      copper: "assets/images/icons/Economy/Copper Coin.png",
+      steel: "assets/images/icons/Economy/Steel Coin.png",
+      coldIron: "assets/images/icons/Economy/Cold Iron Coin.png",
+    };
+    const names = {
+      platinum: "Platinum",
+      gold: "Gold",
+      silver: "Silver",
+      copper: "Copper",
+      steel: "Steel",
+      coldIron: "Iron",
+    };
+    const result = [];
+    for (const denom of order) {
+      const count = counts[denom] || 0;
+      if (count > 0 || (!tidy && result.length)) {
+        if (icons) {
         if (count > 0 || !tidy) {
-          result.push(
-            `<span class="coin"><span class="coin-amount">${count}</span><img src="${iconMap[denom]}" alt="${abbr[denom]}" class="coin-icon"></span>`
-          );
+            result.push(
+              `<span class="coin"><span class="coin-amount">${count}</span><img src="${iconMap[denom]}" alt="${abbr[denom]}" title="${names[denom]}" class="coin-icon"></span>`
+            );
+          }
+        } else {
+          if (count > 0 || !tidy) result.push(`${count}${abbr[denom]}`);
         }
-      } else {
-        if (count > 0 || !tidy) result.push(`${count}${abbr[denom]}`);
       }
     }
-  }
-  if (!result.length) {
-    if (icons) {
-      return `<span class="coin"><span class="coin-amount">0</span><img src="${iconMap.copper}" alt="cp" class="coin-icon"></span>`;
+    if (!result.length) {
+      if (icons) {
+        return `<span class="coin"><span class="coin-amount">0</span><img src="${iconMap.copper}" alt="cp" title="Copper" class="coin-icon"></span>`;
+      }
+      return "0cp";
     }
-    return "0cp";
+    return icons ? `<span class="currency">${result.join(" ")}</span>` : result.join(" ");
   }
-  return icons ? `<span class="currency">${result.join(" ")}</span>` : result.join(" ");
-}
