@@ -2434,7 +2434,7 @@ function showEquipmentUI() {
 
 function startCharacterCreation() {
   updateScale();
-  showBackButton();
+  hideBackButton();
   mapContainer.style.display = 'none';
   let saved = {};
   try {
