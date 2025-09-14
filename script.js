@@ -1501,7 +1501,10 @@ function showNavigation() {
     const aria = prompt ? `${prompt} ${name}` : name;
     const dis = disabled ? 'disabled' : '';
     const cls = extraClass ? ` ${extraClass}` : '';
-    const labelHTML = icon && type !== 'interaction' ? '' : `<span class="street-sign">${name}</span>`;
+    const labelHTML =
+      icon && (type !== 'interaction' || ['shop', 'sell'].includes(action))
+        ? ''
+        : `<span class="street-sign">${name}</span>`;
     return `<div class="nav-item${cls}"><button data-type="${type}" ${attrs} aria-label="${aria}" ${dis}>${iconHTML}</button>${labelHTML}</div>`;
   };
   if (pos.building) {
