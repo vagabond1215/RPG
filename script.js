@@ -1305,6 +1305,15 @@ function showInventoryUI() {
   setMainHTML(html);
 }
 
+function setUniformShopNameWidth() {
+  const names = Array.from(document.querySelectorAll('.shop-item .item-name'));
+  if (!names.length) return;
+  const max = Math.max(...names.map(el => el.getBoundingClientRect().width));
+  names.forEach(el => {
+    el.style.width = `${max}px`;
+  });
+}
+
 async function renderShopUI(buildingName) {
   showBackButton();
   const categories = shopCategoriesForBuilding(buildingName).sells;
@@ -1325,9 +1334,12 @@ async function renderShopUI(buildingName) {
       html += `<h2>${sec.cat}</h2><ul>`;
     }
     sec.items.forEach((item, iIdx) => {
+      const saleQty = item.sale_quantity === 1 && item.unit === 'each'
+        ? ''
+        : `${item.sale_quantity} ${item.unit}`;
       html += `<li class="shop-item">
         <button class="item-name" data-s="${sIdx}" data-i="${iIdx}">${item.name}</button>
-        <span class="sale-qty">${item.sale_quantity} ${item.unit}</span>
+        <span class="sale-qty">${saleQty}</span>
         <span class="item-price">${cpToCoins(item.price, true, true)}</span>
         <input type="number" class="qty" value="1" min="1" data-s="${sIdx}" data-i="${iIdx}">
         <button class="buy-btn" data-s="${sIdx}" data-i="${iIdx}">Buy</button>
@@ -1365,6 +1377,7 @@ async function renderShopUI(buildingName) {
       }
     });
   });
+  setUniformShopNameWidth();
 }
 
 function renderSellUI(buildingName) {

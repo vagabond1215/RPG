@@ -1546,7 +1546,7 @@ body.theme-dark .top-menu button {
 
 .shop-item {
   display: grid;
-  grid-template-columns: 1fr auto auto auto auto;
+  grid-template-columns: auto 6rem 8rem 4rem 4rem;
   align-items: center;
   gap: 0.5rem;
   width: 100%;
@@ -1564,12 +1564,19 @@ body.theme-dark .top-menu button {
   text-shadow: 0 0 0.5rem currentColor;
 }
 
+
 .shop-item .sale-qty,
 .shop-item .item-price {
   text-align: right;
+  color: var(--foreground);
+}
+
+.shop-item .sale-qty {
+  width: 6rem;
 }
 
 .shop-item .item-price {
+  width: 8rem;
   display: flex;
   justify-content: flex-end;
 }
@@ -1577,6 +1584,8 @@ body.theme-dark .top-menu button {
 .shop-item .qty {
   width: 4rem;
   justify-self: center;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 .shop-item .buy-btn {
@@ -1597,6 +1606,7 @@ body.theme-dark .top-menu button {
 
 .currency .coin-amount {
   margin-right: 0.1em;
+  color: var(--foreground);
 }
 
 .currency .coin-icon {
