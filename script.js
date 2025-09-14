@@ -1374,24 +1374,36 @@ function selectProfile() {
     return;
   }
   if (ids.length === 0) {
-    while (!currentProfile) {
-      createProfile();
-    }
-  } else {
-    let choice = '';
-    while (!currentProfile) {
-      choice = prompt(`Select profile (${ids.map(id => profiles[id].name).join(', ')})\nEnter a new name to create one:`);
-      if (choice === null) continue;
-      const existingId = ids.find(id => profiles[id].name === choice);
-      if (existingId) {
-        currentProfileId = existingId;
-        currentProfile = profiles[existingId];
-        localStorage.setItem(LAST_PROFILE_KEY, currentProfileId);
-      } else if (choice) {
-        createProfile(choice);
-      }
+    // No saved profiles and prompting may be unavailable; create a default profile
+    createProfile('Player');
+    return;
   }
-}
+  if (typeof prompt !== 'function') {
+    // Fallback to the first profile if prompts cannot be shown
+    currentProfileId = ids[0];
+    currentProfile = profiles[currentProfileId];
+    localStorage.setItem(LAST_PROFILE_KEY, currentProfileId);
+    return;
+  }
+  let choice = '';
+  while (!currentProfile) {
+    choice = prompt(`Select profile (${ids.map(id => profiles[id].name).join(', ')})\nEnter a new name to create one:`);
+    if (choice === null || choice.trim() === '') {
+      // User cancelled; default to first profile so the UI can load
+      currentProfileId = ids[0];
+      currentProfile = profiles[currentProfileId];
+      localStorage.setItem(LAST_PROFILE_KEY, currentProfileId);
+      break;
+    }
+    const existingId = ids.find(id => profiles[id].name === choice);
+    if (existingId) {
+      currentProfileId = existingId;
+      currentProfile = profiles[existingId];
+      localStorage.setItem(LAST_PROFILE_KEY, currentProfileId);
+    } else {
+      createProfile(choice);
+    }
+  }
 }
 
 function canManageBuilding(city, building) {
