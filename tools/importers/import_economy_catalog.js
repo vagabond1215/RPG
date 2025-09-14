@@ -68,6 +68,9 @@ export async function runImport({file, dryRun=false, itemsPath='assets/data/econ
       corridor_friendly: parseBool(row.CorridorFriendly),
       regional_mult_in: Number(row.RegionalMult_InRegion)||1,
       regional_mult_out: Number(row.RegionalMult_OutOfRegion)||1,
+      sale_quantity: Number(row.SaleQuantity)||1,
+      bulk_discount_threshold: Number(row.BulkDiscountThreshold)||0,
+      bulk_discount_pct: Number(row.BulkDiscountPct)||0,
     };
 
     // validations

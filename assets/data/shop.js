@@ -26,6 +26,9 @@ export function itemsByCategory(category, limit = 10) {
     .map(item => ({
       name: item.display_name || item.internal_name,
       price: item.suggested_price_cp || item.market_value_cp,
-      category
+      category,
+      sale_quantity: item.sale_quantity,
+      bulk_discount_threshold: item.bulk_discount_threshold,
+      bulk_discount_pct: item.bulk_discount_pct
     }));
 }
