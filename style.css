@@ -1531,13 +1531,38 @@ body.theme-dark .top-menu button {
 }
 
 .shop-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto;
   align-items: center;
   gap: 0.5rem;
+  width: 100%;
+}
+
+.shop-item .item-name {
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.shop-item .item-name:hover {
+  text-shadow: 0 0 0.5rem currentColor;
+}
+
+.shop-item .sale-qty,
+.shop-item .item-price {
+  text-align: right;
 }
 
 .shop-item .qty {
   width: 4rem;
+  justify-self: center;
+}
+
+.shop-item .buy-btn {
+  width: 4rem;
+  justify-self: center;
 }
 
 .overlay {
