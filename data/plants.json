@@ -4955,5 +4955,80 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Wild thyme is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "potato",
+    "common_name": "Potato",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Potato is a herb associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly."
+  },
+  {
+    "id": "tomato",
+    "common_name": "Tomato",
+    "growth_form": "vine",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Tomato is a vine associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly."
+  },
+  {
+    "id": "cucumber",
+    "common_name": "Cucumber",
+    "growth_form": "vine",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Cucumber is a vine associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly."
+  },
+  {
+    "id": "lettuce",
+    "common_name": "Lettuce",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Lettuce is a herb associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly."
+  },
+  {
+    "id": "orange",
+    "common_name": "Orange",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Orange is a tree associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly."
   }
 ]

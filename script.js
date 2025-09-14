@@ -1255,13 +1255,27 @@ const formatHeight = cm => {
 const showBackButton = () => (backButton.style.display = 'inline-flex');
 const hideBackButton = () => (backButton.style.display = 'none');
 
+function showItemPopup(item) {
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay';
+  const popup = document.createElement('div');
+  popup.className = 'item-popup';
+  popup.innerHTML = `<button class="close-popup" aria-label="Close">×</button><h3>${item.name}</h3>` +
+    (item.base_item ? `<p>${item.base_item}</p>` : '') +
+    (item.regions ? `<p>Sources: ${item.regions.join(', ')}</p>` : '');
+  overlay.appendChild(popup);
+  document.body.appendChild(overlay);
+  const closeBtn = popup.querySelector('.close-popup');
+  if (closeBtn) closeBtn.addEventListener('click', () => overlay.remove());
+}
+
 function addItemToInventory(item) {
   currentCharacter.inventory = currentCharacter.inventory || [];
   const existing = currentCharacter.inventory.find(i => i.name === item.name);
   if (existing) {
-    existing.qty += 1;
+    existing.qty += item.qty || 1;
   } else {
-    currentCharacter.inventory.push({ ...item, qty: 1 });
+    currentCharacter.inventory.push({ ...item, qty: item.qty || 1 });
   }
 }
 
@@ -1306,7 +1320,7 @@ async function renderShopUI(buildingName) {
   sections.forEach((sec, sIdx) => {
     html += `<h2>${sec.cat}</h2><ul>`;
     sec.items.forEach((item, iIdx) => {
-      html += `<li>${item.name} - ${cpToCoins(item.price)} <button data-s="${sIdx}" data-i="${iIdx}">Buy</button></li>`;
+      html += `<li class="shop-item"><button class="item-name" data-s="${sIdx}" data-i="${iIdx}">${item.name}</button> - ${item.sale_quantity} ${item.unit} - ${cpToCoins(item.price)} <input type="number" class="qty" value="1" min="1" data-s="${sIdx}" data-i="${iIdx}"> <button class="buy-btn" data-s="${sIdx}" data-i="${iIdx}">Buy</button></li>`;
     });
     html += '</ul>';
   });
@@ -1314,16 +1328,26 @@ async function renderShopUI(buildingName) {
   setMainHTML(html);
   sections.forEach((sec, sIdx) => {
     sec.items.forEach((item, iIdx) => {
-      const btn = document.querySelector(`button[data-s="${sIdx}"][data-i="${iIdx}"]`);
-      if (btn) {
-        btn.addEventListener('click', () => {
-          const priceIron = convertCurrency(item.price, 'copper', 'coldIron');
+      const buyBtn = document.querySelector(`.buy-btn[data-s="${sIdx}"][data-i="${iIdx}"]`);
+      const qtyInput = document.querySelector(`input.qty[data-s="${sIdx}"][data-i="${iIdx}"]`);
+      const nameBtn = document.querySelector(`.item-name[data-s="${sIdx}"][data-i="${iIdx}"]`);
+      if (nameBtn) {
+        nameBtn.addEventListener('click', () => showItemPopup(item));
+      }
+      if (buyBtn) {
+        buyBtn.addEventListener('click', () => {
+          const qty = parseInt(qtyInput && qtyInput.value ? qtyInput.value : '1', 10) || 1;
+          let total = item.price * qty;
+          if (item.bulk_discount_threshold && qty >= item.bulk_discount_threshold) {
+            total *= 1 - item.bulk_discount_pct;
+          }
+          const priceIron = convertCurrency(total, 'copper', 'coldIron');
           if (toIron(currentCharacter.money) < priceIron) {
             alert('Not enough funds');
             return;
           }
           currentCharacter.money = fromIron(toIron(currentCharacter.money) - priceIron);
-          addItemToInventory({ name: item.name, category: sec.cat, price: item.price });
+          addItemToInventory({ name: item.name, category: sec.cat, price: item.price, profit: item.profit, qty });
           renderShopUI(buildingName).catch(console.error);
         });
       }
@@ -1333,7 +1357,7 @@ async function renderShopUI(buildingName) {
 
 function renderSellUI(buildingName) {
   showBackButton();
-  const categories = shopCategoriesForBuilding(buildingName).buys;
+  const { buys: categories, resale } = shopCategoriesForBuilding(buildingName);
   const inv = currentCharacter.inventory || [];
   const items = inv.filter(i => categories.includes(i.category));
   let html = `<div class="shop-screen"><h1>Sell to ${buildingName}</h1><p>Funds: ${formatCurrency(currentCharacter.money)}</p>`;
@@ -1344,7 +1368,10 @@ function renderSellUI(buildingName) {
   }
   html += '<ul>';
   items.forEach((item, idx) => {
-    html += `<li>${item.name} x${item.qty} - ${cpToCoins(item.price)} <button data-idx="${idx}">Sell</button></li>`;
+    const basePrice = item.price || 0;
+    const profit = item.profit || 0;
+    const sellPrice = resale ? Math.max(0, Math.floor(basePrice - profit)) : Math.floor(basePrice);
+    html += `<li>${item.name} x${item.qty} - ${cpToCoins(sellPrice)} <button data-idx="${idx}" data-price="${sellPrice}">Sell</button></li>`;
   });
   html += '</ul></div>';
   setMainHTML(html);
@@ -1352,8 +1379,9 @@ function renderSellUI(buildingName) {
     const btn = document.querySelector(`button[data-idx="${idx}"]`);
     if (btn) {
       btn.addEventListener('click', () => {
+        const sellPrice = parseInt(btn.getAttribute('data-price') || '0', 10);
         removeItemFromInventory(item.name);
-        const priceIron = convertCurrency(item.price, 'copper', 'coldIron');
+        const priceIron = convertCurrency(sellPrice, 'copper', 'coldIron');
         currentCharacter.money = fromIron(toIron(currentCharacter.money) + priceIron);
         renderSellUI(buildingName);
       });

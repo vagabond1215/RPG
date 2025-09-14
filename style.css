@@ -1519,3 +1519,38 @@ body.theme-dark .top-menu button {
 .backstory-block {
   margin-top: 1rem;
 }
+
+.shop-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shop-item .qty {
+  width: 4rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.item-popup {
+  background: var(--background);
+  color: var(--foreground);
+  padding: 1rem;
+  border: 1px solid #333;
+  max-width: 300px;
+}
+
+.item-popup .close-popup {
+  float: right;
+}
