@@ -9,6 +9,8 @@
   --capped-color: #2e8b57;
   --new-char-bg: #333333;
   --new-char-color: #f0f0f0;
+  --clear-data-bg: #800000;
+  --clear-data-color: #f0f0f0;
   --hp-color: #ff0000;
   --mp-color: #0000ff;
   --stamina-color: #00ff00;
@@ -257,6 +259,13 @@ button:not(:disabled):hover,
   color: var(--new-char-color);
 }
 
+#dropdownMenu button[data-action="clear-data"],
+#dropdownMenu button[data-action="clear-data"]:hover,
+#dropdownMenu button[data-action="clear-data"].selected {
+  background: var(--clear-data-bg);
+  color: var(--clear-data-color);
+}
+
 #characterMenu button svg,
 #characterMenu .letter-icon {
   width: 1.5rem;
@@ -346,6 +355,8 @@ body.theme-light {
   --capped-color: #2e8b57;
   --new-char-bg: #333333;
   --new-char-color: #f0f0f0;
+  --clear-data-bg: #800000;
+  --clear-data-color: #f0f0f0;
   --hp-color: #ff0000;
   --mp-color: #0000ff;
   --stamina-color: #00ff00;
@@ -360,6 +371,8 @@ body.theme-sepia {
   --capped-color: #1e90ff;
   --new-char-bg: #4a3b2d;
   --new-char-color: #e8dcc2;
+  --clear-data-bg: #800000;
+  --clear-data-color: #e8dcc2;
   --hp-color: #800000;
   --mp-color: #000080;
   --stamina-color: #008000;
@@ -380,6 +393,8 @@ body.theme-dark {
   --capped-color: #9370db;
   --new-char-bg: #444444;
   --new-char-color: #eeeeee;
+  --clear-data-bg: #800000;
+  --clear-data-color: #eeeeee;
   --hp-color: #800000;
   --mp-color: #000080;
   --stamina-color: #008000;
