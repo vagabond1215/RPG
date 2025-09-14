@@ -124,18 +124,18 @@ export interface Party {
 
 /* ========================= Resource Math (your latest dials) ========================= */
 // MP = 5*WIS + 2*(L-1)
-// HP = 5*VIT + 5*(L-1)
+// HP = 2.5*(VIT + CON) + 5*(L-1)
 // Stamina = 5*CON + 4*(L-1)
 
 export const LV_MAX = 50;
 
 export function maxMP(WIS:number, L:number){ return 5*WIS + 2*(L-1); }
-export function maxHP(VIT:number, L:number){ return 5*VIT + 5*(L-1); }
+export function maxHP(VIT:number, CON:number, L:number){ return 2.5*(VIT + CON) + 5*(L-1); }
 export function maxStamina(CON:number, L:number){ return 5*CON + 4*(L-1); }
 
 /** Recalculate maxes & clamp current values */
 export function recomputeResources(m: Member): void {
-  m.resources.HPMax = maxHP(m.attributes.VIT, m.level);
+  m.resources.HPMax = maxHP(m.attributes.VIT, m.attributes.CON, m.level);
   m.resources.MPMax = maxMP(m.attributes.WIS, m.level);
   m.resources.StaminaMax = maxStamina(m.attributes.CON, m.level);
   m.resources.HP = Math.min(m.resources.HP, m.resources.HPMax);

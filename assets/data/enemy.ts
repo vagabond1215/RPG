@@ -25,6 +25,6 @@ export function recomputeEnemyResources(e: Enemy): void {
   recomputeResources(e);
 }
 
-export const enemyMaxHP = (vit: number, level: number) => maxHP(vit, level);
+export const enemyMaxHP = (vit: number, con: number, level: number) => maxHP(vit, con, level);
 export const enemyMaxMP = (wis: number, level: number) => maxMP(wis, level);
 export const enemyMaxStamina = (con: number, level: number) => maxStamina(con, level);
