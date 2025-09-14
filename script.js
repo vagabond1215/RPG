@@ -1328,7 +1328,7 @@ async function renderShopUI(buildingName) {
       html += `<li class="shop-item">
         <button class="item-name" data-s="${sIdx}" data-i="${iIdx}">${item.name}</button>
         <span class="sale-qty">${item.sale_quantity} ${item.unit}</span>
-        <span class="item-price">${cpToCoins(item.price)}</span>
+        <span class="item-price">${cpToCoins(item.price, true, true)}</span>
         <input type="number" class="qty" value="1" min="1" data-s="${sIdx}" data-i="${iIdx}">
         <button class="buy-btn" data-s="${sIdx}" data-i="${iIdx}">Buy</button>
       </li>`;
@@ -1383,7 +1383,7 @@ function renderSellUI(buildingName) {
     const basePrice = item.price || 0;
     const profit = item.profit || 0;
     const sellPrice = resale ? Math.max(0, Math.floor(basePrice - profit)) : Math.floor(basePrice);
-    html += `<li>${item.name} x${item.qty} - ${cpToCoins(sellPrice)} <button data-idx="${idx}" data-price="${sellPrice}">Sell</button></li>`;
+    html += `<li>${item.name} x${item.qty} - ${cpToCoins(sellPrice, true, true)} <button data-idx="${idx}" data-price="${sellPrice}">Sell</button></li>`;
   });
   html += '</ul></div>';
   setMainHTML(html);
@@ -1501,7 +1501,7 @@ function showNavigation() {
     const aria = prompt ? `${prompt} ${name}` : name;
     const dis = disabled ? 'disabled' : '';
     const cls = extraClass ? ` ${extraClass}` : '';
-    const labelHTML = icon ? '' : `<span class="street-sign">${name}</span>`;
+    const labelHTML = icon && type !== 'interaction' ? '' : `<span class="street-sign">${name}</span>`;
     return `<div class="nav-item${cls}"><button data-type="${type}" ${attrs} aria-label="${aria}" ${dis}>${iconHTML}</button>${labelHTML}</div>`;
   };
   if (pos.building) {
