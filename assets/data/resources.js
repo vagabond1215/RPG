@@ -19,7 +19,7 @@ export const OTHER_GROWTH = { a: 2, c: 1 };
 
 /** Resource formulas (updated factors) */
 export const maxMP      = (WIS, L) => 5 * WIS + 2 * (L - 1);
-export const maxHP      = (VIT, L) => 5 * VIT + 5 * (L - 1);
+export const maxHP      = (VIT, CON, L) => 2.5 * (VIT + CON) + 5 * (L - 1);
 export const maxStamina = (CON, L) => 5 * CON + 4 * (L - 1);
 
 /**
@@ -86,7 +86,7 @@ export function attributesAtLevel(A0, L, isHuman, choicePlan) {
 export function computeResources(A0, L, isHuman, choicePlan) {
   const at = attributesAtLevel(A0, L, isHuman, choicePlan);
   return {
-    HP:      maxHP(at.VIT, L),
+    HP:      maxHP(at.VIT, at.CON, L),
     MP:      maxMP(at.WIS, L),
     Stamina: maxStamina(at.CON, L),
     attrs:   at

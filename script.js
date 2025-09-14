@@ -964,13 +964,13 @@ const defaultProficiencies = {
 };
 
 function assignMagicAptitudes(character) {
-  const aptitude = character.magicAptitude || 'low';
   const intStat = character.attributes?.current?.INT ?? 0;
   const wisStat = character.attributes?.current?.WIS ?? 0;
   const avgStat = (intStat + wisStat) / 2;
-  // Stats at or below 10 reduce the chance while higher stats boost it
-  const statMod = Math.max(0.5, 1 + (avgStat - 10) * 0.05);
-  const elemChance = (aptitude === 'high' ? 0.3 : aptitude === 'med' ? 0.2 : 0.1) * statMod;
+  const lowAvg = 9.5;
+  const highAvg = 16.5;
+  const norm = Math.max(0, Math.min(1, (avgStat - lowAvg) / (highAvg - lowAvg)));
+  const elemChance = 0.10 + (0.30 - 0.10) * norm;
   const elemental = [
     'stone',
     'water',
@@ -981,16 +981,25 @@ function assignMagicAptitudes(character) {
     'dark',
     'light'
   ];
-  const baseSchoolChances = {
-    destructive: 0.33,
-    reinforcement: 0.33,
-    enfeebling: 0.33,
-    healing: 0.2,
-    summoning: 0.1,
+  const lowSchoolChances = {
+    destructive: 0.30,
+    reinforcement: 0.30,
+    enfeebling: 0.30,
+    healing: 0.15,
+    summoning: 0.075,
+  };
+  const highSchoolChances = {
+    destructive: 0.60,
+    reinforcement: 0.60,
+    enfeebling: 0.60,
+    healing: 0.30,
+    summoning: 0.15,
   };
   const schoolChances = {};
-  for (const [key, chance] of Object.entries(baseSchoolChances)) {
-    schoolChances[key] = chance * statMod;
+  for (const key of Object.keys(lowSchoolChances)) {
+    const low = lowSchoolChances[key];
+    const high = highSchoolChances[key];
+    schoolChances[key] = low + (high - low) * norm;
   }
 
   const classMap = {
@@ -1016,16 +1025,13 @@ function assignMagicAptitudes(character) {
 
   // Roll for elemental proficiencies; ensure at least one is granted
   if (!hasElement) {
-    let firstPass = true;
     while (!hasElement) {
       for (const key of elemental) {
         if (Math.random() < elemChance) {
           character[key] = 1;
           hasElement = true;
-          if (!firstPass) break;
         }
       }
-      if (!hasElement) firstPass = false;
     }
   }
 
@@ -2506,7 +2512,7 @@ function startCharacterCreation() {
           baseAttrs[k] = (baseAttrs[k] || 0) + v;
         }
         const resources = {
-          HP: maxHP(baseAttrs.VIT, 1),
+          HP: maxHP(baseAttrs.VIT, baseAttrs.CON, 1),
           MP: maxMP(baseAttrs.WIS, 1),
           ST: maxStamina(baseAttrs.CON, 1),
         };
@@ -2533,7 +2539,7 @@ function startCharacterCreation() {
       if (!character.race) return {};
       const attrs = getRaceStartingAttributes(character.race);
       const resources = {
-        HP: maxHP(attrs.VIT, 1),
+        HP: maxHP(attrs.VIT, attrs.CON, 1),
         MP: maxMP(attrs.WIS, 1),
         ST: maxStamina(attrs.CON, 1),
       };
@@ -2964,7 +2970,7 @@ function finalizeCharacter(character) {
     }
   }
   const resources = {
-    maxHP: maxHP(attrBlock.VIT, 1),
+    maxHP: maxHP(attrBlock.VIT, attrBlock.CON, 1),
     maxMP: maxMP(attrBlock.WIS, 1),
     maxStamina: maxStamina(attrBlock.CON, 1),
   };
