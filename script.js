@@ -1317,12 +1317,24 @@ async function renderShopUI(buildingName) {
     setMainHTML(html);
     return;
   }
+  const collapsible = sections.length > 1;
   sections.forEach((sec, sIdx) => {
-    html += `<h2>${sec.cat}</h2><ul>`;
+    if (collapsible) {
+      html += `<details class="shop-category" open><summary>${sec.cat}</summary><ul>`;
+    } else {
+      html += `<h2>${sec.cat}</h2><ul>`;
+    }
     sec.items.forEach((item, iIdx) => {
-      html += `<li class="shop-item"><button class="item-name" data-s="${sIdx}" data-i="${iIdx}">${item.name}</button> - ${item.sale_quantity} ${item.unit} - ${cpToCoins(item.price)} <input type="number" class="qty" value="1" min="1" data-s="${sIdx}" data-i="${iIdx}"> <button class="buy-btn" data-s="${sIdx}" data-i="${iIdx}">Buy</button></li>`;
+      html += `<li class="shop-item">
+        <button class="item-name" data-s="${sIdx}" data-i="${iIdx}">${item.name}</button>
+        <span class="sale-qty">${item.sale_quantity} ${item.unit}</span>
+        <span class="item-price">${cpToCoins(item.price)}</span>
+        <input type="number" class="qty" value="1" min="1" data-s="${sIdx}" data-i="${iIdx}">
+        <button class="buy-btn" data-s="${sIdx}" data-i="${iIdx}">Buy</button>
+      </li>`;
     });
     html += '</ul>';
+    if (collapsible) html += '</details>';
   });
   html += '</div>';
   setMainHTML(html);
