@@ -52,7 +52,18 @@ export const REGIONS = [
 ] as const;
 export type Region = typeof REGIONS[number];
 
-export const DIET = ["herbivore","carnivore","omnivore","insectivore","detritivore","filter_feeder"] as const;
+export const DIET = [
+  "herbivore",
+  "carnivore",
+  "omnivore",
+  "insectivore",
+  "detritivore",
+  "filter_feeder",
+  "grazer",
+  "browser",
+  "scavenger",
+  "piscivore",
+] as const;
 export type Diet = typeof DIET[number];
 
 export const RISK = ["none","low","moderate","high","extreme"] as const;
