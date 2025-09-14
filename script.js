@@ -1291,10 +1291,12 @@ function showInventoryUI() {
   setMainHTML(html);
 }
 
-function renderShopUI(buildingName) {
+async function renderShopUI(buildingName) {
   showBackButton();
   const categories = shopCategoriesForBuilding(buildingName).sells;
-  const sections = categories.map(cat => ({ cat, items: itemsByCategory(cat) }));
+  const sections = await Promise.all(
+    categories.map(async cat => ({ cat, items: await itemsByCategory(cat) }))
+  );
   let html = `<div class="shop-screen"><h1>${buildingName} Shop</h1><p>Funds: ${formatCurrency(currentCharacter.money)}</p>`;
   if (!sections.length) {
     html += '<p>No goods for sale.</p></div>';
@@ -1322,7 +1324,7 @@ function renderShopUI(buildingName) {
           }
           currentCharacter.money = fromIron(toIron(currentCharacter.money) - priceIron);
           addItemToInventory({ name: item.name, category: sec.cat, price: item.price });
-          renderShopUI(buildingName);
+          renderShopUI(buildingName).catch(console.error);
         });
       }
     });
@@ -1701,7 +1703,7 @@ function showNavigation() {
           };
         } else if (type === 'interaction') {
             if (action === 'shop') {
-              renderShopUI(pos.building);
+              renderShopUI(pos.building).catch(console.error);
               return;
             } else if (action === 'sell') {
               renderSellUI(pos.building);

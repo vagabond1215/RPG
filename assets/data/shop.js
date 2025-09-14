@@ -1,4 +1,13 @@
-import ECONOMY_ITEMS from './economy_items.json' assert { type: 'json' };
+let economyItemsPromise = null;
+
+async function loadEconomyItems() {
+  if (!economyItemsPromise) {
+    economyItemsPromise = fetch('assets/data/economy_items.json')
+      .then(res => (res.ok ? res.json() : []))
+      .catch(() => []);
+  }
+  return economyItemsPromise;
+}
 
 const SHOP_RULES = [
   { pattern: /(smith|forge|armory|smithy)/i, sells: ['Weapons', 'Armor', 'Tools'], buys: ['Weapons', 'Armor', 'Tools'] },
@@ -20,8 +29,14 @@ export function shopCategoriesForBuilding(name) {
   return { sells: [], buys: [] };
 }
 
-export function itemsByCategory(category, limit = 10) {
-  return ECONOMY_ITEMS.filter(item => item.category_key === category && (item.quality_tier === 'Common' || item.quality_tier === 'Standard'))
+export async function itemsByCategory(category, limit = 10) {
+  const items = await loadEconomyItems();
+  return items
+    .filter(
+      item =>
+        item.category_key === category &&
+        (item.quality_tier === 'Common' || item.quality_tier === 'Standard')
+    )
     .slice(0, limit)
     .map(item => ({
       name: item.display_name || item.internal_name,
@@ -29,6 +44,6 @@ export function itemsByCategory(category, limit = 10) {
       category,
       sale_quantity: item.sale_quantity,
       bulk_discount_threshold: item.bulk_discount_threshold,
-      bulk_discount_pct: item.bulk_discount_pct
+      bulk_discount_pct: item.bulk_discount_pct,
     }));
 }
