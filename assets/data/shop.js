@@ -52,6 +52,18 @@ const SHOP_RULES = [
     buys: ['Food & Drink', 'Produce'],
     resale: false,
   },
+  {
+    pattern: /(workshop|coachworks|mill|quarry|brickworks|stoneworks|co-op|guild)/i,
+    sells: ['Tools'],
+    buys: ['Tools'],
+    resale: false,
+  },
+  {
+    pattern: /(farm|orchard|pasture|polder|dairy|vineyard|apiary|hive|grove|meadow|stockyard)/i,
+    sells: ['Produce'],
+    buys: ['Produce'],
+    resale: false,
+  },
 ];
 
 export function shopCategoriesForBuilding(name) {
