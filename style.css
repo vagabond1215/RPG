@@ -14,8 +14,8 @@
   --hp-color: #ff0000;
   --mp-color: #0000ff;
   --stamina-color: #00ff00;
-  --menu-button-size: 5rem;
-  --menu-height: calc(var(--menu-button-size) + 4px);
+  --menu-button-size: 2.625rem;
+  --menu-height: var(--menu-button-size);
 }
 
 html {
@@ -52,8 +52,8 @@ main {
   background: var(--background);
   display: flex;
   flex-direction: row;
-  gap: 0.125rem;
-  padding: 2px 0.5rem;
+  gap: 0.0625rem;
+  padding: 0 0.5rem;
   height: var(--menu-button-size);
   align-items: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -81,8 +81,8 @@ main {
 
   .top-menu button svg,
   .top-menu button img {
-    width: 52.5%;
-    height: 52.5%;
+    width: 100%;
+    height: 100%;
     display: block;
   }
   .top-menu button img {
@@ -94,8 +94,8 @@ main {
     fill: none;
   }
   #back-button img {
-    width: 60%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
   #menu-button,
@@ -119,7 +119,7 @@ main {
 
 .settings-group {
   display: flex;
-  gap: 0.125rem;
+  gap: 0.0625rem;
   position: relative;
 }
 
@@ -135,7 +135,7 @@ main {
 
 #settings-panel {
   display: flex;
-  gap: 0.125rem;
+  gap: 0.0625rem;
   overflow: hidden;
   position: absolute;
   pointer-events: none;
@@ -144,7 +144,7 @@ main {
   flex-direction: row;
   top: 0;
   left: 100%;
-  margin-left: 0.125rem;
+  margin-left: 0.0625rem;
   transform: scaleX(0);
   transform-origin: left;
 }
@@ -1558,6 +1558,7 @@ body.theme-dark .top-menu button {
   padding: 0;
   text-align: left;
   cursor: pointer;
+  color: var(--foreground);
 }
 
 .shop-item .item-name:hover {
