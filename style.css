@@ -1593,6 +1593,24 @@ body.theme-dark .top-menu button {
   justify-self: center;
 }
 
+@media (orientation: portrait) {
+  .shop-screen ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .shop-item {
+    grid-template-columns: auto 6rem 8rem calc(3ch + 1rem) calc(3ch + 1rem);
+  }
+
+  .shop-item .qty,
+  .shop-item .buy-btn {
+    width: calc(3ch + 1rem);
+    padding: 0 0.25rem;
+  }
+}
+
 .currency {
   display: inline-flex;
   align-items: center;
