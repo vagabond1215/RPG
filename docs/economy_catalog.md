@@ -56,7 +56,7 @@ A report is written to `reports/import_economy_catalog_<timestamp>.json` summari
 
 ## Currency Helpers
 
-Coin arithmetic and formatting reuse the existing utilities in `assets/data/currency.js` to avoid duplicate currency logic.
+Coin arithmetic and formatting reuse the existing utilities in `assets/economy/currency.js` to avoid duplicate currency logic.
 
 ## Regional Pricing
 

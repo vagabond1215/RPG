@@ -2,7 +2,7 @@ let economyItemsPromise = null;
 
 async function loadEconomyItems() {
   if (!economyItemsPromise) {
-    economyItemsPromise = fetch('assets/data/economy_items.json')
+    economyItemsPromise = fetch('assets/economy/items.json')
       .then(res => (res.ok ? res.json() : []))
       .catch(() => []);
   }

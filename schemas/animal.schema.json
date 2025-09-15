@@ -169,6 +169,18 @@
         "collective": {"type": "string"}
       }
     },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label"],
+        "properties": {
+          "label": {"type": "string"},
+          "notes": {"type": "string"}
+        }
+      }
+    },
     "size_class": {"type": "string", "enum": ["tiny","small","medium","large","huge"]},
     "mating_season": {"type": "string"},
     "gestation_period": {"type": "string"},

@@ -5,7 +5,7 @@ import os from 'os';
 import path from 'path';
 import xlsx from 'xlsx';
 import { runImport } from '../../tools/importers/import_economy_catalog.js';
-import { toCp, cpToCoins } from '../../assets/data/currency.js';
+import { toCp, cpToCoins } from '../../assets/economy/currency.js';
 import { computePrice } from '../../assets/economy/regional_pricing.js';
 
 function makeTmp(){

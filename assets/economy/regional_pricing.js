@@ -1,4 +1,6 @@
-import { clamp } from './util.js';
+function clamp(v, min, max) {
+  return Math.min(Math.max(v, min), max);
+}
 
 export function computePrice(cp, item, destinationBiome, policy){
   if (item.regions && item.regions.includes(destinationBiome)){

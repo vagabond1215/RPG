@@ -48,6 +48,20 @@
         "food_tier": {"type": "array", "items": {"type": "string", "enum": ["common","fine","high table","luxury","arcane"]}},
         "luxury_tier": {"type": "array", "items": {"type": "string", "enum": ["common","fine","high table","luxury","arcane"]}}
       }
+    },
+    "skus": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sku", "units"],
+        "properties": {
+          "sku": {"type": "string"},
+          "units": {"type": "string"},
+          "tiers": {"type": "array", "items": {"type": "string"}},
+          "luxury_tiers": {"type": "array", "items": {"type": "string"}}
+        }
+      }
     }
   }
 }

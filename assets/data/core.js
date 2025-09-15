@@ -1,7 +1,7 @@
 // Core game constants, enums, templates and helper functions
 
 import { createEmptyEquipment } from "./equipment.js";
-import { createEmptyCurrency } from "./currency.js";
+import { createEmptyCurrency } from "../economy/currency.js";
 
 // ---- Cost & Scaling ----
 export function mpCost(tier) {

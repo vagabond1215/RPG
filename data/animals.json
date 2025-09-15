@@ -1209,7 +1209,23 @@
       "milk_production_duration": "",
       "wool_shearing_cycle": ""
     },
-    "butchering_age": "6 months"
+    "butchering_age": "6 months",
+    "variants": [
+      {
+        "label": "Common"
+      },
+      {
+        "label": "Fine"
+      },
+      {
+        "label": "Trained",
+        "notes": "Accustomed to handling"
+      },
+      {
+        "label": "Champion",
+        "notes": "Exceptional breeder/show"
+      }
+    ]
   },
   {
     "id": "chub",
@@ -2195,7 +2211,23 @@
       "milk_production_duration": "6 months for foal",
       "wool_shearing_cycle": ""
     },
-    "butchering_age": "4 years"
+    "butchering_age": "4 years",
+    "variants": [
+      {
+        "label": "Common"
+      },
+      {
+        "label": "Fine"
+      },
+      {
+        "label": "Trained",
+        "notes": "Harness trained"
+      },
+      {
+        "label": "Champion",
+        "notes": "Superior strength/endurance"
+      }
+    ]
   },
   {
     "id": "duck",

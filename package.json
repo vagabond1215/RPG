@@ -4,7 +4,6 @@
   "description": "This repository hosts a simple web-based text RPG prototype intended for deployment via [GitHub Pages](https://pages.github.com/).",
   "main": "script.js",
   "scripts": {
-    "migrate": "tsx scripts/migrateExistingData.ts",
     "validate": "tsx scripts/validateData.ts",
     "build:indexes": "tsx scripts/buildIndexes.ts",
     "test": "vitest run tests/*.test.ts"
