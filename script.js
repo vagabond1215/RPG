@@ -2105,7 +2105,11 @@ function showSpellbookUI() {
     const schoolValue = currentCharacter[schoolKey] ?? 0;
     const profKey = elementalProficiencyMap[spell.element.toLowerCase()];
     const elemValue = currentCharacter[profKey] ?? 0;
-    if (elemValue >= spell.proficiency && schoolValue >= spell.proficiency) {
+    // Default spells have a proficiency requirement of 0. They should only
+    // unlock once the character has at least some proficiency in both the
+    // associated element and school. Treat 0 as requiring a minimum of 1.
+    const req = Math.max(spell.proficiency, 1);
+    if (elemValue >= req && schoolValue >= req) {
       unlocked.push(spell);
     }
   }
