@@ -14,7 +14,7 @@ import {
   createEmptyCurrency,
   formatCurrency,
   cpToCoins,
-} from "./assets/data/currency.js";
+} from "./assets/economy/currency.js";
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipment.js";
 import { LOCATIONS } from "./assets/data/locations.js";
 import { CITY_NAV } from "./assets/data/city_nav.js";

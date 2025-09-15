@@ -213,7 +213,49 @@
       "clover"
     ],
     "rotation_relationships": "Orchards with legume ground cover enrich soil",
-    "fallow_notes": "Prune annually; replant after 25 years to rejuvenate grove"
+    "fallow_notes": "Prune annually; replant after 25 years to rejuvenate grove",
+    "skus": [
+      {
+        "sku": "Apples",
+        "units": "dozen",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Red Apples",
+        "units": "dozen",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Green Apples",
+        "units": "dozen",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Golden Apples",
+        "units": "dozen",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "apricot",
@@ -659,7 +701,29 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
-    "narrative": "The Broad beans is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+    "narrative": "The Broad beans is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "skus": [
+      {
+        "sku": "Pinto Beans",
+        "units": "lb",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Black Beans",
+        "units": "lb",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "broom-scotch-broom",
@@ -797,7 +861,39 @@
       "onion"
     ],
     "rotation_relationships": "Rotate with legumes and roots to deter pests",
-    "fallow_notes": "Avoid planting brassicas in same bed for three years"
+    "fallow_notes": "Avoid planting brassicas in same bed for three years",
+    "skus": [
+      {
+        "sku": "Cabbage",
+        "units": "head",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Green Cabbage",
+        "units": "each",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Red Cabbage",
+        "units": "each",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "caraway",
@@ -884,7 +980,19 @@
         "common"
       ],
       "luxury_tier": []
-    }
+    },
+    "skus": [
+      {
+        "sku": "Orange Carrots",
+        "units": "bunch",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "carrots",
@@ -978,7 +1086,19 @@
         "fine",
         "high table"
       ]
-    }
+    },
+    "skus": [
+      {
+        "sku": "Chanterelles",
+        "units": "basket",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "chard",
@@ -1072,7 +1192,19 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
-    "narrative": "The Chickpeas is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+    "narrative": "The Chickpeas is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "skus": [
+      {
+        "sku": "Chickpeas",
+        "units": "lb",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "chicory",
@@ -1953,7 +2085,29 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
-    "narrative": "The Grapes is a vine associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+    "narrative": "The Grapes is a vine associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "skus": [
+      {
+        "sku": "Red Grapes",
+        "units": "lb",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "White Grapes",
+        "units": "lb",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "guelder-rose",
@@ -2424,7 +2578,39 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
-    "narrative": "The Lentils is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+    "narrative": "The Lentils is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "skus": [
+      {
+        "sku": "Brown Lentils",
+        "units": "lb",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Red Lentils",
+        "units": "lb",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Green Lentils",
+        "units": "lb",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "licorice",
@@ -2969,7 +3155,39 @@
         "common"
       ],
       "luxury_tier": []
-    }
+    },
+    "skus": [
+      {
+        "sku": "Yellow Onions",
+        "units": "sack",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Red Onions",
+        "units": "sack",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "White Onions",
+        "units": "sack",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "onions",
@@ -3278,7 +3496,19 @@
         "luxury",
         "arcane"
       ]
-    }
+    },
+    "skus": [
+      {
+        "sku": "Peppercorns",
+        "units": "sack",
+        "luxury_tiers": [
+          "Common",
+          "Fine",
+          "Luxury",
+          "Arcane"
+        ]
+      }
+    ]
   },
   {
     "id": "pine",
@@ -3821,7 +4051,19 @@
       "grapes"
     ],
     "rotation_relationships": "Rotate with cereals to prevent soil exhaustion",
-    "fallow_notes": "Fields rest after four years of continuous saffron"
+    "fallow_notes": "Fields rest after four years of continuous saffron",
+    "skus": [
+      {
+        "sku": "Saffron",
+        "units": "dram",
+        "luxury_tiers": [
+          "Common",
+          "Fine",
+          "Luxury",
+          "Arcane"
+        ]
+      }
+    ]
   },
   {
     "id": "sage",
@@ -4174,7 +4416,19 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
-    "narrative": "The Strawberries is a shrub associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+    "narrative": "The Strawberries is a shrub associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "skus": [
+      {
+        "sku": "Red Strawberries",
+        "units": "pint",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "strawberry-tree",
@@ -4969,7 +5223,39 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
-    "narrative": "The Potato is a herb associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly."
+    "narrative": "The Potato is a herb associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly.",
+    "skus": [
+      {
+        "sku": "Russet Potatoes",
+        "units": "sack",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Red Potatoes",
+        "units": "sack",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Yukon Gold Potatoes",
+        "units": "sack",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "tomato",
@@ -4984,7 +5270,19 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
-    "narrative": "The Tomato is a vine associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly."
+    "narrative": "The Tomato is a vine associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly.",
+    "skus": [
+      {
+        "sku": "Red Tomatoes",
+        "units": "lb",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "cucumber",
@@ -4999,7 +5297,19 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
-    "narrative": "The Cucumber is a vine associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly."
+    "narrative": "The Cucumber is a vine associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly.",
+    "skus": [
+      {
+        "sku": "Green Cucumbers",
+        "units": "each",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "lettuce",
@@ -5014,7 +5324,19 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
-    "narrative": "The Lettuce is a herb associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly."
+    "narrative": "The Lettuce is a herb associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly.",
+    "skus": [
+      {
+        "sku": "Green Lettuce",
+        "units": "each",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "orange",
@@ -5029,6 +5351,38 @@
     "cultivated": true,
     "edible": true,
     "byproducts": [],
-    "narrative": "The Orange is a tree associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly."
+    "narrative": "The Orange is a tree associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly.",
+    "skus": [
+      {
+        "sku": "Navel Oranges",
+        "units": "dozen",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Blood Oranges",
+        "units": "dozen",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Seville Oranges",
+        "units": "dozen",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   }
 ]

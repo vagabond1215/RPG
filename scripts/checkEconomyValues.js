@@ -1,4 +1,4 @@
-import items from '../assets/data/economy_items.json' assert { type: 'json' };
+import items from '../assets/economy/items.json' assert { type: 'json' };
 const bad = items.filter(i =>
   i.market_value_cp == null ||
   i.net_profit_cp == null ||
