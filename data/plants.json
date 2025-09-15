@@ -1,5 +1,20 @@
 [
   {
+    "id": "acacia",
+    "common_name": "Acacia",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Acacia is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "aconite",
     "common_name": "Aconite",
     "growth_form": "herb",
@@ -13,6 +28,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Aconite is a herb associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "agave",
+    "common_name": "Agave",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Agave is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "agrimony",
@@ -107,6 +137,36 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Almond is a tree associated with terrestrial regions and typically rooted in forest. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "aloe-vera",
+    "common_name": "Aloe vera",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Aloe vera is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "amaranth",
+    "common_name": "Amaranth",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Amaranth is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "angelica",
@@ -292,6 +352,36 @@
     "narrative": "The Arrowhead is a herb associated with aquatic fresh regions and typically rooted in wetland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "arrowroot",
+    "common_name": "Arrowroot",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Arrowroot is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "artemisia",
+    "common_name": "Artemisia",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Artemisia is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "ash",
     "common_name": "Ash",
     "growth_form": "tree",
@@ -305,6 +395,66 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Ash is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "asparagus",
+    "common_name": "Asparagus",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Asparagus is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "azalea",
+    "common_name": "Azalea",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Azalea is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "bamboo",
+    "common_name": "Bamboo",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Bamboo is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "baobab",
+    "common_name": "Baobab",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Baobab is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "barberry",
@@ -444,6 +594,21 @@
     "narrative": "The Beets is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "begonia",
+    "common_name": "Begonia",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Begonia is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "belladonna",
     "common_name": "Belladonna",
     "growth_form": "herb",
@@ -457,6 +622,36 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Belladonna is a herb associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "bergamot",
+    "common_name": "Bergamot",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Bergamot is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "betel-leaf",
+    "common_name": "Betel leaf",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Betel leaf is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "betony",
@@ -555,6 +750,36 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Bitter orange is a tree associated with terrestrial regions and typically rooted in forest. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "bitter-vetch",
+    "common_name": "Bitter vetch",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Bitter vetch is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "black-pepper",
+    "common_name": "Black pepper",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Black pepper is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "blackberries",
@@ -775,6 +1000,21 @@
     "narrative": "The Buckwheat is a grass associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "bullace-plum",
+    "common_name": "Bullace plum",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Bullace plum is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "bulrush",
     "common_name": "Bulrush",
     "growth_form": "herb",
@@ -896,6 +1136,51 @@
     ]
   },
   {
+    "id": "cacao",
+    "common_name": "Cacao",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Cacao is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "camellia",
+    "common_name": "Camellia",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Camellia is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "caper",
+    "common_name": "Caper",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Caper is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "caraway",
     "common_name": "Caraway",
     "growth_form": "herb",
@@ -909,6 +1194,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Caraway is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "cardamom",
+    "common_name": "Cardamom",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Cardamom is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "carrageen-moss",
@@ -1010,6 +1310,66 @@
     "narrative": "The Carrots is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "cassava",
+    "common_name": "Cassava",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Cassava is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "castor-bean",
+    "common_name": "Castor bean",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Castor bean is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "catnip",
+    "common_name": "Catnip",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Catnip is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "cattail",
+    "common_name": "Cattail",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Cattail is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "cedar",
     "common_name": "Cedar",
     "growth_form": "tree",
@@ -1023,6 +1383,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Cedar is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "celery",
+    "common_name": "Celery",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Celery is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "chaga",
@@ -1135,6 +1510,21 @@
     "narrative": "The Cherries is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "cherry",
+    "common_name": "Cherry",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Cherry is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "chervil",
     "common_name": "Chervil",
     "growth_form": "herb",
@@ -1178,6 +1568,51 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Chestnuts is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "chia",
+    "common_name": "Chia",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Chia is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "chickling-vetch",
+    "common_name": "Chickling vetch",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Chickling vetch is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "chickpea",
+    "common_name": "Chickpea",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Chickpea is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "chickpeas",
@@ -1241,6 +1676,21 @@
     "narrative": "The Chives is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Gatherers prize it for byproducts such as herb, useful in trade or craft. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "cinnamon",
+    "common_name": "Cinnamon",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Cinnamon is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "citron",
     "common_name": "Citron",
     "growth_form": "tree",
@@ -1269,6 +1719,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Cloudberry is a shrub associated with terrestrial regions and typically rooted in wetland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "clove",
+    "common_name": "Clove",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Clove is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "clover",
@@ -1318,6 +1783,36 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Clubmoss is a herb associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "coconut",
+    "common_name": "Coconut",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Coconut is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "coffee",
+    "common_name": "Coffee",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Coffee is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "coltsfoot",
@@ -1429,6 +1924,21 @@
     "narrative": "The Cornelian cherry is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "cotton",
+    "common_name": "Cotton",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Cotton is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "cotton-grass",
     "common_name": "Cotton grass",
     "growth_form": "grass",
@@ -1472,6 +1982,33 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Cranberry is a shrub associated with terrestrial regions and typically rooted in wetland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "cucumber",
+    "common_name": "Cucumber",
+    "growth_form": "vine",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Cucumber is a vine associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "skus": [
+      {
+        "sku": "Green Cucumbers",
+        "units": "each",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
   },
   {
     "id": "currant",
@@ -1662,6 +2199,21 @@
     "narrative": "The Dogwood is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "dragonfruit",
+    "common_name": "Dragonfruit",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Dragonfruit is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "duckweed",
     "common_name": "Duckweed",
     "growth_form": "herb",
@@ -1675,6 +2227,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Duckweed is a herb associated with aquatic fresh regions and typically rooted in wetland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "durian",
+    "common_name": "Durian",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Durian is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "eelgrass-zostera",
@@ -1730,6 +2297,21 @@
     "narrative": "The Elder is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "elderberry",
+    "common_name": "Elderberry",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Elderberry is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "elm",
     "common_name": "Elm",
     "growth_form": "tree",
@@ -1783,6 +2365,21 @@
     "narrative": "The Ergot (rye fungus) is a fungus associated with terrestrial regions and typically rooted in farmland. This plant grows wild with little human intervention and is generally considered inedible and may be harmful if consumed. Gatherers prize it for byproducts such as mushroom, useful in trade or craft. Explorers should note that contact or ingestion may cause adverse reactions, making caution essential. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "eucalyptus",
+    "common_name": "Eucalyptus",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Eucalyptus is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "fennel",
     "common_name": "Fennel",
     "growth_form": "herb",
@@ -1830,6 +2427,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Feverfew is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "fig",
+    "common_name": "Fig",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Fig is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "figs",
@@ -1936,6 +2548,21 @@
     "narrative": "The Fly agaric is a mushroom associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and is generally considered inedible and may be harmful if consumed. Gatherers prize it for byproducts such as mushroom, useful in trade or craft. Explorers should note that contact or ingestion may cause adverse reactions, making caution essential. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "fodder-vetch",
+    "common_name": "Fodder vetch",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Fodder vetch is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "foxglove",
     "common_name": "Foxglove",
     "growth_form": "herb",
@@ -1949,6 +2576,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Foxglove is a herb associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "foxtail-millet",
+    "common_name": "Foxtail millet",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Foxtail millet is a grass associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "frogbit",
@@ -2022,6 +2664,36 @@
       ],
       "luxury_tier": []
     }
+  },
+  {
+    "id": "ginkgo",
+    "common_name": "Ginkgo",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Ginkgo is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "ginseng",
+    "common_name": "Ginseng",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Ginseng is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "gooseberry",
@@ -2108,6 +2780,36 @@
         ]
       }
     ]
+  },
+  {
+    "id": "guarana",
+    "common_name": "Guarana",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Guarana is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "guava",
+    "common_name": "Guava",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Guava is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "guelder-rose",
@@ -2247,6 +2949,21 @@
     "narrative": "The Henbane is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "hibiscus",
+    "common_name": "Hibiscus",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Hibiscus is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "holly",
     "common_name": "Holly",
     "growth_form": "tree",
@@ -2326,6 +3043,21 @@
     "narrative": "The Hornwort is a herb associated with aquatic fresh regions and typically rooted in lake. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "horseradish",
+    "common_name": "Horseradish",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Horseradish is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "horsetail",
     "common_name": "Horsetail",
     "growth_form": "herb",
@@ -2386,6 +3118,51 @@
     "narrative": "The Ivy is a herb associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "jackfruit",
+    "common_name": "Jackfruit",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Jackfruit is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "jasmine",
+    "common_name": "Jasmine",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Jasmine is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "jicama",
+    "common_name": "Jicama",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Jicama is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "juniper",
     "common_name": "Juniper",
     "growth_form": "tree",
@@ -2401,6 +3178,36 @@
     "narrative": "The Juniper is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "kale",
+    "common_name": "Kale",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Kale is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "kava",
+    "common_name": "Kava",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Kava is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "kelp",
     "common_name": "Kelp",
     "growth_form": "seaweed",
@@ -2414,6 +3221,81 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Kelp is a seaweed associated with aquatic salt regions and typically rooted in coastal. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "khat",
+    "common_name": "Khat",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Khat is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "kiwi-fruit",
+    "common_name": "Kiwi fruit",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Kiwi fruit is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "kohlrabi",
+    "common_name": "Kohlrabi",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Kohlrabi is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "kumquat",
+    "common_name": "Kumquat",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Kumquat is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "ladys-bedstraw",
+    "common_name": "Lady's bedstraw",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Lady's bedstraw is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "lambs-lettuce",
@@ -2476,6 +3358,21 @@
     "narrative": "The Laver is a seaweed associated with aquatic salt regions and typically rooted in coastal. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "leek",
+    "common_name": "Leek",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Leek is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "leeks",
     "common_name": "Leeks",
     "growth_form": "herb",
@@ -2508,6 +3405,21 @@
       }
     ],
     "narrative": "The Lemon is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Gatherers prize it for byproducts such as fruit, useful in trade or craft. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "lemongrass",
+    "common_name": "Lemongrass",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Lemongrass is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "lentil",
@@ -2613,6 +3525,33 @@
     ]
   },
   {
+    "id": "lettuce",
+    "common_name": "Lettuce",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Lettuce is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "skus": [
+      {
+        "sku": "Green Lettuce",
+        "units": "each",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
+  },
+  {
     "id": "licorice",
     "common_name": "Licorice",
     "growth_form": "herb",
@@ -2681,6 +3620,21 @@
     "narrative": "The Liverwort is a herb associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "loquat",
+    "common_name": "Loquat",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Loquat is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "lotus",
     "common_name": "Lotus",
     "growth_form": "herb",
@@ -2709,6 +3663,51 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Lovage is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "luffa",
+    "common_name": "Luffa",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Luffa is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "lupin",
+    "common_name": "Lupin",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Lupin is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "macadamia",
+    "common_name": "Macadamia",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Macadamia is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "madder",
@@ -2743,6 +3742,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Mandrake is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "mango",
+    "common_name": "Mango",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Mango is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "maple",
@@ -2858,6 +3872,21 @@
     "narrative": "The Medlar is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "melon",
+    "common_name": "Melon",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Melon is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "milkcap",
     "common_name": "Milkcap mushrooms",
     "growth_form": "mushroom",
@@ -2933,6 +3962,21 @@
     "narrative": "The Morel is a mushroom associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "moringa",
+    "common_name": "Moringa",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Moringa is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "moss",
     "common_name": "Moss",
     "growth_form": "herb",
@@ -2978,6 +4022,21 @@
     "narrative": "The Mulberries is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "mulberry",
+    "common_name": "Mulberry",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Mulberry is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "mustard",
     "common_name": "Mustard",
     "growth_form": "herb",
@@ -2991,6 +4050,66 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Mustard is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "myrtle",
+    "common_name": "Myrtle",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Myrtle is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "nasturtium",
+    "common_name": "Nasturtium",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Nasturtium is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "neem",
+    "common_name": "Neem",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Neem is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "nettle",
+    "common_name": "Nettle",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Nettle is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "nettles",
@@ -3025,6 +4144,51 @@
       }
     ],
     "narrative": "The Nigella (black cumin) is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Gatherers prize it for byproducts such as seed, useful in trade or craft. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "nutmeg",
+    "common_name": "Nutmeg",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Nutmeg is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "oak",
+    "common_name": "Oak",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Oak is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "oat",
+    "common_name": "Oat",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Oat is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "oats",
@@ -3083,6 +4247,36 @@
       ],
       "luxury_tier": []
     }
+  },
+  {
+    "id": "okra",
+    "common_name": "Okra",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Okra is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "olive",
+    "common_name": "Olive",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Olive is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "olives",
@@ -3205,6 +4399,53 @@
     "narrative": "The Onions is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "orange",
+    "common_name": "Orange",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Orange is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "skus": [
+      {
+        "sku": "Navel Oranges",
+        "units": "dozen",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Blood Oranges",
+        "units": "dozen",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Seville Oranges",
+        "units": "dozen",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
+  },
+  {
     "id": "orchil-lichen-roccella",
     "common_name": "Orchil lichen (Roccella)",
     "growth_form": "lichen",
@@ -3310,6 +4551,21 @@
     "narrative": "The Pansy is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "papaya",
+    "common_name": "Papaya",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Papaya is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "parsley",
     "common_name": "Parsley",
     "growth_form": "herb",
@@ -3342,6 +4598,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Parsnips is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "passionflower",
+    "common_name": "Passionflower",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Passionflower is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "pea",
@@ -3419,6 +4690,21 @@
       }
     ],
     "narrative": "The Peach is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Gatherers prize it for byproducts such as fruit, useful in trade or craft. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "peanut",
+    "common_name": "Peanut",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Peanut is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "pears",
@@ -3511,6 +4797,36 @@
     ]
   },
   {
+    "id": "peppermint",
+    "common_name": "Peppermint",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Peppermint is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "persimmon",
+    "common_name": "Persimmon",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Persimmon is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "pine",
     "common_name": "Pine",
     "growth_form": "tree",
@@ -3524,6 +4840,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Pine is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "pineapple",
+    "common_name": "Pineapple",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Pineapple is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "pistachio",
@@ -3661,6 +4992,53 @@
     "narrative": "The Porcini is a mushroom associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "potato",
+    "common_name": "Potato",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Potato is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "skus": [
+      {
+        "sku": "Russet Potatoes",
+        "units": "sack",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Red Potatoes",
+        "units": "sack",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      },
+      {
+        "sku": "Yukon Gold Potatoes",
+        "units": "sack",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
+  },
+  {
     "id": "privet",
     "common_name": "Privet",
     "growth_form": "shrub",
@@ -3674,6 +5052,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Privet is a shrub associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "proso-millet",
+    "common_name": "Proso millet",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Proso millet is a grass associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "puffball",
@@ -3710,6 +5103,21 @@
     "narrative": "The Purslane is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Gatherers prize it for byproducts such as leaf, useful in trade or craft. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "quince",
+    "common_name": "Quince",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Quince is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "quinces",
     "common_name": "Quinces",
     "growth_form": "tree",
@@ -3723,6 +5131,36 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Quinces is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "quinoa",
+    "common_name": "Quinoa",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Quinoa is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "radish",
+    "common_name": "Radish",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Radish is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "radishes",
@@ -3759,6 +5197,21 @@
     "narrative": "The Ramsons (wild garlic) is a herb associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Gatherers prize it for byproducts such as leaf, useful in trade or craft. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "rapeseed",
+    "common_name": "Rapeseed",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Rapeseed is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "raspberries",
     "common_name": "Raspberries",
     "growth_form": "shrub",
@@ -3774,6 +5227,36 @@
     "narrative": "The Raspberries is a shrub associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "raspberry",
+    "common_name": "Raspberry",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Raspberry is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "red-clover",
+    "common_name": "Red clover",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Red clover is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "red-dulse",
     "common_name": "Red dulse",
     "growth_form": "seaweed",
@@ -3787,6 +5270,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Red dulse is a seaweed associated with aquatic salt regions and typically rooted in coastal. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "reed",
+    "common_name": "Reed",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Reed is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "reed-canary-grass",
@@ -4134,6 +5632,21 @@
     "narrative": "The Samphire is a herb associated with coastal regions and typically rooted in coastal. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "sarsaparilla",
+    "common_name": "Sarsaparilla",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Sarsaparilla is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "savory",
     "common_name": "Savory",
     "growth_form": "herb",
@@ -4194,6 +5707,21 @@
     "narrative": "The Sea lettuce is a seaweed associated with aquatic salt regions and typically rooted in coastal. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "seaweed",
+    "common_name": "Seaweed",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Seaweed is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "sedges",
     "common_name": "Sedges",
     "growth_form": "grass",
@@ -4207,6 +5735,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Sedges is a grass associated with aquatic fresh regions and typically rooted in wetland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "self-heal",
+    "common_name": "Self-heal",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Self-heal is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "service-tree",
@@ -4225,6 +5768,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Service tree is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "sesame",
+    "common_name": "Sesame",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Sesame is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "shaggy-mane",
@@ -4276,6 +5834,21 @@
     "narrative": "The Skirret is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Gatherers prize it for byproducts such as root, useful in trade or craft. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "sorghum",
+    "common_name": "Sorghum",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Sorghum is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "sorrel",
     "common_name": "Sorrel",
     "growth_form": "herb",
@@ -4289,6 +5862,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Sorrel is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "soybean",
+    "common_name": "Soybean",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Soybean is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "spelt",
@@ -4446,6 +6034,36 @@
     "narrative": "The Strawberry tree is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "sugarcane",
+    "common_name": "Sugarcane",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Sugarcane is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "sunflower",
+    "common_name": "Sunflower",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Sunflower is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "sweet-flag-acorus-calamus",
     "common_name": "Sweet flag (Acorus calamus)",
     "growth_form": "herb",
@@ -4484,6 +6102,51 @@
     "narrative": "The Sweet gale (bog myrtle) is a shrub associated with wetlands transitional regions and typically rooted in wetland. This plant grows wild with little human intervention and is generally considered inedible and may be harmful if consumed. Gatherers prize it for byproducts such as herb, useful in trade or craft. Explorers should note that contact or ingestion may cause adverse reactions, making caution essential. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "sweet-woodruff",
+    "common_name": "Sweet woodruff",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Sweet woodruff is a herb associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "tamarillo",
+    "common_name": "Tamarillo",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Tamarillo is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "tamarind",
+    "common_name": "Tamarind",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Tamarind is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "tansy",
     "common_name": "Tansy",
     "growth_form": "herb",
@@ -4503,6 +6166,21 @@
     "narrative": "The Tansy is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and is generally considered inedible and may be harmful if consumed. Gatherers prize it for byproducts such as herb, useful in trade or craft. Explorers should note that contact or ingestion may cause adverse reactions, making caution essential. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "taro",
+    "common_name": "Taro",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Taro is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "tarragon",
     "common_name": "Tarragon",
     "growth_form": "herb",
@@ -4516,6 +6194,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Tarragon is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "tea",
+    "common_name": "Tea",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Tea is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "thyme",
@@ -4552,6 +6245,48 @@
     "narrative": "The Tinder fungus (amadou) is a fungus associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and is generally considered inedible and may be harmful if consumed. Gatherers prize it for byproducts such as mushroom, useful in trade or craft. Explorers should note that contact or ingestion may cause adverse reactions, making caution essential. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "tobacco",
+    "common_name": "Tobacco",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Tobacco is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "tomato",
+    "common_name": "Tomato",
+    "growth_form": "vine",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Tomato is a vine associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "skus": [
+      {
+        "sku": "Red Tomatoes",
+        "units": "lb",
+        "tiers": [
+          "Low Inn",
+          "Common",
+          "Fine",
+          "High Table"
+        ]
+      }
+    ]
+  },
+  {
     "id": "truffle",
     "common_name": "Truffle",
     "growth_form": "mushroom",
@@ -4580,6 +6315,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Turkey tail is a fungus associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "turmeric",
+    "common_name": "Turmeric",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Turmeric is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "turnip",
@@ -4655,6 +6405,21 @@
     "narrative": "The Turnips is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "ube",
+    "common_name": "Ube",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Ube is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "valerian",
     "common_name": "Valerian",
     "growth_form": "herb",
@@ -4668,6 +6433,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Valerian is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "vanilla",
+    "common_name": "Vanilla",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Vanilla is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "violet",
@@ -4715,6 +6495,21 @@
     "narrative": "The Walnuts is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "wasabi",
+    "common_name": "Wasabi",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Wasabi is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "water-chestnut-trapa-natans",
     "common_name": "Water chestnut (Trapa natans)",
     "growth_form": "herb",
@@ -4747,6 +6542,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Watercress is a herb associated with aquatic fresh regions and typically rooted in wetland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "watermelon",
+    "common_name": "Watermelon",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Watermelon is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "weld-dyers-rocket",
@@ -4888,6 +6698,21 @@
     "narrative": "The Wild pear is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "wild-thyme",
+    "common_name": "Wild thyme",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Wild thyme is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "willow",
     "common_name": "Willow",
     "growth_form": "tree",
@@ -4956,6 +6781,36 @@
     "narrative": "The Wormwood is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "xanthorrhoea",
+    "common_name": "Xanthorrhoea",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Xanthorrhoea is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "yam",
+    "common_name": "Yam",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Yam is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
     "id": "yarrow",
     "common_name": "Yarrow",
     "growth_form": "herb",
@@ -4969,6 +6824,21 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Yarrow is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "yautia",
+    "common_name": "Yautia",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [],
+    "narrative": "The Yautia is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
     "id": "yellow-water-lily",
@@ -4999,390 +6869,5 @@
     "edible": true,
     "byproducts": [],
     "narrative": "The Yew is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "bitter-vetch",
-    "common_name": "Bitter vetch",
-    "growth_form": "herb",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Bitter vetch is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "bullace-plum",
-    "common_name": "Bullace plum",
-    "growth_form": "tree",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Bullace plum is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "cherry",
-    "common_name": "Cherry",
-    "growth_form": "tree",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Cherry is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "chickling-vetch",
-    "common_name": "Chickling vetch",
-    "growth_form": "herb",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Chickling vetch is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "fodder-vetch",
-    "common_name": "Fodder vetch",
-    "growth_form": "herb",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Fodder vetch is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "foxtail-millet",
-    "common_name": "Foxtail millet",
-    "growth_form": "grass",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Foxtail millet is a grass associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "ladys-bedstraw",
-    "common_name": "Lady's bedstraw",
-    "growth_form": "herb",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "grassland"
-    ],
-    "cultivated": false,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Lady's bedstraw is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "lupin",
-    "common_name": "Lupin",
-    "growth_form": "herb",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Lupin is a herb associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "mulberry",
-    "common_name": "Mulberry",
-    "growth_form": "tree",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Mulberry is a tree associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "oak",
-    "common_name": "Oak",
-    "growth_form": "tree",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "forest"
-    ],
-    "cultivated": false,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Oak is a tree associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "proso-millet",
-    "common_name": "Proso millet",
-    "growth_form": "grass",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Proso millet is a grass associated with terrestrial regions and typically rooted in farmland. This plant is often cultivated by people who appreciate its qualities and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "self-heal",
-    "common_name": "Self-heal",
-    "growth_form": "herb",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "grassland"
-    ],
-    "cultivated": false,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Self-heal is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "sweet-woodruff",
-    "common_name": "Sweet woodruff",
-    "growth_form": "herb",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "forest"
-    ],
-    "cultivated": false,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Sweet woodruff is a herb associated with terrestrial regions and typically rooted in forest. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "wild-thyme",
-    "common_name": "Wild thyme",
-    "growth_form": "herb",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "grassland"
-    ],
-    "cultivated": false,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Wild thyme is a herb associated with terrestrial regions and typically rooted in grassland. This plant grows wild with little human intervention and parts of it are considered edible when prepared properly. Despite its presence, it offers few byproducts beyond its natural growth. Explorers should note that even edible parts require care during preparation to avoid illness. Its presence adds to the diversity of the landscape and provides habitat for smaller creatures, contributing to the balance of local ecosystems. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
-  },
-  {
-    "id": "potato",
-    "common_name": "Potato",
-    "growth_form": "herb",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Potato is a herb associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly.",
-    "skus": [
-      {
-        "sku": "Russet Potatoes",
-        "units": "sack",
-        "tiers": [
-          "Low Inn",
-          "Common",
-          "Fine",
-          "High Table"
-        ]
-      },
-      {
-        "sku": "Red Potatoes",
-        "units": "sack",
-        "tiers": [
-          "Low Inn",
-          "Common",
-          "Fine",
-          "High Table"
-        ]
-      },
-      {
-        "sku": "Yukon Gold Potatoes",
-        "units": "sack",
-        "tiers": [
-          "Low Inn",
-          "Common",
-          "Fine",
-          "High Table"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "tomato",
-    "common_name": "Tomato",
-    "growth_form": "vine",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Tomato is a vine associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly.",
-    "skus": [
-      {
-        "sku": "Red Tomatoes",
-        "units": "lb",
-        "tiers": [
-          "Low Inn",
-          "Common",
-          "Fine",
-          "High Table"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "cucumber",
-    "common_name": "Cucumber",
-    "growth_form": "vine",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Cucumber is a vine associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly.",
-    "skus": [
-      {
-        "sku": "Green Cucumbers",
-        "units": "each",
-        "tiers": [
-          "Low Inn",
-          "Common",
-          "Fine",
-          "High Table"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "lettuce",
-    "common_name": "Lettuce",
-    "growth_form": "herb",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Lettuce is a herb associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly.",
-    "skus": [
-      {
-        "sku": "Green Lettuce",
-        "units": "each",
-        "tiers": [
-          "Low Inn",
-          "Common",
-          "Fine",
-          "High Table"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "orange",
-    "common_name": "Orange",
-    "growth_form": "tree",
-    "regions": [
-      "terrestrial"
-    ],
-    "habitats": [
-      "farmland"
-    ],
-    "cultivated": true,
-    "edible": true,
-    "byproducts": [],
-    "narrative": "The Orange is a tree associated with terrestrial regions and typically rooted in farmland. It is commonly cultivated and parts of it are edible when prepared properly.",
-    "skus": [
-      {
-        "sku": "Navel Oranges",
-        "units": "dozen",
-        "tiers": [
-          "Low Inn",
-          "Common",
-          "Fine",
-          "High Table"
-        ]
-      },
-      {
-        "sku": "Blood Oranges",
-        "units": "dozen",
-        "tiers": [
-          "Low Inn",
-          "Common",
-          "Fine",
-          "High Table"
-        ]
-      },
-      {
-        "sku": "Seville Oranges",
-        "units": "dozen",
-        "tiers": [
-          "Low Inn",
-          "Common",
-          "Fine",
-          "High Table"
-        ]
-      }
-    ]
   }
 ]

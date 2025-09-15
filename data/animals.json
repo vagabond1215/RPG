@@ -1,5 +1,133 @@
 [
   {
+    "id": "aardvark",
+    "common_name": "Aardvark",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Aardvark is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Aardvark for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "aardwolf",
+    "common_name": "Aardwolf",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Aardwolf is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Aardwolf for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "agouti",
+    "common_name": "Agouti",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Agouti is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Agouti for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "albatross",
+    "common_name": "Albatross",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Albatross is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Albatross for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "allis-shad",
     "common_name": "Allis shad",
     "taxon_group": "fish",
@@ -36,6 +164,70 @@
     "narrative": "The Allis shad is a fish found in aquatic regions where it prefers open ocean habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Allis shad for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "alpine-ibex",
+    "common_name": "Alpine ibex",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Alpine ibex is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Alpine ibex for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "anaconda",
+    "common_name": "Anaconda",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Anaconda is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Anaconda for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "anchovy",
     "common_name": "Anchovy",
     "taxon_group": "fish",
@@ -66,6 +258,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Anchovy is a fish found in aquatic regions where it prefers open ocean habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Anchovy for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "anole",
+    "common_name": "Anole",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Anole is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Anole for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "ant",
@@ -136,6 +360,38 @@
     "narrative": "The Arctic char is a fish found in aquatic regions where it prefers lakes habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Arctic char for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "armadillo",
+    "common_name": "Armadillo",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Armadillo is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Armadillo for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "ass",
     "common_name": "Wild donkey",
     "taxon_group": "mammal",
@@ -202,6 +458,70 @@
     ],
     "gendered": {},
     "narrative": "The Aurochs is a mammal found in terrestrial regions where it prefers grassland habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Aurochs for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "axolotl",
+    "common_name": "Axolotl",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Axolotl is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Axolotl for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "bactrian-camel",
+    "common_name": "Bactrian camel",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Bactrian camel is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Bactrian camel for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "badger",
@@ -468,6 +788,38 @@
     "narrative": "The Bezoar goat is a mammal found in terrestrial regions where it prefers hills habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Bezoar goat for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "binturong",
+    "common_name": "Binturong",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Binturong is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Binturong for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "bison",
     "common_name": "Bison",
     "taxon_group": "mammal",
@@ -530,6 +882,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Bittern is a bird found in wetlands transitional regions where it prefers marshes habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Bittern for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "black-mamba",
+    "common_name": "Black mamba",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Black mamba is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Black mamba for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "blackbird",
@@ -598,6 +982,38 @@
     ],
     "gendered": {},
     "narrative": "The Bleak is a fish found in aquatic regions where it prefers rivers habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Bleak for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "blue-whale",
+    "common_name": "Blue whale",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Blue whale is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Blue whale for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "boar",
@@ -863,6 +1279,70 @@
     "narrative": "The Capercaillie is a bird found in terrestrial regions where it prefers forest habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Capercaillie for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "capybara",
+    "common_name": "Capybara",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Capybara is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Capybara for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "caracal",
+    "common_name": "Caracal",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Caracal is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Caracal for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "carp",
     "common_name": "Carp",
     "taxon_group": "fish",
@@ -925,6 +1405,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Carp bream is a fish found in aquatic regions where it prefers rivers habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Carp bream for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "cassowary",
+    "common_name": "Cassowary",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Cassowary is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Cassowary for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "cat",
@@ -1122,6 +1634,38 @@
     "narrative": "The Chamois is a mammal found in terrestrial regions where it prefers hills habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Chamois for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "cheetah",
+    "common_name": "Cheetah",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Cheetah is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Cheetah for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "chicken",
     "common_name": "Chicken",
     "alt_names": [
@@ -1199,7 +1743,7 @@
       "collective": "flock"
     },
     "size_class": "small",
-    "narrative": "The Chicken is a bird found in terrestrial regions where it prefers farmland and grassland habitats. As a omnivore and insectivore species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and chicken eggs; cooks typically note that it should be cooked thoroughly to avoid illness. Byproducts such as chicken eggs, meat and feather are collected by those seeking materials or trade goods. Observers value the Chicken for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
+    "narrative": "The Chicken is a bird found in terrestrial regions where it prefers farmland and grassland habitats. As a omnivore and insectivore species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and chicken egg; cooks typically note that it should be cooked thoroughly to avoid illness. Byproducts such as chicken egg, meat and feather are collected by those seeking materials or trade goods. Observers value the Chicken for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
     "mating_season": "spring",
     "gestation_period": "",
     "incubation_period": "21 days",
@@ -1226,6 +1770,70 @@
         "notes": "Exceptional breeder/show"
       }
     ]
+  },
+  {
+    "id": "chinchilla",
+    "common_name": "Chinchilla",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Chinchilla is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Chinchilla for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "chital",
+    "common_name": "Chital",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Chital is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Chital for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "chub",
@@ -1324,6 +1932,70 @@
     "narrative": "The Clam is a mollusk found in aquatic regions where it prefers ocean shores habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Clam for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "coati",
+    "common_name": "Coati",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Coati is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Coati for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "cobia",
+    "common_name": "Cobia",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Cobia is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Cobia for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "cockle",
     "common_name": "Cockle",
     "taxon_group": "mollusk",
@@ -1388,6 +2060,38 @@
     "narrative": "The Cod is a fish found in aquatic regions where it prefers open ocean habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Cod for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "coelacanth",
+    "common_name": "Coelacanth",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Coelacanth is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Coelacanth for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "common-swift",
     "common_name": "Common swift",
     "taxon_group": "bird",
@@ -1422,6 +2126,38 @@
     ],
     "gendered": {},
     "narrative": "The Common swift is a bird found in terrestrial regions where it prefers urban habitats. As a insectivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Common swift for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "condor",
+    "common_name": "Condor",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Condor is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Condor for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "conger-eel",
@@ -1907,6 +2643,102 @@
     "butchering_age": "3 years"
   },
   {
+    "id": "dhole",
+    "common_name": "Dhole",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Dhole is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Dhole for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "dik-dik",
+    "common_name": "Dik-dik",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Dik-dik is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Dik-dik for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "dingo",
+    "common_name": "Dingo",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Dingo is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Dingo for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "dog",
     "common_name": "Dog",
     "taxon_group": "mammal",
@@ -2295,7 +3127,7 @@
       "juvenile": "duckling",
       "collective": "raft"
     },
-    "narrative": "The Duck is a bird found in wetlands transitional regions where it prefers farmland and ponds habitats. As a omnivore and insectivore species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and duck eggs; cooks typically note that it should be roast or stew. Byproducts such as duck eggs, meat and feather are collected by those seeking materials or trade goods. Observers value the Duck for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
+    "narrative": "The Duck is a bird found in wetlands transitional regions where it prefers farmland and ponds habitats. As a omnivore and insectivore species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and duck egg; cooks typically note that it should be roast or stew. Byproducts such as duck egg, meat and feather are collected by those seeking materials or trade goods. Observers value the Duck for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
     "alt_names": [],
     "food_sources": [
       "grains",
@@ -2316,6 +3148,38 @@
       "wool_shearing_cycle": ""
     },
     "butchering_age": "5 months"
+  },
+  {
+    "id": "dugong",
+    "common_name": "Dugong",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Dugong is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Dugong for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "eagle",
@@ -2382,6 +3246,38 @@
     "narrative": "The Earthworm is a annelid found in terrestrial regions where it prefers farmland habitats. As a detritivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Earthworm for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "echidna",
+    "common_name": "Echidna",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Echidna is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Echidna for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "eel",
     "common_name": "Eel",
     "taxon_group": "fish",
@@ -2446,6 +3342,38 @@
     "narrative": "The Eelpout is a fish found in aquatic regions where it prefers rivers habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Eelpout for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "electric-ray",
+    "common_name": "Electric ray",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Electric ray is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Electric ray for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "elephant",
     "common_name": "Elephant",
     "taxon_group": "mammal",
@@ -2508,6 +3436,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Elk is a mammal found in terrestrial regions where it prefers forest habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Elk for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "emu",
+    "common_name": "Emu",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Emu is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Emu for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "ermine",
@@ -2644,6 +3604,38 @@
     ],
     "gendered": {},
     "narrative": "The Fallow deer is a mammal found in terrestrial regions where it prefers forest habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Fallow deer for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "fennec-fox",
+    "common_name": "Fennec fox",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Fennec fox is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Fennec fox for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "ferret",
@@ -2808,6 +3800,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Flounder is a fish found in aquatic regions where it prefers ocean shores habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Flounder for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "flying-squirrel",
+    "common_name": "Flying squirrel",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Flying squirrel is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Flying squirrel for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "fox",
@@ -3070,6 +4094,198 @@
     "narrative": "The Genet is a mammal found in terrestrial regions where it prefers forest habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Genet for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "gerenuk",
+    "common_name": "Gerenuk",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Gerenuk is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Gerenuk for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "gharial",
+    "common_name": "Gharial",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Gharial is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Gharial for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "giant-anteater",
+    "common_name": "Giant anteater",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Giant anteater is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Giant anteater for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "giant-panda",
+    "common_name": "Giant panda",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Giant panda is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Giant panda for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "gibbon",
+    "common_name": "Gibbon",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Gibbon is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Gibbon for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "gila-monster",
+    "common_name": "Gila monster",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Gila monster is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Gila monster for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "goat",
     "common_name": "Goat",
     "taxon_group": "mammal",
@@ -3156,6 +4372,38 @@
       "wool_shearing_cycle": ""
     },
     "butchering_age": "1 year"
+  },
+  {
+    "id": "golden-jackal",
+    "common_name": "Golden jackal",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Golden jackal is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Golden jackal for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "golden-plover",
@@ -3291,7 +4539,7 @@
       "juvenile": "gosling",
       "collective": "gaggle"
     },
-    "narrative": "The Goose is a bird found in wetlands transitional regions where it prefers farmland and marshes habitats. As a herbivore and grazer species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is often aggressive and highly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and goose eggs; cooks typically note that it should be roasted for winter feasts. Byproducts such as goose eggs, meat and feather are collected by those seeking materials or trade goods. Observers value the Goose for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
+    "narrative": "The Goose is a bird found in wetlands transitional regions where it prefers farmland and marshes habitats. As a herbivore and grazer species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is often aggressive and highly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat and goose egg; cooks typically note that it should be roasted for winter feasts. Byproducts such as goose egg, meat and feather are collected by those seeking materials or trade goods. Observers value the Goose for the role it plays in the local ecology and the insight it offers into the balance between predator and prey.",
     "alt_names": [],
     "food_sources": [
       "grass",
@@ -3577,6 +4825,38 @@
     "narrative": "The Grouse is a bird found in terrestrial regions where it prefers hills habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Grouse for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "guanaco",
+    "common_name": "Guanaco",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Guanaco is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Guanaco for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "gudgeon",
     "common_name": "Gudgeon",
     "taxon_group": "fish",
@@ -3809,6 +5089,38 @@
     "narrative": "The Halibut is a fish found in aquatic regions where it prefers open ocean habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Halibut for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "hammerhead-shark",
+    "common_name": "Hammerhead shark",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Hammerhead shark is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Hammerhead shark for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "hare",
     "common_name": "Hare",
     "taxon_group": "mammal",
@@ -3839,6 +5151,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Hare is a mammal found in terrestrial regions where it prefers forest habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Hare for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "harpy-eagle",
+    "common_name": "Harpy eagle",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Harpy eagle is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Harpy eagle for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "harrier",
@@ -4196,6 +5540,38 @@
     "narrative": "The Horsefish is a fish found in aquatic regions where it prefers ocean shores habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Horsefish for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "howler-monkey",
+    "common_name": "Howler monkey",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Howler monkey is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Howler monkey for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "hyena",
     "common_name": "Hyena",
     "taxon_group": "mammal",
@@ -4226,6 +5602,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Hyena is a mammal found in terrestrial regions where it prefers grassland habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is often aggressive and highly territorial, presenting a high risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Hyena for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "hyrax",
+    "common_name": "Hyrax",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Hyrax is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Hyrax for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "iberian-lynx",
@@ -4360,6 +5768,70 @@
     "narrative": "The Ide (orfe) is a fish found in aquatic regions where it prefers rivers habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Ide (orfe) for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "iguana",
+    "common_name": "Iguana",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Iguana is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Iguana for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "impala",
+    "common_name": "Impala",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Impala is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Impala for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "jackdaw",
     "common_name": "Jackdaw",
     "taxon_group": "bird",
@@ -4422,6 +5894,102 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Jellyfish is a other found in aquatic regions where it prefers open ocean habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Jellyfish for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "jerboa",
+    "common_name": "Jerboa",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Jerboa is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Jerboa for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "kakapo",
+    "common_name": "Kakapo",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Kakapo is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Kakapo for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "kangaroo",
+    "common_name": "Kangaroo",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Kangaroo is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Kangaroo for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "kermes-scale-insect",
@@ -4518,6 +6086,166 @@
     ],
     "gendered": {},
     "narrative": "The Kingfisher is a bird found in terrestrial regions where it prefers rivers habitats. As a piscivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Kingfisher for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "kinkajou",
+    "common_name": "Kinkajou",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Kinkajou is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Kinkajou for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "kiwi",
+    "common_name": "Kiwi",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Kiwi is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Kiwi for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "komodo-dragon",
+    "common_name": "Komodo dragon",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Komodo dragon is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Komodo dragon for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "kookaburra",
+    "common_name": "Kookaburra",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Kookaburra is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Kookaburra for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "kudu",
+    "common_name": "Kudu",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Kudu is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Kudu for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "lamprey",
@@ -4648,6 +6376,70 @@
     "narrative": "The Leech is a annelid found in aquatic regions where it prefers swamps habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. It is generally regarded as inedible and unsuitable for consumption. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Leech for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "lemming",
+    "common_name": "Lemming",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Lemming is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Lemming for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "lemur",
+    "common_name": "Lemur",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Lemur is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Lemur for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "leopard",
     "common_name": "Leopard",
     "taxon_group": "mammal",
@@ -4750,6 +6542,38 @@
     ],
     "gendered": {},
     "narrative": "The Ling is a fish found in aquatic regions where it prefers open ocean habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Ling for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "linsang",
+    "common_name": "Linsang",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Linsang is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Linsang for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "lion",
@@ -4976,6 +6800,102 @@
     "narrative": "The Mallard is a bird found in terrestrial regions where it prefers marshes habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Mallard for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "manatee",
+    "common_name": "Manatee",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Manatee is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Manatee for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "markhor",
+    "common_name": "Markhor",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Markhor is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Markhor for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "marmot",
+    "common_name": "Marmot",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Marmot is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Marmot for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "marten",
     "common_name": "Marten",
     "taxon_group": "mammal",
@@ -5006,6 +6926,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Marten is a mammal found in terrestrial regions where it prefers forest habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Marten for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "meerkat",
+    "common_name": "Meerkat",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Meerkat is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Meerkat for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "merlin-falcon",
@@ -5136,6 +7088,38 @@
     "narrative": "The Mole is a mammal found in terrestrial regions where it prefers grassland habitats. As a insectivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Mole for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "mongoose",
+    "common_name": "Mongoose",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Mongoose is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Mongoose for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "monkfish-angler",
     "common_name": "Monkfish (angler)",
     "taxon_group": "fish",
@@ -5234,6 +7218,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Moose is a mammal found in terrestrial regions where it prefers forest habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Moose for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "moray-eel",
+    "common_name": "Moray eel",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Moray eel is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Moray eel for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "mouflon",
@@ -5443,6 +7459,38 @@
     "narrative": "The Musk ox is a mammal found in terrestrial regions where it prefers arctic tundra habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Musk ox for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "muskox",
+    "common_name": "Muskox",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Muskox is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Muskox for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "mussel",
     "common_name": "Mussel",
     "taxon_group": "mollusk",
@@ -5473,6 +7521,70 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Mussel is a mollusk found in aquatic regions where it prefers ocean shores habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Mussel for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "narwhal",
+    "common_name": "Narwhal",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Narwhal is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Narwhal for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "nautilus",
+    "common_name": "Nautilus",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Nautilus is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Nautilus for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "nightingale",
@@ -5539,6 +7651,38 @@
     "narrative": "The Nightjar is a bird found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Nightjar for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "numbat",
+    "common_name": "Numbat",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Numbat is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Numbat for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "octopus",
     "common_name": "Octopus",
     "taxon_group": "mollusk",
@@ -5569,6 +7713,134 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Octopus is a mollusk found in aquatic regions where it prefers ocean shores habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Octopus for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "okapi",
+    "common_name": "Okapi",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Okapi is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Okapi for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "olingo",
+    "common_name": "Olingo",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Olingo is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Olingo for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "opossum",
+    "common_name": "Opossum",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Opossum is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Opossum for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "orangutan",
+    "common_name": "Orangutan",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Orangutan is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Orangutan for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "osprey",
@@ -5699,6 +7971,38 @@
     "narrative": "The Oyster is a mollusk found in aquatic regions where it prefers ocean shores habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Oyster for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "pangolin",
+    "common_name": "Pangolin",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Pangolin is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Pangolin for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "partridge",
     "common_name": "Partridge",
     "taxon_group": "bird",
@@ -5796,6 +8100,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Peafowl is a bird found in terrestrial regions where it prefers farmland habitats. As a omnivore species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Peafowl for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "peccary",
+    "common_name": "Peccary",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Peccary is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Peccary for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "pelican",
@@ -6221,6 +8557,38 @@
     "narrative": "The Plaice is a fish found in aquatic regions where it prefers open ocean habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Plaice for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "platypus",
+    "common_name": "Platypus",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Platypus is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Platypus for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "polecat",
     "common_name": "Polecat",
     "taxon_group": "mammal",
@@ -6353,6 +8721,38 @@
     "narrative": "The Ptarmigan is a bird found in terrestrial regions where it prefers alpine tundra habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Ptarmigan for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "quagga",
+    "common_name": "Quagga",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Quagga is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Quagga for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "quail",
     "common_name": "Quail",
     "taxon_group": "bird",
@@ -6383,6 +8783,102 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Quail is a bird found in terrestrial regions where it prefers grassland habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Quail for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "quetzal",
+    "common_name": "Quetzal",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Quetzal is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Quetzal for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "quokka",
+    "common_name": "Quokka",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Quokka is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Quokka for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "quoll",
+    "common_name": "Quoll",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Quoll is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Quoll for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "rabbit",
@@ -6461,6 +8957,38 @@
       "wool_shearing_cycle": ""
     },
     "butchering_age": "3 months"
+  },
+  {
+    "id": "raccoon",
+    "common_name": "Raccoon",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Raccoon is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Raccoon for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "rat",
@@ -6627,6 +9155,38 @@
     "narrative": "The Reindeer is a mammal found in terrestrial regions where it prefers hills habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Reindeer for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "rhea",
+    "common_name": "Rhea",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Rhea is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Rhea for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "roach",
     "common_name": "Roach",
     "taxon_group": "fish",
@@ -6727,6 +9287,38 @@
     "narrative": "The Rudd is a fish found in aquatic regions where it prefers rivers habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Rudd for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "saiga",
+    "common_name": "Saiga",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Saiga is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Saiga for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "saiga-antelope",
     "common_name": "Saiga antelope",
     "taxon_group": "mammal",
@@ -6789,6 +9381,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Salmon is a fish found in aquatic regions where it prefers rivers habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Salmon for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "saola",
+    "common_name": "Saola",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Saola is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Saola for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "sardine",
@@ -7011,6 +9635,38 @@
     "narrative": "The Seal is a mammal found in aquatic regions where it prefers ocean shores habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Seal for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "secretarybird",
+    "common_name": "Secretarybird",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Secretarybird is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Secretarybird for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "sheep",
     "common_name": "Domestic Sheep",
     "taxon_group": "mammal",
@@ -7099,6 +9755,38 @@
       "wool_shearing_cycle": "yearly"
     },
     "butchering_age": "1 year"
+  },
+  {
+    "id": "shoebill",
+    "common_name": "Shoebill",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Shoebill is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Shoebill for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "shoveler",
@@ -7223,6 +9911,70 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Silkworm is a insect found in terrestrial regions where it prefers farmland habitats. As a herbivore species, it feeds according to the resources available in those areas. The species has long been associated with humans and can be domesticated. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. It is generally regarded as inedible and unsuitable for consumption. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Silkworm for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "skua",
+    "common_name": "Skua",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Skua is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Skua for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "sloth",
+    "common_name": "Sloth",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Sloth is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Sloth for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "smelt",
@@ -7487,6 +10239,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Sparrowhawk is a bird found in terrestrial regions where it prefers forest habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Sparrowhawk for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "spectacled-bear",
+    "common_name": "Spectacled bear",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Spectacled bear is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Spectacled bear for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "spider-crab",
@@ -7949,6 +10733,70 @@
     "narrative": "The Swan is a bird found in terrestrial regions where it prefers lakes habitats. As a herbivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Swan for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "tapir",
+    "common_name": "Tapir",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Tapir is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Tapir for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "tasmanian-devil",
+    "common_name": "Tasmanian devil",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Tasmanian devil is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Tasmanian devil for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "teal",
     "common_name": "Teal",
     "taxon_group": "bird",
@@ -8177,6 +11025,38 @@
     "narrative": "The Trout is a fish found in aquatic regions where it prefers rivers habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Trout for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "tuatara",
+    "common_name": "Tuatara",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Tuatara is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Tuatara for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "turbot",
     "common_name": "Turbot",
     "taxon_group": "fish",
@@ -8309,6 +11189,70 @@
     "narrative": "The Twaite shad is a fish found in aquatic regions where it prefers open ocean habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Byproducts such as meat are collected by those seeking materials or trade goods. Observers value the Twaite shad for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "vaquita",
+    "common_name": "Vaquita",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Vaquita is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Vaquita for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "vicuna",
+    "common_name": "Vicuna",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Vicuna is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Vicuna for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "walrus",
     "common_name": "Walrus",
     "taxon_group": "mammal",
@@ -8339,6 +11283,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Walrus is a mammal found in aquatic regions where it prefers ocean shores habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Walrus for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "warthog",
+    "common_name": "Warthog",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Warthog is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Warthog for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
     "id": "weasel",
@@ -8733,6 +11709,70 @@
     "narrative": "The Wolf is a mammal found in terrestrial regions where it prefers forest habitats. As a carnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a moderate risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Wolf for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   },
   {
+    "id": "wolverine",
+    "common_name": "Wolverine",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Wolverine is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Wolverine for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "wombat",
+    "common_name": "Wombat",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Wombat is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Wombat for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
     "id": "wood-pigeon",
     "common_name": "Wood pigeon",
     "taxon_group": "bird",
@@ -8831,5 +11871,165 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "The Wren is a bird found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Wren for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "xerus",
+    "common_name": "Xerus",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Xerus is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Xerus for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "yak",
+    "common_name": "Yak",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Yak is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Yak for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "yellow-mongoose",
+    "common_name": "Yellow mongoose",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Yellow mongoose is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Yellow mongoose for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "zebu",
+    "common_name": "Zebu",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Zebu is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Zebu for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
+  },
+  {
+    "id": "zorilla",
+    "common_name": "Zorilla",
+    "taxon_group": "other",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "The Zorilla is a other found in terrestrial regions where it prefers forest habitats. As a omnivore species, it feeds according to the resources available in those areas. The species remains largely undomesticated, thriving without human intervention. It is rarely aggressive and not strongly territorial, presenting a low risk to people who draw near. Those who hunt or farm it may consume its meat; cooks typically note that it should be cooked thoroughly. Few byproducts of notable value can be harvested from it beyond basic necessities. Observers value the Zorilla for the role it plays in the local ecology and the insight it offers into the balance between predator and prey."
   }
 ]
