@@ -2,7 +2,7 @@
 
 type Element =
   | "Stone" | "Water" | "Wind" | "Fire"
-  | "Ice" | "Thunder" | "Dark" | "Light";
+  | "Ice" | "Lightning" | "Dark" | "Light";
 
 export type Side = "ally" | "enemy" | "party";
 export type Target = "ST" | "AoE";
@@ -43,7 +43,7 @@ export const VARIANCE_ALPHA = 0.02;
 
 const ELEMENTS: Element[] = [
   "Stone","Water","Wind","Fire",
-  "Ice","Thunder","Dark","Light"
+  "Ice","Lightning","Dark","Light"
 ];
 
 export const ELEMENTAL_DANCES: Omit<Dance, "id">[] = [
@@ -94,7 +94,7 @@ export const ELEMENTAL_DANCES: Omit<Dance, "id">[] = [
     keyAttribute: "INT", maintenance: { maintainable: true, durationCountdown: "afterStop" }
   } as Omit<Dance, "id">,
   {
-    name: "Storm Shield Dance", category: "elemental", kind: "elementalDefense", element: "Thunder",
+    name: "Storm Shield Dance", category: "elemental", kind: "elementalDefense", element: "Lightning",
     target: "AoE", side: "ally", unlock: 66, baseDurationSec: 20,
     scale: { m0: +12, m100: +22, unit: "pct" },
     tags: ["DMG_ABSORB","STUN_ON_HIT"],

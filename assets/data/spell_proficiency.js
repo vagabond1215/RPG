@@ -6,7 +6,7 @@ export const elementalProficiencyMap = {
   wind: "wind",
   fire: "fire",
   ice: "ice",
-  thunder: "thunder",
+  lightning: "lightning",
   dark: "dark",
   light: "light",
 };
@@ -28,10 +28,11 @@ export function gainElementProficiency(element, params) {
 }
 
 export const schoolProficiencyMap = {
-  Destructive: "destructive",
+  Destruction: "destruction",
   Healing: "healing",
-  Reinforcement: "reinforcement",
-  Enfeebling: "enfeebling",
+  Enhancement: "enhancement",
+  Enfeeblement: "enfeeblement",
+  Control: "control",
   Summoning: "summoning",
 };
 

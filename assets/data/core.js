@@ -48,7 +48,7 @@ export const now = () => Date.now() / 1000;
 
 // ---- Enums / Types ----
 export const ATTR = ["STR","DEX","CON","VIT","LCK","AGI","INT","WIS","CHA"];
-export const ELEMENTS = ["Stone","Water","Wind","Fire","Ice","Thunder","Dark","Light"];
+export const ELEMENTS = ["Stone","Water","Wind","Fire","Ice","Lightning","Dark","Light"];
 export const WEAPONS = ["Sword","Greatsword","Dagger","Axe","Greataxe","Spear","Bow","Crossbow","Mace","Staff","Shield","Wand","Unarmed"];
 export const CONTEXT = ["practice","spar","battle"];
 

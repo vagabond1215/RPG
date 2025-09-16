@@ -914,13 +914,14 @@ const defaultProficiencies = {
   wind: 0,
   fire: 0,
   ice: 0,
-  thunder: 0,
+  lightning: 0,
   dark: 0,
   light: 0,
-  destructive: 0,
+  destruction: 0,
   healing: 0,
-  reinforcement: 0,
-  enfeebling: 0,
+  enhancement: 0,
+  enfeeblement: 0,
+  control: 0,
   summoning: 0,
   singing: 0,
   instrument: 0,
@@ -982,21 +983,23 @@ function assignMagicAptitudes(character) {
     'wind',
     'fire',
     'ice',
-    'thunder',
+    'lightning',
     'dark',
     'light'
   ];
   const lowSchoolChances = {
-    destructive: 0.30,
-    reinforcement: 0.30,
-    enfeebling: 0.30,
+    destruction: 0.30,
+    enhancement: 0.30,
+    enfeeblement: 0.30,
+    control: 0.20,
     healing: 0.15,
     summoning: 0.075,
   };
   const highSchoolChances = {
-    destructive: 0.60,
-    reinforcement: 0.60,
-    enfeebling: 0.60,
+    destruction: 0.60,
+    enhancement: 0.60,
+    enfeeblement: 0.60,
+    control: 0.40,
     healing: 0.30,
     summoning: 0.15,
   };
@@ -1070,13 +1073,17 @@ function migrateProficiencies(character) {
     windMagic: 'wind',
     fireMagic: 'fire',
     iceMagic: 'ice',
-    thunderMagic: 'thunder',
+    thunderMagic: 'lightning',
+    lightningMagic: 'lightning',
     darkMagic: 'dark',
     lightMagic: 'light',
-    destructiveMagic: 'destructive',
+    destructiveMagic: 'destruction',
+    destructionMagic: 'destruction',
     healingMagic: 'healing',
-    reinforcementMagic: 'reinforcement',
-    enfeeblingMagic: 'enfeebling',
+    reinforcementMagic: 'enhancement',
+    enhancementMagic: 'enhancement',
+    enfeeblingMagic: 'enfeeblement',
+    controlMagic: 'control',
     summoningMagic: 'summoning',
   };
   for (const [oldKey, newKey] of Object.entries(magicMap)) {
@@ -1095,15 +1102,16 @@ const proficiencyCategories = {
     'wind',
     'fire',
     'ice',
-    'thunder',
+    'lightning',
     'dark',
     'light'
   ],
   'Magical Schools': [
-    'destructive',
+    'destruction',
     'healing',
-    'reinforcement',
-    'enfeebling',
+    'enhancement',
+    'enfeeblement',
+    'control',
     'summoning'
   ],
   Combat: [
@@ -1159,7 +1167,7 @@ const elementIcons = {
   Wind: '<img src="assets/images/icons/Magic/Wind.png" alt="Wind" />',
   Fire: '<img src="assets/images/icons/Magic/Fire.png" alt="Fire" />',
   Ice: '<img src="assets/images/icons/Magic/Ice.png" alt="Ice" />',
-  Thunder: '<img src="assets/images/icons/Magic/Lightning.png" alt="Thunder" />',
+  Lightning: '<img src="assets/images/icons/Magic/Lightning.png" alt="Lightning" />',
   Dark: '<img src="assets/images/icons/Magic/Dark.png" alt="Dark" />',
   Light: '<img src="assets/images/icons/Magic/Light.png" alt="Light" />',
   Wood: '🌲',
@@ -1199,22 +1207,23 @@ const elementColors = {
   Wind: '#22c55e',
   Fire: '#ef4444',
   Ice: '#60a5fa',
-  Thunder: '#eab308',
+  Lightning: '#eab308',
   Dark: '#1e1b4b',
   Light: '#e5e4e2'
 };
 
 const schoolIcons = {
-  Destructive: '<img src="assets/images/icons/Magic/Destruction.png" alt="Destructive" />',
-  Enfeebling: '<img src="assets/images/icons/Magic/Enfeeble.png" alt="Enfeebling" />',
-  Reinforcement: '<img src="assets/images/icons/Magic/Enhance.png" alt="Reinforcement" />',
+  Destruction: '<img src="assets/images/icons/Magic/Destruction.png" alt="Destruction" />',
+  Enfeeblement: '<img src="assets/images/icons/Magic/Enfeeble.png" alt="Enfeeblement" />',
+  Enhancement: '<img src="assets/images/icons/Magic/Enhance.png" alt="Enhancement" />',
+  Control: '🌀',
   Healing: '<img src="assets/images/icons/Magic/Healing.png" alt="Healing" />',
   Summoning: '<img src="assets/images/icons/Magic/Summoning.png" alt="Summoning" />',
   Dance: '<img src="assets/images/icons/Magic/Dance.png" alt="Dance" />',
   Instrument: '<img src="assets/images/icons/Magic/Instrument.png" alt="Instrument" />',
   Voice: '<img src="assets/images/icons/Magic/Voice.png" alt="Voice" />'
 };
-const elementOrder = ['Stone', 'Water', 'Wind', 'Fire', 'Ice', 'Thunder', 'Light', 'Dark'];
+const elementOrder = ['Stone', 'Water', 'Wind', 'Fire', 'Ice', 'Lightning', 'Light', 'Dark'];
 let spellFilters = {
   elements: Object.fromEntries(elementOrder.map(e => [e, true])),
   schools: Object.fromEntries(Object.keys(schoolIcons).map(s => [s, true])),

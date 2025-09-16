@@ -4,7 +4,7 @@
 
 export type Element =
   | "Stone" | "Water" | "Wind" | "Fire"
-  | "Ice"   | "Thunder" | "Dark" | "Light";
+  | "Ice"   | "Lightning" | "Dark" | "Light";
 
 export type Side = "ally" | "enemy" | "party";
 export type Target = "ST" | "AoE";
@@ -95,14 +95,14 @@ const BUFF_REGEN_BASE: Omit<Song, "id">[] = [
   { name:"Guardian’s Song",   category:"buff", kind:"buff",  target:"AoE", side:"ally",  unlock:80, baseDurationSec:20, scale:{ m0:+10, m100:+18, unit:"pct" }, tags:["HP_SHIELD_PCTMAX"] },
 ];
 /** Elemental songs @33 (resist allies) and @66 (weakness enemies) */
-const ELEMENTS: Element[] = ["Stone","Water","Wind","Fire","Ice","Thunder","Dark","Light"];
+const ELEMENTS: Element[] = ["Stone","Water","Wind","Fire","Ice","Lightning","Dark","Light"];
 
 const ELEMENTAL_BASE: Omit<Song, "id">[] = [
   // Resist @33
   ...ELEMENTS.map(el => ({
     name: ({
       Stone:"Stoneguard Tune", Water:"Flowing Harmony", Wind:"Tempest Chant", Fire:"Ember Hymn",
-      Ice:"Frostsong", Thunder:"Storm Resonance", Dark:"Shadow Lament", Light:"Radiant Canticle"
+      Ice:"Frostsong", Lightning:"Storm Resonance", Dark:"Shadow Lament", Light:"Radiant Canticle"
     } as Record<Element,string>)[el],
     category:"elemental" as const, kind:"resist" as const, element: el,
     target:"AoE" as Target, side:"ally" as Side, unlock:33, baseDurationSec:20,
@@ -112,7 +112,7 @@ const ELEMENTAL_BASE: Omit<Song, "id">[] = [
   ...ELEMENTS.map(el => ({
     name: ({
       Stone:"Shattering Note", Water:"Drowning Dirge", Wind:"Cutting Gale Song", Fire:"Scorching Refrain",
-      Ice:"Piercing Chill", Thunder:"Overload Symphony", Dark:"Umbral Chant", Light:"Blinding Hymn"
+      Ice:"Piercing Chill", Lightning:"Overload Symphony", Dark:"Umbral Chant", Light:"Blinding Hymn"
     } as Record<Element,string>)[el],
     category:"elemental" as const, kind:"weakness" as const, element: el,
     target:"AoE" as Target, side:"enemy" as Side, unlock:66, baseDurationSec:20,
