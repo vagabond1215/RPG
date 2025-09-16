@@ -119,6 +119,10 @@ export const characterTemplate = {
   inventory: [],
   buildings: [],
   employment: [],
+  collections: {
+    animals: {},
+    plants: {},
+  },
   guildRank: 'None',
   adventurersGuildRank: 'None',
   backstory: null,
