@@ -94,6 +94,44 @@
     "narrative": "In the terrestrial realms, where forest holds sway, stands the Alder buckthorn, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Alder buckthorn marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "alentejo_winter_barley",
+    "common_name": "Alentejo Winter Barley",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "grain"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Alentejo Winter Barley, a grass of note. Tilled and tended by folk, it answers well to plough and garden row. Its grain sustain the hungry when prepared with care. From its body folk derive grain and fiber, a boon to trade and craft. Thus the Alentejo Winter Barley marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "grain"
+    ],
+    "culinary_uses": [
+      "bread",
+      "ale"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "late autumn",
+    "harvest_season": "early summer",
+    "growth_duration": "180 days",
+    "companion_crops": [
+      "peas"
+    ]
+  },
+  {
     "id": "algae",
     "common_name": "Algae",
     "growth_form": "algae",
@@ -154,6 +192,62 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Aloe vera, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Aloe vera marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "alpine_edelweiss_cluster",
+    "common_name": "Alpine Edelweiss Cluster",
+    "growth_form": "herb",
+    "regions": [
+      "highland"
+    ],
+    "habitats": [
+      "mountains"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the highland realms, where mountains holds sway, stands the Alpine Edelweiss Cluster, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Edelweiss, names born of custom and need. From its body folk derive flower, a boon to trade and craft. Thus the Alpine Edelweiss Cluster marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Collect sparingly to preserve cliffs.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Edelweiss"
+    ]
+  },
+  {
+    "id": "altamaha_buttonbush",
+    "common_name": "Altamaha Buttonbush",
+    "growth_form": "shrub",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "bark"
+      }
+    ],
+    "narrative": "In the wetlands transitional realms, where wetland holds sway, stands the Altamaha Buttonbush, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Buttonbush, names born of custom and need. From its body folk derive bark, a boon to trade and craft. Thus the Altamaha Buttonbush marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Thickets harbor waterfowl nests.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Buttonbush"
+    ]
+  },
+  {
     "id": "amaranth",
     "common_name": "Amaranth",
     "growth_form": "herb",
@@ -167,6 +261,34 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Amaranth, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Amaranth marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "amazon_floating_pistia",
+    "common_name": "Amazon Floating Pistia",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "lake"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where lake holds sway, stands the Amazon Floating Pistia, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Floating Lettuce, names born of custom and need. From its body folk derive fiber, a boon to trade and craft. Thus the Amazon Floating Pistia marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Skim mats to keep channels open.",
+    "seasonality": "year-round",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Floating Lettuce"
+    ]
   },
   {
     "id": "angelica",
@@ -212,6 +334,44 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Anise, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Anise marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "appalachian_spicebush",
+    "common_name": "Appalachian Spicebush",
+    "growth_form": "shrub",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "spice"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where forest holds sway, stands the Appalachian Spicebush, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Benjamin Bush, names born of custom and need. From its body folk derive leaf and spice, a boon to trade and craft. Thus the Appalachian Spicebush marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "tea",
+      "seasoning"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Gather leaves after the morning dew lifts.",
+    "seasonality": "spring",
+    "harvest_season": "late summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Benjamin Bush"
+    ]
   },
   {
     "id": "apple-tree",
@@ -337,6 +497,41 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Apricot, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. From its body folk derive fruit, a boon to trade and craft. Thus the Apricot marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "arctic_crowberry_mat",
+    "common_name": "Arctic Crowberry Mat",
+    "growth_form": "shrub",
+    "regions": [
+      "cold"
+    ],
+    "habitats": [
+      "tundra"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      }
+    ],
+    "narrative": "In the cold realms, where tundra holds sway, stands the Arctic Crowberry Mat, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Crowberry, names born of custom and need. From its body folk derive fruit, a boon to trade and craft. Thus the Arctic Crowberry Mat marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "jam",
+      "winter preserve"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Pick after first frost to sweeten berries.",
+    "seasonality": "late summer",
+    "harvest_season": "late summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Crowberry"
+    ]
+  },
+  {
     "id": "arrowhead",
     "common_name": "Arrowhead",
     "growth_form": "herb",
@@ -412,6 +607,88 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Asparagus, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Asparagus marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "atlantic_dulse_rack",
+    "common_name": "Atlantic Dulse Rack",
+    "growth_form": "seaweed",
+    "regions": [
+      "aquatic_salt"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "dye"
+      }
+    ],
+    "narrative": "In the aquatic salt realms, where coastal holds sway, stands the Atlantic Dulse Rack, a seaweed of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Dulse, names born of custom and need. From its body folk derive leaf and dye, a boon to trade and craft. Thus the Atlantic Dulse Rack marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "broth",
+      "seasoning"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Harvest after low tide for sweetest fronds.",
+    "seasonality": "spring",
+    "harvest_season": "spring",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Dulse"
+    ]
+  },
+  {
+    "id": "atlas_date_palm",
+    "common_name": "Atlas Date Palm",
+    "growth_form": "tree",
+    "regions": [
+      "arid"
+    ],
+    "habitats": [
+      "desert"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "fiber"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the arid realms, where desert holds sway, stands the Atlas Date Palm, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Atlas Date, names born of custom and need. From its body folk derive fruit, fiber and wood, a boon to trade and craft. Thus the Atlas Date Palm marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "dessert",
+      "paste"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "year-round",
+    "sowing_season": "offshoots",
+    "harvest_season": "autumn",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "alfalfa"
+    ],
+    "alt_names": [
+      "Atlas Date"
+    ]
+  },
+  {
     "id": "azalea",
     "common_name": "Azalea",
     "growth_form": "herb",
@@ -425,6 +702,116 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Azalea, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Azalea marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "badia_desert_hyssop",
+    "common_name": "Badia Desert Hyssop",
+    "growth_form": "herb",
+    "regions": [
+      "arid"
+    ],
+    "habitats": [
+      "desert"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the arid realms, where desert holds sway, stands the Badia Desert Hyssop, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Desert Hyssop, names born of custom and need. From its body folk derive leaf and herb, a boon to trade and craft. Thus the Badia Desert Hyssop marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "tea",
+      "seasoning"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Harvest in cool dawn to preserve oils.",
+    "seasonality": "spring",
+    "harvest_season": "spring",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Desert Hyssop"
+    ]
+  },
+  {
+    "id": "baikal_water_shield",
+    "common_name": "Baikal Water Shield",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "lake"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where lake holds sway, stands the Baikal Water Shield, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Gorgon Plant, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Baikal Water Shield marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "stir-fry",
+      "soup"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Gather tender leaves from the surface.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Gorgon Plant"
+    ]
+  },
+  {
+    "id": "baltic_kelp_forest",
+    "common_name": "Baltic Kelp Forest",
+    "growth_form": "seaweed",
+    "regions": [
+      "aquatic_salt"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the aquatic salt realms, where coastal holds sway, stands the Baltic Kelp Forest, a seaweed of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Baltic Kelp, names born of custom and need. From its body folk derive leaf and fiber, a boon to trade and craft. Thus the Baltic Kelp Forest marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "salting",
+      "stew"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Baltic Kelp"
+    ]
   },
   {
     "id": "bamboo",
@@ -549,6 +936,47 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Basil, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. From its body folk derive herb, a boon to trade and craft. Thus the Basil marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "bavarian_field_turnip",
+    "common_name": "Bavarian Field Turnip",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "root"
+      },
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Bavarian Field Turnip, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its root sustain the hungry when prepared with care. Among diverse tongues it is hailed as Bavarian Rübe, names born of custom and need. From its body folk derive root and leaf, a boon to trade and craft. Thus the Bavarian Field Turnip marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "root"
+    ],
+    "culinary_uses": [
+      "stew",
+      "pickle"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "early spring",
+    "harvest_season": "late autumn",
+    "growth_duration": "120 days",
+    "companion_crops": [
+      "cabbage"
+    ],
+    "alt_names": [
+      "Bavarian Rübe"
+    ]
+  },
+  {
     "id": "bay-laurel",
     "common_name": "Bay laurel",
     "growth_form": "tree",
@@ -562,6 +990,35 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Bay laurel, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Bay laurel marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "bayou_crimson_cardinal",
+    "common_name": "Bayou Crimson Cardinal",
+    "growth_form": "herb",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the wetlands transitional realms, where wetland holds sway, stands the Bayou Crimson Cardinal, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Cardinal Flower, names born of custom and need. From its body folk derive flower, a boon to trade and craft. Thus the Bayou Crimson Cardinal marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": true,
+    "toxicity_notes": "Sap may irritate skin.",
+    "foraging_notes": "Keep hands gloved when harvesting blooms.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Cardinal Flower"
+    ]
   },
   {
     "id": "beech",
@@ -673,6 +1130,45 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Betony, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Yet its flesh is shunned at table, for it brings ill to those who partake. From its body folk derive herb, a boon to trade and craft. Thus the Betony marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "bhutan_highland_buckwheat",
+    "common_name": "Bhutan Highland Buckwheat",
+    "growth_form": "herb",
+    "regions": [
+      "highland"
+    ],
+    "habitats": [
+      "farmland",
+      "mountains"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "grain"
+      }
+    ],
+    "narrative": "In the highland realms, where the farmland and mountains hold sway, stands the Bhutan Highland Buckwheat, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its grain sustain the hungry when prepared with care. Among diverse tongues it is hailed as Himalayan Buckwheat, names born of custom and need. From its body folk derive grain, a boon to trade and craft. Thus the Bhutan Highland Buckwheat marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "grain"
+    ],
+    "culinary_uses": [
+      "flatbread",
+      "porridge"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "spring thaw",
+    "harvest_season": "autumn",
+    "growth_duration": "120 days",
+    "companion_crops": [
+      "potatoes"
+    ],
+    "alt_names": [
+      "Himalayan Buckwheat"
+    ]
+  },
+  {
     "id": "bilberry",
     "common_name": "Bilberry",
     "growth_form": "shrub",
@@ -765,6 +1261,38 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Bitter vetch, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Bitter vetch marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "black_forest_morel_patch",
+    "common_name": "Black Forest Morel Patch",
+    "growth_form": "mushroom",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "mushroom"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where forest holds sway, stands the Black Forest Morel Patch, a mushroom of note. It springs forth unbidden, owing nothing to the care of humankind. Its fruiting body sustain the hungry when prepared with care. From its body folk derive mushroom, a boon to trade and craft. Thus the Black Forest Morel Patch marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruiting body"
+    ],
+    "culinary_uses": [
+      "sauté",
+      "broth"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Appears after spring rains.",
+    "seasonality": "spring",
+    "harvest_season": "spring",
+    "growth_duration": "short flush"
   },
   {
     "id": "black-pepper",
@@ -878,6 +1406,44 @@
       }
     ],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Borage, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. From its body folk derive leaf, a boon to trade and craft. Thus the Borage marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "boreal_fireweed_glade",
+    "common_name": "Boreal Fireweed Glade",
+    "growth_form": "herb",
+    "regions": [
+      "cold"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the cold realms, where forest holds sway, stands the Boreal Fireweed Glade, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Fireweed, names born of custom and need. From its body folk derive leaf and flower, a boon to trade and craft. Thus the Boreal Fireweed Glade marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "tea",
+      "jelly"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Young shoots taste best before bloom.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Fireweed"
+    ]
   },
   {
     "id": "boxwood",
@@ -1181,6 +1747,45 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Caper, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Caper marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "capital_rooftop_lettuce",
+    "common_name": "Capital Rooftop Lettuce",
+    "growth_form": "herb",
+    "regions": [
+      "urban"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the urban realms, where urban holds sway, stands the Capital Rooftop Lettuce, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Rooftop Lettuce, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Capital Rooftop Lettuce marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "salad",
+      "wraps"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Keep soil boxes well watered.",
+    "seasonality": "cool-season",
+    "sowing_season": "early spring",
+    "harvest_season": "summer",
+    "growth_duration": "80 days",
+    "companion_crops": [
+      "radish"
+    ],
+    "alt_names": [
+      "Rooftop Lettuce"
+    ]
+  },
+  {
     "id": "caraway",
     "common_name": "Caraway",
     "growth_form": "herb",
@@ -1209,6 +1814,47 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Cardamom, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Cardamom marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "caribbean_sea_grape",
+    "common_name": "Caribbean Sea Grape",
+    "growth_form": "shrub",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Caribbean Sea Grape, a shrub of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Sea Grape, names born of custom and need. From its body folk derive fruit and leaf, a boon to trade and craft. Thus the Caribbean Sea Grape marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "jam",
+      "wine"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "warm-season",
+    "sowing_season": "spring",
+    "harvest_season": "late summer",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "coconut"
+    ],
+    "alt_names": [
+      "Sea Grape"
+    ]
   },
   {
     "id": "carrageen-moss",
@@ -1340,6 +1986,46 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Castor bean, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Castor bean marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "catalan_saffron_crocus",
+    "common_name": "Catalan Saffron Crocus",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "flower"
+      },
+      {
+        "type": "spice"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Catalan Saffron Crocus, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its flower sustain the hungry when prepared with care. Among diverse tongues it is hailed as Catalan Safrà, names born of custom and need. From its body folk derive flower and spice, a boon to trade and craft. Thus the Catalan Saffron Crocus marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "flower"
+    ],
+    "culinary_uses": [
+      "spice"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "autumn",
+    "sowing_season": "summer",
+    "harvest_season": "autumn",
+    "growth_duration": "90 days",
+    "companion_crops": [
+      "grapevines"
+    ],
+    "alt_names": [
+      "Catalan Safrà"
+    ]
+  },
+  {
     "id": "catnip",
     "common_name": "Catnip",
     "growth_form": "herb",
@@ -1368,6 +2054,46 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Cattail, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Cattail marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "caucasus_rhubarb_fan",
+    "common_name": "Caucasus Rhubarb Fan",
+    "growth_form": "herb",
+    "regions": [
+      "highland"
+    ],
+    "habitats": [
+      "mountains"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the highland realms, where mountains holds sway, stands the Caucasus Rhubarb Fan, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Mountain Rhubarb, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Caucasus Rhubarb Fan marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "tart",
+      "stew"
+    ],
+    "medicinal": true,
+    "toxic": true,
+    "toxicity_notes": "Leaf blades are poisonous; use stalks only.",
+    "foraging_notes": "Peel thick stalks to tame sourness.",
+    "seasonality": "spring",
+    "sowing_season": "crown division",
+    "harvest_season": "spring",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "berries"
+    ],
+    "alt_names": [
+      "Mountain Rhubarb"
+    ]
   },
   {
     "id": "cedar",
@@ -1657,6 +2383,47 @@
     "narrative": "In the terrestrial realms, where grassland holds sway, stands the Chicory, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Chicory marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "chihuahuan_agave_stand",
+    "common_name": "Chihuahuan Agave Stand",
+    "growth_form": "herb",
+    "regions": [
+      "arid"
+    ],
+    "habitats": [
+      "desert"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "sap"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the arid realms, where desert holds sway, stands the Chihuahuan Agave Stand, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its sap sustain the hungry when prepared with care. Among diverse tongues it is hailed as Lechuguilla, names born of custom and need. From its body folk derive sap and fiber, a boon to trade and craft. Thus the Chihuahuan Agave Stand marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "sap"
+    ],
+    "culinary_uses": [
+      "syrup",
+      "roast heart"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "year-round",
+    "sowing_season": "pups",
+    "harvest_season": "dry season",
+    "growth_duration": "8 years",
+    "companion_crops": [
+      "mesquite"
+    ],
+    "alt_names": [
+      "Lechuguilla"
+    ]
+  },
+  {
     "id": "chives",
     "common_name": "Chives",
     "growth_form": "herb",
@@ -1879,6 +2646,36 @@
     "narrative": "In the wetlands transitional realms, where wetland holds sway, stands the Common reed (Phragmites), a grass of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. From its body folk derive fiber, a boon to trade and craft. Thus the Common reed (Phragmites) marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "congo_papyrus_stand",
+    "common_name": "Congo Papyrus Stand",
+    "growth_form": "grass",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "riverlands",
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where the riverlands and wetland hold sway, stands the Congo Papyrus Stand, a grass of note. Tilled and tended by folk, it answers well to plough and garden row. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Papyrus Reed, names born of custom and need. From its body folk derive fiber, a boon to trade and craft. Thus the Congo Papyrus Stand marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Cut lower stems for writing sheets.",
+    "seasonality": "year-round",
+    "sowing_season": "spring",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Papyrus Reed"
+    ]
+  },
+  {
     "id": "coral-fungus",
     "common_name": "Coral fungus",
     "growth_form": "fungus",
@@ -1984,6 +2781,44 @@
     "narrative": "In the terrestrial realms, where wetland holds sway, stands the Cranberry, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Cranberry marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "crete_thyme_mat",
+    "common_name": "Crete Thyme Mat",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "hills"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where hills holds sway, stands the Crete Thyme Mat, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Cretan Thyme, names born of custom and need. From its body folk derive leaf and herb, a boon to trade and craft. Thus the Crete Thyme Mat marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "herb",
+      "tea"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Cut during full bloom for best oils.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Cretan Thyme"
+    ]
+  },
+  {
     "id": "cucumber",
     "common_name": "Cucumber",
     "growth_form": "vine",
@@ -2056,6 +2891,47 @@
     "narrative": "In the terrestrial realms, where grassland holds sway, stands the Daisy, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Daisy marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "dalmatian_fig_orchard",
+    "common_name": "Dalmatian Fig Orchard",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Dalmatian Fig Orchard, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Dalmatian Fico, names born of custom and need. From its body folk derive fruit and wood, a boon to trade and craft. Thus the Dalmatian Fig Orchard marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "fresh eating",
+      "drying"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "warm-season",
+    "sowing_season": "spring cuttings",
+    "harvest_season": "late summer",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "olive"
+    ],
+    "alt_names": [
+      "Dalmatian Fico"
+    ]
+  },
+  {
     "id": "damson",
     "common_name": "Damson",
     "growth_form": "tree",
@@ -2075,6 +2951,43 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Damson, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. From its body folk derive fruit, a boon to trade and craft. Thus the Damson marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "danakil_saltwort_patch",
+    "common_name": "Danakil Saltwort Patch",
+    "growth_form": "herb",
+    "regions": [
+      "arid"
+    ],
+    "habitats": [
+      "desert"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "dye"
+      }
+    ],
+    "narrative": "In the arid realms, where desert holds sway, stands the Danakil Saltwort Patch, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Saltwort, names born of custom and need. From its body folk derive leaf and dye, a boon to trade and craft. Thus the Danakil Saltwort Patch marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "brine pickle"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Rinse well to soften salinity.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "annual",
+    "alt_names": [
+      "Saltwort"
+    ]
+  },
+  {
     "id": "dandelion",
     "common_name": "Dandelion",
     "growth_form": "herb",
@@ -2088,6 +3001,76 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where grassland holds sway, stands the Dandelion, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Dandelion marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "danube_water_caltrop",
+    "common_name": "Danube Water Caltrop",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "wetland",
+      "lake"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "nut"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where the wetland and lake hold sway, stands the Danube Water Caltrop, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its nut sustain the hungry when prepared with care. Among diverse tongues it is hailed as Devil Nut, names born of custom and need. From its body folk derive nut, a boon to trade and craft. Thus the Danube Water Caltrop marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "nut"
+    ],
+    "culinary_uses": [
+      "boil",
+      "roast"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "autumn",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "150 days",
+    "companion_crops": [
+      "lotus"
+    ],
+    "alt_names": [
+      "Devil Nut"
+    ]
+  },
+  {
+    "id": "darwin_mangrove_tea",
+    "common_name": "Darwin Mangrove Tea",
+    "growth_form": "tree",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "bark"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Darwin Mangrove Tea, a tree of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Mangrove Tea, names born of custom and need. From its body folk derive bark and wood, a boon to trade and craft. Thus the Darwin Mangrove Tea marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Harvest bark sparingly at low tide.",
+    "seasonality": "year-round",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Mangrove Tea"
+    ]
   },
   {
     "id": "date-palm",
@@ -2137,6 +3120,44 @@
       }
     ],
     "narrative": "In the terrestrial realms, where forest holds sway, stands the Death cap, a mushroom of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. From its body folk derive mushroom, a boon to trade and craft. Thus the Death cap marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "delta_sweet_flag",
+    "common_name": "Delta Sweet Flag",
+    "growth_form": "herb",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "root"
+      }
+    ],
+    "narrative": "In the wetlands transitional realms, where wetland holds sway, stands the Delta Sweet Flag, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its root sustain the hungry when prepared with care. Among diverse tongues it is hailed as Calamus, names born of custom and need. From its body folk derive root, a boon to trade and craft. Thus the Delta Sweet Flag marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "root"
+    ],
+    "culinary_uses": [
+      "candied",
+      "tea"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "spring",
+    "sowing_season": "rhizome division",
+    "harvest_season": "autumn",
+    "growth_duration": "150 days",
+    "companion_crops": [
+      "watercress"
+    ],
+    "alt_names": [
+      "Calamus"
+    ]
   },
   {
     "id": "dewberry-bramble",
@@ -2199,6 +3220,76 @@
     "narrative": "In the terrestrial realms, where forest holds sway, stands the Dogwood, a tree of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Dogwood marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "dolomite_alpine_willow",
+    "common_name": "Dolomite Alpine Willow",
+    "growth_form": "shrub",
+    "regions": [
+      "highland"
+    ],
+    "habitats": [
+      "mountains"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "bark"
+      }
+    ],
+    "narrative": "In the highland realms, where mountains holds sway, stands the Dolomite Alpine Willow, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Alpine Willow, names born of custom and need. From its body folk derive bark, a boon to trade and craft. Thus the Dolomite Alpine Willow marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Bark steeped for pain relief.",
+    "seasonality": "spring",
+    "harvest_season": "spring",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Alpine Willow"
+    ]
+  },
+  {
+    "id": "douro_wine_vineyard",
+    "common_name": "Douro Wine Vineyard",
+    "growth_form": "vine",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "hills",
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the hills and farmland hold sway, stands the Douro Wine Vineyard, a vine of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Douro Vine, names born of custom and need. From its body folk derive fruit and leaf, a boon to trade and craft. Thus the Douro Wine Vineyard marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "wine",
+      "raisin"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "warm-season",
+    "sowing_season": "spring cuttings",
+    "harvest_season": "autumn",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "lavender"
+    ],
+    "alt_names": [
+      "Douro Vine"
+    ]
+  },
+  {
     "id": "dragonfruit",
     "common_name": "Dragonfruit",
     "growth_form": "herb",
@@ -2244,6 +3335,47 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Durian, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Durian marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "east_china_sea_samphire",
+    "common_name": "East China Sea Samphire",
+    "growth_form": "herb",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the East China Sea Samphire, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Sea Asparagus, names born of custom and need. From its body folk derive leaf and herb, a boon to trade and craft. Thus the East China Sea Samphire marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "pickle",
+      "salad"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "summer",
+    "sowing_season": "spring",
+    "harvest_season": "summer",
+    "growth_duration": "90 days",
+    "companion_crops": [
+      "sea beet"
+    ],
+    "alt_names": [
+      "Sea Asparagus"
+    ]
+  },
+  {
     "id": "eelgrass-zostera",
     "common_name": "Eelgrass (Zostera)",
     "growth_form": "grass",
@@ -2261,6 +3393,51 @@
       }
     ],
     "narrative": "In the aquatic salt realms, where coastal holds sway, stands the Eelgrass (Zostera), a grass of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. From its body folk derive fiber, a boon to trade and craft. Thus the Eelgrass (Zostera) marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "egyptian_moringa_grove",
+    "common_name": "Egyptian Moringa Grove",
+    "growth_form": "tree",
+    "regions": [
+      "arid"
+    ],
+    "habitats": [
+      "desert",
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "seed"
+      },
+      {
+        "type": "oil"
+      }
+    ],
+    "narrative": "In the arid realms, where the desert and farmland hold sway, stands the Egyptian Moringa Grove, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Desert Moringa, names born of custom and need. From its body folk derive leaf, seed and oil, a boon to trade and craft. Thus the Egyptian Moringa Grove marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "stew",
+      "tea"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "year-round",
+    "sowing_season": "spring",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "beans"
+    ],
+    "alt_names": [
+      "Desert Moringa"
+    ]
   },
   {
     "id": "einkorn",
@@ -2327,6 +3504,89 @@
     "narrative": "In the terrestrial realms, where forest holds sway, stands the Elm, a tree of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Elm marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "emerald_lotus_paddy",
+    "common_name": "Emerald Lotus Paddy",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "root"
+      },
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where wetland holds sway, stands the Emerald Lotus Paddy, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its root sustain the hungry when prepared with care. Among diverse tongues it is hailed as Emerald Lotus, names born of custom and need. From its body folk derive root and flower, a boon to trade and craft. Thus the Emerald Lotus Paddy marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "root"
+    ],
+    "culinary_uses": [
+      "stir-fry",
+      "sweets"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "summer",
+    "sowing_season": "spring",
+    "harvest_season": "late summer",
+    "growth_duration": "180 days",
+    "companion_crops": [
+      "fish"
+    ],
+    "alt_names": [
+      "Emerald Lotus"
+    ]
+  },
+  {
+    "id": "emilian_chicory_heads",
+    "common_name": "Emilian Chicory Heads",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "root"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Emilian Chicory Heads, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Radicchio Rosso, names born of custom and need. From its body folk derive leaf and root, a boon to trade and craft. Thus the Emilian Chicory Heads marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "salad",
+      "braise"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Blanch heads in cellars for tenderness.",
+    "seasonality": "cool-season",
+    "sowing_season": "late summer",
+    "harvest_season": "winter",
+    "growth_duration": "150 days",
+    "companion_crops": [
+      "grapes"
+    ],
+    "alt_names": [
+      "Radicchio Rosso"
+    ]
+  },
+  {
     "id": "emmer",
     "common_name": "Emmer",
     "growth_form": "grass",
@@ -2365,6 +3625,77 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Ergot (rye fungus), a fungus of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. From its body folk derive mushroom, a boon to trade and craft. Thus the Ergot (rye fungus) marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "estonian_bog_rosemary",
+    "common_name": "Estonian Bog Rosemary",
+    "growth_form": "shrub",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the wetlands transitional realms, where wetland holds sway, stands the Estonian Bog Rosemary, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Bog Rosemary, names born of custom and need. From its body folk derive herb, a boon to trade and craft. Thus the Estonian Bog Rosemary marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": true,
+    "toxicity_notes": "Berries are poisonous.",
+    "foraging_notes": "Admire only; do not harvest.",
+    "seasonality": "spring",
+    "harvest_season": "spring",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Bog Rosemary"
+    ]
+  },
+  {
+    "id": "ethiopian_ensete_grove",
+    "common_name": "Ethiopian Ensete Grove",
+    "growth_form": "tree",
+    "regions": [
+      "highland"
+    ],
+    "habitats": [
+      "farmland",
+      "mountains"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "tuber"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the highland realms, where the farmland and mountains hold sway, stands the Ethiopian Ensete Grove, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its tuber sustain the hungry when prepared with care. Among diverse tongues it is hailed as False Banana, names born of custom and need. From its body folk derive tuber and fiber, a boon to trade and craft. Thus the Ethiopian Ensete Grove marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "tuber"
+    ],
+    "culinary_uses": [
+      "fermented bread",
+      "porridge"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "year-round",
+    "sowing_season": "suckers",
+    "harvest_season": "year-round",
+    "growth_duration": "3 years",
+    "companion_crops": [
+      "coffee"
+    ],
+    "alt_names": [
+      "False Banana"
+    ]
+  },
+  {
     "id": "eucalyptus",
     "common_name": "Eucalyptus",
     "growth_form": "herb",
@@ -2378,6 +3709,44 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Eucalyptus, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Eucalyptus marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "faroe_rockweed",
+    "common_name": "Faroe Rockweed",
+    "growth_form": "seaweed",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Faroe Rockweed, a seaweed of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Rockweed, names born of custom and need. From its body folk derive leaf and fiber, a boon to trade and craft. Thus the Faroe Rockweed marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "stew",
+      "fertilizer tea"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Dry fronds for winter fodder.",
+    "seasonality": "year-round",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Rockweed"
+    ]
   },
   {
     "id": "fennel",
@@ -2459,6 +3828,34 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Figs, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Figs marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "finnmark_bogbean_patch",
+    "common_name": "Finnmark Bogbean Patch",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where wetland holds sway, stands the Finnmark Bogbean Patch, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Menyanthes, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Finnmark Bogbean Patch marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Harvest sparingly for tonics.",
+    "seasonality": "spring",
+    "harvest_season": "spring",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Menyanthes"
+    ]
+  },
+  {
     "id": "fir",
     "common_name": "Fir",
     "growth_form": "tree",
@@ -2527,6 +3924,49 @@
       ],
       "luxury_tier": []
     }
+  },
+  {
+    "id": "floodplain_watermint",
+    "common_name": "Floodplain Watermint",
+    "growth_form": "herb",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland",
+      "riverlands"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the wetlands transitional realms, where the wetland and riverlands hold sway, stands the Floodplain Watermint, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Water Mint, names born of custom and need. From its body folk derive leaf and herb, a boon to trade and craft. Thus the Floodplain Watermint marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "herb",
+      "tea"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Harvest before flowering for richest oils.",
+    "seasonality": "summer",
+    "sowing_season": "spring",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "peas"
+    ],
+    "alt_names": [
+      "Water Mint"
+    ]
   },
   {
     "id": "fly-agaric",
@@ -2606,6 +4046,118 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the aquatic fresh realms, where wetland holds sway, stands the Frogbit, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Frogbit marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "galapagos_red_mangrove",
+    "common_name": "Galápagos Red Mangrove",
+    "growth_form": "tree",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "bark"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Galápagos Red Mangrove, a tree of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Red Mangrove, names born of custom and need. From its body folk derive bark and wood, a boon to trade and craft. Thus the Galápagos Red Mangrove marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Roots shelter nurseries for reef fish.",
+    "seasonality": "year-round",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Red Mangrove"
+    ]
+  },
+  {
+    "id": "galician_kale_row",
+    "common_name": "Galician Kale Row",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Galician Kale Row, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Grelos, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Galician Kale Row marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "broth",
+      "stew"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "early spring",
+    "harvest_season": "winter",
+    "growth_duration": "200 days",
+    "companion_crops": [
+      "beans"
+    ],
+    "alt_names": [
+      "Grelos"
+    ]
+  },
+  {
+    "id": "ganges_floating_rice",
+    "common_name": "Ganges Floating Rice",
+    "growth_form": "grass",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "riverlands",
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "grain"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where the riverlands and farmland hold sway, stands the Ganges Floating Rice, a grass of note. Tilled and tended by folk, it answers well to plough and garden row. Its grain sustain the hungry when prepared with care. Among diverse tongues it is hailed as Deepwater Rice, names born of custom and need. From its body folk derive grain and fiber, a boon to trade and craft. Thus the Ganges Floating Rice marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "grain"
+    ],
+    "culinary_uses": [
+      "rice",
+      "porridge"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Keep paddies flooded through high water.",
+    "seasonality": "monsoon",
+    "sowing_season": "early monsoon",
+    "harvest_season": "dry season",
+    "growth_duration": "210 days",
+    "companion_crops": [
+      "fish"
+    ],
+    "alt_names": [
+      "Deepwater Rice"
+    ]
   },
   {
     "id": "garlic",
@@ -2696,6 +4248,34 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Ginseng, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Ginseng marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "gobi_saxaul_bush",
+    "common_name": "Gobi Saxaul Bush",
+    "growth_form": "shrub",
+    "regions": [
+      "arid"
+    ],
+    "habitats": [
+      "desert"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the arid realms, where desert holds sway, stands the Gobi Saxaul Bush, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Saxaul, names born of custom and need. From its body folk derive wood, a boon to trade and craft. Thus the Gobi Saxaul Bush marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Staple fuelwood of the dunes.",
+    "seasonality": "year-round",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Saxaul"
+    ]
+  },
+  {
     "id": "gooseberry",
     "common_name": "Gooseberry",
     "growth_form": "shrub",
@@ -2782,6 +4362,34 @@
     ]
   },
   {
+    "id": "great_lakes_marsh_blazingstar",
+    "common_name": "Great Lakes Marsh Blazingstar",
+    "growth_form": "herb",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the wetlands transitional realms, where wetland holds sway, stands the Great Lakes Marsh Blazingstar, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Marsh Blazing Star, names born of custom and need. From its body folk derive flower, a boon to trade and craft. Thus the Great Lakes Marsh Blazingstar marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Supports migrating butterflies.",
+    "seasonality": "late summer",
+    "harvest_season": "late summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Marsh Blazing Star"
+    ]
+  },
+  {
     "id": "guarana",
     "common_name": "Guarana",
     "growth_form": "herb",
@@ -2825,6 +4433,48 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where forest holds sway, stands the Guelder rose, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Guelder rose marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "haida_sugar_kelp_line",
+    "common_name": "Haida Sugar Kelp Line",
+    "growth_form": "seaweed",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Haida Sugar Kelp Line, a seaweed of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Sugar Kelp, names born of custom and need. From its body folk derive leaf and fiber, a boon to trade and craft. Thus the Haida Sugar Kelp Line marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "broth",
+      "salting"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Hang spore ropes in autumn swells.",
+    "seasonality": "spring",
+    "sowing_season": "autumn spore ropes",
+    "harvest_season": "spring",
+    "growth_duration": "210 days",
+    "companion_crops": [
+      "mussels"
+    ],
+    "alt_names": [
+      "Sugar Kelp"
+    ]
   },
   {
     "id": "hawthorn",
@@ -2964,6 +4614,34 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Hibiscus, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Hibiscus marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "himalayan_blue_poppy",
+    "common_name": "Himalayan Blue Poppy",
+    "growth_form": "herb",
+    "regions": [
+      "highland"
+    ],
+    "habitats": [
+      "mountains"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the highland realms, where mountains holds sway, stands the Himalayan Blue Poppy, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Blue Poppy, names born of custom and need. From its body folk derive flower, a boon to trade and craft. Thus the Himalayan Blue Poppy marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Grows on misty scree slopes.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Blue Poppy"
+    ]
+  },
+  {
     "id": "holly",
     "common_name": "Holly",
     "growth_form": "tree",
@@ -3073,6 +4751,89 @@
     "narrative": "In the terrestrial realms, where wetland holds sway, stands the Horsetail, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Horsetail marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "huanghe_lotus_root",
+    "common_name": "Huanghe Lotus Root",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "root"
+      },
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where wetland holds sway, stands the Huanghe Lotus Root, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its root sustain the hungry when prepared with care. Among diverse tongues it is hailed as Yellow River Lotus, names born of custom and need. From its body folk derive root and flower, a boon to trade and craft. Thus the Huanghe Lotus Root marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "root"
+    ],
+    "culinary_uses": [
+      "stir-fry",
+      "soup"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "autumn",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "200 days",
+    "companion_crops": [
+      "rice"
+    ],
+    "alt_names": [
+      "Yellow River Lotus"
+    ]
+  },
+  {
+    "id": "hungarian_paprika_chili",
+    "common_name": "Hungarian Paprika Chili",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "spice"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Hungarian Paprika Chili, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Kalocsa Pepper, names born of custom and need. From its body folk derive fruit and spice, a boon to trade and craft. Thus the Hungarian Paprika Chili marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "spice",
+      "powder"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Dry pods before grinding.",
+    "seasonality": "warm-season",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "140 days",
+    "companion_crops": [
+      "tomatoes"
+    ],
+    "alt_names": [
+      "Kalocsa Pepper"
+    ]
+  },
+  {
     "id": "hyssop",
     "common_name": "Hyssop",
     "growth_form": "herb",
@@ -3088,6 +4849,152 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Hyssop, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Hyssop marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "iberian_sea_lavender",
+    "common_name": "Iberian Sea Lavender",
+    "growth_form": "herb",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "flower"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Iberian Sea Lavender, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Sea Lavender, names born of custom and need. From its body folk derive flower and herb, a boon to trade and craft. Thus the Iberian Sea Lavender marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Gather blossoms for fragrant sachets.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Sea Lavender"
+    ]
+  },
+  {
+    "id": "icelandic_angelica_plot",
+    "common_name": "Icelandic Angelica Plot",
+    "growth_form": "herb",
+    "regions": [
+      "cold"
+    ],
+    "habitats": [
+      "tundra"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "root"
+      }
+    ],
+    "narrative": "In the cold realms, where tundra holds sway, stands the Icelandic Angelica Plot, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Icelandic Angelica, names born of custom and need. From its body folk derive leaf and root, a boon to trade and craft. Thus the Icelandic Angelica Plot marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "candy",
+      "tea"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "summer",
+    "sowing_season": "spring",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "birch"
+    ],
+    "alt_names": [
+      "Icelandic Angelica"
+    ]
+  },
+  {
+    "id": "idaho_catkin_willow",
+    "common_name": "Idaho Catkin Willow",
+    "growth_form": "tree",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "wood"
+      },
+      {
+        "type": "bark"
+      }
+    ],
+    "narrative": "In the wetlands transitional realms, where wetland holds sway, stands the Idaho Catkin Willow, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Basket Willow, names born of custom and need. From its body folk derive wood and bark, a boon to trade and craft. Thus the Idaho Catkin Willow marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Cut rods in dormancy for weaving.",
+    "seasonality": "spring",
+    "sowing_season": "cuttings",
+    "harvest_season": "winter",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "cranberries"
+    ],
+    "alt_names": [
+      "Basket Willow"
+    ]
+  },
+  {
+    "id": "inca_oca_patch",
+    "common_name": "Inca Oca Patch",
+    "growth_form": "herb",
+    "regions": [
+      "highland"
+    ],
+    "habitats": [
+      "farmland",
+      "mountains"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "tuber"
+      }
+    ],
+    "narrative": "In the highland realms, where the farmland and mountains hold sway, stands the Inca Oca Patch, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its tuber sustain the hungry when prepared with care. Among diverse tongues it is hailed as Oxalis Tuberosa, names born of custom and need. From its body folk derive tuber, a boon to trade and craft. Thus the Inca Oca Patch marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "tuber"
+    ],
+    "culinary_uses": [
+      "roast",
+      "sun-sweet"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "early spring",
+    "harvest_season": "late autumn",
+    "growth_duration": "200 days",
+    "companion_crops": [
+      "corn"
+    ],
+    "alt_names": [
+      "Oxalis Tuberosa"
+    ]
+  },
+  {
     "id": "ink-cap",
     "common_name": "Ink cap",
     "growth_form": "mushroom",
@@ -3101,6 +5008,90 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where forest holds sway, stands the Ink cap, a mushroom of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Ink cap marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "inle_garden_watercress",
+    "common_name": "Inle Garden Watercress",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "wetland",
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where the wetland and farmland hold sway, stands the Inle Garden Watercress, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Floating Watercress, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Inle Garden Watercress marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "salad",
+      "garnish"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "late autumn",
+    "harvest_season": "spring",
+    "growth_duration": "90 days",
+    "companion_crops": [
+      "floating tomatoes"
+    ],
+    "alt_names": [
+      "Floating Watercress"
+    ]
+  },
+  {
+    "id": "istrian_olive_terrace",
+    "common_name": "Istrian Olive Terrace",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland",
+      "hills"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "oil"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the farmland and hills hold sway, stands the Istrian Olive Terrace, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Istrian Olea, names born of custom and need. From its body folk derive fruit, oil and wood, a boon to trade and craft. Thus the Istrian Olive Terrace marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "oil",
+      "cured"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "warm-season",
+    "sowing_season": "spring cuttings",
+    "harvest_season": "late autumn",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "grapes"
+    ],
+    "alt_names": [
+      "Istrian Olea"
+    ]
   },
   {
     "id": "ivy",
@@ -3133,6 +5124,44 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Jackfruit, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Jackfruit marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "japanese_nori_rafter",
+    "common_name": "Japanese Nori Rafter",
+    "growth_form": "seaweed",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Japanese Nori Rafter, a seaweed of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Nori, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Japanese Nori Rafter marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "wraps",
+      "soup"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "winter",
+    "sowing_season": "autumn spores",
+    "harvest_season": "winter",
+    "growth_duration": "120 days",
+    "companion_crops": [
+      "oysters"
+    ],
+    "alt_names": [
+      "Nori"
+    ]
+  },
+  {
     "id": "jasmine",
     "common_name": "Jasmine",
     "growth_form": "herb",
@@ -3163,6 +5192,43 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Jicama, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Jicama marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "jordanian_sagebrush",
+    "common_name": "Jordanian Sagebrush",
+    "growth_form": "shrub",
+    "regions": [
+      "arid"
+    ],
+    "habitats": [
+      "desert"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the arid realms, where desert holds sway, stands the Jordanian Sagebrush, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Desert Sage, names born of custom and need. From its body folk derive leaf and herb, a boon to trade and craft. Thus the Jordanian Sagebrush marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "tea",
+      "seasoning"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "spring",
+    "harvest_season": "spring",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Desert Sage"
+    ]
+  },
+  {
     "id": "juniper",
     "common_name": "Juniper",
     "growth_form": "tree",
@@ -3178,6 +5244,182 @@
     "narrative": "In the terrestrial realms, where forest holds sway, stands the Juniper, a tree of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Juniper marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "jura_valerian_clump",
+    "common_name": "Jura Valerian Clump",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "hills"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "root"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the forest and hills hold sway, stands the Jura Valerian Clump, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. From its body folk derive root and herb, a boon to trade and craft. Thus the Jura Valerian Clump marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Harvest roots after first frost.",
+    "seasonality": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "perennial"
+  },
+  {
+    "id": "juruena_arrowhead_bed",
+    "common_name": "Juruena Arrowhead Bed",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "tuber"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where wetland holds sway, stands the Juruena Arrowhead Bed, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its tuber sustain the hungry when prepared with care. Among diverse tongues it is hailed as Arrowhead Sagittaria, names born of custom and need. From its body folk derive tuber, a boon to trade and craft. Thus the Juruena Arrowhead Bed marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "tuber"
+    ],
+    "culinary_uses": [
+      "boil",
+      "grill"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "dry-season",
+    "sowing_season": "start of rains",
+    "harvest_season": "dry-season",
+    "growth_duration": "160 days",
+    "companion_crops": [
+      "fish"
+    ],
+    "alt_names": [
+      "Arrowhead Sagittaria"
+    ]
+  },
+  {
+    "id": "jutland_reed_canary",
+    "common_name": "Jutland Reed Canary",
+    "growth_form": "grass",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the wetlands transitional realms, where wetland holds sway, stands the Jutland Reed Canary, a grass of note. Tilled and tended by folk, it answers well to plough and garden row. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Reed Canary Grass, names born of custom and need. From its body folk derive fiber, a boon to trade and craft. Thus the Jutland Reed Canary marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Cut for thatch before seedheads mature.",
+    "seasonality": "summer",
+    "sowing_season": "spring",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Reed Canary Grass"
+    ]
+  },
+  {
+    "id": "kailash_highland_barley",
+    "common_name": "Kailash Highland Barley",
+    "growth_form": "grass",
+    "regions": [
+      "highland"
+    ],
+    "habitats": [
+      "farmland",
+      "mountains"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "grain"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the highland realms, where the farmland and mountains hold sway, stands the Kailash Highland Barley, a grass of note. Tilled and tended by folk, it answers well to plough and garden row. Its grain sustain the hungry when prepared with care. Among diverse tongues it is hailed as Tibetan Barley, names born of custom and need. From its body folk derive grain and fiber, a boon to trade and craft. Thus the Kailash Highland Barley marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "grain"
+    ],
+    "culinary_uses": [
+      "tsampa",
+      "beer"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "early spring",
+    "harvest_season": "late summer",
+    "growth_duration": "120 days",
+    "companion_crops": [
+      "peas"
+    ],
+    "alt_names": [
+      "Tibetan Barley"
+    ]
+  },
+  {
+    "id": "kalahari_tsamma_melon",
+    "common_name": "Kalahari Tsamma Melon",
+    "growth_form": "vine",
+    "regions": [
+      "arid"
+    ],
+    "habitats": [
+      "desert"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "seed"
+      }
+    ],
+    "narrative": "In the arid realms, where desert holds sway, stands the Kalahari Tsamma Melon, a vine of note. It springs forth unbidden, owing nothing to the care of humankind. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Tsamma Melon, names born of custom and need. From its body folk derive fruit and seed, a boon to trade and craft. Thus the Kalahari Tsamma Melon marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "juice",
+      "stew"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Store fruits in shade for water reserve.",
+    "seasonality": "rainy season",
+    "harvest_season": "rainy season",
+    "growth_duration": "annual",
+    "alt_names": [
+      "Tsamma Melon"
+    ]
+  },
+  {
     "id": "kale",
     "common_name": "Kale",
     "growth_form": "herb",
@@ -3191,6 +5433,41 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Kale, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Kale marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "karpatian_wild_garlic",
+    "common_name": "Karpatian Wild Garlic",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where forest holds sway, stands the Karpatian Wild Garlic, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Ramsons, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Karpatian Wild Garlic marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "pesto",
+      "seasoning"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Gather before flowering.",
+    "seasonality": "spring",
+    "harvest_season": "spring",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Ramsons"
+    ]
   },
   {
     "id": "kava",
@@ -3238,6 +5515,46 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Khat, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Khat marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "kinabatangan_water_spinach",
+    "common_name": "Kinabatangan Water Spinach",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "wetland",
+      "riverlands"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where the wetland and riverlands hold sway, stands the Kinabatangan Water Spinach, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Kangkung, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Kinabatangan Water Spinach marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "stir-fry",
+      "pickle"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Harvest tender tips weekly.",
+    "seasonality": "year-round",
+    "sowing_season": "cuttings",
+    "harvest_season": "year-round",
+    "growth_duration": "60 days",
+    "companion_crops": [
+      "paddy rice"
+    ],
+    "alt_names": [
+      "Kangkung"
+    ]
+  },
+  {
     "id": "kiwi-fruit",
     "common_name": "Kiwi fruit",
     "growth_form": "herb",
@@ -3268,6 +5585,75 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Kohlrabi, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Kohlrabi marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "kootenay_sedge_meadow",
+    "common_name": "Kootenay Sedge Meadow",
+    "growth_form": "grass",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the wetlands transitional realms, where wetland holds sway, stands the Kootenay Sedge Meadow, a grass of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Sedge Meadow, names born of custom and need. From its body folk derive fiber, a boon to trade and craft. Thus the Kootenay Sedge Meadow marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Provides fodder for migrating elk.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Sedge Meadow"
+    ]
+  },
+  {
+    "id": "korean_glasswort_flat",
+    "common_name": "Korean Glasswort Flat",
+    "growth_form": "herb",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "dye"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Korean Glasswort Flat, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Salicornia, names born of custom and need. From its body folk derive leaf and dye, a boon to trade and craft. Thus the Korean Glasswort Flat marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "pickle",
+      "salad"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "summer",
+    "sowing_season": "spring",
+    "harvest_season": "late summer",
+    "growth_duration": "100 days",
+    "companion_crops": [
+      "sea rice"
+    ],
+    "alt_names": [
+      "Salicornia"
+    ]
+  },
+  {
     "id": "kumquat",
     "common_name": "Kumquat",
     "growth_form": "herb",
@@ -3281,6 +5667,48 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Kumquat, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Kumquat marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "ladakh_dryland_mustard",
+    "common_name": "Ladakh Dryland Mustard",
+    "growth_form": "herb",
+    "regions": [
+      "highland"
+    ],
+    "habitats": [
+      "farmland",
+      "mountains"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "seed"
+      },
+      {
+        "type": "oil"
+      }
+    ],
+    "narrative": "In the highland realms, where the farmland and mountains hold sway, stands the Ladakh Dryland Mustard, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its seed sustain the hungry when prepared with care. Among diverse tongues it is hailed as Ladakhi Mustard, names born of custom and need. From its body folk derive seed and oil, a boon to trade and craft. Thus the Ladakh Dryland Mustard marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "seed"
+    ],
+    "culinary_uses": [
+      "oil",
+      "pickle"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "spring thaw",
+    "harvest_season": "autumn",
+    "growth_duration": "150 days",
+    "companion_crops": [
+      "barley"
+    ],
+    "alt_names": [
+      "Ladakhi Mustard"
+    ]
   },
   {
     "id": "ladys-bedstraw",
@@ -3298,6 +5726,82 @@
     "narrative": "In the terrestrial realms, where grassland holds sway, stands the Lady's bedstraw, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Lady's bedstraw marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "lagoon_coastal_coconut",
+    "common_name": "Lagoon Coastal Coconut",
+    "growth_form": "tree",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "nut"
+      },
+      {
+        "type": "oil"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Lagoon Coastal Coconut, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its nut sustain the hungry when prepared with care. Among diverse tongues it is hailed as Lagoon Coconut, names born of custom and need. From its body folk derive nut, oil and fiber, a boon to trade and craft. Thus the Lagoon Coastal Coconut marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "nut"
+    ],
+    "culinary_uses": [
+      "milk",
+      "oil"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "year-round",
+    "sowing_season": "transplant",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "breadfruit"
+    ],
+    "alt_names": [
+      "Lagoon Coconut"
+    ]
+  },
+  {
+    "id": "laguna_azolla_mat",
+    "common_name": "Laguna Azolla Mat",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where wetland holds sway, stands the Laguna Azolla Mat, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Floating Fern, names born of custom and need. From its body folk derive herb, a boon to trade and craft. Thus the Laguna Azolla Mat marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Use as living mulch in rice paddies.",
+    "seasonality": "year-round",
+    "sowing_season": "early monsoon",
+    "harvest_season": "year-round",
+    "growth_duration": "fast spread",
+    "companion_crops": [
+      "rice"
+    ],
+    "alt_names": [
+      "Floating Fern"
+    ]
+  },
+  {
     "id": "lambs-lettuce",
     "common_name": "Lambs lettuce",
     "growth_form": "herb",
@@ -3311,6 +5815,42 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where grassland holds sway, stands the Lambs lettuce, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Lambs lettuce marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "lapland_cloudberry_bog",
+    "common_name": "Lapland Cloudberry Bog",
+    "growth_form": "shrub",
+    "regions": [
+      "cold"
+    ],
+    "habitats": [
+      "wetland",
+      "tundra"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      }
+    ],
+    "narrative": "In the cold realms, where the wetland and tundra hold sway, stands the Lapland Cloudberry Bog, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Cloudberry, names born of custom and need. From its body folk derive fruit, a boon to trade and craft. Thus the Lapland Cloudberry Bog marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "jam",
+      "dessert"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Swamps yield heavily after long winters.",
+    "seasonality": "late summer",
+    "harvest_season": "late summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Cloudberry"
+    ]
   },
   {
     "id": "larch",
@@ -3620,6 +6160,47 @@
     "narrative": "In the terrestrial realms, where forest holds sway, stands the Liverwort, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Liverwort marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "loire_meadow_clover",
+    "common_name": "Loire Meadow Clover",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where grassland holds sway, stands the Loire Meadow Clover, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Trifolium of Loire, names born of custom and need. From its body folk derive leaf and flower, a boon to trade and craft. Thus the Loire Meadow Clover marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "fodder infusion",
+      "salad"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "summer",
+    "sowing_season": "spring",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "grain"
+    ],
+    "alt_names": [
+      "Trifolium of Loire"
+    ]
+  },
+  {
     "id": "loquat",
     "common_name": "Loquat",
     "growth_form": "herb",
@@ -3663,6 +6244,45 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Lovage, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Lovage marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "lowcountry_pawpaw",
+    "common_name": "Lowcountry Pawpaw",
+    "growth_form": "tree",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "riverlands",
+      "forest"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      }
+    ],
+    "narrative": "In the wetlands transitional realms, where the riverlands and forest hold sway, stands the Lowcountry Pawpaw, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as River Pawpaw, names born of custom and need. From its body folk derive fruit, a boon to trade and craft. Thus the Lowcountry Pawpaw marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "custard",
+      "fresh eating"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "late summer",
+    "sowing_season": "spring",
+    "harvest_season": "late summer",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "black walnut"
+    ],
+    "alt_names": [
+      "River Pawpaw"
+    ]
   },
   {
     "id": "luffa",
@@ -3727,6 +6347,47 @@
       }
     ],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Madder, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Yet its flesh is shunned at table, for it brings ill to those who partake. From its body folk derive dye, a boon to trade and craft. Thus the Madder marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "maldives_pandanus_grove",
+    "common_name": "Maldives Pandanus Grove",
+    "growth_form": "tree",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Maldives Pandanus Grove, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Screwpine, names born of custom and need. From its body folk derive fruit and fiber, a boon to trade and craft. Thus the Maldives Pandanus Grove marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "starch",
+      "dessert"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "year-round",
+    "sowing_season": "cuttings",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "coconut"
+    ],
+    "alt_names": [
+      "Screwpine"
+    ]
   },
   {
     "id": "mandrake",
@@ -3808,6 +6469,47 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Marjoram, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. From its body folk derive herb, a boon to trade and craft. Thus the Marjoram marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "market_square_herb_planter",
+    "common_name": "Market Square Herb Planter",
+    "growth_form": "herb",
+    "regions": [
+      "urban"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the urban realms, where urban holds sway, stands the Market Square Herb Planter, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Planter Herbs, names born of custom and need. From its body folk derive leaf and herb, a boon to trade and craft. Thus the Market Square Herb Planter marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "herb",
+      "tea"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "year-round",
+    "sowing_season": "spring",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "tomato"
+    ],
+    "alt_names": [
+      "Planter Herbs"
+    ]
+  },
+  {
     "id": "marsh-marigold",
     "common_name": "Marsh marigold",
     "growth_form": "herb",
@@ -3870,6 +6572,44 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Medlar, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Medlar marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "mekong_water_celery",
+    "common_name": "Mekong Water Celery",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where wetland holds sway, stands the Mekong Water Celery, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Pak Chi, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Mekong Water Celery marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "soup",
+      "salad"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "late autumn",
+    "harvest_season": "spring",
+    "growth_duration": "120 days",
+    "companion_crops": [
+      "fish"
+    ],
+    "alt_names": [
+      "Pak Chi"
+    ]
   },
   {
     "id": "melon",
@@ -4067,6 +6807,34 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Myrtle, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Myrtle marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "namib_welwitschia_pair",
+    "common_name": "Namib Welwitschia Pair",
+    "growth_form": "shrub",
+    "regions": [
+      "arid"
+    ],
+    "habitats": [
+      "desert"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the arid realms, where desert holds sway, stands the Namib Welwitschia Pair, a shrub of note. It springs forth unbidden, owing nothing to the care of humankind. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Welwitschia, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Namib Welwitschia Pair marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Leaves persist for centuries across the gravel plains.",
+    "seasonality": "year-round",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Welwitschia"
+    ]
+  },
+  {
     "id": "nasturtium",
     "common_name": "Nasturtium",
     "growth_form": "herb",
@@ -4144,6 +6912,123 @@
       }
     ],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Nigella (black cumin), a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. From its body folk derive seed, a boon to trade and craft. Thus the Nigella (black cumin) marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "nile_blue_lily",
+    "common_name": "Nile Blue Lily",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "lake",
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "seed"
+      },
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where the lake and wetland hold sway, stands the Nile Blue Lily, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its seed sustain the hungry when prepared with care. Among diverse tongues it is hailed as Blue Lotus, names born of custom and need. From its body folk derive seed and flower, a boon to trade and craft. Thus the Nile Blue Lily marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "seed"
+    ],
+    "culinary_uses": [
+      "porridge",
+      "tea"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "summer",
+    "sowing_season": "spring",
+    "harvest_season": "late summer",
+    "growth_duration": "180 days",
+    "companion_crops": [
+      "lotus"
+    ],
+    "alt_names": [
+      "Blue Lotus"
+    ]
+  },
+  {
+    "id": "north_sea_sea_beet",
+    "common_name": "North Sea Sea Beet",
+    "growth_form": "herb",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the North Sea Sea Beet, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Sea Beet, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the North Sea Sea Beet marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "greens",
+      "stew"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "spring",
+    "harvest_season": "spring",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Sea Beet"
+    ]
+  },
+  {
+    "id": "novgorod_flax_field",
+    "common_name": "Novgorod Flax Field",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "seed"
+      },
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Novgorod Flax Field, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its seed sustain the hungry when prepared with care. Among diverse tongues it is hailed as Linen Flax, names born of custom and need. From its body folk derive seed and fiber, a boon to trade and craft. Thus the Novgorod Flax Field marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "seed"
+    ],
+    "culinary_uses": [
+      "oil",
+      "porridge"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "summer",
+    "sowing_season": "early spring",
+    "harvest_season": "late summer",
+    "growth_duration": "110 days",
+    "companion_crops": [
+      "legumes"
+    ],
+    "alt_names": [
+      "Linen Flax"
+    ]
   },
   {
     "id": "nutmeg",
@@ -4247,6 +7132,48 @@
       ],
       "luxury_tier": []
     }
+  },
+  {
+    "id": "occitanian_truffle_oak",
+    "common_name": "Occitanian Truffle Oak",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "hills"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "mushroom"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the forest and hills hold sway, stands the Occitanian Truffle Oak, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruiting body sustain the hungry when prepared with care. Among diverse tongues it is hailed as Truffle Oak Grove, names born of custom and need. From its body folk derive fruiting body and wood, a boon to trade and craft. Thus the Occitanian Truffle Oak marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruiting body"
+    ],
+    "culinary_uses": [
+      "gourmet shaving"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Train hogs to root at dawn.",
+    "seasonality": "autumn",
+    "sowing_season": "spring saplings",
+    "harvest_season": "late autumn",
+    "growth_duration": "many years",
+    "companion_crops": [
+      "hazelnut"
+    ],
+    "alt_names": [
+      "Truffle Oak Grove"
+    ]
   },
   {
     "id": "okra",
@@ -4484,6 +7411,45 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Oregano, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. From its body folk derive herb, a boon to trade and craft. Thus the Oregano marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "orinoco_sagittaria",
+    "common_name": "Orinoco Sagittaria",
+    "growth_form": "herb",
+    "regions": [
+      "aquatic_fresh"
+    ],
+    "habitats": [
+      "riverlands",
+      "wetland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "tuber"
+      }
+    ],
+    "narrative": "In the aquatic fresh realms, where the riverlands and wetland hold sway, stands the Orinoco Sagittaria, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its tuber sustain the hungry when prepared with care. Among diverse tongues it is hailed as Orinoco Arrowroot, names born of custom and need. From its body folk derive tuber, a boon to trade and craft. Thus the Orinoco Sagittaria marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "tuber"
+    ],
+    "culinary_uses": [
+      "stew",
+      "roast"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "dry-season",
+    "sowing_season": "rising waters",
+    "harvest_season": "dry-season",
+    "growth_duration": "150 days",
+    "companion_crops": [
+      "fish"
+    ],
+    "alt_names": [
+      "Orinoco Arrowroot"
+    ]
+  },
+  {
     "id": "oyster-mushroom",
     "common_name": "Oyster Mushroom",
     "alt_names": [
@@ -4534,6 +7500,85 @@
       ],
       "luxury_tier": []
     }
+  },
+  {
+    "id": "palace_courtyard_lime",
+    "common_name": "Palace Courtyard Lime",
+    "growth_form": "tree",
+    "regions": [
+      "urban"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "oil"
+      }
+    ],
+    "narrative": "In the urban realms, where urban holds sway, stands the Palace Courtyard Lime, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Courtyard Lime, names born of custom and need. From its body folk derive fruit and oil, a boon to trade and craft. Thus the Palace Courtyard Lime marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "drink",
+      "condiment"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "year-round",
+    "sowing_season": "potted cuttings",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "mint"
+    ],
+    "alt_names": [
+      "Courtyard Lime"
+    ]
+  },
+  {
+    "id": "pamir_wild_thyme",
+    "common_name": "Pamir Wild Thyme",
+    "growth_form": "herb",
+    "regions": [
+      "highland"
+    ],
+    "habitats": [
+      "mountains"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the highland realms, where mountains holds sway, stands the Pamir Wild Thyme, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Pamir Thyme, names born of custom and need. From its body folk derive leaf and herb, a boon to trade and craft. Thus the Pamir Wild Thyme marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "tea",
+      "herb"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Dry on shaded cloth to keep aroma.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Pamir Thyme"
+    ]
   },
   {
     "id": "pansy",
@@ -4827,6 +7872,48 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Persimmon, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Persimmon marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "piedmont_hazelnut_copse",
+    "common_name": "Piedmont Hazelnut Copse",
+    "growth_form": "shrub",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "hills"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "nut"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the forest and hills hold sway, stands the Piedmont Hazelnut Copse, a shrub of note. Tilled and tended by folk, it answers well to plough and garden row. Its nut sustain the hungry when prepared with care. Among diverse tongues it is hailed as Tonda Nut Grove, names born of custom and need. From its body folk derive nut and wood, a boon to trade and craft. Thus the Piedmont Hazelnut Copse marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "nut"
+    ],
+    "culinary_uses": [
+      "confection",
+      "roast"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "spring",
+    "harvest_season": "late summer",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "truffles"
+    ],
+    "alt_names": [
+      "Tonda Nut Grove"
+    ]
+  },
+  {
     "id": "pine",
     "common_name": "Pine",
     "growth_form": "tree",
@@ -5103,6 +8190,79 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Purslane, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. From its body folk derive leaf, a boon to trade and craft. Thus the Purslane marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "quebec_maple_grove",
+    "common_name": "Quebec Maple Grove",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "sap"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where forest holds sway, stands the Quebec Maple Grove, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its sap sustain the hungry when prepared with care. Among diverse tongues it is hailed as Sugar Maple Stand, names born of custom and need. From its body folk derive sap and wood, a boon to trade and craft. Thus the Quebec Maple Grove marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "sap"
+    ],
+    "culinary_uses": [
+      "syrup",
+      "sugar"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Tap on cold clear mornings.",
+    "seasonality": "late winter",
+    "harvest_season": "early spring",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Sugar Maple Stand"
+    ]
+  },
+  {
+    "id": "queensland_mangrove_fern",
+    "common_name": "Queensland Mangrove Fern",
+    "growth_form": "herb",
+    "regions": [
+      "coastal"
+    ],
+    "habitats": [
+      "coastal"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Queensland Mangrove Fern, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Mangrove Fern, names born of custom and need. From its body folk derive leaf, a boon to trade and craft. Thus the Queensland Mangrove Fern marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "greens",
+      "stew"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Blanch young fronds to tame bitterness.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Mangrove Fern"
+    ]
+  },
+  {
     "id": "quince",
     "common_name": "Quince",
     "growth_form": "herb",
@@ -5332,6 +8492,48 @@
     "narrative": "In the terrestrial realms, where tundra holds sway, stands the Reindeer moss, a lichen of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Reindeer moss marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "rhine_riesling_vine",
+    "common_name": "Rhine Riesling Vine",
+    "growth_form": "vine",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland",
+      "hills"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the farmland and hills hold sway, stands the Rhine Riesling Vine, a vine of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Rhine Riesling, names born of custom and need. From its body folk derive fruit and leaf, a boon to trade and craft. Thus the Rhine Riesling Vine marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "wine",
+      "table"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "warm-season",
+    "sowing_season": "spring cuttings",
+    "harvest_season": "autumn",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "fava beans"
+    ],
+    "alt_names": [
+      "Rhine Riesling"
+    ]
+  },
+  {
     "id": "rice",
     "common_name": "Rice",
     "growth_form": "grass",
@@ -5349,6 +8551,38 @@
       }
     ],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Rice, a grass of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. From its body folk derive grain, a boon to trade and craft. Thus the Rice marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "riverfront_poplar_row",
+    "common_name": "Riverfront Poplar Row",
+    "growth_form": "tree",
+    "regions": [
+      "urban"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the urban realms, where urban holds sway, stands the Riverfront Poplar Row, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as River Poplar, names born of custom and need. From its body folk derive wood, a boon to trade and craft. Thus the Riverfront Poplar Row marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Planted for shade and windbreak.",
+    "seasonality": "spring",
+    "sowing_season": "cuttings",
+    "harvest_season": "winter",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "willow"
+    ],
+    "alt_names": [
+      "River Poplar"
+    ]
   },
   {
     "id": "rose",
@@ -5577,6 +8811,43 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Sage, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Sage marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "saharan_acacia_bosk",
+    "common_name": "Saharan Acacia Bosk",
+    "growth_form": "tree",
+    "regions": [
+      "arid"
+    ],
+    "habitats": [
+      "desert"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "seed"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the arid realms, where desert holds sway, stands the Saharan Acacia Bosk, a tree of note. It springs forth unbidden, owing nothing to the care of humankind. Its seed sustain the hungry when prepared with care. Among diverse tongues it is hailed as Desert Acacia, names born of custom and need. From its body folk derive seed and wood, a boon to trade and craft. Thus the Saharan Acacia Bosk marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "seed"
+    ],
+    "culinary_uses": [
+      "roast meal",
+      "fodder"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "dry-season",
+    "harvest_season": "dry-season",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Desert Acacia"
+    ]
   },
   {
     "id": "salad-burnet",
@@ -5813,6 +9084,87 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Shallots, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Shallots marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "sicilian_blood_orange",
+    "common_name": "Sicilian Blood Orange",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "oil"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Sicilian Blood Orange, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Arancia Rossa, names born of custom and need. From its body folk derive fruit and oil, a boon to trade and craft. Thus the Sicilian Blood Orange marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "dessert",
+      "fresh eating"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "warm-season",
+    "sowing_season": "spring",
+    "harvest_season": "winter",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "basil"
+    ],
+    "alt_names": [
+      "Arancia Rossa"
+    ]
+  },
+  {
+    "id": "silesian_potato_patch",
+    "common_name": "Silesian Potato Patch",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "tuber"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Silesian Potato Patch, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its tuber sustain the hungry when prepared with care. Among diverse tongues it is hailed as Silesian Kartofel, names born of custom and need. From its body folk derive tuber, a boon to trade and craft. Thus the Silesian Potato Patch marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "tuber"
+    ],
+    "culinary_uses": [
+      "dumplings",
+      "stew"
+    ],
+    "medicinal": false,
+    "toxic": true,
+    "toxicity_notes": "Sprouts and green skins are bitter.",
+    "foraging_notes": "Earthing ridges keeps tubers covered.",
+    "seasonality": "cool-season",
+    "sowing_season": "spring",
+    "harvest_season": "autumn",
+    "growth_duration": "120 days",
+    "companion_crops": [
+      "beans"
+    ],
+    "alt_names": [
+      "Silesian Kartofel"
+    ]
   },
   {
     "id": "skirret",
@@ -6064,6 +9416,41 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Sunflower, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Sunflower marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "svalbard_purple_saxifrage",
+    "common_name": "Svalbard Purple Saxifrage",
+    "growth_form": "herb",
+    "regions": [
+      "cold"
+    ],
+    "habitats": [
+      "tundra"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the cold realms, where tundra holds sway, stands the Svalbard Purple Saxifrage, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its flower sustain the hungry when prepared with care. Among diverse tongues it is hailed as Purple Saxifrage, names born of custom and need. From its body folk derive flower, a boon to trade and craft. Thus the Svalbard Purple Saxifrage marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "flower"
+    ],
+    "culinary_uses": [
+      "garnish",
+      "syrup"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Blooms under midnight sun.",
+    "seasonality": "summer",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Purple Saxifrage"
+    ]
+  },
+  {
     "id": "sweet-flag-acorus-calamus",
     "common_name": "Sweet flag (Acorus calamus)",
     "growth_form": "herb",
@@ -6211,6 +9598,48 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Tea, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Tea marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "tenement_window_box_mint",
+    "common_name": "Tenement Window Box Mint",
+    "growth_form": "herb",
+    "regions": [
+      "urban"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the urban realms, where urban holds sway, stands the Tenement Window Box Mint, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Window Mint, names born of custom and need. From its body folk derive leaf and herb, a boon to trade and craft. Thus the Tenement Window Box Mint marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "tea",
+      "garnish"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "foraging_notes": "Keep pots trimmed to prevent bolting.",
+    "seasonality": "year-round",
+    "sowing_season": "spring",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "parsley"
+    ],
+    "alt_names": [
+      "Window Mint"
+    ]
+  },
+  {
     "id": "thyme",
     "common_name": "Thyme",
     "growth_form": "herb",
@@ -6284,6 +9713,86 @@
           "High Table"
         ]
       }
+    ]
+  },
+  {
+    "id": "toscana_artichoke_bed",
+    "common_name": "Toscana Artichoke Bed",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "flower"
+      },
+      {
+        "type": "leaf"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Toscana Artichoke Bed, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its flower sustain the hungry when prepared with care. Among diverse tongues it is hailed as Tuscan Carciofo, names born of custom and need. From its body folk derive flower and leaf, a boon to trade and craft. Thus the Toscana Artichoke Bed marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "flower"
+    ],
+    "culinary_uses": [
+      "roast",
+      "preserve"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "spring",
+    "sowing_season": "winter",
+    "harvest_season": "spring",
+    "growth_duration": "150 days",
+    "companion_crops": [
+      "leeks"
+    ],
+    "alt_names": [
+      "Tuscan Carciofo"
+    ]
+  },
+  {
+    "id": "transylvanian_beech_mast",
+    "common_name": "Transylvanian Beech Mast",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "hills"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "nut"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the forest and hills hold sway, stands the Transylvanian Beech Mast, a tree of note. It springs forth unbidden, owing nothing to the care of humankind. Its nut sustain the hungry when prepared with care. Among diverse tongues it is hailed as Beech Mast Grove, names born of custom and need. From its body folk derive nut and wood, a boon to trade and craft. Thus the Transylvanian Beech Mast marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "nut"
+    ],
+    "culinary_uses": [
+      "pottage",
+      "flour"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Gather before squirrels strip the branches.",
+    "seasonality": "autumn",
+    "harvest_season": "autumn",
+    "growth_duration": "perennial",
+    "alt_names": [
+      "Beech Mast Grove"
     ]
   },
   {
@@ -6405,6 +9914,47 @@
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Turnips, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Turnips marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
   },
   {
+    "id": "tuscan_rosemary_hedge",
+    "common_name": "Tuscan Rosemary Hedge",
+    "growth_form": "shrub",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "herb"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Tuscan Rosemary Hedge, a shrub of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Rosmarino Toscano, names born of custom and need. From its body folk derive leaf and herb, a boon to trade and craft. Thus the Tuscan Rosemary Hedge marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "herb",
+      "roast"
+    ],
+    "medicinal": true,
+    "toxic": false,
+    "seasonality": "year-round",
+    "sowing_season": "spring cuttings",
+    "harvest_season": "year-round",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "grapes"
+    ],
+    "alt_names": [
+      "Rosmarino Toscano"
+    ]
+  },
+  {
     "id": "ube",
     "common_name": "Ube",
     "growth_form": "herb",
@@ -6418,6 +9968,88 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where farmland holds sway, stands the Ube, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Ube marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "umbria_fava_trellis",
+    "common_name": "Umbria Fava Trellis",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "seed"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Umbria Fava Trellis, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its seed sustain the hungry when prepared with care. Among diverse tongues it is hailed as Umbria Broad Bean, names born of custom and need. From its body folk derive seed, a boon to trade and craft. Thus the Umbria Fava Trellis marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "seed"
+    ],
+    "culinary_uses": [
+      "stew",
+      "puree"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "cool-season",
+    "sowing_season": "late autumn",
+    "harvest_season": "late spring",
+    "growth_duration": "210 days",
+    "companion_crops": [
+      "grain"
+    ],
+    "alt_names": [
+      "Umbria Broad Bean"
+    ]
+  },
+  {
+    "id": "valencia_almond_lot",
+    "common_name": "Valencia Almond Lot",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "nut"
+      },
+      {
+        "type": "oil"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Valencia Almond Lot, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its nut sustain the hungry when prepared with care. Among diverse tongues it is hailed as Valencian Almendra, names born of custom and need. From its body folk derive nut, oil and wood, a boon to trade and craft. Thus the Valencia Almond Lot marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "nut"
+    ],
+    "culinary_uses": [
+      "confection",
+      "oil"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "warm-season",
+    "sowing_season": "winter plantings",
+    "harvest_season": "late summer",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "lavender"
+    ],
+    "alt_names": [
+      "Valencian Almendra"
+    ]
   },
   {
     "id": "valerian",
@@ -6463,6 +10095,48 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where grassland holds sway, stands the Violet, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Violet marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "walloon_endive_forcer",
+    "common_name": "Walloon Endive Forcer",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "leaf"
+      },
+      {
+        "type": "root"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where farmland holds sway, stands the Walloon Endive Forcer, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its leaf sustain the hungry when prepared with care. Among diverse tongues it is hailed as Chicon, names born of custom and need. From its body folk derive leaf and root, a boon to trade and craft. Thus the Walloon Endive Forcer marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "leaf"
+    ],
+    "culinary_uses": [
+      "salad",
+      "braise"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Force roots in dark cellars.",
+    "seasonality": "cool-season",
+    "sowing_season": "spring",
+    "harvest_season": "winter",
+    "growth_duration": "180 days",
+    "companion_crops": [
+      "potatoes"
+    ],
+    "alt_names": [
+      "Chicon"
+    ]
   },
   {
     "id": "walnut",
@@ -6869,5 +10543,80 @@
     "edible": true,
     "byproducts": [],
     "narrative": "In the terrestrial realms, where forest holds sway, stands the Yew, a tree of note. It springs forth unbidden, owing nothing to the care of humankind. Its parts sustain the hungry when prepared with care. No notable craft is wrought from it, save what necessity contrives. Thus the Yew marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study."
+  },
+  {
+    "id": "yorkshire_ryegrass_pasture",
+    "common_name": "Yorkshire Ryegrass Pasture",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland",
+      "farmland"
+    ],
+    "cultivated": true,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "fiber"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the grassland and farmland hold sway, stands the Yorkshire Ryegrass Pasture, a grass of note. Tilled and tended by folk, it answers well to plough and garden row. Yet its flesh is shunned at table, for it brings ill to those who partake. Among diverse tongues it is hailed as Pasture Ryegrass, names born of custom and need. From its body folk derive fiber, a boon to trade and craft. Thus the Yorkshire Ryegrass Pasture marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Pasture cut for hay midsummer.",
+    "seasonality": "cool-season",
+    "sowing_season": "autumn",
+    "harvest_season": "summer",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "clover"
+    ],
+    "alt_names": [
+      "Pasture Ryegrass"
+    ]
+  },
+  {
+    "id": "zagreb_plum_orchard",
+    "common_name": "Zagreb Plum Orchard",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland",
+      "hills"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      },
+      {
+        "type": "wood"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the farmland and hills hold sway, stands the Zagreb Plum Orchard, a tree of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Slivovitz Grove, names born of custom and need. From its body folk derive fruit and wood, a boon to trade and craft. Thus the Zagreb Plum Orchard marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "brandy",
+      "jam"
+    ],
+    "medicinal": false,
+    "toxic": false,
+    "seasonality": "warm-season",
+    "sowing_season": "winter",
+    "harvest_season": "late summer",
+    "growth_duration": "perennial",
+    "companion_crops": [
+      "bees"
+    ],
+    "alt_names": [
+      "Slivovitz Grove"
+    ]
   }
 ]
