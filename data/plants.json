@@ -3130,7 +3130,10 @@
   },
   {
     "id": "caribbean_sea_grape",
-    "common_name": "Caribbean Sea Grape",
+    "common_name": "Island Sea Grape",
+    "alt_names": [
+      "Caribbean Sea Grape"
+    ],
     "growth_form": "shrub",
     "regions": [
       "coastal"
@@ -3148,7 +3151,7 @@
         "type": "leaf"
       }
     ],
-    "narrative": "In the coastal realms, where coastal holds sway, stands the Caribbean Sea Grape, a shrub of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Sea Grape, names born of custom and need. From its body folk derive fruit and leaf, a boon to trade and craft. Thus the Caribbean Sea Grape marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "narrative": "In the coastal realms, where coastal holds sway, stands the Island Sea Grape, a shrub of note. Tilled and tended by folk, it answers well to plough and garden row. Its fruit sustain the hungry when prepared with care. Among diverse tongues it is hailed as Sea Grape, names born of custom and need. From its body folk derive fruit and leaf, a boon to trade and craft. Thus the Island Sea Grape marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
     "edible_parts": [
       "fruit"
     ],
