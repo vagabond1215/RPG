@@ -23,7 +23,8 @@ export type SchoolId =
   | "enhancement"
   | "enfeeblement"
   | "control"
-  | "healing";
+  | "healing"
+  | "summoning";
 
 export type ElementName = Capitalize<ElementId>;
 export type SchoolName = Capitalize<SchoolId>;
@@ -34,6 +35,7 @@ export const ALL_SCHOOLS: readonly SchoolId[] = [
   "enfeeblement",
   "control",
   "healing",
+  "summoning",
 ] as const;
 
 export type FamilyId =
@@ -557,14 +559,14 @@ export class SpellScaler {
 }
 
 export const ELEMENT_SCHOOL_WEIGHTS: Record<ElementId, Partial<Record<SchoolId, number>>> = {
-  fire: { destruction: 9, enfeeblement: 3, enhancement: 2, control: 1 },
-  ice: { control: 9, destruction: 3, enfeeblement: 2, enhancement: 1 },
-  lightning: { destruction: 9, enfeeblement: 3, control: 2, enhancement: 1 },
-  water: { healing: 9, control: 3, destruction: 2, enhancement: 1 },
-  wind: { control: 9, enfeeblement: 3, destruction: 2, enhancement: 1 },
-  stone: { enhancement: 9, control: 3, destruction: 2, enfeeblement: 1 },
-  light: { healing: 9, enhancement: 3, control: 2, destruction: 1 },
-  dark: { enfeeblement: 9, control: 3, destruction: 2, enhancement: 1 },
+  fire: { destruction: 9, enfeeblement: 3, enhancement: 2, control: 1, summoning: 2 },
+  ice: { control: 9, destruction: 3, enfeeblement: 2, enhancement: 1, summoning: 2 },
+  lightning: { destruction: 9, enfeeblement: 3, control: 2, enhancement: 1, summoning: 2 },
+  water: { healing: 9, control: 3, destruction: 2, enhancement: 1, summoning: 2 },
+  wind: { control: 9, enfeeblement: 3, destruction: 2, enhancement: 1, summoning: 2 },
+  stone: { enhancement: 9, control: 3, destruction: 2, enfeeblement: 1, summoning: 2 },
+  light: { healing: 9, enhancement: 3, control: 2, destruction: 1, summoning: 2 },
+  dark: { enfeeblement: 9, control: 3, destruction: 2, enhancement: 1, summoning: 2 },
 };
 
 export const familyFromSchool = (s: SchoolId): Family => {
@@ -574,6 +576,8 @@ export const familyFromSchool = (s: SchoolId): Family => {
     case "healing":
       return "support";
     case "enhancement":
+      return "support";
+    case "summoning":
       return "support";
     case "enfeeblement":
       return "control";
@@ -591,6 +595,8 @@ export const typeFromSchool = (s: SchoolId): ActionType => {
       return "Heal";
     case "enhancement":
       return "Buff";
+    case "summoning":
+      return "Buff";
     case "enfeeblement":
       return "Debuff";
     case "control":
@@ -607,6 +613,8 @@ export const pickTarget = (s: SchoolId): TargetRange => {
       return "SINGLE";
     case "enhancement":
       return "SELF";
+    case "summoning":
+      return "PARTY";
     case "enfeeblement":
       return "ENEMY";
     case "control":
@@ -618,13 +626,14 @@ export const pickTarget = (s: SchoolId): TargetRange => {
 const TIER_MP: Record<Tier, number> = { MINOR: 5, LESSER: 8, BASELINE: 12, GREATER: 18, MAJOR: 25, MYTHIC: 36 };
 const TIER_DMG: Record<Tier, number> = { MINOR: 10, LESSER: 18, BASELINE: 28, GREATER: 42, MAJOR: 60, MYTHIC: 85 };
 const TIER_HEAL: Record<Tier, number> = { MINOR: 12, LESSER: 20, BASELINE: 32, GREATER: 48, MAJOR: 70, MYTHIC: 100 };
+const TIER_SUMMON: Record<Tier, number> = { MINOR: 10, LESSER: 18, BASELINE: 26, GREATER: 36, MAJOR: 52, MYTHIC: 72 };
 
 export const calcMpCost = (tier: Tier, school: SchoolId, isChant?: boolean): number => {
   const base = TIER_MP[tier];
   const mod =
     school === "destruction"
       ? 1
-      : school === "control"
+      : school === "control" || school === "summoning"
         ? 1.1
         : school === "enfeeblement"
           ? 1
@@ -645,6 +654,8 @@ export const calcPower = (tier: Tier, school: SchoolId): number => {
       return TIER_HEAL[tier];
     case "enhancement":
       return 0;
+    case "summoning":
+      return TIER_SUMMON[tier];
     case "enfeeblement":
       return Math.round(TIER_DMG[tier] * 0.3);
     case "control":
@@ -707,6 +718,16 @@ const EFFECT_PALETTES: Record<SchoolId, {
     ],
     overtime: ["HoT", "RestoreMP", "DoT"],
   },
+  summoning: {
+    boons: ["Haste", "Fortify", "Frenzy", "Ward", "Regen", "Refresh"],
+    statUps: [
+      { lane: "general", stat: "dmgDealt" },
+      { lane: "general", stat: "dmgTaken" },
+      { lane: "magic", stat: "atk" },
+      { lane: "general", stat: "resist" },
+    ],
+    overtime: ["HoT", "RestoreMP"],
+  },
   healing: {
     boons: ["Blessing", "Aegis", "Ward", "Veil", "Regen", "Refresh"],
     statUps: [{ lane: "general", stat: "dmgTaken" }],
@@ -720,6 +741,7 @@ const ELEM_RES_DEFAULTS: Partial<Record<SchoolId, { up: number; down: number }>>
   control: { up: 8, down: -8 },
   enfeeblement: { up: 0, down: -12 },
   destruction: { up: 0, down: -15 },
+  summoning: { up: 10, down: 0 },
 };
 
 const composeEffects = (element: ElementId, school: SchoolId, tier: Tier, rng: () => number): EffectAtom[] => {
@@ -736,12 +758,12 @@ const composeEffects = (element: ElementId, school: SchoolId, tier: Tier, rng: (
       potency: Math.ceil(tierScale / 2),
       duration: 6 + 2 * tierScale,
     });
-  } else if ((school === "enhancement" || school === "healing") && pal.boons?.length) {
+  } else if ((school === "enhancement" || school === "healing" || school === "summoning") && pal.boons?.length) {
     const boonName = pick(pal.boons, rng);
     out.push({ kind: "boon", boonName, duration: 8 + 2 * tierScale });
   }
 
-  if (school === "enhancement" && pal.statUps?.length) {
+  if ((school === "enhancement" || school === "summoning") && pal.statUps?.length) {
     const statPick = pick(pal.statUps, rng);
     const sign = statPick.stat === "dmgTaken" ? -1 : 1;
     const magnitude = 5 + 3 * tierScale;
@@ -777,7 +799,7 @@ const composeEffects = (element: ElementId, school: SchoolId, tier: Tier, rng: (
 
   const resCfg = ELEM_RES_DEFAULTS[school];
   if (resCfg && tierScale >= 3) {
-    const positive = school === "enhancement" || school === "healing" ? true : rng() < 0.5;
+    const positive = school === "enhancement" || school === "healing" || school === "summoning" ? true : rng() < 0.5;
     const delta = positive ? resCfg.up ?? 0 : resCfg.down ?? 0;
     if (delta !== 0) {
       out.push({ kind: "elemres", elemres: { element, delta } });
@@ -793,6 +815,7 @@ const DEFAULT_BASE_FORMS: Record<SchoolId, FamilyId[]> = {
   enfeeblement: ["beam", "burst", "liquid_flow"],
   enhancement: ["blade", "projectile_sphere", "beam"],
   healing: ["liquid_flow", "beam"],
+  summoning: ["liquid_flow", "beam", "burst"],
 };
 
 const tierIndex = (tier: Tier) => TIERS.indexOf(tier);
@@ -845,6 +868,7 @@ const SCHOOL_VERBS: Record<SchoolId, string> = {
   enfeeblement: "saps",
   enhancement: "bolsters",
   healing: "restores",
+  summoning: "commands",
 };
 
 const ELEMENT_FLAVOR: Record<ElementId, string> = {
@@ -916,6 +940,7 @@ const createDefaultPlan = (element: ElementId): PlannedSpec[] =>
     school,
     baseTier: DEFAULT_SCHOOL_TIER,
     proficiency: DEFAULT_SCHOOL_PROFICIENCY,
+    special: school === "summoning" ? "summon" : undefined,
   }));
 
 export const makeSpell = (args: {
@@ -1136,7 +1161,7 @@ export const buildWeightedPlanForElement = (
   const normalized = normalizeWeights(ELEMENT_SCHOOL_WEIGHTS[element] ?? {});
   const weightEntries = (normalized.length
     ? normalized
-    : normalizeWeights<SchoolId>({ destruction: 1, control: 1, enhancement: 1, enfeeblement: 1, healing: 1 })) as [
+    : normalizeWeights<SchoolId>({ destruction: 1, control: 1, enhancement: 1, enfeeblement: 1, healing: 1, summoning: 1 })) as [
     SchoolId,
     number
   ][];
@@ -1246,6 +1271,9 @@ const applySpecials = (element: ElementId, plan: PlannedSpec[]): PlannedSpec[] =
         break;
       }
     }
+    if (!special && spec.school === "summoning") {
+      special = "summon";
+    }
     return special ? { ...spec, special } : spec;
   });
 };
@@ -1291,6 +1319,7 @@ const buildElementSpellbook = (element: ElementId, total = 20, rngSeed = 0x13572
         school: spec.school,
         tier: spec.baseTier,
         proficiency: spec.proficiency,
+        special: spec.special,
       }),
     ),
   );

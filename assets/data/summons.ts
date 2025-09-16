@@ -15,7 +15,7 @@ export interface UnlockCondition {
 export interface Ability {
   id: string;
   name: string;
-  kind: "strike"|"dot"|"regen"|"control"|"buff"|"debuff"|"aura"|"shield"|"utility";
+  kind: "strike"|"dot"|"regen"|"control"|"buff"|"debuff"|"aura"|"shield"|"utility"|"spell"|"spell_like";
   target: "ST"|"AoE"|"Self"|"Party";
   // payload is “engine-ready” — mirrors shapes you’ve used for spells/songs/dances
   payload: Record<string, unknown>;
@@ -143,6 +143,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ DMG_TAKEN_PCT:-10 }, scaleHints:{ pctBase:-10, pctAtP100:-20 }, tags:["FORTIFY"] },
       { id:"stone:thorns", name:"Spite of Shale", kind:"aura", target:"Party",
         payload:{ THORNS_PCT:5 }, scaleHints:{ pctBase:5, pctAtP100:10 }, tags:["THORNS"] },
+      { id:"stone:elemental:spell:geomantic_burst", name:"Geomantic Burst", kind:"spell", target:"AoE",
+        payload:{ element:"Stone", DMG_PCT:16, STAGGER:true },
+        scaleHints:{ pctBase:12, pctAtP100:24 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"stone:elemental:spelllike:bedrock_guard", name:"Bedrock Guard", kind:"spell_like", target:"Party",
+        payload:{ DMG_TAKEN_PCT:-6, POISE_PCT:+6 },
+        scaleHints:{ pctBase:-6, pctAtP100:-16 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -160,6 +166,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ TAUNT:true, ACCURACY_PCT:-5 }, scaleHints:{ pctBase:-5, pctAtP100:-10 } },
       { id:"stone:shieldwall", name:"Shieldwall", kind:"buff", target:"Party",
         payload:{ DMG_TAKEN_PCT:-8 }, scaleHints:{ pctBase:-8, pctAtP100:-16 } },
+      { id:"stone:humanoid:spell:obsidian_command", name:"Obsidian Command", kind:"spell", target:"AoE",
+        payload:{ element:"Stone", DMG_PCT:20, ARMOR_REND_PCT:+6 },
+        scaleHints:{ pctBase:16, pctAtP100:30 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"stone:humanoid:spelllike:cascade_bulwark", name:"Cascade Bulwark", kind:"spell_like", target:"Party",
+        payload:{ DMG_TAKEN_PCT:-9, THREAT_PCT:+12 },
+        scaleHints:{ pctBase:-9, pctAtP100:-20 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -177,6 +189,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ KNOCKDOWN:true, DMG_PCT:18, element:"Stone" }, scaleHints:{ pctBase:12, pctAtP100:24 } },
       { id:"stone:ward", name:"Earthwarden", kind:"buff", target:"Party",
         payload:{ POISE_PCT:10, DMG_TAKEN_PCT:-10 }, scaleHints:{ pctBase:10, pctAtP100:18 } },
+      { id:"stone:awakened:spell:titan_edict", name:"Titan's Edict", kind:"spell", target:"AoE",
+        payload:{ element:"Stone", DMG_PCT:26, STUN_CHANCE_PCT:+12 },
+        scaleHints:{ pctBase:22, pctAtP100:38 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"stone:awakened:spelllike:citadel_mantle", name:"Citadel Mantle", kind:"spell_like", target:"Party",
+        payload:{ DMG_TAKEN_PCT:-12, BARRIER_PCTMAX:8 },
+        scaleHints:{ pctBase:-12, pctAtP100:-26 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
 
@@ -196,6 +214,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ HP_REGEN_PCT_PER5S:2 }, scaleHints:{ pctBase:2, pctAtP100:5 } },
       { id:"water:slow", name:"Undercurrent", kind:"debuff", target:"AoE",
         payload:{ MOVE_SPEED_PCT:-8 }, scaleHints:{ pctBase:-8, pctAtP100:-16 }, tags:["SLOW"] },
+      { id:"water:elemental:spell:mending_surge", name:"Mending Surge", kind:"spell", target:"Party",
+        payload:{ element:"Water", HEAL_PCT:8, CLEANSE_MINOR:true },
+        scaleHints:{ pctBase:11, pctAtP100:22 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"water:elemental:spelllike:flowveil", name:"Flowveil", kind:"spell_like", target:"Party",
+        payload:{ DMG_TAKEN_PCT:-6, DOT_RESIST_PCT:+12 },
+        scaleHints:{ pctBase:-6, pctAtP100:-16 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -213,6 +237,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ CLEANSE_ONE:true, HEAL_PCT:3 }, scaleHints:{ pctBase:3, pctAtP100:6 } },
       { id:"water:surge", name:"Riptide", kind:"control", target:"AoE",
         payload:{ DISPLACE:true, DMG_PCT:10, element:"Water" }, scaleHints:{ pctBase:8, pctAtP100:16 } },
+      { id:"water:humanoid:spell:tidal_invocation", name:"Tidal Invocation", kind:"spell", target:"Party",
+        payload:{ element:"Water", HEAL_PCT:10, DMG_DEALT_PCT:+6 },
+        scaleHints:{ pctBase:15, pctAtP100:28 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"water:humanoid:spelllike:undertow_barrier", name:"Undertow Barrier", kind:"spell_like", target:"Party",
+        payload:{ DMG_TAKEN_PCT:-9, SHIELD_PCTMAX:6 },
+        scaleHints:{ pctBase:-9, pctAtP100:-20 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -230,6 +260,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ KNOCKBACK:true, DMG_PCT:16 }, scaleHints:{ pctBase:12, pctAtP100:22 } },
       { id:"water:blessing", name:"Ocean’s Blessing", kind:"buff", target:"Party",
         payload:{ DMG_TAKEN_PCT:-10, CLEANSE_PERIODIC:true }, scaleHints:{ pctBase:10, pctAtP100:18 } },
+      { id:"water:awakened:spell:maelstrom_concord", name:"Maelstrom Concord", kind:"spell", target:"Party",
+        payload:{ element:"Water", HEAL_PCT:14, REFRESH_PCT:+8 },
+        scaleHints:{ pctBase:21, pctAtP100:36 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"water:awakened:spelllike:tide_sanctuary", name:"Tide Sanctuary", kind:"spell_like", target:"Party",
+        payload:{ DMG_TAKEN_PCT:-12, BARRIER_PCTMAX:9, CLEANSE_BURSTS:true },
+        scaleHints:{ pctBase:-12, pctAtP100:-26 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
 
@@ -249,6 +285,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ element:"Wind", coeff:"ATK" }, scaleHints:{ pctBase:10, pctAtP100:22 } },
       { id:"wind:gale", name:"Gale Step", kind:"buff", target:"Party",
         payload:{ MOVE_SPEED_PCT:6 }, scaleHints:{ pctBase:6, pctAtP100:12 } },
+      { id:"wind:elemental:spell:gale_crescent", name:"Gale Crescent", kind:"spell", target:"AoE",
+        payload:{ element:"Wind", DMG_PCT:18, BLEED_CHANCE_PCT:+10 },
+        scaleHints:{ pctBase:12, pctAtP100:24 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"wind:elemental:spelllike:zephyr_aegis", name:"Zephyr Aegis", kind:"spell_like", target:"Party",
+        payload:{ EVADE_PCT:+6, MOVE_SPEED_PCT:+6 },
+        scaleHints:{ pctBase:6, pctAtP100:16 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -266,6 +308,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ KNOCKBACK:true, DMG_PCT:12 }, scaleHints:{ pctBase:9, pctAtP100:18 } },
       { id:"wind:volley", name:"Tempest Volley", kind:"strike", target:"AoE",
         payload:{ element:"Wind", coeff:"ATK_SPLIT" }, scaleHints:{ pctBase:18, pctAtP100:30 } },
+      { id:"wind:humanoid:spell:stormstring_volley", name:"Stormstring Volley", kind:"spell", target:"AoE",
+        payload:{ element:"Wind", DMG_PCT:22, CRIT_RATE_PCT:+6 },
+        scaleHints:{ pctBase:16, pctAtP100:30 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"wind:humanoid:spelllike:sky_ward", name:"Sky Ward", kind:"spell_like", target:"Party",
+        payload:{ EVADE_PCT:+9, HASTE_PCT:+5 },
+        scaleHints:{ pctBase:9, pctAtP100:20 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -283,6 +331,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ PULL:true, DMG_PCT:20 }, scaleHints:{ pctBase:14, pctAtP100:28 } },
       { id:"wind:haste", name:"Skystride", kind:"buff", target:"Party",
         payload:{ HASTE_PCT:6 }, scaleHints:{ pctBase:6, pctAtP100:12 } },
+      { id:"wind:awakened:spell:tempest_mandate", name:"Tempest Mandate", kind:"spell", target:"AoE",
+        payload:{ element:"Wind", DMG_PCT:28, STORM_ZONE:true },
+        scaleHints:{ pctBase:22, pctAtP100:38 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"wind:awakened:spelllike:cyclone_shroud", name:"Cyclone Shroud", kind:"spell_like", target:"Party",
+        payload:{ EVADE_PCT:+12, DMG_DEALT_PCT:+6 },
+        scaleHints:{ pctBase:12, pctAtP100:26 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
 
@@ -302,6 +356,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ element:"Fire", coeff:"ATK" }, scaleHints:{ pctBase:12, pctAtP100:24 } },
       { id:"fire:burn", name:"Ignite", kind:"dot", target:"ST",
         payload:{ element:"Fire", HP_DOT_PER5S_PCT:2 }, scaleHints:{ pctBase:2, pctAtP100:5 }, tags:["BURN"] },
+      { id:"fire:elemental:spell:phoenix_flash", name:"Phoenix Flash", kind:"spell", target:"AoE",
+        payload:{ element:"Fire", DMG_PCT:20, BURN_CHANCE_PCT:+12 },
+        scaleHints:{ pctBase:12, pctAtP100:24 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"fire:elemental:spelllike:ember_barrier", name:"Ember Barrier", kind:"spell_like", target:"Party",
+        payload:{ FIRE_RESIST_PCT:+12, DMG_DEALT_PCT:+5 },
+        scaleHints:{ pctBase:6, pctAtP100:16 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -319,6 +379,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ element:"Fire", DMG_PCT:18 }, scaleHints:{ pctBase:14, pctAtP100:28 } },
       { id:"fire:overheat", name:"Overheat", kind:"debuff", target:"AoE",
         payload:{ DMG_TAKEN_PCT:+8 }, scaleHints:{ pctBase:+8, pctAtP100:+16 } },
+      { id:"fire:humanoid:spell:infernal_requiem", name:"Infernal Requiem", kind:"spell", target:"AoE",
+        payload:{ element:"Fire", DMG_PCT:24, CRIT_RATE_PCT:+8 },
+        scaleHints:{ pctBase:16, pctAtP100:30 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"fire:humanoid:spelllike:forge_wrath", name:"Forge Wrath", kind:"spell_like", target:"Party",
+        payload:{ DMG_DEALT_PCT:+9, BURN_RESIST_PCT:+8 },
+        scaleHints:{ pctBase:9, pctAtP100:20 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -336,6 +402,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ STUN:true, DMG_PCT:24 }, scaleHints:{ pctBase:16, pctAtP100:32 } },
       { id:"fire:sear", name:"Searing Aura", kind:"aura", target:"Party",
         payload:{ FIRE_ADD_PCT:6 }, scaleHints:{ pctBase:6, pctAtP100:12 } },
+      { id:"fire:awakened:spell:cataclysmic_brand", name:"Cataclysmic Brand", kind:"spell", target:"AoE",
+        payload:{ element:"Fire", DMG_PCT:30, SUNDER_ARMOR_PCT:+10 },
+        scaleHints:{ pctBase:22, pctAtP100:38 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"fire:awakened:spelllike:inferno_aegis", name:"Inferno Aegis", kind:"spell_like", target:"Party",
+        payload:{ DMG_DEALT_PCT:+12, DMG_TAKEN_PCT:-8 },
+        scaleHints:{ pctBase:12, pctAtP100:26 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
 
@@ -355,6 +427,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ MOVE_SPEED_PCT:-10 }, scaleHints:{ pctBase:-10, pctAtP100:-18 } },
       { id:"ice:freeze", name:"Flash Freeze", kind:"control", target:"ST",
         payload:{ PARALYZE:true, DURATION_S:1.5 }, scaleHints:{ pctBase:0, pctAtP100:0 }, tags:["PARALYZE"] },
+      { id:"ice:elemental:spell:frost_shards", name:"Frost Shards", kind:"spell", target:"AoE",
+        payload:{ element:"Ice", DMG_PCT:16, SLOW_PCT:-12 },
+        scaleHints:{ pctBase:12, pctAtP100:24 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"ice:elemental:spelllike:rime_mantle", name:"Rime Mantle", kind:"spell_like", target:"Party",
+        payload:{ DMG_TAKEN_PCT:-6, CONTROL_RESIST_PCT:+10 },
+        scaleHints:{ pctBase:-6, pctAtP100:-16 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -372,6 +450,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ BRITTLE_PCT:+10 }, scaleHints:{ pctBase:+10, pctAtP100:+18 } },
       { id:"ice:hail", name:"Hail Barrage", kind:"strike", target:"AoE",
         payload:{ element:"Ice", DMG_PCT:16 }, scaleHints:{ pctBase:12, pctAtP100:24 } },
+      { id:"ice:humanoid:spell:glacial_verity", name:"Glacial Verity", kind:"spell", target:"AoE",
+        payload:{ element:"Ice", DMG_PCT:22, FREEZE_CHANCE_PCT:+10 },
+        scaleHints:{ pctBase:16, pctAtP100:30 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"ice:humanoid:spelllike:winter_bastion", name:"Winter Bastion", kind:"spell_like", target:"Party",
+        payload:{ DMG_TAKEN_PCT:-9, SHIELD_PCTMAX:7 },
+        scaleHints:{ pctBase:-9, pctAtP100:-20 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -389,6 +473,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ SLOW_PCT:-20, PARALYZE_CHANCE_PCT:20 }, scaleHints:{ pctBase:-15, pctAtP100:-25 } },
       { id:"ice:ward", name:"Crystallize", kind:"shield", target:"Party",
         payload:{ SHIELD_PCTMAX:8 }, scaleHints:{ pctBase:8, pctAtP100:14 } },
+      { id:"ice:awakened:spell:aurora_decree", name:"Aurora Decree", kind:"spell", target:"AoE",
+        payload:{ element:"Ice", DMG_PCT:26, CONTROL_RESIST_DOWN_PCT:-10 },
+        scaleHints:{ pctBase:22, pctAtP100:38 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"ice:awakened:spelllike:starseal_barrier", name:"Starseal Barrier", kind:"spell_like", target:"Party",
+        payload:{ DMG_TAKEN_PCT:-12, SHIELD_PCTMAX:10 },
+        scaleHints:{ pctBase:-12, pctAtP100:-26 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
 
@@ -408,6 +498,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ element:"Lightning", CHAIN:3 }, scaleHints:{ pctBase:16, pctAtP100:28 } },
       { id:"lightning:stun", name:"Static Lock", kind:"control", target:"ST",
         payload:{ STUN:true, DURATION_S:1 }, scaleHints:{ pctBase:0, pctAtP100:0 } },
+      { id:"lightning:elemental:spell:volt_cascade", name:"Volt Cascade", kind:"spell", target:"AoE",
+        payload:{ element:"Lightning", DMG_PCT:20, SHOCK_CHANCE_PCT:+12 },
+        scaleHints:{ pctBase:12, pctAtP100:24 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"lightning:elemental:spelllike:spark_screen", name:"Spark Screen", kind:"spell_like", target:"Party",
+        payload:{ SHOCK_RESIST_PCT:+12, EVADE_PCT:+6 },
+        scaleHints:{ pctBase:6, pctAtP100:16 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -425,6 +521,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ element:"Lightning", DMG_PCT:22, OVERLOAD:true }, scaleHints:{ pctBase:16, pctAtP100:32 } },
       { id:"lightning:battery", name:"Capacitor Field", kind:"aura", target:"Party",
         payload:{ CRIT_TO_RESOURCE:true, MP_ON_CRIT_PCT:1, STAM_ON_CRIT_PCT:1 }, scaleHints:{ pctBase:1, pctAtP100:2 } },
+      { id:"lightning:humanoid:spell:thunder_rebuke", name:"Thunder Rebuke", kind:"spell", target:"AoE",
+        payload:{ element:"Lightning", DMG_PCT:26, PARALYZE_CHANCE_PCT:+14 },
+        scaleHints:{ pctBase:16, pctAtP100:30 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"lightning:humanoid:spelllike:storm_charger", name:"Storm Charger", kind:"spell_like", target:"Party",
+        payload:{ HASTE_PCT:+9, CRIT_RATE_PCT:+6 },
+        scaleHints:{ pctBase:9, pctAtP100:20 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -442,6 +544,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ PARALYZE:true, DURATION_S:1.5, element:"Lightning" }, scaleHints:{ pctBase:0, pctAtP100:0 } },
       { id:"lightning:overdrive", name:"Overdrive Aura", kind:"aura", target:"Party",
         payload:{ HASTE_PCT:6, CDR_PCT:4 }, scaleHints:{ pctBase:4, pctAtP100:8 } },
+      { id:"lightning:awakened:spell:tempest_ultimatum", name:"Tempest Ultimatum", kind:"spell", target:"AoE",
+        payload:{ element:"Lightning", DMG_PCT:32, SHOCK_ZONE:true },
+        scaleHints:{ pctBase:22, pctAtP100:38 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"lightning:awakened:spelllike:ionis_aegis", name:"Ionis Aegis", kind:"spell_like", target="Party",
+        payload:{ SHOCK_RESIST_PCT:+18, DMG_DEALT_PCT:+8 },
+        scaleHints:{ pctBase:12, pctAtP100:26 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
 
@@ -461,6 +569,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ HP_DOT_PER5S_PCT:2, LIFESTEAL_PCT:50 }, scaleHints:{ pctBase:2, pctAtP100:5 }, tags:["LEECH"] },
       { id:"dark:fear", name:"Dread Murmur", kind:"control", target:"AoE",
         payload:{ FEAR:true, DURATION_S:1 }, scaleHints:{ pctBase:0, pctAtP100:0 } },
+      { id:"dark:elemental:spell:grim_lattice", name:"Grim Lattice", kind:"spell", target:"AoE",
+        payload:{ element:"Dark", DMG_PCT:18, HEALING_RECEIVED_PCT:-6 },
+        scaleHints:{ pctBase:12, pctAtP100:24 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"dark:elemental:spelllike:shadow_screen", name:"Shadow Screen", kind:"spell_like", target:"Party",
+        payload:{ DMG_TAKEN_PCT:-6, HEALING_DONE_PCT:+6 },
+        scaleHints:{ pctBase:-6, pctAtP100:-16 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -478,6 +592,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ ALL_STATS_PCT:-8 }, scaleHints:{ pctBase:-8, pctAtP100:-16 } },
       { id:"dark:veil", name:"Night Veil", kind:"buff", target:"Party",
         payload:{ THREAT_GEN_PCT:-12 }, scaleHints:{ pctBase:-12, pctAtP100:-20 } },
+      { id:"dark:humanoid:spell:abyssal_lash", name:"Abyssal Lash", kind:"spell", target:"AoE",
+        payload:{ element:"Dark", DMG_PCT:22, FEAR_CHANCE_PCT:+12 },
+        scaleHints:{ pctBase:16, pctAtP100:30 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"dark:humanoid:spelllike:dusk_mantle", name:"Dusk Mantle", kind:"spell_like", target="Party",
+        payload:{ DMG_DEALT_PCT:+9, HEALING_RECEIVED_PCT:+8 },
+        scaleHints:{ pctBase:9, pctAtP100:20 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -495,6 +615,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ element:"Dark", DMG_PCT:22, HEALING_RECEIVED_PCT:-10 }, scaleHints:{ pctBase:16, pctAtP100:30 } },
       { id:"dark:edict", name:"Edict of Silence", kind:"control", target:"AoE",
         payload:{ SILENCE:true, DURATION_S:1.5 }, scaleHints:{ pctBase:0, pctAtP100:0 } },
+      { id:"dark:awakened:spell:night_requital", name:"Night Requital", kind:"spell", target:"AoE",
+        payload:{ element:"Dark", DMG_PCT:28, VULN_TO_LIGHT_PCT:+12 },
+        scaleHints:{ pctBase:22, pctAtP100:38 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"dark:awakened:spelllike:void_sacrament", name:"Void Sacrament", kind:"spell_like", target="Party",
+        payload:{ DMG_DEALT_PCT:+12, DMG_TAKEN_PCT:-8, LIFESTEAL_PCT:+10 },
+        scaleHints:{ pctBase:12, pctAtP100:26 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
 
@@ -514,6 +640,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ REVEALED:true, ACCURACY_PCT:+6 }, scaleHints:{ pctBase:+6, pctAtP100:+12 } },
       { id:"light:mend", name:"Radiant Mend", kind:"regen", target:"Party",
         payload:{ HP_REGEN_PCT_PER5S:2 }, scaleHints:{ pctBase:2, pctAtP100:5 } },
+      { id:"light:elemental:spell:radiant_pulse", name:"Radiant Pulse", kind:"spell", target:"AoE",
+        payload:{ element:"Light", DMG_PCT:16, BLIND_CHANCE_PCT:+10 },
+        scaleHints:{ pctBase:12, pctAtP100:24 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"light:elemental:spelllike:glowmantle", name="Glowmantle", kind:"spell_like", target="Party",
+        payload:{ DMG_TAKEN_PCT:-6, HEALING_DONE_PCT:+6 },
+        scaleHints:{ pctBase:-6, pctAtP100:-16 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -531,6 +663,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ SHIELD_PCTMAX:8 }, scaleHints:{ pctBase:8, pctAtP100:14 } },
       { id:"light:res", name:"Guiding Dawn", kind:"buff", target:"Party",
         payload:{ CONTROL_RESIST_PCT:+12 }, scaleHints:{ pctBase:+12, pctAtP100:+20 } },
+      { id:"light:humanoid:spell:luminary_spear", name:"Luminary Spear", kind:"spell", target:"AoE",
+        payload:{ element:"Light", DMG_PCT:22, CLEANSE_ONE:true },
+        scaleHints:{ pctBase:16, pctAtP100:30 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"light:humanoid:spelllike:warden_benediction", name="Warden's Benediction", kind="spell_like", target="Party",
+        payload:{ DMG_DEALT_PCT:+9, HEALING_RECEIVED_PCT:+10 },
+        scaleHints:{ pctBase:9, pctAtP100:20 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
   {
@@ -548,6 +686,12 @@ export const SUMMONS: SummonDef[] = [
         payload:{ element:"Light", DMG_PCT:22, VULN_TO_DARK_PCT:+8 }, scaleHints:{ pctBase:16, pctAtP100:30 } },
       { id:"light:anthem", name:"Courage Anthem", kind:"aura", target:"Party",
         payload:{ ALL_STATS_PCT:+4 }, scaleHints:{ pctBase:+4, pctAtP100:+8 } },
+      { id:"light:awakened:spell:seraphic_mandala", name="Seraphic Mandala", kind:"spell", target:"AoE",
+        payload:{ element:"Light", DMG_PCT:26, CLEANSE_BURSTS:true },
+        scaleHints:{ pctBase:22, pctAtP100:38 }, tags:["SUMMON_ONLY","SUMMON_SPELL"] },
+      { id:"light:awakened:spelllike:solar_sanctum", name="Solar Sanctum", kind="spell_like", target="Party",
+        payload:{ DMG_TAKEN_PCT:-12, HEALING_DONE_PCT:+12, BARRIER_PCTMAX:8 },
+        scaleHints:{ pctBase:-12, pctAtP100:-26 }, tags:["SUMMON_ONLY","SUMMON_SPELLLIKE"] },
     ]
   },
 ];
