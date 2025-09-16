@@ -7,11 +7,11 @@ import { createEmptyEquipment } from "./equipment.js";
 /* ========================= Core Types ========================= */
 
 export type Attr = "STR"|"DEX"|"CON"|"VIT"|"AGI"|"INT"|"WIS"|"CHA";
-export type Element = "Stone"|"Water"|"Wind"|"Fire"|"Ice"|"Thunder"|"Dark"|"Light";
+export type Element = "Stone"|"Water"|"Wind"|"Fire"|"Ice"|"Lightning"|"Dark"|"Light";
 
 export type ProficiencyKind =
   | "Element_Stone"|"Element_Water"|"Element_Wind"|"Element_Fire"
-  | "Element_Ice"|"Element_Thunder"|"Element_Dark"|"Element_Light"
+  | "Element_Ice"|"Element_Lightning"|"Element_Dark"|"Element_Light"
   | "Weapon_Sword"|"Weapon_Greatsword"|"Weapon_Axe"|"Weapon_Greataxe"|"Weapon_Spear"|"Weapon_Dagger"|"Weapon_Mace"|"Weapon_Bow"|"Weapon_Crossbow"|"Weapon_Staff"|"Weapon_Shield"|"Weapon_Wand"|"Weapon_Unarmed"
   | "Instrument"|"Dance"|"Singing"
   | "Craft_Alchemy"|"Craft_Brewing"|"Craft_Carpentry"|"Craft_Weaving"|"Craft_Fletching"|"Craft_Rope"|"Craft_Calligraphy"|"Craft_Drawing"|"Craft_Cooking"

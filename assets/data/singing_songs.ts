@@ -4,7 +4,7 @@
 
 export type Element =
   | "Stone" | "Water" | "Wind" | "Fire"
-  | "Ice"   | "Thunder" | "Dark" | "Light";
+  | "Ice"   | "Lightning" | "Dark" | "Light";
 
 export type Side = "ally" | "enemy" | "party";
 export type Target = "ST" | "AoE";
@@ -125,7 +125,7 @@ const ELEMENTAL_OVERTURES_33: Omit<Song,"id">[] = [
     name:"Water Overture", category:"elemental", kind:"aura", element:"Water",
     target:"AoE", side:"ally", unlock:33, baseDurationSec:20,
     scale:{ m0:+3, m100:+7, unit:"pct" },
-    tags:["PULSE_WATER","SOAKED"], // soaked → future Thunder/Freeze interact more
+    tags:["PULSE_WATER","SOAKED"], // soaked → future Lightning/Freeze interact more
     keyAttribute:"INT",
     maintenance:{maintainable:true,durationCountdown:"afterStop"}
   },
@@ -154,7 +154,7 @@ const ELEMENTAL_OVERTURES_33: Omit<Song,"id">[] = [
     maintenance:{maintainable:true,durationCountdown:"afterStop"}
   },
   {
-    name:"Thunder Overture", category:"elemental", kind:"aura", element:"Thunder",
+    name:"Lightning Overture", category:"elemental", kind:"aura", element:"Lightning",
     target:"AoE", side:"ally", unlock:33, baseDurationSec:20,
     scale:{ m0:+3, m100:+7, unit:"pct" },
     tags:["PULSE_THUNDER","STATIC_CHARGE"], // chance to arc chain on pulses
@@ -217,7 +217,7 @@ const ELEMENTAL_ANTHEMS_66: Omit<Song,"id">[] = [
     maintenance:{maintainable:true,durationCountdown:"afterStop"}
   },
   {
-    name:"Storm Anthem", category:"elemental", kind:"aura", element:"Thunder",
+    name:"Storm Anthem", category:"elemental", kind:"aura", element:"Lightning",
     target:"AoE", side:"ally", unlock:66, baseDurationSec:20,
     scale:{ m0:+2, m100:+4, unit:"pct" }, // crits → MP/Stamina battery
     tags:["CRIT_RESOURCE_BATTERY"], keyAttribute:"INT",
