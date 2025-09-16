@@ -278,6 +278,352 @@ const ELEMENT_POOLS: Record<ElementId, Record<Tier, string[]>> = {
   },
 };
 
+const SIZE_BY_TIER: Record<Tier, string> = {
+  MINOR: "marble-sized",
+  LESSER: "palm-sized",
+  BASELINE: "buckler-sized",
+  GREATER: "shield-sized",
+  MAJOR: "wagon-sized",
+  MYTHIC: "keep-sized",
+};
+
+/** Element textures reworded to avoid modern/scientific terms */
+const ELEMENT_TEXTURE: Record<ElementId, Record<Tier, string>> = {
+  fire: {
+    MINOR: "a faint ember",
+    LESSER: "a flickering flame",
+    BASELINE: "a burning flame",
+    GREATER: "a roaring blaze",
+    MAJOR: "a raging inferno",
+    MYTHIC: "a sunfire storm",
+  },
+  ice: {
+    MINOR: "a chill of frost",
+    LESSER: "a shard of ice",
+    BASELINE: "a biting cold",
+    GREATER: "a glacial wind",
+    MAJOR: "a blizzard’s wrath",
+    MYTHIC: "an endless winter",
+  },
+  lightning: {
+    MINOR: "a faint spark",
+    LESSER: "a crack of thunder",
+    BASELINE: "a flashing bolt",
+    GREATER: "a splitting thunderclap",
+    MAJOR: "a raging storm",
+    MYTHIC: "the fury of the heavens",
+  },
+  water: {
+    MINOR: "a droplet of water",
+    LESSER: "a flowing trickle",
+    BASELINE: "a powerful wave",
+    GREATER: "a surging tide",
+    MAJOR: "a crushing flood",
+    MYTHIC: "a world-swallowing sea",
+  },
+  wind: {
+    MINOR: "a faint breeze",
+    LESSER: "a sharp gust",
+    BASELINE: "a rushing gale",
+    GREATER: "a howling squall",
+    MAJOR: "a raging hurricane",
+    MYTHIC: "a world-tearing tempest",
+  },
+  stone: {
+    MINOR: "a loose pebble",
+    LESSER: "a jagged stone",
+    BASELINE: "a heavy rock",
+    GREATER: "a rolling boulder",
+    MAJOR: "a crushing mountain force",
+    MYTHIC: "a world-breaking quake",
+  },
+  light: {
+    MINOR: "a gentle gleam",
+    LESSER: "a shining ray",
+    BASELINE: "a radiant glow",
+    GREATER: "a blazing dawn",
+    MAJOR: "a solar flare",
+    MYTHIC: "a celestial judgment",
+  },
+  dark: {
+    MINOR: "a dim shadow",
+    LESSER: "a creeping gloom",
+    BASELINE: "a heavy darkness",
+    GREATER: "a choking night",
+    MAJOR: "an abyssal void",
+    MYTHIC: "eternal nightfall",
+  },
+};
+
+const TARGET_PHRASE: Record<TargetRange, string> = {
+  SELF: "the caster",
+  SINGLE: "a single ally",
+  PARTY: "the party",
+  ENEMY: "a single foe",
+  ENEMIES: "all enemies in range",
+};
+
+const SCHOOL_ACTION: Record<SchoolId, { verb: string }> = {
+  destruction: { verb: "strikes" },
+  control: { verb: "binds" },
+  enfeeblement: { verb: "saps" },
+  enhancement: { verb: "bolsters" },
+  healing: { verb: "mends" },
+  summoning: { verb: "commands" },
+};
+
+type FormVisual = {
+  appearance: Record<Tier, (size: string) => string>;
+  impact: Record<Tier, string>;
+};
+
+const FORM_VISUALS: Record<FamilyId, FormVisual> = {
+  projectile_sphere: {
+    appearance: {
+      MINOR: size => `${size} bead`,
+      LESSER: size => `${size} orb`,
+      BASELINE: size => `${size} sphere`,
+      GREATER: size => `${size} globe`,
+      MAJOR: () => "comet-bright star",
+      MYTHIC: () => "worldheart sun",
+    },
+    impact: {
+      MINOR: "a tossed pebble",
+      LESSER: "a sling-stone",
+      BASELINE: "a warhammer's head",
+      GREATER: "a battering ram",
+      MAJOR: "a falling meteor",
+      MYTHIC: "the birth of a sun",
+    },
+  },
+  liquid_flow: {
+    appearance: {
+      MINOR: () => "thread-thin rill",
+      LESSER: () => "narrow jet",
+      BASELINE: () => "surging stream",
+      GREATER: () => "cresting torrent",
+      MAJOR: () => "sweeping flood",
+      MYTHIC: () => "world-drowning deluge",
+    },
+    impact: {
+      MINOR: "a bucket flung from the walls",
+      LESSER: "a racing brook",
+      BASELINE: "a river in spate",
+      GREATER: "a crashing waterfall",
+      MAJOR: "a bursting dam",
+      MYTHIC: "the wrath of a sea",
+    },
+  },
+  piercing: {
+    appearance: {
+      MINOR: () => "needle-fine spike",
+      LESSER: () => "yard-long bolt",
+      BASELINE: () => "pike-length spear",
+      GREATER: () => "tilting lance",
+      MAJOR: () => "siegebreaker harpoon",
+      MYTHIC: () => "god-slaying pike",
+    },
+    impact: {
+      MINOR: "a tailor's needle",
+      LESSER: "a crossbow quarrel",
+      BASELINE: "a legionary's spear",
+      GREATER: "a charging knight's lance",
+      MAJOR: "a ballista bolt",
+      MYTHIC: "a dragon-slayer's harpoon",
+    },
+  },
+  blade: {
+    appearance: {
+      MINOR: () => "razor-slim shard",
+      LESSER: () => "knife-edged arc",
+      BASELINE: () => "sword-length cleave",
+      GREATER: () => "greatblade sweep",
+      MAJOR: () => "giant-hewn cleaver",
+      MYTHIC: () => "world-hewing edge",
+    },
+    impact: {
+      MINOR: "a barber's razor",
+      LESSER: "a duelist's knife",
+      BASELINE: "a seasoned swordsman's cut",
+      GREATER: "a reaper's scythe",
+      MAJOR: "a headsman's axe",
+      MYTHIC: "a titan's cleaver",
+    },
+  },
+  beam: {
+    appearance: {
+      MINOR: () => "pin-thin gleam",
+      LESSER: () => "arrow-straight bolt",
+      BASELINE: () => "focused beam",
+      GREATER: () => "sunlance",
+      MAJOR: () => "pillar of radiance",
+      MYTHIC: () => "world-cleaving ray",
+    },
+    impact: {
+      MINOR: "a needle of light",
+      LESSER: "a hunter's arrow",
+      BASELINE: "a siege torch",
+      GREATER: "a lightning lance",
+      MAJOR: "a sunbeam hurled from a keep",
+      MYTHIC: "judgment from the heavens",
+    },
+  },
+  burst: {
+    appearance: {
+      MINOR: () => "puff of force",
+      LESSER: () => "detonating wave",
+      BASELINE: () => "rolling shock",
+      GREATER: () => "thundering tempest",
+      MAJOR: () => "cataclysmic blast",
+      MYTHIC: () => "world-rending detonation",
+    },
+    impact: {
+      MINOR: "a powder flash",
+      LESSER: "a blasting charge",
+      BASELINE: "a war-drum shockwave",
+      GREATER: "a collapsing gatehouse",
+      MAJOR: "a volcano's roar",
+      MYTHIC: "the sundering of a mountain",
+    },
+  },
+};
+
+const FORCE_WORD: Record<Tier, string> = {
+  MINOR: "faint",
+  LESSER: "pressing",
+  BASELINE: "forceful",
+  GREATER: "surging",
+  MAJOR: "furious",
+  MYTHIC: "world-shaking",
+};
+
+const BIND_WORD: Record<Tier, string> = {
+  MINOR: "light",
+  LESSER: "tightening",
+  BASELINE: "firm",
+  GREATER: "unyielding",
+  MAJOR: "ironclad",
+  MYTHIC: "inescapable",
+};
+
+const DRAIN_WORD: Record<Tier, string> = {
+  MINOR: "subtle",
+  LESSER: "persistent",
+  BASELINE: "withering",
+  GREATER: "debilitating",
+  MAJOR: "crushing",
+  MYTHIC: "soul-deep",
+};
+
+const BOON_WORD: Record<Tier, string> = {
+  MINOR: "gentle",
+  LESSER: "heartening",
+  BASELINE: "steady",
+  GREATER: "vigorous",
+  MAJOR: "radiant",
+  MYTHIC: "legendary",
+};
+
+const RESTORE_WORD: Record<Tier, string> = {
+  MINOR: "gentle",
+  LESSER: "soothing",
+  BASELINE: "steady",
+  GREATER: "reviving",
+  MAJOR: "renewing",
+  MYTHIC: "miraculous",
+};
+
+const COMMAND_WORD: Record<Tier, string> = {
+  MINOR: "modest",
+  LESSER: "stout",
+  BASELINE: "loyal",
+  GREATER: "mighty",
+  MAJOR: "formidable",
+  MYTHIC: "legendary",
+};
+
+const DESTRUCTION_TAILS: Record<ElementId, (tier: Tier) => string> = {
+  fire: tier => `leaves ${FORCE_WORD[tier]} embers smoldering in its wake`,
+  ice: tier => `rimes the ground with ${FORCE_WORD[tier]} frost`,
+  lightning: tier => `shakes the air with ${FORCE_WORD[tier]} thunderclaps`,
+  water: tier => `batters foes with ${FORCE_WORD[tier]} sheets of spray`,
+  wind: tier => `scours the field with ${FORCE_WORD[tier]} razor gusts`,
+  stone: tier => `splinters the earth into ${FORCE_WORD[tier]} shards`,
+  light: tier => `bursts forth in ${FORCE_WORD[tier]} blinding radiance`,
+  dark: tier => `swallows light in ${FORCE_WORD[tier]} creeping gloom`,
+};
+
+const CONTROL_TAILS: Record<ElementId, (tier: Tier) => string> = {
+  fire: tier => `corrals foes behind ${BIND_WORD[tier]} walls of shimmering heat`,
+  ice: tier => `locks their steps beneath ${BIND_WORD[tier]} crusts of rime`,
+  lightning: tier => `threads ${BIND_WORD[tier]} static through every limb`,
+  water: tier => `drags at footing with ${BIND_WORD[tier]} undertows`,
+  wind: tier => `shepherds targets with ${BIND_WORD[tier]} circling gusts`,
+  stone: tier => `raises ${BIND_WORD[tier]} ridges of earth to pen them in`,
+  light: tier => `brands them with ${BIND_WORD[tier]} sigils that refuse to fade`,
+  dark: tier => `casts ${BIND_WORD[tier]} shackles of shadow about them`,
+};
+
+const ENFEEBLEMENT_TAILS: Record<ElementId, (tier: Tier) => string> = {
+  fire: tier => `saps strength with ${DRAIN_WORD[tier]} waves of heat`,
+  ice: tier => `stiffens joints beneath ${DRAIN_WORD[tier]} chill`,
+  lightning: tier => `jangles senses with ${DRAIN_WORD[tier]} humming shocks`,
+  water: tier => `weighs them down with ${DRAIN_WORD[tier]} sodden drag`,
+  wind: tier => `steals breath with ${DRAIN_WORD[tier]} clutching gusts`,
+  stone: tier => `loads limbs with ${DRAIN_WORD[tier]} earthen heft`,
+  light: tier => `bares every flaw beneath ${DRAIN_WORD[tier]} pitiless glow`,
+  dark: tier => `bleeds courage with ${DRAIN_WORD[tier]} whispering dread`,
+};
+
+const ENHANCEMENT_TAILS: Record<ElementId, (tier: Tier) => string> = {
+  fire: tier => `kindles ${BOON_WORD[tier]} courage in allied hearts`,
+  ice: tier => `tempers resolve with ${BOON_WORD[tier]} cool focus`,
+  lightning: tier => `sparks ${BOON_WORD[tier]} swiftness through their sinews`,
+  water: tier => `flows ${BOON_WORD[tier]} vigor through tired limbs`,
+  wind: tier => `lifts spirits on ${BOON_WORD[tier]} rising drafts`,
+  stone: tier => `roots companions in ${BOON_WORD[tier]} bedrock steadiness`,
+  light: tier => `wraps allies in ${BOON_WORD[tier]} halos of grace`,
+  dark: tier => `shrouds companions beneath ${BOON_WORD[tier]} veils of shadow`,
+};
+
+const HEALING_TAILS: Record<ElementId, (tier: Tier) => string> = {
+  fire: tier => `seals wounds with ${RESTORE_WORD[tier]} hearth-warmth`,
+  ice: tier => `knits flesh with ${RESTORE_WORD[tier]} cooling balm`,
+  lightning: tier => `jolts hearts with ${RESTORE_WORD[tier]} invigorating sparks`,
+  water: tier => `washes hurts clean with ${RESTORE_WORD[tier]} tides`,
+  wind: tier => `breathes ${RESTORE_WORD[tier]} air into faltering lungs`,
+  stone: tier => `steadies bones with ${RESTORE_WORD[tier]} earthen strength`,
+  light: tier => `mends body and spirit with ${RESTORE_WORD[tier]} radiance`,
+  dark: tier => `stitches twilight veils into ${RESTORE_WORD[tier]} wards around the wounded`,
+};
+
+const SUMMONING_TAILS: Record<ElementId, (tier: Tier) => string> = {
+  fire: tier => `calls ${COMMAND_WORD[tier]} spirits of flame to the caster's banner`,
+  ice: tier => `binds ${COMMAND_WORD[tier]} frostbound servitors to the fray`,
+  lightning: tier => `summons ${COMMAND_WORD[tier]} storm-wraiths crackling for battle`,
+  water: tier => `beckons ${COMMAND_WORD[tier]} tideborn allies from the deep`,
+  wind: tier => `whirls ${COMMAND_WORD[tier]} zephyr sprites into formation`,
+  stone: tier => `awakens ${COMMAND_WORD[tier]} guardians from the bedrock`,
+  light: tier => `rallies ${COMMAND_WORD[tier]} luminous heralds`,
+  dark: tier => `ushers ${COMMAND_WORD[tier]} shades sworn to obedience`,
+};
+
+const SCHOOL_TAILS: Record<SchoolId, Record<ElementId, (tier: Tier) => string>> = {
+  destruction: DESTRUCTION_TAILS,
+  control: CONTROL_TAILS,
+  enfeeblement: ENFEEBLEMENT_TAILS,
+  enhancement: ENHANCEMENT_TAILS,
+  healing: HEALING_TAILS,
+  summoning: SUMMONING_TAILS,
+};
+
+function schoolFlavorTail(school: SchoolId, element: ElementId, tier: Tier): string {
+  const table = SCHOOL_TAILS[school];
+  if (!table) return "";
+  const builder = table[element];
+  return builder ? builder(tier) : "";
+}
+
 const PREFIX_BY_TIER: Record<Tier, string[]> = {
   MINOR: ["Faint", "Lesser", "Pale"],
   LESSER: ["Lesser", "Dwindled", "Diminished"],
@@ -862,60 +1208,43 @@ const makeChantName = (element: ElementId, tier: Tier, special?: SpecialLine): s
   return name;
 };
 
-const SCHOOL_VERBS: Record<SchoolId, string> = {
-  destruction: "strikes",
-  control: "binds",
-  enfeeblement: "saps",
-  enhancement: "bolsters",
-  healing: "restores",
-  summoning: "commands",
-};
-
-const ELEMENT_FLAVOR: Record<ElementId, string> = {
-  fire: "searing heat and ravenous flame",
-  ice: "biting cold and crystalline frost",
-  lightning: "split-second thunder and crackling charge",
-  water: "surging tides and fluid force",
-  wind: "swift currents and slicing air",
-  stone: "unyielding earth and grinding pressure",
-  light: "radiant purity and sacred brilliance",
-  dark: "devouring shadow and creeping entropy",
-};
-
-const shortDesc = (
+/** Build the final line. 1–2 sentences, streamlined phrasing. */
+function describeSpell(
   name: string,
   element: ElementId,
   school: SchoolId,
   target: TargetRange,
   tier: Tier,
-  isChant?: boolean,
-): string => {
-  const action = isChant ? "suffuses" : SCHOOL_VERBS[school];
-  const flavor = ELEMENT_FLAVOR[element];
-  const scope =
-    target === "SINGLE"
-      ? "a single ally"
-      : target === "ENEMY"
-        ? "a single foe"
-        : target === "PARTY"
-          ? "the party"
-          : target === "ENEMIES"
-            ? "all enemies in range"
-            : "the caster";
-  const tierNote =
-    tier === "MINOR"
-      ? "faintly"
-      : tier === "LESSER"
-        ? "lightly"
-        : tier === "BASELINE"
-          ? ""
-          : tier === "GREATER"
-            ? "powerfully"
-            : tier === "MAJOR"
-              ? "overwhelmingly"
-              : "with mythic force";
-  return `${name} ${action} ${scope} with ${flavor}, ${tierNote}`.replace(/\s+,/g, ",");
-};
+): string {
+  const famInfo = detectFamily(name);
+  const family: FamilyId =
+    famInfo?.family ??
+    (school === "destruction"
+      ? "projectile_sphere"
+      : school === "control"
+        ? "liquid_flow"
+        : school === "enfeeblement"
+          ? "beam"
+          : school === "enhancement"
+            ? "blade"
+            : "liquid_flow");
+
+  const sizeWord = SIZE_BY_TIER[tier];
+  const texture = ELEMENT_TEXTURE[element][tier];
+  const actVerb = SCHOOL_ACTION[school].verb;
+  const scope = TARGET_PHRASE[target];
+
+  const formTable = FORM_VISUALS[family];
+  const appearance = formTable.appearance[tier](sizeWord);
+  const impact = formTable.impact[tier];
+
+  const main =
+    `${name} ${actVerb} ${scope} as a ${appearance} of ${texture}, ` +
+    `like ${impact}.`;
+
+  const tail = schoolFlavorTail(school, element, tier);
+  return tail ? `${main} It ${tail}.` : main;
+}
 
 let SERIAL = 1;
 
@@ -998,7 +1327,7 @@ export const makeSpell = (args: {
     basePower,
     status,
     effects: effects.length ? effects : undefined,
-    description: shortDesc(name, args.element, args.school, target, args.tier, isChant),
+    description: describeSpell(name, args.element, args.school, target, args.tier),
     lineage: lineageFor(args.special || null),
   };
   return entry;

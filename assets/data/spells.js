@@ -35,7 +35,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Ashen Bead strikes a single foe with searing heat and ravenous flame, faintly",
+    "description": "Lesser Ashen Bead strikes a single foe as a marble-sized bead of a faint ember, like a tossed pebble. It leaves faint embers smoldering in its wake.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -74,7 +74,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Ashen Shard bolsters the caster with searing heat and ravenous flame, faintly"
+    "description": "Faint Ashen Shard bolsters the caster as a razor-slim shard of a faint ember, like a barber's razor. It kindles gentle courage in allied hearts."
   },
   {
     "id": "fire:enfeeblement:MINOR:3",
@@ -116,7 +116,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Ashen Glimmer saps a single foe with searing heat and ravenous flame, faintly",
+    "description": "Ashen Glimmer saps a single foe as a pin-thin gleam of a faint ember, like a needle of light. It saps strength with subtle waves of heat.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -157,7 +157,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Faint Ember Rill binds all enemies in range with searing heat and ravenous flame, faintly",
+    "description": "Faint Ember Rill binds all enemies in range as a thread-thin rill of a faint ember, like a bucket flung from the walls. It corrals foes behind light walls of shimmering heat.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -189,7 +189,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Ashen Drip restores a single ally with searing heat and ravenous flame, faintly",
+    "description": "Ashen Drip mends a single ally as a thread-thin rill of a faint ember, like a bucket flung from the walls. It seals wounds with gentle hearth-warmth.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -228,7 +228,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Ashen Rill commands the party with searing heat and ravenous flame, faintly",
+    "description": "Ashen Rill commands the party as a thread-thin rill of a faint ember, like a bucket flung from the walls. It calls modest spirits of flame to the caster's banner.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -274,7 +274,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Ashen Pellet strikes a single foe with searing heat and ravenous flame, faintly",
+    "description": "Lesser Ashen Pellet strikes a single foe as a marble-sized bead of a faint ember, like a tossed pebble. It leaves faint embers smoldering in its wake.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -313,7 +313,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Ember Drip commands the party with searing heat and ravenous flame, faintly",
+    "description": "Ember Drip commands the party as a thread-thin rill of a faint ember, like a bucket flung from the walls. It calls modest spirits of flame to the caster's banner.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -359,7 +359,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Cinder Bead strikes a single foe with searing heat and ravenous flame, lightly",
+    "description": "Cinder Bead strikes a single foe as a palm-sized orb of a flickering flame, like a sling-stone. It leaves pressing embers smoldering in its wake.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -400,7 +400,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Cinder Trickle binds all enemies in range with searing heat and ravenous flame, lightly",
+    "description": "Cinder Trickle binds all enemies in range as a narrow jet of a flickering flame, like a racing brook. It corrals foes behind tightening walls of shimmering heat.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -440,7 +440,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Fiery Ball strikes a single foe with searing heat and ravenous flame, ",
+    "description": "Fiery Ball strikes a single foe as a buckler-sized sphere of a burning flame, like a warhammer's head. It leaves forceful embers smoldering in its wake.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -487,7 +487,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Flame Beam saps a single foe with searing heat and ravenous flame, ",
+    "description": "Flame Beam saps a single foe as a focused beam of a burning flame, like a siege torch. It saps strength with withering waves of heat.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -527,7 +527,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Fiery Glaive strikes a single foe with searing heat and ravenous flame, ",
+    "description": "Fiery Glaive strikes a single foe as a buckler-sized sphere of a burning flame, like a warhammer's head. It leaves forceful embers smoldering in its wake.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -573,7 +573,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Flame Spout commands the party with searing heat and ravenous flame, ",
+    "description": "Flame Spout commands the party as a surging stream of a burning flame, like a river in spate. It calls loyal spirits of flame to the caster's banner.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -619,7 +619,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Wildfire Javelin strikes a single foe with searing heat and ravenous flame, powerfully",
+    "description": "Wildfire Javelin strikes a single foe as a tilting lance of a roaring blaze, like a charging knight's lance. It leaves surging embers smoldering in its wake.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -667,7 +667,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Blaze Cataclysm binds all enemies in range with searing heat and ravenous flame, powerfully",
+    "description": "Blaze Cataclysm binds all enemies in range as a thundering tempest of a roaring blaze, like a collapsing gatehouse. It corrals foes behind unyielding walls of shimmering heat.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -707,7 +707,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Wildfire Nova strikes a single foe with searing heat and ravenous flame, powerfully",
+    "description": "Wildfire Nova strikes a single foe as a shield-sized globe of a roaring blaze, like a battering ram. It leaves surging embers smoldering in its wake.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -753,7 +753,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Utter Hellfire Kingsblade bolsters the caster with searing heat and ravenous flame, overwhelmingly"
+    "description": "Utter Hellfire Kingsblade bolsters the caster as a giant-hewn cleaver of a raging inferno, like a headsman's axe. It kindles radiant courage in allied hearts."
   },
   {
     "id": "fire:enfeeblement:MAJOR:19",
@@ -795,7 +795,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Inferno Starshot saps a single foe with searing heat and ravenous flame, overwhelmingly",
+    "description": "Inferno Starshot saps a single foe as a pillar of radiance of a raging inferno, like a sunbeam hurled from a keep. It saps strength with crushing waves of heat.",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -835,7 +835,7 @@ export const SPELLBOOK = [
         "duration": 18
       }
     ],
-    "description": "Sunfire Pyroclasm Kingsblade strikes a single foe with searing heat and ravenous flame, with mythic force",
+    "description": "Sunfire Pyroclasm Kingsblade strikes a single foe as a worldheart sun of a sunfire storm, like the birth of a sun. It leaves world-shaking embers smoldering in its wake.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -881,7 +881,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Hoarfrost Hoarfrost Pellet strikes a single foe with biting cold and crystalline frost, faintly",
+    "description": "Faint Hoarfrost Hoarfrost Pellet strikes a single foe as a marble-sized bead of a chill of frost, like a tossed pebble. It rimes the ground with faint frost.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -920,7 +920,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Rime Shard bolsters the caster with biting cold and crystalline frost, faintly"
+    "description": "Rime Shard bolsters the caster as a razor-slim shard of a chill of frost, like a barber's razor. It tempers resolve with gentle cool focus."
   },
   {
     "id": "ice:enfeeblement:MINOR:23",
@@ -962,7 +962,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Rime Spark saps a single foe with biting cold and crystalline frost, faintly",
+    "description": "Lesser Rime Spark saps a single foe as a pin-thin gleam of a chill of frost, like a needle of light. It stiffens joints beneath subtle chill.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1003,7 +1003,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Rime Flare binds all enemies in range with biting cold and crystalline frost, faintly",
+    "description": "Rime Flare binds all enemies in range as a thread-thin rill of a chill of frost, like a bucket flung from the walls. It locks their steps beneath light crusts of rime.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1035,7 +1035,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Rime Drip restores a single ally with biting cold and crystalline frost, faintly",
+    "description": "Rime Drip mends a single ally as a thread-thin rill of a chill of frost, like a bucket flung from the walls. It knits flesh with gentle cooling balm.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1074,7 +1074,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Rime Drip commands the party with biting cold and crystalline frost, faintly",
+    "description": "Faint Rime Drip commands the party as a thread-thin rill of a chill of frost, like a bucket flung from the walls. It binds modest frostbound servitors to the fray.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -1121,7 +1121,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Hoarfrost Flare binds all enemies in range with biting cold and crystalline frost, faintly",
+    "description": "Hoarfrost Flare binds all enemies in range as a thread-thin rill of a chill of frost, like a bucket flung from the walls. It locks their steps beneath light crusts of rime.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1160,7 +1160,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Rime Rill commands the party with biting cold and crystalline frost, faintly",
+    "description": "Rime Rill commands the party as a thread-thin rill of a chill of frost, like a bucket flung from the walls. It binds modest frostbound servitors to the fray.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -1207,7 +1207,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Chill Rill binds all enemies in range with biting cold and crystalline frost, lightly",
+    "description": "Chill Rill binds all enemies in range as a narrow jet of a shard of ice, like a racing brook. It locks their steps beneath tightening crusts of rime.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1246,7 +1246,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Chill Sliver bolsters the caster with biting cold and crystalline frost, lightly"
+    "description": "Chill Sliver bolsters the caster as a knife-edged arc of a shard of ice, like a duelist's knife. It tempers resolve with heartening cool focus."
   },
   {
     "id": "ice:control:BASELINE:31",
@@ -1289,7 +1289,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Ice Blast binds all enemies in range with biting cold and crystalline frost, ",
+    "description": "Ice Blast binds all enemies in range as a rolling shock of a biting cold, like a war-drum shockwave. It locks their steps beneath firm crusts of rime.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1329,7 +1329,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Frost Orb strikes a single foe with biting cold and crystalline frost, ",
+    "description": "Frost Orb strikes a single foe as a buckler-sized sphere of a biting cold, like a warhammer's head. It rimes the ground with forceful frost.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1377,7 +1377,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Ice Blast binds all enemies in range with biting cold and crystalline frost, ",
+    "description": "Ice Blast binds all enemies in range as a rolling shock of a biting cold, like a war-drum shockwave. It locks their steps beneath firm crusts of rime.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1423,7 +1423,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Frost Ray commands the party with biting cold and crystalline frost, ",
+    "description": "Frost Ray commands the party as a focused beam of a biting cold, like a siege torch. It binds loyal frostbound servitors to the fray.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -1477,7 +1477,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Glacial Flood binds all enemies in range with biting cold and crystalline frost, powerfully",
+    "description": "Glacial Flood binds all enemies in range as a cresting torrent of a glacial wind, like a crashing waterfall. It locks their steps beneath unyielding crusts of rime.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1523,7 +1523,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Greater Glacial Claymore bolsters the caster with biting cold and crystalline frost, powerfully"
+    "description": "Greater Glacial Claymore bolsters the caster as a greatblade sweep of a glacial wind, like a reaper's scythe. It tempers resolve with vigorous cool focus."
   },
   {
     "id": "ice:control:GREATER:37",
@@ -1566,7 +1566,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Greater Permafrost Cataclysm binds all enemies in range with biting cold and crystalline frost, powerfully",
+    "description": "Greater Permafrost Cataclysm binds all enemies in range as a thundering tempest of a glacial wind, like a collapsing gatehouse. It locks their steps beneath unyielding crusts of rime.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1613,7 +1613,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Grand Aureate Blizzard Sunbeam saps a single foe with biting cold and crystalline frost, overwhelmingly",
+    "description": "Grand Aureate Blizzard Sunbeam saps a single foe as a pillar of radiance of a blizzard’s wrath, like a sunbeam hurled from a keep. It stiffens joints beneath crushing chill.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1653,7 +1653,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Blizzard Singularity strikes a single foe with biting cold and crystalline frost, overwhelmingly",
+    "description": "Blizzard Singularity strikes a single foe as a comet-bright star of a blizzard’s wrath, like a falling meteor. It rimes the ground with furious frost.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1701,7 +1701,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Ice Age Armageddon binds all enemies in range with biting cold and crystalline frost, with mythic force",
+    "description": "Ice Age Armageddon binds all enemies in range as a world-drowning deluge of an endless winter, like the wrath of a sea. It locks their steps beneath inescapable crusts of rime.",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1741,7 +1741,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Static Pellet strikes a single foe with split-second thunder and crackling charge, faintly",
+    "description": "Lesser Static Pellet strikes a single foe as a marble-sized bead of a faint spark, like a tossed pebble. It shakes the air with faint thunderclaps.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1780,7 +1780,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Static Sliver bolsters the caster with split-second thunder and crackling charge, faintly"
+    "description": "Faint Static Sliver bolsters the caster as a razor-slim shard of a faint spark, like a barber's razor. It sparks gentle swiftness through their sinews."
   },
   {
     "id": "lightning:enfeeblement:MINOR:43",
@@ -1822,7 +1822,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Static Spark saps a single foe with split-second thunder and crackling charge, faintly",
+    "description": "Static Spark saps a single foe as a pin-thin gleam of a faint spark, like a needle of light. It jangles senses with subtle humming shocks.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1863,7 +1863,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Lesser Static Drip binds all enemies in range with split-second thunder and crackling charge, faintly",
+    "description": "Lesser Static Drip binds all enemies in range as a thread-thin rill of a faint spark, like a bucket flung from the walls. It threads light static through every limb.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1895,7 +1895,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Static Drip restores a single ally with split-second thunder and crackling charge, faintly",
+    "description": "Faint Static Drip mends a single ally as a thread-thin rill of a faint spark, like a bucket flung from the walls. It jolts hearts with gentle invigorating sparks.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1934,7 +1934,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Static Drip commands the party with split-second thunder and crackling charge, faintly",
+    "description": "Faint Static Drip commands the party as a thread-thin rill of a faint spark, like a bucket flung from the walls. It summons modest storm-wraiths crackling for battle.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -1980,7 +1980,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Tingle Bead strikes a single foe with split-second thunder and crackling charge, faintly",
+    "description": "Tingle Bead strikes a single foe as a marble-sized bead of a faint spark, like a tossed pebble. It shakes the air with faint thunderclaps.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2019,7 +2019,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Static Drip commands the party with split-second thunder and crackling charge, faintly",
+    "description": "Static Drip commands the party as a thread-thin rill of a faint spark, like a bucket flung from the walls. It summons modest storm-wraiths crackling for battle.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -2065,7 +2065,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Dwindled Spark Spike strikes a single foe with split-second thunder and crackling charge, lightly",
+    "description": "Dwindled Spark Spike strikes a single foe as a arrow-straight bolt of a crack of thunder, like a hunter's arrow. It shakes the air with pressing thunderclaps.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2104,7 +2104,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Spark Pellet bolsters the caster with split-second thunder and crackling charge, lightly"
+    "description": "Spark Pellet bolsters the caster as a arrow-straight bolt of a crack of thunder, like a hunter's arrow. It sparks heartening swiftness through their sinews."
   },
   {
     "id": "lightning:destruction:LESSER:51",
@@ -2139,7 +2139,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Spark Bead strikes a single foe with split-second thunder and crackling charge, lightly",
+    "description": "Spark Bead strikes a single foe as a arrow-straight bolt of a crack of thunder, like a hunter's arrow. It shakes the air with pressing thunderclaps.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2186,7 +2186,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Lightning Ray saps a single foe with split-second thunder and crackling charge, ",
+    "description": "Lightning Ray saps a single foe as a focused beam of a flashing bolt, like a siege torch. It jangles senses with withering humming shocks.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2226,7 +2226,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Bolt Orb strikes a single foe with split-second thunder and crackling charge, ",
+    "description": "Bolt Orb strikes a single foe as a buckler-sized sphere of a flashing bolt, like a warhammer's head. It shakes the air with forceful thunderclaps.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2272,7 +2272,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Lightning Spout commands the party with split-second thunder and crackling charge, ",
+    "description": "Lightning Spout commands the party as a surging stream of a flashing bolt, like a river in spate. It summons loyal storm-wraiths crackling for battle.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -2318,7 +2318,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Thunderbolt Harpoon strikes a single foe with split-second thunder and crackling charge, powerfully",
+    "description": "Thunderbolt Harpoon strikes a single foe as a tilting lance of a splitting thunderclap, like a charging knight's lance. It shakes the air with surging thunderclaps.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2364,7 +2364,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Thunder Greatsword bolsters the caster with split-second thunder and crackling charge, powerfully"
+    "description": "Thunder Greatsword bolsters the caster as a greatblade sweep of a splitting thunderclap, like a reaper's scythe. It sparks vigorous swiftness through their sinews."
   },
   {
     "id": "lightning:destruction:GREATER:57",
@@ -2399,7 +2399,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Deep Thunder Javelin strikes a single foe with split-second thunder and crackling charge, powerfully",
+    "description": "Deep Thunder Javelin strikes a single foe as a tilting lance of a splitting thunderclap, like a charging knight's lance. It shakes the air with surging thunderclaps.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2447,7 +2447,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Tempestuous Armageddon binds all enemies in range with split-second thunder and crackling charge, overwhelmingly",
+    "description": "Tempestuous Armageddon binds all enemies in range as a sweeping flood of a raging storm, like a bursting dam. It threads ironclad static through every limb.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -2500,7 +2500,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Tempestuous Stormborn Sunbeam saps a single foe with split-second thunder and crackling charge, overwhelmingly",
+    "description": "Tempestuous Stormborn Sunbeam saps a single foe as a pillar of radiance of a raging storm, like a sunbeam hurled from a keep. It jangles senses with crushing humming shocks.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2540,7 +2540,7 @@ export const SPELLBOOK = [
         "duration": 18
       }
     ],
-    "description": "Skybreaker Worldstorm Kingsblade strikes a single foe with split-second thunder and crackling charge, with mythic force",
+    "description": "Skybreaker Worldstorm Kingsblade strikes a single foe as a worldheart sun of the fury of the heavens, like the birth of a sun. It shakes the air with world-shaking thunderclaps.",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2580,7 +2580,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Dew Pellet strikes a single foe with surging tides and fluid force, faintly",
+    "description": "Lesser Dew Pellet strikes a single foe as a marble-sized bead of a droplet of water, like a tossed pebble. It batters foes with faint sheets of spray.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2619,7 +2619,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Dew Shard bolsters the caster with surging tides and fluid force, faintly"
+    "description": "Lesser Dew Shard bolsters the caster as a razor-slim shard of a droplet of water, like a barber's razor. It flows gentle vigor through tired limbs."
   },
   {
     "id": "water:enfeeblement:MINOR:63",
@@ -2661,7 +2661,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Briny Spark saps a single foe with surging tides and fluid force, faintly",
+    "description": "Faint Briny Spark saps a single foe as a pin-thin gleam of a droplet of water, like a needle of light. It weighs them down with subtle sodden drag.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2702,7 +2702,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Faint Dew Drip binds all enemies in range with surging tides and fluid force, faintly",
+    "description": "Faint Dew Drip binds all enemies in range as a thread-thin rill of a droplet of water, like a bucket flung from the walls. It drags at footing with light undertows.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2734,7 +2734,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Briny Drip restores a single ally with surging tides and fluid force, faintly",
+    "description": "Briny Drip mends a single ally as a thread-thin rill of a droplet of water, like a bucket flung from the walls. It washes hurts clean with gentle tides.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2773,7 +2773,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Dew Drip commands the party with surging tides and fluid force, faintly",
+    "description": "Dew Drip commands the party as a thread-thin rill of a droplet of water, like a bucket flung from the walls. It beckons modest tideborn allies from the deep.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -2811,7 +2811,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Dew Rill restores a single ally with surging tides and fluid force, faintly",
+    "description": "Lesser Dew Rill mends a single ally as a thread-thin rill of a droplet of water, like a bucket flung from the walls. It washes hurts clean with gentle tides.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2850,7 +2850,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Dew Drip commands the party with surging tides and fluid force, faintly",
+    "description": "Dew Drip commands the party as a thread-thin rill of a droplet of water, like a bucket flung from the walls. It beckons modest tideborn allies from the deep.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -2888,7 +2888,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Dew Drip restores a single ally with surging tides and fluid force, faintly",
+    "description": "Faint Dew Drip mends a single ally as a thread-thin rill of a droplet of water, like a bucket flung from the walls. It washes hurts clean with gentle tides.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2927,7 +2927,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Aqueous Shard bolsters the caster with surging tides and fluid force, lightly"
+    "description": "Aqueous Shard bolsters the caster as a knife-edged arc of a flowing trickle, like a duelist's knife. It flows heartening vigor through tired limbs."
   },
   {
     "id": "water:healing:BASELINE:71",
@@ -2962,7 +2962,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Canticle of Water suffuses the party with surging tides and fluid force, ",
+    "description": "Canticle of Water mends the party as a surging stream of a powerful wave, like a river in spate. It washes hurts clean with steady tides.",
     "lineage": {
       "isChant": true,
       "isDance": false,
@@ -3016,7 +3016,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Water Spout binds all enemies in range with surging tides and fluid force, ",
+    "description": "Water Spout binds all enemies in range as a surging stream of a powerful wave, like a river in spate. It drags at footing with firm undertows.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -3056,7 +3056,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Ballad of Wave suffuses the party with surging tides and fluid force, ",
+    "description": "Ballad of Wave mends the party as a rolling shock of a powerful wave, like a war-drum shockwave. It washes hurts clean with steady tides.",
     "lineage": {
       "isChant": true,
       "isDance": false,
@@ -3108,7 +3108,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Water Stream commands the party with surging tides and fluid force, ",
+    "description": "Water Stream commands the party as a surging stream of a powerful wave, like a river in spate. It beckons loyal tideborn allies from the deep.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -3153,7 +3153,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Greater Riptide Flood restores a single ally with surging tides and fluid force, powerfully",
+    "description": "Greater Riptide Flood mends a single ally as a cresting torrent of a surging tide, like a crashing waterfall. It washes hurts clean with reviving tides.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -3199,7 +3199,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Surging Claymore bolsters the caster with surging tides and fluid force, powerfully"
+    "description": "Surging Claymore bolsters the caster as a greatblade sweep of a surging tide, like a reaper's scythe. It flows vigorous vigor through tired limbs."
   },
   {
     "id": "water:healing:GREATER:77",
@@ -3233,7 +3233,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Surging Deluge restores a single ally with surging tides and fluid force, powerfully",
+    "description": "Surging Deluge mends a single ally as a cresting torrent of a surging tide, like a crashing waterfall. It washes hurts clean with reviving tides.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -3273,7 +3273,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Deluge Sun strikes a single foe with surging tides and fluid force, overwhelmingly",
+    "description": "Deluge Sun strikes a single foe as a comet-bright star of a crushing flood, like a falling meteor. It batters foes with furious sheets of spray.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -3321,7 +3321,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Utter Deluge Maelstrom binds all enemies in range with surging tides and fluid force, overwhelmingly",
+    "description": "Utter Deluge Maelstrom binds all enemies in range as a sweeping flood of a crushing flood, like a bursting dam. It drags at footing with ironclad undertows.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -3360,7 +3360,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Abyssal Maelstrom restores a single ally with surging tides and fluid force, with mythic force",
+    "description": "Abyssal Maelstrom mends a single ally as a world-drowning deluge of a world-swallowing sea, like the wrath of a sea. It washes hurts clean with miraculous tides.",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -3400,7 +3400,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Breath Pellet strikes a single foe with swift currents and slicing air, faintly",
+    "description": "Faint Breath Pellet strikes a single foe as a marble-sized bead of a faint breeze, like a tossed pebble. It scours the field with faint razor gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3439,7 +3439,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Whiff Pellet bolsters the caster with swift currents and slicing air, faintly"
+    "description": "Lesser Whiff Pellet bolsters the caster as a razor-slim shard of a faint breeze, like a barber's razor. It lifts spirits on gentle rising drafts."
   },
   {
     "id": "wind:enfeeblement:MINOR:83",
@@ -3481,7 +3481,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Whiff Glimmer saps a single foe with swift currents and slicing air, faintly",
+    "description": "Whiff Glimmer saps a single foe as a pin-thin gleam of a faint breeze, like a needle of light. It steals breath with subtle clutching gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3522,7 +3522,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Lesser Whiff Drip binds all enemies in range with swift currents and slicing air, faintly",
+    "description": "Lesser Whiff Drip binds all enemies in range as a thread-thin rill of a faint breeze, like a bucket flung from the walls. It shepherds targets with light circling gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3554,7 +3554,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Whiff Rill restores a single ally with swift currents and slicing air, faintly",
+    "description": "Whiff Rill mends a single ally as a thread-thin rill of a faint breeze, like a bucket flung from the walls. It breathes gentle air into faltering lungs.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3593,7 +3593,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Whiff Spark commands the party with swift currents and slicing air, faintly",
+    "description": "Faint Whiff Spark commands the party as a pin-thin gleam of a faint breeze, like a needle of light. It whirls modest zephyr sprites into formation.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -3640,7 +3640,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Faint Breath Flare binds all enemies in range with swift currents and slicing air, faintly",
+    "description": "Faint Breath Flare binds all enemies in range as a thread-thin rill of a faint breeze, like a bucket flung from the walls. It shepherds targets with light circling gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3679,7 +3679,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Whiff Drip commands the party with swift currents and slicing air, faintly",
+    "description": "Whiff Drip commands the party as a thread-thin rill of a faint breeze, like a bucket flung from the walls. It whirls modest zephyr sprites into formation.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -3726,7 +3726,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Lesser Whiff Rill binds all enemies in range with swift currents and slicing air, faintly",
+    "description": "Lesser Whiff Rill binds all enemies in range as a thread-thin rill of a faint breeze, like a bucket flung from the walls. It shepherds targets with light circling gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3765,7 +3765,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Lesser Breeze Pellet bolsters the caster with swift currents and slicing air, lightly"
+    "description": "Lesser Breeze Pellet bolsters the caster as a knife-edged arc of a sharp gust, like a duelist's knife. It lifts spirits on heartening rising drafts."
   },
   {
     "id": "wind:control:BASELINE:91",
@@ -3808,7 +3808,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Gust Wave binds all enemies in range with swift currents and slicing air, ",
+    "description": "Gust Wave binds all enemies in range as a rolling shock of a rushing gale, like a war-drum shockwave. It shepherds targets with firm circling gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3855,7 +3855,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Gust Blast saps a single foe with swift currents and slicing air, ",
+    "description": "Gust Blast saps a single foe as a rolling shock of a rushing gale, like a war-drum shockwave. It steals breath with withering clutching gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3903,7 +3903,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Gust Wave binds all enemies in range with swift currents and slicing air, ",
+    "description": "Gust Wave binds all enemies in range as a rolling shock of a rushing gale, like a war-drum shockwave. It shepherds targets with firm circling gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3949,7 +3949,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Gust Spout commands the party with swift currents and slicing air, ",
+    "description": "Gust Spout commands the party as a surging stream of a rushing gale, like a river in spate. It whirls loyal zephyr sprites into formation.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -4003,7 +4003,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Squall Annihilation binds all enemies in range with swift currents and slicing air, powerfully",
+    "description": "Squall Annihilation binds all enemies in range as a thundering tempest of a howling squall, like a collapsing gatehouse. It shepherds targets with unyielding circling gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -4050,7 +4050,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Samba of Squall suffuses the party with swift currents and slicing air, powerfully",
+    "description": "Samba of Squall bolsters the party as a greatblade sweep of a howling squall, like a reaper's scythe. It lifts spirits on vigorous rising drafts.",
     "lineage": {
       "isChant": true,
       "isDance": true,
@@ -4099,7 +4099,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Greater Tempest Cataclysm binds all enemies in range with swift currents and slicing air, powerfully",
+    "description": "Greater Tempest Cataclysm binds all enemies in range as a thundering tempest of a howling squall, like a collapsing gatehouse. It shepherds targets with unyielding circling gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -4139,7 +4139,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Utter Hurricane Singularity strikes a single foe with swift currents and slicing air, overwhelmingly",
+    "description": "Utter Hurricane Singularity strikes a single foe as a comet-bright star of a raging hurricane, like a falling meteor. It scours the field with furious razor gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -4186,7 +4186,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Grand Solar Hurricane Sunbeam saps a single foe with swift currents and slicing air, overwhelmingly",
+    "description": "Grand Solar Hurricane Sunbeam saps a single foe as a pillar of radiance of a raging hurricane, like a sunbeam hurled from a keep. It steals breath with crushing clutching gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -4234,7 +4234,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Mythic Sky Tyrant Worldfire binds all enemies in range with swift currents and slicing air, with mythic force",
+    "description": "Mythic Sky Tyrant Worldfire binds all enemies in range as a world-drowning deluge of a world-tearing tempest, like the wrath of a sea. It shepherds targets with inescapable circling gusts.",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -4274,7 +4274,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Grit Pellet strikes a single foe with unyielding earth and grinding pressure, faintly",
+    "description": "Grit Pellet strikes a single foe as a marble-sized bead of a loose pebble, like a tossed pebble. It splinters the earth into faint shards.",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4313,7 +4313,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Grit Shard bolsters the caster with unyielding earth and grinding pressure, faintly"
+    "description": "Faint Grit Shard bolsters the caster as a razor-slim shard of a loose pebble, like a barber's razor. It roots companions in gentle bedrock steadiness."
   },
   {
     "id": "stone:enfeeblement:MINOR:103",
@@ -4355,7 +4355,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Pebble Glimmer saps a single foe with unyielding earth and grinding pressure, faintly",
+    "description": "Lesser Pebble Glimmer saps a single foe as a pin-thin gleam of a loose pebble, like a needle of light. It loads limbs with subtle earthen heft.",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4396,7 +4396,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Grit Drip binds all enemies in range with unyielding earth and grinding pressure, faintly",
+    "description": "Grit Drip binds all enemies in range as a thread-thin rill of a loose pebble, like a bucket flung from the walls. It raises light ridges of earth to pen them in.",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4428,7 +4428,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Pebble Drip restores a single ally with unyielding earth and grinding pressure, faintly",
+    "description": "Pebble Drip mends a single ally as a thread-thin rill of a loose pebble, like a bucket flung from the walls. It steadies bones with gentle earthen strength.",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4467,7 +4467,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Grit Drip commands the party with unyielding earth and grinding pressure, faintly",
+    "description": "Grit Drip commands the party as a thread-thin rill of a loose pebble, like a bucket flung from the walls. It awakens modest guardians from the bedrock.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -4512,7 +4512,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Pebble Shard bolsters the caster with unyielding earth and grinding pressure, faintly"
+    "description": "Pebble Shard bolsters the caster as a razor-slim shard of a loose pebble, like a barber's razor. It roots companions in gentle bedrock steadiness."
   },
   {
     "id": "stone:summoning:MINOR:108",
@@ -4546,7 +4546,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Grit Rill commands the party with unyielding earth and grinding pressure, faintly",
+    "description": "Faint Grit Rill commands the party as a thread-thin rill of a loose pebble, like a bucket flung from the walls. It awakens modest guardians from the bedrock.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -4591,7 +4591,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Rocky Sliver bolsters the caster with unyielding earth and grinding pressure, lightly"
+    "description": "Rocky Sliver bolsters the caster as a knife-edged arc of a jagged stone, like a duelist's knife. It roots companions in heartening bedrock steadiness."
   },
   {
     "id": "stone:enfeeblement:LESSER:110",
@@ -4633,7 +4633,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Rocky Rocky Dart saps a single foe with unyielding earth and grinding pressure, lightly",
+    "description": "Rocky Rocky Dart saps a single foe as a arrow-straight bolt of a jagged stone, like a hunter's arrow. It loads limbs with persistent earthen heft.",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4679,7 +4679,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Stone Shortsword bolsters the caster with unyielding earth and grinding pressure, "
+    "description": "Stone Shortsword bolsters the caster as a sword-length cleave of a heavy rock, like a seasoned swordsman's cut. It roots companions in steady bedrock steadiness."
   },
   {
     "id": "stone:control:BASELINE:112",
@@ -4722,7 +4722,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Stone Spout binds all enemies in range with unyielding earth and grinding pressure, ",
+    "description": "Stone Spout binds all enemies in range as a surging stream of a heavy rock, like a river in spate. It raises firm ridges of earth to pen them in.",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4768,7 +4768,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Stone Dagger bolsters the caster with unyielding earth and grinding pressure, "
+    "description": "Stone Dagger bolsters the caster as a sword-length cleave of a heavy rock, like a seasoned swordsman's cut. It roots companions in steady bedrock steadiness."
   },
   {
     "id": "stone:summoning:BASELINE:114",
@@ -4809,7 +4809,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Earth Spout commands the party with unyielding earth and grinding pressure, ",
+    "description": "Earth Spout commands the party as a surging stream of a heavy rock, like a river in spate. It awakens loyal guardians from the bedrock.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -4861,7 +4861,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Greater Granite Greatsword bolsters the caster with unyielding earth and grinding pressure, powerfully"
+    "description": "Greater Granite Greatsword bolsters the caster as a greatblade sweep of a rolling boulder, like a reaper's scythe. It roots companions in vigorous bedrock steadiness."
   },
   {
     "id": "stone:enfeeblement:GREATER:116",
@@ -4903,7 +4903,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Deep Granite Harpoon saps a single foe with unyielding earth and grinding pressure, powerfully",
+    "description": "Deep Granite Harpoon saps a single foe as a tilting lance of a rolling boulder, like a charging knight's lance. It loads limbs with debilitating earthen heft.",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4949,7 +4949,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Greater Boulder Greatsword bolsters the caster with unyielding earth and grinding pressure, powerfully"
+    "description": "Greater Boulder Greatsword bolsters the caster as a greatblade sweep of a rolling boulder, like a reaper's scythe. It roots companions in vigorous bedrock steadiness."
   },
   {
     "id": "stone:destruction:MAJOR:118",
@@ -4984,7 +4984,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Monolith Sun strikes a single foe with unyielding earth and grinding pressure, overwhelmingly",
+    "description": "Monolith Sun strikes a single foe as a comet-bright star of a crushing mountain force, like a falling meteor. It splinters the earth into furious shards.",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -5032,7 +5032,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Grand Monolith Maelstrom binds all enemies in range with unyielding earth and grinding pressure, overwhelmingly",
+    "description": "Grand Monolith Maelstrom binds all enemies in range as a sweeping flood of a crushing mountain force, like a bursting dam. It raises ironclad ridges of earth to pen them in.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -5084,7 +5084,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Worldpillar Kingsblade bolsters the caster with unyielding earth and grinding pressure, with mythic force"
+    "description": "Worldpillar Kingsblade bolsters the caster as a world-hewing edge of a world-breaking quake, like a titan's cleaver. It roots companions in legendary bedrock steadiness."
   },
   {
     "id": "light:destruction:MINOR:121",
@@ -5119,7 +5119,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Pellet strikes a single foe with radiant purity and sacred brilliance, faintly",
+    "description": "Faint Pellet strikes a single foe as a marble-sized bead of a gentle gleam, like a tossed pebble. It bursts forth in faint blinding radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5158,7 +5158,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Gleam Sliver bolsters the caster with radiant purity and sacred brilliance, faintly"
+    "description": "Gleam Sliver bolsters the caster as a razor-slim shard of a gentle gleam, like a barber's razor. It wraps allies in gentle halos of grace."
   },
   {
     "id": "light:enfeeblement:MINOR:123",
@@ -5200,7 +5200,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Spark saps a single foe with radiant purity and sacred brilliance, faintly",
+    "description": "Faint Spark saps a single foe as a pin-thin gleam of a gentle gleam, like a needle of light. It bares every flaw beneath subtle pitiless glow.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5241,7 +5241,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Gleam Drip binds all enemies in range with radiant purity and sacred brilliance, faintly",
+    "description": "Gleam Drip binds all enemies in range as a thread-thin rill of a gentle gleam, like a bucket flung from the walls. It brands them with light sigils that refuse to fade.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5273,7 +5273,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Faint Rill restores a single ally with radiant purity and sacred brilliance, faintly",
+    "description": "Lesser Faint Rill mends a single ally as a thread-thin rill of a gentle gleam, like a bucket flung from the walls. It mends body and spirit with gentle radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5312,7 +5312,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Gleam Drip commands the party with radiant purity and sacred brilliance, faintly",
+    "description": "Gleam Drip commands the party as a thread-thin rill of a gentle gleam, like a bucket flung from the walls. It rallies modest luminous heralds.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -5350,7 +5350,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Gleam Drip restores a single ally with radiant purity and sacred brilliance, faintly",
+    "description": "Faint Gleam Drip mends a single ally as a thread-thin rill of a gentle gleam, like a bucket flung from the walls. It mends body and spirit with gentle radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5389,7 +5389,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Gleam Drip commands the party with radiant purity and sacred brilliance, faintly",
+    "description": "Lesser Gleam Drip commands the party as a thread-thin rill of a gentle gleam, like a bucket flung from the walls. It rallies modest luminous heralds.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -5427,7 +5427,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Lesser Bright Drip restores a single ally with radiant purity and sacred brilliance, lightly",
+    "description": "Lesser Bright Drip mends a single ally as a narrow jet of a shining ray, like a racing brook. It mends body and spirit with soothing radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5467,7 +5467,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Bright Pin strikes a single foe with radiant purity and sacred brilliance, lightly",
+    "description": "Bright Pin strikes a single foe as a palm-sized orb of a shining ray, like a sling-stone. It bursts forth in pressing blinding radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5499,7 +5499,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Lesser Shining Rill restores a single ally with radiant purity and sacred brilliance, lightly",
+    "description": "Lesser Shining Rill mends a single ally as a narrow jet of a shining ray, like a racing brook. It mends body and spirit with soothing radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5546,7 +5546,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Lay of Radiant suffuses the party with radiant purity and sacred brilliance, ",
+    "description": "Lay of Radiant bolsters the party as a sword-length cleave of a radiant glow, like a seasoned swordsman's cut. It wraps allies in steady halos of grace.",
     "lineage": {
       "isChant": true,
       "isDance": false,
@@ -5586,7 +5586,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Light Stream restores a single ally with radiant purity and sacred brilliance, ",
+    "description": "Light Stream mends a single ally as a surging stream of a radiant glow, like a river in spate. It mends body and spirit with steady radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5632,7 +5632,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Light Stream commands the party with radiant purity and sacred brilliance, ",
+    "description": "Light Stream commands the party as a surging stream of a radiant glow, like a river in spate. It rallies loyal luminous heralds.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -5677,7 +5677,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Deep Dawning Flood restores a single ally with radiant purity and sacred brilliance, powerfully",
+    "description": "Deep Dawning Flood mends a single ally as a cresting torrent of a blazing dawn, like a crashing waterfall. It mends body and spirit with reviving radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5717,7 +5717,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Greater Sunlit Star strikes a single foe with radiant purity and sacred brilliance, powerfully",
+    "description": "Greater Sunlit Star strikes a single foe as a shield-sized globe of a blazing dawn, like a battering ram. It bursts forth in surging blinding radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5756,7 +5756,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Greater Sunlit Deluge restores a single ally with radiant purity and sacred brilliance, powerfully",
+    "description": "Greater Sunlit Deluge mends a single ally as a cresting torrent of a blazing dawn, like a crashing waterfall. It mends body and spirit with reviving radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5804,7 +5804,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Grand Solar Maelstrom binds all enemies in range with radiant purity and sacred brilliance, overwhelmingly",
+    "description": "Grand Solar Maelstrom binds all enemies in range as a sweeping flood of a solar flare, like a bursting dam. It brands them with ironclad sigils that refuse to fade.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5851,7 +5851,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Cantata of Solar suffuses the party with radiant purity and sacred brilliance, overwhelmingly",
+    "description": "Cantata of Solar bolsters the party as a giant-hewn cleaver of a solar flare, like a headsman's axe. It wraps allies in radiant halos of grace.",
     "lineage": {
       "isChant": true,
       "isDance": false,
@@ -5891,7 +5891,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Seraphic Maelstrom restores a single ally with radiant purity and sacred brilliance, with mythic force",
+    "description": "Seraphic Maelstrom mends a single ally as a world-drowning deluge of a celestial judgment, like the wrath of a sea. It mends body and spirit with miraculous radiance.",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5931,7 +5931,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Dim Pellet strikes a single foe with devouring shadow and creeping entropy, faintly",
+    "description": "Dim Pellet strikes a single foe as a marble-sized bead of a dim shadow, like a tossed pebble. It swallows light in faint creeping gloom.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -5970,7 +5970,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Dim Shard bolsters the caster with devouring shadow and creeping entropy, faintly"
+    "description": "Faint Dim Shard bolsters the caster as a razor-slim shard of a dim shadow, like a barber's razor. It shrouds companions beneath gentle veils of shadow."
   },
   {
     "id": "dark:enfeeblement:MINOR:143",
@@ -6012,7 +6012,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Dim Glimmer saps a single foe with devouring shadow and creeping entropy, faintly",
+    "description": "Faint Dim Glimmer saps a single foe as a pin-thin gleam of a dim shadow, like a needle of light. It bleeds courage with subtle whispering dread.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6053,7 +6053,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Dim Drip binds all enemies in range with devouring shadow and creeping entropy, faintly",
+    "description": "Dim Drip binds all enemies in range as a thread-thin rill of a dim shadow, like a bucket flung from the walls. It casts light shackles of shadow about them.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6085,7 +6085,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Dusky Drip restores a single ally with devouring shadow and creeping entropy, faintly",
+    "description": "Dusky Drip mends a single ally as a thread-thin rill of a dim shadow, like a bucket flung from the walls. It stitches twilight veils into gentle wards around the wounded.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6124,7 +6124,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Dim Rill commands the party with devouring shadow and creeping entropy, faintly",
+    "description": "Faint Dim Rill commands the party as a thread-thin rill of a dim shadow, like a bucket flung from the walls. It ushers modest shades sworn to obedience.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -6177,7 +6177,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Dusky Puff saps a single foe with devouring shadow and creeping entropy, faintly",
+    "description": "Dusky Puff saps a single foe as a puff of force of a dim shadow, like a powder flash. It bleeds courage with subtle whispering dread.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6216,7 +6216,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Dim Drip commands the party with devouring shadow and creeping entropy, faintly",
+    "description": "Dim Drip commands the party as a thread-thin rill of a dim shadow, like a bucket flung from the walls. It ushers modest shades sworn to obedience.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -6269,7 +6269,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Umbral Flare saps a single foe with devouring shadow and creeping entropy, lightly",
+    "description": "Umbral Flare saps a single foe as a arrow-straight bolt of a creeping gloom, like a hunter's arrow. It bleeds courage with persistent whispering dread.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6308,7 +6308,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Shadowed Shard bolsters the caster with devouring shadow and creeping entropy, lightly"
+    "description": "Shadowed Shard bolsters the caster as a knife-edged arc of a creeping gloom, like a duelist's knife. It shrouds companions beneath heartening veils of shadow."
   },
   {
     "id": "dark:enfeeblement:LESSER:151",
@@ -6350,7 +6350,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Shadowed Puff saps a single foe with devouring shadow and creeping entropy, lightly",
+    "description": "Shadowed Puff saps a single foe as a detonating wave of a creeping gloom, like a blasting charge. It bleeds courage with persistent whispering dread.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6398,7 +6398,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Dark Stream binds all enemies in range with devouring shadow and creeping entropy, ",
+    "description": "Dark Stream binds all enemies in range as a surging stream of a heavy darkness, like a river in spate. It casts firm shackles of shadow about them.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6445,7 +6445,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Dark Ray saps a single foe with devouring shadow and creeping entropy, ",
+    "description": "Dark Ray saps a single foe as a focused beam of a heavy darkness, like a siege torch. It bleeds courage with withering whispering dread.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -6497,7 +6497,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Dark Spout commands the party with devouring shadow and creeping entropy, ",
+    "description": "Dark Spout commands the party as a surging stream of a heavy darkness, like a river in spate. It ushers loyal shades sworn to obedience.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -6550,7 +6550,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Stygian Harpoon saps a single foe with devouring shadow and creeping entropy, powerfully",
+    "description": "Stygian Harpoon saps a single foe as a tilting lance of a choking night, like a charging knight's lance. It bleeds courage with debilitating whispering dread.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -6602,7 +6602,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Deep Core bolsters the caster with devouring shadow and creeping entropy, powerfully"
+    "description": "Deep Core bolsters the caster as a greatblade sweep of a choking night, like a reaper's scythe. It shrouds companions beneath vigorous veils of shadow."
   },
   {
     "id": "dark:enfeeblement:GREATER:157",
@@ -6644,7 +6644,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Stygian Starshot saps a single foe with devouring shadow and creeping entropy, powerfully",
+    "description": "Stygian Starshot saps a single foe as a sunlance of a choking night, like a lightning lance. It bleeds courage with debilitating whispering dread.",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -6690,7 +6690,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Deep Deep Harpoon strikes a single foe with devouring shadow and creeping entropy, powerfully",
+    "description": "Deep Deep Harpoon strikes a single foe as a tilting lance of a choking night, like a charging knight's lance. It swallows light in surging creeping gloom.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6738,7 +6738,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Utter Utter Maelstrom binds all enemies in range with devouring shadow and creeping entropy, overwhelmingly",
+    "description": "Utter Utter Maelstrom binds all enemies in range as a sweeping flood of an abyssal void, like a bursting dam. It casts ironclad shackles of shadow about them.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6785,7 +6785,7 @@ export const SPELLBOOK = [
         "duration": 18
       }
     ],
-    "description": "Null Starsear saps a single foe with devouring shadow and creeping entropy, with mythic force",
+    "description": "Null Starsear saps a single foe as a world-cleaving ray of eternal nightfall, like judgment from the heavens. It bleeds courage with soul-deep whispering dread.",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
