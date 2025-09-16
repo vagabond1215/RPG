@@ -173,6 +173,49 @@
     "size_class": "medium"
   },
   {
+    "id": "alligator",
+    "common_name": "Alligator",
+    "taxon_group": "reptile",
+    "regions": [
+      "aquatic",
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "swamps",
+      "rivers"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "hide",
+        "harvest_method": "wild"
+      },
+      {
+        "type": "tooth",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the aquatic and wetlands transitional realms, where the swamps and rivers stretch far and wide, there dwells the Alligator, a reptile of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn hide and tooth, which merchants and craftsmen prize. Thus does the Alligator move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "allis-shad",
     "common_name": "Allis shad",
     "taxon_group": "fish",
@@ -207,6 +250,48 @@
     ],
     "gendered": {},
     "narrative": "In the aquatic realms, where the open ocean stretch far and wide, there dwells the Allis shad, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Allis shad move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "alpaca",
+    "common_name": "Alpaca",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland",
+      "farmland"
+    ],
+    "diet": [
+      "herbivore",
+      "grazer"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "sheep wool",
+        "notes": "Shorn into soft fiber",
+        "harvest_method": "domesticated",
+        "yield_unit": "kg",
+        "avg_yield": 3
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the grassland and farmland stretch far and wide, there dwells the Alpaca, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn sheep wool, which merchants and craftsmen prize. Thus does the Alpaca move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "alpine-ibex",
@@ -586,6 +671,45 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Ant, a insect of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Ant move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "antelope",
+    "common_name": "Antelope",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "savanna",
+      "grassland"
+    ],
+    "diet": [
+      "herbivore",
+      "grazer"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "hide",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the savanna and grassland stretch far and wide, there dwells the Antelope, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn hide, which merchants and craftsmen prize. Thus does the Antelope move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "arctic_ground_squirrel",
     "common_name": "Arctic Ground Squirrel",
     "taxon_group": "mammal",
@@ -872,6 +996,35 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Axolotl, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Axolotl move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "baboon",
+    "common_name": "Baboon",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "savanna",
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the savanna and forest stretch far and wide, there dwells the Baboon, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Baboon move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "bactrian-camel",
@@ -1246,6 +1399,35 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the limestone caves stretch far and wide, there dwells the Bat, a mammal of note. It keeps to a insectivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Bat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "beagle",
+    "common_name": "Beagle",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Beagle, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Beagle move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "bear",
@@ -1726,6 +1908,38 @@
     "size_class": "tiny"
   },
   {
+    "id": "boxer_dog",
+    "common_name": "Boxer Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Boxer Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is given to fury when roused, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Boxer Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Boxer"
+    ]
+  },
+  {
     "id": "brill",
     "common_name": "Brill",
     "taxon_group": "fish",
@@ -1762,6 +1976,66 @@
     "narrative": "In the aquatic realms, where the open ocean stretch far and wide, there dwells the Brill, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Brill move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "broadtail_coon_cat",
+    "common_name": "Broadtail Coon Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Broadtail Coon Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Broadtail Coon Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Maine Coon"
+    ]
+  },
+  {
+    "id": "bulldog",
+    "common_name": "Bulldog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Bulldog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Bulldog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "burbot",
     "common_name": "Burbot",
     "taxon_group": "fish",
@@ -1792,6 +2066,43 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the aquatic realms, where the rivers stretch far and wide, there dwells the Burbot, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Burbot move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "burrowing_groundhog",
+    "common_name": "Burrowing Groundhog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland",
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the grassland and farmland stretch far and wide, there dwells the Burrowing Groundhog, a mammal of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Burrowing Groundhog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Ground Hog",
+      "Woodchuck"
+    ]
   },
   {
     "id": "bustard",
@@ -2466,7 +2777,9 @@
     },
     "narrative": "In the terrestrial realms, where the farmland and grassland stretch far and wide, there dwells the Cattle, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat and milk, ever mindful it must be beef roasted or salted; milk drunk fresh or soured. From its form are drawn meat, milk and hide, which merchants and craftsmen prize. Thus does the Cattle move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
     "alt_names": [
-      "Cow"
+      "Cow",
+      "Bull",
+      "Ox"
     ],
     "food_sources": [
       "pasture grasses",
@@ -2487,6 +2800,34 @@
       "wool_shearing_cycle": ""
     },
     "butchering_age": "2 years"
+  },
+  {
+    "id": "chameleon",
+    "common_name": "Chameleon",
+    "taxon_group": "reptile",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Chameleon, a reptile of note. It keeps to a insectivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Chameleon move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "chamois",
@@ -2659,6 +3000,34 @@
     ]
   },
   {
+    "id": "chimpanzee",
+    "common_name": "Chimpanzee",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Chimpanzee, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Chimpanzee move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "chinchilla",
     "common_name": "Chinchilla",
     "taxon_group": "other",
@@ -2689,6 +3058,39 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Chinchilla, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Chinchilla move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "chipmunk",
+    "common_name": "Chipmunk",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "hills"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest and hills stretch far and wide, there dwells the Chipmunk, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Chipmunk move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "chital",
@@ -2802,6 +3204,38 @@
     "size_class": "small"
   },
   {
+    "id": "city_terrier_dog",
+    "common_name": "City Terrier Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the City Terrier Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the City Terrier Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Boston Terrier"
+    ]
+  },
+  {
     "id": "civet",
     "common_name": "Civet",
     "taxon_group": "mammal",
@@ -2864,6 +3298,37 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the aquatic realms, where the ocean shores stretch far and wide, there dwells the Clam, a mollusk of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Clam move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "classic_shorthair_cat",
+    "common_name": "Classic Shorthair Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Classic Shorthair Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Classic Shorthair Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "American Shorthair"
+    ]
   },
   {
     "id": "coati",
@@ -3024,6 +3489,110 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Coelacanth, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Coelacanth move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "common_fish",
+    "common_name": "Common Fish",
+    "taxon_group": "fish",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "rivers",
+      "lakes"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the aquatic realms, where the rivers and lakes stretch far and wide, there dwells the Common Fish, a fish of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Common Fish move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Fish"
+    ]
+  },
+  {
+    "id": "common_lizard",
+    "common_name": "Common Lizard",
+    "taxon_group": "reptile",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "semi_arid_scrublands"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest and semi arid scrublands stretch far and wide, there dwells the Common Lizard, a reptile of note. It keeps to a insectivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Common Lizard move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Lizard"
+    ]
+  },
+  {
+    "id": "common_monkey",
+    "common_name": "Common Monkey",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "tropical_rainforest",
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the tropical rainforest and forest stretch far and wide, there dwells the Common Monkey, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Common Monkey move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Monkey"
+    ]
   },
   {
     "id": "common-swift",
@@ -3236,6 +3805,81 @@
     "narrative": "In the coastal realms, where the ocean shores stretch far and wide, there dwells the Cormorant, a bird of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Cormorant move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "cougar",
+    "common_name": "Cougar",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "montane_forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "hide",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest and montane forest stretch far and wide, there dwells the Cougar, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn hide, which merchants and craftsmen prize. Thus does the Cougar move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Puma"
+    ]
+  },
+  {
+    "id": "coyote",
+    "common_name": "Coyote",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland",
+      "semi_arid_scrublands"
+    ],
+    "diet": [
+      "omnivore",
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the grassland and semi arid scrublands stretch far and wide, there dwells the Coyote, a mammal of note. It keeps to a omnivore and carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Coyote move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "crab",
     "common_name": "Crab",
     "taxon_group": "crustacean",
@@ -3330,6 +3974,45 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the wetlands transitional realms, where the marshes stretch far and wide, there dwells the Crane fly, a insect of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Crane fly move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "crocodile",
+    "common_name": "Crocodile",
+    "taxon_group": "reptile",
+    "regions": [
+      "aquatic",
+      "coastal"
+    ],
+    "habitats": [
+      "swamps",
+      "rivers"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "hide",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the aquatic and coastal realms, where the swamps and rivers stretch far and wide, there dwells the Crocodile, a reptile of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn hide, which merchants and craftsmen prize. Thus does the Crocodile move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "crow",
@@ -3429,6 +4112,37 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Cuckoo, a bird of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Cuckoo move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "curled_rex_cat",
+    "common_name": "Curled Rex Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Curled Rex Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Curled Rex Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Devon Rex"
+    ]
   },
   {
     "id": "curlew",
@@ -3565,6 +4279,35 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the aquatic realms, where the rivers stretch far and wide, there dwells the Dace, a fish of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Dace move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "dachshund",
+    "common_name": "Dachshund",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Dachshund, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Dachshund move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "danakil_salt_fox",
@@ -3801,7 +4544,9 @@
       "collective": "herd"
     },
     "narrative": "In the terrestrial realms, where the forest and hills stretch far and wide, there dwells the Red Deer, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be venison roasted or smoked. From its form are drawn meat, hide and antler, which merchants and craftsmen prize. Thus does the Red Deer move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
-    "alt_names": [],
+    "alt_names": [
+      "Deer"
+    ],
     "food_sources": [
       "grass",
       "leaves",
@@ -4359,6 +5104,55 @@
     "size_class": "small"
   },
   {
+    "id": "dromedary_camel",
+    "common_name": "Dromedary Camel",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "hot_desert",
+      "semi_arid_scrublands"
+    ],
+    "diet": [
+      "herbivore",
+      "browser"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat",
+        "milk"
+      ],
+      "preparation_notes": "Cook thoroughly; milk soured or boiled."
+    },
+    "byproducts": [
+      {
+        "type": "milk",
+        "harvest_method": "domesticated",
+        "yield_unit": "L",
+        "avg_yield": 5
+      },
+      {
+        "type": "hide",
+        "harvest_method": "domesticated"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the hot desert and semi arid scrublands stretch far and wide, there dwells the Dromedary Camel, a mammal of note. It keeps to a herbivore and browser fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat and milk, ever mindful it must be cooked thoroughly; milk soured or boiled. From its form are drawn milk and hide, which merchants and craftsmen prize. Thus does the Dromedary Camel move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Dromedary"
+    ]
+  },
+  {
     "id": "duck",
     "common_name": "Duck",
     "taxon_group": "bird",
@@ -4838,6 +5632,37 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Electric ray, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Electric ray move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "elegant_temple_cat",
+    "common_name": "Elegant Temple Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Elegant Temple Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Elegant Temple Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Siamese"
+    ]
   },
   {
     "id": "elephant",
@@ -5549,6 +6374,38 @@
     "narrative": "In the aquatic realms, where the ocean shores stretch far and wide, there dwells the Flounder, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Flounder move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "fluffy_spitz_dog",
+    "common_name": "Fluffy Spitz Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Fluffy Spitz Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Fluffy Spitz Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Pomeranian"
+    ]
+  },
+  {
     "id": "flying-squirrel",
     "common_name": "Flying squirrel",
     "taxon_group": "other",
@@ -5579,6 +6436,37 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Flying squirrel, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Flying squirrel move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "folded_ear_cat",
+    "common_name": "Folded Ear Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Folded Ear Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Folded Ear Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Scottish Fold"
+    ]
   },
   {
     "id": "fox",
@@ -5966,6 +6854,37 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Genet, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Genet move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "gentle_ragdoll_cat",
+    "common_name": "Gentle Ragdoll Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Gentle Ragdoll Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Gentle Ragdoll Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Ragdoll"
+    ]
+  },
+  {
     "id": "gerenuk",
     "common_name": "Gerenuk",
     "taxon_group": "other",
@@ -6028,6 +6947,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Gharial, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Gharial move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "giant_guardian_dog",
+    "common_name": "Giant Guardian Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Giant Guardian Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Giant Guardian Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Great Dane"
+    ]
   },
   {
     "id": "giant-anteater",
@@ -6158,6 +7109,39 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Gila monster, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Gila monster move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "giraffe",
+    "common_name": "Giraffe",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "savanna"
+    ],
+    "diet": [
+      "herbivore",
+      "browser"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the savanna stretch far and wide, there dwells the Giraffe, a mammal of note. It keeps to a herbivore and browser fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Giraffe move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "goat",
     "common_name": "Goat",
     "taxon_group": "mammal",
@@ -6277,6 +7261,35 @@
       "desert moths"
     ],
     "size_class": "tiny"
+  },
+  {
+    "id": "golden_retriever",
+    "common_name": "Golden Retriever",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Golden Retriever, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Golden Retriever move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "golden-jackal",
@@ -6502,6 +7515,68 @@
     "narrative": "In the aquatic realms, where the ocean shores stretch far and wide, there dwells the Goose barnacle, a crustacean of note. It keeps to a detritivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Goose barnacle move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "gopher",
+    "common_name": "Gopher",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland",
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the grassland and farmland stretch far and wide, there dwells the Gopher, a mammal of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Gopher move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "gorilla",
+    "common_name": "Gorilla",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore",
+      "browser"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Gorilla, a mammal of note. It keeps to a herbivore and browser fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Gorilla move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "goshawk",
     "common_name": "Goshawk",
     "taxon_group": "bird",
@@ -6564,6 +7639,37 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the aquatic realms, where the rivers stretch far and wide, there dwells the Grayling, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Grayling move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "great_ape",
+    "common_name": "Great Ape",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Great Ape, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Great Ape move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Ape"
+    ]
   },
   {
     "id": "great-spotted-woodpecker",
@@ -6666,6 +7772,35 @@
     "narrative": "In the aquatic realms, where the open ocean stretch far and wide, there dwells the Grey mullet, a fish of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Grey mullet move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "greyhound",
+    "common_name": "Greyhound",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Greyhound, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Greyhound move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "greylag-goose",
     "common_name": "Greylag goose",
     "taxon_group": "bird",
@@ -6696,6 +7831,51 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the marshes stretch far and wide, there dwells the Greylag goose, a bird of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Greylag goose move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "grizzled_bear",
+    "common_name": "Grizzled Bear",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "montane_forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "hide",
+        "harvest_method": "wild"
+      },
+      {
+        "type": "fat",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest and montane forest stretch far and wide, there dwells the Grizzled Bear, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn hide and fat, which merchants and craftsmen prize. Thus does the Grizzled Bear move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Grizzly Bear"
+    ]
   },
   {
     "id": "grouse",
@@ -6762,6 +7942,38 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Guanaco, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Guanaco move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "guardian_pinscher_dog",
+    "common_name": "Guardian Pinscher Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Guardian Pinscher Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Guardian Pinscher Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Doberman Pinscher"
+    ]
+  },
+  {
     "id": "gudgeon",
     "common_name": "Gudgeon",
     "taxon_group": "fish",
@@ -6796,6 +8008,39 @@
     ],
     "gendered": {},
     "narrative": "In the aquatic realms, where the rivers stretch far and wide, there dwells the Gudgeon, a fish of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Gudgeon move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "guinea_pig",
+    "common_name": "Guinea Pig",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Guinea Pig, a mammal of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Guinea Pig move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "guinea-fowl",
@@ -7025,6 +8270,37 @@
     "size_class": "huge"
   },
   {
+    "id": "hairless_sphynx_cat",
+    "common_name": "Hairless Sphynx Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Hairless Sphynx Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Hairless Sphynx Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Sphynx"
+    ]
+  },
+  {
     "id": "hake",
     "common_name": "Hake",
     "taxon_group": "fish",
@@ -7123,6 +8399,34 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Hammerhead shark, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Hammerhead shark move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "hamster",
+    "common_name": "Hamster",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Hamster, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Hamster move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "hare",
@@ -7317,6 +8621,38 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Hedgehog, a mammal of note. It keeps to a insectivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Hedgehog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "herding_shepherd_dog",
+    "common_name": "Herding Shepherd Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Herding Shepherd Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Herding Shepherd Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Australian Shepherd"
+    ]
+  },
+  {
     "id": "heron",
     "common_name": "Heron",
     "taxon_group": "bird",
@@ -7423,6 +8759,42 @@
     "size_class": "medium"
   },
   {
+    "id": "hippopotamus",
+    "common_name": "Hippopotamus",
+    "taxon_group": "mammal",
+    "regions": [
+      "aquatic",
+      "terrestrial"
+    ],
+    "habitats": [
+      "rivers",
+      "lakes",
+      "swamps"
+    ],
+    "diet": [
+      "herbivore",
+      "grazer"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the aquatic and terrestrial realms, where the rivers, lakes and swamps stretch far and wide, there dwells the Hippopotamus, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Hippopotamus move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "honeybee",
     "common_name": "Honeybee",
     "taxon_group": "insect",
@@ -7519,6 +8891,57 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Hoopoe, a bird of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Hoopoe move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "horned_buffalo",
+    "common_name": "Horned Buffalo",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "marshes",
+      "grassland"
+    ],
+    "diet": [
+      "herbivore",
+      "grazer"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat",
+        "milk"
+      ],
+      "preparation_notes": "Cook thoroughly; milk simmered before drinking."
+    },
+    "byproducts": [
+      {
+        "type": "milk",
+        "harvest_method": "domesticated",
+        "yield_unit": "L",
+        "avg_yield": 8
+      },
+      {
+        "type": "hide",
+        "harvest_method": "either",
+        "yield_unit": "kg",
+        "avg_yield": 25
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the marshes and grassland stretch far and wide, there dwells the Horned Buffalo, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat and milk, ever mindful it must be cooked thoroughly; milk simmered before drinking. From its form are drawn milk and hide, which merchants and craftsmen prize. Thus does the Horned Buffalo move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Buffalo"
+    ]
+  },
+  {
     "id": "horse",
     "common_name": "Horse",
     "taxon_group": "mammal",
@@ -7551,7 +8974,10 @@
     },
     "byproducts": [],
     "gendered": {},
-    "narrative": "In the terrestrial realms, where the farmland stretch far and wide, there dwells the Horse, a mammal of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Horse move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+    "narrative": "In the terrestrial realms, where the farmland stretch far and wide, there dwells the Horse, a mammal of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Horse move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Mustang"
+    ]
   },
   {
     "id": "horsefish",
@@ -8123,6 +9549,40 @@
     "size_class": "large"
   },
   {
+    "id": "jackal",
+    "common_name": "Jackal",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "semi_arid_scrublands",
+      "savanna"
+    ],
+    "diet": [
+      "omnivore",
+      "scavenger"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the semi arid scrublands and savanna stretch far and wide, there dwells the Jackal, a mammal of note. It keeps to a omnivore and scavenger fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Jackal move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "jackdaw",
     "common_name": "Jackdaw",
     "taxon_group": "bird",
@@ -8153,6 +9613,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Jackdaw, a bird of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Jackdaw move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "jaguar",
+    "common_name": "Jaguar",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "tropical_rainforest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the tropical rainforest stretch far and wide, there dwells the Jaguar, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Jaguar move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "javan_rainforest_peacock",
@@ -8728,6 +10220,35 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Kiwi, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Kiwi move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "koala",
+    "common_name": "Koala",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore",
+      "browser"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Koala, a mammal of note. It keeps to a herbivore and browser fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Koala move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "komandor_fulmar",
@@ -9318,6 +10839,48 @@
     "narrative": "In the terrestrial realms, where the grassland stretch far and wide, there dwells the Lion, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Lion move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "llama",
+    "common_name": "Llama",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "grassland",
+      "alpine_tundra"
+    ],
+    "diet": [
+      "herbivore",
+      "grazer"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "sheep wool",
+        "notes": "Long fibers spun into cloth",
+        "harvest_method": "domesticated",
+        "yield_unit": "kg",
+        "avg_yield": 4
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the grassland and alpine tundra stretch far and wide, there dwells the Llama, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn sheep wool, which merchants and craftsmen prize. Thus does the Llama move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "loach",
     "common_name": "Loach",
     "taxon_group": "fish",
@@ -9456,6 +11019,70 @@
       "flooded figs"
     ],
     "size_class": "huge"
+  },
+  {
+    "id": "lowland_corgi_dog",
+    "common_name": "Lowland Corgi Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Lowland Corgi Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Lowland Corgi Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Pembroke Welsh Corgi"
+    ]
+  },
+  {
+    "id": "lowland_hound_dog",
+    "common_name": "Lowland Hound Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Lowland Hound Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Lowland Hound Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Basset Hound"
+    ]
   },
   {
     "id": "lynx",
@@ -9688,6 +11315,34 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Manatee, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Manatee move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "mandrill",
+    "common_name": "Mandrill",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "tropical_rainforest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the tropical rainforest stretch far and wide, there dwells the Mandrill, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Mandrill move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "mangrove_saltwater_crocodile",
     "common_name": "Mangrove Saltwater Crocodile",
     "taxon_group": "reptile",
@@ -9768,6 +11423,34 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Markhor, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Markhor move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "marmoset",
+    "common_name": "Marmoset",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "tropical_rainforest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the tropical rainforest stretch far and wide, there dwells the Marmoset, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Marmoset move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "marmot",
@@ -10192,6 +11875,37 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Moray eel, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Moray eel move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "mosscoat_forest_cat",
+    "common_name": "Mosscoat Forest Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Mosscoat Forest Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Mosscoat Forest Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Norwegian Forest Cat"
+    ]
+  },
+  {
     "id": "mouflon",
     "common_name": "Mouflon",
     "taxon_group": "mammal",
@@ -10226,6 +11940,45 @@
     ],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the hills stretch far and wide, there dwells the Mouflon, a mammal of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Mouflon move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "mountain_goat",
+    "common_name": "Mountain Goat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "alpine_tundra",
+      "cliffs"
+    ],
+    "diet": [
+      "herbivore",
+      "browser"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "hide",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the alpine tundra and cliffs stretch far and wide, there dwells the Mountain Goat, a mammal of note. It keeps to a herbivore and browser fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn hide, which merchants and craftsmen prize. Thus does the Mountain Goat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "mouse",
@@ -10431,6 +12184,46 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Muskox, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Muskox move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "muskrat",
+    "common_name": "Muskrat",
+    "taxon_group": "mammal",
+    "regions": [
+      "aquatic",
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "swamps",
+      "marshes"
+    ],
+    "diet": [
+      "herbivore",
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "fur",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the aquatic and wetlands transitional realms, where the swamps and marshes stretch far and wide, there dwells the Muskrat, a mammal of note. It keeps to a herbivore and omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn fur, which merchants and craftsmen prize. Thus does the Muskrat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "mussel",
     "common_name": "Mussel",
     "taxon_group": "mollusk",
@@ -10609,6 +12402,35 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Nautilus, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Nautilus move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "newt",
+    "common_name": "Newt",
+    "taxon_group": "amphibian",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "swamps",
+      "streams"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the wetlands transitional realms, where the swamps and streams stretch far and wide, there dwells the Newt, a amphibian of note. It keeps to a insectivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Newt move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "nightingale",
     "common_name": "Nightingale",
     "taxon_group": "bird",
@@ -10718,6 +12540,38 @@
     "size_class": "large"
   },
   {
+    "id": "northern_husky_dog",
+    "common_name": "Northern Husky Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Northern Husky Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Northern Husky Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Siberian Husky"
+    ]
+  },
+  {
     "id": "numbat",
     "common_name": "Numbat",
     "taxon_group": "other",
@@ -10791,6 +12645,38 @@
       "lotus leaves"
     ],
     "size_class": "large"
+  },
+  {
+    "id": "ocelot",
+    "common_name": "Ocelot",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "tropical_rainforest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the tropical rainforest stretch far and wide, there dwells the Ocelot, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Ocelot move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "octopus",
@@ -11110,6 +12996,40 @@
     "size_class": "huge"
   },
   {
+    "id": "oryx",
+    "common_name": "Oryx",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "hot_desert",
+      "semi_arid_scrublands"
+    ],
+    "diet": [
+      "herbivore",
+      "grazer"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the hot desert and semi arid scrublands stretch far and wide, there dwells the Oryx, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Oryx move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "osprey",
     "common_name": "Osprey",
     "taxon_group": "bird",
@@ -11238,6 +13158,36 @@
     "narrative": "In the aquatic realms, where the ocean shores stretch far and wide, there dwells the Oyster, a mollusk of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Oyster move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "panda",
+    "common_name": "Panda",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "temperate_rainforest",
+      "montane_forest"
+    ],
+    "diet": [
+      "herbivore",
+      "browser"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the temperate rainforest and montane forest stretch far and wide, there dwells the Panda, a mammal of note. It keeps to a herbivore and browser fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Panda move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "pangolin",
     "common_name": "Pangolin",
     "taxon_group": "other",
@@ -11268,6 +13218,69 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Pangolin, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Pangolin move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "parakeet",
+    "common_name": "Parakeet",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and forest stretch far and wide, there dwells the Parakeet, a bird of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Parakeet move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Parakeet"
+    ]
+  },
+  {
+    "id": "parrot",
+    "common_name": "Parrot",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Parrot, a bird of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Parrot move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Parrot"
+    ]
   },
   {
     "id": "partridge",
@@ -11762,7 +13775,8 @@
     "narrative": "In the terrestrial realms, where the farmland and forest stretch far and wide, there dwells the Domestic Pig, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat and fat, ever mindful it must be cooked thoroughly to prevent trichinosis. From its form are drawn meat, fat and hide, which merchants and craftsmen prize. Thus does the Domestic Pig move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
     "alt_names": [
       "Hog",
-      "Swine"
+      "Swine",
+      "Pig"
     ],
     "food_sources": [
       "acorns",
@@ -11954,6 +13968,44 @@
     "narrative": "In the aquatic realms, where the open ocean stretch far and wide, there dwells the Plaice, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Plaice move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "plains_gnu",
+    "common_name": "Plains Gnu",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "savanna",
+      "grassland"
+    ],
+    "diet": [
+      "herbivore",
+      "grazer"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the savanna and grassland stretch far and wide, there dwells the Plains Gnu, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Plains Gnu move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Gnu",
+      "Wildebeest"
+    ]
+  },
+  {
     "id": "platypus",
     "common_name": "Platypus",
     "taxon_group": "other",
@@ -11984,6 +14036,81 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Platypus, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Platypus move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "plush_shorthair_cat",
+    "common_name": "Plush Shorthair Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Plush Shorthair Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Plush Shorthair Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "British Shorthair"
+    ]
+  },
+  {
+    "id": "polar_bear",
+    "common_name": "Polar Bear",
+    "taxon_group": "mammal",
+    "regions": [
+      "polar_ice",
+      "coastal"
+    ],
+    "habitats": [
+      "pack_ice",
+      "ice_shelves"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat",
+        "fat"
+      ],
+      "preparation_notes": "Cook thoroughly; liver avoided for toxicity."
+    },
+    "byproducts": [
+      {
+        "type": "hide",
+        "harvest_method": "wild"
+      },
+      {
+        "type": "fat",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the polar ice and coastal realms, where the pack ice and ice shelves stretch far and wide, there dwells the Polar Bear, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat and fat, ever mindful it must be cooked thoroughly; liver avoided for toxicity. From its form are drawn hide and fat, which merchants and craftsmen prize. Thus does the Polar Bear move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "polecat",
@@ -12054,6 +14181,35 @@
     "narrative": "In the aquatic realms, where the open ocean stretch far and wide, there dwells the Pollock, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Pollock move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "poodle",
+    "common_name": "Poodle",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Poodle, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Poodle move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "porcupine",
     "common_name": "Porcupine",
     "taxon_group": "mammal",
@@ -12084,6 +14240,72 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Porcupine, a mammal of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Porcupine move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "porpoise",
+    "common_name": "Porpoise",
+    "taxon_group": "mammal",
+    "regions": [
+      "aquatic"
+    ],
+    "habitats": [
+      "open_ocean",
+      "ocean_shores"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the aquatic realms, where the open ocean and ocean shores stretch far and wide, there dwells the Porpoise, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Porpoise move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "prairie_dog",
+    "common_name": "Prairie Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "prairie",
+      "grassland"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the prairie and grassland stretch far and wide, there dwells the Prairie Dog, a mammal of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Prairie Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "ptarmigan",
@@ -12747,6 +14969,49 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Rhea, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Rhea move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "rhinoceros",
+    "common_name": "Rhinoceros",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "savanna",
+      "grassland"
+    ],
+    "diet": [
+      "herbivore",
+      "grazer"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "horn",
+        "harvest_method": "wild"
+      },
+      {
+        "type": "hide",
+        "harvest_method": "wild"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the savanna and grassland stretch far and wide, there dwells the Rhinoceros, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn horn and hide, which merchants and craftsmen prize. Thus does the Rhinoceros move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "roach",
     "common_name": "Roach",
     "taxon_group": "fish",
@@ -12813,6 +15078,35 @@
     ],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Roe deer, a mammal of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Roe deer move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "rottweiler",
+    "common_name": "Rottweiler",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Rottweiler, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Rottweiler move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "ruaha_squeaker_catfish",
@@ -12925,6 +15219,37 @@
     "size_class": "large"
   },
   {
+    "id": "sable_temple_cat",
+    "common_name": "Sable Temple Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Sable Temple Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Sable Temple Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Burmese"
+    ]
+  },
+  {
     "id": "sahara_addax_caravan",
     "common_name": "Sahara Addax Caravan",
     "taxon_group": "mammal",
@@ -13031,6 +15356,35 @@
     "narrative": "In the terrestrial realms, where the grassland stretch far and wide, there dwells the Saiga antelope, a mammal of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Saiga antelope move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "salamander",
+    "common_name": "Salamander",
+    "taxon_group": "amphibian",
+    "regions": [
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "streams",
+      "swamps"
+    ],
+    "diet": [
+      "insectivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the wetlands transitional realms, where the streams and swamps stretch far and wide, there dwells the Salamander, a amphibian of note. It keeps to a insectivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Salamander move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
     "id": "salmon",
     "common_name": "Salmon",
     "taxon_group": "fish",
@@ -13125,6 +15479,41 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the aquatic realms, where the open ocean stretch far and wide, there dwells the Sardine, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Sardine move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "scaled_reptile",
+    "common_name": "Scaled Reptile",
+    "taxon_group": "reptile",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Scaled Reptile, a reptile of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Scaled Reptile move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Reptile"
+    ]
   },
   {
     "id": "scallop",
@@ -13347,6 +15736,42 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Secretarybird, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Secretarybird move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "shadow_panther",
+    "common_name": "Shadow Panther",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "tropical_rainforest",
+      "forest"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "high"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the tropical rainforest and forest stretch far and wide, there dwells the Shadow Panther, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Shadow Panther move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Panther"
+    ]
+  },
+  {
     "id": "sheep",
     "common_name": "Domestic Sheep",
     "taxon_group": "mammal",
@@ -13414,7 +15839,12 @@
       "collective": "flock"
     },
     "narrative": "In the terrestrial realms, where the farmland, grassland and hills stretch far and wide, there dwells the Domestic Sheep, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat and milk, ever mindful it must be lamb roasted or stewed. From its form are drawn sheep wool, milk and meat, which merchants and craftsmen prize. Thus does the Domestic Sheep move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
-    "alt_names": [],
+    "alt_names": [
+      "Sheep",
+      "Ewe",
+      "Lamb",
+      "Ram"
+    ],
     "food_sources": [
       "pasture grasses",
       "hay",
@@ -13435,6 +15865,35 @@
       "wool_shearing_cycle": "yearly"
     },
     "butchering_age": "1 year"
+  },
+  {
+    "id": "shih_tzu",
+    "common_name": "Shih Tzu",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Shih Tzu, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Shih Tzu move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "shoebill",
@@ -13565,6 +16024,37 @@
     "narrative": "In the aquatic realms, where the ocean shores stretch far and wide, there dwells the Shrimp, a crustacean of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Shrimp move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "silken_palace_cat",
+    "common_name": "Silken Palace Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Silken Palace Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Silken Palace Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Persian (Modern)"
+    ]
+  },
+  {
     "id": "silkworm",
     "common_name": "Silkworm",
     "taxon_group": "insect",
@@ -13591,6 +16081,44 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the farmland stretch far and wide, there dwells the Silkworm, a insect of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Silkworm move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "silver_fox",
+    "common_name": "Silver Fox",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "boreal_forest",
+      "arctic_tundra"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [
+      {
+        "type": "fur",
+        "harvest_method": "either"
+      }
+    ],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the boreal forest and arctic tundra stretch far and wide, there dwells the Silver Fox, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn fur, which merchants and craftsmen prize. Thus does the Silver Fox move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "skua",
@@ -13623,6 +16151,66 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Skua, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Skua move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "skunk",
+    "common_name": "Skunk",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "grassland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the forest and grassland stretch far and wide, there dwells the Skunk, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Skunk move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "slate_blue_cat",
+    "common_name": "Slate Blue Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Slate Blue Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Slate Blue Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Russian Blue"
+    ]
   },
   {
     "id": "sloth",
@@ -13819,6 +16407,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the aquatic realms, where the ocean shores stretch far and wide, there dwells the Sole, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Sole move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "song_canary",
+    "common_name": "Song Canary",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "forest"
+    ],
+    "diet": [
+      "herbivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "none"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and forest stretch far and wide, there dwells the Song Canary, a bird of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a none hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Song Canary move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Canary"
+    ]
   },
   {
     "id": "song-thrush",
@@ -14023,6 +16643,68 @@
     ],
     "gendered": {},
     "narrative": "In the aquatic realms, where the open ocean stretch far and wide, there dwells the Spiny dogfish, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Spiny dogfish move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "spotted_jungle_cat",
+    "common_name": "Spotted Jungle Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Spotted Jungle Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Spotted Jungle Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Bengal"
+    ]
+  },
+  {
+    "id": "spotted_temple_cat",
+    "common_name": "Spotted Temple Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Spotted Temple Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Spotted Temple Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Egyptian Mau"
+    ]
   },
   {
     "id": "sprat",
@@ -14413,6 +17095,38 @@
     "narrative": "In the terrestrial realms, where the lakes stretch far and wide, there dwells the Swan, a bird of note. It keeps to a herbivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Swan move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "talking_mynah_bird",
+    "common_name": "Talking Mynah Bird",
+    "taxon_group": "bird",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "forest"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and forest stretch far and wide, there dwells the Talking Mynah Bird, a bird of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Talking Mynah Bird move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Mynah Bird"
+    ]
+  },
+  {
     "id": "tapir",
     "common_name": "Tapir",
     "taxon_group": "other",
@@ -14646,6 +17360,37 @@
     "narrative": "In the aquatic realms, where the open ocean stretch far and wide, there dwells the Thornback ray, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Thornback ray move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "ticked_companion_cat",
+    "common_name": "Ticked Companion Cat",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban stretch far and wide, there dwells the Ticked Companion Cat, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Ticked Companion Cat move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Abyssinian"
+    ]
+  },
+  {
     "id": "tierra_del_fuego_penguin_fold",
     "common_name": "Tierra del Fuego Penguin Fold",
     "taxon_group": "bird",
@@ -14720,6 +17465,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Tiger, a mammal of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is given to fury when roused, staunch in guarding its bounds, and offers a high hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Tiger move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "tiny_companion_dog",
+    "common_name": "Tiny Companion Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Tiny Companion Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is given to fury when roused, staunch in guarding its bounds, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Tiny Companion Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Chihuahua"
+    ]
   },
   {
     "id": "toad",
@@ -14930,6 +17707,41 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Turkey, a bird of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Turkey move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "turtle",
+    "common_name": "Turtle",
+    "taxon_group": "reptile",
+    "regions": [
+      "aquatic",
+      "wetlands_transitional"
+    ],
+    "habitats": [
+      "rivers",
+      "lakes",
+      "swamps"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the aquatic and wetlands transitional realms, where the rivers, lakes and swamps stretch far and wide, there dwells the Turtle, a reptile of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Turtle move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "turtle-dove",
@@ -15305,6 +18117,38 @@
     "byproducts": [],
     "gendered": {},
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Warthog, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Warthog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
+  },
+  {
+    "id": "water_retriever_dog",
+    "common_name": "Water Retriever Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "low"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Water Retriever Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Water Retriever Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "Labrador Retriever"
+    ]
   },
   {
     "id": "weasel",
@@ -15831,6 +18675,38 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Woodcock, a bird of note. It keeps to a insectivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. From its form are drawn meat, which merchants and craftsmen prize. Thus does the Woodcock move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
+    "id": "working_shepherd_dog",
+    "common_name": "Working Shepherd Dog",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "urban",
+      "farmland"
+    ],
+    "diet": [
+      "omnivore"
+    ],
+    "domestication": {
+      "domesticated": true
+    },
+    "behavior": {
+      "aggressive": true,
+      "territorial": true,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": false
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the urban and farmland stretch far and wide, there dwells the Working Shepherd Dog, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. Long has it abided beside the hearths of humankind, knowing the touch of halter and hand. It is given to fury when roused, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Working Shepherd Dog move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "alt_names": [
+      "German Shepherd"
+    ]
+  },
+  {
     "id": "wren",
     "common_name": "Wren",
     "taxon_group": "bird",
@@ -16156,6 +19032,40 @@
       "wild herbs"
     ],
     "size_class": "medium"
+  },
+  {
+    "id": "zebra",
+    "common_name": "Zebra",
+    "taxon_group": "mammal",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "savanna",
+      "grassland"
+    ],
+    "diet": [
+      "herbivore",
+      "grazer"
+    ],
+    "domestication": {
+      "domesticated": false
+    },
+    "behavior": {
+      "aggressive": false,
+      "territorial": false,
+      "risk_to_humans": "moderate"
+    },
+    "edibility": {
+      "edible": true,
+      "parts": [
+        "meat"
+      ],
+      "preparation_notes": "Cook thoroughly."
+    },
+    "byproducts": [],
+    "gendered": {},
+    "narrative": "In the terrestrial realms, where the savanna and grassland stretch far and wide, there dwells the Zebra, a mammal of note. It keeps to a herbivore and grazer fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a moderate hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Zebra move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
     "id": "zebu",
