@@ -28,6 +28,14 @@ export type SchoolId =
 export type ElementName = Capitalize<ElementId>;
 export type SchoolName = Capitalize<SchoolId>;
 
+export const ALL_SCHOOLS: readonly SchoolId[] = [
+  "destruction",
+  "enhancement",
+  "enfeeblement",
+  "control",
+  "healing",
+] as const;
+
 export type FamilyId =
   | "projectile_sphere"
   | "liquid_flow"
@@ -549,14 +557,14 @@ export class SpellScaler {
 }
 
 export const ELEMENT_SCHOOL_WEIGHTS: Record<ElementId, Partial<Record<SchoolId, number>>> = {
-  fire: { destruction: 70, enfeeblement: 10, enhancement: 10, control: 5, healing: 5 },
-  ice: { control: 45, destruction: 25, enfeeblement: 15, enhancement: 10, healing: 5 },
-  lightning: { destruction: 45, enfeeblement: 25, control: 15, enhancement: 10, healing: 5 },
-  water: { healing: 35, control: 25, destruction: 15, enhancement: 15, enfeeblement: 10 },
-  wind: { control: 35, enfeeblement: 25, destruction: 20, enhancement: 15, healing: 5 },
-  stone: { enhancement: 35, control: 25, destruction: 20, enfeeblement: 10, healing: 10 },
-  light: { healing: 35, enhancement: 25, control: 15, destruction: 15, enfeeblement: 10 },
-  dark: { enfeeblement: 40, control: 25, destruction: 20, enhancement: 10, healing: 5 },
+  fire: { destruction: 9, enfeeblement: 3, enhancement: 2, control: 1 },
+  ice: { control: 9, destruction: 3, enfeeblement: 2, enhancement: 1 },
+  lightning: { destruction: 9, enfeeblement: 3, control: 2, enhancement: 1 },
+  water: { healing: 9, control: 3, destruction: 2, enhancement: 1 },
+  wind: { control: 9, enfeeblement: 3, destruction: 2, enhancement: 1 },
+  stone: { enhancement: 9, control: 3, destruction: 2, enfeeblement: 1 },
+  light: { healing: 9, enhancement: 3, control: 2, destruction: 1 },
+  dark: { enfeeblement: 9, control: 3, destruction: 2, enhancement: 1 },
 };
 
 export const familyFromSchool = (s: SchoolId): Family => {
@@ -899,6 +907,17 @@ export interface PlannedSpec extends CandidateSpec {
   proficiency: number;
 }
 
+const DEFAULT_SCHOOL_PROFICIENCY = 1;
+const DEFAULT_SCHOOL_TIER: Tier = "MINOR";
+
+const createDefaultPlan = (element: ElementId): PlannedSpec[] =>
+  ALL_SCHOOLS.map(school => ({
+    element,
+    school,
+    baseTier: DEFAULT_SCHOOL_TIER,
+    proficiency: DEFAULT_SCHOOL_PROFICIENCY,
+  }));
+
 export const makeSpell = (args: {
   element: ElementId;
   school: SchoolId;
@@ -1144,11 +1163,12 @@ export const buildWeightedPlanForElement = (
 };
 
 const generatePlanForElement = (element: ElementId, total: number, rng: RNG): PlannedSpec[] => {
+  if (total <= 0) return [];
   const seed = Math.floor(rng.next() * 0xffffffff);
   const plan = buildWeightedPlanForElement(element, total, {
-    startProf: 5,
-    endProf: 95,
-    minGap: 4,
+    startProf: 10,
+    endProf: 200,
+    minGap: 6,
     seed,
   });
   return plan.map(spec => ({
@@ -1258,30 +1278,45 @@ const postProcessSpell = (spell: SpellEntry): SpellEntry => {
   return spell;
 };
 
-const buildElementSpellbook = (element: ElementId, total = 18, rngSeed = 0x13572468): SpellEntry[] => {
+const buildElementSpellbook = (element: ElementId, total = 20, rngSeed = 0x13572468): SpellEntry[] => {
   const rng = new SeededRNG(rngSeed ^ element.charCodeAt(0));
-  const plan = generatePlanForElement(element, total, rng);
+  const defaults = createDefaultPlan(element);
+  const remaining = Math.max(0, total - defaults.length);
+  const plan = generatePlanForElement(element, remaining, rng);
   const withSpecials = applySpecials(element, plan);
-  return withSpecials.map(spec => postProcessSpell(
-    makeSpell({
-      element: spec.element,
-      school: spec.school,
-      tier: spec.baseTier,
-      proficiency: spec.proficiency,
-      special: spec.special,
-    }),
-  ));
+  const defaultSpells = defaults.map(spec =>
+    postProcessSpell(
+      makeSpell({
+        element: spec.element,
+        school: spec.school,
+        tier: spec.baseTier,
+        proficiency: spec.proficiency,
+      }),
+    ),
+  );
+  const generatedSpells = withSpecials.map(spec =>
+    postProcessSpell(
+      makeSpell({
+        element: spec.element,
+        school: spec.school,
+        tier: spec.baseTier,
+        proficiency: spec.proficiency,
+        special: spec.special,
+      }),
+    ),
+  );
+  return [...defaultSpells, ...generatedSpells];
 };
 
 const ELEMENT_TOTALS: Record<ElementId, number> = {
-  fire: 18,
-  ice: 18,
-  lightning: 18,
-  water: 18,
-  wind: 18,
-  stone: 18,
-  light: 18,
-  dark: 18,
+  fire: 20,
+  ice: 20,
+  lightning: 20,
+  water: 20,
+  wind: 20,
+  stone: 20,
+  light: 20,
+  dark: 20,
 };
 
 export const generateSpellbook = (): SpellEntry[] => {

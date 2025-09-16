@@ -10,7 +10,7 @@ export const SPELLBOOK = [
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 5,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 10,
@@ -43,21 +43,143 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:healing:MINOR:2",
-    "name": "Faint Ashen Drip",
+    "id": "fire:enhancement:MINOR:2",
+    "name": "Faint Ashen Shard",
+    "element": "Fire",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 10
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": 8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "RestoreMP",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Faint Ashen Shard bolsters the caster with searing heat and ravenous flame, faintly"
+  },
+  {
+    "id": "fire:enfeeblement:MINOR:3",
+    "name": "Ashen Glimmer",
+    "element": "Fire",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
+    "status": {
+      "name": "Paralyze",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Paralyze",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Ashen Glimmer saps a single foe with searing heat and ravenous flame, faintly",
+    "statusOnCrit": {
+      "name": "Ignite",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "fire:control:MINOR:4",
+    "name": "Faint Ember Rill",
+    "element": "Fire",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 6,
+    "basePower": 2,
+    "status": {
+      "name": "Stun",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Stun",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -8,
+        "duration": 10
+      }
+    ],
+    "description": "Faint Ember Rill binds all enemies in range with searing heat and ravenous flame, faintly",
+    "statusOnCrit": {
+      "name": "Ignite",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "fire:healing:MINOR:5",
+    "name": "Ashen Drip",
     "element": "Fire",
     "school": "Healing",
     "family": "support",
     "type": "Heal",
     "target": "SINGLE",
-    "proficiency": 9,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 12,
     "effects": [
       {
         "kind": "boon",
-        "boonName": "Blessing",
+        "boonName": "Aegis",
         "duration": 10
       },
       {
@@ -67,7 +189,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Ashen Drip restores a single ally with searing heat and ravenous flame, faintly",
+    "description": "Ashen Drip restores a single ally with searing heat and ravenous flame, faintly",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -75,14 +197,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:destruction:MINOR:3",
-    "name": "Lesser Ashen Pellet",
+    "id": "fire:destruction:MINOR:6",
+    "name": "Ashen Pin",
     "element": "Fire",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 16,
+    "proficiency": 10,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 10,
@@ -107,7 +229,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Ashen Pellet strikes a single foe with searing heat and ravenous flame, faintly",
+    "description": "Ashen Pin strikes a single foe with searing heat and ravenous flame, faintly",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -115,19 +237,66 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:control:LESSER:4",
-    "name": "Cinder Trickle",
+    "id": "fire:enfeeblement:MINOR:7",
+    "name": "Lesser Ember Spark",
     "element": "Fire",
-    "school": "Control",
+    "school": "Enfeeblement",
     "family": "control",
-    "type": "Control",
-    "target": "ENEMIES",
-    "proficiency": 20,
-    "tier": "LESSER",
-    "mpCost": 9,
-    "basePower": 4,
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 23,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
     "status": {
-      "name": "Root",
+      "name": "Blind",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Blind",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Lesser Ember Spark saps a single foe with searing heat and ravenous flame, faintly",
+    "statusOnCrit": {
+      "name": "Ignite",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "fire:destruction:LESSER:8",
+    "name": "Lesser Cinder Pellet",
+    "element": "Fire",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 36,
+    "tier": "LESSER",
+    "mpCost": 8,
+    "basePower": 18,
+    "status": {
+      "name": "Burn",
       "chance": 0.2,
       "potency": 1,
       "duration": 10
@@ -135,20 +304,19 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Root",
+        "statusName": "Burn",
         "chance": 0.2,
         "potency": 1,
         "duration": 10
       },
       {
-        "kind": "stat",
-        "lane": "general",
-        "stat": "spd",
-        "value": -11,
-        "duration": 12
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 4,
+        "duration": 10
       }
     ],
-    "description": "Cinder Trickle binds all enemies in range with searing heat and ravenous flame, lightly",
+    "description": "Lesser Cinder Pellet strikes a single foe with searing heat and ravenous flame, lightly",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -156,14 +324,48 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:destruction:LESSER:5",
-    "name": "Lesser Cinder Globelet",
+    "id": "fire:enhancement:LESSER:9",
+    "name": "Cinder Shard",
+    "element": "Fire",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 51,
+    "tier": "LESSER",
+    "mpCost": 7,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Aegis",
+        "duration": 12
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": 11,
+        "duration": 12
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 4,
+        "duration": 10
+      }
+    ],
+    "description": "Cinder Shard bolsters the caster with searing heat and ravenous flame, lightly"
+  },
+  {
+    "id": "fire:destruction:LESSER:10",
+    "name": "Lesser Kindled Pellet",
     "element": "Fire",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 26,
+    "proficiency": 64,
     "tier": "LESSER",
     "mpCost": 8,
     "basePower": 18,
@@ -188,7 +390,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Lesser Cinder Globelet strikes a single foe with searing heat and ravenous flame, lightly",
+    "description": "Lesser Kindled Pellet strikes a single foe with searing heat and ravenous flame, lightly",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -196,31 +398,46 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:healing:LESSER:6",
-    "name": "Dwindled Kindled Drip",
+    "id": "fire:enfeeblement:BASELINE:11",
+    "name": "Fiery Ray",
     "element": "Fire",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 31,
-    "tier": "LESSER",
-    "mpCost": 8,
-    "basePower": 20,
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 76,
+    "tier": "BASELINE",
+    "mpCost": 12,
+    "basePower": 8,
+    "status": {
+      "name": "Blind",
+      "chance": 0.25,
+      "potency": 2,
+      "duration": 12
+    },
     "effects": [
       {
-        "kind": "boon",
-        "boonName": "Aegis",
+        "kind": "status",
+        "statusName": "Blind",
+        "chance": 0.25,
+        "potency": 2,
         "duration": 12
       },
       {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -14,
+        "duration": 14
+      },
+      {
         "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 4,
-        "duration": 10
+        "otKind": "DoT",
+        "otPerTick": 5,
+        "duration": 12
       }
     ],
-    "description": "Dwindled Kindled Drip restores a single ally with searing heat and ravenous flame, lightly",
+    "description": "Fiery Ray saps a single foe with searing heat and ravenous flame, ",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -228,14 +445,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:destruction:BASELINE:7",
-    "name": "Fiery Sphere",
+    "id": "fire:destruction:BASELINE:12",
+    "name": "Flame Globelet",
     "element": "Fire",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 37,
+    "proficiency": 91,
     "tier": "BASELINE",
     "mpCost": 12,
     "basePower": 28,
@@ -260,7 +477,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Fiery Sphere strikes a single foe with searing heat and ravenous flame, ",
+    "description": "Flame Globelet strikes a single foe with searing heat and ravenous flame, ",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -268,14 +485,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:control:BASELINE:8",
+    "id": "fire:control:BASELINE:13",
     "name": "Flame Spout",
     "element": "Fire",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 42,
+    "proficiency": 105,
     "tier": "BASELINE",
     "mpCost": 13,
     "basePower": 6,
@@ -316,95 +533,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:destruction:BASELINE:9",
-    "name": "Fiery Spear",
+    "id": "fire:destruction:BASELINE:14",
+    "name": "Flame Glaive",
     "element": "Fire",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 46,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 28,
-    "status": {
-      "name": "Bleed",
-      "chance": 0.25,
-      "potency": 2,
-      "duration": 12
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Bleed",
-        "chance": 0.25,
-        "potency": 2,
-        "duration": 12
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 5,
-        "duration": 12
-      }
-    ],
-    "description": "Fiery Spear strikes a single foe with searing heat and ravenous flame, ",
-    "statusOnCrit": {
-      "name": "Ignite",
-      "chance": 1,
-      "duration": 4
-    }
-  },
-  {
-    "id": "fire:enhancement:BASELINE:10",
-    "name": "Flame Dagger",
-    "element": "Fire",
-    "school": "Enhancement",
-    "family": "support",
-    "type": "Buff",
-    "target": "SELF",
-    "proficiency": 52,
-    "tier": "BASELINE",
-    "mpCost": 11,
-    "basePower": 0,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Aegis",
-        "duration": 14
-      },
-      {
-        "kind": "stat",
-        "lane": "ranged",
-        "stat": "acc",
-        "value": 14,
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "RestoreMP",
-        "otPerTick": 5,
-        "duration": 12
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "fire",
-          "delta": 15
-        }
-      }
-    ],
-    "description": "Flame Dagger bolsters the caster with searing heat and ravenous flame, "
-  },
-  {
-    "id": "fire:destruction:BASELINE:11",
-    "name": "Flame Orb",
-    "element": "Fire",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMY",
-    "proficiency": 57,
+    "proficiency": 117,
     "tier": "BASELINE",
     "mpCost": 12,
     "basePower": 28,
@@ -429,7 +565,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Flame Orb strikes a single foe with searing heat and ravenous flame, ",
+    "description": "Flame Glaive strikes a single foe with searing heat and ravenous flame, ",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -437,14 +573,95 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:enfeeblement:GREATER:12",
+    "id": "fire:enhancement:GREATER:15",
+    "name": "Wildfire Claymore",
+    "element": "Fire",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 132,
+    "tier": "GREATER",
+    "mpCost": 16,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 16
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": 17,
+        "duration": 16
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 6,
+        "duration": 14
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "fire",
+          "delta": 15
+        }
+      }
+    ],
+    "description": "Wildfire Claymore bolsters the caster with searing heat and ravenous flame, powerfully"
+  },
+  {
+    "id": "fire:destruction:GREATER:16",
+    "name": "Blaze Core",
+    "element": "Fire",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 145,
+    "tier": "GREATER",
+    "mpCost": 18,
+    "basePower": 42,
+    "status": {
+      "name": "Bleed",
+      "chance": 0.30000000000000004,
+      "potency": 2,
+      "duration": 14
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Bleed",
+        "chance": 0.30000000000000004,
+        "potency": 2,
+        "duration": 14
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 6,
+        "duration": 14
+      }
+    ],
+    "description": "Blaze Core strikes a single foe with searing heat and ravenous flame, powerfully",
+    "statusOnCrit": {
+      "name": "Ignite",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "fire:enfeeblement:GREATER:17",
     "name": "Wildfire Starshot",
     "element": "Fire",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 62,
+    "proficiency": 158,
     "tier": "GREATER",
     "mpCost": 18,
     "basePower": 13,
@@ -464,7 +681,7 @@ export const SPELLBOOK = [
       },
       {
         "kind": "stat",
-        "lane": "magic",
+        "lane": "melee",
         "stat": "atk",
         "value": -17,
         "duration": 16
@@ -484,140 +701,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:destruction:GREATER:13",
-    "name": "Blaze Star",
-    "element": "Fire",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMY",
-    "proficiency": 68,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 42,
-    "status": {
-      "name": "Burn",
-      "chance": 0.30000000000000004,
-      "potency": 2,
-      "duration": 14
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.30000000000000004,
-        "potency": 2,
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 6,
-        "duration": 14
-      }
-    ],
-    "description": "Blaze Star strikes a single foe with searing heat and ravenous flame, powerfully",
-    "statusOnCrit": {
-      "name": "Ignite",
-      "chance": 1,
-      "duration": 4
-    }
-  },
-  {
-    "id": "fire:destruction:GREATER:14",
-    "name": "Greater Wildfire Star",
-    "element": "Fire",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMY",
-    "proficiency": 73,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 42,
-    "status": {
-      "name": "Burn",
-      "chance": 0.30000000000000004,
-      "potency": 2,
-      "duration": 14
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.30000000000000004,
-        "potency": 2,
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 6,
-        "duration": 14
-      }
-    ],
-    "description": "Greater Wildfire Star strikes a single foe with searing heat and ravenous flame, powerfully",
-    "statusOnCrit": {
-      "name": "Ignite",
-      "chance": 1,
-      "duration": 4
-    }
-  },
-  {
-    "id": "fire:destruction:MAJOR:15",
-    "name": "Hellfire Godspear",
+    "id": "fire:destruction:MAJOR:18",
+    "name": "Utter Hellfire Sun",
     "element": "Fire",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMIES",
-    "proficiency": 79,
-    "tier": "MAJOR",
-    "mpCost": 25,
-    "basePower": 60,
-    "status": {
-      "name": "Burn",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 7,
-        "duration": 16
-      }
-    ],
-    "description": "Hellfire Godspear strikes a single foe with searing heat and ravenous flame, overwhelmingly",
-    "lineage": {
-      "isChant": false,
-      "isDance": false,
-      "isSummon": false,
-      "isNinjutsu": true
-    },
-    "statusOnCrit": {
-      "name": "Ignite",
-      "chance": 1,
-      "duration": 4
-    }
-  },
-  {
-    "id": "fire:destruction:MAJOR:16",
-    "name": "Inferno Godspear",
-    "element": "Fire",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMIES",
-    "proficiency": 83,
+    "proficiency": 173,
     "tier": "MAJOR",
     "mpCost": 25,
     "basePower": 60,
@@ -642,7 +733,13 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Inferno Godspear strikes a single foe with searing heat and ravenous flame, overwhelmingly",
+    "description": "Utter Hellfire Sun strikes a single foe with searing heat and ravenous flame, overwhelmingly",
+    "lineage": {
+      "isChant": false,
+      "isDance": false,
+      "isSummon": false,
+      "isNinjutsu": true
+    },
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -650,14 +747,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:destruction:MAJOR:17",
-    "name": "Hellfire Singularity",
+    "id": "fire:destruction:MAJOR:19",
+    "name": "Grand Inferno Kingsblade",
     "element": "Fire",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMIES",
-    "proficiency": 89,
+    "proficiency": 185,
     "tier": "MAJOR",
     "mpCost": 25,
     "basePower": 60,
@@ -682,7 +779,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Hellfire Singularity strikes a single foe with searing heat and ravenous flame, overwhelmingly",
+    "description": "Grand Inferno Kingsblade strikes a single foe with searing heat and ravenous flame, overwhelmingly",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -690,19 +787,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "fire:destruction:MYTHIC:18",
-    "name": "Transcendent Pyroclasm Sunfire Singularity",
+    "id": "fire:destruction:MYTHIC:20",
+    "name": "Transcendent Pyroclasm Pyroclasm Singularity",
     "element": "Fire",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMIES",
-    "proficiency": 94,
+    "proficiency": 200,
     "tier": "MYTHIC",
     "mpCost": 36,
     "basePower": 85,
     "status": {
-      "name": "Burn",
+      "name": "Bleed",
       "chance": 0.4,
       "potency": 3,
       "duration": 18
@@ -710,7 +807,7 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Burn",
+        "statusName": "Bleed",
         "chance": 0.4,
         "potency": 3,
         "duration": 18
@@ -722,7 +819,7 @@ export const SPELLBOOK = [
         "duration": 18
       }
     ],
-    "description": "Transcendent Pyroclasm Sunfire Singularity strikes a single foe with searing heat and ravenous flame, with mythic force",
+    "description": "Transcendent Pyroclasm Pyroclasm Singularity strikes a single foe with searing heat and ravenous flame, with mythic force",
     "statusOnCrit": {
       "name": "Ignite",
       "chance": 1,
@@ -730,14 +827,135 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "ice:control:MINOR:19",
-    "name": "Faint Rime Hoarfrost Drip",
+    "id": "ice:destruction:MINOR:21",
+    "name": "Hoarfrost Pellet",
+    "element": "Ice",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 10,
+    "status": {
+      "name": "Bleed",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Bleed",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Hoarfrost Pellet strikes a single foe with biting cold and crystalline frost, faintly",
+    "statusOnCrit": {
+      "name": "Brittle",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "ice:enhancement:MINOR:22",
+    "name": "Lesser Rime Shard",
+    "element": "Ice",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 10
+      },
+      {
+        "kind": "stat",
+        "lane": "ranged",
+        "stat": "acc",
+        "value": 8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Lesser Rime Shard bolsters the caster with biting cold and crystalline frost, faintly"
+  },
+  {
+    "id": "ice:enfeeblement:MINOR:23",
+    "name": "Rime Hoarfrost Glimmer",
+    "element": "Ice",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
+    "status": {
+      "name": "Blind",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Blind",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Rime Hoarfrost Glimmer saps a single foe with biting cold and crystalline frost, faintly",
+    "statusOnCrit": {
+      "name": "Brittle",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "ice:control:MINOR:24",
+    "name": "Rime Drip",
     "element": "Ice",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 5,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 6,
     "basePower": 2,
@@ -763,7 +981,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Faint Rime Hoarfrost Drip binds all enemies in range with biting cold and crystalline frost, faintly",
+    "description": "Rime Drip binds all enemies in range with biting cold and crystalline frost, faintly",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -771,19 +989,51 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "ice:destruction:MINOR:20",
-    "name": "Rime Shard",
+    "id": "ice:healing:MINOR:25",
+    "name": "Faint Rime Drip",
     "element": "Ice",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMY",
-    "proficiency": 10,
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
-    "basePower": 10,
+    "basePower": 12,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Faint Rime Drip restores a single ally with biting cold and crystalline frost, faintly",
+    "statusOnCrit": {
+      "name": "Brittle",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "ice:control:MINOR:26",
+    "name": "Faint Rime Flare",
+    "element": "Ice",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 10,
+    "tier": "MINOR",
+    "mpCost": 6,
+    "basePower": 2,
     "status": {
-      "name": "Bleed",
+      "name": "Root",
       "chance": 0.15000000000000002,
       "potency": 1,
       "duration": 8
@@ -791,7 +1041,48 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Bleed",
+        "statusName": "Root",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -8,
+        "duration": 10
+      }
+    ],
+    "description": "Faint Rime Flare binds all enemies in range with biting cold and crystalline frost, faintly",
+    "statusOnCrit": {
+      "name": "Brittle",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "ice:destruction:MINOR:27",
+    "name": "Rime Hoarfrost Pin",
+    "element": "Ice",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 23,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 10,
+    "status": {
+      "name": "Burn",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Burn",
         "chance": 0.15000000000000002,
         "potency": 1,
         "duration": 8
@@ -803,7 +1094,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Rime Shard strikes a single foe with biting cold and crystalline frost, faintly",
+    "description": "Rime Hoarfrost Pin strikes a single foe with biting cold and crystalline frost, faintly",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -811,19 +1102,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "ice:control:LESSER:21",
+    "id": "ice:control:LESSER:28",
     "name": "Dwindled Chill Trickle",
     "element": "Ice",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 15,
+    "proficiency": 37,
     "tier": "LESSER",
     "mpCost": 9,
     "basePower": 4,
     "status": {
-      "name": "Blind",
+      "name": "Root",
       "chance": 0.2,
       "potency": 1,
       "duration": 10
@@ -831,7 +1122,7 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Blind",
+        "statusName": "Root",
         "chance": 0.2,
         "potency": 1,
         "duration": 10
@@ -852,57 +1143,17 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "ice:destruction:LESSER:22",
-    "name": "Chill Bead",
+    "id": "ice:enfeeblement:LESSER:29",
+    "name": "Chill Dart",
     "element": "Ice",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 20,
+    "proficiency": 49,
     "tier": "LESSER",
     "mpCost": 8,
-    "basePower": 18,
-    "status": {
-      "name": "Burn",
-      "chance": 0.2,
-      "potency": 1,
-      "duration": 10
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.2,
-        "potency": 1,
-        "duration": 10
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 4,
-        "duration": 10
-      }
-    ],
-    "description": "Chill Bead strikes a single foe with biting cold and crystalline frost, lightly",
-    "statusOnCrit": {
-      "name": "Brittle",
-      "chance": 1,
-      "duration": 4
-    }
-  },
-  {
-    "id": "ice:control:LESSER:23",
-    "name": "Dwindled Chill Drip",
-    "element": "Ice",
-    "school": "Control",
-    "family": "control",
-    "type": "Control",
-    "target": "ENEMIES",
-    "proficiency": 26,
-    "tier": "LESSER",
-    "mpCost": 9,
-    "basePower": 4,
+    "basePower": 5,
     "status": {
       "name": "Blind",
       "chance": 0.2,
@@ -913,6 +1164,53 @@ export const SPELLBOOK = [
       {
         "kind": "status",
         "statusName": "Blind",
+        "chance": 0.2,
+        "potency": 1,
+        "duration": 10
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -11,
+        "duration": 12
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 4,
+        "duration": 10
+      }
+    ],
+    "description": "Chill Dart saps a single foe with biting cold and crystalline frost, lightly",
+    "statusOnCrit": {
+      "name": "Brittle",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "ice:control:LESSER:30",
+    "name": "Dwindled Icy Pop",
+    "element": "Ice",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 64,
+    "tier": "LESSER",
+    "mpCost": 9,
+    "basePower": 4,
+    "status": {
+      "name": "Root",
+      "chance": 0.2,
+      "potency": 1,
+      "duration": 10
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Root",
         "chance": 0.2,
         "potency": 1,
         "duration": 10
@@ -925,7 +1223,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Dwindled Chill Drip binds all enemies in range with biting cold and crystalline frost, lightly",
+    "description": "Dwindled Icy Pop binds all enemies in range with biting cold and crystalline frost, lightly",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -933,195 +1231,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "ice:healing:BASELINE:24",
-    "name": "Ice Stream",
+    "id": "ice:destruction:BASELINE:31",
+    "name": "Ice Spear",
     "element": "Ice",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 30,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 32,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Aegis",
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 5,
-        "duration": 12
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "ice",
-          "delta": 12
-        }
-      }
-    ],
-    "description": "Ice Stream restores a single ally with biting cold and crystalline frost, ",
-    "statusOnCrit": {
-      "name": "Brittle",
-      "chance": 1,
-      "duration": 4
-    }
-  },
-  {
-    "id": "ice:control:BASELINE:25",
-    "name": "Frost Spout",
-    "element": "Ice",
-    "school": "Control",
-    "family": "control",
-    "type": "Control",
-    "target": "ENEMIES",
-    "proficiency": 36,
-    "tier": "BASELINE",
-    "mpCost": 13,
-    "basePower": 6,
-    "status": {
-      "name": "Root",
-      "chance": 0.25,
-      "potency": 2,
-      "duration": 12
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Root",
-        "chance": 0.25,
-        "potency": 2,
-        "duration": 12
-      },
-      {
-        "kind": "stat",
-        "lane": "general",
-        "stat": "spd",
-        "value": -14,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "ice",
-          "delta": 8
-        }
-      }
-    ],
-    "description": "Frost Spout binds all enemies in range with biting cold and crystalline frost, ",
-    "statusOnCrit": {
-      "name": "Brittle",
-      "chance": 1,
-      "duration": 4
-    }
-  },
-  {
-    "id": "ice:enhancement:BASELINE:26",
-    "name": "Frost Dagger",
-    "element": "Ice",
-    "school": "Enhancement",
-    "family": "support",
-    "type": "Buff",
-    "target": "SELF",
-    "proficiency": 42,
-    "tier": "BASELINE",
-    "mpCost": 11,
-    "basePower": 0,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Haste",
-        "duration": 14
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": 14,
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 5,
-        "duration": 12
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "ice",
-          "delta": 15
-        }
-      }
-    ],
-    "description": "Frost Dagger bolsters the caster with biting cold and crystalline frost, "
-  },
-  {
-    "id": "ice:control:BASELINE:27",
-    "name": "Frost Spout",
-    "element": "Ice",
-    "school": "Control",
-    "family": "control",
-    "type": "Control",
-    "target": "ENEMIES",
-    "proficiency": 46,
-    "tier": "BASELINE",
-    "mpCost": 13,
-    "basePower": 6,
-    "status": {
-      "name": "Root",
-      "chance": 0.25,
-      "potency": 2,
-      "duration": 12
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Root",
-        "chance": 0.25,
-        "potency": 2,
-        "duration": 12
-      },
-      {
-        "kind": "stat",
-        "lane": "general",
-        "stat": "spd",
-        "value": -14,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "ice",
-          "delta": 8
-        }
-      }
-    ],
-    "description": "Frost Spout binds all enemies in range with biting cold and crystalline frost, ",
-    "statusOnCrit": {
-      "name": "Brittle",
-      "chance": 1,
-      "duration": 4
-    }
-  },
-  {
-    "id": "ice:enfeeblement:BASELINE:28",
-    "name": "Ice Blast",
-    "element": "Ice",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 51,
+    "proficiency": 77,
     "tier": "BASELINE",
     "mpCost": 12,
-    "basePower": 8,
+    "basePower": 28,
     "status": {
-      "name": "Blind",
+      "name": "Burn",
       "chance": 0.25,
       "potency": 2,
       "duration": 12
@@ -1129,17 +1251,10 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Blind",
+        "statusName": "Burn",
         "chance": 0.25,
         "potency": 2,
         "duration": 12
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": -14,
-        "duration": 14
       },
       {
         "kind": "overtime",
@@ -1148,7 +1263,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Ice Blast saps a single foe with biting cold and crystalline frost, ",
+    "description": "Ice Spear strikes a single foe with biting cold and crystalline frost, ",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1156,14 +1271,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "ice:control:BASELINE:29",
+    "id": "ice:control:BASELINE:32",
     "name": "Frost Blast",
     "element": "Ice",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 57,
+    "proficiency": 90,
     "tier": "BASELINE",
     "mpCost": 13,
     "basePower": 6,
@@ -1204,54 +1319,55 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "ice:destruction:GREATER:30",
-    "name": "Glacial Core",
+    "id": "ice:enhancement:BASELINE:33",
+    "name": "Ice Shortsword",
     "element": "Ice",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMY",
-    "proficiency": 63,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 42,
-    "status": {
-      "name": "Burn",
-      "chance": 0.30000000000000004,
-      "potency": 2,
-      "duration": 14
-    },
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 105,
+    "tier": "BASELINE",
+    "mpCost": 11,
+    "basePower": 0,
     "effects": [
       {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.30000000000000004,
-        "potency": 2,
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 14
+      },
+      {
+        "kind": "stat",
+        "lane": "ranged",
+        "stat": "acc",
+        "value": 14,
         "duration": 14
       },
       {
         "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 6,
-        "duration": 14
+        "otKind": "HoT",
+        "otPerTick": 5,
+        "duration": 12
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "ice",
+          "delta": 15
+        }
       }
     ],
-    "description": "Glacial Core strikes a single foe with biting cold and crystalline frost, powerfully",
-    "statusOnCrit": {
-      "name": "Brittle",
-      "chance": 1,
-      "duration": 4
-    }
+    "description": "Ice Shortsword bolsters the caster with biting cold and crystalline frost, "
   },
   {
-    "id": "ice:control:GREATER:31",
-    "name": "Glacial Deluge",
+    "id": "ice:control:GREATER:34",
+    "name": "Permafrost Cataclysm",
     "element": "Ice",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 68,
+    "proficiency": 118,
     "tier": "GREATER",
     "mpCost": 20,
     "basePower": 8,
@@ -1284,7 +1400,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Glacial Deluge binds all enemies in range with biting cold and crystalline frost, powerfully",
+    "description": "Permafrost Cataclysm binds all enemies in range with biting cold and crystalline frost, powerfully",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1292,99 +1408,114 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "ice:healing:GREATER:32",
-    "name": "Permafrost Flood",
-    "element": "Ice",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 73,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 48,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Aegis",
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 6,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "ice",
-          "delta": 12
-        }
-      }
-    ],
-    "description": "Permafrost Flood restores a single ally with biting cold and crystalline frost, powerfully",
-    "statusOnCrit": {
-      "name": "Brittle",
-      "chance": 1,
-      "duration": 4
-    }
-  },
-  {
-    "id": "ice:enhancement:GREATER:33",
-    "name": "Glacial Greatsword",
-    "element": "Ice",
-    "school": "Enhancement",
-    "family": "support",
-    "type": "Buff",
-    "target": "SELF",
-    "proficiency": 79,
-    "tier": "GREATER",
-    "mpCost": 16,
-    "basePower": 0,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Haste",
-        "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "ranged",
-        "stat": "acc",
-        "value": 17,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 6,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "ice",
-          "delta": 15
-        }
-      }
-    ],
-    "description": "Glacial Greatsword bolsters the caster with biting cold and crystalline frost, powerfully"
-  },
-  {
-    "id": "ice:enfeeblement:MAJOR:34",
-    "name": "Hailstorm Hailstorm Sunbeam",
+    "id": "ice:enfeeblement:GREATER:35",
+    "name": "Greater Glacial Javelin",
     "element": "Ice",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 83,
-    "tier": "MAJOR",
-    "mpCost": 25,
-    "basePower": 18,
+    "proficiency": 132,
+    "tier": "GREATER",
+    "mpCost": 18,
+    "basePower": 13,
     "status": {
       "name": "Blind",
+      "chance": 0.30000000000000004,
+      "potency": 2,
+      "duration": 14
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Blind",
+        "chance": 0.30000000000000004,
+        "potency": 2,
+        "duration": 14
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -17,
+        "duration": 16
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 6,
+        "duration": 14
+      }
+    ],
+    "description": "Greater Glacial Javelin saps a single foe with biting cold and crystalline frost, powerfully",
+    "statusOnCrit": {
+      "name": "Brittle",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "ice:control:GREATER:36",
+    "name": "Greater Glacial Deluge",
+    "element": "Ice",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 145,
+    "tier": "GREATER",
+    "mpCost": 20,
+    "basePower": 8,
+    "status": {
+      "name": "Root",
+      "chance": 0.30000000000000004,
+      "potency": 2,
+      "duration": 14
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Root",
+        "chance": 0.30000000000000004,
+        "potency": 2,
+        "duration": 14
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -17,
+        "duration": 16
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "ice",
+          "delta": 8
+        }
+      }
+    ],
+    "description": "Greater Glacial Deluge binds all enemies in range with biting cold and crystalline frost, powerfully",
+    "statusOnCrit": {
+      "name": "Brittle",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "ice:destruction:MAJOR:37",
+    "name": "Grand Hailstorm Sun",
+    "element": "Ice",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMIES",
+    "proficiency": 158,
+    "tier": "MAJOR",
+    "mpCost": 25,
+    "basePower": 60,
+    "status": {
+      "name": "Burn",
       "chance": 0.35,
       "potency": 3,
       "duration": 16
@@ -1392,17 +1523,10 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Blind",
+        "statusName": "Burn",
         "chance": 0.35,
         "potency": 3,
         "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": -20,
-        "duration": 18
       },
       {
         "kind": "overtime",
@@ -1411,7 +1535,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Hailstorm Hailstorm Sunbeam saps a single foe with biting cold and crystalline frost, overwhelmingly",
+    "description": "Grand Hailstorm Sun strikes a single foe with biting cold and crystalline frost, overwhelmingly",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1419,59 +1543,115 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "ice:destruction:MYTHIC:35",
-    "name": "Absolute Zero Sun",
-    "element": "Ice",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMIES",
-    "proficiency": 89,
-    "tier": "MYTHIC",
-    "mpCost": 36,
-    "basePower": 85,
-    "status": {
-      "name": "Burn",
-      "chance": 0.4,
-      "potency": 3,
-      "duration": 18
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.4,
-        "potency": 3,
-        "duration": 18
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 8,
-        "duration": 18
-      }
-    ],
-    "description": "Absolute Zero Sun strikes a single foe with biting cold and crystalline frost, with mythic force",
-    "statusOnCrit": {
-      "name": "Brittle",
-      "chance": 1,
-      "duration": 4
-    }
-  },
-  {
-    "id": "ice:control:MYTHIC:36",
-    "name": "Pyroclasm Absolute Zero Worldfire",
+    "id": "ice:control:MAJOR:38",
+    "name": "Blizzard Worldfire",
     "element": "Ice",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 95,
+    "proficiency": 172,
+    "tier": "MAJOR",
+    "mpCost": 28,
+    "basePower": 12,
+    "status": {
+      "name": "Slow",
+      "chance": 0.35,
+      "potency": 3,
+      "duration": 16
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Slow",
+        "chance": 0.35,
+        "potency": 3,
+        "duration": 16
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -20,
+        "duration": 18
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "ice",
+          "delta": 8
+        }
+      }
+    ],
+    "description": "Blizzard Worldfire binds all enemies in range with biting cold and crystalline frost, overwhelmingly",
+    "statusOnCrit": {
+      "name": "Brittle",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "ice:control:MAJOR:39",
+    "name": "Hailstorm Maelstrom",
+    "element": "Ice",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 185,
+    "tier": "MAJOR",
+    "mpCost": 28,
+    "basePower": 12,
+    "status": {
+      "name": "Stun",
+      "chance": 0.35,
+      "potency": 3,
+      "duration": 16
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Stun",
+        "chance": 0.35,
+        "potency": 3,
+        "duration": 16
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -20,
+        "duration": 18
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "ice",
+          "delta": 8
+        }
+      }
+    ],
+    "description": "Hailstorm Maelstrom binds all enemies in range with biting cold and crystalline frost, overwhelmingly",
+    "statusOnCrit": {
+      "name": "Brittle",
+      "chance": 1,
+      "duration": 4
+    }
+  },
+  {
+    "id": "ice:control:MYTHIC:40",
+    "name": "Transcendent Absolute Zero Maelstrom",
+    "element": "Ice",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 199,
     "tier": "MYTHIC",
     "mpCost": 40,
     "basePower": 17,
     "status": {
-      "name": "Root",
+      "name": "Slow",
       "chance": 0.4,
       "potency": 3,
       "duration": 18
@@ -1479,7 +1659,7 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Root",
+        "statusName": "Slow",
         "chance": 0.4,
         "potency": 3,
         "duration": 18
@@ -1499,7 +1679,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Pyroclasm Absolute Zero Worldfire binds all enemies in range with biting cold and crystalline frost, with mythic force",
+    "description": "Transcendent Absolute Zero Maelstrom binds all enemies in range with biting cold and crystalline frost, with mythic force",
     "statusOnCrit": {
       "name": "Brittle",
       "chance": 1,
@@ -1507,14 +1687,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:destruction:MINOR:37",
-    "name": "Lesser Tingle Shard",
+    "id": "lightning:destruction:MINOR:41",
+    "name": "Faint Static Pellet",
     "element": "Lightning",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 5,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 10,
@@ -1539,7 +1719,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Lesser Tingle Shard strikes a single foe with split-second thunder and crackling charge, faintly",
+    "description": "Faint Static Pellet strikes a single foe with split-second thunder and crackling charge, faintly",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1547,19 +1727,53 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:enfeeblement:MINOR:38",
-    "name": "Faint Static Glimmer",
+    "id": "lightning:enhancement:MINOR:42",
+    "name": "Static Sliver",
+    "element": "Lightning",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Ward",
+        "duration": 10
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": 8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Static Sliver bolsters the caster with split-second thunder and crackling charge, faintly"
+  },
+  {
+    "id": "lightning:enfeeblement:MINOR:43",
+    "name": "Lesser Tingle Spark",
     "element": "Lightning",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 9,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 3,
     "status": {
-      "name": "Poison",
+      "name": "Blind",
       "chance": 0.15000000000000002,
       "potency": 1,
       "duration": 8
@@ -1567,7 +1781,167 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Poison",
+        "statusName": "Blind",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "magic",
+        "stat": "atk",
+        "value": -8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Lesser Tingle Spark saps a single foe with split-second thunder and crackling charge, faintly",
+    "statusOnCrit": {
+      "name": "Paralyze",
+      "chance": 1,
+      "duration": 2
+    }
+  },
+  {
+    "id": "lightning:control:MINOR:44",
+    "name": "Faint Static Flare",
+    "element": "Lightning",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 6,
+    "basePower": 2,
+    "status": {
+      "name": "Root",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Root",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -8,
+        "duration": 10
+      }
+    ],
+    "description": "Faint Static Flare binds all enemies in range with split-second thunder and crackling charge, faintly",
+    "statusOnCrit": {
+      "name": "Paralyze",
+      "chance": 1,
+      "duration": 2
+    }
+  },
+  {
+    "id": "lightning:healing:MINOR:45",
+    "name": "Static Rill",
+    "element": "Lightning",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 12,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Static Rill restores a single ally with split-second thunder and crackling charge, faintly",
+    "statusOnCrit": {
+      "name": "Paralyze",
+      "chance": 1,
+      "duration": 2
+    }
+  },
+  {
+    "id": "lightning:destruction:MINOR:46",
+    "name": "Static Pellet",
+    "element": "Lightning",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 10,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 10,
+    "status": {
+      "name": "Burn",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Burn",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Static Pellet strikes a single foe with split-second thunder and crackling charge, faintly",
+    "statusOnCrit": {
+      "name": "Paralyze",
+      "chance": 1,
+      "duration": 2
+    }
+  },
+  {
+    "id": "lightning:enfeeblement:MINOR:47",
+    "name": "Lesser Tingle Puff",
+    "element": "Lightning",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 22,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
+    "status": {
+      "name": "Slow",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Slow",
         "chance": 0.15000000000000002,
         "potency": 1,
         "duration": 8
@@ -1586,7 +1960,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Static Glimmer saps a single foe with split-second thunder and crackling charge, faintly",
+    "description": "Lesser Tingle Puff saps a single foe with split-second thunder and crackling charge, faintly",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1594,14 +1968,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:destruction:LESSER:39",
-    "name": "Lesser Spark Pellet",
+    "id": "lightning:destruction:LESSER:48",
+    "name": "Spark Globelet",
     "element": "Lightning",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 15,
+    "proficiency": 35,
     "tier": "LESSER",
     "mpCost": 8,
     "basePower": 18,
@@ -1626,7 +2000,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Lesser Spark Pellet strikes a single foe with split-second thunder and crackling charge, lightly",
+    "description": "Spark Globelet strikes a single foe with split-second thunder and crackling charge, lightly",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1634,19 +2008,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:enfeeblement:LESSER:40",
-    "name": "Lesser Spark Dart",
+    "id": "lightning:control:LESSER:49",
+    "name": "Glimmer Burst",
     "element": "Lightning",
-    "school": "Enfeeblement",
+    "school": "Control",
     "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 20,
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 50,
     "tier": "LESSER",
-    "mpCost": 8,
-    "basePower": 5,
+    "mpCost": 9,
+    "basePower": 4,
     "status": {
-      "name": "Poison",
+      "name": "Root",
       "chance": 0.2,
       "potency": 1,
       "duration": 10
@@ -1654,26 +2028,20 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Poison",
+        "statusName": "Root",
         "chance": 0.2,
         "potency": 1,
         "duration": 10
       },
       {
         "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
+        "lane": "general",
+        "stat": "spd",
         "value": -11,
         "duration": 12
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 4,
-        "duration": 10
       }
     ],
-    "description": "Lesser Spark Dart saps a single foe with split-second thunder and crackling charge, lightly",
+    "description": "Glimmer Burst binds all enemies in range with split-second thunder and crackling charge, lightly",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1681,19 +2049,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:destruction:LESSER:41",
-    "name": "Spark Bead",
+    "id": "lightning:destruction:LESSER:50",
+    "name": "Charged Pellet",
     "element": "Lightning",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 26,
+    "proficiency": 63,
     "tier": "LESSER",
     "mpCost": 8,
     "basePower": 18,
     "status": {
-      "name": "Burn",
+      "name": "Bleed",
       "chance": 0.2,
       "potency": 1,
       "duration": 10
@@ -1701,7 +2069,7 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Burn",
+        "statusName": "Bleed",
         "chance": 0.2,
         "potency": 1,
         "duration": 10
@@ -1713,7 +2081,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Spark Bead strikes a single foe with split-second thunder and crackling charge, lightly",
+    "description": "Charged Pellet strikes a single foe with split-second thunder and crackling charge, lightly",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1721,51 +2089,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:healing:LESSER:42",
-    "name": "Spark Trickle",
+    "id": "lightning:enfeeblement:BASELINE:51",
+    "name": "Lightning Ray",
     "element": "Lightning",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 31,
-    "tier": "LESSER",
-    "mpCost": 8,
-    "basePower": 20,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Aegis",
-        "duration": 12
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 4,
-        "duration": 10
-      }
-    ],
-    "description": "Spark Trickle restores a single ally with split-second thunder and crackling charge, lightly",
-    "statusOnCrit": {
-      "name": "Paralyze",
-      "chance": 1,
-      "duration": 2
-    }
-  },
-  {
-    "id": "lightning:destruction:BASELINE:43",
-    "name": "Bolt Orb",
-    "element": "Lightning",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 36,
+    "proficiency": 78,
     "tier": "BASELINE",
     "mpCost": 12,
-    "basePower": 28,
+    "basePower": 8,
     "status": {
-      "name": "Bleed",
+      "name": "Blind",
       "chance": 0.25,
       "potency": 2,
       "duration": 12
@@ -1773,7 +2109,54 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Bleed",
+        "statusName": "Blind",
+        "chance": 0.25,
+        "potency": 2,
+        "duration": 12
+      },
+      {
+        "kind": "stat",
+        "lane": "magic",
+        "stat": "atk",
+        "value": -14,
+        "duration": 14
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 5,
+        "duration": 12
+      }
+    ],
+    "description": "Lightning Ray saps a single foe with split-second thunder and crackling charge, ",
+    "statusOnCrit": {
+      "name": "Paralyze",
+      "chance": 1,
+      "duration": 2
+    }
+  },
+  {
+    "id": "lightning:destruction:BASELINE:52",
+    "name": "Dart Glaive",
+    "element": "Lightning",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 90,
+    "tier": "BASELINE",
+    "mpCost": 12,
+    "basePower": 28,
+    "status": {
+      "name": "Burn",
+      "chance": 0.25,
+      "potency": 2,
+      "duration": 12
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Burn",
         "chance": 0.25,
         "potency": 2,
         "duration": 12
@@ -1785,7 +2168,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Bolt Orb strikes a single foe with split-second thunder and crackling charge, ",
+    "description": "Dart Glaive strikes a single foe with split-second thunder and crackling charge, ",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1793,14 +2176,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:enhancement:BASELINE:44",
-    "name": "Bolt Shortsword",
+    "id": "lightning:enhancement:BASELINE:53",
+    "name": "Lightning Dagger",
     "element": "Lightning",
     "school": "Enhancement",
     "family": "support",
     "type": "Buff",
     "target": "SELF",
-    "proficiency": 42,
+    "proficiency": 105,
     "tier": "BASELINE",
     "mpCost": 11,
     "basePower": 0,
@@ -1819,7 +2202,7 @@ export const SPELLBOOK = [
       },
       {
         "kind": "overtime",
-        "otKind": "HoT",
+        "otKind": "RestoreMP",
         "otPerTick": 5,
         "duration": 12
       },
@@ -1831,42 +2214,42 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Bolt Shortsword bolsters the caster with split-second thunder and crackling charge, "
+    "description": "Lightning Dagger bolsters the caster with split-second thunder and crackling charge, "
   },
   {
-    "id": "lightning:destruction:BASELINE:45",
-    "name": "Bolt Sphere",
+    "id": "lightning:destruction:GREATER:54",
+    "name": "Deep Thunderbolt Nova",
     "element": "Lightning",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 47,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 28,
+    "proficiency": 117,
+    "tier": "GREATER",
+    "mpCost": 18,
+    "basePower": 42,
     "status": {
       "name": "Burn",
-      "chance": 0.25,
+      "chance": 0.30000000000000004,
       "potency": 2,
-      "duration": 12
+      "duration": 14
     },
     "effects": [
       {
         "kind": "status",
         "statusName": "Burn",
-        "chance": 0.25,
+        "chance": 0.30000000000000004,
         "potency": 2,
-        "duration": 12
+        "duration": 14
       },
       {
         "kind": "overtime",
         "otKind": "DoT",
-        "otPerTick": 5,
-        "duration": 12
+        "otPerTick": 6,
+        "duration": 14
       }
     ],
-    "description": "Bolt Sphere strikes a single foe with split-second thunder and crackling charge, ",
+    "description": "Deep Thunderbolt Nova strikes a single foe with split-second thunder and crackling charge, powerfully",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1874,37 +2257,37 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:control:BASELINE:46",
-    "name": "Dart Spout",
+    "id": "lightning:control:GREATER:55",
+    "name": "Thunder Cataclysm",
     "element": "Lightning",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 52,
-    "tier": "BASELINE",
-    "mpCost": 13,
-    "basePower": 6,
+    "proficiency": 131,
+    "tier": "GREATER",
+    "mpCost": 20,
+    "basePower": 8,
     "status": {
       "name": "Root",
-      "chance": 0.25,
+      "chance": 0.30000000000000004,
       "potency": 2,
-      "duration": 12
+      "duration": 14
     },
     "effects": [
       {
         "kind": "status",
         "statusName": "Root",
-        "chance": 0.25,
+        "chance": 0.30000000000000004,
         "potency": 2,
-        "duration": 12
+        "duration": 14
       },
       {
         "kind": "stat",
         "lane": "general",
         "stat": "spd",
-        "value": -14,
-        "duration": 14
+        "value": -17,
+        "duration": 16
       },
       {
         "kind": "elemres",
@@ -1914,7 +2297,13 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Dart Spout binds all enemies in range with split-second thunder and crackling charge, ",
+    "description": "Thunder Cataclysm binds all enemies in range with split-second thunder and crackling charge, powerfully",
+    "lineage": {
+      "isChant": false,
+      "isDance": false,
+      "isSummon": false,
+      "isNinjutsu": true
+    },
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1922,39 +2311,39 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:destruction:BASELINE:47",
-    "name": "Bolt Spear",
+    "id": "lightning:destruction:GREATER:56",
+    "name": "Thunderbolt Thunderbolt Core",
     "element": "Lightning",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 57,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 28,
+    "proficiency": 144,
+    "tier": "GREATER",
+    "mpCost": 18,
+    "basePower": 42,
     "status": {
-      "name": "Bleed",
-      "chance": 0.25,
+      "name": "Burn",
+      "chance": 0.30000000000000004,
       "potency": 2,
-      "duration": 12
+      "duration": 14
     },
     "effects": [
       {
         "kind": "status",
-        "statusName": "Bleed",
-        "chance": 0.25,
+        "statusName": "Burn",
+        "chance": 0.30000000000000004,
         "potency": 2,
-        "duration": 12
+        "duration": 14
       },
       {
         "kind": "overtime",
         "otKind": "DoT",
-        "otPerTick": 5,
-        "duration": 12
+        "otPerTick": 6,
+        "duration": 14
       }
     ],
-    "description": "Bolt Spear strikes a single foe with split-second thunder and crackling charge, ",
+    "description": "Thunderbolt Thunderbolt Core strikes a single foe with split-second thunder and crackling charge, powerfully",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -1962,14 +2351,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:enfeeblement:GREATER:48",
-    "name": "Thunderbolt Javelin",
+    "id": "lightning:enfeeblement:GREATER:57",
+    "name": "Greater Thunder Sunbeam",
     "element": "Lightning",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 63,
+    "proficiency": 159,
     "tier": "GREATER",
     "mpCost": 18,
     "basePower": 13,
@@ -1989,7 +2378,7 @@ export const SPELLBOOK = [
       },
       {
         "kind": "stat",
-        "lane": "magic",
+        "lane": "melee",
         "stat": "atk",
         "value": -17,
         "duration": 16
@@ -2001,7 +2390,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Thunderbolt Javelin saps a single foe with split-second thunder and crackling charge, powerfully",
+    "description": "Greater Thunder Sunbeam saps a single foe with split-second thunder and crackling charge, powerfully",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2009,193 +2398,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:destruction:GREATER:49",
-    "name": "Thunder Nova",
+    "id": "lightning:destruction:MAJOR:58",
+    "name": "Utter Stormborn Sun",
     "element": "Lightning",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
-    "target": "ENEMY",
-    "proficiency": 68,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 42,
-    "status": {
-      "name": "Bleed",
-      "chance": 0.30000000000000004,
-      "potency": 2,
-      "duration": 14
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Bleed",
-        "chance": 0.30000000000000004,
-        "potency": 2,
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 6,
-        "duration": 14
-      }
-    ],
-    "description": "Thunder Nova strikes a single foe with split-second thunder and crackling charge, powerfully",
-    "statusOnCrit": {
-      "name": "Paralyze",
-      "chance": 1,
-      "duration": 2
-    }
-  },
-  {
-    "id": "lightning:healing:GREATER:50",
-    "name": "Thunderbolt Flood",
-    "element": "Lightning",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 74,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 48,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Ward",
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 6,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "lightning",
-          "delta": 12
-        }
-      }
-    ],
-    "description": "Thunderbolt Flood restores a single ally with split-second thunder and crackling charge, powerfully",
-    "statusOnCrit": {
-      "name": "Paralyze",
-      "chance": 1,
-      "duration": 2
-    }
-  },
-  {
-    "id": "lightning:enhancement:GREATER:51",
-    "name": "Greater Thunder Greatsword",
-    "element": "Lightning",
-    "school": "Enhancement",
-    "family": "support",
-    "type": "Buff",
-    "target": "SELF",
-    "proficiency": 79,
-    "tier": "GREATER",
-    "mpCost": 16,
-    "basePower": 0,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Haste",
-        "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": 17,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 6,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "lightning",
-          "delta": 15
-        }
-      }
-    ],
-    "description": "Greater Thunder Greatsword bolsters the caster with split-second thunder and crackling charge, powerfully"
-  },
-  {
-    "id": "lightning:control:MAJOR:52",
-    "name": "Utter Tempestuous Cataclysm",
-    "element": "Lightning",
-    "school": "Control",
-    "family": "control",
-    "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 84,
-    "tier": "MAJOR",
-    "mpCost": 28,
-    "basePower": 12,
-    "status": {
-      "name": "Root",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Root",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "general",
-        "stat": "spd",
-        "value": -20,
-        "duration": 18
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "lightning",
-          "delta": 8
-        }
-      }
-    ],
-    "description": "Utter Tempestuous Cataclysm binds all enemies in range with split-second thunder and crackling charge, overwhelmingly",
-    "lineage": {
-      "isChant": false,
-      "isDance": false,
-      "isSummon": false,
-      "isNinjutsu": true
-    },
-    "statusOnCrit": {
-      "name": "Paralyze",
-      "chance": 1,
-      "duration": 2
-    }
-  },
-  {
-    "id": "lightning:enfeeblement:MAJOR:53",
-    "name": "Stormborn Stormborn Sunbeam",
-    "element": "Lightning",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 89,
+    "proficiency": 172,
     "tier": "MAJOR",
     "mpCost": 25,
-    "basePower": 18,
+    "basePower": 60,
     "status": {
-      "name": "Poison",
+      "name": "Burn",
       "chance": 0.35,
       "potency": 3,
       "duration": 16
@@ -2203,17 +2418,10 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Poison",
+        "statusName": "Burn",
         "chance": 0.35,
         "potency": 3,
         "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": -20,
-        "duration": 18
       },
       {
         "kind": "overtime",
@@ -2222,7 +2430,7 @@ export const SPELLBOOK = [
         "duration": 16
       }
     ],
-    "description": "Stormborn Stormborn Sunbeam saps a single foe with split-second thunder and crackling charge, overwhelmingly",
+    "description": "Utter Stormborn Sun strikes a single foe with split-second thunder and crackling charge, overwhelmingly",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2230,14 +2438,54 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "lightning:destruction:MYTHIC:54",
-    "name": "Transcendent Skybreaker Worldstorm Singularity",
+    "id": "lightning:destruction:MAJOR:59",
+    "name": "Utter Stormborn Sun",
     "element": "Lightning",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMIES",
-    "proficiency": 94,
+    "proficiency": 185,
+    "tier": "MAJOR",
+    "mpCost": 25,
+    "basePower": 60,
+    "status": {
+      "name": "Burn",
+      "chance": 0.35,
+      "potency": 3,
+      "duration": 16
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Burn",
+        "chance": 0.35,
+        "potency": 3,
+        "duration": 16
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 7,
+        "duration": 16
+      }
+    ],
+    "description": "Utter Stormborn Sun strikes a single foe with split-second thunder and crackling charge, overwhelmingly",
+    "statusOnCrit": {
+      "name": "Paralyze",
+      "chance": 1,
+      "duration": 2
+    }
+  },
+  {
+    "id": "lightning:destruction:MYTHIC:60",
+    "name": "Mythic Skybreaker Sun",
+    "element": "Lightning",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMIES",
+    "proficiency": 200,
     "tier": "MYTHIC",
     "mpCost": 36,
     "basePower": 85,
@@ -2262,7 +2510,7 @@ export const SPELLBOOK = [
         "duration": 18
       }
     ],
-    "description": "Transcendent Skybreaker Worldstorm Singularity strikes a single foe with split-second thunder and crackling charge, with mythic force",
+    "description": "Mythic Skybreaker Sun strikes a single foe with split-second thunder and crackling charge, with mythic force",
     "statusOnCrit": {
       "name": "Paralyze",
       "chance": 1,
@@ -2270,14 +2518,176 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:healing:MINOR:55",
-    "name": "Briny Drip",
+    "id": "water:destruction:MINOR:61",
+    "name": "Faint Briny Bead",
+    "element": "Water",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 10,
+    "status": {
+      "name": "Burn",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Burn",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Faint Briny Bead strikes a single foe with surging tides and fluid force, faintly",
+    "statusOnCrit": {
+      "name": "Soak",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "water:enhancement:MINOR:62",
+    "name": "Dew Shard",
+    "element": "Water",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 10
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "eva",
+        "value": 8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Dew Shard bolsters the caster with surging tides and fluid force, faintly"
+  },
+  {
+    "id": "water:enfeeblement:MINOR:63",
+    "name": "Dew Spark",
+    "element": "Water",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
+    "status": {
+      "name": "Blind",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Blind",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Dew Spark saps a single foe with surging tides and fluid force, faintly",
+    "statusOnCrit": {
+      "name": "Soak",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "water:control:MINOR:64",
+    "name": "Lesser Dew Drip",
+    "element": "Water",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 6,
+    "basePower": 2,
+    "status": {
+      "name": "Root",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Root",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -8,
+        "duration": 10
+      }
+    ],
+    "description": "Lesser Dew Drip binds all enemies in range with surging tides and fluid force, faintly",
+    "statusOnCrit": {
+      "name": "Soak",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "water:healing:MINOR:65",
+    "name": "Dew Drip",
     "element": "Water",
     "school": "Healing",
     "family": "support",
     "type": "Heal",
     "target": "SINGLE",
-    "proficiency": 5,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 12,
@@ -2294,7 +2704,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Briny Drip restores a single ally with surging tides and fluid force, faintly",
+    "description": "Dew Drip restores a single ally with surging tides and fluid force, faintly",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2302,19 +2712,51 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:control:MINOR:56",
-    "name": "Dew Flare",
+    "id": "water:healing:MINOR:66",
+    "name": "Faint Dew Drip",
+    "element": "Water",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 10,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 12,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Ward",
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Faint Dew Drip restores a single ally with surging tides and fluid force, faintly",
+    "statusOnCrit": {
+      "name": "Soak",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "water:control:MINOR:67",
+    "name": "Dew Drip",
     "element": "Water",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 9,
+    "proficiency": 23,
     "tier": "MINOR",
     "mpCost": 6,
     "basePower": 2,
     "status": {
-      "name": "Slow",
+      "name": "Root",
       "chance": 0.15000000000000002,
       "potency": 1,
       "duration": 8
@@ -2322,7 +2764,7 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Slow",
+        "statusName": "Root",
         "chance": 0.15000000000000002,
         "potency": 1,
         "duration": 8
@@ -2335,7 +2777,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Dew Flare binds all enemies in range with surging tides and fluid force, faintly",
+    "description": "Dew Drip binds all enemies in range with surging tides and fluid force, faintly",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2343,80 +2785,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:healing:LESSER:57",
-    "name": "Tidal Rill",
+    "id": "water:healing:LESSER:68",
+    "name": "Tidal Drip",
     "element": "Water",
     "school": "Healing",
     "family": "support",
     "type": "Heal",
     "target": "SINGLE",
-    "proficiency": 15,
-    "tier": "LESSER",
-    "mpCost": 8,
-    "basePower": 20,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Aegis",
-        "duration": 12
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 4,
-        "duration": 10
-      }
-    ],
-    "description": "Tidal Rill restores a single ally with surging tides and fluid force, lightly",
-    "statusOnCrit": {
-      "name": "Soak",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "water:enhancement:LESSER:58",
-    "name": "Dwindled Aqueous Sliver",
-    "element": "Water",
-    "school": "Enhancement",
-    "family": "support",
-    "type": "Buff",
-    "target": "SELF",
-    "proficiency": 20,
-    "tier": "LESSER",
-    "mpCost": 7,
-    "basePower": 0,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Ward",
-        "duration": 12
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": 11,
-        "duration": 12
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 4,
-        "duration": 10
-      }
-    ],
-    "description": "Dwindled Aqueous Sliver bolsters the caster with surging tides and fluid force, lightly"
-  },
-  {
-    "id": "water:healing:LESSER:59",
-    "name": "Aqueous Trickle",
-    "element": "Water",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 26,
+    "proficiency": 36,
     "tier": "LESSER",
     "mpCost": 8,
     "basePower": 20,
@@ -2433,7 +2809,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Aqueous Trickle restores a single ally with surging tides and fluid force, lightly",
+    "description": "Tidal Drip restores a single ally with surging tides and fluid force, lightly",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2441,39 +2817,39 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:destruction:BASELINE:60",
-    "name": "Water Orb",
+    "id": "water:destruction:LESSER:69",
+    "name": "Aqueous Globelet",
     "element": "Water",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 31,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 28,
+    "proficiency": 50,
+    "tier": "LESSER",
+    "mpCost": 8,
+    "basePower": 18,
     "status": {
       "name": "Burn",
-      "chance": 0.25,
-      "potency": 2,
-      "duration": 12
+      "chance": 0.2,
+      "potency": 1,
+      "duration": 10
     },
     "effects": [
       {
         "kind": "status",
         "statusName": "Burn",
-        "chance": 0.25,
-        "potency": 2,
-        "duration": 12
+        "chance": 0.2,
+        "potency": 1,
+        "duration": 10
       },
       {
         "kind": "overtime",
         "otKind": "DoT",
-        "otPerTick": 5,
-        "duration": 12
+        "otPerTick": 4,
+        "duration": 10
       }
     ],
-    "description": "Water Orb strikes a single foe with surging tides and fluid force, ",
+    "description": "Aqueous Globelet strikes a single foe with surging tides and fluid force, lightly",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2481,19 +2857,51 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:control:BASELINE:61",
-    "name": "Water Stream",
+    "id": "water:healing:LESSER:70",
+    "name": "Lesser Tidal Drip",
+    "element": "Water",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 64,
+    "tier": "LESSER",
+    "mpCost": 8,
+    "basePower": 20,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Ward",
+        "duration": 12
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 4,
+        "duration": 10
+      }
+    ],
+    "description": "Lesser Tidal Drip restores a single ally with surging tides and fluid force, lightly",
+    "statusOnCrit": {
+      "name": "Soak",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "water:control:BASELINE:71",
+    "name": "Wave Spout",
     "element": "Water",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 36,
+    "proficiency": 78,
     "tier": "BASELINE",
     "mpCost": 13,
     "basePower": 6,
     "status": {
-      "name": "Blind",
+      "name": "Stun",
       "chance": 0.25,
       "potency": 2,
       "duration": 12
@@ -2501,7 +2909,7 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Blind",
+        "statusName": "Stun",
         "chance": 0.25,
         "potency": 2,
         "duration": 12
@@ -2521,7 +2929,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Water Stream binds all enemies in range with surging tides and fluid force, ",
+    "description": "Wave Spout binds all enemies in range with surging tides and fluid force, ",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2529,14 +2937,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:healing:BASELINE:62",
-    "name": "Canticle of Wave",
+    "id": "water:healing:BASELINE:72",
+    "name": "Canticle of Water",
     "element": "Water",
     "school": "Healing",
     "family": "support",
     "type": "Chant",
     "target": "PARTY",
-    "proficiency": 41,
+    "proficiency": 91,
     "tier": "BASELINE",
     "mpCost": 6,
     "upkeep": 4,
@@ -2561,7 +2969,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Canticle of Wave suffuses the party with surging tides and fluid force, ",
+    "description": "Canticle of Water suffuses the party with surging tides and fluid force, ",
     "lineage": {
       "isChant": true,
       "isDance": false,
@@ -2575,61 +2983,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:enfeeblement:BASELINE:63",
-    "name": "Water Ray",
-    "element": "Water",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 47,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 8,
-    "status": {
-      "name": "Slow",
-      "chance": 0.25,
-      "potency": 2,
-      "duration": 12
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Slow",
-        "chance": 0.25,
-        "potency": 2,
-        "duration": 12
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": -14,
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 5,
-        "duration": 12
-      }
-    ],
-    "description": "Water Ray saps a single foe with surging tides and fluid force, ",
-    "statusOnCrit": {
-      "name": "Soak",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "water:enhancement:BASELINE:64",
+    "id": "water:enhancement:BASELINE:73",
     "name": "Wave Dagger",
     "element": "Water",
     "school": "Enhancement",
     "family": "support",
     "type": "Buff",
     "target": "SELF",
-    "proficiency": 52,
+    "proficiency": 105,
     "tier": "BASELINE",
     "mpCost": 11,
     "basePower": 0,
@@ -2641,8 +3002,8 @@ export const SPELLBOOK = [
       },
       {
         "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
+        "lane": "ranged",
+        "stat": "acc",
         "value": 14,
         "duration": 14
       },
@@ -2663,39 +3024,45 @@ export const SPELLBOOK = [
     "description": "Wave Dagger bolsters the caster with surging tides and fluid force, "
   },
   {
-    "id": "water:destruction:BASELINE:65",
-    "name": "Water Spear",
+    "id": "water:healing:BASELINE:74",
+    "name": "Ballad of Water",
     "element": "Water",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMY",
-    "proficiency": 58,
+    "school": "Healing",
+    "family": "support",
+    "type": "Chant",
+    "target": "PARTY",
+    "proficiency": 118,
     "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 28,
-    "status": {
-      "name": "Burn",
-      "chance": 0.25,
-      "potency": 2,
-      "duration": 12
-    },
+    "mpCost": 6,
+    "upkeep": 4,
+    "basePower": 32,
     "effects": [
       {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.25,
-        "potency": 2,
-        "duration": 12
+        "kind": "boon",
+        "boonName": "Ward",
+        "duration": 14
       },
       {
         "kind": "overtime",
-        "otKind": "DoT",
+        "otKind": "HoT",
         "otPerTick": 5,
         "duration": 12
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "water",
+          "delta": 12
+        }
       }
     ],
-    "description": "Water Spear strikes a single foe with surging tides and fluid force, ",
+    "description": "Ballad of Water suffuses the party with surging tides and fluid force, ",
+    "lineage": {
+      "isChant": true,
+      "isDance": false,
+      "isSummon": false,
+      "isNinjutsu": false
+    },
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2703,19 +3070,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:control:GREATER:66",
-    "name": "Surging Flood",
+    "id": "water:destruction:GREATER:75",
+    "name": "Riptide Star",
     "element": "Water",
-    "school": "Control",
-    "family": "control",
-    "type": "Control",
-    "target": "ENEMIES",
-    "proficiency": 63,
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 131,
     "tier": "GREATER",
-    "mpCost": 20,
-    "basePower": 8,
+    "mpCost": 18,
+    "basePower": 42,
     "status": {
-      "name": "Stun",
+      "name": "Burn",
       "chance": 0.30000000000000004,
       "potency": 2,
       "duration": 14
@@ -2723,27 +3090,19 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Stun",
+        "statusName": "Burn",
         "chance": 0.30000000000000004,
         "potency": 2,
         "duration": 14
       },
       {
-        "kind": "stat",
-        "lane": "general",
-        "stat": "spd",
-        "value": -17,
-        "duration": 16
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "water",
-          "delta": 8
-        }
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 6,
+        "duration": 14
       }
     ],
-    "description": "Surging Flood binds all enemies in range with surging tides and fluid force, powerfully",
+    "description": "Riptide Star strikes a single foe with surging tides and fluid force, powerfully",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2751,17 +3110,16 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:healing:GREATER:67",
-    "name": "Anthem of Surging",
+    "id": "water:healing:GREATER:76",
+    "name": "Surging Flood",
     "element": "Water",
     "school": "Healing",
     "family": "support",
-    "type": "Chant",
-    "target": "PARTY",
-    "proficiency": 68,
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 144,
     "tier": "GREATER",
-    "mpCost": 9,
-    "upkeep": 6,
+    "mpCost": 18,
     "basePower": 48,
     "effects": [
       {
@@ -2783,13 +3141,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Anthem of Surging suffuses the party with surging tides and fluid force, powerfully",
-    "lineage": {
-      "isChant": true,
-      "isDance": false,
-      "isSummon": false,
-      "isNinjutsu": false
-    },
+    "description": "Surging Flood restores a single ally with surging tides and fluid force, powerfully",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2797,19 +3149,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:enfeeblement:GREATER:68",
-    "name": "Riptide Harpoon",
+    "id": "water:control:GREATER:77",
+    "name": "Deep Surging Cataclysm",
     "element": "Water",
-    "school": "Enfeeblement",
+    "school": "Control",
     "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 73,
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 159,
     "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 13,
+    "mpCost": 20,
+    "basePower": 8,
     "status": {
-      "name": "Blind",
+      "name": "Root",
       "chance": 0.30000000000000004,
       "potency": 2,
       "duration": 14
@@ -2817,26 +3169,27 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Blind",
+        "statusName": "Root",
         "chance": 0.30000000000000004,
         "potency": 2,
         "duration": 14
       },
       {
         "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
+        "lane": "general",
+        "stat": "spd",
         "value": -17,
         "duration": 16
       },
       {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 6,
-        "duration": 14
+        "kind": "elemres",
+        "elemres": {
+          "element": "water",
+          "delta": 8
+        }
       }
     ],
-    "description": "Riptide Harpoon saps a single foe with surging tides and fluid force, powerfully",
+    "description": "Deep Surging Cataclysm binds all enemies in range with surging tides and fluid force, powerfully",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2844,28 +3197,21 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:enhancement:MAJOR:69",
-    "name": "Maelstrom Greatsword",
+    "id": "water:healing:MAJOR:78",
+    "name": "Deluge Maelstrom",
     "element": "Water",
-    "school": "Enhancement",
+    "school": "Healing",
     "family": "support",
-    "type": "Buff",
+    "type": "Heal",
     "target": "PARTY",
-    "proficiency": 79,
+    "proficiency": 172,
     "tier": "MAJOR",
-    "mpCost": 23,
-    "basePower": 0,
+    "mpCost": 25,
+    "basePower": 70,
     "effects": [
       {
         "kind": "boon",
         "boonName": "Aegis",
-        "duration": 18
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": 20,
         "duration": 18
       },
       {
@@ -2878,46 +3224,11 @@ export const SPELLBOOK = [
         "kind": "elemres",
         "elemres": {
           "element": "water",
-          "delta": 15
+          "delta": 12
         }
       }
     ],
-    "description": "Maelstrom Greatsword bolsters the caster with surging tides and fluid force, overwhelmingly"
-  },
-  {
-    "id": "water:destruction:MAJOR:70",
-    "name": "Grand Deluge Sun",
-    "element": "Water",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMIES",
-    "proficiency": 84,
-    "tier": "MAJOR",
-    "mpCost": 25,
-    "basePower": 60,
-    "status": {
-      "name": "Bleed",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Bleed",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 7,
-        "duration": 16
-      }
-    ],
-    "description": "Grand Deluge Sun strikes a single foe with surging tides and fluid force, overwhelmingly",
+    "description": "Deluge Maelstrom restores a single ally with surging tides and fluid force, overwhelmingly",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -2925,62 +3236,53 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "water:control:MAJOR:71",
-    "name": "Deluge Cataclysm",
-    "element": "Water",
-    "school": "Control",
-    "family": "control",
-    "type": "Control",
-    "target": "ENEMIES",
-    "proficiency": 89,
-    "tier": "MAJOR",
-    "mpCost": 28,
-    "basePower": 12,
-    "status": {
-      "name": "Slow",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Slow",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "general",
-        "stat": "spd",
-        "value": -20,
-        "duration": 18
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "water",
-          "delta": 8
-        }
-      }
-    ],
-    "description": "Deluge Cataclysm binds all enemies in range with surging tides and fluid force, overwhelmingly",
-    "statusOnCrit": {
-      "name": "Soak",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "water:healing:MYTHIC:72",
-    "name": "Worldsea Worldfire",
+    "id": "water:healing:MAJOR:79",
+    "name": "Utter Deluge Cataclysm",
     "element": "Water",
     "school": "Healing",
     "family": "support",
     "type": "Heal",
     "target": "PARTY",
-    "proficiency": 94,
+    "proficiency": 185,
+    "tier": "MAJOR",
+    "mpCost": 25,
+    "basePower": 70,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 18
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 7,
+        "duration": 16
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "water",
+          "delta": 12
+        }
+      }
+    ],
+    "description": "Utter Deluge Cataclysm restores a single ally with surging tides and fluid force, overwhelmingly",
+    "statusOnCrit": {
+      "name": "Soak",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "water:healing:MYTHIC:80",
+    "name": "Worldsea Maelstrom",
+    "element": "Water",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "PARTY",
+    "proficiency": 199,
     "tier": "MYTHIC",
     "mpCost": 36,
     "basePower": 100,
@@ -3004,7 +3306,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Worldsea Worldfire restores a single ally with surging tides and fluid force, with mythic force",
+    "description": "Worldsea Maelstrom restores a single ally with surging tides and fluid force, with mythic force",
     "statusOnCrit": {
       "name": "Soak",
       "chance": 1,
@@ -3012,14 +3314,135 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "wind:control:MINOR:73",
+    "id": "wind:destruction:MINOR:81",
+    "name": "Lesser Breath Pellet",
+    "element": "Wind",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 10,
+    "status": {
+      "name": "Burn",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Burn",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Lesser Breath Pellet strikes a single foe with swift currents and slicing air, faintly",
+    "statusOnCrit": {
+      "name": "Wound",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "wind:enhancement:MINOR:82",
+    "name": "Whiff Sliver",
+    "element": "Wind",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 10
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": 8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Whiff Sliver bolsters the caster with swift currents and slicing air, faintly"
+  },
+  {
+    "id": "wind:enfeeblement:MINOR:83",
+    "name": "Faint Breath Flare",
+    "element": "Wind",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
+    "status": {
+      "name": "Blind",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Blind",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Faint Breath Flare saps a single foe with swift currents and slicing air, faintly",
+    "statusOnCrit": {
+      "name": "Wound",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "wind:control:MINOR:84",
     "name": "Whiff Drip",
     "element": "Wind",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 5,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 6,
     "basePower": 2,
@@ -3053,19 +3476,51 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "wind:enfeeblement:MINOR:74",
-    "name": "Whiff Puff",
+    "id": "wind:healing:MINOR:85",
+    "name": "Lesser Whiff Drip",
     "element": "Wind",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 10,
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
-    "basePower": 3,
+    "basePower": 12,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Lesser Whiff Drip restores a single ally with swift currents and slicing air, faintly",
+    "statusOnCrit": {
+      "name": "Wound",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "wind:control:MINOR:86",
+    "name": "Faint Whiff Drip",
+    "element": "Wind",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 10,
+    "tier": "MINOR",
+    "mpCost": 6,
+    "basePower": 2,
     "status": {
-      "name": "Blind",
+      "name": "Root",
       "chance": 0.15000000000000002,
       "potency": 1,
       "duration": 8
@@ -3073,7 +3528,48 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Blind",
+        "statusName": "Root",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -8,
+        "duration": 10
+      }
+    ],
+    "description": "Faint Whiff Drip binds all enemies in range with swift currents and slicing air, faintly",
+    "statusOnCrit": {
+      "name": "Wound",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "wind:enfeeblement:MINOR:87",
+    "name": "Breath Glimmer",
+    "element": "Wind",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 23,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
+    "status": {
+      "name": "Slow",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Slow",
         "chance": 0.15000000000000002,
         "potency": 1,
         "duration": 8
@@ -3092,7 +3588,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Whiff Puff saps a single foe with swift currents and slicing air, faintly",
+    "description": "Breath Glimmer saps a single foe with swift currents and slicing air, faintly",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3100,14 +3596,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "wind:control:LESSER:75",
-    "name": "Dwindled Breeze Drip",
+    "id": "wind:control:LESSER:88",
+    "name": "Lesser Zephyr Rill",
     "element": "Wind",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 15,
+    "proficiency": 36,
     "tier": "LESSER",
     "mpCost": 9,
     "basePower": 4,
@@ -3133,7 +3629,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Dwindled Breeze Drip binds all enemies in range with swift currents and slicing air, lightly",
+    "description": "Lesser Zephyr Rill binds all enemies in range with swift currents and slicing air, lightly",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3141,114 +3637,39 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "wind:enhancement:LESSER:76",
-    "name": "Breeze Shard",
-    "element": "Wind",
-    "school": "Enhancement",
-    "family": "support",
-    "type": "Buff",
-    "target": "SELF",
-    "proficiency": 20,
-    "tier": "LESSER",
-    "mpCost": 7,
-    "basePower": 0,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Aegis",
-        "duration": 12
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": 11,
-        "duration": 12
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 4,
-        "duration": 10
-      }
-    ],
-    "description": "Breeze Shard bolsters the caster with swift currents and slicing air, lightly"
-  },
-  {
-    "id": "wind:control:LESSER:77",
-    "name": "Dwindled Zephyr Rill",
-    "element": "Wind",
-    "school": "Control",
-    "family": "control",
-    "type": "Control",
-    "target": "ENEMIES",
-    "proficiency": 26,
-    "tier": "LESSER",
-    "mpCost": 9,
-    "basePower": 4,
-    "status": {
-      "name": "Root",
-      "chance": 0.2,
-      "potency": 1,
-      "duration": 10
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Root",
-        "chance": 0.2,
-        "potency": 1,
-        "duration": 10
-      },
-      {
-        "kind": "stat",
-        "lane": "general",
-        "stat": "spd",
-        "value": -11,
-        "duration": 12
-      }
-    ],
-    "description": "Dwindled Zephyr Rill binds all enemies in range with swift currents and slicing air, lightly",
-    "statusOnCrit": {
-      "name": "Wound",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "wind:destruction:BASELINE:78",
-    "name": "Gale Orb",
+    "id": "wind:destruction:LESSER:89",
+    "name": "Lesser Breeze Pellet",
     "element": "Wind",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 31,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 28,
+    "proficiency": 50,
+    "tier": "LESSER",
+    "mpCost": 8,
+    "basePower": 18,
     "status": {
       "name": "Burn",
-      "chance": 0.25,
-      "potency": 2,
-      "duration": 12
+      "chance": 0.2,
+      "potency": 1,
+      "duration": 10
     },
     "effects": [
       {
         "kind": "status",
         "statusName": "Burn",
-        "chance": 0.25,
-        "potency": 2,
-        "duration": 12
+        "chance": 0.2,
+        "potency": 1,
+        "duration": 10
       },
       {
         "kind": "overtime",
         "otKind": "DoT",
-        "otPerTick": 5,
-        "duration": 12
+        "otPerTick": 4,
+        "duration": 10
       }
     ],
-    "description": "Gale Orb strikes a single foe with swift currents and slicing air, ",
+    "description": "Lesser Breeze Pellet strikes a single foe with swift currents and slicing air, lightly",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3256,14 +3677,55 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "wind:enfeeblement:BASELINE:79",
-    "name": "Gust Ray",
+    "id": "wind:control:LESSER:90",
+    "name": "Breeze Trickle",
+    "element": "Wind",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 64,
+    "tier": "LESSER",
+    "mpCost": 9,
+    "basePower": 4,
+    "status": {
+      "name": "Slow",
+      "chance": 0.2,
+      "potency": 1,
+      "duration": 10
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Slow",
+        "chance": 0.2,
+        "potency": 1,
+        "duration": 10
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -11,
+        "duration": 12
+      }
+    ],
+    "description": "Breeze Trickle binds all enemies in range with swift currents and slicing air, lightly",
+    "statusOnCrit": {
+      "name": "Wound",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "wind:enfeeblement:BASELINE:91",
+    "name": "Gust Beam",
     "element": "Wind",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 37,
+    "proficiency": 78,
     "tier": "BASELINE",
     "mpCost": 12,
     "basePower": 8,
@@ -3295,7 +3757,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Gust Ray saps a single foe with swift currents and slicing air, ",
+    "description": "Gust Beam saps a single foe with swift currents and slicing air, ",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3303,14 +3765,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "wind:control:BASELINE:80",
+    "id": "wind:control:BASELINE:92",
     "name": "Gust Blast",
     "element": "Wind",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 41,
+    "proficiency": 91,
     "tier": "BASELINE",
     "mpCost": 13,
     "basePower": 6,
@@ -3351,53 +3813,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "wind:healing:BASELINE:81",
-    "name": "Gust Spout",
-    "element": "Wind",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 47,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 32,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Aegis",
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 5,
-        "duration": 12
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "wind",
-          "delta": 12
-        }
-      }
-    ],
-    "description": "Gust Spout restores a single ally with swift currents and slicing air, ",
-    "statusOnCrit": {
-      "name": "Wound",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "wind:enhancement:BASELINE:82",
-    "name": "Gust Ball",
+    "id": "wind:enhancement:BASELINE:93",
+    "name": "Gust Sphere",
     "element": "Wind",
     "school": "Enhancement",
     "family": "support",
     "type": "Buff",
     "target": "SELF",
-    "proficiency": 52,
+    "proficiency": 105,
     "tier": "BASELINE",
     "mpCost": 11,
     "basePower": 0,
@@ -3409,8 +3832,8 @@ export const SPELLBOOK = [
       },
       {
         "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
+        "lane": "general",
+        "stat": "eva",
         "value": 14,
         "duration": 14
       },
@@ -3428,22 +3851,22 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Gust Ball bolsters the caster with swift currents and slicing air, "
+    "description": "Gust Sphere bolsters the caster with swift currents and slicing air, "
   },
   {
-    "id": "wind:destruction:BASELINE:83",
-    "name": "Gust Orb",
+    "id": "wind:control:BASELINE:94",
+    "name": "Gust Wave",
     "element": "Wind",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMY",
-    "proficiency": 57,
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 118,
     "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 28,
+    "mpCost": 13,
+    "basePower": 6,
     "status": {
-      "name": "Bleed",
+      "name": "Root",
       "chance": 0.25,
       "potency": 2,
       "duration": 12
@@ -3451,19 +3874,27 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Bleed",
+        "statusName": "Root",
         "chance": 0.25,
         "potency": 2,
         "duration": 12
       },
       {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 5,
-        "duration": 12
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -14,
+        "duration": 14
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "wind",
+          "delta": 8
+        }
       }
     ],
-    "description": "Gust Orb strikes a single foe with swift currents and slicing air, ",
+    "description": "Gust Wave binds all enemies in range with swift currents and slicing air, ",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3471,14 +3902,102 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "wind:enfeeblement:GREATER:84",
-    "name": "Greater Squall Javelin",
+    "id": "wind:destruction:GREATER:95",
+    "name": "Squall Greatsword",
+    "element": "Wind",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 131,
+    "tier": "GREATER",
+    "mpCost": 18,
+    "basePower": 42,
+    "status": {
+      "name": "Burn",
+      "chance": 0.30000000000000004,
+      "potency": 2,
+      "duration": 14
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Burn",
+        "chance": 0.30000000000000004,
+        "potency": 2,
+        "duration": 14
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 6,
+        "duration": 14
+      }
+    ],
+    "description": "Squall Greatsword strikes a single foe with swift currents and slicing air, powerfully",
+    "statusOnCrit": {
+      "name": "Wound",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "wind:control:GREATER:96",
+    "name": "Deep Squall Deluge",
+    "element": "Wind",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 144,
+    "tier": "GREATER",
+    "mpCost": 20,
+    "basePower": 8,
+    "status": {
+      "name": "Blind",
+      "chance": 0.30000000000000004,
+      "potency": 2,
+      "duration": 14
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Blind",
+        "chance": 0.30000000000000004,
+        "potency": 2,
+        "duration": 14
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -17,
+        "duration": 16
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "wind",
+          "delta": 8
+        }
+      }
+    ],
+    "description": "Deep Squall Deluge binds all enemies in range with swift currents and slicing air, powerfully",
+    "statusOnCrit": {
+      "name": "Wound",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "wind:enfeeblement:GREATER:97",
+    "name": "Squall Harpoon",
     "element": "Wind",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 63,
+    "proficiency": 159,
     "tier": "GREATER",
     "mpCost": 18,
     "basePower": 13,
@@ -3510,7 +4029,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Greater Squall Javelin saps a single foe with swift currents and slicing air, powerfully",
+    "description": "Squall Harpoon saps a single foe with swift currents and slicing air, powerfully",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3518,37 +4037,37 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "wind:control:GREATER:85",
-    "name": "Squall Deluge",
+    "id": "wind:control:MAJOR:98",
+    "name": "Typhoon Maelstrom",
     "element": "Wind",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 68,
-    "tier": "GREATER",
-    "mpCost": 20,
-    "basePower": 8,
+    "proficiency": 172,
+    "tier": "MAJOR",
+    "mpCost": 28,
+    "basePower": 12,
     "status": {
-      "name": "Slow",
-      "chance": 0.30000000000000004,
-      "potency": 2,
-      "duration": 14
+      "name": "Root",
+      "chance": 0.35,
+      "potency": 3,
+      "duration": 16
     },
     "effects": [
       {
         "kind": "status",
-        "statusName": "Slow",
-        "chance": 0.30000000000000004,
-        "potency": 2,
-        "duration": 14
+        "statusName": "Root",
+        "chance": 0.35,
+        "potency": 3,
+        "duration": 16
       },
       {
         "kind": "stat",
         "lane": "general",
         "stat": "spd",
-        "value": -17,
-        "duration": 16
+        "value": -20,
+        "duration": 18
       },
       {
         "kind": "elemres",
@@ -3558,7 +4077,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Squall Deluge binds all enemies in range with swift currents and slicing air, powerfully",
+    "description": "Typhoon Maelstrom binds all enemies in range with swift currents and slicing air, overwhelmingly",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3566,193 +4085,67 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "wind:healing:GREATER:86",
-    "name": "Tempest Flood",
-    "element": "Wind",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 74,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 48,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Blessing",
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 6,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "wind",
-          "delta": 12
-        }
-      }
-    ],
-    "description": "Tempest Flood restores a single ally with swift currents and slicing air, powerfully",
-    "statusOnCrit": {
-      "name": "Wound",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "wind:enhancement:GREATER:87",
-    "name": "Greater Flamenco of Squall",
-    "element": "Wind",
-    "school": "Enhancement",
-    "family": "support",
-    "type": "Chant",
-    "target": "PARTY",
-    "proficiency": 79,
-    "tier": "GREATER",
-    "mpCost": 8,
-    "upkeep": 6,
-    "basePower": 0,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Aegis",
-        "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": 17,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "RestoreMP",
-        "otPerTick": 6,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "wind",
-          "delta": 15
-        }
-      }
-    ],
-    "description": "Greater Flamenco of Squall suffuses the party with swift currents and slicing air, powerfully",
-    "lineage": {
-      "isChant": true,
-      "isDance": true,
-      "isSummon": false,
-      "isNinjutsu": false
-    }
-  },
-  {
-    "id": "wind:destruction:MAJOR:88",
-    "name": "Hurricane Sunblade",
-    "element": "Wind",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMIES",
-    "proficiency": 84,
-    "tier": "MAJOR",
-    "mpCost": 25,
-    "basePower": 60,
-    "status": {
-      "name": "Burn",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 7,
-        "duration": 16
-      }
-    ],
-    "description": "Hurricane Sunblade strikes a single foe with swift currents and slicing air, overwhelmingly",
-    "statusOnCrit": {
-      "name": "Wound",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "wind:enfeeblement:MAJOR:89",
-    "name": "Grand Aureate Hurricane Sunbeam",
-    "element": "Wind",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 89,
-    "tier": "MAJOR",
-    "mpCost": 25,
-    "basePower": 18,
-    "status": {
-      "name": "Blind",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Blind",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": -20,
-        "duration": 18
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 7,
-        "duration": 16
-      }
-    ],
-    "description": "Grand Aureate Hurricane Sunbeam saps a single foe with swift currents and slicing air, overwhelmingly",
-    "statusOnCrit": {
-      "name": "Wound",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "wind:control:MYTHIC:90",
-    "name": "Transcendent Sky Tyrant Maelstrom",
+    "id": "wind:control:MAJOR:99",
+    "name": "Hurricane Maelstrom",
     "element": "Wind",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 94,
+    "proficiency": 185,
+    "tier": "MAJOR",
+    "mpCost": 28,
+    "basePower": 12,
+    "status": {
+      "name": "Stun",
+      "chance": 0.35,
+      "potency": 3,
+      "duration": 16
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Stun",
+        "chance": 0.35,
+        "potency": 3,
+        "duration": 16
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -20,
+        "duration": 18
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "wind",
+          "delta": 8
+        }
+      }
+    ],
+    "description": "Hurricane Maelstrom binds all enemies in range with swift currents and slicing air, overwhelmingly",
+    "statusOnCrit": {
+      "name": "Wound",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "wind:control:MYTHIC:100",
+    "name": "Mythic Sky Tyrant Maelstrom",
+    "element": "Wind",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 199,
     "tier": "MYTHIC",
     "mpCost": 40,
     "basePower": 17,
     "status": {
-      "name": "Root",
+      "name": "Stun",
       "chance": 0.4,
       "potency": 3,
       "duration": 18
@@ -3760,7 +4153,7 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Root",
+        "statusName": "Stun",
         "chance": 0.4,
         "potency": 3,
         "duration": 18
@@ -3780,7 +4173,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Transcendent Sky Tyrant Maelstrom binds all enemies in range with swift currents and slicing air, with mythic force",
+    "description": "Mythic Sky Tyrant Maelstrom binds all enemies in range with swift currents and slicing air, with mythic force",
     "statusOnCrit": {
       "name": "Wound",
       "chance": 1,
@@ -3788,48 +4181,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "stone:enhancement:MINOR:91",
-    "name": "Faint Pebble Shard",
-    "element": "Stone",
-    "school": "Enhancement",
-    "family": "support",
-    "type": "Buff",
-    "target": "SELF",
-    "proficiency": 5,
-    "tier": "MINOR",
-    "mpCost": 5,
-    "basePower": 0,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Veil",
-        "duration": 10
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": 8,
-        "duration": 10
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 3,
-        "duration": 8
-      }
-    ],
-    "description": "Faint Pebble Shard bolsters the caster with unyielding earth and grinding pressure, faintly"
-  },
-  {
-    "id": "stone:destruction:MINOR:92",
-    "name": "Faint Grit Bead",
+    "id": "stone:destruction:MINOR:101",
+    "name": "Faint Pebble Bead",
     "element": "Stone",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 10,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 10,
@@ -3854,7 +4213,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Grit Bead strikes a single foe with unyielding earth and grinding pressure, faintly",
+    "description": "Faint Pebble Bead strikes a single foe with unyielding earth and grinding pressure, faintly",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -3862,14 +4221,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "stone:enhancement:MINOR:93",
-    "name": "Faint Grit Pellet",
+    "id": "stone:enhancement:MINOR:102",
+    "name": "Grit Shard",
     "element": "Stone",
     "school": "Enhancement",
     "family": "support",
     "type": "Buff",
     "target": "SELF",
-    "proficiency": 14,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 0,
@@ -3881,7 +4240,161 @@ export const SPELLBOOK = [
       },
       {
         "kind": "stat",
-        "lane": "magic",
+        "lane": "ranged",
+        "stat": "acc",
+        "value": 8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Grit Shard bolsters the caster with unyielding earth and grinding pressure, faintly"
+  },
+  {
+    "id": "stone:enfeeblement:MINOR:103",
+    "name": "Pebble Spark",
+    "element": "Stone",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
+    "status": {
+      "name": "Blind",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Blind",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Pebble Spark saps a single foe with unyielding earth and grinding pressure, faintly",
+    "statusOnCrit": {
+      "name": "Stagger",
+      "chance": 1,
+      "duration": 2
+    }
+  },
+  {
+    "id": "stone:control:MINOR:104",
+    "name": "Grit Drip",
+    "element": "Stone",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 6,
+    "basePower": 2,
+    "status": {
+      "name": "Slow",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Slow",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -8,
+        "duration": 10
+      }
+    ],
+    "description": "Grit Drip binds all enemies in range with unyielding earth and grinding pressure, faintly",
+    "statusOnCrit": {
+      "name": "Stagger",
+      "chance": 1,
+      "duration": 2
+    }
+  },
+  {
+    "id": "stone:healing:MINOR:105",
+    "name": "Lesser Grit Drip",
+    "element": "Stone",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 12,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Lesser Grit Drip restores a single ally with unyielding earth and grinding pressure, faintly",
+    "statusOnCrit": {
+      "name": "Stagger",
+      "chance": 1,
+      "duration": 2
+    }
+  },
+  {
+    "id": "stone:enhancement:MINOR:106",
+    "name": "Faint Grit Shard",
+    "element": "Stone",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 10,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 10
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
         "stat": "atk",
         "value": 8,
         "duration": 10
@@ -3893,43 +4406,43 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Grit Pellet bolsters the caster with unyielding earth and grinding pressure, faintly"
+    "description": "Faint Grit Shard bolsters the caster with unyielding earth and grinding pressure, faintly"
   },
   {
-    "id": "stone:control:LESSER:94",
-    "name": "Rocky Drip",
+    "id": "stone:control:MINOR:107",
+    "name": "Faint Pebble Drip",
     "element": "Stone",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 21,
-    "tier": "LESSER",
-    "mpCost": 9,
-    "basePower": 4,
+    "proficiency": 22,
+    "tier": "MINOR",
+    "mpCost": 6,
+    "basePower": 2,
     "status": {
       "name": "Root",
-      "chance": 0.2,
+      "chance": 0.15000000000000002,
       "potency": 1,
-      "duration": 10
+      "duration": 8
     },
     "effects": [
       {
         "kind": "status",
         "statusName": "Root",
-        "chance": 0.2,
+        "chance": 0.15000000000000002,
         "potency": 1,
-        "duration": 10
+        "duration": 8
       },
       {
         "kind": "stat",
         "lane": "general",
         "stat": "spd",
-        "value": -11,
-        "duration": 12
+        "value": -8,
+        "duration": 10
       }
     ],
-    "description": "Rocky Drip binds all enemies in range with unyielding earth and grinding pressure, lightly",
+    "description": "Faint Pebble Drip binds all enemies in range with unyielding earth and grinding pressure, faintly",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -3937,27 +4450,27 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "stone:enhancement:LESSER:95",
-    "name": "Dwindled Stony Rocky Globelet",
+    "id": "stone:enhancement:LESSER:108",
+    "name": "Rocky Shard",
     "element": "Stone",
     "school": "Enhancement",
     "family": "support",
     "type": "Buff",
     "target": "SELF",
-    "proficiency": 26,
+    "proficiency": 37,
     "tier": "LESSER",
     "mpCost": 7,
     "basePower": 0,
     "effects": [
       {
         "kind": "boon",
-        "boonName": "Ward",
+        "boonName": "Aegis",
         "duration": 12
       },
       {
         "kind": "stat",
-        "lane": "ranged",
-        "stat": "acc",
+        "lane": "melee",
+        "stat": "atk",
         "value": 11,
         "duration": 12
       },
@@ -3968,22 +4481,22 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Dwindled Stony Rocky Globelet bolsters the caster with unyielding earth and grinding pressure, lightly"
+    "description": "Rocky Shard bolsters the caster with unyielding earth and grinding pressure, lightly"
   },
   {
-    "id": "stone:destruction:LESSER:96",
-    "name": "Stony Pellet",
+    "id": "stone:destruction:LESSER:109",
+    "name": "Lesser Rocky Pellet",
     "element": "Stone",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 31,
+    "proficiency": 50,
     "tier": "LESSER",
     "mpCost": 8,
     "basePower": 18,
     "status": {
-      "name": "Bleed",
+      "name": "Burn",
       "chance": 0.2,
       "potency": 1,
       "duration": 10
@@ -3991,7 +4504,7 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Bleed",
+        "statusName": "Burn",
         "chance": 0.2,
         "potency": 1,
         "duration": 10
@@ -4003,7 +4516,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Stony Pellet strikes a single foe with unyielding earth and grinding pressure, lightly",
+    "description": "Lesser Rocky Pellet strikes a single foe with unyielding earth and grinding pressure, lightly",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4011,14 +4524,48 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "stone:control:BASELINE:97",
-    "name": "Earth Blast",
+    "id": "stone:enhancement:LESSER:110",
+    "name": "Lesser Stony Sliver",
+    "element": "Stone",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 64,
+    "tier": "LESSER",
+    "mpCost": 7,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 12
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": 11,
+        "duration": 12
+      },
+      {
+        "kind": "overtime",
+        "otKind": "RestoreMP",
+        "otPerTick": 4,
+        "duration": 10
+      }
+    ],
+    "description": "Lesser Stony Sliver bolsters the caster with unyielding earth and grinding pressure, lightly"
+  },
+  {
+    "id": "stone:control:BASELINE:111",
+    "name": "Earth Spout",
     "element": "Stone",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 36,
+    "proficiency": 77,
     "tier": "BASELINE",
     "mpCost": 13,
     "basePower": 6,
@@ -4051,7 +4598,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Earth Blast binds all enemies in range with unyielding earth and grinding pressure, ",
+    "description": "Earth Spout binds all enemies in range with unyielding earth and grinding pressure, ",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4059,14 +4606,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "stone:enhancement:BASELINE:98",
-    "name": "Stone Dagger",
+    "id": "stone:enhancement:BASELINE:112",
+    "name": "Stone Shortsword",
     "element": "Stone",
     "school": "Enhancement",
     "family": "support",
     "type": "Buff",
     "target": "SELF",
-    "proficiency": 41,
+    "proficiency": 90,
     "tier": "BASELINE",
     "mpCost": 11,
     "basePower": 0,
@@ -4078,8 +4625,8 @@ export const SPELLBOOK = [
       },
       {
         "kind": "stat",
-        "lane": "ranged",
-        "stat": "acc",
+        "lane": "melee",
+        "stat": "atk",
         "value": 14,
         "duration": 14
       },
@@ -4097,56 +4644,17 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Stone Dagger bolsters the caster with unyielding earth and grinding pressure, "
+    "description": "Stone Shortsword bolsters the caster with unyielding earth and grinding pressure, "
   },
   {
-    "id": "stone:healing:BASELINE:99",
-    "name": "Stone Stream",
-    "element": "Stone",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 46,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 32,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Blessing",
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 5,
-        "duration": 12
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "stone",
-          "delta": 12
-        }
-      }
-    ],
-    "description": "Stone Stream restores a single ally with unyielding earth and grinding pressure, ",
-    "statusOnCrit": {
-      "name": "Stagger",
-      "chance": 1,
-      "duration": 2
-    }
-  },
-  {
-    "id": "stone:enfeeblement:BASELINE:100",
-    "name": "Stone Beam",
+    "id": "stone:enfeeblement:BASELINE:113",
+    "name": "Stone Ray",
     "element": "Stone",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 52,
+    "proficiency": 105,
     "tier": "BASELINE",
     "mpCost": 12,
     "basePower": 8,
@@ -4178,7 +4686,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Stone Beam saps a single foe with unyielding earth and grinding pressure, ",
+    "description": "Stone Ray saps a single foe with unyielding earth and grinding pressure, ",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4186,14 +4694,55 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "stone:destruction:GREATER:101",
-    "name": "Boulder Star",
+    "id": "stone:enhancement:BASELINE:114",
+    "name": "Stone Shortsword",
+    "element": "Stone",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 117,
+    "tier": "BASELINE",
+    "mpCost": 11,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 14
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": 14,
+        "duration": 14
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 5,
+        "duration": 12
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "stone",
+          "delta": 15
+        }
+      }
+    ],
+    "description": "Stone Shortsword bolsters the caster with unyielding earth and grinding pressure, "
+  },
+  {
+    "id": "stone:destruction:GREATER:115",
+    "name": "Granite Star",
     "element": "Stone",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 57,
+    "proficiency": 132,
     "tier": "GREATER",
     "mpCost": 18,
     "basePower": 42,
@@ -4218,7 +4767,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Boulder Star strikes a single foe with unyielding earth and grinding pressure, powerfully",
+    "description": "Granite Star strikes a single foe with unyielding earth and grinding pressure, powerfully",
     "statusOnCrit": {
       "name": "Stagger",
       "chance": 1,
@@ -4226,62 +4775,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "stone:control:GREATER:102",
-    "name": "Deep Granite Flood",
-    "element": "Stone",
-    "school": "Control",
-    "family": "control",
-    "type": "Control",
-    "target": "ENEMIES",
-    "proficiency": 62,
-    "tier": "GREATER",
-    "mpCost": 20,
-    "basePower": 8,
-    "status": {
-      "name": "Root",
-      "chance": 0.30000000000000004,
-      "potency": 2,
-      "duration": 14
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Root",
-        "chance": 0.30000000000000004,
-        "potency": 2,
-        "duration": 14
-      },
-      {
-        "kind": "stat",
-        "lane": "general",
-        "stat": "spd",
-        "value": -17,
-        "duration": 16
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "stone",
-          "delta": 8
-        }
-      }
-    ],
-    "description": "Deep Granite Flood binds all enemies in range with unyielding earth and grinding pressure, powerfully",
-    "statusOnCrit": {
-      "name": "Stagger",
-      "chance": 1,
-      "duration": 2
-    }
-  },
-  {
-    "id": "stone:enhancement:GREATER:103",
-    "name": "Greater Granite Claymore",
+    "id": "stone:enhancement:GREATER:116",
+    "name": "Granite Greatsword",
     "element": "Stone",
     "school": "Enhancement",
     "family": "support",
     "type": "Buff",
     "target": "SELF",
-    "proficiency": 68,
+    "proficiency": 145,
     "tier": "GREATER",
     "mpCost": 16,
     "basePower": 0,
@@ -4312,166 +4813,40 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Greater Granite Claymore bolsters the caster with unyielding earth and grinding pressure, powerfully"
+    "description": "Granite Greatsword bolsters the caster with unyielding earth and grinding pressure, powerfully"
   },
   {
-    "id": "stone:healing:GREATER:104",
-    "name": "Granite Flood",
-    "element": "Stone",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 73,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 48,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Blessing",
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 6,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "stone",
-          "delta": 12
-        }
-      }
-    ],
-    "description": "Granite Flood restores a single ally with unyielding earth and grinding pressure, powerfully",
-    "statusOnCrit": {
-      "name": "Stagger",
-      "chance": 1,
-      "duration": 2
-    }
-  },
-  {
-    "id": "stone:enfeeblement:MAJOR:105",
-    "name": "Solar Monolith Sunbeam",
-    "element": "Stone",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 78,
-    "tier": "MAJOR",
-    "mpCost": 25,
-    "basePower": 18,
-    "status": {
-      "name": "Blind",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Blind",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": -20,
-        "duration": 18
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 7,
-        "duration": 16
-      }
-    ],
-    "description": "Solar Monolith Sunbeam saps a single foe with unyielding earth and grinding pressure, overwhelmingly",
-    "statusOnCrit": {
-      "name": "Stagger",
-      "chance": 1,
-      "duration": 2
-    }
-  },
-  {
-    "id": "stone:destruction:MAJOR:106",
-    "name": "Grand Monolith Kingsblade",
-    "element": "Stone",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMIES",
-    "proficiency": 83,
-    "tier": "MAJOR",
-    "mpCost": 25,
-    "basePower": 60,
-    "status": {
-      "name": "Burn",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 7,
-        "duration": 16
-      }
-    ],
-    "description": "Grand Monolith Kingsblade strikes a single foe with unyielding earth and grinding pressure, overwhelmingly",
-    "statusOnCrit": {
-      "name": "Stagger",
-      "chance": 1,
-      "duration": 2
-    }
-  },
-  {
-    "id": "stone:control:MYTHIC:107",
-    "name": "Mythic Worldpillar Armageddon",
+    "id": "stone:control:MAJOR:117",
+    "name": "Monolith Maelstrom",
     "element": "Stone",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 89,
-    "tier": "MYTHIC",
-    "mpCost": 40,
-    "basePower": 17,
+    "proficiency": 158,
+    "tier": "MAJOR",
+    "mpCost": 28,
+    "basePower": 12,
     "status": {
-      "name": "Root",
-      "chance": 0.4,
+      "name": "Stun",
+      "chance": 0.35,
       "potency": 3,
-      "duration": 18
+      "duration": 16
     },
     "effects": [
       {
         "kind": "status",
-        "statusName": "Root",
-        "chance": 0.4,
+        "statusName": "Stun",
+        "chance": 0.35,
         "potency": 3,
-        "duration": 18
+        "duration": 16
       },
       {
         "kind": "stat",
         "lane": "general",
         "stat": "spd",
-        "value": -23,
-        "duration": 20
+        "value": -20,
+        "duration": 18
       },
       {
         "kind": "elemres",
@@ -4481,7 +4856,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Mythic Worldpillar Armageddon binds all enemies in range with unyielding earth and grinding pressure, with mythic force",
+    "description": "Monolith Maelstrom binds all enemies in range with unyielding earth and grinding pressure, overwhelmingly",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -4495,14 +4870,96 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "stone:enhancement:MYTHIC:108",
-    "name": "Transcendent Supernal Worldpillar Sunblade",
+    "id": "stone:enhancement:MAJOR:118",
+    "name": "Utter Monolith Kingsblade",
     "element": "Stone",
     "school": "Enhancement",
     "family": "support",
     "type": "Buff",
     "target": "PARTY",
-    "proficiency": 95,
+    "proficiency": 172,
+    "tier": "MAJOR",
+    "mpCost": 23,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 18
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": 20,
+        "duration": 18
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 7,
+        "duration": 16
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "stone",
+          "delta": 15
+        }
+      }
+    ],
+    "description": "Utter Monolith Kingsblade bolsters the caster with unyielding earth and grinding pressure, overwhelmingly"
+  },
+  {
+    "id": "stone:enhancement:MAJOR:119",
+    "name": "Monolith Sun",
+    "element": "Stone",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "PARTY",
+    "proficiency": 186,
+    "tier": "MAJOR",
+    "mpCost": 23,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 18
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": 20,
+        "duration": 18
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 7,
+        "duration": 16
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "stone",
+          "delta": 15
+        }
+      }
+    ],
+    "description": "Monolith Sun bolsters the caster with unyielding earth and grinding pressure, overwhelmingly"
+  },
+  {
+    "id": "stone:enhancement:MYTHIC:120",
+    "name": "Mythic Tectonic Kingsblade",
+    "element": "Stone",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "PARTY",
+    "proficiency": 199,
     "tier": "MYTHIC",
     "mpCost": 32,
     "basePower": 0,
@@ -4514,8 +4971,8 @@ export const SPELLBOOK = [
       },
       {
         "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
+        "lane": "ranged",
+        "stat": "acc",
         "value": 23,
         "duration": 20
       },
@@ -4533,34 +4990,42 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Transcendent Supernal Worldpillar Sunblade bolsters the caster with unyielding earth and grinding pressure, with mythic force"
+    "description": "Mythic Tectonic Kingsblade bolsters the caster with unyielding earth and grinding pressure, with mythic force"
   },
   {
-    "id": "light:healing:MINOR:109",
-    "name": "Gleam Rill",
+    "id": "light:destruction:MINOR:121",
+    "name": "Lesser Faint Pellet",
     "element": "Light",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 5,
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
-    "basePower": 12,
+    "basePower": 10,
+    "status": {
+      "name": "Bleed",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
     "effects": [
       {
-        "kind": "boon",
-        "boonName": "Blessing",
-        "duration": 10
+        "kind": "status",
+        "statusName": "Bleed",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
       },
       {
         "kind": "overtime",
-        "otKind": "HoT",
+        "otKind": "DoT",
         "otPerTick": 3,
         "duration": 8
       }
     ],
-    "description": "Gleam Rill restores a single ally with radiant purity and sacred brilliance, faintly",
+    "description": "Lesser Faint Pellet strikes a single foe with radiant purity and sacred brilliance, faintly",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -4568,21 +5033,21 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "light:enhancement:MINOR:110",
+    "id": "light:enhancement:MINOR:122",
     "name": "Faint Gleam Shard",
     "element": "Light",
     "school": "Enhancement",
     "family": "support",
     "type": "Buff",
     "target": "SELF",
-    "proficiency": 9,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 0,
     "effects": [
       {
         "kind": "boon",
-        "boonName": "Haste",
+        "boonName": "Blessing",
         "duration": 10
       },
       {
@@ -4602,14 +5067,102 @@ export const SPELLBOOK = [
     "description": "Faint Gleam Shard bolsters the caster with radiant purity and sacred brilliance, faintly"
   },
   {
-    "id": "light:healing:MINOR:111",
+    "id": "light:enfeeblement:MINOR:123",
+    "name": "Faint Spark",
+    "element": "Light",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
+    "status": {
+      "name": "Paralyze",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Paralyze",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Faint Spark saps a single foe with radiant purity and sacred brilliance, faintly",
+    "statusOnCrit": {
+      "name": "Dazzle",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "light:control:MINOR:124",
     "name": "Gleam Drip",
+    "element": "Light",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 6,
+    "basePower": 2,
+    "status": {
+      "name": "Root",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Root",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -8,
+        "duration": 10
+      }
+    ],
+    "description": "Gleam Drip binds all enemies in range with radiant purity and sacred brilliance, faintly",
+    "statusOnCrit": {
+      "name": "Dazzle",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "light:healing:MINOR:125",
+    "name": "Lesser Gleam Drip",
     "element": "Light",
     "school": "Healing",
     "family": "support",
     "type": "Heal",
     "target": "SINGLE",
-    "proficiency": 15,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 12,
@@ -4626,7 +5179,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Gleam Drip restores a single ally with radiant purity and sacred brilliance, faintly",
+    "description": "Lesser Gleam Drip restores a single ally with radiant purity and sacred brilliance, faintly",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -4634,61 +5187,87 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "light:destruction:LESSER:112",
-    "name": "Bright Bead",
-    "element": "Light",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMY",
-    "proficiency": 21,
-    "tier": "LESSER",
-    "mpCost": 8,
-    "basePower": 18,
-    "status": {
-      "name": "Burn",
-      "chance": 0.2,
-      "potency": 1,
-      "duration": 10
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.2,
-        "potency": 1,
-        "duration": 10
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 4,
-        "duration": 10
-      }
-    ],
-    "description": "Bright Bead strikes a single foe with radiant purity and sacred brilliance, lightly",
-    "statusOnCrit": {
-      "name": "Dazzle",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "light:healing:LESSER:113",
-    "name": "Bright Drip",
+    "id": "light:healing:MINOR:126",
+    "name": "Faint Gleam Drip",
     "element": "Light",
     "school": "Healing",
     "family": "support",
     "type": "Heal",
     "target": "SINGLE",
-    "proficiency": 26,
+    "proficiency": 10,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 12,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Faint Gleam Drip restores a single ally with radiant purity and sacred brilliance, faintly",
+    "statusOnCrit": {
+      "name": "Dazzle",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "light:enhancement:MINOR:127",
+    "name": "Faint Faint Sliver",
+    "element": "Light",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 22,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Haste",
+        "duration": 10
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "eva",
+        "value": 8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Faint Faint Sliver bolsters the caster with radiant purity and sacred brilliance, faintly"
+  },
+  {
+    "id": "light:healing:LESSER:128",
+    "name": "Shining Drip",
+    "element": "Light",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 35,
     "tier": "LESSER",
     "mpCost": 8,
     "basePower": 20,
     "effects": [
       {
         "kind": "boon",
-        "boonName": "Ward",
+        "boonName": "Aegis",
         "duration": 12
       },
       {
@@ -4698,7 +5277,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Bright Drip restores a single ally with radiant purity and sacred brilliance, lightly",
+    "description": "Shining Drip restores a single ally with radiant purity and sacred brilliance, lightly",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -4706,14 +5285,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "light:control:LESSER:114",
-    "name": "Shining Drip",
+    "id": "light:control:LESSER:129",
+    "name": "Bright Pop",
     "element": "Light",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 31,
+    "proficiency": 50,
     "tier": "LESSER",
     "mpCost": 9,
     "basePower": 4,
@@ -4739,7 +5318,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Shining Drip binds all enemies in range with radiant purity and sacred brilliance, lightly",
+    "description": "Bright Pop binds all enemies in range with radiant purity and sacred brilliance, lightly",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -4747,14 +5326,46 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "light:enhancement:BASELINE:115",
-    "name": "Ballad of Radiant",
+    "id": "light:healing:LESSER:130",
+    "name": "Dwindled Bright Trickle",
+    "element": "Light",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 63,
+    "tier": "LESSER",
+    "mpCost": 8,
+    "basePower": 20,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 12
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 4,
+        "duration": 10
+      }
+    ],
+    "description": "Dwindled Bright Trickle restores a single ally with radiant purity and sacred brilliance, lightly",
+    "statusOnCrit": {
+      "name": "Dazzle",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "light:enhancement:BASELINE:131",
+    "name": "Lay of Radiant",
     "element": "Light",
     "school": "Enhancement",
     "family": "support",
     "type": "Chant",
     "target": "PARTY",
-    "proficiency": 36,
+    "proficiency": 78,
     "tier": "BASELINE",
     "mpCost": 5,
     "upkeep": 4,
@@ -4762,13 +5373,13 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "boon",
-        "boonName": "Blessing",
+        "boonName": "Haste",
         "duration": 14
       },
       {
         "kind": "stat",
-        "lane": "ranged",
-        "stat": "acc",
+        "lane": "general",
+        "stat": "eva",
         "value": 14,
         "duration": 14
       },
@@ -4786,7 +5397,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Ballad of Radiant suffuses the party with radiant purity and sacred brilliance, ",
+    "description": "Lay of Radiant suffuses the party with radiant purity and sacred brilliance, ",
     "lineage": {
       "isChant": true,
       "isDance": false,
@@ -4795,14 +5406,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "light:healing:BASELINE:116",
+    "id": "light:healing:BASELINE:132",
     "name": "Light Stream",
     "element": "Light",
     "school": "Healing",
     "family": "support",
     "type": "Heal",
     "target": "SINGLE",
-    "proficiency": 42,
+    "proficiency": 90,
     "tier": "BASELINE",
     "mpCost": 12,
     "basePower": 32,
@@ -4834,61 +5445,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "light:enfeeblement:BASELINE:117",
-    "name": "Radiant Ray",
-    "element": "Light",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 46,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 8,
-    "status": {
-      "name": "Blind",
-      "chance": 0.25,
-      "potency": 2,
-      "duration": 12
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Blind",
-        "chance": 0.25,
-        "potency": 2,
-        "duration": 12
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": -14,
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 5,
-        "duration": 12
-      }
-    ],
-    "description": "Radiant Ray saps a single foe with radiant purity and sacred brilliance, ",
-    "statusOnCrit": {
-      "name": "Dazzle",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "light:destruction:BASELINE:118",
+    "id": "light:destruction:BASELINE:133",
     "name": "Light Spear",
     "element": "Light",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 52,
+    "proficiency": 105,
     "tier": "BASELINE",
     "mpCost": 12,
     "basePower": 28,
@@ -4921,14 +5485,53 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "light:control:GREATER:119",
-    "name": "Deep Sunlit Deluge",
+    "id": "light:healing:GREATER:134",
+    "name": "Greater Sunlit Flood",
+    "element": "Light",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 117,
+    "tier": "GREATER",
+    "mpCost": 18,
+    "basePower": 48,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 16
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 6,
+        "duration": 14
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "light",
+          "delta": 12
+        }
+      }
+    ],
+    "description": "Greater Sunlit Flood restores a single ally with radiant purity and sacred brilliance, powerfully",
+    "statusOnCrit": {
+      "name": "Dazzle",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "light:control:GREATER:135",
+    "name": "Greater Sunlit Flood",
     "element": "Light",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 57,
+    "proficiency": 131,
     "tier": "GREATER",
     "mpCost": 20,
     "basePower": 8,
@@ -4961,7 +5564,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Deep Sunlit Deluge binds all enemies in range with radiant purity and sacred brilliance, powerfully",
+    "description": "Greater Sunlit Flood binds all enemies in range with radiant purity and sacred brilliance, powerfully",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -4969,62 +5572,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "light:enhancement:GREATER:120",
-    "name": "Anthem of Sunlit",
-    "element": "Light",
-    "school": "Enhancement",
-    "family": "support",
-    "type": "Chant",
-    "target": "PARTY",
-    "proficiency": 62,
-    "tier": "GREATER",
-    "mpCost": 8,
-    "upkeep": 6,
-    "basePower": 0,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Blessing",
-        "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": 17,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 6,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "light",
-          "delta": 15
-        }
-      }
-    ],
-    "description": "Anthem of Sunlit suffuses the party with radiant purity and sacred brilliance, powerfully",
-    "lineage": {
-      "isChant": true,
-      "isDance": false,
-      "isSummon": false,
-      "isNinjutsu": false
-    }
-  },
-  {
-    "id": "light:healing:GREATER:121",
-    "name": "Greater Dawning Flood",
+    "id": "light:healing:GREATER:136",
+    "name": "Sunlit Flood",
     "element": "Light",
     "school": "Healing",
     "family": "support",
     "type": "Heal",
     "target": "SINGLE",
-    "proficiency": 67,
+    "proficiency": 144,
     "tier": "GREATER",
     "mpCost": 18,
     "basePower": 48,
@@ -5048,7 +5603,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Greater Dawning Flood restores a single ally with radiant purity and sacred brilliance, powerfully",
+    "description": "Sunlit Flood restores a single ally with radiant purity and sacred brilliance, powerfully",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5056,171 +5611,36 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "light:enfeeblement:GREATER:122",
-    "name": "Sunlit Harpoon",
-    "element": "Light",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 74,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 13,
-    "status": {
-      "name": "Blind",
-      "chance": 0.30000000000000004,
-      "potency": 2,
-      "duration": 14
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Blind",
-        "chance": 0.30000000000000004,
-        "potency": 2,
-        "duration": 14
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
-        "stat": "atk",
-        "value": -17,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 6,
-        "duration": 14
-      }
-    ],
-    "description": "Sunlit Harpoon saps a single foe with radiant purity and sacred brilliance, powerfully",
-    "statusOnCrit": {
-      "name": "Dazzle",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "light:destruction:MAJOR:123",
-    "name": "Aureate Sun",
-    "element": "Light",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMIES",
-    "proficiency": 79,
-    "tier": "MAJOR",
-    "mpCost": 25,
-    "basePower": 60,
-    "status": {
-      "name": "Burn",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 7,
-        "duration": 16
-      }
-    ],
-    "description": "Aureate Sun strikes a single foe with radiant purity and sacred brilliance, overwhelmingly",
-    "statusOnCrit": {
-      "name": "Dazzle",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "light:control:MAJOR:124",
-    "name": "Solar Maelstrom",
-    "element": "Light",
-    "school": "Control",
-    "family": "control",
-    "type": "Control",
-    "target": "ENEMIES",
-    "proficiency": 83,
-    "tier": "MAJOR",
-    "mpCost": 28,
-    "basePower": 12,
-    "status": {
-      "name": "Root",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Root",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "stat",
-        "lane": "general",
-        "stat": "spd",
-        "value": -20,
-        "duration": 18
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "light",
-          "delta": 8
-        }
-      }
-    ],
-    "description": "Solar Maelstrom binds all enemies in range with radiant purity and sacred brilliance, overwhelmingly",
-    "statusOnCrit": {
-      "name": "Dazzle",
-      "chance": 1,
-      "duration": 3
-    }
-  },
-  {
-    "id": "light:enhancement:MAJOR:125",
-    "name": "Oratorio of Aureate",
+    "id": "light:enhancement:GREATER:137",
+    "name": "Chorale of Sunlit",
     "element": "Light",
     "school": "Enhancement",
     "family": "support",
     "type": "Chant",
     "target": "PARTY",
-    "proficiency": 89,
-    "tier": "MAJOR",
-    "mpCost": 11,
-    "upkeep": 8,
+    "proficiency": 159,
+    "tier": "GREATER",
+    "mpCost": 8,
+    "upkeep": 6,
     "basePower": 0,
     "effects": [
       {
         "kind": "boon",
-        "boonName": "Aegis",
-        "duration": 18
+        "boonName": "Ward",
+        "duration": 16
       },
       {
         "kind": "stat",
         "lane": "melee",
         "stat": "atk",
-        "value": 20,
-        "duration": 18
+        "value": 17,
+        "duration": 16
       },
       {
         "kind": "overtime",
-        "otKind": "RestoreMP",
-        "otPerTick": 7,
-        "duration": 16
+        "otKind": "HoT",
+        "otPerTick": 6,
+        "duration": 14
       },
       {
         "kind": "elemres",
@@ -5230,7 +5650,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Oratorio of Aureate suffuses the party with radiant purity and sacred brilliance, overwhelmingly",
+    "description": "Chorale of Sunlit suffuses the party with radiant purity and sacred brilliance, powerfully",
     "lineage": {
       "isChant": true,
       "isDance": false,
@@ -5239,14 +5659,92 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "light:healing:MYTHIC:126",
-    "name": "Transcendent Supernal Maelstrom",
+    "id": "light:healing:MAJOR:138",
+    "name": "Grand Solar Maelstrom",
     "element": "Light",
     "school": "Healing",
     "family": "support",
     "type": "Heal",
     "target": "PARTY",
-    "proficiency": 95,
+    "proficiency": 172,
+    "tier": "MAJOR",
+    "mpCost": 25,
+    "basePower": 70,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 18
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 7,
+        "duration": 16
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "light",
+          "delta": 12
+        }
+      }
+    ],
+    "description": "Grand Solar Maelstrom restores a single ally with radiant purity and sacred brilliance, overwhelmingly",
+    "statusOnCrit": {
+      "name": "Dazzle",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "light:healing:MAJOR:139",
+    "name": "Grand Solar Maelstrom",
+    "element": "Light",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "PARTY",
+    "proficiency": 185,
+    "tier": "MAJOR",
+    "mpCost": 25,
+    "basePower": 70,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 18
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 7,
+        "duration": 16
+      },
+      {
+        "kind": "elemres",
+        "elemres": {
+          "element": "light",
+          "delta": 12
+        }
+      }
+    ],
+    "description": "Grand Solar Maelstrom restores a single ally with radiant purity and sacred brilliance, overwhelmingly",
+    "statusOnCrit": {
+      "name": "Dazzle",
+      "chance": 1,
+      "duration": 3
+    }
+  },
+  {
+    "id": "light:healing:MYTHIC:140",
+    "name": "Seraphic Maelstrom",
+    "element": "Light",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "PARTY",
+    "proficiency": 200,
     "tier": "MYTHIC",
     "mpCost": 36,
     "basePower": 100,
@@ -5270,7 +5768,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Transcendent Supernal Maelstrom restores a single ally with radiant purity and sacred brilliance, with mythic force",
+    "description": "Seraphic Maelstrom restores a single ally with radiant purity and sacred brilliance, with mythic force",
     "statusOnCrit": {
       "name": "Dazzle",
       "chance": 1,
@@ -5278,19 +5776,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:enfeeblement:MINOR:127",
-    "name": "Faint Dusky Spark",
+    "id": "dark:destruction:MINOR:141",
+    "name": "Dim Prick",
     "element": "Dark",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 5,
+    "proficiency": 1,
     "tier": "MINOR",
     "mpCost": 5,
-    "basePower": 3,
+    "basePower": 10,
     "status": {
-      "name": "Blind",
+      "name": "Bleed",
       "chance": 0.15000000000000002,
       "potency": 1,
       "duration": 8
@@ -5298,7 +5796,81 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Blind",
+        "statusName": "Bleed",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Dim Prick strikes a single foe with devouring shadow and creeping entropy, faintly",
+    "statusOnCrit": {
+      "name": "Curse",
+      "chance": 1,
+      "duration": 5
+    }
+  },
+  {
+    "id": "dark:enhancement:MINOR:142",
+    "name": "Faint Dim Shard",
+    "element": "Dark",
+    "school": "Enhancement",
+    "family": "support",
+    "type": "Buff",
+    "target": "SELF",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 0,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Blessing",
+        "duration": 10
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": 8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Faint Dim Shard bolsters the caster with devouring shadow and creeping entropy, faintly"
+  },
+  {
+    "id": "dark:enfeeblement:MINOR:143",
+    "name": "Dusky Spark",
+    "element": "Dark",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
+    "status": {
+      "name": "Paralyze",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Paralyze",
         "chance": 0.15000000000000002,
         "potency": 1,
         "duration": 8
@@ -5317,7 +5889,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Faint Dusky Spark saps a single foe with devouring shadow and creeping entropy, faintly",
+    "description": "Dusky Spark saps a single foe with devouring shadow and creeping entropy, faintly",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -5325,14 +5897,134 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:control:MINOR:128",
-    "name": "Faint Dim Rill",
+    "id": "dark:control:MINOR:144",
+    "name": "Dim Flare",
     "element": "Dark",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 9,
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 6,
+    "basePower": 2,
+    "status": {
+      "name": "Stun",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Stun",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "general",
+        "stat": "spd",
+        "value": -8,
+        "duration": 10
+      }
+    ],
+    "description": "Dim Flare binds all enemies in range with devouring shadow and creeping entropy, faintly",
+    "statusOnCrit": {
+      "name": "Curse",
+      "chance": 1,
+      "duration": 5
+    }
+  },
+  {
+    "id": "dark:healing:MINOR:145",
+    "name": "Lesser Dim Rill",
+    "element": "Dark",
+    "school": "Healing",
+    "family": "support",
+    "type": "Heal",
+    "target": "SINGLE",
+    "proficiency": 1,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 12,
+    "effects": [
+      {
+        "kind": "boon",
+        "boonName": "Aegis",
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "HoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Lesser Dim Rill restores a single ally with devouring shadow and creeping entropy, faintly",
+    "statusOnCrit": {
+      "name": "Curse",
+      "chance": 1,
+      "duration": 5
+    }
+  },
+  {
+    "id": "dark:enfeeblement:MINOR:146",
+    "name": "Dim Spark",
+    "element": "Dark",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 10,
+    "tier": "MINOR",
+    "mpCost": 5,
+    "basePower": 3,
+    "status": {
+      "name": "Slow",
+      "chance": 0.15000000000000002,
+      "potency": 1,
+      "duration": 8
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Slow",
+        "chance": 0.15000000000000002,
+        "potency": 1,
+        "duration": 8
+      },
+      {
+        "kind": "stat",
+        "lane": "magic",
+        "stat": "atk",
+        "value": -8,
+        "duration": 10
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 3,
+        "duration": 8
+      }
+    ],
+    "description": "Dim Spark saps a single foe with devouring shadow and creeping entropy, faintly",
+    "statusOnCrit": {
+      "name": "Curse",
+      "chance": 1,
+      "duration": 5
+    }
+  },
+  {
+    "id": "dark:control:MINOR:147",
+    "name": "Dusky Drip",
+    "element": "Dark",
+    "school": "Control",
+    "family": "control",
+    "type": "Control",
+    "target": "ENEMIES",
+    "proficiency": 22,
     "tier": "MINOR",
     "mpCost": 6,
     "basePower": 2,
@@ -5358,7 +6050,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Faint Dim Rill binds all enemies in range with devouring shadow and creeping entropy, faintly",
+    "description": "Dusky Drip binds all enemies in range with devouring shadow and creeping entropy, faintly",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -5366,14 +6058,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:enfeeblement:MINOR:129",
-    "name": "Dim Spark",
+    "id": "dark:enfeeblement:MINOR:148",
+    "name": "Faint Dim Puff",
     "element": "Dark",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 15,
+    "proficiency": 36,
     "tier": "MINOR",
     "mpCost": 5,
     "basePower": 3,
@@ -5393,7 +6085,7 @@ export const SPELLBOOK = [
       },
       {
         "kind": "stat",
-        "lane": "melee",
+        "lane": "magic",
         "stat": "atk",
         "value": -8,
         "duration": 10
@@ -5405,7 +6097,7 @@ export const SPELLBOOK = [
         "duration": 8
       }
     ],
-    "description": "Dim Spark saps a single foe with devouring shadow and creeping entropy, faintly",
+    "description": "Faint Dim Puff saps a single foe with devouring shadow and creeping entropy, faintly",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -5413,14 +6105,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:destruction:LESSER:130",
-    "name": "Dwindled Shadowed Pellet",
+    "id": "dark:destruction:LESSER:149",
+    "name": "Lesser Shadowed Pellet",
     "element": "Dark",
     "school": "Destruction",
     "family": "attack",
     "type": "Attack",
     "target": "ENEMY",
-    "proficiency": 20,
+    "proficiency": 49,
     "tier": "LESSER",
     "mpCost": 8,
     "basePower": 18,
@@ -5445,7 +6137,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Dwindled Shadowed Pellet strikes a single foe with devouring shadow and creeping entropy, lightly",
+    "description": "Lesser Shadowed Pellet strikes a single foe with devouring shadow and creeping entropy, lightly",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -5453,19 +6145,19 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:enfeeblement:LESSER:131",
-    "name": "Lesser Shadowed Spark",
+    "id": "dark:enfeeblement:LESSER:150",
+    "name": "Shadowed Spark",
     "element": "Dark",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 26,
+    "proficiency": 64,
     "tier": "LESSER",
     "mpCost": 8,
     "basePower": 5,
     "status": {
-      "name": "Poison",
+      "name": "Slow",
       "chance": 0.2,
       "potency": 1,
       "duration": 10
@@ -5473,7 +6165,7 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Poison",
+        "statusName": "Slow",
         "chance": 0.2,
         "potency": 1,
         "duration": 10
@@ -5492,7 +6184,7 @@ export const SPELLBOOK = [
         "duration": 10
       }
     ],
-    "description": "Lesser Shadowed Spark saps a single foe with devouring shadow and creeping entropy, lightly",
+    "description": "Shadowed Spark saps a single foe with devouring shadow and creeping entropy, lightly",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -5500,14 +6192,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:control:BASELINE:132",
-    "name": "Shadow Wave",
+    "id": "dark:control:BASELINE:151",
+    "name": "Dark Spout",
     "element": "Dark",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 31,
+    "proficiency": 77,
     "tier": "BASELINE",
     "mpCost": 13,
     "basePower": 6,
@@ -5540,7 +6232,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Shadow Wave binds all enemies in range with devouring shadow and creeping entropy, ",
+    "description": "Dark Spout binds all enemies in range with devouring shadow and creeping entropy, ",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -5548,14 +6240,14 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:enfeeblement:BASELINE:133",
-    "name": "Dark Blast",
+    "id": "dark:enfeeblement:BASELINE:152",
+    "name": "Dark Ray",
     "element": "Dark",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 36,
+    "proficiency": 91,
     "tier": "BASELINE",
     "mpCost": 12,
     "basePower": 8,
@@ -5569,98 +6261,6 @@ export const SPELLBOOK = [
       {
         "kind": "status",
         "statusName": "Blind",
-        "chance": 0.25,
-        "potency": 2,
-        "duration": 12
-      },
-      {
-        "kind": "stat",
-        "lane": "magic",
-        "stat": "atk",
-        "value": -14,
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 5,
-        "duration": 12
-      }
-    ],
-    "description": "Dark Blast saps a single foe with devouring shadow and creeping entropy, ",
-    "lineage": {
-      "isChant": false,
-      "isDance": false,
-      "isSummon": false,
-      "isNinjutsu": true
-    },
-    "statusOnCrit": {
-      "name": "Curse",
-      "chance": 1,
-      "duration": 5
-    }
-  },
-  {
-    "id": "dark:healing:BASELINE:134",
-    "name": "Shadow Stream",
-    "element": "Dark",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 42,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 32,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Ward",
-        "duration": 14
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 5,
-        "duration": 12
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "dark",
-          "delta": 12
-        }
-      }
-    ],
-    "description": "Shadow Stream restores a single ally with devouring shadow and creeping entropy, ",
-    "statusOnCrit": {
-      "name": "Curse",
-      "chance": 1,
-      "duration": 5
-    }
-  },
-  {
-    "id": "dark:enfeeblement:BASELINE:135",
-    "name": "Dark Ray",
-    "element": "Dark",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 46,
-    "tier": "BASELINE",
-    "mpCost": 12,
-    "basePower": 8,
-    "status": {
-      "name": "Paralyze",
-      "chance": 0.25,
-      "potency": 2,
-      "duration": 12
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Paralyze",
         "chance": 0.25,
         "potency": 2,
         "duration": 12
@@ -5693,33 +6293,33 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:enhancement:BASELINE:136",
+    "id": "dark:enhancement:BASELINE:153",
     "name": "Shadow Dagger",
     "element": "Dark",
     "school": "Enhancement",
     "family": "support",
     "type": "Buff",
     "target": "SELF",
-    "proficiency": 52,
+    "proficiency": 104,
     "tier": "BASELINE",
     "mpCost": 11,
     "basePower": 0,
     "effects": [
       {
         "kind": "boon",
-        "boonName": "Haste",
+        "boonName": "Veil",
         "duration": 14
       },
       {
         "kind": "stat",
-        "lane": "general",
-        "stat": "eva",
+        "lane": "melee",
+        "stat": "atk",
         "value": 14,
         "duration": 14
       },
       {
         "kind": "overtime",
-        "otKind": "RestoreMP",
+        "otKind": "HoT",
         "otPerTick": 5,
         "duration": 12
       },
@@ -5734,19 +6334,19 @@ export const SPELLBOOK = [
     "description": "Shadow Dagger bolsters the caster with devouring shadow and creeping entropy, "
   },
   {
-    "id": "dark:destruction:BASELINE:137",
-    "name": "Dark Sphere",
+    "id": "dark:enfeeblement:BASELINE:154",
+    "name": "Dark Ray",
     "element": "Dark",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 57,
+    "proficiency": 117,
     "tier": "BASELINE",
     "mpCost": 12,
-    "basePower": 28,
+    "basePower": 8,
     "status": {
-      "name": "Burn",
+      "name": "Poison",
       "chance": 0.25,
       "potency": 2,
       "duration": 12
@@ -5754,10 +6354,17 @@ export const SPELLBOOK = [
     "effects": [
       {
         "kind": "status",
-        "statusName": "Burn",
+        "statusName": "Poison",
         "chance": 0.25,
         "potency": 2,
         "duration": 12
+      },
+      {
+        "kind": "stat",
+        "lane": "magic",
+        "stat": "atk",
+        "value": -14,
+        "duration": 14
       },
       {
         "kind": "overtime",
@@ -5766,7 +6373,7 @@ export const SPELLBOOK = [
         "duration": 12
       }
     ],
-    "description": "Dark Sphere strikes a single foe with devouring shadow and creeping entropy, ",
+    "description": "Dark Ray saps a single foe with devouring shadow and creeping entropy, ",
     "lineage": {
       "isChant": false,
       "isDance": false,
@@ -5780,17 +6387,63 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:control:GREATER:138",
-    "name": "Deep Cataclysm",
+    "id": "dark:destruction:GREATER:155",
+    "name": "Deep Stygian Star",
     "element": "Dark",
-    "school": "Control",
-    "family": "control",
-    "type": "Control",
-    "target": "ENEMIES",
-    "proficiency": 63,
+    "school": "Destruction",
+    "family": "attack",
+    "type": "Attack",
+    "target": "ENEMY",
+    "proficiency": 131,
     "tier": "GREATER",
-    "mpCost": 20,
-    "basePower": 8,
+    "mpCost": 18,
+    "basePower": 42,
+    "status": {
+      "name": "Burn",
+      "chance": 0.30000000000000004,
+      "potency": 2,
+      "duration": 14
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Burn",
+        "chance": 0.30000000000000004,
+        "potency": 2,
+        "duration": 14
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 6,
+        "duration": 14
+      }
+    ],
+    "description": "Deep Stygian Star strikes a single foe with devouring shadow and creeping entropy, powerfully",
+    "lineage": {
+      "isChant": false,
+      "isDance": false,
+      "isSummon": false,
+      "isNinjutsu": true
+    },
+    "statusOnCrit": {
+      "name": "Curse",
+      "chance": 1,
+      "duration": 5
+    }
+  },
+  {
+    "id": "dark:enfeeblement:GREATER:156",
+    "name": "Deep Deep Cataclysm",
+    "element": "Dark",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 144,
+    "tier": "GREATER",
+    "mpCost": 18,
+    "basePower": 13,
     "status": {
       "name": "Blind",
       "chance": 0.30000000000000004,
@@ -5807,55 +6460,7 @@ export const SPELLBOOK = [
       },
       {
         "kind": "stat",
-        "lane": "general",
-        "stat": "spd",
-        "value": -17,
-        "duration": 16
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "dark",
-          "delta": 8
-        }
-      }
-    ],
-    "description": "Deep Cataclysm binds all enemies in range with devouring shadow and creeping entropy, powerfully",
-    "statusOnCrit": {
-      "name": "Curse",
-      "chance": 1,
-      "duration": 5
-    }
-  },
-  {
-    "id": "dark:enfeeblement:GREATER:139",
-    "name": "Deep Javelin",
-    "element": "Dark",
-    "school": "Enfeeblement",
-    "family": "control",
-    "type": "Debuff",
-    "target": "ENEMY",
-    "proficiency": 68,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 13,
-    "status": {
-      "name": "Paralyze",
-      "chance": 0.30000000000000004,
-      "potency": 2,
-      "duration": 14
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Paralyze",
-        "chance": 0.30000000000000004,
-        "potency": 2,
-        "duration": 14
-      },
-      {
-        "kind": "stat",
-        "lane": "melee",
+        "lane": "magic",
         "stat": "atk",
         "value": -17,
         "duration": 16
@@ -5867,7 +6472,7 @@ export const SPELLBOOK = [
         "duration": 14
       }
     ],
-    "description": "Deep Javelin saps a single foe with devouring shadow and creeping entropy, powerfully",
+    "description": "Deep Deep Cataclysm saps a single foe with devouring shadow and creeping entropy, powerfully",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -5875,157 +6480,37 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:healing:GREATER:140",
-    "name": "Deep Deep Flood",
-    "element": "Dark",
-    "school": "Healing",
-    "family": "support",
-    "type": "Heal",
-    "target": "SINGLE",
-    "proficiency": 73,
-    "tier": "GREATER",
-    "mpCost": 18,
-    "basePower": 48,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Ward",
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "HoT",
-        "otPerTick": 6,
-        "duration": 14
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "dark",
-          "delta": 12
-        }
-      }
-    ],
-    "description": "Deep Deep Flood restores a single ally with devouring shadow and creeping entropy, powerfully",
-    "statusOnCrit": {
-      "name": "Curse",
-      "chance": 1,
-      "duration": 5
-    }
-  },
-  {
-    "id": "dark:enhancement:MAJOR:141",
-    "name": "Utter Kingsblade",
-    "element": "Dark",
-    "school": "Enhancement",
-    "family": "support",
-    "type": "Buff",
-    "target": "PARTY",
-    "proficiency": 78,
-    "tier": "MAJOR",
-    "mpCost": 23,
-    "basePower": 0,
-    "effects": [
-      {
-        "kind": "boon",
-        "boonName": "Haste",
-        "duration": 18
-      },
-      {
-        "kind": "stat",
-        "lane": "general",
-        "stat": "eva",
-        "value": 20,
-        "duration": 18
-      },
-      {
-        "kind": "overtime",
-        "otKind": "RestoreMP",
-        "otPerTick": 7,
-        "duration": 16
-      },
-      {
-        "kind": "elemres",
-        "elemres": {
-          "element": "dark",
-          "delta": 15
-        }
-      }
-    ],
-    "description": "Utter Kingsblade bolsters the caster with devouring shadow and creeping entropy, overwhelmingly"
-  },
-  {
-    "id": "dark:destruction:MAJOR:142",
-    "name": "Grand Utter Sun",
-    "element": "Dark",
-    "school": "Destruction",
-    "family": "attack",
-    "type": "Attack",
-    "target": "ENEMIES",
-    "proficiency": 84,
-    "tier": "MAJOR",
-    "mpCost": 25,
-    "basePower": 60,
-    "status": {
-      "name": "Burn",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
-    },
-    "effects": [
-      {
-        "kind": "status",
-        "statusName": "Burn",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
-      },
-      {
-        "kind": "overtime",
-        "otKind": "DoT",
-        "otPerTick": 7,
-        "duration": 16
-      }
-    ],
-    "description": "Grand Utter Sun strikes a single foe with devouring shadow and creeping entropy, overwhelmingly",
-    "statusOnCrit": {
-      "name": "Curse",
-      "chance": 1,
-      "duration": 5
-    }
-  },
-  {
-    "id": "dark:control:MAJOR:143",
-    "name": "Abyssal Cataclysm",
+    "id": "dark:control:GREATER:157",
+    "name": "Greater Deep Flood",
     "element": "Dark",
     "school": "Control",
     "family": "control",
     "type": "Control",
     "target": "ENEMIES",
-    "proficiency": 89,
-    "tier": "MAJOR",
-    "mpCost": 28,
-    "basePower": 12,
+    "proficiency": 158,
+    "tier": "GREATER",
+    "mpCost": 20,
+    "basePower": 8,
     "status": {
       "name": "Root",
-      "chance": 0.35,
-      "potency": 3,
-      "duration": 16
+      "chance": 0.30000000000000004,
+      "potency": 2,
+      "duration": 14
     },
     "effects": [
       {
         "kind": "status",
         "statusName": "Root",
-        "chance": 0.35,
-        "potency": 3,
-        "duration": 16
+        "chance": 0.30000000000000004,
+        "potency": 2,
+        "duration": 14
       },
       {
         "kind": "stat",
         "lane": "general",
         "stat": "spd",
-        "value": -20,
-        "duration": 18
+        "value": -17,
+        "duration": 16
       },
       {
         "kind": "elemres",
@@ -6035,7 +6520,7 @@ export const SPELLBOOK = [
         }
       }
     ],
-    "description": "Abyssal Cataclysm binds all enemies in range with devouring shadow and creeping entropy, overwhelmingly",
+    "description": "Greater Deep Flood binds all enemies in range with devouring shadow and creeping entropy, powerfully",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6043,14 +6528,108 @@ export const SPELLBOOK = [
     }
   },
   {
-    "id": "dark:enfeeblement:MYTHIC:144",
-    "name": "Null Starsear",
+    "id": "dark:enfeeblement:MAJOR:158",
+    "name": "Utter Starshot",
     "element": "Dark",
     "school": "Enfeeblement",
     "family": "control",
     "type": "Debuff",
     "target": "ENEMY",
-    "proficiency": 95,
+    "proficiency": 173,
+    "tier": "MAJOR",
+    "mpCost": 25,
+    "basePower": 18,
+    "status": {
+      "name": "Blind",
+      "chance": 0.35,
+      "potency": 3,
+      "duration": 16
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Blind",
+        "chance": 0.35,
+        "potency": 3,
+        "duration": 16
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -20,
+        "duration": 18
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 7,
+        "duration": 16
+      }
+    ],
+    "description": "Utter Starshot saps a single foe with devouring shadow and creeping entropy, overwhelmingly",
+    "statusOnCrit": {
+      "name": "Curse",
+      "chance": 1,
+      "duration": 5
+    }
+  },
+  {
+    "id": "dark:enfeeblement:MAJOR:159",
+    "name": "Grand Utter Armageddon",
+    "element": "Dark",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 186,
+    "tier": "MAJOR",
+    "mpCost": 25,
+    "basePower": 18,
+    "status": {
+      "name": "Blind",
+      "chance": 0.35,
+      "potency": 3,
+      "duration": 16
+    },
+    "effects": [
+      {
+        "kind": "status",
+        "statusName": "Blind",
+        "chance": 0.35,
+        "potency": 3,
+        "duration": 16
+      },
+      {
+        "kind": "stat",
+        "lane": "melee",
+        "stat": "atk",
+        "value": -20,
+        "duration": 18
+      },
+      {
+        "kind": "overtime",
+        "otKind": "DoT",
+        "otPerTick": 7,
+        "duration": 16
+      }
+    ],
+    "description": "Grand Utter Armageddon saps a single foe with devouring shadow and creeping entropy, overwhelmingly",
+    "statusOnCrit": {
+      "name": "Curse",
+      "chance": 1,
+      "duration": 5
+    }
+  },
+  {
+    "id": "dark:enfeeblement:MYTHIC:160",
+    "name": "Mythic Null Armageddon",
+    "element": "Dark",
+    "school": "Enfeeblement",
+    "family": "control",
+    "type": "Debuff",
+    "target": "ENEMY",
+    "proficiency": 200,
     "tier": "MYTHIC",
     "mpCost": 36,
     "basePower": 26,
@@ -6070,7 +6649,7 @@ export const SPELLBOOK = [
       },
       {
         "kind": "stat",
-        "lane": "melee",
+        "lane": "magic",
         "stat": "atk",
         "value": -23,
         "duration": 20
@@ -6082,7 +6661,7 @@ export const SPELLBOOK = [
         "duration": 18
       }
     ],
-    "description": "Null Starsear saps a single foe with devouring shadow and creeping entropy, with mythic force",
+    "description": "Mythic Null Armageddon saps a single foe with devouring shadow and creeping entropy, with mythic force",
     "statusOnCrit": {
       "name": "Curse",
       "chance": 1,
@@ -6092,40 +6671,39 @@ export const SPELLBOOK = [
 ];
 
 export const MILESTONES = [
-  5,
-  9,
+  1,
   10,
-  14,
-  15,
-  16,
-  20,
-  21,
-  26,
-  30,
-  31,
+  22,
+  23,
+  35,
   36,
   37,
-  41,
-  42,
-  46,
-  47,
+  49,
+  50,
   51,
-  52,
-  57,
-  58,
-  62,
   63,
-  67,
-  68,
-  73,
-  74,
+  64,
+  76,
+  77,
   78,
-  79,
-  83,
-  84,
-  89,
-  94,
-  95
+  90,
+  91,
+  104,
+  105,
+  117,
+  118,
+  131,
+  132,
+  144,
+  145,
+  158,
+  159,
+  172,
+  173,
+  185,
+  186,
+  199,
+  200
 ];
 
 export const STATUS_ON_CRIT = {
