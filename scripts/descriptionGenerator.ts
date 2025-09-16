@@ -203,6 +203,39 @@ function combineSentences(lines: string[]): string {
     .replace(/\s+/g, " ");
 }
 
+type WeaponQuality = "Standard" | "Fine" | "Masterwork";
+
+interface WeaponLike {
+  name: string;
+  description: string;
+  region?: string;
+  fightingStyle?: string;
+  size?: string;
+}
+
+function describeWeaponQuality(weapon: WeaponLike, quality: WeaponQuality): string {
+  const region = weapon.region ? `from ${weapon.region}` : "from renowned smiths";
+  const sizeNote = weapon.size ? weapon.size.toLowerCase() : "balanced";
+  switch (quality) {
+    case "Fine":
+      return `Fine finishing ${region} dresses every fitting and coaxes a livelier balance out of its ${sizeNote} frame.`;
+    case "Masterwork":
+      return `Masterwork artisans ${region} layer select steels, enrich the fittings, and tune the balance to heirloom precision.`;
+    default:
+      return `Trusted ${region}, it proves dependable steel sized for ${sizeNote} engagements.`;
+  }
+}
+
+export function generateWeaponDescription(weapon: WeaponLike, quality: WeaponQuality): string {
+  const displayName = quality === "Standard" ? weapon.name : `${quality} ${weapon.name}`;
+  const baseLine = weapon.description ? ensurePeriod(weapon.description) : "";
+  const qualityLine = describeWeaponQuality(weapon, quality);
+  const styleLine = weapon.fightingStyle
+    ? `Favoured for ${weapon.fightingStyle.toLowerCase()}.`
+    : "";
+  return combineSentences([`${displayName}.`, baseLine, qualityLine, styleLine]);
+}
+
 function animalMicroFlavor(taxonGroup?: string): string {
   switch ((taxonGroup || "").toLowerCase()) {
     case "bird":
