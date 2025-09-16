@@ -30,15 +30,16 @@ const elementProfKey: Record<string, string> = {
   Wind: "wind",
   Fire: "fire",
   Ice: "ice",
-  Thunder: "thunder",
+  Lightning: "lightning",
   Dark: "dark",
   Light: "light",
 };
 const schoolProfKey: Record<string, string> = {
-  Destructive: "destructive",
+  Destruction: "destruction",
   Healing: "healing",
-  Reinforcement: "reinforcement",
-  Enfeebling: "enfeebling",
+  Enhancement: "enhancement",
+  Enfeeblement: "enfeeblement",
+  Control: "control",
   Summoning: "summoning",
 };
 

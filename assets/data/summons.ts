@@ -2,7 +2,7 @@
 
 /* ========================= Types ========================= */
 
-export type Element = "Stone"|"Water"|"Wind"|"Fire"|"Ice"|"Thunder"|"Dark"|"Light";
+export type Element = "Stone"|"Water"|"Wind"|"Fire"|"Ice"|"Lightning"|"Dark"|"Light";
 export type Form = "Elemental"|"Humanoid"|"Awakened";
 export type Role = "Tank"|"DPS"|"Controller"|"Support"|"Hybrid";
 export type Attr = "STR"|"DEX"|"CON"|"VIT"|"AGI"|"INT"|"WIS"|"CHA";
@@ -392,11 +392,11 @@ export const SUMMONS: SummonDef[] = [
     ]
   },
 
-  /* ------------------------ THUNDER ------------------------ */
+  /* ------------------------ LIGHTNING ------------------------ */
   {
-    id: id("Thunder","Elemental"),
-    element:"Thunder", form:"Elemental",
-    name:"Thunder Elemental",
+    id: id("Lightning","Elemental"),
+    element:"Lightning", form:"Elemental",
+    name:"Lightning Elemental",
     description:"Living arcs flicker and bite with capricious speed.",
     role:"DPS",
     keyAttributes:["INT","DEX"],
@@ -404,15 +404,15 @@ export const SUMMONS: SummonDef[] = [
     statCoeffs:{ hpPerCON:18, dmgPerINT:2.7, evaPerAGI:0.6 },
     costModel:{ initialMPCost:20, upkeepMPper5s:6, durationModel:"maintained" },
     abilities:[
-      { id:"thunder:arc", name:"Chain Arc", kind:"strike", target:"AoE",
-        payload:{ element:"Thunder", CHAIN:3 }, scaleHints:{ pctBase:16, pctAtP100:28 } },
-      { id:"thunder:stun", name:"Static Lock", kind:"control", target:"ST",
+      { id:"lightning:arc", name:"Chain Arc", kind:"strike", target:"AoE",
+        payload:{ element:"Lightning", CHAIN:3 }, scaleHints:{ pctBase:16, pctAtP100:28 } },
+      { id:"lightning:stun", name:"Static Lock", kind:"control", target:"ST",
         payload:{ STUN:true, DURATION_S:1 }, scaleHints:{ pctBase:0, pctAtP100:0 } },
     ]
   },
   {
-    id: id("Thunder","Humanoid"),
-    element:"Thunder", form:"Humanoid",
+    id: id("Lightning","Humanoid"),
+    element:"Lightning", form:"Humanoid",
     name:"Storm Herald",
     description:"A thunder-borne champion who writes with lightning.",
     role:"DPS",
@@ -421,15 +421,15 @@ export const SUMMONS: SummonDef[] = [
     statCoeffs:{ hpPerCON:20, dmgPerINT:3.0, evaPerAGI:0.7 },
     costModel:{ initialMPCost:34, upkeepMPper5s:9, durationModel:"maintained" },
     abilities:[
-      { id:"thunder:surge", name:"Voltage Surge", kind:"strike", target:"ST",
-        payload:{ element:"Thunder", DMG_PCT:22, OVERLOAD:true }, scaleHints:{ pctBase:16, pctAtP100:32 } },
-      { id:"thunder:battery", name:"Capacitor Field", kind:"aura", target:"Party",
+      { id:"lightning:surge", name:"Voltage Surge", kind:"strike", target:"ST",
+        payload:{ element:"Lightning", DMG_PCT:22, OVERLOAD:true }, scaleHints:{ pctBase:16, pctAtP100:32 } },
+      { id:"lightning:battery", name:"Capacitor Field", kind:"aura", target:"Party",
         payload:{ CRIT_TO_RESOURCE:true, MP_ON_CRIT_PCT:1, STAM_ON_CRIT_PCT:1 }, scaleHints:{ pctBase:1, pctAtP100:2 } },
     ]
   },
   {
-    id: id("Thunder","Awakened"),
-    element:"Thunder", form:"Awakened",
+    id: id("Lightning","Awakened"),
+    element:"Lightning", form:"Awakened",
     name:"Tempest Archon",
     description:"Storm’s regard, sharpened to a spear.",
     role:"DPS",
@@ -438,9 +438,9 @@ export const SUMMONS: SummonDef[] = [
     statCoeffs:{ hpPerCON:22, dmgPerINT:3.3, evaPerAGI:0.8 },
     costModel:{ initialMPCost:58, upkeepMPper5s:13, durationModel:"maintained" },
     abilities:[
-      { id:"thunder:stormcage", name:"Storm Cage", kind:"control", target:"AoE",
-        payload:{ PARALYZE:true, DURATION_S:1.5, element:"Thunder" }, scaleHints:{ pctBase:0, pctAtP100:0 } },
-      { id:"thunder:overdrive", name:"Overdrive Aura", kind:"aura", target:"Party",
+      { id:"lightning:stormcage", name:"Storm Cage", kind:"control", target:"AoE",
+        payload:{ PARALYZE:true, DURATION_S:1.5, element:"Lightning" }, scaleHints:{ pctBase:0, pctAtP100:0 } },
+      { id:"lightning:overdrive", name:"Overdrive Aura", kind:"aura", target:"Party",
         payload:{ HASTE_PCT:6, CDR_PCT:4 }, scaleHints:{ pctBase:4, pctAtP100:8 } },
     ]
   },
@@ -617,7 +617,7 @@ const ELEMENT_PROF_KEY: Record<Element, string> = {
   Wind: "wind",
   Fire: "fire",
   Ice: "ice",
-  Thunder: "thunder",
+  Lightning: "lightning",
   Dark: "dark",
   Light: "light",
 };
