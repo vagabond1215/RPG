@@ -118,6 +118,26 @@ function capitalize(str) {
   return str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
 }
 
+function escapeHtml(value) {
+  if (value == null) return '';
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function titleize(value) {
+  if (value == null) return '';
+  return String(value)
+    .replace(/[_-]+/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
 function replaceCharacterRefs(text, character) {
   if (!text) return text;
   let result = text;
@@ -2318,6 +2338,461 @@ function removeCapTooltip() {
 
 document.addEventListener('click', removeCapTooltip);
 
+let animalsCatalogPromise = null;
+let animalsCatalogData = null;
+let animalsCatalogFailed = false;
+let plantsCatalogPromise = null;
+let plantsCatalogData = null;
+let plantsCatalogFailed = false;
+
+function loadAnimalsCatalog() {
+  if (!animalsCatalogPromise) {
+    animalsCatalogFailed = false;
+    animalsCatalogPromise = fetch('data/animals.json')
+      .then(res => {
+        if (!res.ok) throw new Error(`Failed to load animals catalog (${res.status})`);
+        return res.json();
+      })
+      .then(data => {
+        animalsCatalogData = Array.isArray(data) ? data : [];
+        return animalsCatalogData;
+      })
+      .catch(err => {
+        console.error('Failed to load animals catalog', err);
+        animalsCatalogFailed = true;
+        animalsCatalogPromise = null;
+        animalsCatalogData = [];
+        return animalsCatalogData;
+      });
+  }
+  return animalsCatalogPromise;
+}
+
+function loadPlantsCatalog() {
+  if (!plantsCatalogPromise) {
+    plantsCatalogFailed = false;
+    plantsCatalogPromise = fetch('data/plants.json')
+      .then(res => {
+        if (!res.ok) throw new Error(`Failed to load plants catalog (${res.status})`);
+        return res.json();
+      })
+      .then(data => {
+        plantsCatalogData = Array.isArray(data) ? data : [];
+        return plantsCatalogData;
+      })
+      .catch(err => {
+        console.error('Failed to load plants catalog', err);
+        plantsCatalogFailed = true;
+        plantsCatalogPromise = null;
+        plantsCatalogData = [];
+        return plantsCatalogData;
+      });
+  }
+  return plantsCatalogPromise;
+}
+
+function normalizeCodexRecord(value, fallbackId) {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    const record = { ...value };
+    if (!record.id && fallbackId) record.id = fallbackId;
+    let levelSource = record.studyLevel;
+    if (levelSource == null) levelSource = record.level;
+    const level = Number.parseInt(levelSource, 10);
+    record.studyLevel = Number.isNaN(level) ? 1 : Math.max(0, level);
+    return record;
+  }
+  if (typeof value === 'number') {
+    return { id: fallbackId, studyLevel: Math.max(0, value) };
+  }
+  if (typeof value === 'boolean') {
+    return { id: fallbackId, studyLevel: value ? 1 : 0 };
+  }
+  if (typeof value === 'string') {
+    const parsed = Number.parseInt(value, 10);
+    return { id: fallbackId, studyLevel: Number.isNaN(parsed) ? 1 : Math.max(0, parsed) };
+  }
+  return { id: fallbackId, studyLevel: 1 };
+}
+
+function normalizeCodexCategory(category) {
+  if (!category) return {};
+  const normalized = {};
+  if (Array.isArray(category)) {
+    category.forEach(entry => {
+      if (!entry) return;
+      if (typeof entry === 'string') {
+        normalized[entry] = normalizeCodexRecord(1, entry);
+      } else if (typeof entry === 'object') {
+        const id = entry.id || entry.name;
+        if (!id) return;
+        normalized[id] = normalizeCodexRecord(entry, id);
+      }
+    });
+    return normalized;
+  }
+  if (typeof category === 'object') {
+    Object.entries(category).forEach(([key, value]) => {
+      if (!key) return;
+      const id =
+        value && typeof value === 'object' && !Array.isArray(value) && value.id
+          ? value.id
+          : key;
+      normalized[key] = normalizeCodexRecord(value, id);
+    });
+    return normalized;
+  }
+  if (typeof category === 'string') {
+    normalized[category] = normalizeCodexRecord(1, category);
+    return normalized;
+  }
+  return normalized;
+}
+
+function ensureCollections(character) {
+  if (!character) return { animals: {}, plants: {} };
+  const existing =
+    character.collections && typeof character.collections === 'object'
+      ? character.collections
+      : {};
+  const normalized = {
+    animals: normalizeCodexCategory(existing.animals),
+    plants: normalizeCodexCategory(existing.plants),
+  };
+  character.collections = normalized;
+  return normalized;
+}
+
+function getStudyLevel(record) {
+  if (!record) return 1;
+  const level = Number.parseInt(record.studyLevel, 10);
+  return Number.isNaN(level) ? 1 : Math.max(0, level);
+}
+
+function formatCodexList(items) {
+  if (!Array.isArray(items) || !items.length) return '';
+  return items.map(item => titleize(item)).join(', ');
+}
+
+function formatCodexDate(value) {
+  if (!value) return '';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  return date.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+
+function buildCodexNarrative(text) {
+  if (!text) return '';
+  return text
+    .split('\n')
+    .map(line => line.trim())
+    .filter(Boolean)
+    .map(line => `<p>${escapeHtml(line)}</p>`)
+    .join('');
+}
+
+function renderCodexScreen({
+  title,
+  entries,
+  selectedId,
+  collection,
+  onSelect,
+  emptyMessage,
+  buildDetails,
+  banner,
+}) {
+  if (!entries.length) {
+    setMainHTML(`
+      <div class="codex-screen">
+        <h1>${escapeHtml(title)}</h1>
+        <p class="codex-empty">${escapeHtml(emptyMessage || 'No records available.')}</p>
+      </div>
+    `);
+    return;
+  }
+  const activeId = entries.some(entry => entry.id === selectedId)
+    ? selectedId
+    : entries[0].id;
+  const listItems = entries
+    .map(entry => {
+      const state = collection[entry.id];
+      const level = getStudyLevel(state);
+      const name =
+        entry.data.common_name ||
+        entry.data.commonName ||
+        entry.data.name ||
+        titleize(entry.id);
+      const cls = entry.id === activeId ? 'codex-entry selected' : 'codex-entry';
+      return `
+        <li class="${cls}" data-id="${escapeHtml(entry.id)}">
+          <span class="codex-entry-name">${escapeHtml(name)}</span>
+          <span class="codex-entry-study">Lv. ${escapeHtml(level)}</span>
+        </li>
+      `;
+    })
+    .join('');
+  const selectedEntry = entries.find(entry => entry.id === activeId);
+  const detailHTML = buildDetails(selectedEntry, collection[activeId]);
+  setMainHTML(`
+    <div class="codex-screen">
+      <h1>${escapeHtml(title)}</h1>
+      ${banner ? `<p class="codex-hint">${escapeHtml(banner)}</p>` : ''}
+      <div class="codex-layout">
+        <ul class="codex-list">${listItems}</ul>
+        ${detailHTML}
+      </div>
+    </div>
+  `);
+  if (main) {
+    const items = main.querySelectorAll('.codex-entry');
+    items.forEach(item => {
+      item.addEventListener('click', () => onSelect(item.dataset.id));
+    });
+  }
+}
+
+function buildAnimalDetails(entry, record) {
+  const { data, id, missing } = entry;
+  const name = data.common_name || data.commonName || data.name || titleize(id);
+  const studyLevel = getStudyLevel(record);
+  if (missing) {
+    return `
+      <div class="codex-details">
+        <header class="codex-details-header">
+          <h2>${escapeHtml(name)}</h2>
+          <div class="codex-study">Study Level: ${escapeHtml(studyLevel)}</div>
+        </header>
+        <p class="codex-empty">Formal records for this creature have not been transcribed yet.</p>
+        <p class="codex-hint">Additional insights will unlock as you continue your studies.</p>
+      </div>
+    `;
+  }
+  const meta = [];
+  if (data.taxon_group) meta.push({ label: 'Classification', value: titleize(data.taxon_group) });
+  const regions = formatCodexList(data.regions);
+  if (regions) meta.push({ label: 'Regions', value: regions });
+  const habitats = formatCodexList(data.habitats);
+  if (habitats) meta.push({ label: 'Habitats', value: habitats });
+  const diet = formatCodexList(data.diet);
+  if (diet) meta.push({ label: 'Diet', value: diet });
+  if (data.domestication) {
+    const parts = [];
+    if (typeof data.domestication.domesticated === 'boolean') {
+      parts.push(data.domestication.domesticated ? 'Domesticated' : 'Wild');
+    }
+    if (data.domestication.notes) parts.push(data.domestication.notes);
+    if (parts.length) meta.push({ label: 'Domestication', value: parts.join(' · ') });
+  }
+  if (data.behavior) {
+    const parts = [];
+    if (typeof data.behavior.aggressive === 'boolean') {
+      parts.push(`Aggressive: ${data.behavior.aggressive ? 'Yes' : 'No'}`);
+    }
+    if (typeof data.behavior.territorial === 'boolean') {
+      parts.push(`Territorial: ${data.behavior.territorial ? 'Yes' : 'No'}`);
+    }
+    if (data.behavior.risk_to_humans) {
+      parts.push(`Risk to Humans: ${titleize(data.behavior.risk_to_humans)}`);
+    }
+    if (parts.length) meta.push({ label: 'Behavior', value: parts.join(' · ') });
+  }
+  if (data.edibility) {
+    const parts = [];
+    if (typeof data.edibility.edible === 'boolean') {
+      parts.push(data.edibility.edible ? 'Edible' : 'Inedible');
+    }
+    const edParts = formatCodexList(data.edibility.parts);
+    if (edParts) parts.push(`Parts: ${edParts}`);
+    if (data.edibility.preparation_notes) parts.push(data.edibility.preparation_notes);
+    if (parts.length) meta.push({ label: 'Edibility', value: parts.join(' · ') });
+  }
+  const byproducts = formatCodexList(data.byproducts);
+  if (byproducts) meta.push({ label: 'Byproducts', value: byproducts });
+  const firstEncountered = formatCodexDate(record?.firstEncountered);
+  if (firstEncountered) meta.push({ label: 'First Encountered', value: firstEncountered });
+  const lastObserved = formatCodexDate(record?.lastObserved);
+  if (lastObserved) meta.push({ label: 'Last Observed', value: lastObserved });
+  const detailRows = meta
+    .map(row => `<dt>${escapeHtml(row.label)}</dt><dd>${escapeHtml(row.value)}</dd>`)
+    .join('');
+  const narrative = data.narrative ? buildCodexNarrative(data.narrative) : '';
+  return `
+    <div class="codex-details">
+      <header class="codex-details-header">
+        <h2>${escapeHtml(name)}</h2>
+        <div class="codex-study">Study Level: ${escapeHtml(studyLevel)}</div>
+      </header>
+      ${detailRows ? `<dl class="codex-detail-grid">${detailRows}</dl>` : ''}
+      ${narrative ? `<div class="codex-narrative">${narrative}</div>` : ''}
+      <p class="codex-hint">Additional insights will unlock as you continue your studies.</p>
+    </div>
+  `;
+}
+
+function buildPlantDetails(entry, record) {
+  const { data, id, missing } = entry;
+  const name = data.common_name || data.commonName || data.name || titleize(id);
+  const studyLevel = getStudyLevel(record);
+  if (missing) {
+    return `
+      <div class="codex-details">
+        <header class="codex-details-header">
+          <h2>${escapeHtml(name)}</h2>
+          <div class="codex-study">Study Level: ${escapeHtml(studyLevel)}</div>
+        </header>
+        <p class="codex-empty">Field sketches exist, but this plant's record has not been copied into the herbarium yet.</p>
+        <p class="codex-hint">Additional insights will unlock as you continue your studies.</p>
+      </div>
+    `;
+  }
+  const meta = [];
+  if (data.growth_form) meta.push({ label: 'Growth Form', value: titleize(data.growth_form) });
+  const regions = formatCodexList(data.regions);
+  if (regions) meta.push({ label: 'Regions', value: regions });
+  const habitats = formatCodexList(data.habitats);
+  if (habitats) meta.push({ label: 'Habitats', value: habitats });
+  if (typeof data.cultivated === 'boolean') {
+    meta.push({ label: 'Cultivation', value: data.cultivated ? 'Cultivated' : 'Wild' });
+  }
+  if (typeof data.edible === 'boolean') {
+    meta.push({ label: 'Edibility', value: data.edible ? 'Edible' : 'Inedible' });
+  }
+  const byproducts = formatCodexList(data.byproducts);
+  if (byproducts) meta.push({ label: 'Byproducts', value: byproducts });
+  const firstLogged = formatCodexDate(record?.firstEncountered || record?.firstCatalogued);
+  if (firstLogged) meta.push({ label: 'First Logged', value: firstLogged });
+  const detailRows = meta
+    .map(row => `<dt>${escapeHtml(row.label)}</dt><dd>${escapeHtml(row.value)}</dd>`)
+    .join('');
+  const narrative = data.narrative ? buildCodexNarrative(data.narrative) : '';
+  return `
+    <div class="codex-details">
+      <header class="codex-details-header">
+        <h2>${escapeHtml(name)}</h2>
+        <div class="codex-study">Study Level: ${escapeHtml(studyLevel)}</div>
+      </header>
+      ${detailRows ? `<dl class="codex-detail-grid">${detailRows}</dl>` : ''}
+      ${narrative ? `<div class="codex-narrative">${narrative}</div>` : ''}
+      <p class="codex-hint">Additional insights will unlock as you continue your studies.</p>
+    </div>
+  `;
+}
+
+function showBestiaryUI(selectedId) {
+  if (!currentCharacter) return;
+  updateScale();
+  showBackButton();
+  const collections = ensureCollections(currentCharacter);
+  const encountered = Object.keys(collections.animals || {});
+  if (!encountered.length) {
+    setMainHTML(`
+      <div class="codex-screen">
+        <h1>Bestiary</h1>
+        <p class="codex-empty">Encounter creatures in the wild to populate your bestiary.</p>
+      </div>
+    `);
+    return;
+  }
+  if (animalsCatalogData === null) {
+    setMainHTML(`
+      <div class="codex-screen">
+        <h1>Bestiary</h1>
+        <p class="codex-loading">Compiling field notes...</p>
+      </div>
+    `);
+  }
+  loadAnimalsCatalog().then(catalog => {
+    const map = new Map(catalog.map(entry => [entry.id, entry]));
+    const entries = encountered
+      .map(id => {
+        const data = map.get(id);
+        return {
+          id,
+          data: data || { id, common_name: titleize(id) },
+          missing: !data,
+        };
+      })
+      .sort((a, b) => {
+        const nameA =
+          a.data.common_name || a.data.commonName || a.data.name || titleize(a.id);
+        const nameB =
+          b.data.common_name || b.data.commonName || b.data.name || titleize(b.id);
+        return nameA.localeCompare(nameB);
+      });
+    renderCodexScreen({
+      title: 'Bestiary',
+      entries,
+      selectedId,
+      collection: collections.animals,
+      onSelect: id => showBestiaryUI(id),
+      emptyMessage: 'No animal records are available yet.',
+      buildDetails: (entry, record) => buildAnimalDetails(entry, record),
+      banner: animalsCatalogFailed
+        ? 'Catalog data could not be retrieved. Showing personal field notes instead.'
+        : '',
+    });
+  });
+}
+
+function showHerbariumUI(selectedId) {
+  if (!currentCharacter) return;
+  updateScale();
+  showBackButton();
+  const collections = ensureCollections(currentCharacter);
+  const recorded = Object.keys(collections.plants || {});
+  if (!recorded.length) {
+    setMainHTML(`
+      <div class="codex-screen">
+        <h1>Herbarium</h1>
+        <p class="codex-empty">Study flora in the field to unlock entries in your herbarium.</p>
+      </div>
+    `);
+    return;
+  }
+  if (plantsCatalogData === null) {
+    setMainHTML(`
+      <div class="codex-screen">
+        <h1>Herbarium</h1>
+        <p class="codex-loading">Drying specimens...</p>
+      </div>
+    `);
+  }
+  loadPlantsCatalog().then(catalog => {
+    const map = new Map(catalog.map(entry => [entry.id, entry]));
+    const entries = recorded
+      .map(id => {
+        const data = map.get(id);
+        return {
+          id,
+          data: data || { id, common_name: titleize(id) },
+          missing: !data,
+        };
+      })
+      .sort((a, b) => {
+        const nameA =
+          a.data.common_name || a.data.commonName || a.data.name || titleize(a.id);
+        const nameB =
+          b.data.common_name || b.data.commonName || b.data.name || titleize(b.id);
+        return nameA.localeCompare(nameB);
+      });
+    renderCodexScreen({
+      title: 'Herbarium',
+      entries,
+      selectedId,
+      collection: collections.plants,
+      onSelect: id => showHerbariumUI(id),
+      emptyMessage: 'No plant records are available yet.',
+      buildDetails: (entry, record) => buildPlantDetails(entry, record),
+      banner: plantsCatalogFailed
+        ? 'Herbal archives are unavailable. Displaying personal notes instead.'
+        : '',
+    });
+  });
+}
+
 function showBuildingsUI() {
   if (!currentCharacter) return;
   showBackButton();
@@ -3138,6 +3613,7 @@ function finalizeCharacter(character) {
     }
   }
   assignMagicAptitudes(newChar);
+  ensureCollections(newChar);
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;
   currentCharacter = newChar;
@@ -3155,6 +3631,7 @@ function loadCharacter() {
       ...defaultProficiencies,
       ...currentProfile.characters[charId]
     });
+    ensureCollections(currentCharacter);
     showCharacter();
   } else if (localStorage.getItem(TEMP_CHARACTER_KEY)) {
     startCharacterCreation();
@@ -3308,6 +3785,10 @@ characterMenu.addEventListener('click', e => {
     showInventoryUI();
   } else if (action === 'spellbook') {
     showSpellbookUI();
+  } else if (action === 'bestiary') {
+    showBestiaryUI();
+  } else if (action === 'herbarium') {
+    showHerbariumUI();
   } else if (action === 'proficiencies') {
     showProficienciesUI();
   } else if (action === 'buildings') {

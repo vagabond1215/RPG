@@ -1658,3 +1658,147 @@ body.theme-dark .top-menu button {
 .item-popup .close-popup {
   float: right;
 }
+
+.codex-screen {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.codex-screen h1 {
+  margin: 0;
+}
+
+.codex-layout {
+  display: grid;
+  grid-template-columns: minmax(12rem, 18rem) 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.codex-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--foreground);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: var(--background);
+}
+
+.codex-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.theme-dark .codex-entry {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.codex-entry:last-child {
+  border-bottom: none;
+}
+
+.codex-entry:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.theme-dark .codex-entry:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.codex-entry.selected {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.codex-entry-name {
+  font-weight: 600;
+}
+
+.codex-entry-study {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.codex-details {
+  border: 1px solid var(--foreground);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background: var(--background);
+  color: var(--foreground);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.codex-details-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.codex-details-header h2 {
+  margin: 0;
+}
+
+.codex-study {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.codex-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(8rem, max-content) 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0;
+}
+
+.codex-detail-grid dt {
+  font-weight: 600;
+}
+
+.codex-detail-grid dd {
+  margin: 0;
+}
+
+.codex-narrative p {
+  margin: 0 0 0.75rem;
+}
+
+.codex-narrative p:last-child {
+  margin-bottom: 0;
+}
+
+.codex-hint {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.codex-empty,
+.codex-loading {
+  margin: 0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+  .codex-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .codex-list {
+    max-height: 12rem;
+    overflow-y: auto;
+  }
+}
