@@ -3491,18 +3491,19 @@
     "narrative": "In the terrestrial realms, where the forest stretch far and wide, there dwells the Coelacanth, a other of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Coelacanth move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it."
   },
   {
-    "id": "common_fish",
-    "common_name": "Common Fish",
+    "id": "rainbow_trout",
+    "common_name": "Rainbow Trout",
     "taxon_group": "fish",
     "regions": [
       "aquatic"
     ],
     "habitats": [
       "rivers",
-      "lakes"
+      "lakes",
+      "streams"
     ],
     "diet": [
-      "omnivore"
+      "carnivore"
     ],
     "domestication": {
       "domesticated": false
@@ -3517,18 +3518,19 @@
       "parts": [
         "meat"
       ],
-      "preparation_notes": "Cook thoroughly."
+      "preparation_notes": "Well-suited to grilling, smoking, or baking."
     },
     "byproducts": [],
     "gendered": {},
-    "narrative": "In the aquatic realms, where the rivers and lakes stretch far and wide, there dwells the Common Fish, a fish of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Common Fish move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "narrative": "In the aquatic realms, where the rivers, lakes, and streams stretch far and wide, there dwells the Rainbow Trout, a fish of note. It keeps to a carnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, oft praising the shimmering hues that catch the sun, ever mindful it must be cooked thoroughly. From swift currents it leaps, heartening anglers and storytellers alike. Thus does the Rainbow Trout move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
     "alt_names": [
-      "Fish"
+      "Steelhead Trout",
+      "Redband Trout"
     ]
   },
   {
-    "id": "common_lizard",
-    "common_name": "Common Lizard",
+    "id": "western_fence_lizard",
+    "common_name": "Western Fence Lizard",
     "taxon_group": "reptile",
     "regions": [
       "terrestrial"
@@ -3545,7 +3547,7 @@
     },
     "behavior": {
       "aggressive": false,
-      "territorial": false,
+      "territorial": true,
       "risk_to_humans": "low"
     },
     "edibility": {
@@ -3557,14 +3559,15 @@
     },
     "byproducts": [],
     "gendered": {},
-    "narrative": "In the terrestrial realms, where the forest and semi arid scrublands stretch far and wide, there dwells the Common Lizard, a reptile of note. It keeps to a insectivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, wandering free of sworn domain, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. No craftsman covets its remains, save in times of need. Thus does the Common Lizard move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "narrative": "In the terrestrial realms, where the forest and semi arid scrublands stretch far and wide, there dwells the Western Fence Lizard, a reptile of note. It keeps to an insectivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, standing watchful over sun-warmed perches, and offers a low hazard to the heedless. Those who seek its tablefare take the meat, ever mindful it must be cooked thoroughly. Males flash blue bellies in ritual display, warding rivals while delighting any who pause to look. Thus does the Western Fence Lizard move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
     "alt_names": [
-      "Lizard"
+      "Blue-belly",
+      "Fence Swift"
     ]
   },
   {
-    "id": "common_monkey",
-    "common_name": "Common Monkey",
+    "id": "white_headed_capuchin",
+    "common_name": "White-headed Capuchin",
     "taxon_group": "mammal",
     "regions": [
       "terrestrial"
@@ -3589,9 +3592,10 @@
     },
     "byproducts": [],
     "gendered": {},
-    "narrative": "In the terrestrial realms, where the tropical rainforest and forest stretch far and wide, there dwells the Common Monkey, a mammal of note. It keeps to a omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. No craftsman covets its remains, save in times of need. Thus does the Common Monkey move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
+    "narrative": "In the terrestrial realms, where the tropical rainforest and forest stretch far and wide, there dwells the White-headed Capuchin, a mammal of note. It keeps to an omnivore fare, taking sustenance as the wilds afford. No yoke nor leash has tamed it, for it prospers without the aid of men. It is mild of temper, staunch in guarding its bounds, and offers a moderate hazard to the heedless. Its flesh is shunned at feast and fire, deemed unfit for mortal taste. Within the canopy it moves with clever hands, sharing fruits and insects while keeping sharp watch for foes. Thus does the White-headed Capuchin move through legend and living world alike, keeping the balance of nature and stirring wonder in those who behold it.",
     "alt_names": [
-      "Monkey"
+      "White-faced Capuchin",
+      "Capuchin Monkey"
     ]
   },
   {
