@@ -989,6 +989,34 @@ const defaultProficiencies = {
   pearlDiving: 0
 };
 
+const CLASS_ALIAS_FIELDS = [
+  'class',
+  'advancedClass',
+  'theme',
+  'classLine',
+  'primaryClass',
+  'secondaryClass',
+  'build',
+  'buildName'
+];
+
+function getClassAliases(character) {
+  const names = new Set();
+  if (!character) return names;
+  const addValue = value => {
+    if (!value || typeof value !== 'string') return;
+    String(value)
+      .split(/[\/,&]+|\s+/)
+      .map(part => part.trim().toLowerCase())
+      .filter(Boolean)
+      .forEach(name => names.add(name));
+  };
+  for (const key of CLASS_ALIAS_FIELDS) {
+    addValue(character[key]);
+  }
+  return names;
+}
+
 function assignMagicAptitudes(character) {
   const intStat = character.attributes?.current?.INT ?? 0;
   const wisStat = character.attributes?.current?.WIS ?? 0;
@@ -997,6 +1025,8 @@ function assignMagicAptitudes(character) {
   const highAvg = 16.5;
   const norm = Math.max(0, Math.min(1, (avgStat - lowAvg) / (highAvg - lowAvg)));
   const elemChance = 0.10 + (0.30 - 0.10) * norm;
+  const classAliases = getClassAliases(character);
+  const isSummoner = classAliases.has('summoner');
   const elemental = [
     'stone',
     'water',
@@ -1013,7 +1043,7 @@ function assignMagicAptitudes(character) {
     enfeeblement: 0.30,
     control: 0.20,
     healing: 0.15,
-    summoning: 0.075,
+    summoning: isSummoner ? 0.075 : 0,
   };
   const highSchoolChances = {
     destruction: 0.60,
@@ -1021,7 +1051,7 @@ function assignMagicAptitudes(character) {
     enfeeblement: 0.60,
     control: 0.40,
     healing: 0.30,
-    summoning: 0.15,
+    summoning: isSummoner ? 0.15 : 0,
   };
   const schoolChances = {};
   for (const key of Object.keys(lowSchoolChances)) {
@@ -1032,7 +1062,6 @@ function assignMagicAptitudes(character) {
 
   const classMap = {
     summoner: ['summoning'],
-    conjurer: ['summoning'],
     dancer: ['dancing'],
     performer: ['dancing'],
     healer: ['healing'],
@@ -1041,11 +1070,17 @@ function assignMagicAptitudes(character) {
     bard: ['singing','instrument'],
     minstrel: ['singing','instrument']
   };
-  const cls = character.class?.toLowerCase();
-  if (cls && classMap[cls]) {
-    for (const key of classMap[cls]) {
+  for (const name of classAliases) {
+    const keys = classMap[name];
+    if (!keys) continue;
+    for (const key of keys) {
       character[key] = Math.max(character[key] || 0, 1);
     }
+  }
+  if (isSummoner) {
+    character.summoning = Math.max(character.summoning || 0, 1);
+  } else {
+    character.summoning = 0;
   }
 
   // Determine if the character already has an elemental proficiency
@@ -1111,6 +1146,9 @@ function migrateProficiencies(character) {
       if (!(newKey in character)) character[newKey] = character[oldKey];
       delete character[oldKey];
     }
+  }
+  if (!getClassAliases(character).has('summoner')) {
+    character.summoning = 0;
   }
   return character;
 }
@@ -2128,8 +2166,13 @@ function showSpellbookUI() {
   updateScale();
   showBackButton();
 
+  const classAliases = getClassAliases(currentCharacter);
+  const allowSummoning = classAliases.has('summoner');
   const unlocked = [];
   for (const spell of SPELLBOOK) {
+    if (!allowSummoning && spell.school === 'Summoning') {
+      continue;
+    }
     const schoolKey = schoolProficiencyMap[spell.school];
     const schoolValue = currentCharacter[schoolKey] ?? 0;
     const profKey = elementalProficiencyMap[spell.element.toLowerCase()];

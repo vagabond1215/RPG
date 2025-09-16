@@ -38,6 +38,38 @@ export const schoolProficiencyMap = {
 
 export const SCHOOL_MAGIC_KEYS = Object.values(schoolProficiencyMap);
 
+const CLASS_ALIAS_FIELDS = [
+  "class",
+  "advancedClass",
+  "theme",
+  "classLine",
+  "primaryClass",
+  "secondaryClass",
+  "build",
+  "buildName",
+];
+
+function collectClassAliases(character) {
+  const names = new Set();
+  if (!character) return names;
+  const addValue = value => {
+    if (!value || typeof value !== "string") return;
+    String(value)
+      .split(/[\/,&]+|\s+/)
+      .map(part => part.trim().toLowerCase())
+      .filter(Boolean)
+      .forEach(name => names.add(name));
+  };
+  for (const key of CLASS_ALIAS_FIELDS) {
+    addValue(character[key]);
+  }
+  return names;
+}
+
+function hasSummonerAccess(character) {
+  return collectClassAliases(character).has("summoner");
+}
+
 export function applySpellProficiencyGain(character, spell, params) {
   if (!character || !spell) return;
   const elemKey = elementalProficiencyMap[spell.element?.toLowerCase()];
@@ -49,9 +81,13 @@ export function applySpellProficiencyGain(character, spell, params) {
   }
   const schoolKey = schoolProficiencyMap[spell.school];
   if (schoolKey) {
-    character[schoolKey] = gainProficiency({
-      P: character[schoolKey],
-      ...params,
-    });
+    if (schoolKey === "summoning" && !hasSummonerAccess(character)) {
+      character[schoolKey] = 0;
+    } else {
+      character[schoolKey] = gainProficiency({
+        P: character[schoolKey],
+        ...params,
+      });
+    }
   }
 }
