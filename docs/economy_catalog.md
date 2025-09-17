@@ -56,15 +56,15 @@ A report is written to `reports/import_economy_catalog_<timestamp>.json` summari
 
 ## Currency Helpers
 
-Coin arithmetic and formatting reuse the existing utilities in `assets/economy/currency.js` to avoid duplicate currency logic.
+Coin arithmetic and formatting reuse the existing utilities in `data/economy/currency.js` to avoid duplicate currency logic.
 
 ## Regional Pricing
 
-Runtime pricing uses `assets/economy/regional_pricing.js`:
+Runtime pricing uses `data/economy/regional_pricing.js`:
 
 ```js
-import { computePrice } from '../assets/economy/regional_pricing.js';
-import policy from '../assets/data/region_policy.json' assert { type: 'json' };
+import { computePrice } from '../data/economy/regional_pricing.js';
+import policy from '../data/game/region_policy.json' assert { type: 'json' };
 const item = /* item from catalog */;
 const price = computePrice(item.market_value_cp, item, 'desert', policyMap);
 ```

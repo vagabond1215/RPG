@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "fs/promises";
 import slugify from "slugify";
-import { cpToCoins } from "../assets/economy/currency.js";
+import { cpToCoins } from "../data/economy/currency.js";
 import { generateWeaponDescription } from "./descriptionGenerator";
 
 type WeaponQuality = "Standard" | "Fine" | "Masterwork";
@@ -1021,7 +1021,7 @@ function keepWeaponItem(item: any): boolean {
 }
 
 async function updateItemsFile(records: ReturnType<typeof computeItemRecord>[]) {
-  const path = "assets/economy/items.json";
+  const path = "data/economy/items.json";
   const raw = await readFile(path, "utf-8");
   const data = JSON.parse(raw);
   const retained = data.filter(keepWeaponItem);
@@ -1070,7 +1070,7 @@ async function writeArmoryData(variants: WeaponVariant[]) {
   }
   lines.push("};");
   lines.push("");
-  await writeFile("assets/data/armory.ts", lines.join("\n"));
+  await writeFile("data/game/armory.ts", lines.join("\n"));
 }
 
 async function main() {

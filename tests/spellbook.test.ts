@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { SPELLBOOK } from "../assets/data/spells.js";
-import { elementalProficiencyMap, schoolProficiencyMap } from "../assets/data/spell_proficiency.js";
+import { SPELLBOOK } from "../data/game/spells.js";
+import { elementalProficiencyMap, schoolProficiencyMap } from "../data/game/spell_proficiency.js";
 
 function unlockedSpells(character: Record<string, number>) {
   const unlocked = [] as typeof SPELLBOOK;

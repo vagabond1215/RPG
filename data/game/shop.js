@@ -86,7 +86,7 @@ function parseLooseValue(value) {
 
 async function loadEconomyItems() {
   if (!economyItemsPromise) {
-    economyItemsPromise = fetch("assets/economy/items.json")
+    economyItemsPromise = fetch("data/economy/items.json")
       .then(async res => {
         if (!res.ok) return [];
         const text = await res.text();
