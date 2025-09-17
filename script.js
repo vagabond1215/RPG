@@ -1383,41 +1383,55 @@ function setUniformShopNameWidth() {
 
 async function renderShopUI(buildingName) {
   showBackButton();
-  const categories = shopCategoriesForBuilding(buildingName).sells;
+  const profile = shopCategoriesForBuilding(buildingName);
+  const baseContext = {
+    name: buildingName,
+    lower: buildingName.toLowerCase(),
+    scale: 'medium',
+    wealth: 'modest',
+    type: 'producer',
+    words: [],
+    ...(profile.context || {})
+  };
   const sections = await Promise.all(
-    categories.map(async cat => ({ cat, items: await itemsByCategory(cat) }))
+    (profile.sells || []).map(async section => ({
+      ...section,
+      items: await itemsByCategory(section, baseContext)
+    }))
   );
+  const available = sections.filter(section => section.items.length);
   let html = `<div class="shop-screen"><h1>${buildingName} Shop</h1><p>Funds: ${formatCurrency(currentCharacter.money)}</p>`;
-  if (!sections.length) {
+  if (!available.length) {
     html += '<p>No goods for sale.</p></div>';
     setMainHTML(html);
     return;
   }
-  const collapsible = sections.length > 1;
-  sections.forEach((sec, sIdx) => {
+  const collapsible = available.length > 1;
+  available.forEach((sec, sIdx) => {
+    const heading = sec.heading || sec.label || sec.key;
     if (collapsible) {
-      html += `<details class="shop-category" open><summary>${sec.cat}</summary><ul>`;
+      html += `<details class="shop-category" open><summary>${heading}</summary><ul>`;
     } else {
-      html += `<h2>${sec.cat}</h2><ul>`;
+      html += `<h2>${heading}</h2><ul>`;
     }
     sec.items.forEach((item, iIdx) => {
       const saleQty = item.sale_quantity === 1 && item.unit === 'each'
         ? ''
         : `${item.sale_quantity} ${item.unit}`;
-      html += `<li class="shop-item">
-        <button class="item-name" data-s="${sIdx}" data-i="${iIdx}">${item.name}</button>
-        <span class="sale-qty">${saleQty}</span>
-        <span class="item-price">${cpToCoins(item.price, true, true)}</span>
-        <input type="number" class="qty" value="1" min="1" data-s="${sIdx}" data-i="${iIdx}">
-        <button class="buy-btn" data-s="${sIdx}" data-i="${iIdx}">Buy</button>
-      </li>`;
+      html += `<li class="shop-item">`
+        + `<button class="item-name" data-s="${sIdx}" data-i="${iIdx}">${item.name}</button>`
+        + `<span class="sale-qty">${saleQty}</span>`
+        + `<span class="item-price">${cpToCoins(item.price, true, true)}</span>`
+        + `<input type="number" class="qty" value="1" min="1" data-s="${sIdx}" data-i="${iIdx}">`
+        + `<button class="buy-btn" data-s="${sIdx}" data-i="${iIdx}">Buy</button>`
+        + `</li>`;
     });
     html += '</ul>';
     if (collapsible) html += '</details>';
   });
   html += '</div>';
   setMainHTML(html);
-  sections.forEach((sec, sIdx) => {
+  available.forEach((sec, sIdx) => {
     sec.items.forEach((item, iIdx) => {
       const buyBtn = document.querySelector(`.buy-btn[data-s="${sIdx}"][data-i="${iIdx}"]`);
       const qtyInput = document.querySelector(`input.qty[data-s="${sIdx}"][data-i="${iIdx}"]`);
@@ -1438,7 +1452,13 @@ async function renderShopUI(buildingName) {
             return;
           }
           currentCharacter.money = fromIron(toIron(currentCharacter.money) - priceIron);
-          addItemToInventory({ name: item.name, category: sec.cat, price: item.price, profit: item.profit, qty });
+          addItemToInventory({
+            name: item.name,
+            category: sec.inventoryKey || sec.heading || sec.key,
+            price: item.price,
+            profit: item.profit,
+            qty
+          });
           renderShopUI(buildingName).catch(console.error);
         });
       }
@@ -1446,6 +1466,7 @@ async function renderShopUI(buildingName) {
   });
   setUniformShopNameWidth();
 }
+
 
 function renderSellUI(buildingName) {
   showBackButton();
