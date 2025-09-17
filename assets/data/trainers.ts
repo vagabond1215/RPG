@@ -1,5 +1,12 @@
 // trainers.ts — tiered trainer system for crafts
 
+import {
+  trainingCraft,
+  type CraftKey,
+  type CraftingState,
+  type CraftTrainingOptions,
+} from "./craft_skill_tracker.js";
+
 export type Craft =
   | 'glassblowing'
   | 'blacksmithing'
@@ -32,6 +39,28 @@ export const TRAINER_TIERS: TrainerTier[] = [
   'journeyman',
   'master'
 ];
+
+const TRAINER_TO_TRACKER_CRAFT: Record<Craft, CraftKey> = {
+  glassblowing: 'glassblowing',
+  blacksmithing: 'blacksmithing',
+  carpentry: 'carpentry',
+  tailoring: 'tailoring',
+  leatherworking: 'leatherworking',
+  alchemy: 'alchemy',
+  enchanting: 'enchanting',
+  'pearl-diving': 'pearlDiving',
+  masonry: 'masonry',
+  textiles: 'textiles',
+};
+
+export function trainCraftSkill(
+  character: CraftingState,
+  craft: Craft,
+  options: CraftTrainingOptions = {},
+): number {
+  const craftKey = TRAINER_TO_TRACKER_CRAFT[craft];
+  return trainingCraft(character, craftKey, options);
+}
 
 /** Determine if a trainer of tier A can teach someone of tier B */
 export function canTrain(trainer: TrainerTier, learner: TrainerTier): boolean {

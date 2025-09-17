@@ -26,7 +26,7 @@ import {
   schoolProficiencyMap,
   applySpellProficiencyGain,
 } from "./assets/data/spell_proficiency.js";
-import { trainCraftSkill } from "./assets/data/trainer_proficiency.js";
+import { trainCraftSkill } from "./assets/data/trainers.js";
 import { performGathering } from "./assets/data/gathering_proficiency.js";
 import { performOutdoorActivity } from "./assets/data/outdoor_skills.js";
 import { performHunt } from "./assets/data/hunting_proficiency.js";
