@@ -204,7 +204,7 @@ function simplifyDomesticPrefix(name: string): string {
 
 async function main() {
   const [itemsRaw, plantsRaw, animalsRaw] = await Promise.all([
-    readFile('assets/economy/items.json', 'utf-8'),
+    readFile('data/economy/items.json', 'utf-8'),
     readFile('data/plants.json', 'utf-8'),
     readFile('data/animals.json', 'utf-8'),
   ]);
@@ -322,7 +322,7 @@ async function main() {
   newItems.sort((a, b) => a.display_name.localeCompare(b.display_name));
   if (newItems.length > 0) {
     items.push(...newItems);
-    await writeFile('assets/economy/items.json', `${JSON.stringify(items, null, 2)}\n`);
+    await writeFile('data/economy/items.json', `${JSON.stringify(items, null, 2)}\n`);
   }
 
   console.log(`Generated ${newItems.length} new produce items.`);

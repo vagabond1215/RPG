@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const FILE = 'assets/economy/items.json';
+const FILE = 'data/economy/items.json';
 const HIGH_CONSUMPTION = new Set([
   'Food & Drink', 'FoodDrink', 'Produce', 'Dairy', 'LivestockMeat',
   'Beverages', 'Confectionery', 'SpicesHerbs', 'Raw Materials',

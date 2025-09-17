@@ -1,9 +1,9 @@
-import { SPELLBOOK, MILESTONES } from "./assets/data/spells.js";
-import { WEAPON_SKILLS } from "./assets/data/weapon_skills.js";
-import { characterTemplate } from "./assets/data/core.js";
-import { gainProficiency, proficiencyCap } from "./assets/data/proficiency_base.js";
-import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./assets/data/race_attrs.js";
-import { maxHP, maxMP, maxStamina } from "./assets/data/resources.js";
+import { SPELLBOOK, MILESTONES } from "./data/game/spells.js";
+import { WEAPON_SKILLS } from "./data/game/weapon_skills.js";
+import { characterTemplate } from "./data/game/core.js";
+import { gainProficiency, proficiencyCap } from "./data/game/proficiency_base.js";
+import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./data/game/race_attrs.js";
+import { maxHP, maxMP, maxStamina } from "./data/game/resources.js";
 import {
   DENOMINATIONS,
   CURRENCY_VALUES,
@@ -14,41 +14,41 @@ import {
   createEmptyCurrency,
   formatCurrency,
   cpToCoins,
-} from "./assets/economy/currency.js";
-import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipment.js";
-import { LOCATIONS } from "./assets/data/locations.js";
-import { applyWavesBreakRegistry } from "./assets/data/waves_break_registry.js";
-import { TidefallCalendar, dateKey } from "./assets/data/calendar.js";
+} from "./data/economy/currency.js";
+import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./data/game/equipment.js";
+import { LOCATIONS } from "./data/game/locations.js";
+import { applyWavesBreakRegistry } from "./data/game/waves_break_registry.js";
+import { TidefallCalendar, dateKey } from "./data/game/calendar.js";
 import {
   createDefaultWeatherGenerator,
   createDeterministicRandom as createWeatherRandom,
-} from "./assets/data/weather.js";
+} from "./data/game/weather.js";
 import {
   generateNpcName,
   clearNameGenerator,
   registerFamily,
-} from "./assets/data/name_generator.js";
-import { CITY_NAV } from "./assets/data/city_nav.js";
-import { composeImagePrompt } from "./assets/data/image_prompts.js";
-import { DEFAULT_NAMES } from "./assets/data/names.js";
-import { WAVES_BREAK_BACKSTORIES } from "./assets/data/waves_break_backstories.js";
+} from "./data/game/name_generator.js";
+import { CITY_NAV } from "./data/game/city_nav.js";
+import { composeImagePrompt } from "./data/game/image_prompts.js";
+import { DEFAULT_NAMES } from "./data/game/names.js";
+import { WAVES_BREAK_BACKSTORIES } from "./data/game/waves_break_backstories.js";
 import {
   elementalProficiencyMap,
   schoolProficiencyMap,
   applySpellProficiencyGain,
-} from "./assets/data/spell_proficiency.js";
-import { trainCraftSkill } from "./assets/data/trainers.js";
-import { performGathering } from "./assets/data/gathering_proficiency.js";
-import { performOutdoorActivity } from "./assets/data/outdoor_skills.js";
-import { performHunt } from "./assets/data/hunting_proficiency.js";
+} from "./data/game/spell_proficiency.js";
+import { trainCraftSkill } from "./data/game/trainers.js";
+import { performGathering } from "./data/game/gathering_proficiency.js";
+import { performOutdoorActivity } from "./data/game/outdoor_skills.js";
+import { performHunt } from "./data/game/hunting_proficiency.js";
 import {
   ADVENTURERS_GUILD_RANKS,
   determineOwnership,
   getJobRolesForBuilding,
   JOB_ROLE_DATA,
-} from "./assets/data/buildings.js";
-import { characterBuilds } from "./assets/data/character_builds.js";
-import { shopCategoriesForBuilding, itemsByCategory } from "./assets/data/shop.js";
+} from "./data/game/buildings.js";
+import { characterBuilds } from "./data/game/character_builds.js";
+import { shopCategoriesForBuilding, itemsByCategory } from "./data/game/shop.js";
 
 applyWavesBreakRegistry(LOCATIONS);
 

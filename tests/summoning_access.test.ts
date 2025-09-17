@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { applySpellProficiencyGain } from "../assets/data/spell_proficiency.js";
+import { applySpellProficiencyGain } from "../data/game/spell_proficiency.js";
 
 const BASE_PARAMS = { L: 1, A0: 1, A: 0, r: 1, rand: () => 0 } as const;
 

@@ -8,13 +8,13 @@ import {
   advanceDate,
   dateKey,
   getSeasonForDate,
-} from '../assets/data/calendar.js';
+} from '../data/game/calendar.js';
 import {
   createDefaultWeatherGenerator,
   createDeterministicRandom,
-} from '../assets/data/weather.js';
-import { LOCATIONS } from '../assets/data/locations.js';
-import { applyWavesBreakRegistry } from '../assets/data/waves_break_registry.js';
+} from '../data/game/weather.js';
+import { LOCATIONS } from '../data/game/locations.js';
+import { applyWavesBreakRegistry } from '../data/game/waves_break_registry.js';
 
 applyWavesBreakRegistry(LOCATIONS);
 

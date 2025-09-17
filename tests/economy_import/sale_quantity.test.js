@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import data from '../../assets/economy/items.json' assert { type: 'json' };
+import data from '../../data/economy/items.json' assert { type: 'json' };
 
 test('items have sale quantities and valid bulk pricing', () => {
   for (const item of data) {

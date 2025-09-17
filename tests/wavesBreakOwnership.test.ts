@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { LOCATIONS } from '../assets/data/locations.js';
-import { applyWavesBreakRegistry } from '../assets/data/waves_break_registry.js';
+import { LOCATIONS } from '../data/game/locations.js';
+import { applyWavesBreakRegistry } from '../data/game/waves_break_registry.js';
 
 applyWavesBreakRegistry(LOCATIONS);
 

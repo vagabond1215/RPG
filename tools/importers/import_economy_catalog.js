@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import xlsx from 'xlsx';
 import slugify from 'slugify';
-import { cpToCoins } from '../../assets/economy/currency.js';
+import { cpToCoins } from '../../data/economy/currency.js';
 
 const ALLOWED_BIOMES = [
   'coastal','riverlands','lake','wetland','grassland','farmland',
@@ -15,7 +15,7 @@ function parseBool(val){
   return !!val;
 }
 
-export async function runImport({file, dryRun=false, itemsPath='assets/economy/items.json', policyPath='assets/data/region_policy.json', reportPath}){
+export async function runImport({file, dryRun=false, itemsPath='data/economy/items.json', policyPath='data/game/region_policy.json', reportPath}){
   const wb = xlsx.readFile(file);
   const itemsSheet = xlsx.utils.sheet_to_json(wb.Sheets['Catalog_Flat'], {defval:null});
   const policySheet = xlsx.utils.sheet_to_json(wb.Sheets['RegionPolicy'], {defval:null});
