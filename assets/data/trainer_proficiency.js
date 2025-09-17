@@ -1,4 +1,4 @@
-import { gainProficiency } from "./proficiency_base.js";
+import { trainingCraft } from "./craft_skill_tracker.js";
 
 /**
  * Increase a character's crafting skill using standard training parameters.
@@ -7,15 +7,6 @@ import { gainProficiency } from "./proficiency_base.js";
  * @param {string} skillKey - Property name for the crafting skill.
  * @returns {number} Updated proficiency value.
  */
-export function trainCraftSkill(character, skillKey) {
-  const current = character[skillKey] || 0;
-  const level = character.level;
-  character[skillKey] = gainProficiency({
-    P: current,
-    L: level,
-    A0: 1,
-    A: 0,
-    r: 1,
-  });
-  return character[skillKey];
+export function trainCraftSkill(character, skillKey, opts = {}) {
+  return trainingCraft(character, skillKey, opts);
 }
