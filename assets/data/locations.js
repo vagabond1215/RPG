@@ -16,6 +16,7 @@ export function createLocation(name, mapFile, description = "") {
         population: undefined,
         quests: [],
         questBoards: {},
+        ownership: undefined,
     };
 }
 function createQuest(title, description, opts = {}) {
@@ -90,11 +91,6 @@ function addQuestBoards(loc) {
         }
     });
     loc.questBoards = boards;
-    Object.keys(boards).forEach((boardName) => {
-        if (!loc.pointsOfInterest.buildings.includes(boardName)) {
-            loc.pointsOfInterest.buildings.push(boardName);
-        }
-    });
     const allQuests = Object.values(boards).reduce((arr, q) => arr.concat(q), []);
     loc.quests.push(...allQuests);
 }

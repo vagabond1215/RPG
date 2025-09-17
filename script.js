@@ -17,6 +17,17 @@ import {
 } from "./assets/economy/currency.js";
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./assets/data/equipment.js";
 import { LOCATIONS } from "./assets/data/locations.js";
+import { applyWavesBreakRegistry } from "./assets/data/waves_break_registry.js";
+import { TidefallCalendar, dateKey } from "./assets/data/calendar.js";
+import {
+  createDefaultWeatherGenerator,
+  createDeterministicRandom as createWeatherRandom,
+} from "./assets/data/weather.js";
+import {
+  generateNpcName,
+  clearNameGenerator,
+  registerFamily,
+} from "./assets/data/name_generator.js";
 import { CITY_NAV } from "./assets/data/city_nav.js";
 import { composeImagePrompt } from "./assets/data/image_prompts.js";
 import { DEFAULT_NAMES } from "./assets/data/names.js";
@@ -39,6 +50,11 @@ import {
 import { characterBuilds } from "./assets/data/character_builds.js";
 import { shopCategoriesForBuilding, itemsByCategory } from "./assets/data/shop.js";
 
+applyWavesBreakRegistry(LOCATIONS);
+
+const worldCalendar = new TidefallCalendar();
+const weatherSystem = createDefaultWeatherGenerator(worldCalendar.today());
+
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
 }
@@ -58,8 +74,18 @@ window.parseCurrency = parseCurrency;
 window.formatCurrency = formatCurrency;
 window.cpToCoins = cpToCoins;
 window.LOCATIONS = LOCATIONS;
+window.generateNpcName = generateNpcName;
+window.registerNpcFamily = registerFamily;
+window.resetNpcNameGenerator = clearNameGenerator;
 window.ADVENTURERS_GUILD_RANKS = ADVENTURERS_GUILD_RANKS;
 window.performHunt = performHunt;
+window.WORLD_CALENDAR = worldCalendar;
+window.WEATHER_SYSTEM = weatherSystem;
+window.advanceWorldDay = (days = 1) => {
+  worldCalendar.advance(days);
+};
+window.currentWeatherFor = (region = "waves_break", habitat = 'urban') =>
+  weatherSystem.getDailyWeather(region, habitat, worldCalendar.today());
 
 const NAV_ICONS = {
   location: '🗺️',
@@ -74,6 +100,74 @@ const CITY_SLUGS = { "Wave's Break": "waves_break" };
 const BACKSTORY_MAP = {
   "Wave's Break": WAVES_BREAK_BACKSTORIES,
 };
+
+function resolveQuestBinding(quest, boardName) {
+  const source = quest?.visibilityBinding ? { ...quest.visibilityBinding } : {};
+  if (!source.region) source.region = "waves_break";
+  if (!source.habitat) source.habitat = 'urban';
+  if (!source.business) source.business = quest?.location || boardName;
+  if (!source.board) source.board = boardName;
+  if (!source.district) {
+    source.district =
+      source.habitat === 'farmland'
+        ? 'Farmlands'
+        : source.habitat === 'coastal'
+          ? 'Harbor Ward'
+          : "Wave's Break";
+  }
+  return source;
+}
+
+function evaluateQuestAvailability(quest, boardName) {
+  const binding = resolveQuestBinding(quest, boardName);
+  const date = worldCalendar.today();
+  let weather;
+  try {
+    weather = weatherSystem.getDailyWeather(binding.region, binding.habitat, date);
+  } catch (err) {
+    weather = weatherSystem.getDailyWeather('waves_break', 'urban', date);
+  }
+  if (!quest.visibility) {
+    return { available: true, demand: 1, reason: 'Standing posting', weather };
+  }
+  const seed = `${binding.region}:${binding.habitat}:${binding.business}:${dateKey(date)}:${quest.title}`;
+  const rng = createWeatherRandom(seed);
+  const result = quest.visibility({
+    date,
+    weather,
+    random: rng,
+    binding,
+    laborCondition: quest.laborCondition,
+    questTitle: quest.title,
+  });
+  return { ...result, weather };
+}
+
+function boardWeatherSnapshot(quests, boardName) {
+  if (!quests.length) return null;
+  const candidate = quests.find((quest) => quest.visibilityBinding) || quests[0];
+  const binding = resolveQuestBinding(candidate, boardName);
+  const weather = weatherSystem.getDailyWeather(
+    binding.region,
+    binding.habitat,
+    worldCalendar.today(),
+  );
+  return { weather, binding };
+}
+
+function formatWeatherSummary(report) {
+  const points = [`${report.condition} ${report.temperatureC.toFixed(1)}°C`];
+  if (report.precipitationMm > 0) {
+    points.push(`${report.precipitationMm.toFixed(1)} mm precip.`);
+  }
+  if (report.droughtStage !== 'none') {
+    points.push(`Drought ${report.droughtStage}`);
+  }
+  if (report.floodRisk !== 'none') {
+    points.push(`Flood ${report.floodRisk}`);
+  }
+  return `${points.join(' • ')} — ${report.narrative || 'conditions steady.'}`;
+}
 
 function matchCase(word, pattern) {
   if (pattern.toUpperCase() === pattern) return word.toUpperCase();
@@ -2927,7 +3021,10 @@ function showQuestBoardsUI() {
     return `<div class="nav-item"><button data-board="${name}" aria-label="${name}"><span class="nav-icon">🪧</span></button><span class="street-sign">${name}</span></div>`;
   };
   const buttons = boards.map(createItem).join('');
-  setMainHTML(`<div class="navigation"><h2>Quest Boards</h2><div class="option-grid">${buttons}</div></div>`);
+  const today = worldCalendar.formatCurrentDate();
+  setMainHTML(
+    `<div class="navigation"><h2>Quest Boards</h2><p class="quest-date">Today is ${today}</p><div class="option-grid">${buttons}</div></div>`,
+  );
   normalizeOptionButtonWidths();
   updateMenuHeight();
   if (main) {
@@ -2945,23 +3042,49 @@ function showQuestBoardDetails(boardName) {
   showBackButton();
   const loc = LOCATIONS[currentCharacter.location];
   const quests = loc.questBoards[boardName] || [];
+  const evaluations = quests.map((quest) => ({
+    quest,
+    availability: evaluateQuestAvailability(quest, boardName),
+  }));
+  const active = evaluations.filter((entry) => entry.availability.available);
+  const inactive = evaluations.filter((entry) => !entry.availability.available);
+  const weatherContext = boardWeatherSnapshot(quests, boardName);
   let html = `<div class="questboard-detail navigation"><h2>${boardName}</h2>`;
-  if (quests.length) {
+  if (weatherContext) {
+    const areaLabel = weatherContext.binding.district || weatherContext.binding.habitat;
+    html += `<p class="quest-weather"><strong>Weather over ${areaLabel}:</strong> ${formatWeatherSummary(weatherContext.weather)}</p>`;
+  }
+  if (active.length) {
     html += '<ul class="quest-list">';
-    quests.forEach(q => {
-      html += `<li class="quest-item"><h3>${q.title}</h3><p>${q.description}</p>`;
+    active.forEach(({ quest, availability }) => {
+      html += `<li class="quest-item"><h3>${quest.title}</h3><p>${quest.description}</p>`;
       html += '<ul class="quest-meta">';
-      if (q.location) html += `<li><strong>Location:</strong> ${q.location}</li>`;
-      if (q.requirements) html += `<li><strong>Requirements:</strong> ${Array.isArray(q.requirements) ? q.requirements.join(', ') : q.requirements}</li>`;
-      if (q.conditions) html += `<li><strong>Conditions:</strong> ${Array.isArray(q.conditions) ? q.conditions.join(', ') : q.conditions}</li>`;
-      if (q.timeline) html += `<li><strong>Timeline:</strong> ${q.timeline}</li>`;
-      if (q.risks) html += `<li><strong>Risks:</strong> ${Array.isArray(q.risks) ? q.risks.join(', ') : q.risks}</li>`;
-      if (q.reward) html += `<li><strong>Reward:</strong> ${q.reward}</li>`;
+      if (quest.location) html += `<li><strong>Location:</strong> ${quest.location}</li>`;
+      if (quest.requirements)
+        html += `<li><strong>Requirements:</strong> ${Array.isArray(quest.requirements) ? quest.requirements.join(', ') : quest.requirements}</li>`;
+      if (quest.conditions)
+        html += `<li><strong>Conditions:</strong> ${Array.isArray(quest.conditions) ? quest.conditions.join(', ') : quest.conditions}</li>`;
+      if (quest.timeline) html += `<li><strong>Timeline:</strong> ${quest.timeline}</li>`;
+      if (quest.risks)
+        html += `<li><strong>Risks:</strong> ${Array.isArray(quest.risks) ? quest.risks.join(', ') : quest.risks}</li>`;
+      if (quest.reward) html += `<li><strong>Reward:</strong> ${quest.reward}</li>`;
+      html += `<li><strong>Demand:</strong> ${(availability.demand * 100).toFixed(0)}% probability</li>`;
+      if (availability.reason)
+        html += `<li><strong>Status:</strong> ${availability.reason}</li>`;
+      if (availability.eventTag)
+        html += `<li><strong>Event:</strong> ${availability.eventTag}</li>`;
       html += '</ul></li>';
     });
     html += '</ul>';
   } else {
-    html += '<p>No quests available.</p>';
+    html += '<p>No quests available today.</p>';
+  }
+  if (inactive.length) {
+    html += '<details class="questboard-hints"><summary>Inactive postings</summary><ul>';
+    inactive.slice(0, 6).forEach(({ quest, availability }) => {
+      html += `<li>${quest.title}: ${availability.reason || 'No demand at present.'}</li>`;
+    });
+    html += '</ul></details>';
   }
   html += '<div class="option-grid"><button id="return-questboards">Back to Boards</button></div></div>';
   setMainHTML(html);
