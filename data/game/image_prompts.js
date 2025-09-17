@@ -3,9 +3,9 @@ import { getBuildDescription } from "./character_builds.js";
 import { getRaceColors } from "./race_colors.js";
 
 export const BASE_IMAGE_PROMPT_TEMPLATE =
-  "A hyper-detailed fantasy Anime-style full-body portrait of a handsome {sex} {race} dressed in tantalizing, tasteful garb in front of a neutral gray background. Reference facial features from the most attractive {sexPlural}. Human proportionality for height is about 7.5 heads tall. Hair: {hair}. Skin: {skin} with light freckles. Eyes: {eyes}. Clothing is vibrant, complementary colors contrasting hair and skin tones with accents, trim, and accessories. Dynamic composition, ultra high definition, delicate details. No hat. No weapon.";
+  "A hyper-detailed fantasy anime-style full-body portrait of a beautiful {sex} {race} dressed in tantalizing, tasteful {theme} garb in front of a neutral gray background. Reference facial features from the most attractive {sexPlural}. Typical {race} proportionality for height is about {heads} heads tall. Hair: {hair}. Skin: {skin} with light freckles. Eyes: {eyes}. Clothing is vibrant in complementary colors with accents, trim, and accessories matching theme colors only. Dynamic composition, ultra high definition, delicate details. No bulky or high coverage hats or helms.";
 export const ADDON_IMAGE_PROMPT_TEMPLATE =
-  "Picture Theme: {themeName} — {themeDesc} — {colors}.";
+  "Picture Theme: {themeName} {colors}.";
 
 export function getRacePrompt(race) {
   switch (race) {
@@ -28,14 +28,27 @@ export function getRacePrompt(race) {
   }
 }
 
-export function buildImagePrompt({ sex, sexPlural, race, hair, skin, eyes, themeName, themeDesc, colors }) {
+export function buildImagePrompt({
+  sex,
+  sexPlural,
+  race,
+  hair,
+  skin,
+  eyes,
+  themeName,
+  themeDesc,
+  colors,
+  heads,
+}) {
   const base = BASE_IMAGE_PROMPT_TEMPLATE
-    .replace('{sex}', sex.toLowerCase())
-    .replace('{race}', race.toLowerCase())
-    .replace('{sexPlural}', sexPlural.toLowerCase())
-    .replace('{hair}', hair)
-    .replace('{skin}', skin)
-    .replace('{eyes}', eyes);
+    .replace(/\{sex\}/g, sex.toLowerCase())
+    .replace(/\{race\}/g, race.toLowerCase())
+    .replace(/\{sexPlural\}/g, sexPlural.toLowerCase())
+    .replace(/\{hair\}/g, hair)
+    .replace(/\{skin\}/g, skin)
+    .replace(/\{eyes\}/g, eyes)
+    .replace(/\{theme\}/g, (themeName || '').toLowerCase())
+    .replace(/\{heads\}/g, heads);
   const racePart = getRacePrompt(race);
   const addon = ADDON_IMAGE_PROMPT_TEMPLATE
     .replace('{themeName}', themeName)
@@ -60,6 +73,7 @@ export function composeImagePrompt(character) {
   const themeName = character.theme || '';
   const themeDesc = descriptor || '';
   const colors = pictureTheme.join(', ');
+  const heads = '7.5';
 
   return buildImagePrompt({
     sex: character.sex,
@@ -71,5 +85,6 @@ export function composeImagePrompt(character) {
     themeName,
     themeDesc,
     colors,
+    heads,
   });
 }
