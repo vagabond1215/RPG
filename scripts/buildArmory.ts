@@ -11,6 +11,31 @@ type Reach = "Very Short" | "Short" | "Short/Medium" | "Medium" | "Medium/Long" 
 
 type WeaponSize = "Tiny" | "Small" | "Medium" | "Large" | "Very Large";
 
+type DamageComponent = "BLUNT" | "SLASH" | "PIERCE";
+
+type OnHitEffect = {
+  chancePct: number;
+  power?: number;
+  durationSec?: number;
+  stacksMax?: number;
+  powerPct?: number;
+  cdSec?: number;
+};
+
+type OnHitMap = Record<string, OnHitEffect>;
+
+interface WeaponUpgrade {
+  category: string;
+  name: string;
+  quality: WeaponQuality;
+  ap: number;
+  dmgMix: Record<DamageComponent, number>;
+  critChancePct: number;
+  critMult: number;
+  critArmorBypassPct?: number;
+  onHit?: OnHitMap;
+}
+
 interface WeaponEntry {
   name: string;
   region: string;
@@ -762,6 +787,474 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
   ],
 };
 
+const CATEGORY_SORT_ORDER = Object.keys(ARMORY_SOURCE).reduce<Record<string, number>>((acc, category, index) => {
+  acc[category] = index;
+  return acc;
+}, {});
+
+const WEAPON_UPGRADE_RULES_DATA = {
+  id: "wur:all-archetypes",
+  note:
+    "Rules apply to all weapons in ARMORY by category+name match. Engine should materialize per-weapon upgrades from these rules.",
+  apMap: {
+    Low: 0.06,
+    "Low-Medium": 0.12,
+    Medium: 0.2,
+    "Medium-High": 0.3,
+    High: 0.42,
+    "Very High": 0.52,
+  },
+  qualityMods: {
+    Standard: { critChancePct_delta: 0, critMult_delta: 0 },
+    Fine: { critChancePct_delta: 1, critMult_delta: 0.05 },
+    Masterwork: { critChancePct_delta: 2, critMult_delta: 0.1 },
+  },
+  archetypes: [
+    {
+      match: {
+        category: "swords",
+        names: ["Arming Sword", "Short Guardblade", "Eastern Straightblade", "Companion Blade"],
+      },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.1, SLASH: 0.6, PIERCE: 0.3 },
+        critChancePct: 9,
+        critMult: 1.55,
+        critArmorBypassPct: 0,
+        hazardTags: ["edge", "point"],
+        controlTags: ["pommel"],
+        onHit: {
+          bleed: { chancePct: 12, power: 1.2, durationSec: 7, stacksMax: 3 },
+        },
+      },
+      overrides: {
+        "Short Guardblade": {
+          critChancePct: 10,
+          dmgMix: { BLUNT: 0.1, SLASH: 0.65, PIERCE: 0.25 },
+        },
+        "Eastern Straightblade": {
+          critChancePct: 11,
+          dmgMix: { BLUNT: 0.05, SLASH: 0.55, PIERCE: 0.4 },
+        },
+        "Companion Blade": {
+          critChancePct: 11,
+          dmgMix: { BLUNT: 0.05, SLASH: 0.6, PIERCE: 0.35 },
+        },
+      },
+    },
+    {
+      match: {
+        category: "swords",
+        names: ["Falchion", "Steppe Sabre", "Blade of the Tide"],
+      },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.05, SLASH: 0.8, PIERCE: 0.15 },
+        critChancePct: 12,
+        critMult: 1.5,
+        hazardTags: ["edge"],
+        onHit: {
+          bleed: { chancePct: 18, power: 1.6, durationSec: 8, stacksMax: 4 },
+          sever: { chancePct: 5, power: 1, cdSec: 12 },
+        },
+      },
+      overrides: {
+        "Blade of the Tide": { critChancePct: 13, apOverride: "Medium-High" },
+        "Steppe Sabre": { critChancePct: 13 },
+      },
+    },
+    {
+      match: { category: "swords", names: ["Longsword"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.1, SLASH: 0.55, PIERCE: 0.35 },
+        critChancePct: 11,
+        critMult: 1.6,
+        hazardTags: ["edge", "point"],
+        controlTags: ["pommel"],
+        onHit: {
+          bleed: { chancePct: 14, power: 1.3, durationSec: 7, stacksMax: 3 },
+          sunder: { chancePct: 8, powerPct: 6, durationSec: 10, stacksMax: 3 },
+        },
+      },
+    },
+    {
+      match: {
+        category: "swords",
+        names: ["Great Sword", "Two-Hand Colossus", "Great-Edge"],
+      },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.15, SLASH: 0.7, PIERCE: 0.15 },
+        critChancePct: 14,
+        critMult: 1.7,
+        critArmorBypassPct: 0.08,
+        hazardTags: ["edge"],
+        controlTags: ["pommel"],
+        onHit: {
+          bleed: { chancePct: 20, power: 1.8, durationSec: 9, stacksMax: 4 },
+          sunder: { chancePct: 12, powerPct: 7, durationSec: 12, stacksMax: 4 },
+          sever: { chancePct: 8, power: 1.2, cdSec: 14 },
+        },
+      },
+      overrides: {
+        "Great-Edge": {
+          onHit: { sever: { chancePct: 9, power: 1.3, cdSec: 14 } },
+        },
+        "Two-Hand Colossus": {
+          onHit: { sunder: { chancePct: 14, powerPct: 8, durationSec: 12, stacksMax: 4 } },
+        },
+      },
+    },
+    {
+      match: { category: "daggers", names: ["Misericorde", "Rondel", "Piercer"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.05, SLASH: 0.15, PIERCE: 0.8 },
+        critChancePct: 12,
+        critMult: 1.6,
+        critArmorBypassPct: 0.05,
+        hazardTags: ["point"],
+        onHit: { bleed: { chancePct: 12, power: 1.1, durationSec: 6, stacksMax: 3 } },
+      },
+      overrides: {
+        Rondel: { critChancePct: 11, critArmorBypassPct: 0.06 },
+        Piercer: { critChancePct: 13, critArmorBypassPct: 0.07 },
+      },
+    },
+    {
+      match: { category: "daggers", names: ["Push-Spike"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.05, SLASH: 0.2, PIERCE: 0.75 },
+        critChancePct: 13,
+        critMult: 1.6,
+        critArmorBypassPct: 0.06,
+        hazardTags: ["point"],
+        onHit: {
+          bleed: { chancePct: 12, power: 1.2, durationSec: 6, stacksMax: 3 },
+          sunder: { chancePct: 6, powerPct: 5, durationSec: 8, stacksMax: 3 },
+        },
+      },
+    },
+    {
+      match: {
+        category: "daggers",
+        names: ["Curved Twin-Edge", "Wavesong Dagger", "Cairn Dirk"],
+      },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.05, SLASH: 0.7, PIERCE: 0.25 },
+        critChancePct: 11,
+        critMult: 1.5,
+        hazardTags: ["edge", "point"],
+        onHit: { bleed: { chancePct: 16, power: 1.3, durationSec: 7, stacksMax: 3 } },
+      },
+      overrides: {
+        "Cairn Dirk": {
+          dmgMix: { BLUNT: 0.1, SLASH: 0.45, PIERCE: 0.45 },
+          critChancePct: 12,
+        },
+      },
+    },
+    {
+      match: { category: "axes", names: ["Bearded Axe", "Crescent Battleaxe"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.1, SLASH: 0.75, PIERCE: 0.15 },
+        critChancePct: 12,
+        critMult: 1.5,
+        hazardTags: ["edge"],
+        controlTags: ["hook"],
+        onHit: {
+          bleed: { chancePct: 18, power: 1.6, durationSec: 8, stacksMax: 4 },
+          sever: { chancePct: 5, power: 1, cdSec: 12 },
+        },
+      },
+    },
+    {
+      match: {
+        category: "axes",
+        names: ["Long-Haft War Axe", "Long-Blade Axe", "Hooked War Axe"],
+      },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.2, SLASH: 0.65, PIERCE: 0.15 },
+        critChancePct: 12,
+        critMult: 1.6,
+        hazardTags: ["edge"],
+        controlTags: ["hook"],
+        onHit: {
+          bleed: { chancePct: 20, power: 1.7, durationSec: 8, stacksMax: 4 },
+          sunder: { chancePct: 14, powerPct: 7, durationSec: 12, stacksMax: 4 },
+          sever: { chancePct: 6, power: 1.1, cdSec: 12 },
+        },
+      },
+      overrides: {
+        "Hooked War Axe": {
+          onHit: { disarm: { chancePct: 8, power: 1, cdSec: 10 } },
+        },
+      },
+    },
+    {
+      match: { category: "axes", names: ["Throwing Axe"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.1, SLASH: 0.8, PIERCE: 0.1 },
+        critChancePct: 10,
+        critMult: 1.5,
+        hazardTags: ["edge"],
+        onHit: { bleed: { chancePct: 12, power: 1.2, durationSec: 6, stacksMax: 3 } },
+      },
+    },
+    {
+      match: {
+        category: "polearms",
+        names: ["Partisan Spear", "Winding Spear", "Trident Fork"],
+      },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.1, SLASH: 0.2, PIERCE: 0.7 },
+        critChancePct: 10,
+        critMult: 1.55,
+        hazardTags: ["point"],
+        controlTags: ["hook"],
+        onHit: { bleed: { chancePct: 10, power: 1.1, durationSec: 6, stacksMax: 2 } },
+      },
+      overrides: {
+        "Trident Fork": {
+          onHit: { bleed: { chancePct: 12, power: 1.2, durationSec: 6, stacksMax: 2 } },
+        },
+      },
+    },
+    {
+      match: { category: "polearms", names: ["Glaive", "River-Blade"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.1, SLASH: 0.75, PIERCE: 0.15 },
+        critChancePct: 11,
+        critMult: 1.55,
+        hazardTags: ["edge"],
+        controlTags: ["hook"],
+        onHit: {
+          bleed: { chancePct: 16, power: 1.5, durationSec: 7, stacksMax: 3 },
+          sever: { chancePct: 5, power: 1, cdSec: 12 },
+        },
+      },
+    },
+    {
+      match: {
+        category: "polearms",
+        names: ["Halberd", "Axe-Knife Polearm"],
+      },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.2, SLASH: 0.55, PIERCE: 0.25 },
+        critChancePct: 11,
+        critMult: 1.6,
+        hazardTags: ["edge", "point"],
+        controlTags: ["hook"],
+        onHit: {
+          bleed: { chancePct: 16, power: 1.4, durationSec: 7, stacksMax: 3 },
+          sunder: { chancePct: 14, powerPct: 7, durationSec: 12, stacksMax: 4 },
+        },
+      },
+    },
+    {
+      match: { category: "polearms", names: ["Beak-Hammer", "Lucent Warhammer"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.7, SLASH: 0.1, PIERCE: 0.2 },
+        critChancePct: 10,
+        critMult: 1.75,
+        critArmorBypassPct: 0.1,
+        hazardTags: ["spike"],
+        controlTags: ["beak"],
+        onHit: {
+          sunder: { chancePct: 22, powerPct: 10, durationSec: 12, stacksMax: 5 },
+          disarm: { chancePct: 10, power: 1, cdSec: 8 },
+        },
+      },
+    },
+    {
+      match: {
+        category: "ranged",
+        names: ["Greatbow", "Composite Recurve", "Asymmetrical Longbow"],
+      },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.05, SLASH: 0.15, PIERCE: 0.8 },
+        critChancePct: 8,
+        critMult: 1.5,
+        hazardTags: ["point"],
+        onHit: { bleed: { chancePct: 8, power: 0.9, durationSec: 6, stacksMax: 2 } },
+      },
+      overrides: {
+        "Asymmetrical Longbow": { critChancePct: 9 },
+      },
+    },
+    {
+      match: { category: "ranged", names: ["Heavy Crossbow"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.05, SLASH: 0.1, PIERCE: 0.85 },
+        critChancePct: 10,
+        critMult: 1.8,
+        critArmorBypassPct: 0.08,
+        hazardTags: ["point"],
+        onHit: { bleed: { chancePct: 10, power: 1, durationSec: 6, stacksMax: 2 } },
+      },
+    },
+    {
+      match: { category: "ranged", names: ["Hand Crossbow", "Repeating Crossbow"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.05, SLASH: 0.1, PIERCE: 0.85 },
+        critChancePct: 8,
+        critMult: 1.55,
+        hazardTags: ["point"],
+        onHit: { bleed: { chancePct: 7, power: 0.8, durationSec: 5, stacksMax: 2 } },
+      },
+      overrides: {
+        "Repeating Crossbow": {
+          apOverride: "Low-Medium",
+          critChancePct: 7,
+          critMult: 1.5,
+        },
+      },
+    },
+    {
+      match: { category: "chains", names: ["Chain Morning Star", "Meteor Chain"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.75, SLASH: 0.15, PIERCE: 0.1 },
+        critChancePct: 11,
+        critMult: 1.55,
+        hazardTags: ["spike"],
+        controlTags: ["hook"],
+        onHit: {
+          bleed: { chancePct: 16, power: 1.4, durationSec: 7, stacksMax: 3 },
+          sunder: { chancePct: 12, powerPct: 6, durationSec: 10, stacksMax: 3 },
+          disarm: { chancePct: 10, power: 1, cdSec: 10 },
+        },
+      },
+    },
+    {
+      match: { category: "whips", names: ["Punisher Lash"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.05, SLASH: 0.9, PIERCE: 0.05 },
+        critChancePct: 10,
+        critMult: 1.45,
+        hazardTags: ["edge"],
+        onHit: {
+          bleed: { chancePct: 22, power: 1.1, durationSec: 8, stacksMax: 4 },
+          disarm: { chancePct: 10, power: 0.8, cdSec: 8 },
+        },
+      },
+    },
+    {
+      match: { category: "whips", names: ["Scorpion Whip"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.1, SLASH: 0.8, PIERCE: 0.1 },
+        critChancePct: 11,
+        critMult: 1.5,
+        hazardTags: ["edge", "spike"],
+        controlTags: ["hook"],
+        onHit: {
+          bleed: { chancePct: 26, power: 1.3, durationSec: 8, stacksMax: 5 },
+          disarm: { chancePct: 12, power: 1, cdSec: 10 },
+        },
+      },
+    },
+    {
+      match: { category: "staves", names: ["Quarterstaff", "Ironwood Staff", "Short Staff"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.85, SLASH: 0.1, PIERCE: 0.05 },
+        critChancePct: 6,
+        critMult: 1.45,
+        onHit: {
+          sunder: { chancePct: 8, powerPct: 5, durationSec: 8, stacksMax: 3 },
+          disarm: { chancePct: 8, power: 0.8, cdSec: 8 },
+        },
+      },
+    },
+    {
+      match: { category: "martial", names: ["Twin Sai", "Tonfa Pair", "Knuckle Gauntlet"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.4, SLASH: 0.5, PIERCE: 0.1 },
+        critChancePct: 9,
+        critMult: 1.5,
+        controlTags: ["hook"],
+        hazardTags: ["edge"],
+        onHit: {
+          disarm: { chancePct: 12, power: 1, cdSec: 8 },
+          bleed: { chancePct: 10, power: 0.9, durationSec: 6, stacksMax: 2 },
+        },
+      },
+      overrides: {
+        "Knuckle Gauntlet": {
+          dmgMix: { BLUNT: 0.7, SLASH: 0.25, PIERCE: 0.05 },
+          controlTags: [],
+          onHit: { disarm: { chancePct: 8, power: 0.8, cdSec: 8 } },
+        },
+        "Tonfa Pair": {
+          dmgMix: { BLUNT: 0.55, SLASH: 0.35, PIERCE: 0.1 },
+        },
+      },
+    },
+    {
+      match: { category: "martial", names: ["Emei Rods", "Tiger Claws"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.2, SLASH: 0.3, PIERCE: 0.5 },
+        critChancePct: 11,
+        critMult: 1.5,
+        hazardTags: ["point", "edge"],
+        onHit: { bleed: { chancePct: 14, power: 1, durationSec: 6, stacksMax: 3 } },
+      },
+      overrides: {
+        "Tiger Claws": {
+          dmgMix: { BLUNT: 0.2, SLASH: 0.75, PIERCE: 0.05 },
+          critChancePct: 12,
+          onHit: { bleed: { chancePct: 18, power: 1.1, durationSec: 7, stacksMax: 3 } },
+        },
+      },
+    },
+    {
+      match: { category: "maces", names: ["Spiked Morning Star", "Flanged Mace"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.8, SLASH: 0.1, PIERCE: 0.1 },
+        critChancePct: 9,
+        critMult: 1.6,
+        hazardTags: ["spike"],
+        onHit: {
+          sunder: { chancePct: 18, powerPct: 8, durationSec: 12, stacksMax: 4 },
+          bleed: { chancePct: 12, power: 1.2, durationSec: 7, stacksMax: 3 },
+          disarm: { chancePct: 8, power: 0.9, cdSec: 10 },
+        },
+      },
+    },
+    {
+      match: { category: "maces", names: ["Iron-Studded Great Club"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.9, SLASH: 0.05, PIERCE: 0.05 },
+        critChancePct: 8,
+        critMult: 1.7,
+        onHit: {
+          sunder: { chancePct: 20, powerPct: 9, durationSec: 12, stacksMax: 4 },
+          disarm: { chancePct: 8, power: 0.9, cdSec: 10 },
+        },
+      },
+    },
+  ],
+} as const;
+
 const CATEGORY_BASE_PRICE: Record<string, number> = {
   swords: 720,
   daggers: 220,
@@ -915,6 +1408,7 @@ function computeQualityPrice(basePrice: number, quality: WeaponQuality): number 
 }
 
 type WeaponVariant = WeaponEntry & {
+  category: string;
   quality: WeaponQuality;
   priceCp: number;
   priceDisplay: string;
@@ -931,6 +1425,7 @@ async function buildArmory(): Promise<WeaponVariant[]> {
         const descriptionFull = generateWeaponDescription(weapon, quality);
         variants.push({
           ...weapon,
+          category,
           quality,
           priceCp,
           priceDisplay: cpToCoins(priceCp),
@@ -1023,7 +1518,13 @@ function keepWeaponItem(item: any): boolean {
 async function updateItemsFile(records: ReturnType<typeof computeItemRecord>[]) {
   const path = "data/economy/items.json";
   const raw = await readFile(path, "utf-8");
-  const data = JSON.parse(raw);
+  let data: any[];
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    return;
+  }
+  if (!Array.isArray(data)) return;
   const retained = data.filter(keepWeaponItem);
   const weapons = retained.filter((item: any) => item.category_key === "Weapons");
   const nonWeapons = retained.filter((item: any) => item.category_key !== "Weapons");
@@ -1033,17 +1534,101 @@ async function updateItemsFile(records: ReturnType<typeof computeItemRecord>[]) 
   await writeFile(path, JSON.stringify(updated, null, 2) + "\n");
 }
 
+function cloneOnHitMap(source?: OnHitMap): OnHitMap | undefined {
+  if (!source) return undefined;
+  const copy: OnHitMap = {};
+  for (const [key, value] of Object.entries(source)) {
+    copy[key] = { ...value };
+  }
+  return copy;
+}
+
+function mergeOnHitMaps(base?: OnHitMap, override?: OnHitMap): OnHitMap | undefined {
+  const initial = cloneOnHitMap(base);
+  if (!override) return initial;
+  const target = initial ?? {};
+  for (const [key, value] of Object.entries(override)) {
+    target[key] = { ...(target[key] || {}), ...value };
+  }
+  return target;
+}
+
+function generateWeaponUpgrades(variants: WeaponVariant[]): WeaponUpgrade[] {
+  const upgrades: WeaponUpgrade[] = [];
+  const { apMap, qualityMods, archetypes } = WEAPON_UPGRADE_RULES_DATA;
+  for (const variant of variants) {
+    const archetype = archetypes.find(
+      (entry) => entry.match.category === variant.category && entry.match.names.includes(variant.name),
+    );
+    if (!archetype) continue;
+    const override = archetype.overrides?.[variant.name];
+    const dmgMix = { ...archetype.base.dmgMix, ...(override?.dmgMix ?? {}) } as Record<DamageComponent, number>;
+    const onHit = mergeOnHitMaps(
+      archetype.base.onHit as OnHitMap | undefined,
+      override?.onHit as OnHitMap | undefined,
+    );
+    const apOverride = override?.apOverride ?? archetype.base.apOverride;
+    const apFromData = override?.apFromData ?? archetype.base.apFromData;
+    const directAp = override?.ap ?? archetype.base.ap;
+    let apValue: number;
+    if (typeof directAp === "number") {
+      apValue = directAp;
+    } else if (apOverride) {
+      apValue = apMap[apOverride as keyof typeof apMap] ?? 0;
+    } else if (apFromData) {
+      apValue = apMap[variant.armorPen as keyof typeof apMap] ?? 0;
+    } else {
+      apValue = 0;
+    }
+    const baseCritChance = override?.critChancePct ?? archetype.base.critChancePct;
+    const baseCritMult = override?.critMult ?? archetype.base.critMult;
+    const baseCritArmorBypass = override?.critArmorBypassPct ?? archetype.base.critArmorBypassPct;
+    const qualityMod = qualityMods[variant.quality as keyof typeof qualityMods];
+    const critChancePct = Math.round(baseCritChance + (qualityMod?.critChancePct_delta ?? 0));
+    const critMult = round(baseCritMult + (qualityMod?.critMult_delta ?? 0), 2);
+    const upgrade: WeaponUpgrade = {
+      category: variant.category,
+      name: variant.name,
+      quality: variant.quality,
+      ap: round(apValue, 2),
+      dmgMix: {
+        BLUNT: round(dmgMix.BLUNT ?? 0, 2),
+        SLASH: round(dmgMix.SLASH ?? 0, 2),
+        PIERCE: round(dmgMix.PIERCE ?? 0, 2),
+      },
+      critChancePct,
+      critMult,
+    };
+    if (baseCritArmorBypass && baseCritArmorBypass > 0) {
+      upgrade.critArmorBypassPct = round(baseCritArmorBypass, 2);
+    }
+    if (onHit && Object.keys(onHit).length) {
+      upgrade.onHit = onHit;
+    }
+    upgrades.push(upgrade);
+  }
+  const qualityOrder: Record<WeaponQuality, number> = { Standard: 0, Fine: 1, Masterwork: 2 };
+  upgrades.sort((a, b) => {
+    const categoryCmp = (CATEGORY_SORT_ORDER[a.category] ?? Number.MAX_SAFE_INTEGER) -
+      (CATEGORY_SORT_ORDER[b.category] ?? Number.MAX_SAFE_INTEGER);
+    if (categoryCmp) return categoryCmp;
+    const nameCmp = a.name.localeCompare(b.name);
+    if (nameCmp) return nameCmp;
+    return qualityOrder[a.quality] - qualityOrder[b.quality];
+  });
+  return upgrades;
+}
+
 async function writeArmoryData(variants: WeaponVariant[]) {
   const lines: string[] = [];
+  const upgrades = generateWeaponUpgrades(variants);
   lines.push("export type WeaponQuality = 'Standard' | 'Fine' | 'Masterwork';");
   lines.push("export interface WeaponEntry {\n  name: string;\n  region: string;\n  size: 'Tiny'|'Small'|'Medium'|'Large'|'Very Large';\n  hands: 1|2;\n  reach: 'Very Short'|'Short'|'Short/Medium'|'Medium'|'Medium/Long'|'Long'|'Very Long';\n  description: string;\n  fightingStyle: string;\n  attackSpeed: number;\n  damage: number;\n  armorPen: 'Low'|'Low-Medium'|'Medium'|'Medium-High'|'High'|'Very High';\n}");
   lines.push("export interface WeaponRecord extends WeaponEntry {\n  quality: WeaponQuality;\n  priceCp: number;\n  priceDisplay: string;\n  descriptionFull: string;\n}");
   const grouped: Record<string, WeaponVariant[]> = {};
   for (const variant of variants) {
-    const category = Object.entries(ARMORY_SOURCE).find(([, entries]) => entries.some((entry) => entry.name === variant.name && entry.region === variant.region))?.[0];
-    const key = category || "misc";
-    if (!grouped[key]) grouped[key] = [];
-    grouped[key].push(variant);
+    if (!grouped[variant.category]) grouped[variant.category] = [];
+    grouped[variant.category].push(variant);
   }
   lines.push("export const ARMORY: Record<string, WeaponRecord[]> = {");
   for (const [category, items] of Object.entries(grouped)) {
@@ -1070,6 +1655,24 @@ async function writeArmoryData(variants: WeaponVariant[]) {
   }
   lines.push("};");
   lines.push("");
+  lines.push("export interface WeaponUpgradeOnHitEffect {\n  chancePct: number;\n  power?: number;\n  durationSec?: number;\n  stacksMax?: number;\n  powerPct?: number;\n  cdSec?: number;\n}");
+  lines.push("export type WeaponUpgradeOnHitMap = Record<string, WeaponUpgradeOnHitEffect>;");
+  lines.push("export interface WeaponUpgrade {\n  category: string;\n  name: string;\n  quality: WeaponQuality;\n  ap: number;\n  dmgMix: Record<'BLUNT'|'SLASH'|'PIERCE', number>;\n  critChancePct: number;\n  critMult: number;\n  critArmorBypassPct?: number;\n  onHit?: WeaponUpgradeOnHitMap;\n}");
+  lines.push("");
+  const upgradesLines = JSON.stringify(upgrades, null, 2).split("\n");
+  if (upgradesLines.length) {
+    upgradesLines[0] = `export const WEAPON_UPGRADES: WeaponUpgrade[] = ${upgradesLines[0]}`;
+    upgradesLines[upgradesLines.length - 1] = `${upgradesLines[upgradesLines.length - 1]};`;
+    lines.push(...upgradesLines);
+    lines.push("");
+  }
+  const upgradeLines = JSON.stringify(WEAPON_UPGRADE_RULES_DATA, null, 2).split("\n");
+  if (upgradeLines.length) {
+    upgradeLines[0] = `export const WEAPON_UPGRADE_RULES = ${upgradeLines[0]}`;
+    upgradeLines[upgradeLines.length - 1] = `${upgradeLines[upgradeLines.length - 1]} as const;`;
+    lines.push(...upgradeLines);
+    lines.push("");
+  }
   await writeFile("data/game/armory.ts", lines.join("\n"));
 }
 
