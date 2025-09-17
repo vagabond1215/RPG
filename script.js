@@ -3824,7 +3824,9 @@ characterButton.addEventListener('click', () => {
 });
 
 dropdownMenu.addEventListener('click', e => {
-  const action = e.target.dataset.action;
+  const button = e.target.closest('button');
+  if (!button || !dropdownMenu.contains(button)) return;
+  const action = button.dataset.action;
   if (!action) return;
   dropdownMenu.classList.remove('active');
   if (action === 'new-character') {
@@ -3840,7 +3842,9 @@ dropdownMenu.addEventListener('click', e => {
 });
 
 characterMenu.addEventListener('click', e => {
-  const action = e.target.dataset.action;
+  const button = e.target.closest('button');
+  if (!button || !characterMenu.contains(button)) return;
+  const action = button.dataset.action;
   if (!action) return;
   characterMenu.classList.remove('active');
   if (action === 'profile') {
