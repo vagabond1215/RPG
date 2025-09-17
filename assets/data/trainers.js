@@ -21,6 +21,8 @@ export const TRAINERS = [
     { craft: 'leatherworking', tier: 'master', name: 'Rook the Tanner', city: "Dragon's Reach Road", location: "Tanners' Yard" },
     { craft: 'alchemy', tier: 'master', name: 'Sage Aurellius', city: 'Warm Springs', location: 'Emberflask Lab' },
     { craft: 'enchanting', tier: 'master', name: 'Archmage Selene', city: 'Mountain Top', location: "Arcanists' Enclave" },
+    { craft: 'masonry', tier: 'master', name: 'Corin Wavecut', city: "Wave's Break", location: "Wavecut Stoneworks" },
+    { craft: 'textiles', tier: 'master', name: 'Matron Selka', city: "Wave's Break", location: "Netmaker's Co-op" },
     // Journeyman and apprentice examples in populated cities
     { craft: 'glassblowing', tier: 'journeyman', name: 'Jorin Sandshaper', city: 'Coral Keep', location: "Glassblowing Workshop" },
     { craft: 'blacksmithing', tier: 'journeyman', name: 'Brakka Ironbent', city: "Wave's Break", location: "Tidefire Forge" },
@@ -30,6 +32,8 @@ export const TRAINERS = [
     { craft: 'alchemy', tier: 'journeyman', name: 'Iris Flaskbinder', city: "Wave's Break", location: "Tideglass Alchemical Atelier" },
     { craft: 'enchanting', tier: 'initiate', name: 'Sira Glowtouch', city: "Wave's Break", location: "Arc Runes Enchantery" },
     { craft: 'pearl-diving', tier: 'journeyman', name: 'Doran Deepbreath', city: 'Coral Keep', location: "Pearl Diving Dock" },
+    { craft: 'masonry', tier: 'journeyman', name: 'Lysa Quarryborn', city: "Wave's Break", location: "Cliffbreak Quarry" },
+    { craft: 'textiles', tier: 'journeyman', name: 'Tarin Twinehand', city: "Wave's Break", location: "Netmaker's Co-op" },
 ];
 /** Utility to fetch trainers able to teach a given learner tier */
 export function trainersFor(craft, learner, city) {
