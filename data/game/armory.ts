@@ -204,3 +204,5231 @@ export const ARMORY: Record<string, WeaponRecord[]> = {
     { name: "Iron-Studded Great Club", region: "Island Clans", size: "Very Large", hands: 2, reach: "Long", description: "Heavy iron-shod wooden staff reinforced with rows of riveted studs; dark-blued rings and end-caps; demands strength and timing to bring its mass to bear.", fightingStyle: "Crushing sweeps and pounding overhead smashes", attackSpeed: 3, damage: 9.2, armorPen: "High", quality: "Masterwork", priceCp: 4895, priceDisplay: "2g 8si 95cp", descriptionFull: "Masterwork Iron-Studded Great Club. Heavy iron-shod wooden staff reinforced with rows of riveted studs; dark-blued rings and end-caps; demands strength and timing to bring its mass to bear. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for crushing sweeps and pounding overhead smashes." },
   ],
 };
+
+export interface WeaponUpgradeOnHitEffect {
+  chancePct: number;
+  power?: number;
+  durationSec?: number;
+  stacksMax?: number;
+  powerPct?: number;
+  cdSec?: number;
+}
+export type WeaponUpgradeOnHitMap = Record<string, WeaponUpgradeOnHitEffect>;
+export interface WeaponUpgrade {
+  category: string;
+  name: string;
+  quality: WeaponQuality;
+  ap: number;
+  dmgMix: Record<'BLUNT'|'SLASH'|'PIERCE', number>;
+  critChancePct: number;
+  critMult: number;
+  critArmorBypassPct?: number;
+  onHit?: WeaponUpgradeOnHitMap;
+}
+
+export const WEAPON_UPGRADES: WeaponUpgrade[] = [
+  {
+    "category": "swords",
+    "name": "Arming Sword",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.6,
+      "PIERCE": 0.3
+    },
+    "critChancePct": 9,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Arming Sword",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.6,
+      "PIERCE": 0.3
+    },
+    "critChancePct": 10,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Arming Sword",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.6,
+      "PIERCE": 0.3
+    },
+    "critChancePct": 11,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Blade of the Tide",
+    "quality": "Standard",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.8,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 13,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Blade of the Tide",
+    "quality": "Fine",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.8,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Blade of the Tide",
+    "quality": "Masterwork",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.8,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 15,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Companion Blade",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.6,
+      "PIERCE": 0.35
+    },
+    "critChancePct": 11,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Companion Blade",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.6,
+      "PIERCE": 0.35
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Companion Blade",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.6,
+      "PIERCE": 0.35
+    },
+    "critChancePct": 13,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Eastern Straightblade",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.55,
+      "PIERCE": 0.4
+    },
+    "critChancePct": 11,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Eastern Straightblade",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.55,
+      "PIERCE": 0.4
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Eastern Straightblade",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.55,
+      "PIERCE": 0.4
+    },
+    "critChancePct": 13,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Falchion",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.8,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 12,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Falchion",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.8,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 13,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Falchion",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.8,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Great Sword",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.15,
+      "SLASH": 0.7,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.7,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.8,
+        "durationSec": 9,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 8,
+        "power": 1.2,
+        "cdSec": 14
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Great Sword",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.15,
+      "SLASH": 0.7,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 15,
+    "critMult": 1.75,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.8,
+        "durationSec": 9,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 8,
+        "power": 1.2,
+        "cdSec": 14
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Great Sword",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.15,
+      "SLASH": 0.7,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 16,
+    "critMult": 1.8,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.8,
+        "durationSec": 9,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 8,
+        "power": 1.2,
+        "cdSec": 14
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Great-Edge",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.15,
+      "SLASH": 0.7,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.7,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.8,
+        "durationSec": 9,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 9,
+        "power": 1.3,
+        "cdSec": 14
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Great-Edge",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.15,
+      "SLASH": 0.7,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 15,
+    "critMult": 1.75,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.8,
+        "durationSec": 9,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 9,
+        "power": 1.3,
+        "cdSec": 14
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Great-Edge",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.15,
+      "SLASH": 0.7,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 16,
+    "critMult": 1.8,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.8,
+        "durationSec": 9,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 9,
+        "power": 1.3,
+        "cdSec": 14
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Longsword",
+    "quality": "Standard",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.55,
+      "PIERCE": 0.35
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 14,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 6,
+        "durationSec": 10,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Longsword",
+    "quality": "Fine",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.55,
+      "PIERCE": 0.35
+    },
+    "critChancePct": 12,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 14,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 6,
+        "durationSec": 10,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Longsword",
+    "quality": "Masterwork",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.55,
+      "PIERCE": 0.35
+    },
+    "critChancePct": 13,
+    "critMult": 1.7,
+    "onHit": {
+      "bleed": {
+        "chancePct": 14,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 6,
+        "durationSec": 10,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Short Guardblade",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.65,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Short Guardblade",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.65,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Short Guardblade",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.65,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 12,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Steppe Sabre",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.8,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 13,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Steppe Sabre",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.8,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Steppe Sabre",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.8,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 15,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Two-Hand Colossus",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.15,
+      "SLASH": 0.7,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.7,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.8,
+        "durationSec": 9,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 8,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 8,
+        "power": 1.2,
+        "cdSec": 14
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Two-Hand Colossus",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.15,
+      "SLASH": 0.7,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 15,
+    "critMult": 1.75,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.8,
+        "durationSec": 9,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 8,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 8,
+        "power": 1.2,
+        "cdSec": 14
+      }
+    }
+  },
+  {
+    "category": "swords",
+    "name": "Two-Hand Colossus",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.15,
+      "SLASH": 0.7,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 16,
+    "critMult": 1.8,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.8,
+        "durationSec": 9,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 8,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 8,
+        "power": 1.2,
+        "cdSec": 14
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Cairn Dirk",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.45,
+      "PIERCE": 0.45
+    },
+    "critChancePct": 12,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Cairn Dirk",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.45,
+      "PIERCE": 0.45
+    },
+    "critChancePct": 13,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Cairn Dirk",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.45,
+      "PIERCE": 0.45
+    },
+    "critChancePct": 14,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Curved Twin-Edge",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.7,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 11,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Curved Twin-Edge",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.7,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 12,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Curved Twin-Edge",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.7,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 13,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Misericorde",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "critArmorBypassPct": 0.05,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Misericorde",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 13,
+    "critMult": 1.65,
+    "critArmorBypassPct": 0.05,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Misericorde",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 14,
+    "critMult": 1.7,
+    "critArmorBypassPct": 0.05,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Piercer",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 13,
+    "critMult": 1.6,
+    "critArmorBypassPct": 0.07,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Piercer",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 14,
+    "critMult": 1.65,
+    "critArmorBypassPct": 0.07,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Piercer",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 15,
+    "critMult": 1.7,
+    "critArmorBypassPct": 0.07,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Push-Spike",
+    "quality": "Standard",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.2,
+      "PIERCE": 0.75
+    },
+    "critChancePct": 13,
+    "critMult": 1.6,
+    "critArmorBypassPct": 0.06,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 6,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Push-Spike",
+    "quality": "Fine",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.2,
+      "PIERCE": 0.75
+    },
+    "critChancePct": 14,
+    "critMult": 1.65,
+    "critArmorBypassPct": 0.06,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 6,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Push-Spike",
+    "quality": "Masterwork",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.2,
+      "PIERCE": 0.75
+    },
+    "critChancePct": 15,
+    "critMult": 1.7,
+    "critArmorBypassPct": 0.06,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 6,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Rondel",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "critArmorBypassPct": 0.06,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Rondel",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 12,
+    "critMult": 1.65,
+    "critArmorBypassPct": 0.06,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Rondel",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 13,
+    "critMult": 1.7,
+    "critArmorBypassPct": 0.06,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Wavesong Dagger",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.7,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 11,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Wavesong Dagger",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.7,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 12,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "daggers",
+    "name": "Wavesong Dagger",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.7,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 13,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.3,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Bearded Axe",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 12,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Bearded Axe",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 13,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Bearded Axe",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Crescent Battleaxe",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 12,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Crescent Battleaxe",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 13,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Crescent Battleaxe",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.6,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Hooked War Axe",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.65,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.7,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 6,
+        "power": 1.1,
+        "cdSec": 12
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Hooked War Axe",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.65,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 13,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.7,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 6,
+        "power": 1.1,
+        "cdSec": 12
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Hooked War Axe",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.65,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.7,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.7,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 6,
+        "power": 1.1,
+        "cdSec": 12
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Long-Blade Axe",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.65,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.7,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 6,
+        "power": 1.1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Long-Blade Axe",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.65,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 13,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.7,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 6,
+        "power": 1.1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Long-Blade Axe",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.65,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.7,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.7,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 6,
+        "power": 1.1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Long-Haft War Axe",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.65,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.7,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 6,
+        "power": 1.1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Long-Haft War Axe",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.65,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 13,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.7,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 6,
+        "power": 1.1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Long-Haft War Axe",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.65,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 14,
+    "critMult": 1.7,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.7,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "sever": {
+        "chancePct": 6,
+        "power": 1.1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Throwing Axe",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.8,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 10,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Throwing Axe",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.8,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 11,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "axes",
+    "name": "Throwing Axe",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.8,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Axe-Knife Polearm",
+    "quality": "Standard",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.55,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Axe-Knife Polearm",
+    "quality": "Fine",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.55,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 12,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Axe-Knife Polearm",
+    "quality": "Masterwork",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.55,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 13,
+    "critMult": 1.7,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Beak-Hammer",
+    "quality": "Standard",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.1,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 10,
+    "critMult": 1.75,
+    "critArmorBypassPct": 0.1,
+    "onHit": {
+      "sunder": {
+        "chancePct": 22,
+        "powerPct": 10,
+        "durationSec": 12,
+        "stacksMax": 5
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Beak-Hammer",
+    "quality": "Fine",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.1,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 11,
+    "critMult": 1.8,
+    "critArmorBypassPct": 0.1,
+    "onHit": {
+      "sunder": {
+        "chancePct": 22,
+        "powerPct": 10,
+        "durationSec": 12,
+        "stacksMax": 5
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Beak-Hammer",
+    "quality": "Masterwork",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.1,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 12,
+    "critMult": 1.85,
+    "critArmorBypassPct": 0.1,
+    "onHit": {
+      "sunder": {
+        "chancePct": 22,
+        "powerPct": 10,
+        "durationSec": 12,
+        "stacksMax": 5
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Glaive",
+    "quality": "Standard",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 11,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.5,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Glaive",
+    "quality": "Fine",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.5,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Glaive",
+    "quality": "Masterwork",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 13,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.5,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Halberd",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.55,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Halberd",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.55,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 12,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Halberd",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.55,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 13,
+    "critMult": 1.7,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 7,
+        "durationSec": 12,
+        "stacksMax": 4
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Lucent Warhammer",
+    "quality": "Standard",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.1,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 10,
+    "critMult": 1.75,
+    "critArmorBypassPct": 0.1,
+    "onHit": {
+      "sunder": {
+        "chancePct": 22,
+        "powerPct": 10,
+        "durationSec": 12,
+        "stacksMax": 5
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Lucent Warhammer",
+    "quality": "Fine",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.1,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 11,
+    "critMult": 1.8,
+    "critArmorBypassPct": 0.1,
+    "onHit": {
+      "sunder": {
+        "chancePct": 22,
+        "powerPct": 10,
+        "durationSec": 12,
+        "stacksMax": 5
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Lucent Warhammer",
+    "quality": "Masterwork",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.1,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 12,
+    "critMult": 1.85,
+    "critArmorBypassPct": 0.1,
+    "onHit": {
+      "sunder": {
+        "chancePct": 22,
+        "powerPct": 10,
+        "durationSec": 12,
+        "stacksMax": 5
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Partisan Spear",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.2,
+      "PIERCE": 0.7
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Partisan Spear",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.2,
+      "PIERCE": 0.7
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Partisan Spear",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.2,
+      "PIERCE": 0.7
+    },
+    "critChancePct": 12,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "River-Blade",
+    "quality": "Standard",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 11,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.5,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "River-Blade",
+    "quality": "Fine",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.5,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "River-Blade",
+    "quality": "Masterwork",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.75,
+      "PIERCE": 0.15
+    },
+    "critChancePct": 13,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.5,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sever": {
+        "chancePct": 5,
+        "power": 1,
+        "cdSec": 12
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Trident Fork",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.2,
+      "PIERCE": 0.7
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Trident Fork",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.2,
+      "PIERCE": 0.7
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Trident Fork",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.2,
+      "PIERCE": 0.7
+    },
+    "critChancePct": 12,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Winding Spear",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.2,
+      "PIERCE": 0.7
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Winding Spear",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.2,
+      "PIERCE": 0.7
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "polearms",
+    "name": "Winding Spear",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.2,
+      "PIERCE": 0.7
+    },
+    "critChancePct": 12,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Asymmetrical Longbow",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 9,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Asymmetrical Longbow",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Asymmetrical Longbow",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Composite Recurve",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 8,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Composite Recurve",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 9,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Composite Recurve",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 10,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Greatbow",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 8,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Greatbow",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 9,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Greatbow",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 10,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Hand Crossbow",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 8,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 7,
+        "power": 0.8,
+        "durationSec": 5,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Hand Crossbow",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 9,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 7,
+        "power": 0.8,
+        "durationSec": 5,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Hand Crossbow",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 10,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 7,
+        "power": 0.8,
+        "durationSec": 5,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Heavy Crossbow",
+    "quality": "Standard",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 10,
+    "critMult": 1.8,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Heavy Crossbow",
+    "quality": "Fine",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 11,
+    "critMult": 1.85,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Heavy Crossbow",
+    "quality": "Masterwork",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 12,
+    "critMult": 1.9,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Repeating Crossbow",
+    "quality": "Standard",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 7,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 7,
+        "power": 0.8,
+        "durationSec": 5,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Repeating Crossbow",
+    "quality": "Fine",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 8,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 7,
+        "power": 0.8,
+        "durationSec": 5,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Repeating Crossbow",
+    "quality": "Masterwork",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 9,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 7,
+        "power": 0.8,
+        "durationSec": 5,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "chains",
+    "name": "Chain Morning Star",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.75,
+      "SLASH": 0.15,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 11,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 6,
+        "durationSec": 10,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "chains",
+    "name": "Chain Morning Star",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.75,
+      "SLASH": 0.15,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 6,
+        "durationSec": 10,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "chains",
+    "name": "Chain Morning Star",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.75,
+      "SLASH": 0.15,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 13,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 6,
+        "durationSec": 10,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "chains",
+    "name": "Meteor Chain",
+    "quality": "Standard",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.75,
+      "SLASH": 0.15,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 11,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 6,
+        "durationSec": 10,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "chains",
+    "name": "Meteor Chain",
+    "quality": "Fine",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.75,
+      "SLASH": 0.15,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 12,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 6,
+        "durationSec": 10,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "chains",
+    "name": "Meteor Chain",
+    "quality": "Masterwork",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.75,
+      "SLASH": 0.15,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 13,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.4,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 6,
+        "durationSec": 10,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "whips",
+    "name": "Punisher Lash",
+    "quality": "Standard",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.9,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 10,
+    "critMult": 1.45,
+    "onHit": {
+      "bleed": {
+        "chancePct": 22,
+        "power": 1.1,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "whips",
+    "name": "Punisher Lash",
+    "quality": "Fine",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.9,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 11,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 22,
+        "power": 1.1,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "whips",
+    "name": "Punisher Lash",
+    "quality": "Masterwork",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.9,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 12,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 22,
+        "power": 1.1,
+        "durationSec": 8,
+        "stacksMax": 4
+      },
+      "disarm": {
+        "chancePct": 10,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "whips",
+    "name": "Scorpion Whip",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.8,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 11,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 26,
+        "power": 1.3,
+        "durationSec": 8,
+        "stacksMax": 5
+      },
+      "disarm": {
+        "chancePct": 12,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "whips",
+    "name": "Scorpion Whip",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.8,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 12,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 26,
+        "power": 1.3,
+        "durationSec": 8,
+        "stacksMax": 5
+      },
+      "disarm": {
+        "chancePct": 12,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "whips",
+    "name": "Scorpion Whip",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.8,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 13,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 26,
+        "power": 1.3,
+        "durationSec": 8,
+        "stacksMax": 5
+      },
+      "disarm": {
+        "chancePct": 12,
+        "power": 1,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "staves",
+    "name": "Ironwood Staff",
+    "quality": "Standard",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.85,
+      "SLASH": 0.1,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 6,
+    "critMult": 1.45,
+    "onHit": {
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "staves",
+    "name": "Ironwood Staff",
+    "quality": "Fine",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.85,
+      "SLASH": 0.1,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 7,
+    "critMult": 1.5,
+    "onHit": {
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "staves",
+    "name": "Ironwood Staff",
+    "quality": "Masterwork",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.85,
+      "SLASH": 0.1,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 8,
+    "critMult": 1.55,
+    "onHit": {
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "staves",
+    "name": "Quarterstaff",
+    "quality": "Standard",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.85,
+      "SLASH": 0.1,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 6,
+    "critMult": 1.45,
+    "onHit": {
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "staves",
+    "name": "Quarterstaff",
+    "quality": "Fine",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.85,
+      "SLASH": 0.1,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 7,
+    "critMult": 1.5,
+    "onHit": {
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "staves",
+    "name": "Quarterstaff",
+    "quality": "Masterwork",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.85,
+      "SLASH": 0.1,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 8,
+    "critMult": 1.55,
+    "onHit": {
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "staves",
+    "name": "Short Staff",
+    "quality": "Standard",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.85,
+      "SLASH": 0.1,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 6,
+    "critMult": 1.45,
+    "onHit": {
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "staves",
+    "name": "Short Staff",
+    "quality": "Fine",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.85,
+      "SLASH": 0.1,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 7,
+    "critMult": 1.5,
+    "onHit": {
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "staves",
+    "name": "Short Staff",
+    "quality": "Masterwork",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.85,
+      "SLASH": 0.1,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 8,
+    "critMult": 1.55,
+    "onHit": {
+      "sunder": {
+        "chancePct": 8,
+        "powerPct": 5,
+        "durationSec": 8,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Emei Rods",
+    "quality": "Standard",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.3,
+      "PIERCE": 0.5
+    },
+    "critChancePct": 11,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 14,
+        "power": 1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Emei Rods",
+    "quality": "Fine",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.3,
+      "PIERCE": 0.5
+    },
+    "critChancePct": 12,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 14,
+        "power": 1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Emei Rods",
+    "quality": "Masterwork",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.3,
+      "PIERCE": 0.5
+    },
+    "critChancePct": 13,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 14,
+        "power": 1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Knuckle Gauntlet",
+    "quality": "Standard",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.25,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 9,
+    "critMult": 1.5,
+    "onHit": {
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      },
+      "bleed": {
+        "chancePct": 10,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Knuckle Gauntlet",
+    "quality": "Fine",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.25,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      },
+      "bleed": {
+        "chancePct": 10,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Knuckle Gauntlet",
+    "quality": "Masterwork",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.25,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.8,
+        "cdSec": 8
+      },
+      "bleed": {
+        "chancePct": 10,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Tiger Claws",
+    "quality": "Standard",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.75,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 12,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.1,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Tiger Claws",
+    "quality": "Fine",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.75,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 13,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.1,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Tiger Claws",
+    "quality": "Masterwork",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.75,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 14,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 18,
+        "power": 1.1,
+        "durationSec": 7,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Tonfa Pair",
+    "quality": "Standard",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.55,
+      "SLASH": 0.35,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 9,
+    "critMult": 1.5,
+    "onHit": {
+      "disarm": {
+        "chancePct": 12,
+        "power": 1,
+        "cdSec": 8
+      },
+      "bleed": {
+        "chancePct": 10,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Tonfa Pair",
+    "quality": "Fine",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.55,
+      "SLASH": 0.35,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "disarm": {
+        "chancePct": 12,
+        "power": 1,
+        "cdSec": 8
+      },
+      "bleed": {
+        "chancePct": 10,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Tonfa Pair",
+    "quality": "Masterwork",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.55,
+      "SLASH": 0.35,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "disarm": {
+        "chancePct": 12,
+        "power": 1,
+        "cdSec": 8
+      },
+      "bleed": {
+        "chancePct": 10,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Twin Sai",
+    "quality": "Standard",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.4,
+      "SLASH": 0.5,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 9,
+    "critMult": 1.5,
+    "onHit": {
+      "disarm": {
+        "chancePct": 12,
+        "power": 1,
+        "cdSec": 8
+      },
+      "bleed": {
+        "chancePct": 10,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Twin Sai",
+    "quality": "Fine",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.4,
+      "SLASH": 0.5,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "disarm": {
+        "chancePct": 12,
+        "power": 1,
+        "cdSec": 8
+      },
+      "bleed": {
+        "chancePct": 10,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "martial",
+    "name": "Twin Sai",
+    "quality": "Masterwork",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.4,
+      "SLASH": 0.5,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "disarm": {
+        "chancePct": 12,
+        "power": 1,
+        "cdSec": 8
+      },
+      "bleed": {
+        "chancePct": 10,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "maces",
+    "name": "Flanged Mace",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.8,
+      "SLASH": 0.1,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 9,
+    "critMult": 1.6,
+    "onHit": {
+      "sunder": {
+        "chancePct": 18,
+        "powerPct": 8,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.9,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "maces",
+    "name": "Flanged Mace",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.8,
+      "SLASH": 0.1,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 10,
+    "critMult": 1.65,
+    "onHit": {
+      "sunder": {
+        "chancePct": 18,
+        "powerPct": 8,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.9,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "maces",
+    "name": "Flanged Mace",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.8,
+      "SLASH": 0.1,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 11,
+    "critMult": 1.7,
+    "onHit": {
+      "sunder": {
+        "chancePct": 18,
+        "powerPct": 8,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.9,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "maces",
+    "name": "Iron-Studded Great Club",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.9,
+      "SLASH": 0.05,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 8,
+    "critMult": 1.7,
+    "onHit": {
+      "sunder": {
+        "chancePct": 20,
+        "powerPct": 9,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.9,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "maces",
+    "name": "Iron-Studded Great Club",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.9,
+      "SLASH": 0.05,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 9,
+    "critMult": 1.75,
+    "onHit": {
+      "sunder": {
+        "chancePct": 20,
+        "powerPct": 9,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.9,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "maces",
+    "name": "Iron-Studded Great Club",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.9,
+      "SLASH": 0.05,
+      "PIERCE": 0.05
+    },
+    "critChancePct": 10,
+    "critMult": 1.8,
+    "onHit": {
+      "sunder": {
+        "chancePct": 20,
+        "powerPct": 9,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.9,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "maces",
+    "name": "Spiked Morning Star",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.8,
+      "SLASH": 0.1,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 9,
+    "critMult": 1.6,
+    "onHit": {
+      "sunder": {
+        "chancePct": 18,
+        "powerPct": 8,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.9,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "maces",
+    "name": "Spiked Morning Star",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.8,
+      "SLASH": 0.1,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 10,
+    "critMult": 1.65,
+    "onHit": {
+      "sunder": {
+        "chancePct": 18,
+        "powerPct": 8,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.9,
+        "cdSec": 10
+      }
+    }
+  },
+  {
+    "category": "maces",
+    "name": "Spiked Morning Star",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.8,
+      "SLASH": 0.1,
+      "PIERCE": 0.1
+    },
+    "critChancePct": 11,
+    "critMult": 1.7,
+    "onHit": {
+      "sunder": {
+        "chancePct": 18,
+        "powerPct": 8,
+        "durationSec": 12,
+        "stacksMax": 4
+      },
+      "bleed": {
+        "chancePct": 12,
+        "power": 1.2,
+        "durationSec": 7,
+        "stacksMax": 3
+      },
+      "disarm": {
+        "chancePct": 8,
+        "power": 0.9,
+        "cdSec": 10
+      }
+    }
+  }
+];
+
+export const WEAPON_UPGRADE_RULES = {
+  "id": "wur:all-archetypes",
+  "note": "Rules apply to all weapons in ARMORY by category+name match. Engine should materialize per-weapon upgrades from these rules.",
+  "apMap": {
+    "Low": 0.06,
+    "Low-Medium": 0.12,
+    "Medium": 0.2,
+    "Medium-High": 0.3,
+    "High": 0.42,
+    "Very High": 0.52
+  },
+  "qualityMods": {
+    "Standard": {
+      "critChancePct_delta": 0,
+      "critMult_delta": 0
+    },
+    "Fine": {
+      "critChancePct_delta": 1,
+      "critMult_delta": 0.05
+    },
+    "Masterwork": {
+      "critChancePct_delta": 2,
+      "critMult_delta": 0.1
+    }
+  },
+  "archetypes": [
+    {
+      "match": {
+        "category": "swords",
+        "names": [
+          "Arming Sword",
+          "Short Guardblade",
+          "Eastern Straightblade",
+          "Companion Blade"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.1,
+          "SLASH": 0.6,
+          "PIERCE": 0.3
+        },
+        "critChancePct": 9,
+        "critMult": 1.55,
+        "critArmorBypassPct": 0,
+        "hazardTags": [
+          "edge",
+          "point"
+        ],
+        "controlTags": [
+          "pommel"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 12,
+            "power": 1.2,
+            "durationSec": 7,
+            "stacksMax": 3
+          }
+        }
+      },
+      "overrides": {
+        "Short Guardblade": {
+          "critChancePct": 10,
+          "dmgMix": {
+            "BLUNT": 0.1,
+            "SLASH": 0.65,
+            "PIERCE": 0.25
+          }
+        },
+        "Eastern Straightblade": {
+          "critChancePct": 11,
+          "dmgMix": {
+            "BLUNT": 0.05,
+            "SLASH": 0.55,
+            "PIERCE": 0.4
+          }
+        },
+        "Companion Blade": {
+          "critChancePct": 11,
+          "dmgMix": {
+            "BLUNT": 0.05,
+            "SLASH": 0.6,
+            "PIERCE": 0.35
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "swords",
+        "names": [
+          "Falchion",
+          "Steppe Sabre",
+          "Blade of the Tide"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.05,
+          "SLASH": 0.8,
+          "PIERCE": 0.15
+        },
+        "critChancePct": 12,
+        "critMult": 1.5,
+        "hazardTags": [
+          "edge"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 18,
+            "power": 1.6,
+            "durationSec": 8,
+            "stacksMax": 4
+          },
+          "sever": {
+            "chancePct": 5,
+            "power": 1,
+            "cdSec": 12
+          }
+        }
+      },
+      "overrides": {
+        "Blade of the Tide": {
+          "critChancePct": 13,
+          "apOverride": "Medium-High"
+        },
+        "Steppe Sabre": {
+          "critChancePct": 13
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "swords",
+        "names": [
+          "Longsword"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.1,
+          "SLASH": 0.55,
+          "PIERCE": 0.35
+        },
+        "critChancePct": 11,
+        "critMult": 1.6,
+        "hazardTags": [
+          "edge",
+          "point"
+        ],
+        "controlTags": [
+          "pommel"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 14,
+            "power": 1.3,
+            "durationSec": 7,
+            "stacksMax": 3
+          },
+          "sunder": {
+            "chancePct": 8,
+            "powerPct": 6,
+            "durationSec": 10,
+            "stacksMax": 3
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "swords",
+        "names": [
+          "Great Sword",
+          "Two-Hand Colossus",
+          "Great-Edge"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.15,
+          "SLASH": 0.7,
+          "PIERCE": 0.15
+        },
+        "critChancePct": 14,
+        "critMult": 1.7,
+        "critArmorBypassPct": 0.08,
+        "hazardTags": [
+          "edge"
+        ],
+        "controlTags": [
+          "pommel"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 20,
+            "power": 1.8,
+            "durationSec": 9,
+            "stacksMax": 4
+          },
+          "sunder": {
+            "chancePct": 12,
+            "powerPct": 7,
+            "durationSec": 12,
+            "stacksMax": 4
+          },
+          "sever": {
+            "chancePct": 8,
+            "power": 1.2,
+            "cdSec": 14
+          }
+        }
+      },
+      "overrides": {
+        "Great-Edge": {
+          "onHit": {
+            "sever": {
+              "chancePct": 9,
+              "power": 1.3,
+              "cdSec": 14
+            }
+          }
+        },
+        "Two-Hand Colossus": {
+          "onHit": {
+            "sunder": {
+              "chancePct": 14,
+              "powerPct": 8,
+              "durationSec": 12,
+              "stacksMax": 4
+            }
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "daggers",
+        "names": [
+          "Misericorde",
+          "Rondel",
+          "Piercer"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.05,
+          "SLASH": 0.15,
+          "PIERCE": 0.8
+        },
+        "critChancePct": 12,
+        "critMult": 1.6,
+        "critArmorBypassPct": 0.05,
+        "hazardTags": [
+          "point"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 12,
+            "power": 1.1,
+            "durationSec": 6,
+            "stacksMax": 3
+          }
+        }
+      },
+      "overrides": {
+        "Rondel": {
+          "critChancePct": 11,
+          "critArmorBypassPct": 0.06
+        },
+        "Piercer": {
+          "critChancePct": 13,
+          "critArmorBypassPct": 0.07
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "daggers",
+        "names": [
+          "Push-Spike"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.05,
+          "SLASH": 0.2,
+          "PIERCE": 0.75
+        },
+        "critChancePct": 13,
+        "critMult": 1.6,
+        "critArmorBypassPct": 0.06,
+        "hazardTags": [
+          "point"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 12,
+            "power": 1.2,
+            "durationSec": 6,
+            "stacksMax": 3
+          },
+          "sunder": {
+            "chancePct": 6,
+            "powerPct": 5,
+            "durationSec": 8,
+            "stacksMax": 3
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "daggers",
+        "names": [
+          "Curved Twin-Edge",
+          "Wavesong Dagger",
+          "Cairn Dirk"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.05,
+          "SLASH": 0.7,
+          "PIERCE": 0.25
+        },
+        "critChancePct": 11,
+        "critMult": 1.5,
+        "hazardTags": [
+          "edge",
+          "point"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 16,
+            "power": 1.3,
+            "durationSec": 7,
+            "stacksMax": 3
+          }
+        }
+      },
+      "overrides": {
+        "Cairn Dirk": {
+          "dmgMix": {
+            "BLUNT": 0.1,
+            "SLASH": 0.45,
+            "PIERCE": 0.45
+          },
+          "critChancePct": 12
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "axes",
+        "names": [
+          "Bearded Axe",
+          "Crescent Battleaxe"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.1,
+          "SLASH": 0.75,
+          "PIERCE": 0.15
+        },
+        "critChancePct": 12,
+        "critMult": 1.5,
+        "hazardTags": [
+          "edge"
+        ],
+        "controlTags": [
+          "hook"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 18,
+            "power": 1.6,
+            "durationSec": 8,
+            "stacksMax": 4
+          },
+          "sever": {
+            "chancePct": 5,
+            "power": 1,
+            "cdSec": 12
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "axes",
+        "names": [
+          "Long-Haft War Axe",
+          "Long-Blade Axe",
+          "Hooked War Axe"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.2,
+          "SLASH": 0.65,
+          "PIERCE": 0.15
+        },
+        "critChancePct": 12,
+        "critMult": 1.6,
+        "hazardTags": [
+          "edge"
+        ],
+        "controlTags": [
+          "hook"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 20,
+            "power": 1.7,
+            "durationSec": 8,
+            "stacksMax": 4
+          },
+          "sunder": {
+            "chancePct": 14,
+            "powerPct": 7,
+            "durationSec": 12,
+            "stacksMax": 4
+          },
+          "sever": {
+            "chancePct": 6,
+            "power": 1.1,
+            "cdSec": 12
+          }
+        }
+      },
+      "overrides": {
+        "Hooked War Axe": {
+          "onHit": {
+            "disarm": {
+              "chancePct": 8,
+              "power": 1,
+              "cdSec": 10
+            }
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "axes",
+        "names": [
+          "Throwing Axe"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.1,
+          "SLASH": 0.8,
+          "PIERCE": 0.1
+        },
+        "critChancePct": 10,
+        "critMult": 1.5,
+        "hazardTags": [
+          "edge"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 12,
+            "power": 1.2,
+            "durationSec": 6,
+            "stacksMax": 3
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "polearms",
+        "names": [
+          "Partisan Spear",
+          "Winding Spear",
+          "Trident Fork"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.1,
+          "SLASH": 0.2,
+          "PIERCE": 0.7
+        },
+        "critChancePct": 10,
+        "critMult": 1.55,
+        "hazardTags": [
+          "point"
+        ],
+        "controlTags": [
+          "hook"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 10,
+            "power": 1.1,
+            "durationSec": 6,
+            "stacksMax": 2
+          }
+        }
+      },
+      "overrides": {
+        "Trident Fork": {
+          "onHit": {
+            "bleed": {
+              "chancePct": 12,
+              "power": 1.2,
+              "durationSec": 6,
+              "stacksMax": 2
+            }
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "polearms",
+        "names": [
+          "Glaive",
+          "River-Blade"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.1,
+          "SLASH": 0.75,
+          "PIERCE": 0.15
+        },
+        "critChancePct": 11,
+        "critMult": 1.55,
+        "hazardTags": [
+          "edge"
+        ],
+        "controlTags": [
+          "hook"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 16,
+            "power": 1.5,
+            "durationSec": 7,
+            "stacksMax": 3
+          },
+          "sever": {
+            "chancePct": 5,
+            "power": 1,
+            "cdSec": 12
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "polearms",
+        "names": [
+          "Halberd",
+          "Axe-Knife Polearm"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.2,
+          "SLASH": 0.55,
+          "PIERCE": 0.25
+        },
+        "critChancePct": 11,
+        "critMult": 1.6,
+        "hazardTags": [
+          "edge",
+          "point"
+        ],
+        "controlTags": [
+          "hook"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 16,
+            "power": 1.4,
+            "durationSec": 7,
+            "stacksMax": 3
+          },
+          "sunder": {
+            "chancePct": 14,
+            "powerPct": 7,
+            "durationSec": 12,
+            "stacksMax": 4
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "polearms",
+        "names": [
+          "Beak-Hammer",
+          "Lucent Warhammer"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.7,
+          "SLASH": 0.1,
+          "PIERCE": 0.2
+        },
+        "critChancePct": 10,
+        "critMult": 1.75,
+        "critArmorBypassPct": 0.1,
+        "hazardTags": [
+          "spike"
+        ],
+        "controlTags": [
+          "beak"
+        ],
+        "onHit": {
+          "sunder": {
+            "chancePct": 22,
+            "powerPct": 10,
+            "durationSec": 12,
+            "stacksMax": 5
+          },
+          "disarm": {
+            "chancePct": 10,
+            "power": 1,
+            "cdSec": 8
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "ranged",
+        "names": [
+          "Greatbow",
+          "Composite Recurve",
+          "Asymmetrical Longbow"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.05,
+          "SLASH": 0.15,
+          "PIERCE": 0.8
+        },
+        "critChancePct": 8,
+        "critMult": 1.5,
+        "hazardTags": [
+          "point"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 8,
+            "power": 0.9,
+            "durationSec": 6,
+            "stacksMax": 2
+          }
+        }
+      },
+      "overrides": {
+        "Asymmetrical Longbow": {
+          "critChancePct": 9
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "ranged",
+        "names": [
+          "Heavy Crossbow"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.05,
+          "SLASH": 0.1,
+          "PIERCE": 0.85
+        },
+        "critChancePct": 10,
+        "critMult": 1.8,
+        "critArmorBypassPct": 0.08,
+        "hazardTags": [
+          "point"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 10,
+            "power": 1,
+            "durationSec": 6,
+            "stacksMax": 2
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "ranged",
+        "names": [
+          "Hand Crossbow",
+          "Repeating Crossbow"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.05,
+          "SLASH": 0.1,
+          "PIERCE": 0.85
+        },
+        "critChancePct": 8,
+        "critMult": 1.55,
+        "hazardTags": [
+          "point"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 7,
+            "power": 0.8,
+            "durationSec": 5,
+            "stacksMax": 2
+          }
+        }
+      },
+      "overrides": {
+        "Repeating Crossbow": {
+          "apOverride": "Low-Medium",
+          "critChancePct": 7,
+          "critMult": 1.5
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "chains",
+        "names": [
+          "Chain Morning Star",
+          "Meteor Chain"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.75,
+          "SLASH": 0.15,
+          "PIERCE": 0.1
+        },
+        "critChancePct": 11,
+        "critMult": 1.55,
+        "hazardTags": [
+          "spike"
+        ],
+        "controlTags": [
+          "hook"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 16,
+            "power": 1.4,
+            "durationSec": 7,
+            "stacksMax": 3
+          },
+          "sunder": {
+            "chancePct": 12,
+            "powerPct": 6,
+            "durationSec": 10,
+            "stacksMax": 3
+          },
+          "disarm": {
+            "chancePct": 10,
+            "power": 1,
+            "cdSec": 10
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "whips",
+        "names": [
+          "Punisher Lash"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.05,
+          "SLASH": 0.9,
+          "PIERCE": 0.05
+        },
+        "critChancePct": 10,
+        "critMult": 1.45,
+        "hazardTags": [
+          "edge"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 22,
+            "power": 1.1,
+            "durationSec": 8,
+            "stacksMax": 4
+          },
+          "disarm": {
+            "chancePct": 10,
+            "power": 0.8,
+            "cdSec": 8
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "whips",
+        "names": [
+          "Scorpion Whip"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.1,
+          "SLASH": 0.8,
+          "PIERCE": 0.1
+        },
+        "critChancePct": 11,
+        "critMult": 1.5,
+        "hazardTags": [
+          "edge",
+          "spike"
+        ],
+        "controlTags": [
+          "hook"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 26,
+            "power": 1.3,
+            "durationSec": 8,
+            "stacksMax": 5
+          },
+          "disarm": {
+            "chancePct": 12,
+            "power": 1,
+            "cdSec": 10
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "staves",
+        "names": [
+          "Quarterstaff",
+          "Ironwood Staff",
+          "Short Staff"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.85,
+          "SLASH": 0.1,
+          "PIERCE": 0.05
+        },
+        "critChancePct": 6,
+        "critMult": 1.45,
+        "onHit": {
+          "sunder": {
+            "chancePct": 8,
+            "powerPct": 5,
+            "durationSec": 8,
+            "stacksMax": 3
+          },
+          "disarm": {
+            "chancePct": 8,
+            "power": 0.8,
+            "cdSec": 8
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "martial",
+        "names": [
+          "Twin Sai",
+          "Tonfa Pair",
+          "Knuckle Gauntlet"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.4,
+          "SLASH": 0.5,
+          "PIERCE": 0.1
+        },
+        "critChancePct": 9,
+        "critMult": 1.5,
+        "controlTags": [
+          "hook"
+        ],
+        "hazardTags": [
+          "edge"
+        ],
+        "onHit": {
+          "disarm": {
+            "chancePct": 12,
+            "power": 1,
+            "cdSec": 8
+          },
+          "bleed": {
+            "chancePct": 10,
+            "power": 0.9,
+            "durationSec": 6,
+            "stacksMax": 2
+          }
+        }
+      },
+      "overrides": {
+        "Knuckle Gauntlet": {
+          "dmgMix": {
+            "BLUNT": 0.7,
+            "SLASH": 0.25,
+            "PIERCE": 0.05
+          },
+          "controlTags": [],
+          "onHit": {
+            "disarm": {
+              "chancePct": 8,
+              "power": 0.8,
+              "cdSec": 8
+            }
+          }
+        },
+        "Tonfa Pair": {
+          "dmgMix": {
+            "BLUNT": 0.55,
+            "SLASH": 0.35,
+            "PIERCE": 0.1
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "martial",
+        "names": [
+          "Emei Rods",
+          "Tiger Claws"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.2,
+          "SLASH": 0.3,
+          "PIERCE": 0.5
+        },
+        "critChancePct": 11,
+        "critMult": 1.5,
+        "hazardTags": [
+          "point",
+          "edge"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 14,
+            "power": 1,
+            "durationSec": 6,
+            "stacksMax": 3
+          }
+        }
+      },
+      "overrides": {
+        "Tiger Claws": {
+          "dmgMix": {
+            "BLUNT": 0.2,
+            "SLASH": 0.75,
+            "PIERCE": 0.05
+          },
+          "critChancePct": 12,
+          "onHit": {
+            "bleed": {
+              "chancePct": 18,
+              "power": 1.1,
+              "durationSec": 7,
+              "stacksMax": 3
+            }
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "maces",
+        "names": [
+          "Spiked Morning Star",
+          "Flanged Mace"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.8,
+          "SLASH": 0.1,
+          "PIERCE": 0.1
+        },
+        "critChancePct": 9,
+        "critMult": 1.6,
+        "hazardTags": [
+          "spike"
+        ],
+        "onHit": {
+          "sunder": {
+            "chancePct": 18,
+            "powerPct": 8,
+            "durationSec": 12,
+            "stacksMax": 4
+          },
+          "bleed": {
+            "chancePct": 12,
+            "power": 1.2,
+            "durationSec": 7,
+            "stacksMax": 3
+          },
+          "disarm": {
+            "chancePct": 8,
+            "power": 0.9,
+            "cdSec": 10
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "maces",
+        "names": [
+          "Iron-Studded Great Club"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.9,
+          "SLASH": 0.05,
+          "PIERCE": 0.05
+        },
+        "critChancePct": 8,
+        "critMult": 1.7,
+        "onHit": {
+          "sunder": {
+            "chancePct": 20,
+            "powerPct": 9,
+            "durationSec": 12,
+            "stacksMax": 4
+          },
+          "disarm": {
+            "chancePct": 8,
+            "power": 0.9,
+            "cdSec": 10
+          }
+        }
+      }
+    }
+  ]
+} as const;
