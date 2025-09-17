@@ -109,14 +109,14 @@
 
 <main style="padding:1rem;"></main>
   </div>
+<script type="module" src="script.js"></script>
 <script>
-  if (/^https?:$/.test(window.location.protocol)) {
-    const s = document.createElement('script');
-    s.type = 'module';
-    s.src = 'script.js';
-    document.body.appendChild(s);
-  } else {
-    document.body.innerHTML = '<p>This application must be served over HTTP(S).<br>Use a local server or visit the GitHub Pages deployment.</p>';
+  if (window.location.protocol === 'file:') {
+    const app = document.getElementById('app');
+    const warning = document.createElement('p');
+    warning.className = 'protocol-warning';
+    warning.innerHTML = 'Loading directly from the filesystem may prevent some data files from being fetched. For the full experience, use a local server or the GitHub Pages deployment.';
+    document.body.insertBefore(warning, app);
   }
 </script>
 </body>
