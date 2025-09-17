@@ -291,9 +291,39 @@ function normalizeProficiencyNameWidths() {
 const STORAGE_KEY = 'rpgProfiles';
 const LAST_PROFILE_KEY = 'rpgLastProfile';
 const TEMP_CHARACTER_KEY = 'rpgTempCharacter';
+
+const isPlainObject = value => value != null && typeof value === 'object' && !Array.isArray(value);
+
+const sanitizeProfiles = raw => {
+  if (!isPlainObject(raw)) return {};
+  const sanitized = {};
+  for (const [id, profile] of Object.entries(raw)) {
+    if (!isPlainObject(profile)) continue;
+    const sanitizedProfile = { ...profile };
+    sanitizedProfile.id = typeof profile.id === 'string' ? profile.id : id;
+    sanitizedProfile.name =
+      typeof profile.name === 'string' && profile.name.trim() !== '' ? profile.name : 'Player';
+    sanitizedProfile.preferences = isPlainObject(profile.preferences)
+      ? { ...profile.preferences }
+      : {};
+    sanitizedProfile.characters = isPlainObject(profile.characters)
+      ? { ...profile.characters }
+      : {};
+    if (
+      typeof sanitizedProfile.lastCharacter !== 'string' ||
+      !sanitizedProfile.characters[sanitizedProfile.lastCharacter]
+    ) {
+      sanitizedProfile.lastCharacter = null;
+    }
+    sanitized[sanitizedProfile.id] = sanitizedProfile;
+  }
+  return sanitized;
+};
+
 let profiles = {};
 try {
-  profiles = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  const storedProfiles = localStorage.getItem(STORAGE_KEY);
+  profiles = storedProfiles ? sanitizeProfiles(JSON.parse(storedProfiles)) : {};
 } catch {
   profiles = {};
 }
@@ -1309,6 +1339,9 @@ function proficiencyToTierLabel(prof) {
 
 const saveProfiles = () => {
   if (currentProfile && currentCharacter) {
+    if (!isPlainObject(currentProfile.characters)) {
+      currentProfile.characters = {};
+    }
     currentProfile.characters[currentCharacter.id] = currentCharacter;
   }
   localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
