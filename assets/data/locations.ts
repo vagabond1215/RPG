@@ -1,5 +1,46 @@
 import { questHelper } from "./questHelper.js";
+import type { CalendarDate } from './calendar.js';
+import type { Habitat, WeatherReport } from './weather.js';
 const MAP_BASE_PATH = "assets/images/Maps";
+
+export interface OwnershipDetail {
+  owner: string;
+  stewards?: string[];
+  notes?: string;
+}
+
+export interface LocationOwnership {
+  buildings?: Record<string, OwnershipDetail>;
+  businesses?: Record<string, OwnershipDetail>;
+}
+
+export interface QuestAvailability {
+  available: boolean;
+  demand: number;
+  reason?: string;
+  eventTag?: string;
+}
+
+export interface QuestVisibilityBinding {
+  region: string;
+  habitat: Habitat;
+  district?: string;
+  board?: string;
+  business?: string;
+}
+
+export interface QuestVisibilityContext {
+  date: CalendarDate;
+  weather: WeatherReport;
+  random: () => number;
+  binding: QuestVisibilityBinding;
+  laborCondition?: LaborCondition;
+  questTitle?: string;
+}
+
+export type QuestVisibilityRule = (
+  context: QuestVisibilityContext,
+) => QuestAvailability;
 
 export interface Location {
   name: string;
@@ -32,6 +73,7 @@ export interface Location {
   quests: Quest[];
   questBoards: Record<string, Quest[]>;
   businesses?: BusinessProfile[];
+  ownership?: LocationOwnership;
 }
 
 export interface Quest {
@@ -53,6 +95,9 @@ export interface Quest {
   rewardNotes?: string;
   replacementFor?: string;
   notes?: string;
+  visibility?: QuestVisibilityRule;
+  visibilityBinding?: QuestVisibilityBinding;
+  laborCondition?: LaborCondition;
 }
 
 export type LaborTier = 'unskilled' | 'skilled' | 'specialist';
@@ -91,6 +136,7 @@ export interface BusinessProfile {
   workforce: WorkforceProfile;
   laborConditions: LaborCondition[];
   quests: Quest[];
+  ownership?: OwnershipDetail;
 }
 
 export function createLocation(
@@ -113,6 +159,7 @@ export function createLocation(
     population: undefined,
     quests: [],
     questBoards: {},
+    ownership: undefined,
   };
 }
 
@@ -257,11 +304,6 @@ function addQuestBoards(loc: Location) {
   });
 
   loc.questBoards = boards;
-  Object.keys(boards).forEach((boardName) => {
-    if (!loc.pointsOfInterest.buildings.includes(boardName)) {
-      loc.pointsOfInterest.buildings.push(boardName);
-    }
-  });
   const allQuests: Quest[] = Object.values(boards).reduce(
     (arr: Quest[], q) => arr.concat(q),
     [] as Quest[],
