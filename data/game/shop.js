@@ -611,6 +611,48 @@ function producePlan(context) {
   return { sells: normalized, buys, resale: false };
 }
 
+function forgePlan(context) {
+  const wealthQualities =
+    context.wealth === "wealthy"
+      ? ["Luxury", "Arcane"]
+      : context.wealth === "comfortable"
+        ? ["Common", "Fine"]
+        : ["Common"];
+  const sells = [
+    {
+      key: "Metals",
+      label: context.scale === "large" ? "Ingots & Stock" : "Smelted Metals",
+      limit: { small: 2, medium: 4, large: 6 },
+      preferBulk: context.scale !== "small",
+      preferBasics: context.wealth !== "wealthy"
+    },
+    {
+      key: "Weapons",
+      label: context.wealth === "wealthy" ? "Commissioned Weapons" : "Forged Weapons",
+      limit: { small: 3, medium: 5, large: 8 },
+      quality: wealthQualities,
+      allowQualityFallback: true,
+      sort: context.wealth === "wealthy" ? "desc" : null
+    },
+    {
+      key: "Armor",
+      label: context.wealth === "wealthy" ? "Plate & Mail" : "Forged Armor",
+      limit: { small: 2, medium: 4, large: 6 },
+      quality: wealthQualities,
+      allowQualityFallback: true,
+      sort: context.wealth === "wealthy" ? "desc" : null
+    },
+    {
+      key: "Tools",
+      label: "Smithing Tools",
+      limit: { small: 1, medium: 2, large: 3 },
+      preferBasics: true
+    }
+  ].map(section => finalizeSection(section, context));
+  const buys = ["Metals", "Weapons", "Armor", "Tools"];
+  return { sells, buys, resale: false };
+}
+
 function tailorPlan(context) {
   const wealthQualities = context.wealth === "wealthy" ? ["Luxury", "Arcane"] : context.wealth === "comfortable" ? ["Common", "Fine"] : ["Common"];
   const sells = [
