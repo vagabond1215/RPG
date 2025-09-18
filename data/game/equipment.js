@@ -297,6 +297,30 @@ export const ARMOR_CATALOG = {
       setMemberships: ["aset:high-medieval"]
     },
     {
+      id: "arm:coat-of-plates-body",
+      categoryKey: "armor",
+      internalName: "coat-of-plates",
+      displayName: "Coat of Plates (Body)",
+      baseItem: "Coat of Plates",
+      variant: "Reinforced Brigandine",
+      qualityTier: "Fine",
+      unit: "each",
+      marketValueCp: 11200,
+      displayPrice: "5g 12si",
+      suggestedPriceCp: 11200,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 1120,
+      netProfitCp: 10080,
+      defense: 66,
+      strReq: 4,
+      weightClass: "Heavy",
+      resists: { BLUNT: 16, SLASH: 34, PIERCE: 22 },
+      critDamageReductionPct: 4,
+      slots: ["body"],
+      setMemberships: ["aset:crusader-knightly"]
+    },
+    {
       id: "arm:helmet-open-head",
       categoryKey: "armor",
       internalName: "helmet-open",
@@ -523,7 +547,7 @@ export const ARMOR_CATALOG = {
       resists: { BLUNT: 12, SLASH: 14, PIERCE: 10 },
       bulky: true,
       slots: ["offHand"],
-      setMemberships: ["aset:heavy-plate"]
+      setMemberships: ["aset:heavy-plate", "aset:crusader-knightly"]
     },
     {
       id: "arm:weighted-net-offhand",
@@ -630,7 +654,7 @@ export const ARMOR_CATALOG = {
       weightClass: "Heavy",
       resists: { BLUNT: 7, SLASH: 14, PIERCE: 9 },
       slots: ["shoulders"],
-      setMemberships: ["aset:high-medieval"]
+      setMemberships: ["aset:high-medieval", "aset:crusader-knightly"]
     },
     {
       id: "arm:splinted-vambraces-arms",
@@ -699,7 +723,7 @@ export const ARMOR_CATALOG = {
       weightClass: "Heavy",
       resists: { BLUNT: 9, SLASH: 16, PIERCE: 11 },
       slots: ["legs"],
-      setMemberships: ["aset:high-medieval"]
+      setMemberships: ["aset:high-medieval", "aset:crusader-knightly"]
     },
     {
       id: "arm:scalloped-sabatons-feet",
@@ -722,7 +746,7 @@ export const ARMOR_CATALOG = {
       weightClass: "Medium",
       resists: { BLUNT: 5, SLASH: 9, PIERCE: 8 },
       slots: ["feet"],
-      setMemberships: ["aset:high-medieval"]
+      setMemberships: ["aset:high-medieval", "aset:crusader-knightly"]
     },
     {
       id: "arm:tournament-gorget-neck",
@@ -747,7 +771,30 @@ export const ARMOR_CATALOG = {
       critDamageReductionPct: 4,
       critDefense: 3,
       slots: ["neck"],
-      setMemberships: ["aset:high-medieval"]
+      setMemberships: ["aset:high-medieval", "aset:crusader-knightly"]
+    },
+    {
+      id: "arm:turban-steelcap-head",
+      categoryKey: "armor",
+      internalName: "turban-steelcap",
+      displayName: "Turban Steelcap (Head)",
+      baseItem: "Turban Steelcap",
+      variant: "Mail-wrapped Dome",
+      qualityTier: "Fine",
+      unit: "each",
+      marketValueCp: 1880,
+      displayPrice: "18si 80cp",
+      suggestedPriceCp: 1880,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 188,
+      netProfitCp: 1692,
+      defense: 21,
+      strReq: 1,
+      weightClass: "Medium",
+      resists: { BLUNT: 7, SLASH: 12, PIERCE: 9 },
+      slots: ["head"],
+      setMemberships: ["aset:persianate-lamellar"]
     },
     {
       id: "arm:lamellar-kabuto-head",
@@ -793,7 +840,30 @@ export const ARMOR_CATALOG = {
       weightClass: "Light",
       resists: { BLUNT: 5, SLASH: 9, PIERCE: 6 },
       slots: ["arms"],
-      setMemberships: ["aset:far-east-lamellar"]
+      setMemberships: ["aset:far-east-lamellar", "aset:persianate-lamellar"]
+    },
+    {
+      id: "arm:segmented-fauld-waist",
+      categoryKey: "armor",
+      internalName: "segmented-fauld",
+      displayName: "Segmented Fauld (Waist)",
+      baseItem: "Segmented Fauld",
+      variant: "Lacquered Laminae",
+      qualityTier: "Fine",
+      unit: "each",
+      marketValueCp: 2100,
+      displayPrice: "1g 1si",
+      suggestedPriceCp: 2100,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 210,
+      netProfitCp: 1890,
+      defense: 20,
+      strReq: 1,
+      weightClass: "Medium",
+      resists: { BLUNT: 6, SLASH: 12, PIERCE: 8 },
+      slots: ["waist"],
+      setMemberships: ["aset:persianate-lamellar"]
     },
     {
       id: "arm:steppe-lamellar-body",
@@ -816,7 +886,30 @@ export const ARMOR_CATALOG = {
       weightClass: "Medium",
       resists: { BLUNT: 14, SLASH: 28, PIERCE: 18 },
       slots: ["body"],
-      setMemberships: ["aset:far-east-lamellar"]
+      setMemberships: ["aset:far-east-lamellar", "aset:persianate-lamellar", "aset:steppe-lamellar"]
+    },
+    {
+      id: "arm:laminar-rider-skirt-legs",
+      categoryKey: "armor",
+      internalName: "laminar-rider-skirt",
+      displayName: "Laminar Rider Skirt (Legs)",
+      baseItem: "Laminar Rider Skirt",
+      variant: "Horsehair Backed",
+      qualityTier: "Fine",
+      unit: "pair",
+      marketValueCp: 2480,
+      displayPrice: "1g 4si 80cp",
+      suggestedPriceCp: 2480,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 248,
+      netProfitCp: 2232,
+      defense: 24,
+      strReq: 1,
+      weightClass: "Medium",
+      resists: { BLUNT: 8, SLASH: 15, PIERCE: 9 },
+      slots: ["legs"],
+      setMemberships: ["aset:steppe-lamellar"]
     },
     {
       id: "arm:laced-riding-boots-feet",
@@ -839,7 +932,30 @@ export const ARMOR_CATALOG = {
       weightClass: "Light",
       resists: { BLUNT: 4, SLASH: 7, PIERCE: 5 },
       slots: ["feet"],
-      setMemberships: ["aset:far-east-lamellar"]
+      setMemberships: ["aset:far-east-lamellar", "aset:steppe-lamellar"]
+    },
+    {
+      id: "arm:scale-lined-cloak-back",
+      categoryKey: "armor",
+      internalName: "scale-lined-cloak",
+      displayName: "Scale-Lined Cloak (Back)",
+      baseItem: "Scale-Lined Cloak",
+      variant: "Rawhide Scales",
+      qualityTier: "Fine",
+      unit: "each",
+      marketValueCp: 1360,
+      displayPrice: "13si 60cp",
+      suggestedPriceCp: 1360,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 136,
+      netProfitCp: 1224,
+      defense: 15,
+      strReq: 0,
+      weightClass: "Light",
+      resists: { BLUNT: 4, SLASH: 9, PIERCE: 6 },
+      slots: ["back"],
+      setMemberships: ["aset:steppe-lamellar"]
     },
     {
       id: "arm:plate-cuirass-body",
@@ -982,6 +1098,56 @@ export const ARMOR_CATALOG = {
         EVADE_PCT: 6,
         staminaRegenPct: 3,
         DMG_TAKEN_PCT: -3
+      }
+    },
+    {
+      id: "aset:crusader-knightly",
+      displayName: "Crusader Knightly Set",
+      components: [
+        "arm:coat-of-plates-body",
+        "arm:crescent-pauldrons-shoulders",
+        "arm:riveted-cuisses-legs",
+        "arm:scalloped-sabatons-feet",
+        "arm:tournament-gorget-neck",
+        "arm:sun-kite-shield-offhand"
+      ],
+      class: "Heavy",
+      setBonuses: {
+        blockChancePct: 8,
+        DMG_TAKEN_PCT: -7,
+        critDamageReductionPct: 6
+      }
+    },
+    {
+      id: "aset:persianate-lamellar",
+      displayName: "Persianate Lamellar Set",
+      components: [
+        "arm:turban-steelcap-head",
+        "arm:steppe-lamellar-body",
+        "arm:segmented-fauld-waist",
+        "arm:kote-sleeve-guards-arms"
+      ],
+      class: "Medium",
+      setBonuses: {
+        EVADE_PCT: 5,
+        staminaRegenPct: 4,
+        DMG_TAKEN_PCT: -3
+      }
+    },
+    {
+      id: "aset:steppe-lamellar",
+      displayName: "Steppe Lamellar Rider Set",
+      components: [
+        "arm:steppe-lamellar-body",
+        "arm:laminar-rider-skirt-legs",
+        "arm:laced-riding-boots-feet",
+        "arm:scale-lined-cloak-back"
+      ],
+      class: "Medium",
+      setBonuses: {
+        EVADE_PCT: 7,
+        staminaRegenPct: 5,
+        critDamageReductionPct: 3
       }
     }
   ]
