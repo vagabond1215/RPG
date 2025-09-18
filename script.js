@@ -2805,9 +2805,41 @@ document.addEventListener('click', removeCapTooltip);
 let animalsCatalogPromise = null;
 let animalsCatalogData = null;
 let animalsCatalogFailed = false;
+let animalsCatalogIndex = null;
+let animalsCatalogIndexSource = null;
 let plantsCatalogPromise = null;
 let plantsCatalogData = null;
 let plantsCatalogFailed = false;
+let plantsCatalogIndex = null;
+let plantsCatalogIndexSource = null;
+
+function buildCatalogIndex(entries) {
+  const map = new Map();
+  if (!Array.isArray(entries)) return map;
+  entries.forEach(entry => {
+    if (!entry || typeof entry !== 'object') return;
+    const id = entry.id;
+    if (id == null) return;
+    map.set(id, entry);
+  });
+  return map;
+}
+
+function ensureAnimalsCatalogIndex() {
+  if (!animalsCatalogIndex || animalsCatalogIndexSource !== animalsCatalogData) {
+    animalsCatalogIndex = buildCatalogIndex(animalsCatalogData);
+    animalsCatalogIndexSource = animalsCatalogData;
+  }
+  return animalsCatalogIndex;
+}
+
+function ensurePlantsCatalogIndex() {
+  if (!plantsCatalogIndex || plantsCatalogIndexSource !== plantsCatalogData) {
+    plantsCatalogIndex = buildCatalogIndex(plantsCatalogData);
+    plantsCatalogIndexSource = plantsCatalogData;
+  }
+  return plantsCatalogIndex;
+}
 
 function loadAnimalsCatalog() {
   if (!animalsCatalogPromise) {
@@ -2819,6 +2851,8 @@ function loadAnimalsCatalog() {
       })
       .then(data => {
         animalsCatalogData = Array.isArray(data) ? data : [];
+        animalsCatalogIndex = buildCatalogIndex(animalsCatalogData);
+        animalsCatalogIndexSource = animalsCatalogData;
         return animalsCatalogData;
       })
       .catch(err => {
@@ -2826,6 +2860,8 @@ function loadAnimalsCatalog() {
         animalsCatalogFailed = true;
         animalsCatalogPromise = null;
         animalsCatalogData = [];
+        animalsCatalogIndex = buildCatalogIndex(animalsCatalogData);
+        animalsCatalogIndexSource = animalsCatalogData;
         return animalsCatalogData;
       });
   }
@@ -2842,6 +2878,8 @@ function loadPlantsCatalog() {
       })
       .then(data => {
         plantsCatalogData = Array.isArray(data) ? data : [];
+        plantsCatalogIndex = buildCatalogIndex(plantsCatalogData);
+        plantsCatalogIndexSource = plantsCatalogData;
         return plantsCatalogData;
       })
       .catch(err => {
@@ -2849,6 +2887,8 @@ function loadPlantsCatalog() {
         plantsCatalogFailed = true;
         plantsCatalogPromise = null;
         plantsCatalogData = [];
+        plantsCatalogIndex = buildCatalogIndex(plantsCatalogData);
+        plantsCatalogIndexSource = plantsCatalogData;
         return plantsCatalogData;
       });
   }
@@ -3253,11 +3293,11 @@ function showBestiaryUI(selectedId) {
       </div>
     `);
   }
-  loadAnimalsCatalog().then(catalog => {
-    const map = new Map(catalog.map(entry => [entry.id, entry]));
+  loadAnimalsCatalog().then(() => {
+    const index = ensureAnimalsCatalogIndex();
     const entries = encountered
       .map(id => {
-        const data = map.get(id);
+        const data = index.get(id);
         return {
           id,
           data: data || { id, common_name: titleize(id) },
@@ -3309,11 +3349,11 @@ function showHerbariumUI(selectedId) {
       </div>
     `);
   }
-  loadPlantsCatalog().then(catalog => {
-    const map = new Map(catalog.map(entry => [entry.id, entry]));
+  loadPlantsCatalog().then(() => {
+    const index = ensurePlantsCatalogIndex();
     const entries = recorded
       .map(id => {
-        const data = map.get(id);
+        const data = index.get(id);
         return {
           id,
           data: data || { id, common_name: titleize(id) },
