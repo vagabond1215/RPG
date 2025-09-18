@@ -21,6 +21,10 @@ export interface WeaponOnHitConfig {
   stacksMax?: number;
   cdSec?: number;
   scalesWith?: string;
+  tickSec?: number;
+  range?: string;
+  description?: string;
+  tags?: string[];
   [key: string]: any;
 }
 
@@ -122,10 +126,61 @@ export const MELEE_FORMULA = {
 } as const;
 
 export const ON_HIT_DEFAULTS = {
-  bleed: { maxStacks: 5, tickSec: 2, scalesWith: "finalDamage" },
-  sunder: { maxStacks: 5, durationSec: 12 },
-  disarm: { durationSec: 4, cdSec: 8 },
-  sever: { cdSec: 14 },
+  bleed: {
+    description: "Applies a stacking bleed that deals physical damage over time based on the final damage dealt.",
+    range: "Contact",
+    durationSec: 6,
+    maxStacks: 5,
+    tickSec: 2,
+    scalesWith: "finalDamage",
+    tags: ["damage", "over-time", "physical"],
+  },
+  sunder: {
+    description: "Reduces the target's armor and defense values per stack.",
+    range: "Contact",
+    durationSec: 12,
+    maxStacks: 5,
+    tags: ["debuff", "armor"],
+  },
+  disarm: {
+    description: "Forces the target to lose grip on their weapon, reducing their offensive options temporarily.",
+    range: "Contact",
+    durationSec: 4,
+    cdSec: 8,
+    tags: ["control", "crowd"],
+  },
+  sever: {
+    description: "Inflicts a grievous wound with a chance to maim or cripple the target.",
+    range: "Contact",
+    cdSec: 14,
+    tags: ["damage", "maim"],
+  },
+  daze: {
+    description: "Briefly staggers the target, reducing their accuracy and evasion.",
+    range: "Contact",
+    durationSec: 2,
+    tags: ["control", "crowd"],
+  },
+  rend: {
+    description: "Tears through armor and flesh, causing bleed-like damage and reducing defenses.",
+    range: "Contact",
+    durationSec: 8,
+    tickSec: 2,
+    scalesWith: "finalDamage",
+    tags: ["damage", "over-time", "armor"],
+  },
+  entangle: {
+    description: "Restricts the target's movement, lowering evasion and making repositioning difficult.",
+    range: "Reach",
+    durationSec: 6,
+    tags: ["control", "crowd"],
+  },
+  lunarBrand: {
+    description: "Brands the target in pale light, increasing the damage they take from follow-up attacks.",
+    range: "Contact",
+    durationSec: 10,
+    tags: ["debuff", "magic", "mark"],
+  },
 } as const;
 
 const COEFF = MELEE_FORMULA.coefficients;

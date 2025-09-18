@@ -20,6 +20,11 @@ type OnHitEffect = {
   stacksMax?: number;
   powerPct?: number;
   cdSec?: number;
+  tickSec?: number;
+  scalesWith?: string;
+  range?: string;
+  description?: string;
+  tags?: string[];
 };
 
 type OnHitMap = Record<string, OnHitEffect>;
@@ -207,6 +212,123 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       damage: 4.5,
       armorPen: "Medium",
     },
+    {
+      name: "Bronze Leafblade",
+      region: "High Kingdoms",
+      size: "Small",
+      hands: 1,
+      reach: "Short/Medium",
+      description:
+        "Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling.",
+      fightingStyle: "Entry cuts and shield-line thrusts",
+      attackSpeed: 7.2,
+      damage: 4.4,
+      armorPen: "Low-Medium",
+    },
+    {
+      name: "Kopis Cutter",
+      region: "Southern Kingdoms",
+      size: "Medium",
+      hands: 1,
+      reach: "Medium",
+      description:
+        "Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle.",
+      fightingStyle: "Sweeping draw-cuts and decisive chops",
+      attackSpeed: 6.8,
+      damage: 5.7,
+      armorPen: "Medium",
+    },
+    {
+      name: "Tegha Broadblade",
+      region: "Southern Steppes",
+      size: "Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight.",
+      fightingStyle: "Two-handed hews from saddle or line",
+      attackSpeed: 5.8,
+      damage: 7.0,
+      armorPen: "Medium-High",
+    },
+    {
+      name: "Shashka Officer Saber",
+      region: "Eastern Realms",
+      size: "Medium",
+      hands: 1,
+      reach: "Medium",
+      description:
+        "Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills.",
+      fightingStyle: "High-cadence slashes and ripostes",
+      attackSpeed: 7.3,
+      damage: 5.4,
+      armorPen: "Medium",
+    },
+    {
+      name: "Flanged Sabre",
+      region: "Southern Kingdoms",
+      size: "Medium",
+      hands: 1,
+      reach: "Medium/Long",
+      description:
+        "Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams.",
+      fightingStyle: "Armor-splitting slashes and hooking parries",
+      attackSpeed: 6.7,
+      damage: 5.9,
+      armorPen: "Medium-High",
+    },
+    {
+      name: "Xiphos Leaf Sword",
+      region: "Southern Kingdoms",
+      size: "Small",
+      hands: 1,
+      reach: "Short/Medium",
+      description:
+        "Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press.",
+      fightingStyle: "Shield-line stabs and tight cuts",
+      attackSpeed: 7.3,
+      damage: 4.9,
+      armorPen: "Medium",
+    },
+    {
+      name: "Sawtooth Falx",
+      region: "Borderlands",
+      size: "Large",
+      hands: 2,
+      reach: "Medium/Long",
+      description:
+        "Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down.",
+      fightingStyle: "Hooking pulls and brutal overhand cleaves",
+      attackSpeed: 4.9,
+      damage: 7.8,
+      armorPen: "High",
+    },
+    {
+      name: "City Gentle’s Cane",
+      region: "High Kingdoms",
+      size: "Small",
+      hands: 1,
+      reach: "Medium",
+      description:
+        "Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats.",
+      fightingStyle: "Discreet thrusts and cloak-assisted ripostes",
+      attackSpeed: 7.6,
+      damage: 4.2,
+      armorPen: "Low-Medium",
+    },
+    {
+      name: "Dual Set: Wakizashi Companion + Tanto Sideblade",
+      region: "Island Clans",
+      size: "Medium",
+      hands: 2,
+      reach: "Short",
+      description:
+        "Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts.",
+      fightingStyle: "Alternating twin-blade slashes and traps",
+      attackSpeed: 8.0,
+      damage: 5.0,
+      armorPen: "Medium",
+    },
   ],
   daggers: [
     {
@@ -300,6 +422,58 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       damage: 3.2,
       armorPen: "Medium",
     },
+    {
+      name: "Tanto Sideblade",
+      region: "Island Clans",
+      size: "Small",
+      hands: 1,
+      reach: "Short",
+      description:
+        "Straight-ground side dagger with ridged spine, ray-skin wrap, and horn caps; pairs with longer blades for confined quarters.",
+      fightingStyle: "Close-guard slashes with thrusting ripostes",
+      attackSpeed: 8.8,
+      damage: 2.9,
+      armorPen: "Medium",
+    },
+    {
+      name: "Kris Wave Dagger",
+      region: "Island Clans",
+      size: "Small",
+      hands: 1,
+      reach: "Short",
+      description:
+        "Undulating southern island blade of layered steels, carved hardwood grip, and silver ferrules; famed for ritual duels and stealthy cuts.",
+      fightingStyle: "Snaking draw-cuts that worry wounds",
+      attackSpeed: 8.2,
+      damage: 3.0,
+      armorPen: "Medium",
+    },
+    {
+      name: "Karambit Claw",
+      region: "Southern Kingdoms",
+      size: "Tiny",
+      hands: 1,
+      reach: "Very Short",
+      description:
+        "Curved claw dagger with finger ring, darkened steel, and cord-wrapped tang; excels at hooking tendons and wrenching grips.",
+      fightingStyle: "Hooking slashes and control grapples",
+      attackSpeed: 9.0,
+      damage: 2.7,
+      armorPen: "Medium",
+    },
+    {
+      name: "Pesh-Kabz Tusk",
+      region: "Eastern Realms",
+      size: "Small",
+      hands: 1,
+      reach: "Short",
+      description:
+        "Reinforced-tang dagger with T-spine, ivory grip slabs, and tapered armor-piercing point; prized for puncturing mail and padded coats.",
+      fightingStyle: "Thrust-focused armor breaches",
+      attackSpeed: 8.3,
+      damage: 3.1,
+      armorPen: "High",
+    },
   ],
   axes: [
     {
@@ -380,6 +554,45 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       damage: 5.0,
       armorPen: "Medium",
     },
+    {
+      name: "Skeggox Hewing Axe",
+      region: "Northern Marches",
+      size: "Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Massive bearded axe with thick wedge profile, tarred ash haft, and iron hooping; winters beside hearths before marching to raid walls.",
+      fightingStyle: "Limb-lopping cleaves and shield splits",
+      attackSpeed: 4.4,
+      damage: 8.0,
+      armorPen: "High",
+    },
+    {
+      name: "Tabargan Twinblade",
+      region: "Southern Steppes",
+      size: "Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Steppe twin axe with mirrored crescent blades and counterweighted butt spike; rawhide lashes reinforce the long riding haft.",
+      fightingStyle: "Alternating hooks and horse-felling sweeps",
+      attackSpeed: 4.6,
+      damage: 7.6,
+      armorPen: "High",
+    },
+    {
+      name: "Moon Cleaver",
+      region: "Island Clans",
+      size: "Very Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Mythic crescent of moonsteel inlaid with pale opal, lacquered haft bound in midnight silk; its arc leaves shimmering trails in dusk battles.",
+      fightingStyle: "Sweeping luminous blows that unnerve ranks",
+      attackSpeed: 4.1,
+      damage: 8.8,
+      armorPen: "Very High",
+    },
   ],
   polearms: [
     {
@@ -396,6 +609,32 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       armorPen: "High",
     },
     {
+      name: "Guisarme Hook",
+      region: "High Kingdoms",
+      size: "Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Medieval polehook with inward-curving blade, rear spike, and beaked hook for unseating riders; ash shaft shod in iron for leverage.",
+      fightingStyle: "Hook riders, drag shields, finish with thrust",
+      attackSpeed: 4.6,
+      damage: 8.0,
+      armorPen: "High",
+    },
+    {
+      name: "Voulge Splitter",
+      region: "Northern Marches",
+      size: "Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Burgundian poleaxe with wide cleaver blade, reinforcing straps, and spike-tipped butt; heavy enough to split pavises and gate bars.",
+      fightingStyle: "Downward cleaves and braced counter-charges",
+      attackSpeed: 4.4,
+      damage: 8.5,
+      armorPen: "High",
+    },
+    {
       name: "Glaive",
       region: "High Kingdoms",
       size: "Large",
@@ -409,6 +648,19 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       armorPen: "Medium-High",
     },
     {
+      name: "Naginata Guardblade",
+      region: "Island Clans",
+      size: "Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Far East guardblade with long, graceful curve, steel shoe, and silk tassel; temple guards whirl it between sweeping cuts and sliding thrusts.",
+      fightingStyle: "Sweeping guard arcs and precision thrusts",
+      attackSpeed: 5.2,
+      damage: 7.5,
+      armorPen: "Medium-High",
+    },
+    {
       name: "Partisan Spear",
       region: "High Kingdoms",
       size: "Large",
@@ -419,6 +671,19 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       fightingStyle: "Thrusts, blade parries, rank-fighting stability",
       attackSpeed: 5.2,
       damage: 7.0,
+      armorPen: "High",
+    },
+    {
+      name: "Sarissa Pike",
+      region: "Southern Kingdoms",
+      size: "Very Large",
+      hands: 2,
+      reach: "Very Long",
+      description:
+        "Phalanx pike of layered ash up to six meters, bronze shoe and counterweight; requires drilled ranks to wield its unstoppable reach.",
+      fightingStyle: "Massed rank thrusts and shield-wall control",
+      attackSpeed: 4.0,
+      damage: 7.2,
       armorPen: "High",
     },
     {
@@ -485,6 +750,19 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       attackSpeed: 5.2,
       damage: 7.0,
       armorPen: "High",
+    },
+    {
+      name: "Quarterdock Trident",
+      region: "Southern Kingdoms",
+      size: "Medium",
+      hands: 2,
+      reach: "Medium/Long",
+      description:
+        "Harbor-issue trident with barbed prongs, rope loops for retention, and saltproof lacquer; doubles as pike or tool for corralling smugglers.",
+      fightingStyle: "Pressing thrusts and entangling pushes on piers",
+      attackSpeed: 5.0,
+      damage: 6.8,
+      armorPen: "Medium-High",
     },
     {
       name: "Axe-Knife Polearm",
@@ -607,6 +885,19 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       damage: 8.0,
       armorPen: "Medium-High",
     },
+    {
+      name: "Duo Chain Flail",
+      region: "High Villages",
+      size: "Medium",
+      hands: 2,
+      reach: "Medium",
+      description:
+        "Peasant militia haft with twin chained iron weights, oak grip bound in rawhide, and ring loops for quick leverage; simple to make, vicious in crush.",
+      fightingStyle: "Alternating chain sweeps and shield tangles",
+      attackSpeed: 5.0,
+      damage: 7.0,
+      armorPen: "Medium",
+    },
   ],
   whips: [
     {
@@ -621,6 +912,19 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       attackSpeed: 9.0,
       damage: 3.5,
       armorPen: "Low",
+    },
+    {
+      name: "Thornvine Lash",
+      region: "Southern Kingdoms",
+      size: "Medium",
+      hands: 1,
+      reach: "Medium",
+      description:
+        "Jungle-plaited whip woven with hardened thorns and resin, bone-handled and oil-treated to keep its bite; wraps foes with snagging barbs.",
+      fightingStyle: "Snaring lashes and bleeding wraps",
+      attackSpeed: 8.5,
+      damage: 3.8,
+      armorPen: "Low-Medium",
     },
     {
       name: "Scorpion Whip",
@@ -675,6 +979,45 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       attackSpeed: 7.5,
       damage: 4.0,
       armorPen: "Low-Medium",
+    },
+    {
+      name: "Reed Quarterstaff",
+      region: "Southern Kingdoms",
+      size: "Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Riverlands staff of river reed cores sleeved in hardwood, iron ferrules and waxed wraps keeping it light yet lively for boat decks.",
+      fightingStyle: "Flowing deflections with darting strikes",
+      attackSpeed: 7.4,
+      damage: 4.3,
+      armorPen: "Low-Medium",
+    },
+    {
+      name: "Ferruled Waystaff",
+      region: "Borderlands",
+      size: "Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Wayfarer staff of tough ash with brass ferrules, hidden cord wraps, and travel sigils burned along the length; doubles as walking aid and defense.",
+      fightingStyle: "Measured guards, shoulder checks, and sweeps",
+      attackSpeed: 7.1,
+      damage: 4.6,
+      armorPen: "Low-Medium",
+    },
+    {
+      name: "Temple Ironstaff",
+      region: "Eastern Realms",
+      size: "Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Monastic ironstaff with octagonal cross-section, ringed finials that chime with motion, and crimson cord grips for forms practice and patrols.",
+      fightingStyle: "Disciplined forms with crushing counters",
+      attackSpeed: 6.9,
+      damage: 5.0,
+      armorPen: "Medium",
     },
   ],
   martial: [
@@ -772,6 +1115,32 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       armorPen: "High",
     },
     {
+      name: "Estuary Pick",
+      region: "Southern Kingdoms",
+      size: "Medium",
+      hands: 1,
+      reach: "Short",
+      description:
+        "Marshland war pick with narrow diamond spike, bronze beak counterweight, and tarred haft against damp; prized for biting through soaked gambesons.",
+      fightingStyle: "Armor-piercing picks and braced hooks",
+      attackSpeed: 5.6,
+      damage: 6.8,
+      armorPen: "Very High",
+    },
+    {
+      name: "Studded Cudgel",
+      region: "High Villages",
+      size: "Medium",
+      hands: 1,
+      reach: "Short",
+      description:
+        "Seasoned oak cudgel wrapped in rawhide with iron studs along the striking face; village constables keep it by the door.",
+      fightingStyle: "Ringing blows and joint-breaking strikes",
+      attackSpeed: 6.2,
+      damage: 5.8,
+      armorPen: "Medium",
+    },
+    {
       name: "Iron-Studded Great Club",
       region: "Island Clans",
       size: "Very Large",
@@ -782,6 +1151,32 @@ const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
       fightingStyle: "Crushing sweeps and pounding overhead smashes",
       attackSpeed: 3.0,
       damage: 9.2,
+      armorPen: "High",
+    },
+    {
+      name: "Oaken Maul",
+      region: "Borderlands",
+      size: "Very Large",
+      hands: 2,
+      reach: "Long",
+      description:
+        "Frontier two-hand maul of iron-banded oak with lead-weighted head and hide-wrapped mid-grip; used to shatter palisades and stubborn shields.",
+      fightingStyle: "Earthshaking smashes that stagger lines",
+      attackSpeed: 3.2,
+      damage: 9.0,
+      armorPen: "High",
+    },
+    {
+      name: "Fang of the Star",
+      region: "Eastern Realms",
+      size: "Medium",
+      hands: 1,
+      reach: "Short",
+      description:
+        "Astral morningstar with cobalt-steel flanges and a luminous quartz core set into the head; haft lacquered midnight blue with silver constellations.",
+      fightingStyle: "Radiant crushing blows and shield rattles",
+      attackSpeed: 5.4,
+      damage: 7.4,
       armorPen: "High",
     },
   ],
@@ -813,7 +1208,15 @@ const WEAPON_UPGRADE_RULES_DATA = {
     {
       match: {
         category: "swords",
-        names: ["Arming Sword", "Short Guardblade", "Eastern Straightblade", "Companion Blade"],
+        names: [
+          "Arming Sword",
+          "Short Guardblade",
+          "Eastern Straightblade",
+          "Companion Blade",
+          "Bronze Leafblade",
+          "Xiphos Leaf Sword",
+          "City Gentle’s Cane",
+        ],
       },
       base: {
         apFromData: true,
@@ -840,12 +1243,30 @@ const WEAPON_UPGRADE_RULES_DATA = {
           critChancePct: 11,
           dmgMix: { BLUNT: 0.05, SLASH: 0.6, PIERCE: 0.35 },
         },
+        "Bronze Leafblade": {
+          dmgMix: { BLUNT: 0.12, SLASH: 0.48, PIERCE: 0.4 },
+        },
+        "Xiphos Leaf Sword": {
+          critChancePct: 10,
+          dmgMix: { BLUNT: 0.08, SLASH: 0.52, PIERCE: 0.4 },
+        },
+        "City Gentle’s Cane": {
+          dmgMix: { BLUNT: 0.3, SLASH: 0.4, PIERCE: 0.3 },
+          onHit: { daze: { chancePct: 12, durationSec: 2 } },
+        },
       },
     },
     {
       match: {
         category: "swords",
-        names: ["Falchion", "Steppe Sabre", "Blade of the Tide"],
+        names: [
+          "Falchion",
+          "Steppe Sabre",
+          "Blade of the Tide",
+          "Kopis Cutter",
+          "Shashka Officer Saber",
+          "Flanged Sabre",
+        ],
       },
       base: {
         apFromData: true,
@@ -861,6 +1282,18 @@ const WEAPON_UPGRADE_RULES_DATA = {
       overrides: {
         "Blade of the Tide": { critChancePct: 13, apOverride: "Medium-High" },
         "Steppe Sabre": { critChancePct: 13 },
+        "Kopis Cutter": {
+          dmgMix: { BLUNT: 0.05, SLASH: 0.75, PIERCE: 0.2 },
+          onHit: { rend: { chancePct: 12, powerPct: 16, durationSec: 8 } },
+        },
+        "Shashka Officer Saber": {
+          critChancePct: 14,
+          dmgMix: { BLUNT: 0.04, SLASH: 0.66, PIERCE: 0.3 },
+          onHit: { bleed: { chancePct: 20, durationSec: 7 } },
+        },
+        "Flanged Sabre": {
+          onHit: { sunder: { chancePct: 18, powerPct: 9, durationSec: 12 } },
+        },
       },
     },
     {
@@ -881,7 +1314,13 @@ const WEAPON_UPGRADE_RULES_DATA = {
     {
       match: {
         category: "swords",
-        names: ["Great Sword", "Two-Hand Colossus", "Great-Edge"],
+        names: [
+          "Great Sword",
+          "Two-Hand Colossus",
+          "Great-Edge",
+          "Tegha Broadblade",
+          "Sawtooth Falx",
+        ],
       },
       base: {
         apFromData: true,
@@ -904,10 +1343,36 @@ const WEAPON_UPGRADE_RULES_DATA = {
         "Two-Hand Colossus": {
           onHit: { sunder: { chancePct: 14, powerPct: 8, durationSec: 12, stacksMax: 4 } },
         },
+        "Tegha Broadblade": {
+          critChancePct: 13,
+          onHit: { sunder: { chancePct: 16, powerPct: 8, durationSec: 12, stacksMax: 4 } },
+        },
+        "Sawtooth Falx": {
+          dmgMix: { BLUNT: 0.1, SLASH: 0.75, PIERCE: 0.15 },
+          onHit: {
+            bleed: { chancePct: 24, power: 2.0, durationSec: 9, stacksMax: 4 },
+            rend: { chancePct: 22, powerPct: 20, durationSec: 10, tickSec: 2 },
+          },
+        },
       },
     },
     {
-      match: { category: "daggers", names: ["Misericorde", "Rondel", "Piercer"] },
+      match: { category: "swords", names: ["Dual Set: Wakizashi Companion + Tanto Sideblade"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.08, SLASH: 0.62, PIERCE: 0.3 },
+        critChancePct: 13,
+        critMult: 1.55,
+        hazardTags: ["edge", "point"],
+        controlTags: ["trap"],
+        onHit: {
+          bleed: { chancePct: 18, power: 1.2, durationSec: 6, stacksMax: 3 },
+          daze: { chancePct: 8, durationSec: 2 },
+        },
+      },
+    },
+    {
+      match: { category: "daggers", names: ["Misericorde", "Rondel", "Piercer", "Pesh-Kabz Tusk"] },
       base: {
         apFromData: true,
         dmgMix: { BLUNT: 0.05, SLASH: 0.15, PIERCE: 0.8 },
@@ -920,6 +1385,7 @@ const WEAPON_UPGRADE_RULES_DATA = {
       overrides: {
         Rondel: { critChancePct: 11, critArmorBypassPct: 0.06 },
         Piercer: { critChancePct: 13, critArmorBypassPct: 0.07 },
+        "Pesh-Kabz Tusk": { critChancePct: 12, critArmorBypassPct: 0.08 },
       },
     },
     {
@@ -940,7 +1406,14 @@ const WEAPON_UPGRADE_RULES_DATA = {
     {
       match: {
         category: "daggers",
-        names: ["Curved Twin-Edge", "Wavesong Dagger", "Cairn Dirk"],
+        names: [
+          "Curved Twin-Edge",
+          "Wavesong Dagger",
+          "Cairn Dirk",
+          "Tanto Sideblade",
+          "Kris Wave Dagger",
+          "Karambit Claw",
+        ],
       },
       base: {
         apFromData: true,
@@ -954,6 +1427,17 @@ const WEAPON_UPGRADE_RULES_DATA = {
         "Cairn Dirk": {
           dmgMix: { BLUNT: 0.1, SLASH: 0.45, PIERCE: 0.45 },
           critChancePct: 12,
+        },
+        "Tanto Sideblade": {
+          critChancePct: 12,
+          onHit: { bleed: { chancePct: 18, power: 1.2, durationSec: 6, stacksMax: 3 } },
+        },
+        "Kris Wave Dagger": {
+          onHit: { bleed: { chancePct: 20, power: 1.3, durationSec: 8, stacksMax: 3 } },
+        },
+        "Karambit Claw": {
+          dmgMix: { BLUNT: 0.1, SLASH: 0.65, PIERCE: 0.25 },
+          onHit: { entangle: { chancePct: 12, durationSec: 5 } },
         },
       },
     },
@@ -975,7 +1459,13 @@ const WEAPON_UPGRADE_RULES_DATA = {
     {
       match: {
         category: "axes",
-        names: ["Long-Haft War Axe", "Long-Blade Axe", "Hooked War Axe"],
+        names: [
+          "Long-Haft War Axe",
+          "Long-Blade Axe",
+          "Hooked War Axe",
+          "Skeggox Hewing Axe",
+          "Tabargan Twinblade",
+        ],
       },
       base: {
         apFromData: true,
@@ -994,6 +1484,34 @@ const WEAPON_UPGRADE_RULES_DATA = {
         "Hooked War Axe": {
           onHit: { disarm: { chancePct: 8, power: 1, cdSec: 10 } },
         },
+        "Skeggox Hewing Axe": {
+          onHit: {
+            bleed: { chancePct: 22, power: 1.8, durationSec: 8, stacksMax: 4 },
+            sunder: { chancePct: 16, powerPct: 8, durationSec: 12, stacksMax: 4 },
+          },
+        },
+        "Tabargan Twinblade": {
+          onHit: {
+            bleed: { chancePct: 22, power: 1.8, durationSec: 8, stacksMax: 4 },
+            disarm: { chancePct: 10, power: 1, cdSec: 9 },
+          },
+        },
+      },
+    },
+    {
+      match: { category: "axes", names: ["Moon Cleaver"] },
+      base: {
+        apFromData: true,
+        dmgMix: { BLUNT: 0.18, SLASH: 0.67, PIERCE: 0.15 },
+        critChancePct: 14,
+        critMult: 1.7,
+        hazardTags: ["edge"],
+        controlTags: ["hook"],
+        onHit: {
+          bleed: { chancePct: 24, power: 1.9, durationSec: 9, stacksMax: 4 },
+          sunder: { chancePct: 14, powerPct: 8, durationSec: 12, stacksMax: 4 },
+          lunarBrand: { chancePct: 12, powerPct: 12, durationSec: 10 },
+        },
       },
     },
     {
@@ -1010,7 +1528,7 @@ const WEAPON_UPGRADE_RULES_DATA = {
     {
       match: {
         category: "polearms",
-        names: ["Partisan Spear", "Winding Spear", "Trident Fork"],
+        names: ["Partisan Spear", "Winding Spear", "Trident Fork", "Sarissa Pike", "Quarterdock Trident"],
       },
       base: {
         apFromData: true,
@@ -1025,10 +1543,20 @@ const WEAPON_UPGRADE_RULES_DATA = {
         "Trident Fork": {
           onHit: { bleed: { chancePct: 12, power: 1.2, durationSec: 6, stacksMax: 2 } },
         },
+        "Sarissa Pike": {
+          critChancePct: 9,
+          dmgMix: { BLUNT: 0.08, SLASH: 0.16, PIERCE: 0.76 },
+        },
+        "Quarterdock Trident": {
+          onHit: {
+            bleed: { chancePct: 14, power: 1.1, durationSec: 6, stacksMax: 2 },
+            entangle: { chancePct: 10, durationSec: 6 },
+          },
+        },
       },
     },
     {
-      match: { category: "polearms", names: ["Glaive", "River-Blade"] },
+      match: { category: "polearms", names: ["Glaive", "River-Blade", "Naginata Guardblade"] },
       base: {
         apFromData: true,
         dmgMix: { BLUNT: 0.1, SLASH: 0.75, PIERCE: 0.15 },
@@ -1041,11 +1569,16 @@ const WEAPON_UPGRADE_RULES_DATA = {
           sever: { chancePct: 5, power: 1, cdSec: 12 },
         },
       },
+      overrides: {
+        "Naginata Guardblade": {
+          onHit: { bleed: { chancePct: 18, power: 1.5, durationSec: 7, stacksMax: 3 }, entangle: { chancePct: 8, durationSec: 4 } },
+        },
+      },
     },
     {
       match: {
         category: "polearms",
-        names: ["Halberd", "Axe-Knife Polearm"],
+        names: ["Halberd", "Axe-Knife Polearm", "Guisarme Hook", "Voulge Splitter"],
       },
       base: {
         apFromData: true,
@@ -1057,6 +1590,21 @@ const WEAPON_UPGRADE_RULES_DATA = {
         onHit: {
           bleed: { chancePct: 16, power: 1.4, durationSec: 7, stacksMax: 3 },
           sunder: { chancePct: 14, powerPct: 7, durationSec: 12, stacksMax: 4 },
+        },
+      },
+      overrides: {
+        "Guisarme Hook": {
+          onHit: {
+            bleed: { chancePct: 18, power: 1.4, durationSec: 7, stacksMax: 3 },
+            sunder: { chancePct: 16, powerPct: 7, durationSec: 12, stacksMax: 4 },
+            entangle: { chancePct: 12, durationSec: 5 },
+          },
+        },
+        "Voulge Splitter": {
+          onHit: {
+            bleed: { chancePct: 18, power: 1.6, durationSec: 8, stacksMax: 3 },
+            sunder: { chancePct: 16, powerPct: 8, durationSec: 12, stacksMax: 4 },
+          },
         },
       },
     },
@@ -1124,7 +1672,7 @@ const WEAPON_UPGRADE_RULES_DATA = {
       },
     },
     {
-      match: { category: "chains", names: ["Chain Morning Star", "Meteor Chain"] },
+      match: { category: "chains", names: ["Chain Morning Star", "Meteor Chain", "Duo Chain Flail"] },
       base: {
         apFromData: true,
         dmgMix: { BLUNT: 0.75, SLASH: 0.15, PIERCE: 0.1 },
@@ -1138,9 +1686,17 @@ const WEAPON_UPGRADE_RULES_DATA = {
           disarm: { chancePct: 10, power: 1, cdSec: 10 },
         },
       },
+      overrides: {
+        "Duo Chain Flail": {
+          onHit: {
+            bleed: { chancePct: 14, power: 1.2, durationSec: 7, stacksMax: 3 },
+            entangle: { chancePct: 14, durationSec: 6 },
+          },
+        },
+      },
     },
     {
-      match: { category: "whips", names: ["Punisher Lash"] },
+      match: { category: "whips", names: ["Punisher Lash", "Thornvine Lash"] },
       base: {
         apFromData: true,
         dmgMix: { BLUNT: 0.05, SLASH: 0.9, PIERCE: 0.05 },
@@ -1150,6 +1706,17 @@ const WEAPON_UPGRADE_RULES_DATA = {
         onHit: {
           bleed: { chancePct: 22, power: 1.1, durationSec: 8, stacksMax: 4 },
           disarm: { chancePct: 10, power: 0.8, cdSec: 8 },
+        },
+      },
+      overrides: {
+        "Thornvine Lash": {
+          hazardTags: ["edge", "thorn"],
+          controlTags: ["hook"],
+          onHit: {
+            bleed: { chancePct: 24, power: 1.2, durationSec: 8, stacksMax: 4 },
+            disarm: { chancePct: 12, power: 0.9, cdSec: 8 },
+            entangle: { chancePct: 20, durationSec: 6 },
+          },
         },
       },
     },
@@ -1169,7 +1736,17 @@ const WEAPON_UPGRADE_RULES_DATA = {
       },
     },
     {
-      match: { category: "staves", names: ["Quarterstaff", "Ironwood Staff", "Short Staff"] },
+      match: {
+        category: "staves",
+        names: [
+          "Quarterstaff",
+          "Ironwood Staff",
+          "Short Staff",
+          "Reed Quarterstaff",
+          "Ferruled Waystaff",
+          "Temple Ironstaff",
+        ],
+      },
       base: {
         apFromData: true,
         dmgMix: { BLUNT: 0.85, SLASH: 0.1, PIERCE: 0.05 },
@@ -1178,6 +1755,31 @@ const WEAPON_UPGRADE_RULES_DATA = {
         onHit: {
           sunder: { chancePct: 8, powerPct: 5, durationSec: 8, stacksMax: 3 },
           disarm: { chancePct: 8, power: 0.8, cdSec: 8 },
+        },
+      },
+      overrides: {
+        "Reed Quarterstaff": {
+          onHit: {
+            sunder: { chancePct: 7, powerPct: 5, durationSec: 8, stacksMax: 3 },
+            disarm: { chancePct: 8, power: 0.8, cdSec: 8 },
+            entangle: { chancePct: 10, durationSec: 5 },
+          },
+        },
+        "Ferruled Waystaff": {
+          onHit: {
+            sunder: { chancePct: 9, powerPct: 6, durationSec: 10, stacksMax: 3 },
+            disarm: { chancePct: 10, power: 1, cdSec: 8 },
+            daze: { chancePct: 10, durationSec: 2 },
+          },
+        },
+        "Temple Ironstaff": {
+          critChancePct: 7,
+          dmgMix: { BLUNT: 0.88, SLASH: 0.07, PIERCE: 0.05 },
+          onHit: {
+            sunder: { chancePct: 10, powerPct: 6, durationSec: 10, stacksMax: 3 },
+            disarm: { chancePct: 10, power: 1, cdSec: 8 },
+            daze: { chancePct: 12, durationSec: 2 },
+          },
         },
       },
     },
@@ -1225,7 +1827,16 @@ const WEAPON_UPGRADE_RULES_DATA = {
       },
     },
     {
-      match: { category: "maces", names: ["Spiked Morning Star", "Flanged Mace"] },
+      match: {
+        category: "maces",
+        names: [
+          "Spiked Morning Star",
+          "Flanged Mace",
+          "Estuary Pick",
+          "Studded Cudgel",
+          "Fang of the Star",
+        ],
+      },
       base: {
         apFromData: true,
         dmgMix: { BLUNT: 0.8, SLASH: 0.1, PIERCE: 0.1 },
@@ -1238,17 +1849,58 @@ const WEAPON_UPGRADE_RULES_DATA = {
           disarm: { chancePct: 8, power: 0.9, cdSec: 10 },
         },
       },
+      overrides: {
+        "Estuary Pick": {
+          dmgMix: { BLUNT: 0.55, SLASH: 0.05, PIERCE: 0.4 },
+          hazardTags: ["spike", "point"],
+          onHit: {
+            sunder: { chancePct: 24, powerPct: 11, durationSec: 12, stacksMax: 4 },
+            bleed: { chancePct: 10, power: 1.1, durationSec: 6, stacksMax: 3 },
+            disarm: { chancePct: 6, power: 0.8, cdSec: 10 },
+            rend: { chancePct: 18, powerPct: 18, durationSec: 8, tickSec: 2 },
+          },
+        },
+        "Studded Cudgel": {
+          dmgMix: { BLUNT: 0.95, SLASH: 0.05, PIERCE: 0 },
+          hazardTags: ["blunt"],
+          onHit: {
+            sunder: { chancePct: 12, powerPct: 6, durationSec: 10, stacksMax: 3 },
+            bleed: { chancePct: 10, power: 0.9, durationSec: 6, stacksMax: 2 },
+            disarm: { chancePct: 10, power: 1, cdSec: 9 },
+            daze: { chancePct: 16, durationSec: 2 },
+          },
+        },
+        "Fang of the Star": {
+          hazardTags: ["spike", "arcane"],
+          onHit: {
+            sunder: { chancePct: 16, powerPct: 8, durationSec: 12, stacksMax: 4 },
+            bleed: { chancePct: 14, power: 1.3, durationSec: 7, stacksMax: 3 },
+            disarm: { chancePct: 8, power: 0.9, cdSec: 10 },
+            lunarBrand: { chancePct: 20, powerPct: 15, durationSec: 10 },
+          },
+        },
+      },
     },
     {
-      match: { category: "maces", names: ["Iron-Studded Great Club"] },
+      match: { category: "maces", names: ["Iron-Studded Great Club", "Oaken Maul"] },
       base: {
         apFromData: true,
         dmgMix: { BLUNT: 0.9, SLASH: 0.05, PIERCE: 0.05 },
         critChancePct: 8,
         critMult: 1.7,
+        hazardTags: ["blunt"],
         onHit: {
           sunder: { chancePct: 20, powerPct: 9, durationSec: 12, stacksMax: 4 },
           disarm: { chancePct: 8, power: 0.9, cdSec: 10 },
+        },
+      },
+      overrides: {
+        "Oaken Maul": {
+          onHit: {
+            sunder: { chancePct: 24, powerPct: 10, durationSec: 12, stacksMax: 4 },
+            disarm: { chancePct: 10, power: 1, cdSec: 9 },
+            daze: { chancePct: 20, durationSec: 3 },
+          },
         },
       },
     },
@@ -1266,6 +1918,33 @@ const CATEGORY_BASE_PRICE: Record<string, number> = {
   staves: 160,
   martial: 180,
   maces: 760,
+};
+
+const SPECIAL_EFFECT_PRICE_MULTIPLIERS: Record<string, number> = {
+  "City Gentle’s Cane": 1.1,
+  "Dual Set: Wakizashi Companion + Tanto Sideblade": 1.18,
+  "Kopis Cutter": 1.12,
+  "Sawtooth Falx": 1.2,
+  "Shashka Officer Saber": 1.08,
+  "Flanged Sabre": 1.1,
+  "Kris Wave Dagger": 1.1,
+  "Karambit Claw": 1.12,
+  "Tabargan Twinblade": 1.1,
+  "Moon Cleaver": 1.25,
+  "Estuary Pick": 1.12,
+  "Studded Cudgel": 1.05,
+  "Fang of the Star": 1.2,
+  "Oaken Maul": 1.18,
+  "Sarissa Pike": 1.05,
+  "Naginata Guardblade": 1.1,
+  "Guisarme Hook": 1.15,
+  "Voulge Splitter": 1.12,
+  "Quarterdock Trident": 1.12,
+  "Duo Chain Flail": 1.1,
+  "Thornvine Lash": 1.12,
+  "Reed Quarterstaff": 1.05,
+  "Ferruled Waystaff": 1.08,
+  "Temple Ironstaff": 1.15,
 };
 
 const SIZE_MULTIPLIERS: Record<WeaponSize, number> = {
@@ -1385,6 +2064,8 @@ function computeBasePrice(category: string, weapon: WeaponEntry): number {
   const armor = ARMOR_PEN_MULTIPLIERS[weapon.armorPen] ?? 1;
   const perf = performanceFactor(category, weapon);
   let price = base * size * hand * reach * armor * perf;
+  const specialMultiplier = SPECIAL_EFFECT_PRICE_MULTIPLIERS[weapon.name] ?? 1;
+  price *= specialMultiplier;
   if (category === "ranged") {
     price *= rangedAdjust(weapon.name);
   }
@@ -1655,7 +2336,23 @@ async function writeArmoryData(variants: WeaponVariant[]) {
   }
   lines.push("};");
   lines.push("");
-  lines.push("export interface WeaponUpgradeOnHitEffect {\n  chancePct: number;\n  power?: number;\n  durationSec?: number;\n  stacksMax?: number;\n  powerPct?: number;\n  cdSec?: number;\n}");
+  lines.push(
+    [
+      "export interface WeaponUpgradeOnHitEffect {",
+      "  chancePct: number;",
+      "  power?: number;",
+      "  durationSec?: number;",
+      "  stacksMax?: number;",
+      "  powerPct?: number;",
+      "  cdSec?: number;",
+      "  tickSec?: number;",
+      "  scalesWith?: string;",
+      "  range?: string;",
+      "  description?: string;",
+      "  tags?: string[];",
+      "}",
+    ].join("\n"),
+  );
   lines.push("export type WeaponUpgradeOnHitMap = Record<string, WeaponUpgradeOnHitEffect>;");
   lines.push("export interface WeaponUpgrade {\n  category: string;\n  name: string;\n  quality: WeaponQuality;\n  ap: number;\n  dmgMix: Record<'BLUNT'|'SLASH'|'PIERCE', number>;\n  critChancePct: number;\n  critMult: number;\n  critArmorBypassPct?: number;\n  onHit?: WeaponUpgradeOnHitMap;\n}");
   lines.push("");

@@ -88,7 +88,8 @@ export const ARMOR_CATALOG = {
       weightClass: "Light",
       resists: { BLUNT: 6, SLASH: 12, PIERCE: 4 },
       weakness: { PIERCE: -2 },
-      slots: ["body"]
+      slots: ["body"],
+      setMemberships: ["aset:light-scout"]
     },
     {
       id: "arm:padded-gambeson-legs",
@@ -160,7 +161,8 @@ export const ARMOR_CATALOG = {
       strReq: 0,
       weightClass: "Light",
       resists: { BLUNT: 1, SLASH: 5, PIERCE: 2 },
-      slots: ["head"]
+      slots: ["head"],
+      setMemberships: ["aset:light-scout"]
     },
     {
       id: "arm:chain-shirt-body",
@@ -183,7 +185,8 @@ export const ARMOR_CATALOG = {
       weightClass: "Medium",
       resists: { BLUNT: 8, SLASH: 26, PIERCE: 10 },
       weakness: { BLUNT: -3 },
-      slots: ["body"]
+      slots: ["body"],
+      setMemberships: ["aset:medium-mail"]
     },
     {
       id: "arm:chain-shirt-head",
@@ -206,7 +209,8 @@ export const ARMOR_CATALOG = {
       weightClass: "Medium",
       resists: { BLUNT: 2, SLASH: 6, PIERCE: 2 },
       weakness: { BLUNT: -1 },
-      slots: ["head"]
+      slots: ["head"],
+      setMemberships: ["aset:medium-mail"]
     },
     {
       id: "arm:chain-hauberk-body",
@@ -273,7 +277,8 @@ export const ARMOR_CATALOG = {
       strReq: 1,
       weightClass: "Medium",
       resists: { BLUNT: 10, SLASH: 8, PIERCE: 8 },
-      slots: ["head"]
+      slots: ["head"],
+      setMemberships: ["aset:heavy-plate"]
     },
     {
       id: "arm:shield-wooden-round-offhand",
@@ -294,8 +299,13 @@ export const ARMOR_CATALOG = {
       defense: 16,
       blockChanceBonusPct: 10,
       blockPowerBonus: 8,
+      shieldBlockChancePct: 10,
+      shieldDamageReductionPct: 8,
+      shieldBashDamage: 3,
+      shieldBashStunChancePct: 12,
       resists: { BLUNT: 6, SLASH: 8, PIERCE: 4 },
-      slots: ["offHand"]
+      slots: ["offHand"],
+      setMemberships: ["aset:light-scout"]
     },
     {
       id: "arm:shield-iron-kite-offhand",
@@ -317,8 +327,13 @@ export const ARMOR_CATALOG = {
       strReq: 1,
       blockChanceBonusPct: 14,
       blockPowerBonus: 14,
+      shieldBlockChancePct: 14,
+      shieldDamageReductionPct: 14,
+      shieldBashDamage: 5,
+      shieldBashStunChancePct: 18,
       resists: { BLUNT: 10, SLASH: 12, PIERCE: 8 },
-      slots: ["offHand"]
+      slots: ["offHand"],
+      setMemberships: ["aset:medium-mail"]
     },
     {
       id: "arm:plate-cuirass-body",
@@ -340,7 +355,8 @@ export const ARMOR_CATALOG = {
       strReq: 4,
       weightClass: "Heavy",
       resists: { BLUNT: 18, SLASH: 30, PIERCE: 28 },
-      slots: ["body"]
+      slots: ["body"],
+      setMemberships: ["aset:heavy-plate"]
     },
     {
       id: "arm:full-plate-harness-body",
@@ -364,7 +380,8 @@ export const ARMOR_CATALOG = {
       resists: { BLUNT: 30, SLASH: 50, PIERCE: 46 },
       critDamageReductionPct: 10,
       critDefense: 6,
-      slots: ["head", "body", "hands", "legs", "feet"]
+      slots: ["head", "body", "hands", "legs", "feet"],
+      setMemberships: ["aset:heavy-plate"]
     }
   ],
   sets: [

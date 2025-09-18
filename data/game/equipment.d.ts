@@ -72,9 +72,14 @@ export interface ArmorCatalogItem {
   weakness?: Partial<Record<DamageType, number>>;
   blockChanceBonusPct?: number;
   blockPowerBonus?: number;
+  shieldBlockChancePct?: number;
+  shieldDamageReductionPct?: number;
+  shieldBashDamage?: number;
+  shieldBashStunChancePct?: number;
   critDamageReductionPct?: number;
   critDefense?: number;
   slots: string[];
+  setMemberships?: string[];
 }
 
 export interface ArmorSet {
