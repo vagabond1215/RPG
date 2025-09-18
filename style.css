@@ -1540,6 +1540,163 @@ body.theme-dark .top-menu button {
   font-size: 0.9rem;
 }
 
+.quest-meta {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0.5rem;
+  font-size: 0.85rem;
+}
+
+.quest-meta li {
+  margin: 0.15rem 0;
+}
+
+.quest-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  align-items: center;
+}
+
+.quest-accept {
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--foreground);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+.quest-accept[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.quest-requirement-note {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: rgba(51, 51, 51, 0.8);
+}
+
+.questboard-detail {
+  padding-bottom: 1rem;
+}
+
+.questboard-detail h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.quest-board-district-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(46, 139, 87, 0.5);
+  background: rgba(46, 139, 87, 0.15);
+  color: rgba(25, 83, 52, 0.9);
+}
+
+.questboard-detail .quest-weather {
+  margin: 0.5rem 0 0.75rem;
+  font-size: 0.9rem;
+}
+
+.questboard-detail .quest-empty {
+  margin: 0.75rem 0;
+  font-style: italic;
+  color: rgba(51, 51, 51, 0.85);
+}
+
+.quest-board-actions {
+  margin-top: 1.5rem;
+}
+
+.quest-board-actions button {
+  width: 100%;
+}
+
+.quest-item-accepted {
+  border-left: 3px solid rgba(46, 139, 87, 0.6);
+  padding-left: 0.5rem;
+}
+
+.quest-item-accepted .quest-accept {
+  background: rgba(46, 139, 87, 0.18);
+  border-color: rgba(46, 139, 87, 0.45);
+}
+
+.questboard-detail details {
+  margin-top: 1rem;
+}
+
+.quest-board-section {
+  margin-top: 1.5rem;
+}
+
+.quest-board-heading {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(51, 51, 51, 0.75);
+}
+
+.quest-board-grid {
+  margin-bottom: 1rem;
+}
+
+.quest-board-item {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+}
+
+.quest-board-item .street-sign {
+  white-space: normal;
+  font-size: 0.78rem;
+  line-height: 1.15;
+  padding: 0.35rem 0.5rem;
+}
+
+.quest-board-district {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.quest-date {
+  font-size: 0.9rem;
+  color: rgba(51, 51, 51, 0.7);
+  margin: 0.25rem 0 0.75rem;
+}
+
+.quest-flash {
+  margin: 0.5rem 0 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.quest-flash-success {
+  background: rgba(46, 139, 87, 0.15);
+  border: 1px solid rgba(46, 139, 87, 0.4);
+}
+
+.quest-flash-error {
+  background: rgba(178, 34, 34, 0.15);
+  border: 1px solid rgba(178, 34, 34, 0.4);
+}
+
 .backstory-block {
   margin-top: 1rem;
 }
