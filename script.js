@@ -83,6 +83,7 @@ window.WORLD_CALENDAR = worldCalendar;
 window.WEATHER_SYSTEM = weatherSystem;
 window.advanceWorldDay = (days = 1) => {
   worldCalendar.advance(days);
+  updateTopMenuIndicators();
 };
 window.currentWeatherFor = (region = "waves_break", habitat = 'urban') =>
   weatherSystem.getDailyWeather(region, habitat, worldCalendar.today());
@@ -95,6 +96,8 @@ const NAV_ICONS = {
   interaction: '⚙️',
   quests: '🪧',
 };
+
+const QUEST_BOARD_ICON = 'assets/images/icons/Quests.png';
 
 const ADVENTURERS_GUILD_RANK_ORDER = [
   'None',
@@ -198,14 +201,58 @@ function boardMatchesDistrict(bindingDistrict, navDistrict) {
   return normalizeDistrictName(alias) === normalizedNav;
 }
 
-function questBoardsForDistrict(city, district) {
+function normalizePlaceName(name) {
+  if (!name) return '';
+  return String(name)
+    .toLowerCase()
+    .replace(/\bquest board\b$/i, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function boardMatchesBuildingName(binding, boardName, buildingSet) {
+  if (!buildingSet || !buildingSet.size) return false;
+  const business = normalizePlaceName(binding?.business);
+  if (business && buildingSet.has(business)) return true;
+  const board = normalizePlaceName(boardName);
+  if (board && buildingSet.has(board)) return true;
+  return false;
+}
+
+function questBoardsForDistrict(city, district, options = {}) {
   const loc = LOCATIONS[city];
   if (!loc || !loc.questBoards) return [];
+  const { excludeBuildingBoards = false, buildingNames = [] } = options;
+  const buildingSet = new Set(
+    (buildingNames || []).map(name => normalizePlaceName(name)).filter(Boolean),
+  );
   const entries = [];
   Object.entries(loc.questBoards).forEach(([boardName, quests]) => {
     if (!Array.isArray(quests) || !quests.length) return;
     const binding = resolveQuestBinding(quests[0], boardName);
-    if (boardMatchesDistrict(binding.district, district)) {
+    if (!boardMatchesDistrict(binding.district, district)) return;
+    if (excludeBuildingBoards && boardMatchesBuildingName(binding, boardName, buildingSet)) {
+      return;
+    }
+    entries.push({ name: boardName, quests });
+  });
+  entries.sort((a, b) => a.name.localeCompare(b.name));
+  return entries;
+}
+
+function questBoardsForBuilding(city, district, building) {
+  const loc = LOCATIONS[city];
+  if (!loc || !loc.questBoards || !building) return [];
+  const target = normalizePlaceName(building);
+  if (!target) return [];
+  const entries = [];
+  Object.entries(loc.questBoards).forEach(([boardName, quests]) => {
+    if (!Array.isArray(quests) || !quests.length) return;
+    const binding = resolveQuestBinding(quests[0], boardName);
+    if (!boardMatchesDistrict(binding.district, district)) return;
+    const business = normalizePlaceName(binding.business);
+    const board = normalizePlaceName(boardName);
+    if (business === target || board === target) {
       entries.push({ name: boardName, quests });
     }
   });
@@ -409,6 +456,20 @@ const main = document.querySelector('main');
 const backButton = document.getElementById('back-button');
 const topMenu = document.querySelector('.top-menu');
 const app = document.getElementById('app');
+const menuDateLabel = document.getElementById('menu-date');
+const menuMoneyLabel = document.getElementById('menu-money');
+
+function updateTopMenuIndicators() {
+  if (menuDateLabel) {
+    menuDateLabel.textContent = `Date: ${worldCalendar.formatCurrentDate()}`;
+  }
+  if (menuMoneyLabel) {
+    const funds = currentCharacter
+      ? formatCurrency(currentCharacter.money || createEmptyCurrency())
+      : '—';
+    menuMoneyLabel.textContent = `Funds: ${funds}`;
+  }
+}
 
 function updateLayoutSize() {
   if (!app) return;
@@ -437,6 +498,7 @@ function handleResize() {
 }
 window.addEventListener('resize', handleResize);
 handleResize();
+updateTopMenuIndicators();
 
 function setMainHTML(html) {
   if (main) main.innerHTML = html;
@@ -1562,6 +1624,7 @@ const saveProfiles = () => {
     currentProfile.characters[currentCharacter.id] = currentCharacter;
   }
   localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
+  updateTopMenuIndicators();
 };
 
 const formatHeight = cm => {
@@ -1826,6 +1889,7 @@ function canManageBuilding(city, building) {
 }
 
 function showNavigation() {
+  updateTopMenuIndicators();
   if (!currentCharacter) return;
   if (!currentCharacter.position) {
     const city = currentCharacter.location;
@@ -1869,10 +1933,11 @@ function showNavigation() {
   };
   if (pos.building) {
     const building = cityData.buildings[pos.building];
-    const buttons = [];
+    const groups = [];
+    const exitButtons = [];
     building.exits.forEach(e => {
       if (e.type === 'location') {
-        buttons.push(
+        exitButtons.push(
           createNavItem({
             type: 'location',
             target: e.target,
@@ -1884,19 +1949,37 @@ function showNavigation() {
       } else if (e.target !== pos.district) {
         const prompt = e.prompt || building.travelPrompt || 'Travel to';
         const icon = e.icon || getDistrictIcon(pos.city, e.name);
-        buttons.push(
+        exitButtons.push(
           createNavItem({ type: 'district', target: e.target, name: e.name, prompt, icon })
         );
       }
     });
-    if (buttons.length && (building.interactions || []).length) {
-      buttons.push('<div class="group-separator"></div>');
-    }
+    if (exitButtons.length) groups.push(exitButtons);
+    const buildingBoards = questBoardsForBuilding(pos.city, pos.district, pos.building);
+    const questButtons = buildingBoards.map(board =>
+      createNavItem({
+        type: 'quests',
+        target: board.name,
+        name: board.name,
+        prompt: 'Review quests at',
+        icon: QUEST_BOARD_ICON,
+        extraClass: 'quest-board-item',
+      })
+    );
+    if (questButtons.length) groups.push(questButtons);
+    const interactionButtons = [];
     (building.interactions || []).forEach(i => {
       if (i.action === 'manage' && !canManageBuilding(pos.city, pos.building)) return;
-      buttons.push(
+      interactionButtons.push(
         createNavItem({ type: 'interaction', action: i.action, name: i.name, icon: i.icon })
       );
+    });
+    if (interactionButtons.length) groups.push(interactionButtons);
+    const buttons = [];
+    groups.forEach((group, index) => {
+      if (group.length === 0) return;
+      if (index > 0) buttons.push('<div class="group-separator"></div>');
+      buttons.push(...group);
     });
     const hours = building.hours;
     const descText = building.description;
@@ -1919,11 +2002,18 @@ function showNavigation() {
     const exits = [];
     const districts = [];
     const locals = [];
-    const questBoards = questBoardsForDistrict(pos.city, pos.district);
+    const buildingNames = [];
     district.points.forEach(pt => {
       if (pt.type === 'location') exits.push(pt);
       else if (pt.type === 'district') districts.push(pt);
       else locals.push(pt);
+      if (pt.type === 'building') {
+        buildingNames.push(pt.target || pt.name);
+      }
+    });
+    const questBoards = questBoardsForDistrict(pos.city, pos.district, {
+      excludeBuildingBoards: true,
+      buildingNames,
     });
     const makeButton = pt => {
       const prompt = pt.type === 'district' ? 'Travel to' : district.travelPrompt || 'Walk to';
@@ -2115,14 +2205,25 @@ function showNavigation() {
         } else if (type === 'quests') {
           const board = target || '';
           if (board) {
-            const districtName = pos.district;
-            showQuestBoardDetails(board, {
-              origin: 'district',
-              backLabel: `Back to ${districtName}`,
-              onBack: () => {
-                showNavigation();
-              },
-            });
+            if (pos.building) {
+              const buildingName = pos.building;
+              showQuestBoardDetails(board, {
+                origin: 'building',
+                backLabel: `Back to ${buildingName}`,
+                onBack: () => {
+                  showNavigation();
+                },
+              });
+            } else {
+              const districtName = pos.district;
+              showQuestBoardDetails(board, {
+                origin: 'district',
+                backLabel: `Back to ${districtName}`,
+                onBack: () => {
+                  showNavigation();
+                },
+              });
+            }
           }
           return;
         } else if (type === 'location') {
@@ -2289,12 +2390,14 @@ function showCharacter() {
 function showNoCharacterUI() {
   hideBackButton();
   updateCharacterButton();
+  updateTopMenuIndicators();
   setMainHTML(`<div class="no-character"><h1>Start your journey...</h1><button id="new-character">New Character</button></div>`);
   document.getElementById('new-character').addEventListener('click', startCharacterCreation);
   updateMenuHeight();
 }
 
 function showCharacterSelectUI() {
+  updateTopMenuIndicators();
   showBackButton();
   const characters = currentProfile?.characters || {};
   const ids = Object.keys(characters);
@@ -2327,6 +2430,7 @@ function showCharacterSelectUI() {
 }
 
 function showMainUI() {
+  updateTopMenuIndicators();
   updateScale();
   if (currentCharacter) {
     showCharacter();
@@ -2340,6 +2444,7 @@ function showCharacterUI() {
     startCharacterCreation();
     return;
   }
+  updateTopMenuIndicators();
   showBackButton();
   const c = currentCharacter;
   const portrait = `<img src="${c.image || ''}" alt="portrait" class="profile-portrait"${c.image ? '' : ' style="display:none;"'}>`;
@@ -3251,6 +3356,7 @@ function showBuildingsUI() {
 }
 
 function showQuestBoardsUI() {
+  updateTopMenuIndicators();
   if (!currentCharacter) return;
   showBackButton();
   ensureQuestLog(currentCharacter);
@@ -3295,6 +3401,7 @@ function showQuestBoardsUI() {
 }
 
 function showQuestBoardDetails(boardName, options = {}) {
+  updateTopMenuIndicators();
   if (!currentCharacter) return;
   showBackButton();
   ensureQuestLog(currentCharacter);
@@ -3353,6 +3460,42 @@ function showQuestBoardDetails(boardName, options = {}) {
       .map(seg => `<p>${seg.replace(/(?:\r?\n)/g, '<br>')}</p>`)
       .join('');
   };
+  const flattenToStrings = value => {
+    if (Array.isArray(value)) {
+      return value.flatMap(item => flattenToStrings(item));
+    }
+    if (value && typeof value === 'object') {
+      const fields = ['text', 'description', 'label', 'title', 'name', 'notes'];
+      let collected = [];
+      fields.forEach(field => {
+        if (value[field] != null) {
+          collected = collected.concat(flattenToStrings(value[field]));
+        }
+      });
+      if (collected.length) return collected;
+      return [String(value)];
+    }
+    if (value == null) return [];
+    return [String(value)];
+  };
+  const removePromotionClauses = text => {
+    if (!text) return '';
+    let result = String(text);
+    result = result.replace(/(?:[;—-]\s*)?promotion[^.;]*(?:\.)?/gi, '');
+    result = result.replace(/(?:[;—-]\s*)?stamps?[^.;]*reset[^.;]*(?:\.)?/gi, '');
+    result = result.replace(/\s{2,}/g, ' ').trim();
+    return result;
+  };
+  const sanitizeRequirementTexts = value =>
+    flattenToStrings(value)
+      .map(text => removePromotionClauses(text).trim())
+      .filter(Boolean);
+  const sanitizeRiskTexts = value =>
+    flattenToStrings(value)
+      .map(text => String(text).trim())
+      .filter(text => text && !/splinter/i.test(text));
+  const formatListFromStrings = values =>
+    values.map(item => sanitizeText(item)).filter(Boolean).join(', ');
   const computeBackLabel = () => {
     if (context.backLabel) return context.backLabel;
     if (context.origin === 'district' && currentCharacter?.position?.district) {
@@ -3404,14 +3547,18 @@ function showQuestBoardDetails(boardName, options = {}) {
         if (rankRequirements.length) {
           html += `<li><strong>Guild Rank:</strong> ${formatListValue(rankRequirements)}</li>`;
         }
-        const requirementsValue = formatListValue(quest.requirements);
-        if (requirementsValue) html += `<li><strong>Requirements:</strong> ${requirementsValue}</li>`;
+        const requirementTexts = sanitizeRequirementTexts(quest.requirements);
+        if (requirementTexts.length) {
+          html += `<li><strong>Requirements:</strong> ${formatListFromStrings(requirementTexts)}</li>`;
+        }
         const conditionsValue = formatListValue(quest.conditions);
         if (conditionsValue) html += `<li><strong>Conditions:</strong> ${conditionsValue}</li>`;
         const timelineValue = formatListValue(quest.timeline);
         if (timelineValue) html += `<li><strong>Timeline:</strong> ${timelineValue}</li>`;
-        const risksValue = formatListValue(quest.risks);
-        if (risksValue) html += `<li><strong>Risks:</strong> ${risksValue}</li>`;
+        const riskTexts = sanitizeRiskTexts(quest.risks);
+        if (riskTexts.length) {
+          html += `<li><strong>Risks:</strong> ${formatListFromStrings(riskTexts)}</li>`;
+        }
         const rewardValue = formatListValue(quest.reward);
         if (rewardValue) html += `<li><strong>Reward:</strong> ${rewardValue}</li>`;
         if (Number.isFinite(availability.demand)) {
