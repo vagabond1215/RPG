@@ -123,6 +123,7 @@ export const characterTemplate = {
     animals: {},
     plants: {},
   },
+  questLog: [],
   guildRank: 'None',
   adventurersGuildRank: 'None',
   backstory: null,

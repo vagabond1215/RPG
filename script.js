@@ -93,6 +93,31 @@ const NAV_ICONS = {
   building: '🏠',
   exit: '🚪',
   interaction: '⚙️',
+  quests: '🪧',
+};
+
+const ADVENTURERS_GUILD_RANK_ORDER = [
+  'None',
+  'Cold Iron',
+  'Steel',
+  'Copper',
+  'Bronze',
+  'Brass',
+  'Silver',
+  'Gold',
+  'Platinum',
+  'Diamond',
+];
+
+const QUEST_DISTRICT_ALIASES = {
+  'Harbor Ward': 'The Port District',
+  'Upper Ward': 'The Upper Ward',
+  'Little Terns': 'Little Terns',
+  'Greensoul Hill': 'Greensoul Hill',
+  'Lower Gardens': 'The Lower Gardens',
+  'High Road': 'The High Road District',
+  Farmlands: 'The Farmlands',
+  "Wave's Break": "Wave's Break",
 };
 
 const CITY_SLUGS = { "Wave's Break": "waves_break" };
@@ -153,6 +178,104 @@ function boardWeatherSnapshot(quests, boardName) {
     worldCalendar.today(),
   );
   return { weather, binding };
+}
+
+function questKey(boardName, questTitle) {
+  return `${boardName}::${questTitle}`;
+}
+
+function normalizeDistrictName(name) {
+  return name ? name.replace(/^the\s+/i, '').toLowerCase() : '';
+}
+
+function boardMatchesDistrict(bindingDistrict, navDistrict) {
+  if (!navDistrict) return false;
+  const normalizedNav = normalizeDistrictName(navDistrict);
+  if (!bindingDistrict) {
+    return normalizedNav === normalizeDistrictName("Wave's Break");
+  }
+  const alias = QUEST_DISTRICT_ALIASES[bindingDistrict] || bindingDistrict;
+  return normalizeDistrictName(alias) === normalizedNav;
+}
+
+function questBoardsForDistrict(city, district) {
+  const loc = LOCATIONS[city];
+  if (!loc || !loc.questBoards) return [];
+  const entries = [];
+  Object.entries(loc.questBoards).forEach(([boardName, quests]) => {
+    if (!Array.isArray(quests) || !quests.length) return;
+    const binding = resolveQuestBinding(quests[0], boardName);
+    if (boardMatchesDistrict(binding.district, district)) {
+      entries.push({ name: boardName, quests });
+    }
+  });
+  entries.sort((a, b) => a.name.localeCompare(b.name));
+  return entries;
+}
+
+function extractGuildRanks(text) {
+  if (!text) return [];
+  const matches = String(text).match(/Adventurers'? Guild[^.;\n]*/gi) || [];
+  const found = new Set();
+  matches.forEach(segment => {
+    const normalized = segment.toLowerCase();
+    ADVENTURERS_GUILD_RANK_ORDER.forEach(rank => {
+      if (rank === 'None') return;
+      if (normalized.includes(rank.toLowerCase())) {
+        found.add(rank);
+      }
+    });
+  });
+  return Array.from(found);
+}
+
+function collectGuildRankRequirements(quest) {
+  const sources = [];
+  if (quest.guildRankRequirement) {
+    sources.push(quest.guildRankRequirement);
+  }
+  if (quest.requirements) {
+    if (Array.isArray(quest.requirements)) {
+      quest.requirements.forEach(req => {
+        if (typeof req === 'string') sources.push(req);
+      });
+    } else if (typeof quest.requirements === 'string') {
+      sources.push(quest.requirements);
+    }
+  }
+  const ranks = new Set();
+  sources.forEach(text => {
+    extractGuildRanks(text).forEach(rank => ranks.add(rank));
+  });
+  return Array.from(ranks);
+}
+
+function rankValue(rank) {
+  if (!rank) return null;
+  const normalized = String(rank).trim().toLowerCase();
+  const index = ADVENTURERS_GUILD_RANK_ORDER.findIndex(
+    name => name.toLowerCase() === normalized,
+  );
+  return index >= 0 ? index : null;
+}
+
+function evaluateQuestEligibility(quest) {
+  if (!currentCharacter) {
+    return { canAccept: false, reasons: ['No active character.'] };
+  }
+  const reasons = [];
+  const requiredRanks = collectGuildRankRequirements(quest)
+    .map(rankValue)
+    .filter(value => value != null);
+  if (requiredRanks.length) {
+    const minRequired = Math.min(...requiredRanks);
+    const playerRank = rankValue(currentCharacter.adventurersGuildRank || 'None');
+    if (playerRank == null || playerRank < minRequired) {
+      const label = ADVENTURERS_GUILD_RANK_ORDER[minRequired];
+      reasons.push(`Requires Adventurers' Guild ${label} rank or higher.`);
+    }
+  }
+  return { canAccept: reasons.length === 0, reasons };
 }
 
 function formatWeatherSummary(report) {
@@ -1723,19 +1846,26 @@ function showNavigation() {
     return;
   }
   const createNavItem = ({ type, target, name, action, prompt, icon, disabled, extraClass }) => {
+    const safeName = escapeHtml(name || '');
     const defaultIcon = NAV_ICONS[type] || '📍';
     const iconHTML = icon
       ? `<img src="${icon}" alt="" class="nav-icon">`
       : `<span class="nav-icon">${defaultIcon}</span>`;
-    const attrs = action ? `data-action="${action}"` : `data-target="${target}"`;
+    const attrValue = action ? escapeHtml(action) : escapeHtml(target ?? '');
+    const attrs = action
+      ? `data-action="${attrValue}"`
+      : target != null
+        ? `data-target="${attrValue}"`
+        : '';
     const aria = prompt ? `${prompt} ${name}` : name;
+    const ariaLabel = escapeHtml(aria || '');
     const dis = disabled ? 'disabled' : '';
     const cls = extraClass ? ` ${extraClass}` : '';
     const labelHTML =
       icon && (type !== 'interaction' || ['shop', 'sell'].includes(action))
         ? ''
-        : `<span class="street-sign">${name}</span>`;
-    return `<div class="nav-item${cls}"><button data-type="${type}" ${attrs} aria-label="${aria}" ${dis}>${iconHTML}</button>${labelHTML}</div>`;
+        : `<span class="street-sign">${safeName}</span>`;
+    return `<div class="nav-item${cls}"><button data-type="${type}" ${attrs} aria-label="${ariaLabel}" ${dis}>${iconHTML}</button>${labelHTML}</div>`;
   };
   if (pos.building) {
     const building = cityData.buildings[pos.building];
@@ -1789,6 +1919,7 @@ function showNavigation() {
     const exits = [];
     const districts = [];
     const locals = [];
+    const questBoards = questBoardsForDistrict(pos.city, pos.district);
     district.points.forEach(pt => {
       if (pt.type === 'location') exits.push(pt);
       else if (pt.type === 'district') districts.push(pt);
@@ -1922,9 +2053,26 @@ function showNavigation() {
     ) {
       description = district.descriptions[pos.previousDistrict];
     }
-    const localsHTML = locals.length
-      ? `<div class="option-grid">${locals.map(makeButton).join('')}</div>`
-      : '';
+    const questButtons = questBoards.map(board =>
+      createNavItem({
+        type: 'quests',
+        target: board.name,
+        name: board.name,
+        prompt: "Review quests at",
+        extraClass: 'quest-board-item',
+      })
+    );
+    const localButtons = locals.map(makeButton);
+    const localSections = [];
+    if (questButtons.length) {
+      localSections.push(
+        `<div class="quest-board-section"><h3 class="quest-board-heading">Quest Boards</h3><div class="option-grid quest-board-grid">${questButtons.join('')}</div></div>`
+      );
+    }
+    if (localButtons.length) {
+      localSections.push(`<div class="option-grid">${localButtons.join('')}</div>`);
+    }
+    const localsHTML = localSections.join('');
     const descHTML = description
       ? `<p class="location-description">${description}</p>`
       : '';
@@ -1964,6 +2112,19 @@ function showNavigation() {
           pos.previousDistrict = pos.district;
           pos.building = null;
           pos.district = target;
+        } else if (type === 'quests') {
+          const board = target || '';
+          if (board) {
+            const districtName = pos.district;
+            showQuestBoardDetails(board, {
+              origin: 'district',
+              backLabel: `Back to ${districtName}`,
+              onBack: () => {
+                showNavigation();
+              },
+            });
+          }
+          return;
         } else if (type === 'location') {
           currentCharacter.location = target;
           const city = CITY_NAV[target];
@@ -2655,6 +2816,91 @@ function ensureCollections(character) {
   return normalized;
 }
 
+const REPEATABLE_QUEST_STATUSES = new Set(['abandoned', 'failed', 'expired', 'declined']);
+
+function ensureQuestLog(character) {
+  if (!character) return [];
+  let log = Array.isArray(character.questLog) ? character.questLog : [];
+  log = log
+    .filter(entry => entry && typeof entry === 'object')
+    .map(entry => ({
+      key: typeof entry.key === 'string' ? entry.key : questKey(entry.board || '', entry.title || ''),
+      board: entry.board || null,
+      title: entry.title || '',
+      acceptedOn: entry.acceptedOn || null,
+      acceptedOnLabel: entry.acceptedOnLabel || entry.acceptedOn || null,
+      status: entry.status || 'accepted',
+      location: entry.location || null,
+    }));
+  character.questLog = log;
+  return log;
+}
+
+function acceptQuest(boardName, questTitle) {
+  if (!currentCharacter) {
+    return { ok: false, message: 'No active character.' };
+  }
+  ensureQuestLog(currentCharacter);
+  const loc = LOCATIONS[currentCharacter.location];
+  if (!loc || !loc.questBoards) {
+    return { ok: false, message: 'No quest boards found here.' };
+  }
+  const quests = loc.questBoards[boardName] || [];
+  const quest = quests.find(q => q.title === questTitle);
+  if (!quest) {
+    return { ok: false, message: 'Quest could not be found.' };
+  }
+  const availability = evaluateQuestAvailability(quest, boardName);
+  if (!availability.available) {
+    const reason = availability.reason || 'This posting is not accepting adventurers right now.';
+    return { ok: false, message: reason };
+  }
+  const eligibility = evaluateQuestEligibility(quest);
+  if (!eligibility.canAccept) {
+    const message = eligibility.reasons.length
+      ? eligibility.reasons.join(' ')
+      : 'You do not meet the requirements.';
+    return { ok: false, message };
+  }
+  const log = ensureQuestLog(currentCharacter);
+  const key = questKey(boardName, quest.title || '');
+  const existing = log.find(entry => entry.key === key);
+  const today = worldCalendar.today();
+  const acceptedOn = dateKey(today);
+  const acceptedOnLabel = worldCalendar.formatCurrentDate();
+  const questLabel = quest.title || 'this quest';
+  if (existing) {
+    const status = (existing.status || '').toLowerCase();
+    if (!REPEATABLE_QUEST_STATUSES.has(status)) {
+      const acceptedLabel = existing.acceptedOnLabel || existing.acceptedOn;
+      return {
+        ok: false,
+        message: acceptedLabel
+          ? `Already accepted on ${acceptedLabel}.`
+          : 'Quest already in your log.',
+      };
+    }
+    existing.status = 'accepted';
+    existing.acceptedOn = acceptedOn;
+    existing.acceptedOnLabel = acceptedOnLabel;
+    existing.location = quest.location || null;
+    saveProfiles();
+    return { ok: true, message: `“${questLabel}” added back to your quest log.`, entry: existing };
+  }
+  const entry = {
+    key,
+    board: boardName,
+    title: quest.title || '',
+    acceptedOn,
+    acceptedOnLabel,
+    status: 'accepted',
+    location: quest.location || null,
+  };
+  log.push(entry);
+  saveProfiles();
+  return { ok: true, message: `“${questLabel}” added to your quest log.`, entry };
+}
+
 function getStudyLevel(record) {
   if (!record) return 1;
   const level = Number.parseInt(record.studyLevel, 10);
@@ -3007,6 +3253,7 @@ function showBuildingsUI() {
 function showQuestBoardsUI() {
   if (!currentCharacter) return;
   showBackButton();
+  ensureQuestLog(currentCharacter);
   const loc = LOCATIONS[currentCharacter.location];
   if (!loc) {
     setMainHTML('<div class="no-character"><h1>No quest boards found.</h1></div>');
@@ -3018,7 +3265,15 @@ function showQuestBoardsUI() {
     return;
   }
   const createItem = name => {
-    return `<div class="nav-item"><button data-board="${name}" aria-label="${name}"><span class="nav-icon">🪧</span></button><span class="street-sign">${name}</span></div>`;
+    const quests = loc.questBoards[name] || [];
+    const binding = quests.length ? resolveQuestBinding(quests[0], name) : null;
+    const district = binding?.district || null;
+    const boardAttr = encodeURIComponent(name);
+    const districtAttr = district ? ` data-district="${encodeURIComponent(district)}"` : '';
+    const districtLabel = district
+      ? `<span class="quest-board-district">${escapeHtml(district)}</span>`
+      : '';
+    return `<div class="nav-item quest-board-item"><button data-board="${boardAttr}" aria-label="${escapeHtml(name)}"${districtAttr}><span class="nav-icon">${NAV_ICONS.quests}</span></button><span class="street-sign">${escapeHtml(name)}${districtLabel ? ` ${districtLabel}` : ''}</span></div>`;
   };
   const buttons = boards.map(createItem).join('');
   const today = worldCalendar.formatCurrentDate();
@@ -3030,67 +3285,210 @@ function showQuestBoardsUI() {
   if (main) {
     main.querySelectorAll('.option-grid button').forEach(btn => {
       btn.addEventListener('click', () => {
-        const board = btn.dataset.board;
-        showQuestBoardDetails(board);
+        const board = btn.dataset.board ? decodeURIComponent(btn.dataset.board) : '';
+        if (board) {
+          showQuestBoardDetails(board, { onBack: showQuestBoardsUI });
+        }
       });
     });
   }
 }
 
-function showQuestBoardDetails(boardName) {
+function showQuestBoardDetails(boardName, options = {}) {
   if (!currentCharacter) return;
   showBackButton();
+  ensureQuestLog(currentCharacter);
   const loc = LOCATIONS[currentCharacter.location];
-  const quests = loc.questBoards[boardName] || [];
-  const evaluations = quests.map((quest) => ({
-    quest,
-    availability: evaluateQuestAvailability(quest, boardName),
-  }));
-  const active = evaluations.filter((entry) => entry.availability.available);
-  const inactive = evaluations.filter((entry) => !entry.availability.available);
+  if (!loc || !loc.questBoards) {
+    setMainHTML(
+      `<div class="questboard-detail navigation"><h2>${escapeHtml(boardName)}</h2><p>No quest boards are available here.</p></div>`,
+    );
+    updateMenuHeight();
+    return;
+  }
+  const boardExists = Object.prototype.hasOwnProperty.call(loc.questBoards, boardName);
+  const quests = boardExists ? loc.questBoards[boardName] || [] : [];
+  const { flash: flashMessage = null, ...context } = options || {};
+  const questLog = ensureQuestLog(currentCharacter);
+  const evaluations = quests.map(quest => {
+    const availability = evaluateQuestAvailability(quest, boardName);
+    const eligibility = evaluateQuestEligibility(quest);
+    const key = questKey(boardName, quest.title || '');
+    const logEntry = questLog.find(entry => entry.key === key) || null;
+    return { quest, availability, eligibility, logEntry };
+  });
+  const active = evaluations.filter(entry => entry.availability.available);
+  const inactive = evaluations.filter(entry => !entry.availability.available);
   const weatherContext = boardWeatherSnapshot(quests, boardName);
-  let html = `<div class="questboard-detail navigation"><h2>${boardName}</h2>`;
-  if (weatherContext) {
-    const areaLabel = weatherContext.binding.district || weatherContext.binding.habitat;
-    html += `<p class="quest-weather"><strong>Weather over ${areaLabel}:</strong> ${formatWeatherSummary(weatherContext.weather)}</p>`;
+  const binding = quests.length ? resolveQuestBinding(quests[0], boardName) : null;
+
+  const sanitizeText = value => {
+    if (value == null) return '';
+    const replaced = replaceCharacterRefs(String(value), currentCharacter);
+    return escapeHtml(replaced);
+  };
+  const formatListValue = value => {
+    if (Array.isArray(value)) {
+      return value
+        .map(item => formatListValue(item))
+        .filter(Boolean)
+        .join(', ');
+    }
+    if (value && typeof value === 'object') {
+      const fields = ['name', 'title', 'label', 'description'];
+      const text = fields.map(field => value[field]).find(Boolean);
+      if (text) return sanitizeText(text);
+      return sanitizeText(String(value));
+    }
+    return sanitizeText(value);
+  };
+  const formatParagraphs = text => {
+    const safe = sanitizeText(text);
+    if (!safe) return '';
+    const segments = safe.split(/(?:\r?\n){2,}/).map(seg => seg.trim()).filter(Boolean);
+    if (!segments.length) {
+      return `<p>${safe.replace(/(?:\r?\n)/g, '<br>')}</p>`;
+    }
+    return segments
+      .map(seg => `<p>${seg.replace(/(?:\r?\n)/g, '<br>')}</p>`)
+      .join('');
+  };
+  const computeBackLabel = () => {
+    if (context.backLabel) return context.backLabel;
+    if (context.origin === 'district' && currentCharacter?.position?.district) {
+      return `Back to ${currentCharacter.position.district}`;
+    }
+    return 'Back to Boards';
+  };
+
+  const heading = escapeHtml(boardName);
+  const districtLabel = binding?.district ? escapeHtml(binding.district) : '';
+  const backLabel = escapeHtml(computeBackLabel());
+  const todayLabel = escapeHtml(worldCalendar.formatCurrentDate());
+
+  let html = `<div class="questboard-detail navigation"><h2>${heading}`;
+  if (districtLabel) {
+    html += `<span class="quest-board-district-tag">${districtLabel}</span>`;
   }
-  if (active.length) {
-    html += '<ul class="quest-list">';
-    active.forEach(({ quest, availability }) => {
-      html += `<li class="quest-item"><h3>${quest.title}</h3><p>${quest.description}</p>`;
-      html += '<ul class="quest-meta">';
-      if (quest.location) html += `<li><strong>Location:</strong> ${quest.location}</li>`;
-      if (quest.requirements)
-        html += `<li><strong>Requirements:</strong> ${Array.isArray(quest.requirements) ? quest.requirements.join(', ') : quest.requirements}</li>`;
-      if (quest.conditions)
-        html += `<li><strong>Conditions:</strong> ${Array.isArray(quest.conditions) ? quest.conditions.join(', ') : quest.conditions}</li>`;
-      if (quest.timeline) html += `<li><strong>Timeline:</strong> ${quest.timeline}</li>`;
-      if (quest.risks)
-        html += `<li><strong>Risks:</strong> ${Array.isArray(quest.risks) ? quest.risks.join(', ') : quest.risks}</li>`;
-      if (quest.reward) html += `<li><strong>Reward:</strong> ${quest.reward}</li>`;
-      html += `<li><strong>Demand:</strong> ${(availability.demand * 100).toFixed(0)}% probability</li>`;
-      if (availability.reason)
-        html += `<li><strong>Status:</strong> ${availability.reason}</li>`;
-      if (availability.eventTag)
-        html += `<li><strong>Event:</strong> ${availability.eventTag}</li>`;
-      html += '</ul></li>';
-    });
-    html += '</ul>';
+  html += '</h2>';
+  html += `<p class="quest-date">Today is ${todayLabel}</p>`;
+  if (flashMessage && flashMessage.message) {
+    const flashType = flashMessage.type === 'error' ? 'quest-flash-error' : 'quest-flash-success';
+    html += `<div class="quest-flash ${flashType}">${escapeHtml(flashMessage.message)}</div>`;
+  }
+  if (!boardExists) {
+    html += '<p>No quest postings found here.</p>';
   } else {
-    html += '<p>No quests available today.</p>';
+    if (weatherContext) {
+      const areaLabel = weatherContext.binding.district || weatherContext.binding.habitat || boardName;
+      const summary = formatWeatherSummary(weatherContext.weather);
+      html += `<p class="quest-weather"><strong>Weather over ${escapeHtml(areaLabel)}:</strong> ${escapeHtml(summary)}</p>`;
+    }
+    if (active.length) {
+      html += '<ul class="quest-list">';
+      active.forEach(({ quest, availability, eligibility, logEntry }) => {
+        const status = (logEntry?.status || '').toLowerCase();
+        const alreadyAccepted = !!logEntry && !REPEATABLE_QUEST_STATUSES.has(status);
+        const itemClasses = ['quest-item'];
+        if (alreadyAccepted) itemClasses.push('quest-item-accepted');
+        html += `<li class="${itemClasses.join(' ')}">`;
+        html += `<h3>${sanitizeText(quest.title || 'Untitled Quest')}</h3>`;
+        const descriptionHTML = formatParagraphs(quest.description);
+        if (descriptionHTML) {
+          html += descriptionHTML;
+        }
+        html += '<ul class="quest-meta">';
+        const locationValue = formatListValue(quest.location);
+        if (locationValue) html += `<li><strong>Location:</strong> ${locationValue}</li>`;
+        const rankRequirements = collectGuildRankRequirements(quest);
+        if (rankRequirements.length) {
+          html += `<li><strong>Guild Rank:</strong> ${formatListValue(rankRequirements)}</li>`;
+        }
+        const requirementsValue = formatListValue(quest.requirements);
+        if (requirementsValue) html += `<li><strong>Requirements:</strong> ${requirementsValue}</li>`;
+        const conditionsValue = formatListValue(quest.conditions);
+        if (conditionsValue) html += `<li><strong>Conditions:</strong> ${conditionsValue}</li>`;
+        const timelineValue = formatListValue(quest.timeline);
+        if (timelineValue) html += `<li><strong>Timeline:</strong> ${timelineValue}</li>`;
+        const risksValue = formatListValue(quest.risks);
+        if (risksValue) html += `<li><strong>Risks:</strong> ${risksValue}</li>`;
+        const rewardValue = formatListValue(quest.reward);
+        if (rewardValue) html += `<li><strong>Reward:</strong> ${rewardValue}</li>`;
+        if (Number.isFinite(availability.demand)) {
+          html += `<li><strong>Demand:</strong> ${(availability.demand * 100).toFixed(0)}% probability</li>`;
+        }
+        const statusText = formatListValue(availability.reason);
+        if (statusText) html += `<li><strong>Status:</strong> ${statusText}</li>`;
+        const eventText = formatListValue(availability.eventTag);
+        if (eventText) html += `<li><strong>Event:</strong> ${eventText}</li>`;
+        if (alreadyAccepted && (logEntry?.acceptedOnLabel || logEntry?.acceptedOn)) {
+          const acceptedLabel = logEntry.acceptedOnLabel || logEntry.acceptedOn;
+          html += `<li><strong>Accepted:</strong> ${escapeHtml(acceptedLabel)}</li>`;
+        }
+        html += '</ul>';
+        const boardAttr = escapeHtml(boardName);
+        const questAttr = escapeHtml(quest.title || '');
+        const disabled = alreadyAccepted || !eligibility.canAccept || !questAttr;
+        const buttonLabel = alreadyAccepted ? 'Accepted' : 'Accept Quest';
+        html += `<div class="quest-actions"><button class="quest-accept"${disabled ? ' disabled' : ''} data-board="${boardAttr}" data-quest="${questAttr}">${buttonLabel}</button>`;
+        const notes = [];
+        if (alreadyAccepted) {
+          if (logEntry?.acceptedOnLabel) {
+            notes.push(`Accepted on ${logEntry.acceptedOnLabel}.`);
+          } else {
+            notes.push('Already in your quest log.');
+          }
+        }
+        if (!eligibility.canAccept) {
+          notes.push(...eligibility.reasons);
+        }
+        if (notes.length) {
+          html += `<p class="quest-requirement-note">${notes.map(note => sanitizeText(note)).filter(Boolean).join('<br>')}</p>`;
+        }
+        html += '</div></li>';
+      });
+      html += '</ul>';
+    } else {
+      html += '<p class="quest-empty">No quests available today.</p>';
+    }
+    if (inactive.length) {
+      html += '<details class="questboard-hints"><summary>Inactive postings</summary><ul>';
+      inactive.slice(0, 6).forEach(({ quest, availability }) => {
+        const titleText = sanitizeText(quest.title || 'Posting');
+        const reasonText = formatListValue(availability.reason || 'No demand at present.');
+        html += `<li><strong>${titleText}</strong>: ${reasonText || 'No demand at present.'}</li>`;
+      });
+      html += '</ul></details>';
+    }
   }
-  if (inactive.length) {
-    html += '<details class="questboard-hints"><summary>Inactive postings</summary><ul>';
-    inactive.slice(0, 6).forEach(({ quest, availability }) => {
-      html += `<li>${quest.title}: ${availability.reason || 'No demand at present.'}</li>`;
-    });
-    html += '</ul></details>';
-  }
-  html += '<div class="option-grid"><button id="return-questboards">Back to Boards</button></div></div>';
+  html += `<div class="option-grid quest-board-actions"><button class="quest-back" data-action="quest-back">${backLabel}</button></div></div>`;
   setMainHTML(html);
+  normalizeOptionButtonWidths();
   updateMenuHeight();
-  const backBtn = document.getElementById('return-questboards');
-  if (backBtn) backBtn.addEventListener('click', showQuestBoardsUI);
+  if (main) {
+    const backBtn = main.querySelector('.quest-back');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        if (typeof context.onBack === 'function') {
+          context.onBack();
+        } else {
+          showQuestBoardsUI();
+        }
+      });
+    }
+    main.querySelectorAll('.quest-accept').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.disabled) return;
+        const board = btn.dataset.board || boardName;
+        const questTitle = btn.dataset.quest || '';
+        if (!questTitle) return;
+        const result = acceptQuest(board, questTitle);
+        const message = result.message || (result.ok ? 'Quest accepted.' : 'Unable to accept quest.');
+        const flash = { type: result.ok ? 'success' : 'error', message };
+        showQuestBoardDetails(board, { ...context, flash });
+      });
+    });
+  }
 }
 
 const SLOT_ICONS = {
