@@ -20,68 +20,83 @@ export interface WeaponRecord extends WeaponEntry {
 export const ARMORY: Record<string, WeaponRecord[]> = {
   swords: [
     { name: "Arming Sword", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "A straight double-edged steel blade (~75 cm) with a dark-iron cruciform guard, leather-wrapped grip over cord, and a rounded steel pommel engraved with simple sigils; balanced, serviceable, and kept bright with oil.", fightingStyle: "Balanced cut and thrust; commonly paired with shield", attackSpeed: 7, damage: 5, armorPen: "Medium", quality: "Standard", priceCp: 710, priceDisplay: "7si 10cp", descriptionFull: "Arming Sword. A straight double-edged steel blade (~75 cm) with a dark-iron cruciform guard, leather-wrapped grip over cord, and a rounded steel pommel engraved with simple sigils; balanced, serviceable, and kept bright with oil. Trusted from High Kingdoms, it proves dependable steel sized for medium engagements. Favoured for balanced cut and thrust; commonly paired with shield." },
-    { name: "Arming Sword", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "A straight double-edged steel blade (~75 cm) with a dark-iron cruciform guard, leather-wrapped grip over cord, and a rounded steel pommel engraved with simple sigils; balanced, serviceable, and kept bright with oil.", fightingStyle: "Balanced cut and thrust; commonly paired with shield", attackSpeed: 7, damage: 5, armorPen: "Medium", quality: "Fine", priceCp: 1030, priceDisplay: "10si 30cp", descriptionFull: "Fine Arming Sword. A straight double-edged steel blade (~75 cm) with a dark-iron cruciform guard, leather-wrapped grip over cord, and a rounded steel pommel engraved with simple sigils; balanced, serviceable, and kept bright with oil. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for balanced cut and thrust; commonly paired with shield." },
-    { name: "Arming Sword", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "A straight double-edged steel blade (~75 cm) with a dark-iron cruciform guard, leather-wrapped grip over cord, and a rounded steel pommel engraved with simple sigils; balanced, serviceable, and kept bright with oil.", fightingStyle: "Balanced cut and thrust; commonly paired with shield", attackSpeed: 7, damage: 5, armorPen: "Medium", quality: "Masterwork", priceCp: 1665, priceDisplay: "16si 65cp", descriptionFull: "Masterwork Arming Sword. A straight double-edged steel blade (~75 cm) with a dark-iron cruciform guard, leather-wrapped grip over cord, and a rounded steel pommel engraved with simple sigils; balanced, serviceable, and kept bright with oil. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for balanced cut and thrust; commonly paired with shield." },
-    { name: "Longsword", region: "High Kingdoms", size: "Large", hands: 2, reach: "Very Long", description: "Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust.", fightingStyle: "Two-handed leverage; sweeping slashes and strong thrusts", attackSpeed: 6, damage: 6.5, armorPen: "Medium-High", quality: "Standard", priceCp: 1540, priceDisplay: "15si 40cp", descriptionFull: "Longsword. Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust. Trusted from High Kingdoms, it proves dependable steel sized for large engagements. Favoured for two-handed leverage; sweeping slashes and strong thrusts." },
-    { name: "Longsword", region: "High Kingdoms", size: "Large", hands: 2, reach: "Very Long", description: "Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust.", fightingStyle: "Two-handed leverage; sweeping slashes and strong thrusts", attackSpeed: 6, damage: 6.5, armorPen: "Medium-High", quality: "Fine", priceCp: 2230, priceDisplay: "1g 2si 30cp", descriptionFull: "Fine Longsword. Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for two-handed leverage; sweeping slashes and strong thrusts." },
-    { name: "Longsword", region: "High Kingdoms", size: "Large", hands: 2, reach: "Very Long", description: "Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust.", fightingStyle: "Two-handed leverage; sweeping slashes and strong thrusts", attackSpeed: 6, damage: 6.5, armorPen: "Medium-High", quality: "Masterwork", priceCp: 3615, priceDisplay: "1g 16si 15cp", descriptionFull: "Masterwork Longsword. Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for two-handed leverage; sweeping slashes and strong thrusts." },
-    { name: "Great Sword", region: "Northern Marches", size: "Very Large", hands: 2, reach: "Very Long", description: "A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks.", fightingStyle: "Power strokes, wide arcs, line-breaking presence", attackSpeed: 5.5, damage: 7, armorPen: "High", quality: "Standard", priceCp: 2240, priceDisplay: "1g 2si 40cp", descriptionFull: "Great Sword. A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks. Trusted from Northern Marches, it proves dependable steel sized for very large engagements. Favoured for power strokes, wide arcs, line-breaking presence." },
-    { name: "Great Sword", region: "Northern Marches", size: "Very Large", hands: 2, reach: "Very Long", description: "A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks.", fightingStyle: "Power strokes, wide arcs, line-breaking presence", attackSpeed: 5.5, damage: 7, armorPen: "High", quality: "Fine", priceCp: 3250, priceDisplay: "1g 12si 50cp", descriptionFull: "Fine Great Sword. A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks. Fine finishing from Northern Marches dresses every fitting and coaxes a livelier balance out of its very large frame. Favoured for power strokes, wide arcs, line-breaking presence." },
-    { name: "Great Sword", region: "Northern Marches", size: "Very Large", hands: 2, reach: "Very Long", description: "A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks.", fightingStyle: "Power strokes, wide arcs, line-breaking presence", attackSpeed: 5.5, damage: 7, armorPen: "High", quality: "Masterwork", priceCp: 5270, priceDisplay: "2g 12si 70cp", descriptionFull: "Masterwork Great Sword. A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks. Masterwork artisans from Northern Marches layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for power strokes, wide arcs, line-breaking presence." },
-    { name: "Two-Hand Colossus", region: "Borderlands", size: "Very Large", hands: 2, reach: "Very Long", description: "Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach.", fightingStyle: "Crushing cleaves and long-reach thrusts; slow recoveries", attackSpeed: 3.5, damage: 9.5, armorPen: "High", quality: "Standard", priceCp: 2145, priceDisplay: "1g 1si 45cp", descriptionFull: "Two-Hand Colossus. Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach. Trusted from Borderlands, it proves dependable steel sized for very large engagements. Favoured for crushing cleaves and long-reach thrusts; slow recoveries." },
-    { name: "Two-Hand Colossus", region: "Borderlands", size: "Very Large", hands: 2, reach: "Very Long", description: "Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach.", fightingStyle: "Crushing cleaves and long-reach thrusts; slow recoveries", attackSpeed: 3.5, damage: 9.5, armorPen: "High", quality: "Fine", priceCp: 3110, priceDisplay: "1g 11si 10cp", descriptionFull: "Fine Two-Hand Colossus. Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach. Fine finishing from Borderlands dresses every fitting and coaxes a livelier balance out of its very large frame. Favoured for crushing cleaves and long-reach thrusts; slow recoveries." },
-    { name: "Two-Hand Colossus", region: "Borderlands", size: "Very Large", hands: 2, reach: "Very Long", description: "Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach.", fightingStyle: "Crushing cleaves and long-reach thrusts; slow recoveries", attackSpeed: 3.5, damage: 9.5, armorPen: "High", quality: "Masterwork", priceCp: 5040, priceDisplay: "2g 10si 40cp", descriptionFull: "Masterwork Two-Hand Colossus. Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach. Masterwork artisans from Borderlands layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for crushing cleaves and long-reach thrusts; slow recoveries." },
-    { name: "Falchion", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor.", fightingStyle: "Heavy slashes and choppers; excels against light armor", attackSpeed: 7, damage: 5.5, armorPen: "Medium", quality: "Standard", priceCp: 730, priceDisplay: "7si 30cp", descriptionFull: "Falchion. Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor. Trusted from High Kingdoms, it proves dependable steel sized for medium engagements. Favoured for heavy slashes and choppers; excels against light armor." },
-    { name: "Falchion", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor.", fightingStyle: "Heavy slashes and choppers; excels against light armor", attackSpeed: 7, damage: 5.5, armorPen: "Medium", quality: "Fine", priceCp: 1060, priceDisplay: "10si 60cp", descriptionFull: "Fine Falchion. Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for heavy slashes and choppers; excels against light armor." },
-    { name: "Falchion", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor.", fightingStyle: "Heavy slashes and choppers; excels against light armor", attackSpeed: 7, damage: 5.5, armorPen: "Medium", quality: "Masterwork", priceCp: 1715, priceDisplay: "17si 15cp", descriptionFull: "Masterwork Falchion. Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for heavy slashes and choppers; excels against light armor." },
+    { name: "Arming Sword", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "A straight double-edged steel blade (~75 cm) with a dark-iron cruciform guard, leather-wrapped grip over cord, and a rounded steel pommel engraved with simple sigils; balanced, serviceable, and kept bright with oil.", fightingStyle: "Balanced cut and thrust; commonly paired with shield", attackSpeed: 7, damage: 5, armorPen: "Medium", quality: "Fine", priceCp: 1035, priceDisplay: "10si 35cp", descriptionFull: "Fine Arming Sword. A straight double-edged steel blade (~75 cm) with a dark-iron cruciform guard, leather-wrapped grip over cord, and a rounded steel pommel engraved with simple sigils; balanced, serviceable, and kept bright with oil. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for balanced cut and thrust; commonly paired with shield." },
+    { name: "Arming Sword", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "A straight double-edged steel blade (~75 cm) with a dark-iron cruciform guard, leather-wrapped grip over cord, and a rounded steel pommel engraved with simple sigils; balanced, serviceable, and kept bright with oil.", fightingStyle: "Balanced cut and thrust; commonly paired with shield", attackSpeed: 7, damage: 5, armorPen: "Medium", quality: "Masterwork", priceCp: 1675, priceDisplay: "16si 75cp", descriptionFull: "Masterwork Arming Sword. A straight double-edged steel blade (~75 cm) with a dark-iron cruciform guard, leather-wrapped grip over cord, and a rounded steel pommel engraved with simple sigils; balanced, serviceable, and kept bright with oil. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for balanced cut and thrust; commonly paired with shield." },
+    { name: "Longsword", region: "High Kingdoms", size: "Large", hands: 2, reach: "Very Long", description: "Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust.", fightingStyle: "Two-handed leverage; sweeping slashes and strong thrusts", attackSpeed: 6, damage: 6.5, armorPen: "Medium-High", quality: "Standard", priceCp: 1545, priceDisplay: "15si 45cp", descriptionFull: "Longsword. Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust. Trusted from High Kingdoms, it proves dependable steel sized for large engagements. Favoured for two-handed leverage; sweeping slashes and strong thrusts." },
+    { name: "Longsword", region: "High Kingdoms", size: "Large", hands: 2, reach: "Very Long", description: "Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust.", fightingStyle: "Two-handed leverage; sweeping slashes and strong thrusts", attackSpeed: 6, damage: 6.5, armorPen: "Medium-High", quality: "Fine", priceCp: 2240, priceDisplay: "1g 2si 40cp", descriptionFull: "Fine Longsword. Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for two-handed leverage; sweeping slashes and strong thrusts." },
+    { name: "Longsword", region: "High Kingdoms", size: "Large", hands: 2, reach: "Very Long", description: "Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust.", fightingStyle: "Two-handed leverage; sweeping slashes and strong thrusts", attackSpeed: 6, damage: 6.5, armorPen: "Medium-High", quality: "Masterwork", priceCp: 3630, priceDisplay: "1g 16si 30cp", descriptionFull: "Masterwork Longsword. Slender straight steel blade with a long ricasso and extended grip for two hands; iron crossguard with scent-stopper pommel; leather over wood core scabbard; quick in the bind yet authoritative on the thrust. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for two-handed leverage; sweeping slashes and strong thrusts." },
+    { name: "Great Sword", region: "Northern Marches", size: "Very Large", hands: 2, reach: "Very Long", description: "A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks.", fightingStyle: "Power strokes, wide arcs, line-breaking presence", attackSpeed: 5.5, damage: 7, armorPen: "High", quality: "Standard", priceCp: 2250, priceDisplay: "1g 2si 50cp", descriptionFull: "Great Sword. A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks. Trusted from Northern Marches, it proves dependable steel sized for very large engagements. Favoured for power strokes, wide arcs, line-breaking presence." },
+    { name: "Great Sword", region: "Northern Marches", size: "Very Large", hands: 2, reach: "Very Long", description: "A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks.", fightingStyle: "Power strokes, wide arcs, line-breaking presence", attackSpeed: 5.5, damage: 7, armorPen: "High", quality: "Fine", priceCp: 3265, priceDisplay: "1g 12si 65cp", descriptionFull: "Fine Great Sword. A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks. Fine finishing from Northern Marches dresses every fitting and coaxes a livelier balance out of its very large frame. Favoured for power strokes, wide arcs, line-breaking presence." },
+    { name: "Great Sword", region: "Northern Marches", size: "Very Large", hands: 2, reach: "Very Long", description: "A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks.", fightingStyle: "Power strokes, wide arcs, line-breaking presence", attackSpeed: 5.5, damage: 7, armorPen: "High", quality: "Masterwork", priceCp: 5295, priceDisplay: "2g 12si 95cp", descriptionFull: "Masterwork Great Sword. A broad, elongated battlefield blade of tempered steel, oversized crossguard and heavy wheel pommel; grip wrapped in oiled leather over cord; meant for shoulder-carry and shock charges against dense ranks. Masterwork artisans from Northern Marches layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for power strokes, wide arcs, line-breaking presence." },
+    { name: "Two-Hand Colossus", region: "Borderlands", size: "Very Large", hands: 2, reach: "Very Long", description: "Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach.", fightingStyle: "Crushing cleaves and long-reach thrusts; slow recoveries", attackSpeed: 3.5, damage: 9.5, armorPen: "High", quality: "Standard", priceCp: 2155, priceDisplay: "1g 1si 55cp", descriptionFull: "Two-Hand Colossus. Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach. Trusted from Borderlands, it proves dependable steel sized for very large engagements. Favoured for crushing cleaves and long-reach thrusts; slow recoveries." },
+    { name: "Two-Hand Colossus", region: "Borderlands", size: "Very Large", hands: 2, reach: "Very Long", description: "Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach.", fightingStyle: "Crushing cleaves and long-reach thrusts; slow recoveries", attackSpeed: 3.5, damage: 9.5, armorPen: "High", quality: "Fine", priceCp: 3125, priceDisplay: "1g 11si 25cp", descriptionFull: "Fine Two-Hand Colossus. Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach. Fine finishing from Borderlands dresses every fitting and coaxes a livelier balance out of its very large frame. Favoured for crushing cleaves and long-reach thrusts; slow recoveries." },
+    { name: "Two-Hand Colossus", region: "Borderlands", size: "Very Large", hands: 2, reach: "Very Long", description: "Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach.", fightingStyle: "Crushing cleaves and long-reach thrusts; slow recoveries", attackSpeed: 3.5, damage: 9.5, armorPen: "High", quality: "Masterwork", priceCp: 5065, priceDisplay: "2g 10si 65cp", descriptionFull: "Masterwork Two-Hand Colossus. Massive steel blade with side lugs at the forte and a long waisted grip; iron fittings dark-blued against weather; requires measured cadence to harness its cutting mass and thrusting reach. Masterwork artisans from Borderlands layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for crushing cleaves and long-reach thrusts; slow recoveries." },
+    { name: "Falchion", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor.", fightingStyle: "Heavy slashes and choppers; excels against light armor", attackSpeed: 7, damage: 5.5, armorPen: "Medium", quality: "Standard", priceCp: 735, priceDisplay: "7si 35cp", descriptionFull: "Falchion. Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor. Trusted from High Kingdoms, it proves dependable steel sized for medium engagements. Favoured for heavy slashes and choppers; excels against light armor." },
+    { name: "Falchion", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor.", fightingStyle: "Heavy slashes and choppers; excels against light armor", attackSpeed: 7, damage: 5.5, armorPen: "Medium", quality: "Fine", priceCp: 1065, priceDisplay: "10si 65cp", descriptionFull: "Fine Falchion. Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for heavy slashes and choppers; excels against light armor." },
+    { name: "Falchion", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor.", fightingStyle: "Heavy slashes and choppers; excels against light armor", attackSpeed: 7, damage: 5.5, armorPen: "Medium", quality: "Masterwork", priceCp: 1725, priceDisplay: "17si 25cp", descriptionFull: "Masterwork Falchion. Single-edged, forward-weighted steel blade with slight curve; brass or iron guard, simple leather grip; edge polished bright for chopping power against cloth, flesh, and light armor. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for heavy slashes and choppers; excels against light armor." },
     { name: "Estoc", region: "Borderlands", size: "Medium", hands: 1, reach: "Medium", description: "Rigid, triangular-section steel blade with minimal edge and acute point; stout iron crossguard and ring; built to survive hard binds and drive into seams of mail and plate.", fightingStyle: "Precise stabs into armor seams; binds and windings", attackSpeed: 6.5, damage: 6, armorPen: "High", quality: "Standard", priceCp: 940, priceDisplay: "9si 40cp", descriptionFull: "Estoc. Rigid, triangular-section steel blade with minimal edge and acute point; stout iron crossguard and ring; built to survive hard binds and drive into seams of mail and plate. Trusted from Borderlands, it proves dependable steel sized for medium engagements. Favoured for precise stabs into armor seams; binds and windings." },
-    { name: "Estoc", region: "Borderlands", size: "Medium", hands: 1, reach: "Medium", description: "Rigid, triangular-section steel blade with minimal edge and acute point; stout iron crossguard and ring; built to survive hard binds and drive into seams of mail and plate.", fightingStyle: "Precise stabs into armor seams; binds and windings", attackSpeed: 6.5, damage: 6, armorPen: "High", quality: "Fine", priceCp: 1360, priceDisplay: "13si 60cp", descriptionFull: "Fine Estoc. Rigid, triangular-section steel blade with minimal edge and acute point; stout iron crossguard and ring; built to survive hard binds and drive into seams of mail and plate. Fine finishing from Borderlands dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for precise stabs into armor seams; binds and windings." },
-    { name: "Estoc", region: "Borderlands", size: "Medium", hands: 1, reach: "Medium", description: "Rigid, triangular-section steel blade with minimal edge and acute point; stout iron crossguard and ring; built to survive hard binds and drive into seams of mail and plate.", fightingStyle: "Precise stabs into armor seams; binds and windings", attackSpeed: 6.5, damage: 6, armorPen: "High", quality: "Masterwork", priceCp: 2205, priceDisplay: "1g 2si 5cp", descriptionFull: "Masterwork Estoc. Rigid, triangular-section steel blade with minimal edge and acute point; stout iron crossguard and ring; built to survive hard binds and drive into seams of mail and plate. Masterwork artisans from Borderlands layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for precise stabs into armor seams; binds and windings." },
+    { name: "Estoc", region: "Borderlands", size: "Medium", hands: 1, reach: "Medium", description: "Rigid, triangular-section steel blade with minimal edge and acute point; stout iron crossguard and ring; built to survive hard binds and drive into seams of mail and plate.", fightingStyle: "Precise stabs into armor seams; binds and windings", attackSpeed: 6.5, damage: 6, armorPen: "High", quality: "Fine", priceCp: 1365, priceDisplay: "13si 65cp", descriptionFull: "Fine Estoc. Rigid, triangular-section steel blade with minimal edge and acute point; stout iron crossguard and ring; built to survive hard binds and drive into seams of mail and plate. Fine finishing from Borderlands dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for precise stabs into armor seams; binds and windings." },
+    { name: "Estoc", region: "Borderlands", size: "Medium", hands: 1, reach: "Medium", description: "Rigid, triangular-section steel blade with minimal edge and acute point; stout iron crossguard and ring; built to survive hard binds and drive into seams of mail and plate.", fightingStyle: "Precise stabs into armor seams; binds and windings", attackSpeed: 6.5, damage: 6, armorPen: "High", quality: "Masterwork", priceCp: 2215, priceDisplay: "1g 2si 15cp", descriptionFull: "Masterwork Estoc. Rigid, triangular-section steel blade with minimal edge and acute point; stout iron crossguard and ring; built to survive hard binds and drive into seams of mail and plate. Masterwork artisans from Borderlands layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for precise stabs into armor seams; binds and windings." },
     { name: "Short Guardblade", region: "Borderlands", size: "Small", hands: 1, reach: "Short", description: "Compact, broad steel blade with protective side rings; wooden core grip in black leather; city-guard issue for press-fighting in alleys and tight interiors.", fightingStyle: "Close-in slashes and quick parries", attackSpeed: 7.5, damage: 4.5, armorPen: "Medium", quality: "Standard", priceCp: 505, priceDisplay: "5si 5cp", descriptionFull: "Short Guardblade. Compact, broad steel blade with protective side rings; wooden core grip in black leather; city-guard issue for press-fighting in alleys and tight interiors. Trusted from Borderlands, it proves dependable steel sized for small engagements. Favoured for close-in slashes and quick parries." },
-    { name: "Short Guardblade", region: "Borderlands", size: "Small", hands: 1, reach: "Short", description: "Compact, broad steel blade with protective side rings; wooden core grip in black leather; city-guard issue for press-fighting in alleys and tight interiors.", fightingStyle: "Close-in slashes and quick parries", attackSpeed: 7.5, damage: 4.5, armorPen: "Medium", quality: "Fine", priceCp: 730, priceDisplay: "7si 30cp", descriptionFull: "Fine Short Guardblade. Compact, broad steel blade with protective side rings; wooden core grip in black leather; city-guard issue for press-fighting in alleys and tight interiors. Fine finishing from Borderlands dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for close-in slashes and quick parries." },
-    { name: "Short Guardblade", region: "Borderlands", size: "Small", hands: 1, reach: "Short", description: "Compact, broad steel blade with protective side rings; wooden core grip in black leather; city-guard issue for press-fighting in alleys and tight interiors.", fightingStyle: "Close-in slashes and quick parries", attackSpeed: 7.5, damage: 4.5, armorPen: "Medium", quality: "Masterwork", priceCp: 1185, priceDisplay: "11si 85cp", descriptionFull: "Masterwork Short Guardblade. Compact, broad steel blade with protective side rings; wooden core grip in black leather; city-guard issue for press-fighting in alleys and tight interiors. Masterwork artisans from Borderlands layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for close-in slashes and quick parries." },
-    { name: "Steppe Sabre", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium", description: "Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion.", fightingStyle: "Mounted draw-cuts and fluid passing strikes", attackSpeed: 6.8, damage: 5.8, armorPen: "Medium", quality: "Standard", priceCp: 735, priceDisplay: "7si 35cp", descriptionFull: "Steppe Sabre. Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion. Trusted from Southern Steppes, it proves dependable steel sized for medium engagements. Favoured for mounted draw-cuts and fluid passing strikes." },
-    { name: "Steppe Sabre", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium", description: "Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion.", fightingStyle: "Mounted draw-cuts and fluid passing strikes", attackSpeed: 6.8, damage: 5.8, armorPen: "Medium", quality: "Fine", priceCp: 1065, priceDisplay: "10si 65cp", descriptionFull: "Fine Steppe Sabre. Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion. Fine finishing from Southern Steppes dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for mounted draw-cuts and fluid passing strikes." },
-    { name: "Steppe Sabre", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium", description: "Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion.", fightingStyle: "Mounted draw-cuts and fluid passing strikes", attackSpeed: 6.8, damage: 5.8, armorPen: "Medium", quality: "Masterwork", priceCp: 1725, priceDisplay: "17si 25cp", descriptionFull: "Masterwork Steppe Sabre. Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion. Masterwork artisans from Southern Steppes layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for mounted draw-cuts and fluid passing strikes." },
+    { name: "Short Guardblade", region: "Borderlands", size: "Small", hands: 1, reach: "Short", description: "Compact, broad steel blade with protective side rings; wooden core grip in black leather; city-guard issue for press-fighting in alleys and tight interiors.", fightingStyle: "Close-in slashes and quick parries", attackSpeed: 7.5, damage: 4.5, armorPen: "Medium", quality: "Fine", priceCp: 735, priceDisplay: "7si 35cp", descriptionFull: "Fine Short Guardblade. Compact, broad steel blade with protective side rings; wooden core grip in black leather; city-guard issue for press-fighting in alleys and tight interiors. Fine finishing from Borderlands dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for close-in slashes and quick parries." },
+    { name: "Short Guardblade", region: "Borderlands", size: "Small", hands: 1, reach: "Short", description: "Compact, broad steel blade with protective side rings; wooden core grip in black leather; city-guard issue for press-fighting in alleys and tight interiors.", fightingStyle: "Close-in slashes and quick parries", attackSpeed: 7.5, damage: 4.5, armorPen: "Medium", quality: "Masterwork", priceCp: 1190, priceDisplay: "11si 90cp", descriptionFull: "Masterwork Short Guardblade. Compact, broad steel blade with protective side rings; wooden core grip in black leather; city-guard issue for press-fighting in alleys and tight interiors. Masterwork artisans from Borderlands layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for close-in slashes and quick parries." },
+    { name: "Steppe Sabre", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium", description: "Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion.", fightingStyle: "Mounted draw-cuts and fluid passing strikes", attackSpeed: 6.8, damage: 5.8, armorPen: "Medium", quality: "Standard", priceCp: 740, priceDisplay: "7si 40cp", descriptionFull: "Steppe Sabre. Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion. Trusted from Southern Steppes, it proves dependable steel sized for medium engagements. Favoured for mounted draw-cuts and fluid passing strikes." },
+    { name: "Steppe Sabre", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium", description: "Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion.", fightingStyle: "Mounted draw-cuts and fluid passing strikes", attackSpeed: 6.8, damage: 5.8, armorPen: "Medium", quality: "Fine", priceCp: 1070, priceDisplay: "10si 70cp", descriptionFull: "Fine Steppe Sabre. Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion. Fine finishing from Southern Steppes dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for mounted draw-cuts and fluid passing strikes." },
+    { name: "Steppe Sabre", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium", description: "Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion.", fightingStyle: "Mounted draw-cuts and fluid passing strikes", attackSpeed: 6.8, damage: 5.8, armorPen: "Medium", quality: "Masterwork", priceCp: 1735, priceDisplay: "17si 35cp", descriptionFull: "Masterwork Steppe Sabre. Deeply curved single-edged steel blade with a flared tip; brass backstrap and knuckle bow; scabbard in rawhide or lacquer; optimized for mounted draw-cuts and flowing motion. Masterwork artisans from Southern Steppes layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for mounted draw-cuts and fluid passing strikes." },
     { name: "Eastern Straightblade", region: "Eastern Realms", size: "Small", hands: 1, reach: "Short/Medium", description: "Elegant straight, double-edged steel blade with a narrow fuller; oval guard and ring pommel; lacquered scabbard with understated motifs; prized for balance and poise.", fightingStyle: "Precision fencing, balanced cuts and thrusts", attackSpeed: 7.5, damage: 4.8, armorPen: "Medium", quality: "Standard", priceCp: 545, priceDisplay: "5si 45cp", descriptionFull: "Eastern Straightblade. Elegant straight, double-edged steel blade with a narrow fuller; oval guard and ring pommel; lacquered scabbard with understated motifs; prized for balance and poise. Trusted from Eastern Realms, it proves dependable steel sized for small engagements. Favoured for precision fencing, balanced cuts and thrusts." },
     { name: "Eastern Straightblade", region: "Eastern Realms", size: "Small", hands: 1, reach: "Short/Medium", description: "Elegant straight, double-edged steel blade with a narrow fuller; oval guard and ring pommel; lacquered scabbard with understated motifs; prized for balance and poise.", fightingStyle: "Precision fencing, balanced cuts and thrusts", attackSpeed: 7.5, damage: 4.8, armorPen: "Medium", quality: "Fine", priceCp: 790, priceDisplay: "7si 90cp", descriptionFull: "Fine Eastern Straightblade. Elegant straight, double-edged steel blade with a narrow fuller; oval guard and ring pommel; lacquered scabbard with understated motifs; prized for balance and poise. Fine finishing from Eastern Realms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for precision fencing, balanced cuts and thrusts." },
-    { name: "Eastern Straightblade", region: "Eastern Realms", size: "Small", hands: 1, reach: "Short/Medium", description: "Elegant straight, double-edged steel blade with a narrow fuller; oval guard and ring pommel; lacquered scabbard with understated motifs; prized for balance and poise.", fightingStyle: "Precision fencing, balanced cuts and thrusts", attackSpeed: 7.5, damage: 4.8, armorPen: "Medium", quality: "Masterwork", priceCp: 1275, priceDisplay: "12si 75cp", descriptionFull: "Masterwork Eastern Straightblade. Elegant straight, double-edged steel blade with a narrow fuller; oval guard and ring pommel; lacquered scabbard with understated motifs; prized for balance and poise. Masterwork artisans from Eastern Realms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for precision fencing, balanced cuts and thrusts." },
-    { name: "Blade of the Tide", region: "Island Clans", size: "Medium", hands: 2, reach: "Long", description: "Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen.", fightingStyle: "Two-handed draw-cuts and precise diagonal slashes", attackSpeed: 6.5, damage: 6.2, armorPen: "Medium-High", quality: "Standard", priceCp: 1145, priceDisplay: "11si 45cp", descriptionFull: "Blade of the Tide. Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen. Trusted from Island Clans, it proves dependable steel sized for medium engagements. Favoured for two-handed draw-cuts and precise diagonal slashes." },
-    { name: "Blade of the Tide", region: "Island Clans", size: "Medium", hands: 2, reach: "Long", description: "Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen.", fightingStyle: "Two-handed draw-cuts and precise diagonal slashes", attackSpeed: 6.5, damage: 6.2, armorPen: "Medium-High", quality: "Fine", priceCp: 1660, priceDisplay: "16si 60cp", descriptionFull: "Fine Blade of the Tide. Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for two-handed draw-cuts and precise diagonal slashes." },
-    { name: "Blade of the Tide", region: "Island Clans", size: "Medium", hands: 2, reach: "Long", description: "Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen.", fightingStyle: "Two-handed draw-cuts and precise diagonal slashes", attackSpeed: 6.5, damage: 6.2, armorPen: "Medium-High", quality: "Masterwork", priceCp: 2685, priceDisplay: "1g 6si 85cp", descriptionFull: "Masterwork Blade of the Tide. Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for two-handed draw-cuts and precise diagonal slashes." },
-    { name: "Great-Edge", region: "Island Clans", size: "Very Large", hands: 2, reach: "Very Long", description: "Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight.", fightingStyle: "Sweeping, space-hungry strikes; anti-cavalry limb-cleavers", attackSpeed: 3.2, damage: 9.2, armorPen: "High", quality: "Standard", priceCp: 2070, priceDisplay: "1g 70cp", descriptionFull: "Great-Edge. Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight. Trusted from Island Clans, it proves dependable steel sized for very large engagements. Favoured for sweeping, space-hungry strikes; anti-cavalry limb-cleavers." },
-    { name: "Great-Edge", region: "Island Clans", size: "Very Large", hands: 2, reach: "Very Long", description: "Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight.", fightingStyle: "Sweeping, space-hungry strikes; anti-cavalry limb-cleavers", attackSpeed: 3.2, damage: 9.2, armorPen: "High", quality: "Fine", priceCp: 3000, priceDisplay: "1g 10si", descriptionFull: "Fine Great-Edge. Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its very large frame. Favoured for sweeping, space-hungry strikes; anti-cavalry limb-cleavers." },
-    { name: "Great-Edge", region: "Island Clans", size: "Very Large", hands: 2, reach: "Very Long", description: "Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight.", fightingStyle: "Sweeping, space-hungry strikes; anti-cavalry limb-cleavers", attackSpeed: 3.2, damage: 9.2, armorPen: "High", quality: "Masterwork", priceCp: 4860, priceDisplay: "2g 8si 60cp", descriptionFull: "Masterwork Great-Edge. Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for sweeping, space-hungry strikes; anti-cavalry limb-cleavers." },
-    { name: "Companion Blade", region: "Island Clans", size: "Small", hands: 1, reach: "Short", description: "Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes.", fightingStyle: "Defensive parries, opportunistic ripostes", attackSpeed: 7.8, damage: 4.5, armorPen: "Medium", quality: "Standard", priceCp: 510, priceDisplay: "5si 10cp", descriptionFull: "Companion Blade. Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes. Trusted from Island Clans, it proves dependable steel sized for small engagements. Favoured for defensive parries, opportunistic ripostes." },
-    { name: "Companion Blade", region: "Island Clans", size: "Small", hands: 1, reach: "Short", description: "Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes.", fightingStyle: "Defensive parries, opportunistic ripostes", attackSpeed: 7.8, damage: 4.5, armorPen: "Medium", quality: "Fine", priceCp: 740, priceDisplay: "7si 40cp", descriptionFull: "Fine Companion Blade. Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for defensive parries, opportunistic ripostes." },
-    { name: "Companion Blade", region: "Island Clans", size: "Small", hands: 1, reach: "Short", description: "Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes.", fightingStyle: "Defensive parries, opportunistic ripostes", attackSpeed: 7.8, damage: 4.5, armorPen: "Medium", quality: "Masterwork", priceCp: 1200, priceDisplay: "12si", descriptionFull: "Masterwork Companion Blade. Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for defensive parries, opportunistic ripostes." },
-    { name: "Bronze Leafblade", region: "High Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling.", fightingStyle: "Entry cuts and shield-line thrusts", attackSpeed: 7.2, damage: 4.4, armorPen: "Low-Medium", quality: "Standard", priceCp: 490, priceDisplay: "4si 90cp", descriptionFull: "Bronze Leafblade. Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling. Trusted from High Kingdoms, it proves dependable steel sized for small engagements. Favoured for entry cuts and shield-line thrusts." },
+    { name: "Eastern Straightblade", region: "Eastern Realms", size: "Small", hands: 1, reach: "Short/Medium", description: "Elegant straight, double-edged steel blade with a narrow fuller; oval guard and ring pommel; lacquered scabbard with understated motifs; prized for balance and poise.", fightingStyle: "Precision fencing, balanced cuts and thrusts", attackSpeed: 7.5, damage: 4.8, armorPen: "Medium", quality: "Masterwork", priceCp: 1285, priceDisplay: "12si 85cp", descriptionFull: "Masterwork Eastern Straightblade. Elegant straight, double-edged steel blade with a narrow fuller; oval guard and ring pommel; lacquered scabbard with understated motifs; prized for balance and poise. Masterwork artisans from Eastern Realms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for precision fencing, balanced cuts and thrusts." },
+    { name: "Blade of the Tide", region: "Island Clans", size: "Medium", hands: 2, reach: "Long", description: "Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen.", fightingStyle: "Two-handed draw-cuts and precise diagonal slashes", attackSpeed: 6.5, damage: 6.2, armorPen: "Medium-High", quality: "Standard", priceCp: 1150, priceDisplay: "11si 50cp", descriptionFull: "Blade of the Tide. Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen. Trusted from Island Clans, it proves dependable steel sized for medium engagements. Favoured for two-handed draw-cuts and precise diagonal slashes." },
+    { name: "Blade of the Tide", region: "Island Clans", size: "Medium", hands: 2, reach: "Long", description: "Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen.", fightingStyle: "Two-handed draw-cuts and precise diagonal slashes", attackSpeed: 6.5, damage: 6.2, armorPen: "Medium-High", quality: "Fine", priceCp: 1665, priceDisplay: "16si 65cp", descriptionFull: "Fine Blade of the Tide. Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for two-handed draw-cuts and precise diagonal slashes." },
+    { name: "Blade of the Tide", region: "Island Clans", size: "Medium", hands: 2, reach: "Long", description: "Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen.", fightingStyle: "Two-handed draw-cuts and precise diagonal slashes", attackSpeed: 6.5, damage: 6.2, armorPen: "Medium-High", quality: "Masterwork", priceCp: 2700, priceDisplay: "1g 7si", descriptionFull: "Masterwork Blade of the Tide. Folded-steel curved blade with a distinct hardened edge line; ray-skin handle bound in dark silk; indigo lacquered scabbard with silver clan inlays; a prestigious cutter with ocean-blue sheen. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for two-handed draw-cuts and precise diagonal slashes." },
+    { name: "Great-Edge", region: "Island Clans", size: "Very Large", hands: 2, reach: "Very Long", description: "Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight.", fightingStyle: "Sweeping, space-hungry strikes; anti-cavalry limb-cleavers", attackSpeed: 3.2, damage: 9.2, armorPen: "High", quality: "Standard", priceCp: 2080, priceDisplay: "1g 80cp", descriptionFull: "Great-Edge. Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight. Trusted from Island Clans, it proves dependable steel sized for very large engagements. Favoured for sweeping, space-hungry strikes; anti-cavalry limb-cleavers." },
+    { name: "Great-Edge", region: "Island Clans", size: "Very Large", hands: 2, reach: "Very Long", description: "Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight.", fightingStyle: "Sweeping, space-hungry strikes; anti-cavalry limb-cleavers", attackSpeed: 3.2, damage: 9.2, armorPen: "High", quality: "Fine", priceCp: 3015, priceDisplay: "1g 10si 15cp", descriptionFull: "Fine Great-Edge. Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its very large frame. Favoured for sweeping, space-hungry strikes; anti-cavalry limb-cleavers." },
+    { name: "Great-Edge", region: "Island Clans", size: "Very Large", hands: 2, reach: "Very Long", description: "Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight.", fightingStyle: "Sweeping, space-hungry strikes; anti-cavalry limb-cleavers", attackSpeed: 3.2, damage: 9.2, armorPen: "High", quality: "Masterwork", priceCp: 4885, priceDisplay: "2g 8si 85cp", descriptionFull: "Masterwork Great-Edge. Oversized curved battlefield sword of tempered steel, long o-kissaki-like tip and extended two-hand grip; blackened iron fittings; carried across the back; terrifying reach and limb-shearing weight. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for sweeping, space-hungry strikes; anti-cavalry limb-cleavers." },
+    { name: "Companion Blade", region: "Island Clans", size: "Small", hands: 1, reach: "Short", description: "Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes.", fightingStyle: "Defensive parries, opportunistic ripostes", attackSpeed: 7.8, damage: 4.5, armorPen: "Medium", quality: "Standard", priceCp: 515, priceDisplay: "5si 15cp", descriptionFull: "Companion Blade. Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes. Trusted from Island Clans, it proves dependable steel sized for small engagements. Favoured for defensive parries, opportunistic ripostes." },
+    { name: "Companion Blade", region: "Island Clans", size: "Small", hands: 1, reach: "Short", description: "Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes.", fightingStyle: "Defensive parries, opportunistic ripostes", attackSpeed: 7.8, damage: 4.5, armorPen: "Medium", quality: "Fine", priceCp: 745, priceDisplay: "7si 45cp", descriptionFull: "Fine Companion Blade. Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for defensive parries, opportunistic ripostes." },
+    { name: "Companion Blade", region: "Island Clans", size: "Small", hands: 1, reach: "Short", description: "Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes.", fightingStyle: "Defensive parries, opportunistic ripostes", attackSpeed: 7.8, damage: 4.5, armorPen: "Medium", quality: "Masterwork", priceCp: 1205, priceDisplay: "12si 5cp", descriptionFull: "Masterwork Companion Blade. Short, razor-keen side sword with folded-steel blade; ray-skin and cord-wrapped grip; paired to longer blades for indoor defense and sudden ripostes. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for defensive parries, opportunistic ripostes." },
+    { name: "Bronze Leafblade", region: "High Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling.", fightingStyle: "Entry cuts and shield-line thrusts", attackSpeed: 7.2, damage: 4.4, armorPen: "Low-Medium", quality: "Standard", priceCp: 495, priceDisplay: "4si 95cp", descriptionFull: "Bronze Leafblade. Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling. Trusted from High Kingdoms, it proves dependable steel sized for small engagements. Favoured for entry cuts and shield-line thrusts." },
     { name: "Bronze Leafblade", region: "High Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling.", fightingStyle: "Entry cuts and shield-line thrusts", attackSpeed: 7.2, damage: 4.4, armorPen: "Low-Medium", quality: "Fine", priceCp: 715, priceDisplay: "7si 15cp", descriptionFull: "Fine Bronze Leafblade. Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for entry cuts and shield-line thrusts." },
-    { name: "Bronze Leafblade", region: "High Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling.", fightingStyle: "Entry cuts and shield-line thrusts", attackSpeed: 7.2, damage: 4.4, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 1155, priceDisplay: "11si 55cp", descriptionFull: "Masterwork Bronze Leafblade. Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for entry cuts and shield-line thrusts." },
-    { name: "Kopis Cutter", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle.", fightingStyle: "Sweeping draw-cuts and decisive chops", attackSpeed: 6.8, damage: 5.7, armorPen: "Medium", quality: "Standard", priceCp: 820, priceDisplay: "8si 20cp", descriptionFull: "Kopis Cutter. Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle. Trusted from Southern Kingdoms, it proves dependable steel sized for medium engagements. Favoured for sweeping draw-cuts and decisive chops." },
-    { name: "Kopis Cutter", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle.", fightingStyle: "Sweeping draw-cuts and decisive chops", attackSpeed: 6.8, damage: 5.7, armorPen: "Medium", quality: "Fine", priceCp: 1185, priceDisplay: "11si 85cp", descriptionFull: "Fine Kopis Cutter. Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for sweeping draw-cuts and decisive chops." },
-    { name: "Kopis Cutter", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle.", fightingStyle: "Sweeping draw-cuts and decisive chops", attackSpeed: 6.8, damage: 5.7, armorPen: "Medium", quality: "Masterwork", priceCp: 1925, priceDisplay: "19si 25cp", descriptionFull: "Masterwork Kopis Cutter. Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for sweeping draw-cuts and decisive chops." },
-    { name: "Tegha Broadblade", region: "Southern Steppes", size: "Large", hands: 2, reach: "Long", description: "Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight.", fightingStyle: "Two-handed hews from saddle or line", attackSpeed: 5.8, damage: 7, armorPen: "Medium-High", quality: "Standard", priceCp: 1430, priceDisplay: "14si 30cp", descriptionFull: "Tegha Broadblade. Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight. Trusted from Southern Steppes, it proves dependable steel sized for large engagements. Favoured for two-handed hews from saddle or line." },
-    { name: "Tegha Broadblade", region: "Southern Steppes", size: "Large", hands: 2, reach: "Long", description: "Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight.", fightingStyle: "Two-handed hews from saddle or line", attackSpeed: 5.8, damage: 7, armorPen: "Medium-High", quality: "Fine", priceCp: 2075, priceDisplay: "1g 75cp", descriptionFull: "Fine Tegha Broadblade. Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight. Fine finishing from Southern Steppes dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for two-handed hews from saddle or line." },
-    { name: "Tegha Broadblade", region: "Southern Steppes", size: "Large", hands: 2, reach: "Long", description: "Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight.", fightingStyle: "Two-handed hews from saddle or line", attackSpeed: 5.8, damage: 7, armorPen: "Medium-High", quality: "Masterwork", priceCp: 3365, priceDisplay: "1g 13si 65cp", descriptionFull: "Masterwork Tegha Broadblade. Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight. Masterwork artisans from Southern Steppes layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for two-handed hews from saddle or line." },
+    { name: "Bronze Leafblade", region: "High Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling.", fightingStyle: "Entry cuts and shield-line thrusts", attackSpeed: 7.2, damage: 4.4, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 1160, priceDisplay: "11si 60cp", descriptionFull: "Masterwork Bronze Leafblade. Leaf-shaped bronze blade with simple crossguard, rawhide-wrapped grip, and a wood core scabbard; dependable starter steel for militia drilling. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for entry cuts and shield-line thrusts." },
+    { name: "Kopis Cutter", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle.", fightingStyle: "Sweeping draw-cuts and decisive chops", attackSpeed: 6.8, damage: 5.7, armorPen: "Medium", quality: "Standard", priceCp: 825, priceDisplay: "8si 25cp", descriptionFull: "Kopis Cutter. Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle. Trusted from Southern Kingdoms, it proves dependable steel sized for medium engagements. Favoured for sweeping draw-cuts and decisive chops." },
+    { name: "Kopis Cutter", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle.", fightingStyle: "Sweeping draw-cuts and decisive chops", attackSpeed: 6.8, damage: 5.7, armorPen: "Medium", quality: "Fine", priceCp: 1195, priceDisplay: "11si 95cp", descriptionFull: "Fine Kopis Cutter. Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for sweeping draw-cuts and decisive chops." },
+    { name: "Kopis Cutter", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle.", fightingStyle: "Sweeping draw-cuts and decisive chops", attackSpeed: 6.8, damage: 5.7, armorPen: "Medium", quality: "Masterwork", priceCp: 1935, priceDisplay: "19si 35cp", descriptionFull: "Masterwork Kopis Cutter. Forward-curved single-edged blade with thick spine and clip point; bronze backstrap and horn grip flare; meant to chop from hip or saddle. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for sweeping draw-cuts and decisive chops." },
+    { name: "Tegha Broadblade", region: "Southern Steppes", size: "Large", hands: 2, reach: "Long", description: "Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight.", fightingStyle: "Two-handed hews from saddle or line", attackSpeed: 5.8, damage: 7, armorPen: "Medium-High", quality: "Standard", priceCp: 1440, priceDisplay: "14si 40cp", descriptionFull: "Tegha Broadblade. Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight. Trusted from Southern Steppes, it proves dependable steel sized for large engagements. Favoured for two-handed hews from saddle or line." },
+    { name: "Tegha Broadblade", region: "Southern Steppes", size: "Large", hands: 2, reach: "Long", description: "Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight.", fightingStyle: "Two-handed hews from saddle or line", attackSpeed: 5.8, damage: 7, armorPen: "Medium-High", quality: "Fine", priceCp: 2085, priceDisplay: "1g 85cp", descriptionFull: "Fine Tegha Broadblade. Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight. Fine finishing from Southern Steppes dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for two-handed hews from saddle or line." },
+    { name: "Tegha Broadblade", region: "Southern Steppes", size: "Large", hands: 2, reach: "Long", description: "Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight.", fightingStyle: "Two-handed hews from saddle or line", attackSpeed: 5.8, damage: 7, armorPen: "Medium-High", quality: "Masterwork", priceCp: 3380, priceDisplay: "1g 13si 80cp", descriptionFull: "Masterwork Tegha Broadblade. Wide-backed steppe war blade with long ovoid grip, iron guard rings, and horsehair tassels; rides across saddles yet hews with camp-clearing weight. Masterwork artisans from Southern Steppes layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for two-handed hews from saddle or line." },
     { name: "Shashka Officer Saber", region: "Eastern Realms", size: "Medium", hands: 1, reach: "Medium", description: "Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills.", fightingStyle: "High-cadence slashes and ripostes", attackSpeed: 7.3, damage: 5.4, armorPen: "Medium", quality: "Standard", priceCp: 795, priceDisplay: "7si 95cp", descriptionFull: "Shashka Officer Saber. Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills. Trusted from Eastern Realms, it proves dependable steel sized for medium engagements. Favoured for high-cadence slashes and ripostes." },
-    { name: "Shashka Officer Saber", region: "Eastern Realms", size: "Medium", hands: 1, reach: "Medium", description: "Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills.", fightingStyle: "High-cadence slashes and ripostes", attackSpeed: 7.3, damage: 5.4, armorPen: "Medium", quality: "Fine", priceCp: 1150, priceDisplay: "11si 50cp", descriptionFull: "Fine Shashka Officer Saber. Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills. Fine finishing from Eastern Realms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for high-cadence slashes and ripostes." },
-    { name: "Shashka Officer Saber", region: "Eastern Realms", size: "Medium", hands: 1, reach: "Medium", description: "Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills.", fightingStyle: "High-cadence slashes and ripostes", attackSpeed: 7.3, damage: 5.4, armorPen: "Medium", quality: "Masterwork", priceCp: 1865, priceDisplay: "18si 65cp", descriptionFull: "Masterwork Shashka Officer Saber. Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills. Masterwork artisans from Eastern Realms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for high-cadence slashes and ripostes." },
-    { name: "Flanged Sabre", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium/Long", description: "Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams.", fightingStyle: "Armor-splitting slashes and hooking parries", attackSpeed: 6.7, damage: 5.9, armorPen: "Medium-High", quality: "Standard", priceCp: 950, priceDisplay: "9si 50cp", descriptionFull: "Flanged Sabre. Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams. Trusted from Southern Kingdoms, it proves dependable steel sized for medium engagements. Favoured for armor-splitting slashes and hooking parries." },
-    { name: "Flanged Sabre", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium/Long", description: "Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams.", fightingStyle: "Armor-splitting slashes and hooking parries", attackSpeed: 6.7, damage: 5.9, armorPen: "Medium-High", quality: "Fine", priceCp: 1380, priceDisplay: "13si 80cp", descriptionFull: "Fine Flanged Sabre. Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for armor-splitting slashes and hooking parries." },
-    { name: "Flanged Sabre", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium/Long", description: "Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams.", fightingStyle: "Armor-splitting slashes and hooking parries", attackSpeed: 6.7, damage: 5.9, armorPen: "Medium-High", quality: "Masterwork", priceCp: 2235, priceDisplay: "1g 2si 35cp", descriptionFull: "Masterwork Flanged Sabre. Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for armor-splitting slashes and hooking parries." },
-    { name: "Xiphos Leaf Sword", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press.", fightingStyle: "Shield-line stabs and tight cuts", attackSpeed: 7.3, damage: 4.9, armorPen: "Medium", quality: "Standard", priceCp: 540, priceDisplay: "5si 40cp", descriptionFull: "Xiphos Leaf Sword. Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press. Trusted from Southern Kingdoms, it proves dependable steel sized for small engagements. Favoured for shield-line stabs and tight cuts." },
-    { name: "Xiphos Leaf Sword", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press.", fightingStyle: "Shield-line stabs and tight cuts", attackSpeed: 7.3, damage: 4.9, armorPen: "Medium", quality: "Fine", priceCp: 785, priceDisplay: "7si 85cp", descriptionFull: "Fine Xiphos Leaf Sword. Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for shield-line stabs and tight cuts." },
-    { name: "Xiphos Leaf Sword", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press.", fightingStyle: "Shield-line stabs and tight cuts", attackSpeed: 7.3, damage: 4.9, armorPen: "Medium", quality: "Masterwork", priceCp: 1275, priceDisplay: "12si 75cp", descriptionFull: "Masterwork Xiphos Leaf Sword. Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for shield-line stabs and tight cuts." },
-    { name: "Sawtooth Falx", region: "Borderlands", size: "Large", hands: 2, reach: "Medium/Long", description: "Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down.", fightingStyle: "Hooking pulls and brutal overhand cleaves", attackSpeed: 4.9, damage: 7.8, armorPen: "High", quality: "Standard", priceCp: 1760, priceDisplay: "17si 60cp", descriptionFull: "Sawtooth Falx. Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down. Trusted from Borderlands, it proves dependable steel sized for large engagements. Favoured for hooking pulls and brutal overhand cleaves." },
-    { name: "Sawtooth Falx", region: "Borderlands", size: "Large", hands: 2, reach: "Medium/Long", description: "Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down.", fightingStyle: "Hooking pulls and brutal overhand cleaves", attackSpeed: 4.9, damage: 7.8, armorPen: "High", quality: "Fine", priceCp: 2555, priceDisplay: "1g 5si 55cp", descriptionFull: "Fine Sawtooth Falx. Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down. Fine finishing from Borderlands dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for hooking pulls and brutal overhand cleaves." },
-    { name: "Sawtooth Falx", region: "Borderlands", size: "Large", hands: 2, reach: "Medium/Long", description: "Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down.", fightingStyle: "Hooking pulls and brutal overhand cleaves", attackSpeed: 4.9, damage: 7.8, armorPen: "High", quality: "Masterwork", priceCp: 4140, priceDisplay: "2g 1si 40cp", descriptionFull: "Masterwork Sawtooth Falx. Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down. Masterwork artisans from Borderlands layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for hooking pulls and brutal overhand cleaves." },
-    { name: "City Gentle’s Cane", region: "High Kingdoms", size: "Small", hands: 1, reach: "Medium", description: "Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats.", fightingStyle: "Discreet thrusts and cloak-assisted ripostes", attackSpeed: 7.6, damage: 4.2, armorPen: "Low-Medium", quality: "Standard", priceCp: 570, priceDisplay: "5si 70cp", descriptionFull: "City Gentle’s Cane. Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats. Trusted from High Kingdoms, it proves dependable steel sized for small engagements. Favoured for discreet thrusts and cloak-assisted ripostes." },
-    { name: "City Gentle’s Cane", region: "High Kingdoms", size: "Small", hands: 1, reach: "Medium", description: "Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats.", fightingStyle: "Discreet thrusts and cloak-assisted ripostes", attackSpeed: 7.6, damage: 4.2, armorPen: "Low-Medium", quality: "Fine", priceCp: 825, priceDisplay: "8si 25cp", descriptionFull: "Fine City Gentle’s Cane. Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for discreet thrusts and cloak-assisted ripostes." },
-    { name: "City Gentle’s Cane", region: "High Kingdoms", size: "Small", hands: 1, reach: "Medium", description: "Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats.", fightingStyle: "Discreet thrusts and cloak-assisted ripostes", attackSpeed: 7.6, damage: 4.2, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 1340, priceDisplay: "13si 40cp", descriptionFull: "Masterwork City Gentle’s Cane. Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for discreet thrusts and cloak-assisted ripostes." },
-    { name: "Dual Set: Wakizashi Companion + Tanto Sideblade", region: "Island Clans", size: "Medium", hands: 2, reach: "Short", description: "Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts.", fightingStyle: "Alternating twin-blade slashes and traps", attackSpeed: 8, damage: 5, armorPen: "Medium", quality: "Standard", priceCp: 940, priceDisplay: "9si 40cp", descriptionFull: "Dual Set: Wakizashi Companion + Tanto Sideblade. Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts. Trusted from Island Clans, it proves dependable steel sized for medium engagements. Favoured for alternating twin-blade slashes and traps." },
-    { name: "Dual Set: Wakizashi Companion + Tanto Sideblade", region: "Island Clans", size: "Medium", hands: 2, reach: "Short", description: "Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts.", fightingStyle: "Alternating twin-blade slashes and traps", attackSpeed: 8, damage: 5, armorPen: "Medium", quality: "Fine", priceCp: 1365, priceDisplay: "13si 65cp", descriptionFull: "Fine Dual Set: Wakizashi Companion + Tanto Sideblade. Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for alternating twin-blade slashes and traps." },
-    { name: "Dual Set: Wakizashi Companion + Tanto Sideblade", region: "Island Clans", size: "Medium", hands: 2, reach: "Short", description: "Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts.", fightingStyle: "Alternating twin-blade slashes and traps", attackSpeed: 8, damage: 5, armorPen: "Medium", quality: "Masterwork", priceCp: 2210, priceDisplay: "1g 2si 10cp", descriptionFull: "Masterwork Dual Set: Wakizashi Companion + Tanto Sideblade. Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for alternating twin-blade slashes and traps." },
+    { name: "Shashka Officer Saber", region: "Eastern Realms", size: "Medium", hands: 1, reach: "Medium", description: "Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills.", fightingStyle: "High-cadence slashes and ripostes", attackSpeed: 7.3, damage: 5.4, armorPen: "Medium", quality: "Fine", priceCp: 1155, priceDisplay: "11si 55cp", descriptionFull: "Fine Shashka Officer Saber. Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills. Fine finishing from Eastern Realms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for high-cadence slashes and ripostes." },
+    { name: "Shashka Officer Saber", region: "Eastern Realms", size: "Medium", hands: 1, reach: "Medium", description: "Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills.", fightingStyle: "High-cadence slashes and ripostes", attackSpeed: 7.3, damage: 5.4, armorPen: "Medium", quality: "Masterwork", priceCp: 1875, priceDisplay: "18si 75cp", descriptionFull: "Masterwork Shashka Officer Saber. Slim, guardless saber of polished steel with subtly flared tip; lacquered wood grip capped in brass; carriage blade for lightning cavalry drills. Masterwork artisans from Eastern Realms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for high-cadence slashes and ripostes." },
+    { name: "Flanged Sabre", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium/Long", description: "Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams.", fightingStyle: "Armor-splitting slashes and hooking parries", attackSpeed: 6.7, damage: 5.9, armorPen: "Medium-High", quality: "Standard", priceCp: 955, priceDisplay: "9si 55cp", descriptionFull: "Flanged Sabre. Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams. Trusted from Southern Kingdoms, it proves dependable steel sized for medium engagements. Favoured for armor-splitting slashes and hooking parries." },
+    { name: "Flanged Sabre", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium/Long", description: "Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams.", fightingStyle: "Armor-splitting slashes and hooking parries", attackSpeed: 6.7, damage: 5.9, armorPen: "Medium-High", quality: "Fine", priceCp: 1385, priceDisplay: "13si 85cp", descriptionFull: "Fine Flanged Sabre. Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for armor-splitting slashes and hooking parries." },
+    { name: "Flanged Sabre", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium/Long", description: "Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams.", fightingStyle: "Armor-splitting slashes and hooking parries", attackSpeed: 6.7, damage: 5.9, armorPen: "Medium-High", quality: "Masterwork", priceCp: 2245, priceDisplay: "1g 2si 45cp", descriptionFull: "Masterwork Flanged Sabre. Curved desert saber with reinforced flanged spine, crescent guard, and wrapped palm swell; keeps edge keen even after biting through armor seams. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for armor-splitting slashes and hooking parries." },
+    { name: "Xiphos Leaf Sword", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press.", fightingStyle: "Shield-line stabs and tight cuts", attackSpeed: 7.3, damage: 4.9, armorPen: "Medium", quality: "Standard", priceCp: 545, priceDisplay: "5si 45cp", descriptionFull: "Xiphos Leaf Sword. Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press. Trusted from Southern Kingdoms, it proves dependable steel sized for small engagements. Favoured for shield-line stabs and tight cuts." },
+    { name: "Xiphos Leaf Sword", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press.", fightingStyle: "Shield-line stabs and tight cuts", attackSpeed: 7.3, damage: 4.9, armorPen: "Medium", quality: "Fine", priceCp: 790, priceDisplay: "7si 90cp", descriptionFull: "Fine Xiphos Leaf Sword. Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for shield-line stabs and tight cuts." },
+    { name: "Xiphos Leaf Sword", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press.", fightingStyle: "Shield-line stabs and tight cuts", attackSpeed: 7.3, damage: 4.9, armorPen: "Medium", quality: "Masterwork", priceCp: 1280, priceDisplay: "12si 80cp", descriptionFull: "Masterwork Xiphos Leaf Sword. Classical leaf-shaped double edge of bright steel, bronze disk guard, and linen-wrapped grip; marches with hoplite shields into close press. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for shield-line stabs and tight cuts." },
+    { name: "Sawtooth Falx", region: "Borderlands", size: "Large", hands: 2, reach: "Medium/Long", description: "Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down.", fightingStyle: "Hooking pulls and brutal overhand cleaves", attackSpeed: 4.9, damage: 7.8, armorPen: "High", quality: "Standard", priceCp: 1770, priceDisplay: "17si 70cp", descriptionFull: "Sawtooth Falx. Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down. Trusted from Borderlands, it proves dependable steel sized for large engagements. Favoured for hooking pulls and brutal overhand cleaves." },
+    { name: "Sawtooth Falx", region: "Borderlands", size: "Large", hands: 2, reach: "Medium/Long", description: "Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down.", fightingStyle: "Hooking pulls and brutal overhand cleaves", attackSpeed: 4.9, damage: 7.8, armorPen: "High", quality: "Fine", priceCp: 2565, priceDisplay: "1g 5si 65cp", descriptionFull: "Fine Sawtooth Falx. Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down. Fine finishing from Borderlands dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for hooking pulls and brutal overhand cleaves." },
+    { name: "Sawtooth Falx", region: "Borderlands", size: "Large", hands: 2, reach: "Medium/Long", description: "Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down.", fightingStyle: "Hooking pulls and brutal overhand cleaves", attackSpeed: 4.9, damage: 7.8, armorPen: "High", quality: "Masterwork", priceCp: 4160, priceDisplay: "2g 1si 60cp", descriptionFull: "Masterwork Sawtooth Falx. Hooked underrealm blade with serrated inner edge, dark-etched steel, and bone-capped haft; drags shields aside before rending down. Masterwork artisans from Borderlands layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for hooking pulls and brutal overhand cleaves." },
+    { name: "City Gentle’s Cane", region: "High Kingdoms", size: "Small", hands: 1, reach: "Medium", description: "Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats.", fightingStyle: "Discreet thrusts and cloak-assisted ripostes", attackSpeed: 7.6, damage: 4.2, armorPen: "Low-Medium", quality: "Standard", priceCp: 575, priceDisplay: "5si 75cp", descriptionFull: "City Gentle’s Cane. Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats. Trusted from High Kingdoms, it proves dependable steel sized for small engagements. Favoured for discreet thrusts and cloak-assisted ripostes." },
+    { name: "City Gentle’s Cane", region: "High Kingdoms", size: "Small", hands: 1, reach: "Medium", description: "Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats.", fightingStyle: "Discreet thrusts and cloak-assisted ripostes", attackSpeed: 7.6, damage: 4.2, armorPen: "Low-Medium", quality: "Fine", priceCp: 830, priceDisplay: "8si 30cp", descriptionFull: "Fine City Gentle’s Cane. Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for discreet thrusts and cloak-assisted ripostes." },
+    { name: "City Gentle’s Cane", region: "High Kingdoms", size: "Small", hands: 1, reach: "Medium", description: "Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats.", fightingStyle: "Discreet thrusts and cloak-assisted ripostes", attackSpeed: 7.6, damage: 4.2, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 1345, priceDisplay: "13si 45cp", descriptionFull: "Masterwork City Gentle’s Cane. Polished walking cane with hidden slender blade, silver ferrule, and engraved knob; draws with a twist to surprise alley threats. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for discreet thrusts and cloak-assisted ripostes." },
+    { name: "Dual Set: Wakizashi Companion + Tanto Sideblade", region: "Island Clans", size: "Medium", hands: 2, reach: "Short", description: "Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts.", fightingStyle: "Alternating twin-blade slashes and traps", attackSpeed: 8, damage: 5, armorPen: "Medium", quality: "Standard", priceCp: 945, priceDisplay: "9si 45cp", descriptionFull: "Dual Set: Wakizashi Companion + Tanto Sideblade. Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts. Trusted from Island Clans, it proves dependable steel sized for medium engagements. Favoured for alternating twin-blade slashes and traps." },
+    { name: "Dual Set: Wakizashi Companion + Tanto Sideblade", region: "Island Clans", size: "Medium", hands: 2, reach: "Short", description: "Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts.", fightingStyle: "Alternating twin-blade slashes and traps", attackSpeed: 8, damage: 5, armorPen: "Medium", quality: "Fine", priceCp: 1370, priceDisplay: "13si 70cp", descriptionFull: "Fine Dual Set: Wakizashi Companion + Tanto Sideblade. Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for alternating twin-blade slashes and traps." },
+    { name: "Dual Set: Wakizashi Companion + Tanto Sideblade", region: "Island Clans", size: "Medium", hands: 2, reach: "Short", description: "Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts.", fightingStyle: "Alternating twin-blade slashes and traps", attackSpeed: 8, damage: 5, armorPen: "Medium", quality: "Masterwork", priceCp: 2220, priceDisplay: "1g 2si 20cp", descriptionFull: "Masterwork Dual Set: Wakizashi Companion + Tanto Sideblade. Matched pair of lacquered scabbards holding a wakizashi and tanto; ray-skin grips in midnight cord, iron tsuba with moon motifs; danced in alternating cuts. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for alternating twin-blade slashes and traps." },
+    { name: "Dual Set: Bronze Leafblade + Rondache Buckler", region: "Southern Kingdoms", size: "Medium", hands: 2, reach: "Short/Medium", description: "Bronze leafblade paired with a scalloped rondache buckler of layered linden and bossed steel; shield straps cinch tight for quick cover while the short sword darts between openings.", fightingStyle: "Shield-line feints, short jabs, and buckler shoves", attackSpeed: 6.6, damage: 4.8, armorPen: "Medium", quality: "Standard", priceCp: 915, priceDisplay: "9si 15cp", descriptionFull: "Dual Set: Bronze Leafblade + Rondache Buckler. Bronze leafblade paired with a scalloped rondache buckler of layered linden and bossed steel; shield straps cinch tight for quick cover while the short sword darts between openings. Trusted from Southern Kingdoms, it proves dependable steel sized for medium engagements. Favoured for shield-line feints, short jabs, and buckler shoves." },
+    { name: "Dual Set: Bronze Leafblade + Rondache Buckler", region: "Southern Kingdoms", size: "Medium", hands: 2, reach: "Short/Medium", description: "Bronze leafblade paired with a scalloped rondache buckler of layered linden and bossed steel; shield straps cinch tight for quick cover while the short sword darts between openings.", fightingStyle: "Shield-line feints, short jabs, and buckler shoves", attackSpeed: 6.6, damage: 4.8, armorPen: "Medium", quality: "Fine", priceCp: 1325, priceDisplay: "13si 25cp", descriptionFull: "Fine Dual Set: Bronze Leafblade + Rondache Buckler. Bronze leafblade paired with a scalloped rondache buckler of layered linden and bossed steel; shield straps cinch tight for quick cover while the short sword darts between openings. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for shield-line feints, short jabs, and buckler shoves." },
+    { name: "Dual Set: Bronze Leafblade + Rondache Buckler", region: "Southern Kingdoms", size: "Medium", hands: 2, reach: "Short/Medium", description: "Bronze leafblade paired with a scalloped rondache buckler of layered linden and bossed steel; shield straps cinch tight for quick cover while the short sword darts between openings.", fightingStyle: "Shield-line feints, short jabs, and buckler shoves", attackSpeed: 6.6, damage: 4.8, armorPen: "Medium", quality: "Masterwork", priceCp: 2150, priceDisplay: "1g 1si 50cp", descriptionFull: "Masterwork Dual Set: Bronze Leafblade + Rondache Buckler. Bronze leafblade paired with a scalloped rondache buckler of layered linden and bossed steel; shield straps cinch tight for quick cover while the short sword darts between openings. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for shield-line feints, short jabs, and buckler shoves." },
+    { name: "Dual Set: Kopis Cutter + Madu Horn Shield", region: "Southern Kingdoms", size: "Medium", hands: 2, reach: "Medium", description: "Forward-weighted kopis balanced against a paired-horn madu shield of lacquered hide; the off-hand horn spikes catch and punish while the kopis hacks from the hip.", fightingStyle: "Hooking horn parries into decisive chopping ripostes", attackSpeed: 6.1, damage: 5.5, armorPen: "Medium", quality: "Standard", priceCp: 995, priceDisplay: "9si 95cp", descriptionFull: "Dual Set: Kopis Cutter + Madu Horn Shield. Forward-weighted kopis balanced against a paired-horn madu shield of lacquered hide; the off-hand horn spikes catch and punish while the kopis hacks from the hip. Trusted from Southern Kingdoms, it proves dependable steel sized for medium engagements. Favoured for hooking horn parries into decisive chopping ripostes." },
+    { name: "Dual Set: Kopis Cutter + Madu Horn Shield", region: "Southern Kingdoms", size: "Medium", hands: 2, reach: "Medium", description: "Forward-weighted kopis balanced against a paired-horn madu shield of lacquered hide; the off-hand horn spikes catch and punish while the kopis hacks from the hip.", fightingStyle: "Hooking horn parries into decisive chopping ripostes", attackSpeed: 6.1, damage: 5.5, armorPen: "Medium", quality: "Fine", priceCp: 1445, priceDisplay: "14si 45cp", descriptionFull: "Fine Dual Set: Kopis Cutter + Madu Horn Shield. Forward-weighted kopis balanced against a paired-horn madu shield of lacquered hide; the off-hand horn spikes catch and punish while the kopis hacks from the hip. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for hooking horn parries into decisive chopping ripostes." },
+    { name: "Dual Set: Kopis Cutter + Madu Horn Shield", region: "Southern Kingdoms", size: "Medium", hands: 2, reach: "Medium", description: "Forward-weighted kopis balanced against a paired-horn madu shield of lacquered hide; the off-hand horn spikes catch and punish while the kopis hacks from the hip.", fightingStyle: "Hooking horn parries into decisive chopping ripostes", attackSpeed: 6.1, damage: 5.5, armorPen: "Medium", quality: "Masterwork", priceCp: 2340, priceDisplay: "1g 3si 40cp", descriptionFull: "Masterwork Dual Set: Kopis Cutter + Madu Horn Shield. Forward-weighted kopis balanced against a paired-horn madu shield of lacquered hide; the off-hand horn spikes catch and punish while the kopis hacks from the hip. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for hooking horn parries into decisive chopping ripostes." },
+    { name: "Dual Set: Tegha Broadblade + Sun-Kite Shield", region: "Southern Steppes", size: "Large", hands: 2, reach: "Medium/Long", description: "Heavy tegha warblade partnered with a sun-emblazoned kite shield of reinforced spruce; riders brace behind radiant lacquer before hewing outward with sweeping steel.", fightingStyle: "Shield-braced advance with wide cleaving counters", attackSpeed: 5.2, damage: 6.6, armorPen: "Medium-High", quality: "Standard", priceCp: 1500, priceDisplay: "15si", descriptionFull: "Dual Set: Tegha Broadblade + Sun-Kite Shield. Heavy tegha warblade partnered with a sun-emblazoned kite shield of reinforced spruce; riders brace behind radiant lacquer before hewing outward with sweeping steel. Trusted from Southern Steppes, it proves dependable steel sized for large engagements. Favoured for shield-braced advance with wide cleaving counters." },
+    { name: "Dual Set: Tegha Broadblade + Sun-Kite Shield", region: "Southern Steppes", size: "Large", hands: 2, reach: "Medium/Long", description: "Heavy tegha warblade partnered with a sun-emblazoned kite shield of reinforced spruce; riders brace behind radiant lacquer before hewing outward with sweeping steel.", fightingStyle: "Shield-braced advance with wide cleaving counters", attackSpeed: 5.2, damage: 6.6, armorPen: "Medium-High", quality: "Fine", priceCp: 2175, priceDisplay: "1g 1si 75cp", descriptionFull: "Fine Dual Set: Tegha Broadblade + Sun-Kite Shield. Heavy tegha warblade partnered with a sun-emblazoned kite shield of reinforced spruce; riders brace behind radiant lacquer before hewing outward with sweeping steel. Fine finishing from Southern Steppes dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for shield-braced advance with wide cleaving counters." },
+    { name: "Dual Set: Tegha Broadblade + Sun-Kite Shield", region: "Southern Steppes", size: "Large", hands: 2, reach: "Medium/Long", description: "Heavy tegha warblade partnered with a sun-emblazoned kite shield of reinforced spruce; riders brace behind radiant lacquer before hewing outward with sweeping steel.", fightingStyle: "Shield-braced advance with wide cleaving counters", attackSpeed: 5.2, damage: 6.6, armorPen: "Medium-High", quality: "Masterwork", priceCp: 3525, priceDisplay: "1g 15si 25cp", descriptionFull: "Masterwork Dual Set: Tegha Broadblade + Sun-Kite Shield. Heavy tegha warblade partnered with a sun-emblazoned kite shield of reinforced spruce; riders brace behind radiant lacquer before hewing outward with sweeping steel. Masterwork artisans from Southern Steppes layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for shield-braced advance with wide cleaving counters." },
+    { name: "Dual Set: Flanged Sabre + Buckram Round", region: "Southern Kingdoms", size: "Large", hands: 2, reach: "Medium/Long", description: "Armor-notched flanged sabre mated to a buckram-bound round shield rimmed in iron; cavalry officers wheel behind the disc to punch through armor seams then drive the saber home.", fightingStyle: "Shield hooks to pry guard gaps followed by flanged slashes", attackSpeed: 5.7, damage: 6.1, armorPen: "Medium-High", quality: "Standard", priceCp: 1530, priceDisplay: "15si 30cp", descriptionFull: "Dual Set: Flanged Sabre + Buckram Round. Armor-notched flanged sabre mated to a buckram-bound round shield rimmed in iron; cavalry officers wheel behind the disc to punch through armor seams then drive the saber home. Trusted from Southern Kingdoms, it proves dependable steel sized for large engagements. Favoured for shield hooks to pry guard gaps followed by flanged slashes." },
+    { name: "Dual Set: Flanged Sabre + Buckram Round", region: "Southern Kingdoms", size: "Large", hands: 2, reach: "Medium/Long", description: "Armor-notched flanged sabre mated to a buckram-bound round shield rimmed in iron; cavalry officers wheel behind the disc to punch through armor seams then drive the saber home.", fightingStyle: "Shield hooks to pry guard gaps followed by flanged slashes", attackSpeed: 5.7, damage: 6.1, armorPen: "Medium-High", quality: "Fine", priceCp: 2220, priceDisplay: "1g 2si 20cp", descriptionFull: "Fine Dual Set: Flanged Sabre + Buckram Round. Armor-notched flanged sabre mated to a buckram-bound round shield rimmed in iron; cavalry officers wheel behind the disc to punch through armor seams then drive the saber home. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for shield hooks to pry guard gaps followed by flanged slashes." },
+    { name: "Dual Set: Flanged Sabre + Buckram Round", region: "Southern Kingdoms", size: "Large", hands: 2, reach: "Medium/Long", description: "Armor-notched flanged sabre mated to a buckram-bound round shield rimmed in iron; cavalry officers wheel behind the disc to punch through armor seams then drive the saber home.", fightingStyle: "Shield hooks to pry guard gaps followed by flanged slashes", attackSpeed: 5.7, damage: 6.1, armorPen: "Medium-High", quality: "Masterwork", priceCp: 3595, priceDisplay: "1g 15si 95cp", descriptionFull: "Masterwork Dual Set: Flanged Sabre + Buckram Round. Armor-notched flanged sabre mated to a buckram-bound round shield rimmed in iron; cavalry officers wheel behind the disc to punch through armor seams then drive the saber home. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for shield hooks to pry guard gaps followed by flanged slashes." },
+    { name: "Dual Set: Sawtooth Falx + Steel Tower", region: "Borderlands", size: "Very Large", hands: 2, reach: "Long", description: "Serpentine falx with serrated belly carried alongside a towering wall shield of riveted steel; assault vanguards weather volleys then hook shields aside for brutal finishing arcs.", fightingStyle: "Tower-covered advance with hooking cleaves that ruin lines", attackSpeed: 4.6, damage: 7.6, armorPen: "High", quality: "Standard", priceCp: 2515, priceDisplay: "1g 5si 15cp", descriptionFull: "Dual Set: Sawtooth Falx + Steel Tower. Serpentine falx with serrated belly carried alongside a towering wall shield of riveted steel; assault vanguards weather volleys then hook shields aside for brutal finishing arcs. Trusted from Borderlands, it proves dependable steel sized for very large engagements. Favoured for tower-covered advance with hooking cleaves that ruin lines." },
+    { name: "Dual Set: Sawtooth Falx + Steel Tower", region: "Borderlands", size: "Very Large", hands: 2, reach: "Long", description: "Serpentine falx with serrated belly carried alongside a towering wall shield of riveted steel; assault vanguards weather volleys then hook shields aside for brutal finishing arcs.", fightingStyle: "Tower-covered advance with hooking cleaves that ruin lines", attackSpeed: 4.6, damage: 7.6, armorPen: "High", quality: "Fine", priceCp: 3650, priceDisplay: "1g 16si 50cp", descriptionFull: "Fine Dual Set: Sawtooth Falx + Steel Tower. Serpentine falx with serrated belly carried alongside a towering wall shield of riveted steel; assault vanguards weather volleys then hook shields aside for brutal finishing arcs. Fine finishing from Borderlands dresses every fitting and coaxes a livelier balance out of its very large frame. Favoured for tower-covered advance with hooking cleaves that ruin lines." },
+    { name: "Dual Set: Sawtooth Falx + Steel Tower", region: "Borderlands", size: "Very Large", hands: 2, reach: "Long", description: "Serpentine falx with serrated belly carried alongside a towering wall shield of riveted steel; assault vanguards weather volleys then hook shields aside for brutal finishing arcs.", fightingStyle: "Tower-covered advance with hooking cleaves that ruin lines", attackSpeed: 4.6, damage: 7.6, armorPen: "High", quality: "Masterwork", priceCp: 5915, priceDisplay: "2g 19si 15cp", descriptionFull: "Masterwork Dual Set: Sawtooth Falx + Steel Tower. Serpentine falx with serrated belly carried alongside a towering wall shield of riveted steel; assault vanguards weather volleys then hook shields aside for brutal finishing arcs. Masterwork artisans from Borderlands layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for tower-covered advance with hooking cleaves that ruin lines." },
   ],
   daggers: [
     { name: "Misericorde", region: "High Kingdoms", size: "Tiny", hands: 1, reach: "Very Short", description: "Thin, spike-like dagger of hardened steel with a triangular section; small iron guard and rounded pommel; rough leather grip; stained dark from oil and use—built for the final thrust.", fightingStyle: "Finishing thrusts into armor gaps", attackSpeed: 10, damage: 2, armorPen: "High", quality: "Standard", priceCp: 130, priceDisplay: "1si 30cp", descriptionFull: "Misericorde. Thin, spike-like dagger of hardened steel with a triangular section; small iron guard and rounded pommel; rough leather grip; stained dark from oil and use—built for the final thrust. Trusted from High Kingdoms, it proves dependable steel sized for tiny engagements. Favoured for finishing thrusts into armor gaps." },
@@ -192,24 +207,51 @@ export const ARMORY: Record<string, WeaponRecord[]> = {
     { name: "Axe-Knife Polearm", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium", description: "Compact axelike steel head with a reinforced knife edge set on a short, hide-bound shaft; carriage-friendly and doorway-safe.", fightingStyle: "Close-quarters chopping and thrusting", attackSpeed: 5.5, damage: 6.8, armorPen: "Medium-High", quality: "Masterwork", priceCp: 2165, priceDisplay: "1g 1si 65cp", descriptionFull: "Masterwork Axe-Knife Polearm. Compact axelike steel head with a reinforced knife edge set on a short, hide-bound shaft; carriage-friendly and doorway-safe. Masterwork artisans from Southern Steppes layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for close-quarters chopping and thrusting." },
   ],
   ranged: [
-    { name: "Greatbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Long", description: "Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer.", fightingStyle: "Massed volleys and long-range interdiction", attackSpeed: 4.5, damage: 7, armorPen: "High", quality: "Standard", priceCp: 2975, priceDisplay: "1g 9si 75cp", descriptionFull: "Greatbow. Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer. Trusted from High Kingdoms, it proves dependable steel sized for large engagements. Favoured for massed volleys and long-range interdiction." },
-    { name: "Greatbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Long", description: "Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer.", fightingStyle: "Massed volleys and long-range interdiction", attackSpeed: 4.5, damage: 7, armorPen: "High", quality: "Fine", priceCp: 4310, priceDisplay: "2g 3si 10cp", descriptionFull: "Fine Greatbow. Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for massed volleys and long-range interdiction." },
-    { name: "Greatbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Long", description: "Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer.", fightingStyle: "Massed volleys and long-range interdiction", attackSpeed: 4.5, damage: 7, armorPen: "High", quality: "Masterwork", priceCp: 6985, priceDisplay: "3g 9si 85cp", descriptionFull: "Masterwork Greatbow. Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for massed volleys and long-range interdiction." },
-    { name: "Composite Recurve", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium/Long", description: "Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain.", fightingStyle: "Fast shooting on the move; skirmish dominance", attackSpeed: 5, damage: 6.8, armorPen: "High", quality: "Standard", priceCp: 1620, priceDisplay: "16si 20cp", descriptionFull: "Composite Recurve. Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain. Trusted from Southern Steppes, it proves dependable steel sized for medium engagements. Favoured for fast shooting on the move; skirmish dominance." },
-    { name: "Composite Recurve", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium/Long", description: "Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain.", fightingStyle: "Fast shooting on the move; skirmish dominance", attackSpeed: 5, damage: 6.8, armorPen: "High", quality: "Fine", priceCp: 2350, priceDisplay: "1g 3si 50cp", descriptionFull: "Fine Composite Recurve. Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain. Fine finishing from Southern Steppes dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for fast shooting on the move; skirmish dominance." },
-    { name: "Composite Recurve", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium/Long", description: "Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain.", fightingStyle: "Fast shooting on the move; skirmish dominance", attackSpeed: 5, damage: 6.8, armorPen: "High", quality: "Masterwork", priceCp: 3805, priceDisplay: "1g 18si 5cp", descriptionFull: "Masterwork Composite Recurve. Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain. Masterwork artisans from Southern Steppes layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for fast shooting on the move; skirmish dominance." },
-    { name: "Asymmetrical Longbow", region: "Island Clans", size: "Large", hands: 2, reach: "Very Long", description: "Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise.", fightingStyle: "Deliberate long-range marksmanship and volley fire", attackSpeed: 4.2, damage: 6.5, armorPen: "High", quality: "Standard", priceCp: 2965, priceDisplay: "1g 9si 65cp", descriptionFull: "Asymmetrical Longbow. Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise. Trusted from Island Clans, it proves dependable steel sized for large engagements. Favoured for deliberate long-range marksmanship and volley fire." },
-    { name: "Asymmetrical Longbow", region: "Island Clans", size: "Large", hands: 2, reach: "Very Long", description: "Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise.", fightingStyle: "Deliberate long-range marksmanship and volley fire", attackSpeed: 4.2, damage: 6.5, armorPen: "High", quality: "Fine", priceCp: 4300, priceDisplay: "2g 3si", descriptionFull: "Fine Asymmetrical Longbow. Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for deliberate long-range marksmanship and volley fire." },
-    { name: "Asymmetrical Longbow", region: "Island Clans", size: "Large", hands: 2, reach: "Very Long", description: "Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise.", fightingStyle: "Deliberate long-range marksmanship and volley fire", attackSpeed: 4.2, damage: 6.5, armorPen: "High", quality: "Masterwork", priceCp: 6970, priceDisplay: "3g 9si 70cp", descriptionFull: "Masterwork Asymmetrical Longbow. Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for deliberate long-range marksmanship and volley fire." },
-    { name: "Heavy Crossbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Medium", description: "Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron.", fightingStyle: "Devastating bolts; slow to reload", attackSpeed: 1, damage: 9, armorPen: "Very High", quality: "Standard", priceCp: 2260, priceDisplay: "1g 2si 60cp", descriptionFull: "Heavy Crossbow. Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron. Trusted from High Kingdoms, it proves dependable steel sized for large engagements. Favoured for devastating bolts; slow to reload." },
-    { name: "Heavy Crossbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Medium", description: "Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron.", fightingStyle: "Devastating bolts; slow to reload", attackSpeed: 1, damage: 9, armorPen: "Very High", quality: "Fine", priceCp: 3280, priceDisplay: "1g 12si 80cp", descriptionFull: "Fine Heavy Crossbow. Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for devastating bolts; slow to reload." },
-    { name: "Heavy Crossbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Medium", description: "Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron.", fightingStyle: "Devastating bolts; slow to reload", attackSpeed: 1, damage: 9, armorPen: "Very High", quality: "Masterwork", priceCp: 5315, priceDisplay: "2g 13si 15cp", descriptionFull: "Masterwork Heavy Crossbow. Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for devastating bolts; slow to reload." },
+    { name: "Greatbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Long", description: "Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer.", fightingStyle: "Massed volleys and long-range interdiction", attackSpeed: 4.5, damage: 7, armorPen: "High", quality: "Standard", priceCp: 2885, priceDisplay: "1g 8si 85cp", descriptionFull: "Greatbow. Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer. Trusted from High Kingdoms, it proves dependable steel sized for large engagements. Favoured for massed volleys and long-range interdiction." },
+    { name: "Greatbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Long", description: "Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer.", fightingStyle: "Massed volleys and long-range interdiction", attackSpeed: 4.5, damage: 7, armorPen: "High", quality: "Fine", priceCp: 4185, priceDisplay: "2g 1si 85cp", descriptionFull: "Fine Greatbow. Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for massed volleys and long-range interdiction." },
+    { name: "Greatbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Long", description: "Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer.", fightingStyle: "Massed volleys and long-range interdiction", attackSpeed: 4.5, damage: 7, armorPen: "High", quality: "Masterwork", priceCp: 6785, priceDisplay: "3g 7si 85cp", descriptionFull: "Masterwork Greatbow. Tall self-bow of yew or elm; horn nocks and linen string; goose-fletched heavy arrows in ash quiver; oiled leather grip and bracer. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for massed volleys and long-range interdiction." },
+    { name: "Composite Recurve", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium/Long", description: "Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain.", fightingStyle: "Fast shooting on the move; skirmish dominance", attackSpeed: 5, damage: 6.8, armorPen: "High", quality: "Standard", priceCp: 1575, priceDisplay: "15si 75cp", descriptionFull: "Composite Recurve. Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain. Trusted from Southern Steppes, it proves dependable steel sized for medium engagements. Favoured for fast shooting on the move; skirmish dominance." },
+    { name: "Composite Recurve", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium/Long", description: "Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain.", fightingStyle: "Fast shooting on the move; skirmish dominance", attackSpeed: 5, damage: 6.8, armorPen: "High", quality: "Fine", priceCp: 2280, priceDisplay: "1g 2si 80cp", descriptionFull: "Fine Composite Recurve. Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain. Fine finishing from Southern Steppes dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for fast shooting on the move; skirmish dominance." },
+    { name: "Composite Recurve", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium/Long", description: "Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain.", fightingStyle: "Fast shooting on the move; skirmish dominance", attackSpeed: 5, damage: 6.8, armorPen: "High", quality: "Masterwork", priceCp: 3700, priceDisplay: "1g 17si", descriptionFull: "Masterwork Composite Recurve. Reflex-recurve bow of wood, horn, and sinew glued and wrapped under birch bark; short and powerful for saddle archery; rawhide case against rain. Masterwork artisans from Southern Steppes layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for fast shooting on the move; skirmish dominance." },
+    { name: "Asymmetrical Longbow", region: "Island Clans", size: "Large", hands: 2, reach: "Very Long", description: "Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise.", fightingStyle: "Deliberate long-range marksmanship and volley fire", attackSpeed: 4.2, damage: 6.5, armorPen: "High", quality: "Standard", priceCp: 2880, priceDisplay: "1g 8si 80cp", descriptionFull: "Asymmetrical Longbow. Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise. Trusted from Island Clans, it proves dependable steel sized for large engagements. Favoured for deliberate long-range marksmanship and volley fire." },
+    { name: "Asymmetrical Longbow", region: "Island Clans", size: "Large", hands: 2, reach: "Very Long", description: "Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise.", fightingStyle: "Deliberate long-range marksmanship and volley fire", attackSpeed: 4.2, damage: 6.5, armorPen: "High", quality: "Fine", priceCp: 4180, priceDisplay: "2g 1si 80cp", descriptionFull: "Fine Asymmetrical Longbow. Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for deliberate long-range marksmanship and volley fire." },
+    { name: "Asymmetrical Longbow", region: "Island Clans", size: "Large", hands: 2, reach: "Very Long", description: "Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise.", fightingStyle: "Deliberate long-range marksmanship and volley fire", attackSpeed: 4.2, damage: 6.5, armorPen: "High", quality: "Masterwork", priceCp: 6770, priceDisplay: "3g 7si 70cp", descriptionFull: "Masterwork Asymmetrical Longbow. Long, uneven limbs of laminated hardwood; silk bowstring; lacquered grip; practiced draw from standing or kneel with ritual poise. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for deliberate long-range marksmanship and volley fire." },
+    { name: "Heavy Crossbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Medium", description: "Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron.", fightingStyle: "Devastating bolts; slow to reload", attackSpeed: 1, damage: 9, armorPen: "Very High", quality: "Standard", priceCp: 2195, priceDisplay: "1g 1si 95cp", descriptionFull: "Heavy Crossbow. Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron. Trusted from High Kingdoms, it proves dependable steel sized for large engagements. Favoured for devastating bolts; slow to reload." },
+    { name: "Heavy Crossbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Medium", description: "Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron.", fightingStyle: "Devastating bolts; slow to reload", attackSpeed: 1, damage: 9, armorPen: "Very High", quality: "Fine", priceCp: 3185, priceDisplay: "1g 11si 85cp", descriptionFull: "Fine Heavy Crossbow. Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for devastating bolts; slow to reload." },
+    { name: "Heavy Crossbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Medium", description: "Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron.", fightingStyle: "Devastating bolts; slow to reload", attackSpeed: 1, damage: 9, armorPen: "Very High", quality: "Masterwork", priceCp: 5165, priceDisplay: "2g 11si 65cp", descriptionFull: "Masterwork Heavy Crossbow. Steel prod on a stout wooden tiller; windlass or cranequin draw; quarrels with bodkin heads; trigger and stirrup in black iron. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for devastating bolts; slow to reload." },
     { name: "Hand Crossbow", region: "High Kingdoms", size: "Small", hands: 1, reach: "Short", description: "Compact wooden tiller with light steel prod; simple spanning lever; short bolts in a belt case; concealable beneath cloaks.", fightingStyle: "Ambush tool; quick shots at close range", attackSpeed: 2, damage: 4.5, armorPen: "Medium", quality: "Standard", priceCp: 550, priceDisplay: "5si 50cp", descriptionFull: "Hand Crossbow. Compact wooden tiller with light steel prod; simple spanning lever; short bolts in a belt case; concealable beneath cloaks. Trusted from High Kingdoms, it proves dependable steel sized for small engagements. Favoured for ambush tool; quick shots at close range." },
     { name: "Hand Crossbow", region: "High Kingdoms", size: "Small", hands: 1, reach: "Short", description: "Compact wooden tiller with light steel prod; simple spanning lever; short bolts in a belt case; concealable beneath cloaks.", fightingStyle: "Ambush tool; quick shots at close range", attackSpeed: 2, damage: 4.5, armorPen: "Medium", quality: "Fine", priceCp: 800, priceDisplay: "8si", descriptionFull: "Fine Hand Crossbow. Compact wooden tiller with light steel prod; simple spanning lever; short bolts in a belt case; concealable beneath cloaks. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for ambush tool; quick shots at close range." },
     { name: "Hand Crossbow", region: "High Kingdoms", size: "Small", hands: 1, reach: "Short", description: "Compact wooden tiller with light steel prod; simple spanning lever; short bolts in a belt case; concealable beneath cloaks.", fightingStyle: "Ambush tool; quick shots at close range", attackSpeed: 2, damage: 4.5, armorPen: "Medium", quality: "Masterwork", priceCp: 1295, priceDisplay: "12si 95cp", descriptionFull: "Masterwork Hand Crossbow. Compact wooden tiller with light steel prod; simple spanning lever; short bolts in a belt case; concealable beneath cloaks. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for ambush tool; quick shots at close range." },
-    { name: "Repeating Crossbow", region: "Eastern Realms", size: "Medium", hands: 2, reach: "Short/Medium", description: "Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate.", fightingStyle: "Volume over punch; suppressive shooting", attackSpeed: 6, damage: 3, armorPen: "Low-Medium", quality: "Standard", priceCp: 915, priceDisplay: "9si 15cp", descriptionFull: "Repeating Crossbow. Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate. Trusted from Eastern Realms, it proves dependable steel sized for medium engagements. Favoured for volume over punch; suppressive shooting." },
-    { name: "Repeating Crossbow", region: "Eastern Realms", size: "Medium", hands: 2, reach: "Short/Medium", description: "Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate.", fightingStyle: "Volume over punch; suppressive shooting", attackSpeed: 6, damage: 3, armorPen: "Low-Medium", quality: "Fine", priceCp: 1325, priceDisplay: "13si 25cp", descriptionFull: "Fine Repeating Crossbow. Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate. Fine finishing from Eastern Realms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for volume over punch; suppressive shooting." },
-    { name: "Repeating Crossbow", region: "Eastern Realms", size: "Medium", hands: 2, reach: "Short/Medium", description: "Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate.", fightingStyle: "Volume over punch; suppressive shooting", attackSpeed: 6, damage: 3, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 2150, priceDisplay: "1g 1si 50cp", descriptionFull: "Masterwork Repeating Crossbow. Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate. Masterwork artisans from Eastern Realms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for volume over punch; suppressive shooting." },
+    { name: "Repeating Crossbow", region: "Eastern Realms", size: "Medium", hands: 2, reach: "Short/Medium", description: "Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate.", fightingStyle: "Volume over punch; suppressive shooting", attackSpeed: 6, damage: 3, armorPen: "Low-Medium", quality: "Standard", priceCp: 890, priceDisplay: "8si 90cp", descriptionFull: "Repeating Crossbow. Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate. Trusted from Eastern Realms, it proves dependable steel sized for medium engagements. Favoured for volume over punch; suppressive shooting." },
+    { name: "Repeating Crossbow", region: "Eastern Realms", size: "Medium", hands: 2, reach: "Short/Medium", description: "Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate.", fightingStyle: "Volume over punch; suppressive shooting", attackSpeed: 6, damage: 3, armorPen: "Low-Medium", quality: "Fine", priceCp: 1290, priceDisplay: "12si 90cp", descriptionFull: "Fine Repeating Crossbow. Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate. Fine finishing from Eastern Realms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for volume over punch; suppressive shooting." },
+    { name: "Repeating Crossbow", region: "Eastern Realms", size: "Medium", hands: 2, reach: "Short/Medium", description: "Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate.", fightingStyle: "Volume over punch; suppressive shooting", attackSpeed: 6, damage: 3, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 2090, priceDisplay: "1g 90cp", descriptionFull: "Masterwork Repeating Crossbow. Magazine-fed lever crossbow of lacquered wood and iron; slim bolts drop from a top box; trades power for relentless rate. Masterwork artisans from Eastern Realms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for volume over punch; suppressive shooting." },
+    { name: "Elm Flatbow", region: "High Villages", size: "Medium", hands: 2, reach: "Long", description: "Self bow of resilient elm with bark-backing and flax string; leather grip darkened by rain cloaks; woodland sentries rely on its quiet cast and forgiving draw.", fightingStyle: "Stalking volleys and opportunistic woodland shots", attackSpeed: 5.2, damage: 6, armorPen: "Medium", quality: "Standard", priceCp: 1500, priceDisplay: "15si", descriptionFull: "Elm Flatbow. Self bow of resilient elm with bark-backing and flax string; leather grip darkened by rain cloaks; woodland sentries rely on its quiet cast and forgiving draw. Trusted from High Villages, it proves dependable steel sized for medium engagements. Favoured for stalking volleys and opportunistic woodland shots." },
+    { name: "Elm Flatbow", region: "High Villages", size: "Medium", hands: 2, reach: "Long", description: "Self bow of resilient elm with bark-backing and flax string; leather grip darkened by rain cloaks; woodland sentries rely on its quiet cast and forgiving draw.", fightingStyle: "Stalking volleys and opportunistic woodland shots", attackSpeed: 5.2, damage: 6, armorPen: "Medium", quality: "Fine", priceCp: 2175, priceDisplay: "1g 1si 75cp", descriptionFull: "Fine Elm Flatbow. Self bow of resilient elm with bark-backing and flax string; leather grip darkened by rain cloaks; woodland sentries rely on its quiet cast and forgiving draw. Fine finishing from High Villages dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for stalking volleys and opportunistic woodland shots." },
+    { name: "Elm Flatbow", region: "High Villages", size: "Medium", hands: 2, reach: "Long", description: "Self bow of resilient elm with bark-backing and flax string; leather grip darkened by rain cloaks; woodland sentries rely on its quiet cast and forgiving draw.", fightingStyle: "Stalking volleys and opportunistic woodland shots", attackSpeed: 5.2, damage: 6, armorPen: "Medium", quality: "Masterwork", priceCp: 3525, priceDisplay: "1g 15si 25cp", descriptionFull: "Masterwork Elm Flatbow. Self bow of resilient elm with bark-backing and flax string; leather grip darkened by rain cloaks; woodland sentries rely on its quiet cast and forgiving draw. Masterwork artisans from High Villages layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for stalking volleys and opportunistic woodland shots." },
+    { name: "Horn Composite", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium/Long", description: "Short reflex composite of horn, sinew, and wood sealed beneath painted birch bark; brass string bridges reinforce the siyahs for brutal saddle draws.", fightingStyle: "Galloping precision shots and cutback harassing fire", attackSpeed: 4.8, damage: 6.6, armorPen: "High", quality: "Standard", priceCp: 1585, priceDisplay: "15si 85cp", descriptionFull: "Horn Composite. Short reflex composite of horn, sinew, and wood sealed beneath painted birch bark; brass string bridges reinforce the siyahs for brutal saddle draws. Trusted from Southern Steppes, it proves dependable steel sized for medium engagements. Favoured for galloping precision shots and cutback harassing fire." },
+    { name: "Horn Composite", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium/Long", description: "Short reflex composite of horn, sinew, and wood sealed beneath painted birch bark; brass string bridges reinforce the siyahs for brutal saddle draws.", fightingStyle: "Galloping precision shots and cutback harassing fire", attackSpeed: 4.8, damage: 6.6, armorPen: "High", quality: "Fine", priceCp: 2295, priceDisplay: "1g 2si 95cp", descriptionFull: "Fine Horn Composite. Short reflex composite of horn, sinew, and wood sealed beneath painted birch bark; brass string bridges reinforce the siyahs for brutal saddle draws. Fine finishing from Southern Steppes dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for galloping precision shots and cutback harassing fire." },
+    { name: "Horn Composite", region: "Southern Steppes", size: "Medium", hands: 1, reach: "Medium/Long", description: "Short reflex composite of horn, sinew, and wood sealed beneath painted birch bark; brass string bridges reinforce the siyahs for brutal saddle draws.", fightingStyle: "Galloping precision shots and cutback harassing fire", attackSpeed: 4.8, damage: 6.6, armorPen: "High", quality: "Masterwork", priceCp: 3725, priceDisplay: "1g 17si 25cp", descriptionFull: "Masterwork Horn Composite. Short reflex composite of horn, sinew, and wood sealed beneath painted birch bark; brass string bridges reinforce the siyahs for brutal saddle draws. Masterwork artisans from Southern Steppes layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for galloping precision shots and cutback harassing fire." },
+    { name: "Windlass Crossbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Medium", description: "Steel prod locked into an oak tiller with reinforced nut and spanning cranequin; windlass crank ratchets the string for plate-breaking quarrels.", fightingStyle: "Siege-ready shots that shatter armor at deliberate pace", attackSpeed: 0.8, damage: 9.5, armorPen: "Very High", quality: "Standard", priceCp: 2550, priceDisplay: "1g 5si 50cp", descriptionFull: "Windlass Crossbow. Steel prod locked into an oak tiller with reinforced nut and spanning cranequin; windlass crank ratchets the string for plate-breaking quarrels. Trusted from High Kingdoms, it proves dependable steel sized for large engagements. Favoured for siege-ready shots that shatter armor at deliberate pace." },
+    { name: "Windlass Crossbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Medium", description: "Steel prod locked into an oak tiller with reinforced nut and spanning cranequin; windlass crank ratchets the string for plate-breaking quarrels.", fightingStyle: "Siege-ready shots that shatter armor at deliberate pace", attackSpeed: 0.8, damage: 9.5, armorPen: "Very High", quality: "Fine", priceCp: 3695, priceDisplay: "1g 16si 95cp", descriptionFull: "Fine Windlass Crossbow. Steel prod locked into an oak tiller with reinforced nut and spanning cranequin; windlass crank ratchets the string for plate-breaking quarrels. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for siege-ready shots that shatter armor at deliberate pace." },
+    { name: "Windlass Crossbow", region: "High Kingdoms", size: "Large", hands: 2, reach: "Medium", description: "Steel prod locked into an oak tiller with reinforced nut and spanning cranequin; windlass crank ratchets the string for plate-breaking quarrels.", fightingStyle: "Siege-ready shots that shatter armor at deliberate pace", attackSpeed: 0.8, damage: 9.5, armorPen: "Very High", quality: "Masterwork", priceCp: 5990, priceDisplay: "2g 19si 90cp", descriptionFull: "Masterwork Windlass Crossbow. Steel prod locked into an oak tiller with reinforced nut and spanning cranequin; windlass crank ratchets the string for plate-breaking quarrels. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for siege-ready shots that shatter armor at deliberate pace." },
+    { name: "Leadshot Sling", region: "High Villages", size: "Small", hands: 2, reach: "Medium/Long", description: "Braided wool sling with leather cradle and pouch of molded lead glandes; shepherds whirl it above their head before letting fly with bone-cracking force.", fightingStyle: "Wide arcing throws and harrying skirmish stones", attackSpeed: 6.5, damage: 3.8, armorPen: "Low-Medium", quality: "Standard", priceCp: 960, priceDisplay: "9si 60cp", descriptionFull: "Leadshot Sling. Braided wool sling with leather cradle and pouch of molded lead glandes; shepherds whirl it above their head before letting fly with bone-cracking force. Trusted from High Villages, it proves dependable steel sized for small engagements. Favoured for wide arcing throws and harrying skirmish stones." },
+    { name: "Leadshot Sling", region: "High Villages", size: "Small", hands: 2, reach: "Medium/Long", description: "Braided wool sling with leather cradle and pouch of molded lead glandes; shepherds whirl it above their head before letting fly with bone-cracking force.", fightingStyle: "Wide arcing throws and harrying skirmish stones", attackSpeed: 6.5, damage: 3.8, armorPen: "Low-Medium", quality: "Fine", priceCp: 1390, priceDisplay: "13si 90cp", descriptionFull: "Fine Leadshot Sling. Braided wool sling with leather cradle and pouch of molded lead glandes; shepherds whirl it above their head before letting fly with bone-cracking force. Fine finishing from High Villages dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for wide arcing throws and harrying skirmish stones." },
+    { name: "Leadshot Sling", region: "High Villages", size: "Small", hands: 2, reach: "Medium/Long", description: "Braided wool sling with leather cradle and pouch of molded lead glandes; shepherds whirl it above their head before letting fly with bone-cracking force.", fightingStyle: "Wide arcing throws and harrying skirmish stones", attackSpeed: 6.5, damage: 3.8, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 2255, priceDisplay: "1g 2si 55cp", descriptionFull: "Masterwork Leadshot Sling. Braided wool sling with leather cradle and pouch of molded lead glandes; shepherds whirl it above their head before letting fly with bone-cracking force. Masterwork artisans from High Villages layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for wide arcing throws and harrying skirmish stones." },
+    { name: "Aklys Tetherclub", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Notched hardwood club drilled for a rawhide tether and lead-weighted knob; guards cast the club to stun then yank foes back off balance.", fightingStyle: "Snaring throws and return strikes in tight alleys", attackSpeed: 6, damage: 4.3, armorPen: "Low-Medium", quality: "Standard", priceCp: 820, priceDisplay: "8si 20cp", descriptionFull: "Aklys Tetherclub. Notched hardwood club drilled for a rawhide tether and lead-weighted knob; guards cast the club to stun then yank foes back off balance. Trusted from Southern Kingdoms, it proves dependable steel sized for small engagements. Favoured for snaring throws and return strikes in tight alleys." },
+    { name: "Aklys Tetherclub", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Notched hardwood club drilled for a rawhide tether and lead-weighted knob; guards cast the club to stun then yank foes back off balance.", fightingStyle: "Snaring throws and return strikes in tight alleys", attackSpeed: 6, damage: 4.3, armorPen: "Low-Medium", quality: "Fine", priceCp: 1190, priceDisplay: "11si 90cp", descriptionFull: "Fine Aklys Tetherclub. Notched hardwood club drilled for a rawhide tether and lead-weighted knob; guards cast the club to stun then yank foes back off balance. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for snaring throws and return strikes in tight alleys." },
+    { name: "Aklys Tetherclub", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short/Medium", description: "Notched hardwood club drilled for a rawhide tether and lead-weighted knob; guards cast the club to stun then yank foes back off balance.", fightingStyle: "Snaring throws and return strikes in tight alleys", attackSpeed: 6, damage: 4.3, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 1930, priceDisplay: "19si 30cp", descriptionFull: "Masterwork Aklys Tetherclub. Notched hardwood club drilled for a rawhide tether and lead-weighted knob; guards cast the club to stun then yank foes back off balance. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for snaring throws and return strikes in tight alleys." },
+    { name: "Ghadziya Darts", region: "Southern Kingdoms", size: "Tiny", hands: 1, reach: "Medium", description: "Bundle of leaf-bladed throwing darts balanced with bone tails and silk streamers; desert outriders flick them from between fingers for flickering kills.", fightingStyle: "Palm-fanned bursts that pick joints and exposed throats", attackSpeed: 7.5, damage: 3.4, armorPen: "Medium", quality: "Standard", priceCp: 675, priceDisplay: "6si 75cp", descriptionFull: "Ghadziya Darts. Bundle of leaf-bladed throwing darts balanced with bone tails and silk streamers; desert outriders flick them from between fingers for flickering kills. Trusted from Southern Kingdoms, it proves dependable steel sized for tiny engagements. Favoured for palm-fanned bursts that pick joints and exposed throats." },
+    { name: "Ghadziya Darts", region: "Southern Kingdoms", size: "Tiny", hands: 1, reach: "Medium", description: "Bundle of leaf-bladed throwing darts balanced with bone tails and silk streamers; desert outriders flick them from between fingers for flickering kills.", fightingStyle: "Palm-fanned bursts that pick joints and exposed throats", attackSpeed: 7.5, damage: 3.4, armorPen: "Medium", quality: "Fine", priceCp: 980, priceDisplay: "9si 80cp", descriptionFull: "Fine Ghadziya Darts. Bundle of leaf-bladed throwing darts balanced with bone tails and silk streamers; desert outriders flick them from between fingers for flickering kills. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its tiny frame. Favoured for palm-fanned bursts that pick joints and exposed throats." },
+    { name: "Ghadziya Darts", region: "Southern Kingdoms", size: "Tiny", hands: 1, reach: "Medium", description: "Bundle of leaf-bladed throwing darts balanced with bone tails and silk streamers; desert outriders flick them from between fingers for flickering kills.", fightingStyle: "Palm-fanned bursts that pick joints and exposed throats", attackSpeed: 7.5, damage: 3.4, armorPen: "Medium", quality: "Masterwork", priceCp: 1585, priceDisplay: "15si 85cp", descriptionFull: "Masterwork Ghadziya Darts. Bundle of leaf-bladed throwing darts balanced with bone tails and silk streamers; desert outriders flick them from between fingers for flickering kills. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for palm-fanned bursts that pick joints and exposed throats." },
+    { name: "Chakram Razorwheel", region: "Eastern Realms", size: "Small", hands: 1, reach: "Medium/Long", description: "Polished steel throwing ring with sharpened rim and etched mantra around the hub; twirls from the index finger before slashing through ranks.", fightingStyle: "Circular release arcs and ricochet slices", attackSpeed: 6.7, damage: 4.6, armorPen: "Medium-High", quality: "Standard", priceCp: 1170, priceDisplay: "11si 70cp", descriptionFull: "Chakram Razorwheel. Polished steel throwing ring with sharpened rim and etched mantra around the hub; twirls from the index finger before slashing through ranks. Trusted from Eastern Realms, it proves dependable steel sized for small engagements. Favoured for circular release arcs and ricochet slices." },
+    { name: "Chakram Razorwheel", region: "Eastern Realms", size: "Small", hands: 1, reach: "Medium/Long", description: "Polished steel throwing ring with sharpened rim and etched mantra around the hub; twirls from the index finger before slashing through ranks.", fightingStyle: "Circular release arcs and ricochet slices", attackSpeed: 6.7, damage: 4.6, armorPen: "Medium-High", quality: "Fine", priceCp: 1700, priceDisplay: "17si", descriptionFull: "Fine Chakram Razorwheel. Polished steel throwing ring with sharpened rim and etched mantra around the hub; twirls from the index finger before slashing through ranks. Fine finishing from Eastern Realms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for circular release arcs and ricochet slices." },
+    { name: "Chakram Razorwheel", region: "Eastern Realms", size: "Small", hands: 1, reach: "Medium/Long", description: "Polished steel throwing ring with sharpened rim and etched mantra around the hub; twirls from the index finger before slashing through ranks.", fightingStyle: "Circular release arcs and ricochet slices", attackSpeed: 6.7, damage: 4.6, armorPen: "Medium-High", quality: "Masterwork", priceCp: 2755, priceDisplay: "1g 7si 55cp", descriptionFull: "Masterwork Chakram Razorwheel. Polished steel throwing ring with sharpened rim and etched mantra around the hub; twirls from the index finger before slashing through ranks. Masterwork artisans from Eastern Realms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for circular release arcs and ricochet slices." },
+    { name: "Whaler’s Harpoon", region: "Island Clans", size: "Large", hands: 2, reach: "Long", description: "Barbed iron harpoon lashed to coiled hemp line, ash shaft tarred against spray; crews brace the butt against gunwales before hurling to pin quarry.", fightingStyle: "Tethered strikes that drag targets off footing", attackSpeed: 3.8, damage: 7.3, armorPen: "Medium-High", quality: "Standard", priceCp: 2390, priceDisplay: "1g 3si 90cp", descriptionFull: "Whaler’s Harpoon. Barbed iron harpoon lashed to coiled hemp line, ash shaft tarred against spray; crews brace the butt against gunwales before hurling to pin quarry. Trusted from Island Clans, it proves dependable steel sized for large engagements. Favoured for tethered strikes that drag targets off footing." },
+    { name: "Whaler’s Harpoon", region: "Island Clans", size: "Large", hands: 2, reach: "Long", description: "Barbed iron harpoon lashed to coiled hemp line, ash shaft tarred against spray; crews brace the butt against gunwales before hurling to pin quarry.", fightingStyle: "Tethered strikes that drag targets off footing", attackSpeed: 3.8, damage: 7.3, armorPen: "Medium-High", quality: "Fine", priceCp: 3465, priceDisplay: "1g 14si 65cp", descriptionFull: "Fine Whaler’s Harpoon. Barbed iron harpoon lashed to coiled hemp line, ash shaft tarred against spray; crews brace the butt against gunwales before hurling to pin quarry. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for tethered strikes that drag targets off footing." },
+    { name: "Whaler’s Harpoon", region: "Island Clans", size: "Large", hands: 2, reach: "Long", description: "Barbed iron harpoon lashed to coiled hemp line, ash shaft tarred against spray; crews brace the butt against gunwales before hurling to pin quarry.", fightingStyle: "Tethered strikes that drag targets off footing", attackSpeed: 3.8, damage: 7.3, armorPen: "Medium-High", quality: "Masterwork", priceCp: 5620, priceDisplay: "2g 16si 20cp", descriptionFull: "Masterwork Whaler’s Harpoon. Barbed iron harpoon lashed to coiled hemp line, ash shaft tarred against spray; crews brace the butt against gunwales before hurling to pin quarry. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for tethered strikes that drag targets off footing." },
+    { name: "Earthen Firepot", region: "Borderlands", size: "Small", hands: 1, reach: "Short/Medium", description: "Pitch-lined clay grenade packed with oil and resin shards, sealed by wax and fuse; siege crews light and lob to burst in sheets of flame.", fightingStyle: "Arc-thrown incendiaries that scatter shield walls", attackSpeed: 2.5, damage: 8.4, armorPen: "Medium", quality: "Standard", priceCp: 955, priceDisplay: "9si 55cp", descriptionFull: "Earthen Firepot. Pitch-lined clay grenade packed with oil and resin shards, sealed by wax and fuse; siege crews light and lob to burst in sheets of flame. Trusted from Borderlands, it proves dependable steel sized for small engagements. Favoured for arc-thrown incendiaries that scatter shield walls." },
+    { name: "Earthen Firepot", region: "Borderlands", size: "Small", hands: 1, reach: "Short/Medium", description: "Pitch-lined clay grenade packed with oil and resin shards, sealed by wax and fuse; siege crews light and lob to burst in sheets of flame.", fightingStyle: "Arc-thrown incendiaries that scatter shield walls", attackSpeed: 2.5, damage: 8.4, armorPen: "Medium", quality: "Fine", priceCp: 1380, priceDisplay: "13si 80cp", descriptionFull: "Fine Earthen Firepot. Pitch-lined clay grenade packed with oil and resin shards, sealed by wax and fuse; siege crews light and lob to burst in sheets of flame. Fine finishing from Borderlands dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for arc-thrown incendiaries that scatter shield walls." },
+    { name: "Earthen Firepot", region: "Borderlands", size: "Small", hands: 1, reach: "Short/Medium", description: "Pitch-lined clay grenade packed with oil and resin shards, sealed by wax and fuse; siege crews light and lob to burst in sheets of flame.", fightingStyle: "Arc-thrown incendiaries that scatter shield walls", attackSpeed: 2.5, damage: 8.4, armorPen: "Medium", quality: "Masterwork", priceCp: 2240, priceDisplay: "1g 2si 40cp", descriptionFull: "Masterwork Earthen Firepot. Pitch-lined clay grenade packed with oil and resin shards, sealed by wax and fuse; siege crews light and lob to burst in sheets of flame. Masterwork artisans from Borderlands layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for arc-thrown incendiaries that scatter shield walls." },
   ],
   chains: [
     { name: "Chain Morning Star", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Short/Medium", description: "Spiked steel ball on a short iron chain anchored to a hardwood handle with iron cap; leather wrist loop and choke wrap for control; bites through helmets when momentum peaks.", fightingStyle: "Circular momentum strikes; wraps and sudden snaps", attackSpeed: 5.5, damage: 7.2, armorPen: "High", quality: "Standard", priceCp: 1030, priceDisplay: "10si 30cp", descriptionFull: "Chain Morning Star. Spiked steel ball on a short iron chain anchored to a hardwood handle with iron cap; leather wrist loop and choke wrap for control; bites through helmets when momentum peaks. Trusted from High Kingdoms, it proves dependable steel sized for medium engagements. Favoured for circular momentum strikes; wraps and sudden snaps." },
@@ -269,6 +311,26 @@ export const ARMORY: Record<string, WeaponRecord[]> = {
     { name: "Knuckle Gauntlet", region: "Island Clans", size: "Tiny", hands: 1, reach: "Very Short", description: "Leather glove with riveted steel knuckle plates and palm bar; some feature spike studs; a brawler’s answer to daggers in the clinch.", fightingStyle: "Close punches and clinch control", attackSpeed: 9.5, damage: 2, armorPen: "Low", quality: "Standard", priceCp: 110, priceDisplay: "1si 10cp", descriptionFull: "Knuckle Gauntlet. Leather glove with riveted steel knuckle plates and palm bar; some feature spike studs; a brawler’s answer to daggers in the clinch. Trusted from Island Clans, it proves dependable steel sized for tiny engagements. Favoured for close punches and clinch control." },
     { name: "Knuckle Gauntlet", region: "Island Clans", size: "Tiny", hands: 1, reach: "Very Short", description: "Leather glove with riveted steel knuckle plates and palm bar; some feature spike studs; a brawler’s answer to daggers in the clinch.", fightingStyle: "Close punches and clinch control", attackSpeed: 9.5, damage: 2, armorPen: "Low", quality: "Fine", priceCp: 160, priceDisplay: "1si 60cp", descriptionFull: "Fine Knuckle Gauntlet. Leather glove with riveted steel knuckle plates and palm bar; some feature spike studs; a brawler’s answer to daggers in the clinch. Fine finishing from Island Clans dresses every fitting and coaxes a livelier balance out of its tiny frame. Favoured for close punches and clinch control." },
     { name: "Knuckle Gauntlet", region: "Island Clans", size: "Tiny", hands: 1, reach: "Very Short", description: "Leather glove with riveted steel knuckle plates and palm bar; some feature spike studs; a brawler’s answer to daggers in the clinch.", fightingStyle: "Close punches and clinch control", attackSpeed: 9.5, damage: 2, armorPen: "Low", quality: "Masterwork", priceCp: 260, priceDisplay: "2si 60cp", descriptionFull: "Masterwork Knuckle Gauntlet. Leather glove with riveted steel knuckle plates and palm bar; some feature spike studs; a brawler’s answer to daggers in the clinch. Masterwork artisans from Island Clans layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for close punches and clinch control." },
+  ],
+  shields: [
+    { name: "Madu Horn Shield", region: "Eastern Realms", size: "Small", hands: 1, reach: "Short", description: "Paired antelope horns riveted to a hide-disk buckler, edges bound in brass and palm grip corded tight; darts forward with spiked ripostes while still catching blows.", fightingStyle: "Horned parries that gore and deflect in equal measure", attackSpeed: 6.2, damage: 4.2, armorPen: "Low-Medium", quality: "Standard", priceCp: 510, priceDisplay: "5si 10cp", descriptionFull: "Madu Horn Shield. Paired antelope horns riveted to a hide-disk buckler, edges bound in brass and palm grip corded tight; darts forward with spiked ripostes while still catching blows. Trusted from Eastern Realms, it proves dependable steel sized for small engagements. Favoured for horned parries that gore and deflect in equal measure." },
+    { name: "Madu Horn Shield", region: "Eastern Realms", size: "Small", hands: 1, reach: "Short", description: "Paired antelope horns riveted to a hide-disk buckler, edges bound in brass and palm grip corded tight; darts forward with spiked ripostes while still catching blows.", fightingStyle: "Horned parries that gore and deflect in equal measure", attackSpeed: 6.2, damage: 4.2, armorPen: "Low-Medium", quality: "Fine", priceCp: 740, priceDisplay: "7si 40cp", descriptionFull: "Fine Madu Horn Shield. Paired antelope horns riveted to a hide-disk buckler, edges bound in brass and palm grip corded tight; darts forward with spiked ripostes while still catching blows. Fine finishing from Eastern Realms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for horned parries that gore and deflect in equal measure." },
+    { name: "Madu Horn Shield", region: "Eastern Realms", size: "Small", hands: 1, reach: "Short", description: "Paired antelope horns riveted to a hide-disk buckler, edges bound in brass and palm grip corded tight; darts forward with spiked ripostes while still catching blows.", fightingStyle: "Horned parries that gore and deflect in equal measure", attackSpeed: 6.2, damage: 4.2, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 1195, priceDisplay: "11si 95cp", descriptionFull: "Masterwork Madu Horn Shield. Paired antelope horns riveted to a hide-disk buckler, edges bound in brass and palm grip corded tight; darts forward with spiked ripostes while still catching blows. Masterwork artisans from Eastern Realms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for horned parries that gore and deflect in equal measure." },
+    { name: "Rondache Buckler", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short", description: "Convex linden buckler faced in rawhide with central steel boss and scalloped rim; light arm loops keep it nimble for street duels and list melees alike.", fightingStyle: "Whipping cover beats and knuckle-cracking ripostes", attackSpeed: 6.8, damage: 3.5, armorPen: "Low", quality: "Standard", priceCp: 450, priceDisplay: "4si 50cp", descriptionFull: "Rondache Buckler. Convex linden buckler faced in rawhide with central steel boss and scalloped rim; light arm loops keep it nimble for street duels and list melees alike. Trusted from Southern Kingdoms, it proves dependable steel sized for small engagements. Favoured for whipping cover beats and knuckle-cracking ripostes." },
+    { name: "Rondache Buckler", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short", description: "Convex linden buckler faced in rawhide with central steel boss and scalloped rim; light arm loops keep it nimble for street duels and list melees alike.", fightingStyle: "Whipping cover beats and knuckle-cracking ripostes", attackSpeed: 6.8, damage: 3.5, armorPen: "Low", quality: "Fine", priceCp: 650, priceDisplay: "6si 50cp", descriptionFull: "Fine Rondache Buckler. Convex linden buckler faced in rawhide with central steel boss and scalloped rim; light arm loops keep it nimble for street duels and list melees alike. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its small frame. Favoured for whipping cover beats and knuckle-cracking ripostes." },
+    { name: "Rondache Buckler", region: "Southern Kingdoms", size: "Small", hands: 1, reach: "Short", description: "Convex linden buckler faced in rawhide with central steel boss and scalloped rim; light arm loops keep it nimble for street duels and list melees alike.", fightingStyle: "Whipping cover beats and knuckle-cracking ripostes", attackSpeed: 6.8, damage: 3.5, armorPen: "Low", quality: "Masterwork", priceCp: 1050, priceDisplay: "10si 50cp", descriptionFull: "Masterwork Rondache Buckler. Convex linden buckler faced in rawhide with central steel boss and scalloped rim; light arm loops keep it nimble for street duels and list melees alike. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for whipping cover beats and knuckle-cracking ripostes." },
+    { name: "Sun-Kite Shield", region: "High Kingdoms", size: "Large", hands: 1, reach: "Short", description: "Tall kite shield of layered spruce, bronze rim, and radiant sun emblazoned across gilded gesso; a padded guige lets crusader lines lock together under the blazing motif.", fightingStyle: "Wall-forming guard with punishing shield-bash counters", attackSpeed: 5, damage: 4.8, armorPen: "Low-Medium", quality: "Standard", priceCp: 790, priceDisplay: "7si 90cp", descriptionFull: "Sun-Kite Shield. Tall kite shield of layered spruce, bronze rim, and radiant sun emblazoned across gilded gesso; a padded guige lets crusader lines lock together under the blazing motif. Trusted from High Kingdoms, it proves dependable steel sized for large engagements. Favoured for wall-forming guard with punishing shield-bash counters." },
+    { name: "Sun-Kite Shield", region: "High Kingdoms", size: "Large", hands: 1, reach: "Short", description: "Tall kite shield of layered spruce, bronze rim, and radiant sun emblazoned across gilded gesso; a padded guige lets crusader lines lock together under the blazing motif.", fightingStyle: "Wall-forming guard with punishing shield-bash counters", attackSpeed: 5, damage: 4.8, armorPen: "Low-Medium", quality: "Fine", priceCp: 1145, priceDisplay: "11si 45cp", descriptionFull: "Fine Sun-Kite Shield. Tall kite shield of layered spruce, bronze rim, and radiant sun emblazoned across gilded gesso; a padded guige lets crusader lines lock together under the blazing motif. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its large frame. Favoured for wall-forming guard with punishing shield-bash counters." },
+    { name: "Sun-Kite Shield", region: "High Kingdoms", size: "Large", hands: 1, reach: "Short", description: "Tall kite shield of layered spruce, bronze rim, and radiant sun emblazoned across gilded gesso; a padded guige lets crusader lines lock together under the blazing motif.", fightingStyle: "Wall-forming guard with punishing shield-bash counters", attackSpeed: 5, damage: 4.8, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 1855, priceDisplay: "18si 55cp", descriptionFull: "Masterwork Sun-Kite Shield. Tall kite shield of layered spruce, bronze rim, and radiant sun emblazoned across gilded gesso; a padded guige lets crusader lines lock together under the blazing motif. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for wall-forming guard with punishing shield-bash counters." },
+    { name: "Weighted Net", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Arena net woven from tarred cord with lead weights at each knot and a wrist-loop recall line; casts wide to smother blades before being ripped tight.", fightingStyle: "Snaring tosses that trip and bind for follow-up strikes", attackSpeed: 4.2, damage: 2.5, armorPen: "Low", quality: "Standard", priceCp: 520, priceDisplay: "5si 20cp", descriptionFull: "Weighted Net. Arena net woven from tarred cord with lead weights at each knot and a wrist-loop recall line; casts wide to smother blades before being ripped tight. Trusted from Southern Kingdoms, it proves dependable steel sized for medium engagements. Favoured for snaring tosses that trip and bind for follow-up strikes." },
+    { name: "Weighted Net", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Arena net woven from tarred cord with lead weights at each knot and a wrist-loop recall line; casts wide to smother blades before being ripped tight.", fightingStyle: "Snaring tosses that trip and bind for follow-up strikes", attackSpeed: 4.2, damage: 2.5, armorPen: "Low", quality: "Fine", priceCp: 755, priceDisplay: "7si 55cp", descriptionFull: "Fine Weighted Net. Arena net woven from tarred cord with lead weights at each knot and a wrist-loop recall line; casts wide to smother blades before being ripped tight. Fine finishing from Southern Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for snaring tosses that trip and bind for follow-up strikes." },
+    { name: "Weighted Net", region: "Southern Kingdoms", size: "Medium", hands: 1, reach: "Medium", description: "Arena net woven from tarred cord with lead weights at each knot and a wrist-loop recall line; casts wide to smother blades before being ripped tight.", fightingStyle: "Snaring tosses that trip and bind for follow-up strikes", attackSpeed: 4.2, damage: 2.5, armorPen: "Low", quality: "Masterwork", priceCp: 1225, priceDisplay: "12si 25cp", descriptionFull: "Masterwork Weighted Net. Arena net woven from tarred cord with lead weights at each knot and a wrist-loop recall line; casts wide to smother blades before being ripped tight. Masterwork artisans from Southern Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for snaring tosses that trip and bind for follow-up strikes." },
+    { name: "Buckram Round", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Short", description: "Buckram-laminated round shield backed with elm ribs and heavy enarmes; the iron boss is fluted to catch and wrench opposing steel.", fightingStyle: "Rotational guards and boss punches that unseat foes", attackSpeed: 5.8, damage: 4, armorPen: "Low-Medium", quality: "Standard", priceCp: 615, priceDisplay: "6si 15cp", descriptionFull: "Buckram Round. Buckram-laminated round shield backed with elm ribs and heavy enarmes; the iron boss is fluted to catch and wrench opposing steel. Trusted from High Kingdoms, it proves dependable steel sized for medium engagements. Favoured for rotational guards and boss punches that unseat foes." },
+    { name: "Buckram Round", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Short", description: "Buckram-laminated round shield backed with elm ribs and heavy enarmes; the iron boss is fluted to catch and wrench opposing steel.", fightingStyle: "Rotational guards and boss punches that unseat foes", attackSpeed: 5.8, damage: 4, armorPen: "Low-Medium", quality: "Fine", priceCp: 890, priceDisplay: "8si 90cp", descriptionFull: "Fine Buckram Round. Buckram-laminated round shield backed with elm ribs and heavy enarmes; the iron boss is fluted to catch and wrench opposing steel. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its medium frame. Favoured for rotational guards and boss punches that unseat foes." },
+    { name: "Buckram Round", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Short", description: "Buckram-laminated round shield backed with elm ribs and heavy enarmes; the iron boss is fluted to catch and wrench opposing steel.", fightingStyle: "Rotational guards and boss punches that unseat foes", attackSpeed: 5.8, damage: 4, armorPen: "Low-Medium", quality: "Masterwork", priceCp: 1445, priceDisplay: "14si 45cp", descriptionFull: "Masterwork Buckram Round. Buckram-laminated round shield backed with elm ribs and heavy enarmes; the iron boss is fluted to catch and wrench opposing steel. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for rotational guards and boss punches that unseat foes." },
+    { name: "Steel Tower", region: "High Kingdoms", size: "Very Large", hands: 1, reach: "Short", description: "Full-length tower shield of riveted steel plates over oak, vision slit shuttered with leather; pavise bearers lean in to weather volleys then drive forward.", fightingStyle: "Bastion advance with crushing edge checks", attackSpeed: 4, damage: 4.8, armorPen: "Low", quality: "Standard", priceCp: 930, priceDisplay: "9si 30cp", descriptionFull: "Steel Tower. Full-length tower shield of riveted steel plates over oak, vision slit shuttered with leather; pavise bearers lean in to weather volleys then drive forward. Trusted from High Kingdoms, it proves dependable steel sized for very large engagements. Favoured for bastion advance with crushing edge checks." },
+    { name: "Steel Tower", region: "High Kingdoms", size: "Very Large", hands: 1, reach: "Short", description: "Full-length tower shield of riveted steel plates over oak, vision slit shuttered with leather; pavise bearers lean in to weather volleys then drive forward.", fightingStyle: "Bastion advance with crushing edge checks", attackSpeed: 4, damage: 4.8, armorPen: "Low", quality: "Fine", priceCp: 1350, priceDisplay: "13si 50cp", descriptionFull: "Fine Steel Tower. Full-length tower shield of riveted steel plates over oak, vision slit shuttered with leather; pavise bearers lean in to weather volleys then drive forward. Fine finishing from High Kingdoms dresses every fitting and coaxes a livelier balance out of its very large frame. Favoured for bastion advance with crushing edge checks." },
+    { name: "Steel Tower", region: "High Kingdoms", size: "Very Large", hands: 1, reach: "Short", description: "Full-length tower shield of riveted steel plates over oak, vision slit shuttered with leather; pavise bearers lean in to weather volleys then drive forward.", fightingStyle: "Bastion advance with crushing edge checks", attackSpeed: 4, damage: 4.8, armorPen: "Low", quality: "Masterwork", priceCp: 2190, priceDisplay: "1g 1si 90cp", descriptionFull: "Masterwork Steel Tower. Full-length tower shield of riveted steel plates over oak, vision slit shuttered with leather; pavise bearers lean in to weather volleys then drive forward. Masterwork artisans from High Kingdoms layer select steels, enrich the fittings, and tune the balance to heirloom precision. Favoured for bastion advance with crushing edge checks." },
   ],
   maces: [
     { name: "Spiked Morning Star", region: "High Kingdoms", size: "Medium", hands: 1, reach: "Short", description: "Rigid ash haft capped with a solid steel ball bristling with pyramidal spikes; iron langets protect the wood; brutal, simple, and cheap to keep.", fightingStyle: "Overhand crashes and shield-busting blows", attackSpeed: 5.8, damage: 7, armorPen: "High", quality: "Standard", priceCp: 955, priceDisplay: "9si 55cp", descriptionFull: "Spiked Morning Star. Rigid ash haft capped with a solid steel ball bristling with pyramidal spikes; iron langets protect the wood; brutal, simple, and cheap to keep. Trusted from High Kingdoms, it proves dependable steel sized for medium engagements. Favoured for overhand crashes and shield-busting blows." },
@@ -4578,6 +4640,75 @@ export const WEAPON_UPGRADES: WeaponUpgrade[] = [
   },
   {
     "category": "ranged",
+    "name": "Aklys Tetherclub",
+    "quality": "Standard",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.6,
+      "SLASH": 0.1,
+      "PIERCE": 0.3
+    },
+    "critChancePct": 8,
+    "critMult": 1.5,
+    "onHit": {
+      "daze": {
+        "chancePct": 18,
+        "durationSec": 3
+      },
+      "entangle": {
+        "chancePct": 16,
+        "durationSec": 4
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Aklys Tetherclub",
+    "quality": "Fine",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.6,
+      "SLASH": 0.1,
+      "PIERCE": 0.3
+    },
+    "critChancePct": 9,
+    "critMult": 1.55,
+    "onHit": {
+      "daze": {
+        "chancePct": 18,
+        "durationSec": 3
+      },
+      "entangle": {
+        "chancePct": 16,
+        "durationSec": 4
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Aklys Tetherclub",
+    "quality": "Masterwork",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.6,
+      "SLASH": 0.1,
+      "PIERCE": 0.3
+    },
+    "critChancePct": 10,
+    "critMult": 1.6,
+    "onHit": {
+      "daze": {
+        "chancePct": 18,
+        "durationSec": 3
+      },
+      "entangle": {
+        "chancePct": 16,
+        "durationSec": 4
+      }
+    }
+  },
+  {
+    "category": "ranged",
     "name": "Asymmetrical Longbow",
     "quality": "Standard",
     "ap": 0.42,
@@ -4641,6 +4772,69 @@ export const WEAPON_UPGRADES: WeaponUpgrade[] = [
   },
   {
     "category": "ranged",
+    "name": "Chakram Razorwheel",
+    "quality": "Standard",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.7,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 9,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Chakram Razorwheel",
+    "quality": "Fine",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.7,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 10,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Chakram Razorwheel",
+    "quality": "Masterwork",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.7,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 11,
+    "critMult": 1.7,
+    "onHit": {
+      "bleed": {
+        "chancePct": 20,
+        "power": 1.2,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "ranged",
     "name": "Composite Recurve",
     "quality": "Standard",
     "ap": 0.42,
@@ -4699,6 +4893,210 @@ export const WEAPON_UPGRADES: WeaponUpgrade[] = [
         "power": 0.9,
         "durationSec": 6,
         "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Earthen Firepot",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.5,
+      "SLASH": 0.1,
+      "PIERCE": 0.4
+    },
+    "critChancePct": 6,
+    "critMult": 1.45,
+    "onHit": {
+      "burn": {
+        "chancePct": 85,
+        "powerPct": 18,
+        "durationSec": 8,
+        "tickSec": 2
+      },
+      "shatter": {
+        "chancePct": 20,
+        "powerPct": 10,
+        "durationSec": 6
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Earthen Firepot",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.5,
+      "SLASH": 0.1,
+      "PIERCE": 0.4
+    },
+    "critChancePct": 7,
+    "critMult": 1.5,
+    "onHit": {
+      "burn": {
+        "chancePct": 85,
+        "powerPct": 18,
+        "durationSec": 8,
+        "tickSec": 2
+      },
+      "shatter": {
+        "chancePct": 20,
+        "powerPct": 10,
+        "durationSec": 6
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Earthen Firepot",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.5,
+      "SLASH": 0.1,
+      "PIERCE": 0.4
+    },
+    "critChancePct": 8,
+    "critMult": 1.55,
+    "onHit": {
+      "burn": {
+        "chancePct": 85,
+        "powerPct": 18,
+        "durationSec": 8,
+        "tickSec": 2
+      },
+      "shatter": {
+        "chancePct": 20,
+        "powerPct": 10,
+        "durationSec": 6
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Elm Flatbow",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.06,
+      "SLASH": 0.18,
+      "PIERCE": 0.76
+    },
+    "critChancePct": 8,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Elm Flatbow",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.06,
+      "SLASH": 0.18,
+      "PIERCE": 0.76
+    },
+    "critChancePct": 9,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Elm Flatbow",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.06,
+      "SLASH": 0.18,
+      "PIERCE": 0.76
+    },
+    "critChancePct": 10,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Ghadziya Darts",
+    "quality": "Standard",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Ghadziya Darts",
+    "quality": "Fine",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Ghadziya Darts",
+    "quality": "Masterwork",
+    "ap": 0.2,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.15,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 12,
+    "critMult": 1.65,
+    "onHit": {
+      "bleed": {
+        "chancePct": 16,
+        "power": 1.1,
+        "durationSec": 6,
+        "stacksMax": 3
       }
     }
   },
@@ -4896,6 +5294,126 @@ export const WEAPON_UPGRADES: WeaponUpgrade[] = [
   },
   {
     "category": "ranged",
+    "name": "Horn Composite",
+    "quality": "Standard",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.04,
+      "SLASH": 0.14,
+      "PIERCE": 0.82
+    },
+    "critChancePct": 9,
+    "critMult": 1.5,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Horn Composite",
+    "quality": "Fine",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.04,
+      "SLASH": 0.14,
+      "PIERCE": 0.82
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Horn Composite",
+    "quality": "Masterwork",
+    "ap": 0.42,
+    "dmgMix": {
+      "BLUNT": 0.04,
+      "SLASH": 0.14,
+      "PIERCE": 0.82
+    },
+    "critChancePct": 11,
+    "critMult": 1.6,
+    "onHit": {
+      "bleed": {
+        "chancePct": 8,
+        "power": 0.9,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Leadshot Sling",
+    "quality": "Standard",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.05,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 7,
+    "critMult": 1.45,
+    "onHit": {
+      "daze": {
+        "chancePct": 14,
+        "durationSec": 3
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Leadshot Sling",
+    "quality": "Fine",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.05,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 8,
+    "critMult": 1.5,
+    "onHit": {
+      "daze": {
+        "chancePct": 14,
+        "durationSec": 3
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Leadshot Sling",
+    "quality": "Masterwork",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.7,
+      "SLASH": 0.05,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 9,
+    "critMult": 1.55,
+    "onHit": {
+      "daze": {
+        "chancePct": 14,
+        "durationSec": 3
+      }
+    }
+  },
+  {
+    "category": "ranged",
     "name": "Repeating Crossbow",
     "quality": "Standard",
     "ap": 0.12,
@@ -4953,6 +5471,144 @@ export const WEAPON_UPGRADES: WeaponUpgrade[] = [
         "chancePct": 7,
         "power": 0.8,
         "durationSec": 5,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Whaler’s Harpoon",
+    "quality": "Standard",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.1,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 9,
+    "critMult": 1.6,
+    "onHit": {
+      "entangle": {
+        "chancePct": 24,
+        "durationSec": 5
+      },
+      "drag": {
+        "chancePct": 12,
+        "powerPct": 12,
+        "durationSec": 4
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Whaler’s Harpoon",
+    "quality": "Fine",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.1,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 10,
+    "critMult": 1.65,
+    "onHit": {
+      "entangle": {
+        "chancePct": 24,
+        "durationSec": 5
+      },
+      "drag": {
+        "chancePct": 12,
+        "powerPct": 12,
+        "durationSec": 4
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Whaler’s Harpoon",
+    "quality": "Masterwork",
+    "ap": 0.3,
+    "dmgMix": {
+      "BLUNT": 0.1,
+      "SLASH": 0.1,
+      "PIERCE": 0.8
+    },
+    "critChancePct": 11,
+    "critMult": 1.7,
+    "onHit": {
+      "entangle": {
+        "chancePct": 24,
+        "durationSec": 5
+      },
+      "drag": {
+        "chancePct": 12,
+        "powerPct": 12,
+        "durationSec": 4
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Windlass Crossbow",
+    "quality": "Standard",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 9,
+    "critMult": 1.85,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Windlass Crossbow",
+    "quality": "Fine",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 10,
+    "critMult": 1.9,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1,
+        "durationSec": 6,
+        "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "ranged",
+    "name": "Windlass Crossbow",
+    "quality": "Masterwork",
+    "ap": 0.52,
+    "dmgMix": {
+      "BLUNT": 0.05,
+      "SLASH": 0.1,
+      "PIERCE": 0.85
+    },
+    "critChancePct": 11,
+    "critMult": 1.95,
+    "critArmorBypassPct": 0.08,
+    "onHit": {
+      "bleed": {
+        "chancePct": 10,
+        "power": 1,
+        "durationSec": 6,
         "stacksMax": 2
       }
     }
@@ -6364,6 +7020,405 @@ export const WEAPON_UPGRADES: WeaponUpgrade[] = [
         "power": 0.9,
         "durationSec": 6,
         "stacksMax": 2
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Buckram Round",
+    "quality": "Standard",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.62,
+      "SLASH": 0.18,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 8,
+    "critMult": 1.45,
+    "onHit": {
+      "daze": {
+        "chancePct": 16,
+        "durationSec": 3
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Buckram Round",
+    "quality": "Fine",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.62,
+      "SLASH": 0.18,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 9,
+    "critMult": 1.5,
+    "onHit": {
+      "daze": {
+        "chancePct": 16,
+        "durationSec": 3
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Buckram Round",
+    "quality": "Masterwork",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.62,
+      "SLASH": 0.18,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "daze": {
+        "chancePct": 16,
+        "durationSec": 3
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Madu Horn Shield",
+    "quality": "Standard",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.45,
+      "SLASH": 0.15,
+      "PIERCE": 0.4
+    },
+    "critChancePct": 8,
+    "critMult": 1.45,
+    "onHit": {
+      "daze": {
+        "chancePct": 18,
+        "durationSec": 3
+      },
+      "bleed": {
+        "chancePct": 14,
+        "power": 1,
+        "durationSec": 5
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Madu Horn Shield",
+    "quality": "Fine",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.45,
+      "SLASH": 0.15,
+      "PIERCE": 0.4
+    },
+    "critChancePct": 9,
+    "critMult": 1.5,
+    "onHit": {
+      "daze": {
+        "chancePct": 18,
+        "durationSec": 3
+      },
+      "bleed": {
+        "chancePct": 14,
+        "power": 1,
+        "durationSec": 5
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Madu Horn Shield",
+    "quality": "Masterwork",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.45,
+      "SLASH": 0.15,
+      "PIERCE": 0.4
+    },
+    "critChancePct": 10,
+    "critMult": 1.55,
+    "onHit": {
+      "daze": {
+        "chancePct": 18,
+        "durationSec": 3
+      },
+      "bleed": {
+        "chancePct": 14,
+        "power": 1,
+        "durationSec": 5
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Rondache Buckler",
+    "quality": "Standard",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.55,
+      "SLASH": 0.25,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 9,
+    "critMult": 1.45,
+    "onHit": {
+      "daze": {
+        "chancePct": 16,
+        "durationSec": 3
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Rondache Buckler",
+    "quality": "Fine",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.55,
+      "SLASH": 0.25,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 10,
+    "critMult": 1.5,
+    "onHit": {
+      "daze": {
+        "chancePct": 16,
+        "durationSec": 3
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Rondache Buckler",
+    "quality": "Masterwork",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.55,
+      "SLASH": 0.25,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 11,
+    "critMult": 1.55,
+    "onHit": {
+      "daze": {
+        "chancePct": 16,
+        "durationSec": 3
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Steel Tower",
+    "quality": "Standard",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.65,
+      "SLASH": 0.15,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 6,
+    "critMult": 1.45,
+    "onHit": {
+      "daze": {
+        "chancePct": 20,
+        "durationSec": 3
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 6,
+        "durationSec": 8
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Steel Tower",
+    "quality": "Fine",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.65,
+      "SLASH": 0.15,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 7,
+    "critMult": 1.5,
+    "onHit": {
+      "daze": {
+        "chancePct": 20,
+        "durationSec": 3
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 6,
+        "durationSec": 8
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Steel Tower",
+    "quality": "Masterwork",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.65,
+      "SLASH": 0.15,
+      "PIERCE": 0.2
+    },
+    "critChancePct": 8,
+    "critMult": 1.55,
+    "onHit": {
+      "daze": {
+        "chancePct": 20,
+        "durationSec": 3
+      },
+      "sunder": {
+        "chancePct": 12,
+        "powerPct": 6,
+        "durationSec": 8
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Sun-Kite Shield",
+    "quality": "Standard",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.6,
+      "SLASH": 0.15,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 7,
+    "critMult": 1.45,
+    "onHit": {
+      "daze": {
+        "chancePct": 18,
+        "durationSec": 3
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 6,
+        "durationSec": 8
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Sun-Kite Shield",
+    "quality": "Fine",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.6,
+      "SLASH": 0.15,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 8,
+    "critMult": 1.5,
+    "onHit": {
+      "daze": {
+        "chancePct": 18,
+        "durationSec": 3
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 6,
+        "durationSec": 8
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Sun-Kite Shield",
+    "quality": "Masterwork",
+    "ap": 0.12,
+    "dmgMix": {
+      "BLUNT": 0.6,
+      "SLASH": 0.15,
+      "PIERCE": 0.25
+    },
+    "critChancePct": 9,
+    "critMult": 1.55,
+    "onHit": {
+      "daze": {
+        "chancePct": 18,
+        "durationSec": 3
+      },
+      "sunder": {
+        "chancePct": 14,
+        "powerPct": 6,
+        "durationSec": 8
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Weighted Net",
+    "quality": "Standard",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.25,
+      "PIERCE": 0.55
+    },
+    "critChancePct": 6,
+    "critMult": 1.45,
+    "onHit": {
+      "daze": {
+        "chancePct": 10,
+        "durationSec": 2
+      },
+      "entangle": {
+        "chancePct": 32,
+        "durationSec": 5
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Weighted Net",
+    "quality": "Fine",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.25,
+      "PIERCE": 0.55
+    },
+    "critChancePct": 7,
+    "critMult": 1.5,
+    "onHit": {
+      "daze": {
+        "chancePct": 10,
+        "durationSec": 2
+      },
+      "entangle": {
+        "chancePct": 32,
+        "durationSec": 5
+      }
+    }
+  },
+  {
+    "category": "shields",
+    "name": "Weighted Net",
+    "quality": "Masterwork",
+    "ap": 0.06,
+    "dmgMix": {
+      "BLUNT": 0.2,
+      "SLASH": 0.25,
+      "PIERCE": 0.55
+    },
+    "critChancePct": 8,
+    "critMult": 1.55,
+    "onHit": {
+      "daze": {
+        "chancePct": 10,
+        "durationSec": 2
+      },
+      "entangle": {
+        "chancePct": 32,
+        "durationSec": 5
       }
     }
   },
@@ -8055,7 +9110,9 @@ export const WEAPON_UPGRADE_RULES = {
         "names": [
           "Greatbow",
           "Composite Recurve",
-          "Asymmetrical Longbow"
+          "Asymmetrical Longbow",
+          "Elm Flatbow",
+          "Horn Composite"
         ]
       },
       "base": {
@@ -8082,6 +9139,22 @@ export const WEAPON_UPGRADE_RULES = {
       "overrides": {
         "Asymmetrical Longbow": {
           "critChancePct": 9
+        },
+        "Elm Flatbow": {
+          "critChancePct": 8,
+          "dmgMix": {
+            "BLUNT": 0.06,
+            "SLASH": 0.18,
+            "PIERCE": 0.76
+          }
+        },
+        "Horn Composite": {
+          "critChancePct": 9,
+          "dmgMix": {
+            "BLUNT": 0.04,
+            "SLASH": 0.14,
+            "PIERCE": 0.82
+          }
         }
       }
     },
@@ -8089,7 +9162,8 @@ export const WEAPON_UPGRADE_RULES = {
       "match": {
         "category": "ranged",
         "names": [
-          "Heavy Crossbow"
+          "Heavy Crossbow",
+          "Windlass Crossbow"
         ]
       },
       "base": {
@@ -8112,6 +9186,12 @@ export const WEAPON_UPGRADE_RULES = {
             "durationSec": 6,
             "stacksMax": 2
           }
+        }
+      },
+      "overrides": {
+        "Windlass Crossbow": {
+          "critChancePct": 9,
+          "critMult": 1.85
         }
       }
     },
@@ -8149,6 +9229,194 @@ export const WEAPON_UPGRADE_RULES = {
           "apOverride": "Low-Medium",
           "critChancePct": 7,
           "critMult": 1.5
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "ranged",
+        "names": [
+          "Leadshot Sling"
+        ]
+      },
+      "base": {
+        "apOverride": "Low-Medium",
+        "dmgMix": {
+          "BLUNT": 0.7,
+          "SLASH": 0.05,
+          "PIERCE": 0.25
+        },
+        "critChancePct": 7,
+        "critMult": 1.45,
+        "hazardTags": [
+          "blunt"
+        ],
+        "onHit": {
+          "daze": {
+            "chancePct": 14,
+            "durationSec": 3
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "ranged",
+        "names": [
+          "Aklys Tetherclub"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.6,
+          "SLASH": 0.1,
+          "PIERCE": 0.3
+        },
+        "critChancePct": 8,
+        "critMult": 1.5,
+        "hazardTags": [
+          "blunt"
+        ],
+        "controlTags": [
+          "hook"
+        ],
+        "onHit": {
+          "daze": {
+            "chancePct": 18,
+            "durationSec": 3
+          },
+          "entangle": {
+            "chancePct": 16,
+            "durationSec": 4
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "ranged",
+        "names": [
+          "Ghadziya Darts"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.05,
+          "SLASH": 0.15,
+          "PIERCE": 0.8
+        },
+        "critChancePct": 10,
+        "critMult": 1.55,
+        "hazardTags": [
+          "point"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 16,
+            "power": 1.1,
+            "durationSec": 6,
+            "stacksMax": 3
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "ranged",
+        "names": [
+          "Chakram Razorwheel"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.1,
+          "SLASH": 0.7,
+          "PIERCE": 0.2
+        },
+        "critChancePct": 9,
+        "critMult": 1.6,
+        "hazardTags": [
+          "edge"
+        ],
+        "onHit": {
+          "bleed": {
+            "chancePct": 20,
+            "power": 1.2,
+            "durationSec": 6,
+            "stacksMax": 3
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "ranged",
+        "names": [
+          "Whaler’s Harpoon"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.1,
+          "SLASH": 0.1,
+          "PIERCE": 0.8
+        },
+        "critChancePct": 9,
+        "critMult": 1.6,
+        "hazardTags": [
+          "point"
+        ],
+        "controlTags": [
+          "hook"
+        ],
+        "onHit": {
+          "entangle": {
+            "chancePct": 24,
+            "durationSec": 5
+          },
+          "drag": {
+            "chancePct": 12,
+            "powerPct": 12,
+            "durationSec": 4
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "ranged",
+        "names": [
+          "Earthen Firepot"
+        ]
+      },
+      "base": {
+        "apOverride": "Medium",
+        "dmgMix": {
+          "BLUNT": 0.5,
+          "SLASH": 0.1,
+          "PIERCE": 0.4
+        },
+        "critChancePct": 6,
+        "critMult": 1.45,
+        "hazardTags": [
+          "fire"
+        ],
+        "onHit": {
+          "burn": {
+            "chancePct": 85,
+            "powerPct": 18,
+            "durationSec": 8,
+            "tickSec": 2
+          },
+          "shatter": {
+            "chancePct": 20,
+            "powerPct": 10,
+            "durationSec": 6
+          }
         }
       }
     },
@@ -8522,6 +9790,148 @@ export const WEAPON_UPGRADE_RULES = {
               "power": 1.1,
               "durationSec": 7,
               "stacksMax": 3
+            }
+          }
+        }
+      }
+    },
+    {
+      "match": {
+        "category": "shields",
+        "names": [
+          "Madu Horn Shield",
+          "Rondache Buckler",
+          "Sun-Kite Shield",
+          "Weighted Net",
+          "Buckram Round",
+          "Steel Tower"
+        ]
+      },
+      "base": {
+        "apFromData": true,
+        "dmgMix": {
+          "BLUNT": 0.6,
+          "SLASH": 0.15,
+          "PIERCE": 0.25
+        },
+        "critChancePct": 7,
+        "critMult": 1.45,
+        "hazardTags": [
+          "blunt"
+        ],
+        "controlTags": [
+          "bash"
+        ],
+        "onHit": {
+          "daze": {
+            "chancePct": 16,
+            "durationSec": 3
+          }
+        }
+      },
+      "overrides": {
+        "Madu Horn Shield": {
+          "apOverride": "Low-Medium",
+          "dmgMix": {
+            "BLUNT": 0.45,
+            "SLASH": 0.15,
+            "PIERCE": 0.4
+          },
+          "critChancePct": 8,
+          "hazardTags": [
+            "blunt",
+            "spike"
+          ],
+          "controlTags": [
+            "bash",
+            "hook"
+          ],
+          "onHit": {
+            "daze": {
+              "chancePct": 18,
+              "durationSec": 3
+            },
+            "bleed": {
+              "chancePct": 14,
+              "power": 1,
+              "durationSec": 5
+            }
+          }
+        },
+        "Rondache Buckler": {
+          "critChancePct": 9,
+          "dmgMix": {
+            "BLUNT": 0.55,
+            "SLASH": 0.25,
+            "PIERCE": 0.2
+          }
+        },
+        "Sun-Kite Shield": {
+          "onHit": {
+            "daze": {
+              "chancePct": 18,
+              "durationSec": 3
+            },
+            "sunder": {
+              "chancePct": 14,
+              "powerPct": 6,
+              "durationSec": 8
+            }
+          }
+        },
+        "Weighted Net": {
+          "apOverride": "Low",
+          "dmgMix": {
+            "BLUNT": 0.2,
+            "SLASH": 0.25,
+            "PIERCE": 0.55
+          },
+          "critChancePct": 6,
+          "controlTags": [
+            "trap"
+          ],
+          "onHit": {
+            "entangle": {
+              "chancePct": 32,
+              "durationSec": 5
+            },
+            "daze": {
+              "chancePct": 10,
+              "durationSec": 2
+            }
+          }
+        },
+        "Buckram Round": {
+          "critChancePct": 8,
+          "dmgMix": {
+            "BLUNT": 0.62,
+            "SLASH": 0.18,
+            "PIERCE": 0.2
+          },
+          "hazardTags": [
+            "blunt",
+            "edge"
+          ]
+        },
+        "Steel Tower": {
+          "critChancePct": 6,
+          "dmgMix": {
+            "BLUNT": 0.65,
+            "SLASH": 0.15,
+            "PIERCE": 0.2
+          },
+          "hazardTags": [
+            "blunt"
+          ],
+          "onHit": {
+            "daze": {
+              "chancePct": 20,
+              "durationSec": 3
+            },
+            "sunder": {
+              "chancePct": 12,
+              "powerPct": 6,
+              "durationSec": 8
             }
           }
         }
