@@ -90,6 +90,7 @@ export interface ArmorSet {
   displayName: string;
   components: string[];
   class: string;
+  signatureWeapons?: string[];
   setBonuses: Record<string, number>;
 }
 

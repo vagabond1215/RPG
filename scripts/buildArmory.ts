@@ -52,6 +52,7 @@ interface WeaponEntry {
   attackSpeed: number;
   damage: number;
   armorPen: ArmorPen;
+  specialEffect?: string;
 }
 
 const ARMORY_SOURCE: Record<string, WeaponEntry[]> = {
@@ -2736,7 +2737,7 @@ async function writeArmoryData(variants: WeaponVariant[]) {
   const lines: string[] = [];
   const upgrades = generateWeaponUpgrades(variants);
   lines.push("export type WeaponQuality = 'Standard' | 'Fine' | 'Masterwork';");
-  lines.push("export interface WeaponEntry {\n  name: string;\n  region: string;\n  size: 'Tiny'|'Small'|'Medium'|'Large'|'Very Large';\n  hands: 1|2;\n  reach: 'Very Short'|'Short'|'Short/Medium'|'Medium'|'Medium/Long'|'Long'|'Very Long';\n  description: string;\n  fightingStyle: string;\n  attackSpeed: number;\n  damage: number;\n  armorPen: 'Low'|'Low-Medium'|'Medium'|'Medium-High'|'High'|'Very High';\n}");
+  lines.push("export interface WeaponEntry {\n  name: string;\n  region: string;\n  size: 'Tiny'|'Small'|'Medium'|'Large'|'Very Large';\n  hands: 1|2;\n  reach: 'Very Short'|'Short'|'Short/Medium'|'Medium'|'Medium/Long'|'Long'|'Very Long';\n  description: string;\n  fightingStyle: string;\n  attackSpeed: number;\n  damage: number;\n  armorPen: 'Low'|'Low-Medium'|'Medium'|'Medium-High'|'High'|'Very High';\n  specialEffect?: string;\n}");
   lines.push("export interface WeaponRecord extends WeaponEntry {\n  quality: WeaponQuality;\n  priceCp: number;\n  priceDisplay: string;\n  descriptionFull: string;\n}");
   const grouped: Record<string, WeaponVariant[]> = {};
   for (const variant of variants) {
