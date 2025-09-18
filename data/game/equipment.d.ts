@@ -7,8 +7,11 @@ export type WeaponSlot =
 
 export type ArmorSlot =
   | "head"
+  | "neck"
   | "body"
+  | "shoulders"
   | "back"
+  | "arms"
   | "hands"
   | "waist"
   | "legs"
