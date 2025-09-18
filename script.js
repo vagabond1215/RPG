@@ -469,6 +469,11 @@ function updateTopMenuIndicators() {
       : '—';
     menuMoneyLabel.textContent = `Funds: ${funds}`;
   }
+  if (typeof requestAnimationFrame === 'function') {
+    requestAnimationFrame(() => updateMenuHeight());
+  } else {
+    updateMenuHeight();
+  }
 }
 
 function updateLayoutSize() {
