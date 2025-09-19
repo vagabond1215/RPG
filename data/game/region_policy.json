@@ -1,86 +1,14 @@
 [
-  {
-    "biome": "coastal",
-    "delta_perishable": -0.02,
-    "delta_bulky": -0.02,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "riverlands",
-    "delta_perishable": 0,
-    "delta_bulky": -0.02,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "lake",
-    "delta_perishable": 0,
-    "delta_bulky": 0,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "wetland",
-    "delta_perishable": 0,
-    "delta_bulky": 0,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "grassland",
-    "delta_perishable": 0,
-    "delta_bulky": 0,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "farmland",
-    "delta_perishable": 0,
-    "delta_bulky": 0,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "forest",
-    "delta_perishable": 0,
-    "delta_bulky": 0,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "hills",
-    "delta_perishable": 0,
-    "delta_bulky": 0.03,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "mountains",
-    "delta_perishable": 0,
-    "delta_bulky": 0.03,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "desert",
-    "delta_perishable": 0.04,
-    "delta_bulky": 0.03,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "tundra",
-    "delta_perishable": 0.04,
-    "delta_bulky": 0,
-    "delta_fragile": 0,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  },
-  {
-    "biome": "urban",
-    "delta_perishable": -0.02,
-    "delta_bulky": -0.02,
-    "delta_fragile": -0.01,
-    "notes": "Add to out-of-region multiplier; clamp 0.90–1.40"
-  }
+  {"biome":"coastal","delta_perishable":-0.02,"delta_bulky":-0.02,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"riverlands","delta_perishable":0,"delta_bulky":-0.02,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"lake","delta_perishable":0,"delta_bulky":0,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"wetland","delta_perishable":0,"delta_bulky":0,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"grassland","delta_perishable":0,"delta_bulky":0,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"farmland","delta_perishable":0,"delta_bulky":0,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"forest","delta_perishable":0,"delta_bulky":0,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"hills","delta_perishable":0,"delta_bulky":0.03,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"mountains","delta_perishable":0,"delta_bulky":0.03,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"desert","delta_perishable":0.04,"delta_bulky":0.03,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"tundra","delta_perishable":0.04,"delta_bulky":0,"delta_fragile":0,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"},
+  {"biome":"urban","delta_perishable":-0.02,"delta_bulky":-0.02,"delta_fragile":-0.01,"notes":"Add to out-of-region multiplier; clamp 0.90–1.40"}
 ]
