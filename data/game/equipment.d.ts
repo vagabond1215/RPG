@@ -7,6 +7,7 @@ export type WeaponSlot =
 
 export type ArmorSlot =
   | "head"
+  | "face"
   | "neck"
   | "body"
   | "shoulders"
@@ -23,6 +24,8 @@ export type TrinketSlot =
   | "neck"
   | "lRing"
   | "rRing"
+  | "brooch"
+  | "belt"
   | "pouch";
 
 export type DamageType = "BLUNT" | "SLASH" | "PIERCE";
@@ -83,6 +86,8 @@ export interface ArmorCatalogItem {
   critDefense?: number;
   slots: string[];
   setMemberships?: string[];
+  effects?: string[];
+  bonuses?: Record<string, number>;
 }
 
 export interface ArmorSet {
@@ -109,6 +114,8 @@ export interface TrinketCatalogItem {
   suggestedPriceCp: number;
   netProfitCp: number;
   slots: string[];
+  effects?: string[];
+  bonuses?: Record<string, number>;
 }
 
 export interface TrinketCatalog {

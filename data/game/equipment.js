@@ -8,6 +8,7 @@ export const WEAPON_SLOTS = [
 
 export const ARMOR_SLOTS = [
   "head",
+  "face",
   "neck",
   "body",
   "shoulders",
@@ -25,6 +26,8 @@ export const TRINKET_SLOTS = [
   "neck",
   "lRing",
   "rRing",
+  "brooch",
+  "belt",
   "pouch"
 ];
 
@@ -45,6 +48,7 @@ export const CODEX_SCHEMA = {
     armorClasses: ["Light", "Medium", "Heavy"],
     slotsArmor: [
       "head",
+      "face",
       "neck",
       "body",
       "shoulders",
@@ -56,7 +60,7 @@ export const CODEX_SCHEMA = {
       "feet"
     ],
     slotsWeapons: ["mainHand", "offHand", "ranged", "instrument", "ammo"],
-    slotsTrinkets: ["lEar", "rEar", "neck", "lRing", "rRing", "pouch"],
+    slotsTrinkets: ["lEar", "rEar", "neck", "lRing", "rRing", "brooch", "belt", "pouch"],
     quality: ["Standard", "Fine", "Masterwork"],
     regions: [
       "High Kingdoms",
@@ -1935,6 +1939,256 @@ export const ARMOR_CATALOG = {
       critDefense: 2,
       slots: ["feet"],
       setMemberships: ["aset:courtly-royal"]
+    },
+    {
+      id: "arm:witchs-widebrim-head",
+      categoryKey: "armor",
+      internalName: "witchs-widebrim",
+      displayName: "Witch’s Widebrim (Head)",
+      baseItem: "Witch’s Widebrim",
+      variant: "Runesewn brim",
+      qualityTier: "Arcane",
+      primaryConsumer: "Arcanist",
+      unit: "each",
+      marketValueCp: 5200,
+      displayPrice: "2g 12si",
+      suggestedPriceCp: 5200,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 520,
+      netProfitCp: 4680,
+      dutyPct: 0,
+      regions: ["High Villages"],
+      defense: 14,
+      strReq: 0,
+      weightClass: "Light",
+      resists: { BLUNT: 4, SLASH: 6, PIERCE: 5 },
+      critDefense: 3,
+      slots: ["head"],
+      setMemberships: ["aset:arcane-attire"],
+      effects: [
+        "Bolsters arcane channeling",
+        "Draws down moonlight to restore spent mana"
+      ],
+      bonuses: { spellFocusPct: 4, manaRegenPct: 3, nightSightBonusPct: 10 }
+    },
+    {
+      id: "arm:sky-dancer-boots-feet",
+      categoryKey: "armor",
+      internalName: "sky-dancer-boots",
+      displayName: "Sky Dancer Boots (Feet)",
+      baseItem: "Sky Dancer Boots",
+      variant: "Featherlight soles",
+      qualityTier: "Arcane",
+      primaryConsumer: "Arcanist",
+      unit: "pair",
+      marketValueCp: 4800,
+      displayPrice: "2g 8si",
+      suggestedPriceCp: 4800,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 480,
+      netProfitCp: 4320,
+      dutyPct: 0,
+      regions: ["High Villages"],
+      defense: 12,
+      strReq: 0,
+      weightClass: "Light",
+      resists: { BLUNT: 3, SLASH: 4, PIERCE: 4 },
+      slots: ["feet"],
+      setMemberships: ["aset:arcane-attire"],
+      effects: [
+        "Featherstep enchantments cushion leaps",
+        "Winds assist dodges while airborne"
+      ],
+      bonuses: { moveSpeedPct: 6, evadePct: 4, fallDamageReductionPct: 25 }
+    },
+    {
+      id: "arm:silken-turban-head",
+      categoryKey: "armor",
+      internalName: "silken-turban",
+      displayName: "Silken Turban (Head)",
+      baseItem: "Silken Turban",
+      variant: "Desert court weave",
+      qualityTier: "Luxury",
+      primaryConsumer: "Envoy",
+      unit: "each",
+      marketValueCp: 3100,
+      displayPrice: "1g 11si",
+      suggestedPriceCp: 3100,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 310,
+      netProfitCp: 2790,
+      dutyPct: 0,
+      regions: ["Southern Kingdoms"],
+      defense: 16,
+      strReq: 0,
+      weightClass: "Light",
+      resists: { BLUNT: 3, SLASH: 6, PIERCE: 4 },
+      critDefense: 2,
+      slots: ["head"],
+      setMemberships: ["aset:desert-court"],
+      effects: [
+        "Veils the wearer from desert sun",
+        "Keeps sand devils from the eyes"
+      ],
+      bonuses: { heatResistPct: 20, perceptionBonusPct: 4 }
+    },
+    {
+      id: "arm:mistveil-cape-back",
+      categoryKey: "armor",
+      internalName: "mistveil-cape",
+      displayName: "Mistveil Cape (Back)",
+      baseItem: "Mistveil Cape",
+      variant: "Layered gauze",
+      qualityTier: "Luxury",
+      primaryConsumer: "Envoy",
+      unit: "each",
+      marketValueCp: 3600,
+      displayPrice: "1g 16si",
+      suggestedPriceCp: 3600,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 360,
+      netProfitCp: 3240,
+      dutyPct: 0,
+      regions: ["Southern Kingdoms"],
+      defense: 18,
+      strReq: 0,
+      weightClass: "Light",
+      resists: { BLUNT: 4, SLASH: 7, PIERCE: 3 },
+      slots: ["back"],
+      setMemberships: ["aset:desert-court"],
+      effects: [
+        "Billows mirage-light to break an archer’s aim",
+        "Sheds dust and grit with a shake"
+      ],
+      bonuses: { heatResistPct: 10, stealthBonusPct: 6, evadePct: 2 }
+    },
+    {
+      id: "arm:sandskimmer-goggles-face",
+      categoryKey: "armor",
+      internalName: "sandskimmer-goggles",
+      displayName: "Sandskimmer Goggles (Face)",
+      baseItem: "Sandskimmer Goggles",
+      variant: "Sunstone lenses",
+      qualityTier: "Luxury",
+      primaryConsumer: "Envoy",
+      unit: "each",
+      marketValueCp: 2400,
+      displayPrice: "1g 4si",
+      suggestedPriceCp: 2400,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 240,
+      netProfitCp: 2160,
+      dutyPct: 0,
+      regions: ["Southern Kingdoms"],
+      defense: 8,
+      strReq: 0,
+      weightClass: "Light",
+      resists: { BLUNT: 2, SLASH: 3, PIERCE: 5 },
+      slots: ["face"],
+      setMemberships: ["aset:desert-court"],
+      effects: [
+        "Filters grit and glare when storms rise",
+        "Focuses distant silhouettes along the dunes"
+      ],
+      bonuses: { sandstormVisionPct: 40, rangedAccuracyPct: 3 }
+    },
+    {
+      id: "arm:guildmaster-vest-body",
+      categoryKey: "armor",
+      internalName: "guildmaster-vest",
+      displayName: "Guildmaster Vest (Body)",
+      baseItem: "Guildmaster Vest",
+      variant: "Ledger-lined",
+      qualityTier: "Fine",
+      primaryConsumer: "Merchant",
+      unit: "each",
+      marketValueCp: 2800,
+      displayPrice: "1g 8si",
+      suggestedPriceCp: 2800,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 280,
+      netProfitCp: 2520,
+      dutyPct: 0,
+      regions: ["High Kingdoms"],
+      defense: 28,
+      strReq: 0,
+      weightClass: "Light",
+      resists: { BLUNT: 6, SLASH: 12, PIERCE: 8 },
+      slots: ["body"],
+      setMemberships: ["aset:merchant-guild"],
+      effects: [
+        "Hidden pockets balance ledger weight",
+        "Copper-thread wards against sudden blades"
+      ],
+      bonuses: { presenceBonusPct: 6, negotiationBonusPct: 8 }
+    },
+    {
+      id: "arm:guntram-warbelt-waist",
+      categoryKey: "armor",
+      internalName: "guntram-warbelt",
+      displayName: "Guntram Warbelt (Waist)",
+      baseItem: "Guntram Warbelt",
+      variant: "Layered cuirboulli",
+      qualityTier: "Fine",
+      primaryConsumer: "Merchant Guard",
+      unit: "each",
+      marketValueCp: 2100,
+      displayPrice: "1g 1si",
+      suggestedPriceCp: 2100,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 210,
+      netProfitCp: 1890,
+      dutyPct: 0,
+      regions: ["High Kingdoms"],
+      defense: 14,
+      strReq: 1,
+      weightClass: "Medium",
+      resists: { BLUNT: 4, SLASH: 5, PIERCE: 4 },
+      slots: ["waist"],
+      setMemberships: ["aset:merchant-guild"],
+      effects: [
+        "Distributes satchel loads across the hips",
+        "Brace plates guard against knives in the crowd"
+      ],
+      bonuses: { carryCapacityPct: 12, staminaRegenPct: 2 }
+    },
+    {
+      id: "arm:messenger-satchel-back",
+      categoryKey: "armor",
+      internalName: "messenger-satchel",
+      displayName: "Messenger Satchel (Back)",
+      baseItem: "Messenger Satchel",
+      variant: "Waxed couriers’ leather",
+      qualityTier: "Fine",
+      primaryConsumer: "Merchant",
+      unit: "each",
+      marketValueCp: 1950,
+      displayPrice: "19si 50cp",
+      suggestedPriceCp: 1950,
+      materialCostCp: null,
+      laborCostCp: null,
+      overheadCp: 195,
+      netProfitCp: 1755,
+      dutyPct: 0,
+      regions: ["High Kingdoms"],
+      defense: 10,
+      strReq: 0,
+      weightClass: "Light",
+      resists: { BLUNT: 3, SLASH: 4, PIERCE: 3 },
+      slots: ["back"],
+      setMemberships: ["aset:merchant-guild"],
+      effects: [
+        "Courier compartments keep missives dry",
+        "Harness lets packs drop free for a quick draw"
+      ],
+      bonuses: { inventorySlotsBonus: 4, travelSpeedPct: 4 }
     }
   ],
   sets: [
@@ -2223,6 +2477,61 @@ export const ARMOR_CATALOG = {
         threatReductionPct: 6,
         critDamageReductionPct: 4
       }
+    },
+    {
+      id: "aset:arcane-attire",
+      displayName: "Arcane Attire Set",
+      components: [
+        "arm:witchs-widebrim-head",
+        "arm:sky-dancer-boots-feet",
+        "trn:lucky-raven-pin",
+        "trn:serpents-eye",
+        "trn:moonsilver-band"
+      ],
+      class: "Light",
+      setBonuses: {
+        spellFocusPct: 8,
+        manaRegenPct: 6,
+        EVADE_PCT: 4,
+        critChancePct: 3
+      }
+    },
+    {
+      id: "aset:desert-court",
+      displayName: "Desert Court Set",
+      components: [
+        "arm:silken-turban-head",
+        "arm:mistveil-cape-back",
+        "arm:sandskimmer-goggles-face",
+        "trn:river-pearl-chain"
+      ],
+      class: "Light",
+      setBonuses: {
+        heatResistPct: 20,
+        EVADE_PCT: 3,
+        DMG_TAKEN_PCT: -2,
+        perceptionBonusPct: 6,
+        travelSpeedPct: 4
+      }
+    },
+    {
+      id: "aset:merchant-guild",
+      displayName: "Merchant Guild Set",
+      components: [
+        "arm:guildmaster-vest-body",
+        "arm:guntram-warbelt-waist",
+        "arm:messenger-satchel-back",
+        "trn:herbalist-belt",
+        "trn:physic-kit-pouch"
+      ],
+      class: "Light",
+      setBonuses: {
+        negotiationBonusPct: 12,
+        tradePriceBonusPct: 10,
+        carryCapacityPct: 15,
+        DMG_TAKEN_PCT: -1,
+        staminaRegenPct: 2
+      }
     }
   ]
 };
@@ -2316,6 +2625,102 @@ export const TRINKET_CATALOG = {
       suggestedPriceCp: 1357,
       netProfitCp: 203.544,
       slots: ["neck"]
+    },
+    {
+      id: "trn:lucky-raven-pin",
+      displayName: "Lucky Raven Pin",
+      variant: "Feathered obsidian",
+      qualityTier: "Arcane",
+      marketValueCp: 3600,
+      displayPrice: "1g 16si",
+      suggestedPriceCp: 3600,
+      netProfitCp: 3240,
+      slots: ["brooch"],
+      effects: [
+        "Feather-charms coax fortune in the wearer’s favor",
+        "Softens falls as the pin’s feathers flare"
+      ],
+      bonuses: { luckBonusPct: 5, missileEvadePct: 5, critChancePct: 3 }
+    },
+    {
+      id: "trn:serpents-eye",
+      displayName: "Serpent’s Eye",
+      variant: "Verdant crystal",
+      qualityTier: "Arcane",
+      marketValueCp: 4200,
+      displayPrice: "2g 2si",
+      suggestedPriceCp: 4200,
+      netProfitCp: 3780,
+      slots: ["neck"],
+      effects: [
+        "Glass gem sees heat shimmer and hidden venom",
+        "Attunes spell chants with sibilant harmony"
+      ],
+      bonuses: { spellFocusPct: 3, perceptionBonusPct: 6, poisonResistPct: 15 }
+    },
+    {
+      id: "trn:moonsilver-band",
+      displayName: "Moonsilver Band",
+      variant: "Runed circlet",
+      qualityTier: "Arcane",
+      marketValueCp: 4000,
+      displayPrice: "2g",
+      suggestedPriceCp: 4000,
+      netProfitCp: 3600,
+      slots: ["lRing", "rRing"],
+      effects: [
+        "Pale glyphs sip moonlight for reserves",
+        "Stills shaking hands when weaving wards"
+      ],
+      bonuses: { manaRegenPct: 4, wardStrengthPct: 3 }
+    },
+    {
+      id: "trn:river-pearl-chain",
+      displayName: "River Pearl Chain",
+      variant: "Court tassel",
+      qualityTier: "Luxury",
+      marketValueCp: 2500,
+      displayPrice: "1g 5si",
+      suggestedPriceCp: 2500,
+      netProfitCp: 2250,
+      slots: ["neck"],
+      effects: [
+        "Cool pearls ease parched throats in the dunes",
+        "Polished shell charms favor courtly words"
+      ],
+      bonuses: { diplomacyBonusPct: 6, heatResistPct: 8 }
+    },
+    {
+      id: "trn:herbalist-belt",
+      displayName: "Herbalist Belt",
+      variant: "Glass vials",
+      qualityTier: "Fine",
+      marketValueCp: 1800,
+      displayPrice: "18si",
+      suggestedPriceCp: 1800,
+      netProfitCp: 1620,
+      slots: ["belt"],
+      effects: [
+        "Holds fresh-cut sprigs at even weight",
+        "Colour-coded straps quick-sort reagents"
+      ],
+      bonuses: { alchemyBonusPct: 8, potionBrewSpeedPct: 10 }
+    },
+    {
+      id: "trn:physic-kit-pouch",
+      displayName: "Physic Kit Pouch",
+      variant: "Fold-out organizer",
+      qualityTier: "Fine",
+      marketValueCp: 1600,
+      displayPrice: "16si",
+      suggestedPriceCp: 1600,
+      netProfitCp: 1440,
+      slots: ["pouch"],
+      effects: [
+        "Keeps tinctures braced against jostling",
+        "Labelled tabs cut response time in crises"
+      ],
+      bonuses: { medicineBonusPct: 10, emergencyResponsePct: 12 }
     }
   ]
 };
@@ -2331,6 +2736,7 @@ export function createEmptyEquipment() {
     },
     armor: {
       head: null,
+      face: null,
       neck: null,
       body: null,
       shoulders: null,
@@ -2347,6 +2753,8 @@ export function createEmptyEquipment() {
       neck: null,
       lRing: null,
       rRing: null,
+      brooch: null,
+      belt: null,
       pouch: null
     }
   };
