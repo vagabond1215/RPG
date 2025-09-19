@@ -451,6 +451,12 @@ function getCityIcon(city) {
 const SHOW_DISTRICTS_KEY = 'rpgShowDistricts';
 let showDistricts = localStorage.getItem(SHOW_DISTRICTS_KEY) === 'true';
 
+// Declare profile pointers up front so early UI helpers can safely reference them
+let profiles = {};
+let currentProfileId = null;
+let currentProfile = null;
+let currentCharacter = null;
+
 const body = document.body;
 const main = document.querySelector('main');
 const backButton = document.getElementById('back-button');
@@ -604,16 +610,16 @@ const sanitizeProfiles = raw => {
   return sanitized;
 };
 
-let profiles = {};
+profiles = {};
 try {
   const storedProfiles = localStorage.getItem(STORAGE_KEY);
   profiles = storedProfiles ? sanitizeProfiles(JSON.parse(storedProfiles)) : {};
 } catch {
   profiles = {};
 }
-let currentProfileId = localStorage.getItem(LAST_PROFILE_KEY);
-let currentProfile = currentProfileId ? profiles[currentProfileId] : null;
-let currentCharacter = null;
+currentProfileId = localStorage.getItem(LAST_PROFILE_KEY);
+currentProfile = currentProfileId ? profiles[currentProfileId] : null;
+currentCharacter = null;
 
 const humanHairColors = [
   '#f5f0e6', '#efe6d6', '#e8dcc7', '#e2d2b9', '#dbc8ac', '#d5be9f',
