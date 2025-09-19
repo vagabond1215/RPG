@@ -1902,6 +1902,7 @@ function canManageBuilding(city, building) {
 function showNavigation() {
   updateTopMenuIndicators();
   if (!currentCharacter) return;
+  ensureCharacterClock(currentCharacter);
   if (!currentCharacter.position) {
     const city = currentCharacter.location;
     const cityData = CITY_NAV[city];
@@ -2987,9 +2988,579 @@ function ensureQuestLog(character) {
       acceptedOnLabel: entry.acceptedOnLabel || entry.acceptedOn || null,
       status: entry.status || 'accepted',
       location: entry.location || null,
+      completedOn: entry.completedOn || null,
+      completedOnLabel: entry.completedOnLabel || entry.completedOn || null,
+      outcome: entry.outcome || null,
+      reward: entry.reward || null,
+      notes: entry.notes || null,
+      npc: entry.npc || null,
     }));
   character.questLog = log;
   return log;
+}
+
+function ensureQuestHistory(character) {
+  if (!character) return [];
+  const history = Array.isArray(character.questHistory) ? character.questHistory : [];
+  const normalized = history
+    .filter(entry => entry && typeof entry === 'object')
+    .map(entry => ({
+      key: entry.key || null,
+      title: entry.title || '',
+      board: entry.board || null,
+      location: entry.location || null,
+      npc: entry.npc || null,
+      outcome: entry.outcome || null,
+      success: Boolean(entry.success),
+      reward: entry.reward || null,
+      narrative: entry.narrative || '',
+      date: entry.date || null,
+      dateLabel: entry.dateLabel || entry.date || null,
+      hours: Number.isFinite(entry.hours) ? entry.hours : null,
+      timeOfDay: Number.isFinite(entry.timeOfDay) ? entry.timeOfDay : null,
+      daysElapsed: Number.isFinite(entry.daysElapsed) ? entry.daysElapsed : null,
+    }));
+  character.questHistory = normalized;
+  return normalized;
+}
+
+function ensureCharacterClock(character) {
+  if (!character) return 0;
+  const hours = Number(character.timeOfDay);
+  if (!Number.isFinite(hours) || hours < 0) {
+    character.timeOfDay = 8;
+  } else if (hours >= 24) {
+    character.timeOfDay = hours % 24;
+  } else {
+    character.timeOfDay = hours;
+  }
+  return character.timeOfDay;
+}
+
+function advanceCharacterTime(hours = 0) {
+  if (!currentCharacter) {
+    return { days: 0, timeOfDay: 0 };
+  }
+  ensureCharacterClock(currentCharacter);
+  const increment = Number(hours);
+  if (!Number.isFinite(increment) || increment <= 0) {
+    return { days: 0, timeOfDay: currentCharacter.timeOfDay };
+  }
+  let total = currentCharacter.timeOfDay + increment;
+  let days = 0;
+  while (total >= 24) {
+    total -= 24;
+    days += 1;
+  }
+  currentCharacter.timeOfDay = Math.max(0, Math.min(24, Math.round(total * 100) / 100));
+  if (days > 0) {
+    worldCalendar.advance(days);
+  }
+  return { days, timeOfDay: currentCharacter.timeOfDay };
+}
+
+function describeTimeOfDay(hour) {
+  if (!Number.isFinite(hour)) return 'day';
+  const h = ((hour % 24) + 24) % 24;
+  if (h < 4) return 'deep night';
+  if (h < 6) return 'pre-dawn darkness';
+  if (h < 9) return 'early morning';
+  if (h < 12) return 'late morning';
+  if (h < 15) return 'early afternoon';
+  if (h < 18) return 'late afternoon';
+  if (h < 21) return 'evening';
+  return 'night';
+}
+
+function questValueToList(value) {
+  if (Array.isArray(value)) {
+    return value.flatMap(item => questValueToList(item)).filter(Boolean);
+  }
+  if (value && typeof value === 'object') {
+    const fields = ['text', 'description', 'label', 'title', 'name', 'notes', 'summary'];
+    for (const field of fields) {
+      if (value[field] != null) {
+        const collected = questValueToList(value[field]);
+        if (collected.length) return collected;
+      }
+    }
+    return [String(value)];
+  }
+  if (value == null) return [];
+  return [String(value)];
+}
+
+function questValueToText(value, joiner = ', ') {
+  const parts = questValueToList(value);
+  return parts.join(joiner);
+}
+
+function extractFirstSentence(text) {
+  if (!text) return '';
+  const normalized = String(text).replace(/\s+/g, ' ').trim();
+  if (!normalized) return '';
+  const match = normalized.match(/([^.!?]+[.!?])/);
+  return match ? match[1].trim() : normalized;
+}
+
+function determineQuestDuration(quest) {
+  const timelineText = questValueToText(quest.timeline, ' ').toLowerCase();
+  const descriptionText = (quest.description || '').toLowerCase();
+  const combined = `${timelineText} ${descriptionText}`;
+  const duration = { hours: 6, label: 'a six-hour shift', overnight: false };
+  const hourMatch = combined.match(/(\d+)\s*(?:hour|hr)/);
+  if (hourMatch) {
+    const parsed = parseInt(hourMatch[1], 10);
+    if (Number.isFinite(parsed)) {
+      duration.hours = Math.min(Math.max(parsed, 2), 16);
+    }
+  } else if (/half[-\s]?day/.test(combined)) {
+    duration.hours = 5;
+  } else if (/(full|whole|entire) day/.test(combined)) {
+    duration.hours = 10;
+  }
+  if (/(overnight|night watch|moonlit|night shift|after dusk|until dawn)/.test(combined)) {
+    duration.hours = Math.max(duration.hours, 12);
+    duration.overnight = true;
+  } else if (/(dawn|sunrise|morning)/.test(combined)) {
+    duration.hours = Math.min(duration.hours, 4);
+  } else if (/(afternoon|midday|sunset)/.test(combined)) {
+    duration.hours = Math.max(duration.hours, 5);
+  }
+  if (!duration.label) {
+    const hours = duration.hours;
+    if (duration.overnight) {
+      duration.label = 'an overnight vigil';
+    } else if (hours <= 3) {
+      duration.label = `${hours}-hour shift`;
+    } else if (hours <= 6) {
+      duration.label = `about ${hours} hours of work`;
+    } else if (hours <= 10) {
+      duration.label = `most of the day (${hours} hours)`;
+    } else {
+      duration.label = `a long ${hours}-hour effort`;
+    }
+  }
+  return duration;
+}
+
+function inferQuestNpcRole(quest, destination) {
+  const context = `${questValueToText(quest.timeline, ' ')} ${questValueToText(quest.description, ' ')}`.toLowerCase();
+  const locationText = (destination?.label || '').toLowerCase();
+  const roles = [
+    { match: /(harvest|orchard|farm|field|gather)/, role: 'Harvest Steward', station: 'commoner' },
+    { match: /(guard|watch|patrol|barracks|garrison)/, role: 'Watch Sergeant', station: 'military' },
+    { match: /(forge|smith|anvil|workshop|craft)/, role: 'Master Artisan', station: 'artisan' },
+    { match: /(temple|shrine|prayer|rite|ritual)/, role: 'Ritual Acolyte', station: 'clergy' },
+    { match: /(ship|dock|sail|naval|pier)/, role: 'Dock Foreman', station: 'guild' },
+    { match: /(inn|tavern|kitchen|cook)/, role: 'House Steward', station: 'commoner' },
+  ];
+  for (const candidate of roles) {
+    if (candidate.match.test(context) || candidate.match.test(locationText)) {
+      return candidate;
+    }
+  }
+  return { role: 'Quest Overseer', station: 'guild' };
+}
+
+function findQuestDestination(quest, boardName) {
+  const binding = resolveQuestBinding(quest, boardName);
+  const cityName = currentCharacter?.location || Object.keys(CITY_NAV)[0] || null;
+  const cityData = cityName ? CITY_NAV[cityName] : null;
+  const desired = (quest.location || binding.business || binding.board || boardName || '').trim();
+  const normalizedDesired = desired.toLowerCase();
+  let matchedDistrict = null;
+  let matchedBuilding = desired || null;
+  let matchedPoint = null;
+  if (cityData) {
+    for (const [districtName, district] of Object.entries(cityData.districts || {})) {
+      for (const point of district.points || []) {
+        const target = (point.target || point.name || '').trim();
+        if (!target) continue;
+        const normalizedTarget = target.toLowerCase();
+        if (
+          normalizedDesired &&
+          (normalizedTarget === normalizedDesired || normalizedDesired.includes(normalizedTarget) || normalizedTarget.includes(normalizedDesired))
+        ) {
+          matchedDistrict = districtName;
+          matchedBuilding = target;
+          matchedPoint = point;
+          break;
+        }
+      }
+      if (matchedPoint) break;
+    }
+  }
+  if (!matchedDistrict) {
+    const alias = QUEST_DISTRICT_ALIASES[binding?.district] || binding?.district || null;
+    matchedDistrict = alias || currentCharacter?.position?.district || null;
+  }
+  return {
+    city: cityName,
+    district: matchedDistrict,
+    building: matchedBuilding,
+    label: matchedBuilding || matchedDistrict || desired || boardName,
+    point: matchedPoint,
+    binding,
+  };
+}
+
+function calculateTravelHours(destination) {
+  if (!currentCharacter || !destination) return 0.5;
+  const pos = currentCharacter.position || {};
+  if (pos.city && destination.city && pos.city !== destination.city) {
+    return 4;
+  }
+  if (pos.district && destination.district && pos.district !== destination.district) {
+    return 1.5;
+  }
+  if (pos.building && destination.building && pos.building !== destination.building) {
+    return 0.75;
+  }
+  return 0.5;
+}
+
+function generateQuestApproachOptions(quest) {
+  const context = `${questValueToText(quest.description, ' ')} ${questValueToText(quest.timeline, ' ')}`.toLowerCase();
+  if (/(harvest|gather|orchard|field|crop|garden)/.test(context)) {
+    return [
+      { key: 'careful', label: 'Pick carefully to protect the crop', successMod: 0.15, narrative: 'You take slow, careful cuts to protect every stem.' },
+      { key: 'swift', label: 'Work swiftly to clear as many rows as possible', successMod: -0.05, narrative: 'You hustle through the rows, racing the baskets being filled.' },
+      { key: 'support', label: 'Coordinate with the crew and share tips', successMod: 0.05, narrative: 'You call out steady rhythms and help load baskets for the others.' },
+    ];
+  }
+  if (/(guard|patrol|watch|escort|barracks)/.test(context)) {
+    return [
+      { key: 'vigilant', label: 'Take a vigilant patrol, checking every blind spot', successMod: 0.1, narrative: 'You make extra passes and keep the crew alert at every turn.' },
+      { key: 'bold', label: 'Press forward aggressively to deter threats', successMod: -0.05, narrative: 'You push the team into risky ground to flush out anything lurking.' },
+      { key: 'tactical', label: 'Plan ambush points and rotate watches smartly', successMod: 0.05, narrative: 'You organize rotations and overlapping patrol routes to cover more ground.' },
+    ];
+  }
+  if (/(forge|smith|workshop|construction|repair|craft|ship)/.test(context)) {
+    return [
+      { key: 'precise', label: 'Measure twice and craft with precision', successMod: 0.12, narrative: 'You double-check every measurement before hammer meets metal.' },
+      { key: 'innovate', label: 'Experiment with faster techniques', successMod: -0.08, narrative: 'You try to streamline the process with risky shortcuts.' },
+      { key: 'assist', label: 'Assist coworkers and keep tools ready', successMod: 0.03, narrative: 'You fetch supplies, quench tools, and keep the workflow humming.' },
+    ];
+  }
+  return [
+    { key: 'steady', label: 'Keep a steady pace and follow instructions', successMod: 0.1, narrative: 'You follow the overseer’s plan and keep momentum steady.' },
+    { key: 'ambitious', label: 'Push to exceed expectations and take initiative', successMod: -0.07, narrative: 'You volunteer for the hardest tasks and try to leave a mark.' },
+    { key: 'supportive', label: 'Support your fellow workers and solve problems', successMod: 0.04, narrative: 'You check on others, patching issues before they grow.' },
+  ];
+}
+
+let activeQuestStoryline = null;
+
+function buildQuestStoryline(quest, boardName, entry) {
+  if (!currentCharacter) return null;
+  ensureCharacterClock(currentCharacter);
+  const destination = findQuestDestination(quest, boardName);
+  const npcRole = inferQuestNpcRole(quest, destination);
+  const npcName = generateNpcName({ station: npcRole.station, allowReuse: false });
+  const duration = determineQuestDuration(quest);
+  const travelHours = calculateTravelHours(destination);
+  const binding = destination.binding;
+  let weatherReport = null;
+  try {
+    weatherReport = weatherSystem.getDailyWeather(binding?.region || 'waves_break', binding?.habitat || 'urban', worldCalendar.today());
+  } catch (err) {
+    weatherReport = null;
+  }
+  return {
+    quest,
+    boardName,
+    entry,
+    destination,
+    npc: { ...npcName, role: npcRole.role },
+    duration,
+    travelHours,
+    weather: weatherReport,
+    createdOn: dateKey(worldCalendar.today()),
+    createdOnLabel: worldCalendar.formatCurrentDate(),
+    previousPosition: currentCharacter.position ? { ...currentCharacter.position } : null,
+    phase: 'travel',
+    choices: generateQuestApproachOptions(quest),
+    returnContext: null,
+    travelTimeSpent: 0,
+    resolved: false,
+    success: null,
+    outcome: null,
+    resultLabel: null,
+    narrative: [],
+    rewardText: questValueToText(quest.reward) || '',
+    historyLogged: false,
+  };
+}
+
+function startQuestStoryline(storyline, context = {}) {
+  if (!storyline) return;
+  activeQuestStoryline = { ...storyline, returnContext: context.boardContext || context }; // attach context
+  if (context.boardName) {
+    activeQuestStoryline.boardName = context.boardName;
+  }
+  renderQuestStoryline();
+}
+
+function narrativeParagraphs(lines) {
+  return lines
+    .filter(line => line != null && String(line).trim().length)
+    .map(line => `<p>${escapeHtml(String(line))}</p>`)
+    .join('');
+}
+
+function renderQuestStoryline() {
+  if (!activeQuestStoryline) return;
+  showBackButton();
+  const story = activeQuestStoryline;
+  const title = story.quest?.title || 'Quest';
+  const locationLabel = story.destination?.label || story.boardName || 'Quest Location';
+  const npcName = story.npc?.fullName || 'the overseer';
+  let bodyHTML = '';
+  let actions = [];
+  if (story.phase === 'travel') {
+    const lines = [];
+    const origin = story.previousPosition?.building || story.previousPosition?.district || story.previousPosition?.city;
+    if (origin) {
+      lines.push(`You depart ${origin} and make your way toward ${locationLabel}.`);
+    } else {
+      lines.push(`You set out toward ${locationLabel}.`);
+    }
+    if (story.weather) {
+      const weatherSummary = story.weather.narrative || formatWeatherSummary(story.weather);
+      lines.push(`The weather along the way: ${weatherSummary}`);
+    }
+    bodyHTML = narrativeParagraphs(lines);
+    actions = [
+      `<button data-action="quest-storyline-arrive">Arrive at ${escapeHtml(locationLabel)}</button>`,
+    ];
+  } else if (story.phase === 'briefing') {
+    const lines = [];
+    lines.push(`${npcName} greets you at ${locationLabel}.`);
+    lines.push(`${story.npc.role || 'Overseer'}: "We need help for ${story.duration.label}. Can you spare the time?"`);
+    bodyHTML = narrativeParagraphs(lines);
+    actions = [
+      '<button data-action="quest-storyline-accept">Accept the shift</button>',
+      '<button data-action="quest-storyline-decline">Decline</button>',
+    ];
+  } else if (story.phase === 'approach') {
+    const lines = [];
+    lines.push(`${npcName} outlines the tasks for ${story.duration.label}. How will you proceed?`);
+    bodyHTML = narrativeParagraphs(lines);
+    actions = story.choices.map(choice => `<button data-action="quest-storyline-choice" data-choice="${escapeHtml(choice.key)}">${escapeHtml(choice.label)}</button>`);
+  } else if (story.phase === 'results') {
+    const outcomeClass = story.success ? 'quest-storyline-outcome-success' : story.outcome === 'declined' ? 'quest-storyline-outcome-declined' : 'quest-storyline-outcome-failed';
+    const outcomeLabel = story.resultLabel || (story.success ? 'Success' : 'Failure');
+    const lines = [...(story.narrative || [])];
+    if (story.rewardText) {
+      lines.push(`Reward: ${story.rewardText}`);
+    }
+    if (story.daysElapsed && story.daysElapsed > 0) {
+      lines.push(`Time spent: ${story.daysElapsed} day${story.daysElapsed === 1 ? '' : 's'} of work.`);
+    }
+    const timeNote = describeTimeOfDay(story.timeAfter);
+    if (timeNote) {
+      lines.push(`By the ${timeNote}, the assignment is complete.`);
+    }
+    bodyHTML = `
+      <div class="quest-storyline-outcome ${outcomeClass}">${escapeHtml(outcomeLabel)}</div>
+      ${narrativeParagraphs(lines)}
+    `;
+    actions = [
+      '<button data-action="quest-storyline-finish">Return to the quest board</button>',
+    ];
+  }
+  setMainHTML(`
+    <div class="quest-storyline">
+      <header class="quest-storyline-header">
+        <h2>${escapeHtml(title)}</h2>
+        <p class="quest-storyline-subtitle">${escapeHtml(locationLabel)}</p>
+      </header>
+      <section class="quest-storyline-body">${bodyHTML}</section>
+      <footer class="quest-storyline-actions">${actions.join('')}</footer>
+    </div>
+  `);
+  updateMenuHeight();
+  if (main) {
+    const arriveBtn = main.querySelector('[data-action="quest-storyline-arrive"]');
+    if (arriveBtn) {
+      arriveBtn.addEventListener('click', () => {
+        const dest = story.destination;
+        if (currentCharacter) {
+          const prev = currentCharacter.position ? { ...currentCharacter.position } : null;
+          const city = dest.city || currentCharacter.location;
+          currentCharacter.location = city;
+          currentCharacter.position = {
+            city,
+            district: dest.district || prev?.district || null,
+            building: dest.building || null,
+            previousDistrict: prev?.district || null,
+            previousBuilding: prev?.building || null,
+          };
+          const travelResult = advanceCharacterTime(story.travelHours || 0);
+          story.travelTimeSpent = travelResult.timeOfDay;
+          saveProfiles();
+          updateTopMenuIndicators();
+        }
+        story.phase = 'briefing';
+        renderQuestStoryline();
+      });
+    }
+    const acceptBtn = main.querySelector('[data-action="quest-storyline-accept"]');
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => {
+        story.phase = 'approach';
+        renderQuestStoryline();
+      });
+    }
+    const declineBtn = main.querySelector('[data-action="quest-storyline-decline"]');
+    if (declineBtn) {
+      declineBtn.addEventListener('click', () => {
+        story.success = false;
+        story.outcome = 'declined';
+        story.resultLabel = 'Declined';
+        story.narrative = [`You politely decline the shift offered by ${npcName}.`];
+        story.phase = 'results';
+        story.resolved = true;
+        story.timeAfter = currentCharacter ? currentCharacter.timeOfDay : 0;
+        const entry = story.entry;
+        if (entry) {
+          entry.status = 'declined';
+          entry.outcome = 'Declined';
+          entry.completedOn = dateKey(worldCalendar.today());
+          entry.completedOnLabel = worldCalendar.formatCurrentDate();
+          entry.reward = null;
+          entry.notes = 'Declined after briefing';
+          entry.npc = { name: npcName, role: story.npc.role };
+        }
+        saveProfiles();
+        renderQuestStoryline();
+      });
+    }
+    main.querySelectorAll('[data-action="quest-storyline-choice"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.choice || '';
+        resolveQuestOutcome(story, key);
+        story.phase = 'results';
+        renderQuestStoryline();
+      });
+    });
+    const finishBtn = main.querySelector('[data-action="quest-storyline-finish"]');
+    if (finishBtn) {
+      finishBtn.addEventListener('click', () => {
+        finalizeQuestStoryline(story);
+      });
+    }
+  }
+}
+
+function resolveQuestOutcome(story, choiceKey) {
+  if (!story || story.resolved) return story;
+  const choice = (story.choices || []).find(opt => opt.key === choiceKey) || null;
+  let chance = 0.6 + ((currentCharacter?.level || 1) * 0.02);
+  if (story.quest?.highPriority) chance -= 0.05;
+  if (Array.isArray(story.quest?.skillRequirements) && story.quest.skillRequirements.length) {
+    chance -= 0.05;
+  }
+  if (choice?.successMod) {
+    chance += choice.successMod;
+  }
+  chance = Math.max(0.05, Math.min(0.95, chance));
+  const success = Math.random() < chance;
+  const hoursWorked = (story.duration?.hours || 0) + (story.travelHours || 0);
+  const timeResult = advanceCharacterTime(hoursWorked);
+  const afterTime = timeResult.timeOfDay;
+  const weatherNote = story.weather?.narrative || '';
+  const questSummary = extractFirstSentence(story.quest?.description || '');
+  const lines = [];
+  if (choice?.narrative) {
+    lines.push(choice.narrative);
+  } else {
+    lines.push(`You throw yourself into the work alongside ${story.npc.fullName}.`);
+  }
+  if (questSummary) {
+    lines.push(questSummary);
+  }
+  if (weatherNote) {
+    lines.push(`Conditions: ${weatherNote}`);
+  }
+  if (success) {
+    lines.push(`The crew finishes the assignment with your help, earning nods from ${story.npc.fullName}.`);
+  } else {
+    lines.push(`Despite your efforts, complications force ${story.npc.fullName} to revise the plan.`);
+  }
+  const rewardStrings = questValueToList(story.quest?.reward);
+  let totalIron = 0;
+  rewardStrings.forEach(text => {
+    const parsed = parseCurrency(text);
+    totalIron += toIron(parsed);
+  });
+  if (success && totalIron > 0 && currentCharacter) {
+    const walletIron = toIron(currentCharacter.money || createEmptyCurrency());
+    const newWallet = fromIron(walletIron + totalIron);
+    currentCharacter.money = { ...createEmptyCurrency(), ...newWallet };
+  }
+  story.success = success;
+  story.outcome = success ? 'completed' : 'failed';
+  story.resultLabel = success ? 'Success' : 'Failure';
+  story.narrative = lines;
+  story.timeAfter = afterTime;
+  story.daysElapsed = timeResult.days;
+  story.resolved = true;
+  const rewardText = questValueToText(story.quest?.reward) || '';
+  story.rewardText = success ? rewardText : '';
+  const entry = story.entry;
+  if (entry) {
+    entry.status = story.outcome;
+    entry.outcome = story.resultLabel;
+    entry.completedOn = dateKey(worldCalendar.today());
+    entry.completedOnLabel = worldCalendar.formatCurrentDate();
+    entry.reward = story.rewardText;
+    entry.notes = choice?.label || null;
+    entry.npc = { name: story.npc.fullName, role: story.npc.role };
+    entry.location = story.destination?.label || entry.location;
+  }
+  saveProfiles();
+  updateTopMenuIndicators();
+  return story;
+}
+
+function finalizeQuestStoryline(story) {
+  if (!story) return;
+  if (!story.resolved && story.phase !== 'results') {
+    resolveQuestOutcome(story, story.choices?.[0]?.key || 'steady');
+  }
+  const history = ensureQuestHistory(currentCharacter);
+  if (!story.historyLogged) {
+    history.push({
+      key: story.entry?.key || null,
+      title: story.quest?.title || '',
+      board: story.boardName || null,
+      location: story.destination?.label || null,
+      npc: { name: story.npc?.fullName || null, role: story.npc?.role || null },
+      outcome: story.resultLabel || null,
+      success: Boolean(story.success),
+      reward: story.rewardText || null,
+      narrative: (story.narrative || []).join('\n'),
+      date: dateKey(worldCalendar.today()),
+      dateLabel: worldCalendar.formatCurrentDate(),
+      hours: (story.duration?.hours || 0) + (story.travelHours || 0),
+      timeOfDay: story.timeAfter ?? currentCharacter?.timeOfDay ?? null,
+      daysElapsed: story.daysElapsed ?? 0,
+    });
+    story.historyLogged = true;
+  }
+  saveProfiles();
+  activeQuestStoryline = null;
+  const success = Boolean(story.success);
+  const message = story.outcome === 'declined'
+    ? `You declined “${story.quest?.title || 'Quest'}”.`
+    : success
+      ? `Quest complete: “${story.quest?.title || 'Quest'}”.${story.rewardText ? ` Reward: ${story.rewardText}.` : ''}`
+      : `Quest failed: “${story.quest?.title || 'Quest'}”.`;
+  const flash = { type: success ? 'success' : story.outcome === 'declined' ? 'info' : 'error', message };
+  const context = story.returnContext || {};
+  showQuestBoardDetails(story.boardName || (story.returnContext?.boardName ?? ''), { ...context, flash });
 }
 
 function acceptQuest(boardName, questTitle) {
@@ -2997,6 +3568,8 @@ function acceptQuest(boardName, questTitle) {
     return { ok: false, message: 'No active character.' };
   }
   ensureQuestLog(currentCharacter);
+  ensureQuestHistory(currentCharacter);
+  ensureCharacterClock(currentCharacter);
   const loc = LOCATIONS[currentCharacter.location];
   if (!loc || !loc.questBoards) {
     return { ok: false, message: 'No quest boards found here.' };
@@ -3025,6 +3598,8 @@ function acceptQuest(boardName, questTitle) {
   const acceptedOn = dateKey(today);
   const acceptedOnLabel = worldCalendar.formatCurrentDate();
   const questLabel = quest.title || 'this quest';
+  let entry = null;
+  let message = '';
   if (existing) {
     const status = (existing.status || '').toLowerCase();
     if (!REPEATABLE_QUEST_STATUSES.has(status)) {
@@ -3040,21 +3615,36 @@ function acceptQuest(boardName, questTitle) {
     existing.acceptedOn = acceptedOn;
     existing.acceptedOnLabel = acceptedOnLabel;
     existing.location = quest.location || null;
-    saveProfiles();
-    return { ok: true, message: `“${questLabel}” added back to your quest log.`, entry: existing };
+    existing.completedOn = null;
+    existing.completedOnLabel = null;
+    existing.outcome = null;
+    existing.reward = null;
+    existing.notes = null;
+    existing.npc = null;
+    entry = existing;
+    message = `“${questLabel}” added back to your quest log.`;
+  } else {
+    entry = {
+      key,
+      board: boardName,
+      title: quest.title || '',
+      acceptedOn,
+      acceptedOnLabel,
+      status: 'accepted',
+      location: quest.location || null,
+      completedOn: null,
+      completedOnLabel: null,
+      outcome: null,
+      reward: null,
+      notes: null,
+      npc: null,
+    };
+    log.push(entry);
+    message = `“${questLabel}” added to your quest log.`;
   }
-  const entry = {
-    key,
-    board: boardName,
-    title: quest.title || '',
-    acceptedOn,
-    acceptedOnLabel,
-    status: 'accepted',
-    location: quest.location || null,
-  };
-  log.push(entry);
   saveProfiles();
-  return { ok: true, message: `“${questLabel}” added to your quest log.`, entry };
+  const storyline = buildQuestStoryline(quest, boardName, entry);
+  return { ok: true, message, entry, storyline };
 }
 
 function getStudyLevel(record) {
@@ -3681,9 +4271,13 @@ function showQuestBoardDetails(boardName, options = {}) {
         const questTitle = btn.dataset.quest || '';
         if (!questTitle) return;
         const result = acceptQuest(board, questTitle);
-        const message = result.message || (result.ok ? 'Quest accepted.' : 'Unable to accept quest.');
-        const flash = { type: result.ok ? 'success' : 'error', message };
-        showQuestBoardDetails(board, { ...context, flash });
+        if (result.ok && result.storyline) {
+          startQuestStoryline(result.storyline, { boardName: board, boardContext: context });
+        } else {
+          const message = result.message || (result.ok ? 'Quest accepted.' : 'Unable to accept quest.');
+          const flash = { type: result.ok ? 'success' : 'error', message };
+          showQuestBoardDetails(board, { ...context, flash });
+        }
       });
     });
   }
@@ -4441,6 +5035,9 @@ function finalizeCharacter(character) {
   }
   assignMagicAptitudes(newChar);
   ensureCollections(newChar);
+  ensureQuestLog(newChar);
+  ensureQuestHistory(newChar);
+  ensureCharacterClock(newChar);
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;
   currentCharacter = newChar;
@@ -4459,6 +5056,9 @@ function loadCharacter() {
       ...currentProfile.characters[charId]
     });
     ensureCollections(currentCharacter);
+    ensureQuestLog(currentCharacter);
+    ensureQuestHistory(currentCharacter);
+    ensureCharacterClock(currentCharacter);
     showCharacter();
   } else if (localStorage.getItem(TEMP_CHARACTER_KEY)) {
     startCharacterCreation();
