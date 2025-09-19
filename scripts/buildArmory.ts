@@ -1,9 +1,8 @@
 import { readFile, writeFile } from "fs/promises";
 import slugify from "slugify";
 import { cpToCoins } from "../data/economy/currency.js";
+import { WEAPON_QUALITIES, type WeaponQuality } from "../data/game/item_baselines";
 import { generateWeaponDescription } from "./descriptionGenerator";
-
-type WeaponQuality = "Standard" | "Fine" | "Masterwork";
 
 type ArmorPen = "Low" | "Low-Medium" | "Medium" | "Medium-High" | "High" | "Very High";
 
@@ -2412,47 +2411,7 @@ const ARMOR_PEN_MULTIPLIERS: Record<ArmorPen, number> = {
   "Very High": 1.45,
 };
 
-const QUALITY_CONFIG: Record<WeaponQuality, {
-  qualityTier: "Common" | "Fine" | "Luxury";
-  priceMultiplier: number;
-  materialRatio: number;
-  laborRatio: number;
-  overheadRatio: number;
-  taxPct: number;
-  primaryConsumer: "Military" | "Artisan" | "Noble";
-  valueDense: boolean;
-}> = {
-  Standard: {
-    qualityTier: "Common",
-    priceMultiplier: 1,
-    materialRatio: 0.35,
-    laborRatio: 0.3,
-    overheadRatio: 0.08,
-    taxPct: 0.06,
-    primaryConsumer: "Military",
-    valueDense: false,
-  },
-  Fine: {
-    qualityTier: "Fine",
-    priceMultiplier: 1.45,
-    materialRatio: 0.4,
-    laborRatio: 0.32,
-    overheadRatio: 0.09,
-    taxPct: 0.12,
-    primaryConsumer: "Artisan",
-    valueDense: false,
-  },
-  Masterwork: {
-    qualityTier: "Luxury",
-    priceMultiplier: 2.35,
-    materialRatio: 0.44,
-    laborRatio: 0.34,
-    overheadRatio: 0.11,
-    taxPct: 0.35,
-    primaryConsumer: "Noble",
-    valueDense: true,
-  },
-};
+const QUALITY_CONFIG = WEAPON_QUALITIES;
 
 function round(value: number, digits = 3): number {
   const factor = 10 ** digits;
