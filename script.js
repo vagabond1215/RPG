@@ -3690,6 +3690,7 @@ const SLOT_ICONS = {
   instrument: '<svg viewBox="0 0 24 24"><path d="M6 3c4 9 10 12 10 19H6Z"/><path d="M6 7h8"/><path d="M6 11h9"/><path d="M6 15h8"/><path d="M6 19h6"/></svg>',
   ammo: '<svg viewBox="0 0 24 24"><path d="M3 12h14"/><polyline points="3 9 6 12 3 15"/><polyline points="17 7 23 12 17 17"/></svg>',
   head: '<svg viewBox="0 0 24 24"><path d="M2 10l4-2 3 3 3-6 3 6 3-3 4 2v8H2z"/></svg>',
+  face: '<svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 20c1.2-3.2 4.6-5 8-5s6.8 1.8 8 5"/><path d="M7 9h10"/></svg>',
   body: '<svg viewBox="0 0 24 24"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" /></svg>',
   shoulders: '<svg viewBox="0 0 24 24"><path d="M4 9a8 8 0 0 1 16 0v9l-6 4-1-5h-2l-1 5-6-4z"/></svg>',
   back: '<svg viewBox="0 0 24 24"><path d="M12 2c3 1 5 4 5 8v12l-5-3-5 3V10c0-4 2-7 5-8z"/></svg>',
@@ -3701,6 +3702,8 @@ const SLOT_ICONS = {
   lEar: '<svg viewBox="0 0 24 24"><g transform="scale(-1,1) translate(-24,0)"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></g></svg>',
   neck: '<svg viewBox="0 0 24 24"><path d="M4 5a8 8 0 0 0 16 0"/><circle cx="12" cy="13" r="2"/><path d="M12 15v4"/></svg>',
   lRing: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" /></svg>',
+  brooch: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 8V4"/><path d="M12 16v4"/></svg>',
+  belt: '<svg viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="10" y="9" width="4" height="6" rx="0.5"/><path d="M3 12h4"/><path d="M17 12h4"/></svg>',
   pouch: '<svg viewBox="0 0 24 24"><path d="M4 7h16v10a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M4 7l8-4 8 4"/><rect x="9" y="11" width="6" height="3"/><path d="M12 11v3"/></svg>'
 };
 SLOT_ICONS.rEar = '<svg viewBox="0 0 24 24"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></svg>';
@@ -3710,10 +3713,14 @@ function formatSlotName(slot) {
   const names = {
     mainHand: 'Main Hand',
     offHand: 'Off Hand',
+    face: 'Face',
     lEar: 'Left Ear',
     rEar: 'Right Ear',
     lRing: 'Left Ring',
-    rRing: 'Right Ring'
+    rRing: 'Right Ring',
+    brooch: 'Brooch',
+    belt: 'Belt',
+    pouch: 'Pouch'
   };
   return (
     names[slot] ||
