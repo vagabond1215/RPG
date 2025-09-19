@@ -19,6 +19,12 @@ export const GATHERING_ATTRS = {
   farming: { primary: "VIT", secondary: "INT" },
   // Gardening smaller plots – dexterity plus botanical understanding.
   gardening: { primary: "DEX", secondary: "WIS" },
+  // Herbalism/herb lore rewards keen observation and trained study.
+  herbalism: { primary: "WIS", secondary: "INT" },
+  // Vineyard stewardship blends botanical sense with resilience.
+  viticulture: { primary: "WIS", secondary: "CON" },
+  // Pearl diving blends lung capacity with agile swimming in open water.
+  pearlDiving: { primary: "CON", secondary: "AGI" },
 };
 
 function attrFactor(attrs, key) {

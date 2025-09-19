@@ -1,4 +1,4 @@
-import { questHelper } from "./questHelper.js";
+import { questHelper, type QuestSkillRequirement } from "./questHelper.js";
 import type { CalendarDate } from './calendar.js';
 import type { Habitat, WeatherReport } from './weather.js';
 const MAP_BASE_PATH = "assets/images/Maps";
@@ -85,6 +85,7 @@ export interface Quest {
   timeline: string | null;
   risks: string[] | null;
   reward: string | null;
+  skillRequirements?: QuestSkillRequirement[];
   repeatable?: boolean;
   highPriority?: boolean;
   requiresCheckIn?: boolean;
