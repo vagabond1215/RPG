@@ -1,10 +1,10 @@
 # Fantasy Economy Catalog
 
-This repository stores item, wage, and region policy data imported from the `Fantasy_Economy_Catalog_REBUILT.xlsx` workbook.
+This repository stores item, wage, and region policy data in the `data/economy/catalog_flat.csv` and `data/economy/region_policy.csv` source files.
 
-## Sheets
+## Source files
 
-### `Catalog_Flat`
+### `catalog_flat.csv`
 Key columns used by the importer:
 
 | Column | Description |
@@ -29,7 +29,7 @@ Key columns used by the importer:
 
 Natural key: `slugify(InternalName)` + `Variant`. This ensures idempotent upserts without duplicates.
 
-### `RegionPolicy`
+### `region_policy.csv`
 Defines biome adjustments applied when pricing items out of their home regions.
 
 | Column | Description |
@@ -46,10 +46,15 @@ Run the importer to refresh data:
 
 ```bash
 # Dry run
-node tools/importers/import_economy_catalog.js --file Fantasy_Economy_Catalog_REBUILT.xlsx --dry-run
+node tools/importers/import_economy_catalog.js --dry-run
 
 # Real run
-node tools/importers/import_economy_catalog.js --file Fantasy_Economy_Catalog_REBUILT.xlsx
+node tools/importers/import_economy_catalog.js
+
+# Custom source files
+node tools/importers/import_economy_catalog.js \
+  --catalog path/to/catalog_flat.csv \
+  --region-policy path/to/region_policy.csv
 ```
 
 A report is written to `reports/import_economy_catalog_<timestamp>.json` summarising inserts, updates, skips and validation errors.
@@ -90,15 +95,15 @@ Where `policyMap` maps biome keys to policy rows. In-region prices use `Regional
 
 Two automated checks keep the catalog in a believable range:
 
-1. The Excel importer refuses to ingest rows whose computed `net_profit_cp` differs from the workbook formula, ensuring that material, labour, overhead, and tax inputs reconcile to the stored profit.【F:tools/importers/import_economy_catalog.js†L35-L92】
+1. The CSV importer refuses to ingest rows whose computed `net_profit_cp` differs from the provided inputs, ensuring that material, labour, overhead, and tax inputs reconcile to the stored profit.【F:tools/importers/import_economy_catalog.js†L18-L104】
 2. The `net_profit.test.js` suite replays the same calculation and asserts profits remain non-negative and never exceed their item’s `market_value_cp`, preserving the 5–35 % profit window established in the source sheet.【F:tests/economy_import/net_profit.test.js†L1-L13】
 3. `profit_margin.test.js` enforces the same window explicitly, flagging entries whose margins fall below 4.5 % or climb above 35 % so luxury markups never explode and staples still return a sustainable profit.【F:tests/economy_import/profit_margin.test.js†L1-L18】
 
-Regenerate the JSON with `node tools/importers/import_economy_catalog.js --file Fantasy_Economy_Catalog_REBUILT.xlsx` and rerun the Node test (`node --test tests/economy_import/net_profit.test.js`) after tuning workbook rows. This guarantees every price, wage, or quest reward derived from the catalog remains proportional to the bread baseline and within the repository’s expected margins.【F:reports/import_economy_catalog_2025-09-19T00-14-05-153Z.json†L1-L6】【7c63fc†L1-L12】
+Regenerate the JSON with `node tools/importers/import_economy_catalog.js` and rerun the Node test (`node --test tests/economy_import/net_profit.test.js`) after tuning catalog rows. This guarantees every price, wage, or quest reward derived from the catalog remains proportional to the bread baseline and within the repository’s expected margins.【F:reports/import_economy_catalog_2025-09-19T00-14-05-153Z.json†L1-L6】【7c63fc†L1-L12】
 
 ## Extending the Catalog
 
-1. Add new rows to the Excel workbook.
-2. Ensure `InternalName` and `Variant` combination is unique.
+1. Add or edit rows in `data/economy/catalog_flat.csv` and, when necessary, update biome modifiers in `data/economy/region_policy.csv`.
+2. Ensure the combination of `InternalName` and `Variant` remains unique.
 3. Run the importer. Existing items with matching keys are updated; new items are appended.
 4. Commit the updated JSON files and report as needed.
