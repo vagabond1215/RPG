@@ -3,13 +3,13 @@ import { gainCraftProficiency } from "./crafting_proficiency.js";
 import { performCraft, trainingCraft, resetCraftTracking, } from "./craft_skill_tracker.js";
 import { gainSwimming, gainSailing, gainRiding, performOutdoorActivity } from "./outdoor_skills.js";
 import { gainHuntingProficiency, performHunt } from "./hunting_proficiency.js";
-import { gainInstrumentProficiency } from "./instrument_songs.ts";
-import { gainDanceProficiency } from "./dance_proficiency.ts";
-import { gainSingingProficiency } from "./singing_proficiency.ts";
-import { gainAnimalHandling } from "./animal_handling_proficiency.ts";
-import { gainSwordProficiency, gainGreatswordProficiency, gainAxeProficiency, gainGreataxeProficiency, gainSpearProficiency, gainDaggerProficiency, gainMaceProficiency, gainBowProficiency, gainCrossbowProficiency, gainStaffProficiency, gainShieldProficiency, gainWandProficiency, gainUnarmedProficiency, } from "./weapon_proficiency.ts";
-import { applyLightArmorProficiencyGain, applyMediumArmorProficiencyGain, applyHeavyArmorProficiencyGain, } from "./armor_proficiency.ts";
-import { gainReactiveProficiency } from "./reactive_proficiency.ts";
+import { gainInstrumentProficiency } from "./instrument_songs.js";
+import { gainDanceProficiency } from "./dance_proficiency.js";
+import { gainSingingProficiency } from "./singing_proficiency.js";
+import { gainAnimalHandling } from "./animal_handling_proficiency.js";
+import { gainSwordProficiency, gainGreatswordProficiency, gainAxeProficiency, gainGreataxeProficiency, gainSpearProficiency, gainDaggerProficiency, gainMaceProficiency, gainBowProficiency, gainCrossbowProficiency, gainStaffProficiency, gainShieldProficiency, gainWandProficiency, gainUnarmedProficiency, } from "./weapon_proficiency.js";
+import { applyLightArmorProficiencyGain, applyMediumArmorProficiencyGain, applyHeavyArmorProficiencyGain, } from "./armor_proficiency.js";
+import { gainReactiveProficiency } from "./reactive_proficiency.js";
 import { gainElementProficiency } from "./spell_proficiency.js";
 const OUTDOOR_GAINERS = {
     swimming: gainSwimming,
