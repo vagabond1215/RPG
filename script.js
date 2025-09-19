@@ -452,7 +452,55 @@ function getCityIcon(city) {
 }
 
 const SHOW_DISTRICTS_KEY = 'rpgShowDistricts';
-let showDistricts = localStorage.getItem(SHOW_DISTRICTS_KEY) === 'true';
+
+const safeStorage = (() => {
+  if (typeof window === 'undefined') {
+    return {
+      isEnabled: () => false,
+      getItem: () => null,
+      setItem: () => false,
+      removeItem: () => {},
+      clear: () => {},
+    };
+  }
+  let enabled = false;
+  let store = null;
+  try {
+    store = window.localStorage;
+    const testKey = '__rpg_storage_test__';
+    store.setItem(testKey, '1');
+    store.removeItem(testKey);
+    enabled = true;
+  } catch {
+    store = null;
+    enabled = false;
+  }
+  const guard = (action, fallback) => (...args) => {
+    if (!enabled || !store) return fallback;
+    try {
+      return action(...args);
+    } catch {
+      enabled = false;
+      return fallback;
+    }
+  };
+  return {
+    isEnabled: () => enabled,
+    getItem: guard(key => store.getItem(key), null),
+    setItem: guard((key, value) => {
+      store.setItem(key, value);
+      return true;
+    }, false),
+    removeItem: guard(key => {
+      store.removeItem(key);
+    }),
+    clear: guard(() => {
+      store.clear();
+    }),
+  };
+})();
+
+let showDistricts = safeStorage.getItem(SHOW_DISTRICTS_KEY) === 'true';
 
 // Declare profile pointers up front so early UI helpers can safely reference them
 let profiles = {};
@@ -614,13 +662,15 @@ const sanitizeProfiles = raw => {
 };
 
 profiles = {};
-try {
-  const storedProfiles = localStorage.getItem(STORAGE_KEY);
-  profiles = storedProfiles ? sanitizeProfiles(JSON.parse(storedProfiles)) : {};
-} catch {
-  profiles = {};
+const storedProfilesRaw = safeStorage.getItem(STORAGE_KEY);
+if (storedProfilesRaw) {
+  try {
+    profiles = sanitizeProfiles(JSON.parse(storedProfilesRaw));
+  } catch {
+    profiles = {};
+  }
 }
-currentProfileId = localStorage.getItem(LAST_PROFILE_KEY);
+currentProfileId = safeStorage.getItem(LAST_PROFILE_KEY);
 currentProfile = currentProfileId ? profiles[currentProfileId] : null;
 currentCharacter = null;
 
@@ -1637,7 +1687,7 @@ const saveProfiles = () => {
     }
     currentProfile.characters[currentCharacter.id] = currentCharacter;
   }
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
+  safeStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
   updateTopMenuIndicators();
 };
 
@@ -1943,7 +1993,7 @@ function createProfile(name) {
   profiles[id] = { id, name: profileName, preferences: {}, characters: {}, lastCharacter: null };
   currentProfileId = id;
   currentProfile = profiles[id];
-  localStorage.setItem(LAST_PROFILE_KEY, id);
+  safeStorage.setItem(LAST_PROFILE_KEY, id);
   saveProfiles();
   return id;
 }
@@ -1963,7 +2013,7 @@ function selectProfile() {
     // Fallback to the first profile if prompts cannot be shown
     currentProfileId = ids[0];
     currentProfile = profiles[currentProfileId];
-    localStorage.setItem(LAST_PROFILE_KEY, currentProfileId);
+    safeStorage.setItem(LAST_PROFILE_KEY, currentProfileId);
     return;
   }
   let choice = '';
@@ -1973,14 +2023,14 @@ function selectProfile() {
       // User cancelled; default to first profile so the UI can load
       currentProfileId = ids[0];
       currentProfile = profiles[currentProfileId];
-      localStorage.setItem(LAST_PROFILE_KEY, currentProfileId);
+      safeStorage.setItem(LAST_PROFILE_KEY, currentProfileId);
       break;
     }
     const existingId = ids.find(id => profiles[id].name === choice);
     if (existingId) {
       currentProfileId = existingId;
       currentProfile = profiles[existingId];
-      localStorage.setItem(LAST_PROFILE_KEY, currentProfileId);
+      safeStorage.setItem(LAST_PROFILE_KEY, currentProfileId);
     } else {
       createProfile(choice);
     }
@@ -3038,7 +3088,7 @@ function showNavigation() {
         extraClass: 'quest-board-item',
       })
     );
-    const localButtons = locals.map(makeButton);
+          safeStorage.setItem(SHOW_DISTRICTS_KEY, showDistricts);
     const localSections = [];
     if (questButtons.length) {
       localSections.push(
@@ -5345,7 +5395,7 @@ function equipmentSection(title, items) {
   return `<section class="equipment-section"><h3 class="equipment-header">${title}</h3><ul class="equipment-list">${items}</ul></section>`;
 }
 
-function showEquipmentUI() {
+    saved = JSON.parse(safeStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
   if (!currentCharacter) return;
   updateScale();
   showBackButton();
@@ -5408,9 +5458,9 @@ function startCharacterCreation() {
       label: 'Choose your sex',
       type: 'select',
       options: ['Male', 'Female']
-    },
-    classField,
-    { key: 'characterImage', label: 'Choose your character', type: 'select' }
+      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
   ];
 
   const FIELD_STEP_LABELS = {
@@ -5657,20 +5707,20 @@ function startCharacterCreation() {
           colors = skinColorOptionsByRace[character.race] || humanSkinColors;
         }
         colors = colors.slice().sort();
-        let value = character[field.key];
-        if (value === undefined) {
-          value = colors[0];
-          character[field.key] = value;
-        }
-        const pickerId = `${field.key}-picker`;
-        inputHTML = `
-          <div class="color-carousel wheel-selector" data-field="${field.key}">
-            <button class="color-arrow left" aria-label="Previous">&#x2039;</button>
-            <button class="color-button" style="background:${value}" aria-label="${value}"></button>
-            <button class="color-arrow right" aria-label="Next">&#x203A;</button>
-            <button class="color-picker" aria-label="Pick color">🎨</button>
-            <input type="color" id="${pickerId}" value="${value}" style="display:none;">
-          </div>`;
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            safeStorage.setItem(
+            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        safeStorage.removeItem(TEMP_CHARACTER_KEY);
+  let apiKey = safeStorage.getItem('openaiApiKey');
+    if (apiKey) safeStorage.setItem('openaiApiKey', apiKey);
       }
 
       setMainHTML(
@@ -6027,9 +6077,9 @@ function finalizeCharacter(character) {
       const district = newChar.backstory.district;
       let building = null;
       if (newChar.backstory.startingLocation && cityData.buildings) {
-        const startLower = newChar.backstory.startingLocation.toLowerCase();
-        for (const name of Object.keys(cityData.buildings)) {
-          if (startLower.includes(name.toLowerCase())) {
+  safeStorage.removeItem(TEMP_CHARACTER_KEY);
+  } else if (safeStorage.getItem(TEMP_CHARACTER_KEY)) {
+    safeStorage.clear();
             building = name;
             break;
           }
