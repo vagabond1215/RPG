@@ -774,6 +774,63 @@ body.theme-dark .top-menu button {
     text-align: left;
   }
 
+  .building-description p {
+    margin: 0.5rem 0;
+  }
+
+  .building-description .npc-line {
+    margin: 0.5rem 0;
+    font-style: italic;
+  }
+
+  .building-description .npc-line strong {
+    font-style: normal;
+  }
+
+  .building-description .npc-dialogue {
+    font-style: normal;
+  }
+
+  .building-description .encounter-message {
+    margin: 0.75rem 0;
+    padding: 0.5rem 0.75rem;
+    border-left: 3px solid var(--foreground);
+    background: rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+  }
+
+  body.theme-dark .building-description .encounter-message {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .building-description .encounter-message-success {
+    border-color: #2e8b57;
+    color: #2e8b57;
+  }
+
+  body.theme-dark .building-description .encounter-message-success {
+    color: #7fd27f;
+    border-color: #7fd27f;
+  }
+
+  .building-description .encounter-message-error {
+    border-color: #800000;
+    color: #800000;
+  }
+
+  body.theme-dark .building-description .encounter-message-error {
+    color: #ff7f7f;
+    border-color: #ff7f7f;
+  }
+
+  .building-description .encounter-message-info {
+    border-color: #555555;
+  }
+
+  body.theme-dark .building-description .encounter-message-info {
+    border-color: #bbbbbb;
+  }
+
   .business-hours {
     margin: 0 0 0.5rem 0;
     text-align: left;

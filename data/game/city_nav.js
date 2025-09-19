@@ -756,8 +756,8 @@ Rare flowers bloom around the boxes while waves crash far below.`,
       },
       "Gulls' Orchard": {
         travelPrompt: "Exit to",
-        description: `As you wander into Gulls' Orchard, wings beat overhead.
-Apple and pear trees line the creek, their fruit pecked by curious birds.`,
+        description: `Salt-sweet rows of apple and pear trees march along the tidal creek.
+Harvest ladders lean against the trunks while crates wait beside the press house.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],        produces: { resources: [], commodities: ["fruit"], luxuries: [] },
         consumes: { resources: [], commodities: [], luxuries: [] }
       },
