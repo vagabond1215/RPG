@@ -30,7 +30,7 @@ interface ParsedLaborDetails {
 }
 
 const GROUP_BINDINGS: Record<string, QuestVisibilityBinding> = {
-  farmland: { region: "waves_break", habitat: 'farmland', district: 'Farmlands' },
+  farmland: { region: "waves_break", habitat: 'farmland', district: 'High Road' },
   port: { region: "waves_break", habitat: 'coastal', district: 'Harbor Ward' },
   upper: { region: "waves_break", habitat: 'urban', district: 'Upper Ward' },
   terns: { region: "waves_break", habitat: 'urban', district: 'Little Terns' },

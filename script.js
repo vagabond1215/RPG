@@ -123,6 +123,8 @@ const QUEST_DISTRICT_ALIASES = {
   "Wave's Break": "Wave's Break",
 };
 
+const QUEST_BOARD_BUILDINGS = new Set(['North Gate', 'South Gate']);
+
 const CITY_SLUGS = { "Wave's Break": "waves_break" };
 
 const BACKSTORY_MAP = {
@@ -2632,16 +2634,19 @@ function showNavigation() {
     });
     if (exitButtons.length) groups.push(exitButtons);
     const buildingBoards = questBoardsForBuilding(pos.city, pos.district, pos.building);
-    const questButtons = buildingBoards.map(board =>
-      createNavItem({
-        type: 'quests',
-        target: board.name,
-        name: board.name,
-        prompt: 'Review quests at',
-        icon: QUEST_BOARD_ICON,
-        extraClass: 'quest-board-item',
-      })
-    );
+    let questButtons = [];
+    if (QUEST_BOARD_BUILDINGS.has(pos.building)) {
+      questButtons = buildingBoards.map(board =>
+        createNavItem({
+          type: 'quests',
+          target: board.name,
+          name: board.name,
+          prompt: 'Review quests at',
+          icon: QUEST_BOARD_ICON,
+          extraClass: 'quest-board-item',
+        })
+      );
+    }
     if (questButtons.length) groups.push(questButtons);
     const interactionButtons = [];
     (building.interactions || []).forEach(i => {
@@ -3676,6 +3681,8 @@ function ensureCollections(character) {
 }
 
 const REPEATABLE_QUEST_STATUSES = new Set(['abandoned', 'failed', 'expired', 'declined']);
+const ACTIVE_QUEST_STATUSES = new Set(['accepted', 'in_progress']);
+const COMPLETED_QUEST_STATUSES = new Set(['completed', 'failed', 'abandoned', 'expired']);
 
 function ensureQuestLog(character) {
   if (!character) return [];
@@ -3696,6 +3703,9 @@ function ensureQuestLog(character) {
       reward: entry.reward || null,
       notes: entry.notes || null,
       npc: entry.npc || null,
+      timesCompleted: Number.isFinite(entry.timesCompleted)
+        ? entry.timesCompleted
+        : 0,
     }));
   character.questLog = log;
   return log;
@@ -4221,6 +4231,12 @@ function resolveQuestOutcome(story, choiceKey) {
     entry.notes = choice?.label || null;
     entry.npc = { name: story.npc.fullName, role: story.npc.role };
     entry.location = story.destination?.label || entry.location;
+    if (story.success) {
+      const prevCount = Number.isFinite(entry.timesCompleted)
+        ? entry.timesCompleted
+        : 0;
+      entry.timesCompleted = prevCount + 1;
+    }
   }
   saveProfiles();
   updateTopMenuIndicators();
@@ -4340,6 +4356,7 @@ function acceptQuest(boardName, questTitle) {
       reward: null,
       notes: null,
       npc: null,
+      timesCompleted: 0,
     };
     log.push(entry);
     message = `“${questLabel}” added to your quest log.`;
@@ -4696,6 +4713,81 @@ function showBuildingsUI() {
     html += '</ul></div>';
   }
   setMainHTML(html);
+}
+
+function showQuestLogUI() {
+  updateTopMenuIndicators();
+  if (!currentCharacter) return;
+  showBackButton();
+  const questLog = ensureQuestLog(currentCharacter);
+  const normalizeStatus = status => {
+    if (!status) return '';
+    const normalized = String(status).toLowerCase();
+    if (normalized === 'in_progress') return 'In Progress';
+    return titleize(normalized.replace(/_/g, ' '));
+  };
+  const metaLine = (label, value) => {
+    if (value == null || value === '') return '';
+    return `<div class="quest-log-meta-line"><span class="quest-log-label">${escapeHtml(label)}:</span> ${escapeHtml(String(value))}</div>`;
+  };
+  const formatTimesCompleted = entry => {
+    const count = Number.isFinite(entry.timesCompleted)
+      ? entry.timesCompleted
+      : 0;
+    if (count <= 0) return '';
+    return metaLine('Times Completed', count);
+  };
+  const buildEntry = entry => {
+    const title = escapeHtml(entry.title || 'Quest');
+    const lines = [];
+    lines.push(metaLine('Board', entry.board || 'Unknown'));
+    lines.push(metaLine('Status', normalizeStatus(entry.status)));
+    lines.push(metaLine('Accepted', entry.acceptedOnLabel || entry.acceptedOn || ''));
+    lines.push(metaLine('Completed', entry.completedOnLabel || entry.completedOn || ''));
+    lines.push(metaLine('Outcome', entry.outcome || ''));
+    lines.push(metaLine('Reward', entry.reward || ''));
+    const repeats = formatTimesCompleted(entry);
+    if (repeats) lines.push(repeats);
+    const details = lines.filter(Boolean).join('');
+    const locationLine = entry.location
+      ? metaLine('Location', entry.location)
+      : '';
+    const npcLine = entry.npc && entry.npc.name
+      ? metaLine('Contact', entry.npc.name)
+      : '';
+    const extra = [locationLine, npcLine].filter(Boolean).join('');
+    const allDetails = [details, extra].filter(Boolean).join('');
+    return `<li class="quest-log-entry"><h3>${title}</h3>${allDetails ? `<div class="quest-log-meta">${allDetails}</div>` : ''}</li>`;
+  };
+  const sortByField = (field, fallback = '') => (a, b) => {
+    const aField = (a[field] || fallback);
+    const bField = (b[field] || fallback);
+    return String(bField).localeCompare(String(aField));
+  };
+  const inProgress = questLog
+    .filter(entry => ACTIVE_QUEST_STATUSES.has((entry.status || '').toLowerCase()))
+    .sort(sortByField('acceptedOn', ''));
+  const completed = questLog
+    .filter(entry => COMPLETED_QUEST_STATUSES.has((entry.status || '').toLowerCase()))
+    .sort(sortByField('completedOn', ''));
+  let html = '<div class="quest-log-screen"><h1>Quest Log</h1>';
+  if (!inProgress.length && !completed.length) {
+    html += '<p>No quests have been accepted yet.</p>';
+  } else {
+    html += '<section class="quest-log-section"><h2>In Progress</h2>';
+    html += inProgress.length
+      ? `<ul class="quest-log-list">${inProgress.map(buildEntry).join('')}</ul>`
+      : '<p class="quest-log-empty">No quests in progress.</p>';
+    html += '</section>';
+    html += '<section class="quest-log-section"><h2>Complete</h2>';
+    html += completed.length
+      ? `<ul class="quest-log-list">${completed.map(buildEntry).join('')}</ul>`
+      : '<p class="quest-log-empty">No completed quests yet.</p>';
+    html += '</section>';
+  }
+  html += '</div>';
+  setMainHTML(html);
+  updateMenuHeight();
 }
 
 function showQuestBoardsUI() {
@@ -5961,7 +6053,7 @@ characterMenu.addEventListener('click', e => {
   } else if (action === 'buildings') {
     showBuildingsUI();
   } else if (action === 'quests') {
-    showQuestBoardsUI();
+    showQuestLogUI();
   } else {
     showBackButton();
     setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
