@@ -2031,9 +2031,9 @@ const WAVES_BREAK_FARMLAND_BUSINESSES: BusinessProfile[] = [
     quests: [
       createQuest(
         "North Gate Roster",
-        "Captain Brisa calls for gate-grinders and a veteran guard to keep the portcullis ready through caravan week.",
+        "Captain Brisa spreads a grease-striped roster atop the North Gate winch dais, seeking grinders to oil the counterweight chains and a veteran to pace the torch-lit portcullis drums through caravan week.",
         {
-          location: "North Gate",
+          location: "North Gate winch dais and toll ledgers",
           requirements: [
             "Wave's Break Guard rank: Gatehand or Adventurers' Guild Bronze",
             "Strength to work portcullis winches for extended periods",
@@ -2058,9 +2058,9 @@ const WAVES_BREAK_FARMLAND_BUSINESSES: BusinessProfile[] = [
       ),
       createQuest(
         "Portcullis Siege Drill",
-        "Intelligence of raiders triggers a siege drill—experienced guards must man the murder holes and test the gate.",
+        "Raid whispers send gongs ringing along the parapet—the winch towers need archers at the murder holes, engineers tending tar cauldrons, and shield guards bracing the gatehouse doors for a midnight siege drill.",
         {
-          location: "North Gate",
+          location: "North Gate battlements and murder-hole galleries",
           requirements: [
             "Guard rank: Sergeant or Adventurers' Guild Brass",
             "Martial Weapon proficiency 35+ with polearm or crossbow",
@@ -2638,9 +2638,9 @@ const WAVES_BREAK_FARMLAND_BUSINESSES: BusinessProfile[] = [
     quests: [
       createQuest(
         "South Gate Writ",
-        "Captain Relwen seeks gate marshals and a sergeant to regulate outbound wagons bound for the fields.",
+        "Captain Relwen nails a sun-faded writ beneath the South Gate canopy, calling for queue marshals to chalk wagon numbers, steady torch-bearers amid spice carts, and a steady sergeant to stamp toll ledgers before the harvest caravans roll out.",
         {
-          location: "South Gate",
+          location: "South Gate marshal's canopy and outbound queue lanes",
           requirements: [
             "Wave's Break Guard rank: Gatehand or Adventurers' Guild Bronze",
             "Perception 24+ to spot contraband",
@@ -2664,9 +2664,9 @@ const WAVES_BREAK_FARMLAND_BUSINESSES: BusinessProfile[] = [
       ),
       createQuest(
         "Outbound Patrol Escort",
-        "Bandit rumors demand a vetted escort team to lead supply wagons to the outer watchposts.",
+        "Gatewatch runners need a seasoned escort to marshal salt-caked supply wagons, haul storm tarps, and carry brass signal horns from the South Gate muster yard to the Brackenshore and Coast Road watchposts as bandit whispers flare.",
         {
-          location: "South Gate",
+          location: "South Gate muster yard and coastal road watchposts",
           requirements: [
             "Guard rank: Sergeant or Adventurers' Guild Brass",
             "Martial Weapon proficiency 30+ or Battle Magic (Circle 1)",
@@ -5937,9 +5937,9 @@ const WAVES_BREAK_LOWER_GARDENS_BUSINESSES: BusinessProfile[] = [
     quests: [
       createQuest(
         "Caravan Loader Levy",
-        "Gate sergeants hire loaders to ready caravans before the midday sun.",
+        "Sergeant Hullen waves crews toward the South Gate loading yard, pressing bale hooks, crate sledges, and fresh tarpaulins into ready hands so wagons are stacked before the noon bells scorch the cobbles.",
         {
-          location: "South Gate Market",
+          location: "South Gate Market loading yards and tack sheds",
           requirements: [
             "Strength and stamina",
             "Guild Rank: Caravan Laborer or Adventurers' Guild Bronze",
@@ -5963,9 +5963,9 @@ const WAVES_BREAK_LOWER_GARDENS_BUSINESSES: BusinessProfile[] = [
       ),
       createQuest(
         "Manifest Inspection Patrol",
-        "Smuggling rumors demand discreet inspectors to walk the line and verify manifests at dusk.",
+        "With contraband whispers rising, Hullen needs quiet inspectors walking the dusk-lit caravan queue, lanterns angled over brass-sealed manifests and spice-stained crates to spot false seals before the wagons roll.",
         {
-          location: "South Gate Market",
+          location: "South Gate Market caravan queue and ledger tents",
           requirements: [
             "Investigation 20+",
             "Guild Rank: Gate Inspector or Adventurers' Guild Silver",

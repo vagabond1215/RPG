@@ -2161,6 +2161,7 @@ function showNavigation() {
         target: board.name,
         name: board.name,
         prompt: "Review quests at",
+        icon: QUEST_BOARD_ICON,
         extraClass: 'quest-board-item',
       })
     );
@@ -4137,6 +4138,18 @@ function showQuestBoardDetails(boardName, options = {}) {
       .filter(text => text && !/splinter/i.test(text));
   const formatListFromStrings = values =>
     values.map(item => sanitizeText(item)).filter(Boolean).join(', ');
+  const uniqueValues = values => {
+    const seen = new Set();
+    const output = [];
+    values.forEach(value => {
+      if (value == null) return;
+      const text = String(value).trim();
+      if (!text || seen.has(text)) return;
+      seen.add(text);
+      output.push(text);
+    });
+    return output;
+  };
   const computeBackLabel = () => {
     if (context.backLabel) return context.backLabel;
     if (context.origin === 'district' && currentCharacter?.position?.district) {
@@ -4168,6 +4181,25 @@ function showQuestBoardDetails(boardName, options = {}) {
       const summary = formatWeatherSummary(weatherContext.weather);
       html += `<p class="quest-weather"><strong>Weather over ${escapeHtml(areaLabel)}:</strong> ${escapeHtml(summary)}</p>`;
     }
+    const boardBindings = quests.map(quest => resolveQuestBinding(quest, boardName));
+    const sourceNames = uniqueValues(boardBindings.map(binding => binding?.business));
+    const taskLocations = uniqueValues(
+      quests.flatMap(quest => flattenToStrings(quest.location))
+    );
+    const summaryParts = [];
+    if (sourceNames.length) {
+      const label = sourceNames.length > 1 ? 'Posting sources' : 'Posting source';
+      const details = sourceNames.map(name => sanitizeText(name)).join(', ');
+      summaryParts.push(`<strong>${label}:</strong> ${details}`);
+    }
+    if (taskLocations.length) {
+      const label = taskLocations.length > 1 ? 'Task sites' : 'Task site';
+      const details = taskLocations.map(loc => sanitizeText(loc)).join(', ');
+      summaryParts.push(`<strong>${label}:</strong> ${details}`);
+    }
+    if (summaryParts.length) {
+      html += `<p class="quest-sources">${summaryParts.join(' • ')}</p>`;
+    }
     if (active.length) {
       html += '<ul class="quest-list">';
       active.forEach(({ quest, availability, eligibility, logEntry }) => {
@@ -4182,8 +4214,11 @@ function showQuestBoardDetails(boardName, options = {}) {
           html += descriptionHTML;
         }
         html += '<ul class="quest-meta">';
+        const questBinding = resolveQuestBinding(quest, boardName);
         const locationValue = formatListValue(quest.location);
         if (locationValue) html += `<li><strong>Location:</strong> ${locationValue}</li>`;
+        const postingValue = formatListValue(questBinding?.business);
+        if (postingValue) html += `<li><strong>Posting:</strong> ${postingValue}</li>`;
         const rankRequirements = collectGuildRankRequirements(quest);
         if (rankRequirements.length) {
           html += `<li><strong>Guild Rank:</strong> ${formatListValue(rankRequirements)}</li>`;
