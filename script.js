@@ -3119,7 +3119,7 @@ function showNavigation() {
         const action = btn.dataset.action;
         if (action === 'toggle-districts') {
           showDistricts = !showDistricts;
-          localStorage.setItem(SHOW_DISTRICTS_KEY, showDistricts);
+          safeStorage.setItem(SHOW_DISTRICTS_KEY, showDistricts);
           showNavigation();
           return;
         } else if (action === 'toggle-city-map') {
@@ -5424,7 +5424,7 @@ function startCharacterCreation() {
   mapContainer.style.display = 'none';
   let saved = {};
   try {
-    saved = JSON.parse(localStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
+    saved = JSON.parse(safeStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
   } catch {
     saved = {};
   }
@@ -5487,11 +5487,11 @@ function startCharacterCreation() {
     else if (step === activeFields.length + 2) field = backstoryField;
     if (field && field.key === 'race' && !character.race) {
       character.race = field.options[0];
-      localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
     }
     if (field && field.key === 'class' && !character.class) {
       character.class = classField.options[0];
-      localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
     }
     if (field && field.key === 'location' && !character.location) {
       character.location = locationField.options[0];
@@ -5500,7 +5500,7 @@ function startCharacterCreation() {
       const bs = BACKSTORY_MAP[character.location] || [];
       if (!character.backstory && bs.length) {
         character.backstory = bs[0].background;
-        localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
       }
     }
 
@@ -5641,7 +5641,7 @@ function startCharacterCreation() {
         }
         if (!character[field.key]) {
           character[field.key] = colors[0];
-          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         }
         const currentColor = character[field.key];
         inputHTML = `
@@ -5750,7 +5750,7 @@ function startCharacterCreation() {
           index = (index + dir + options.length) % options.length;
           character.location = options[index];
           delete character.backstory;
-          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         };
         document.querySelector('.loc-arrow.left').addEventListener('click', () => change(-1));
@@ -5764,7 +5764,7 @@ function startCharacterCreation() {
           if (character.race !== 'Cait Sith') delete character.accentColor;
           if (character.race !== 'Salamander') delete character.scaleColor;
           delete character.characterImage;
-          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         };
         document.querySelector('.race-arrow.left').addEventListener('click', () => change(-1));
@@ -5776,7 +5776,7 @@ function startCharacterCreation() {
           index = (index + dir + options.length) % options.length;
           character.sex = options[index];
           delete character.characterImage;
-          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         };
         document.querySelector('.sex-arrow.left').addEventListener('click', () => change(-1));
@@ -5787,7 +5787,7 @@ function startCharacterCreation() {
         const change = dir => {
           index = (index + dir + options.length) % options.length;
           character.class = options[index];
-          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         };
         document.querySelector('.class-arrow.left').addEventListener('click', () => change(-1));
@@ -5798,7 +5798,7 @@ function startCharacterCreation() {
         const change = dir => {
           index = (index + dir + options.length) % options.length;
           character.backstory = options[index];
-          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         };
         document.querySelector('.backstory-arrow.left').addEventListener('click', () => change(-1));
@@ -5812,7 +5812,7 @@ function startCharacterCreation() {
             index = (index + dir + files.length) % files.length;
             character.characterImage = files[index];
             ccPortraitZoom = 1;
-            localStorage.setItem(
+            safeStorage.setItem(
               TEMP_CHARACTER_KEY,
               JSON.stringify({ step, character })
             );
@@ -5864,7 +5864,7 @@ function startCharacterCreation() {
             if (pickerInput) {
               pickerInput.value = character[field.key];
             }
-            localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           };
           const change = dir => {
             index = (index + dir + colors.length) % colors.length;
@@ -5898,7 +5898,7 @@ function startCharacterCreation() {
           btn.style.background = character[field.key];
           btn.setAttribute('aria-label', character[field.key]);
           pickerInput.value = character[field.key];
-          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         };
         const change = dir => {
           index = (index + dir + colors.length) % colors.length;
@@ -5928,7 +5928,7 @@ function startCharacterCreation() {
       const randomBtn = document.getElementById('name-random');
       const updateName = () => {
         character.name = nameInput.value.trim();
-        localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         const completeBtn = document.getElementById('cc-complete');
         const nameStepEl = document.querySelector(`.progress-step[data-step="${activeFields.length}"]`);
         if (character.name) {
@@ -5952,7 +5952,7 @@ function startCharacterCreation() {
 
     document.getElementById('cc-complete').addEventListener('click', () => {
       if (!isComplete()) return;
-      localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
       const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
       character.image = `${folder}/${character.characterImage || ''}`;
       finalizeCharacter(character);
@@ -5962,14 +5962,14 @@ function startCharacterCreation() {
       const index = parseInt(el.dataset.step, 10);
       el.addEventListener('click', () => {
         step = index;
-        localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         renderStep();
       });
     });
 
     document.getElementById('cc-cancel').addEventListener('click', () => {
       if (confirm('Cancel character creation?')) {
-        localStorage.removeItem(TEMP_CHARACTER_KEY);
+        safeStorage.removeItem(TEMP_CHARACTER_KEY);
         showMainUI();
       }
     });
@@ -5978,10 +5978,10 @@ function startCharacterCreation() {
 
 async function generateCharacterImage(character) {
   const prompt = composeImagePrompt(character);
-  let apiKey = localStorage.getItem('openaiApiKey');
+  let apiKey = safeStorage.getItem('openaiApiKey');
   if (!apiKey) {
     apiKey = prompt('Enter OpenAI API key:');
-    if (apiKey) localStorage.setItem('openaiApiKey', apiKey);
+    if (apiKey) safeStorage.setItem('openaiApiKey', apiKey);
   }
   const res = await fetch('https://api.openai.com/v1/images/generations', {
     method: 'POST',
@@ -6135,7 +6135,7 @@ function finalizeCharacter(character) {
   saveProfiles();
   updateScale();
   showCharacter();
-  localStorage.removeItem(TEMP_CHARACTER_KEY);
+  safeStorage.removeItem(TEMP_CHARACTER_KEY);
 }
 
 function loadCharacter() {
@@ -6151,7 +6151,7 @@ function loadCharacter() {
     ensureQuestHistory(currentCharacter);
     ensureCharacterClock(currentCharacter);
     showCharacter();
-  } else if (localStorage.getItem(TEMP_CHARACTER_KEY)) {
+  } else if (safeStorage.getItem(TEMP_CHARACTER_KEY)) {
     startCharacterCreation();
   } else {
     showNoCharacterUI();
@@ -6173,7 +6173,7 @@ function loadPreferences() {
 async function clearLocalData() {
   if (!confirm('Clear all local data? This will reload the page.')) return;
   try {
-    localStorage.clear();
+    safeStorage.clear();
     if (typeof caches !== 'undefined') {
       const keys = await caches.keys();
       await Promise.all(keys.map(k => caches.delete(k)));
