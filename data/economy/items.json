@@ -2,7 +2,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "bread-loaf-(1-lb)-(low-inn)",
-    "display_name": "Coarse Hearth Bread",
+    "display_name": "Staple Coarse Hearth Bread",
     "base_item": "Bread, loaf (1 lb)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -92,7 +92,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "bread-loaf-(1-lb)-(fine)",
-    "display_name": "Artisan Wheat Boule",
+    "display_name": "Fine Artisan Wheat Boule",
     "base_item": "Bread, loaf (1 lb)",
     "variant": "Fine",
     "quality_tier": "Fine",
@@ -137,7 +137,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "bread-loaf-(1-lb)-(high-table)",
-    "display_name": "Golden Feast Loaf",
+    "display_name": "Luxury Golden Feast Loaf",
     "base_item": "Bread, loaf (1 lb)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -182,7 +182,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "stew-and-bread-(low-inn)",
-    "display_name": "Coarse Hearth Bread",
+    "display_name": "Staple Coarse Hearth Bread",
     "base_item": "Stew & bread",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -272,7 +272,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "stew-and-bread-(fine)",
-    "display_name": "Artisan Wheat Boule",
+    "display_name": "Fine Artisan Wheat Boule",
     "base_item": "Stew & bread",
     "variant": "Fine",
     "quality_tier": "Fine",
@@ -317,7 +317,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "stew-and-bread-(high-table)",
-    "display_name": "Golden Feast Loaf",
+    "display_name": "Luxury Golden Feast Loaf",
     "base_item": "Stew & bread",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -362,7 +362,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "ale-tankard-(low-inn)",
-    "display_name": "Small-Batch Bitter Ale",
+    "display_name": "Staple Small-Batch Bitter Ale",
     "base_item": "Ale, tankard",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -452,7 +452,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "ale-tankard-(fine)",
-    "display_name": "Cask-Conditioned Pale Ale",
+    "display_name": "Fine Cask-Conditioned Pale Ale",
     "base_item": "Ale, tankard",
     "variant": "Fine",
     "quality_tier": "Fine",
@@ -497,7 +497,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "ale-tankard-(high-table)",
-    "display_name": "Reserve Spiced Ale",
+    "display_name": "Luxury Reserve Spiced Ale",
     "base_item": "Ale, tankard",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -542,7 +542,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "wine-bottle-(table)-(low-inn)",
-    "display_name": "Table Red",
+    "display_name": "Staple Table Red",
     "base_item": "Wine, bottle (table)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -632,7 +632,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "wine-bottle-(table)-(fine)",
-    "display_name": "Estate Vintage",
+    "display_name": "Fine Estate Vintage",
     "base_item": "Wine, bottle (table)",
     "variant": "Fine",
     "quality_tier": "Fine",
@@ -677,7 +677,7 @@
   {
     "category_key": "FoodDrink",
     "internal_name": "wine-bottle-(table)-(high-table)",
-    "display_name": "Grand Reserve",
+    "display_name": "Luxury Grand Reserve",
     "base_item": "Wine, bottle (table)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -1367,7 +1367,7 @@
   {
     "category_key": "Tools",
     "internal_name": "iron-knife-(masterwork)",
-    "display_name": "Masterwork Iron Knife",
+    "display_name": "Luxury Masterwork Iron Knife",
     "base_item": "Iron knife",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -1539,7 +1539,7 @@
   {
     "category_key": "Tools",
     "internal_name": "hammer-(carpenter's)-(masterwork)",
-    "display_name": "Masterwork Hammer",
+    "display_name": "Luxury Masterwork Hammer",
     "base_item": "Hammer (carpenter's)",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -1711,7 +1711,7 @@
   {
     "category_key": "Tools",
     "internal_name": "pickaxe-(masterwork)",
-    "display_name": "Masterwork Pickaxe",
+    "display_name": "Luxury Masterwork Pickaxe",
     "base_item": "Pickaxe",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -1840,7 +1840,7 @@
   {
     "category_key": "Weapons",
     "internal_name": "dagger-(masterwork)",
-    "display_name": "Masterwork Dagger",
+    "display_name": "Luxury Masterwork Dagger",
     "base_item": "Dagger",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -1883,7 +1883,7 @@
   {
     "category_key": "Weapons",
     "internal_name": "dagger-(exhibition)",
-    "display_name": "Exhibition Dagger",
+    "display_name": "Arcane Exhibition Dagger",
     "base_item": "Dagger",
     "variant": "Exhibition",
     "quality_tier": "Arcane",
@@ -2012,7 +2012,7 @@
   {
     "category_key": "Weapons",
     "internal_name": "longsword-(masterwork)",
-    "display_name": "Masterwork Longsword",
+    "display_name": "Luxury Masterwork Longsword",
     "base_item": "Longsword",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -2055,7 +2055,7 @@
   {
     "category_key": "Weapons",
     "internal_name": "longsword-(exhibition)",
-    "display_name": "Exhibition Longsword",
+    "display_name": "Arcane Exhibition Longsword",
     "base_item": "Longsword",
     "variant": "Exhibition",
     "quality_tier": "Arcane",
@@ -2184,7 +2184,7 @@
   {
     "category_key": "Weapons",
     "internal_name": "bow-long-(masterwork)",
-    "display_name": "Masterwork Bow, Long",
+    "display_name": "Luxury Masterwork Bow, Long",
     "base_item": "Bow, long",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -2227,7 +2227,7 @@
   {
     "category_key": "Weapons",
     "internal_name": "bow-long-(exhibition)",
-    "display_name": "Exhibition Bow, Long",
+    "display_name": "Arcane Exhibition Bow, Long",
     "base_item": "Bow, long",
     "variant": "Exhibition",
     "quality_tier": "Arcane",
@@ -2356,7 +2356,7 @@
   {
     "category_key": "Armor",
     "internal_name": "gambeson-(padded)-(masterwork)",
-    "display_name": "Masterwork Gambeson",
+    "display_name": "Luxury Masterwork Gambeson",
     "base_item": "Gambeson (padded)",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -2399,7 +2399,7 @@
   {
     "category_key": "Armor",
     "internal_name": "gambeson-(padded)-(parade)",
-    "display_name": "Parade Gambeson",
+    "display_name": "Arcane Parade Gambeson",
     "base_item": "Gambeson (padded)",
     "variant": "Parade",
     "quality_tier": "Arcane",
@@ -2528,7 +2528,7 @@
   {
     "category_key": "Armor",
     "internal_name": "chain-hauberk-(masterwork)",
-    "display_name": "Masterwork Chain Hauberk",
+    "display_name": "Luxury Masterwork Chain Hauberk",
     "base_item": "Chain hauberk",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -2571,7 +2571,7 @@
   {
     "category_key": "Armor",
     "internal_name": "chain-hauberk-(parade)",
-    "display_name": "Parade Chain Hauberk",
+    "display_name": "Arcane Parade Chain Hauberk",
     "base_item": "Chain hauberk",
     "variant": "Parade",
     "quality_tier": "Arcane",
@@ -2700,7 +2700,7 @@
   {
     "category_key": "Armor",
     "internal_name": "plate-mail-(masterwork)",
-    "display_name": "Masterwork Plate Mail",
+    "display_name": "Luxury Masterwork Plate Mail",
     "base_item": "Plate mail",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -2743,7 +2743,7 @@
   {
     "category_key": "Armor",
     "internal_name": "plate-mail-(parade)",
-    "display_name": "Parade Plate Mail",
+    "display_name": "Arcane Parade Plate Mail",
     "base_item": "Plate mail",
     "variant": "Parade",
     "quality_tier": "Arcane",
@@ -3646,7 +3646,7 @@
   {
     "category_key": "Clothing",
     "internal_name": "shirt-and-trousers-(linen)-(tailored)",
-    "display_name": "Tailored Shirt & Trousers",
+    "display_name": "Fine Tailored Shirt & Trousers",
     "base_item": "Shirt & trousers (linen)",
     "variant": "Tailored",
     "quality_tier": "Fine",
@@ -3689,7 +3689,7 @@
   {
     "category_key": "Clothing",
     "internal_name": "shirt-and-trousers-(linen)-(courtly)",
-    "display_name": "Courtly Shirt & Trousers",
+    "display_name": "Luxury Courtly Shirt & Trousers",
     "base_item": "Shirt & trousers (linen)",
     "variant": "Courtly",
     "quality_tier": "Luxury",
@@ -3818,7 +3818,7 @@
   {
     "category_key": "Clothing",
     "internal_name": "cloak-wool-(tailored)",
-    "display_name": "Tailored Cloak, Wool",
+    "display_name": "Fine Tailored Cloak, Wool",
     "base_item": "Cloak, wool",
     "variant": "Tailored",
     "quality_tier": "Fine",
@@ -3861,7 +3861,7 @@
   {
     "category_key": "Clothing",
     "internal_name": "cloak-wool-(courtly)",
-    "display_name": "Courtly Cloak, Wool",
+    "display_name": "Luxury Courtly Cloak, Wool",
     "base_item": "Cloak, wool",
     "variant": "Courtly",
     "quality_tier": "Luxury",
@@ -3990,7 +3990,7 @@
   {
     "category_key": "Clothing",
     "internal_name": "boots-leather-(pair)-(tailored)",
-    "display_name": "Tailored Boots, Leather",
+    "display_name": "Fine Tailored Boots, Leather",
     "base_item": "Boots, leather (pair)",
     "variant": "Tailored",
     "quality_tier": "Fine",
@@ -4033,7 +4033,7 @@
   {
     "category_key": "Clothing",
     "internal_name": "boots-leather-(pair)-(courtly)",
-    "display_name": "Courtly Boots, Leather",
+    "display_name": "Luxury Courtly Boots, Leather",
     "base_item": "Boots, leather (pair)",
     "variant": "Courtly",
     "quality_tier": "Luxury",
@@ -4205,7 +4205,7 @@
   {
     "category_key": "Accessories",
     "internal_name": "brooch-bronze-(ornate)",
-    "display_name": "Ornate Brooch, Bronze",
+    "display_name": "Luxury Ornate Brooch, Bronze",
     "base_item": "Brooch, bronze",
     "variant": "Ornate",
     "quality_tier": "Luxury",
@@ -4377,7 +4377,7 @@
   {
     "category_key": "Accessories",
     "internal_name": "pendant-silver-(ornate)",
-    "display_name": "Ornate Pendant, Silver",
+    "display_name": "Luxury Ornate Pendant, Silver",
     "base_item": "Pendant, silver",
     "variant": "Ornate",
     "quality_tier": "Luxury",
@@ -5581,7 +5581,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "fish-cod-(whole)-(low-inn)",
-    "display_name": "Low Inn Fish, cod",
+    "display_name": "Staple Low Inn Fish, cod",
     "base_item": "Fish, cod (whole)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -5626,7 +5626,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "fish-cod-(whole)-(common)",
-    "display_name": "Common Fish, cod",
+    "display_name": "Fish, cod",
     "base_item": "Fish, cod (whole)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -5716,7 +5716,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "fish-cod-(whole)-(high-table)",
-    "display_name": "High Table Fish, cod",
+    "display_name": "Luxury High Table Fish, cod",
     "base_item": "Fish, cod (whole)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -5761,7 +5761,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "oysters-(dozen)-(low-inn)",
-    "display_name": "Low Inn Oysters",
+    "display_name": "Staple Low Inn Oysters",
     "base_item": "Oysters (dozen)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -5804,7 +5804,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "oysters-(dozen)-(common)",
-    "display_name": "Common Oysters",
+    "display_name": "Oysters",
     "base_item": "Oysters (dozen)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -5890,7 +5890,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "oysters-(dozen)-(high-table)",
-    "display_name": "High Table Oysters",
+    "display_name": "Luxury High Table Oysters",
     "base_item": "Oysters (dozen)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -5933,7 +5933,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "smoked-herring-(1-lb)-(low-inn)",
-    "display_name": "Low Inn Smoked herring",
+    "display_name": "Staple Low Inn Smoked herring",
     "base_item": "Smoked herring (1 lb)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -5978,7 +5978,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "smoked-herring-(1-lb)-(common)",
-    "display_name": "Common Smoked herring",
+    "display_name": "Smoked herring",
     "base_item": "Smoked herring (1 lb)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -6068,7 +6068,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "smoked-herring-(1-lb)-(high-table)",
-    "display_name": "High Table Smoked herring",
+    "display_name": "Luxury High Table Smoked herring",
     "base_item": "Smoked herring (1 lb)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -6113,7 +6113,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "lobster-(whole)-(low-inn)",
-    "display_name": "Low Inn Lobster",
+    "display_name": "Staple Low Inn Lobster",
     "base_item": "Lobster (whole)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -6156,7 +6156,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "lobster-(whole)-(common)",
-    "display_name": "Common Lobster",
+    "display_name": "Lobster",
     "base_item": "Lobster (whole)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -6242,7 +6242,7 @@
   {
     "category_key": "Seafood",
     "internal_name": "lobster-(whole)-(high-table)",
-    "display_name": "High Table Lobster",
+    "display_name": "Luxury High Table Lobster",
     "base_item": "Lobster (whole)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -6285,7 +6285,7 @@
   {
     "category_key": "Produce",
     "internal_name": "apples-(dozen)-(low-inn)",
-    "display_name": "Low Inn Apples",
+    "display_name": "Staple Low Inn Apples",
     "base_item": "Apples (dozen)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -6330,7 +6330,7 @@
   {
     "category_key": "Produce",
     "internal_name": "apples-(dozen)-(common)",
-    "display_name": "Common Apples",
+    "display_name": "Apples",
     "base_item": "Apples (dozen)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -6420,7 +6420,7 @@
   {
     "category_key": "Produce",
     "internal_name": "apples-(dozen)-(high-table)",
-    "display_name": "High Table Apples",
+    "display_name": "Luxury High Table Apples",
     "base_item": "Apples (dozen)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -6465,7 +6465,7 @@
   {
     "category_key": "Produce",
     "internal_name": "potatoes-(sack)-(low-inn)",
-    "display_name": "Low Inn Potatoes",
+    "display_name": "Staple Low Inn Potatoes",
     "base_item": "Potatoes (sack)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -6510,7 +6510,7 @@
   {
     "category_key": "Produce",
     "internal_name": "potatoes-(sack)-(common)",
-    "display_name": "Common Potatoes",
+    "display_name": "Potatoes",
     "base_item": "Potatoes (sack)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -6600,7 +6600,7 @@
   {
     "category_key": "Produce",
     "internal_name": "potatoes-(sack)-(high-table)",
-    "display_name": "High Table Potatoes",
+    "display_name": "Luxury High Table Potatoes",
     "base_item": "Potatoes (sack)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -6645,7 +6645,7 @@
   {
     "category_key": "Produce",
     "internal_name": "onions-(sack)-(low-inn)",
-    "display_name": "Low Inn Onions",
+    "display_name": "Staple Low Inn Onions",
     "base_item": "Onions (sack)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -6690,7 +6690,7 @@
   {
     "category_key": "Produce",
     "internal_name": "onions-(sack)-(common)",
-    "display_name": "Common Onions",
+    "display_name": "Onions",
     "base_item": "Onions (sack)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -6780,7 +6780,7 @@
   {
     "category_key": "Produce",
     "internal_name": "onions-(sack)-(high-table)",
-    "display_name": "High Table Onions",
+    "display_name": "Luxury High Table Onions",
     "base_item": "Onions (sack)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -6825,7 +6825,7 @@
   {
     "category_key": "Produce",
     "internal_name": "beans-(dry-1-lb)-(low-inn)",
-    "display_name": "Low Inn Beans",
+    "display_name": "Staple Low Inn Beans",
     "base_item": "Beans (dry, 1 lb)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -6870,7 +6870,7 @@
   {
     "category_key": "Produce",
     "internal_name": "beans-(dry-1-lb)-(common)",
-    "display_name": "Common Beans",
+    "display_name": "Beans",
     "base_item": "Beans (dry, 1 lb)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -6960,7 +6960,7 @@
   {
     "category_key": "Produce",
     "internal_name": "beans-(dry-1-lb)-(high-table)",
-    "display_name": "High Table Beans",
+    "display_name": "Luxury High Table Beans",
     "base_item": "Beans (dry, 1 lb)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -7005,7 +7005,7 @@
   {
     "category_key": "Produce",
     "internal_name": "lentils-(1-lb)-(low-inn)",
-    "display_name": "Low Inn Lentils",
+    "display_name": "Staple Low Inn Lentils",
     "base_item": "Lentils (1 lb)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -7050,7 +7050,7 @@
   {
     "category_key": "Produce",
     "internal_name": "lentils-(1-lb)-(common)",
-    "display_name": "Common Lentils",
+    "display_name": "Lentils",
     "base_item": "Lentils (1 lb)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -7140,7 +7140,7 @@
   {
     "category_key": "Produce",
     "internal_name": "lentils-(1-lb)-(high-table)",
-    "display_name": "High Table Lentils",
+    "display_name": "Luxury High Table Lentils",
     "base_item": "Lentils (1 lb)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -7185,7 +7185,7 @@
   {
     "category_key": "Produce",
     "internal_name": "cabbage-(head)-(low-inn)",
-    "display_name": "Low Inn Cabbage",
+    "display_name": "Staple Low Inn Cabbage",
     "base_item": "Cabbage (head)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -7230,7 +7230,7 @@
   {
     "category_key": "Produce",
     "internal_name": "cabbage-(head)-(common)",
-    "display_name": "Common Cabbage",
+    "display_name": "Cabbage",
     "base_item": "Cabbage (head)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -7320,7 +7320,7 @@
   {
     "category_key": "Produce",
     "internal_name": "cabbage-(head)-(high-table)",
-    "display_name": "High Table Cabbage",
+    "display_name": "Luxury High Table Cabbage",
     "base_item": "Cabbage (head)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -7365,7 +7365,7 @@
   {
     "category_key": "Produce",
     "internal_name": "oranges-(dozen)-(low-inn)",
-    "display_name": "Low Inn Oranges",
+    "display_name": "Staple Low Inn Oranges",
     "base_item": "Oranges (dozen)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -7410,7 +7410,7 @@
   {
     "category_key": "Produce",
     "internal_name": "oranges-(dozen)-(common)",
-    "display_name": "Common Oranges",
+    "display_name": "Oranges",
     "base_item": "Oranges (dozen)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -7500,7 +7500,7 @@
   {
     "category_key": "Produce",
     "internal_name": "oranges-(dozen)-(high-table)",
-    "display_name": "High Table Oranges",
+    "display_name": "Luxury High Table Oranges",
     "base_item": "Oranges (dozen)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -7545,7 +7545,7 @@
   {
     "category_key": "Dairy",
     "internal_name": "milk-(gallon)-(low-inn)",
-    "display_name": "Low Inn Milk",
+    "display_name": "Staple Low Inn Milk",
     "base_item": "Milk (gallon)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -7590,7 +7590,7 @@
   {
     "category_key": "Dairy",
     "internal_name": "milk-(gallon)-(common)",
-    "display_name": "Common Milk",
+    "display_name": "Milk",
     "base_item": "Milk (gallon)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -7680,7 +7680,7 @@
   {
     "category_key": "Dairy",
     "internal_name": "milk-(gallon)-(high-table)",
-    "display_name": "High Table Milk",
+    "display_name": "Luxury High Table Milk",
     "base_item": "Milk (gallon)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -7725,7 +7725,7 @@
   {
     "category_key": "Dairy",
     "internal_name": "butter-(1-lb)-(low-inn)",
-    "display_name": "Low Inn Butter",
+    "display_name": "Staple Low Inn Butter",
     "base_item": "Butter (1 lb)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -7770,7 +7770,7 @@
   {
     "category_key": "Dairy",
     "internal_name": "butter-(1-lb)-(common)",
-    "display_name": "Common Butter",
+    "display_name": "Butter",
     "base_item": "Butter (1 lb)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -7860,7 +7860,7 @@
   {
     "category_key": "Dairy",
     "internal_name": "butter-(1-lb)-(high-table)",
-    "display_name": "High Table Butter",
+    "display_name": "Luxury High Table Butter",
     "base_item": "Butter (1 lb)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -7905,7 +7905,7 @@
   {
     "category_key": "Dairy",
     "internal_name": "cheese-soft-(1-lb)-(low-inn)",
-    "display_name": "Low Inn Cheese, soft",
+    "display_name": "Staple Low Inn Cheese, soft",
     "base_item": "Cheese, soft (1 lb)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -7950,7 +7950,7 @@
   {
     "category_key": "Dairy",
     "internal_name": "cheese-soft-(1-lb)-(common)",
-    "display_name": "Common Cheese, soft",
+    "display_name": "Cheese, soft",
     "base_item": "Cheese, soft (1 lb)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -8040,7 +8040,7 @@
   {
     "category_key": "Dairy",
     "internal_name": "cheese-soft-(1-lb)-(high-table)",
-    "display_name": "High Table Cheese, soft",
+    "display_name": "Luxury High Table Cheese, soft",
     "base_item": "Cheese, soft (1 lb)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -8085,7 +8085,7 @@
   {
     "category_key": "SpicesHerbs",
     "internal_name": "salt-(1-lb)-(common)",
-    "display_name": "Common Salt",
+    "display_name": "Salt",
     "base_item": "Salt (1 lb)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -8257,7 +8257,7 @@
   {
     "category_key": "SpicesHerbs",
     "internal_name": "peppercorns-(4-oz)-(common)",
-    "display_name": "Common Peppercorns",
+    "display_name": "Peppercorns",
     "base_item": "Peppercorns (4 oz)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -8429,7 +8429,7 @@
   {
     "category_key": "SpicesHerbs",
     "internal_name": "saffron-(1-gram)-(common)",
-    "display_name": "Common Saffron",
+    "display_name": "Saffron",
     "base_item": "Saffron (1 gram)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -8687,7 +8687,7 @@
   {
     "category_key": "Alchemy",
     "internal_name": "healing-draught-(potent)",
-    "display_name": "Potent Healing Draught",
+    "display_name": "Luxury Potent Healing Draught",
     "base_item": "Healing draught",
     "variant": "Potent",
     "quality_tier": "Luxury",
@@ -8859,7 +8859,7 @@
   {
     "category_key": "Alchemy",
     "internal_name": "antitoxin-(potent)",
-    "display_name": "Potent Antitoxin",
+    "display_name": "Luxury Potent Antitoxin",
     "base_item": "Antitoxin",
     "variant": "Potent",
     "quality_tier": "Luxury",
@@ -8945,7 +8945,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "chicken-(whole)-(low-inn)",
-    "display_name": "Low Inn Chicken",
+    "display_name": "Staple Low Inn Chicken",
     "base_item": "Chicken (whole)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -8990,7 +8990,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "chicken-(whole)-(common)",
-    "display_name": "Common Chicken",
+    "display_name": "Chicken",
     "base_item": "Chicken (whole)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -9080,7 +9080,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "chicken-(whole)-(high-table)",
-    "display_name": "High Table Chicken",
+    "display_name": "Luxury High Table Chicken",
     "base_item": "Chicken (whole)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -9125,7 +9125,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "bacon-(1-lb)-(low-inn)",
-    "display_name": "Low Inn Bacon",
+    "display_name": "Staple Low Inn Bacon",
     "base_item": "Bacon (1 lb)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -9170,7 +9170,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "bacon-(1-lb)-(common)",
-    "display_name": "Common Bacon",
+    "display_name": "Bacon",
     "base_item": "Bacon (1 lb)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -9260,7 +9260,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "bacon-(1-lb)-(high-table)",
-    "display_name": "High Table Bacon",
+    "display_name": "Luxury High Table Bacon",
     "base_item": "Bacon (1 lb)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -9305,7 +9305,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "ham-(1-lb)-(low-inn)",
-    "display_name": "Low Inn Ham",
+    "display_name": "Staple Low Inn Ham",
     "base_item": "Ham (1 lb)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -9350,7 +9350,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "ham-(1-lb)-(common)",
-    "display_name": "Common Ham",
+    "display_name": "Ham",
     "base_item": "Ham (1 lb)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -9440,7 +9440,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "ham-(1-lb)-(high-table)",
-    "display_name": "High Table Ham",
+    "display_name": "Luxury High Table Ham",
     "base_item": "Ham (1 lb)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -9485,7 +9485,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "sausage-links-(dozen)-(low-inn)",
-    "display_name": "Low Inn Sausage links",
+    "display_name": "Staple Low Inn Sausage links",
     "base_item": "Sausage links (dozen)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -9530,7 +9530,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "sausage-links-(dozen)-(common)",
-    "display_name": "Common Sausage links",
+    "display_name": "Sausage links",
     "base_item": "Sausage links (dozen)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -9620,7 +9620,7 @@
   {
     "category_key": "LivestockMeat",
     "internal_name": "sausage-links-(dozen)-(high-table)",
-    "display_name": "High Table Sausage links",
+    "display_name": "Luxury High Table Sausage links",
     "base_item": "Sausage links (dozen)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -9665,7 +9665,7 @@
   {
     "category_key": "Beverages",
     "internal_name": "water-clean-(skin)-(low-inn)",
-    "display_name": "Low Inn Water, clean",
+    "display_name": "Staple Low Inn Water, clean",
     "base_item": "Water, clean (skin)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -9710,7 +9710,7 @@
   {
     "category_key": "Beverages",
     "internal_name": "water-clean-(skin)-(common)",
-    "display_name": "Common Water, clean",
+    "display_name": "Water, clean",
     "base_item": "Water, clean (skin)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -9800,7 +9800,7 @@
   {
     "category_key": "Beverages",
     "internal_name": "water-clean-(skin)-(high-table)",
-    "display_name": "High Table Water, clean",
+    "display_name": "Luxury High Table Water, clean",
     "base_item": "Water, clean (skin)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -9845,7 +9845,7 @@
   {
     "category_key": "Beverages",
     "internal_name": "tea-(pot)-(low-inn)",
-    "display_name": "Low Inn Tea",
+    "display_name": "Staple Low Inn Tea",
     "base_item": "Tea (pot)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -9890,7 +9890,7 @@
   {
     "category_key": "Beverages",
     "internal_name": "tea-(pot)-(common)",
-    "display_name": "Common Tea",
+    "display_name": "Tea",
     "base_item": "Tea (pot)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -9980,7 +9980,7 @@
   {
     "category_key": "Beverages",
     "internal_name": "tea-(pot)-(high-table)",
-    "display_name": "High Table Tea",
+    "display_name": "Luxury High Table Tea",
     "base_item": "Tea (pot)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -10025,7 +10025,7 @@
   {
     "category_key": "Beverages",
     "internal_name": "juice-berry-(cup)-(low-inn)",
-    "display_name": "Low Inn Juice, berry",
+    "display_name": "Staple Low Inn Juice, berry",
     "base_item": "Juice, berry (cup)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -10070,7 +10070,7 @@
   {
     "category_key": "Beverages",
     "internal_name": "juice-berry-(cup)-(common)",
-    "display_name": "Common Juice, berry",
+    "display_name": "Juice, berry",
     "base_item": "Juice, berry (cup)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -10160,7 +10160,7 @@
   {
     "category_key": "Beverages",
     "internal_name": "juice-berry-(cup)-(high-table)",
-    "display_name": "High Table Juice, berry",
+    "display_name": "Luxury High Table Juice, berry",
     "base_item": "Juice, berry (cup)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -10250,7 +10250,7 @@
   {
     "category_key": "Confectionery",
     "internal_name": "honey-candies-(dozen)-(common)",
-    "display_name": "Common Honey candies",
+    "display_name": "Fine Common Honey candies",
     "base_item": "Honey candies (dozen)",
     "variant": "Common",
     "quality_tier": "Fine",
@@ -10295,7 +10295,7 @@
   {
     "category_key": "Confectionery",
     "internal_name": "honey-candies-(dozen)-(fine)",
-    "display_name": "Fine Honey candies",
+    "display_name": "Luxury Fine Honey candies",
     "base_item": "Honey candies (dozen)",
     "variant": "Fine",
     "quality_tier": "Luxury",
@@ -10340,7 +10340,7 @@
   {
     "category_key": "Confectionery",
     "internal_name": "honey-candies-(dozen)-(high-table)",
-    "display_name": "High Table Honey candies",
+    "display_name": "Luxury High Table Honey candies",
     "base_item": "Honey candies (dozen)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -10430,7 +10430,7 @@
   {
     "category_key": "Confectionery",
     "internal_name": "candied-nuts-(cup)-(common)",
-    "display_name": "Common Candied nuts",
+    "display_name": "Fine Common Candied nuts",
     "base_item": "Candied nuts (cup)",
     "variant": "Common",
     "quality_tier": "Fine",
@@ -10475,7 +10475,7 @@
   {
     "category_key": "Confectionery",
     "internal_name": "candied-nuts-(cup)-(fine)",
-    "display_name": "Fine Candied nuts",
+    "display_name": "Luxury Fine Candied nuts",
     "base_item": "Candied nuts (cup)",
     "variant": "Fine",
     "quality_tier": "Luxury",
@@ -10520,7 +10520,7 @@
   {
     "category_key": "Confectionery",
     "internal_name": "candied-nuts-(cup)-(high-table)",
-    "display_name": "High Table Candied nuts",
+    "display_name": "Luxury High Table Candied nuts",
     "base_item": "Candied nuts (cup)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -10694,7 +10694,7 @@
   {
     "category_key": "Stationery",
     "internal_name": "paper-(quire-of-25)-(masterwork)",
-    "display_name": "Masterwork Paper",
+    "display_name": "Luxury Masterwork Paper",
     "base_item": "Paper (quire of 25)",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -10866,7 +10866,7 @@
   {
     "category_key": "Stationery",
     "internal_name": "parchment-(sheet)-(masterwork)",
-    "display_name": "Masterwork Parchment",
+    "display_name": "Luxury Masterwork Parchment",
     "base_item": "Parchment (sheet)",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -11038,7 +11038,7 @@
   {
     "category_key": "Stationery",
     "internal_name": "ink-(bottle)-(masterwork)",
-    "display_name": "Masterwork Ink",
+    "display_name": "Luxury Masterwork Ink",
     "base_item": "Ink (bottle)",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -11081,7 +11081,7 @@
   {
     "category_key": "BooksMaps",
     "internal_name": "bound-book-(common)-(common)",
-    "display_name": "Common Bound Book",
+    "display_name": "Bound Book",
     "base_item": "Bound book (common)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -11167,7 +11167,7 @@
   {
     "category_key": "BooksMaps",
     "internal_name": "bound-book-(common)-(illuminated)",
-    "display_name": "Illuminated Bound Book",
+    "display_name": "Luxury Illuminated Bound Book",
     "base_item": "Bound book (common)",
     "variant": "Illuminated",
     "quality_tier": "Luxury",
@@ -11253,7 +11253,7 @@
   {
     "category_key": "BooksMaps",
     "internal_name": "map-local-(common)",
-    "display_name": "Common Map, Local",
+    "display_name": "Map, Local",
     "base_item": "Map, local",
     "variant": "Common",
     "quality_tier": "Common",
@@ -11339,7 +11339,7 @@
   {
     "category_key": "BooksMaps",
     "internal_name": "map-local-(illuminated)",
-    "display_name": "Illuminated Map, Local",
+    "display_name": "Luxury Illuminated Map, Local",
     "base_item": "Map, local",
     "variant": "Illuminated",
     "quality_tier": "Luxury",
@@ -11425,7 +11425,7 @@
   {
     "category_key": "Furniture",
     "internal_name": "stool-wooden-(common)",
-    "display_name": "Common Stool, Wooden",
+    "display_name": "Stool, Wooden",
     "base_item": "Stool, wooden",
     "variant": "Common",
     "quality_tier": "Common",
@@ -11511,7 +11511,7 @@
   {
     "category_key": "Furniture",
     "internal_name": "stool-wooden-(masterwork)",
-    "display_name": "Masterwork Stool, Wooden",
+    "display_name": "Luxury Masterwork Stool, Wooden",
     "base_item": "Stool, wooden",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -11554,7 +11554,7 @@
   {
     "category_key": "Furniture",
     "internal_name": "stool-wooden-(parade)",
-    "display_name": "Parade Stool, Wooden",
+    "display_name": "Arcane Parade Stool, Wooden",
     "base_item": "Stool, wooden",
     "variant": "Parade",
     "quality_tier": "Arcane",
@@ -11597,7 +11597,7 @@
   {
     "category_key": "Furniture",
     "internal_name": "table-trestle-(common)",
-    "display_name": "Common Table, Trestle",
+    "display_name": "Table, Trestle",
     "base_item": "Table, trestle",
     "variant": "Common",
     "quality_tier": "Common",
@@ -11683,7 +11683,7 @@
   {
     "category_key": "Furniture",
     "internal_name": "table-trestle-(masterwork)",
-    "display_name": "Masterwork Table, Trestle",
+    "display_name": "Luxury Masterwork Table, Trestle",
     "base_item": "Table, trestle",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -11726,7 +11726,7 @@
   {
     "category_key": "Furniture",
     "internal_name": "table-trestle-(parade)",
-    "display_name": "Parade Table, Trestle",
+    "display_name": "Arcane Parade Table, Trestle",
     "base_item": "Table, trestle",
     "variant": "Parade",
     "quality_tier": "Arcane",
@@ -11769,7 +11769,7 @@
   {
     "category_key": "CeramicsGlass",
     "internal_name": "clay-mug-(common)",
-    "display_name": "Common Clay Mug",
+    "display_name": "Clay Mug",
     "base_item": "Clay mug",
     "variant": "Common",
     "quality_tier": "Common",
@@ -11855,7 +11855,7 @@
   {
     "category_key": "CeramicsGlass",
     "internal_name": "clay-mug-(masterwork)",
-    "display_name": "Masterwork Clay Mug",
+    "display_name": "Luxury Masterwork Clay Mug",
     "base_item": "Clay mug",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -11898,7 +11898,7 @@
   {
     "category_key": "CeramicsGlass",
     "internal_name": "clay-mug-(exhibition)",
-    "display_name": "Exhibition Clay Mug",
+    "display_name": "Arcane Exhibition Clay Mug",
     "base_item": "Clay mug",
     "variant": "Exhibition",
     "quality_tier": "Arcane",
@@ -11941,7 +11941,7 @@
   {
     "category_key": "CeramicsGlass",
     "internal_name": "glass-bottle-(common)",
-    "display_name": "Common Glass Bottle",
+    "display_name": "Glass Bottle",
     "base_item": "Glass bottle",
     "variant": "Common",
     "quality_tier": "Common",
@@ -12027,7 +12027,7 @@
   {
     "category_key": "CeramicsGlass",
     "internal_name": "glass-bottle-(masterwork)",
-    "display_name": "Masterwork Glass Bottle",
+    "display_name": "Luxury Masterwork Glass Bottle",
     "base_item": "Glass bottle",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -12070,7 +12070,7 @@
   {
     "category_key": "CeramicsGlass",
     "internal_name": "glass-bottle-(exhibition)",
-    "display_name": "Exhibition Glass Bottle",
+    "display_name": "Arcane Exhibition Glass Bottle",
     "base_item": "Glass bottle",
     "variant": "Exhibition",
     "quality_tier": "Arcane",
@@ -12113,7 +12113,7 @@
   {
     "category_key": "Building",
     "internal_name": "brick-(100)-(common)",
-    "display_name": "Common Brick",
+    "display_name": "Brick",
     "base_item": "Brick (100)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -12199,7 +12199,7 @@
   {
     "category_key": "Building",
     "internal_name": "brick-(100)-(reinforced)",
-    "display_name": "Reinforced Brick",
+    "display_name": "Luxury Reinforced Brick",
     "base_item": "Brick (100)",
     "variant": "Reinforced",
     "quality_tier": "Luxury",
@@ -12242,7 +12242,7 @@
   {
     "category_key": "Building",
     "internal_name": "brick-(100)-(elite)",
-    "display_name": "Elite Brick",
+    "display_name": "Arcane Elite Brick",
     "base_item": "Brick (100)",
     "variant": "Elite",
     "quality_tier": "Arcane",
@@ -12285,7 +12285,7 @@
   {
     "category_key": "Building",
     "internal_name": "lumber-(beam)-(common)",
-    "display_name": "Common Lumber",
+    "display_name": "Lumber",
     "base_item": "Lumber (beam)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -12371,7 +12371,7 @@
   {
     "category_key": "Building",
     "internal_name": "lumber-(beam)-(reinforced)",
-    "display_name": "Reinforced Lumber",
+    "display_name": "Luxury Reinforced Lumber",
     "base_item": "Lumber (beam)",
     "variant": "Reinforced",
     "quality_tier": "Luxury",
@@ -12414,7 +12414,7 @@
   {
     "category_key": "Building",
     "internal_name": "lumber-(beam)-(elite)",
-    "display_name": "Elite Lumber",
+    "display_name": "Arcane Elite Lumber",
     "base_item": "Lumber (beam)",
     "variant": "Elite",
     "quality_tier": "Arcane",
@@ -12457,7 +12457,7 @@
   {
     "category_key": "Building",
     "internal_name": "stone-block-(common)",
-    "display_name": "Common Stone Block",
+    "display_name": "Stone Block",
     "base_item": "Stone block",
     "variant": "Common",
     "quality_tier": "Common",
@@ -12543,7 +12543,7 @@
   {
     "category_key": "Building",
     "internal_name": "stone-block-(reinforced)",
-    "display_name": "Reinforced Stone Block",
+    "display_name": "Luxury Reinforced Stone Block",
     "base_item": "Stone block",
     "variant": "Reinforced",
     "quality_tier": "Luxury",
@@ -12586,7 +12586,7 @@
   {
     "category_key": "Building",
     "internal_name": "stone-block-(elite)",
-    "display_name": "Elite Stone Block",
+    "display_name": "Arcane Elite Stone Block",
     "base_item": "Stone block",
     "variant": "Elite",
     "quality_tier": "Arcane",
@@ -12629,7 +12629,7 @@
   {
     "category_key": "Lighting",
     "internal_name": "candle-(tallow)-(common)",
-    "display_name": "Common Candle",
+    "display_name": "Candle",
     "base_item": "Candle (tallow)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -12715,7 +12715,7 @@
   {
     "category_key": "Lighting",
     "internal_name": "candle-(tallow)-(masterwork)",
-    "display_name": "Masterwork Candle",
+    "display_name": "Luxury Masterwork Candle",
     "base_item": "Candle (tallow)",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -12801,7 +12801,7 @@
   {
     "category_key": "Lighting",
     "internal_name": "lantern-hooded-(common)",
-    "display_name": "Common Lantern, Hooded",
+    "display_name": "Lantern, Hooded",
     "base_item": "Lantern, hooded",
     "variant": "Common",
     "quality_tier": "Common",
@@ -12887,7 +12887,7 @@
   {
     "category_key": "Lighting",
     "internal_name": "lantern-hooded-(masterwork)",
-    "display_name": "Masterwork Lantern, Hooded",
+    "display_name": "Luxury Masterwork Lantern, Hooded",
     "base_item": "Lantern, hooded",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -12973,7 +12973,7 @@
   {
     "category_key": "Lighting",
     "internal_name": "oil-(pint)-(common)",
-    "display_name": "Common Oil",
+    "display_name": "Oil",
     "base_item": "Oil (pint)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -13059,7 +13059,7 @@
   {
     "category_key": "Lighting",
     "internal_name": "oil-(pint)-(masterwork)",
-    "display_name": "Masterwork Oil",
+    "display_name": "Luxury Masterwork Oil",
     "base_item": "Oil (pint)",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -13188,7 +13188,7 @@
   {
     "category_key": "Instruments",
     "internal_name": "tin-whistle-(journeyman)",
-    "display_name": "Journeyman Tin Whistle",
+    "display_name": "Fine Journeyman Tin Whistle",
     "base_item": "Tin whistle",
     "variant": "Journeyman",
     "quality_tier": "Fine",
@@ -13231,7 +13231,7 @@
   {
     "category_key": "Instruments",
     "internal_name": "tin-whistle-(masterwork)",
-    "display_name": "Masterwork Tin Whistle",
+    "display_name": "Luxury Masterwork Tin Whistle",
     "base_item": "Tin whistle",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -13274,7 +13274,7 @@
   {
     "category_key": "Instruments",
     "internal_name": "tin-whistle-(virtuoso)",
-    "display_name": "Virtuoso Tin Whistle",
+    "display_name": "Arcane Virtuoso Tin Whistle",
     "base_item": "Tin whistle",
     "variant": "Virtuoso",
     "quality_tier": "Arcane",
@@ -13360,7 +13360,7 @@
   {
     "category_key": "Instruments",
     "internal_name": "lute-(journeyman)",
-    "display_name": "Journeyman Lute",
+    "display_name": "Fine Journeyman Lute",
     "base_item": "Lute",
     "variant": "Journeyman",
     "quality_tier": "Fine",
@@ -13403,7 +13403,7 @@
   {
     "category_key": "Instruments",
     "internal_name": "lute-(masterwork)",
-    "display_name": "Masterwork Lute",
+    "display_name": "Luxury Masterwork Lute",
     "base_item": "Lute",
     "variant": "Masterwork",
     "quality_tier": "Luxury",
@@ -13446,7 +13446,7 @@
   {
     "category_key": "Instruments",
     "internal_name": "lute-(virtuoso)",
-    "display_name": "Virtuoso Lute",
+    "display_name": "Arcane Virtuoso Lute",
     "base_item": "Lute",
     "variant": "Virtuoso",
     "quality_tier": "Arcane",
@@ -13489,7 +13489,7 @@
   {
     "category_key": "Leisure",
     "internal_name": "dice-set-(bone)-(common)",
-    "display_name": "Common Dice Set",
+    "display_name": "Dice Set",
     "base_item": "Dice set (bone)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -13618,7 +13618,7 @@
   {
     "category_key": "Leisure",
     "internal_name": "dice-set-(bone)-(collector)",
-    "display_name": "Collector Dice Set",
+    "display_name": "Arcane Collector Dice Set",
     "base_item": "Dice set (bone)",
     "variant": "Collector",
     "quality_tier": "Arcane",
@@ -13661,7 +13661,7 @@
   {
     "category_key": "Leisure",
     "internal_name": "chessmen-(wood)-(common)",
-    "display_name": "Common Chessmen",
+    "display_name": "Chessmen",
     "base_item": "Chessmen (wood)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -13790,7 +13790,7 @@
   {
     "category_key": "Leisure",
     "internal_name": "chessmen-(wood)-(collector)",
-    "display_name": "Collector Chessmen",
+    "display_name": "Arcane Collector Chessmen",
     "base_item": "Chessmen (wood)",
     "variant": "Collector",
     "quality_tier": "Arcane",
@@ -13833,7 +13833,7 @@
   {
     "category_key": "Transport",
     "internal_name": "cart-hire-(in-city)-(common)",
-    "display_name": "Common Cart Hire",
+    "display_name": "Cart Hire",
     "base_item": "Cart hire (in-city)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -13876,7 +13876,7 @@
   {
     "category_key": "Transport",
     "internal_name": "cart-hire-(in-city)-(priority)",
-    "display_name": "Priority Cart Hire",
+    "display_name": "Fine Priority Cart Hire",
     "base_item": "Cart hire (in-city)",
     "variant": "Priority",
     "quality_tier": "Fine",
@@ -13919,7 +13919,7 @@
   {
     "category_key": "Transport",
     "internal_name": "cart-hire-(in-city)-(secure)",
-    "display_name": "Secure Cart Hire",
+    "display_name": "Luxury Secure Cart Hire",
     "base_item": "Cart hire (in-city)",
     "variant": "Secure",
     "quality_tier": "Luxury",
@@ -13962,7 +13962,7 @@
   {
     "category_key": "Transport",
     "internal_name": "cart-hire-(in-city)-(elite)",
-    "display_name": "Elite Cart Hire",
+    "display_name": "Arcane Elite Cart Hire",
     "base_item": "Cart hire (in-city)",
     "variant": "Elite",
     "quality_tier": "Arcane",
@@ -14005,7 +14005,7 @@
   {
     "category_key": "Transport",
     "internal_name": "courier-letter-(in-city)-(common)",
-    "display_name": "Common Courier Letter",
+    "display_name": "Courier Letter",
     "base_item": "Courier letter (in-city)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -14048,7 +14048,7 @@
   {
     "category_key": "Transport",
     "internal_name": "courier-letter-(in-city)-(priority)",
-    "display_name": "Priority Courier Letter",
+    "display_name": "Fine Priority Courier Letter",
     "base_item": "Courier letter (in-city)",
     "variant": "Priority",
     "quality_tier": "Fine",
@@ -14091,7 +14091,7 @@
   {
     "category_key": "Transport",
     "internal_name": "courier-letter-(in-city)-(secure)",
-    "display_name": "Secure Courier Letter",
+    "display_name": "Luxury Secure Courier Letter",
     "base_item": "Courier letter (in-city)",
     "variant": "Secure",
     "quality_tier": "Luxury",
@@ -14134,7 +14134,7 @@
   {
     "category_key": "Transport",
     "internal_name": "courier-letter-(in-city)-(elite)",
-    "display_name": "Elite Courier Letter",
+    "display_name": "Arcane Elite Courier Letter",
     "base_item": "Courier letter (in-city)",
     "variant": "Elite",
     "quality_tier": "Arcane",
@@ -14521,7 +14521,7 @@
   {
     "category_key": "Religious",
     "internal_name": "prayer-candle-(common)",
-    "display_name": "Common Prayer Candle",
+    "display_name": "Prayer Candle",
     "base_item": "Prayer candle",
     "variant": "Common",
     "quality_tier": "Common",
@@ -14607,7 +14607,7 @@
   {
     "category_key": "Religious",
     "internal_name": "prayer-candle-(ornate)",
-    "display_name": "Ornate Prayer Candle",
+    "display_name": "Luxury Ornate Prayer Candle",
     "base_item": "Prayer candle",
     "variant": "Ornate",
     "quality_tier": "Luxury",
@@ -14650,7 +14650,7 @@
   {
     "category_key": "Religious",
     "internal_name": "prayer-candle-(relic)",
-    "display_name": "Relic Prayer Candle",
+    "display_name": "Arcane Relic Prayer Candle",
     "base_item": "Prayer candle",
     "variant": "Relic",
     "quality_tier": "Arcane",
@@ -14693,7 +14693,7 @@
   {
     "category_key": "Religious",
     "internal_name": "silver-holy-symbol-(common)",
-    "display_name": "Common Silver Holy Symbol",
+    "display_name": "Silver Holy Symbol",
     "base_item": "Silver holy symbol",
     "variant": "Common",
     "quality_tier": "Common",
@@ -14779,7 +14779,7 @@
   {
     "category_key": "Religious",
     "internal_name": "silver-holy-symbol-(ornate)",
-    "display_name": "Ornate Silver Holy Symbol",
+    "display_name": "Luxury Ornate Silver Holy Symbol",
     "base_item": "Silver holy symbol",
     "variant": "Ornate",
     "quality_tier": "Luxury",
@@ -14822,7 +14822,7 @@
   {
     "category_key": "Religious",
     "internal_name": "silver-holy-symbol-(relic)",
-    "display_name": "Relic Silver Holy Symbol",
+    "display_name": "Arcane Relic Silver Holy Symbol",
     "base_item": "Silver holy symbol",
     "variant": "Relic",
     "quality_tier": "Arcane",
@@ -14865,7 +14865,7 @@
   {
     "category_key": "Reagents",
     "internal_name": "mandrake-root-(common)",
-    "display_name": "Common Mandrake Root",
+    "display_name": "Mandrake Root",
     "base_item": "Mandrake root",
     "variant": "Common",
     "quality_tier": "Common",
@@ -14908,7 +14908,7 @@
   {
     "category_key": "Reagents",
     "internal_name": "mandrake-root-(rare)",
-    "display_name": "Rare Mandrake Root",
+    "display_name": "Fine Rare Mandrake Root",
     "base_item": "Mandrake root",
     "variant": "Rare",
     "quality_tier": "Fine",
@@ -14951,7 +14951,7 @@
   {
     "category_key": "Reagents",
     "internal_name": "mandrake-root-(exquisite)",
-    "display_name": "Exquisite Mandrake Root",
+    "display_name": "Luxury Exquisite Mandrake Root",
     "base_item": "Mandrake root",
     "variant": "Exquisite",
     "quality_tier": "Luxury",
@@ -14994,7 +14994,7 @@
   {
     "category_key": "Reagents",
     "internal_name": "mandrake-root-(legendary)",
-    "display_name": "Legendary Mandrake Root",
+    "display_name": "Arcane Legendary Mandrake Root",
     "base_item": "Mandrake root",
     "variant": "Legendary",
     "quality_tier": "Arcane",
@@ -15037,7 +15037,7 @@
   {
     "category_key": "Reagents",
     "internal_name": "powdered-pearl-(common)",
-    "display_name": "Common Powdered Pearl",
+    "display_name": "Powdered Pearl",
     "base_item": "Powdered pearl",
     "variant": "Common",
     "quality_tier": "Common",
@@ -15080,7 +15080,7 @@
   {
     "category_key": "Reagents",
     "internal_name": "powdered-pearl-(rare)",
-    "display_name": "Rare Powdered Pearl",
+    "display_name": "Fine Rare Powdered Pearl",
     "base_item": "Powdered pearl",
     "variant": "Rare",
     "quality_tier": "Fine",
@@ -15123,7 +15123,7 @@
   {
     "category_key": "Reagents",
     "internal_name": "powdered-pearl-(exquisite)",
-    "display_name": "Exquisite Powdered Pearl",
+    "display_name": "Luxury Exquisite Powdered Pearl",
     "base_item": "Powdered pearl",
     "variant": "Exquisite",
     "quality_tier": "Luxury",
@@ -15166,7 +15166,7 @@
   {
     "category_key": "Reagents",
     "internal_name": "powdered-pearl-(legendary)",
-    "display_name": "Legendary Powdered Pearl",
+    "display_name": "Arcane Legendary Powdered Pearl",
     "base_item": "Powdered pearl",
     "variant": "Legendary",
     "quality_tier": "Arcane",
@@ -15209,7 +15209,7 @@
   {
     "category_key": "Animals",
     "internal_name": "chicken-(hen)-(common)",
-    "display_name": "Common Chicken",
+    "display_name": "Chicken",
     "base_item": "Chicken (hen)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -15299,7 +15299,7 @@
   {
     "category_key": "Animals",
     "internal_name": "chicken-(hen)-(trained)",
-    "display_name": "Trained Chicken",
+    "display_name": "Luxury Trained Chicken",
     "base_item": "Chicken (hen)",
     "variant": "Trained",
     "quality_tier": "Luxury",
@@ -15344,7 +15344,7 @@
   {
     "category_key": "Animals",
     "internal_name": "chicken-(hen)-(champion)",
-    "display_name": "Champion Chicken",
+    "display_name": "Arcane Champion Chicken",
     "base_item": "Chicken (hen)",
     "variant": "Champion",
     "quality_tier": "Arcane",
@@ -15389,7 +15389,7 @@
   {
     "category_key": "Animals",
     "internal_name": "draft-horse-(common)",
-    "display_name": "Common Draft Horse",
+    "display_name": "Draft Horse",
     "base_item": "Draft horse",
     "variant": "Common",
     "quality_tier": "Common",
@@ -15479,7 +15479,7 @@
   {
     "category_key": "Animals",
     "internal_name": "draft-horse-(trained)",
-    "display_name": "Trained Draft Horse",
+    "display_name": "Luxury Trained Draft Horse",
     "base_item": "Draft horse",
     "variant": "Trained",
     "quality_tier": "Luxury",
@@ -15524,7 +15524,7 @@
   {
     "category_key": "Animals",
     "internal_name": "draft-horse-(champion)",
-    "display_name": "Champion Draft Horse",
+    "display_name": "Arcane Champion Draft Horse",
     "base_item": "Draft horse",
     "variant": "Champion",
     "quality_tier": "Arcane",
@@ -15569,7 +15569,7 @@
   {
     "category_key": "ShipSupplies",
     "internal_name": "rope-hemp-(50-ft)-(common)",
-    "display_name": "Common Rope, Hemp",
+    "display_name": "Rope, Hemp",
     "base_item": "Rope, hemp (50 ft)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -15655,7 +15655,7 @@
   {
     "category_key": "ShipSupplies",
     "internal_name": "rope-hemp-(50-ft)-(heavy-duty)",
-    "display_name": "Heavy-duty Rope, Hemp",
+    "display_name": "Luxury Heavy-duty Rope, Hemp",
     "base_item": "Rope, hemp (50 ft)",
     "variant": "Heavy-Duty",
     "quality_tier": "Luxury",
@@ -15698,7 +15698,7 @@
   {
     "category_key": "ShipSupplies",
     "internal_name": "rope-hemp-(50-ft)-(admiralty)",
-    "display_name": "Admiralty Rope, Hemp",
+    "display_name": "Arcane Admiralty Rope, Hemp",
     "base_item": "Rope, hemp (50 ft)",
     "variant": "Admiralty",
     "quality_tier": "Arcane",
@@ -15741,7 +15741,7 @@
   {
     "category_key": "ShipSupplies",
     "internal_name": "block-and-tackle-(common)",
-    "display_name": "Common Block & Tackle",
+    "display_name": "Block & Tackle",
     "base_item": "Block & tackle",
     "variant": "Common",
     "quality_tier": "Common",
@@ -15827,7 +15827,7 @@
   {
     "category_key": "ShipSupplies",
     "internal_name": "block-and-tackle-(heavy-duty)",
-    "display_name": "Heavy-duty Block & Tackle",
+    "display_name": "Luxury Heavy-duty Block & Tackle",
     "base_item": "Block & tackle",
     "variant": "Heavy-Duty",
     "quality_tier": "Luxury",
@@ -15870,7 +15870,7 @@
   {
     "category_key": "ShipSupplies",
     "internal_name": "block-and-tackle-(admiralty)",
-    "display_name": "Admiralty Block & Tackle",
+    "display_name": "Arcane Admiralty Block & Tackle",
     "base_item": "Block & tackle",
     "variant": "Admiralty",
     "quality_tier": "Arcane",
@@ -15913,7 +15913,7 @@
   {
     "category_key": "WildGame",
     "internal_name": "venison-(1-lb)-(low-inn)",
-    "display_name": "Low Inn Venison",
+    "display_name": "Staple Low Inn Venison",
     "base_item": "Venison (1 lb)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -15960,7 +15960,7 @@
   {
     "category_key": "WildGame",
     "internal_name": "venison-(1-lb)-(common)",
-    "display_name": "Common Venison",
+    "display_name": "Venison",
     "base_item": "Venison (1 lb)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -16054,7 +16054,7 @@
   {
     "category_key": "WildGame",
     "internal_name": "venison-(1-lb)-(high-table)",
-    "display_name": "High Table Venison",
+    "display_name": "Luxury High Table Venison",
     "base_item": "Venison (1 lb)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -16101,7 +16101,7 @@
   {
     "category_key": "WildGame",
     "internal_name": "pheasant-(whole)-(low-inn)",
-    "display_name": "Low Inn Pheasant",
+    "display_name": "Staple Low Inn Pheasant",
     "base_item": "Pheasant (whole)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -16148,7 +16148,7 @@
   {
     "category_key": "WildGame",
     "internal_name": "pheasant-(whole)-(common)",
-    "display_name": "Common Pheasant",
+    "display_name": "Pheasant",
     "base_item": "Pheasant (whole)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -16242,7 +16242,7 @@
   {
     "category_key": "WildGame",
     "internal_name": "pheasant-(whole)-(high-table)",
-    "display_name": "High Table Pheasant",
+    "display_name": "Luxury High Table Pheasant",
     "base_item": "Pheasant (whole)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -16289,7 +16289,7 @@
   {
     "category_key": "WildGame",
     "internal_name": "elk-(1-lb)-(low-inn)",
-    "display_name": "Low Inn Elk",
+    "display_name": "Staple Low Inn Elk",
     "base_item": "Elk (1 lb)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -16336,7 +16336,7 @@
   {
     "category_key": "WildGame",
     "internal_name": "elk-(1-lb)-(common)",
-    "display_name": "Common Elk",
+    "display_name": "Elk",
     "base_item": "Elk (1 lb)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -16430,7 +16430,7 @@
   {
     "category_key": "WildGame",
     "internal_name": "elk-(1-lb)-(high-table)",
-    "display_name": "High Table Elk",
+    "display_name": "Luxury High Table Elk",
     "base_item": "Elk (1 lb)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -16477,7 +16477,7 @@
   {
     "category_key": "Foraged",
     "internal_name": "chanterelles-(basket)-(low-inn)",
-    "display_name": "Low Inn Chanterelles",
+    "display_name": "Staple Low Inn Chanterelles",
     "base_item": "Chanterelles (basket)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -16523,7 +16523,7 @@
   {
     "category_key": "Foraged",
     "internal_name": "chanterelles-(basket)-(common)",
-    "display_name": "Common Chanterelles",
+    "display_name": "Chanterelles",
     "base_item": "Chanterelles (basket)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -16615,7 +16615,7 @@
   {
     "category_key": "Foraged",
     "internal_name": "chanterelles-(basket)-(high-table)",
-    "display_name": "High Table Chanterelles",
+    "display_name": "Luxury High Table Chanterelles",
     "base_item": "Chanterelles (basket)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -16661,7 +16661,7 @@
   {
     "category_key": "Foraged",
     "internal_name": "walnuts-(sack)-(low-inn)",
-    "display_name": "Low Inn Walnuts",
+    "display_name": "Staple Low Inn Walnuts",
     "base_item": "Walnuts (sack)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -16707,7 +16707,7 @@
   {
     "category_key": "Foraged",
     "internal_name": "walnuts-(sack)-(common)",
-    "display_name": "Common Walnuts",
+    "display_name": "Walnuts",
     "base_item": "Walnuts (sack)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -16799,7 +16799,7 @@
   {
     "category_key": "Foraged",
     "internal_name": "walnuts-(sack)-(high-table)",
-    "display_name": "High Table Walnuts",
+    "display_name": "Luxury High Table Walnuts",
     "base_item": "Walnuts (sack)",
     "variant": "High Table",
     "quality_tier": "Luxury",
@@ -16845,7 +16845,7 @@
   {
     "category_key": "Foraged",
     "internal_name": "truffles-(ounce)-(low-inn)",
-    "display_name": "Low Inn Truffles",
+    "display_name": "Staple Low Inn Truffles",
     "base_item": "Truffles (ounce)",
     "variant": "Low Inn",
     "quality_tier": "Staple",
@@ -16891,7 +16891,7 @@
   {
     "category_key": "Foraged",
     "internal_name": "truffles-(ounce)-(common)",
-    "display_name": "Common Truffles",
+    "display_name": "Truffles",
     "base_item": "Truffles (ounce)",
     "variant": "Common",
     "quality_tier": "Common",
@@ -16983,7 +16983,7 @@
   {
     "category_key": "Foraged",
     "internal_name": "truffles-(ounce)-(high-table)",
-    "display_name": "High Table Truffles",
+    "display_name": "Luxury High Table Truffles",
     "base_item": "Truffles (ounce)",
     "variant": "High Table",
     "quality_tier": "Luxury",

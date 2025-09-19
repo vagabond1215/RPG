@@ -9,6 +9,41 @@ const ALLOWED_BIOMES = [
   'forest','hills','mountains','desert','tundra','urban'
 ];
 
+const NON_ITEM_CATEGORIES = new Set(['Services']);
+
+function titleCase(value){
+  return value
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(' ');
+}
+
+function normalizeDisplayName(row){
+  const raw = (row.DisplayName || '').trim();
+  if (!raw) return null;
+  const category = row.CategoryKey || '';
+  const quality = (row.QualityTier || '').trim();
+  if (!quality) return raw;
+
+  if (NON_ITEM_CATEGORIES.has(category)){
+    return raw;
+  }
+
+  const lowerQuality = quality.toLowerCase();
+  if (lowerQuality === 'common'){
+    const stripped = raw.replace(/^common\b[\s-]*/i, '').trim();
+    return stripped || raw;
+  }
+
+  const prefix = titleCase(quality);
+  const prefixRe = new RegExp(`^${prefix}\\b`, 'i');
+  if (prefixRe.test(raw)){
+    return raw;
+  }
+  return `${prefix} ${raw}`.replace(/\s+/g, ' ').trim();
+}
+
 function parseBool(val){
   if (typeof val === 'boolean') return val;
   if (typeof val === 'string') return val.trim().toLowerCase() === 'true';
@@ -47,7 +82,7 @@ export async function runImport({catalogPath, policySourcePath='data/economy/reg
     const item = {
       category_key: row.CategoryKey || null,
       internal_name: internal,
-      display_name: row.DisplayName || null,
+      display_name: normalizeDisplayName(row),
       base_item: row.BaseItem || null,
       variant: variant,
       quality_tier: row.QualityTier || null,
