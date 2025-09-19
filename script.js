@@ -2608,7 +2608,6 @@ function buildingParagraphHTML(text) {
   }
   return segments
     .map(seg => `<p>${seg}</p>`)
-)/g, '<br>')}</p>`)
     .join('');
 }
 
@@ -2936,46 +2935,66 @@ function showNavigation() {
     );
   } else {
     const district = cityData.districts[pos.district];
+    if (!district) {
+      setMainHTML(
+        `<div class="navigation"><h2>${escapeHtml(pos.city)}</h2><p class="location-description">This district is unavailable.</p></div>`
+      );
+      return;
+    }
+
     const exits = [];
-    const districts = [];
+    const districtLinks = [];
     const locals = [];
     const buildingNames = [];
+
     district.points.forEach(pt => {
-      if (pt.type === 'location') exits.push(pt);
-      else if (pt.type === 'district') districts.push(pt);
-      else locals.push(pt);
-      if (pt.type === 'building') {
-        buildingNames.push(pt.target || pt.name);
+      const entry = { ...pt };
+      if (entry.type === 'location') {
+        exits.push(entry);
+      } else if (entry.type === 'district') {
+        districtLinks.push(entry);
+      } else {
+        locals.push(entry);
+      }
+      if (entry.type === 'building') {
+        buildingNames.push(entry.target || entry.name);
       }
     });
+
     const questBoards = questBoardsForDistrict(pos.city, pos.district, {
       excludeBuildingBoards: true,
       buildingNames,
     });
+
     const makeButton = pt => {
-      const prompt = pt.type === 'district' ? 'Travel to' : district.travelPrompt || 'Walk to';
+      const prompt =
+        pt.type === 'district' ? 'Travel to' : district.travelPrompt || 'Walk to';
       return createNavItem({
         type: pt.type,
-        target: pt.target,
+        target: pt.target ?? pt.name,
         name: pt.name,
         prompt,
         icon: pt.icon,
         extraClass: pt.extraClass,
+        disabled: pt.disabled,
       });
     };
-    const groups = [];
+
     const exitGroup = exits.map(makeButton);
-    const hasMultipleDistricts = Object.keys(cityData.districts).length > 1;
+    const localButtons = locals.map(makeButton);
+    const hasMultipleDistricts = Object.keys(cityData.districts || {}).length > 1;
+
     const buildDistrictNav = () => {
       const layout = cityData.layout;
-      const allNames = Object.keys(cityData.districts);
-      if (showDistricts && layout && layout.positions) {
-        const accessible = new Set(districts.map(d => d.name).concat(pos.district));
+      const allNames = Object.keys(cityData.districts || {});
+      if (hasMultipleDistricts && showDistricts && layout && layout.positions) {
+        const accessible = new Set(
+          districtLinks.map(d => d.target || d.name).concat(pos.district)
+        );
         const fontSize =
           parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
         const isLandscape = window.innerWidth > window.innerHeight;
         const iconRem = isLandscape ? 10 : 4.5;
-        // Each district icon button is iconRem rem square, so space nodes accordingly
         const size = iconRem * fontSize;
         const nodes = allNames.map(name => {
           const coords = layout.positions[name] || [0, 0];
@@ -2993,8 +3012,8 @@ function showNavigation() {
         });
         const lines = (layout.connections || [])
           .map(([a, b]) => {
-            const [r1, c1] = layout.positions[a];
-            const [r2, c2] = layout.positions[b];
+            const [r1, c1] = layout.positions[a] || [0, 0];
+            const [r2, c2] = layout.positions[b] || [0, 0];
             const x1 = c1 * size + size / 2;
             const y1 = r1 * size + size / 2;
             const x2 = c2 * size + size / 2;
@@ -3002,73 +3021,77 @@ function showNavigation() {
             return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" />`;
           })
           .join('');
-        const width = layout.cols * size;
-        const height = layout.rows * size;
+        const width = (layout.cols || 0) * size;
+        const height = (layout.rows || 0) * size;
         return [
           `<div class="district-map" style="width:${width}px;height:${height}px;"><svg class="district-connections" width="${width}" height="${height}">${lines}</svg>${nodes.join('')}</div>`,
         ];
       }
-      const neighborButtons = districts.map(d =>
-      const districtGroup = [districtToggle, mapToggle];
-      if (showDistricts) {
-        groups.push(districtGroup);
-        if (districtNav.length) {
-          groups.push(districtNav);
-      } else if (exitGroup.length) {
-        exitGroup.unshift(...districtGroup);
-        groups.push(districtGroup);
-      if (districtNav.length) {
-        groups.push(districtNav);
+      const neighborButtons = districtLinks.map(makeButton);
+      if (!hasMultipleDistricts) {
+        return neighborButtons;
+      }
+      const neighborNames = new Set(districtLinks.map(d => d.target || d.name));
+      const additional = allNames
+        .filter(name => name !== pos.district && !neighborNames.has(name))
+        .map(name =>
+          createNavItem({
+            type: 'district',
+            target: name,
+            name,
+            prompt: 'Travel to',
+            icon: getDistrictIcon(pos.city, name),
+          })
+        );
+      return [...neighborButtons, ...additional];
+    };
+
+    const mapToggle = hasMultipleDistricts
+      ? createNavItem({
+          type: 'district',
+          action: 'toggle-city-map',
+          name: 'City Map',
+          prompt: 'Toggle city map',
+          icon: getCityIcon(pos.city),
+        })
+      : null;
+
+    const districtToggle = hasMultipleDistricts
+      ? createNavItem({
+          type: 'district',
+          action: 'toggle-districts',
+          name: showDistricts ? 'Hide Districts' : 'Show Districts',
+          prompt: 'Toggle district overview',
+          icon: getDistrictsEnvelope(pos.city),
+        })
+      : null;
+
+    const groups = [];
+    if (hasMultipleDistricts) {
+      const toggleButtons = [districtToggle, mapToggle].filter(Boolean);
+      if (toggleButtons.length) {
+        groups.push(toggleButtons);
       }
     }
+
+    const districtNav = buildDistrictNav();
+    if (districtNav.length) {
+      groups.push(districtNav);
+    }
+
     if (exitGroup.length) {
       groups.push(exitGroup);
-    groups
-      .map(group => group.filter(Boolean))
-      .filter(group => group.length)
-      .forEach(group => {
-        if (navButtons.length) {
-          navButtons.push('<div class="group-separator"></div>');
-        }
-        navButtons.push(...group);
-      });
-      });
-      const districtNav = buildDistrictNav();
-    groups
-      .map(group => group.filter(Boolean))
-      .filter(group => group.length)
-      .forEach(group => {
-        if (navButtons.length) {
-          navButtons.push('<div class="group-separator"></div>');
-        }
-        navButtons.push(...group);
-      });
-          safeStorage.setItem(SHOW_DISTRICTS_KEY, showDistricts);
-        if (districtNav.length) groups.push(districtNav);
-      } else {
-        districtGroup.push(...districtNav);
-        if (exitGroup.length) {
-          exitGroup.unshift(...districtGroup);
-        } else {
-          groups.push(districtGroup);
-        }
-      }
-    } else {
-      const districtNav = buildDistrictNav();
-      if (exitGroup.length) {
-        exitGroup.unshift(mapToggle);
-      } else {
-        groups.push([mapToggle]);
-      }
-      if (districtNav.length) groups.push(districtNav);
     }
-    if (exitGroup.length) groups.push(exitGroup);
+
     const navButtons = [];
-          safeStorage.setItem(SHOW_DISTRICTS_KEY, showDistricts);
-        if (navButtons.length) navButtons.push('<div class="group-separator"></div>');
-        navButtons.push(...g);
+    groups.forEach(group => {
+      if (!group || !group.length) return;
+      if (navButtons.length) {
+        navButtons.push('<div class="group-separator"></div>');
       }
+      navButtons.push(...group);
     });
+
     let description = null;
     if (pos.previousBuilding) {
       description = `Leaving ${pos.previousBuilding}, you step back into ${pos.district}.`;
@@ -3081,17 +3104,18 @@ function showNavigation() {
     ) {
       description = district.descriptions[pos.previousDistrict];
     }
+
     const questButtons = questBoards.map(board =>
       createNavItem({
         type: 'quests',
         target: board.name,
         name: board.name,
-        prompt: "Review quests at",
+        prompt: 'Review quests at',
         icon: QUEST_BOARD_ICON,
         extraClass: 'quest-board-item',
       })
     );
-          safeStorage.setItem(SHOW_DISTRICTS_KEY, showDistricts);
+
     const localSections = [];
     if (questButtons.length) {
       localSections.push(
@@ -5373,7 +5397,7 @@ const SLOT_ICONS = {
 SLOT_ICONS.rEar = '<svg viewBox="0 0 24 24"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></svg>';
 SLOT_ICONS.rRing = SLOT_ICONS.lRing;
 
-function showEquipmentUI() {
+function formatSlotName(slot) {
   const names = {
     mainHand: 'Main Hand',
     offHand: 'Off Hand',
@@ -5384,7 +5408,7 @@ function showEquipmentUI() {
     rRing: 'Right Ring',
     brooch: 'Brooch',
     belt: 'Belt',
-    pouch: 'Pouch'
+    pouch: 'Pouch',
   };
   return (
     names[slot] ||
@@ -5398,15 +5422,18 @@ function equipmentSection(title, items) {
   return `<section class="equipment-section"><h3 class="equipment-header">${title}</h3><ul class="equipment-list">${items}</ul></section>`;
 }
 
-    saved = JSON.parse(safeStorage.getItem(TEMP_CHARACTER_KEY) || '{}');
-  if (!currentCharacter) return;
+function showEquipmentUI() {
+  if (!currentCharacter) {
+    startCharacterCreation();
+    return;
+  }
   updateScale();
   showBackButton();
   const { equipment } = currentCharacter;
   const buildList = (slots, group) =>
     slots
       .map(slot => {
-        const item = equipment[group][slot];
+        const item = equipment[group]?.[slot];
         const icon = SLOT_ICONS[slot] || '';
         const name = item ? item.name : '';
         return `<li class="equipment-slot"><span class="slot-icon">${icon}</span><span class="slot-name">${formatSlotName(slot)}</span><span class="slot-item">${name}</span></li>`;
@@ -5415,7 +5442,9 @@ function equipmentSection(title, items) {
   const weaponList = buildList(WEAPON_SLOTS, 'weapons');
   const armorList = buildList(ARMOR_SLOTS, 'armor');
   const trinketList = buildList(TRINKET_SLOTS, 'trinkets');
-  setMainHTML(`<div class="equipment-screen">${equipmentSection('Weapons', weaponList)}${equipmentSection('Armor', armorList)}${equipmentSection('Trinkets', trinketList)}</div>`);
+  setMainHTML(
+    `<div class="equipment-screen">${equipmentSection('Weapons', weaponList)}${equipmentSection('Armor', armorList)}${equipmentSection('Trinkets', trinketList)}</div>`
+  );
 }
 
 function startCharacterCreation() {
@@ -5434,8 +5463,10 @@ function startCharacterCreation() {
     key: 'class',
     label: 'Choose your class',
     type: 'select',
-      options: ['Male', 'Female'],
-    },
+    options: buildEntries.map(b => b.primary),
+  };
+  const locationField = {
+    key: 'location',
     label: 'Choose your starting location',
     type: 'select',
     options: Object.keys(LOCATIONS).filter(l => l !== 'Duvilia Kingdom')
@@ -5459,9 +5490,9 @@ function startCharacterCreation() {
       label: 'Choose your sex',
       type: 'select',
       options: ['Male', 'Female']
-      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+    },
+    classField,
+    { key: 'characterImage', label: 'Choose your character', type: 'select' }
   ];
 
   const FIELD_STEP_LABELS = {
@@ -5633,40 +5664,26 @@ function startCharacterCreation() {
             character.sex = options[0];
           }
           inputHTML = `
-            inputHTML = `
-      }
-        if (!colors.length) {
-          const fallback = character[field.key] || '#ffffff';
-          colors = [fallback];
-        }
-        if (!character[field.key]) {
-          character[field.key] = colors[0];
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-        }
-        const currentColor = character[field.key];
-        inputHTML = `
-          <div class="color-carousel wheel-selector" data-field="${field.key}">
-            <button type="button" class="color-arrow left" aria-label="Previous">&#x2039;</button>
-            <button type="button" class="color-button" style="background:${currentColor};" aria-label="${currentColor}"></button>
-            <button type="button" class="color-arrow right" aria-label="Next">&#x203A;</button>
-            <button type="button" class="color-picker" aria-label="Pick custom color">🎨</button>
-            <input type="color" value="${currentColor}" aria-label="${field.label}" style="position:absolute;left:-9999px;">
-          </div>`;
-      }
-      setMainHTML(
-        `<div class="character-creation">
-          <div class="cc-top-row">
-            <div class="progress-container">${progressHTML}</div>
-            <div class="cc-right">
-              <div class="cc-options">
-                <h2>${field.label}</h2>
-                ${inputHTML}
-              </div>
-              ${statsSection}
-            </div>
-          </div>
-          <div class="cc-info">${descHTML}</div>
-        </div>`
+            <div class="sex-carousel wheel-selector">
+              <button class="sex-arrow left" aria-label="Previous">&#x2039;</button>
+              <button class="option-button sex-button">${character.sex}</button>
+              <button class="sex-arrow right" aria-label="Next">&#x203A;</button>
+            </div>`;
+        } else if (field.key === 'class') {
+          const options = field.options;
+          let index = options.indexOf(character.class);
+          if (index === -1) {
+            index = 0;
+            character.class = options[0];
+          }
+          inputHTML = `
+            <div class="class-carousel wheel-selector">
+              <button class="class-arrow left" aria-label="Previous">&#x2039;</button>
+              <button class="option-button class-button">${character.class}</button>
+              <button class="class-arrow right" aria-label="Next">&#x203A;</button>
+            </div>`;
+        } else if (field.key === 'backstory') {
+          const options = (BACKSTORY_MAP[character.location] || []).map(b => b.background);
           let index = options.indexOf(character.backstory);
           if (index === -1) {
             index = 0;
@@ -5722,24 +5739,24 @@ function startCharacterCreation() {
           colors = skinColorOptionsByRace[character.race] || humanSkinColors;
         }
         colors = colors.slice().sort();
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-            safeStorage.setItem(
-            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-        safeStorage.removeItem(TEMP_CHARACTER_KEY);
+        let value = character[field.key];
+        if (value === undefined) {
+          value = colors[0];
+          character[field.key] = value;
+        }
+        const pickerId = `${field.key}-picker`;
+        inputHTML = `
+          <div class="color-carousel wheel-selector" data-field="${field.key}">
+            <button class="color-arrow left" aria-label="Previous">&#x2039;</button>
+            <button class="color-button" style="background:${value}" aria-label="${value}"></button>
+            <button class="color-arrow right" aria-label="Next">&#x203A;</button>
+            <button class="color-picker" aria-label="Pick color">🎨</button>
+            <input type="color" id="${pickerId}" value="${value}" style="display:none;">
+          </div>`;
+      }
 
-  let apiKey = safeStorage.getItem('openaiApiKey');
-    if (apiKey) safeStorage.setItem('openaiApiKey', apiKey);
+      setMainHTML(
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-right"><div class="cc-options">${inputHTML}</div>${statsSection}</div></div><div class="cc-info">${descHTML}</div></div>`
       );
       normalizeOptionButtonWidths();
 
@@ -5848,40 +5865,25 @@ function startCharacterCreation() {
             updateZoom();
           });
 
-        if (!colors.length) {
-          const fallback = character[field.key] || '#ffffff';
-          colors = [fallback];
-        }
-        if (carousel) {
-          const btn = carousel.querySelector('.color-button');
-          const pickerInput = carousel.querySelector('input[type="color"]');
-          const pickerBtn = carousel.querySelector('.color-picker');
-          const update = () => {
-            if (btn) {
-              btn.style.background = character[field.key];
-              btn.setAttribute('aria-label', character[field.key]);
-            }
-            if (pickerInput) {
-              pickerInput.value = character[field.key];
-            }
-            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          };
-          const change = dir => {
-            index = (index + dir + colors.length) % colors.length;
-            character[field.key] = colors[index];
-            update();
-          };
-          const leftArrow = carousel.querySelector('.color-arrow.left');
-          const rightArrow = carousel.querySelector('.color-arrow.right');
-          leftArrow?.addEventListener('click', () => change(-1));
-          rightArrow?.addEventListener('click', () => change(1));
-          pickerBtn?.addEventListener('click', () => pickerInput?.click());
-          btn?.addEventListener('click', () => pickerInput?.click());
-          pickerInput?.addEventListener('input', () => {
-            character[field.key] = pickerInput.value;
-            update();
+          zoomReset.addEventListener('click', () => {
+            ccPortraitZoom = 1;
+            updateZoom();
           });
+
+          if (portraitImg.complete) updateZoom();
+          else portraitImg.addEventListener('load', updateZoom);
         }
+      } else if (field.type === 'select') {
+        document.querySelectorAll('.option-button').forEach(btn => {
+          btn.addEventListener('click', () => {
+            character[field.key] = btn.dataset.value;
+            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            renderStep();
+          });
+        });
+      } else if (field.type === 'color') {
+        let colors = [];
+        if (field.key === 'hairColor') {
           colors = hairColorOptionsByRace[character.race] || humanHairColors;
         } else if (field.key === 'eyeColor') {
           colors = eyeColorOptionsByRace[character.race] || humanEyeColors;
@@ -5976,54 +5978,6 @@ function startCharacterCreation() {
   }
 }
 
-async function generateCharacterImage(character) {
-  const prompt = composeImagePrompt(character);
-  let apiKey = safeStorage.getItem('openaiApiKey');
-  if (!apiKey) {
-    apiKey = prompt('Enter OpenAI API key:');
-    if (apiKey) safeStorage.setItem('openaiApiKey', apiKey);
-  }
-  const res = await fetch('https://api.openai.com/v1/images/generations', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: 'gpt-image-1',
-      prompt,
-      n: 1,
-      size: '512x512',
-      response_format: 'b64_json'
-    })
-  });
-  if (!res.ok) throw new Error('Image generation failed');
-  const data = await res.json();
-  const img = data.data[0].b64_json;
-  return img.startsWith('http') ? img : `data:image/png;base64,${img}`;
-}
-
-async function generatePortrait(character, callback) {
-  setMainHTML(`<div class="no-character"><h1>Generating portrait...</h1><div class="progress"><div class="progress-bar" id="portrait-progress"></div></div></div>`);
-
-  let progress = 0;
-  const progressBar = document.getElementById('portrait-progress');
-  const progressInterval = setInterval(() => {
-    progress = (progress + 1) % 101;
-    progressBar.style.width = progress + '%';
-  }, 100);
-
-  try {
-    const src = await generateCharacterImage(character);
-    clearInterval(progressInterval);
-    callback(src);
-  } catch (err) {
-    console.error(err);
-    clearInterval(progressInterval);
-    callback('https://placehold.co/512x512?text=Portrait');
-  }
-}
-
 function finalizeCharacter(character) {
   const id = Date.now().toString();
   const template = JSON.parse(JSON.stringify(characterTemplate));
@@ -6081,9 +6035,9 @@ function finalizeCharacter(character) {
         dailyProfit: b.dailyProfit || 0,
         jobRoles: getJobRolesForBuilding(b.name),
         money: b.money
-        const target = newChar.backstory.startingLocation;
-        for (const [name, info] of Object.entries(cityData.buildings)) {
-          if (info.name === target || name === target) {
+          ? { ...createEmptyCurrency(), ...parseCurrency(b.money) }
+          : createEmptyCurrency(),
+      }));
     }
     if (raw.employment) {
       newChar.employment = raw.employment.map(job => ({
@@ -6107,9 +6061,9 @@ function finalizeCharacter(character) {
       const district = newChar.backstory.district;
       let building = null;
       if (newChar.backstory.startingLocation && cityData.buildings) {
-  safeStorage.removeItem(TEMP_CHARACTER_KEY);
-  } else if (safeStorage.getItem(TEMP_CHARACTER_KEY)) {
-    safeStorage.clear();
+        const startLower = newChar.backstory.startingLocation.toLowerCase();
+        for (const name of Object.keys(cityData.buildings)) {
+          if (startLower.includes(name.toLowerCase())) {
             building = name;
             break;
           }
