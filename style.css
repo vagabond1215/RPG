@@ -1764,6 +1764,54 @@ body.theme-dark .top-menu button {
   padding: 0.35rem 0.5rem;
 }
 
+.quest-log-screen {
+  padding: 1rem;
+}
+
+.quest-log-section {
+  margin-top: 1.5rem;
+}
+
+.quest-log-section:first-of-type {
+  margin-top: 0.5rem;
+}
+
+.quest-log-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.quest-log-entry {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quest-log-entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.quest-log-meta {
+  margin-top: 0.5rem;
+}
+
+.quest-log-meta-line {
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.quest-log-label {
+  font-weight: 600;
+  margin-right: 0.35rem;
+}
+
+.quest-log-empty {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .quest-board-district {
   display: block;
   margin-top: 0.25rem;
