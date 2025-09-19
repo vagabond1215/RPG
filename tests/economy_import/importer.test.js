@@ -3,51 +3,73 @@ import assert from 'node:assert';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import xlsx from 'xlsx';
 import { runImport } from '../../tools/importers/import_economy_catalog.js';
 import { toCp, cpToCoins } from '../../data/economy/currency.js';
 import { computePrice } from '../../data/economy/regional_pricing.js';
+import { parse } from 'csv-parse/sync';
 
 function makeTmp(){
   return fs.mkdtempSync(path.join(os.tmpdir(), 'econ-'));
 }
 
-async function baseImport(tmpDir, file){
+function readCsv(file){
+  const content = fs.readFileSync(file, 'utf8');
+  return parse(content, {columns:true, skip_empty_lines:true});
+}
+
+function writeCsv(file, rows){
+  if (rows.length === 0) throw new Error('cannot write empty csv');
+  const headers = Object.keys(rows[0]);
+  const lines = [];
+  lines.push(headers.join(','));
+  for (const row of rows){
+    lines.push(headers.map(h => escapeCsvValue(row[h] ?? '')).join(','));
+  }
+  fs.writeFileSync(file, lines.join('\n') + '\n');
+}
+
+function escapeCsvValue(value){
+  if (value === null || value === undefined) return '';
+  const str = String(value);
+  if (/[",\n]/.test(str)){
+    return '"' + str.replace(/"/g,'""') + '"';
+  }
+  return str;
+}
+
+async function baseImport(tmpDir, {catalogPath='data/economy/catalog_flat.csv', policySourcePath='data/economy/region_policy.csv'}={}){
   const itemsPath = path.join(tmpDir, 'items.json');
   const policyPath = path.join(tmpDir, 'policy.json');
   const reportPath = path.join(tmpDir, 'report.json');
-  const res = await runImport({file, itemsPath, policyPath, reportPath});
+  const res = await runImport({catalogPath, policySourcePath, itemsPath, policyPath, reportPath});
   return {res, itemsPath, policyPath};
 }
 
 test('importer idempotent', async () => {
   const tmp = makeTmp();
-  const {res, itemsPath, policyPath} = await baseImport(tmp, 'Fantasy_Economy_Catalog_REBUILT.xlsx');
+  const {res, itemsPath, policyPath} = await baseImport(tmp);
   assert.ok(res.inserted > 0);
-  const res2 = await runImport({file:'Fantasy_Economy_Catalog_REBUILT.xlsx', itemsPath, policyPath, reportPath:path.join(tmp,'r2.json')});
+  const res2 = await runImport({itemsPath, policyPath, reportPath:path.join(tmp,'r2.json')});
   assert.equal(res2.inserted, 0);
   assert.equal(res2.updated, 0);
 });
 
 test('single row update', async () => {
   const tmp = makeTmp();
-  const {itemsPath, policyPath} = await baseImport(tmp, 'Fantasy_Economy_Catalog_REBUILT.xlsx');
-  const wb = xlsx.readFile('Fantasy_Economy_Catalog_REBUILT.xlsx');
-  const items = xlsx.utils.sheet_to_json(wb.Sheets['Catalog_Flat']);
-  items[0].DisplayName = String(items[0].DisplayName || '') + ' Updated';
-  const wb2 = xlsx.utils.book_new();
-  xlsx.utils.book_append_sheet(wb2, xlsx.utils.json_to_sheet(items), 'Catalog_Flat');
-  const policy = xlsx.utils.sheet_to_json(wb.Sheets['RegionPolicy']);
-  xlsx.utils.book_append_sheet(wb2, xlsx.utils.json_to_sheet(policy), 'RegionPolicy');
-  const tempFile = path.join(tmp, 'mod.xlsx');
-  xlsx.writeFile(wb2, tempFile);
-  const res = await runImport({file:tempFile, itemsPath, policyPath, reportPath:path.join(tmp,'r3.json')});
+  const {itemsPath, policyPath} = await baseImport(tmp);
+  const rows = readCsv('data/economy/catalog_flat.csv');
+  rows[0].DisplayName = String(rows[0].DisplayName || '') + ' Updated';
+  const catalogPath = path.join(tmp, 'catalog.csv');
+  writeCsv(catalogPath, rows);
+  const regionPolicyPath = path.join(tmp, 'region_policy.csv');
+  fs.copyFileSync('data/economy/region_policy.csv', regionPolicyPath);
+  const res = await runImport({catalogPath, policySourcePath:regionPolicyPath, itemsPath, policyPath, reportPath:path.join(tmp,'r3.json')});
   assert.equal(res.updated, 1);
 });
 
 test('region policy count', async () => {
   const tmp = makeTmp();
-  const {policyPath} = await baseImport(tmp, 'Fantasy_Economy_Catalog_REBUILT.xlsx');
+  const {policyPath} = await baseImport(tmp);
   const policies = JSON.parse(fs.readFileSync(policyPath));
   assert.equal(policies.length, 12);
 });

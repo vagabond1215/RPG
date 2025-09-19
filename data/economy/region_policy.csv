@@ -1,0 +1,13 @@
+Biome,Delta_Perishable,Delta_Bulky,Delta_Fragile,Notes
+coastal,-0.02,-0.02,0,Add to out-of-region multiplier; clamp 0.90–1.40
+riverlands,0,-0.02,0,Add to out-of-region multiplier; clamp 0.90–1.40
+lake,0,0,0,Add to out-of-region multiplier; clamp 0.90–1.40
+wetland,0,0,0,Add to out-of-region multiplier; clamp 0.90–1.40
+grassland,0,0,0,Add to out-of-region multiplier; clamp 0.90–1.40
+farmland,0,0,0,Add to out-of-region multiplier; clamp 0.90–1.40
+forest,0,0,0,Add to out-of-region multiplier; clamp 0.90–1.40
+hills,0,0.03,0,Add to out-of-region multiplier; clamp 0.90–1.40
+mountains,0,0.03,0,Add to out-of-region multiplier; clamp 0.90–1.40
+desert,0.04,0.03,0,Add to out-of-region multiplier; clamp 0.90–1.40
+tundra,0.04,0,0,Add to out-of-region multiplier; clamp 0.90–1.40
+urban,-0.02,-0.02,-0.01,Add to out-of-region multiplier; clamp 0.90–1.40

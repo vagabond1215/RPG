@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import xlsx from 'xlsx';
+import { parse } from 'csv-parse/sync';
 import slugify from 'slugify';
 import { cpToCoins } from '../../data/economy/currency.js';
 
@@ -15,10 +15,23 @@ function parseBool(val){
   return !!val;
 }
 
-export async function runImport({file, dryRun=false, itemsPath='data/economy/items.json', policyPath='data/game/region_policy.json', reportPath}){
-  const wb = xlsx.readFile(file);
-  const itemsSheet = xlsx.utils.sheet_to_json(wb.Sheets['Catalog_Flat'], {defval:null});
-  const policySheet = xlsx.utils.sheet_to_json(wb.Sheets['RegionPolicy'], {defval:null});
+function readCsv(file){
+  const content = fs.readFileSync(file, 'utf8');
+  const rows = parse(content, {columns:true, skip_empty_lines:true, trim:true});
+  return rows.map(row => {
+    const out = {};
+    for (const [key, value] of Object.entries(row)){
+      out[key] = value === '' ? null : value;
+    }
+    return out;
+  });
+}
+
+export async function runImport({catalogPath, policySourcePath='data/economy/region_policy.csv', dryRun=false, itemsPath='data/economy/items.json', policyPath='data/game/region_policy.json', reportPath, file}={}){
+  if (!catalogPath && file) catalogPath = file;
+  if (!catalogPath) catalogPath = 'data/economy/catalog_flat.csv';
+  const itemsSheet = readCsv(catalogPath);
+  const policySheet = readCsv(policySourcePath);
 
   const existingItems = fs.existsSync(itemsPath) ? JSON.parse(fs.readFileSync(itemsPath,'utf8')) : [];
   const existingMap = new Map(existingItems.map(it=>[`${it.internal_name}__${it.variant}`, it]));
@@ -137,21 +150,21 @@ function parseArgs(){
   const opts = {dryRun:false};
   for (let i=0;i<args.length;i++){
     const a = args[i];
-    if (a === '--file') opts.file = args[++i];
+    if (a === '--catalog') opts.catalogPath = args[++i];
+    else if (a === '--region-policy') opts.policySourcePath = args[++i];
     else if (a === '--dry-run') opts.dryRun = true;
     else if (a === '--items-output') opts.itemsPath = args[++i];
     else if (a === '--policy-output') opts.policyPath = args[++i];
     else if (a === '--report') opts.reportPath = args[++i];
+    else if (a === '--file') opts.catalogPath = args[++i];
   }
   return opts;
 }
 
 if (import.meta.url === `file://${process.argv[1]}`){
   const opts = parseArgs();
-  if (!opts.file){
-    console.error('Usage: node tools/importers/import_economy_catalog.js --file <xlsx> [--dry-run]');
-    process.exit(1);
-  }
+  if (!opts.catalogPath) opts.catalogPath = 'data/economy/catalog_flat.csv';
+  if (!opts.policySourcePath) opts.policySourcePath = 'data/economy/region_policy.csv';
   runImport(opts).then(r=>{
     console.log(JSON.stringify(r, null, 2));
   }).catch(e=>{
