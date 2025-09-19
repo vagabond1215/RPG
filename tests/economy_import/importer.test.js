@@ -74,6 +74,24 @@ test('region policy count', async () => {
   assert.equal(policies.length, 12);
 });
 
+test('display name normalization removes common labels and adds quality prefixes', async () => {
+  const tmp = makeTmp();
+  const {itemsPath} = await baseImport(tmp);
+  const items = JSON.parse(fs.readFileSync(itemsPath));
+
+  const apples = items.find(item => item.internal_name === 'apples-(dozen)-(common)');
+  assert.ok(apples, 'common apples present');
+  assert.equal(apples.display_name, 'Apples');
+
+  const stapleApples = items.find(item => item.internal_name === 'apples-(dozen)-(low-inn)');
+  assert.ok(stapleApples, 'staple apples present');
+  assert.equal(stapleApples.display_name, 'Staple Low Inn Apples');
+
+  const luxuryBread = items.find(item => item.internal_name === 'bread-loaf-(1-lb)-(high-table)');
+  assert.ok(luxuryBread, 'luxury bread present');
+  assert.ok(/^Luxury\b/.test(luxuryBread.display_name));
+});
+
 test('coin round trip', () => {
   const cp = toCp({g:1, si:1, cp:45});
   assert.equal(cpToCoins(cp), '1g 1si 45cp');
