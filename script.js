@@ -2596,8 +2596,12 @@ function buildingParagraphHTML(text) {
   const safe = escapeHtml(replaced);
   if (!safe) return '';
   const segments = safe
-    .split(/(?:?
-){2,}/)
+    .split(/(?:
+?
+    return `<p>${safe.replace(/(?:
+?
+    .map(seg => `<p>${seg.replace(/(?:
+?
     .map(seg => seg.trim())
     .filter(Boolean);
   if (!segments.length) {
@@ -3060,8 +3064,7 @@ function showNavigation() {
     }
     if (exitGroup.length) groups.push(exitGroup);
     const navButtons = [];
-    groups.forEach(g => {
-      if (g.length) {
+          safeStorage.setItem(SHOW_DISTRICTS_KEY, showDistricts);
         if (navButtons.length) navButtons.push('<div class="group-separator"></div>');
         navButtons.push(...g);
       }
@@ -5712,6 +5715,9 @@ function startCharacterCreation() {
           safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
             safeStorage.setItem(
             safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
@@ -5719,12 +5725,9 @@ function startCharacterCreation() {
       safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         safeStorage.removeItem(TEMP_CHARACTER_KEY);
+
   let apiKey = safeStorage.getItem('openaiApiKey');
     if (apiKey) safeStorage.setItem('openaiApiKey', apiKey);
-      }
-
-      setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-right"><div class="cc-options">${inputHTML}</div>${statsSection}</div></div><div class="cc-info">${descHTML}</div></div>`
       );
       normalizeOptionButtonWidths();
 
