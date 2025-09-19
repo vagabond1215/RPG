@@ -4,7 +4,7 @@
   --foreground: #333333;
   /* Menu button colors default to the light theme */
   --menu-color-dark: #333333;
-    --menu-color-light: #d3d3d3;
+  --menu-color-light: #d3d3d3;
   --range-color: #555555;
   --capped-color: #2e8b57;
   --new-char-bg: #333333;
@@ -16,6 +16,9 @@
   --stamina-color: #00ff00;
   --menu-button-size: 2.625rem;
   --menu-height: var(--menu-button-size);
+  --settings-panel-gap: 0.0625rem;
+  --settings-panel-width: calc(3 * var(--menu-button-size) + 2 * var(--settings-panel-gap));
+  --settings-panel-buffer: 0.5rem;
 }
 
 html {
@@ -52,7 +55,7 @@ main {
   background: var(--background);
   display: flex;
   flex-direction: row;
-  gap: 0.0625rem;
+  gap: var(--settings-panel-gap);
   padding: 0 0.5rem;
   height: var(--menu-button-size);
   align-items: center;
@@ -114,7 +117,7 @@ main {
   font-weight: 600;
   color: var(--menu-color-dark);
   padding: 0 0.5rem 0 0.75rem;
-  margin-left: auto;
+  margin-left: var(--settings-panel-gap);
 }
 
 .top-menu-info span {
@@ -140,9 +143,15 @@ body.theme-dark .top-menu-info {
 
 .settings-group {
   display: flex;
-  gap: 0.0625rem;
+  gap: var(--settings-panel-gap);
   position: relative;
   align-items: center;
+}
+
+.settings-buffer {
+  flex: 0 0 calc(var(--settings-panel-width) + var(--settings-panel-buffer));
+  min-width: calc(var(--settings-panel-width) + var(--settings-panel-buffer));
+  height: 100%;
 }
 
 @media (orientation: portrait) {
@@ -157,7 +166,7 @@ body.theme-dark .top-menu-info {
 
 #settings-panel {
   display: flex;
-  gap: 0.0625rem;
+  gap: var(--settings-panel-gap);
   overflow: hidden;
   position: absolute;
   pointer-events: none;
@@ -1628,6 +1637,16 @@ body.theme-dark .top-menu button {
 .questboard-detail .quest-weather {
   margin: 0.5rem 0 0.75rem;
   font-size: 0.9rem;
+}
+
+.questboard-detail .quest-sources {
+  margin: 0.25rem 0 0.75rem;
+  font-size: 0.85rem;
+  color: rgba(51, 51, 51, 0.75);
+}
+
+.questboard-detail .quest-sources strong {
+  color: rgba(51, 51, 51, 0.95);
 }
 
 .questboard-detail .quest-empty {
