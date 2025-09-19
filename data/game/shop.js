@@ -442,6 +442,17 @@ function filterByExclusions(items, keywords) {
   });
 }
 
+function filterByRegionTags(items, tags) {
+  const normalized = normalizeKeywords(tags);
+  if (!normalized.length) return items;
+  const filtered = items.filter(item => {
+    const regions = (item.regions || []).map(region => String(region).toLowerCase());
+    if (!regions.length) return true;
+    return normalized.some(tag => regions.includes(tag));
+  });
+  return filtered.length ? filtered : items;
+}
+
 function finalizeSection(section, context) {
   const heading = section.label || labelForKey(section.key);
   const inventoryKey = section.inventoryKey || section.key;
@@ -1182,8 +1193,15 @@ export async function itemsByCategory(section, context) {
     filtered = items.filter(item => categories.includes(item.category_key) && fallback.includes(item.quality_tier));
   }
 
-  filtered = filterByKeywords(filtered, section.keywords);
+  const extraKeywords = normalizeKeywords([
+    ...(context.productKeywords || []),
+    ...(context.productionGoods || []),
+    ...((context.yields && Object.values(context.yields).flat()) || []),
+  ]);
+  const combinedKeywords = Array.from(new Set([...(section.keywords || []), ...extraKeywords]));
+  filtered = filterByKeywords(filtered, combinedKeywords);
   filtered = filterByExclusions(filtered, section.excludeKeywords);
+  filtered = filterByRegionTags(filtered, context.regionTags);
 
   let sorted;
   if (section.preferBulk) {
