@@ -2596,18 +2596,13 @@ function buildingParagraphHTML(text) {
   const safe = escapeHtml(replaced);
   if (!safe) return '';
   const segments = safe
-    .split(/(?:
-?
-    return `<p>${safe.replace(/(?:
-?
-    .map(seg => `<p>${seg.replace(/(?:
-?
-    .map(seg => seg.trim())
+    .split(/(?:\r?\n){2,}/)
+    .map(seg => seg.replace(/(?:\r?\n)+/g, '<br>').trim())
     .filter(Boolean);
   if (!segments.length) {
-    return `<p>${safe.replace(/(?:?
-)/g, '<br>')}</p>`;
-  }
+    const single = safe.replace(/(?:\r?\n)+/g, '<br>').trim();
+    return single ? `<p>${single}</p>` : '';
+    .map(seg => `<p>${seg}</p>`)
   return segments
     .map(seg => `<p>${seg.replace(/(?:?
 )/g, '<br>')}</p>`)
@@ -3037,13 +3032,16 @@ function showNavigation() {
         icon: getDistrictsEnvelope(pos.city),
       });
       const districtNav = buildDistrictNav();
-      const districtGroup = [mapToggle, districtToggle];
-      if (showDistricts) {
-        if (exitGroup.length) {
-          exitGroup.unshift(...districtGroup);
-        } else {
-          groups.push(districtGroup);
+    groups
+      .map(group => group.filter(Boolean))
+      .filter(group => group.length)
+      .forEach(group => {
+        if (navButtons.length) {
+          navButtons.push('<div class="group-separator"></div>');
         }
+        navButtons.push(...group);
+      });
+          safeStorage.setItem(SHOW_DISTRICTS_KEY, showDistricts);
         if (districtNav.length) groups.push(districtNav);
       } else {
         districtGroup.push(...districtNav);
