@@ -2595,16 +2595,19 @@ function buildingParagraphHTML(text) {
   const replaced = replaceCharacterRefs(String(text), currentCharacter || {});
   const safe = escapeHtml(replaced);
   if (!safe) return '';
-  const segments = safe
-    .split(/(?:\r?\n){2,}/)
-    .map(seg => seg.replace(/(?:\r?\n)+/g, '<br>').trim())
+  const normalized = safe
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n');
+  const segments = normalized
+    .split(/\n{2,}/)
+    .map(seg => seg.replace(/\n+/g, '<br>').trim())
     .filter(Boolean);
   if (!segments.length) {
-    const single = safe.replace(/(?:\r?\n)+/g, '<br>').trim();
+    const single = normalized.replace(/\n+/g, '<br>').trim();
     return single ? `<p>${single}</p>` : '';
-    .map(seg => `<p>${seg}</p>`)
+  }
   return segments
-    .map(seg => `<p>${seg.replace(/(?:?
+    .map(seg => `<p>${seg}</p>`)
 )/g, '<br>')}</p>`)
     .join('');
 }
@@ -3006,30 +3009,29 @@ function showNavigation() {
         ];
       }
       const neighborButtons = districts.map(d =>
-        makeButton({ ...d, extraClass: 'connected-district' })
-      );
-      const currentButton = createNavItem({
-        type: 'district',
-        target: pos.district,
-        name: pos.district,
-        icon: getDistrictIcon(pos.city, pos.district),
-        disabled: true,
-        extraClass: 'current-district',
+      const districtGroup = [districtToggle, mapToggle];
+      if (showDistricts) {
+        groups.push(districtGroup);
+        if (districtNav.length) {
+          groups.push(districtNav);
+      } else if (exitGroup.length) {
+        exitGroup.unshift(...districtGroup);
+        groups.push(districtGroup);
+      if (districtNav.length) {
+        groups.push(districtNav);
+      }
+    }
+    if (exitGroup.length) {
+      groups.push(exitGroup);
+    groups
+      .map(group => group.filter(Boolean))
+      .filter(group => group.length)
+      .forEach(group => {
+        if (navButtons.length) {
+          navButtons.push('<div class="group-separator"></div>');
+        }
+        navButtons.push(...group);
       });
-      return [currentButton, ...neighborButtons];
-    };
-    const mapToggle = createNavItem({
-      type: 'map-toggle',
-      action: 'toggle-city-map',
-      name: 'City Map',
-      icon: getCityIcon(pos.city),
-    });
-    if (hasMultipleDistricts) {
-      const districtToggle = createNavItem({
-        type: 'district-toggle',
-        action: 'toggle-districts',
-        name: 'Districts',
-        icon: getDistrictsEnvelope(pos.city),
       });
       const districtNav = buildDistrictNav();
     groups
@@ -5371,7 +5373,7 @@ const SLOT_ICONS = {
 SLOT_ICONS.rEar = '<svg viewBox="0 0 24 24"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></svg>';
 SLOT_ICONS.rRing = SLOT_ICONS.lRing;
 
-function formatSlotName(slot) {
+function showEquipmentUI() {
   const names = {
     mainHand: 'Main Hand',
     offHand: 'Off Hand',
@@ -5432,10 +5434,8 @@ function startCharacterCreation() {
     key: 'class',
     label: 'Choose your class',
     type: 'select',
-    options: buildEntries.map(b => b.primary),
-  };
-  const locationField = {
-    key: 'location',
+      options: ['Male', 'Female'],
+    },
     label: 'Choose your starting location',
     type: 'select',
     options: Object.keys(LOCATIONS).filter(l => l !== 'Duvilia Kingdom')
@@ -5633,26 +5633,40 @@ function startCharacterCreation() {
             character.sex = options[0];
           }
           inputHTML = `
-            <div class="sex-carousel wheel-selector">
-              <button class="sex-arrow left" aria-label="Previous">&#x2039;</button>
-              <button class="option-button sex-button">${character.sex}</button>
-              <button class="sex-arrow right" aria-label="Next">&#x203A;</button>
-            </div>`;
-        } else if (field.key === 'class') {
-          const options = field.options;
-          let index = options.indexOf(character.class);
-          if (index === -1) {
-            index = 0;
-            character.class = options[0];
-          }
-          inputHTML = `
-            <div class="class-carousel wheel-selector">
-              <button class="class-arrow left" aria-label="Previous">&#x2039;</button>
-              <button class="option-button class-button">${character.class}</button>
-              <button class="class-arrow right" aria-label="Next">&#x203A;</button>
-            </div>`;
-        } else if (field.key === 'backstory') {
-          const options = (BACKSTORY_MAP[character.location] || []).map(b => b.background);
+            inputHTML = `
+      }
+        if (!colors.length) {
+          const fallback = character[field.key] || '#ffffff';
+          colors = [fallback];
+        }
+        if (!character[field.key]) {
+          character[field.key] = colors[0];
+          localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        }
+        const currentColor = character[field.key];
+        inputHTML = `
+          <div class="color-carousel wheel-selector" data-field="${field.key}">
+            <button type="button" class="color-arrow left" aria-label="Previous">&#x2039;</button>
+            <button type="button" class="color-button" style="background:${currentColor};" aria-label="${currentColor}"></button>
+            <button type="button" class="color-arrow right" aria-label="Next">&#x203A;</button>
+            <button type="button" class="color-picker" aria-label="Pick custom color">🎨</button>
+            <input type="color" value="${currentColor}" aria-label="${field.label}" style="position:absolute;left:-9999px;">
+          </div>`;
+      }
+      setMainHTML(
+        `<div class="character-creation">
+          <div class="cc-top-row">
+            <div class="progress-container">${progressHTML}</div>
+            <div class="cc-right">
+              <div class="cc-options">
+                <h2>${field.label}</h2>
+                ${inputHTML}
+              </div>
+              ${statsSection}
+            </div>
+          </div>
+          <div class="cc-info">${descHTML}</div>
+        </div>`
           let index = options.indexOf(character.backstory);
           if (index === -1) {
             index = 0;
@@ -5834,25 +5848,40 @@ function startCharacterCreation() {
             updateZoom();
           });
 
-          zoomReset.addEventListener('click', () => {
-            ccPortraitZoom = 1;
-            updateZoom();
-          });
-
-          if (portraitImg.complete) updateZoom();
-          else portraitImg.addEventListener('load', updateZoom);
+        if (!colors.length) {
+          const fallback = character[field.key] || '#ffffff';
+          colors = [fallback];
         }
-      } else if (field.type === 'select') {
-        document.querySelectorAll('.option-button').forEach(btn => {
-          btn.addEventListener('click', () => {
-            character[field.key] = btn.dataset.value;
+        if (carousel) {
+          const btn = carousel.querySelector('.color-button');
+          const pickerInput = carousel.querySelector('input[type="color"]');
+          const pickerBtn = carousel.querySelector('.color-picker');
+          const update = () => {
+            if (btn) {
+              btn.style.background = character[field.key];
+              btn.setAttribute('aria-label', character[field.key]);
+            }
+            if (pickerInput) {
+              pickerInput.value = character[field.key];
+            }
             localStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-            renderStep();
+          };
+          const change = dir => {
+            index = (index + dir + colors.length) % colors.length;
+            character[field.key] = colors[index];
+            update();
+          };
+          const leftArrow = carousel.querySelector('.color-arrow.left');
+          const rightArrow = carousel.querySelector('.color-arrow.right');
+          leftArrow?.addEventListener('click', () => change(-1));
+          rightArrow?.addEventListener('click', () => change(1));
+          pickerBtn?.addEventListener('click', () => pickerInput?.click());
+          btn?.addEventListener('click', () => pickerInput?.click());
+          pickerInput?.addEventListener('input', () => {
+            character[field.key] = pickerInput.value;
+            update();
           });
-        });
-      } else if (field.type === 'color') {
-        let colors = [];
-        if (field.key === 'hairColor') {
+        }
           colors = hairColorOptionsByRace[character.race] || humanHairColors;
         } else if (field.key === 'eyeColor') {
           colors = eyeColorOptionsByRace[character.race] || humanEyeColors;
@@ -6052,9 +6081,9 @@ function finalizeCharacter(character) {
         dailyProfit: b.dailyProfit || 0,
         jobRoles: getJobRolesForBuilding(b.name),
         money: b.money
-          ? { ...createEmptyCurrency(), ...parseCurrency(b.money) }
-          : createEmptyCurrency(),
-      }));
+        const target = newChar.backstory.startingLocation;
+        for (const [name, info] of Object.entries(cityData.buildings)) {
+          if (info.name === target || name === target) {
     }
     if (raw.employment) {
       newChar.employment = raw.employment.map(job => ({

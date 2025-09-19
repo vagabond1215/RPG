@@ -18,9 +18,10 @@
     "slugify": "^1.6.6"
   },
   "devDependencies": {
+    "acorn": "^8.15.0",
     "ajv": "^8.12.0",
     "tsx": "^4.7.1",
-    "vitest": "^1.2.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vitest": "^1.2.0"
   }
 }
