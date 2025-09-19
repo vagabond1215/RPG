@@ -18,7 +18,7 @@ import {
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./data/game/equipment.js";
 import { LOCATIONS } from "./data/game/locations.js";
 import { applyWavesBreakRegistry } from "./data/game/waves_break_registry.js";
-import { TidefallCalendar, dateKey } from "./data/game/calendar.js";
+import { TidefallCalendar, dateKey, getSeasonForDate } from "./data/game/calendar.js";
 import {
   createDefaultWeatherGenerator,
   createDeterministicRandom as createWeatherRandom,
@@ -46,6 +46,7 @@ import {
   determineOwnership,
   getJobRolesForBuilding,
   JOB_ROLE_DATA,
+  getBusinessProfileByName,
 } from "./data/game/buildings.js";
 import { characterBuilds } from "./data/game/character_builds.js";
 import { shopCategoriesForBuilding, itemsByCategory } from "./data/game/shop.js";
@@ -1709,9 +1710,95 @@ function setUniformShopNameWidth() {
   });
 }
 
+const SHOP_KEYWORD_STOP_WORDS = new Set([
+  'the',
+  'and',
+  'of',
+  'orchard',
+  'farm',
+  'estate',
+  'company',
+  'guild',
+  'house',
+  'hall',
+  'trading',
+  'works',
+  'workshop',
+  'press',
+  'mill',
+  'co',
+  'cooperative',
+  'shop',
+  'store',
+  'market',
+]);
+
+function tokenizeShopKeywords(value) {
+  if (!value) return [];
+  return String(value)
+    .toLowerCase()
+    .replace(/[’']/g, '')
+    .split(/[^a-z]+/)
+    .filter(Boolean)
+    .filter(token => token.length > 2 && !SHOP_KEYWORD_STOP_WORDS.has(token));
+}
+
+function deriveProductKeywords(businessProfile, building) {
+  const keywords = new Set();
+  (businessProfile?.production?.goods || []).forEach(item => {
+    tokenizeShopKeywords(item).forEach(word => keywords.add(word));
+  });
+  if (businessProfile?.production?.notes) {
+    tokenizeShopKeywords(businessProfile.production.notes).forEach(word => keywords.add(word));
+  }
+  const produces = building?.produces || {};
+  ['resources', 'commodities', 'luxuries'].forEach(key => {
+    (produces[key] || []).forEach(item => {
+      tokenizeShopKeywords(item).forEach(word => keywords.add(word));
+    });
+  });
+  return Array.from(keywords);
+}
+
+function deriveRegionTags(city, district, buildingName, habitat) {
+  const tags = new Set();
+  if (habitat) tags.add(String(habitat).toLowerCase());
+  const lowerCity = (city || '').toLowerCase();
+  if (lowerCity) {
+    if (/wave|break|bay|port|harbor/.test(lowerCity)) tags.add('coastal');
+    if (/river|brook|creek|flood/.test(lowerCity)) tags.add('riverlands');
+    if (/stone|keep|kingdom|court/.test(lowerCity)) tags.add('urban');
+  }
+  const lowerDistrict = (district || '').toLowerCase();
+  if (lowerDistrict) {
+    if (/farmland|orchard|fields|grove|meadow|pasture/.test(lowerDistrict)) tags.add('farmland');
+    if (/port|dock|harbor|quay|pier/.test(lowerDistrict)) tags.add('coastal');
+    if (/market|ward|district|plaza|exchange/.test(lowerDistrict)) tags.add('urban');
+    if (/forest|wood|grove/.test(lowerDistrict)) tags.add('forest');
+    if (/hill|ridge|cliff/.test(lowerDistrict)) tags.add('hills');
+  }
+  const lowerName = (buildingName || '').toLowerCase();
+  if (/farm|orchard|grove|pasture|meadow/.test(lowerName)) tags.add('farmland');
+  if (/mill|granary|warehouse/.test(lowerName)) tags.add('farmland');
+  if (/dock|port|harbor|wharf|quay/.test(lowerName)) tags.add('coastal');
+  if (/library|guild|hall|temple|shop|market|office|academy/.test(lowerName)) tags.add('urban');
+  return Array.from(tags);
+}
+
 async function renderShopUI(buildingName) {
   showBackButton();
   const profile = shopCategoriesForBuilding(buildingName);
+  const pos = currentCharacter?.position;
+  const city = pos?.city || currentCharacter?.location || null;
+  const cityData = city ? CITY_NAV[city] : null;
+  const building = cityData?.buildings?.[buildingName] || {};
+  const encounterContext = pos?.city
+    ? createBuildingEncounterContext({ city: pos.city, district: pos.district, building: buildingName })
+    : null;
+  const businessProfile = getBusinessProfileByName(buildingName);
+  const productKeywords = deriveProductKeywords(businessProfile, building);
+  const regionTags = deriveRegionTags(pos?.city, pos?.district, buildingName, encounterContext?.habitat || building.habitat);
+  const season = encounterContext?.today ? getSeasonForDate(encounterContext.today).toLowerCase() : null;
   const baseContext = {
     name: buildingName,
     lower: buildingName.toLowerCase(),
@@ -1719,7 +1806,19 @@ async function renderShopUI(buildingName) {
     wealth: 'modest',
     type: 'producer',
     words: [],
-    ...(profile.context || {})
+    ...(profile.context || {}),
+    city: pos?.city || null,
+    district: pos?.district || null,
+    habitat: encounterContext?.habitat || building.habitat || null,
+    weather: encounterContext?.weather || null,
+    date: encounterContext?.today || null,
+    season,
+    timeOfDay: encounterContext?.timeOfDay ?? null,
+    timeLabel: encounterContext?.timeLabel ?? null,
+    regionTags,
+    productKeywords,
+    productionGoods: businessProfile?.production?.goods || [],
+    yields: building?.produces || {},
   };
   const sections = await Promise.all(
     (profile.sells || []).map(async section => ({
@@ -1922,6 +2021,61 @@ function resetBuildingEncounterState(name) {
   delete buildingEncounterStates[name];
 }
 
+function createBuildingEncounterContext(position, extras = {}) {
+  if (!position || !position.building) return null;
+  const cityData = CITY_NAV[position.city];
+  if (!cityData) return null;
+  const buildingKey = position.building;
+  const building = extras.building || cityData.buildings?.[buildingKey];
+  if (!building) return null;
+  const buildingBoards =
+    extras.buildingBoards || questBoardsForBuilding(position.city, position.district, buildingKey);
+  const today = extras.today || worldCalendar.today();
+  const timeOfDay =
+    extras.timeOfDay != null ? extras.timeOfDay : currentCharacter ? currentCharacter.timeOfDay : null;
+  const timeLabel = extras.timeLabel || describeTimeOfDay(timeOfDay);
+  let habitat = extras.habitat || building.habitat;
+  if (!habitat) {
+    const districtName = position.district || '';
+    const name = building.name || buildingKey || '';
+    if (/farmland|orchard|fields|grove|meadow|pasture/i.test(districtName)) habitat = 'farmland';
+    else if (/orchard|farm|grove|pasture|meadow/i.test(name)) habitat = 'farmland';
+    else if (/port|harbor|dock|quay|pier/i.test(districtName)) habitat = 'coastal';
+    else if (/dock|port|harbor|quay|pier/i.test(name)) habitat = 'coastal';
+    else if (/forest|wood|grove/i.test(districtName)) habitat = 'forest';
+    else habitat = 'urban';
+  }
+  let weatherReport = extras.weather || null;
+  if (!weatherReport) {
+    try {
+      const regionKey = citySlug(position.city);
+      weatherReport = weatherSystem.getDailyWeather(regionKey, habitat, today);
+    } catch (err) {
+      try {
+        weatherReport = weatherSystem.getDailyWeather('waves_break', habitat, today);
+      } catch (err2) {
+        weatherReport = null;
+      }
+    }
+  }
+  const buildingName = extras.buildingName || building.name || buildingKey;
+  const state = extras.state ?? getBuildingEncounterState(buildingKey);
+  return {
+    state,
+    setState: newState => setBuildingEncounterState(buildingKey, newState),
+    buildingBoards,
+    today,
+    timeOfDay,
+    timeLabel,
+    weather: weatherReport,
+    city: position.city,
+    district: position.district,
+    building,
+    habitat,
+    buildingName,
+  };
+}
+
 function renderBuildingDescription(desc, character) {
   if (!desc) return '';
   if (typeof desc === 'object' && !Array.isArray(desc)) {
@@ -1957,37 +2111,25 @@ function renderBuildingDescription(desc, character) {
   return `<div class="building-description">${html}</div>`;
 }
 
-const ORCHARD_PERSONAS = [
-  {
-    key: 'riala',
-    name: 'Riala Seafeather',
-    shortName: 'Riala',
-    role: 'orchard mistress',
-    demeanor: 'brisk',
-    style: 'warm',
-    weight: 0.4,
-  },
-  {
-    key: 'bryn',
-    name: 'Foreman Bryn Ashglow',
-    shortName: 'Bryn',
-    role: 'field foreman',
-    demeanor: 'gruff',
-    style: 'gruff',
-    weight: 0.35,
-  },
-  {
-    key: 'tamsin',
-    name: 'Ward Keeper Tamsin Gullglade',
-    shortName: 'Tamsin',
-    role: 'ward keeper',
-    demeanor: 'wry',
-    style: 'dry',
-    weight: 0.25,
-  },
-];
+const BUILDING_PERSONA_DETAILS = {
+  warm: [
+    'hands dusted with work-stained calluses',
+    'a welcoming nod despite the workload',
+    'coat sleeves rolled back with practiced ease',
+  ],
+  gruff: [
+    'ledger tucked beneath one arm',
+    'voice already sharp from giving orders',
+    'boots scuffed by long rounds through the site',
+  ],
+  dry: [
+    'quill marks smudged along their cuffs',
+    'glasses glinting as they take stock of you',
+    'a tally slate balanced carefully in hand',
+  ],
+};
 
-function orchardTimeBand(hour) {
+function buildingTimeBand(hour) {
   if (!Number.isFinite(hour)) return 'day';
   const h = ((hour % 24) + 24) % 24;
   if (h < 5) return 'preDawn';
@@ -1999,217 +2141,298 @@ function orchardTimeBand(hour) {
   return 'night';
 }
 
-function orchardGreetingChance(timeBand, weather) {
+function buildingGreetingChance(timeBand, weather, workers) {
   const baseChances = {
-    preDawn: 0.15,
-    earlyMorning: 0.55,
-    lateMorning: 0.65,
-    earlyAfternoon: 0.6,
-    lateAfternoon: 0.45,
+    preDawn: 0.1,
+    earlyMorning: 0.45,
+    lateMorning: 0.58,
+    earlyAfternoon: 0.55,
+    lateAfternoon: 0.42,
     evening: 0.3,
-    night: 0.1,
-    day: 0.5,
+    night: 0.12,
+    day: 0.45,
   };
-  const base = baseChances[timeBand] ?? baseChances.day;
-  if (!weather) return base;
-  const condition = (weather.condition || '').toLowerCase();
-  if (condition.includes('storm')) return Math.max(0.05, base - 0.25);
-  if (condition.includes('rain') || condition.includes('drizzle')) return Math.max(0.1, base - 0.15);
-  if (condition.includes('fog')) return Math.max(0.1, base - 0.05);
-  return Math.min(0.85, base + (condition.includes('clear') ? 0.05 : 0));
-}
-
-function orchardWorkerEstimate(timeBand, weather) {
-  let workers = 10;
-  if (timeBand === 'preDawn' || timeBand === 'night') workers = 4;
-  else if (timeBand === 'evening') workers = 6;
-  else if (timeBand === 'lateAfternoon') workers = 8;
+  let chance = baseChances[timeBand] ?? baseChances.day;
+  if (workers >= 20) chance += 0.15;
+  else if (workers >= 10) chance += 0.05;
+  else if (workers === 0) chance -= 0.2;
+  else if (workers <= 4) chance -= 0.1;
   if (weather) {
     const condition = (weather.condition || '').toLowerCase();
-    if (condition.includes('storm')) workers = Math.max(3, Math.round(workers * 0.4));
-    else if (condition.includes('rain') || condition.includes('drizzle')) workers = Math.max(4, Math.round(workers * 0.7));
-    else if (condition.includes('snow') || condition.includes('sleet')) workers = Math.max(3, Math.round(workers * 0.5));
+    if (condition.includes('storm')) chance -= 0.2;
+    else if (condition.includes('rain') || condition.includes('drizzle')) chance -= 0.1;
+    else if (condition.includes('fog')) chance -= 0.05;
+    else if (condition.includes('clear')) chance += 0.05;
   }
+  return Math.max(0.05, Math.min(0.85, chance));
+}
+
+function buildingWorkerEstimate(profile, timeBand, weather, building) {
+  const base =
+    profile?.workforce?.normal?.reduce((sum, band) => sum + (band.count || 0), 0) ||
+    (building?.employees ? Math.max(3, Math.round(building.employees.length * 0.75)) : 6);
+  const multipliers = {
+    preDawn: 0.2,
+    earlyMorning: 0.6,
+    lateMorning: 0.9,
+    earlyAfternoon: 1,
+    lateAfternoon: 0.75,
+    evening: 0.45,
+    night: 0.25,
+    day: 0.65,
+  };
+  let workers = Math.round(base * (multipliers[timeBand] ?? multipliers.day));
+  if (weather) {
+    const condition = (weather.condition || '').toLowerCase();
+    if (condition.includes('storm')) workers = Math.round(workers * 0.5);
+    else if (condition.includes('rain') || condition.includes('drizzle')) workers = Math.round(workers * 0.7);
+    else if (condition.includes('snow') || condition.includes('sleet')) workers = Math.round(workers * 0.6);
+    else if (condition.includes('clear')) workers = Math.round(workers * 1.05);
+  }
+  if (workers < 0) workers = 0;
+  if (base > 0 && workers === 0) workers = 1;
   return workers;
 }
 
-function orchardWeatherPhrase(weather) {
-  if (!weather) return 'brackish breezes set salt-sweet leaves rustling';
+function buildingWeatherPhrase(weather, habitat, buildingName) {
+  const place = buildingName || 'the site';
+  if (!weather) {
+    return `with the crews keeping ${place} moving steadily`;
+  }
   const condition = (weather.condition || '').toLowerCase();
-  switch (condition) {
-    case 'storm':
-      return 'gusts rattle the ward bells strung between the trunks';
-    case 'rain':
-      return 'sea-mist rain beads on waxy leaves and darkens the turf underfoot';
-    case 'drizzle':
-      return 'misty rain patters softly on nets stretched between the trees';
-    case 'fog':
-      return 'milk-white fog curls through the rows, muffling the orchard bells';
-    case 'snow':
-      return 'wet snow clings to scare-kites and bends supple branches low';
-    case 'sleet':
-      return 'sleet slicks the bark and sets icicles prickling along the ward lines';
-    case 'clear':
-      return 'sunlight glints from copper ward-bells and dew-bright leaves';
-    default:
-      return 'brackish breezes stir the salt-sweet canopy overhead';
-  }
-}
-
-function orchardWorkerPhrase(workers, rng) {
-  if (workers >= 9) {
-    return 'Ladder teams swarm the aisles, passing wicker crates toward the press house in a steady chain.';
-  }
-  if (workers >= 6) {
-    return 'Steady crews pace each row, trading off between picking hooks and sorting tables beneath awnings.';
-  }
-  if (workers >= 4) {
-    return 'A slim crew tends the grafts, hauling full baskets toward waiting carts with practiced strides.';
-  }
-  const loneScenes = [
-    'Only a couple of keepers patrol the rows, tightening gull nets and checking for blight.',
-    'Just a handful of wardens make their rounds, keeping tally of fruit still clinging to the higher branches.',
-  ];
-  return loneScenes[Math.floor(rng() * loneScenes.length)] ?? loneScenes[0];
-}
-
-function orchardGullPhrase(weather, rng) {
-  const condition = (weather?.condition || '').toLowerCase();
   if (condition.includes('storm')) {
-    return 'Gulls crouch low on fence posts, shrieking whenever a gust shakes loose a pear.';
+    return habitat === 'coastal'
+      ? 'while storm gusts fling spray across the yard'
+      : `as storm winds rattle through ${place.toLowerCase()}`;
   }
   if (condition.includes('rain') || condition.includes('drizzle')) {
-    return 'Sodden gulls still wheel overhead, ready to dive on any fruit that slips free.';
+    return `with rain pattering against ${place.toLowerCase()}`;
   }
   if (condition.includes('fog')) {
-    return 'Muted gull cries echo somewhere beyond the mist-laced rows.';
+    return `as fog muffles the bustle around ${place.toLowerCase()}`;
   }
-  const options = [
-    'Silver gulls spiral above the canopy, quick to pounce on dropped apples.',
-    'Ward bells chime as gulls test the nets strung between the trees.',
-    'Pairs of youths rattle copper scarers, keeping gull wings from brushing the ripest fruit.',
-  ];
-  return options[Math.floor(rng() * options.length)] ?? options[0];
+  if (condition.includes('snow') || condition.includes('sleet')) {
+    return 'beneath a coat of slush that slows every step';
+  }
+  if (condition.includes('clear')) {
+    return 'under a clear sky that brightens the workyards';
+  }
+  if (condition.includes('cloud')) {
+    return 'beneath overcast light that keeps the pace steady';
+  }
+  return `amid shifting weather over ${place.toLowerCase()}`;
 }
 
-function orchardExtraScene(rng) {
-  const scenes = [
-    'Cider steam breathes from the press house, sweetening the salt air.',
-    'Apprentices knot fresh warding charms onto lines that twine around the orchard.',
-    'Crates of bruised fruit are trundled toward a waiting cider vat to salvage the pressings.',
-    'Children on gull-duty sling pebbles skyward, laughing as bells jangle in reply.',
-    'A graftmaster inspects newly spliced branches, marking the promising shoots with ribbon.',
-  ];
-  return scenes[Math.floor(rng() * scenes.length)] ?? scenes[0];
+function buildingActivityPhrase(workers, profile, buildingName) {
+  if (!workers) {
+    return `Only caretakers keep ${buildingName} idling today.`;
+  }
+  const description = profile?.workforce?.description;
+  if (description) {
+    return `${description} Roughly ${workers} workers are on duty.`;
+  }
+  const lower = buildingName.toLowerCase();
+  const label = /orchard|grove|field|farm/.test(lower)
+    ? 'rows'
+    : /mill|forge|workshop|hall/.test(lower)
+      ? 'floors'
+      : 'workspaces';
+  return `About ${workers} workers move through the ${label}, keeping ${buildingName} running.`;
 }
 
-function orchardSceneParagraphs(context) {
-  const { weather, timeLabel, workers, rng } = context;
-  const intro = timeLabel ? `In the ${timeLabel}, ` : '';
-  const first = `${intro}rows of apple and pear trees march along the tidal creek, ${orchardWeatherPhrase(weather)}.`;
-  const second = `${orchardWorkerPhrase(workers, rng)} ${orchardGullPhrase(weather, rng)}`;
-  const third = orchardExtraScene(rng);
-  return [first, second, third];
+function buildingExtraScene(profile, building, rng) {
+  const notes = profile?.production?.notes;
+  if (notes) return notes;
+  const goods = new Set();
+  (profile?.production?.goods || []).forEach(item => goods.add(item));
+  const produces = building?.produces || {};
+  ['resources', 'commodities', 'luxuries'].forEach(key => {
+    (produces[key] || []).forEach(item => goods.add(item));
+  });
+  if (goods.size) {
+    const list = Array.from(goods);
+    const index = Math.floor((rng ?? Math.random)() * list.length);
+    const choice = list[index] || list[0];
+    return `The day's focus is on ${choice}.`;
+  }
+  return '';
 }
 
-function orchardSelectPersona(rng) {
-  const roll = rng();
+function buildingSceneParagraphs(context) {
+  const { building, buildingName, businessProfile, timeLabel, weather, workers, rng, habitat } = context;
+  const paragraphs = [];
+  if (building?.description) paragraphs.push(building.description);
+  const displayName = building?.name || buildingName;
+  if (displayName) {
+    const weatherPhrase = buildingWeatherPhrase(weather, habitat, displayName);
+    const intro = timeLabel
+      ? `${displayName} works through the ${timeLabel.toLowerCase()}, ${weatherPhrase}.`
+      : `${displayName} hums ${weatherPhrase}.`;
+    paragraphs.push(intro);
+  }
+  const activity = buildingActivityPhrase(workers, businessProfile, displayName || 'the site');
+  if (activity) paragraphs.push(activity);
+  const extra = buildingExtraScene(businessProfile, building, rng);
+  if (extra) paragraphs.push(extra);
+  return paragraphs;
+}
+
+function inferPersonaStyle(role) {
+  const lower = (role || '').toLowerCase();
+  if (lower.includes('owner') || lower.includes('mistress') || lower.includes('master')) return 'warm';
+  if (lower.includes('manager') || lower.includes('foreman') || lower.includes('captain')) return 'gruff';
+  if (lower.includes('administrator') || lower.includes('steward') || lower.includes('scribe')) return 'dry';
+  if (lower.includes('keeper')) return 'dry';
+  return 'warm';
+}
+
+function defaultPersonaLabel(role) {
+  const lower = (role || '').toLowerCase();
+  if (!lower) return 'the steward';
+  if (lower === 'owner') return 'the owner';
+  if (lower === 'manager') return 'the manager';
+  if (lower === 'administrator') return 'the administrator';
+  if (lower === 'foreman') return 'the foreman';
+  if (lower === 'steward') return 'the steward';
+  return `the ${lower}`;
+}
+
+function buildPersonaCandidates(context) {
+  const buildingName = context.building?.name || context.buildingName || '';
+  const city = context.city;
+  const ownership = LOCATIONS[city]?.ownership;
+  const businessInfo =
+    ownership?.businesses?.[buildingName] || ownership?.buildings?.[buildingName];
+  const employees = context.building?.employees || [];
+  const leadershipRoles = employees.filter(e =>
+    ['Owner', 'Manager', 'Administrator', 'Steward', 'Foreman'].includes(e.role),
+  );
+  const personas = [];
+  if (businessInfo?.owner) {
+    const ownerRole = leadershipRoles.find(e => e.role === 'Owner');
+    const role = ownerRole ? ownerRole.role : 'Owner';
+    personas.push({ name: businessInfo.owner, role, style: inferPersonaStyle(role) });
+  }
+  const stewardRoles = leadershipRoles.filter(e => e.role !== 'Owner');
+  const stewardNames = Array.isArray(businessInfo?.stewards) ? businessInfo.stewards : [];
+  stewardNames.forEach((name, index) => {
+    const employee = stewardRoles[index] || stewardRoles[0] || leadershipRoles[0];
+    const role = employee ? employee.role : 'Steward';
+    personas.push({ name, role, style: inferPersonaStyle(role) });
+  });
+  if (!personas.length && leadershipRoles.length) {
+    const employee = leadershipRoles[0];
+    personas.push({
+      name: defaultPersonaLabel(employee.role),
+      role: employee.role,
+      style: inferPersonaStyle(employee.role),
+    });
+  }
+  if (!personas.length) {
+    personas.push({ name: 'the steward', role: 'Steward', style: 'warm' });
+  }
+  return personas;
+}
+
+function buildingSelectPersona(context, rng) {
+  const personas = buildPersonaCandidates(context);
+  if (personas.length <= 1) return personas[0];
+  const weights = personas.map(persona => {
+    const role = (persona.role || '').toLowerCase();
+    if (role.includes('owner')) return 0.25;
+    if (role.includes('manager') || role.includes('foreman')) return 0.35;
+    if (role.includes('administrator')) return 0.3;
+    return 0.3;
+  });
+  const total = weights.reduce((sum, value) => sum + value, 0) || personas.length;
+  const roll = rng() * total;
   let cumulative = 0;
-  for (const persona of ORCHARD_PERSONAS) {
-    cumulative += persona.weight;
-    if (roll <= cumulative) return persona;
+  for (let i = 0; i < personas.length; i += 1) {
+    cumulative += weights[i] || 1;
+    if (roll <= cumulative) return personas[i];
   }
-  return ORCHARD_PERSONAS[ORCHARD_PERSONAS.length - 1];
+  return personas[personas.length - 1];
 }
 
-function orchardComposeIntro(persona, method, context) {
-  const { rng } = context;
-  const adornments = {
-    warm: [
-      'her braid damp with sea mist',
-      'apron brushed with pollen dust',
-      'sleeves rolled despite the chill breeze',
-    ],
-    gruff: [
-      'sap-streaked gloves hanging from his belt',
-      'boots caked with orchard loam',
-      'a tally slate tucked beneath one arm',
-    ],
-    dry: [
-      'charms chiming softly from her belt',
-      'ward bells jangling at her shoulder',
-      'a string of gull feathers braided into her hair',
-    ],
-  };
-  const adorn = adornments[persona.style] || ['hands stained with apple tannin'];
-  const detail = adorn[Math.floor((rng ?? Math.random)() * adorn.length)] || adorn[0];
+function buildingComposeIntro(persona, method, context) {
+  const details = BUILDING_PERSONA_DETAILS[persona.style] || [
+    'hands marked by long hours',
+  ];
+  const detail = details[Math.floor((context.rng ?? Math.random)() * details.length)] || details[0];
   if (method === 'door') {
-    return `${persona.name} cracks open the homestead door, ${detail}, and peers out to weigh your arrival.`;
+    return `${persona.name} answers the entrance, ${detail}, and weighs your arrival.`;
   }
   if (method === 'search') {
-    return `You flag down ${persona.name} between the rows; ${detail} as they straighten to face you.`;
+    return `You flag down ${persona.name} amid the bustle, ${detail}, as they pause to listen.`;
   }
-  return `${persona.name} strides out from the orchard lanes, ${detail}, intercepting you near the gate.`;
+  return `${persona.name} steps away from the crews, ${detail}, to hear you out.`;
 }
 
-function orchardComposeQuote(persona, context) {
-  const { weather, workers, rng } = context;
-  const condition = (weather?.condition || '').toLowerCase();
+function buildingComposeQuote(persona, context) {
+  const condition = (context.weather?.condition || '').toLowerCase();
   const weatherNote = () => {
     if (!condition) return '';
-    if (condition.includes('storm')) return 'while the wind keeps snapping at our bells';
-    if (condition.includes('rain') || condition.includes('drizzle')) return 'with this wet clinging to everything';
-    if (condition.includes('fog')) return 'with the fog thick as wool';
-    if (condition.includes('snow') || condition.includes('sleet')) return 'before the cold chews through the crews';
-    if (condition.includes('clear')) return 'under a sky this clear';
+    if (condition.includes('storm')) return 'before the squalls pick up again';
+    if (condition.includes('rain') || condition.includes('drizzle')) return 'while this rain keeps crews wet';
+    if (condition.includes('fog')) return 'while the fog has everyone moving slow';
+    if (condition.includes('snow') || condition.includes('sleet')) return 'before the chill freezes our hands';
+    if (condition.includes('clear')) return 'while the sky stays kind';
     return '';
   };
-  const workerNote = workers > 8
-    ? 'We have more fruit than hands today.'
-    : workers <= 4
-      ? 'It is a thin crew out there.'
-      : 'Crews are stretched between grafting and sorting.';
+  const workerNote =
+    context.workers > 14
+      ? 'Crews are stretched thin today.'
+      : context.workers <= 3
+        ? 'We are running with a skeleton crew right now.'
+        : 'There is steady work if you are interested.';
+  const rng = context.rng ?? Math.random;
   if (persona.style === 'gruff') {
     const lines = [
-      'Is there something I can do for you?',
-      `Make it quick. ${workerNote}`,
-      `If you're here for work, say so ${weatherNote() || 'before the gulls chew through our patience'}.`,
+      `State your business. ${workerNote}`,
+      `If you are here for work, say so ${weatherNote() || 'before I turn back to the crews'}.`,
+      'Quick questions only—we are on a timetable.',
     ];
     return lines[Math.floor(rng() * lines.length)] ?? lines[0];
   }
   if (persona.style === 'dry') {
     const lines = [
-      'Looking to chase gulls or just chase a quiet stroll?',
-      `Careful out there—bells bite harder than the birds when ${weatherNote() || 'the mist is up'}.`,
-      `If you fancy a posting, speak up. ${workerNote}`,
+      `Records first, then requests. ${workerNote}`,
+      `Mind the ledgers—${weatherNote() || 'we are keeping careful tally today'}.`,
+      'If you are following up on a posting, have the details ready.',
     ];
     return lines[Math.floor(rng() * lines.length)] ?? lines[0];
   }
-  const greetings = [
-    'What brings you out our way today?',
-    `You have come at a good moment—${workerNote}`,
-    `If you're looking for honest hours, we can use steady hands ${weatherNote() || 'keeping the gulls honest'}.`,
+  const lines = [
+    `Welcome. ${workerNote}`,
+    `Looking to help out? We could always use steady hands ${weatherNote() || 'on the floor'}.`,
+    'Tell me what brings you in and we will see where to put you.',
   ];
-  return greetings[Math.floor(rng() * greetings.length)] ?? greetings[0];
+  return lines[Math.floor(rng() * lines.length)] ?? lines[0];
 }
 
-function orchardStateSeed(context) {
+function buildingStateSeed(context) {
   const base = dateKey(context.today);
   const hour = Number.isFinite(context.timeOfDay) ? Math.round(context.timeOfDay * 10) : 0;
   const name = currentCharacter?.name || 'traveler';
-  return `gulls_orchard:${base}:${hour}:${name}`;
+  const buildingName = context.building?.name || context.buildingName || 'building';
+  return `building_encounter:${buildingName}:${base}:${hour}:${name}`;
 }
 
-function initializeOrchardState(context) {
-  const seed = orchardStateSeed(context);
+function initializeBuildingState(context) {
+  const seed = buildingStateSeed(context);
   const rng = createWeatherRandom(seed);
-  const timeBand = orchardTimeBand(context.timeOfDay);
-  const workers = orchardWorkerEstimate(timeBand, context.weather);
-  const baseParagraphs = orchardSceneParagraphs({
-    weather: context.weather,
+  const timeBand = buildingTimeBand(context.timeOfDay);
+  const businessProfile = getBusinessProfileByName(context.building?.name || context.buildingName);
+  const workers = buildingWorkerEstimate(businessProfile, timeBand, context.weather, context.building);
+  const baseParagraphs = buildingSceneParagraphs({
+    building: context.building,
+    buildingName: context.buildingName,
+    businessProfile,
     timeLabel: context.timeLabel,
+    weather: context.weather,
     workers,
     rng,
+    habitat: context.habitat,
   });
   const state = {
     key: seed,
@@ -2225,78 +2448,61 @@ function initializeOrchardState(context) {
     messageType: null,
     knockAttempts: 0,
     searchAttempts: 0,
-    remainingWorkers: Math.max(1, workers),
+    remainingContacts: Math.max(1, Math.round(Math.max(workers, 3) / 3)),
     managerFound: false,
     persona: null,
     entryMethod: null,
+    businessProfile,
+    habitat: context.habitat,
+    buildingName: context.buildingName || context.building?.name || '',
   };
   const greetRoll = rng();
-  if (greetRoll < orchardGreetingChance(timeBand, context.weather)) {
-    orchardSummonManager(state, context, 'greeted');
+  if (greetRoll < buildingGreetingChance(timeBand, context.weather, workers)) {
+    buildingSummonManager(state, context, 'greeted');
   } else {
-    const workingLine = workers <= 3
-      ? 'Walking toward the homestead, no one answers the door; only a couple of figures tend the rows.'
-      : `Walking toward the homestead, no one appears to be home, though ${workers} workers move between the trees.`;
-    state.narrative.push(workingLine);
+    const fallback =
+      workers <= 1
+        ? 'You wait by the entrance, but only a lone caretaker crosses your path.'
+        : `You wait near the entrance while ${workers} workers stay focused on their tasks.`;
+    state.narrative.push(fallback);
   }
   return state;
 }
 
-function orchardSummonManager(state, context, method) {
-  const persona = orchardSelectPersona(state.random);
+function buildingSummonManager(state, context, method) {
+  const persona = buildingSelectPersona(
+    { building: context.building, buildingName: context.buildingName || context.building?.name, city: context.city },
+    state.random,
+  );
   state.persona = persona;
   state.managerFound = true;
   state.entryMethod = method;
-  const intro = orchardComposeIntro(persona, method, context);
-  const quote = orchardComposeQuote(persona, context);
+  const intro = buildingComposeIntro(persona, method, { rng: state.random });
+  const quote = buildingComposeQuote(persona, {
+    weather: context.weather,
+    workers: state.workers,
+    buildingName: state.buildingName || context.building?.name || 'the site',
+    rng: state.random,
+  });
   if (!state.narrative.includes(intro)) {
     state.narrative.push(intro);
   }
-  state.dialogue = [
-    {
-      persona,
-      quote,
-    },
-  ];
+  state.dialogue = [{ persona, quote }];
 }
 
-function orchardEnsureState(context) {
+function ensureBuildingEncounterState(context) {
   let state = context.state;
-  if (!state || state.key !== orchardStateSeed(context)) {
-    state = initializeOrchardState(context);
+  if (!state || state.key !== buildingStateSeed(context)) {
+    state = initializeBuildingState(context);
     context.setState(state);
   }
   return state;
 }
 
-function findAvailableQuestForBoards(buildingBoards) {
-  if (!currentCharacter) return null;
-  const questLog = ensureQuestLog(currentCharacter);
-  let fallback = null;
-  for (const entry of buildingBoards) {
-    const boardName = entry.name;
-    const quests = Array.isArray(entry.quests) ? entry.quests : [];
-    for (const quest of quests) {
-      const availability = evaluateQuestAvailability(quest, boardName);
-      const eligibility = evaluateQuestEligibility(quest);
-      const key = questKey(boardName, quest.title || '');
-      const logEntry = questLog.find(item => item.key === key) || null;
-      const status = (logEntry?.status || '').toLowerCase();
-      const alreadyAccepted = logEntry && !REPEATABLE_QUEST_STATUSES.has(status);
-      const canOffer = availability.available && eligibility.canAccept && !alreadyAccepted;
-      const details = { boardName, quest, availability, eligibility, logEntry, alreadyAccepted, canOffer };
-      if (canOffer) return details;
-      if (!fallback) fallback = details;
-    }
-  }
-  return fallback;
-}
-
-function orchardQuestStatusNote(questInfo) {
+function buildingQuestStatusNote(questInfo) {
   if (!questInfo) return null;
-  if (questInfo.canOffer) return null;
-  if (questInfo.alreadyAccepted) {
-    const acceptedLabel = questInfo.logEntry?.acceptedOnLabel || questInfo.logEntry?.acceptedOn;
+  if (questInfo.quest && questInfo.alreadyAccepted) {
+    const acceptedLabel = questInfo.acceptedOnLabel;
     return acceptedLabel
       ? `They remind you the posting is already on your log from ${acceptedLabel}.`
       : 'They remind you that you have already taken this posting.';
@@ -2312,7 +2518,7 @@ function orchardQuestStatusNote(questInfo) {
   return null;
 }
 
-function orchardDialogueHTML(dialogue) {
+function buildingDialogueHTML(dialogue) {
   if (!dialogue || !dialogue.persona) return '';
   const name = escapeHtml(dialogue.persona.name || 'The steward');
   const role = dialogue.persona.role ? escapeHtml(dialogue.persona.role) : '';
@@ -2321,166 +2527,132 @@ function orchardDialogueHTML(dialogue) {
   return `<p class="npc-line"><strong>${name}</strong>${roleLabel}: <span class="npc-dialogue">&ldquo;${speech}&rdquo;</span></p>`;
 }
 
-function orchardMessageHTML(state, questInfo) {
+function buildingMessageHTML(state, questInfo) {
   const lines = [];
   if (state.message) {
     const cls = state.messageType ? ` encounter-message-${state.messageType}` : '';
-    lines.push(
-      `<p class="encounter-message${cls}">${escapeHtml(state.message)}</p>`,
-    );
+    lines.push(`<p class="encounter-message${cls}">${escapeHtml(state.message)}</p>`);
   }
-  const questNote = orchardQuestStatusNote(questInfo);
+  const questNote = buildingQuestStatusNote(questInfo);
   if (questNote) {
     lines.push(`<p class="encounter-message encounter-message-info">${escapeHtml(questNote)}</p>`);
   }
   return lines.join('');
 }
 
-function orchardParagraphHTML(text) {
+function buildingParagraphHTML(text) {
   if (!text) return '';
   const replaced = replaceCharacterRefs(String(text), currentCharacter || {});
   const safe = escapeHtml(replaced);
   if (!safe) return '';
   const segments = safe
-    .split(/(?:\r?\n){2,}/)
+    .split(/(?:?
+){2,}/)
     .map(seg => seg.trim())
     .filter(Boolean);
   if (!segments.length) {
-    return `<p>${safe.replace(/(?:\r?\n)/g, '<br>')}</p>`;
+    return `<p>${safe.replace(/(?:?
+)/g, '<br>')}</p>`;
   }
   return segments
-    .map(seg => `<p>${seg.replace(/(?:\r?\n)/g, '<br>')}</p>`)
+    .map(seg => `<p>${seg.replace(/(?:?
+)/g, '<br>')}</p>`)
     .join('');
 }
 
-function orchardDescriptionHTML(state, questInfo) {
+function buildingDescriptionHTML(state, questInfo) {
   const parts = [];
   state.baseParagraphs.forEach(text => {
-    parts.push(orchardParagraphHTML(text));
+    parts.push(buildingParagraphHTML(text));
   });
   state.narrative.forEach(text => {
-    parts.push(orchardParagraphHTML(text));
+    parts.push(buildingParagraphHTML(text));
   });
   state.dialogue.forEach(line => {
-    parts.push(orchardDialogueHTML(line));
+    parts.push(buildingDialogueHTML(line));
   });
-  const message = orchardMessageHTML(state, questInfo);
+  const message = buildingMessageHTML(state, questInfo);
   if (message) parts.push(message);
   const html = parts.filter(Boolean).join('');
   return { html };
 }
 
-function generateGullsOrchardEncounter(context) {
-  const state = orchardEnsureState(context);
+function buildingInteractionLabels(context) {
+  const habitat = (context.habitat || '').toLowerCase();
+  const name = (context.building?.name || context.buildingName || '').toLowerCase();
+  if (habitat === 'farmland' || /farm|orchard|grove|pasture|meadow/i.test(name)) {
+    return {
+      knock: 'Knock on the homestead door',
+      search: 'Walk the rows to find someone in charge',
+      request: 'Ask about field postings',
+    };
+  }
+  return {
+    knock: 'Knock on the office door',
+    search: 'Ask around for the supervisor',
+    request: 'Ask about available work',
+  };
+}
+
+function generateBuildingEncounter(buildingName, context) {
+  const state = ensureBuildingEncounterState(context);
   const questInfo = findAvailableQuestForBoards(context.buildingBoards || []);
   const interactions = [];
+  const labels = buildingInteractionLabels(context);
   if (!state.managerFound) {
-    interactions.push({ action: 'orchard-knock', name: 'Knock on the homestead door' });
-    interactions.push({ action: 'orchard-search', name: 'Walk the rows to find someone in charge' });
+    interactions.push({ action: 'building-knock', name: labels.knock });
+    interactions.push({ action: 'building-search', name: labels.search });
   } else {
     interactions.push({
-      action: 'orchard-request-work',
-      name: questInfo?.quest?.title ? `Ask about “${questInfo.quest.title}”` : 'Ask about orchard work',
+      action: 'building-request-work',
+      name: questInfo?.quest?.title ? `Ask about “${questInfo.quest.title}”` : labels.request,
       disabled: questInfo ? !questInfo.canOffer : false,
     });
   }
   return {
     state,
-    description: orchardDescriptionHTML(state, questInfo),
+    description: buildingDescriptionHTML(state, questInfo),
     interactions,
     questInfo,
   };
 }
 
-function generateBuildingEncounter(buildingName, context) {
-  if (buildingName === "Gulls' Orchard") {
-    return generateGullsOrchardEncounter(context);
-  }
-  return null;
-}
-
-function createBuildingEncounterContext(position, extras = {}) {
-  if (!position || !position.building) return null;
-  const cityData = CITY_NAV[position.city];
-  if (!cityData) return null;
-  const building = extras.building || cityData.buildings[position.building];
-  if (!building) return null;
-  const buildingBoards = extras.buildingBoards
-    || questBoardsForBuilding(position.city, position.district, position.building);
-  const today = worldCalendar.today();
-  const timeOfDay = currentCharacter ? currentCharacter.timeOfDay : null;
-  const timeLabel = describeTimeOfDay(timeOfDay);
-  let habitat = building.habitat;
-  if (!habitat) {
-    const districtName = position.district || '';
-    if (/farmland/i.test(districtName)) habitat = 'farmland';
-    else if (/port|harbor|docks/i.test(districtName)) habitat = 'coastal';
-    else habitat = 'urban';
-  }
-  let weatherReport = null;
-  try {
-    const regionKey = citySlug(position.city);
-    weatherReport = weatherSystem.getDailyWeather(regionKey, habitat, today);
-  } catch (err) {
-    try {
-      weatherReport = weatherSystem.getDailyWeather('waves_break', habitat, today);
-    } catch (err2) {
-      weatherReport = null;
-    }
-  }
-  return {
-    state: getBuildingEncounterState(position.building),
-    setState: state => setBuildingEncounterState(position.building, state),
-    buildingBoards,
-    today,
-    timeOfDay,
-    timeLabel,
-    weather: weatherReport,
-    city: position.city,
-    district: position.district,
-    building,
-  };
-}
-
-function handleOrchardKnock(position) {
+function handleBuildingKnock(position) {
   const context = createBuildingEncounterContext(position);
   if (!context) return;
-  const state = orchardEnsureState(context);
+  const state = ensureBuildingEncounterState(context);
   state.message = null;
   state.messageType = null;
   if (state.managerFound) {
-    state.narrative.push('The steward is already with you—no need to knock again.');
+    state.narrative.push('The lead already has an eye on you—no need to knock again.');
     setBuildingEncounterState(position.building, state);
     showNavigation();
     return;
   }
   state.knockAttempts = (state.knockAttempts || 0) + 1;
-  const baseChances = {
-    preDawn: 0.12,
-    earlyMorning: 0.45,
-    lateMorning: 0.5,
-    earlyAfternoon: 0.4,
-    lateAfternoon: 0.35,
-    evening: 0.25,
-    night: 0.08,
-    day: 0.35,
-  };
-  const base = baseChances[state.timeBand] ?? baseChances.day;
+  const base = buildingGreetingChance(state.timeBand, state.weather, state.workers);
   const chance = Math.max(0.05, base - (state.knockAttempts - 1) * 0.05);
   if (state.random() < chance) {
-    const approachLines = [
-      'After a pause, footsteps thump toward the door and the latch lifts.',
-      'Persistent knocking finally draws someone from within the homestead.',
+    const lines = [
+      'After a pause, footsteps approach and the latch lifts.',
+      'Persistent knocking finally draws someone from within.',
     ];
-    const line = approachLines[(state.knockAttempts - 1) % approachLines.length];
+    const line = lines[(state.knockAttempts - 1) % lines.length];
     state.narrative.push(line);
-    orchardSummonManager(state, context, 'door');
+    buildingSummonManager(state, context, 'door');
   } else {
-    const missLines = [
-      'You rap on the homestead door and wait, but only gull cries answer.',
-      'After a polite knock, nothing stirs inside the homestead.',
-      'You wait on the porch, yet the door stays shut while crews shout in the rows.',
-    ];
+    const rural = buildingInteractionLabels(context).knock.includes('homestead');
+    const missLines = rural
+      ? [
+          'You rap on the homestead door and wait, but only distant work calls answer.',
+          'No one emerges from the farmhouse—crews must be deep in the rows.',
+          'You linger on the porch, yet the door stays shut as workers shout orders beyond the trees.',
+        ]
+      : [
+          'You knock on the office door, but the bustle inside does not pause.',
+          'After a polite knock, no one breaks from their ledgers to greet you.',
+          'You wait by the entry, yet staff hurry past without stopping.',
+        ];
     const miss = missLines[(state.knockAttempts - 1) % missLines.length];
     state.narrative.push(miss);
   }
@@ -2488,43 +2660,55 @@ function handleOrchardKnock(position) {
   showNavigation();
 }
 
-function handleOrchardSearch(position) {
+function handleBuildingSearch(position) {
   const context = createBuildingEncounterContext(position);
   if (!context) return;
-  const state = orchardEnsureState(context);
+  const state = ensureBuildingEncounterState(context);
   state.message = null;
   state.messageType = null;
   if (state.managerFound) {
-    state.narrative.push('The overseer is already speaking with you.');
+    state.narrative.push('The lead is already speaking with you.');
     setBuildingEncounterState(position.building, state);
     showNavigation();
     return;
   }
   state.searchAttempts = (state.searchAttempts || 0) + 1;
-  const remaining = Math.max(1, state.remainingWorkers || state.workers || 1);
+  const remaining = Math.max(1, state.remainingContacts || Math.max(1, Math.round(Math.max(state.workers, 3) / 3)));
   const chance = 1 / remaining;
   if (state.random() < chance || remaining <= 1) {
-    state.narrative.push('You weave between ladders until a supervisor waves you over.');
-    orchardSummonManager(state, context, 'search');
-    state.remainingWorkers = Math.max(1, remaining - 1);
-  } else {
-    const missLines = [
-      'A picker points you toward another row, promising the steward is further upslope.',
-      'You flag down a hauler, but they shrug and send you deeper into the orchard.',
-      'Another crew member shakes their head—they have crates to move and no authority to help.',
+    const lines = [
+      'You weave between workers until a supervisor waves you over.',
+      'You catch the attention of someone in charge as they finish directing a crew.',
     ];
+    const line = lines[(state.searchAttempts - 1) % lines.length];
+    state.narrative.push(line);
+    buildingSummonManager(state, context, 'search');
+    state.remainingContacts = Math.max(1, remaining - 1);
+  } else {
+    const rural = buildingInteractionLabels(context).search.includes('rows');
+    const missLines = rural
+      ? [
+          'A picker points you toward another lane, promising the steward is further upslope.',
+          'You flag down a hauler, but they shrug and send you deeper among the trees.',
+          'Another crew member shakes their head—they have crates to move and no authority to help.',
+        ]
+      : [
+          'A clerk nods toward the back offices, suggesting you try again later.',
+          'You stop a porter, but they are too busy to fetch a supervisor right now.',
+          'Someone gestures upstairs, yet no one breaks away to meet you.',
+        ];
     const miss = missLines[(state.searchAttempts - 1) % missLines.length];
     state.narrative.push(miss);
-    state.remainingWorkers = Math.max(1, remaining - 1);
+    state.remainingContacts = Math.max(1, remaining - 1);
   }
   setBuildingEncounterState(position.building, state);
   showNavigation();
 }
 
-function handleOrchardQuestRequest(position) {
+function handleBuildingQuestRequest(position) {
   const context = createBuildingEncounterContext(position);
   if (!context) return;
-  const state = orchardEnsureState(context);
+  const state = ensureBuildingEncounterState(context);
   if (!state.managerFound) {
     state.narrative.push('You should find whoever is in charge before asking about postings.');
     setBuildingEncounterState(position.building, state);
@@ -2533,14 +2717,14 @@ function handleOrchardQuestRequest(position) {
   }
   const questInfo = findAvailableQuestForBoards(context.buildingBoards || []);
   if (!questInfo) {
-    state.message = 'No orchard postings are available today.';
+    state.message = 'No postings are being offered here today.';
     state.messageType = 'info';
     setBuildingEncounterState(position.building, state);
     showNavigation();
     return;
   }
   if (!questInfo.canOffer) {
-    state.message = orchardQuestStatusNote(questInfo) || 'No orchard postings are being offered right now.';
+    state.message = buildingQuestStatusNote(questInfo) || 'No postings are being offered right now.';
     state.messageType = 'info';
     setBuildingEncounterState(position.building, state);
     showNavigation();
@@ -2564,7 +2748,6 @@ function handleOrchardQuestRequest(position) {
     showNavigation();
   }
 }
-
 function showNavigation() {
   updateTopMenuIndicators();
   if (!currentCharacter) return;
@@ -3077,14 +3260,14 @@ function showNavigation() {
                 `<div class="no-character"><h1>You practice enchanting.</h1><p>Proficiency: ${prof.toFixed(2)}</p></div>`
               );
               return;
-            } else if (action === 'orchard-knock') {
-              handleOrchardKnock(pos);
+            } else if (action === 'building-knock') {
+              handleBuildingKnock(pos);
               return;
-            } else if (action === 'orchard-search') {
-              handleOrchardSearch(pos);
+            } else if (action === 'building-search') {
+              handleBuildingSearch(pos);
               return;
-            } else if (action === 'orchard-request-work') {
-              handleOrchardQuestRequest(pos);
+            } else if (action === 'building-request-work') {
+              handleBuildingQuestRequest(pos);
               return;
             } else {
               showBackButton();

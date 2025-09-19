@@ -1,3 +1,5 @@
+import { LOCATIONS } from "./locations.js";
+
 export const ADVENTURERS_GUILD_RANKS = [
   'Cold Iron',
   'Steel',
@@ -92,6 +94,98 @@ export const JOB_ROLE_DATA = {
   Acolyte: { schedule: '06:00-18:00' , hours: ['06:00-18:00'] },
   Librarian: { schedule: '09:00-17:00' , hours: ['09:00-17:00'] }
 };
+
+const BUSINESS_PROFILE_INDEX = (() => {
+  const map = new Map();
+  Object.values(LOCATIONS).forEach((location) => {
+    const businesses = location?.businesses || [];
+    businesses.forEach((profile) => {
+      if (profile?.name) {
+        map.set(profile.name, profile);
+      }
+    });
+  });
+  return map;
+})();
+
+export function getBusinessProfileByName(name) {
+  if (!name) return null;
+  return BUSINESS_PROFILE_INDEX.get(name) || null;
+}
+
+const CATEGORY_DEFAULT_ROLES = {
+  agriculture: { unskilled: 'Farmhand', skilled: 'Farmer', specialist: 'Farmer' },
+  craft: { unskilled: 'Laborer', skilled: 'Craftsman', specialist: 'Craftsman' },
+  processing: { unskilled: 'Laborer', skilled: 'Craftsman', specialist: 'Craftsman' },
+  logistics: { unskilled: 'Porter', skilled: 'Porter', specialist: 'Quartermaster' },
+  security: { unskilled: 'Guard', skilled: 'Guard', specialist: 'Guard' },
+  support: { unskilled: 'Attendant', skilled: 'Attendant', specialist: 'Administrator' },
+  default: { unskilled: 'Laborer', skilled: 'Craftsman', specialist: 'Craftsman' },
+};
+
+const BAND_ROLE_RULES = [
+  { match: /fruit|orchard|picker|plucker/, role: 'Fruit Picker', tiers: ['unskilled'] },
+  {
+    match: /grafter|orchardist|warden|trellis|graft/,
+    role: 'Orchard Keeper',
+    tiers: ['skilled', 'specialist'],
+  },
+  { match: /herbal|apothec|pest ward|antifungal/, role: 'Herbalist', tiers: ['specialist', 'skilled'] },
+  { match: /hauler|loader|carrier|porter|crate|sack|barrow/, role: 'Laborer', tiers: ['unskilled'] },
+  { match: /miller|millwright|gear/, role: 'Miller' },
+  { match: /brewer|cider|ferment|mash/, role: 'Brewer' },
+  { match: /smith|forge|anvil/, role: 'Blacksmith' },
+  { match: /tailor|seamstress|cloth/, role: 'Tailor', tiers: ['skilled', 'specialist'] },
+  { match: /glass|blower|kiln/, role: 'Glassblower', tiers: ['skilled', 'specialist'] },
+  { match: /rope|rigging/, role: 'Ropemaker', tiers: ['skilled', 'specialist'] },
+  { match: /coop|cask|barrel/, role: 'Cooper', tiers: ['skilled', 'specialist'] },
+  { match: /scribe|clerk|account/, role: 'Clerk', tiers: ['skilled', 'specialist'] },
+];
+
+function mapBandToRole(name, category, band) {
+  const lowerName = name.toLowerCase();
+  const text = (band.roles || '').toLowerCase();
+  for (const rule of BAND_ROLE_RULES) {
+    if (rule.tiers && !rule.tiers.includes(band.type)) continue;
+    if (rule.match.test(text)) return rule.role;
+  }
+  if (lowerName.includes('orchard')) {
+    if (band.type === 'unskilled') return 'Fruit Picker';
+    if (band.type === 'skilled') return 'Orchard Keeper';
+    if (band.type === 'specialist') return text.includes('herbal') ? 'Herbalist' : 'Orchard Keeper';
+  }
+  if (lowerName.includes('farm')) {
+    if (band.type === 'unskilled') return 'Farmhand';
+    if (band.type === 'skilled') return 'Farmer';
+  }
+  if (lowerName.includes('mill')) {
+    if (band.type !== 'unskilled') return 'Miller';
+  }
+  if (lowerName.includes('granary') || lowerName.includes('warehouse')) {
+    if (band.type === 'unskilled') return 'Laborer';
+    return 'Clerk';
+  }
+  const defaults = CATEGORY_DEFAULT_ROLES[category] || CATEGORY_DEFAULT_ROLES.default;
+  return defaults[band.type] || CATEGORY_DEFAULT_ROLES.default[band.type];
+}
+
+function deriveWorkforceCounts(name) {
+  const profile = getBusinessProfileByName(name);
+  if (!profile?.workforce?.normal?.length) return null;
+  const counts = {};
+  let total = 0;
+  profile.workforce.normal.forEach((band) => {
+    const role = mapBandToRole(name, profile.category, band);
+    if (!role) return;
+    total += band.count;
+    counts[role] = (counts[role] || 0) + band.count;
+  });
+  if (profile.category === 'agriculture' && total > 0) {
+    const homestead = Math.max(2, Math.round(total * 0.15));
+    counts.Member = Math.max(counts.Member || 0, homestead);
+  }
+  return counts;
+}
 
 export function getJobRolesForBuilding(name) {
   const lower = name.toLowerCase();
@@ -503,6 +597,13 @@ function staffCountsForBuilding(name) {
   // ensure at least one of each role discovered by getJobRolesForBuilding
   for (const role of getJobRolesForBuilding(name)) {
     if (!counts[role]) counts[role] = 1;
+  }
+
+  const workforceCounts = deriveWorkforceCounts(name);
+  if (workforceCounts) {
+    Object.entries(workforceCounts).forEach(([role, count]) => {
+      counts[role] = Math.max(counts[role] || 0, count);
+    });
   }
 
   return counts;
