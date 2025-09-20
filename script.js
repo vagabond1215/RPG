@@ -1935,8 +1935,16 @@ const formatHeight = cm => {
   return `${feet}' ${inches}"`;
 };
 
-const showBackButton = () => (backButton.style.display = 'inline-flex');
-const hideBackButton = () => (backButton.style.display = 'none');
+const showBackButton = () => {
+  if (backButton) {
+    backButton.style.display = 'inline-flex';
+  }
+};
+const hideBackButton = () => {
+  if (backButton) {
+    backButton.style.display = 'none';
+  }
+};
 
 function showItemPopup(item) {
   const overlay = document.createElement('div');
@@ -6606,9 +6614,11 @@ async function clearLocalData() {
 
 const settingsButton = document.getElementById('settings-button');
 const settingsPanel = document.getElementById('settings-panel');
-settingsButton.addEventListener('click', () => {
-  settingsPanel.classList.toggle('active');
-});
+if (settingsButton && settingsPanel) {
+  settingsButton.addEventListener('click', () => {
+    settingsPanel.classList.toggle('active');
+  });
+}
 
 // Theme toggle
 const themeToggle = document.getElementById('theme-toggle');
@@ -6635,10 +6645,12 @@ const setTheme = index => {
   body.classList.add(`theme-${theme}`);
   savePreference('theme', theme);
 };
-themeToggle.addEventListener('click', () => {
-  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-  setTheme(currentThemeIndex);
-});
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+    setTheme(currentThemeIndex);
+  });
+}
 
 // UI scale buttons
 let uiScale = 1;
@@ -6647,14 +6659,20 @@ const updateScale = () => {
   savePreference('uiScale', uiScale);
   updateMenuHeight();
 };
-document.getElementById('scale-dec').addEventListener('click', () => {
-  uiScale = Math.max(0.5, uiScale - 0.1);
-  updateScale();
-});
-document.getElementById('scale-inc').addEventListener('click', () => {
-  uiScale = Math.min(2, uiScale + 0.1);
-  updateScale();
-});
+const scaleDecButton = document.getElementById('scale-dec');
+const scaleIncButton = document.getElementById('scale-inc');
+if (scaleDecButton) {
+  scaleDecButton.addEventListener('click', () => {
+    uiScale = Math.max(0.5, uiScale - 0.1);
+    updateScale();
+  });
+}
+if (scaleIncButton) {
+  scaleIncButton.addEventListener('click', () => {
+    uiScale = Math.min(2, uiScale + 0.1);
+    updateScale();
+  });
+}
 
 // Dropdown menu
 const menuButton = document.getElementById('menu-button');
@@ -6681,6 +6699,7 @@ function toggleCityMap(btn) {
 
 
 function updateCharacterButton() {
+  if (!characterButton) return;
   if (!currentCharacter) {
     characterButton.style.display = 'none';
     mapContainer.style.display = 'none';
@@ -6696,68 +6715,78 @@ function updateCharacterButton() {
   characterButton.style.display = 'inline-flex';
 }
 
-menuButton.addEventListener('click', () => {
-  dropdownMenu.classList.toggle('active');
-  characterMenu.classList.remove('active');
-});
-characterButton.addEventListener('click', () => {
-  dropdownMenu.classList.remove('active');
-  characterMenu.classList.toggle('active');
-});
+if (menuButton && dropdownMenu && characterMenu) {
+  menuButton.addEventListener('click', () => {
+    dropdownMenu.classList.toggle('active');
+    characterMenu.classList.remove('active');
+  });
+}
+if (characterButton && dropdownMenu && characterMenu) {
+  characterButton.addEventListener('click', () => {
+    dropdownMenu.classList.remove('active');
+    characterMenu.classList.toggle('active');
+  });
+}
 
-dropdownMenu.addEventListener('click', e => {
-  const button = e.target.closest('button');
-  if (!button || !dropdownMenu.contains(button)) return;
-  const action = button.dataset.action;
-  if (!action) return;
-  dropdownMenu.classList.remove('active');
-  if (action === 'new-character') {
-    startCharacterCreation();
-  } else if (action === 'character-select') {
-    showCharacterSelectUI();
-  } else if (action === 'clear-data') {
-    clearLocalData();
-  } else {
-    showBackButton();
-    setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
-  }
-});
+if (dropdownMenu) {
+  dropdownMenu.addEventListener('click', e => {
+    const button = e.target.closest('button');
+    if (!button || !dropdownMenu.contains(button)) return;
+    const action = button.dataset.action;
+    if (!action) return;
+    dropdownMenu.classList.remove('active');
+    if (action === 'new-character') {
+      startCharacterCreation();
+    } else if (action === 'character-select') {
+      showCharacterSelectUI();
+    } else if (action === 'clear-data') {
+      clearLocalData();
+    } else {
+      showBackButton();
+      setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
+    }
+  });
+}
 
-characterMenu.addEventListener('click', e => {
-  const button = e.target.closest('button');
-  if (!button || !characterMenu.contains(button)) return;
-  const action = button.dataset.action;
-  if (!action) return;
-  characterMenu.classList.remove('active');
-  if (action === 'profile') {
-    showCharacterUI();
-  } else if (action === 'equipment') {
-    showEquipmentUI();
-  } else if (action === 'inventory') {
-    showInventoryUI();
-  } else if (action === 'spellbook') {
-    showSpellbookUI();
-  } else if (action === 'bestiary') {
-    showBestiaryUI();
-  } else if (action === 'herbarium') {
-    showHerbariumUI();
-  } else if (action === 'proficiencies') {
-    showProficienciesUI();
-  } else if (action === 'buildings') {
-    showBuildingsUI();
-  } else if (action === 'quests') {
-    showQuestLogUI();
-  } else {
-    showBackButton();
-    setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
-  }
-});
+if (characterMenu) {
+  characterMenu.addEventListener('click', e => {
+    const button = e.target.closest('button');
+    if (!button || !characterMenu.contains(button)) return;
+    const action = button.dataset.action;
+    if (!action) return;
+    characterMenu.classList.remove('active');
+    if (action === 'profile') {
+      showCharacterUI();
+    } else if (action === 'equipment') {
+      showEquipmentUI();
+    } else if (action === 'inventory') {
+      showInventoryUI();
+    } else if (action === 'spellbook') {
+      showSpellbookUI();
+    } else if (action === 'bestiary') {
+      showBestiaryUI();
+    } else if (action === 'herbarium') {
+      showHerbariumUI();
+    } else if (action === 'proficiencies') {
+      showProficienciesUI();
+    } else if (action === 'buildings') {
+      showBuildingsUI();
+    } else if (action === 'quests') {
+      showQuestLogUI();
+    } else {
+      showBackButton();
+      setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
+    }
+  });
+}
 
-backButton.addEventListener('click', () => {
-  dropdownMenu.classList.remove('active');
-  characterMenu.classList.remove('active');
-  showMainUI();
-});
+if (backButton && dropdownMenu && characterMenu) {
+  backButton.addEventListener('click', () => {
+    dropdownMenu.classList.remove('active');
+    characterMenu.classList.remove('active');
+    showMainUI();
+  });
+}
 
 // Initialization
 selectProfile();
