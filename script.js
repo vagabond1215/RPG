@@ -2782,6 +2782,59 @@ function buildingInteractionLabels(context) {
   };
 }
 
+function scoreQuestCandidate(info) {
+  if (!info) return -Infinity;
+  let score = 0;
+  if (info.availability?.available) score += 4;
+  else if (info.availability) score += 1;
+  if (info.eligibility?.canAccept) score += 2;
+  if (info.alreadyAccepted) score += 3;
+  return score;
+}
+
+function findAvailableQuestForBoards(boardEntries) {
+  if (!currentCharacter) return null;
+  if (!Array.isArray(boardEntries) || boardEntries.length === 0) return null;
+  const questLog = ensureQuestLog(currentCharacter);
+  let best = null;
+  let bestScore = -Infinity;
+
+  for (const entry of boardEntries) {
+    if (!entry || typeof entry !== 'object') continue;
+    const boardName = entry.name || entry.boardName;
+    if (!boardName) continue;
+    const quests = Array.isArray(entry.quests) ? entry.quests : [];
+    for (const quest of quests) {
+      if (!quest || typeof quest !== 'object') continue;
+      const availability = evaluateQuestAvailability(quest, boardName);
+      const eligibility = evaluateQuestEligibility(quest);
+      const key = questKey(boardName, quest.title || '');
+      const logEntry = questLog.find(entry => entry.key === key) || null;
+      const status = (logEntry?.status || '').toLowerCase();
+      const alreadyAccepted = Boolean(logEntry) && !REPEATABLE_QUEST_STATUSES.has(status);
+      const info = {
+        boardName,
+        quest,
+        availability,
+        eligibility,
+        alreadyAccepted,
+        acceptedOnLabel: logEntry?.acceptedOnLabel || logEntry?.acceptedOn || null,
+        logEntry,
+      };
+      info.canOffer = Boolean(availability?.available) && eligibility?.canAccept && !alreadyAccepted;
+      if (info.canOffer) {
+        return info;
+      }
+      const score = scoreQuestCandidate(info);
+      if (score > bestScore) {
+        best = info;
+        bestScore = score;
+      }
+    }
+  }
+  return best;
+}
+
 function generateBuildingEncounter(buildingName, context) {
   const state = ensureBuildingEncounterState(context);
   const questInfo = findAvailableQuestForBoards(context.buildingBoards || []);
