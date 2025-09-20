@@ -5694,6 +5694,17 @@ function startCharacterCreation() {
 
   let step = saved.step || 0;
   let ccPortraitZoom = 1;
+
+  const resetCharacterCreationState = () => {
+    saved = {};
+    step = 0;
+    ccPortraitZoom = 1;
+    if (character && typeof character === 'object') {
+      Object.keys(character).forEach(key => delete character[key]);
+    }
+    safeStorage.removeItem(TEMP_CHARACTER_KEY);
+  };
+
   renderStep();
 
   async function renderStep() {
@@ -6190,6 +6201,7 @@ function startCharacterCreation() {
       const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
       character.image = character.characterImage ? `${folder}/${character.characterImage}` : '';
       finalizeCharacter(character);
+      resetCharacterCreationState();
     });
 
     document.querySelectorAll('.progress-step').forEach(el => {
@@ -6203,7 +6215,7 @@ function startCharacterCreation() {
 
     document.getElementById('cc-cancel').addEventListener('click', () => {
       if (confirm('Cancel character creation?')) {
-        safeStorage.removeItem(TEMP_CHARACTER_KEY);
+        resetCharacterCreationState();
         showMainUI();
       }
     });
