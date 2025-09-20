@@ -6614,12 +6614,25 @@ settingsButton.addEventListener('click', () => {
 // Theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 const themes = ['light', 'dark', 'sepia'];
-let currentThemeIndex = themes.indexOf(
-  [...body.classList].find(c => c.startsWith('theme-')).replace('theme-', '')
-);
+const currentThemeClass = body
+  ? [...body.classList].find(c => typeof c === 'string' && c.startsWith('theme-'))
+  : null;
+let currentThemeIndex = currentThemeClass
+  ? themes.indexOf(currentThemeClass.replace('theme-', ''))
+  : -1;
+if (currentThemeIndex === -1) {
+  currentThemeIndex = 0;
+  if (body && (!currentThemeClass || currentThemeClass !== `theme-${themes[0]}`)) {
+    body.classList.add(`theme-${themes[0]}`);
+  }
+}
+const removeThemeClasses = themes.map(theme => `theme-${theme}`);
 const setTheme = index => {
-  body.classList.remove('theme-light', 'theme-dark', 'theme-sepia');
-  const theme = themes[index];
+  const safeIndex = Number.isInteger(index) && index >= 0 && index < themes.length ? index : 0;
+  if (!body) return;
+  body.classList.remove(...removeThemeClasses);
+  const theme = themes[safeIndex];
+  if (!theme) return;
   body.classList.add(`theme-${theme}`);
   savePreference('theme', theme);
 };
