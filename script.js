@@ -5522,18 +5522,15 @@ function showQuestBoardDetails(boardIdentifier, options = {}) {
   const formatParagraphs = text => {
     const safe = sanitizeText(text);
     if (!safe) return '';
-    const segments = safe.split(/(?:
-?
-){2,}/).map(seg => seg.trim()).filter(Boolean);
+    const segments = safe
+      .split(/(?:\r?\n){2,}/)
+      .map(seg => seg.trim())
+      .filter(Boolean);
     if (!segments.length) {
-      return `<p>${safe.replace(/(?:
-?
-)/g, '<br>')}</p>`;
+      return `<p>${safe.replace(/(?:\r?\n)/g, '<br>')}</p>`;
     }
     return segments
-      .map(seg => `<p>${seg.replace(/(?:
-?
-)/g, '<br>')}</p>`)
+      .map(seg => `<p>${seg.replace(/(?:\r?\n)/g, '<br>')}</p>`)
       .join('');
   };
   const flattenToStrings = value => {
@@ -5780,6 +5777,8 @@ function showQuestBoardDetails(boardIdentifier, options = {}) {
           showQuestBoardDetails(groupKey, { ...detailContext, flash });
         }
       });
+    });
+  }
 }
 
 const SLOT_ICONS = {
