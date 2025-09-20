@@ -9,7 +9,12 @@ import type {
 } from "./locations.js";
 import type { Habitat } from './weather.js';
 
-type BoardPlan = Record<string, string[]>;
+interface BoardDefinition {
+  location?: string;
+  businesses: string[];
+}
+
+type BoardPlan = Record<string, BoardDefinition>;
 
 type OwnershipMap = Record<string, OwnershipDetail>;
 
@@ -162,6 +167,7 @@ function applyQuestVisibilityToBusiness(
       habitat: binding.habitat,
       district: binding.district,
       business: business.name,
+      location: business.name,
     };
     quest.visibilityBinding = quest.visibilityBinding
       ? { ...quest.visibilityBinding, ...baseBinding }
@@ -384,95 +390,179 @@ const HIGH_ROAD_BUSINESSES = [
 ];
 
 const FARMLAND_BOARD_PLAN: BoardPlan = {
-  "North Gate Labor Postings": [
-    "Bayside Brickworks",
-    "Cliffbreak Quarry",
-    "Coast Road Watchtower",
-    "Copperbrook Forge",
-    "East Road to Mountain Top",
-    "Greenridge Polder",
-    "Mistflower Apiary",
-    "Netmaker's Co-op",
-    "North Gate",
-    "Tidewatcher Lighthouse",
-    "Tidewheel Watermill",
-    "Wavecut Stoneworks",
-  ],
-  "South Gate Field Contracts": [
-    "Brackenshore Croft",
-    "Cliffblossom Hives",
-    "Driftfell Meadow",
-    "Foamfield Flax Farm",
-    "Gulls' Orchard",
-    "Gullwind Mill",
-    "Harborwind Dairy",
-    "Moorlight Flats",
-    "Saltcrest Vineyard & Winery",
-    "Saltmarsh Granary",
-    "Saltmeadow Potato Farm",
-    "Seabreeze Oat Farm",
-    "Seawisp Plum Orchard",
-    "South Gate",
-    "Sunmellow Grove",
-    "Tideflock Stockyards",
-    "Windward Berry Vineyard & Winery",
-  ],
+  "North Gate Labor Postings": {
+    location: "North Gate",
+    businesses: [
+      "Bayside Brickworks",
+      "Cliffbreak Quarry",
+      "Coast Road Watchtower",
+      "Copperbrook Forge",
+      "East Road to Mountain Top",
+      "Greenridge Polder",
+      "Mistflower Apiary",
+      "Netmaker's Co-op",
+      "North Gate",
+      "Tidewatcher Lighthouse",
+      "Tidewheel Watermill",
+      "Wavecut Stoneworks",
+    ],
+  },
+  "South Gate Field Contracts": {
+    location: "South Gate",
+    businesses: [
+      "Brackenshore Croft",
+      "Cliffblossom Hives",
+      "Driftfell Meadow",
+      "Foamfield Flax Farm",
+      "Gulls' Orchard",
+      "Gullwind Mill",
+      "Harborwind Dairy",
+      "Moorlight Flats",
+      "Saltcrest Vineyard & Winery",
+      "Saltmarsh Granary",
+      "Saltmeadow Potato Farm",
+      "Seabreeze Oat Farm",
+      "Seawisp Plum Orchard",
+      "South Gate",
+      "Sunmellow Grove",
+      "Tideflock Stockyards",
+      "Windward Berry Vineyard & Winery",
+    ],
+  },
 };
 
 const PORT_BOARD_PLAN: BoardPlan = {
-  "Harborwatch Quay Ledger": ["Harborwatch Trading House"],
-  "Stormkeel Slipway Mast": ["Stormkeel Shipwrights"],
-  "Naval Yard Muster Wall": ["Harbor Guard Naval Yard"],
-  "Saltworks Evaporation Gate": ["Saltworks"],
-  "Fishmongers' Stall Hooks": ["Fishmongers' Row"],
-  "Ropewalk Entry Plaques": ["The Ropewalk"],
+  "Harborwatch Quay Ledger": {
+    location: "The Port District",
+    businesses: ["Harborwatch Trading House"],
+  },
+  "Stormkeel Slipway Mast": {
+    location: "Stormkeel Shipwrights",
+    businesses: ["Stormkeel Shipwrights"],
+  },
+  "Naval Yard Muster Wall": {
+    location: "Harbor Guard Naval Yard",
+    businesses: ["Harbor Guard Naval Yard"],
+  },
+  "Saltworks Evaporation Gate": {
+    location: "Saltworks",
+    businesses: ["Saltworks"],
+  },
+  "Fishmongers' Stall Hooks": {
+    location: "Fishmongers' Row",
+    businesses: ["Fishmongers' Row"],
+  },
+  "Ropewalk Entry Plaques": {
+    location: "The Ropewalk",
+    businesses: ["The Ropewalk"],
+  },
 };
 
 const UPPER_WARD_BOARD_PLAN: BoardPlan = {
-  "Governor's Keep Gatehouse Registry": ["Governor's Keep", "Hall of Records"],
-  "Highward Mercantile Ledger": ["Mercantile Exchange", "Highward Vintners' Salon"],
-  "Adventurers' Guild Liaison Counter": [
-    "Master Jeweler's Guildhall",
-    "Aurelian Apothecarium & Perfumery",
-  ],
+  "Governor's Keep Gatehouse Registry": {
+    location: "Governor's Keep",
+    businesses: ["Governor's Keep", "Hall of Records"],
+  },
+  "Highward Mercantile Ledger": {
+    location: "Mercantile Exchange",
+    businesses: ["Mercantile Exchange", "Highward Vintners' Salon"],
+  },
+  "Adventurers' Guild Liaison Counter": {
+    location: "Master Jeweler's Guildhall",
+    businesses: [
+      "Master Jeweler's Guildhall",
+      "Aurelian Apothecarium & Perfumery",
+    ],
+  },
 };
 
 const LITTLE_TERNS_BOARD_PLAN: BoardPlan = {
-  "Guild of Smiths Forge Gate": ["Guild of Smiths"],
-  "Timberwave Yard Posting": ["Timberwave Carpenters' Guild"],
-  "Carvers' Hall Chisel Board": ["Carvers' and Fletchers' Hall"],
-  "Gilded Needle Facade Placards": ["The Gilded Needle Clothiers"],
-  "Brine & Bark Headhouse": ["Brine & Bark Tannery"],
-  "Seawind Loft Rail": ["Seawind Sailmakers' Hall"],
+  "Guild of Smiths Forge Gate": {
+    location: "Guild of Smiths",
+    businesses: ["Guild of Smiths"],
+  },
+  "Timberwave Yard Posting": {
+    location: "Timberwave Carpenters' Guild",
+    businesses: ["Timberwave Carpenters' Guild"],
+  },
+  "Carvers' Hall Chisel Board": {
+    location: "Carvers' and Fletchers' Hall",
+    businesses: ["Carvers' and Fletchers' Hall"],
+  },
+  "Gilded Needle Facade Placards": {
+    location: "The Gilded Needle Clothiers",
+    businesses: ["The Gilded Needle Clothiers"],
+  },
+  "Brine & Bark Headhouse": {
+    location: "Brine & Bark Tannery",
+    businesses: ["Brine & Bark Tannery"],
+  },
+  "Seawind Loft Rail": {
+    location: "Seawind Sailmakers' Hall",
+    businesses: ["Seawind Sailmakers' Hall"],
+  },
 };
 
 const GREENSOUL_HILL_BOARD_PLAN: BoardPlan = {
-  "Grand Library Request Desk": ["Grand Library of Wave's Break"],
-  "Arcanists' Gatehouse Wards": ["Arcanists' Enclave"],
-  "Herbal Conservatory Loggia": ["Herbal Conservatory"],
-  "Skyline Academy Posting Column": ["Skyline Academy"],
-  "Temple of the Tides Ledger": ["Temple of the Tides"],
-  "Candlewrights' Guild Lantern Wall": ["Candlewrights' Guild"],
+  "Grand Library Request Desk": {
+    location: "Grand Library of Wave's Break",
+    businesses: ["Grand Library of Wave's Break"],
+  },
+  "Arcanists' Gatehouse Wards": {
+    location: "Arcanists' Enclave",
+    businesses: ["Arcanists' Enclave"],
+  },
+  "Herbal Conservatory Loggia": {
+    location: "Herbal Conservatory",
+    businesses: ["Herbal Conservatory"],
+  },
+  "Skyline Academy Posting Column": {
+    location: "Skyline Academy",
+    businesses: ["Skyline Academy"],
+  },
+  "Temple of the Tides Ledger": {
+    location: "Temple of the Tides",
+    businesses: ["Temple of the Tides"],
+  },
+  "Candlewrights' Guild Lantern Wall": {
+    location: "Candlewrights' Guild",
+    businesses: ["Candlewrights' Guild"],
+  },
 };
 
 const LOWER_GARDENS_BOARD_PLAN: BoardPlan = {
-  "South Gate Market Posting Wall": [
-    "South Gate Market",
-    "Quayside Greens Market",
-    "Anchor's Toast Brewery",
-  ],
-  "Arena Promenade Notices": ["Seastone Arena", "Wisteria Pavilion", "Sunleaf Inn"],
+  "South Gate Market Posting Wall": {
+    location: "South Gate Market",
+    businesses: [
+      "South Gate Market",
+      "Quayside Greens Market",
+      "Anchor's Toast Brewery",
+    ],
+  },
+  "Arena Promenade Notices": {
+    location: "Seastone Arena",
+    businesses: ["Seastone Arena", "Wisteria Pavilion", "Sunleaf Inn"],
+  },
 };
 
 const HIGH_ROAD_BOARD_PLAN: BoardPlan = {
-  "Adventurers' Guild Contract Archive": ["Adventurers' Guildhall"],
-  "Caravan Square Contract Wall": [
-    "Rolling Wave Coachworks",
-    "Wavehide Leather Guild",
-    "Shield & Sail Armsmiths",
-    "Stonebridge Caravanserai",
-  ],
-  "Gatewatch Muster Board": ["Gatewatch Barracks"],
+  "Adventurers' Guild Contract Archive": {
+    location: "Adventurers' Guildhall",
+    businesses: ["Adventurers' Guildhall"],
+  },
+  "Caravan Square Contract Wall": {
+    location: "Caravan Square",
+    businesses: [
+      "Rolling Wave Coachworks",
+      "Wavehide Leather Guild",
+      "Shield & Sail Armsmiths",
+      "Stonebridge Caravanserai",
+    ],
+  },
+  "Gatewatch Muster Board": {
+    location: "Gatewatch Barracks",
+    businesses: ["Gatewatch Barracks"],
+  },
 };
 
 const ALL_BUSINESS_GROUPS = new Map<string, string[]>([
@@ -500,6 +590,7 @@ function cloneQuestForBoard(
   boardName: string,
   businessName: string,
   binding: QuestVisibilityBinding,
+  boardLocation?: string,
 ): Quest {
   const notes = quest.notes
     ? `${quest.notes} Posted on the ${boardName}; report to ${businessName}.`
@@ -509,6 +600,9 @@ function cloneQuestForBoard(
     board: boardName,
     business: businessName,
   };
+  if (boardLocation) {
+    visibilityBinding.location = boardLocation;
+  }
   return {
     ...quest,
     notes,
@@ -535,13 +629,23 @@ function collectBoardQuests(
   if (!businesses?.length) return {};
   const index = new Map(businesses.map((b) => [b.name, b]));
   const boards: Record<string, Quest[]> = {};
-  Object.entries(plan).forEach(([boardName, businessNames]) => {
+  Object.entries(plan).forEach(([boardName, details]) => {
+    const board = details ?? { businesses: [] };
+    const businessNames = board.businesses || [];
     const quests: Quest[] = [];
     businessNames.forEach((name) => {
       const business = index.get(name);
       if (!business) return;
       business.quests.forEach((quest) => {
-        quests.push(cloneQuestForBoard(quest, boardName, business.name, binding));
+        quests.push(
+          cloneQuestForBoard(
+            quest,
+            boardName,
+            business.name,
+            binding,
+            board.location,
+          ),
+        );
       });
     });
     if (quests.length) {

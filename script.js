@@ -138,6 +138,7 @@ function resolveQuestBinding(quest, boardName) {
   if (!source.habitat) source.habitat = 'urban';
   if (!source.business) source.business = quest?.location || boardName;
   if (!source.board) source.board = boardName;
+  if (!source.location) source.location = source.business || boardName;
   if (!source.district) {
     source.district =
       source.habitat === 'farmland'
@@ -215,6 +216,8 @@ function normalizePlaceName(name) {
 
 function boardMatchesBuildingName(binding, boardName, buildingSet) {
   if (!buildingSet || !buildingSet.size) return false;
+  const location = normalizePlaceName(binding?.location);
+  if (location && buildingSet.has(location)) return true;
   const business = normalizePlaceName(binding?.business);
   if (business && buildingSet.has(business)) return true;
   const board = normalizePlaceName(boardName);
@@ -230,12 +233,28 @@ function questBoardsForDistrict(city, district, options = {}) {
     (buildingNames || []).map(name => normalizePlaceName(name)).filter(Boolean),
   );
   const entries = [];
+  const seenLocations = new Set();
   Object.entries(loc.questBoards).forEach(([boardName, quests]) => {
     if (!Array.isArray(quests) || !quests.length) return;
-    const binding = resolveQuestBinding(quests[0], boardName);
-    if (!boardMatchesDistrict(binding.district, district)) return;
-    if (excludeBuildingBoards && boardMatchesBuildingName(binding, boardName, buildingSet)) {
+    const bindings = quests.map(quest => resolveQuestBinding(quest, boardName));
+    const matchingBinding = bindings.find(binding =>
+      boardMatchesDistrict(binding.district, district),
+    );
+    if (!matchingBinding) return;
+    if (
+      excludeBuildingBoards &&
+      bindings.some(binding => boardMatchesBuildingName(binding, boardName, buildingSet))
+    ) {
       return;
+    }
+    const locationKey = normalizePlaceName(
+      matchingBinding.location || matchingBinding.board || boardName,
+    );
+    if (locationKey && seenLocations.has(locationKey)) {
+      return;
+    }
+    if (locationKey) {
+      seenLocations.add(locationKey);
     }
     entries.push({ name: boardName, quests });
   });
@@ -251,11 +270,17 @@ function questBoardsForBuilding(city, district, building) {
   const entries = [];
   Object.entries(loc.questBoards).forEach(([boardName, quests]) => {
     if (!Array.isArray(quests) || !quests.length) return;
-    const binding = resolveQuestBinding(quests[0], boardName);
-    if (!boardMatchesDistrict(binding.district, district)) return;
-    const business = normalizePlaceName(binding.business);
-    const board = normalizePlaceName(boardName);
-    if (business === target || board === target) {
+    const bindings = quests
+      .map(quest => resolveQuestBinding(quest, boardName))
+      .filter(binding => boardMatchesDistrict(binding.district, district));
+    if (!bindings.length) return;
+    const boardLabel = normalizePlaceName(boardName);
+    const matches = bindings.some(binding => {
+      const location = normalizePlaceName(binding.location);
+      const business = normalizePlaceName(binding.business);
+      return location === target || business === target || boardLabel === target;
+    });
+    if (matches) {
       entries.push({ name: boardName, quests });
     }
   });
