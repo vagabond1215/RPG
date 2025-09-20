@@ -1752,6 +1752,44 @@ body.theme-dark .top-menu button {
   margin-top: 1rem;
 }
 
+.questboard-subareas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.questboard-subarea {
+  border: 1px solid rgba(46, 139, 87, 0.25);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem 0.75rem;
+  background: rgba(46, 139, 87, 0.08);
+}
+
+.questboard-subarea summary {
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.questboard-subarea[open] {
+  background: rgba(46, 139, 87, 0.12);
+}
+
+.questboard-subarea .quest-board-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1rem;
+}
+
+.quest-count {
+  font-size: 0.8rem;
+  color: rgba(25, 83, 52, 0.8);
+}
+
 .quest-board-section {
   margin-top: 1.5rem;
 }

@@ -232,31 +232,21 @@ function questBoardsForDistrict(city, district, options = {}) {
   const buildingSet = new Set(
     (buildingNames || []).map(name => normalizePlaceName(name)).filter(Boolean),
   );
-  const entries = [];
-  const seenLocations = new Set();
-  Object.entries(loc.questBoards).forEach(([boardName, quests]) => {
-    if (!Array.isArray(quests) || !quests.length) return;
-    const bindings = quests.map(quest => resolveQuestBinding(quest, boardName));
-    const matchingBinding = bindings.find(binding =>
+  const { groups } = collectQuestBoardGroups(loc, {
+    predicate: (binding, boardName) =>
       boardMatchesDistrict(binding.district, district),
+  });
+  const entries = [];
+  groups.forEach(group => {
+    const containsBuildingBoard = group.boards.some(section =>
+      section.quests.some(entry =>
+        boardMatchesBuildingName(entry.binding, section.name, buildingSet),
+      ),
     );
-    if (!matchingBinding) return;
-    if (
-      excludeBuildingBoards &&
-      bindings.some(binding => boardMatchesBuildingName(binding, boardName, buildingSet))
-    ) {
+    if (excludeBuildingBoards && containsBuildingBoard) {
       return;
     }
-    const locationKey = normalizePlaceName(
-      matchingBinding.location || matchingBinding.board || boardName,
-    );
-    if (locationKey && seenLocations.has(locationKey)) {
-      return;
-    }
-    if (locationKey) {
-      seenLocations.add(locationKey);
-    }
-    entries.push({ name: boardName, quests });
+    entries.push(group);
   });
   entries.sort((a, b) => a.name.localeCompare(b.name));
   return entries;
@@ -267,25 +257,103 @@ function questBoardsForBuilding(city, district, building) {
   if (!loc || !loc.questBoards || !building) return [];
   const target = normalizePlaceName(building);
   if (!target) return [];
-  const entries = [];
-  Object.entries(loc.questBoards).forEach(([boardName, quests]) => {
-    if (!Array.isArray(quests) || !quests.length) return;
-    const bindings = quests
-      .map(quest => resolveQuestBinding(quest, boardName))
-      .filter(binding => boardMatchesDistrict(binding.district, district));
-    if (!bindings.length) return;
-    const boardLabel = normalizePlaceName(boardName);
-    const matches = bindings.some(binding => {
-      const location = normalizePlaceName(binding.location);
-      const business = normalizePlaceName(binding.business);
-      return location === target || business === target || boardLabel === target;
-    });
-    if (matches) {
-      entries.push({ name: boardName, quests });
-    }
+  const buildingSet = new Set([target]);
+  const { groups } = collectQuestBoardGroups(loc, {
+    predicate: (binding, boardName) =>
+      boardMatchesDistrict(binding.district, district) &&
+      boardMatchesBuildingName(binding, boardName, buildingSet),
   });
+  const entries = Array.from(groups.values());
   entries.sort((a, b) => a.name.localeCompare(b.name));
   return entries;
+}
+
+function collectQuestBoardGroups(loc, options = {}) {
+  const predicate = typeof options.predicate === 'function' ? options.predicate : null;
+  const interim = new Map();
+  const boardIndex = new Map();
+  Object.entries(loc.questBoards || {}).forEach(([boardName, quests]) => {
+    if (!Array.isArray(quests) || !quests.length) return;
+    const questEntries = [];
+    quests.forEach(quest => {
+      const binding = resolveQuestBinding(quest, boardName);
+      if (predicate && !predicate(binding, boardName, quest)) return;
+      questEntries.push({ quest, binding });
+    });
+    if (!questEntries.length) return;
+    const locationLabel =
+      questEntries[0].binding.location || questEntries[0].binding.board || boardName;
+    const locationKey = normalizePlaceName(locationLabel || boardName);
+    if (!locationKey) return;
+    let group = interim.get(locationKey);
+    if (!group) {
+      group = {
+        key: locationKey,
+        name: locationLabel,
+        boards: [],
+        districts: new Set(),
+      };
+      interim.set(locationKey, group);
+    }
+    questEntries.forEach(entry => {
+      if (entry.binding?.district) {
+        group.districts.add(entry.binding.district);
+      }
+    });
+    group.boards.push({
+      name: boardName,
+      quests: questEntries,
+    });
+    boardIndex.set(normalizePlaceName(boardName), locationKey);
+  });
+  const groups = new Map();
+  interim.forEach(group => {
+    const district = group.districts.size === 1
+      ? Array.from(group.districts)[0]
+      : null;
+    groups.set(group.key, {
+      key: group.key,
+      name: group.name,
+      district,
+      boards: group.boards.map(section => ({
+        name: section.name,
+        quests: section.quests.map(entry => ({
+          quest: entry.quest,
+          binding: entry.binding,
+        })),
+      })),
+    });
+  });
+  return { groups, boardIndex };
+}
+
+function findQuestBoardGroup(loc, identifier, options = {}) {
+  if (!loc || !loc.questBoards) return null;
+  const normalized = normalizePlaceName(identifier);
+  if (!normalized) return null;
+  const district = options.district || null;
+  const building = options.building || null;
+  const buildingSet = building
+    ? new Set([normalizePlaceName(building)].filter(Boolean))
+    : null;
+  const predicate = (binding, boardName) => {
+    if (district && !boardMatchesDistrict(binding.district, district)) {
+      return false;
+    }
+    if (buildingSet && !boardMatchesBuildingName(binding, boardName, buildingSet)) {
+      return false;
+    }
+    return true;
+  };
+  let { groups, boardIndex } = collectQuestBoardGroups(loc, { predicate });
+  let key = boardIndex.get(normalized) || normalized;
+  let group = groups.get(key) || null;
+  if (!group) {
+    ({ groups, boardIndex } = collectQuestBoardGroups(loc));
+    key = boardIndex.get(normalized) || normalized;
+    group = groups.get(key) || null;
+  }
+  return group;
 }
 
 function extractGuildRanks(text) {
@@ -2240,8 +2308,43 @@ function createBuildingEncounterContext(position, extras = {}) {
   const buildingKey = position.building;
   const building = extras.building || cityData.buildings?.[buildingKey];
   if (!building) return null;
-  const buildingBoards =
-    extras.buildingBoards || questBoardsForBuilding(position.city, position.district, buildingKey);
+  const buildingName = extras.buildingName || building.name || buildingKey;
+  let boardGroups = [];
+  if (Array.isArray(extras.buildingBoards) && extras.buildingBoards.length) {
+    if (Array.isArray(extras.buildingBoards[0]?.boards)) {
+      boardGroups = extras.buildingBoards;
+    } else {
+      boardGroups = extras.buildingBoards.map(entry => {
+        const entryName = entry?.name || entry?.boardName || buildingName;
+        const normalized = normalizePlaceName(entryName || buildingName);
+        const quests = Array.isArray(entry?.quests) ? entry.quests : [];
+        return {
+          key: normalized,
+          name: entryName || buildingName,
+          district: entry?.district || position.district || null,
+          boards: [
+            {
+              name: entryName || buildingName,
+              quests: quests.map(quest => ({
+                quest,
+                binding: resolveQuestBinding(quest, entryName || buildingName),
+              })),
+            },
+          ],
+        };
+      });
+    }
+  } else {
+    boardGroups = questBoardsForBuilding(position.city, position.district, buildingKey);
+  }
+  const buildingBoards = Array.isArray(boardGroups)
+    ? boardGroups.flatMap(group =>
+        group.boards.map(section => ({
+          name: section.name,
+          quests: section.quests.map(entry => entry.quest),
+        })),
+      )
+    : [];
   const today = extras.today || worldCalendar.today();
   const timeOfDay =
     extras.timeOfDay != null ? extras.timeOfDay : currentCharacter ? currentCharacter.timeOfDay : null;
@@ -2270,12 +2373,12 @@ function createBuildingEncounterContext(position, extras = {}) {
       }
     }
   }
-  const buildingName = extras.buildingName || building.name || buildingKey;
   const state = extras.state ?? getBuildingEncounterState(buildingKey);
   return {
     state,
     setState: newState => setBuildingEncounterState(buildingKey, newState),
     buildingBoards,
+    boardGroups,
     today,
     timeOfDay,
     timeLabel,
@@ -3088,7 +3191,7 @@ function showNavigation() {
       questButtons = buildingBoards.map(board =>
         createNavItem({
           type: 'quests',
-          target: board.name,
+          target: board.key,
           name: board.name,
           prompt: 'Review quests at',
           icon: QUEST_BOARD_ICON,
@@ -3323,7 +3426,7 @@ function showNavigation() {
     const questButtons = questBoards.map(board =>
       createNavItem({
         type: 'quests',
-        target: board.name,
+        target: board.key,
         name: board.name,
         prompt: 'Review quests at',
         icon: QUEST_BOARD_ICON,
@@ -3384,6 +3487,11 @@ function showNavigation() {
         } else if (type === 'quests') {
           const board = target || '';
           if (board) {
+            const locData = LOCATIONS[pos.city];
+            const groupInfo = locData
+              ? findQuestBoardGroup(locData, board, { district: pos.district, building: pos.building })
+              : null;
+            const displayName = groupInfo?.name || undefined;
             if (pos.building) {
               const buildingName = pos.building;
               showQuestBoardDetails(board, {
@@ -3392,6 +3500,9 @@ function showNavigation() {
                 onBack: () => {
                   showNavigation();
                 },
+                displayName,
+                district: groupInfo?.district || pos.district || undefined,
+                building: buildingName,
               });
             } else {
               const districtName = pos.district;
@@ -3401,6 +3512,8 @@ function showNavigation() {
                 onBack: () => {
                   showNavigation();
                 },
+                displayName,
+                district: groupInfo?.district || districtName || undefined,
               });
             }
           }
@@ -4753,7 +4866,8 @@ function finalizeQuestStoryline(story) {
       : `Quest failed: “${story.quest?.title || 'Quest'}”.`;
   const flash = { type: success ? 'success' : story.outcome === 'declined' ? 'info' : 'error', message };
   const context = story.returnContext || {};
-  showQuestBoardDetails(story.boardName || (story.returnContext?.boardName ?? ''), { ...context, flash });
+  const targetBoard = context.boardKey || story.boardName || (context.boardName ?? '');
+  showQuestBoardDetails(targetBoard, { ...context, flash });
 }
 
 function acceptQuest(boardName, questTitle) {
@@ -5275,23 +5389,24 @@ function showQuestBoardsUI() {
     setMainHTML('<div class="no-character"><h1>No quest boards found.</h1></div>');
     return;
   }
-  const boards = Object.keys(loc.questBoards || {});
-  if (!boards.length) {
+  const { groups } = collectQuestBoardGroups(loc);
+  const boardGroups = Array.from(groups.values());
+  if (!boardGroups.length) {
     setMainHTML(`<div class="no-character"><h1>No quest boards in ${loc.name}</h1></div>`);
     return;
   }
-  const createItem = name => {
-    const quests = loc.questBoards[name] || [];
-    const binding = quests.length ? resolveQuestBinding(quests[0], name) : null;
-    const district = binding?.district || null;
-    const boardAttr = encodeURIComponent(name);
-    const districtAttr = district ? ` data-district="${encodeURIComponent(district)}"` : '';
-    const districtLabel = district
-      ? `<span class="quest-board-district">${escapeHtml(district)}</span>`
+  boardGroups.sort((a, b) => a.name.localeCompare(b.name));
+  const createItem = group => {
+    const label = group.name || 'Quest Board';
+    const boardAttr = encodeURIComponent(group.key);
+    const nameAttr = encodeURIComponent(label);
+    const districtAttr = group.district ? ` data-district="${encodeURIComponent(group.district)}"` : '';
+    const districtLabel = group.district
+      ? `<span class="quest-board-district">${escapeHtml(group.district)}</span>`
       : '';
-    return `<div class="nav-item quest-board-item"><button data-board="${boardAttr}" aria-label="${escapeHtml(name)}"${districtAttr}><span class="nav-icon">${NAV_ICONS.quests}</span></button><span class="street-sign">${escapeHtml(name)}${districtLabel ? ` ${districtLabel}` : ''}</span></div>`;
+    return `<div class="nav-item quest-board-item"><button data-board="${boardAttr}" data-name="${nameAttr}"${districtAttr} aria-label="${escapeHtml(label)}"><span class="nav-icon">${NAV_ICONS.quests}</span></button><span class="street-sign">${escapeHtml(label)}${districtLabel ? `${districtLabel}` : ''}</span></div>`;
   };
-  const buttons = boards.map(createItem).join('');
+  const buttons = boardGroups.map(createItem).join('');
   const today = worldCalendar.formatCurrentDate();
   setMainHTML(
     `<div class="navigation"><h2>Quest Boards</h2><p class="quest-date">Today is ${today}</p><div class="option-grid">${buttons}</div></div>`,
@@ -5302,15 +5417,20 @@ function showQuestBoardsUI() {
     main.querySelectorAll('.option-grid button').forEach(btn => {
       btn.addEventListener('click', () => {
         const board = btn.dataset.board ? decodeURIComponent(btn.dataset.board) : '';
-        if (board) {
-          showQuestBoardDetails(board, { onBack: showQuestBoardsUI });
-        }
+        if (!board) return;
+        const displayName = btn.dataset.name ? decodeURIComponent(btn.dataset.name) : '';
+        const district = btn.dataset.district ? decodeURIComponent(btn.dataset.district) : null;
+        showQuestBoardDetails(board, {
+          onBack: showQuestBoardsUI,
+          displayName: displayName || undefined,
+          district: district || undefined,
+        });
       });
     });
   }
 }
 
-function showQuestBoardDetails(boardName, options = {}) {
+function showQuestBoardDetails(boardIdentifier, options = {}) {
   updateTopMenuIndicators();
   if (!currentCharacter) return;
   showBackButton();
@@ -5318,26 +5438,59 @@ function showQuestBoardDetails(boardName, options = {}) {
   const loc = LOCATIONS[currentCharacter.location];
   if (!loc || !loc.questBoards) {
     setMainHTML(
-      `<div class="questboard-detail navigation"><h2>${escapeHtml(boardName)}</h2><p>No quest boards are available here.</p></div>`,
+      `<div class="questboard-detail navigation"><h2>${escapeHtml(boardIdentifier)}</h2><p>No quest boards are available here.</p></div>`,
     );
     updateMenuHeight();
     return;
   }
-  const boardExists = Object.prototype.hasOwnProperty.call(loc.questBoards, boardName);
-  const quests = boardExists ? loc.questBoards[boardName] || [] : [];
   const { flash: flashMessage = null, ...context } = options || {};
+  const group = findQuestBoardGroup(loc, boardIdentifier, {
+    district: context.district,
+    building: context.building,
+  });
+  if (!group) {
+    const fallback = escapeHtml(context.displayName || boardIdentifier || 'Quest Board');
+    setMainHTML(
+      `<div class="questboard-detail navigation"><h2>${fallback}</h2><p>No quest boards are available here.</p></div>`,
+    );
+    updateMenuHeight();
+    return;
+  }
+  const displayName = context.displayName || group.name || boardIdentifier;
+  const detailContext = {
+    ...context,
+    displayName,
+    district: context.district || group.district || null,
+    boardKey: group.key,
+    boardName: displayName,
+  };
   const questLog = ensureQuestLog(currentCharacter);
-  const evaluations = quests.map(quest => {
-    const availability = evaluateQuestAvailability(quest, boardName);
-    const eligibility = evaluateQuestEligibility(quest);
-    const key = questKey(boardName, quest.title || '');
-    const logEntry = questLog.find(entry => entry.key === key) || null;
-    return { quest, availability, eligibility, logEntry };
+  const questEntries = [];
+  group.boards.forEach(section => {
+    section.quests.forEach(entry => {
+      questEntries.push({
+        quest: entry.quest,
+        binding: entry.binding,
+        boardName: section.name,
+      });
+    });
+  });
+  const evaluations = questEntries.map(entry => {
+    const availability = evaluateQuestAvailability(entry.quest, entry.boardName);
+    const eligibility = evaluateQuestEligibility(entry.quest);
+    const key = questKey(entry.boardName, entry.quest.title || '');
+    const logEntry = questLog.find(item => item.key === key) || null;
+    return { ...entry, availability, eligibility, logEntry };
   });
   const active = evaluations.filter(entry => entry.availability.available);
   const inactive = evaluations.filter(entry => !entry.availability.available);
-  const weatherContext = boardWeatherSnapshot(quests, boardName);
-  const binding = quests.length ? resolveQuestBinding(quests[0], boardName) : null;
+  const weatherContext = questEntries.length
+    ? boardWeatherSnapshot(
+        questEntries.map(entry => entry.quest),
+        questEntries[0].boardName,
+      )
+    : null;
+  const primaryBinding = questEntries.length ? questEntries[0].binding : null;
 
   const sanitizeText = value => {
     if (value == null) return '';
@@ -5362,12 +5515,18 @@ function showQuestBoardDetails(boardName, options = {}) {
   const formatParagraphs = text => {
     const safe = sanitizeText(text);
     if (!safe) return '';
-    const segments = safe.split(/(?:\r?\n){2,}/).map(seg => seg.trim()).filter(Boolean);
+    const segments = safe.split(/(?:
+?
+){2,}/).map(seg => seg.trim()).filter(Boolean);
     if (!segments.length) {
-      return `<p>${safe.replace(/(?:\r?\n)/g, '<br>')}</p>`;
+      return `<p>${safe.replace(/(?:
+?
+)/g, '<br>')}</p>`;
     }
     return segments
-      .map(seg => `<p>${seg.replace(/(?:\r?\n)/g, '<br>')}</p>`)
+      .map(seg => `<p>${seg.replace(/(?:
+?
+)/g, '<br>')}</p>`)
       .join('');
   };
   const flattenToStrings = value => {
@@ -5418,17 +5577,20 @@ function showQuestBoardDetails(boardName, options = {}) {
     });
     return output;
   };
-  const computeBackLabel = () => {
-    if (context.backLabel) return context.backLabel;
-    if (context.origin === 'district' && currentCharacter?.position?.district) {
+  const computeBackLabel = ctx => {
+    if (ctx.backLabel) return ctx.backLabel;
+    if (ctx.origin === 'district' && currentCharacter?.position?.district) {
       return `Back to ${currentCharacter.position.district}`;
+    }
+    if (ctx.origin === 'building' && ctx.building) {
+      return `Back to ${ctx.building}`;
     }
     return 'Back to Boards';
   };
 
-  const heading = escapeHtml(boardName);
-  const districtLabel = binding?.district ? escapeHtml(binding.district) : '';
-  const backLabel = escapeHtml(computeBackLabel());
+  const heading = escapeHtml(displayName);
+  const districtLabel = detailContext.district ? escapeHtml(detailContext.district) : '';
+  const backLabel = escapeHtml(computeBackLabel(detailContext));
   const todayLabel = escapeHtml(worldCalendar.formatCurrentDate());
 
   let html = `<div class="questboard-detail navigation"><h2>${heading}`;
@@ -5441,19 +5603,25 @@ function showQuestBoardDetails(boardName, options = {}) {
     const flashType = flashMessage.type === 'error' ? 'quest-flash-error' : 'quest-flash-success';
     html += `<div class="quest-flash ${flashType}">${escapeHtml(flashMessage.message)}</div>`;
   }
-  if (!boardExists) {
+  if (!questEntries.length) {
     html += '<p>No quest postings found here.</p>';
   } else {
     if (weatherContext) {
-      const areaLabel = weatherContext.binding.district || weatherContext.binding.habitat || boardName;
+      const areaLabel =
+        weatherContext.binding.location ||
+        weatherContext.binding.district ||
+        weatherContext.binding.habitat ||
+        displayName;
       const summary = formatWeatherSummary(weatherContext.weather);
       html += `<p class="quest-weather"><strong>Weather over ${escapeHtml(areaLabel)}:</strong> ${escapeHtml(summary)}</p>`;
     }
-    const boardBindings = quests.map(quest => resolveQuestBinding(quest, boardName));
-    const sourceNames = uniqueValues(boardBindings.map(binding => binding?.business));
-    const taskLocations = uniqueValues(
-      quests.flatMap(quest => flattenToStrings(quest.location))
+    const sourceNames = uniqueValues(
+      questEntries.map(entry => entry.binding?.business).filter(Boolean),
     );
+    const taskLocations = uniqueValues(
+      questEntries.flatMap(entry => flattenToStrings(entry.quest.location)),
+    );
+    const subAreas = uniqueValues(group.boards.map(section => section.name).filter(Boolean));
     const summaryParts = [];
     if (sourceNames.length) {
       const label = sourceNames.length > 1 ? 'Posting sources' : 'Posting source';
@@ -5465,89 +5633,107 @@ function showQuestBoardDetails(boardName, options = {}) {
       const details = taskLocations.map(loc => sanitizeText(loc)).join(', ');
       summaryParts.push(`<strong>${label}:</strong> ${details}`);
     }
+    if (subAreas.length) {
+      const label = subAreas.length > 1 ? 'Sub-areas' : 'Sub-area';
+      const details = subAreas.map(name => sanitizeText(name)).join(', ');
+      summaryParts.push(`<strong>${label}:</strong> ${details}`);
+    }
     if (summaryParts.length) {
       html += `<p class="quest-sources">${summaryParts.join(' • ')}</p>`;
     }
-    if (active.length) {
-      html += '<ul class="quest-list">';
-      active.forEach(({ quest, availability, eligibility, logEntry }) => {
-        const status = (logEntry?.status || '').toLowerCase();
-        const alreadyAccepted = !!logEntry && !REPEATABLE_QUEST_STATUSES.has(status);
-        const itemClasses = ['quest-item'];
-        if (alreadyAccepted) itemClasses.push('quest-item-accepted');
-        html += `<li class="${itemClasses.join(' ')}">`;
-        html += `<h3>${sanitizeText(quest.title || 'Untitled Quest')}</h3>`;
-        const descriptionHTML = formatParagraphs(quest.description);
-        if (descriptionHTML) {
-          html += descriptionHTML;
+    const activeSections = group.boards
+      .map(section => ({
+        name: section.name,
+        entries: active.filter(entry => entry.boardName === section.name),
+      }))
+      .filter(section => section.entries.length);
+    const renderQuestItem = entry => {
+      const { quest, availability, eligibility, logEntry, boardName } = entry;
+      const status = (logEntry?.status || '').toLowerCase();
+      const alreadyAccepted = Boolean(logEntry) && !REPEATABLE_QUEST_STATUSES.has(status);
+      const itemClasses = ['quest-item'];
+      if (alreadyAccepted) itemClasses.push('quest-item-accepted');
+      let itemHTML = `<li class="${itemClasses.join(' ')}">`;
+      itemHTML += `<h3>${sanitizeText(quest.title || 'Untitled Quest')}</h3>`;
+      const descriptionHTML = formatParagraphs(quest.description);
+      if (descriptionHTML) itemHTML += descriptionHTML;
+      itemHTML += '<ul class="quest-meta">';
+      const locationValue = formatListValue(quest.location);
+      if (locationValue) itemHTML += `<li><strong>Location:</strong> ${locationValue}</li>`;
+      const postingValue = formatListValue(entry.binding?.business);
+      if (postingValue) itemHTML += `<li><strong>Posting:</strong> ${postingValue}</li>`;
+      const rankRequirements = collectGuildRankRequirements(quest);
+      if (rankRequirements.length) {
+        itemHTML += `<li><strong>Guild Rank:</strong> ${formatListValue(rankRequirements)}</li>`;
+      }
+      const requirementTexts = sanitizeRequirementTexts(quest.requirements);
+      if (requirementTexts.length) {
+        itemHTML += `<li><strong>Requirements:</strong> ${formatListFromStrings(requirementTexts)}</li>`;
+      }
+      const conditionsValue = formatListValue(quest.conditions);
+      if (conditionsValue) itemHTML += `<li><strong>Conditions:</strong> ${conditionsValue}</li>`;
+      const timelineValue = formatListValue(quest.timeline);
+      if (timelineValue) itemHTML += `<li><strong>Timeline:</strong> ${timelineValue}</li>`;
+      const riskTexts = sanitizeRiskTexts(quest.risks);
+      if (riskTexts.length) {
+        itemHTML += `<li><strong>Risks:</strong> ${formatListFromStrings(riskTexts)}</li>`;
+      }
+      const rewardValue = formatListValue(quest.reward);
+      if (rewardValue) itemHTML += `<li><strong>Reward:</strong> ${rewardValue}</li>`;
+      if (Number.isFinite(availability.demand)) {
+        itemHTML += `<li><strong>Demand:</strong> ${(availability.demand * 100).toFixed(0)}% probability</li>`;
+      }
+      const statusText = formatListValue(availability.reason);
+      if (statusText) itemHTML += `<li><strong>Status:</strong> ${statusText}</li>`;
+      const eventText = formatListValue(availability.eventTag);
+      if (eventText) itemHTML += `<li><strong>Event:</strong> ${eventText}</li>`;
+      if (alreadyAccepted && (logEntry?.acceptedOnLabel || logEntry?.acceptedOn)) {
+        const acceptedLabel = logEntry.acceptedOnLabel || logEntry.acceptedOn;
+        itemHTML += `<li><strong>Accepted:</strong> ${escapeHtml(acceptedLabel)}</li>`;
+      }
+      itemHTML += '</ul>';
+      const boardAttr = escapeHtml(boardName);
+      const questAttr = escapeHtml(quest.title || '');
+      const groupAttr = escapeHtml(detailContext.boardKey || group.key);
+      const disabled = alreadyAccepted || !eligibility.canAccept || !questAttr;
+      const buttonLabel = alreadyAccepted ? 'Accepted' : 'Accept Quest';
+      itemHTML += `<div class="quest-actions"><button class="quest-accept"${disabled ? ' disabled' : ''} data-board="${boardAttr}" data-group="${groupAttr}" data-quest="${questAttr}">${buttonLabel}</button>`;
+      const notes = [];
+      if (alreadyAccepted) {
+        if (logEntry?.acceptedOnLabel) {
+          notes.push(`Accepted on ${logEntry.acceptedOnLabel}.`);
+        } else {
+          notes.push('Already in your quest log.');
         }
-        html += '<ul class="quest-meta">';
-        const questBinding = resolveQuestBinding(quest, boardName);
-        const locationValue = formatListValue(quest.location);
-        if (locationValue) html += `<li><strong>Location:</strong> ${locationValue}</li>`;
-        const postingValue = formatListValue(questBinding?.business);
-        if (postingValue) html += `<li><strong>Posting:</strong> ${postingValue}</li>`;
-        const rankRequirements = collectGuildRankRequirements(quest);
-        if (rankRequirements.length) {
-          html += `<li><strong>Guild Rank:</strong> ${formatListValue(rankRequirements)}</li>`;
-        }
-        const requirementTexts = sanitizeRequirementTexts(quest.requirements);
-        if (requirementTexts.length) {
-          html += `<li><strong>Requirements:</strong> ${formatListFromStrings(requirementTexts)}</li>`;
-        }
-        const conditionsValue = formatListValue(quest.conditions);
-        if (conditionsValue) html += `<li><strong>Conditions:</strong> ${conditionsValue}</li>`;
-        const timelineValue = formatListValue(quest.timeline);
-        if (timelineValue) html += `<li><strong>Timeline:</strong> ${timelineValue}</li>`;
-        const riskTexts = sanitizeRiskTexts(quest.risks);
-        if (riskTexts.length) {
-          html += `<li><strong>Risks:</strong> ${formatListFromStrings(riskTexts)}</li>`;
-        }
-        const rewardValue = formatListValue(quest.reward);
-        if (rewardValue) html += `<li><strong>Reward:</strong> ${rewardValue}</li>`;
-        if (Number.isFinite(availability.demand)) {
-          html += `<li><strong>Demand:</strong> ${(availability.demand * 100).toFixed(0)}% probability</li>`;
-        }
-        const statusText = formatListValue(availability.reason);
-        if (statusText) html += `<li><strong>Status:</strong> ${statusText}</li>`;
-        const eventText = formatListValue(availability.eventTag);
-        if (eventText) html += `<li><strong>Event:</strong> ${eventText}</li>`;
-        if (alreadyAccepted && (logEntry?.acceptedOnLabel || logEntry?.acceptedOn)) {
-          const acceptedLabel = logEntry.acceptedOnLabel || logEntry.acceptedOn;
-          html += `<li><strong>Accepted:</strong> ${escapeHtml(acceptedLabel)}</li>`;
-        }
-        html += '</ul>';
-        const boardAttr = escapeHtml(boardName);
-        const questAttr = escapeHtml(quest.title || '');
-        const disabled = alreadyAccepted || !eligibility.canAccept || !questAttr;
-        const buttonLabel = alreadyAccepted ? 'Accepted' : 'Accept Quest';
-        html += `<div class="quest-actions"><button class="quest-accept"${disabled ? ' disabled' : ''} data-board="${boardAttr}" data-quest="${questAttr}">${buttonLabel}</button>`;
-        const notes = [];
-        if (alreadyAccepted) {
-          if (logEntry?.acceptedOnLabel) {
-            notes.push(`Accepted on ${logEntry.acceptedOnLabel}.`);
-          } else {
-            notes.push('Already in your quest log.');
-          }
-        }
-        if (!eligibility.canAccept) {
-          notes.push(...eligibility.reasons);
-        }
-        if (notes.length) {
-          html += `<p class="quest-requirement-note">${notes.map(note => sanitizeText(note)).filter(Boolean).join('<br>')}</p>`;
-        }
-        html += '</div></li>';
+      }
+      if (!eligibility.canAccept) {
+        notes.push(...eligibility.reasons);
+      }
+      if (notes.length) {
+        itemHTML += `<p class="quest-requirement-note">${notes.map(note => sanitizeText(note)).filter(Boolean).join('<br>')}</p>`;
+      }
+      itemHTML += '</div></li>';
+      return itemHTML;
+    };
+    if (activeSections.length) {
+      html += '<div class="questboard-subareas">';
+      activeSections.forEach(section => {
+        const summaryLabel = sanitizeText(section.name || displayName);
+        const countLabel = `<span class="quest-count">${section.entries.length}</span>`;
+        const listHTML = section.entries.map(renderQuestItem).join('');
+        html += `<details class="questboard-subarea" open><summary>${summaryLabel}${countLabel}</summary><ul class="quest-board-list">${listHTML}</ul></details>`;
       });
-      html += '</ul>';
+      html += '</div>';
     } else {
       html += '<p class="quest-empty">No quests available today.</p>';
     }
     if (inactive.length) {
       html += '<details class="questboard-hints"><summary>Inactive postings</summary><ul>';
-      inactive.slice(0, 6).forEach(({ quest, availability }) => {
-        const titleText = sanitizeText(quest.title || 'Posting');
-        const reasonText = formatListValue(availability.reason || 'No demand at present.');
-        html += `<li><strong>${titleText}</strong>: ${reasonText || 'No demand at present.'}</li>`;
+      inactive.slice(0, 6).forEach(entry => {
+        const titleText = sanitizeText(entry.quest.title || 'Posting');
+        const reasonText = formatListValue(entry.availability.reason || 'No demand at present.');
+        const areaLabel = sanitizeText(entry.boardName || displayName);
+        html += `<li><strong>${titleText}</strong> (${areaLabel}): ${reasonText || 'No demand at present.'}</li>`;
       });
       html += '</ul></details>';
     }
@@ -5560,8 +5746,8 @@ function showQuestBoardDetails(boardName, options = {}) {
     const backBtn = main.querySelector('.quest-back');
     if (backBtn) {
       backBtn.addEventListener('click', () => {
-        if (typeof context.onBack === 'function') {
-          context.onBack();
+        if (typeof detailContext.onBack === 'function') {
+          detailContext.onBack();
         } else {
           showQuestBoardsUI();
         }
@@ -5570,20 +5756,23 @@ function showQuestBoardDetails(boardName, options = {}) {
     main.querySelectorAll('.quest-accept').forEach(btn => {
       btn.addEventListener('click', () => {
         if (btn.disabled) return;
-        const board = btn.dataset.board || boardName;
+        const board = btn.dataset.board || '';
         const questTitle = btn.dataset.quest || '';
-        if (!questTitle) return;
+        const groupKey = btn.dataset.group || detailContext.boardKey || boardIdentifier;
+        if (!board || !questTitle) return;
         const result = acceptQuest(board, questTitle);
         if (result.ok && result.storyline) {
-          startQuestStoryline(result.storyline, { boardName: board, boardContext: context });
+          startQuestStoryline(result.storyline, {
+            boardName: board,
+            boardContext: detailContext,
+            boardKey: groupKey,
+          });
         } else {
           const message = result.message || (result.ok ? 'Quest accepted.' : 'Unable to accept quest.');
           const flash = { type: result.ok ? 'success' : 'error', message };
-          showQuestBoardDetails(board, { ...context, flash });
+          showQuestBoardDetails(groupKey, { ...detailContext, flash });
         }
       });
-    });
-  }
 }
 
 const SLOT_ICONS = {
