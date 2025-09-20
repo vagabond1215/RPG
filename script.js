@@ -608,6 +608,13 @@ const topMenu = document.querySelector('.top-menu');
 const app = document.getElementById('app');
 const menuDateLabel = document.getElementById('menu-date');
 const menuMoneyLabel = document.getElementById('menu-money');
+const mapContainer = document.createElement('div');
+mapContainer.id = 'map-container';
+mapContainer.style.display = 'none';
+if (app) {
+  app.appendChild(mapContainer);
+}
+let mapToggleButton = null;
 
 function updateTopMenuIndicators() {
   if (menuDateLabel) {
@@ -657,8 +664,8 @@ updateTopMenuIndicators();
 
 function setMainHTML(html) {
   if (main) main.innerHTML = html;
-  if (typeof mapContainer !== "undefined") mapContainer.style.display = "none";
-  if (typeof mapToggleButton !== "undefined" && mapToggleButton) {
+  if (mapContainer) mapContainer.style.display = 'none';
+  if (mapToggleButton) {
     mapToggleButton.classList.remove("map-toggle-floating");
     mapToggleButton = null;
   }
@@ -6642,10 +6649,6 @@ const menuButton = document.getElementById('menu-button');
 const characterButton = document.getElementById('character-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const characterMenu = document.getElementById('characterMenu');
-const mapContainer = document.createElement('div');
-mapContainer.id = 'map-container';
-app.appendChild(mapContainer);
-let mapToggleButton = null;
 function toggleCityMap(btn) {
   if (!currentCharacter) return;
   if (mapContainer.style.display === 'flex') {
