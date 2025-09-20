@@ -68,6 +68,8 @@ main {
     height: var(--menu-button-size);
     padding: 0;
     box-sizing: border-box;
+    flex: 0 0 var(--menu-button-size);
+    min-width: var(--menu-button-size);
     font-size: calc(var(--menu-button-size) * 0.7);
     display: flex;
     align-items: center;
@@ -161,6 +163,22 @@ body.theme-dark .top-menu-info {
 
   .top-menu {
     padding: 0 0.5rem;
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 640px) {
+  .settings-buffer {
+    display: none;
+  }
+
+  .top-menu-info {
+    order: 10;
+    flex: 1 0 100%;
+    margin-left: 0;
+    padding: 0.25rem 0 0;
+    align-items: flex-start;
   }
 }
 
