@@ -27,6 +27,7 @@ export interface QuestVisibilityBinding {
   district?: string;
   board?: string;
   business?: string;
+  location?: string;
 }
 
 export interface QuestVisibilityContext {
