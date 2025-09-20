@@ -635,6 +635,136 @@ const TEMP_CHARACTER_KEY = 'rpgTempCharacter';
 
 const isPlainObject = value => value != null && typeof value === 'object' && !Array.isArray(value);
 
+const currencyKeyAliases = {
+  ci: 'coldIron',
+  st: 'steel',
+  cp: 'copper',
+  sp: 'silver',
+  gp: 'gold',
+  pp: 'platinum',
+};
+
+function normalizeCurrencyValue(value) {
+  if (isPlainObject(value)) {
+    const normalized = createEmptyCurrency();
+    for (const [key, rawAmount] of Object.entries(value)) {
+      const denom = DENOMINATIONS.includes(key) ? key : currencyKeyAliases[key] || null;
+      if (!denom) continue;
+      const amount = Number(rawAmount);
+      if (Number.isFinite(amount)) {
+        normalized[denom] = Math.max(0, Math.floor(amount));
+      }
+    }
+    return normalized;
+  }
+  if (typeof value === 'string') {
+    return { ...createEmptyCurrency(), ...parseCurrency(value) };
+  }
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    const iron = convertCurrency(Math.max(0, value), 'copper', 'coldIron');
+    if (typeof iron === 'number' && Number.isFinite(iron)) {
+      return { ...createEmptyCurrency(), ...fromIron(Math.floor(Math.max(0, iron))) };
+    }
+  }
+  return createEmptyCurrency();
+}
+
+function findCityByName(name) {
+  if (typeof name !== 'string') return null;
+  const trimmed = name.trim();
+  if (!trimmed) return null;
+  if (CITY_NAV[trimmed]) return trimmed;
+  const lower = trimmed.toLowerCase();
+  return Object.keys(CITY_NAV).find(city => city.toLowerCase() === lower) || null;
+}
+
+function resolveCityPreference(...candidates) {
+  for (const candidate of candidates) {
+    const match = findCityByName(candidate);
+    if (match) return match;
+  }
+  const cities = Object.keys(CITY_NAV);
+  return cities.length ? cities[0] : null;
+}
+
+function normalizeCharacterPosition(character) {
+  const raw = isPlainObject(character.position) ? character.position : {};
+  const city = resolveCityPreference(raw.city, character.location, character.homeTown);
+  if (!city) {
+    character.position = null;
+    return;
+  }
+  const cityData = CITY_NAV[city];
+  character.location = city;
+  const districtCandidates = [
+    raw.district,
+    isPlainObject(character.backstory) ? character.backstory.district : null,
+  ];
+  let district = null;
+  for (const candidate of districtCandidates) {
+    if (typeof candidate !== 'string') continue;
+    const trimmed = candidate.trim();
+    if (!trimmed) continue;
+    if (cityData?.districts?.[trimmed]) {
+      district = trimmed;
+      break;
+    }
+    const normalized = Object.keys(cityData?.districts || {}).find(
+      name => name.toLowerCase() === trimmed.toLowerCase(),
+    );
+    if (normalized) {
+      district = normalized;
+      break;
+    }
+  }
+  if (!district) {
+    const districts = Object.keys(cityData?.districts || {});
+    district = districts.length ? districts[0] : null;
+  }
+  let building = typeof raw.building === 'string' ? raw.building.trim() : null;
+  if (building) {
+    if (!cityData?.buildings?.[building]) {
+      const normalized = Object.keys(cityData?.buildings || {}).find(
+        name => name.toLowerCase() === building.toLowerCase(),
+      );
+      building = normalized || null;
+    }
+    if (building && !cityData?.buildings?.[building]) {
+      building = null;
+    }
+  }
+  character.position = {
+    city,
+    district,
+    building,
+    previousDistrict: null,
+    previousBuilding: null,
+  };
+}
+
+function normalizeCharacterState(character) {
+  if (!isPlainObject(character)) return null;
+  character.money = normalizeCurrencyValue(character.money);
+  if (Array.isArray(character.buildings)) {
+    character.buildings = character.buildings.map(entry => {
+      if (!isPlainObject(entry)) return entry;
+      return { ...entry, money: normalizeCurrencyValue(entry.money) };
+    });
+  } else {
+    character.buildings = [];
+  }
+  normalizeCharacterPosition(character);
+  const hours = Number(character.timeOfDay);
+  if (!Number.isFinite(hours) || hours < 0) {
+    character.timeOfDay = 8;
+  } else if (hours >= 24) {
+    character.timeOfDay = hours % 24;
+  } else {
+    character.timeOfDay = hours;
+  }
+  return character;
+}
+
 const sanitizeProfiles = raw => {
   if (!isPlainObject(raw)) return {};
   const sanitized = {};
@@ -647,9 +777,16 @@ const sanitizeProfiles = raw => {
     sanitizedProfile.preferences = isPlainObject(profile.preferences)
       ? { ...profile.preferences }
       : {};
-    sanitizedProfile.characters = isPlainObject(profile.characters)
-      ? { ...profile.characters }
-      : {};
+    const characters = isPlainObject(profile.characters) ? profile.characters : {};
+    const normalizedCharacters = {};
+    for (const [charId, charData] of Object.entries(characters)) {
+      if (!isPlainObject(charData)) continue;
+      const normalized = normalizeCharacterState({ ...charData });
+      if (normalized) {
+        normalizedCharacters[charId] = normalized;
+      }
+    }
+    sanitizedProfile.characters = normalizedCharacters;
     if (
       typeof sanitizedProfile.lastCharacter !== 'string' ||
       !sanitizedProfile.characters[sanitizedProfile.lastCharacter]
@@ -6120,6 +6257,7 @@ function finalizeCharacter(character) {
       };
     }
   }
+  normalizeCharacterState(newChar);
   assignMagicAptitudes(newChar);
   ensureCollections(newChar);
   ensureQuestLog(newChar);
@@ -6137,11 +6275,13 @@ function finalizeCharacter(character) {
 function loadCharacter() {
   const charId = currentProfile?.lastCharacter;
   if (charId && currentProfile.characters && currentProfile.characters[charId]) {
-    currentCharacter = migrateProficiencies({
+    const loadedCharacter = migrateProficiencies({
       ...JSON.parse(JSON.stringify(characterTemplate)),
       ...defaultProficiencies,
       ...currentProfile.characters[charId]
     });
+    normalizeCharacterState(loadedCharacter);
+    currentCharacter = loadedCharacter;
     ensureCollections(currentCharacter);
     ensureQuestLog(currentCharacter);
     ensureQuestHistory(currentCharacter);
