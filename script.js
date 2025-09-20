@@ -5527,10 +5527,15 @@ function startCharacterCreation() {
     if (field && field.key === 'location' && !character.location) {
       character.location = locationField.options[0];
     }
+    const availableBackstories = BACKSTORY_MAP[character.location] || [];
     if (field && field.key === 'backstory') {
-      const bs = BACKSTORY_MAP[character.location] || [];
-      if (!character.backstory && bs.length) {
-        character.backstory = bs[0].background;
+      if (!availableBackstories.length) {
+        if (character.backstory) {
+          character.backstory = null;
+          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        }
+      } else if (!character.backstory) {
+        character.backstory = availableBackstories[0].background;
         safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
       }
     }
@@ -5538,19 +5543,35 @@ function startCharacterCreation() {
     const stepLabels = activeFields
       .map(f => FIELD_STEP_LABELS[f.key])
       .concat(['Name', 'Location', 'Backstory']);
+    const isFieldComplete = field => {
+      if (!field) return true;
+      if (field.key === 'characterImage') {
+        const portraits = (CHARACTER_IMAGE_FILES[character.race] || {})[character.sex];
+        if (Array.isArray(portraits)) {
+          return portraits.length === 0 ? true : Boolean(character.characterImage);
+        }
+        return Boolean(character.characterImage);
+      }
+      return Boolean(character[field.key]);
+    };
+    const isBackstoryComplete = () =>
+      availableBackstories.length === 0 ? true : Boolean(character.backstory);
     const isComplete = () =>
-      activeFields.every(f => character[f.key]) && character.name && character.location && character.backstory;
+      activeFields.every(isFieldComplete) &&
+      Boolean(character.name) &&
+      Boolean(character.location) &&
+      isBackstoryComplete();
     const progressHTML =
       stepLabels
         .map((label, i) => {
           const hasValue =
             i < activeFields.length
-              ? character[activeFields[i].key]
+              ? isFieldComplete(activeFields[i])
               : i === activeFields.length
-              ? character.name
+              ? Boolean(character.name)
               : i === activeFields.length + 1
-              ? character.location
-              : character.backstory;
+              ? Boolean(character.location)
+              : isBackstoryComplete();
           let cls = 'clickable';
           if (i === step) cls = 'current clickable';
           else if (hasValue) cls = 'completed clickable';
@@ -5566,13 +5587,22 @@ function startCharacterCreation() {
         const descHTML = `<div class="race-description">${loc.description || ''}</div>`;
         return { descHTML };
       }
-      if (field && field.key === 'backstory' && character.backstory) {
-        const bs = BACKSTORY_MAP[character.location] || [];
-        const entry = bs.find(b => b.background === character.backstory);
-        const descHTML = entry
-          ? `<div class="race-description">${replaceCharacterRefs(entry.past, character)}</div>`
-          : '';
-        return { descHTML };
+      if (field && field.key === 'backstory') {
+        if (!availableBackstories.length) {
+          const locationLabel = character.location
+            ? escapeHtml(character.location)
+            : 'this location';
+          return {
+            descHTML: `<div class="race-description"><p>No backstories are available for ${locationLabel} yet.</p></div>`
+          };
+        }
+        if (character.backstory) {
+          const entry = availableBackstories.find(b => b.background === character.backstory);
+          const descHTML = entry
+            ? `<div class="race-description">${replaceCharacterRefs(entry.past, character)}</div>`
+            : '';
+          return { descHTML };
+        }
       }
       if (field && field.key === 'class' && character.class) {
         const build = buildEntries.find(b => b.primary === character.class);
@@ -5683,18 +5713,24 @@ function startCharacterCreation() {
               <button class="class-arrow right" aria-label="Next">&#x203A;</button>
             </div>`;
         } else if (field.key === 'backstory') {
-          const options = (BACKSTORY_MAP[character.location] || []).map(b => b.background);
-          let index = options.indexOf(character.backstory);
-          if (index === -1) {
-            index = 0;
-            character.backstory = options[0];
+          const options = availableBackstories.map(b => b.background);
+          if (!options.length) {
+            inputHTML = `<div class="cc-empty-option">No backstories are available for ${escapeHtml(
+              character.location || 'this location'
+            )} yet.</div>`;
+          } else {
+            let index = options.indexOf(character.backstory);
+            if (index === -1) {
+              index = 0;
+              character.backstory = options[0];
+            }
+            inputHTML = `
+              <div class="backstory-carousel wheel-selector">
+                <button class="backstory-arrow left" aria-label="Previous">&#x2039;</button>
+                <button class="option-button backstory-button">${escapeHtml(character.backstory)}</button>
+                <button class="backstory-arrow right" aria-label="Next">&#x203A;</button>
+              </div>`;
           }
-          inputHTML = `
-            <div class="backstory-carousel wheel-selector">
-              <button class="backstory-arrow left" aria-label="Previous">&#x2039;</button>
-              <button class="option-button backstory-button">${character.backstory}</button>
-              <button class="backstory-arrow right" aria-label="Next">&#x203A;</button>
-            </div>`;
         } else if (field.key === 'characterImage') {
           const files = await getCharacterImages(character.race, character.sex);
           if (files.length) {
@@ -5718,6 +5754,10 @@ function startCharacterCreation() {
                 </div>
                 <button class="character-arrow right" aria-label="Next">&#x203A;</button>
               </div>`;
+          } else {
+            character.characterImage = null;
+            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            inputHTML = `<div class="cc-empty-option">No portraits are available for this selection yet.</div>`;
           }
         } else {
           inputHTML = `<div class="option-grid">${field.options
@@ -5810,16 +5850,18 @@ function startCharacterCreation() {
         document.querySelector('.class-arrow.left').addEventListener('click', () => change(-1));
         document.querySelector('.class-arrow.right').addEventListener('click', () => change(1));
       } else if (field.key === 'backstory') {
-        const options = (BACKSTORY_MAP[character.location] || []).map(b => b.background);
-        let index = options.indexOf(character.backstory);
-        const change = dir => {
-          index = (index + dir + options.length) % options.length;
-          character.backstory = options[index];
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
-          renderStep();
-        };
-        document.querySelector('.backstory-arrow.left').addEventListener('click', () => change(-1));
-        document.querySelector('.backstory-arrow.right').addEventListener('click', () => change(1));
+        const options = availableBackstories.map(b => b.background);
+        if (options.length) {
+          let index = options.indexOf(character.backstory);
+          const change = dir => {
+            index = (index + dir + options.length) % options.length;
+            character.backstory = options[index];
+            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            renderStep();
+          };
+          document.querySelector('.backstory-arrow.left').addEventListener('click', () => change(-1));
+          document.querySelector('.backstory-arrow.right').addEventListener('click', () => change(1));
+        }
       } else if (field.key === 'characterImage') {
         const files =
           (CHARACTER_IMAGE_FILES[character.race] || {})[character.sex] || [];
@@ -5956,7 +5998,7 @@ function startCharacterCreation() {
       if (!isComplete()) return;
       safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
       const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
-      character.image = `${folder}/${character.characterImage || ''}`;
+      character.image = character.characterImage ? `${folder}/${character.characterImage}` : '';
       finalizeCharacter(character);
     });
 
