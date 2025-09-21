@@ -618,13 +618,24 @@ let mapToggleButton = null;
 
 function updateTopMenuIndicators() {
   if (menuDateLabel) {
-    menuDateLabel.textContent = `Date: ${worldCalendar.formatCurrentDate()}`;
+    const currentDate = worldCalendar.formatCurrentDate();
+    menuDateLabel.textContent = currentDate;
+    menuDateLabel.setAttribute('title', `Date: ${currentDate}`);
+    menuDateLabel.setAttribute('aria-label', `Current date: ${currentDate}`);
   }
   if (menuMoneyLabel) {
-    const funds = currentCharacter
-      ? formatCurrency(currentCharacter.money || createEmptyCurrency())
-      : '—';
-    menuMoneyLabel.textContent = `Funds: ${funds}`;
+    if (currentCharacter) {
+      const money = currentCharacter.money || createEmptyCurrency();
+      const totalCopper = convertCurrency(toIron(money), 'coldIron', 'copper');
+      const fundsText = formatCurrency(money);
+      menuMoneyLabel.innerHTML = cpToCoins(totalCopper, true, true);
+      menuMoneyLabel.setAttribute('title', `Funds: ${fundsText}`);
+      menuMoneyLabel.setAttribute('aria-label', `Available funds: ${fundsText}`);
+    } else {
+      menuMoneyLabel.textContent = '—';
+      menuMoneyLabel.setAttribute('title', 'Available funds');
+      menuMoneyLabel.setAttribute('aria-label', 'Available funds: unavailable');
+    }
   }
   if (typeof requestAnimationFrame === 'function') {
     requestAnimationFrame(() => updateMenuHeight());
