@@ -443,8 +443,10 @@ Cloaked attendants whisper greetings as perfumed breezes mingle with salt spray.
       },
       "Merchants' Wharf": {
         travelPrompt: "Exit to",
-        description: `Weaving through shouting stevedores, you step onto Merchants' Wharf.
-Crates teeter in precarious stacks and the air buzzes with deals sealed over the creak of mooring lines.`,
+        description: `You weave your way through shouting stevedores as you step onto the Merchants' Wharf pier.
+Throngs of laborers and merchants press between the docks and the Port District as cargo lines move on and off the ships.
+Stacks of crates teeter in precarious towers, a testament to work that stretches from the first tide until the last light.
+A large ocean frigate bearing the Coral Keep crest sits alongside the pier, surrounded by smaller vessels ready to dart away.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
