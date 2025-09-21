@@ -3372,22 +3372,7 @@ function showNavigation() {
         ];
       }
       const neighborButtons = districtLinks.map(makeButton);
-      if (!hasMultipleDistricts) {
-        return neighborButtons;
-      }
-      const neighborNames = new Set(districtLinks.map(d => d.target || d.name));
-      const additional = allNames
-        .filter(name => name !== pos.district && !neighborNames.has(name))
-        .map(name =>
-          createNavItem({
-            type: 'district',
-            target: name,
-            name,
-            prompt: 'Travel to',
-            icon: getDistrictIcon(pos.city, name),
-          })
-        );
-      return [...neighborButtons, ...additional];
+      return neighborButtons;
     };
 
     const mapToggle = hasMultipleDistricts
