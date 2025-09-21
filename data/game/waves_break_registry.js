@@ -393,28 +393,28 @@ const UPPER_WARD_BOARD_PLAN = {
     },
 };
 const LITTLE_TERNS_BOARD_PLAN = {
-  "Guild of Smiths Forge Gate": {
-        location: "Little Terns District Board",
+    "Guild of Smiths Forge Gate": {
+        location: "Guild of Smiths",
         businesses: ["Guild of Smiths"],
     },
     "Timberwave Yard Posting": {
-        location: "Little Terns District Board",
+        location: "Timberwave Carpenters' Guild",
         businesses: ["Timberwave Carpenters' Guild"],
     },
     "Carvers' Hall Chisel Board": {
-        location: "Little Terns District Board",
+        location: "Carvers' and Fletchers' Hall",
         businesses: ["Carvers' and Fletchers' Hall"],
     },
     "Gilded Needle Facade Placards": {
-        location: "Little Terns District Board",
+        location: "The Gilded Needle Clothiers",
         businesses: ["The Gilded Needle Clothiers"],
     },
     "Brine & Bark Headhouse": {
-        location: "Little Terns District Board",
+        location: "Brine & Bark Tannery",
         businesses: ["Brine & Bark Tannery"],
     },
     "Seawind Loft Rail": {
-        location: "Little Terns District Board",
+        location: "Seawind Sailmakers' Hall",
         businesses: ["Seawind Sailmakers' Hall"],
     },
 };
