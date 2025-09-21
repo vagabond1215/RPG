@@ -111,31 +111,39 @@ main {
 
 .top-menu-info {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.2rem;
   font-size: calc(var(--menu-button-size) * 0.32);
-  line-height: 1;
+  line-height: 1.1;
   font-weight: 600;
   color: var(--menu-color-dark);
   padding: 0 0.5rem 0 0.75rem;
   margin-left: auto;
   flex: 1 1 auto;
   min-width: 0;
+  text-align: right;
 }
 
 .top-menu-info .top-menu-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.35rem;
   white-space: nowrap;
 }
 
 .top-menu-info .currency {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
   gap: 0.35rem;
 }
 
 .top-menu-info .coin {
+  display: inline-flex;
+  align-items: center;
   gap: 0.2rem;
 }
 
@@ -197,8 +205,11 @@ body.theme-dark .top-menu-info {
     margin-left: 0;
     padding: 0.25rem 0 0;
     align-items: flex-start;
+    text-align: left;
+  }
+
+  .top-menu-info .top-menu-item {
     justify-content: flex-start;
-    flex-wrap: wrap;
   }
 }
 
