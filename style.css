@@ -111,19 +111,37 @@ main {
 
 .top-menu-info {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.125rem;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
   font-size: calc(var(--menu-button-size) * 0.32);
-  line-height: 1.1;
+  line-height: 1;
   font-weight: 600;
   color: var(--menu-color-dark);
   padding: 0 0.5rem 0 0.75rem;
-  margin-left: var(--settings-panel-gap);
+  margin-left: auto;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
-.top-menu-info span {
+.top-menu-info .top-menu-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   white-space: nowrap;
+}
+
+.top-menu-info .currency {
+  gap: 0.35rem;
+}
+
+.top-menu-info .coin {
+  gap: 0.2rem;
+}
+
+.top-menu-info .coin-icon {
+  height: calc(var(--menu-button-size) * 0.32);
+  width: auto;
 }
 
   body.theme-dark #menu-button {
@@ -179,6 +197,8 @@ body.theme-dark .top-menu-info {
     margin-left: 0;
     padding: 0.25rem 0 0;
     align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 }
 
