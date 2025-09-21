@@ -200,16 +200,17 @@ body.theme-dark .top-menu-info {
   }
 
   .top-menu-info {
-    order: 10;
-    flex: 1 0 100%;
-    margin-left: 0;
-    padding: 0.25rem 0 0;
-    align-items: flex-start;
-    text-align: left;
+    order: 0;
+    flex: 1 1 auto;
+    margin-left: auto;
+    padding: 0;
+    align-items: flex-end;
+    text-align: right;
+    min-width: 0;
   }
 
   .top-menu-info .top-menu-item {
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 }
 
