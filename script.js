@@ -2564,30 +2564,128 @@ function buildingWeatherPhrase(weather, habitat, buildingName) {
   return `amid shifting weather over ${place.toLowerCase()}`;
 }
 
-function merchantsWharfWeatherSentence(weather) {
-  if (!weather) {
-    return 'Stevedores keep the berths turning regardless of the day.';
-  }
-  const condition = (weather.condition || '').toLowerCase();
+function merchantsWharfConditionDetails(weather) {
+  const condition = (weather?.condition || '').toLowerCase();
   if (condition.includes('storm')) {
-    return "Spray lashes every gang as gale gusts whip across the quay.";
+    return {
+      entrySetting: 'bracing against spray-lashed planks',
+      pacePhrase: 'keep their footing with shouted counts over the gale',
+      crateDescriptor: 'are lashed beneath weighted tarps',
+      shipDetail: 'its crew double-checking storm lines while smaller cutters stand off the pier',
+    };
   }
   if (condition.includes('rain') || condition.includes('drizzle')) {
-    return "Laborers move with redoubled efforts under the heavy rain's onslaught.";
+    return {
+      entrySetting: 'stopping amid rain-soaked cobbles',
+      pacePhrase: 'keep a redoubled pace beneath the downpour',
+      crateDescriptor: 'teeter in tarpaulin-draped stacks',
+      shipDetail: 'its crew rigging tarps while smaller vessels shuffle through the squall',
+    };
   }
   if (condition.includes('fog')) {
-    return 'Bell signals and shouted counts cut through the fog to keep the cargo flowing.';
+    return {
+      entrySetting: 'feeling your way along fog-damp boards',
+      pacePhrase: 'move by shouted tallies through the haze',
+      crateDescriptor: 'loom as shadowed silhouettes above the quay',
+      shipDetail: 'its lamps burning steady beacons for the clustered luggers',
+    };
   }
   if (condition.includes('snow') || condition.includes('sleet')) {
-    return 'Slick planks and frozen lines slow every step, but the crews lash each pallet tight.';
+    return {
+      entrySetting: 'finding your footing on slush-slick timbers',
+      pacePhrase: 'work carefully to keep loads steady through the sleet',
+      crateDescriptor: 'sit wrapped in oilcloth lashings that glisten with frost',
+      shipDetail: 'its rigging rimed while harbor cogs nudge through the chop',
+    };
   }
   if (condition.includes('clear')) {
-    return 'Sunlight gleams on wet ropes while the pace never falters beneath the clear sky.';
+    return {
+      entrySetting: 'stepping onto sun-warmed planks',
+      pacePhrase: 'move with a crisp, confident rhythm beneath the clear sky',
+      crateDescriptor: 'form neat terraces beside the quay',
+      shipDetail: 'its brightwork gleaming as cutters dart through the calm',
+    };
   }
   if (condition.includes('cloud')) {
-    return 'Cool overcast skies keep the crews marching in a relentless rhythm.';
+    return {
+      entrySetting: 'pausing on wind-brushed planks',
+      pacePhrase: 'press forward in the muted light under rolling clouds',
+      crateDescriptor: 'rise in orderly stacks beneath the gray glow',
+      shipDetail: 'its quarterdeck coordinating tenders lined along the pier',
+    };
   }
-  return 'Crews adjust on the fly, keeping cargo moving despite the shifting conditions.';
+  return {
+    entrySetting: 'finding your footing on weathered planks',
+    pacePhrase: 'maintain a steady flow despite the shifting tide',
+    crateDescriptor: 'teeter in well-ordered tiers ready for inspection',
+    shipDetail: 'its officers signalling to nimble harbor craft',
+  };
+}
+
+function merchantsWharfSeasonNote(season) {
+  const lower = (season || '').toLowerCase();
+  if (!lower) return '';
+  if (lower.includes('spring')) {
+    return 'many marked with fresh blossom sigils from the inland markets';
+  }
+  if (lower.includes('summer')) {
+    return 'their tarred ropes tacky in the heavy summer air';
+  }
+  if (lower.includes('autumn') || lower.includes('fall')) {
+    return 'bearing ocher harvest stamps bound for distant holds';
+  }
+  if (lower.includes('winter')) {
+    return 'their canvas covers stiff where the cold bites through the harbor';
+  }
+  return '';
+}
+
+function merchantsWharfShiftEvidence(timeLabel) {
+  const lower = (timeLabel || '').toLowerCase();
+  if (!lower) return 'evidence of crews ready to work every tide from dawn to dusk';
+  if (lower.includes('deep night')) {
+    return 'evidence of crews pushing through the dead of night to catch the tide';
+  }
+  if (lower.includes('pre-dawn')) {
+    return 'evidence of crews already driving loads before first light';
+  }
+  if (lower.includes('early morning')) {
+    return 'evidence of a shift shaking off dawn bells and building momentum';
+  }
+  if (lower.includes('late morning')) {
+    return 'evidence of work rolling since first bell with no sign of slowing';
+  }
+  if (lower.includes('early afternoon')) {
+    return 'evidence of crews hauling since sunup to meet the afternoon tide';
+  }
+  if (lower.includes('late afternoon')) {
+    return 'evidence of teams racing to beat the sunset tide';
+  }
+  if (lower.includes('evening')) {
+    return 'evidence of laborers determined to clear the decks before nightfall';
+  }
+  if (lower.includes('night')) {
+    return 'evidence of crews grinding on under lantern light for the night tide';
+  }
+  if (lower.includes('day')) {
+    return 'evidence of crews pressing steadily through the day';
+  }
+  return 'evidence of crews ready to work every tide from dawn to dusk';
+}
+
+function merchantsWharfOverview({ weather, season, timeLabel }) {
+  const details = merchantsWharfConditionDetails(weather);
+  const seasonNote = merchantsWharfSeasonNote(season);
+  const shiftNote = merchantsWharfShiftEvidence(timeLabel);
+  const entrySentence = `You weave your way through shouting stevedores, ${details.entrySetting} as you step onto the Merchants' Wharf pier.`;
+  const throngSentence = `Throngs of laborers and merchants ${details.pacePhrase} between the docks and the Port District while cargo lines move on and off the ships.`;
+  let crateSentence = `Stacks of crates ${details.crateDescriptor}`;
+  if (seasonNote) {
+    crateSentence += `, ${seasonNote}`;
+  }
+  crateSentence += `, ${shiftNote}.`;
+  const shipSentence = `A large ocean frigate bearing the Coral Keep crest sits alongside the pier, ${details.shipDetail}.`;
+  return `${entrySentence} ${throngSentence} ${crateSentence} ${shipSentence}`;
 }
 
 function capitalizeFirst(text) {
@@ -2986,17 +3084,15 @@ function buildingExtraScene(profile, building, rng, buildingName, workers) {
 }
 
 function buildingSceneParagraphs(context) {
-  const { building, buildingName, businessProfile, timeLabel, weather, workers, rng, habitat } = context;
+  const { building, buildingName, businessProfile, timeLabel, weather, workers, rng, habitat, season } = context;
   const paragraphs = [];
-  if (building?.description) paragraphs.push(building.description);
   const displayName = building?.name || buildingName;
-  if (displayName) {
-    if (displayName === "Merchants' Wharf") {
-      const base =
-        'Laborers and merchants line the docks from sunrise to sunset as lines of cargo make their way on and off of ships.';
-      const weatherSentence = merchantsWharfWeatherSentence(weather);
-      paragraphs.push(`${base} ${weatherSentence}`);
-    } else {
+  if (displayName === "Merchants' Wharf") {
+    const overview = merchantsWharfOverview({ weather, season, timeLabel });
+    if (overview) paragraphs.push(overview);
+  } else {
+    if (building?.description) paragraphs.push(building.description);
+    if (displayName) {
       const weatherPhrase = buildingWeatherPhrase(weather, habitat, displayName);
       const intro = timeLabel
         ? `${displayName} works through the ${timeLabel.toLowerCase()}, ${weatherPhrase}.`
@@ -3158,6 +3254,7 @@ function initializeBuildingState(context) {
   const timeBand = buildingTimeBand(context.timeOfDay);
   const businessProfile = getBusinessProfileByName(context.building?.name || context.buildingName);
   const workers = buildingWorkerEstimate(businessProfile, timeBand, context.weather, context.building);
+  const season = context.today ? getSeasonForDate(context.today).toLowerCase() : null;
   const baseParagraphs = buildingSceneParagraphs({
     building: context.building,
     buildingName: context.buildingName,
@@ -3167,6 +3264,7 @@ function initializeBuildingState(context) {
     workers,
     rng,
     habitat: context.habitat,
+    season,
   });
   const state = {
     key: seed,
@@ -3189,6 +3287,7 @@ function initializeBuildingState(context) {
     businessProfile,
     habitat: context.habitat,
     buildingName: context.buildingName || context.building?.name || '',
+    season,
   };
   const greetRoll = rng();
   if (greetRoll < buildingGreetingChance(timeBand, context.weather, workers)) {
