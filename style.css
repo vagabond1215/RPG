@@ -131,7 +131,11 @@ main {
   align-items: center;
   justify-content: flex-end;
   gap: 0.35rem;
-  white-space: nowrap;
+  max-width: 100%;
+  flex-wrap: wrap;
+  white-space: normal;
+  text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .top-menu-info .currency {
@@ -139,6 +143,8 @@ main {
   align-items: center;
   justify-content: flex-end;
   gap: 0.35rem;
+  flex-wrap: wrap;
+  max-width: 100%;
 }
 
 .top-menu-info .coin {
