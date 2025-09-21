@@ -339,6 +339,7 @@ const PORT_BUSINESSES = [
   "Harborwatch Trading House",
   "Stormkeel Shipwrights",
   "Harbor Guard Naval Yard",
+  "Merchants' Wharf",
   "Saltworks",
   "Fishmongers' Row",
   "The Ropewalk",
@@ -443,6 +444,10 @@ const PORT_BOARD_PLAN: BoardPlan = {
   "Naval Yard Muster Wall": {
     location: "Harbor Guard Naval Yard",
     businesses: ["Harbor Guard Naval Yard"],
+  },
+  "Merchants' Wharf Cargo Roster": {
+    location: "Merchants' Wharf",
+    businesses: ["Merchants' Wharf"],
   },
   "Saltworks Evaporation Gate": {
     location: "Saltworks",
@@ -805,6 +810,11 @@ const WAVES_BREAK_BUSINESS_OWNERS: OwnershipMap = {
     stewards: ["Captain Yorsen of the Harbor Guard"],
     notes: "Fleet tenders answer to the harbor admiralty office.",
   },
+  "Merchants' Wharf": {
+    owner: "Merrow Syndicate",
+    stewards: ["Factor Alis Merrow"],
+    notes: "Merrow berth officers marshal crane captains and cargo bosses to keep the quay turning.",
+  },
   "Saltworks": {
     owner: "Saltmaster Family Cooperative",
     stewards: ["Saltmaster Rinna"],
@@ -992,7 +1002,7 @@ const WAVES_BREAK_BUILDING_OWNERS: OwnershipMap = {
   "Merchants' Wharf": {
     owner: "Merrow Syndicate",
     stewards: ["Factor Alis Merrow"],
-    notes: "Syndicate factors rotate berths for merchant caravels.",
+    notes: "Syndicate factors rotate berths and crane crews to keep bulk cargo moving between tide windows.",
   },
   "Fisherman's Pier": {
     owner: "Hookfin Netters",

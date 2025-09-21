@@ -2564,6 +2564,32 @@ function buildingWeatherPhrase(weather, habitat, buildingName) {
   return `amid shifting weather over ${place.toLowerCase()}`;
 }
 
+function merchantsWharfWeatherSentence(weather) {
+  if (!weather) {
+    return 'Stevedores keep the berths turning regardless of the day.';
+  }
+  const condition = (weather.condition || '').toLowerCase();
+  if (condition.includes('storm')) {
+    return "Spray lashes every gang as gale gusts whip across the quay.";
+  }
+  if (condition.includes('rain') || condition.includes('drizzle')) {
+    return "Laborers move with redoubled efforts under the heavy rain's onslaught.";
+  }
+  if (condition.includes('fog')) {
+    return 'Bell signals and shouted counts cut through the fog to keep the cargo flowing.';
+  }
+  if (condition.includes('snow') || condition.includes('sleet')) {
+    return 'Slick planks and frozen lines slow every step, but the crews lash each pallet tight.';
+  }
+  if (condition.includes('clear')) {
+    return 'Sunlight gleams on wet ropes while the pace never falters beneath the clear sky.';
+  }
+  if (condition.includes('cloud')) {
+    return 'Cool overcast skies keep the crews marching in a relentless rhythm.';
+  }
+  return 'Crews adjust on the fly, keeping cargo moving despite the shifting conditions.';
+}
+
 function buildingActivityPhrase(workers, profile, buildingName) {
   if (!workers) {
     return `Only caretakers keep ${buildingName} idling today.`;
@@ -2605,11 +2631,18 @@ function buildingSceneParagraphs(context) {
   if (building?.description) paragraphs.push(building.description);
   const displayName = building?.name || buildingName;
   if (displayName) {
-    const weatherPhrase = buildingWeatherPhrase(weather, habitat, displayName);
-    const intro = timeLabel
-      ? `${displayName} works through the ${timeLabel.toLowerCase()}, ${weatherPhrase}.`
-      : `${displayName} hums ${weatherPhrase}.`;
-    paragraphs.push(intro);
+    if (displayName === "Merchants' Wharf") {
+      const base =
+        'Laborers and merchants line the docks from sunrise to sunset as lines of cargo make their way on and off of ships.';
+      const weatherSentence = merchantsWharfWeatherSentence(weather);
+      paragraphs.push(`${base} ${weatherSentence}`);
+    } else {
+      const weatherPhrase = buildingWeatherPhrase(weather, habitat, displayName);
+      const intro = timeLabel
+        ? `${displayName} works through the ${timeLabel.toLowerCase()}, ${weatherPhrase}.`
+        : `${displayName} hums ${weatherPhrase}.`;
+      paragraphs.push(intro);
+    }
   }
   const activity = buildingActivityPhrase(workers, businessProfile, displayName || 'the site');
   if (activity) paragraphs.push(activity);
