@@ -3340,21 +3340,21 @@ function showNavigation() {
         const isLandscape = window.innerWidth > window.innerHeight;
         const iconRem = isLandscape ? 10 : 4.5;
         const size = iconRem * fontSize;
-        const nodes = allNames.map(name => {
+        const visibleNames = allNames.filter(name => accessible.has(name));
+        const nodes = visibleNames.map(name => {
           const coords = layout.positions[name] || [0, 0];
           const [row, col] = coords;
-          const disabled = !accessible.has(name);
           const extraClass = name === pos.district ? 'current-district' : '';
           return `<div class="district-node" style="left:${col * size}px;top:${row * size}px;">${createNavItem({
             type: 'district',
             target: name,
             name,
             icon: getDistrictIcon(pos.city, name),
-            disabled,
             extraClass,
           })}</div>`;
         });
         const lines = (layout.connections || [])
+          .filter(([a, b]) => accessible.has(a) && accessible.has(b))
           .map(([a, b]) => {
             const [r1, c1] = layout.positions[a] || [0, 0];
             const [r2, c2] = layout.positions[b] || [0, 0];
@@ -5740,11 +5740,13 @@ function showQuestBoardDetails(boardIdentifier, options = {}) {
     };
     if (activeSections.length) {
       html += '<div class="questboard-subareas">';
-      activeSections.forEach(section => {
+      const autoOpenAll = activeSections.length === 1;
+      activeSections.forEach((section, index) => {
         const summaryLabel = sanitizeText(section.name || displayName);
         const countLabel = `<span class="quest-count">${section.entries.length}</span>`;
         const listHTML = section.entries.map(renderQuestItem).join('');
-        html += `<details class="questboard-subarea" open><summary>${summaryLabel}${countLabel}</summary><ul class="quest-board-list">${listHTML}</ul></details>`;
+        const openAttr = autoOpenAll || index === 0 ? ' open' : '';
+        html += `<details class="questboard-subarea"${openAttr}><summary>${summaryLabel}${countLabel}</summary><ul class="quest-board-list">${listHTML}</ul></details>`;
       });
       html += '</div>';
     } else {
