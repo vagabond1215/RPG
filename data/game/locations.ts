@@ -3617,6 +3617,109 @@ const WAVES_BREAK_PORT_BUSINESSES: BusinessProfile[] = [
     ],
   },
   {
+    name: "Merchants' Wharf",
+    category: "logistics",
+    scale: {
+      tier: 'strategic',
+      label: "Bulk Cargo Wharf (Strategic)",
+      rationale:
+        "Limited berths demand nonstop crane crews to keep merchant hulls turning with the tide.",
+      output:
+        "Berth rotations, cargo tallies, and wagon dispatches feeding inland trade routes.",
+    },
+    production: {
+      goods: ["bulk cargo transfers", "berth schedules", "overland dispatch slips"],
+      notes:
+        "Timber cranes, capstan winches, and wagon queues move grain, ore, and textiles ashore before the tide shifts again.",
+    },
+    workforce: {
+      description:
+        "Stevedore gangs, crane captains, tally clerks, and wagon marshals labor in tight rotations along the quay.",
+      normal: [
+        unskilled(54, "dock laborers, sling teams, wagon loaders"),
+        skilled(20, "crane captains, tally clerks, rigging supervisors"),
+        specialist(5, "dockmasters coordinating berths and manifests"),
+      ],
+    },
+    laborConditions: [
+      {
+        trigger: "Storm-delayed flotillas",
+        season: "Any storm season emergency",
+        description:
+          "Backlogged hulls arrive on the same tide; extra shifts must clear cargo before the harbormaster closes the lane.",
+        staffing: [
+          unskilled(30, "night crane gangs and rope tenders"),
+          skilled(8, "relief tally clerks and riggers"),
+          specialist(2, "assistant dockmasters to juggle berth rotations"),
+        ],
+      },
+      {
+        trigger: "Harvest convoy surge",
+        season: "Late summer through early autumn",
+        description:
+          "Grain barges and timber caravans crowd the piers, demanding overflow crews to keep wagons rolling inland.",
+        staffing: [
+          unskilled(24, "sunrise wagon loaders and sack carriers"),
+          skilled(6, "scale inspectors certifying cargo weight"),
+        ],
+      },
+    ],
+    quests: [
+      createQuest(
+        "Sunrise Cargo Rotation",
+        "Dockmaster Alis needs reliable muscle to clear holds before the tide turns.",
+        {
+          location: "Merchants' Wharf",
+          requirements: [
+            "Athletics 18+ or Strength 16+ to haul sling loads without slowing",
+            "Guild Rank: Dockhand Crew Laborer or Adventurers' Guild Bronze",
+            "Bronze token stamped with 1 star accepted; stamp resets when promoted.",
+          ],
+          conditions: [
+            "Sunrise-to-sunset shift moving bulk cargo from holds to waiting wagons",
+            "Obey crane captains' calls and report tally discrepancies immediately",
+          ],
+          timeline: "Single-day contract (sunrise rotation)",
+          risks: [
+            "Swinging pallets and runaway wagons",
+            "Fines for damaged cargo or missed tide",
+          ],
+          reward: "2 sp 6 cp plus hot meal chit at the quay kitchens",
+          postingStyle: "Dockmaster's Bill",
+          issuer: "Factor Alis Merrow",
+          guildRankRequirement: "Adventurers' Guild Bronze",
+          reputationRequirement: "Bronze token stamped with 1 star for dock service",
+        },
+      ),
+      createQuest(
+        "Evening Crane Watch",
+        "The Merrow Syndicate requires sharp oversight as dusk shipments berth under crowded quotas.",
+        {
+          location: "Merchants' Wharf",
+          requirements: [
+            "Perception 20+ or Navigator's Tools proficiency 18+ to spot unsafe rigging",
+            "Guild Rank: Harbor Guard Corporal or Adventurers' Guild Silver",
+            "Silver token stamped with 1 star; stamp clears upon promotion.",
+          ],
+          conditions: [
+            "Supervise crane teams through sunset arrivals and log incidents with Harborwatch",
+            "File berth turnover reports before the curfew bell",
+          ],
+          timeline: "Two-evening oversight during storm backlog",
+          risks: [
+            "Cable snaps over crowded decks",
+            "Dockmaster fines if cargo schedules slip",
+          ],
+          reward: "12 sp plus berth priority chit for a chartered vessel",
+          postingStyle: "Syndicate Crane Order",
+          issuer: "Merrow Syndicate Berth Office",
+          guildRankRequirement: "Adventurers' Guild Silver",
+          reputationRequirement: "Silver token stamped with 1 star for harbor oversight",
+        },
+      ),
+    ],
+  },
+  {
     name: "Saltworks",
     category: "processing",
     scale: {
