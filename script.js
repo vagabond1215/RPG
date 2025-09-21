@@ -2590,26 +2590,384 @@ function merchantsWharfWeatherSentence(weather) {
   return 'Crews adjust on the fly, keeping cargo moving despite the shifting conditions.';
 }
 
-function buildingActivityPhrase(workers, profile, buildingName) {
-  if (!workers) {
-    return `Only caretakers keep ${buildingName} idling today.`;
-  }
-  const description = profile?.workforce?.description;
-  if (description) {
-    return `${description} Roughly ${workers} workers are on duty.`;
-  }
-  const lower = buildingName.toLowerCase();
-  const label = /orchard|grove|field|farm/.test(lower)
-    ? 'rows'
-    : /mill|forge|workshop|hall/.test(lower)
-      ? 'floors'
-      : 'workspaces';
-  return `About ${workers} workers move through the ${label}, keeping ${buildingName} running.`;
+function capitalizeFirst(text) {
+  if (!text) return '';
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-function buildingExtraScene(profile, building, rng) {
+function workerCountDescriptor(workers) {
+  if (!workers || workers <= 0) return { text: 'no crews', plural: true };
+  if (workers === 1) return { text: 'a lone worker', plural: false };
+  if (workers === 2) return { text: 'a pair of workers', plural: true };
+  if (workers <= 4) return { text: 'a handful of workers', plural: true };
+  if (workers <= 6) return { text: 'half a dozen hands', plural: true };
+  if (workers <= 10) return { text: 'several crews', plural: true };
+  if (workers <= 14) return { text: 'a dozen workers', plural: true };
+  if (workers <= 22) return { text: 'a score of laborers', plural: true };
+  if (workers <= 36) return { text: 'scores of laborers', plural: true };
+  if (workers <= 60) return { text: 'dozens of crews', plural: true };
+  return { text: 'a multitude of workers', plural: true };
+}
+
+function buildingLocaleDescription(buildingName) {
+  const name = (buildingName || 'the site').toLowerCase();
+  if (name.includes('wharf')) return 'the wharf';
+  if (name.includes('pier')) return 'the pier';
+  if (name.includes('dock')) return 'the docks';
+  if (name.includes('quay')) return 'the quay';
+  if (name.includes('yard')) return 'the yard';
+  if (name.includes('forge') || name.includes('smith')) return 'the forge';
+  if (name.includes('glass')) return 'the glassworks';
+  if (name.includes('hall') && !name.includes('town hall')) return 'the hall';
+  if (name.includes('guild')) return 'the guildhall';
+  if (name.includes('temple') || name.includes('shrine')) return 'the sanctuary';
+  if (name.includes('market') || name.includes('exchange')) return 'the market';
+  if (name.includes('library')) return 'the stacks';
+  if (name.includes('academy') || name.includes('school')) return 'the academy';
+  if (name.includes('manor') || name.includes('keep')) return 'the keep';
+  if (name.includes('tannery')) return 'the curing sheds';
+  if (name.includes('vineyard') || name.includes('orchard')) return 'the rows';
+  if (name.includes('farm')) return 'the fields';
+  if (name.includes('mill')) return 'the mill floor';
+  return buildingName || 'the site';
+}
+
+function buildingOperationDetail(buildingName) {
+  const name = (buildingName || '').toLowerCase();
+  if (name.includes('wharf') || name.includes('dock') || name.includes('pier') || name.includes('quay')) {
+    return 'cargo flowing along the wharf';
+  }
+  if (name.includes('yard')) {
+    return 'the yard drilled and ready';
+  }
+  if (name.includes('forge') || name.includes('smith') || name.includes('foundry')) {
+    return 'the forges hammering hot metal into shape';
+  }
+  if (name.includes('glass')) {
+    return 'molten glass spinning into new forms';
+  }
+  if (name.includes('temple') || name.includes('shrine')) {
+    return 'rituals moving in measured cadence';
+  }
+  if (name.includes('market') || name.includes('exchange') || name.includes('bazaar')) {
+    return 'stalls open for the next wave of customers';
+  }
+  if (name.includes('library') || name.includes('records') || name.includes('archive')) {
+    return 'the stacks cataloged and ready for scholars';
+  }
+  if (name.includes('academy') || name.includes('school')) {
+    return 'lessons rolling from hall to hall';
+  }
+  if (name.includes('tannery')) {
+    return 'the curing racks tended despite the stinging brine';
+  }
+  if (name.includes('vineyard') || name.includes('orchard') || name.includes('farm')) {
+    return 'the rows tended under practiced hands';
+  }
+  if (name.includes('mill')) {
+    return 'the millstones grinding without pause';
+  }
+  if (name.includes('guild')) {
+    return 'guild matters handled without delay';
+  }
+  return `${buildingLocaleDescription(buildingName)} running smoothly`;
+}
+
+function workerOperationSentence(workers, buildingName) {
+  const descriptor = workerCountDescriptor(workers);
+  if (!descriptor.text) return '';
+  const subject = capitalizeFirst(descriptor.text);
+  const verb = descriptor.plural ? 'keep' : 'keeps';
+  const detail = buildingOperationDetail(buildingName);
+  return `${subject} ${verb} ${detail}.`;
+}
+
+function chooseRandom(list, rng) {
+  if (!list || list.length === 0) return '';
+  const roll = (rng ?? Math.random)();
+  const index = Math.floor(roll * list.length);
+  return list[index] ?? list[0];
+}
+
+function buildingExtraSceneOverride(buildingName, rng) {
+  const lower = (buildingName || '').toLowerCase();
+  const patterns = [
+    {
+      pattern: /wharf|pier|dock|quay/,
+      scenes: [
+        'A large open ocean frigate with a Coral Keep crest is moored to the pier.',
+        'Capstan crews chant as they warp a grain barge beneath the waiting cranes.',
+        'Ledger-runners weave between crate stacks, relaying berth assignments to sweating dock bosses.',
+      ],
+    },
+    {
+      pattern: /yard/,
+      scenes: [
+        'Marines run boarding drills along chalked deck outlines while bosuns bark cadence.',
+        'Signal flags snap overhead as quartermasters lay out inspection gear beside the parade ground.',
+        'Gunnery crews practice run-out drills beside rows of polished cannon.',
+      ],
+    },
+    {
+      pattern: /forge|smith|foundry/,
+      scenes: [
+        'Bellows wheeze while sparks shower from anvils lined in orderly ranks.',
+        'An apprentice quenches a glowing billet, steam hissing loud enough to drown conversation.',
+        'Racks of finished steel await guild marks as the next heats begin.',
+      ],
+    },
+    {
+      pattern: /glass/,
+      scenes: [
+        'Glassblowers spin molten bulbs into spirals that cast rippling light across the workshop.',
+        'Kiln doors yawn open, revealing glowing sheets cooling on padded tables.',
+        'Apprentices trim hot edges with shears while masters inspect each curve for flaws.',
+      ],
+    },
+    {
+      pattern: /tannery/,
+      scenes: [
+        'Smoke from the curing pits hangs low as workers stretch hides across scraping beams.',
+        'Buckets of brine slosh underfoot while racks of leather sway in the salted breeze.',
+        'Dyers stir earthen vats, coaxing color into freshly scraped skins.',
+      ],
+    },
+    {
+      pattern: /market|exchange|bazaar/,
+      scenes: [
+        'Factors haggle over tally sticks while porters shuffle bolts of cloth into display.',
+        'Spice merchants crack open crates, letting sharp aromas spill into the lane.',
+        'Street criers announce convoy arrivals, sending buyers scrambling toward favored stalls.',
+      ],
+    },
+    {
+      pattern: /temple|shrine/,
+      scenes: [
+        'Tide-priests ring conch bells, calling worshippers toward moonlit basins.',
+        'Devotees lay votive shells upon the altar while seawater trickles through carved channels.',
+        'Choirs weave tide-chants between the pillars, harmonizing with the surf outside.',
+      ],
+    },
+    {
+      pattern: /library|records|archive/,
+      scenes: [
+        'Scribes trade armfuls of scrolls as indexing carts squeak between towering shelves.',
+        'A senior archivist unfurls tide-maps across a slate table for consulting captains.',
+        'Dust motes swirl in lamplight where scholars whisper over spread codices.',
+      ],
+    },
+    {
+      pattern: /academy|school/,
+      scenes: [
+        'Students trace sigils midair while an instructor paces, correcting posture with a tapping staff.',
+        'Lecture bells chime, sending clusters of apprentices hustling toward their next lesson.',
+        'Practice yards crackle with spellfire as wards flare and dissipate.',
+      ],
+    },
+    {
+      pattern: /vineyard|orchard|farm|field/,
+      scenes: [
+        'Field hands load overflowing baskets onto wagons bound for the morning markets.',
+        'Irrigation channels glimmer as crews adjust sluice gates to drench the furrows.',
+        'Sun hats bob between rows as harvesters sing cadence to keep the pace.',
+      ],
+    },
+    {
+      pattern: /guild/,
+      scenes: [
+        'Journeymen compare stamped contracts at a long oak table, trading news of fresh commissions.',
+        'Masters circulate with ledgers of writs, matching crews to the day\'s assignments.',
+        'Apprentices hustle between benches, ferrying tools back to their racks.',
+      ],
+    },
+  ];
+  for (const entry of patterns) {
+    if (entry.pattern.test(lower)) {
+      return chooseRandom(entry.scenes, rng);
+    }
+  }
+  return null;
+}
+
+function goodsSceneDescription(goods, buildingName, rng) {
+  const lowerGoods = (goods || '').toLowerCase();
+  const locale = buildingLocaleDescription(buildingName);
+  const bulkPattern = /grain|ore|timber|stone|fish|salt|ingot|coal|cargo|supplies|produce|textile|shipment|import|export|lumber|barrel|bale|crate|spice|cargo/;
+  const intangiblePattern = /schedule|slip|ledger|contract|order|record|permit|dispatch|report|tally|charter|registry|manifest|invoice|assignment|roster|voucher/;
+  const glassPattern = /glass|crystal|bottle|vial|lens|flask/;
+  const smithPattern = /blade|weapon|sword|armor|mail|metal|gear|tool|anvil|steel|iron/;
+  const potionPattern = /potion|elixir|remedy|draught|tonic|elixir|philter|serum/;
+  const knowledgePattern = /scroll|map|chart|tome|codex|treatise|manuscript|blueprint|plan/;
+  const shipPattern = /ship|hull|rigging|mast|sail|keel|rudder/;
+  const brewPattern = /wine|ale|beer|mead|brew|cider/;
+
+  if (intangiblePattern.test(lowerGoods)) {
+    return chooseRandom(
+      [
+        `Clerks ink ${goods} and slide them across tall desks for signatures.`,
+        `${capitalizeFirst(goods)} change hands as factors tally seals by lamplight.`,
+        `Messengers dart between offices delivering ${goods} to waiting overseers.`,
+      ],
+      rng,
+    );
+  }
+  if (bulkPattern.test(lowerGoods)) {
+    return chooseRandom(
+      [
+        `Pallets of ${goods} crowd ${locale}, ready for the next wagon train.`,
+        `${capitalizeFirst(goods)} sway from crane hooks toward waiting carts.`,
+        `Porters lash ${goods} tight before the tide turns.`,
+      ],
+      rng,
+    );
+  }
+  if (glassPattern.test(lowerGoods)) {
+    return chooseRandom(
+      [
+        `${capitalizeFirst(goods)} glitter on padded shelves while apprentices polish away stray soot.`,
+        `Cooling racks brim with ${goods}, each catching the furnace glow.`,
+        `Glassblowers rotate ${goods} slowly, inspecting for stray bubbles.`,
+      ],
+      rng,
+    );
+  }
+  if (smithPattern.test(lowerGoods)) {
+    return chooseRandom(
+      [
+        `Racks of ${goods} line the wall as quench tubs hiss nearby.`,
+        `${capitalizeFirst(goods)} lie cooling on the anvils, ready for the guild stamp.`,
+        `Journeymen oil ${goods} while masters inspect the temper.`,
+      ],
+      rng,
+    );
+  }
+  if (potionPattern.test(lowerGoods)) {
+    return chooseRandom(
+      [
+        `Amber light filters through ${goods} arranged in precise rows along the bench.`,
+        `Apprentices swirl ${goods}, watching for the exact shimmer that marks success.`,
+        `Corked ${goods} rest beneath rune-etched clamps awaiting delivery.`,
+      ],
+      rng,
+    );
+  }
+  if (knowledgePattern.test(lowerGoods)) {
+    return chooseRandom(
+      [
+        `${capitalizeFirst(goods)} unfurl across study tables as scribes note amendments.`,
+        `Assistants ferry ${goods} from stack to stack under the librarian's gaze.`,
+        `Scholars consult ${goods} beside flickering lamps, murmuring discoveries.`,
+      ],
+      rng,
+    );
+  }
+  if (shipPattern.test(lowerGoods)) {
+    return chooseRandom(
+      [
+        `Tarred ${goods} stretch across the slipways as crews hammer trunnels home.`,
+        `${capitalizeFirst(goods)} lie propped along trestles while caulkers seal every seam.`,
+        `Loftsmen chalk measurements across ${goods} before the next set of ribs goes in.`,
+      ],
+      rng,
+    );
+  }
+  if (brewPattern.test(lowerGoods)) {
+    return chooseRandom(
+      [
+        `Oak casks of ${goods} breathe slowly in the cool shadows.`,
+        `Cellar hands siphon ${goods} between vats, testing the bouquet at each stage.`,
+        `${capitalizeFirst(goods)} froth in copper kettles while the air fills with sweet steam.`,
+      ],
+      rng,
+    );
+  }
+  return chooseRandom(
+    [
+      `${capitalizeFirst(goods)} take shape across ${locale}.`,
+      `${capitalizeFirst(goods)} are laid out for inspection along ${locale}.`,
+      `Runners coordinate ${goods} as the shift wears on.`,
+    ],
+    rng,
+  );
+}
+
+function buildingWaitingNarration(buildingName, workers) {
+  const name = buildingName || 'the building';
+  const lower = name.toLowerCase();
+  if (workers <= 1) {
+    if (/wharf|pier|dock|quay/.test(lower)) {
+      return 'You stand at the head of the pier as only a harbor watchman patrols the quiet dock.';
+    }
+    if (/forge|smith|foundry/.test(lower)) {
+      return 'You hover near the doorway while a lone smith tends embers in near silence.';
+    }
+    if (/temple|shrine/.test(lower)) {
+      return 'You wait beneath the archway; a solitary acolyte drifts between tide basins.';
+    }
+    if (/library|records|archive/.test(lower)) {
+      return 'You pause by the entry desk where only a single scribe minds the hushed stacks.';
+    }
+    return 'You wait by the entrance, crossing paths with only a lone caretaker.';
+  }
+  const descriptor = workerCountDescriptor(workers);
+  if (/wharf|pier|dock|quay/.test(lower)) {
+    return 'You stand at the head of the pier amidst the throng streaming between the ships and the Port District.';
+  }
+  if (/forge|smith|foundry/.test(lower)) {
+    const verb = descriptor.plural ? 'hammer' : 'hammers';
+    return `You linger near the doorway as ${descriptor.text} ${verb} at the anvils without looking up.`;
+  }
+  if (/glass/.test(lower)) {
+    const verb = descriptor.plural ? 'twirl' : 'twirls';
+    return `You keep to the edge while ${descriptor.text} ${verb} molten glass at roaring furnaces.`;
+  }
+  if (/yard/.test(lower)) {
+    const verb = descriptor.plural ? 'run' : 'runs';
+    return `You wait beside the fence as ${descriptor.text} ${verb} drills across the parade ground.`;
+  }
+  if (/temple|shrine/.test(lower)) {
+    const verb = descriptor.plural ? 'move' : 'moves';
+    return `You remain near the entry as ${descriptor.text} ${verb} between tide basins with ritual precision.`;
+  }
+  if (/library|records|archive/.test(lower)) {
+    const verb = descriptor.plural ? 'shuffle' : 'shuffles';
+    return `You rest by the check-in desk while ${descriptor.text} ${verb} armloads of parchment through the stacks.`;
+  }
+  if (/market|exchange|bazaar/.test(lower)) {
+    const verb = descriptor.plural ? 'thread' : 'threads';
+    return `You lean against a stall post as ${descriptor.text} ${verb} through narrow aisles laden with wares.`;
+  }
+  if (/guild/.test(lower)) {
+    const verb = descriptor.plural ? 'trade' : 'trades';
+    return `You pause on the entry dais while ${descriptor.text} ${verb} assignments over the central table.`;
+  }
+  const stayVerb = descriptor.plural ? 'stay' : 'stays';
+  return `You keep to the entry as ${descriptor.text} ${stayVerb} intent on their duties within.`;
+}
+
+function buildingActivityPhrase(workers, profile, buildingName) {
+  if (!workers) {
+    const locale = buildingLocaleDescription(buildingName);
+    return `Only caretakers linger around ${locale}, the usual bustle briefly quiet.`;
+  }
+  const description = profile?.workforce?.description?.trim();
+  const operationSentence = workerOperationSentence(workers, buildingName);
+  if (description) {
+    return operationSentence ? `${description} ${operationSentence}` : description;
+  }
+  if (operationSentence) return operationSentence;
+  const descriptor = workerCountDescriptor(workers);
+  const locale = buildingLocaleDescription(buildingName);
+  const verb = descriptor.plural ? 'move' : 'moves';
+  return `${capitalizeFirst(descriptor.text)} ${verb} through ${locale}, keeping ${buildingName} steady.`;
+}
+
+function buildingExtraScene(profile, building, rng, buildingName, workers) {
   const notes = profile?.production?.notes;
   if (notes) return notes;
+  const name = buildingName || building?.name || profile?.name || 'the site';
+  const override = buildingExtraSceneOverride(name, rng);
+  if (override) return override;
   const goods = new Set();
   (profile?.production?.goods || []).forEach(item => goods.add(item));
   const produces = building?.produces || {};
@@ -2618,11 +2976,13 @@ function buildingExtraScene(profile, building, rng) {
   });
   if (goods.size) {
     const list = Array.from(goods);
-    const index = Math.floor((rng ?? Math.random)() * list.length);
-    const choice = list[index] || list[0];
-    return `The day's focus is on ${choice}.`;
+    const choice = list[Math.floor((rng ?? Math.random)() * list.length)] || list[0];
+    return goodsSceneDescription(choice, name, rng);
   }
-  return '';
+  const descriptor = workerCountDescriptor(workers);
+  const locale = buildingLocaleDescription(name);
+  const tempoVerb = descriptor.plural ? 'keep' : 'keeps';
+  return `${capitalizeFirst(descriptor.text)} ${tempoVerb} ${locale} from falling silent.`;
 }
 
 function buildingSceneParagraphs(context) {
@@ -2646,7 +3006,7 @@ function buildingSceneParagraphs(context) {
   }
   const activity = buildingActivityPhrase(workers, businessProfile, displayName || 'the site');
   if (activity) paragraphs.push(activity);
-  const extra = buildingExtraScene(businessProfile, building, rng);
+  const extra = buildingExtraScene(businessProfile, building, rng, displayName, workers);
   if (extra) paragraphs.push(extra);
   return paragraphs;
 }
@@ -2834,11 +3194,8 @@ function initializeBuildingState(context) {
   if (greetRoll < buildingGreetingChance(timeBand, context.weather, workers)) {
     buildingSummonManager(state, context, 'greeted');
   } else {
-    const fallback =
-      workers <= 1
-        ? 'You wait by the entrance, but only a lone caretaker crosses your path.'
-        : `You wait near the entrance while ${workers} workers stay focused on their tasks.`;
-    state.narrative.push(fallback);
+    const waitNarration = buildingWaitingNarration(state.buildingName, workers);
+    state.narrative.push(waitNarration);
   }
   return state;
 }
