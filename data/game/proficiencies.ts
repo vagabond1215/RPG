@@ -6,7 +6,13 @@ import {
   resetCraftTracking,
   type CraftKey,
 } from "./craft_skill_tracker.js";
-import { gainSwimming, gainSailing, gainRiding, performOutdoorActivity } from "./outdoor_skills.js";
+import {
+  gainSwimming,
+  gainSailing,
+  gainRiding,
+  gainTrapping,
+  performOutdoorActivity,
+} from "./outdoor_skills.js";
 import { gainHuntingProficiency, performHunt } from "./hunting_proficiency.js";
 import { gainInstrumentProficiency } from "./instrument_songs.ts";
 import { gainDanceProficiency } from "./dance_proficiency.ts";
@@ -71,6 +77,7 @@ const OUTDOOR_GAINERS = {
   swimming: gainSwimming,
   sailing: gainSailing,
   riding: gainRiding,
+  trapping: gainTrapping,
 } as const;
 
 export type OutdoorSkill = keyof typeof OUTDOOR_GAINERS;
@@ -382,6 +389,15 @@ const GATHERING_PROFICIENCIES: ProficiencyDefinition[] = [
     kinds: ["Gather_Herbalism"],
   }),
   createDefinition("gathering", {
+    key: "fishing",
+    name: "Fishing",
+    description: "Casting lines, nets, and traps to haul in aquatic catch.",
+    synonyms: ["angling", "net casting", "line fishing", "shore casting"],
+    tags: ["water", "provisioning"],
+    progression: createGatheringProgression("fishing"),
+    kinds: ["Gather_Fishing"],
+  }),
+  createDefinition("gathering", {
     key: "viticulture",
     name: "Viticulture",
     description: "Cultivating grapes and stewarding healthy vineyards.",
@@ -619,6 +635,14 @@ const OUTDOOR_PROFICIENCIES: ProficiencyDefinition[] = [
     description: "Scaling cliffs and structures with ropes and gear.",
     synonyms: ["climbing", "rope climbing", "belaying"],
     tags: ["mountain", "safety"],
+  }),
+  createDefinition("outdoor", {
+    key: "trapping",
+    name: "Trapping",
+    description: "Setting snares, deadfalls, and cages along wilderness paths.",
+    synonyms: ["trapping", "snaring", "trap setting", "trapmaking"],
+    tags: ["wilds", "survival"],
+    progression: createOutdoorProgression("trapping"),
   }),
   createDefinition("outdoor", {
     key: "hunting",
@@ -1134,6 +1158,13 @@ const KNOWLEDGE_PROFICIENCIES: ProficiencyDefinition[] = [
     tags: ["wilds", "practical"],
   }),
   createDefinition("knowledge", {
+    key: "fieldMedicine",
+    name: "Field Medicine",
+    description: "Stemming bleeding and stabilizing wounds with mundane care.",
+    synonyms: ["field medicine", "first aid", "battlefield medicine", "physic"],
+    tags: ["healing", "support"],
+  }),
+  createDefinition("knowledge", {
     key: "engineering",
     name: "Engineering",
     description: "Designing load-bearing works and mechanical solutions.",
@@ -1160,6 +1191,13 @@ const KNOWLEDGE_PROFICIENCIES: ProficiencyDefinition[] = [
     description: "Quick fingers for palming, lockwork, and delicate tasks.",
     synonyms: ["sleight-of-hand", "sleight of hand", "pickpocketing"],
     tags: ["dexterity", "urban"],
+  }),
+  createDefinition("knowledge", {
+    key: "stealth",
+    name: "Stealth",
+    description: "Moving unheard and unseen through shadow and cover.",
+    synonyms: ["sneaking", "camouflage", "skulking", "shadowing"],
+    tags: ["dexterity", "tactics"],
   }),
   createDefinition("knowledge", {
     key: "religion",

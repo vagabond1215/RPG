@@ -8,6 +8,7 @@ export interface Backstory {
   skills: string[];
   combat: string;
   craftProficiencies?: Record<string, number>;
+  gatheringProficiencies?: Record<string, number>;
   startingLocation: string;
   narrative: string;
 }

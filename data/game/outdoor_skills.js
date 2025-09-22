@@ -11,11 +11,13 @@ function gainActivity(base, input) {
 export const gainSwimming = (input) => gainActivity(0.06, input); // steady improvement through time in water
 export const gainSailing = (input) => gainActivity(0.05, input); // progress at the helm or managing sails
 export const gainRiding = (input) => gainActivity(0.055, input); // horseback riding progression
+export const gainTrapping = (input) => gainActivity(0.05, input); // setting and maintaining trap lines
 
 export const OUTDOOR_GAIN_FUNCTIONS = {
     swimming: gainSwimming,
     sailing: gainSailing,
     riding: gainRiding,
+    trapping: gainTrapping,
 };
 
 export function performOutdoorActivity(character, skillKey, opts) {
