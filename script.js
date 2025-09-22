@@ -3138,8 +3138,13 @@ function buildingActivityPhrase(workers, profile, buildingName) {
   if (operationSentence) return operationSentence;
   const descriptor = workerCountDescriptor(workers);
   const locale = buildingLocaleDescription(buildingName);
+  const name = buildingName || 'the site';
+  const isMerchantsWharf = name.toLowerCase() === "merchants' wharf";
+  if (isMerchantsWharf && descriptor.text === 'a handful of workers') {
+    return '';
+  }
   const verb = descriptor.plural ? 'move' : 'moves';
-  return `${capitalizeFirst(descriptor.text)} ${verb} through ${locale}, keeping ${buildingName} steady.`;
+  return `${capitalizeFirst(descriptor.text)} ${verb} through ${locale}, keeping ${name} steady.`;
 }
 
 function buildingExtraScene(profile, building, rng, buildingName, workers) {
@@ -3574,9 +3579,13 @@ function generateBuildingEncounter(buildingName, context) {
   const questInfo = findAvailableQuestForBoards(context.buildingBoards || []);
   const interactions = [];
   const labels = buildingInteractionLabels(context);
+  const encounterBuildingName = context.building?.name || context.buildingName || '';
+  const isMerchantsWharf = encounterBuildingName.toLowerCase() === "merchants' wharf";
   if (!state.managerFound) {
-    interactions.push({ action: 'building-knock', name: labels.knock });
-    interactions.push({ action: 'building-search', name: labels.search });
+    if (!isMerchantsWharf) {
+      interactions.push({ action: 'building-knock', name: labels.knock });
+      interactions.push({ action: 'building-search', name: labels.search });
+    }
   } else {
     interactions.push({
       action: 'building-request-work',
