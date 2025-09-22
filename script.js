@@ -646,8 +646,9 @@ function updateTopMenuIndicators() {
 
 function updateLayoutSize() {
   if (!app) return;
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
+  const viewport = window.visualViewport;
+  const vw = viewport?.width || window.innerWidth;
+  const vh = viewport?.height || window.innerHeight;
   const scale = parseFloat(
     getComputedStyle(document.documentElement).getPropertyValue('--ui-scale')
   ) || 1;
@@ -670,6 +671,10 @@ function handleResize() {
   normalizeProficiencyNameWidths();
 }
 window.addEventListener('resize', handleResize);
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', handleResize);
+  window.visualViewport.addEventListener('scroll', handleResize);
+}
 handleResize();
 updateTopMenuIndicators();
 
@@ -2795,6 +2800,9 @@ function buildingOperationDetail(buildingName) {
   if (name.includes('wharf') || name.includes('dock') || name.includes('pier') || name.includes('quay')) {
     return 'cargo flowing along the wharf';
   }
+  if (name.includes('warehouse')) {
+    return 'manifests checked and cargo sealed along the warehouse row';
+  }
   if (name.includes('yard')) {
     return 'the yard drilled and ready';
   }
@@ -2862,6 +2870,14 @@ function buildingExtraSceneOverride(buildingName, rng) {
       scenes: [
         'Capstan crews chant as they warp a grain barge beneath the waiting cranes.',
         'Ledger-runners weave between crate stacks, relaying berth assignments to sweating dock bosses.',
+      ],
+    },
+    {
+      pattern: /warehouse/,
+      scenes: [
+        'Porters hoist crates while tally clerks flick abacuses beneath the hanging lamps.',
+        'Inspectors unseal cargo before scribes ink fresh manifests for the bonded stores.',
+        'Cart teams reverse in tight formation as dockhands stack marked freight for delivery.',
       ],
     },
     {
