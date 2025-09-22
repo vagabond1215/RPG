@@ -1008,9 +1008,17 @@ const WAVES_BREAK_FARMLAND_BUSINESSES = [
             output: "Harvests one hundred twenty orchard crates per season with staggered ripening.",
         },
         production: {
-            goods: ["apples", "pears", "orchard preserves"],
+            goods: ["apples", "pears", "apple preserve", "pear preserve"],
+            byproducts: ["cider", "perry", "apple preserve", "pear preserve"],
+            focus: ["sea-sweet apples", "coastal pears", "cider pressing"],
+            yields: {
+                Produce: ["apples", "pears", "fruit"],
+                FoodDrink: ["cider", "perry", "preserve"],
+                Confectionery: ["apple preserve", "pear preserve"],
+            },
             notes: "Fruit supplies the Quayside Greens Market and Sunmellow Grove; bruised fruit fermented into cider.",
         },
+        regionTags: ["coastal", "farmland", "hills"],
         workforce: {
             description: "Pickers climb trees while wardens manage grafting, pruning, and bird deterrents.",
             normal: [
@@ -1981,9 +1989,17 @@ const WAVES_BREAK_FARMLAND_BUSINESSES = [
             output: "Harvests eighty baskets per season with mist-dependent ripening.",
         },
         production: {
-            goods: ["plums", "preserves", "plum wine base"],
+            goods: ["plums", "sunmellow plums", "plum preserve"],
+            byproducts: ["plum preserve", "sunmellow preserve", "plum cordial", "plum wine"],
+            focus: ["mist-plucked plums", "sea-mist curing", "apothecary syrups"],
+            yields: {
+                Produce: ["plum", "sunmellow"],
+                FoodDrink: ["plum wine", "plum cordial", "plum juice"],
+                Confectionery: ["plum preserve", "sunmellow preserve"],
+            },
             notes: "Fruit sold to apothecaries and Sunmellow Grove; pits used for oil extraction.",
         },
+        regionTags: ["coastal", "farmland", "hills"],
         workforce: {
             description: "Gatherers work in damp dawns while pruners manage tree health to prevent mildew.",
             normal: [
