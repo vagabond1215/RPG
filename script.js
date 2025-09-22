@@ -2774,9 +2774,12 @@ function buildingOperationDetail(buildingName) {
 function workerOperationSentence(workers, buildingName) {
   const descriptor = workerCountDescriptor(workers);
   if (!descriptor.text) return '';
+  const detail = buildingOperationDetail(buildingName);
+  if (descriptor.text === 'a handful of workers' && detail === 'cargo flowing along the wharf') {
+    return '';
+  }
   const subject = capitalizeFirst(descriptor.text);
   const verb = descriptor.plural ? 'keep' : 'keeps';
-  const detail = buildingOperationDetail(buildingName);
   return `${subject} ${verb} ${detail}.`;
 }
 
@@ -2793,7 +2796,6 @@ function buildingExtraSceneOverride(buildingName, rng) {
     {
       pattern: /wharf|pier|dock|quay/,
       scenes: [
-        'A large open ocean frigate with a Coral Keep crest is moored to the pier.',
         'Capstan crews chant as they warp a grain barge beneath the waiting cranes.',
         'Ledger-runners weave between crate stacks, relaying berth assignments to sweating dock bosses.',
       ],
@@ -3009,7 +3011,7 @@ function buildingWaitingNarration(buildingName, workers) {
   }
   const descriptor = workerCountDescriptor(workers);
   if (/wharf|pier|dock|quay/.test(lower)) {
-    return 'You stand at the head of the pier amidst the throng streaming between the ships and the Port District.';
+    return '';
   }
   if (/forge|smith|foundry/.test(lower)) {
     const verb = descriptor.plural ? 'hammer' : 'hammers';
@@ -3294,7 +3296,9 @@ function initializeBuildingState(context) {
     buildingSummonManager(state, context, 'greeted');
   } else {
     const waitNarration = buildingWaitingNarration(state.buildingName, workers);
-    state.narrative.push(waitNarration);
+    if (waitNarration) {
+      state.narrative.push(waitNarration);
+    }
   }
   return state;
 }
