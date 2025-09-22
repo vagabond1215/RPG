@@ -280,9 +280,8 @@ Ledger-scribbling clerks dart between crates piled high, and the salt tang mingl
       },
       "Warehouse Row": {
         travelPrompt: "Exit to",
-        description: `Shouldering past a laden cart, you slip into Warehouse Row.
-Rows of doors stretch like the ribs of a sleeping beast, each hiding cargo bound for distant ports.
-Rats scurry between crates, wary of your tread.`,
+        description: `Shouldering past a laden cart, you slip into Warehouse Row where rows of doors stretch like the ribs of a sleeping beast, each hiding cargo bound for distant ports.
+Pausing to look around, you see rats scurrying between crates, wary of your tread, and of the several crews keeping the warehouse running smoothly and buzzing with life.`,
         exits: [ { name: "The Port District", target: "The Port District" } ],
       },
       "Stormkeel Shipwrights": {
