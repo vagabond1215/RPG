@@ -1,4 +1,42 @@
+import { getBusinessProfileByName } from "./buildings.js";
+
 let economyItemsPromise = null;
+
+async function readEconomyItemsFromFs() {
+  if (typeof process === "undefined" || !process?.versions?.node) return [];
+  try {
+    const fs = await import("fs/promises");
+    const url = new URL("../economy/items.json", import.meta.url);
+    const text = await fs.readFile(url, "utf8");
+    if (!text) return [];
+    try {
+      const parsed = JSON.parse(text);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (err) {
+      return looseParseEconomyItems(text);
+    }
+  } catch (err) {
+    return [];
+  }
+}
+
+async function fetchEconomyItemsViaFetch() {
+  if (typeof fetch !== "function") return null;
+  try {
+    const res = await fetch("data/economy/items.json");
+    if (!res.ok) return null;
+    const text = await res.text();
+    if (!text) return [];
+    try {
+      const parsed = JSON.parse(text);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (err) {
+      return looseParseEconomyItems(text);
+    }
+  } catch (err) {
+    return null;
+  }
+}
 
 function looseParseEconomyItems(text) {
   const lines = text.split(/\r?\n/);
@@ -86,54 +124,41 @@ function parseLooseValue(value) {
 
 async function loadEconomyItems() {
   if (!economyItemsPromise) {
-    economyItemsPromise = fetch("data/economy/items.json")
-      .then(async res => {
-        if (!res.ok) return [];
-        const text = await res.text();
-        if (!text) return [];
-        try {
-          const parsed = JSON.parse(text);
-          return Array.isArray(parsed) ? parsed : [];
-        } catch (err) {
-          return looseParseEconomyItems(text);
-        }
-      })
-      .catch(() => []);
+    economyItemsPromise = (async () => {
+      const viaFetch = await fetchEconomyItemsViaFetch();
+      if (viaFetch !== null) return viaFetch;
+      return readEconomyItemsFromFs();
+    })();
   }
   return economyItemsPromise;
 }
 
 const CATEGORY_ALIASES = {
-  Produce: ["Produce", "Agriculture & Food"],
-  FoodDrink: ["Food & Drink", "Foodcraft & Brewing"],
-  "Food & Drink": ["Food & Drink", "Foodcraft & Brewing"],
-  Beverages: ["Foodcraft & Brewing"],
-  Tools: ["Tools & Fixtures", "Crafts & Trades", "Shipbuilding & Rigging"],
-  Weapons: ["Weapons", "Weapon Parts"],
-  Armor: ["Armor", "Armor Parts"],
-  Clothing: ["Textiles & Tailoring", "Leatherworking"],
-  Textiles: ["Textiles & Tailoring"],
-  Reagents: [
-    "Alchemy & Apothecary",
-    "Elemental",
-    "Medicines & Misc",
-    "Oils, Saps & Adhesives",
-    "Pigments & Dyes"
-  ],
-  BooksMaps: ["Paper & Scribes"],
-  "Books & Maps": ["Paper & Scribes"],
-  Glassware: ["Glass & Ceramics"],
-  Gems: ["Gems (Cut)", "Gems (Raw)", "Jewelry Findings"],
-  Metals: ["Ingots & Metal Bars", "Ores & Raw Metals", "Smelting & Forge Inputs"],
-  Wood: ["Wood & Carpentry"],
-  Stone: ["Stone & Masonry", "Raw Materials"],
-  Ship: ["Shipbuilding & Rigging", "Fishing & Maritime"],
-  Livestock: ["LivestockMeat", "Animal Handling"],
-  Services: ["Housing & Services", "Urban Services"],
-  "Adventuring Gear": ["Adventuring Consumables", "Guard & Bodyguard", "Tools & Fixtures"],
-  Crafts: ["Crafting Materials", "Crafts & Trades"],
-  "Raw Materials": ["Raw Materials", "Ores & Raw Metals", "Wood & Carpentry", "Stone & Masonry"],
-  "Luxury Goods": ["Luxuries & Status Goods", "Glass & Ceramics", "Gems (Cut)"]
+  Produce: ["Produce"],
+  FoodDrink: ["FoodDrink", "Dairy", "Confectionery", "Beverages", "Seafood", "WildGame", "SpicesHerbs"],
+  "Food & Drink": ["FoodDrink", "Dairy", "Confectionery", "Beverages", "Seafood", "WildGame", "SpicesHerbs"],
+  Beverages: ["Beverages", "FoodDrink"],
+  Tools: ["Tools"],
+  Weapons: ["Weapons"],
+  Armor: ["Armor"],
+  Clothing: ["Clothing"],
+  Textiles: ["Textiles"],
+  Leatherworking: ["Clothing", "Accessories"],
+  Reagents: ["Reagents", "Alchemy", "Foraged", "SpicesHerbs"],
+  BooksMaps: ["BooksMaps", "Stationery"],
+  "Books & Maps": ["BooksMaps", "Stationery"],
+  Glassware: ["CeramicsGlass", "Lighting"],
+  Gems: ["Accessories"],
+  Metals: ["Metals", "Building"],
+  Wood: ["Building"],
+  Stone: ["Building"],
+  Ship: ["ShipSupplies", "Transport"],
+  Livestock: ["LivestockMeat", "Animals"],
+  Services: ["Services"],
+  "Adventuring Gear": ["Tools", "Accessories", "Leisure", "Transport"],
+  Crafts: ["Accessories", "CeramicsGlass", "Furniture"],
+  "Raw Materials": ["Building", "Metals", "LivestockMeat", "Foraged", "Produce"],
+  "Luxury Goods": ["Accessories", "CeramicsGlass", "Leisure", "Confectionery", "Services"]
 };
 
 const LABEL_ALIASES = {
@@ -180,7 +205,9 @@ const STOP_WORDS = new Set([
 
 const PRODUCE_KEYWORD_DICTIONARY = {
   apple: ["apple", "cider"],
+  apricot: ["apricot", "preserve", "cordial"],
   berry: ["berry", "jam", "wine"],
+  cherry: ["cherry", "cordial", "preserve"],
   grape: ["grape", "wine"],
   vine: ["wine", "grape"],
   vineyard: ["wine", "grape"],
@@ -199,7 +226,14 @@ const PRODUCE_KEYWORD_DICTIONARY = {
   nut: ["nut", "oil"],
   grove: ["nut", "fruit"],
   orchard: ["fruit"],
+  peach: ["peach", "preserve", "brandy"],
+  pear: ["pear", "perry", "cider", "preserve"],
+  perry: ["pear", "cider"],
+  plum: ["plum", "prune", "preserve", "juice"],
+  prune: ["prune", "plum"],
+  damson: ["plum", "damson", "preserve", "brandy"],
   citrus: ["citrus", "juice"],
+  sunmellow: ["sunmellow", "plum", "apricot", "honey", "cordial"],
   dairy: ["milk", "cheese", "butter", "cream"],
   goat: ["goat", "cheese", "milk"],
   sheep: ["sheep", "wool", "mutton", "cheese"],
@@ -277,6 +311,105 @@ function buildContext(name) {
   };
 }
 
+function collectKeywordStrings(value, add) {
+  if (!value) return;
+  if (typeof value === "string") {
+    const normalized = value.trim();
+    if (!normalized) return;
+    add(normalized);
+    toWords(normalized).forEach(add);
+    return;
+  }
+  if (Array.isArray(value)) {
+    value.forEach(entry => collectKeywordStrings(entry, add));
+    return;
+  }
+  if (typeof value === "object") {
+    Object.values(value).forEach(entry => collectKeywordStrings(entry, add));
+  }
+}
+
+function deriveRegionTagsFromProfile(context, profile) {
+  const tags = new Set((context.regionTags || []).map(tag => String(tag).toLowerCase()).filter(Boolean));
+  const addTag = tag => {
+    if (!tag) return;
+    const normalized = String(tag).trim().toLowerCase();
+    if (normalized) tags.add(normalized);
+  };
+  if (Array.isArray(profile?.regionTags)) {
+    profile.regionTags.forEach(addTag);
+  }
+  if (profile?.category === "agriculture") {
+    addTag("farmland");
+  }
+  const text = [
+    profile?.name,
+    profile?.scale?.label,
+    profile?.scale?.rationale,
+    profile?.production?.notes,
+    profile?.production?.output
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  if (text) {
+    if (/coast|shore|sea|bay|tide|gull|spray|salt|harbor|mist|cove|reef|wave/.test(text)) addTag("coastal");
+    if (/river|brook|stream|creek|ford|delta|polder|canal|estuary/.test(text)) addTag("riverlands");
+    if (/marsh|bog|fen|wetland|mire|swamp/.test(text)) addTag("wetland");
+    if (/hill|ridge|upland|highland|terrace|stone|cliff|bluff/.test(text)) addTag("hills");
+    if (/mountain|peak|crag|summit|range/.test(text)) addTag("mountains");
+    if (/forest|grove|wood|timber|glade|copse|thicket|orchard/.test(text)) addTag("forest");
+    if (/grass|meadow|pasture|plain|prairie|steppe/.test(text)) addTag("grassland");
+  }
+  return Array.from(tags);
+}
+
+function extendContextWithProfile(baseContext, profile) {
+  if (!profile) return { ...baseContext };
+  const productionGoods = new Set((baseContext.productionGoods || []).map(value => String(value).toLowerCase()).filter(Boolean));
+  const productKeywords = new Set((baseContext.productKeywords || []).map(value => String(value).toLowerCase()).filter(Boolean));
+  const addProductKeyword = value => {
+    const normalized = String(value || "").trim().toLowerCase();
+    if (!normalized) return;
+    productionGoods.add(normalized);
+    productKeywords.add(normalized);
+  };
+  const addKeywordOnly = value => {
+    const normalized = String(value || "").trim().toLowerCase();
+    if (normalized) productKeywords.add(normalized);
+  };
+  collectKeywordStrings(profile.production?.goods, addProductKeyword);
+  collectKeywordStrings(profile.production?.byproducts, addProductKeyword);
+  collectKeywordStrings(profile.production?.focus, addProductKeyword);
+  collectKeywordStrings(profile.resources?.domestic, addKeywordOnly);
+  collectKeywordStrings(profile.resources?.exports, addKeywordOnly);
+  collectKeywordStrings(profile.resources?.imports, addKeywordOnly);
+  const yields = { ...(baseContext.yields || {}) };
+  if (profile.production?.yields && typeof profile.production.yields === "object") {
+    for (const [key, value] of Object.entries(profile.production.yields)) {
+      const normalizedKey = String(key || "").trim();
+      if (!normalizedKey) continue;
+      const bucket = new Set((yields[normalizedKey] || []).map(entry => String(entry).toLowerCase()).filter(Boolean));
+      collectKeywordStrings(value, entry => {
+        const normalized = String(entry || "").trim().toLowerCase();
+        if (!normalized) return;
+        bucket.add(normalized);
+        productKeywords.add(normalized);
+      });
+      if (bucket.size) yields[normalizedKey] = Array.from(bucket);
+    }
+  }
+  const regionTags = deriveRegionTagsFromProfile(baseContext, profile);
+  const extended = {
+    ...baseContext,
+    productionGoods: Array.from(productionGoods),
+    productKeywords: Array.from(productKeywords)
+  };
+  if (regionTags.length) extended.regionTags = regionTags;
+  if (Object.keys(yields).length) extended.yields = yields;
+  return extended;
+}
+
 function expandCategoryKey(key) {
   if (!key) return [];
   const normalized = key.trim();
@@ -320,8 +453,25 @@ function fallbackQualities(primary, context) {
 
 function deriveProduceKeywords(context) {
   const found = new Set();
+  const words = new Set(context.words || []);
+  const fragments = [context.lower || ""];
+  const harvestKeywords = value => {
+    collectKeywordStrings(value, entry => {
+      const normalized = String(entry || "").trim().toLowerCase();
+      if (!normalized) return;
+      fragments.push(normalized);
+      normalized
+        .split(/[^a-z]+/)
+        .filter(Boolean)
+        .forEach(token => words.add(token));
+    });
+  };
+  harvestKeywords(context.productionGoods);
+  harvestKeywords(context.productKeywords);
+  if (context.yields) harvestKeywords(Object.values(context.yields));
+  const haystack = fragments.join(" ");
   for (const [key, synonyms] of Object.entries(PRODUCE_KEYWORD_DICTIONARY)) {
-    if (context.lower.includes(key) || context.words.includes(key)) {
+    if (haystack.includes(key) || words.has(key)) {
       synonyms.forEach(value => found.add(value));
     }
   }
@@ -353,6 +503,31 @@ function preserveKeywordsFromFocus(focus) {
     if (keyword.includes("berry")) {
       extra.add("jam");
       extra.add("wine");
+    }
+    if (keyword.includes("pear") || keyword.includes("perry")) {
+      extra.add("perry");
+      extra.add("cider");
+      extra.add("preserve");
+    }
+    if (keyword.includes("plum") || keyword.includes("prune") || keyword.includes("damson")) {
+      extra.add("preserve");
+      extra.add("juice");
+      extra.add("brandy");
+    }
+    if (keyword.includes("apricot") || keyword.includes("peach")) {
+      extra.add("preserve");
+      extra.add("cordial");
+      extra.add("brandy");
+    }
+    if (keyword.includes("cherry")) {
+      extra.add("preserve");
+      extra.add("cordial");
+    }
+    if (keyword.includes("sunmellow")) {
+      extra.add("honey");
+      extra.add("cordial");
+      extra.add("wine");
+      extra.add("preserve");
     }
     if (keyword.includes("grape") || keyword.includes("wine")) {
       extra.add("wine");
@@ -1141,7 +1316,13 @@ function uniqueStrings(list) {
 }
 
 export function shopCategoriesForBuilding(name) {
-  const context = buildContext(name);
+  const baseContext = buildContext(name);
+  const profile = getBusinessProfileByName(name);
+  const context = extendContextWithProfile(baseContext, profile);
+  const logisticsOnly = profile?.category === "logistics" || /warehouse\s*row/.test(context.lower);
+  if (logisticsOnly) {
+    return { sells: [], buys: [], resale: false, context: { ...context, type: "logistics" } };
+  }
   let plan = null;
   for (const rule of INVENTORY_RULES) {
     try {
