@@ -6530,7 +6530,7 @@ The wilderness surrounding Dancing Pines is equally bountiful. Rare pelts from m
             },
             "Hunter's Row": {
                 estimate: 20,
-                notes: "hunters, trappers, and tannery hands",
+                notes: "hunters, trappers with Trapping proficiency, and tannery hands",
             },
             "Market Plaza": {
                 estimate: 15,

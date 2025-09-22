@@ -111,6 +111,10 @@ describe("proficiency registry", () => {
         expected: ["crafting.textiles"],
       },
       {
+        text: "Angling proficiency 24+ or Pearl Diving 20+",
+        expected: ["gathering.fishing", "gathering.pearlDiving"],
+      },
+      {
         text: "Water Ward Magic (Circle 1)",
         expected: ["magic.waterWard"],
       },
@@ -125,6 +129,18 @@ describe("proficiency registry", () => {
       {
         text: "Divine Magic proficiency",
         expected: ["magic.divine"],
+      },
+      {
+        text: "First Aid proficiency 18+",
+        expected: ["knowledge.fieldMedicine"],
+      },
+      {
+        text: "Stealth proficiency 20+ or Sleight of Hand 18+",
+        expected: ["knowledge.stealth", "knowledge.sleightOfHand"],
+      },
+      {
+        text: "Snaring proficiency 22+",
+        expected: ["outdoor.trapping"],
       },
     ];
 

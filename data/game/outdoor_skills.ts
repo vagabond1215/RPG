@@ -28,10 +28,14 @@ export const gainSailing = (input: ActivityGainInput): number =>
 export const gainRiding = (input: ActivityGainInput): number =>
   gainActivity(0.055, input); // horseback riding progression
 
+export const gainTrapping = (input: ActivityGainInput): number =>
+  gainActivity(0.05, input); // setting and maintaining trap lines
+
 export const OUTDOOR_GAIN_FUNCTIONS = {
   swimming: gainSwimming,
   sailing: gainSailing,
   riding: gainRiding,
+  trapping: gainTrapping,
 };
 
 export interface OutdoorActivityOpts {
