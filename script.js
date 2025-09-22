@@ -2535,33 +2535,93 @@ function buildingWorkerEstimate(profile, timeBand, weather, building) {
   return workers;
 }
 
+function buildingWeatherLocale(buildingName) {
+  const name = (buildingName || '').toLowerCase();
+  if (name.includes('wharf') || name.includes('dock') || name.includes('pier') || name.includes('quay')) return 'the wharf';
+  if (name.includes('yard')) return 'the yard';
+  if (name.includes('warehouse') || name.includes('row')) return 'the warehouse lanes';
+  if (name.includes('forge') || name.includes('smith') || name.includes('foundry')) return 'the forges';
+  if (name.includes('glass')) return 'the glassworks';
+  if (name.includes('market') || name.includes('exchange') || name.includes('bazaar')) return 'the market stalls';
+  if (name.includes('temple') || name.includes('shrine')) return 'the sanctuary';
+  if (name.includes('library') || name.includes('records') || name.includes('archive')) return 'the stacks';
+  if (name.includes('hall')) return 'the hall';
+  if (name.includes('guild')) return 'the guildhall';
+  if (name.includes('mill')) return 'the mill floor';
+  if (name.includes('farm') || name.includes('orchard') || name.includes('vineyard') || name.includes('field')) return 'the rows';
+  return 'the worksite';
+}
+
+function buildingWeatherSurface(buildingName) {
+  const name = (buildingName || '').toLowerCase();
+  if (name.includes('wharf') || name.includes('dock') || name.includes('pier') || name.includes('quay')) return 'the wharf planks';
+  if (name.includes('yard')) return "the yard's packed earth";
+  if (name.includes('warehouse') || name.includes('row')) return 'the warehouse roofs';
+  if (name.includes('forge') || name.includes('smith') || name.includes('foundry')) return 'the forge awnings';
+  if (name.includes('glass')) return 'the glasshouse vents';
+  if (name.includes('market') || name.includes('exchange') || name.includes('bazaar')) return 'the market awnings';
+  if (name.includes('temple') || name.includes('shrine')) return 'the sanctuary eaves';
+  if (name.includes('library') || name.includes('records') || name.includes('archive')) return 'the library eaves';
+  if (name.includes('hall')) return "the hall's stonework";
+  if (name.includes('guild')) return 'the guildhall lintels';
+  if (name.includes('mill')) return 'the mill roof';
+  if (name.includes('farm') || name.includes('orchard') || name.includes('vineyard') || name.includes('field')) return 'the field rows';
+  return 'the roofs overhead';
+}
+
+function buildingWorkforceNoun(buildingName) {
+  const name = (buildingName || '').toLowerCase();
+  if (name.includes('wharf') || name.includes('dock') || name.includes('pier') || name.includes('quay')) return 'dock crews';
+  if (name.includes('warehouse') || name.includes('row')) return 'teamsters';
+  if (name.includes('yard')) return 'yard hands';
+  if (name.includes('forge') || name.includes('smith') || name.includes('foundry')) return 'smiths';
+  if (name.includes('glass')) return 'glassworkers';
+  if (name.includes('market') || name.includes('exchange') || name.includes('bazaar')) return 'marketfolk';
+  if (name.includes('temple') || name.includes('shrine')) return 'acolytes';
+  if (name.includes('library') || name.includes('records') || name.includes('archive')) return 'scribes';
+  if (name.includes('guild')) return 'guild clerks';
+  if (name.includes('mill')) return 'millhands';
+  if (name.includes('farm') || name.includes('orchard') || name.includes('vineyard') || name.includes('field')) return 'farmhands';
+  if (name.includes('inn') || name.includes('tavern')) return 'innkeepers';
+  if (name.includes('hall')) return 'attendants';
+  return 'crews';
+}
+
+function buildingWorkforceGroup(buildingName, workforceNoun) {
+  if (!buildingName) return `the ${workforceNoun}`;
+  if (/^The\s+/i.test(buildingName)) {
+    return `the ${workforceNoun} of the ${buildingName.slice(4)}`;
+  }
+  return `the ${workforceNoun} of ${buildingName}`;
+}
+
 function buildingWeatherPhrase(weather, habitat, buildingName) {
-  const place = buildingName || 'the site';
   if (!weather) {
-    return `with the crews keeping ${place} moving steadily`;
+    return '';
   }
   const condition = (weather.condition || '').toLowerCase();
   if (condition.includes('storm')) {
+    const locale = buildingWeatherLocale(buildingName);
     return habitat === 'coastal'
-      ? 'while storm gusts fling spray across the yard'
-      : `as storm winds rattle through ${place.toLowerCase()}`;
+      ? 'storm gusts fling spray across the yard'
+      : `storm winds rattle through ${locale}`;
   }
   if (condition.includes('rain') || condition.includes('drizzle')) {
-    return `with rain pattering against ${place.toLowerCase()}`;
+    return `rain patters against ${buildingWeatherSurface(buildingName)}`;
   }
   if (condition.includes('fog')) {
-    return `as fog muffles the bustle around ${place.toLowerCase()}`;
+    return `fog muffles the bustle around ${buildingWeatherLocale(buildingName)}`;
   }
   if (condition.includes('snow') || condition.includes('sleet')) {
-    return 'beneath a coat of slush that slows every step';
+    return 'slush slicks every step';
   }
   if (condition.includes('clear')) {
-    return 'under a clear sky that brightens the workyards';
+    return 'clear skies lend the crews fresh energy';
   }
   if (condition.includes('cloud')) {
-    return 'beneath overcast light that keeps the pace steady';
+    return 'overcast light keeps the pace steady';
   }
-  return `amid shifting weather over ${place.toLowerCase()}`;
+  return `shifting weather swirls above ${buildingWeatherLocale(buildingName)}`;
 }
 
 function merchantsWharfConditionDetails(weather) {
@@ -2768,7 +2828,11 @@ function buildingOperationDetail(buildingName) {
   if (name.includes('guild')) {
     return 'guild matters handled without delay';
   }
-  return `${buildingLocaleDescription(buildingName)} running smoothly`;
+  const locale = buildingLocaleDescription(buildingName);
+  if (locale && locale !== buildingName) {
+    return `${locale} running smoothly`;
+  }
+  return 'the worksite running smoothly';
 }
 
 function workerOperationSentence(workers, buildingName) {
@@ -3095,11 +3159,15 @@ function buildingSceneParagraphs(context) {
   } else {
     if (building?.description) paragraphs.push(building.description);
     if (displayName) {
+      const workforceNoun = buildingWorkforceNoun(displayName);
+      const workforceGroup = capitalizeFirst(buildingWorkforceGroup(displayName, workforceNoun));
+      const operationDetail = buildingOperationDetail(displayName);
+      const timeAction = timeLabel
+        ? `work through the ${timeLabel.toLowerCase()}${operationDetail ? ` to keep ${operationDetail}` : ''}`
+        : `keep ${operationDetail || 'the work moving'}`;
       const weatherPhrase = buildingWeatherPhrase(weather, habitat, displayName);
-      const intro = timeLabel
-        ? `${displayName} works through the ${timeLabel.toLowerCase()}, ${weatherPhrase}.`
-        : `${displayName} hums ${weatherPhrase}.`;
-      paragraphs.push(intro);
+      const weatherClause = weatherPhrase ? ` while ${weatherPhrase}` : '';
+      paragraphs.push(`${workforceGroup} ${timeAction}${weatherClause}.`);
     }
   }
   const activity = buildingActivityPhrase(workers, businessProfile, displayName || 'the site');
@@ -3140,10 +3208,13 @@ function buildPersonaCandidates(context) {
     ['Owner', 'Manager', 'Administrator', 'Steward', 'Foreman'].includes(e.role),
   );
   const personas = [];
-  if (businessInfo?.owner) {
+  const ownerName = typeof businessInfo?.owner === 'string' ? businessInfo.owner.trim() : '';
+  const cityName = typeof city === 'string' ? city.trim() : '';
+  const isCivicOwner = ownerName && cityName && ownerName.toLowerCase() === cityName.toLowerCase();
+  if (ownerName && !isCivicOwner) {
     const ownerRole = leadershipRoles.find(e => e.role === 'Owner');
     const role = ownerRole ? ownerRole.role : 'Owner';
-    personas.push({ name: businessInfo.owner, role, style: inferPersonaStyle(role) });
+    personas.push({ name: ownerName, role, style: inferPersonaStyle(role) });
   }
   const stewardRoles = leadershipRoles.filter(e => e.role !== 'Owner');
   const stewardNames = Array.isArray(businessInfo?.stewards) ? businessInfo.stewards : [];
