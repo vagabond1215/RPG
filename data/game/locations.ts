@@ -3,6 +3,8 @@ import type { CalendarDate } from './calendar.js';
 import type { Habitat, WeatherReport } from './weather.js';
 const MAP_BASE_PATH = "assets/images/Maps";
 
+export type VendorType = 'none' | 'street' | 'shop';
+
 export interface OwnershipDetail {
   owner: string;
   stewards?: string[];
@@ -75,6 +77,7 @@ export interface Location {
   questBoards: Record<string, Quest[]>;
   businesses?: BusinessProfile[];
   ownership?: LocationOwnership;
+  vendorType?: VendorType;
 }
 
 export interface Quest {
@@ -139,6 +142,7 @@ export interface BusinessProfile {
   laborConditions: LaborCondition[];
   quests: Quest[];
   ownership?: OwnershipDetail;
+  vendorType?: VendorType;
 }
 
 export function createLocation(
@@ -311,6 +315,40 @@ function addQuestBoards(loc: Location) {
     [] as Quest[],
   );
   loc.quests.push(...allQuests);
+}
+
+const BUSINESS_STREET_ONLY = /market|plaza|square|row|arcade|promenade|roadside|boardwalk|bazaar|stalls?/i;
+const BUSINESS_NO_VENDOR = /wharf|warehouse|yard|naval|barracks|guard|temple|shrine|monastery|academy|keep|hall|exchange|office|arena|court/i;
+
+function defaultVendorTypeForBusiness(business: BusinessProfile): VendorType {
+  if (business.vendorType) return business.vendorType;
+  const name = business.name || '';
+  if (BUSINESS_STREET_ONLY.test(name)) return 'street';
+  if (BUSINESS_NO_VENDOR.test(name)) return 'none';
+  if (business.category === 'logistics' || business.category === 'security') return 'none';
+  return 'shop';
+}
+
+const LOCATION_HIGH_SECURITY = /keep|citadel|fort|barracks|naval|guard|temple|shrine|monastery|academy/i;
+
+function defaultVendorTypeForLocation(location: Location): VendorType {
+  if (location.vendorType) return location.vendorType;
+  const name = location.name || '';
+  if (LOCATION_HIGH_SECURITY.test(name)) return 'none';
+  if (/market|plaza|ward|district|farmland|docks|harbor|port|road/i.test(name)) return 'street';
+  return 'street';
+}
+
+function applyVendorDefaults(locations: Record<string, Location>) {
+  Object.values(locations).forEach((location) => {
+    if (!location) return;
+    location.vendorType = defaultVendorTypeForLocation(location);
+    if (Array.isArray(location.businesses)) {
+      location.businesses.forEach((business) => {
+        business.vendorType = defaultVendorTypeForBusiness(business);
+      });
+    }
+  });
 }
 
 const makeBand = (
@@ -8478,6 +8516,8 @@ export const LOCATIONS: Record<string, Location> = {
     "Dragon's Reach Road": DRAGONS_REACH_ROAD,
     "Whiteheart": WHITEHEART,
   };
+
+applyVendorDefaults(LOCATIONS);
 
 Object.keys(LOCATIONS).forEach((name) => addQuestBoards(LOCATIONS[name]));
 

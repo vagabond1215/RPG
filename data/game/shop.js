@@ -1319,7 +1319,8 @@ export function shopCategoriesForBuilding(name) {
   const baseContext = buildContext(name);
   const profile = getBusinessProfileByName(name);
   const context = extendContextWithProfile(baseContext, profile);
-  const logisticsOnly = profile?.category === "logistics" || /warehouse\s*row/.test(context.lower);
+  const logisticsOnly =
+    profile?.category === "logistics" || /warehouse\s*row|wharf/.test(context.lower);
   if (logisticsOnly) {
     return { sells: [], buys: [], resale: false, context: { ...context, type: "logistics" } };
   }

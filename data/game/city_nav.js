@@ -1,6 +1,33 @@
 import { LOCATIONS } from "./locations.js";
-import { defaultEmployeesForBuilding } from "./buildings.js";
+import { defaultEmployeesForBuilding, getBusinessProfileByName } from "./buildings.js";
 import { shopCategoriesForBuilding } from "./shop.js";
+
+const DEFAULT_DISTRICT_VENDOR_POLICY = { type: 'street', baseChance: 0.3, security: 'medium' };
+
+const DISTRICT_VENDOR_POLICIES = {
+  "Wave's Break": {
+    "The Port District": { type: 'street', baseChance: 0.45, security: 'medium', tags: ['coastal'] },
+    "The Upper Ward": {
+      type: 'none',
+      baseChance: 0.05,
+      security: 'high',
+      eventType: 'street',
+      eventBoost: 2,
+      eventWindows: [
+        { start: { monthIndex: 5, day: 14 }, end: { monthIndex: 5, day: 18 }, label: 'High Summer Fête' },
+      ],
+      tags: ['highcourt']
+    },
+    "Little Terns": { type: 'street', baseChance: 0.35, security: 'medium', tags: ['artisan'] },
+    "Greensoul Hill": { type: 'street', baseChance: 0.25, security: 'medium', tags: ['herbal'] },
+    "The Lower Gardens": { type: 'street', baseChance: 0.4, security: 'medium', tags: ['festival'] },
+    "The High Road District": { type: 'street', baseChance: 0.32, security: 'medium', tags: ['road'] },
+    "The Farmlands": { type: 'street', baseChance: 0.5, security: 'low', tags: ['farmland'] },
+  },
+};
+
+const BUILDING_STREET_ONLY = /market|plaza|square|row|arcade|promenade|roadside|boardwalk|bazaar|stalls?/i;
+const BUILDING_NO_VENDOR = /wharf|warehouse|yard|naval|barracks|guard|temple|shrine|monastery|academy|keep|hall|exchange|office|arena|court/i;
 
 export const CITY_NAV = {
   "Wave's Break": {
@@ -1547,6 +1574,41 @@ From its height, scouts survey both the sea and the road beyond the fields.`,
   }
 };
 
+function cloneDistrictVendorPolicy(cityName, districtName) {
+  const cityPolicies = DISTRICT_VENDOR_POLICIES[cityName] || null;
+  const base = cityPolicies && cityPolicies[districtName] ? cityPolicies[districtName] : null;
+  const policy = { ...DEFAULT_DISTRICT_VENDOR_POLICY, ...(base || {}) };
+  if (base && Array.isArray(base.eventWindows)) {
+    policy.eventWindows = base.eventWindows.map((window) => ({
+      start: window.start ? { ...window.start } : null,
+      end: window.end ? { ...window.end } : null,
+      label: window.label || null,
+    }));
+  }
+  return policy;
+}
+
+function inferBuildingVendorType(name, profile) {
+  if (profile && profile.vendorType) return profile.vendorType;
+  if (BUILDING_STREET_ONLY.test(name)) return 'street';
+  if (BUILDING_NO_VENDOR.test(name)) return 'none';
+  return 'shop';
+}
+
+function applyVendorPolicies(nav) {
+  Object.entries(nav).forEach(([cityName, city]) => {
+    Object.entries(city.districts || {}).forEach(([districtName, district]) => {
+      const policy = cloneDistrictVendorPolicy(cityName, districtName);
+      district.vendorPolicy = policy;
+      district.vendorType = policy.type;
+    });
+    Object.entries(city.buildings || {}).forEach(([buildingName, building]) => {
+      const profile = getBusinessProfileByName(buildingName);
+      building.vendorType = inferBuildingVendorType(buildingName, profile);
+    });
+  });
+}
+
 function defaultBusinessHours(cityName, buildingName) {
   const population = LOCATIONS[cityName]?.population?.estimate || 0;
   const name = buildingName.toLowerCase();
@@ -1582,20 +1644,32 @@ function applyBusinessHours(nav) {
 
 applyBusinessHours(CITY_NAV);
 
+applyVendorPolicies(CITY_NAV);
+
 function applyBusinessEmployees(nav) {
   const city = nav["Wave's Break"];
   if (!city) return;
   Object.entries(city.buildings).forEach(([name, building]) => {
+    const profile = getBusinessProfileByName(name);
+    const vendorType = building.vendorType || inferBuildingVendorType(name, profile);
+    building.vendorType = vendorType;
     building.employees = defaultEmployeesForBuilding(name);
+    if (vendorType !== 'shop') {
+      (building.employees || []).forEach(emp => {
+        if (Array.isArray(emp.access)) {
+          emp.access = emp.access.filter(action => action !== 'shop' && action !== 'sell');
+        }
+      });
+    }
     const categories = shopCategoriesForBuilding(name);
     const baseInteractions = [];
-    if (categories.sells.length)
+    if (vendorType === 'shop' && categories.sells.length)
       baseInteractions.push({
         name: "Shop",
         action: "shop",
         icon: "assets/images/icons/Economy/Shop.png",
       });
-    if (categories.buys.length)
+    if (vendorType === 'shop' && categories.buys.length)
       baseInteractions.push({
         name: "Sell",
         action: "sell",

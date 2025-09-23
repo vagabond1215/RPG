@@ -134,6 +134,161 @@ const BACKSTORY_MAP = {
   "Wave's Break": WAVES_BREAK_BACKSTORIES,
 };
 
+const STREET_VENDOR_ICON = 'assets/images/icons/Economy/Sell.png';
+const STREET_VENDOR_SECURITY_MODIFIERS = { high: 0.25, medium: 0.75, low: 1.1 };
+const STREET_VENDOR_TIME_MODIFIERS = {
+  preDawn: 0.2,
+  morning: 0.85,
+  day: 1,
+  evening: 0.6,
+  night: 0.1,
+};
+const STREET_VENDOR_WEATHER_MODIFIERS = {
+  storm: 0.05,
+  snow: 0.15,
+  sleet: 0.2,
+  rain: 0.35,
+  drizzle: 0.6,
+  fog: 0.65,
+  clear: 1.15,
+  'partly cloudy': 1,
+};
+
+const DEFAULT_STREET_VENDOR_BASE_CHANCE = 0.3;
+
+const STREET_VENDOR_THEMES = [
+  {
+    id: 'coastal-food',
+    tags: ['coastal'],
+    label: 'Pier Street Food',
+    description:
+      'Steam curls from a brazier of sizzling seafood skewers and spiced hand-pies, drawing longshoremen with the promise of a quick bite.',
+    sections: [
+      {
+        key: 'FoodDrink',
+        label: 'Hot Bites',
+        keywords: ['smoke', 'skewer', 'fish', 'clam', 'roll', 'pie', 'stew'],
+        maxItems: 3,
+        preferBasics: true,
+      },
+    ],
+    discount: 0.85,
+    maxQuantity: 3,
+    names: ['Harbor Skillet', 'Gullwing Snacks', 'Brinepan Vendor'],
+  },
+  {
+    id: 'fresh-produce',
+    tags: ['farmland', 'artisan'],
+    label: 'Fresh Produce Cart',
+    description:
+      'Bushels of greens and berries spill over a handcart, dew still clinging to leaves from the morning harvest.',
+    sections: [
+      {
+        key: 'Produce',
+        label: 'Seasonal Harvest',
+        keywords: [],
+        maxItems: 4,
+        preferBasics: true,
+      },
+    ],
+    discount: 0.8,
+    maxQuantity: 4,
+    names: ['Morning Harvest Wagon', 'Sunrise Bushels', 'Greencrest Cart'],
+  },
+  {
+    id: 'artisan-goods',
+    tags: ['urban', 'artisan', 'festival'],
+    label: 'Artisan Trinkets',
+    description:
+      'A folding stall gleams with hand-tooled trinkets and bright scarves, the vendor touting their makers between haggled deals.',
+    sections: [
+      {
+        key: 'Accessories',
+        label: 'Handcrafted Wares',
+        keywords: ['bracelet', 'charm', 'token', 'lace', 'scarf'],
+        maxItems: 3,
+        allowQualityFallback: true,
+      },
+      {
+        key: 'Textiles',
+        label: 'Small Cloth Goods',
+        keywords: ['scarf', 'ribbon', 'kerchief'],
+        maxItems: 2,
+        allowQualityFallback: true,
+      },
+    ],
+    discount: 0.88,
+    maxQuantity: 2,
+    names: ['Ribbon & Ring Stall', 'Silver Thread Bracelets', 'Market Trinket Rack'],
+  },
+  {
+    id: 'travel-supplies',
+    tags: ['road', 'forest', 'urban'],
+    label: "Traveler's Pack",
+    description:
+      'Bundles of oilskin-wrapped gear and refurbished tools hang from a makeshift awning, perfect for a quick resupply before the road.',
+    sections: [
+      {
+        key: 'Adventuring Gear',
+        label: 'Trail Gear',
+        keywords: ['rope', 'kit', 'pack', 'torch', 'supply'],
+        maxItems: 3,
+        preferBasics: true,
+      },
+      {
+        key: 'Tools',
+        label: 'Quick Repairs',
+        keywords: ['tool', 'hammer', 'saw', 'hook'],
+        maxItems: 2,
+      },
+    ],
+    discount: 0.9,
+    maxQuantity: 2,
+    names: ['Roadside Outfitters', 'Pack & Patch Stand', 'Wayfarer’s Tray'],
+  },
+  {
+    id: 'herbal',
+    tags: ['herbal', 'forest', 'festival'],
+    label: 'Herbal Remedies',
+    description:
+      'Bundles of fragrant herbs and small tincture vials line the table, the vendor murmuring about soothing teas and salves.',
+    sections: [
+      {
+        key: 'Reagents',
+        label: 'Herbs & Tonics',
+        keywords: ['herb', 'poultice', 'tea', 'salve'],
+        maxItems: 3,
+        allowQualityFallback: true,
+      },
+    ],
+    discount: 0.87,
+    maxQuantity: 3,
+    names: ['Greensoul Remedies', 'Terrace Tinctures', 'Healing Herb Basket'],
+  },
+  {
+    id: 'festival-sweets',
+    tags: ['festival', 'highcourt', 'urban'],
+    label: 'Festival Confections',
+    description:
+      'Sugared nuts and glazed pastries are artfully arranged beneath ribbons, offered only when the district celebrates.',
+    sections: [
+      {
+        key: 'Confectionery',
+        label: 'Sweet Treats',
+        keywords: ['cake', 'pastry', 'candy', 'sweet'],
+        maxItems: 3,
+        allowQualityFallback: true,
+      },
+    ],
+    discount: 0.9,
+    maxQuantity: 3,
+    eventOnly: true,
+    names: ['Solstice Sweets', 'Festival Sugarworks', 'Courtly Delights'],
+  },
+];
+
+const streetVendorStates = new Map();
+
 function resolveQuestBinding(quest, boardName) {
   const source = quest?.visibilityBinding ? { ...quest.visibilityBinding } : {};
   if (!source.region) source.region = "waves_break";
@@ -536,6 +691,265 @@ function getBuildingIcon(city, district, building) {
     pt => pt.type === 'building' && (pt.target === building || pt.name === building)
   );
   return point && point.icon ? point.icon : "";
+}
+
+function districtVendorPolicy(city, district) {
+  return CITY_NAV[city]?.districts?.[district]?.vendorPolicy || null;
+}
+
+function districtVendorTags(policy, city, district) {
+  const tags = new Set();
+  (policy?.tags || []).forEach(tag => tags.add(tag));
+  const lowerCity = (city || '').toLowerCase();
+  if (lowerCity.includes('port') || lowerCity.includes('harbor')) tags.add('coastal');
+  const lowerDistrict = (district || '').toLowerCase();
+  if (/port|harbor|dock|wharf|quay/.test(lowerDistrict)) tags.add('coastal');
+  if (/garden|market|plaza|festival/.test(lowerDistrict)) tags.add('festival');
+  if (/farmland|orchard|fields|farm/.test(lowerDistrict)) tags.add('farmland');
+  if (/road|gate|high road/.test(lowerDistrict)) tags.add('road');
+  if (/hill|grove|temple/.test(lowerDistrict)) tags.add('herbal');
+  if (/upper ward|salon|keep/.test(lowerDistrict)) tags.add('highcourt');
+  tags.add('urban');
+  return Array.from(tags);
+}
+
+function districtHabitat(city, district) {
+  const lower = (district || '').toLowerCase();
+  if (/farmland|orchard|fields|pasture|meadow/.test(lower)) return 'farmland';
+  if (/port|harbor|dock|wharf|quay/.test(lower)) return 'coastal';
+  if (/forest|grove|wood/.test(lower)) return 'forest';
+  return 'urban';
+}
+
+function streetVendorTimeBand(hour) {
+  if (!Number.isFinite(hour)) return 'day';
+  const h = ((hour % 24) + 24) % 24;
+  if (h < 6) return 'preDawn';
+  if (h < 10) return 'morning';
+  if (h < 17) return 'day';
+  if (h < 21) return 'evening';
+  return 'night';
+}
+
+function getDistrictWeather(city, district) {
+  const date = worldCalendar.today();
+  const habitat = districtHabitat(city, district);
+  const slug = citySlug(city);
+  try {
+    return weatherSystem.getDailyWeather(slug, habitat, date);
+  } catch (err) {
+    try {
+      return weatherSystem.getDailyWeather('waves_break', habitat, date);
+    } catch (err2) {
+      return null;
+    }
+  }
+}
+
+function normalizeVendorDate(source, fallbackYear) {
+  if (!source) {
+    return { year: fallbackYear, monthIndex: 0, day: 1 };
+  }
+  const year = source.year != null ? source.year : fallbackYear;
+  const monthIndex = source.monthIndex != null ? source.monthIndex : 0;
+  const day = source.day != null ? source.day : 1;
+  return { year, monthIndex, day };
+}
+
+function vendorDateKey(date) {
+  const year = String(date.year != null ? date.year : '').padStart(4, '0');
+  const month = String(date.monthIndex != null ? date.monthIndex : 0).padStart(2, '0');
+  const day = String(date.day != null ? date.day : 1).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function isStreetVendorEventActive(policy, date) {
+  if (!policy || !Array.isArray(policy.eventWindows) || !policy.eventWindows.length) return false;
+  const target = normalizeVendorDate(date, date.year);
+  return policy.eventWindows.some(window => {
+    if (!window) return false;
+    const start = window.start ? normalizeVendorDate(window.start, date.year) : null;
+    const end = window.end ? normalizeVendorDate(window.end, date.year) : null;
+    if (start && vendorDateKey(target) < vendorDateKey(start)) return false;
+    if (end && vendorDateKey(target) > vendorDateKey(end)) return false;
+    return true;
+  });
+}
+
+function computeStreetVendorChance(policy, weather, timeBand, eventActive) {
+  if (!policy) return 0;
+  const base = Number.isFinite(policy.baseChance) ? policy.baseChance : DEFAULT_STREET_VENDOR_BASE_CHANCE;
+  const security = STREET_VENDOR_SECURITY_MODIFIERS[policy.security || 'medium'] || 0.75;
+  const time = STREET_VENDOR_TIME_MODIFIERS[timeBand] || 1;
+  const condition = weather?.condition || 'partly cloudy';
+  const weatherMod = STREET_VENDOR_WEATHER_MODIFIERS[condition] || 0.9;
+  let chance = base * security * time * weatherMod;
+  if (eventActive) {
+    const eventBoost = policy.eventBoost != null ? policy.eventBoost : 1.8;
+    chance *= eventBoost;
+  }
+  return Math.max(0, Math.min(chance, 0.95));
+}
+
+function streetVendorThemeFor(policy, city, district, eventActive, rng) {
+  const tags = districtVendorTags(policy, city, district);
+  const candidates = STREET_VENDOR_THEMES.filter(theme => {
+    if (theme.eventOnly && !eventActive) return false;
+    if (!theme.tags || !theme.tags.length) return true;
+    return theme.tags.some(tag => tags.includes(tag));
+  });
+  const pool = candidates.length ? candidates : STREET_VENDOR_THEMES;
+  const index = Math.floor(rng() * pool.length);
+  return pool[Math.max(0, Math.min(pool.length - 1, index))];
+}
+
+function vendorStateKey(city, district) {
+  return `${city || ''}::${district || ''}`;
+}
+
+function getStreetVendorState(city, district) {
+  const key = vendorStateKey(city, district);
+  if (!streetVendorStates.has(key)) {
+    streetVendorStates.set(key, { dateKey: null, timeBand: null, evaluated: false, vendor: null });
+  }
+  return streetVendorStates.get(key);
+}
+
+function evaluateStreetVendor(city, district) {
+  if (!city || !district) return null;
+  const state = getStreetVendorState(city, district);
+  const today = worldCalendar.today();
+  const todayKey = vendorDateKey(today);
+  const timeOfDay = currentCharacter ? currentCharacter.timeOfDay : null;
+  const timeBand = streetVendorTimeBand(timeOfDay);
+  if (state.dateKey !== todayKey || state.timeBand !== timeBand) {
+    state.dateKey = todayKey;
+    state.timeBand = timeBand;
+    state.evaluated = false;
+    state.vendor = null;
+  }
+  if (state.evaluated) {
+    return state.vendor;
+  }
+  state.evaluated = true;
+  const policy = districtVendorPolicy(city, district);
+  if (!policy) {
+    state.vendor = null;
+    return null;
+  }
+  const date = worldCalendar.today();
+  const eventActive = isStreetVendorEventActive(policy, date);
+  const vendorMode = policy.type === 'none' && eventActive && policy.eventType ? policy.eventType : policy.type;
+  if (vendorMode !== 'street') {
+    state.vendor = null;
+    return null;
+  }
+  const weather = getDistrictWeather(city, district);
+  const chance = computeStreetVendorChance(policy, weather, timeBand, eventActive);
+  if (chance <= 0) {
+    state.vendor = null;
+    return null;
+  }
+  const rngKey = `${citySlug(city)}:${district}:${todayKey}:${timeBand}`;
+  const rng = createWeatherRandom(rngKey);
+  if (rng() > chance) {
+    state.vendor = null;
+    return null;
+  }
+  const theme = streetVendorThemeFor(policy, city, district, eventActive, rng);
+  const namePool = theme.names || ['Street Vendor'];
+  const title = namePool[Math.floor(rng() * namePool.length)] || 'Street Vendor';
+  state.vendor = {
+    key: rngKey,
+    city,
+    district,
+    policy,
+    theme,
+    name: title,
+    label: `${title}`,
+    eventActive,
+    weather,
+    timeBand,
+    timeOfDay,
+    date,
+    habitat: districtHabitat(city, district),
+    tags: districtVendorTags(policy, city, district),
+    discount: theme.discount || 0.9,
+    maxQuantity: theme.maxQuantity || 2,
+    goods: [],
+    goodsLoaded: false,
+    description: theme.description || '',
+    icon: STREET_VENDOR_ICON,
+    rngSeed: rngKey,
+  };
+  return state.vendor;
+}
+
+async function ensureStreetVendorInventory(vendor) {
+  if (!vendor || vendor.goodsLoaded) return vendor;
+  const rng = createWeatherRandom(`${vendor.rngSeed}:inventory`);
+  const context = {
+    name: vendor.name,
+    lower: vendor.name.toLowerCase(),
+    scale: 'small',
+    wealth: 'modest',
+    type: 'street',
+    words: vendor.tags,
+    city: vendor.city,
+    district: vendor.district,
+    habitat: vendor.habitat,
+    weather: vendor.weather,
+    date: vendor.date,
+    season: vendor.date ? getSeasonForDate(vendor.date) : null,
+    timeOfDay: vendor.timeOfDay ?? null,
+    timeLabel: describeTimeOfDay(vendor.timeOfDay),
+    regionTags: vendor.tags,
+    productKeywords: [],
+    yields: {},
+  };
+  const goods = [];
+  for (const section of vendor.theme.sections || []) {
+    const baseSection = {
+      key: section.key,
+      label: section.label,
+      limit: section.limit || { small: 6, medium: 6, large: 8 },
+      keywords: section.keywords || [],
+      allowQualityFallback: section.allowQualityFallback !== false,
+      preferBasics: Boolean(section.preferBasics),
+      allowBulk: false,
+    };
+    const items = await itemsByCategory(baseSection, context);
+    if (!items || !items.length) continue;
+    const maxItems = Math.max(1, section.maxItems || 2);
+    const sample = [];
+    const pool = items.slice();
+    while (pool.length && sample.length < maxItems) {
+      const idx = Math.floor(rng() * pool.length);
+      sample.push(pool.splice(idx, 1)[0]);
+    }
+    sample.forEach(item => {
+      const basePrice = item.price;
+      const price = Math.max(1, Math.round(basePrice * vendor.discount));
+      const qty = Math.max(1, Math.round(rng() * vendor.maxQuantity));
+      goods.push({
+        item,
+        basePrice,
+        price,
+        quantity: qty,
+        maxQuantity: qty,
+        sectionLabel: baseSection.label,
+        inventoryKey: baseSection.key,
+      });
+    });
+  }
+  vendor.goods = goods;
+  vendor.goodsLoaded = true;
+  return vendor;
+}
+
+function streetVendorSoldOut(vendor) {
+  if (!vendor || !vendor.goodsLoaded) return false;
+  return vendor.goods.every(good => good.quantity <= 0);
 }
 
 function getDistrictsEnvelope(city) {
@@ -2207,8 +2621,82 @@ async function renderShopUI(buildingName) {
   setUniformShopNameWidth();
 }
 
+async function renderStreetVendorUI(city, district) {
+  showBackButton();
+  const vendor = evaluateStreetVendor(city, district);
+  if (!vendor) {
+    setMainHTML(
+      `<div class="shop-screen street-vendor"><h1>Street Vendor</h1><p>No street vendors are set up here at the moment.</p></div>`
+    );
+    return;
+  }
+  await ensureStreetVendorInventory(vendor);
+  const funds = formatCurrency(currentCharacter.money);
+  const soldOut = streetVendorSoldOut(vendor);
+  let html = `<div class="shop-screen street-vendor"><h1>${escapeHtml(vendor.name)}</h1>`;
+  if (vendor.description) {
+    html += `<p class="street-vendor-desc">${escapeHtml(vendor.description)}</p>`;
+  }
+  html += `<p class="street-vendor-funds">Funds: ${funds}</p>`;
+  if (!vendor.goods.length || soldOut) {
+    html += '<p>The vendor has sold out for now.</p></div>';
+    setMainHTML(html);
+    return;
+  }
+  html += '<ul class="street-vendor-goods">';
+  vendor.goods.forEach((good, idx) => {
+    if (good.quantity <= 0) return;
+    const item = good.item;
+    const saleQty = item.sale_quantity === 1 && item.unit === 'each'
+      ? ''
+      : `${item.sale_quantity} ${item.unit || ''}`.trim();
+    const priceLabel = `${cpToCoins(good.price, true, true)} (market ${cpToCoins(good.basePrice, true, true)})`;
+    html += `<li class="shop-item street-vendor-item">`
+      + `<button class="item-name" data-i="${idx}">${escapeHtml(item.name)}</button>`
+      + `<span class="sale-qty">${saleQty}</span>`
+      + `<span class="vendor-stock">Qty left: ${good.quantity}</span>`
+      + `<span class="item-price">${priceLabel}</span>`
+      + `<input type="number" class="qty street-vendor-qty" value="1" min="1" max="${good.quantity}" data-i="${idx}">`
+      + `<button class="buy-btn street-vendor-buy" data-i="${idx}">Buy</button>`
+      + `</li>`;
+  });
+  html += '</ul></div>';
+  setMainHTML(html);
+  vendor.goods.forEach((good, idx) => {
+    if (good.quantity <= 0) return;
+    const buyBtn = document.querySelector(`.street-vendor-buy[data-i="${idx}"]`);
+    const qtyInput = document.querySelector(`.street-vendor-qty[data-i="${idx}"]`);
+    const nameBtn = document.querySelector(`.street-vendor-item .item-name[data-i="${idx}"]`);
+    if (nameBtn) {
+      nameBtn.addEventListener('click', () => showItemPopup(good.item));
+    }
+    if (buyBtn) {
+      buyBtn.addEventListener('click', () => {
+        const max = good.quantity;
+        const qty = Math.max(1, Math.min(Number(qtyInput?.value) || 1, max));
+        const totalCopper = good.price * qty;
+        const costIron = convertCurrency(totalCopper, 'copper', 'coldIron');
+        if (toIron(currentCharacter.money) < costIron) {
+          alert('Not enough funds');
+          return;
+        }
+        currentCharacter.money = fromIron(toIron(currentCharacter.money) - costIron);
+        addItemToInventory({
+          name: good.item.name,
+          category: good.inventoryKey || vendor.theme.id || 'Street Vendor',
+          price: good.price,
+          qty,
+        });
+        good.quantity -= qty;
+        saveProfiles();
+        renderStreetVendorUI(city, district).catch(console.error);
+      });
+    }
+  });
+}
 
-function renderSellUI(buildingName) {
+
+  function renderSellUI(buildingName) {
   showBackButton();
   const { buys: categories, resale } = shopCategoriesForBuilding(buildingName);
   const inv = currentCharacter.inventory || [];
@@ -4496,6 +4984,23 @@ function showNavigation() {
 
     const exitGroup = exits.map(makeButton);
     const localButtons = locals.map(makeButton);
+    const activeVendor = evaluateStreetVendor(pos.city, pos.district);
+    if (activeVendor) {
+      const soldOut = streetVendorSoldOut(activeVendor);
+      const vendorLabel = soldOut
+        ? `${activeVendor.name} (Sold Out)`
+        : `Street Vendor: ${activeVendor.name}`;
+      localButtons.push(
+        createNavItem({
+          type: 'interaction',
+          action: 'street-vendor',
+          name: vendorLabel,
+          icon: activeVendor.icon,
+          disabled: soldOut,
+          extraClass: 'street-vendor-option',
+        })
+      );
+    }
     const hasMultipleDistricts = Object.keys(cityData.districts || {}).length > 1;
 
     const buildDistrictNav = () => {
@@ -4716,6 +5221,10 @@ function showNavigation() {
           }
         }
         if (type === 'interaction') {
+            if (action === 'street-vendor') {
+              renderStreetVendorUI(pos.city, pos.district).catch(console.error);
+              return;
+            }
             if (action === 'shop') {
               renderShopUI(pos.building).catch(console.error);
               return;
