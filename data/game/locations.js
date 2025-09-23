@@ -94,6 +94,47 @@ function addQuestBoards(loc) {
     const allQuests = Object.values(boards).reduce((arr, q) => arr.concat(q), []);
     loc.quests.push(...allQuests);
 }
+const BUSINESS_STREET_ONLY = /market|plaza|square|row|arcade|promenade|roadside|boardwalk|bazaar|stalls?/i;
+const BUSINESS_NO_VENDOR = /wharf|warehouse|yard|naval|barracks|guard|temple|shrine|monastery|academy|keep|hall|exchange|office|arena|court/i;
+function defaultVendorTypeForBusiness(business) {
+    if (!business)
+        return 'none';
+    if (business.vendorType)
+        return business.vendorType;
+    const name = business.name || '';
+    if (BUSINESS_STREET_ONLY.test(name))
+        return 'street';
+    if (BUSINESS_NO_VENDOR.test(name))
+        return 'none';
+    if (business.category === 'logistics' || business.category === 'security')
+        return 'none';
+    return 'shop';
+}
+const LOCATION_HIGH_SECURITY = /keep|citadel|fort|barracks|naval|guard|temple|shrine|monastery|academy/i;
+function defaultVendorTypeForLocation(location) {
+    if (!location)
+        return 'street';
+    if (location.vendorType)
+        return location.vendorType;
+    const name = location.name || '';
+    if (LOCATION_HIGH_SECURITY.test(name))
+        return 'none';
+    if (/market|plaza|ward|district|farmland|docks|harbor|port|road/i.test(name))
+        return 'street';
+    return 'street';
+}
+function applyVendorDefaults(locations) {
+    Object.values(locations).forEach((location) => {
+        if (!location)
+            return;
+        location.vendorType = defaultVendorTypeForLocation(location);
+        if (Array.isArray(location.businesses)) {
+            location.businesses.forEach((business) => {
+                business.vendorType = defaultVendorTypeForBusiness(business);
+            });
+        }
+    });
+}
 const makeBand = (type, count, roles, notes) => ({ type, count, roles, notes });
 const unskilled = (count, roles, notes) => makeBand('unskilled', count, roles, notes);
 const skilled = (count, roles, notes) => makeBand('skilled', count, roles, notes);
@@ -7059,4 +7100,5 @@ export const LOCATIONS = {
     "Dragon's Reach Road": DRAGONS_REACH_ROAD,
     "Whiteheart": WHITEHEART,
 };
+applyVendorDefaults(LOCATIONS);
 Object.keys(LOCATIONS).forEach((name) => addQuestBoards(LOCATIONS[name]));
