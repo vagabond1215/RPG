@@ -126,6 +126,8 @@ const QUEST_DISTRICT_ALIASES = {
 
 const QUEST_BOARD_BUILDINGS = new Set(['North Gate', 'South Gate']);
 
+const MERCHANTS_WHARF_DYNAMIC_BOARD = "Merchants' Wharf Pier Leads";
+
 const CITY_SLUGS = { "Wave's Break": "waves_break" };
 
 const BACKSTORY_MAP = {
@@ -2330,6 +2332,9 @@ function setBuildingEncounterState(name, state) {
 function resetBuildingEncounterState(name) {
   if (!name) return;
   delete buildingEncounterStates[name];
+  if (name === "Merchants' Wharf") {
+    applyMerchantsWharfDynamicBoard(null);
+  }
 }
 
 function createBuildingEncounterContext(position, extras = {}) {
@@ -2753,6 +2758,518 @@ function merchantsWharfOverview({ weather, season, timeLabel }) {
   return `${entrySentence} ${throngSentence} ${crateSentence} ${shipSentence}`;
 }
 
+function merchantsWharfSeasonKey(season) {
+  const lower = (season || '').toLowerCase();
+  if (!lower) return null;
+  if (lower.includes('spring')) return 'spring';
+  if (lower.includes('summer')) return 'summer';
+  if (lower.includes('autumn') || lower.includes('fall')) return 'autumn';
+  if (lower.includes('winter')) return 'winter';
+  return lower;
+}
+
+function merchantsWharfTimeKey(timeLabel) {
+  const lower = (timeLabel || '').toLowerCase();
+  if (!lower) return 'day';
+  if (lower.includes('deep night') || lower.includes('midnight')) return 'night';
+  if (lower.includes('pre-dawn') || lower.includes('predawn')) return 'predawn';
+  if (lower.includes('early morning')) return 'morning';
+  if (lower.includes('late morning')) return 'late-morning';
+  if (lower.includes('early afternoon')) return 'afternoon';
+  if (lower.includes('late afternoon')) return 'late-afternoon';
+  if (lower.includes('evening')) return 'evening';
+  if (lower.includes('night')) return 'night';
+  if (lower.includes('afternoon')) return 'afternoon';
+  if (lower.includes('morning')) return 'morning';
+  return 'day';
+}
+
+function merchantsWharfScaleWeight(scale, workers) {
+  if (!Number.isFinite(workers)) return 1;
+  if (scale === 'minor') {
+    if (workers <= 8) return 1.4;
+    if (workers >= 48) return 0.75;
+    return 1;
+  }
+  if (scale === 'moderate') {
+    if (workers >= 32) return 1.25;
+    if (workers <= 12) return 0.85;
+    return 1;
+  }
+  if (scale === 'major') {
+    if (workers >= 36) return 1.3;
+    if (workers <= 20) return 0.7;
+    return 1;
+  }
+  return 1;
+}
+
+function merchantsWharfActiveEvents(state) {
+  const events = new Set();
+  const condition = (state.weather?.condition || '').toLowerCase();
+  if (/storm|squall|gale/.test(condition)) {
+    events.add('storm_backlog');
+  }
+  if (/rain|drizzle|spray/.test(condition)) {
+    events.add('slick_planks');
+  }
+  const seasonKey = merchantsWharfSeasonKey(state.season);
+  if (seasonKey === 'summer' || seasonKey === 'autumn') {
+    events.add('harvest_surge');
+  }
+  const timeLower = (state.timeLabel || '').toLowerCase();
+  if (timeLower.includes('night') || timeLower.includes('evening')) {
+    events.add('night_shift');
+  }
+  (state.businessProfile?.laborConditions || []).forEach(entry => {
+    const trigger = (entry?.trigger || '').toLowerCase();
+    if (trigger.includes('storm') && events.has('storm_backlog')) {
+      events.add('condition_storm_backlog');
+    }
+    if (trigger.includes('harvest') && events.has('harvest_surge')) {
+      events.add('condition_harvest_convoy');
+    }
+  });
+  return Array.from(events);
+}
+
+function merchantsWharfOpportunityFactors(state) {
+  return {
+    timeKey: merchantsWharfTimeKey(state.timeLabel),
+    seasonKey: merchantsWharfSeasonKey(state.season),
+    events: merchantsWharfActiveEvents(state),
+    weatherCondition: (state.weather?.condition || '').toLowerCase(),
+    timeLabel: state.timeLabel,
+  };
+}
+
+function merchantsWharfPick(list, rng) {
+  if (!Array.isArray(list) || list.length === 0) return '';
+  const roll = (rng ?? Math.random)();
+  const index = Math.floor(roll * list.length);
+  return list[index] ?? list[0];
+}
+
+function merchantsWharfRandomInt(rng, min, max) {
+  if (min > max) return min;
+  const roll = (rng ?? Math.random)();
+  const range = max - min + 1;
+  return min + Math.floor(roll * range);
+}
+
+function formatMerchantsWharfReward(cpValue, bonus) {
+  const total = Math.max(0, Math.round(cpValue));
+  const sp = Math.floor(total / 100);
+  const remainder = total % 100;
+  const parts = [];
+  if (sp) parts.push(`${sp} sp`);
+  if (remainder || !parts.length) parts.push(`${remainder} cp`);
+  let reward = parts.join(' ');
+  if (bonus) reward += ` plus ${bonus}`;
+  return reward;
+}
+
+function applyMerchantsWharfDynamicBoard(quest) {
+  if (!currentCharacter) return;
+  const city = currentCharacter.location;
+  const loc = LOCATIONS[city];
+  if (!loc) return;
+  if (!loc.questBoards) loc.questBoards = {};
+  if (quest) {
+    loc.questBoards[MERCHANTS_WHARF_DYNAMIC_BOARD] = [quest];
+  } else {
+    delete loc.questBoards[MERCHANTS_WHARF_DYNAMIC_BOARD];
+  }
+  const allQuests = Object.values(loc.questBoards).reduce((acc, quests) => acc.concat(quests), []);
+  loc.quests = allQuests;
+}
+
+const MERCHANTS_WHARF_OPPORTUNITIES = [
+  {
+    key: 'hookfin-catch',
+    scale: 'minor',
+    baseWeight: 1.6,
+    station: 'commoner',
+    personaRole: 'Hookfin Net Captain',
+    personaStyle: 'gruff',
+    timeWeights: {
+      predawn: 1.6,
+      morning: 1.3,
+      'late-morning': 1.2,
+      afternoon: 1.1,
+      evening: 0.85,
+      night: 0.55,
+    },
+    seasonWeights: { spring: 1.05, summer: 1.1, autumn: 1.0, winter: 0.85 },
+    eventWeights: { storm_backlog: 1.1, harvest_surge: 0.9 },
+    createQuest: ({ persona, factors, rng }) => {
+      const tideMap = {
+        predawn: 'pre-dawn tide',
+        morning: 'morning tide',
+        'late-morning': 'late morning tide',
+        afternoon: 'afternoon tide',
+        'late-afternoon': 'sunset tide',
+        evening: 'evening tide',
+        night: 'lantern-lit tide',
+        day: 'day tide',
+      };
+      const tidePhrase = tideMap[factors.timeKey] || 'current tide';
+      const eventDetail = factors.events.includes('storm_backlog')
+        ? 'Storm-delayed boats disgorged twice their usual catch, and crates already crowd the planks.'
+        : factors.events.includes('harvest_surge')
+          ? 'Harvest barges arrived heavy with preserved fishmeal that must move inland before the sun bakes it.'
+          : "Tonight's nets bulged with silvered fish, overflowing the Hookfin skiff.";
+      const reward = merchantsWharfRandomInt(rng, 120, 210);
+      const timeline =
+        factors.timeKey === 'predawn'
+          ? 'Pre-dawn tide rotation (~3 hours)'
+          : factors.timeKey === 'night'
+            ? 'Lantern-lit tide rotation (~3 hours)'
+            : 'Single tide rotation (~3 hours)';
+      const laborCondition = factors.events.includes('storm_backlog')
+        ? 'Storm-delayed flotillas'
+        : factors.events.includes('harvest_surge')
+          ? 'Harvest convoy surge'
+          : null;
+      return {
+        title: merchantsWharfPick(
+          ['Hookfin Dawn Offload', "Netters' Overflow Haul", 'Skiff Catch Sling Team'],
+          rng,
+        ),
+        description: `${eventDetail} ${persona.name} needs extra arms to move the gleaming catch from the Hookfin skiff to waiting wagons before the ${tidePhrase} turns.`,
+        location: "Merchants' Wharf",
+        requirements: [
+          'Athletics 16+ or Strength 14+ to haul baskets without slowing.',
+          "Guild Rank: Dockhand Crew Laborer or Adventurers' Guild Cold Iron.",
+        ],
+        conditions: [
+          `Work the ${tidePhrase} moving baskets from skiff to market wagons in one sweep.`,
+          "Keep tally slates dry and follow the net captain's cadence.",
+        ],
+        timeline,
+        risks: [
+          'Slippery planks and swinging basket loads.',
+          'Spoilage fines if crates warm before reaching market.',
+        ],
+        reward: formatMerchantsWharfReward(reward, 'dock kitchen meal chit'),
+        notes: `Find ${persona.name} by the Hookfin skiff when the ${tidePhrase} begins.`,
+        issuer: `${persona.name}, Hookfin Net Captain`,
+        postingStyle: 'Pier Contract Offer',
+        laborCondition,
+        repeatable: true,
+      };
+    },
+    createNarrative: ({ persona, factors }) => {
+      if (factors.events.includes('storm_backlog')) {
+        return `Spray-lashed planks tremble beneath your boots as ${persona.name} waves you toward a skiff piled high with storm-delayed catch.`;
+      }
+      if (factors.timeKey === 'predawn' || factors.timeKey === 'night') {
+        return `Lanternlight flickers across the tide when ${persona.name} from the Hookfin crew beckons you toward their overloaded skiff.`;
+      }
+      return `You shadow the rush of dockhands until ${persona.name} whistles for help beside a skiff stacked with fresh catch.`;
+    },
+    createQuote: ({ persona, factors }) => {
+      const tideMap = {
+        predawn: 'before dawn bells ring',
+        night: 'before the lantern tide turns',
+        morning: 'before the morning tide shifts',
+        'late-morning': 'before the noon bell',
+        afternoon: 'before the afternoon tide swings back out',
+        'late-afternoon': 'before sunset crowds the pier',
+        evening: 'before curfew bells sound',
+      };
+      const deadline = tideMap[factors.timeKey] || 'before this tide turns';
+      return `Grab a sling and keep pace—we need this catch cleared ${deadline}.`;
+    },
+  },
+  {
+    key: 'wagon-push',
+    scale: 'moderate',
+    baseWeight: 1.1,
+    station: 'guild',
+    personaRole: 'Merrow Berth Clerk',
+    personaStyle: 'dry',
+    timeWeights: {
+      predawn: 0.6,
+      morning: 1.1,
+      'late-morning': 1.25,
+      afternoon: 1.35,
+      'late-afternoon': 1.4,
+      evening: 1.15,
+      night: 0.7,
+    },
+    seasonWeights: { spring: 1, summer: 1.1, autumn: 1.25, winter: 0.9 },
+    eventWeights: { harvest_surge: 1.4, storm_backlog: 1.15 },
+    createQuest: ({ persona, factors, rng }) => {
+      const queueNote = factors.events.includes('harvest_surge')
+        ? 'Harvest convoy wagons clog the quay, demanding a relentless load-out.'
+        : factors.events.includes('storm_backlog')
+          ? 'Storm-stacked manifests overflow the berth office and the wagons must roll before tides shift again.'
+          : 'Overflow consignments from inland markets are stacking higher than the scheduled crews can clear.';
+      const reward = merchantsWharfRandomInt(rng, 360, 520);
+      const timeline = factors.timeKey === 'evening' || factors.timeKey === 'late-afternoon'
+        ? 'Extended dusk rotation (~8 hours)'
+        : 'Full daylight shift (~8 hours)';
+      const laborCondition = factors.events.includes('harvest_surge')
+        ? 'Harvest convoy surge'
+        : factors.events.includes('storm_backlog')
+          ? 'Storm-delayed flotillas'
+          : null;
+      return {
+        title: merchantsWharfPick(
+          ['Grain Wagon Surge Crew', 'Berth Overflow Sling Team', 'Merrow Wagon Dispatch'],
+          rng,
+        ),
+        description: `${queueNote} ${persona.name} needs disciplined hands to keep crane slings feeding inland wagons without pause.`,
+        location: "Merchants' Wharf",
+        requirements: [
+          'Athletics 18+ or Vehicles (Land) proficiency 16+ to keep the queue moving.',
+          "Guild Rank: Dockhand Crew Laborer or Adventurers' Guild Bronze.",
+        ],
+        conditions: [
+          'Cycle cargo from hold to wagon until the manifest queue is cleared.',
+          'Record each wagon seal with the berth clerk before it rolls inland.',
+        ],
+        timeline,
+        risks: [
+          'Runaway pallets or strained backs from relentless hauling.',
+          'Dock fines if manifests go missing or wagons depart late.',
+        ],
+        reward: formatMerchantsWharfReward(reward, 'wagon priority chit for inland dispatch'),
+        notes: `Check in with ${persona.name} at the berth office counter before taking a sling team.`,
+        issuer: `${persona.name}, Merrow Berth Clerk`,
+        postingStyle: 'Pier Contract Offer',
+        laborCondition,
+        repeatable: true,
+      };
+    },
+    createNarrative: ({ persona, factors }) => {
+      if (factors.events.includes('harvest_surge')) {
+        return `${persona.name} slaps a stack of grain tallies against their palm, gesturing at wagon teams that stretch far past the pier gates.`;
+      }
+      return `Manifest cards fan between ${persona.name}'s fingers as they flag you toward a row of waiting wagons.`;
+    },
+    createQuote: ({ persona, factors }) => {
+      const urgency = factors.events.includes('harvest_surge')
+        ? 'These farmers have no patience—keep the convoy rolling.'
+        : 'Queues are backing into the district—keep the cranes cycling and the wagons rolling.';
+      return `${urgency}`;
+    },
+  },
+  {
+    key: 'frigate-offload',
+    scale: 'major',
+    baseWeight: 0.65,
+    station: 'guild',
+    personaRole: 'Syndicate Logistics Factor',
+    personaStyle: 'dry',
+    timeWeights: {
+      predawn: 0.8,
+      morning: 0.95,
+      'late-morning': 1.05,
+      afternoon: 1.2,
+      'late-afternoon': 1.35,
+      evening: 1.4,
+      night: 1.25,
+    },
+    seasonWeights: { spring: 1, summer: 1.05, autumn: 1.15, winter: 0.9 },
+    eventWeights: { storm_backlog: 1.6, harvest_surge: 1.2 },
+    createQuest: ({ persona, factors, rng }) => {
+      const pressure = factors.events.includes('storm_backlog')
+        ? 'A Coral Keep frigate limped in behind the storm, holds packed tight with overdue cargo that must clear before the next tide closes the lane.'
+        : factors.events.includes('harvest_surge')
+          ? 'Harvest convoys wait offshore for berth space while a Coral Keep frigate still sits heavy with trade goods.'
+          : 'The syndicate wants a Coral Keep frigate turned in record time so new charters can take the berth.';
+      const reward = merchantsWharfRandomInt(rng, 1000, 1500);
+      const timeline = 'Double-tide contract (~10 hours across two shifts)';
+      const laborCondition = factors.events.includes('storm_backlog')
+        ? 'Storm-delayed flotillas'
+        : factors.events.includes('harvest_surge')
+          ? 'Harvest convoy surge'
+          : null;
+      return {
+        title: merchantsWharfPick(
+          ['Coral Keep Frigate Turnaround', 'Syndicate Frigate Unload Detail', 'Frigate Double-Tide Overseer'],
+          rng,
+        ),
+        description: `${pressure} ${persona.name} needs a steady hand to drive two full shifts of crane crews and tally clerks.`,
+        location: "Merchants' Wharf",
+        requirements: [
+          "Leadership 20+ or Navigator's Tools proficiency 18+ to coordinate double crews.",
+          "Guild Rank: Merrow Syndicate Contractor or Adventurers' Guild Silver.",
+        ],
+        conditions: [
+          'Oversee paired crane teams unloading the frigate over two consecutive tides.',
+          'File turnover reports with Harborwatch after each hold clears.',
+        ],
+        timeline,
+        risks: [
+          'Cable snaps and crowded decks during peak unload.',
+          'Dockmaster penalties if tides miss their scheduled window.',
+        ],
+        reward: formatMerchantsWharfReward(reward, 'berth priority chit for a future charter'),
+        notes: `Report to ${persona.name} in the berth office an hour before the next tide bell.`,
+        issuer: `${persona.name}, Syndicate Logistics Factor`,
+        postingStyle: 'Pier Contract Offer',
+        laborCondition,
+        repeatable: true,
+      };
+    },
+    createNarrative: ({ persona, factors }) => {
+      if (factors.events.includes('storm_backlog')) {
+        return `Factor ${persona.name} strides from the berth office, coat still damp from the squall, pointing toward a frigate laden with storm-backlog cargo.`;
+      }
+      return `Ledger satchels thump against ${persona.name}'s hip as they outline a two-tide plan to clear the frigate at berth.`;
+    },
+    createQuote: ({ persona }) => {
+      return 'Two tides, no excuses—keep the cranes in motion and hand me a clean turnover report.';
+    },
+  },
+  {
+    key: 'night-watch',
+    scale: 'moderate',
+    baseWeight: 0.9,
+    station: 'military',
+    personaRole: 'Harbor Guard Corporal',
+    personaStyle: 'gruff',
+    timeWeights: {
+      predawn: 1.4,
+      morning: 0.6,
+      'late-morning': 0.55,
+      afternoon: 0.65,
+      'late-afternoon': 0.8,
+      evening: 1.6,
+      night: 1.9,
+    },
+    seasonWeights: { spring: 1, summer: 1, autumn: 1.05, winter: 1.1 },
+    eventWeights: { storm_backlog: 1.2, night_shift: 2, slick_planks: 1.15 },
+    createQuest: ({ persona, factors, rng }) => {
+      const situation = factors.events.includes('storm_backlog')
+        ? 'Storm haze and backlog crews make the night shift risky; extra eyes are needed on every crane line.'
+        : factors.events.includes('slick_planks')
+          ? 'Rain-slick planks and night crews risk accidents unless someone keeps watch.'
+          : 'Lantern crews are stretched thin and smugglers favor this tide for slipping contraband ashore.';
+      const reward = merchantsWharfRandomInt(rng, 520, 680);
+      const timeline = 'Lantern-lit watch (~6 hours)';
+      const laborCondition = factors.events.includes('storm_backlog')
+        ? 'Storm-delayed flotillas'
+        : factors.events.includes('harvest_surge')
+          ? 'Harvest convoy surge'
+          : null;
+      return {
+        title: merchantsWharfPick(
+          ['Pier Lantern Vigil', 'Night Crane Oversight', 'Harborwatch Tide Patrol'],
+          rng,
+        ),
+        description: `${situation} ${persona.name} is organizing an extra set of eyes to patrol the pier and cranes through the night tide.`,
+        location: "Merchants' Wharf",
+        requirements: [
+          "Perception 18+ or Navigator's Tools proficiency 16+ to monitor rigging after dark.",
+          "Guild Rank: Harbor Guard Corporal or Adventurers' Guild Silver.",
+        ],
+        conditions: [
+          'Patrol the pier and crane decks through the night tide, logging incidents with Harborwatch.',
+          'Coordinate with berth crews to flag unsafe rigging or contraband slips.',
+        ],
+        timeline,
+        risks: [
+          'Hidden slicks and swinging loads in low light.',
+          'Guard penalties if an incident goes unreported.',
+        ],
+        reward: formatMerchantsWharfReward(reward, 'Harbor Guard hazard chit'),
+        notes: `Check in with ${persona.name} beside the Harbor Guard brazier at shift change.`,
+        issuer: `${persona.name}, Harbor Guard Corporal`,
+        postingStyle: 'Pier Contract Offer',
+        laborCondition,
+        repeatable: true,
+      };
+    },
+    createNarrative: ({ persona }) => {
+      return `Lanterns sway in the salt breeze as Harbor Guard corporal ${persona.name} motions you closer to the watch brazier.`;
+    },
+    createQuote: ({ persona }) => {
+      return `${persona.name.split(' ')[0] || 'Corporal'} growls, "Keep those cranes honest and file every incident before dawn."`;
+    },
+  },
+];
+
+function merchantsWharfOpportunityWeight(template, factors, state) {
+  let weight = template.baseWeight ?? 1;
+  if (template.timeWeights) {
+    weight *= template.timeWeights[factors.timeKey] ?? template.timeWeights.day ?? 1;
+  }
+  if (template.seasonWeights && factors.seasonKey) {
+    weight *= template.seasonWeights[factors.seasonKey] ?? 1;
+  }
+  if (template.eventWeights && Array.isArray(factors.events)) {
+    factors.events.forEach(event => {
+      if (template.eventWeights[event] != null) {
+        weight *= template.eventWeights[event];
+      }
+    });
+  }
+  weight *= merchantsWharfScaleWeight(template.scale, state.workers);
+  return Math.max(0, weight);
+}
+
+function selectMerchantsWharfOpportunity(state) {
+  const factors = merchantsWharfOpportunityFactors(state);
+  const weights = MERCHANTS_WHARF_OPPORTUNITIES.map(template =>
+    merchantsWharfOpportunityWeight(template, factors, state),
+  );
+  const total = weights.reduce((sum, value) => sum + value, 0);
+  if (total <= 0) return null;
+  const roll = state.random() * total;
+  let cumulative = 0;
+  for (let i = 0; i < MERCHANTS_WHARF_OPPORTUNITIES.length; i += 1) {
+    cumulative += weights[i];
+    if (roll <= cumulative) {
+      return { template: MERCHANTS_WHARF_OPPORTUNITIES[i], factors };
+    }
+  }
+  return {
+    template: MERCHANTS_WHARF_OPPORTUNITIES[MERCHANTS_WHARF_OPPORTUNITIES.length - 1],
+    factors,
+  };
+}
+
+function generateMerchantsWharfOpportunity(state) {
+  const selection = selectMerchantsWharfOpportunity(state);
+  if (!selection) return null;
+  const { template, factors } = selection;
+  const nameDetails = generateNpcName({ station: template.station || 'guild', allowReuse: false });
+  const persona = {
+    name: nameDetails.fullName,
+    role: template.personaRole || 'Pier Steward',
+    style: template.personaStyle || 'gruff',
+  };
+  const quest = template.createQuest({ persona, factors, rng: state.random });
+  if (!quest) return null;
+  const narrative = template.createNarrative
+    ? template.createNarrative({ persona, factors, rng: state.random })
+    : `${persona.name} flags you down with an urgent contract along the pier.`;
+  const quote = template.createQuote
+    ? template.createQuote({ persona, factors, rng: state.random })
+    : 'Can you take this contract before the tide turns?';
+  const binding = quest.visibilityBinding ? { ...quest.visibilityBinding } : {};
+  if (!binding.board) binding.board = MERCHANTS_WHARF_DYNAMIC_BOARD;
+  if (!binding.business) binding.business = "Merchants' Wharf";
+  if (!binding.location) binding.location = "Merchants' Wharf";
+  if (!binding.district) binding.district = 'Harbor Ward';
+  if (!binding.habitat) binding.habitat = 'coastal';
+  if (!binding.region) binding.region = 'waves_break';
+  quest.visibilityBinding = binding;
+  if (!quest.location) quest.location = "Merchants' Wharf";
+  if (!quest.postingStyle) quest.postingStyle = 'Pier Contract Offer';
+  if (!quest.issuer) quest.issuer = `${persona.name}, ${template.personaRole}`;
+  if (!quest.notes) {
+    const label = factors.timeLabel ? factors.timeLabel.toLowerCase() : 'the current tide';
+    quest.notes = `Meet ${persona.name} along the pier during the ${label}.`;
+  }
+  quest.repeatable = quest.repeatable ?? true;
+  return { persona, quest, narrative, quote, factors, template };
+}
+
 function capitalizeFirst(text) {
   if (!text) return '';
   return text.charAt(0).toUpperCase() + text.slice(1);
@@ -2868,8 +3385,8 @@ function buildingExtraSceneOverride(buildingName, rng) {
     {
       pattern: /wharf|pier|dock|quay/,
       scenes: [
-        'Capstan crews chant as they warp a grain barge beneath the waiting cranes.',
-        'Ledger-runners weave between crate stacks, relaying berth assignments to sweating dock bosses.',
+        'Ledger-runners weave between crate stacks, relaying berth assignments to sweating dock bosses. Across the pier, capstan crews chant as they haul a grain barge beneath the waiting cranes.',
+        'Harbor quartermasters clap tally drums while sling gangs cinch fresh cargo into waiting nets.',
       ],
     },
     {
@@ -3382,7 +3899,13 @@ function initializeBuildingState(context) {
     habitat: context.habitat,
     buildingName: context.buildingName || context.building?.name || '',
     season,
+    dynamicBoards: [],
+    pierWalks: 0,
+    lastOpportunity: null,
   };
+  if ((state.buildingName || '').toLowerCase() === "merchants' wharf") {
+    applyMerchantsWharfDynamicBoard(null);
+  }
   const greetRoll = rng();
   if (greetRoll < buildingGreetingChance(timeBand, context.weather, workers)) {
     buildingSummonManager(state, context, 'greeted');
@@ -3507,6 +4030,13 @@ function buildingDescriptionHTML(state, questInfo) {
 function buildingInteractionLabels(context) {
   const habitat = (context.habitat || '').toLowerCase();
   const name = (context.building?.name || context.buildingName || '').toLowerCase();
+  if (name === "merchants' wharf") {
+    return {
+      knock: 'Signal the berth office',
+      search: 'Walk the pier looking for job opportunities',
+      request: 'Ask about pier contracts',
+    };
+  }
   if (habitat === 'farmland' || /farm|orchard|grove|pasture|meadow/i.test(name)) {
     return {
       knock: 'Knock on the homestead door',
@@ -3576,16 +4106,25 @@ function findAvailableQuestForBoards(boardEntries) {
 
 function generateBuildingEncounter(buildingName, context) {
   const state = ensureBuildingEncounterState(context);
-  const questInfo = findAvailableQuestForBoards(context.buildingBoards || []);
+  const dynamicBoards = Array.isArray(state.dynamicBoards) ? state.dynamicBoards : [];
+  const combinedBoards = [...(context.buildingBoards || []), ...dynamicBoards];
+  const questInfo = findAvailableQuestForBoards(combinedBoards);
   const interactions = [];
   const labels = buildingInteractionLabels(context);
   const encounterBuildingName = context.building?.name || context.buildingName || '';
   const isMerchantsWharf = encounterBuildingName.toLowerCase() === "merchants' wharf";
-  if (!state.managerFound) {
-    if (!isMerchantsWharf) {
-      interactions.push({ action: 'building-knock', name: labels.knock });
-      interactions.push({ action: 'building-search', name: labels.search });
+  if (isMerchantsWharf) {
+    interactions.push({ action: 'merchants-walk-pier', name: 'Walk the pier looking for job opportunities' });
+    if (state.managerFound) {
+      interactions.push({
+        action: 'building-request-work',
+        name: questInfo?.quest?.title ? `Ask about “${questInfo.quest.title}”` : labels.request,
+        disabled: questInfo ? !questInfo.canOffer : false,
+      });
     }
+  } else if (!state.managerFound) {
+    interactions.push({ action: 'building-knock', name: labels.knock });
+    interactions.push({ action: 'building-search', name: labels.search });
   } else {
     interactions.push({
       action: 'building-request-work',
@@ -3599,6 +4138,48 @@ function generateBuildingEncounter(buildingName, context) {
     interactions,
     questInfo,
   };
+}
+
+function handleMerchantsPierWalk(position) {
+  const context = createBuildingEncounterContext(position);
+  if (!context) return;
+  const state = ensureBuildingEncounterState(context);
+  state.message = null;
+  state.messageType = null;
+  state.pierWalks = (state.pierWalks || 0) + 1;
+  const opportunity = generateMerchantsWharfOpportunity(state);
+  if (!opportunity) {
+    state.narrative.push('You walk the length of the pier, but every crew keeps their heads down with no spare contracts today.');
+    state.dynamicBoards = [];
+    state.dialogue = [];
+    state.persona = null;
+    state.managerFound = false;
+    state.lastOpportunity = null;
+    applyMerchantsWharfDynamicBoard(null);
+    state.message = 'No fresh postings surfaced during this circuit of the pier.';
+    state.messageType = 'info';
+    setBuildingEncounterState(position.building, state);
+    showNavigation();
+    return;
+  }
+  const { persona, quest, narrative, quote } = opportunity;
+  state.dynamicBoards = [
+    {
+      name: MERCHANTS_WHARF_DYNAMIC_BOARD,
+      quests: [quest],
+    },
+  ];
+  state.dialogue = [{ persona, quote }];
+  state.narrative.push(narrative);
+  state.persona = persona;
+  state.managerFound = true;
+  state.entryMethod = 'pier';
+  state.lastOpportunity = quest.title || opportunity.template?.key || null;
+  state.message = `A new contract is on offer: “${quest.title}”.`;
+  state.messageType = 'info';
+  applyMerchantsWharfDynamicBoard(quest);
+  setBuildingEncounterState(position.building, state);
+  showNavigation();
 }
 
 function handleBuildingKnock(position) {
@@ -4264,6 +4845,9 @@ function showNavigation() {
               setMainHTML(
                 `<div class="no-character"><h1>You practice enchanting.</h1><p>Proficiency: ${prof.toFixed(2)}</p></div>`
               );
+              return;
+            } else if (action === 'merchants-walk-pier') {
+              handleMerchantsPierWalk(pos);
               return;
             } else if (action === 'building-knock') {
               handleBuildingKnock(pos);
