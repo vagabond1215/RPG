@@ -4187,7 +4187,7 @@ const BUILDING_OVERVIEW_BLUEPRINTS = {
         "season:autumn": "Wagons brim with harvested grain and root bundles",
         "season:winter": "Root cellars stand stacked with preserved stores while fields lie fallow",
         default: () => {
-          const good = fragments.sampleGood || 'produce ready for the day's dispatch';
+          const good = fragments.sampleGood || "produce ready for the day's dispatch";
           return `Stacked crates of ${good} wait beside the packing shed`;
         },
       },
