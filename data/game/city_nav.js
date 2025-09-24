@@ -457,8 +457,9 @@ Ship hulls rise on their stocks while disciplined marines drill between coils of
       },
       "Nobles' Quay": {
         travelPrompt: "Exit to",
-        description: `Gliding down the marble steps onto Nobles' Quay, you catch reflections of gilded barges in the water.
-Cloaked attendants whisper greetings as perfumed breezes mingle with salt spray.`,
+        description: `Stepping onto the granite span of Nobles' Quay, you find a high society pier reserved for sanctioned arrivals.
+Silken canopies and proud banners shade the spotless walkway where only approved nobles and patrols take measured strolls.
+An inspected lane admits occasional curtained wagons to service private vessels after scrutiny at the pier head, with major cargo left for dusk labor or the bustling Merchants' Wharf.`,
         exits: [
           { name: "The Port District", target: "The Port District" },
           { name: "Coral Keep", target: "Coral Keep", type: "location", prompt: "Sail to", icon: "assets/images/icons/waves_break/Sail to Coral Keep.png" }
