@@ -3246,7 +3246,7 @@ function merchantsWharfOverview({ weather, season, timeLabel }) {
   return `${entrySentence} ${throngSentence} ${crateSentence} ${shipSentence}`;
 }
 
-function merchantsWharfSeasonKey(season) {
+function normalizeSeasonKey(season) {
   const lower = (season || '').toLowerCase();
   if (!lower) return null;
   if (lower.includes('spring')) return 'spring';
@@ -3256,7 +3256,7 @@ function merchantsWharfSeasonKey(season) {
   return lower;
 }
 
-function merchantsWharfTimeKey(timeLabel) {
+function normalizeTimeKey(timeLabel) {
   const lower = (timeLabel || '').toLowerCase();
   if (!lower) return 'day';
   if (lower.includes('deep night') || lower.includes('midnight')) return 'night';
@@ -3270,6 +3270,1050 @@ function merchantsWharfTimeKey(timeLabel) {
   if (lower.includes('afternoon')) return 'afternoon';
   if (lower.includes('morning')) return 'morning';
   return 'day';
+}
+
+function normalizeWeatherKey(weather) {
+  const condition = (weather?.condition || '').toLowerCase();
+  if (!condition) return null;
+  if (condition.includes('storm') || condition.includes('gale') || condition.includes('squall')) return 'storm';
+  if (condition.includes('rain') || condition.includes('drizzle')) return 'rain';
+  if (condition.includes('fog') || condition.includes('mist')) return 'fog';
+  if (condition.includes('snow') || condition.includes('sleet') || condition.includes('ice')) return 'snow';
+  if (condition.includes('clear')) return 'clear';
+  if (condition.includes('cloud')) return 'cloud';
+  return condition.split(/[\s,]+/)[0] || condition;
+}
+
+function evaluateOverviewValue(value, fragments) {
+  if (typeof value === 'function') return value(fragments);
+  if (Array.isArray(value)) {
+    const list = value.filter(Boolean);
+    if (!list.length) return '';
+    const rng = fragments.rng ?? Math.random;
+    const index = Math.floor(rng() * list.length);
+    const entry = list[index] ?? list[0];
+    if (typeof entry === 'function') return entry(fragments);
+    return entry;
+  }
+  return value;
+}
+
+function chooseOverviewFragment(options, fragments) {
+  if (!options) return '';
+  const { events = [], weatherKey, seasonKey, timeKey } = fragments;
+  const order = [];
+  events.forEach(event => order.push(`event:${event}`));
+  if (weatherKey) order.push(`weather:${weatherKey}`);
+  if (seasonKey) order.push(`season:${seasonKey}`);
+  if (timeKey) order.push(`time:${timeKey}`);
+  order.push('default');
+  for (const key of order) {
+    if (!key) continue;
+    if (Object.prototype.hasOwnProperty.call(options, key)) {
+      const resolved = evaluateOverviewValue(options[key], fragments);
+      if (resolved) return resolved;
+    }
+  }
+  const values = Object.values(options);
+  for (const value of values) {
+    const resolved = evaluateOverviewValue(value, fragments);
+    if (resolved) return resolved;
+  }
+  return '';
+}
+
+function gatherBuildingOverviewFlags(nameLower) {
+  return {
+    isGlass: /glass|blower|kiln|glory hole/.test(nameLower),
+    isForge: /forge|smith|anvil|foundry|smelter/.test(nameLower),
+    isTannery: /tann|hide|leather|skin|curing/.test(nameLower),
+    isRope: /rope|rigging|cord|line|cable/.test(nameLower),
+    isBrew: /brew|ale|mead|distill|spirits|wine|winery|cider|brewery/.test(nameLower),
+    isBakery: /bake|oven|bread|pastry|bakery|loaf/.test(nameLower),
+    isTailor: /tailor|seam|cloth|garb|loom|weave|textile|drape|haberdash/.test(nameLower),
+    isCarpenter: /carpenter|wood|saw|joiner|lumber|timber/.test(nameLower),
+    isPrinter: /press|printer|typeset|type|broadside/.test(nameLower),
+    isMason: /mason|stone|brick|kiln/.test(nameLower),
+    isTemple: /temple|shrine|sanctuary|altar|cathedral|chapel/.test(nameLower),
+    isMarket: /market|bazaar|plaza|square|exchange|mart/.test(nameLower),
+    isInn: /inn|tavern|alehouse|hostel|lodge|pub|cantina|taproom/.test(nameLower),
+    isGarrison: /barracks|guard|watch|garrison|fort|gate/.test(nameLower),
+    isHarbor: /wharf|dock|pier|quay|shipyard|slip/.test(nameLower),
+  };
+}
+
+function buildingTypeKey(buildingName, businessProfile) {
+  const nameLower = (buildingName || '').toLowerCase();
+  const category = (businessProfile?.category || '').toLowerCase();
+  if (/wharf|dock|pier|quay/.test(nameLower)) return 'port';
+  if (/shipyard|drydock|slip/.test(nameLower)) return 'shipyard';
+  if (/yard/.test(nameLower) && /naval|ship|dock/.test(nameLower)) return 'shipyard';
+  if (/warehouse|granary|storehouse|depot|stockyard|barn/.test(nameLower)) return 'warehouse';
+  if (/barracks|guard|watch|garrison|fort|gate/.test(nameLower)) return 'garrison';
+  if (/temple|shrine|sanctuary|altar|cathedral|chapel/.test(nameLower)) return 'temple';
+  if (/library|archive|records|athenaeum|scriptorium/.test(nameLower)) return 'archive';
+  if (/academy|school|college|lyceum|seminary/.test(nameLower)) return 'academy';
+  if (/guild|exchange|hall|consulate/.test(nameLower)) return 'guild';
+  if (/market|bazaar|plaza|square|mart/.test(nameLower)) return 'market';
+  if (/inn|tavern|alehouse|hostel|lodge|pub|cantina|taproom/.test(nameLower)) return 'inn';
+  if (/mill|wheel|grinder|press/.test(nameLower)) return 'mill';
+  if (/brew|distill|brewery|mead|spirits|wine|winery|cider/.test(nameLower)) return 'workshop_craft';
+  if (/forge|smith|anvil|foundry|smelter/.test(nameLower)) return 'workshop_hot';
+  if (/glass|kiln|blower|furnace/.test(nameLower)) return 'workshop_hot';
+  if (/ropewalk|rope|rigging|loom|weave|tailor|tannery|leather|dye|cooper|sailmaker|butcher|smokehouse|bakery|oven|carpenter|woodshop|printer|press|workshop|smithy/.test(nameLower)) {
+    return 'workshop_craft';
+  }
+  if (/farm|field|pasture|orchard|grove|meadow|polder|ranch|vineyard|stockyard|barn|apiary|dairy|paddock|stead|acre|garden/.test(nameLower)) {
+    return 'farm';
+  }
+  if (/clinic|hospital|healer|apothecary|bath|spa|sanitorium|theater|opera|playhouse|amphitheater/.test(nameLower)) {
+    return 'service';
+  }
+  switch (category) {
+    case 'logistics':
+      return /wharf|dock|pier|quay/.test(nameLower) ? 'port' : 'warehouse';
+    case 'security':
+      return 'garrison';
+    case 'support':
+      return 'service';
+    case 'service':
+      return 'service';
+    case 'hospitality':
+      return 'inn';
+    case 'processing':
+      return /forge|smelt|kiln|glass/.test(nameLower) ? 'workshop_hot' : 'workshop_craft';
+    case 'craft':
+      return /forge|smith|glass|kiln/.test(nameLower) ? 'workshop_hot' : 'workshop_craft';
+    case 'agriculture':
+      return 'farm';
+    case 'education':
+      return 'academy';
+    case 'religion':
+      return 'temple';
+    default:
+      break;
+  }
+  return 'default';
+}
+
+function gatherBuildingOverviewEvents(context, typeKey, weatherKey, seasonKey, timeKey) {
+  const events = new Set();
+  if (timeKey === 'night' || timeKey === 'evening' || timeKey === 'predawn') {
+    events.add('night_shift');
+  }
+  if (weatherKey === 'storm') events.add('storm_response');
+  if (weatherKey === 'rain') events.add('rainfall');
+  if (weatherKey === 'fog') events.add('fogbound');
+  if (weatherKey === 'snow') events.add('snowfall');
+  if (typeKey === 'farm' && (seasonKey === 'summer' || seasonKey === 'autumn')) {
+    events.add('harvest_rush');
+  }
+  if (typeKey === 'mill' && seasonKey === 'autumn') {
+    events.add('harvest_rush');
+  }
+  if (typeKey === 'temple' && seasonKey === 'spring') {
+    events.add('pilgrimage');
+  }
+  if (typeKey === 'market' && seasonKey === 'spring') {
+    events.add('festival_buzz');
+  }
+  if (typeKey === 'garrison' && (timeKey === 'morning' || timeKey === 'afternoon')) {
+    events.add('drill');
+  }
+  (context.businessProfile?.laborConditions || []).forEach(entry => {
+    const trigger = (entry?.trigger || '').toLowerCase();
+    const seasonText = (entry?.season || '').toLowerCase();
+    const seasonMatch = !seasonText || (seasonKey && seasonText.includes(seasonKey));
+    if (!seasonMatch) return;
+    if (trigger.includes('harvest')) events.add('harvest_condition');
+    if (trigger.includes('storm')) events.add('storm_backlog');
+    if (trigger.includes('festival') || trigger.includes('holiday')) events.add('festival');
+    if (trigger.includes('surge') || trigger.includes('rush')) events.add('surge');
+    if (trigger.includes('inspection') || trigger.includes('audit')) events.add('inspection');
+    if (trigger.includes('convoy')) events.add('convoy');
+    if (trigger.includes('drill') || trigger.includes('patrol')) events.add('patrol');
+  });
+  return Array.from(events);
+}
+
+function sampleProductionGood(profile, rng) {
+  const goods = profile?.production?.goods;
+  if (Array.isArray(goods) && goods.length) {
+    const index = Math.floor((rng ?? Math.random)() * goods.length);
+    return goods[index] ?? goods[0];
+  }
+  return null;
+}
+
+function sentenceFromSlug(slug) {
+  if (!slug) return '';
+  let text = slug.trim();
+  if (!text) return '';
+  text = text.replace(/\s+/g, ' ');
+  const first = text.charAt(0);
+  if (first && first === first.toLowerCase()) {
+    text = first.toUpperCase() + text.slice(1);
+  }
+  if (!/[.!?]$/.test(text)) {
+    text += '.';
+  }
+  return text;
+}
+
+function joinOverviewParts(...parts) {
+  const filtered = parts.filter(Boolean).join(', ');
+  return filtered ? sentenceFromSlug(filtered) : '';
+}
+
+const BUILDING_OVERVIEW_BLUEPRINTS = {
+  port: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "event:storm_response": "brace against spray-lashed planks as gusts slam the awnings",
+        "weather:rain": "sidestep puddles pooling along the rain-slick planks",
+        "weather:fog": "feel your way past lantern posts wrapped in fog",
+        "weather:snow": "test each slush-slick timber while the harbor wind bites",
+        "weather:clear": "step over sun-warmed planks beneath a bright coastal sky",
+        "weather:cloud": "move along wind-brushed planks under muted daylight",
+        default: "thread between coiled hawsers and weathered bollards along the pier",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:storm_backlog": "Storm-delayed crews bark orders while crane captains juggle berths",
+        "event:night_shift": "Lantern teams trade hushed counts while harbor bells mark the tide",
+        "event:surge": "Extra gangs haul in double-time as manifests pile higher than usual",
+        "time:predawn": "Bleary stevedores set hooks for the first tide before dawn breaks",
+        "time:night": "Night crews labor under swinging lanterns to clear the holds before dawn",
+        "time:morning": "Dock crews strike an early rhythm slinging cargo ashore for waiting wagons",
+        "time:late-morning": "Clerks shout tallies as dock gangs rotate around the crowded berth",
+        "time:afternoon": "Sun-warmed crews heave cargo toward wagon queues without breaking cadence",
+        "time:late-afternoon": "Harbormasters push for one more turnover before the sunset tide",
+        "time:evening": "Dusk paints the cranes as teams race to finish loads before curfew bells",
+        default: "Dock crews keep cargo moving between ship holds and counting tables",
+      },
+      fragments,
+    );
+    const goodsBase = chooseOverviewFragment(
+      {
+        "event:harvest_condition": "Harvest wagons queue beside grain sacks stamped for inland caravans",
+        "event:harvest_rush": "Harvest wagons queue beside grain sacks stamped for inland caravans",
+        "event:storm_backlog": "Cargo lashed beneath heavy tarps waits for calmer seas and open berths",
+        "event:storm_response": "Extra lashings bind each pallet while crews brace against the gale",
+        "weather:rain": "Crates crouch beneath dripping tarpaulins while chalk tallies smear",
+        "weather:fog": "Shadowed cargo towers over the quay, lantern-light tracing their outlines",
+        "weather:snow": "Canvas-wrapped loads glisten with sleet along the pier edge",
+        "season:spring": "Fresh-painted crates from inland markets lend the quay a blossom of color",
+        "season:summer": "Citrus casks and tar-slick coils steep the air in heavy summer scents",
+        "season:autumn": "Ocher harvest seals mark bales bound for distant storehouses",
+        "season:winter": "Frost-stiff ropes bind salted stores awaiting hardy wagon teams",
+        default: "Orderly stacks of cargo crowd the quay awaiting dispatch inland",
+      },
+      fragments,
+    );
+    const shiftNote = chooseOverviewFragment(
+      {
+        "time:predawn": "first-light tally clerks double-check manifests before the bells change",
+        "time:morning": "fresh crews rotate in to keep the berths turning without pause",
+        "time:late-morning": "midday relief crews brace for the tide swing",
+        "time:afternoon": "sun-high teams pace themselves for the long haul to dusk",
+        "time:late-afternoon": "tide captains push for one last turnover before sunset",
+        "time:evening": "lantern orders stand ready as dusk creeps over the rigging",
+        "time:night": "watch captains demand steady counts despite the hour",
+        default: "shift leads shout schedules to keep the berths on time",
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:storm_backlog": "Signal bells clang while harbor cutters jockey for a safe approach",
+        "event:storm_response": "Harbor pilots pace the quay, eyes on rollers crashing against moored hulls",
+        "event:night_shift": "Harborwatch patrol boats idle nearby while lanterns sweep the water",
+        "event:surge": "Merrow Syndicate clerks wave more wagons into place, warning crews not to stall",
+        "weather:fog": "Horn calls echo as pilots trade signals with anchored luggers",
+        "weather:rain": "Berth clerks hunch beneath awnings while boatmen adjust rain-swollen lines",
+        "season:autumn": "Merchant syndicate flags ripple beside barges stacked with late-season grain",
+        default: "A merchant frigate under charter takes on loaders while harbor pilots pace the quay",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      joinOverviewParts(goodsBase, shiftNote),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+  shipyard: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "event:storm_response": "duck under tarped scaffolds as storm gusts rattle half-rigged masts",
+        "weather:rain": "step around runnels of rainwater spilling down the slipway planks",
+        "weather:fog": "follow the rasp of saws through fog-slick timbers toward the drydock",
+        "weather:snow": "brush sleet from your shoulders while braziers glow against the chill",
+        "weather:clear": "walk along sunlit planks while wood chips sparkle in the air",
+        default: "step between stacked timbers and tar kettles lining the shipyard slip",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:storm_backlog": "Repair crews swarm storm-battered hulls, shouting measurements over the din",
+        "event:night_shift": "Lantern-bearing riggers lash ratlines while caulkers tamp seams by feel",
+        "time:predawn": "Shipwrights chalk lines along keels before the first whistle of the day",
+        "time:night": "Night crews rivet patch plates while braziers keep the pitch pliant",
+        "time:morning": "Shipwright crews plane keel planks while riggers shout for fresh bolts",
+        "time:afternoon": "Sunlit scaffolds host carpenters fitting ribs into place",
+        "time:late-afternoon": "Supervisors press crews to button seams before tides reclaim the slip",
+        default: "Shipwright gangs coordinate sawyers, riveters, and riggers along the cradle",
+      },
+      fragments,
+    );
+    const stock = chooseOverviewFragment(
+      {
+        "event:storm_backlog": "Cradles brim with hulls awaiting inspection and replacement spars",
+        "season:spring": "Fresh-cut timber stacks perfume the air with sap and sawdust",
+        "season:summer": "Pitch kettles simmer beside neatly ranked planking bundles",
+        "season:autumn": "Tarred canvas and rope coils await convoy hulls bound for autumn seas",
+        "season:winter": "Frost dulls the sheen on copper sheathing stacked for winter refits",
+        default: () => {
+          const good = fragments.sampleGood || 'seasoned planks and tar barrels';
+          return `Staging racks brim with ${good}`;
+        },
+      },
+      fragments,
+    );
+    const focus = chooseOverviewFragment(
+      {
+        "event:storm_backlog": "A damaged brigantine tilts in its cradle while inspectors tally repairs",
+        "event:night_shift": "Night foremen pace the slip, lanterns reflecting off half-finished hulls",
+        "weather:fog": "Signal horns trade low notes with pilots waiting beyond the breakwater",
+        default: "A half-framed hull towers above the slip while caulkers tamp oakum into the seams",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(stock),
+      sentenceFromSlug(focus),
+    ].filter(Boolean);
+  },
+  warehouse: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "slip beneath overhangs dripping steady sheets beside the loading doors",
+        "weather:fog": "trace tally chalk marks through gray haze filling the warehouse lanes",
+        "weather:snow": "stamp slush from your boots before stepping onto the counting floor",
+        default: "step aside as wagon tongues line the counting house and loading bays",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:storm_backlog": "Porters hustle backlog pallets into rows while clerks demand fresh tallies",
+        "event:harvest_condition": "Additional crews swing grain sacks onto scales for rapid certification",
+        "time:predawn": "Skeleton crews sort manifests so dawn wagons can be loaded without delay",
+        "time:night": "Lantern-lit porters guide handcarts between towering racks before the night tide arrives",
+        "time:morning": "Porters shove handcarts between tall rack aisles while clerks chase signatures",
+        "time:afternoon": "Sunlight stripes the floor as teams relay crates toward outbound wagons",
+        default: "Porters and tally clerks weave around pallet stacks keeping goods accounted for",
+      },
+      fragments,
+    );
+    const goods = chooseOverviewFragment(
+      {
+        "event:harvest_condition": "Granaries of grain and dried goods dominate the main aisle",
+        "season:spring": "Bales stamped with blossom crests wait beside jars of preserved herbs",
+        "season:summer": "Salted barrels and citrus crates keep the air sharp with spice",
+        "season:autumn": "Harvest-marked bins overflow with bundled textiles and grain sacks",
+        "season:winter": "Crated coal and woolens pile high for cold-season caravans",
+        default: () => {
+          const good = fragments.sampleGood || 'crates and barrels ready for dispatch';
+          return `Rows of ${good} line the reinforced shelving`;
+        },
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:inspection": "Auditors stand over ledger desks comparing seals before releasing shipments",
+        "event:night_shift": "Night foremen watch from the mezzanine, lanterns bobbing over the aisles",
+        default: "Ledger clerks shout quotas from the mezzanine while overseers track outgoing loads",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(goods),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  workshop_hot: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "event:storm_response": fragments.flags.isGlass
+          ? "shield your face from gusts that drive furnace heat across the glasshouse floor"
+          : "brace against gusts that whip sparks beneath the forge awning",
+        "weather:rain": fragments.flags.isGlass
+          ? "wipe rain from your brow as furnace light spills across the slick floor"
+          : "shake off rain as you duck beneath the forge awnings and coal smoke",
+        "weather:fog": fragments.flags.isGlass
+          ? "follow the glow of the glory holes through damp morning haze"
+          : "navigate by the ring of hammers through fog-thickened courtyards",
+        "weather:snow": fragments.flags.isGlass
+          ? "stamp sleet from your boots while annealing ovens radiate welcome heat"
+          : "stamp sleet from your boots as furnace heat billows out to meet you",
+        default: fragments.flags.isGlass
+          ? "step into shimmering heat where molten glass paints the rafters in gold"
+          : "step beneath soot-dark awnings as hammer heat rolls out to meet you",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:night_shift": fragments.flags.isGlass
+          ? "Night gaffers rotate through the glory holes while annealers guard the kilns"
+          : "Lantern-lit smiths temper steel while quenching troughs hiss in the dark",
+        "event:surge": fragments.flags.isGlass
+          ? "Extra blowers twirl glowing gathers to keep pace with rush orders"
+          : "Additional hammer teams trade ringing blows to fill backlog commissions",
+        "time:morning": fragments.flags.isGlass
+          ? "Glassblowers twirl glowing gathers while cutters call out timings"
+          : "Hammer teams trade rhythmic blows as apprentices rush billets between the anvils",
+        "time:afternoon": fragments.flags.isGlass
+          ? "Polishers coax shimmer from cooling pieces while the kilns roar on"
+          : "Sunlit anvils flash as smiths stretch and fold metal in steady cadence",
+        default: fragments.flags.isGlass
+          ? "Glassworkers coordinate gathers, molds, and annealing racks with practiced ease"
+          : "Forge crews coordinate bellows, hammers, and quench baths to keep orders moving",
+      },
+      fragments,
+    );
+    const goods = chooseOverviewFragment(
+      {
+        "season:winter": fragments.flags.isGlass
+          ? "Frost traces the panes stacked to cool beside the annealing ovens"
+          : "Freshly forged hearth-irons and plowshares steam in the cold air",
+        "season:summer": fragments.flags.isGlass
+          ? "Sunlight refracts through shelves of sea-green glassware"
+          : "Racks of tempered blades gleam beneath the open shutters",
+        default: () => {
+          const good = fragments.sampleGood || (fragments.flags.isGlass ? 'cooling glassware' : 'freshly forged work');
+          return `Racks of ${good} line the staging tables`;
+        },
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:inspection": fragments.flags.isGlass
+          ? "Guild inspectors hold finished pieces to the light, seeking waves or trapped ash"
+          : "Quartermasters weigh each forging, ensuring guild marks match the order",
+        default: fragments.flags.isGlass
+          ? "A master gaffer spins a final gather while apprentices stand ready with molds"
+          : "The master smith checks the temper of a blade, nodding for the quench",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(goods),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  workshop_craft: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": fragments.flags.isTannery
+          ? "pick your way past runoff sluicing from covered vats"
+          : fragments.flags.isRope
+            ? "step through the long shed while rain drums on stretched fibers"
+            : "duck beneath dripping eaves crowded with drying work",
+        "weather:snow": fragments.flags.isBrew
+          ? "let malt steam chase the cold as you enter the brewhouse"
+          : "stamp sleet from your boots while warm workroom air rolls out",
+        default: fragments.flags.isTannery
+          ? "skirt pungent vats where hides soak under stretched awnings"
+          : fragments.flags.isRope
+            ? "walk the long shed where fibers twist beneath steady tension"
+            : fragments.flags.isBrew
+              ? "breathe in malt steam curling from copper kettles"
+              : fragments.flags.isBakery
+                ? "let the scent of fresh bread and sugar wash over you from glowing ovens"
+                : fragments.flags.isTailor
+                  ? "step between bolt-draped tables while dyed cloth sways from rafters"
+                  : fragments.flags.isCarpenter
+                    ? "pass stacks of planed boards and sawdust-sprinkled benches"
+                    : "step into a workshop lined with tools, molds, and workbenches",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:surge": "Journeymen double their pace to fill rush orders while apprentices fetch supplies",
+        "time:predawn": fragments.flags.isBakery
+          ? "Bakers knead dough under lantern light to have loaves ready by dawn"
+          : "Early crews prep materials so daylight shifts can start without delay",
+        "time:night": fragments.flags.isBrew
+          ? "Night brewers tend slow boils while cellarmen rotate the casks"
+          : "Late crews finish detailing work while supervisors close ledgers for the day",
+        default: fragments.flags.isTailor
+          ? "Tailors measure, cut, and stitch while runners ferry orders between tables"
+          : fragments.flags.isTannery
+            ? "Hide-scrapers and stretchers trade places to keep curing on schedule"
+            : fragments.flags.isRope
+              ? "Twisters pace the ropewalk while splicers bind lengths for shipment"
+              : fragments.flags.isBakery
+                ? "Bakers pull golden loaves while clerks package sweet rolls for waiting patrons"
+                : fragments.flags.isBrew
+                  ? "Brewers stir kettles and monitor cooling tubs as coopers ready fresh barrels"
+                  : "Journeymen lean over benches, tools flashing while foremen review each stage of work",
+      },
+      fragments,
+    );
+    const goods = chooseOverviewFragment(
+      {
+        "season:spring": fragments.flags.isTailor
+          ? "Pastel fabrics and floral trims drape along display forms"
+          : fragments.flags.isBrew
+            ? "Casks of fresh spring ales line the cellar doors"
+            : null,
+        "season:autumn": fragments.flags.isBakery
+          ? "Spiced pastries and seed loaves cool beside the ovens"
+          : fragments.flags.isTailor
+            ? "Woolen cloaks and lined coats await the chill winds"
+            : null,
+        default: () => {
+          const good = fragments.sampleGood || 'finished goods';
+          return `Shelves of ${good} await inspection along the wall`;
+        },
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:inspection": "Guild assessors check each piece against pattern cards before approving the lot",
+        default: fragments.flags.isTailor
+          ? "A master tailor checks drape and fit on a mannequin while assistants adjust hems"
+          : fragments.flags.isBrew
+            ? "The brewmaster samples a ladle from the kettle, nodding for the chill to begin"
+            : fragments.flags.isBakery
+              ? "The head baker scores a final loaf before sliding it into the brick oven"
+              : "The workshop steward circles the floor, offering quick corrections before shipments depart",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      goods ? sentenceFromSlug(goods) : '',
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  market: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "weave beneath canvas awnings beating with rainwater",
+        "weather:fog": "follow bell calls through fog-wrapped stalls",
+        "weather:snow": "sidestep slush as vendors brush snow from awning ropes",
+        default: "thread through vendor stalls where voices and scents collide in the narrow aisles",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:festival": "Performers and hawkers amplify the din as festival crowds flood the square",
+        "event:festival_buzz": "Spring revelers compare new wares while musicians tune for the afternoon show",
+        "time:predawn": "Fishmongers and bakers finish arranging displays before the first customers arrive",
+        "time:night": "Lantern-lit vendors offer late deals while watch patrols keep the peace",
+        "time:morning": "Traders haggle over fresh deliveries while porters shuttle crates between stalls",
+        "time:afternoon": "The market hums as patrons compare prices under the height of the sun",
+        default: "Merchants bargain loudly while runners dash between stalls and counting tables",
+      },
+      fragments,
+    );
+    const goods = chooseOverviewFragment(
+      {
+        "season:spring": "Bundles of herbs and blossom-marked crates lend bright color to the stalls",
+        "season:summer": "Stacks of citrus, spices, and chilled drinks fight the heavy heat",
+        "season:autumn": "Harvest bales and barrels of preserved fruits crowd the cobbles",
+        "season:winter": "Braziers warm buyers inspecting woolens and preserved stores",
+        default: () => {
+          const good = fragments.sampleGood || 'wares from across the coast';
+          return `Stalls overflow with ${good}`;
+        },
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:inspection": "City weighmasters circulate with stamped scales, checking tariffs at random",
+        "event:festival": "A herald announces festival contests while children chase streamers through the square",
+        default: "A guild factor posts new tariffs beside a tally board while patrons crowd for a look",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(goods),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  temple: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "slip beneath rain-darkened eaves as incense curls into the damp air",
+        "weather:fog": "let muted bell tones guide you through the fog toward the sanctuary",
+        "weather:snow": "shake frost from your cloak as warm lamplight spills from the nave",
+        default: "lower your voice as incense and candlelight meet you at the temple threshold",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:pilgrimage": "Pilgrims circle the central altar while acolytes steady the flow of offerings",
+        "time:predawn": "Monks recite dawn chants that echo softly beneath the arches",
+        "time:night": "Evening supplicants light vigil candles while the choir hums low hymns",
+        default: "Acolytes move between altars with measured steps, guiding supplicants through their devotions",
+      },
+      fragments,
+    );
+    const offerings = chooseOverviewFragment(
+      {
+        "season:spring": "Offerings of blossom garlands and fresh water gleam beside the shrine",
+        "season:summer": "Bowls of citrus, incense, and cooling oils sit ready for weary travelers",
+        "season:autumn": "Harvest loaves and polished gourds rest among candles on the altar",
+        "season:winter": "Lanterns ring offerings of spiced wine and thick cloaks for the needy",
+        default: "Offering tables glitter with coin, candles, and carefully arranged tributes",
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:festival": "The high cantor leads a procession through incense haze toward the outer plaza",
+        default: "The high priest confers with supplicants near the central basin, voice calm amid the hush",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(offerings),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  guild: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "step past dripping cloaks hung beside the guildhall vestibule",
+        "weather:snow": "stamp off snow before entering the ledger hall warmed by coal braziers",
+        default: "slip past bronze doors into a hall alive with murmured negotiations and shuffled ledgers",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:inspection": "Auditors quiz clerks over seal books while messengers dash between offices",
+        "event:surge": "Charter agents juggle applicants while scribes stack forms for expedited approvals",
+        "time:predawn": "Night staff collate manifests for the day shift to sign and seal",
+        "time:night": "A skeleton crew monitors message tubes while wardens secure the archives",
+        default: "Clerks and factors debate quotas over sprawling tables while messengers rush dispatches to every corner",
+      },
+      fragments,
+    );
+    const goods = chooseOverviewFragment(
+      {
+        default: () => {
+          const label = context.businessProfile?.scale?.label;
+          return label
+            ? `Guild charts outlining ${label.toLowerCase()} dominate the briefing wall`
+            : 'Guild charts and shipping routes cover the briefing wall';
+        },
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:night_shift": "Lantern-bearing stewards review sealed postings before locking the cases for the night",
+        default: "A senior steward confers with petitioners beside the assignment dais, stamping new orders as they arrive",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(goods),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  archive: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "ease the heavy door closed to keep damp air from the stacks",
+        "weather:fog": "wipe condensation from your cloak before descending into the quiet aisles",
+        default: "ease the door shut behind you so the hush of the stacks remains unbroken",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "time:predawn": "Night scribes finish indexing ledgers before sunrise clerks arrive",
+        "time:night": "Lamplight pools around lone researchers flipping through guarded tomes",
+        default: "Scribes shuffle folios and guide researchers whispering requests at the reference desk",
+      },
+      fragments,
+    );
+    const shelves = chooseOverviewFragment(
+      {
+        default: 'Shelves of vellum codices and rune-marked scroll tubes stretch into the dim',
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:inspection": "Archivists supervise a record audit, matching seals before scrolls return to storage",
+        default: "The chief archivist notes each visitor in a ledger before unlocking a reading alcove",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(shelves),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  academy: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "follow echoing recitations through halls scented with damp chalk",
+        "weather:snow": "shake snow from your boots in corridors warmed by rune-lit braziers",
+        default: "step into vaulted halls where lecture voices mingle with the scratch of quills",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "time:predawn": "Sleepless apprentices review notes before the bell summons instructors",
+        "time:night": "Late study circles debate theory under floating lanterns in the library wing",
+        default: "Instructors trade notes while students hurry between lessons clutching slates and satchels",
+      },
+      fragments,
+    );
+    const halls = chooseOverviewFragment(
+      {
+        default: 'Lecture boards drip with fresh chalk diagrams beside tables cluttered with apparatus',
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:festival": "Demonstration circles ready elaborate displays for the next symposium night",
+        default: "A dean pauses to quiz a cohort on doctrine before dismissing them to practicum labs",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(halls),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  garrison: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "avoid muddy divots kicked up along the drill yard",
+        "weather:snow": "stamp slush from your boots as braziers flare beside the muster line",
+        default: "step aside as squads march past the gate toward the drill yard",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:drill": "Sergeants bark cadence as formations pivot across the packed earth yard",
+        "event:night_shift": "Night sentries swap posts while patrol lieutenants check kit for the graveyard shift",
+        "time:predawn": "Bleary recruits jog laps to warm up before the bell",
+        "time:night": "Lantern patrols form ranks while watch captains assign routes",
+        default: "Guard squads drill weapon forms while quartermasters oversee armor fittings",
+      },
+      fragments,
+    );
+    const stores = chooseOverviewFragment(
+      {
+        "season:winter": "Wool cloaks and braziers stand ready beside the watch posts",
+        default: 'Racks of spears, shields, and practice blades line the inner wall awaiting inspection',
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:patrol": "Watch captains pore over patrol maps before dispatching the next rotation",
+        default: "The commandant reviews duty rosters at a trestle table while scribes tally the day's drills",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(stores),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  inn: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "shake the rain from your cloak as hearth-warmth spills from the doorway",
+        "weather:snow": "let the scent of mulled cider thaw the chill as you step inside",
+        default: "step into a hearth-bright common room buzzing with conversation and clinking cups",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "time:predawn": "Kitchen staff prep breakfasts while the last night-watch patrons doze over mugs",
+        "time:night": "Minstrels strike up lively tunes while servers weave between late-night revelers",
+        default: "Servers carry laden trays between packed tables as travelers trade stories by the hearth",
+      },
+      fragments,
+    );
+    const fare = chooseOverviewFragment(
+      {
+        "season:spring": "Plates of fresh greens and citrus glisten beside loaves still steaming",
+        "season:autumn": "Hearty stews and roasted roots perfume the air from the kitchen pass",
+        "season:winter": "Mugs of spiced cider and thick stews keep patrons lingering near the fire",
+        default: () => {
+          const good = fragments.sampleGood || 'hearty fare';
+          return `Platters of ${good} await any table with spare seating`;
+        },
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        "event:festival": "Travelers pin festival ribbons above the mantle while laughter fills the rafters",
+        default: "The innkeep makes the rounds with a practiced smile, checking tabs and swapping quick gossip",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(fare),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  mill: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "follow the vibration of the millstones while rain drums on the wheelhouse roof",
+        "weather:snow": "watch your footing on frost-slick stones as the wheel churns icy water",
+        default: "approach the grinding hall where the wheel's steady rumble fills the air",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:harvest_rush": "Millhands race to clear full bins while drovers queue with laden carts",
+        "time:predawn": "Early crews prime the stones so farmers can unload at first light",
+        "time:night": "Lantern-lit grinders finish the last sacks before shutters close",
+        default: "Millhands keep sacks moving while the miller monitors grind and sifts flour for impurities",
+      },
+      fragments,
+    );
+    const grain = chooseOverviewFragment(
+      {
+        "season:spring": "Fresh barley and rye fill the intake bins for the new planting contracts",
+        "season:autumn": "Harvest wagons overflow with grain waiting their turn at the stones",
+        default: () => {
+          const good = fragments.sampleGood || 'grain ready for the stones';
+          return `Bins overflow with ${good}`;
+        },
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        default: "The waterwheel beats a steady rhythm while the miller checks flour texture by feel",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(grain),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  farm: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "follow muddy cart ruts between sodden rows while rain beads on broad leaves",
+        "weather:fog": "walk the damp lanes while distant bells mark time over the fields",
+        "weather:snow": "crunch across frost-hardened furrows toward the working sheds",
+        default: "walk along furrows lined with low stone walls and the scent of tilled earth",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:harvest_rush": "Farmhands hustle full baskets toward wagons while overseers tally yields",
+        "time:predawn": "Lanterns bob between rows as crews set up for the day's labor",
+        "time:night": "Late crews stack covered crates while the last daylight fades over the fields",
+        default: "Workers tend rows, drive teams, and maintain irrigation ditches to keep the crop steady",
+      },
+      fragments,
+    );
+    const produce = chooseOverviewFragment(
+      {
+        "season:spring": "Bud-laden branches and seedbeds promise a strong early crop",
+        "season:summer": "Irrigation ditches glint beside lush rows heavy with growth",
+        "season:autumn": "Wagons brim with harvested grain and root bundles",
+        "season:winter": "Root cellars stand stacked with preserved stores while fields lie fallow",
+        default: () => {
+          const good = fragments.sampleGood || 'produce ready for the day's dispatch';
+          return `Stacked crates of ${good} wait beside the packing shed`;
+        },
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        default: "The field reeve checks tallies at a ledger table while beasts stamp in the shade",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(produce),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  service: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "let warm, perfumed air chase the chill as you step through the threshold",
+        "weather:snow": "leave dripping cloaks at the rack while attendants hurry forward with towels",
+        default: "step into a refined hall where murmured conversation blends with soft music and steam",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:festival": "Entertainers run through cues while hosts ready the evening's special program",
+        "time:predawn": "Attendants polish fixtures and prepare amenities before clientele arrive",
+        "time:night": "Late patrons relax while staff circulate with refreshments and news",
+        default: "Attendants glide between patrons, offering refreshments and guiding newcomers to their appointments",
+      },
+      fragments,
+    );
+    const amenities = chooseOverviewFragment(
+      {
+        default: 'Trays of scented oils, clean linens, and carefully prepared comforts stand ready along the wall',
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        default: "The house steward maintains a serene smile as they schedule services and settle accounts",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(amenities),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+
+  default: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        "weather:rain": "take in the tang of wet stone and damp wood around the busy entry",
+        "weather:fog": "feel your way toward the worklights glowing through the mist",
+        "weather:snow": "stamp cold from your feet before joining the bustle inside",
+        default: "approach a busy worksite humming with purposeful motion",
+      },
+      fragments,
+    );
+    const bustle = chooseOverviewFragment(
+      {
+        "event:surge": "Crews push for overtime output while overseers call for constant checks",
+        "event:night_shift": "Night crews keep essential lines moving while lanterns sway overhead",
+        default: "Crews coordinate tools, materials, and ledgers to keep operations on schedule",
+      },
+      fragments,
+    );
+    const stock = chooseOverviewFragment(
+      {
+        default: 'Supplies and partially finished work line the walls awaiting their turn',
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        default: "The steward moves between teams, solving problems before they can slow the day",
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(bustle),
+      sentenceFromSlug(stock),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
+};
+
+function composeBuildingOverview(context) {
+  const buildingName = context.building?.name || context.buildingName;
+  if (!buildingName) return '';
+  const typeKey = buildingTypeKey(buildingName, context.businessProfile);
+  const weatherKey = normalizeWeatherKey(context.weather);
+  const seasonKey = normalizeSeasonKey(context.season);
+  const timeKey = normalizeTimeKey(context.timeLabel);
+  const events = gatherBuildingOverviewEvents(context, typeKey, weatherKey, seasonKey, timeKey);
+  const rng = context.rng ?? Math.random;
+  const fragments = {
+    weatherKey,
+    seasonKey,
+    timeKey,
+    events,
+    rng,
+    businessProfile: context.businessProfile,
+    sampleGood: sampleProductionGood(context.businessProfile, rng),
+    flags: gatherBuildingOverviewFlags((buildingName || '').toLowerCase()),
+  };
+  const blueprint = BUILDING_OVERVIEW_BLUEPRINTS[typeKey] || BUILDING_OVERVIEW_BLUEPRINTS.default;
+  const sentences = blueprint(context, fragments);
+  return sentences.filter(Boolean).join(' ');
+}
+
+function merchantsWharfSeasonKey(season) {
+  return normalizeSeasonKey(season);
+}
+
+function merchantsWharfTimeKey(timeLabel) {
+  return normalizeTimeKey(timeLabel);
 }
 
 function merchantsWharfScaleWeight(scale, workers) {
@@ -4176,13 +5220,26 @@ function buildingExtraScene(profile, building, rng, buildingName, workers) {
 }
 
 function buildingSceneParagraphs(context) {
-  const { building, buildingName, businessProfile, timeLabel, weather, workers, rng, habitat, season } = context;
+  const { building, buildingName, businessProfile, timeLabel, weather, workers, rng, habitat, season, district } = context;
   const paragraphs = [];
   const displayName = building?.name || buildingName;
   if (displayName === "Merchants' Wharf") {
     const overview = merchantsWharfOverview({ weather, season, timeLabel });
     if (overview) paragraphs.push(overview);
   } else {
+    const overview = composeBuildingOverview({
+      building,
+      buildingName: displayName,
+      businessProfile,
+      timeLabel,
+      weather,
+      workers,
+      rng,
+      habitat,
+      season,
+      district,
+    });
+    if (overview) paragraphs.push(overview);
     if (building?.description) paragraphs.push(building.description);
     if (displayName) {
       const workforceNoun = buildingWorkforceNoun(displayName);
@@ -4364,6 +5421,7 @@ function initializeBuildingState(context) {
     rng,
     habitat: context.habitat,
     season,
+    district: context.district,
   });
   const state = {
     key: seed,
