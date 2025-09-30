@@ -128,7 +128,19 @@ const QUEST_BOARD_BUILDINGS = new Set(['North Gate', 'South Gate']);
 
 const MERCHANTS_WHARF_DYNAMIC_BOARD = "Merchants' Wharf Pier Leads";
 
-const CITY_SLUGS = { "Wave's Break": "waves_break" };
+const CITY_SLUGS = {
+  "Wave's Break": "waves_break",
+  "Coral Keep": "coral_keep",
+  "Timber Grove": "timber_grove",
+  Creekside: "creekside",
+  "Warm Springs": "warm_springs",
+  "Dancing Pines": "dancing_pines",
+  "Mountain Top": "mountain_top",
+  Corona: "corona",
+  "Corner Stone": "corner_stone",
+  "Dragon's Reach Road": "dragons_reach_road",
+  Whiteheart: "whiteheart",
+};
 
 const BACKSTORY_MAP = {
   "Wave's Break": WAVES_BREAK_BACKSTORIES,
