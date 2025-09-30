@@ -27,7 +27,7 @@ const DISTRICT_VENDOR_POLICIES = {
 };
 
 const BUILDING_STREET_ONLY = /market|plaza|square|row|arcade|promenade|roadside|boardwalk|bazaar|stalls?/i;
-const BUILDING_NO_VENDOR = /wharf|warehouse|yard|naval|barracks|guard|temple|shrine|monastery|academy|keep|hall|exchange|office|arena|court/i;
+const BUILDING_NO_VENDOR = /wharf|warehouse|yard|naval|barracks|guard|temple|shrine|monastery|academy|keep|hall|exchange|office|arena|court|beach|riverbank|grasslands?|pinewood|creek|forest\s*edge/i;
 
 export const CITY_NAV = {
   "Wave's Break": {
@@ -271,6 +271,12 @@ export const CITY_NAV = {
               { name: "Cliffbreak Quarry", type: "building", target: "Cliffbreak Quarry", icon: "assets/images/icons/waves_break/Cliffbreak Quarry.png" },
               { name: "Wavecut Stoneworks", type: "building", target: "Wavecut Stoneworks", icon: "assets/images/icons/waves_break/Wavecut Stoneworks.png" },
               { name: "Coast Road Watchtower", type: "building", target: "Coast Road Watchtower", icon: "assets/images/icons/waves_break/Coast Road Watchtower.png" },
+              { name: "Saltwash Beach", type: "building", target: "Saltwash Beach", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Tidebreak Riverbank", type: "building", target: "Tidebreak Riverbank", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Copperbrook Creek", type: "building", target: "Copperbrook Creek", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Sunset Grasslands", type: "building", target: "Sunset Grasslands", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Forest Edge", type: "building", target: "Forest Edge", icon: "assets/images/icons/waves_break/Default.png" },
+              { name: "Coastal Pinewood", type: "building", target: "Coastal Pinewood", icon: "assets/images/icons/waves_break/Default.png" },
               { name: "North Gate", type: "building", target: "North Gate", icon: "assets/images/icons/waves_break/North Gate.png" },
               { name: "South Gate", type: "building", target: "South Gate", icon: "assets/images/icons/waves_break/South Gate.png" },
               { name: "East Road to Mountain Top", type: "location", target: "Mountain Top", icon: "assets/images/icons/waves_break/The East Road to Mountain Top.png" }
@@ -863,6 +869,88 @@ Though the beacon is dark, watchmen keep vigilant eyes on the waves.`,
 Hands fly as workers braid ropes and weave fishing nets for the fleet.`,
         exits: [ { name: "The Farmlands", target: "The Farmlands" } ],        produces: { resources: [], commodities: ["nets"], luxuries: [] },
         consumes: { resources: ["flax"], commodities: [], luxuries: [] }
+      },
+      "Saltwash Beach": {
+        travelPrompt: "Explore",
+        description: `Foam-laced waves lap a crescent of pale sand while gulls wheel overhead.
+Fishers stake long poles in the surf and tidepools glimmer with shellfish waiting to be gathered.`,
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
+        interactions: [],
+        produces: { resources: ["shellfish", "seaweed", "tidal crabs"], commodities: ["sea salt"], luxuries: ["pearls"] },
+        activities: [
+          { type: "gathering", skill: "Fishing", description: "Practice surf casting and net fishing in the shallows." },
+          { type: "foraging", skill: "Gathering", description: "Comb tidepools for crabs, seaweed, and polished shells." },
+          { type: "combat", difficulty: "moderate", description: "Reefclaw packs and brine sprites stir when storms roll in." }
+        ],
+        threats: ["reefclaw packs", "brine sprites"]
+      },
+      "Tidebreak Riverbank": {
+        travelPrompt: "Explore",
+        description: `The Tidebreak River splits the farmlands with a ribbon of brackish water.
+Reeds rattle in the breeze while silverfish leap at dusk.`,
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
+        interactions: [],
+        produces: { resources: ["river fish", "freshwater eels", "reeds"], commodities: ["smoked fish"], luxuries: [] },
+        activities: [
+          { type: "gathering", skill: "Fishing", description: "Cast lines from the bank or mend nets beside the slow current." },
+          { type: "craft", skill: "Trapping", description: "Set eel pots and river snares in the shallows." },
+          { type: "combat", difficulty: "moderate", description: "Watch for river drakes that prowl the deep eddies." }
+        ],
+        threats: ["river drakes", "swollen-tide serpents"]
+      },
+      "Copperbrook Creek": {
+        travelPrompt: "Explore",
+        description: `A cold tributary winds through willow stands, its clear water chattering over copper-streaked stones.
+Herbs and crayfish thrive where the current pools in shadowed bends.`,
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
+        interactions: [],
+        produces: { resources: ["freshwater herbs", "crayfish", "river clay"], commodities: [], luxuries: ["alchemical moss"] },
+        activities: [
+          { type: "gathering", skill: "Herbalism", description: "Harvest creekside herbs and luminous moss from shaded banks." },
+          { type: "hunting", skill: "Trapping", description: "Lay snares for waterfowl and creek critters along the reeds." },
+          { type: "combat", difficulty: "low", description: "Boglurkers and oversized eels lurk in the deeper pools." }
+        ],
+        threats: ["boglurkers", "giant creek eels"]
+      },
+      "Sunset Grasslands": {
+        travelPrompt: "Explore",
+        description: `Golden grasses ripple across the hills east of Wave's Break, dotted with wind-scoured stones and grazing aurochs.`,
+        exits: [ { name: "The Farmlands", target: "The Farmlands" } ],
+        interactions: [],
+        produces: { resources: ["game meat", "wild hides", "prairie herbs"], commodities: ["cured meats"], luxuries: [] },
+        activities: [
+          { type: "hunting", skill: "Hunting", description: "Stalk antelope and wild boar that graze at dawn and dusk." },
+          { type: "training", skill: "Riding", description: "Gallop across the open flats to hone mounted maneuvers." },
+          { type: "combat", difficulty: "moderate", description: "Beware bandit outriders and aggressive aurochs." }
+        ],
+        threats: ["bandit outriders", "aurochs herds"]
+      },
+      "Forest Edge": {
+        travelPrompt: "Explore",
+        description: `The last farm fences give way to a fringe of coastal pines where salt wind meets loamy earth.
+It is a threshold between tilled fields and the deep woods beyond.`,
+        exits: [ { name: "The Farmlands", target: "The Farmlands" }, { name: "Coastal Pinewood", target: "Coastal Pinewood" } ],
+        interactions: [],
+        produces: { resources: ["foraged herbs", "saplings", "small game"], commodities: [], luxuries: [] },
+        activities: [
+          { type: "foraging", skill: "Gathering", description: "Harvest mushrooms, berries, and resin along the shaded paths." },
+          { type: "training", skill: "Stealth", description: "Practice quiet movement while scouting the tree line." },
+          { type: "combat", difficulty: "moderate", description: "Wolf packs and stray twiglings test the boundary under fog." }
+        ],
+        threats: ["wolf packs", "twiglings"]
+      },
+      "Coastal Pinewood": {
+        travelPrompt: "Explore",
+        description: `Beyond the edge the forest rises thick and dim, resinous pines creaking while mist clings to mossy trunks.`,
+        exits: [ { name: "Forest Edge", target: "Forest Edge" } ],
+        interactions: [],
+        produces: { resources: ["timber", "resin", "rare mushrooms"], commodities: ["treated lumber"], luxuries: ["pine incense"] },
+        activities: [
+          { type: "gathering", skill: "Logging", description: "Fell wind-twisted pines and collect resin for the city." },
+          { type: "hunting", skill: "Hunting", description: "Track stag and boar deeper beneath the canopy." },
+          { type: "combat", difficulty: "high", description: "Elusive leucrotta and forest spirits stalk the dim hollows." }
+        ],
+        threats: ["leucrotta", "forest spirits"]
       },
       "The Sunleaf Inn": {
         travelPrompt: "Exit to",

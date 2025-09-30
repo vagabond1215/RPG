@@ -6114,6 +6114,12 @@ Its people are diverse: salt-stained sailors, silver-tongued merchants, hammer-a
             "Copperbrook Forge",
             "Tidewatcher Lighthouse",
             "Netmaker's Co-op",
+            "Saltwash Beach",
+            "Tidebreak Riverbank",
+            "Copperbrook Creek",
+            "Sunset Grasslands",
+            "Forest Edge",
+            "Coastal Pinewood",
         ],
         tradeRoutes: [],
         resources: {
