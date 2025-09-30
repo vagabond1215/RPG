@@ -42,6 +42,13 @@ import { performGathering } from "./data/game/gathering_proficiency.js";
 import { performOutdoorActivity } from "./data/game/outdoor_skills.js";
 import { performHunt } from "./data/game/hunting_proficiency.js";
 import {
+  listEnvironmentActions,
+  getEnvironmentDefinition,
+  buildEnvironmentActionId,
+  parseEnvironmentActionId,
+  describeEnvironmentAction,
+} from "./data/game/environment_interactions.js";
+import {
   ADVENTURERS_GUILD_RANKS,
   determineOwnership,
   getJobRolesForBuilding,
@@ -2705,6 +2712,809 @@ async function renderStreetVendorUI(city, district) {
       });
     }
   });
+}
+
+
+const ENVIRONMENT_TOOL_KEYWORDS = {
+  fishing: [
+    /fish/i,
+    /net/i,
+    /rod/i,
+    /line/i,
+    /hook/i,
+    /tackle/i,
+    /harpoon/i,
+  ],
+  huntingWeapon: [
+    /bow/i,
+    /crossbow/i,
+    /spear/i,
+    /javelin/i,
+    /sling/i,
+    /blade/i,
+    /sword/i,
+    /axe/i,
+    /mace/i,
+    /hammer/i,
+    /dagger/i,
+    /knife/i,
+    /polearm/i,
+    /glaive/i,
+    /halberd/i,
+    /staff/i,
+  ],
+};
+
+const ENVIRONMENT_RANGED_WEAPONS = [/bow/i, /crossbow/i, /sling/i, /dart/i, /arquebus/i, /gun/i];
+const ENVIRONMENT_THROWN_WEAPONS = [/spear/i, /javelin/i, /harpoon/i, /throwing/i];
+const ENVIRONMENT_MELEE_WEAPONS = [
+  /sword/i,
+  /axe/i,
+  /mace/i,
+  /hammer/i,
+  /club/i,
+  /dagger/i,
+  /knife/i,
+  /staff/i,
+  /blade/i,
+  /polearm/i,
+];
+
+const HUNT_DIFFICULTY_BY_SIZE = {
+  tiny: 1,
+  small: 2,
+  medium: 3,
+  large: 4,
+  huge: 5,
+};
+
+function gatherCharacterItemNames(character) {
+  const names = [];
+  (character.inventory || []).forEach(item => {
+    if (item?.name) names.push(String(item.name));
+  });
+  const weapons = character.equipment?.weapons || {};
+  Object.values(weapons).forEach(entry => {
+    if (!entry) return;
+    if (typeof entry === 'string') {
+      names.push(entry);
+    } else if (entry.name) {
+      names.push(entry.name);
+    } else if (entry.displayName) {
+      names.push(entry.displayName);
+    } else if (entry.baseItem) {
+      names.push(entry.baseItem);
+    }
+  });
+  return names;
+}
+
+function hasToolRequirement(requirement, character) {
+  if (!requirement) return { ok: true, matched: false };
+  const patterns = ENVIRONMENT_TOOL_KEYWORDS[requirement.kind] || [];
+  if (!patterns.length) return { ok: true, matched: false };
+  const names = gatherCharacterItemNames(character);
+  const matched = names.some(name => patterns.some(pattern => pattern.test(name)));
+  return { ok: matched, matched };
+}
+
+function detectWeaponProfile(character) {
+  const names = gatherCharacterItemNames(character).map(n => String(n));
+  const hasPattern = patterns => names.some(name => patterns.some(pattern => pattern.test(name)));
+  return {
+    ranged: hasPattern(ENVIRONMENT_RANGED_WEAPONS),
+    thrown: hasPattern(ENVIRONMENT_THROWN_WEAPONS),
+    melee: hasPattern(ENVIRONMENT_MELEE_WEAPONS),
+  };
+}
+
+function timeBandForHour(hour) {
+  if (!Number.isFinite(hour)) return 'day';
+  const h = ((hour % 24) + 24) % 24;
+  if (h < 4) return 'night';
+  if (h < 6) return 'preDawn';
+  if (h < 9) return 'dawn';
+  if (h < 12) return 'morning';
+  if (h < 15) return 'day';
+  if (h < 18) return 'afternoon';
+  if (h < 21) return 'dusk';
+  return 'night';
+}
+
+function weatherModifierKey(weather) {
+  if (!weather) return null;
+  if (weather.storm) return 'storm';
+  const condition = (weather.condition || '').toLowerCase();
+  if (!condition) return null;
+  if (condition.includes('snow')) return 'snow';
+  if (condition.includes('sleet')) return 'sleet';
+  if (condition.includes('rain')) return 'rain';
+  if (condition.includes('drizzle')) return 'rain';
+  if (condition.includes('fog')) return 'fog';
+  if (condition.includes('clear')) return 'clear';
+  if (condition.includes('cloud')) return 'cloudy';
+  return condition;
+}
+
+function computeAttributeModifier(keys, character) {
+  if (!Array.isArray(keys) || keys.length === 0) return { value: 0, label: null };
+  const attrs = character.attributes?.current || {};
+  let sum = 0;
+  keys.forEach(key => {
+    const base = Number(attrs[key]) || 0;
+    sum += base - 10;
+  });
+  const avg = sum / keys.length;
+  const value = clamp(avg * 0.02, -0.15, 0.15);
+  return { value, label: `Attributes (${keys.join('/')})` };
+}
+
+function computeActionChance(actionDef, context, opts = {}) {
+  let chance = typeof opts.baseChance === 'number'
+    ? opts.baseChance
+    : typeof actionDef.baseChance === 'number'
+      ? actionDef.baseChance
+      : 0.5;
+  const modifiers = [];
+
+  if (context.season && actionDef.seasonModifiers && actionDef.seasonModifiers[context.season] != null) {
+    const value = actionDef.seasonModifiers[context.season];
+    chance += value;
+    modifiers.push({ label: `Season (${context.season})`, value });
+  }
+
+  if (actionDef.timeModifiers) {
+    const keys = [];
+    const band = context.timeBand;
+    if (band) keys.push(band);
+    if (band === 'afternoon') keys.push('day');
+    if (band === 'morning') keys.push('day');
+    if (band === 'dusk') keys.push('evening');
+    if (band === 'night') keys.push('evening');
+    if (band === 'preDawn') keys.push('dawn');
+    keys.push('any');
+    keys.forEach(key => {
+      if (key && actionDef.timeModifiers[key] != null) {
+        const value = actionDef.timeModifiers[key];
+        chance += value;
+        modifiers.push({ label: `Time (${key})`, value });
+      }
+    });
+  }
+
+  const weatherKey = weatherModifierKey(context.weather);
+  if (weatherKey && actionDef.weatherModifiers && actionDef.weatherModifiers[weatherKey] != null) {
+    const value = actionDef.weatherModifiers[weatherKey];
+    chance += value;
+    const conditionLabel = context.weather?.condition || weatherKey;
+    modifiers.push({ label: `Weather (${conditionLabel})`, value });
+  }
+
+  const skillKey = opts.skillKey || actionDef.gatherSkill || actionDef.huntSkill;
+  let skillBonus = 0;
+  if (skillKey && currentCharacter) {
+    const raw = Number(currentCharacter[skillKey]) || 0;
+    const factor = opts.skillFactor ?? 1;
+    skillBonus = clamp((raw / 200) * factor, -0.2, 0.25);
+    if (skillBonus) {
+      chance += skillBonus;
+      modifiers.push({ label: `Skill (${toTitleCase(skillKey)})`, value: skillBonus });
+    }
+  }
+
+  const attributeKeys = opts.attributes || actionDef.attributes;
+  let attributeBonus = 0;
+  if (attributeKeys && attributeKeys.length && currentCharacter) {
+    const attr = computeAttributeModifier(attributeKeys, currentCharacter);
+    const factor = opts.attributeFactor ?? 1;
+    attributeBonus = clamp(attr.value * factor, -0.15, 0.15);
+    if (attributeBonus) {
+      chance += attributeBonus;
+      modifiers.push({ label: attr.label, value: attributeBonus });
+    }
+  }
+
+  chance = clamp(chance, 0.05, 0.95);
+  return { chance, modifiers, skillBonus, attributeBonus };
+}
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function randomInt(min, max) {
+  const low = Math.ceil(min);
+  const high = Math.floor(max);
+  return Math.floor(Math.random() * (high - low + 1)) + low;
+}
+
+function pickRandom(array) {
+  if (!array || !array.length) return null;
+  const idx = Math.floor(Math.random() * array.length);
+  return array[idx];
+}
+
+function pickRandomUnique(array, count) {
+  if (!array || !array.length) return [];
+  const copy = array.slice();
+  const result = [];
+  const limit = Math.min(copy.length, count);
+  for (let i = 0; i < limit; i += 1) {
+    const idx = Math.floor(Math.random() * copy.length);
+    result.push(copy.splice(idx, 1)[0]);
+  }
+  return result;
+}
+
+function joinWithAnd(items) {
+  const filtered = (items || []).filter(Boolean);
+  if (!filtered.length) return '';
+  if (filtered.length === 1) return filtered[0];
+  const last = filtered[filtered.length - 1];
+  return `${filtered.slice(0, -1).join(', ')} and ${last}`;
+}
+
+function toTitleCase(text) {
+  if (!text) return '';
+  return String(text)
+    .split(/[_\s]+/)
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function filterPlantsForAction(actionDef) {
+  const plants = plantsCatalogData || [];
+  return plants.filter(plant => {
+    if (actionDef.floraHabitats && !actionDef.floraHabitats.some(h => plant.habitats?.includes(h))) {
+      return false;
+    }
+    if (actionDef.floraRegions && !actionDef.floraRegions.some(r => plant.regions?.includes(r))) {
+      return false;
+    }
+    return true;
+  });
+}
+
+function filterAnimalsForAction(actionDef, extra = {}) {
+  const animals = animalsCatalogData || [];
+  return animals.filter(animal => {
+    if (actionDef.faunaHabitats && !actionDef.faunaHabitats.some(h => animal.habitats?.includes(h))) {
+      return false;
+    }
+    if (extra.faunaHabitats && !extra.faunaHabitats.some(h => animal.habitats?.includes(h))) {
+      return false;
+    }
+    if (actionDef.faunaRegions && !actionDef.faunaRegions.some(r => animal.regions?.includes(r))) {
+      return false;
+    }
+    if (extra.faunaRegions && !extra.faunaRegions.some(r => animal.regions?.includes(r))) {
+      return false;
+    }
+    if (actionDef.taxonGroups && !actionDef.taxonGroups.some(g => animal.taxon_group === g)) {
+      return false;
+    }
+    if (extra.taxonGroups && !extra.taxonGroups.some(g => animal.taxon_group === g)) {
+      return false;
+    }
+    if (extra.sizeClasses && !extra.sizeClasses.some(s => animal.size_class === s)) {
+      return false;
+    }
+    if (extra.edibleOnly !== false) {
+      if (animal.edibility && animal.edibility.edible === false) return false;
+    }
+    return true;
+  });
+}
+
+function describeWeatherSummary(weather) {
+  if (!weather) return 'calm skies';
+  const parts = [];
+  if (weather.condition) parts.push(weather.condition);
+  if (Number.isFinite(weather.temperatureC)) parts.push(`${weather.temperatureC}°C`);
+  if (Number.isFinite(weather.humidity)) parts.push(`${weather.humidity}% humidity`);
+  return parts.join(', ');
+}
+
+async function handleEnvironmentInteraction(actionId, pos) {
+  if (!currentCharacter) return;
+  const parsed = parseEnvironmentActionId(actionId);
+  if (!parsed) {
+    showBackButton();
+    setMainHTML(
+      '<div class="no-character"><h1>Interaction unavailable</h1><p>This outdoor interaction is no longer valid.</p></div>',
+    );
+    return;
+  }
+  const city = parsed.city || pos.city;
+  const district = parsed.district || pos.district;
+  const location = parsed.location || pos.building;
+  const definition = getEnvironmentDefinition(city, district, location);
+  if (!definition) {
+    showBackButton();
+    setMainHTML(
+      `<div class="no-character"><h1>Interaction unavailable</h1><p>No outdoor encounters are configured for ${escapeHtml(location || 'this area')}.</p></div>`,
+    );
+    return;
+  }
+  const actionDef = definition.actions?.[parsed.actionType];
+  if (!actionDef) {
+    showBackButton();
+    setMainHTML(
+      `<div class="no-character"><h1>Interaction unavailable</h1><p>${escapeHtml(describeEnvironmentAction(parsed.actionType))} is not available at ${escapeHtml(definition.location)}.</p></div>`,
+    );
+    return;
+  }
+
+  const context = buildEnvironmentContext(definition, actionDef, pos);
+  let result;
+  try {
+    result = await resolveEnvironmentAction(parsed.actionType, definition, actionDef, context);
+  } catch (err) {
+    console.error('Failed to resolve environment interaction', err);
+    showBackButton();
+    setMainHTML(
+      `<div class="no-character"><h1>Interaction error</h1><p>Something disrupted the encounter. Try again later.</p></div>`,
+    );
+    return;
+  }
+  renderEnvironmentOutcome(result);
+  saveProfiles();
+}
+
+function buildEnvironmentContext(definition, actionDef, pos) {
+  const today = worldCalendar.today();
+  const season = getSeasonForDate(today);
+  const timeOfDay = ensureCharacterClock(currentCharacter);
+  const timeLabel = describeTimeOfDay(timeOfDay);
+  const timeBand = timeBandForHour(timeOfDay);
+  const habitat = actionDef.weatherHabitat || definition.weatherHabitat || definition.habitat || 'farmland';
+  let weather = null;
+  try {
+    if (definition.region && habitat) {
+      weather = weatherSystem.getDailyWeather(definition.region, habitat, today);
+    }
+  } catch (err) {
+    weather = null;
+  }
+  return {
+    position: pos,
+    today,
+    season,
+    timeOfDay,
+    timeLabel,
+    timeBand,
+    weather,
+  };
+}
+
+async function resolveEnvironmentAction(actionType, definition, actionDef, context) {
+  if (actionType === 'forage') {
+    return resolveForage(definition, actionDef, context);
+  }
+  if (actionType === 'fish') {
+    return resolveFish(definition, actionDef, context);
+  }
+  if (actionType === 'hunt') {
+    return resolveHunt(definition, actionDef, context);
+  }
+  return {
+    title: `${definition.location} – ${describeEnvironmentAction(actionType)}`,
+    success: false,
+    narrative: 'Nothing happens.',
+    timeLabel: context.timeLabel,
+    season: context.season,
+    weather: context.weather,
+    timeSpentHours: 0,
+  };
+}
+
+async function resolveForage(definition, actionDef, context) {
+  await loadPlantsCatalog();
+  ensurePlantsCatalogIndex();
+  const chanceInfo = computeActionChance(actionDef, context, {
+    skillKey: actionDef.gatherSkill || 'foraging',
+  });
+  const roll = Math.random();
+  const found = roll < chanceInfo.chance;
+  const timeSpent = actionDef.timeHours ?? 1;
+  const timeResult = advanceCharacterTime(timeSpent);
+
+  let plants = [];
+  if (found) {
+    plants = filterPlantsForAction(actionDef);
+    if (!plants.length) {
+      plants = filterPlantsForAction({ floraHabitats: actionDef.floraHabitats || [], floraRegions: actionDef.floraRegions || [] });
+    }
+    if (!plants.length) {
+      plants = [];
+    }
+  }
+
+  let gathered = found && plants.length ? pickRandomUnique(plants, randomInt(1, Math.min(3, plants.length))) : [];
+  if (found && !gathered.length) {
+    const fallbackName = actionDef.fallbackFlora || 'wild greens';
+    gathered = [{ common_name: fallbackName }];
+  }
+  const loot = [];
+  gathered.forEach(entry => {
+    const qty = randomInt(1, 2);
+    const name = `Foraged ${entry.common_name}`;
+    addItemToInventory({ name, category: 'Gathered Goods', price: 0, profit: 0, qty, baseItem: entry.common_name });
+    loot.push({ name, qty });
+  });
+
+  const skillKey = actionDef.gatherSkill || 'foraging';
+  const before = Number(currentCharacter[skillKey]) || 0;
+  const after = performGathering(currentCharacter, skillKey, { success: found });
+  const delta = Math.round((after - before) * 100) / 100;
+
+  const gatheredNames = gathered.map(entry => entry.common_name);
+  const narrative = found
+    ? `${actionDef.narrative} You gather ${joinWithAnd(gatheredNames.length ? gatheredNames : ['wild herbs'])}.`
+    : `${actionDef.narrative} Despite careful searching, you leave empty-handed.`;
+
+  return {
+    type: 'forage',
+    title: `${definition.location} – ${actionDef.label}`,
+    success: found,
+    narrative,
+    rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
+    loot,
+    skillProgress: { key: skillKey, label: toTitleCase(skillKey), before, after, delta },
+    weather: context.weather,
+    season: context.season,
+    timeLabel: context.timeLabel,
+    timeSpentHours: timeSpent,
+    timeAfter: timeResult,
+  };
+}
+
+async function resolveFish(definition, actionDef, context) {
+  await loadAnimalsCatalog();
+  ensureAnimalsCatalogIndex();
+  const toolCheck = hasToolRequirement(actionDef.tool, currentCharacter);
+  const skillKey = actionDef.gatherSkill || 'fishing';
+
+  if (!toolCheck.ok && !actionDef.handGatherable) {
+    const before = Number(currentCharacter[skillKey]) || 0;
+    const after = performGathering(currentCharacter, skillKey, { success: false });
+    const delta = Math.round((after - before) * 100) / 100;
+    return {
+      type: 'fish',
+      title: `${definition.location} – ${actionDef.label}`,
+      success: false,
+      narrative: `${actionDef.narrative} Without proper tackle the fish keep their distance.`,
+      requirementMessage: actionDef.tool?.message || 'You lack the gear to fish here.',
+      rollInfo: null,
+      loot: [],
+      skillProgress: { key: skillKey, label: toTitleCase(skillKey), before, after, delta },
+      weather: context.weather,
+      season: context.season,
+      timeLabel: context.timeLabel,
+      timeSpentHours: 0,
+      timeAfter: { days: 0, timeOfDay: currentCharacter.timeOfDay },
+    };
+  }
+
+  const usingFallback = !toolCheck.ok && !!actionDef.handGatherable;
+  const chanceInfo = computeActionChance(actionDef, context, {
+    baseChance: usingFallback ? actionDef.handGatherable.chance ?? 0.3 : actionDef.baseChance,
+    skillKey,
+    skillFactor: usingFallback ? 0.5 : 1,
+    attributeFactor: usingFallback ? 0.5 : 1,
+  });
+  const roll = Math.random();
+  const success = roll < chanceInfo.chance;
+  const timeSpent = actionDef.timeHours ?? 2;
+  const timeResult = advanceCharacterTime(timeSpent);
+
+  let fauna = [];
+  if (success) {
+    fauna = filterAnimalsForAction(actionDef, usingFallback ? actionDef.handGatherable : {});
+    if (!fauna.length && actionDef.handGatherable) {
+      fauna = filterAnimalsForAction(actionDef.handGatherable, {});
+    }
+  }
+  let catchList = success && fauna.length
+    ? pickRandomUnique(fauna, randomInt(1, Math.min(2, fauna.length)))
+    : [];
+  if (success && !catchList.length) {
+    const fallbackName = usingFallback ? 'river mussels' : 'small fish';
+    catchList = [{ common_name: fallbackName }];
+  }
+
+  const loot = [];
+  catchList.forEach(entry => {
+    const qty = randomInt(1, usingFallback ? 1 : 3);
+    const name = usingFallback ? `Handful of ${entry.common_name}` : `Catch of ${entry.common_name}`;
+    addItemToInventory({ name, category: 'Fresh Catch', price: 0, profit: 0, qty, baseItem: entry.common_name });
+    loot.push({ name, qty });
+  });
+
+  const before = Number(currentCharacter[skillKey]) || 0;
+  const after = performGathering(currentCharacter, skillKey, { success });
+  const delta = Math.round((after - before) * 100) / 100;
+
+  const names = catchList.map(entry => entry.common_name);
+  let narrative;
+  if (success) {
+    const listText = names.length ? joinWithAnd(names) : 'a modest haul';
+    narrative = usingFallback
+      ? `${actionDef.handGatherable?.narrative || 'You scour the shallows by hand.'} You pry up ${listText}.`
+      : `${actionDef.narrative} You haul in ${listText}.`;
+  } else {
+    narrative = usingFallback
+      ? `${actionDef.handGatherable?.narrative || 'You scour the shallows by hand.'} The shellfish slip free.`
+      : `${actionDef.narrative} The fish ignore your efforts today.`;
+  }
+
+  return {
+    type: 'fish',
+    title: `${definition.location} – ${actionDef.label}`,
+    success,
+    partialSuccess: success && usingFallback,
+    narrative,
+    rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
+    loot,
+    skillProgress: { key: skillKey, label: toTitleCase(skillKey), before, after, delta },
+    weather: context.weather,
+    season: context.season,
+    timeLabel: context.timeLabel,
+    timeSpentHours: timeSpent,
+    timeAfter: timeResult,
+    requirementMessage: !toolCheck.ok && actionDef.tool?.message ? actionDef.tool.message : null,
+  };
+}
+
+async function resolveHunt(definition, actionDef, context) {
+  await loadAnimalsCatalog();
+  ensureAnimalsCatalogIndex();
+
+  const toolCheck = hasToolRequirement(actionDef.tool, currentCharacter);
+  const weaponProfile = detectWeaponProfile(currentCharacter);
+  const skillKey = 'hunting';
+
+  const usingFallback = !toolCheck.ok && !!actionDef.handPrey;
+  const chanceInfo = computeActionChance(actionDef, context, {
+    baseChance: usingFallback ? actionDef.handPrey.chance ?? 0.3 : actionDef.baseChance,
+    skillKey,
+    skillFactor: usingFallback ? 0.6 : 1,
+    attributeFactor: usingFallback ? 0.6 : 1,
+  });
+  const roll = Math.random();
+  const located = roll < chanceInfo.chance;
+  const timeSpent = actionDef.timeHours ?? 3;
+  const timeResult = advanceCharacterTime(timeSpent);
+
+  if (!toolCheck.ok && !usingFallback) {
+    const before = Number(currentCharacter[skillKey]) || 0;
+    const after = performHunt(currentCharacter, 1, { success: false });
+    return {
+      type: 'hunt',
+      title: `${definition.location} – ${actionDef.label}`,
+      success: false,
+      narrative: `${actionDef.narrative} Without a proper hunting weapon, the wildlife scatters long before you can strike.`,
+      requirementMessage: actionDef.tool?.message || 'You need a suitable hunting weapon.',
+      rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
+      loot: [],
+      stages: [],
+      skillProgress: { key: skillKey, label: 'Hunting', before, after, delta: Math.round((after - before) * 100) / 100 },
+      weather: context.weather,
+      season: context.season,
+      timeLabel: context.timeLabel,
+      timeSpentHours: timeSpent,
+      timeAfter: timeResult,
+    };
+  }
+
+  let preyList = [];
+  if (located) {
+    preyList = filterAnimalsForAction(actionDef, usingFallback ? actionDef.handPrey : {});
+  }
+  if (!preyList.length && located && actionDef.handPrey) {
+    preyList = filterAnimalsForAction(actionDef.handPrey, {});
+  }
+  const prey = located && preyList.length ? pickRandom(preyList) : null;
+
+  const stages = [];
+  let finalSuccess = false;
+  if (!located || !prey) {
+    stages.push({
+      name: 'Search',
+      chance: chanceInfo.chance,
+      roll,
+      success: false,
+      failureText: 'You fail to find any promising tracks today.',
+    });
+  } else if (usingFallback) {
+    const before = Number(currentCharacter[skillKey]) || 0;
+    const after = performHunt(currentCharacter, HUNT_DIFFICULTY_BY_SIZE[prey.size_class] || 1, { success: true });
+    const delta = Math.round((after - before) * 100) / 100;
+    const qty = 1;
+    const name = `Hand-caught ${prey.common_name}`;
+    addItemToInventory({ name, category: 'Game Meat', price: 0, profit: 0, qty, baseItem: prey.common_name });
+    return {
+      type: 'hunt',
+      title: `${definition.location} – ${actionDef.label}`,
+      success: true,
+      partialSuccess: true,
+      narrative: `${actionDef.handPrey?.narrative || 'You rely on quick reflexes.'} You manage to grab a ${prey.common_name}.`,
+      rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
+      loot: [{ name, qty }],
+      stages: [
+        {
+          name: 'Ambush',
+          chance: chanceInfo.chance,
+          roll,
+          success: true,
+          successText: `You seize the ${prey.common_name} before it slips away.`,
+        },
+      ],
+      skillProgress: { key: skillKey, label: 'Hunting', before, after, delta },
+      weather: context.weather,
+      season: context.season,
+      timeLabel: context.timeLabel,
+      timeSpentHours: timeSpent,
+      timeAfter: timeResult,
+    };
+  } else {
+    const size = prey.size_class || 'medium';
+    const difficulty = HUNT_DIFFICULTY_BY_SIZE[size] || 3;
+    const weaponBonus = weaponProfile.ranged ? 0.08 : weaponProfile.thrown ? 0.05 : weaponProfile.melee ? 0.03 : 0;
+
+    const trackChance = clamp(0.5 + chanceInfo.skillBonus + chanceInfo.attributeBonus + (chanceInfo.modifiers?.length ? 0 : 0), 0.1, 0.95);
+    const trackRoll = Math.random();
+    const trackSuccess = trackRoll < trackChance;
+    stages.push({
+      name: 'Track',
+      chance: trackChance,
+      roll: trackRoll,
+      success: trackSuccess,
+      successText: 'You follow fresh prints deeper into the wilds.',
+      failureText: 'The trail vanishes beneath fallen needles.',
+    });
+
+    let approachSuccess = false;
+    let strikeSuccess = false;
+    const approachChance = clamp(0.52 + chanceInfo.skillBonus * 0.8 + chanceInfo.attributeBonus * 0.8 - difficulty * 0.03, 0.1, 0.9);
+    const strikeChance = clamp(0.5 + chanceInfo.skillBonus + weaponBonus - difficulty * 0.05, 0.1, 0.92);
+    if (trackSuccess) {
+      const approachRoll = Math.random();
+      approachSuccess = approachRoll < approachChance;
+      stages.push({
+        name: 'Stalk',
+        chance: approachChance,
+        roll: approachRoll,
+        success: approachSuccess,
+        successText: 'You creep within striking distance.',
+        failureText: 'A snapped twig sends the prey bolting.',
+      });
+      if (approachSuccess) {
+        const strikeRoll = Math.random();
+        strikeSuccess = strikeRoll < strikeChance;
+        stages.push({
+          name: 'Strike',
+          chance: strikeChance,
+          roll: strikeRoll,
+          success: strikeSuccess,
+          successText: `Your shot drops the ${prey.common_name}.`,
+          failureText: `The ${prey.common_name} twists away at the last heartbeat.`,
+        });
+      }
+    }
+    finalSuccess = trackSuccess && approachSuccess && strikeSuccess;
+    const before = Number(currentCharacter[skillKey]) || 0;
+    const after = performHunt(currentCharacter, difficulty, { success: finalSuccess });
+    const delta = Math.round((after - before) * 100) / 100;
+
+    let loot = [];
+    if (finalSuccess) {
+      const qty = randomInt(Math.max(1, difficulty - 1), difficulty + 1);
+      const name = `Game meat (${prey.common_name})`;
+      addItemToInventory({ name, category: 'Game Meat', price: 0, profit: 0, qty, baseItem: prey.common_name });
+      loot.push({ name, qty });
+    }
+
+    const narrative = finalSuccess
+      ? `${actionDef.narrative} After a tense stalk you fell a ${prey.common_name}.`
+      : `${actionDef.narrative} You glimpse a ${prey?.common_name || 'shape'} but it escapes before you land a clean hit.`;
+
+    return {
+      type: 'hunt',
+      title: `${definition.location} – ${actionDef.label}`,
+      success: finalSuccess,
+      narrative,
+      rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
+      loot,
+      stages,
+      prey,
+      skillProgress: { key: skillKey, label: 'Hunting', before, after, delta },
+      weather: context.weather,
+      season: context.season,
+      timeLabel: context.timeLabel,
+      timeSpentHours: timeSpent,
+      timeAfter: timeResult,
+      requirementMessage: !toolCheck.ok ? actionDef.tool?.message : null,
+    };
+  }
+
+  const before = Number(currentCharacter[skillKey]) || 0;
+  const after = performHunt(currentCharacter, 1, { success: false });
+  return {
+    type: 'hunt',
+    title: `${definition.location} – ${actionDef.label}`,
+    success: false,
+    narrative: `${actionDef.narrative} Nothing stirs today.`,
+    rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
+    loot: [],
+    stages,
+    skillProgress: { key: skillKey, label: 'Hunting', before, after, delta: Math.round((after - before) * 100) / 100 },
+    weather: context.weather,
+    season: context.season,
+    timeLabel: context.timeLabel,
+    timeSpentHours: timeSpent,
+    timeAfter: timeResult,
+  };
+}
+
+function renderEnvironmentOutcome(result) {
+  showBackButton();
+  const pieces = [];
+  pieces.push(`<div class="no-character environment-result"><h1>${escapeHtml(result.title)}</h1>`);
+  if (result.narrative) {
+    pieces.push(`<p>${escapeHtml(result.narrative)}</p>`);
+  }
+  if (result.requirementMessage && !result.success && !result.partialSuccess) {
+    pieces.push(`<p class="environment-requirement">${escapeHtml(result.requirementMessage)}</p>`);
+  }
+  if (result.rollInfo) {
+    const chancePct = Math.round(result.rollInfo.chance * 100);
+    const rollPct = Math.round(result.rollInfo.roll * 1000) / 10;
+    pieces.push(`<p class="environment-roll">Find chance ${chancePct}% — rolled ${rollPct}%.</p>`);
+    if (Array.isArray(result.rollInfo.modifiers) && result.rollInfo.modifiers.length) {
+      pieces.push('<ul class="environment-modifiers">');
+      result.rollInfo.modifiers.forEach(mod => {
+        const pct = Math.round(mod.value * 1000) / 10;
+        const sign = pct >= 0 ? '+' : '';
+        pieces.push(`<li>${escapeHtml(mod.label)}: ${sign}${pct}%</li>`);
+      });
+      pieces.push('</ul>');
+    }
+  }
+  if (Array.isArray(result.stages) && result.stages.length) {
+    pieces.push('<h2>Encounter</h2><ol class="environment-stages">');
+    result.stages.forEach(stage => {
+      const chancePct = Math.round(stage.chance * 100);
+      const rollPct = Math.round(stage.roll * 1000) / 10;
+      const text = stage.success ? stage.successText : stage.failureText;
+      pieces.push(
+        `<li><strong>${escapeHtml(stage.name)}:</strong> ${escapeHtml(text)} <span class="environment-stage-roll">(${chancePct}% vs ${rollPct}%)</span></li>`,
+      );
+    });
+    pieces.push('</ol>');
+  }
+  if (Array.isArray(result.loot) && result.loot.length) {
+    pieces.push('<h2>Gains</h2><ul class="environment-loot">');
+    result.loot.forEach(item => {
+      pieces.push(`<li>${escapeHtml(item.name)} x${item.qty}</li>`);
+    });
+    pieces.push('</ul>');
+  }
+  if (result.skillProgress) {
+    const { label, after, delta } = result.skillProgress;
+    const changeText = delta > 0 ? `(+${delta.toFixed(2)})` : '(no progress)';
+    pieces.push(`<p class="environment-skill">${escapeHtml(label)} ${after.toFixed(2)} ${changeText}</p>`);
+  }
+  const contextParts = [];
+  if (result.season) contextParts.push(`Season: ${escapeHtml(result.season)}`);
+  if (result.timeLabel) contextParts.push(`Time: ${escapeHtml(result.timeLabel)}`);
+  contextParts.push(`Weather: ${escapeHtml(describeWeatherSummary(result.weather))}`);
+  pieces.push(`<p class="environment-context">${contextParts.join(' · ')}</p>`);
+  if (result.timeSpentHours != null) {
+    pieces.push(`<p class="environment-time">Time spent: ${result.timeSpentHours}h</p>`);
+  }
+  pieces.push('</div>');
+  setMainHTML(pieces.join(''));
 }
 
 
@@ -5980,6 +6790,23 @@ function showNavigation() {
         }),
       );
     });
+    const environmentActions = listEnvironmentActions(pos.city, pos.district, pos.building);
+    environmentActions.forEach(envAction => {
+      const actionId = buildEnvironmentActionId(
+        envAction.type,
+        pos.city,
+        pos.district,
+        pos.building,
+      );
+      interactionButtons.push(
+        createNavItem({
+          type: 'interaction',
+          action: actionId,
+          name: envAction.label || describeEnvironmentAction(envAction.type),
+          extraClass: 'environment-action',
+        }),
+      );
+    });
     if (interactionButtons.length) groups.push(interactionButtons);
     const buttons = [];
     groups.forEach((group, index) => {
@@ -6436,6 +7263,9 @@ function showNavigation() {
               return;
             } else if (action === 'building-request-work') {
               handleBuildingQuestRequest(pos);
+              return;
+            } else if (action.startsWith('environment:')) {
+              handleEnvironmentInteraction(action, pos).catch(console.error);
               return;
             } else {
               showBackButton();

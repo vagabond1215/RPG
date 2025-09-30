@@ -604,6 +604,36 @@ const WAVES_BREAK_BUSINESS_OWNERS = {
         stewards: ["Factor Selka Tideknot"],
         notes: "Selkanet knotters lease looms along the riverbank under Harborworks quotas.",
     },
+    "Saltwash Beach": {
+        owner: "Wave's Break",
+        stewards: ["Beachwarden Lysa Hookfin"],
+        notes: "Harborworks wardens tend tidal nets and shellfish leases along the public strand.",
+    },
+    "Tidebreak Riverbank": {
+        owner: "Wave's Break",
+        stewards: ["Riverwarden Galen Tidebinder"],
+        notes: "Tidebinder reeves maintain eel pots and drainage dikes on the brackish river split.",
+    },
+    "Copperbrook Creek": {
+        owner: "Greensoul Herbal Circle",
+        stewards: ["Herbalist Ina Copperbrook"],
+        notes: "Creekside herb plots are tended by Greensoul healers collecting luminous moss and sweetwater cress.",
+    },
+    "Sunset Grasslands": {
+        owner: "Wave's Break",
+        stewards: ["Ranger Captain Vel Moorlight"],
+        notes: "City rangers rotate grazing rights and patrol bandit paths across the open prairie hills.",
+    },
+    "Forest Edge": {
+        owner: "Wave's Break",
+        stewards: ["Edgewarden Neris Thorn"],
+        notes: "Gatewatch scouts manage snares and sap taps where farm fence meets coastal pine fringe.",
+    },
+    "Coastal Pinewood": {
+        owner: "Wave's Break",
+        stewards: ["Pinewarden Elira Greensong"],
+        notes: "Forestry wardens fell resin pines cautiously while watching for spirits in the misted wood.",
+    },
     "North Gate": {
         owner: "Wave's Break",
         stewards: ["Gate Sergeant Hullen"],
