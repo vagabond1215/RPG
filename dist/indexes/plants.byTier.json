@@ -1,34 +1,42 @@
 {
   "food": {
-    "Low Inn": [
-      "cabbage",
-      "chanterelle",
-      "apple-tree"
-    ],
+    "Low Inn": [],
     "Common": [
+      "apple-tree",
+      "barley",
       "cabbage",
+      "carrot",
       "chanterelle",
-      "apple-tree"
+      "flax",
+      "garlic",
+      "lentil",
+      "oats",
+      "onion",
+      "oyster-mushroom",
+      "pea",
+      "rye",
+      "turnip",
+      "wheat"
     ],
     "Fine": [
-      "cabbage",
+      "apple-tree",
       "chanterelle",
-      "apple-tree"
+      "garlic",
+      "oyster-mushroom",
+      "wheat"
     ],
     "High Table": [
-      "cabbage",
+      "apple-tree",
       "chanterelle",
-      "apple-tree"
+      "saffron"
     ]
   },
   "luxury": {
     "Common": [
-      "peppercorn",
-      "saffron"
+      "peppercorn"
     ],
     "Fine": [
-      "peppercorn",
-      "saffron"
+      "peppercorn"
     ],
     "Luxury": [
       "peppercorn",
