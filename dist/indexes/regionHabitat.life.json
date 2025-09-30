@@ -1,0 +1,1927 @@
+{
+  "aquatic": {
+    "coral_reefs": {
+      "animals": [
+        "sea-sponge"
+      ],
+      "plants": []
+    },
+    "floodplains": {
+      "animals": [
+        "amazon_river_dolphin",
+        "danube_backwater_pike",
+        "ganges_softshell_turtle",
+        "lower_mekong_giant_barb",
+        "nam_song_rice_paddy_eel"
+      ],
+      "plants": []
+    },
+    "lakes": {
+      "animals": [
+        "arctic-char",
+        "baikal_seal_colony",
+        "carp",
+        "finnmark_arctic_char",
+        "hippopotamus",
+        "peruvian_lake_grebe",
+        "rainbow_trout",
+        "turtle",
+        "whitefish"
+      ],
+      "plants": []
+    },
+    "marshes": {
+      "animals": [
+        "muskrat",
+        "peruvian_lake_grebe",
+        "tonle_sap_siamese_crocodile",
+        "upper_nile_shoebill"
+      ],
+      "plants": []
+    },
+    "ocean_shores": {
+      "animals": [
+        "clam",
+        "cockle",
+        "crab",
+        "flounder",
+        "goose-barnacle",
+        "horsefish",
+        "limpet",
+        "lobster",
+        "murex-purple-dye",
+        "mussel",
+        "octopus",
+        "oyster",
+        "periwinkle",
+        "porpoise",
+        "scallop",
+        "sea-cucumber",
+        "sea-lion",
+        "sea-urchin",
+        "seal",
+        "shrimp",
+        "sole",
+        "spider-crab",
+        "turbot",
+        "walrus",
+        "whelk"
+      ],
+      "plants": []
+    },
+    "open_ocean": {
+      "animals": [
+        "allis-shad",
+        "anchovy",
+        "brill",
+        "cod",
+        "conger-eel",
+        "cuttlefish",
+        "dab",
+        "dolphin",
+        "garfish",
+        "grey-mullet",
+        "haddock",
+        "hagfish",
+        "hake",
+        "halibut",
+        "herring",
+        "jellyfish",
+        "ling",
+        "mackerel",
+        "monkfish-angler",
+        "plaice",
+        "pollock",
+        "porpoise",
+        "sardine",
+        "spiny-dogfish",
+        "sprat",
+        "squid",
+        "starfish",
+        "thornback-ray",
+        "twaite-shad",
+        "whale",
+        "whiting"
+      ],
+      "plants": []
+    },
+    "pack_ice": {
+      "animals": [
+        "baikal_seal_colony"
+      ],
+      "plants": []
+    },
+    "ponds": {
+      "animals": [
+        "nam_song_rice_paddy_eel"
+      ],
+      "plants": []
+    },
+    "rivers": {
+      "animals": [
+        "alligator",
+        "amazon_river_dolphin",
+        "barbel",
+        "beaver",
+        "bleak",
+        "burbot",
+        "carp-bream",
+        "chub",
+        "congo_tigerfish",
+        "crocodile",
+        "dace",
+        "danube_backwater_pike",
+        "eastern_freshwater_cod",
+        "eel",
+        "eelpout",
+        "finnmark_arctic_char",
+        "freshwater-crayfish",
+        "ganges_softshell_turtle",
+        "grayling",
+        "gudgeon",
+        "hippopotamus",
+        "huanghe_chinese_sturgeon",
+        "ide-orfe",
+        "inirida_giant_otter",
+        "juruena_armored_catfish",
+        "kinabatangan_plain_catfish",
+        "lamprey",
+        "loach",
+        "lower_mekong_giant_barb",
+        "madagascar_rainbowfish",
+        "minnow",
+        "orinoco_black_caiman",
+        "otter",
+        "perch",
+        "pike",
+        "pikeperch",
+        "queensland_lungfish",
+        "rainbow_trout",
+        "roach",
+        "ruaha_squeaker_catfish",
+        "rudd",
+        "salmon",
+        "smelt",
+        "stickleback",
+        "sturgeon",
+        "tench",
+        "trout",
+        "turtle",
+        "wels-catfish"
+      ],
+      "plants": []
+    },
+    "streams": {
+      "animals": [
+        "madagascar_rainbowfish",
+        "rainbow_trout"
+      ],
+      "plants": []
+    },
+    "swamps": {
+      "animals": [
+        "alligator",
+        "crocodile",
+        "hippopotamus",
+        "inirida_giant_otter",
+        "kinabatangan_plain_catfish",
+        "leech",
+        "muskrat",
+        "orinoco_black_caiman",
+        "queensland_lungfish",
+        "tonle_sap_siamese_crocodile",
+        "turtle",
+        "upper_nile_shoebill"
+      ],
+      "plants": []
+    },
+    "tidal_flats": {
+      "animals": [
+        "razor-clam"
+      ],
+      "plants": []
+    },
+    "underground_lakes": {
+      "animals": [
+        "cuatrocienegas_blind_loach"
+      ],
+      "plants": []
+    },
+    "underground_rivers": {
+      "animals": [
+        "cuatrocienegas_blind_loach"
+      ],
+      "plants": []
+    }
+  },
+  "aquatic_fresh": {
+    "farmland": {
+      "animals": [],
+      "plants": [
+        "ganges_floating_rice",
+        "inle_garden_watercress"
+      ]
+    },
+    "lake": {
+      "animals": [],
+      "plants": [
+        "amazon_floating_pistia",
+        "azolla_fern",
+        "baikal_water_shield",
+        "danube_water_caltrop",
+        "hornwort",
+        "lotus",
+        "nile_blue_lily",
+        "pondweed",
+        "spirulina",
+        "water-chestnut-trapa-natans",
+        "white-water-lily",
+        "yellow-water-lily"
+      ]
+    },
+    "riverlands": {
+      "animals": [],
+      "plants": [
+        "congo_papyrus_stand",
+        "ganges_floating_rice",
+        "kinabatangan_water_spinach",
+        "orinoco_sagittaria"
+      ]
+    },
+    "wetland": {
+      "animals": [],
+      "plants": [
+        "algae",
+        "alisma",
+        "arrowhead",
+        "azolla_fern",
+        "bulrush",
+        "congo_papyrus_stand",
+        "danube_water_caltrop",
+        "duckweed",
+        "emerald_lotus_paddy",
+        "finnmark_bogbean_patch",
+        "frogbit",
+        "huanghe_lotus_root",
+        "inle_garden_watercress",
+        "juruena_arrowhead_bed",
+        "kinabatangan_water_spinach",
+        "laguna_azolla_mat",
+        "marsh-marigold",
+        "mekong_water_celery",
+        "nile_blue_lily",
+        "orinoco_sagittaria",
+        "reed-canary-grass",
+        "reed-sweet-grass",
+        "sedges",
+        "watercress",
+        "wild-celery"
+      ]
+    }
+  },
+  "aquatic_salt": {
+    "coastal": {
+      "animals": [],
+      "plants": [
+        "atlantic_dulse_rack",
+        "baltic_kelp_forest",
+        "bladderwrack",
+        "carrageen-moss",
+        "eelgrass-zostera",
+        "kelp",
+        "laver",
+        "red-dulse",
+        "sea-lettuce"
+      ]
+    }
+  },
+  "arid": {
+    "desert": {
+      "animals": [],
+      "plants": [
+        "arfaj",
+        "atlas_date_palm",
+        "badia_desert_hyssop",
+        "brittlebush",
+        "buffalo_weed",
+        "chihuahuan_agave_stand",
+        "danakil_saltwort_patch",
+        "desert_apple",
+        "egyptian_moringa_grove",
+        "gobi_saxaul_bush",
+        "jordanian_sagebrush",
+        "kalahari_tsamma_melon",
+        "namib_welwitschia_pair",
+        "saharan_acacia_bosk"
+      ]
+    },
+    "farmland": {
+      "animals": [],
+      "plants": [
+        "egyptian_moringa_grove"
+      ]
+    },
+    "grassland": {
+      "animals": [],
+      "plants": [
+        "buffalo_weed"
+      ]
+    }
+  },
+  "coastal": {
+    "cliffs": {
+      "animals": [
+        "darwin_blue_footed_booby",
+        "dyrholaey_arctic_tern",
+        "feroe_stormy_petrel",
+        "komandor_fulmar",
+        "patagonian_fur_seal_rookery"
+      ],
+      "plants": []
+    },
+    "coastal": {
+      "animals": [],
+      "plants": [
+        "california_bay_laurel",
+        "caribbean_sea_grape",
+        "catalina_ironwood",
+        "darwin_mangrove_tea",
+        "east_china_sea_samphire",
+        "faroe_rockweed",
+        "galapagos_red_mangrove",
+        "haida_sugar_kelp_line",
+        "iberian_sea_lavender",
+        "island_cress",
+        "japanese_nori_rafter",
+        "korean_glasswort_flat",
+        "lagoon_coastal_coconut",
+        "maldives_pandanus_grove",
+        "north_sea_sea_beet",
+        "orchil-lichen-roccella",
+        "queensland_mangrove_fern",
+        "samphire",
+        "sea-buckthorn",
+        "sea-kale"
+      ]
+    },
+    "coastal_dunes": {
+      "animals": [
+        "galapagos_marine_iguana"
+      ],
+      "plants": []
+    },
+    "continental_shelves": {
+      "animals": [
+        "haida_gwaii_humpback",
+        "north_sea_codline"
+      ],
+      "plants": []
+    },
+    "coral_reefs": {
+      "animals": [
+        "caribbean_reef_shark",
+        "okinawa_reef_manta",
+        "red_sea_lionfish",
+        "uluwatu_sea_snake"
+      ],
+      "plants": []
+    },
+    "estuaries": {
+      "animals": [
+        "lagoon_spotted_ray",
+        "mangrove_saltwater_crocodile",
+        "quintana_roo_brown_pelican"
+      ],
+      "plants": []
+    },
+    "hills": {
+      "animals": [],
+      "plants": [
+        "california_bay_laurel",
+        "catalina_ironwood"
+      ]
+    },
+    "ice_shelves": {
+      "animals": [
+        "baltic_gray_seal",
+        "polar_bear",
+        "tierra_del_fuego_penguin_fold"
+      ],
+      "plants": []
+    },
+    "kelp_forests": {
+      "animals": [
+        "aleutian_kelp_otter"
+      ],
+      "plants": []
+    },
+    "lagoons": {
+      "animals": [
+        "lagoon_spotted_ray"
+      ],
+      "plants": []
+    },
+    "lava_tubes": {
+      "animals": [
+        "jeju_black_volcanic_crab"
+      ],
+      "plants": []
+    },
+    "mangroves": {
+      "animals": [
+        "mangrove_saltwater_crocodile"
+      ],
+      "plants": []
+    },
+    "ocean_shores": {
+      "animals": [
+        "baltic_gray_seal",
+        "cormorant",
+        "darwin_blue_footed_booby",
+        "galapagos_marine_iguana",
+        "patagonian_fur_seal_rookery",
+        "pelican",
+        "quintana_roo_brown_pelican",
+        "tierra_del_fuego_penguin_fold"
+      ],
+      "plants": []
+    },
+    "open_ocean": {
+      "animals": [
+        "caribbean_reef_shark",
+        "feroe_stormy_petrel",
+        "haida_gwaii_humpback",
+        "indian_ocean_dolphin_fish",
+        "komandor_fulmar",
+        "okinawa_reef_manta",
+        "uluwatu_sea_snake"
+      ],
+      "plants": []
+    },
+    "pack_ice": {
+      "animals": [
+        "amundsen_polar_bear",
+        "dyrholaey_arctic_tern",
+        "polar_bear"
+      ],
+      "plants": []
+    },
+    "polar_deserts": {
+      "animals": [
+        "amundsen_polar_bear"
+      ],
+      "plants": []
+    },
+    "rivers": {
+      "animals": [
+        "crocodile"
+      ],
+      "plants": []
+    },
+    "swamps": {
+      "animals": [
+        "crocodile"
+      ],
+      "plants": []
+    },
+    "tidal_flats": {
+      "animals": [
+        "elysian_tidepool_octopus",
+        "jeju_black_volcanic_crab"
+      ],
+      "plants": []
+    }
+  },
+  "cold": {
+    "forest": {
+      "animals": [],
+      "plants": [
+        "bearberry",
+        "boreal_fireweed_glade"
+      ]
+    },
+    "tundra": {
+      "animals": [],
+      "plants": [
+        "arctic_crowberry_mat",
+        "bearberry",
+        "icelandic_angelica_plot",
+        "lapland_cloudberry_bog",
+        "svalbard_purple_saxifrage"
+      ]
+    },
+    "wetland": {
+      "animals": [],
+      "plants": [
+        "lapland_cloudberry_bog"
+      ]
+    }
+  },
+  "extreme": {
+    "cliffs": {
+      "animals": [
+        "barren_volcanic_hawk"
+      ],
+      "plants": []
+    },
+    "deep_sea": {
+      "animals": [
+        "caribbean_hydrothermal_shrimp"
+      ],
+      "plants": []
+    },
+    "geothermal_springs": {
+      "animals": [
+        "caribbean_hydrothermal_shrimp",
+        "ethiopian_geyser_frog"
+      ],
+      "plants": []
+    },
+    "hyper_arid_salt_basins": {
+      "animals": [
+        "atacama_salt_flamingo",
+        "danakil_salt_fox"
+      ],
+      "plants": []
+    },
+    "volcanic_regions": {
+      "animals": [
+        "barren_volcanic_hawk"
+      ],
+      "plants": []
+    }
+  },
+  "highland": {
+    "farmland": {
+      "animals": [],
+      "plants": [
+        "bhutan_highland_buckwheat",
+        "ethiopian_ensete_grove",
+        "inca_oca_patch",
+        "kailash_highland_barley",
+        "ladakh_dryland_mustard"
+      ]
+    },
+    "mountains": {
+      "animals": [],
+      "plants": [
+        "alpine_edelweiss_cluster",
+        "bhutan_highland_buckwheat",
+        "caucasus_rhubarb_fan",
+        "dolomite_alpine_willow",
+        "ethiopian_ensete_grove",
+        "himalayan_blue_poppy",
+        "inca_oca_patch",
+        "kailash_highland_barley",
+        "ladakh_dryland_mustard",
+        "mountain_tea_shrub",
+        "pamir_wild_thyme"
+      ]
+    }
+  },
+  "polar_ice": {
+    "arctic_tundra": {
+      "animals": [
+        "chukchi_ice_fox",
+        "east_greenland_muskoxen"
+      ],
+      "plants": []
+    },
+    "cliffs": {
+      "animals": [
+        "dyrholaey_arctic_tern"
+      ],
+      "plants": []
+    },
+    "ice_shelves": {
+      "animals": [
+        "baltic_gray_seal",
+        "beaufort_ringed_seal",
+        "polar_bear",
+        "tierra_del_fuego_penguin_fold"
+      ],
+      "plants": []
+    },
+    "lakes": {
+      "animals": [
+        "baikal_seal_colony"
+      ],
+      "plants": []
+    },
+    "ocean_shores": {
+      "animals": [
+        "baltic_gray_seal",
+        "tierra_del_fuego_penguin_fold"
+      ],
+      "plants": []
+    },
+    "pack_ice": {
+      "animals": [
+        "amundsen_polar_bear",
+        "baikal_seal_colony",
+        "beaufort_ringed_seal",
+        "dyrholaey_arctic_tern",
+        "polar_bear"
+      ],
+      "plants": []
+    },
+    "polar_deserts": {
+      "animals": [
+        "amundsen_polar_bear",
+        "east_greenland_muskoxen"
+      ],
+      "plants": []
+    },
+    "snowfields": {
+      "animals": [
+        "chukchi_ice_fox"
+      ],
+      "plants": []
+    }
+  },
+  "subterranean": {
+    "lava_tubes": {
+      "animals": [
+        "eldfell_lava_tube_spider"
+      ],
+      "plants": []
+    },
+    "limestone_caves": {
+      "animals": [
+        "ancient_karst_salamander",
+        "basque_cave_cricket",
+        "dinaric_white_olm"
+      ],
+      "plants": []
+    },
+    "underground_lakes": {
+      "animals": [
+        "cuatrocienegas_blind_loach",
+        "dinaric_white_olm"
+      ],
+      "plants": []
+    },
+    "underground_rivers": {
+      "animals": [
+        "ancient_karst_salamander",
+        "cuatrocienegas_blind_loach"
+      ],
+      "plants": []
+    }
+  },
+  "terrestrial": {
+    "alpine_tundra": {
+      "animals": [
+        "ethiopian_highland_hare",
+        "llama",
+        "mountain_goat",
+        "ptarmigan"
+      ],
+      "plants": []
+    },
+    "arctic_tundra": {
+      "animals": [
+        "arctic_ground_squirrel",
+        "chukchi_ice_fox",
+        "east_greenland_muskoxen",
+        "musk-ox",
+        "silver_fox"
+      ],
+      "plants": []
+    },
+    "boreal_forest": {
+      "animals": [
+        "silver_fox",
+        "ural_forest_moose",
+        "yenisei_pine_marten"
+      ],
+      "plants": []
+    },
+    "cliffs": {
+      "animals": [
+        "eagle",
+        "mountain_goat",
+        "wuling_mountain_serow",
+        "zagros_wild_goat"
+      ],
+      "plants": []
+    },
+    "cold_desert": {
+      "animals": [
+        "gobi_long_eared_jerboa",
+        "xinjiang_bactrian_camel"
+      ],
+      "plants": []
+    },
+    "desert": {
+      "animals": [],
+      "plants": [
+        "date-palm"
+      ]
+    },
+    "dry_forest": {
+      "animals": [
+        "bengal_thicket_cat",
+        "deccan_spotted_chevrotain"
+      ],
+      "plants": []
+    },
+    "farmland": {
+      "animals": [
+        "alpaca",
+        "beagle",
+        "boxer_dog",
+        "bulldog",
+        "burrowing_groundhog",
+        "cat",
+        "cattle",
+        "chicken",
+        "city_terrier_dog",
+        "dachshund",
+        "dog",
+        "donkey",
+        "draft-horse",
+        "earthworm",
+        "ferret",
+        "fluffy_spitz_dog",
+        "giant_guardian_dog",
+        "goat",
+        "golden_retriever",
+        "gopher",
+        "greyhound",
+        "guardian_pinscher_dog",
+        "guinea_pig",
+        "herding_shepherd_dog",
+        "honeybee",
+        "horse",
+        "iberian_montado_boar",
+        "lowland_corgi_dog",
+        "lowland_hound_dog",
+        "mule",
+        "northern_husky_dog",
+        "partridge",
+        "peafowl",
+        "pheasant",
+        "pig",
+        "poodle",
+        "rabbit",
+        "rottweiler",
+        "sheep",
+        "shih_tzu",
+        "silkworm",
+        "starling",
+        "swallow",
+        "tiny_companion_dog",
+        "water_retriever_dog",
+        "working_shepherd_dog"
+      ],
+      "plants": [
+        "acacia",
+        "agave",
+        "agrimony",
+        "alentejo_winter_barley",
+        "aloe-vera",
+        "amaranth",
+        "angelica",
+        "angelica-root",
+        "anise",
+        "annual_sow_thistle",
+        "apple-tree",
+        "apricot",
+        "arrowroot",
+        "artemisia",
+        "asparagus",
+        "azalea",
+        "bamboo",
+        "banana_plant",
+        "baobab",
+        "barley",
+        "basil",
+        "bavarian_field_turnip",
+        "bay-laurel",
+        "bay_laurel",
+        "beets",
+        "begonia",
+        "bergamot",
+        "betel-leaf",
+        "betony",
+        "bitter-vetch",
+        "black-pepper",
+        "black_nightshade",
+        "blackberries",
+        "blackcap_raspberry",
+        "blackweed",
+        "borage",
+        "boxelder_maple",
+        "broad-beans",
+        "broadleaf_herb",
+        "broadleaf_plantain",
+        "buckwheat",
+        "bulbous_cress",
+        "bullace-plum",
+        "cabbage",
+        "cacao",
+        "california_walnut",
+        "camellia",
+        "canada_thistle",
+        "caper",
+        "caraway",
+        "cardamom",
+        "carrot",
+        "carrot_weed",
+        "carrots",
+        "cart_track_plant",
+        "cassava",
+        "castor-bean",
+        "catalan_saffron_crocus",
+        "catnip",
+        "cattail",
+        "celery",
+        "chamomile",
+        "chard",
+        "cherries",
+        "cherry",
+        "chervil",
+        "chestnut",
+        "chestnuts",
+        "chia",
+        "chickling-vetch",
+        "chickpea",
+        "chickpeas",
+        "chives",
+        "chrysanthemum",
+        "cinnamon",
+        "clove",
+        "coconut",
+        "coffee",
+        "common_bean",
+        "coriander",
+        "cotton",
+        "cucumber",
+        "currant",
+        "dalmatian_fig_orchard",
+        "damson",
+        "dill",
+        "douro_wine_vineyard",
+        "dragonfruit",
+        "durian",
+        "einkorn",
+        "elderberry",
+        "emilian_chicory_heads",
+        "emmer",
+        "ergot-rye-fungus",
+        "eucalyptus",
+        "fennel",
+        "fenugreek",
+        "feverfew",
+        "fig",
+        "figs",
+        "flax",
+        "fodder-vetch",
+        "foxtail-millet",
+        "galician_kale_row",
+        "garlic",
+        "ginkgo",
+        "ginseng",
+        "gooseberry",
+        "grapes",
+        "guarana",
+        "guava",
+        "hazelnuts",
+        "hemp",
+        "hibiscus",
+        "hops",
+        "horse_nettle",
+        "horseradish",
+        "hungarian_paprika_chili",
+        "hyssop",
+        "istrian_olive_terrace",
+        "jackfruit",
+        "jasmine",
+        "jicama",
+        "kale",
+        "kava",
+        "khat",
+        "kiwi-fruit",
+        "kohlrabi",
+        "kumquat",
+        "lavender",
+        "leek",
+        "leeks",
+        "lemon",
+        "lemongrass",
+        "lentil",
+        "lentils",
+        "lettuce",
+        "licorice",
+        "loquat",
+        "lovage",
+        "luffa",
+        "lupin",
+        "macadamia",
+        "madder",
+        "mango",
+        "marjoram",
+        "marshmallow-althaea",
+        "medlar",
+        "melon",
+        "millet",
+        "mint",
+        "moringa",
+        "mulberries",
+        "mulberry",
+        "mustard",
+        "myrtle",
+        "nasturtium",
+        "neem",
+        "nettle",
+        "nigella-black-cumin",
+        "novgorod_flax_field",
+        "nutmeg",
+        "oat",
+        "oats",
+        "okra",
+        "olive",
+        "olives",
+        "onion",
+        "onions",
+        "orange",
+        "oregano",
+        "oyster-mushroom",
+        "paddy_rice",
+        "papaya",
+        "parsley",
+        "parsnips",
+        "passionflower",
+        "pea",
+        "peach",
+        "peanut",
+        "pears",
+        "peas",
+        "peppercorn",
+        "peppermint",
+        "peppery_cress",
+        "persimmon",
+        "pineapple",
+        "plums",
+        "poppy",
+        "potato",
+        "proso-millet",
+        "purslane",
+        "quince",
+        "quinces",
+        "quinoa",
+        "radish",
+        "radishes",
+        "rapeseed",
+        "raspberries",
+        "raspberry",
+        "red-clover",
+        "reed",
+        "rhine_riesling_vine",
+        "rice",
+        "rosemary",
+        "rue",
+        "rye",
+        "saffron",
+        "sage",
+        "salad-burnet",
+        "salsify",
+        "sarsaparilla",
+        "savanna_rice",
+        "savory",
+        "seaweed",
+        "sesame",
+        "shallots",
+        "sicilian_blood_orange",
+        "silesian_potato_patch",
+        "skirret",
+        "sorghum",
+        "soybean",
+        "spelt",
+        "spinach",
+        "st-johns-wort",
+        "strawberries",
+        "sugarcane",
+        "sunflower",
+        "tamarillo",
+        "tamarind",
+        "tansy",
+        "taro",
+        "tarragon",
+        "tea",
+        "thyme",
+        "tobacco",
+        "tomato",
+        "toscana_artichoke_bed",
+        "true_cinnamon",
+        "turmeric",
+        "turnip",
+        "turnips",
+        "tuscan_rosemary_hedge",
+        "ube",
+        "umbria_fava_trellis",
+        "valencia_almond_lot",
+        "vanilla",
+        "walloon_endive_forcer",
+        "walnut",
+        "walnuts",
+        "wasabi",
+        "watermelon",
+        "weld-dyers-rocket",
+        "wheat",
+        "woad",
+        "xanthorrhoea",
+        "yam",
+        "yarrow",
+        "yautia",
+        "yorkshire_ryegrass_pasture",
+        "zagreb_plum_orchard"
+      ]
+    },
+    "floodplains": {
+      "animals": [
+        "qinghai_steppe_crane"
+      ],
+      "plants": []
+    },
+    "forest": {
+      "animals": [
+        "aardvark",
+        "aardwolf",
+        "agouti",
+        "albatross",
+        "alpine-ibex",
+        "anaconda",
+        "anole",
+        "ant",
+        "armadillo",
+        "axolotl",
+        "baboon",
+        "bactrian-camel",
+        "badger",
+        "barbary-ape",
+        "bear",
+        "binturong",
+        "black-mamba",
+        "blackbird",
+        "blue-whale",
+        "boar",
+        "buzzard",
+        "capercaillie",
+        "capybara",
+        "caracal",
+        "cassowary",
+        "chameleon",
+        "cheetah",
+        "chimpanzee",
+        "chinchilla",
+        "chipmunk",
+        "chital",
+        "civet",
+        "coati",
+        "cobia",
+        "coelacanth",
+        "condor",
+        "cougar",
+        "cuckoo",
+        "deer",
+        "dhole",
+        "dik-dik",
+        "dingo",
+        "dog",
+        "dove",
+        "draft-horse",
+        "dugong",
+        "echidna",
+        "electric-ray",
+        "elk",
+        "emu",
+        "ermine",
+        "eurasian-jay",
+        "falcon",
+        "fallow-deer",
+        "fennec-fox",
+        "fieldfare",
+        "finch",
+        "flying-squirrel",
+        "fox",
+        "gall-wasp-oak-gall",
+        "genet",
+        "gerenuk",
+        "gharial",
+        "giant-anteater",
+        "giant-panda",
+        "gibbon",
+        "gila-monster",
+        "golden-jackal",
+        "gorilla",
+        "goshawk",
+        "great-spotted-woodpecker",
+        "great_ape",
+        "grizzled_bear",
+        "guanaco",
+        "guinea-fowl",
+        "hammerhead-shark",
+        "hare",
+        "harpy-eagle",
+        "harrier",
+        "hawk",
+        "hedge-sparrow",
+        "hedgehog",
+        "honeybee",
+        "hoopoe",
+        "howler-monkey",
+        "hyrax",
+        "iberian-lynx",
+        "iberian_montado_boar",
+        "iguana",
+        "impala",
+        "jerboa",
+        "kakapo",
+        "kangaroo",
+        "kermes-scale-insect",
+        "kestrel",
+        "kinkajou",
+        "kiwi",
+        "koala",
+        "komodo-dragon",
+        "kookaburra",
+        "kudu",
+        "lemming",
+        "lemur",
+        "leopard",
+        "linsang",
+        "lynx",
+        "magpie",
+        "manatee",
+        "markhor",
+        "marmot",
+        "marten",
+        "meerkat",
+        "merlin-falcon",
+        "mink",
+        "mongoose",
+        "moose",
+        "moray-eel",
+        "mule-deer",
+        "muskox",
+        "narwhal",
+        "nautilus",
+        "nightingale",
+        "nightjar",
+        "numbat",
+        "okapi",
+        "olingo",
+        "opossum",
+        "orangutan",
+        "owl",
+        "pangolin",
+        "parakeet",
+        "parrot",
+        "peacock",
+        "peccary",
+        "peregrine-falcon",
+        "pig",
+        "platypus",
+        "polecat",
+        "porcupine",
+        "quagga",
+        "quetzal",
+        "quokka",
+        "quoll",
+        "raccoon",
+        "red-kite",
+        "rhea",
+        "roe-deer",
+        "saiga",
+        "saola",
+        "scaled_reptile",
+        "secretarybird",
+        "shadow_panther",
+        "shoebill",
+        "shrew",
+        "skua",
+        "skunk",
+        "sloth",
+        "snail",
+        "snake",
+        "song-thrush",
+        "song_canary",
+        "sparrowhawk",
+        "spectacled-bear",
+        "squirrel",
+        "stag",
+        "stoat",
+        "talking_mynah_bird",
+        "tapir",
+        "tasmanian-devil",
+        "tiger",
+        "tuatara",
+        "turkey",
+        "turtle-dove",
+        "vaquita",
+        "vicuna",
+        "warthog",
+        "weasel",
+        "western_fence_lizard",
+        "white_headed_capuchin",
+        "wildcat",
+        "wolf",
+        "wolverine",
+        "wombat",
+        "wood-pigeon",
+        "woodcock",
+        "wren",
+        "xerus",
+        "yak",
+        "yellow-mongoose",
+        "zebu",
+        "zorilla"
+      ],
+      "plants": [
+        "aconite",
+        "alder",
+        "alder-buckthorn",
+        "almond",
+        "amy_root",
+        "appalachian_spicebush",
+        "apple-tree",
+        "arrowwood_shrub",
+        "ash",
+        "banana_plant",
+        "barberry",
+        "bay_laurel",
+        "bear_corn",
+        "beech",
+        "belladonna",
+        "bilberry",
+        "birch",
+        "birch-polypore",
+        "bird-cherry",
+        "bird_s_nest_fern",
+        "bitter-orange",
+        "bitter_nightshade",
+        "black_birch",
+        "black_cherry",
+        "black_forest_morel_patch",
+        "black_hellebore",
+        "black_maple",
+        "blackberry",
+        "blackcap_raspberry",
+        "blackhaw",
+        "blackthorn-sloe",
+        "blue_ash",
+        "blue_bindweed",
+        "blueberry",
+        "blueberry_cornel",
+        "bolean_birch",
+        "boston_sword_fern",
+        "bow_wood",
+        "boxwood",
+        "bracken-fern",
+        "bristly_dewberry",
+        "bristly_groundberry",
+        "buckthorn",
+        "bur_oak",
+        "cabinet_cherry",
+        "canada_root",
+        "cancer_jalap",
+        "canoe_birch",
+        "cedar",
+        "chaga",
+        "champion_oak",
+        "chanterelle",
+        "cherry_birch",
+        "chestnut",
+        "chestnut-oak",
+        "christmas_fern",
+        "citron",
+        "clubmoss",
+        "coral-fungus",
+        "cornelian-cherry",
+        "crab-apple",
+        "cypress",
+        "death-cap",
+        "dewberry-bramble",
+        "dogwood",
+        "elder",
+        "elm",
+        "fir",
+        "flowering_dogwood",
+        "fly-agaric",
+        "foxglove",
+        "guelder-rose",
+        "hawthorn",
+        "hazel",
+        "hen-of-the-woods",
+        "holly",
+        "hornbeam",
+        "ink-cap",
+        "ivy",
+        "juniper",
+        "jura_valerian_clump",
+        "karpatian_wild_garlic",
+        "larch",
+        "lentil",
+        "linden-lime-tree",
+        "lingonberry",
+        "liverwort",
+        "maple",
+        "meadow_nightshade",
+        "milkcap",
+        "mistletoe",
+        "morel",
+        "nestled_anthurium",
+        "oak",
+        "occitanian_truffle_oak",
+        "oyster-mushroom",
+        "peppercorn",
+        "piedmont_hazelnut_copse",
+        "pine",
+        "pistachio",
+        "plane-tree",
+        "pomegranate",
+        "poplar",
+        "porcini",
+        "privet",
+        "puffball",
+        "quebec_maple_grove",
+        "ramsons-wild-garlic",
+        "rosehip",
+        "rowan",
+        "rum_cherry",
+        "russula",
+        "service-tree",
+        "shaggy-mane",
+        "spindle-tree",
+        "spruce",
+        "stone-pine-pine-nuts",
+        "strawberry-tree",
+        "sweet-woodruff",
+        "tinder-fungus-amadou",
+        "transylvanian_beech_mast",
+        "true_cinnamon",
+        "truffle",
+        "turkey-tail",
+        "wild-olive",
+        "wild-pear",
+        "wild_pellitory",
+        "willow",
+        "wood-sorrel",
+        "woodland_bittersweet",
+        "yew"
+      ]
+    },
+    "grassland": {
+      "animals": [
+        "alpaca",
+        "antelope",
+        "ass",
+        "aurochs",
+        "bison",
+        "burrowing_groundhog",
+        "bustard",
+        "camelopard",
+        "cattle",
+        "chicken",
+        "coyote",
+        "draft-horse",
+        "elephant",
+        "gazelle",
+        "golden-plover",
+        "goldfinch",
+        "gopher",
+        "horned_buffalo",
+        "hyena",
+        "lark",
+        "lion",
+        "llama",
+        "mole",
+        "plains_gnu",
+        "prairie_dog",
+        "quail",
+        "rabbit",
+        "rhinoceros",
+        "saiga-antelope",
+        "sheep",
+        "skunk",
+        "zebra"
+      ],
+      "plants": [
+        "annual_sow_thistle",
+        "barley",
+        "bitterweed",
+        "black_eyed_susan",
+        "blackiehead",
+        "blue_oak",
+        "blue_of_the_heavens",
+        "bluntleaf_milkweed",
+        "bow_wood",
+        "brilliant_coneflower",
+        "bristly_dewberry",
+        "brown_betty",
+        "brown_daisy",
+        "brown_eyed_susan",
+        "bull_nettle",
+        "bur_oak",
+        "butterfly_flower",
+        "butterfly_weed",
+        "california_buckeye",
+        "california_thistle",
+        "chicory",
+        "chigger_flower",
+        "clover",
+        "coltsfoot",
+        "columbine",
+        "comfrey",
+        "daisy",
+        "dandelion",
+        "datura",
+        "dock",
+        "goosefoot",
+        "henbane",
+        "horehound",
+        "ladys-bedstraw",
+        "lambs-lettuce",
+        "loire_meadow_clover",
+        "mandrake",
+        "marigold",
+        "meadow_nightshade",
+        "meadowsweet",
+        "mugwort",
+        "nettles",
+        "pansy",
+        "peony",
+        "plantain",
+        "rose",
+        "saffron",
+        "self-heal",
+        "sorrel",
+        "valerian",
+        "violet",
+        "wheat",
+        "wild-thyme",
+        "wormwood",
+        "yorkshire_ryegrass_pasture"
+      ]
+    },
+    "hills": {
+      "animals": [
+        "bezoar-goat",
+        "chamois",
+        "chipmunk",
+        "deer",
+        "donkey",
+        "drakensberg_rock_hyrax",
+        "goat",
+        "grouse",
+        "ibex",
+        "loess_plateau_pika",
+        "mouflon",
+        "raven",
+        "reindeer",
+        "sheep",
+        "zagros_wild_goat"
+      ],
+      "plants": [
+        "bitter_nightshade",
+        "black_birch",
+        "black_hellebore",
+        "blackhaw",
+        "blue_oak",
+        "bolean_birch",
+        "broom-scotch-broom",
+        "cabbage",
+        "california_buckeye",
+        "california_walnut",
+        "champion_oak",
+        "chanterelle",
+        "crete_thyme_mat",
+        "douro_wine_vineyard",
+        "gorse-furze",
+        "heather-ling",
+        "istrian_olive_terrace",
+        "jura_valerian_clump",
+        "oats",
+        "occitanian_truffle_oak",
+        "piedmont_hazelnut_copse",
+        "rhine_riesling_vine",
+        "rye",
+        "transylvanian_beech_mast",
+        "zagreb_plum_orchard"
+      ]
+    },
+    "hot_desert": {
+      "animals": [
+        "camel",
+        "dromedary_camel",
+        "kalahari_meerkat_band",
+        "namib_brown_hyena",
+        "oryx",
+        "sahara_addax_caravan"
+      ],
+      "plants": []
+    },
+    "lake": {
+      "animals": [],
+      "plants": [
+        "canoe_birch"
+      ]
+    },
+    "lakes": {
+      "animals": [
+        "hippopotamus",
+        "swan"
+      ],
+      "plants": []
+    },
+    "limestone_caves": {
+      "animals": [
+        "bat"
+      ],
+      "plants": []
+    },
+    "marshes": {
+      "animals": [
+        "coot",
+        "crane",
+        "curlew",
+        "flamingo",
+        "frog",
+        "grebe",
+        "greylag-goose",
+        "horned_buffalo",
+        "ibis",
+        "lapwing",
+        "mallard",
+        "moorhen",
+        "pintail",
+        "shoveler",
+        "snipe",
+        "stork",
+        "teal",
+        "toad",
+        "white-pelican",
+        "whooper-swan",
+        "wigeon",
+        "wild-goose"
+      ],
+      "plants": []
+    },
+    "montane_forest": {
+      "animals": [
+        "andean_spectacled_bear",
+        "atlas_barbary_macaque",
+        "cougar",
+        "grizzled_bear",
+        "himalayan_musk_deer",
+        "panda",
+        "rwanda_bamboo_gorilla",
+        "wuling_mountain_serow"
+      ],
+      "plants": []
+    },
+    "ocean_shores": {
+      "animals": [
+        "barnacle-goose",
+        "gannet",
+        "gull",
+        "tern"
+      ],
+      "plants": []
+    },
+    "polar_deserts": {
+      "animals": [
+        "east_greenland_muskoxen"
+      ],
+      "plants": []
+    },
+    "prairie": {
+      "animals": [
+        "prairie_dog"
+      ],
+      "plants": []
+    },
+    "riverlands": {
+      "animals": [],
+      "plants": [
+        "bank_cress",
+        "boxelder_maple",
+        "california_sycamore",
+        "canyon_sycamore"
+      ]
+    },
+    "rivers": {
+      "animals": [
+        "hippopotamus",
+        "kingfisher",
+        "osprey"
+      ],
+      "plants": []
+    },
+    "savanna": {
+      "animals": [
+        "antelope",
+        "baboon",
+        "giraffe",
+        "jackal",
+        "okavango_painted_dog",
+        "plains_gnu",
+        "rhinoceros",
+        "zebra"
+      ],
+      "plants": []
+    },
+    "semi_arid_scrublands": {
+      "animals": [
+        "coyote",
+        "donkey",
+        "dromedary_camel",
+        "fynbos_cape_grysbok",
+        "jackal",
+        "oryx",
+        "tatacoa_spinytail_iguana",
+        "western_fence_lizard"
+      ],
+      "plants": []
+    },
+    "snowfields": {
+      "animals": [
+        "chukchi_ice_fox"
+      ],
+      "plants": []
+    },
+    "steppe": {
+      "animals": [
+        "caspian_steppe_lynx",
+        "patagonian_mara_forager",
+        "qinghai_steppe_crane"
+      ],
+      "plants": []
+    },
+    "swamps": {
+      "animals": [
+        "hippopotamus"
+      ],
+      "plants": []
+    },
+    "temperate_rainforest": {
+      "animals": [
+        "canary_laurel_pigeon",
+        "panda"
+      ],
+      "plants": []
+    },
+    "tropical_rainforest": {
+      "animals": [
+        "jaguar",
+        "javan_rainforest_peacock",
+        "madagascar_leaf_tailed_gecko",
+        "mandrill",
+        "marmoset",
+        "ocelot",
+        "shadow_panther",
+        "vietnamese_sika_deer",
+        "white_headed_capuchin"
+      ],
+      "plants": []
+    },
+    "tundra": {
+      "animals": [],
+      "plants": [
+        "reindeer-moss"
+      ]
+    },
+    "urban": {
+      "animals": [
+        "beagle",
+        "boxer_dog",
+        "broadtail_coon_cat",
+        "bulldog",
+        "cat",
+        "city_terrier_dog",
+        "classic_shorthair_cat",
+        "common-swift",
+        "crow",
+        "curled_rex_cat",
+        "dachshund",
+        "dog",
+        "elegant_temple_cat",
+        "fluffy_spitz_dog",
+        "folded_ear_cat",
+        "gentle_ragdoll_cat",
+        "giant_guardian_dog",
+        "golden_retriever",
+        "greyhound",
+        "guardian_pinscher_dog",
+        "guinea_pig",
+        "hairless_sphynx_cat",
+        "hamster",
+        "herding_shepherd_dog",
+        "jackdaw",
+        "lowland_corgi_dog",
+        "lowland_hound_dog",
+        "mosscoat_forest_cat",
+        "mouse",
+        "northern_husky_dog",
+        "parakeet",
+        "pigeon",
+        "plush_shorthair_cat",
+        "poodle",
+        "rat",
+        "rottweiler",
+        "sable_temple_cat",
+        "shih_tzu",
+        "silken_palace_cat",
+        "slate_blue_cat",
+        "song_canary",
+        "sparrow",
+        "spotted_jungle_cat",
+        "spotted_temple_cat",
+        "talking_mynah_bird",
+        "ticked_companion_cat",
+        "tiny_companion_dog",
+        "water_retriever_dog",
+        "working_shepherd_dog"
+      ],
+      "plants": [
+        "black_nightshade",
+        "boston_sword_fern",
+        "broadleaf_plantain",
+        "cart_track_plant",
+        "chrysanthemum",
+        "nestled_anthurium"
+      ]
+    },
+    "wetland": {
+      "animals": [],
+      "plants": [
+        "bittercress",
+        "bluntleaf_milkweed",
+        "butterbur",
+        "cloudberry",
+        "cotton-grass",
+        "cranberry",
+        "horsetail",
+        "moss",
+        "paddy_rice"
+      ]
+    }
+  },
+  "urban": {
+    "urban": {
+      "animals": [],
+      "plants": [
+        "capital_rooftop_lettuce",
+        "market_square_herb_planter",
+        "miniature_rose",
+        "palace_courtyard_lime",
+        "riverfront_poplar_row",
+        "tenement_window_box_mint",
+        "velvet_violet"
+      ]
+    }
+  },
+  "wetlands_transitional": {
+    "bogs": {
+      "animals": [
+        "boreal_bog_lemming"
+      ],
+      "plants": []
+    },
+    "farmland": {
+      "animals": [
+        "duck",
+        "goose",
+        "jinxian_rice_paddy_frog"
+      ],
+      "plants": []
+    },
+    "fens": {
+      "animals": [
+        "boreal_bog_lemming"
+      ],
+      "plants": []
+    },
+    "floodplains": {
+      "animals": [
+        "altamaha_swamp_rabbit",
+        "delta_mud_heron",
+        "floodplain_reedbuck",
+        "huanghe_reed_warbler",
+        "jinxian_rice_paddy_frog",
+        "kafue_floodplain_lechwe",
+        "laguna_capybara",
+        "nyasa_sitatunga"
+      ],
+      "plants": []
+    },
+    "forest": {
+      "animals": [
+        "idanre_wetland_duiker"
+      ],
+      "plants": [
+        "lowcountry_pawpaw",
+        "tall_hellebore",
+        "winterberry_holly"
+      ]
+    },
+    "lakes": {
+      "animals": [
+        "turtle"
+      ],
+      "plants": []
+    },
+    "marshes": {
+      "animals": [
+        "bittern",
+        "cattail_bittern",
+        "crane-fly",
+        "delta_mud_heron",
+        "everglade_snail_kite",
+        "floodplain_reedbuck",
+        "goose",
+        "gulf_coast_muskrat",
+        "heron",
+        "huanghe_reed_warbler",
+        "kafue_floodplain_lechwe",
+        "marshland_mongoose",
+        "muskrat",
+        "okefenokee_bullfrog"
+      ],
+      "plants": []
+    },
+    "ponds": {
+      "animals": [
+        "duck"
+      ],
+      "plants": []
+    },
+    "riverlands": {
+      "animals": [],
+      "plants": [
+        "black_alder",
+        "floodplain_watermint",
+        "lowcountry_pawpaw"
+      ]
+    },
+    "rivers": {
+      "animals": [
+        "alligator",
+        "turtle"
+      ],
+      "plants": []
+    },
+    "streams": {
+      "animals": [
+        "newt",
+        "salamander"
+      ],
+      "plants": []
+    },
+    "swamps": {
+      "animals": [
+        "alligator",
+        "altamaha_swamp_rabbit",
+        "everglade_snail_kite",
+        "gulf_coast_muskrat",
+        "idanre_wetland_duiker",
+        "laguna_capybara",
+        "marshland_mongoose",
+        "muskrat",
+        "newt",
+        "nyasa_sitatunga",
+        "okefenokee_bullfrog",
+        "salamander",
+        "turtle"
+      ],
+      "plants": []
+    },
+    "wetland": {
+      "animals": [],
+      "plants": [
+        "altamaha_buttonbush",
+        "bayou_crimson_cardinal",
+        "belle_isle_cress",
+        "black_alder",
+        "black_ash",
+        "cane_ash",
+        "club-rush-schoenoplectus",
+        "common-reed-phragmites",
+        "delta_sweet_flag",
+        "estonian_bog_rosemary",
+        "floodplain_watermint",
+        "great_lakes_marsh_blazingstar",
+        "idaho_catkin_willow",
+        "jutland_reed_canary",
+        "kootenay_sedge_meadow",
+        "sweet-flag-acorus-calamus",
+        "sweet-gale-bog-myrtle",
+        "tall_hellebore",
+        "white_hellebore",
+        "winterberry_holly"
+      ]
+    }
+  }
+}
