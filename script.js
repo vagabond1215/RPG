@@ -3828,7 +3828,11 @@ function buildingGreetingChance(timeBand, weather, workers) {
   return Math.max(0.05, Math.min(0.85, chance));
 }
 
-function buildingWorkerEstimate(profile, timeBand, weather, building) {
+function buildingWorkerEstimate(profile, timeBand, weather, building, buildingName) {
+  const displayName = building?.name || buildingName || profile?.name;
+  if (isOutdoorSite(displayName)) {
+    return 0;
+  }
   const base =
     profile?.workforce?.normal?.reduce((sum, band) => sum + (band.count || 0), 0) ||
     (building?.employees ? Math.max(3, Math.round(building.employees.length * 0.75)) : 6);
@@ -4144,8 +4148,28 @@ function chooseOverviewFragment(options, fragments) {
   return '';
 }
 
-function gatherBuildingOverviewFlags(nameLower) {
+function outdoorEnvironmentFlags(nameLower) {
   return {
+    isRiver: /river|riverbank|brook|creek|stream|shallows|ford/.test(nameLower),
+    isCoast: /beach|shore|coast|dune|cliff|cove|bay|surf|tidal/.test(nameLower),
+    isForest: /forest|wood|pine|grove|thicket|glade|copse/.test(nameLower),
+    isGrassland: /grassland|meadow|plain|prairie|moor|heath|steppe/.test(nameLower),
+    isWetland: /marsh|bog|fen|swamp|reed|mire|wetland/.test(nameLower),
+    isHills: /hill|ridge|bluff|crag|rise/.test(nameLower),
+  };
+}
+
+function isOutdoorSite(name) {
+  if (!name) return false;
+  const lower = String(name).toLowerCase();
+  if (/camp|fair|tournament/.test(lower)) return true;
+  const flags = outdoorEnvironmentFlags(lower);
+  return Object.values(flags).some(Boolean);
+}
+
+function gatherBuildingOverviewFlags(nameLower) {
+  const outdoorFlags = outdoorEnvironmentFlags(nameLower);
+  return Object.assign({
     isGlass: /glass|blower|kiln|glory hole/.test(nameLower),
     isForge: /forge|smith|anvil|foundry|smelter/.test(nameLower),
     isTannery: /tann|hide|leather|skin|curing/.test(nameLower),
@@ -4161,7 +4185,8 @@ function gatherBuildingOverviewFlags(nameLower) {
     isInn: /inn|tavern|alehouse|hostel|lodge|pub|cantina|taproom/.test(nameLower),
     isGarrison: /barracks|guard|watch|garrison|fort|gate/.test(nameLower),
     isHarbor: /wharf|dock|pier|quay|shipyard|slip/.test(nameLower),
-  };
+    isOutdoor: isOutdoorSite(nameLower),
+  }, outdoorFlags);
 }
 
 function buildingTypeKey(buildingName, businessProfile) {
@@ -4188,6 +4213,7 @@ function buildingTypeKey(buildingName, businessProfile) {
   if (/farm|field|pasture|orchard|grove|meadow|polder|ranch|vineyard|stockyard|barn|apiary|dairy|paddock|stead|acre|garden/.test(nameLower)) {
     return 'farm';
   }
+  if (isOutdoorSite(buildingName)) return 'wilds';
   if (/clinic|hospital|healer|apothecary|bath|spa|sanitorium|theater|opera|playhouse|amphitheater/.test(nameLower)) {
     return 'service';
   }
@@ -4288,6 +4314,85 @@ function joinOverviewParts(...parts) {
 }
 
 const BUILDING_OVERVIEW_BLUEPRINTS = {
+  wilds: (context, fragments) => {
+    const entryAction = chooseOverviewFragment(
+      {
+        'weather:storm': 'brace against wind-driven rain that scours the open ground',
+        'weather:rain': fragments.flags.isCoast
+          ? 'walk the tideline while rain stipples the sand'
+          : fragments.flags.isRiver
+            ? 'pick through slick reeds as rain dimples the current'
+            : 'move carefully along mud-darkened trails as rain patters around you',
+        'weather:fog': fragments.flags.isCoast
+          ? 'listen to the surf muffled by fog as you crest the dunes'
+          : 'follow muted silhouettes while fog beads on nearby brush',
+        'weather:snow': fragments.flags.isForest
+          ? 'follow softened steps beneath snow-weighted boughs'
+          : 'crunch across frost-hardened ground beneath a pale sky',
+        'weather:clear': fragments.flags.isRiver
+          ? 'trace sunlit ripples along the riverbank'
+          : fragments.flags.isCoast
+            ? 'walk bright dunes while salt wind stings your cheeks'
+            : 'breathe crisp air across open land where grasses sway',
+        default: fragments.flags.isRiver
+          ? 'follow the reed-lined bank beside the slow current'
+          : fragments.flags.isCoast
+            ? 'stroll damp sand where waves lap in steady rhythm'
+            : fragments.flags.isForest
+              ? 'move beneath the shade of wind-stirred boughs'
+              : 'cross quiet ground where wild grasses rustle',
+      },
+      fragments,
+    );
+    const ambient = chooseOverviewFragment(
+      {
+        'time:predawn': 'pre-dawn hush leaves only distant water and rustling leaves to mark the hour',
+        'time:morning': fragments.flags.isRiver
+          ? 'first light paints the shallows while mist lifts off the current'
+          : fragments.flags.isCoast
+            ? 'gulls cry over the tideline as the morning tide creeps in'
+            : 'sunrise warms dew from grasses and shrubs',
+        'time:late-morning': 'late-morning light settles across the landscape without stirring much traffic',
+        'time:afternoon': 'insects drone through the afternoon heat while the open ground lies largely undisturbed',
+        'time:late-afternoon': 'lengthening shadows stretch across the terrain as evening nears',
+        'time:evening': fragments.flags.isRiver
+          ? 'dusk glimmers along the water while frogs ready their chorus'
+          : 'crickets strike up song as twilight settles',
+        'time:night': fragments.flags.isRiver
+          ? 'only the river’s murmur keeps you company beneath the night sky'
+          : 'moonlight silvers the landscape while distant creatures call',
+        default: 'the area lies quiet aside from wind and wildlife',
+      },
+      fragments,
+    );
+    const feature = chooseOverviewFragment(
+      {
+        'season:spring': fragments.flags.isRiver
+          ? 'fresh shoots line the bank where minnows dart between reeds'
+          : 'new growth and blossoms lend color to the wild ground',
+        'season:summer': fragments.flags.isCoast
+          ? 'warm salt air carries the tang of drying kelp'
+          : 'summer growth thickens the brush where wildlife hides',
+        'season:autumn': fragments.flags.isForest
+          ? 'fallen leaves carpet the path beneath turning canopies'
+          : 'autumn hues ripple through bending grasses',
+        'season:winter': fragments.flags.isRiver
+          ? 'ice rims the edges of the current while the main flow stays dark'
+          : 'frost grips the landscape, muting scent and sound',
+        default: fragments.flags.isForest
+          ? 'pine resin and leaf litter scent the steady hush'
+          : fragments.flags.isCoast
+            ? 'the rhythmic pulse of waves marks the time between gusts'
+            : 'open country stretches away, shaped by wind and weather',
+      },
+      fragments,
+    );
+    return [
+      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
+      sentenceFromSlug(ambient),
+      sentenceFromSlug(feature),
+    ].filter(Boolean);
+  },
   port: (context, fragments) => {
     const entryAction = chooseOverviewFragment(
       {
@@ -6041,10 +6146,298 @@ function buildingExtraScene(profile, building, rng, buildingName, workers) {
   return `${capitalizeFirst(descriptor.text)} ${tempoVerb} ${locale} from falling silent.`;
 }
 
+function outdoorTimeBucket(timeLabel) {
+  const key = normalizeTimeKey(timeLabel);
+  switch (key) {
+    case 'predawn':
+      return 'predawn';
+    case 'morning':
+    case 'late-morning':
+      return 'morning';
+    case 'afternoon':
+    case 'late-afternoon':
+      return 'afternoon';
+    case 'evening':
+      return 'evening';
+    case 'night':
+      return 'night';
+    default:
+      return 'day';
+  }
+}
+
+function outdoorHumanPresence(context) {
+  const rng = context.rng ?? Math.random;
+  const displayName = context.building?.name || context.buildingName || '';
+  const flags = outdoorEnvironmentFlags(displayName.toLowerCase());
+  const bucket = outdoorTimeBucket(context.timeLabel);
+  const weatherKey = normalizeWeatherKey(context.weather);
+  const seasonKey = normalizeSeasonKey(context.season);
+  const districtLower = (context.district || '').toLowerCase();
+  let chance = 0.05;
+
+  if (/farmland|field|orchard|polder|meadow|grove|village|hamlet/.test(districtLower)) chance += 0.1;
+  if (/ward|district|market|harbor|dock|port|bridge|square|road/.test(districtLower)) chance += 0.05;
+  if (flags.isRiver || flags.isCoast) chance += 0.05;
+  if (flags.isForest || flags.isGrassland || flags.isWetland || flags.isHills) chance += 0.02;
+
+  switch (bucket) {
+    case 'predawn':
+      chance -= 0.09;
+      break;
+    case 'morning':
+      chance += 0.08;
+      break;
+    case 'day':
+      chance += 0.04;
+      break;
+    case 'afternoon':
+      chance += 0.03;
+      break;
+    case 'evening':
+      chance -= 0.02;
+      break;
+    case 'night':
+      chance -= 0.12;
+      break;
+    default:
+      break;
+  }
+
+  if (weatherKey === 'storm') chance = 0;
+  else if (weatherKey === 'rain') chance -= 0.07;
+  else if (weatherKey === 'fog') chance -= 0.04;
+  else if (weatherKey === 'snow') chance -= 0.09;
+  else if (weatherKey === 'clear') chance += 0.03;
+
+  if (seasonKey === 'winter') chance -= 0.03;
+  else if (seasonKey === 'summer') chance += 0.01;
+
+  chance = Math.max(0, Math.min(0.55, chance));
+
+  const roll = (rng ?? Math.random)();
+  if (roll > chance) {
+    const quietOptions = [
+      'No other travelers cross your path; the landscape is quiet at this hour.',
+      'You have the stretch to yourself, with only natural sounds for company.',
+      'The area is empty of people, leaving the wilds hushed around you.',
+    ];
+    return chooseRandom(quietOptions, rng) || quietOptions[0];
+  }
+
+  const general = {
+    predawn: ['a lantern-bearing scout makes a slow pass along the path'],
+    morning: ['a traveler pauses to refill waterskins before pressing on'],
+    day: ['a courier guides a pack-pony along the road toward the city'],
+    afternoon: ['a pair of wanderers share a quiet meal while watching the horizon'],
+    evening: ['a hunter cleans gear before heading home with the fading light'],
+    night: ['a watchful ranger traces a patrol route under hooded light'],
+  };
+
+  const river = {
+    predawn: ['a lone fisher checks eel pots in the pre-dawn hush'],
+    morning: ['a fisher casts for the morning rise from a reed-wrapped perch'],
+    day: ['a washerwoman rinses linens at a calm eddy'],
+    afternoon: ['two youngsters gather reeds for weaving along the bank'],
+    evening: ['a lantern-bearing angler waits for the dusk rise'],
+    night: ['a river warden patrols the bank to guard moored boats'],
+  };
+
+  const coast = {
+    predawn: ['a shell-gatherer checks tide wrack by lantern light'],
+    morning: ['a beachcomber combs the wrack for drifted goods'],
+    day: ['a net-mender spreads lines to dry along a driftwood frame'],
+    afternoon: ['two fishers mend nets beside beached skiffs'],
+    evening: ['a tide-watcher notes the swell before heading back to town'],
+    night: ['a lighthouse runner makes a final inspection along the shore'],
+  };
+
+  const forest = {
+    predawn: ['a trapper checks snares beneath the shadowed boughs'],
+    morning: ['an herbalist clips dew-damp leaves into a satchel'],
+    day: ['a woodcutter hauls a modest bundle toward the trailhead'],
+    afternoon: ['two foragers compare mushroom finds near the path'],
+    evening: ['a cloaked ranger marks trees with a small sigil before dusk'],
+    night: ['a night watch keeps a hooded lantern low among the trunks'],
+  };
+
+  const grassland = {
+    predawn: ['a shepherd counts silhouettes of the herd before sunrise'],
+    morning: ['a farmhand drives a small flock toward a watering bend'],
+    day: ['a messenger on horseback canters along the ridge road'],
+    afternoon: ['two herders trade whistles as they gather strays'],
+    evening: ['a hunter leads a pack pony laden with snares back toward the farms'],
+    night: ['a lone rider trots past, lantern swinging from the saddle'],
+  };
+
+  const wetland = {
+    predawn: ['a reed-cutter bundles shoots while the mist clings low'],
+    morning: ['a herbalist harvests sweetflag near the marsh edge'],
+    day: ['two gatherers stack cattail fluff into wicker baskets'],
+    afternoon: ['a bog guide checks marker poles before the light fades'],
+    evening: ['a frog catcher wades carefully with a hooded lantern'],
+    night: ['a levee warden makes quiet rounds to watch the waters'],
+  };
+
+  const hills = {
+    predawn: ['a lookout peers toward the city lights from the ridge'],
+    morning: ['a surveyor sights along a staff atop the rise'],
+    day: ['two couriers rest their mounts in the lee of a hill'],
+    afternoon: ['a shepherd whistles for dogs to bring goats down from the slopes'],
+    evening: ['a traveler pauses to watch sunset wash the hills'],
+    night: ['a distant campfire flickers where a patrol shelters from the wind'],
+  };
+
+  const entries = [];
+  const addEntries = table => {
+    if (!table) return;
+    const list = table[bucket] || table.day || [];
+    list.forEach(item => entries.push(item));
+  };
+
+  addEntries(general);
+  if (flags.isRiver) addEntries(river);
+  if (flags.isCoast) addEntries(coast);
+  if (flags.isForest) addEntries(forest);
+  if (flags.isGrassland) addEntries(grassland);
+  if (flags.isWetland) addEntries(wetland);
+  if (flags.isHills) addEntries(hills);
+
+  if (!entries.length) entries.push(...(general[bucket] || general.day || []));
+
+  const selection = (chooseRandom(entries, rng) || entries[0] || '').trim();
+  if (!selection) return '';
+  const weatherClause = (() => {
+    if (weatherKey === 'rain') return 'despite the drizzle';
+    if (weatherKey === 'fog') return 'moving carefully through the fog';
+    if (weatherKey === 'snow') return 'bundled against the cold';
+    if (weatherKey === 'clear') return 'enjoying the clear weather';
+    return '';
+  })();
+  let sentence = selection;
+  if (weatherClause) sentence += `, ${weatherClause}`;
+  return sentenceFromSlug(sentence);
+}
+
+function outdoorWildlifeActivity(context) {
+  const rng = context.rng ?? Math.random;
+  const displayName = context.building?.name || context.buildingName || '';
+  const flags = outdoorEnvironmentFlags(displayName.toLowerCase());
+  const weatherKey = normalizeWeatherKey(context.weather);
+  const bucket = outdoorTimeBucket(context.timeLabel);
+  const seasonKey = normalizeSeasonKey(context.season);
+  const habitat = (context.habitat || '').toLowerCase();
+
+  if (weatherKey === 'storm') {
+    return 'Wind-driven rain batters the area, and most wildlife stays hidden.';
+  }
+  if (weatherKey === 'snow') {
+    return 'Snow muffles the landscape so only faint tracks betray the local creatures.';
+  }
+
+  const options = [];
+
+  if (flags.isRiver) {
+    options.push('Silverfish flicker where the current curls around submerged stones.');
+    options.push('Herons stalk between the reeds while frogs croak from the shallows.');
+    if (bucket === 'evening' || bucket === 'night') {
+      options.push('Fireflies drift above the reeds as the river murmurs through the dark.');
+    }
+    if (seasonKey === 'spring') {
+      options.push('Migrating waterfowl settle on the eddies, paddling past fresh shoots.');
+    }
+  }
+
+  if (flags.isCoast || habitat === 'coastal') {
+    options.push('Gulls wheel overhead and dive for fish riding the nearby tide.');
+    if (bucket === 'evening') {
+      options.push('Sandpipers skitter along the retreating waves while dusk paints the foam.');
+    }
+    if (bucket === 'morning') {
+      options.push('Crabs scuttle between tidepools, leaving tiny tracks in the damp sand.');
+    }
+  }
+
+  if (flags.isForest) {
+    options.push('Songbirds chatter among the branches while resin scents the air.');
+    if (bucket === 'evening' || bucket === 'night') {
+      options.push('Owls trade distant calls between the trees as night creatures stir.');
+    }
+    if (seasonKey === 'autumn') {
+      options.push('Fallen leaves rustle with squirrels caching the last of the season’s nuts.');
+    }
+  }
+
+  if (flags.isGrassland || habitat === 'farmland') {
+    options.push('Wind bends the tall grasses, flushing startled hares across the open ground.');
+    if (bucket === 'night') {
+      options.push('Crickets and night insects trill in layered rhythm across the flats.');
+    }
+  }
+
+  if (flags.isWetland) {
+    options.push('Dragonflies stitch bright arcs above the marsh while frogs splash from the banks.');
+    if (bucket === 'morning') {
+      options.push('Mist beads on cattails as marsh birds pick through the shallows for breakfast.');
+    }
+  }
+
+  if (flags.isHills) {
+    options.push('Aurochs silhouettes crest a distant ridge before vanishing beyond the slope.');
+  }
+
+  if (!options.length) {
+    options.push('Wind teases through the wild growth while unseen creatures rustle in the distance.');
+    if (bucket === 'night') {
+      options.push('Starlight glints off dew while nocturnal insects hum softly around you.');
+    }
+  }
+
+  return sentenceFromSlug(chooseRandom(options, rng) || options[0]);
+}
+
 function buildingSceneParagraphs(context) {
   const { building, buildingName, businessProfile, timeLabel, weather, workers, rng, habitat, season, district } = context;
   const paragraphs = [];
   const displayName = building?.name || buildingName;
+  if (displayName && isOutdoorSite(displayName)) {
+    const overview = composeBuildingOverview({
+      building,
+      buildingName: displayName,
+      businessProfile,
+      timeLabel,
+      weather,
+      workers,
+      rng,
+      habitat,
+      season,
+      district,
+    });
+    if (overview) paragraphs.push(overview);
+    if (building?.description) paragraphs.push(building.description);
+    const presence = outdoorHumanPresence({
+      building,
+      buildingName: displayName,
+      timeLabel,
+      weather,
+      season,
+      rng,
+      habitat,
+      district
+    });
+    if (presence) paragraphs.push(presence);
+    const wildlife = outdoorWildlifeActivity({
+      building,
+      buildingName: displayName,
+      timeLabel,
+      weather,
+      season,
+      rng,
+      habitat
+    });
+    if (wildlife) paragraphs.push(wildlife);
+    return paragraphs;
+  }
   if (displayName === "Merchants' Wharf") {
     const overview = merchantsWharfOverview({ weather, season, timeLabel });
     if (overview) paragraphs.push(overview);
@@ -6231,7 +6624,13 @@ function initializeBuildingState(context) {
   const rng = createWeatherRandom(seed);
   const timeBand = buildingTimeBand(context.timeOfDay);
   const businessProfile = getBusinessProfileByName(context.building?.name || context.buildingName);
-  const workers = buildingWorkerEstimate(businessProfile, timeBand, context.weather, context.building);
+  const workers = buildingWorkerEstimate(
+    businessProfile,
+    timeBand,
+    context.weather,
+    context.building,
+    context.buildingName
+  );
   const season = context.today ? getSeasonForDate(context.today).toLowerCase() : null;
   const baseParagraphs = buildingSceneParagraphs({
     building: context.building,
