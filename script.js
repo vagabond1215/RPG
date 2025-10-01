@@ -95,6 +95,7 @@ window.advanceWorldDay = (days = 1) => {
 };
 window.currentWeatherFor = (region = "waves_break", habitat = 'urban') =>
   weatherSystem.getDailyWeather(region, habitat, worldCalendar.today());
+window.getLocationLogHistory = getLocationLogHistory;
 
 const NAV_ICONS = {
   location: '🗺️',
@@ -1065,8 +1066,10 @@ if (app) {
 }
 let mapToggleButton = null;
 
-const LOCATION_LOG_LIMIT = 4;
-const locationActionLogs = new Map();
+const LOCATION_LOG_DISPLAY_LIMIT = 4;
+const LOCATION_LOG_HISTORY_LIMIT = 50;
+const locationActionHistory = new Map();
+const locationActionDisplay = new Map();
 
 function locationPositionKey(pos) {
   if (!pos) return null;
@@ -1079,14 +1082,22 @@ function locationPositionKey(pos) {
 function pushLocationLogEntry(pos, entry) {
   const key = locationPositionKey(pos);
   if (!key || !entry) return;
-  const existing = locationActionLogs.get(key) || [];
-  locationActionLogs.set(key, [entry, ...existing].slice(0, LOCATION_LOG_LIMIT));
+  const history = locationActionHistory.get(key) || [];
+  const updatedHistory = [entry, ...history].slice(0, LOCATION_LOG_HISTORY_LIMIT);
+  locationActionHistory.set(key, updatedHistory);
+  locationActionDisplay.set(key, updatedHistory.slice(0, LOCATION_LOG_DISPLAY_LIMIT));
 }
 
 function getLocationLogEntries(pos) {
   const key = locationPositionKey(pos);
   if (!key) return [];
-  return locationActionLogs.get(key) || [];
+  return locationActionDisplay.get(key) || [];
+}
+
+function getLocationLogHistory(pos) {
+  const key = locationPositionKey(pos);
+  if (!key) return [];
+  return locationActionHistory.get(key) || [];
 }
 
 function renderLocationLogEntries(pos) {
@@ -1108,7 +1119,8 @@ function renderLocationLogEntry(entry) {
 }
 
 function resetLocationLogs() {
-  locationActionLogs.clear();
+  locationActionHistory.clear();
+  locationActionDisplay.clear();
 }
 
 function buildMessageLogHTML(entry) {
@@ -6988,15 +7000,20 @@ function buildingDescriptionHTML(state, questInfo) {
 
 function buildingHasHomestead(context) {
   const habitat = (context.habitat || '').toLowerCase();
-  if (habitat === 'farmland') return true;
   const buildingName = (context.building?.name || context.buildingName || '').toLowerCase();
   const districtName = (context.district || '').toLowerCase();
-  const farmPattern = /homestead|farm|field|pasture|orchard|vineyard|meadow|paddock|stead|acre|barn|dairy|ranch|grove/;
-  if (farmPattern.test(buildingName)) return true;
-  if (/farmland|fields|pasture|orchard|meadow/.test(districtName)) return true;
   const profile = getBusinessProfileByName(context.building?.name || context.buildingName || '');
   const category = (profile?.category || '').toLowerCase();
-  if (category === 'agriculture') return true;
+  const homesteadPattern = /homestead|farmhouse|stead|manor|villa|hall|house|cottage|barn|lodge|quarters|cabin|estate/;
+  const tags = Array.isArray(context.building?.tags)
+    ? context.building.tags.map(tag => String(tag).toLowerCase())
+    : [];
+  if (homesteadPattern.test(buildingName)) return true;
+  if (tags.some(tag => homesteadPattern.test(tag))) return true;
+  if (category === 'residential') return true;
+  if (habitat === 'farmland' || category === 'agriculture') {
+    if (homesteadPattern.test(districtName)) return true;
+  }
   return false;
 }
 
@@ -7013,36 +7030,64 @@ function buildingHasRowLayout(context) {
   return false;
 }
 
+function buildingHasFieldCrews(context) {
+  const buildingName = (context.building?.name || context.buildingName || '').toLowerCase();
+  const districtName = (context.district || '').toLowerCase();
+  const habitat = (context.habitat || '').toLowerCase();
+  const tags = Array.isArray(context.building?.tags)
+    ? context.building.tags.map(tag => String(tag).toLowerCase())
+    : [];
+  const profile = getBusinessProfileByName(context.building?.name || context.buildingName || '');
+  const category = (profile?.category || '').toLowerCase();
+  const ruralPattern = /\b(field|fields|orchard|orchards|vineyard|vineyards|row|rows|grove|groves|pasture|pastures|meadow|meadows|paddock|paddocks|acre|acres|grain|grains|farm|farms|farmstead|farmsteads|stead|steads|ranch|ranches|garden|gardens|grassland|grasslands|hayfield|hayfields|crop|crops|furrow|furrows)\b/;
+  const isRuralHabitat = habitat === 'farmland' || ruralPattern.test(districtName) || category === 'agriculture';
+  if (!isRuralHabitat) return false;
+  if (ruralPattern.test(buildingName)) return true;
+  if (tags.some(tag => ruralPattern.test(tag))) return true;
+  return isRuralHabitat && !buildingHasHomestead(context);
+}
+
 function buildingInteractionLabels(context) {
-  const name = (context.building?.name || context.buildingName || '').toLowerCase();
+  const buildingName = context.building?.name || context.buildingName || '';
+  const name = buildingName.toLowerCase();
   if (name === "merchants' wharf") {
     return {
-      knock: 'Signal the berth office',
-      search: 'Walk the pier looking for job opportunities',
+      knock: { label: 'Signal the berth office', tone: 'urban' },
+      search: { label: 'Walk the pier looking for job opportunities', tone: 'pier' },
       request: 'Ask about pier contracts',
     };
   }
   const hasHomestead = buildingHasHomestead(context);
+  const hasFieldCrews = buildingHasFieldCrews(context);
   const hasRows = buildingHasRowLayout(context);
+  const profile = getBusinessProfileByName(buildingName);
+  const category = (profile?.category || '').toLowerCase();
+
+  let knock = { label: 'Knock on the office door', tone: 'urban' };
+  let search = { label: 'Ask around for the supervisor', tone: 'urban' };
+  let request = 'Ask about available work';
+
+  if (hasRows && !hasFieldCrews) {
+    search = { label: 'Walk the row looking for someone in charge', tone: 'row' };
+    request = 'Ask about warehouse assignments';
+  }
+
+  if (hasFieldCrews) {
+    search = { label: 'Walk the fields looking for a steward', tone: 'rural' };
+    request = 'Ask about field postings';
+  }
+
   if (hasHomestead) {
-    return {
-      knock: 'Knock on the homestead door',
-      search: 'Walk the rows to find someone in charge',
-      request: 'Ask about field postings',
-    };
+    knock = { label: 'Knock on the farmhouse door', tone: 'rural' };
+  } else if (hasFieldCrews) {
+    knock = null;
   }
-  if (hasRows) {
-    return {
-      knock: "Knock on the row steward's door",
-      search: 'Walk the rows to flag a steward',
-      request: 'Ask about row assignments',
-    };
+
+  if (!hasFieldCrews && category === 'logistics' && !hasRows) {
+    request = 'Ask about cargo contracts';
   }
-  return {
-    knock: 'Knock on the office door',
-    search: 'Ask around for the supervisor',
-    request: 'Ask about available work',
-  };
+
+  return { knock, search, request };
 }
 
 function scoreQuestCandidate(info) {
@@ -7117,12 +7162,22 @@ function generateBuildingEncounter(buildingName, context) {
       });
     }
   } else if (!state.managerFound) {
-    interactions.push({ action: 'building-knock', name: labels.knock });
-    interactions.push({ action: 'building-search', name: labels.search });
+    if (labels.knock) {
+      interactions.push({ action: 'building-knock', name: labels.knock.label });
+    }
+    if (labels.search) {
+      interactions.push({ action: 'building-search', name: labels.search.label });
+    }
+    if (!labels.knock && !labels.search) {
+      interactions.push({ action: 'building-search', name: 'Look around for whoever is in charge' });
+    }
   } else {
+    const requestLabel = questInfo?.quest?.title
+      ? `Ask about “${questInfo.quest.title}”`
+      : labels.request || 'Ask about available work';
     interactions.push({
       action: 'building-request-work',
-      name: questInfo?.quest?.title ? `Ask about “${questInfo.quest.title}”` : labels.request,
+      name: requestLabel,
       disabled: questInfo ? !questInfo.canOffer : false,
     });
   }
@@ -7180,10 +7235,17 @@ function handleBuildingKnock(position) {
   const context = createBuildingEncounterContext(position);
   if (!context) return;
   const state = ensureBuildingEncounterState(context);
+  const labels = buildingInteractionLabels(context);
   state.message = null;
   state.messageType = null;
   if (state.managerFound) {
     state.narrative.push('The lead already has an eye on you—no need to knock again.');
+    setBuildingEncounterState(position.building, state);
+    showNavigation();
+    return;
+  }
+  if (!labels.knock) {
+    state.narrative.push('There is no door to knock on here—you will need to hail someone working nearby instead.');
     setBuildingEncounterState(position.building, state);
     showNavigation();
     return;
@@ -7200,12 +7262,12 @@ function handleBuildingKnock(position) {
     state.narrative.push(line);
     buildingSummonManager(state, context, 'door');
   } else {
-    const rural = buildingInteractionLabels(context).knock.includes('homestead');
-    const missLines = rural
+    const tone = labels.knock.tone;
+    const missLines = tone === 'rural'
       ? [
-          'You rap on the homestead door and wait, but only distant work calls answer.',
-          'No one emerges from the farmhouse—crews must be deep in the rows.',
-          'You linger on the porch, yet the door stays shut as workers shout orders beyond the trees.',
+          'You rap on the farmhouse door and wait, but only distant work calls answer.',
+          'No one emerges from the farmhouse—crews must be working the far fields.',
+          'You linger on the porch, yet the door stays shut as workers shout orders beyond the hedgerows.',
         ]
       : [
           'You knock on the office door, but the bustle inside does not pause.',
@@ -7223,10 +7285,17 @@ function handleBuildingSearch(position) {
   const context = createBuildingEncounterContext(position);
   if (!context) return;
   const state = ensureBuildingEncounterState(context);
+  const labels = buildingInteractionLabels(context);
   state.message = null;
   state.messageType = null;
   if (state.managerFound) {
     state.narrative.push('The lead is already speaking with you.');
+    setBuildingEncounterState(position.building, state);
+    showNavigation();
+    return;
+  }
+  if (!labels.search) {
+    state.narrative.push('There is no clear path to track down a supervisor here.');
     setBuildingEncounterState(position.building, state);
     showNavigation();
     return;
@@ -7244,12 +7313,18 @@ function handleBuildingSearch(position) {
     buildingSummonManager(state, context, 'search');
     state.remainingContacts = Math.max(1, remaining - 1);
   } else {
-    const rural = buildingInteractionLabels(context).search.includes('rows');
-    const missLines = rural
+    const tone = labels.search.tone;
+    const missLines = tone === 'rural'
       ? [
-          'A picker points you toward another lane, promising the steward is further upslope.',
-          'You flag down a hauler, but they shrug and send you deeper among the trees.',
+          'A picker points you toward another field, promising the steward is further upslope.',
+          'You flag down a hauler, but they shrug and send you deeper among the crops.',
           'Another crew member shakes their head—they have crates to move and no authority to help.',
+        ]
+      : tone === 'row'
+      ? [
+          'A porter waves you farther down the row, saying the quartermaster is tied up.',
+          'You check a warehouse office, but the steward is already escorting another crew.',
+          'Someone at the next door shouts that the supervisor is out inspecting manifests.',
         ]
       : [
           'A clerk nods toward the back offices, suggesting you try again later.',
