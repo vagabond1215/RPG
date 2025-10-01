@@ -1042,7 +1042,21 @@ const backButton = document.getElementById('back-button');
 const topMenu = document.querySelector('.top-menu');
 const app = document.getElementById('app');
 const menuDateLabel = document.getElementById('menu-date');
+const menuCharacterNameLabel = document.getElementById('menu-character-name');
 const menuMoneyLabel = document.getElementById('menu-money');
+const menuTimeDisplay = document.getElementById('menu-time');
+const menuTimeLabelText = menuTimeDisplay ? menuTimeDisplay.querySelector('.time-label') : null;
+const menuTimeClockText = menuTimeDisplay ? menuTimeDisplay.querySelector('.time-clock') : null;
+const TIME_BAND_CLASS_MAP = {
+  night: 'time-band-night',
+  preDawn: 'time-band-predawn',
+  dawn: 'time-band-dawn',
+  morning: 'time-band-day',
+  day: 'time-band-day',
+  afternoon: 'time-band-day',
+  dusk: 'time-band-dusk',
+};
+const TIME_BAND_CLASSES = Array.from(new Set(Object.values(TIME_BAND_CLASS_MAP)));
 const mapContainer = document.createElement('div');
 mapContainer.id = 'map-container';
 mapContainer.style.display = 'none';
@@ -1051,12 +1065,154 @@ if (app) {
 }
 let mapToggleButton = null;
 
+const LOCATION_LOG_LIMIT = 4;
+const locationActionLogs = new Map();
+
+function locationPositionKey(pos) {
+  if (!pos) return null;
+  const city = pos.city || '';
+  const district = pos.district || '';
+  const building = pos.building || '';
+  return `${city}:::${district}:::${building}`;
+}
+
+function pushLocationLogEntry(pos, entry) {
+  const key = locationPositionKey(pos);
+  if (!key || !entry) return;
+  const existing = locationActionLogs.get(key) || [];
+  locationActionLogs.set(key, [entry, ...existing].slice(0, LOCATION_LOG_LIMIT));
+}
+
+function getLocationLogEntries(pos) {
+  const key = locationPositionKey(pos);
+  if (!key) return [];
+  return locationActionLogs.get(key) || [];
+}
+
+function renderLocationLogEntries(pos) {
+  const entries = getLocationLogEntries(pos);
+  if (!entries.length) return '';
+  const html = entries.map(renderLocationLogEntry).join('');
+  return `<section class="location-log" aria-live="polite">${html}</section>`;
+}
+
+function renderLocationLogEntry(entry) {
+  if (!entry) return '';
+  if (entry.kind === 'environment') {
+    return buildEnvironmentOutcomeHTML(entry.result);
+  }
+  if (entry.kind === 'message') {
+    return buildMessageLogHTML(entry);
+  }
+  return '';
+}
+
+function resetLocationLogs() {
+  locationActionLogs.clear();
+}
+
+function buildMessageLogHTML(entry) {
+  const classes = ['location-log-entry', 'location-log-message'];
+  const tone = entry?.tone;
+  if (tone) {
+    classes.push(`location-log-${tone}`);
+  } else {
+    classes.push('location-log-info');
+  }
+  const title = entry?.title ? escapeHtml(entry.title) : 'Notice';
+  let bodyHTML = '';
+  if (Array.isArray(entry?.body)) {
+    bodyHTML = entry.body.map(text => `<p>${escapeHtml(text)}</p>`).join('');
+  } else if (entry?.body) {
+    bodyHTML = `<p>${escapeHtml(entry.body)}</p>`;
+  }
+  const metaHTML = Array.isArray(entry?.meta) && entry.meta.length
+    ? `<p class="location-log-meta">${entry.meta.map(text => escapeHtml(text)).join(' · ')}</p>`
+    : '';
+  return `<article class="${classes.join(' ')}"><h3>${title}</h3>${bodyHTML}${metaHTML}</article>`;
+}
+
+const TRAINING_TRACKER_KEYS = {
+  glassblowing: 'glassblowing',
+  'pearl-diving': 'pearlDiving',
+  blacksmithing: 'blacksmithing',
+  carpentry: 'carpentry',
+  tailoring: 'tailoring',
+  leatherworking: 'leatherworking',
+  alchemy: 'alchemy',
+  enchanting: 'enchanting',
+  masonry: 'masonry',
+  textiles: 'textiles',
+};
+
+function craftTrackerKey(craft) {
+  return TRAINING_TRACKER_KEYS[craft] || craft;
+}
+
+function handleTrainingAction(pos, craft) {
+  if (!currentCharacter) return;
+  const key = craftTrackerKey(craft);
+  const before = Number(currentCharacter[key]) || 0;
+  const after = trainCraftSkill(currentCharacter, craft);
+  const delta = Math.round((after - before) * 100) / 100;
+  const label = toTitleCase(craft.replace(/[-_]/g, ' '));
+  const tone = delta > 0 ? 'success' : 'info';
+  const metaText = `${label} ${after.toFixed(2)}${delta > 0 ? ` (+${delta.toFixed(2)})` : ' (no progress)'}`;
+  pushLocationLogEntry(pos, {
+    kind: 'message',
+    tone,
+    title: `${label} training`,
+    body: `You practice ${label.toLowerCase()}.`,
+    meta: [metaText],
+  });
+  saveProfiles();
+  showNavigation();
+}
+
 function updateTopMenuIndicators() {
   if (menuDateLabel) {
     const currentDate = worldCalendar.formatCurrentDate();
     menuDateLabel.textContent = currentDate;
     menuDateLabel.setAttribute('title', `Date: ${currentDate}`);
     menuDateLabel.setAttribute('aria-label', `Current date: ${currentDate}`);
+  }
+  if (menuCharacterNameLabel) {
+    if (currentCharacter) {
+      const name = (currentCharacter.name || '').trim() || 'Unnamed Adventurer';
+      menuCharacterNameLabel.textContent = name;
+      menuCharacterNameLabel.setAttribute('title', `Active character: ${name}`);
+      menuCharacterNameLabel.setAttribute('aria-label', `Active character: ${name}`);
+    } else {
+      menuCharacterNameLabel.textContent = '—';
+      menuCharacterNameLabel.setAttribute('title', 'Active character');
+      menuCharacterNameLabel.setAttribute('aria-label', 'Active character unavailable');
+    }
+  }
+  if (menuTimeDisplay) {
+    if (currentCharacter) {
+      const hours = ensureCharacterClock(currentCharacter);
+      const normalized = ((hours % 24) + 24) % 24;
+      const rotation = (normalized / 24) * 360;
+      menuTimeDisplay.style.setProperty('--time-rotation', `${rotation}deg`);
+      const band = TIME_BAND_CLASS_MAP[timeBandForHour(hours)];
+      menuTimeDisplay.classList.remove(...TIME_BAND_CLASSES);
+      if (band) {
+        menuTimeDisplay.classList.add(band);
+      }
+      const label = toTitleCase(describeTimeOfDay(hours));
+      const clock = formatClockTime(hours);
+      if (menuTimeLabelText) menuTimeLabelText.textContent = label || '—';
+      if (menuTimeClockText) menuTimeClockText.textContent = clock;
+      menuTimeDisplay.setAttribute('title', `Time: ${label} (${clock})`);
+      menuTimeDisplay.setAttribute('aria-label', `Current time: ${label} at ${clock}`);
+    } else {
+      menuTimeDisplay.classList.remove(...TIME_BAND_CLASSES);
+      menuTimeDisplay.style.removeProperty('--time-rotation');
+      if (menuTimeLabelText) menuTimeLabelText.textContent = '—';
+      if (menuTimeClockText) menuTimeClockText.textContent = '—';
+      menuTimeDisplay.setAttribute('title', 'Current time unavailable');
+      menuTimeDisplay.setAttribute('aria-label', 'Current time unavailable');
+    }
   }
   if (menuMoneyLabel) {
     if (currentCharacter) {
@@ -3019,10 +3175,13 @@ async function handleEnvironmentInteraction(actionId, pos) {
   if (!currentCharacter) return;
   const parsed = parseEnvironmentActionId(actionId);
   if (!parsed) {
-    showBackButton();
-    setMainHTML(
-      '<div class="no-character"><h1>Interaction unavailable</h1><p>This outdoor interaction is no longer valid.</p></div>',
-    );
+    pushLocationLogEntry(pos, {
+      kind: 'message',
+      tone: 'error',
+      title: 'Interaction unavailable',
+      body: 'This outdoor interaction is no longer valid.',
+    });
+    showNavigation();
     return;
   }
   const city = parsed.city || pos.city;
@@ -3030,18 +3189,24 @@ async function handleEnvironmentInteraction(actionId, pos) {
   const location = parsed.location || pos.building;
   const definition = getEnvironmentDefinition(city, district, location);
   if (!definition) {
-    showBackButton();
-    setMainHTML(
-      `<div class="no-character"><h1>Interaction unavailable</h1><p>No outdoor encounters are configured for ${escapeHtml(location || 'this area')}.</p></div>`,
-    );
+    pushLocationLogEntry(pos, {
+      kind: 'message',
+      tone: 'error',
+      title: 'Interaction unavailable',
+      body: `No outdoor encounters are configured for ${location || 'this area'}.`,
+    });
+    showNavigation();
     return;
   }
   const actionDef = definition.actions?.[parsed.actionType];
   if (!actionDef) {
-    showBackButton();
-    setMainHTML(
-      `<div class="no-character"><h1>Interaction unavailable</h1><p>${escapeHtml(describeEnvironmentAction(parsed.actionType))} is not available at ${escapeHtml(definition.location)}.</p></div>`,
-    );
+    pushLocationLogEntry(pos, {
+      kind: 'message',
+      tone: 'error',
+      title: 'Interaction unavailable',
+      body: `${describeEnvironmentAction(parsed.actionType)} is not available at ${definition.location}.`,
+    });
+    showNavigation();
     return;
   }
 
@@ -3051,14 +3216,18 @@ async function handleEnvironmentInteraction(actionId, pos) {
     result = await resolveEnvironmentAction(parsed.actionType, definition, actionDef, context);
   } catch (err) {
     console.error('Failed to resolve environment interaction', err);
-    showBackButton();
-    setMainHTML(
-      `<div class="no-character"><h1>Interaction error</h1><p>Something disrupted the encounter. Try again later.</p></div>`,
-    );
+    pushLocationLogEntry(pos, {
+      kind: 'message',
+      tone: 'error',
+      title: 'Interaction error',
+      body: 'Something disrupted the encounter. Try again later.',
+    });
+    showNavigation();
     return;
   }
-  renderEnvironmentOutcome(result);
+  pushLocationLogEntry(pos, { kind: 'environment', result });
   saveProfiles();
+  showNavigation();
 }
 
 function buildEnvironmentContext(definition, actionDef, pos) {
@@ -3457,10 +3626,18 @@ async function resolveHunt(definition, actionDef, context) {
   };
 }
 
-function renderEnvironmentOutcome(result) {
-  showBackButton();
-  const pieces = [];
-  pieces.push(`<div class="no-character environment-result"><h1>${escapeHtml(result.title)}</h1>`);
+function buildEnvironmentOutcomeHTML(result) {
+  if (!result) return '';
+  const classes = ['location-log-entry', 'environment-log'];
+  if (result.success) {
+    classes.push('location-log-success');
+  } else if (result.partialSuccess) {
+    classes.push('location-log-partial');
+  } else {
+    classes.push('location-log-error');
+  }
+  const title = result.title ? escapeHtml(result.title) : 'Outdoor encounter';
+  const pieces = [`<article class="${classes.join(' ')}"><h3>${title}</h3>`];
   if (result.narrative) {
     pieces.push(`<p>${escapeHtml(result.narrative)}</p>`);
   }
@@ -3472,49 +3649,64 @@ function renderEnvironmentOutcome(result) {
     const rollPct = Math.round(result.rollInfo.roll * 1000) / 10;
     pieces.push(`<p class="environment-roll">Find chance ${chancePct}% — rolled ${rollPct}%.</p>`);
     if (Array.isArray(result.rollInfo.modifiers) && result.rollInfo.modifiers.length) {
-      pieces.push('<ul class="environment-modifiers">');
-      result.rollInfo.modifiers.forEach(mod => {
-        const pct = Math.round(mod.value * 1000) / 10;
-        const sign = pct >= 0 ? '+' : '';
-        pieces.push(`<li>${escapeHtml(mod.label)}: ${sign}${pct}%</li>`);
-      });
-      pieces.push('</ul>');
+      const modifierItems = result.rollInfo.modifiers
+        .map(mod => {
+          const pct = Math.round(mod.value * 1000) / 10;
+          const sign = pct >= 0 ? '+' : '';
+          return `<li>${escapeHtml(mod.label)}: ${sign}${pct}%</li>`;
+        })
+        .join('');
+      pieces.push(`<ul class="environment-modifiers">${modifierItems}</ul>`);
     }
   }
   if (Array.isArray(result.stages) && result.stages.length) {
-    pieces.push('<h2>Encounter</h2><ol class="environment-stages">');
-    result.stages.forEach(stage => {
-      const chancePct = Math.round(stage.chance * 100);
-      const rollPct = Math.round(stage.roll * 1000) / 10;
-      const text = stage.success ? stage.successText : stage.failureText;
-      pieces.push(
-        `<li><strong>${escapeHtml(stage.name)}:</strong> ${escapeHtml(text)} <span class="environment-stage-roll">(${chancePct}% vs ${rollPct}%)</span></li>`,
-      );
-    });
-    pieces.push('</ol>');
+    const stageItems = result.stages
+      .map(stage => {
+        const chancePct = Math.round(stage.chance * 100);
+        const rollPct = Math.round(stage.roll * 1000) / 10;
+        const text = stage.success ? stage.successText : stage.failureText;
+        return `<li><strong>${escapeHtml(stage.name)}:</strong> ${escapeHtml(text)} <span class="environment-stage-roll">(${chancePct}% vs ${rollPct}%)</span></li>`;
+      })
+      .join('');
+    pieces.push(`<details class="environment-stages"><summary>Encounter details</summary><ol>${stageItems}</ol></details>`);
   }
   if (Array.isArray(result.loot) && result.loot.length) {
-    pieces.push('<h2>Gains</h2><ul class="environment-loot">');
-    result.loot.forEach(item => {
-      pieces.push(`<li>${escapeHtml(item.name)} x${item.qty}</li>`);
-    });
-    pieces.push('</ul>');
+    const lootItems = result.loot
+      .map(item => `<li>${escapeHtml(item.name)} x${item.qty}</li>`)
+      .join('');
+    pieces.push(`<ul class="environment-loot">${lootItems}</ul>`);
   }
   if (result.skillProgress) {
     const { label, after, delta } = result.skillProgress;
-    const changeText = delta > 0 ? `(+${delta.toFixed(2)})` : '(no progress)';
-    pieces.push(`<p class="environment-skill">${escapeHtml(label)} ${after.toFixed(2)} ${changeText}</p>`);
+    const changeText = Number.isFinite(delta) && delta > 0 ? ` (+${delta.toFixed(2)})` : ' (no progress)';
+    pieces.push(`<p class="environment-skill">${escapeHtml(label)} ${after.toFixed(2)}${changeText}</p>`);
   }
   const contextParts = [];
-  if (result.season) contextParts.push(`Season: ${escapeHtml(result.season)}`);
-  if (result.timeLabel) contextParts.push(`Time: ${escapeHtml(result.timeLabel)}`);
-  contextParts.push(`Weather: ${escapeHtml(describeWeatherSummary(result.weather))}`);
-  pieces.push(`<p class="environment-context">${contextParts.join(' · ')}</p>`);
-  if (result.timeSpentHours != null) {
-    pieces.push(`<p class="environment-time">Time spent: ${result.timeSpentHours}h</p>`);
+  if (result.season) contextParts.push(`Season: ${result.season}`);
+  if (result.timeLabel) contextParts.push(`Time: ${result.timeLabel}`);
+  contextParts.push(`Weather: ${describeWeatherSummary(result.weather)}`);
+  if (contextParts.length) {
+    pieces.push(`<p class="environment-context">${contextParts.map(part => escapeHtml(part)).join(' · ')}</p>`);
   }
-  pieces.push('</div>');
-  setMainHTML(pieces.join(''));
+  const metaParts = [];
+  if (result.timeSpentHours != null) {
+    metaParts.push(`Time spent: ${result.timeSpentHours}h`);
+  }
+  if (result.timeAfter && Number.isFinite(result.timeAfter.timeOfDay)) {
+    const afterLabel = toTitleCase(describeTimeOfDay(result.timeAfter.timeOfDay));
+    const clock = formatClockTime(result.timeAfter.timeOfDay);
+    let text = `Now: ${afterLabel} (${clock})`;
+    const dayDelta = Number(result.timeAfter.days) || 0;
+    if (dayDelta > 0) {
+      text += ` · +${dayDelta} day${dayDelta === 1 ? '' : 's'}`;
+    }
+    metaParts.push(text);
+  }
+  if (metaParts.length) {
+    pieces.push(`<p class="environment-meta">${metaParts.map(part => escapeHtml(part)).join(' · ')}</p>`);
+  }
+  pieces.push('</article>');
+  return pieces.join('');
 }
 
 
@@ -6794,8 +6986,34 @@ function buildingDescriptionHTML(state, questInfo) {
   return { html };
 }
 
-function buildingInteractionLabels(context) {
+function buildingHasHomestead(context) {
   const habitat = (context.habitat || '').toLowerCase();
+  if (habitat === 'farmland') return true;
+  const buildingName = (context.building?.name || context.buildingName || '').toLowerCase();
+  const districtName = (context.district || '').toLowerCase();
+  const farmPattern = /homestead|farm|field|pasture|orchard|vineyard|meadow|paddock|stead|acre|barn|dairy|ranch|grove/;
+  if (farmPattern.test(buildingName)) return true;
+  if (/farmland|fields|pasture|orchard|meadow/.test(districtName)) return true;
+  const profile = getBusinessProfileByName(context.building?.name || context.buildingName || '');
+  const category = (profile?.category || '').toLowerCase();
+  if (category === 'agriculture') return true;
+  return false;
+}
+
+function buildingHasRowLayout(context) {
+  const buildingName = (context.building?.name || context.buildingName || '').toLowerCase();
+  const districtName = (context.district || '').toLowerCase();
+  const tags = Array.isArray(context.building?.tags)
+    ? context.building.tags.map(tag => String(tag).toLowerCase())
+    : [];
+  const rowPattern = /row|terrace|arcade|lane|gallery|block|tier/;
+  if (rowPattern.test(buildingName)) return true;
+  if (rowPattern.test(districtName)) return true;
+  if (tags.some(tag => rowPattern.test(tag))) return true;
+  return false;
+}
+
+function buildingInteractionLabels(context) {
   const name = (context.building?.name || context.buildingName || '').toLowerCase();
   if (name === "merchants' wharf") {
     return {
@@ -6804,11 +7022,20 @@ function buildingInteractionLabels(context) {
       request: 'Ask about pier contracts',
     };
   }
-  if (habitat === 'farmland' || /farm|orchard|grove|pasture|meadow/i.test(name)) {
+  const hasHomestead = buildingHasHomestead(context);
+  const hasRows = buildingHasRowLayout(context);
+  if (hasHomestead) {
     return {
       knock: 'Knock on the homestead door',
       search: 'Walk the rows to find someone in charge',
       request: 'Ask about field postings',
+    };
+  }
+  if (hasRows) {
+    return {
+      knock: "Knock on the row steward's door",
+      search: 'Walk the rows to flag a steward',
+      request: 'Ask about row assignments',
     };
   }
   return {
@@ -7247,8 +7474,9 @@ function showNavigation() {
     const headerHTML = `<div class="nav-header"><button data-type="district" data-target="${pos.district}" aria-label="Return to ${pos.district}"><img src="${dIcon}" alt="" class="nav-icon"></button>${
       bIcon ? `<img src="${bIcon}" alt="" class="nav-icon">` : ''
     }</div>`;
+    const logHTML = renderLocationLogEntries(pos);
     setMainHTML(
-      `<div class="navigation">${headerHTML}${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div></div>`
+      `<div class="navigation">${headerHTML}${descriptionHTML}${hoursText ? `<p class="business-hours">${hoursText}</p>` : ''}<div class="option-grid">${buttons.join('')}</div>${logHTML}</div>`
     );
   } else {
     const district = cityData.districts[pos.district];
@@ -7449,8 +7677,9 @@ function showNavigation() {
     const descHTML = description
       ? `<p class="location-description">${description}</p>`
       : '';
+    const logHTML = renderLocationLogEntries(pos);
     setMainHTML(
-      `<div class="navigation"><h2>${pos.district}</h2><div class="option-grid">${navButtons.join('')}</div>${descHTML}${localsHTML}</div>`
+      `<div class="navigation"><h2>${pos.district}</h2><div class="option-grid">${navButtons.join('')}</div>${descHTML}${localsHTML}${logHTML}</div>`
     );
   }
   normalizeOptionButtonWidths();
@@ -7608,68 +7837,28 @@ function showNavigation() {
               renderManage();
               return;
             } else if (action === 'train-glassblowing') {
-              const prof = trainCraftSkill(currentCharacter, 'glassblowing');
-              saveProfiles();
-              showBackButton();
-              setMainHTML(
-                `<div class="no-character"><h1>You practice glassblowing.</h1><p>Proficiency: ${prof.toFixed(2)}</p></div>`
-              );
+              handleTrainingAction(pos, 'glassblowing');
               return;
             } else if (action === 'train-pearl-diving') {
-              const prof = performGathering(currentCharacter, 'pearlDiving');
-              saveProfiles();
-              showBackButton();
-              setMainHTML(
-                `<div class="no-character"><h1>You practice pearl diving.</h1><p>Proficiency: ${prof.toFixed(2)}</p></div>`
-              );
+              handleTrainingAction(pos, 'pearl-diving');
               return;
             } else if (action === 'train-blacksmithing') {
-              const prof = trainCraftSkill(currentCharacter, 'blacksmithing');
-              saveProfiles();
-              showBackButton();
-              setMainHTML(
-                `<div class="no-character"><h1>You practice blacksmithing.</h1><p>Proficiency: ${prof.toFixed(2)}</p></div>`
-              );
+              handleTrainingAction(pos, 'blacksmithing');
               return;
             } else if (action === 'train-carpentry') {
-              const prof = trainCraftSkill(currentCharacter, 'carpentry');
-              saveProfiles();
-              showBackButton();
-              setMainHTML(
-                `<div class="no-character"><h1>You practice carpentry.</h1><p>Proficiency: ${prof.toFixed(2)}</p></div>`
-              );
+              handleTrainingAction(pos, 'carpentry');
               return;
             } else if (action === 'train-tailoring') {
-              const prof = trainCraftSkill(currentCharacter, 'tailoring');
-              saveProfiles();
-              showBackButton();
-              setMainHTML(
-                `<div class="no-character"><h1>You practice tailoring.</h1><p>Proficiency: ${prof.toFixed(2)}</p></div>`
-              );
+              handleTrainingAction(pos, 'tailoring');
               return;
             } else if (action === 'train-leatherworking') {
-              const prof = trainCraftSkill(currentCharacter, 'leatherworking');
-              saveProfiles();
-              showBackButton();
-              setMainHTML(
-                `<div class="no-character"><h1>You practice leatherworking.</h1><p>Proficiency: ${prof.toFixed(2)}</p></div>`
-              );
+              handleTrainingAction(pos, 'leatherworking');
               return;
             } else if (action === 'train-alchemy') {
-              const prof = trainCraftSkill(currentCharacter, 'alchemy');
-              saveProfiles();
-              showBackButton();
-              setMainHTML(
-                `<div class="no-character"><h1>You practice alchemy.</h1><p>Proficiency: ${prof.toFixed(2)}</p></div>`
-              );
+              handleTrainingAction(pos, 'alchemy');
               return;
             } else if (action === 'train-enchanting') {
-              const prof = trainCraftSkill(currentCharacter, 'enchanting');
-              saveProfiles();
-              showBackButton();
-              setMainHTML(
-                `<div class="no-character"><h1>You practice enchanting.</h1><p>Proficiency: ${prof.toFixed(2)}</p></div>`
-              );
+              handleTrainingAction(pos, 'enchanting');
               return;
             } else if (action === 'merchants-walk-pier') {
               handleMerchantsPierWalk(pos);
@@ -7741,6 +7930,7 @@ function showCharacterSelectUI() {
           ...defaultProficiencies,
           ...currentProfile.characters[id]
         });
+        resetLocationLogs();
         saveProfiles();
         showMainUI();
       });
@@ -8382,6 +8572,20 @@ function describeTimeOfDay(hour) {
   if (h < 18) return 'late afternoon';
   if (h < 21) return 'evening';
   return 'night';
+}
+
+function formatClockTime(hour) {
+  if (!Number.isFinite(hour)) return '—';
+  let normalized = ((hour % 24) + 24) % 24;
+  let wholeHours = Math.floor(normalized);
+  let minutes = Math.round((normalized - wholeHours) * 60);
+  if (minutes === 60) {
+    minutes = 0;
+    wholeHours = (wholeHours + 1) % 24;
+  }
+  const hoursText = String(wholeHours).padStart(2, '0');
+  const minutesText = String(minutes).padStart(2, '0');
+  return `${hoursText}:${minutesText}`;
 }
 
 function questValueToList(value) {
@@ -10556,6 +10760,7 @@ function finalizeCharacter(character) {
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;
   currentCharacter = newChar;
+  resetLocationLogs();
   saveProfiles();
   updateScale();
   showCharacter();
@@ -10572,6 +10777,7 @@ function loadCharacter() {
     });
     normalizeCharacterState(loadedCharacter);
     currentCharacter = loadedCharacter;
+    resetLocationLogs();
     ensureCollections(currentCharacter);
     ensureQuestLog(currentCharacter);
     ensureQuestHistory(currentCharacter);
