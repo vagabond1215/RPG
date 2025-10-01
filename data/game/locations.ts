@@ -1,6 +1,10 @@
 import { questHelper, type QuestSkillRequirement } from "./questHelper.js";
 import type { CalendarDate } from './calendar.js';
 import type { Habitat, WeatherReport } from './weather.js';
+import {
+  KINGDOM_HEX_GRID,
+  type HexLocation,
+} from './hexGrid.js';
 const MAP_BASE_PATH = "assets/images/Maps";
 
 export type VendorType = 'none' | 'street' | 'shop';
@@ -50,6 +54,7 @@ export interface Location {
   description: string;
   map: string;
   subdivisions: string[];
+  hex: HexLocation;
   position: {
     general?: string;
     relative?: string;
@@ -148,13 +153,18 @@ export interface BusinessProfile {
 export function createLocation(
   name: string,
   mapFile: string,
-  description = ""
+  description: string
 ): Location {
+  const hex = KINGDOM_HEX_GRID[name];
+  if (!hex) {
+    throw new Error(`No hex grid location defined for ${name}.`);
+  }
   return {
     name,
     description,
     map: `${MAP_BASE_PATH}/${mapFile}`,
     subdivisions: [],
+    hex,
     position: {},
     travel: { routes: [], connections: [] },
     pointsOfInterest: {
@@ -8545,7 +8555,12 @@ At present, Whiteheart is little more than a guild hall, barracks, and a scatter
 export const LOCATIONS: Record<string, Location> = {
   "Duvilia Kingdom": createLocation(
     "Duvilia Kingdom",
-    "Duvilia Kingdom.png"
+    "Duvilia Kingdom.png",
+    `Duvilia Kingdom – Realm of Coast and Crown
+
+Stretching from the tidal inlets of the western gulf to the cold ramparts of the northern frontier, the Kingdom of Duvilia binds diverse landscapes into a single realm. Its coasts are anchored by the sister cities of Wave's Break and Coral Keep, where fleets trade fish, pearls, and distant luxuries. Inland, the river basins around Creekside and Timber Grove provide grain, cattle, hardwood, and the lumber that feeds both shipwrights and craftsmen. Beyond the mountains lie Warm Springs and Dancing Pines, quiet settlements that distill reagents, gems, and frontier bounty for the wider realm.
+
+Corona rises at the kingdom's heart as the royal capital and the mustering ground for campaigns into the Wetlands, while Corner Stone oversees the guild courts and master artisans that mint coin and forge prestige. Outposts such as Mountain Top, Dragon's Reach Road, and Whiteheart guard the approaches to dragon-haunted ridges and shadowed forests, keeping the kingdom's borders secure. Caravans, river barges, and sea lanes knit these regions together, and the shared guild system ensures workers, adventurers, and merchants can claim hospitality anywhere the royal standard flies. Duvilia thrives on cooperation between its provinces, each settlement lending its strength so the crown may hold both prosperity and peace.`
   ),
   "Wave's Break": WAVES_BREAK,
   "Coral Keep": CORAL_KEEP,

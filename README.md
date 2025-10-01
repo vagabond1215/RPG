@@ -40,9 +40,13 @@ Maintain fauna entries in `data/animals.json` and flora entries in `data/plants.
 
 The economy data in `data/economy/` underpins item pricing, wages, and trade modifiers. Prefer refreshing `data/economy/items.json` and `data/game/region_policy.json` through `tools/importers/import_economy_catalog.js`, which ingests `data/economy/catalog_flat.csv` and `data/economy/region_policy.csv`, normalizes slugs, and validates pricing math. Currency helpers in `data/economy/currency.js` keep display strings consistent, while `data/economy/regional_pricing.js` applies biome-specific multipliers at runtime. The Vitest cases in `tests/economy_import/` cover importer invariants, sale quantities, and profitability; rerun them after adjusting catalog logic or CSV rows.
 
-### Locations and quest boards
+### Locations, quest boards, and the kingdom hex grid
 
-City and region definitions reside in `data/game/locations.ts` (and the generated `locations.js`). Use `createLocation`, `questHelper`, and the supporting types to structure new settlements, businesses, and quest boards. When adding businesses or ownership data, keep the curated registries—such as `data/game/waves_break_registry.ts`—in sync so automated checks like `tests/wavesBreakOwnership.test.ts` continue to pass. The helper routines automatically seed quest boards for buildings and districts, so reuse them instead of hand-rolling UI strings.
+City and region definitions reside in `data/game/locations.ts` (and the generated `locations.js`). Use `createLocation`, `questHelper`, and the supporting types to structure new settlements, businesses, and quest boards. Every settlement must now provide a crafted narrative description—`createLocation` no longer synthesizes placeholder copy—so author lore-grounded summaries as you expand the setting.
+
+Map entries are anchored to the axial hex grid encoded in `data/game/hexGrid.ts`. Before registering a new city, add its hex definition—coordinates, habitat, key features, and travel links—to the `KINGDOM_HEX_GRID` export. The helper enforces this linkage at runtime, ensuring each location exposes consistent travel data, travel methods, environmental conditions, and neighboring waypoints. When adjusting the grid, keep travel-time assumptions aligned with the shared calculator (`TRAVEL_METHOD_DAYS_PER_HEX`, route-specific logistics, and the new `conditions` metadata) and update downstream references or tests.
+
+When adding businesses or ownership data, keep the curated registries—such as `data/game/waves_break_registry.ts`—in sync so automated checks like `tests/wavesBreakOwnership.test.ts` continue to pass. The helper routines automatically seed quest boards for buildings and districts, so reuse them instead of hand-rolling UI strings.
 
 ### Character prompts and imagery
 
@@ -54,7 +58,7 @@ The UI sanitizes partially specified saves and Codex entries through helpers suc
 
 ### Additional resources
 
-`docs/economy_catalog.md` documents the CSV importer fields in depth, and the `tests/` folder illustrates the invariants we expect across data sets. Browsing those files before large edits will save time chasing validation or test failures.
+`docs/economy_catalog.md` documents the CSV importer fields in depth, `docs/hex_grid.md` captures the hex coordinate workflow, and the `tests/` folder illustrates the invariants we expect across data sets. Browsing those files before large edits will save time chasing validation or test failures.
 
 ## Structure
 
