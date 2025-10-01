@@ -6703,27 +6703,45 @@ function showNavigation() {
     setMainHTML(`<div class="no-character"><h1>Welcome, ${currentCharacter.name}</h1><p>You are in ${pos.city}.</p></div>`);
     return;
   }
-  const createNavItem = ({ type, target, name, action, prompt, icon, disabled, extraClass }) => {
+  const createNavItem = ({
+    type,
+    target,
+    name,
+    action,
+    prompt,
+    icon,
+    disabled,
+    extraClass,
+    tags,
+  }) => {
     const safeName = escapeHtml(name || '');
     const defaultIcon = NAV_ICONS[type] || '📍';
+    const usesDefaultAsset = typeof icon === 'string' && /\/Default\.png$/i.test(icon);
     const iconHTML = icon
       ? `<img src="${icon}" alt="" class="nav-icon">`
       : `<span class="nav-icon">${defaultIcon}</span>`;
     const attrValue = action ? escapeHtml(action) : escapeHtml(target ?? '');
-    const attrs = action
-      ? `data-action="${attrValue}"`
-      : target != null
-        ? `data-target="${attrValue}"`
-        : '';
     const aria = prompt ? `${prompt} ${name}` : name;
     const ariaLabel = escapeHtml(aria || '');
-    const dis = disabled ? 'disabled' : '';
     const cls = extraClass ? ` ${extraClass}` : '';
-    const labelHTML =
-      icon && (type !== 'interaction' || ['shop', 'sell'].includes(action))
-        ? ''
-        : `<span class="street-sign">${safeName}</span>`;
-    return `<div class="nav-item${cls}"><button data-type="${type}" ${attrs} aria-label="${ariaLabel}" ${dis}>${iconHTML}</button>${labelHTML}</div>`;
+    const labelNeeded =
+      !icon || usesDefaultAsset || (type === 'interaction' && !['shop', 'sell'].includes(action));
+    const labelHTML = labelNeeded ? `<span class="street-sign">${safeName}</span>` : '';
+    const attrParts = [`data-type="${type}"`];
+    if (action) {
+      attrParts.push(`data-action="${attrValue}"`);
+    } else if (target != null) {
+      attrParts.push(`data-target="${attrValue}"`);
+    }
+    if (Array.isArray(tags) && tags.length) {
+      attrParts.push(`data-tags="${escapeHtml(tags.join(' '))}"`);
+    }
+    attrParts.push(`aria-label="${ariaLabel}"`);
+    if (disabled) {
+      attrParts.push('disabled');
+    }
+    const buttonAttrs = attrParts.join(' ');
+    return `<div class="nav-item${cls}"><button ${buttonAttrs}>${iconHTML}</button>${labelHTML}</div>`;
   };
   if (pos.building) {
     const building = cityData.buildings[pos.building];
@@ -6738,13 +6756,14 @@ function showNavigation() {
             name: e.name,
             prompt: e.prompt || 'Travel to',
             icon: e.icon,
+            tags: e.tags,
           })
         );
       } else if (e.target !== pos.district) {
         const prompt = e.prompt || building.travelPrompt || 'Travel to';
         const icon = e.icon || getDistrictIcon(pos.city, e.name);
         exitButtons.push(
-          createNavItem({ type: 'district', target: e.target, name: e.name, prompt, icon })
+          createNavItem({ type: 'district', target: e.target, name: e.name, prompt, icon, tags: e.tags })
         );
       }
     });
@@ -6768,7 +6787,7 @@ function showNavigation() {
     (building.interactions || []).forEach(i => {
       if (i.action === 'manage' && !canManageBuilding(pos.city, pos.building)) return;
       interactionButtons.push(
-        createNavItem({ type: 'interaction', action: i.action, name: i.name, icon: i.icon })
+        createNavItem({ type: 'interaction', action: i.action, name: i.name, icon: i.icon, tags: i.tags })
       );
     });
     const encounterContext = createBuildingEncounterContext(pos, { building, buildingBoards });
@@ -6876,6 +6895,7 @@ function showNavigation() {
         icon: pt.icon,
         extraClass: pt.extraClass,
         disabled: pt.disabled,
+        tags: pt.tags,
       });
     };
 
