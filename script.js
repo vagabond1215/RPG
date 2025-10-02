@@ -3295,7 +3295,6 @@ const ENVIRONMENT_TOOL_KEYWORDS = {
   fishing: [
     /fish/i,
     /net/i,
-    /rod/i,
     /line/i,
     /hook/i,
     /tackle/i,
@@ -3338,6 +3337,30 @@ const ENVIRONMENT_MELEE_WEAPONS = [
   /polearm/i,
 ];
 
+const FISHING_ROD_OR_POLE_PATTERNS = [/\brods?\b/i, /\bpoles?\b/i];
+const FISHING_ROD_CONTEXT_PATTERNS = [
+  /fish/i,
+  /angl/i,
+  /reel/i,
+  /cast/i,
+  /bait/i,
+  /hook/i,
+  /lure/i,
+  /fly/i,
+  /troll/i,
+  /surf/i,
+  /river/i,
+  /lake/i,
+  /ocean/i,
+  /sea/i,
+  /shore/i,
+  /tidal/i,
+  /shallows?/i,
+  /current/i,
+  /net/i,
+  /line/i,
+];
+
 const HUNT_DIFFICULTY_BY_SIZE = {
   tiny: 1,
   small: 2,
@@ -3367,11 +3390,26 @@ function gatherCharacterItemNames(character) {
   return names;
 }
 
+function hasFishingRodOrPole(names) {
+  return names.some(name => {
+    if (!name) return false;
+    const text = String(name);
+    if (!FISHING_ROD_OR_POLE_PATTERNS.some(pattern => pattern.test(text))) {
+      return false;
+    }
+    return FISHING_ROD_CONTEXT_PATTERNS.some(pattern => pattern.test(text));
+  });
+}
+
 function hasToolRequirement(requirement, character) {
   if (!requirement) return { ok: true, matched: false };
+  const names = gatherCharacterItemNames(character);
+  if (requirement.kind === 'fishing') {
+    const matchedRodOrPole = hasFishingRodOrPole(names);
+    return { ok: matchedRodOrPole, matched: matchedRodOrPole };
+  }
   const patterns = ENVIRONMENT_TOOL_KEYWORDS[requirement.kind] || [];
   if (!patterns.length) return { ok: true, matched: false };
-  const names = gatherCharacterItemNames(character);
   const matched = names.some(name => patterns.some(pattern => pattern.test(name)));
   return { ok: matched, matched };
 }

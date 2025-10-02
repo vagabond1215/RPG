@@ -578,7 +578,7 @@ const ENVIRONMENT_NODES = [
         attributes: ['WIS', 'DEX'],
         tool: {
           kind: 'fishing',
-          message: 'You need a fishing rod, hand line, or net to work the surf effectively.',
+          message: 'You need a fishing rod or pole to work the surf effectively; without one you scour the shallows by hand.',
         },
         handGatherable: {
           chance: 0.35,
@@ -586,7 +586,7 @@ const ENVIRONMENT_NODES = [
           faunaRegions: ['coastal', 'aquatic'],
           taxonGroups: ['mollusk', 'other'],
           sizeClasses: ['tiny', 'small'],
-          narrative: 'You can still pry shellfish from tidepools with bare hands, though it is slow work.',
+          narrative: 'Lacking a rod, you wade the shallows to pry shellfish and tideline creatures loose by hand.',
         },
         seasonModifiers: { Winter: -0.05, Autumn: 0.05 },
         timeModifiers: { dawn: 0.1, dusk: 0.1, night: -0.15 },
@@ -883,7 +883,7 @@ const ENVIRONMENT_NODES = [
         attributes: ['WIS', 'DEX'],
         tool: {
           kind: 'fishing',
-          message: 'A rod, hand line, or net is needed to fish the river properly.',
+          message: 'Bring a fishing rod or pole if you want to cast here; otherwise you settle for working the shallows by hand.',
         },
         handGatherable: {
           chance: 0.4,
@@ -891,7 +891,7 @@ const ENVIRONMENT_NODES = [
           faunaRegions: ['aquatic'],
           taxonGroups: ['mollusk', 'other'],
           sizeClasses: ['tiny', 'small'],
-          narrative: 'Bare hands can still pry mussels and crayfish from the slick banks.',
+          narrative: 'Without a rod you comb the shallows, coaxing mussels and crayfish from the slick banks by hand.',
         },
         seasonModifiers: { Winter: -0.1, Autumn: 0.05 },
         timeModifiers: { dawn: 0.08, dusk: 0.08, night: -0.2 },
@@ -981,7 +981,7 @@ const ENVIRONMENT_NODES = [
         attributes: ['WIS', 'DEX'],
         tool: {
           kind: 'fishing',
-          message: 'A light rod, snare line, or net is needed to fish the creek efficiently.',
+          message: 'A fishing rod or pole is required to set lines here; otherwise you resort to hand gathering in the shallows.',
         },
         handGatherable: {
           chance: 0.45,
@@ -989,7 +989,7 @@ const ENVIRONMENT_NODES = [
           faunaRegions: ['aquatic'],
           taxonGroups: ['mollusk', 'other'],
           sizeClasses: ['tiny', 'small'],
-          narrative: 'You can scoop crayfish and freshwater mussels by hand from shaded pools.',
+          narrative: 'Lacking a rod you kneel in the shallows, scooping crayfish and freshwater mussels by hand.',
         },
         seasonModifiers: { Winter: -0.12, Autumn: 0.04 },
         timeModifiers: { dawn: 0.06, dusk: 0.08, night: -0.18 },
