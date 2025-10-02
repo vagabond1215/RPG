@@ -1133,6 +1133,50 @@ body.theme-dark .tooltip-anchor::after {
   box-shadow: 0 4px 14px rgba(10, 12, 24, 0.35);
 }
 
+.tooltip-anchor.tooltip-anchor--js::after {
+  display: none !important;
+}
+
+.tooltip-bubble {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(18, 22, 32, 0.92);
+  color: #ffffff;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.4rem;
+  font-size: 0.7rem;
+  line-height: 1.3;
+  min-width: 9rem;
+  max-width: 18rem;
+  white-space: pre-wrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 1200;
+}
+
+.tooltip-bubble.is-visible {
+  opacity: 1;
+}
+
+.tooltip-bubble.is-measuring {
+  transition: none;
+}
+
+.tooltip-bubble[data-theme='light'] {
+  background: rgba(18, 22, 32, 0.92);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip-bubble[data-theme='dark'] {
+  background: rgba(240, 244, 255, 0.95);
+  color: #0e1324;
+  box-shadow: 0 4px 14px rgba(10, 12, 24, 0.35);
+}
+
 .info-icon {
   width: 1.4em;
   height: 1.4em;
