@@ -42,20 +42,16 @@
     <span id="menu-money" class="top-menu-item currency" aria-label="Available funds" title="Available funds">—</span>
   </div>
   <div id="menu-time" class="time-display" aria-label="Current time" title="Current time">
-    <div class="time-text">
+    <div class="time-meta">
       <span id="menu-date" class="time-date" aria-label="Current date" title="Current date">—</span>
-      <span class="time-line">
-        <span class="time-icons">
-          <span id="menu-time-icon" class="time-icon time-of-day-icon tooltip-anchor" role="img" aria-label="Time of day">—</span>
-          <span id="menu-season-icon" class="time-icon season-icon tooltip-anchor" role="img" aria-label="Season">—</span>
-          <span id="menu-weather-icon" class="time-icon weather-icon tooltip-anchor" role="img" aria-label="Weather">—</span>
-        </span>
-        <span class="time-label sr-only">—</span>
-        <span class="time-clock">—</span>
-      </span>
+      <span class="time-meta-separator" aria-hidden="true">·</span>
+      <span class="time-clock">—</span>
     </div>
-    <div class="time-wheel" aria-hidden="true">
-      <div class="time-wheel-hand"></div>
+    <span class="time-label sr-only">—</span>
+    <div class="time-icons">
+      <span id="menu-time-icon" class="time-icon time-of-day-icon tooltip-anchor" role="img" aria-label="Time of day">—</span>
+      <span id="menu-season-icon" class="time-icon season-icon tooltip-anchor" role="img" aria-label="Season">—</span>
+      <span id="menu-weather-icon" class="time-icon weather-icon tooltip-anchor" role="img" aria-label="Weather">—</span>
     </div>
   </div>
   </nav>
@@ -120,6 +116,15 @@
       <path d="M9 21v-6h6v6" />
     </svg>
     Buildings
+  </button>
+  <button data-action="action-log">
+    <svg viewBox="0 0 24 24">
+      <path d="M5 6h14" />
+      <path d="M5 12h14" />
+      <path d="M5 18h9" />
+      <path d="M4 4v16" />
+    </svg>
+    Action Log
   </button>
   <button data-action="quests">
     <svg viewBox="0 0 24 24">

@@ -18,7 +18,13 @@ import {
 import { WEAPON_SLOTS, ARMOR_SLOTS, TRINKET_SLOTS } from "./data/game/equipment.js";
 import { LOCATIONS } from "./data/game/locations.js";
 import { applyWavesBreakRegistry } from "./data/game/waves_break_registry.js";
-import { TidefallCalendar, dateKey, getSeasonForDate } from "./data/game/calendar.js";
+import {
+  TidefallCalendar,
+  dateKey,
+  getSeasonForDate,
+  MONTHS,
+  DAYS_PER_MONTH,
+} from "./data/game/calendar.js";
 import {
   createDefaultWeatherGenerator,
   createDeterministicRandom as createWeatherRandom,
@@ -149,6 +155,11 @@ const CITY_SLUGS = {
   "Dragon's Reach Road": "dragons_reach_road",
   Whiteheart: "whiteheart",
 };
+
+const REGION_LABELS = Object.entries(CITY_SLUGS).reduce((map, [name, slug]) => {
+  map[slug] = name;
+  return map;
+}, {});
 
 const BACKSTORY_MAP = {
   "Wave's Break": WAVES_BREAK_BACKSTORIES,
@@ -1075,6 +1086,73 @@ const TIME_BAND_ICON_MAP = {
   afternoon: '🌞',
   dusk: '🌇',
 };
+
+const TIME_BAND_METADATA = {
+  night: {
+    label: 'Deep night',
+    startHour: 21,
+    endHour: 4,
+    summary: 'Quiet streets and shuttered shops cloak the city beneath the stars.',
+  },
+  preDawn: {
+    label: 'Pre-dawn watch',
+    startHour: 4,
+    endHour: 6,
+    summary: 'Bakers and harbor crews stir as the last watch changes over.',
+  },
+  dawn: {
+    label: 'Dawn rise',
+    startHour: 6,
+    endHour: 9,
+    summary: 'Sunrise paints the sky while stalls and ferries ready for the rush.',
+  },
+  morning: {
+    label: 'Late morning bustle',
+    startHour: 9,
+    endHour: 12,
+    summary: 'Commerce hums along the piers and markets hit full stride.',
+  },
+  day: {
+    label: 'Early afternoon',
+    startHour: 12,
+    endHour: 15,
+    summary: 'The sun sits high—ideal for travel and guild business.',
+  },
+  afternoon: {
+    label: 'Late afternoon glow',
+    startHour: 15,
+    endHour: 18,
+    summary: 'Shadows lengthen and returning ships crowd the docks.',
+  },
+  dusk: {
+    label: 'Evening lanternlight',
+    startHour: 18,
+    endHour: 21,
+    summary: 'Lanterns spark to life as taverns and theaters fill.',
+  },
+};
+
+const SEASON_SUMMARIES = {
+  Spring: 'Blooming festivals and warm rains encourage planting and travel.',
+  Summer: 'High sun, humid squalls, and bustling trade define the warm months.',
+  Autumn: 'Harvest bonfires and crisp winds sweep through every district.',
+  Winter: 'Long nights, auroral skies, and bracing coastal storms take hold.',
+};
+
+const SEASON_TOOLTIP_DATA = MONTHS.reduce((map, month) => {
+  const bucket = map[month.season] || {
+    months: [],
+    monthIndexes: [],
+    constellations: [],
+    summary: SEASON_SUMMARIES[month.season] || '',
+  };
+  bucket.months.push(month.name);
+  bucket.monthIndexes.push(month.index);
+  if (month.constellation) bucket.constellations.push(month.constellation);
+  bucket.lengthDays = bucket.months.length * DAYS_PER_MONTH;
+  map[month.season] = bucket;
+  return map;
+}, {});
 const SEASON_ICON_MAP = {
   Winter: '❄️',
   Spring: '🌱',
@@ -1091,8 +1169,11 @@ let mapToggleButton = null;
 
 const LOCATION_LOG_DISPLAY_LIMIT = 4;
 const LOCATION_LOG_HISTORY_LIMIT = 50;
+const ACTION_LOG_STORAGE_LIMIT = 200;
 const locationActionHistory = new Map();
 const locationActionDisplay = new Map();
+let actionLogFilterState = { type: 'all', outcome: 'all', city: 'all' };
+let questHistoryFilterState = { city: 'all', outcome: 'all', board: 'all' };
 
 function locationPositionKey(pos) {
   if (!pos) return null;
@@ -1109,6 +1190,7 @@ function pushLocationLogEntry(pos, entry) {
   const updatedHistory = [entry, ...history].slice(0, LOCATION_LOG_HISTORY_LIMIT);
   locationActionHistory.set(key, updatedHistory);
   locationActionDisplay.set(key, updatedHistory.slice(0, LOCATION_LOG_DISPLAY_LIMIT));
+  recordCharacterAction(pos, entry);
 }
 
 function getLocationLogEntries(pos) {
@@ -1126,8 +1208,22 @@ function getLocationLogHistory(pos) {
 function renderLocationLogEntries(pos) {
   const entries = getLocationLogEntries(pos);
   if (!entries.length) return '';
-  const html = entries.map(renderLocationLogEntry).join('');
-  return `<section class="location-log" aria-live="polite">${html}</section>`;
+  const [latest, ...previous] = entries;
+  const latestHTML = renderLocationLogEntry(latest);
+  let historyHTML = '';
+  if (previous.length) {
+    const countLabel = previous.length === 1
+      ? '1 earlier event'
+      : `${previous.length} earlier events`;
+    const historyEntries = previous.map(renderLocationLogEntry).join('');
+    historyHTML = `
+      <details class="location-log-history">
+        <summary>${escapeHtml(`Event Log (${countLabel})`)}</summary>
+        <div class="location-log-history-content">${historyEntries}</div>
+      </details>
+    `;
+  }
+  return `<section class="location-log" aria-live="polite">${latestHTML}${historyHTML}</section>`;
 }
 
 function renderLocationLogEntry(entry) {
@@ -1139,6 +1235,96 @@ function renderLocationLogEntry(entry) {
     return buildMessageLogHTML(entry);
   }
   return '';
+}
+
+function recordCharacterAction(pos, entry) {
+  if (!currentCharacter || !entry) return;
+  const actionLog = ensureActionLog(currentCharacter);
+  const todayLabel = typeof worldCalendar?.formatCurrentDate === 'function'
+    ? worldCalendar.formatCurrentDate()
+    : null;
+  const seasonLabel = typeof worldCalendar?.season === 'function'
+    ? worldCalendar.season()
+    : null;
+  const timeOfDay = ensureCharacterClock(currentCharacter);
+  const timeLabel = describeTimeOfDay(timeOfDay);
+  const clock = formatClockTime(timeOfDay);
+  const location = pos || currentCharacter.position || {};
+  const city = findCityByName(location.city || currentCharacter.location || '') || location.city || currentCharacter.location || null;
+  const district = location.district || null;
+  const building = location.building || null;
+  const locationLabelParts = [building, district, city].filter(Boolean);
+  const locationLabel = locationLabelParts.length ? locationLabelParts.join(' · ') : city;
+
+  let title = 'Event';
+  let description = '';
+  let weather = null;
+  let success = null;
+  let partialSuccess = false;
+  let tone = entry.tone || null;
+  let outcomeLabel = null;
+
+  if (entry.kind === 'environment') {
+    const result = entry.result || {};
+    title = result.title || 'Encounter';
+    if (typeof result.narrative === 'string') {
+      description = result.narrative;
+    } else if (result.narrative && typeof result.narrative === 'object') {
+      description = [result.narrative.scene, result.narrative.outcome].filter(Boolean).join(' ');
+    }
+    weather = result.weather ? describeWeatherSummary(result.weather) : null;
+    if (result.success === true) {
+      success = true;
+      outcomeLabel = 'Success';
+    } else if (result.partialSuccess) {
+      partialSuccess = true;
+      success = false;
+      outcomeLabel = 'Partial Success';
+    } else if (result.success === false) {
+      success = false;
+      outcomeLabel = 'Failure';
+    }
+  } else if (entry.kind === 'message') {
+    title = entry.title || 'Notice';
+    if (Array.isArray(entry.body)) {
+      description = entry.body.map(text => String(text)).join(' ');
+    } else if (entry.body) {
+      description = String(entry.body);
+    }
+    if (tone === 'success') {
+      success = true;
+      outcomeLabel = 'Success';
+    } else if (tone === 'error') {
+      success = false;
+      outcomeLabel = 'Failure';
+    }
+  }
+
+  const logEntry = {
+    id: `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
+    kind: entry.kind === 'environment' ? 'environment' : 'message',
+    title,
+    description,
+    outcome: outcomeLabel,
+    success,
+    partialSuccess,
+    tone: tone || null,
+    date: todayLabel,
+    season: seasonLabel,
+    timeLabel: toTitleCase(timeLabel),
+    clock,
+    weather,
+    city,
+    district,
+    building,
+    locationLabel: locationLabel || null,
+  };
+
+  actionLog.unshift(logEntry);
+  if (actionLog.length > ACTION_LOG_STORAGE_LIMIT) {
+    actionLog.length = ACTION_LOG_STORAGE_LIMIT;
+  }
+  saveProfiles();
 }
 
 function resetLocationLogs() {
@@ -1208,7 +1394,11 @@ function resolveWeatherForPosition(position) {
   const today = worldCalendar.today();
   let region = 'waves_break';
   let habitat = 'urban';
+  let city = null;
+  let district = null;
   if (position) {
+    city = position.city || null;
+    district = position.district || null;
     if (position.city && CITY_SLUGS[position.city]) {
       region = CITY_SLUGS[position.city];
     }
@@ -1223,23 +1413,71 @@ function resolveWeatherForPosition(position) {
     }
   }
   try {
-    return weatherSystem.getDailyWeather(region, habitat, today);
+    const report = weatherSystem.getDailyWeather(region, habitat, today);
+    if (!report) return null;
+    const regionLabel = report.regionLabel || REGION_LABELS[report.region] || REGION_LABELS[region];
+    const fallbackRegionLabel = regionLabel || toTitleCase(String(report.region || region).replace(/[-_]/g, ' '));
+    const habitatLabel = toTitleCase(String(habitat).replace(/[-_]/g, ' '));
+    return {
+      ...report,
+      city,
+      district,
+      regionLabel: fallbackRegionLabel,
+      habitatLabel,
+    };
   } catch {
     return null;
   }
 }
 
-function buildTimeTooltip(label, clock) {
+function formatTimeBandRange(startHour, endHour) {
+  if (!Number.isFinite(startHour) || !Number.isFinite(endHour)) return null;
+  const normalize = value => ((value % 24) + 24) % 24;
+  const normalizedStart = normalize(startHour);
+  const normalizedEnd = normalize(endHour);
+  const wraps = normalizedStart >= normalizedEnd;
+  const startText = formatClockTime(normalizedStart);
+  const endText = formatClockTime(normalizedEnd);
+  if (!wraps && normalizedStart === normalizedEnd) {
+    return startText;
+  }
+  return wraps ? `${startText} – ${endText} (next day)` : `${startText} – ${endText}`;
+}
+
+function buildTimeTooltip(label, clock, bandKey) {
   const parts = [];
-  if (label) parts.push(`Time: ${label}`);
-  if (clock) parts.push(`Clock: ${clock}`);
+  if (label) parts.push(`Segment: ${label}`);
+  if (clock) parts.push(`Current clock: ${clock}`);
+  const meta = TIME_BAND_METADATA[bandKey];
+  if (meta) {
+    const range = formatTimeBandRange(meta.startHour, meta.endHour);
+    if (range) parts.push(`Typical window: ${range}`);
+    if (meta.summary) parts.push(meta.summary);
+  }
   return parts.join('\n');
 }
 
-function buildSeasonTooltip(season, dateText) {
+function buildSeasonTooltip(season, dateText, today) {
   const parts = [];
   if (season) parts.push(`Season: ${season}`);
-  if (dateText) parts.push(`Date: ${dateText}`);
+  if (dateText) parts.push(`Current date: ${dateText}`);
+  const info = SEASON_TOOLTIP_DATA[season];
+  if (info) {
+    if (Array.isArray(info.monthIndexes) && today) {
+      const monthPosition = info.monthIndexes.indexOf(today.monthIndex);
+      if (monthPosition >= 0) {
+        const dayOfSeason = monthPosition * DAYS_PER_MONTH + today.day;
+        if (Number.isFinite(info.lengthDays)) {
+          parts.push(`Day ${dayOfSeason} of ${info.lengthDays}`);
+        }
+      }
+    }
+    if (info.summary) parts.push(info.summary);
+    if (info.months?.length) parts.push(`Months: ${info.months.join(', ')}`);
+    if (info.constellations?.length) {
+      parts.push(`Constellations: ${info.constellations.join(', ')}`);
+    }
+  }
   return parts.join('\n');
 }
 
@@ -1263,13 +1501,39 @@ function resolveWeatherIcon(weather) {
   return { icon: '🌤️', label };
 }
 
-function buildWeatherTooltip(weather) {
+function buildWeatherTooltip(weather, context = {}) {
   if (!weather) return 'Weather data unavailable.';
   const parts = [];
   const iconInfo = resolveWeatherIcon(weather);
   if (iconInfo.label) parts.push(`Condition: ${iconInfo.label}`);
   if (Number.isFinite(weather.temperatureC)) parts.push(`Temperature: ${weather.temperatureC}°C`);
   if (Number.isFinite(weather.humidity)) parts.push(`Humidity: ${weather.humidity}%`);
+  if (Number.isFinite(weather.precipitationMm)) {
+    parts.push(`Precipitation: ${weather.precipitationMm} mm`);
+  }
+  const drought = weather.droughtStage && weather.droughtStage !== 'none' ? toTitleCase(weather.droughtStage) : null;
+  if (drought) parts.push(`Drought status: ${drought}`);
+  const flood = weather.floodRisk && weather.floodRisk !== 'none' ? toTitleCase(weather.floodRisk) : null;
+  if (flood) parts.push(`Flood risk: ${flood}`);
+  const areaParts = [];
+  const city = context.city || weather.city;
+  if (city) areaParts.push(city);
+  const district = context.district || weather.district;
+  if (district) areaParts.push(district);
+  const regionLabel = weather.regionLabel || REGION_LABELS[weather.region];
+  if (!areaParts.length && regionLabel) {
+    areaParts.push(regionLabel);
+  }
+  if (areaParts.length) parts.push(`Area: ${areaParts.join(' – ')}`);
+  const habitatLabel =
+    context.habitatLabel ||
+    weather.habitatLabel ||
+    (weather.habitat ? toTitleCase(String(weather.habitat).replace(/[-_]/g, ' ')) : null);
+  if (habitatLabel) parts.push(`Habitat: ${habitatLabel}`);
+  if (context.dateLabel) {
+    const observed = context.clock ? `${context.dateLabel} at ${context.clock}` : context.dateLabel;
+    parts.push(`Observation: ${observed}`);
+  }
   if (weather.narrative) parts.push(weather.narrative);
   return parts.join('\n');
 }
@@ -1278,6 +1542,7 @@ function updateTopMenuIndicators() {
   const currentDate = worldCalendar.formatCurrentDate();
   const today = worldCalendar.today();
   const season = getSeasonForDate(today);
+  let clock = null;
   if (menuDateLabel) {
     menuDateLabel.textContent = currentDate;
     menuDateLabel.setAttribute('title', `Date: ${currentDate}`);
@@ -1298,9 +1563,6 @@ function updateTopMenuIndicators() {
   if (menuTimeDisplay) {
     if (currentCharacter) {
       const hours = ensureCharacterClock(currentCharacter);
-      const normalized = ((hours % 24) + 24) % 24;
-      const rotation = (normalized / 24) * 360;
-      menuTimeDisplay.style.setProperty('--time-rotation', `${rotation}deg`);
       const bandKey = timeBandForHour(hours);
       const band = TIME_BAND_CLASS_MAP[bandKey];
       menuTimeDisplay.classList.remove(...TIME_BAND_CLASSES);
@@ -1308,20 +1570,19 @@ function updateTopMenuIndicators() {
         menuTimeDisplay.classList.add(band);
       }
       const label = toTitleCase(describeTimeOfDay(hours));
-      const clock = formatClockTime(hours);
+      clock = formatClockTime(hours);
       if (menuTimeLabelText) menuTimeLabelText.textContent = label || '—';
       if (menuTimeClockText) menuTimeClockText.textContent = clock;
       if (menuTimeIcon) {
         const icon = TIME_BAND_ICON_MAP[bandKey] || '🕰️';
         menuTimeIcon.textContent = icon;
-        menuTimeIcon.setAttribute('data-tooltip', buildTimeTooltip(label, clock));
+        menuTimeIcon.setAttribute('data-tooltip', buildTimeTooltip(label, clock, bandKey));
         menuTimeIcon.setAttribute('aria-label', label ? `Time of day: ${label}` : 'Time of day');
       }
       menuTimeDisplay.setAttribute('title', `Time: ${label} (${clock})`);
       menuTimeDisplay.setAttribute('aria-label', `Current time: ${label} at ${clock}`);
     } else {
       menuTimeDisplay.classList.remove(...TIME_BAND_CLASSES);
-      menuTimeDisplay.style.removeProperty('--time-rotation');
       if (menuTimeLabelText) menuTimeLabelText.textContent = '—';
       if (menuTimeClockText) menuTimeClockText.textContent = '—';
       if (menuTimeIcon) {
@@ -1337,7 +1598,7 @@ function updateTopMenuIndicators() {
     if (season) {
       const icon = SEASON_ICON_MAP[season] || '🗓️';
       menuSeasonIcon.textContent = icon;
-      menuSeasonIcon.setAttribute('data-tooltip', buildSeasonTooltip(season, currentDate));
+      menuSeasonIcon.setAttribute('data-tooltip', buildSeasonTooltip(season, currentDate, today));
       menuSeasonIcon.setAttribute('aria-label', `Current season: ${season}`);
     } else {
       menuSeasonIcon.textContent = '—';
@@ -1346,10 +1607,17 @@ function updateTopMenuIndicators() {
     }
   }
   if (menuWeatherIcon) {
-    const weather = resolveWeatherForPosition(currentCharacter?.position || null);
+    const position = currentCharacter?.position || null;
+    const weather = resolveWeatherForPosition(position);
     const iconInfo = resolveWeatherIcon(weather);
     menuWeatherIcon.textContent = iconInfo.icon;
-    menuWeatherIcon.setAttribute('data-tooltip', buildWeatherTooltip(weather));
+    const weatherTooltipContext = {
+      city: position?.city || weather?.city || null,
+      district: position?.district || weather?.district || null,
+      dateLabel: currentDate,
+      clock,
+    };
+    menuWeatherIcon.setAttribute('data-tooltip', buildWeatherTooltip(weather, weatherTooltipContext));
     menuWeatherIcon.setAttribute('aria-label', iconInfo.label || 'Weather information');
   }
   if (menuMoneyLabel) {
@@ -1523,6 +1791,19 @@ function findCityByName(name) {
   return Object.keys(CITY_NAV).find(city => city.toLowerCase() === lower) || null;
 }
 
+function deriveNearestCity(source) {
+  if (typeof source !== 'string') return null;
+  const parts = source
+    .split(/[·,;\/\-|–—]/)
+    .map(part => part.trim())
+    .filter(Boolean);
+  for (const part of [source.trim(), ...parts]) {
+    const city = findCityByName(part);
+    if (city) return city;
+  }
+  return null;
+}
+
 function resolveCityPreference(...candidates) {
   for (const candidate of candidates) {
     const match = findCityByName(candidate);
@@ -1607,6 +1888,7 @@ function normalizeCharacterState(character) {
   } else {
     character.timeOfDay = hours;
   }
+  ensureActionLog(character);
   return character;
 }
 
@@ -3948,31 +4230,6 @@ function buildEnvironmentOutcomeHTML(result) {
         `<p class="environment-skill">${escapeHtml(skillText)}${skillIcon ? ` ${skillIcon}` : ''}</p>`
       );
     }
-  }
-  const contextParts = [];
-  if (result.season) contextParts.push(`Season: ${result.season}`);
-  if (result.timeLabel) contextParts.push(`Time: ${result.timeLabel}`);
-  contextParts.push(`Weather: ${describeWeatherSummary(result.weather)}`);
-  if (contextParts.length) {
-    pieces.push(`<p class="environment-context">${contextParts.map(part => escapeHtml(part)).join(' · ')}</p>`);
-  }
-  const metaParts = [];
-  if (result.timeSpentHours != null) {
-    const durationLabel = describeHoursDuration(result.timeSpentHours);
-    metaParts.push(`Time spent: ${durationLabel}`);
-  }
-  if (result.timeAfter && Number.isFinite(result.timeAfter.timeOfDay)) {
-    const afterLabel = toTitleCase(describeTimeOfDay(result.timeAfter.timeOfDay));
-    const clock = formatClockTime(result.timeAfter.timeOfDay);
-    let text = `Now: ${afterLabel} (${clock})`;
-    const dayDelta = Number(result.timeAfter.days) || 0;
-    if (dayDelta > 0) {
-      text += ` · +${dayDelta} day${dayDelta === 1 ? '' : 's'}`;
-    }
-    metaParts.push(text);
-  }
-  if (metaParts.length) {
-    pieces.push(`<p class="environment-meta">${metaParts.map(part => escapeHtml(part)).join(' · ')}</p>`);
   }
   pieces.push('</article>');
   return pieces.join('');
@@ -8843,6 +9100,7 @@ function ensureQuestHistory(character) {
       title: entry.title || '',
       board: entry.board || null,
       location: entry.location || null,
+      nearestCity: deriveNearestCity(entry.location || entry.board || ''),
       npc: entry.npc || null,
       outcome: entry.outcome || null,
       success: Boolean(entry.success),
@@ -8856,6 +9114,51 @@ function ensureQuestHistory(character) {
     }));
   character.questHistory = normalized;
   return normalized;
+}
+
+function normalizeActionLogEntry(entry) {
+  if (!entry || typeof entry !== 'object') {
+    return null;
+  }
+  const id = typeof entry.id === 'string' && entry.id.trim() ? entry.id : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+  const kind = entry.kind === 'environment' ? 'environment' : 'message';
+  const city = findCityByName(entry.city || '') || (entry.city || null);
+  const district = entry.district || null;
+  const building = entry.building || null;
+  const locationLabelParts = [];
+  if (building) locationLabelParts.push(building);
+  if (district) locationLabelParts.push(district);
+  if (city) locationLabelParts.push(city);
+  const locationLabel = entry.locationLabel || (locationLabelParts.length ? locationLabelParts.join(' · ') : null);
+  return {
+    id,
+    kind,
+    title: entry.title || 'Event',
+    description: entry.description || '',
+    outcome: entry.outcome || null,
+    success: entry.success === true ? true : entry.success === false ? false : null,
+    partialSuccess: Boolean(entry.partialSuccess),
+    tone: entry.tone || null,
+    date: entry.date || null,
+    season: entry.season || null,
+    timeLabel: entry.timeLabel || null,
+    clock: entry.clock || null,
+    weather: entry.weather || null,
+    city,
+    district,
+    building,
+    locationLabel,
+  };
+}
+
+function ensureActionLog(character) {
+  if (!character) return [];
+  const raw = Array.isArray(character.actionLog) ? character.actionLog : [];
+  const normalized = raw
+    .map(normalizeActionLogEntry)
+    .filter(Boolean);
+  character.actionLog = normalized.slice(0, ACTION_LOG_STORAGE_LIMIT);
+  return character.actionLog;
 }
 
 function ensureCharacterClock(character) {
@@ -10079,11 +10382,167 @@ function showBuildingsUI() {
   setMainHTML(html);
 }
 
+function showActionLogUI() {
+  updateTopMenuIndicators();
+  if (!currentCharacter) return;
+  showBackButton();
+  const log = ensureActionLog(currentCharacter);
+  const uniqueValues = entries => Array.from(new Set(entries.filter(Boolean))).sort((a, b) => a.localeCompare(b));
+  const cityOptions = uniqueValues(log.map(entry => entry.city || (entry.locationLabel ? entry.locationLabel.split(' · ').pop() : null)));
+  if (actionLogFilterState.city !== 'all' && !cityOptions.includes(actionLogFilterState.city)) {
+    actionLogFilterState = { ...actionLogFilterState, city: 'all' };
+  }
+  const filtered = log.filter(entry => {
+    if (actionLogFilterState.type !== 'all' && entry.kind !== actionLogFilterState.type) {
+      return false;
+    }
+    if (actionLogFilterState.outcome === 'success' && entry.success !== true) {
+      return false;
+    }
+    if (actionLogFilterState.outcome === 'failure' && entry.success !== false) {
+      return false;
+    }
+    if (actionLogFilterState.outcome === 'partial' && !entry.partialSuccess) {
+      return false;
+    }
+    if (actionLogFilterState.city !== 'all') {
+      const city = entry.city || null;
+      if (!city || city !== actionLogFilterState.city) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  const buildOutcomeChip = entry => {
+    if (entry.partialSuccess) {
+      return '<span class="action-log-chip action-log-chip-partial">Partial</span>';
+    }
+    if (entry.success === true) {
+      return '<span class="action-log-chip action-log-chip-success">Success</span>';
+    }
+    if (entry.success === false) {
+      return '<span class="action-log-chip action-log-chip-failure">Failure</span>';
+    }
+    return entry.outcome
+      ? `<span class="action-log-chip">${escapeHtml(entry.outcome)}</span>`
+      : '';
+  };
+
+  const buildMeta = entry => {
+    const parts = [];
+    if (entry.date) parts.push(`<span>📅 ${escapeHtml(entry.date)}</span>`);
+    if (entry.timeLabel || entry.clock) {
+      const label = [entry.timeLabel, entry.clock ? `(${entry.clock})` : null]
+        .filter(Boolean)
+        .join(' ');
+      parts.push(`<span>🕒 ${escapeHtml(label)}</span>`);
+    }
+    if (entry.locationLabel) parts.push(`<span>📍 ${escapeHtml(entry.locationLabel)}</span>`);
+    if (entry.weather) parts.push(`<span>☁️ ${escapeHtml(entry.weather)}</span>`);
+    if (entry.season) parts.push(`<span>🍂 ${escapeHtml(entry.season)}</span>`);
+    return parts.length ? `<div class="action-log-meta">${parts.join('')}</div>` : '';
+  };
+
+  const buildDescription = entry => {
+    if (!entry.description) return '';
+    return entry.description
+      .split(/\n+/)
+      .filter(Boolean)
+      .map(line => `<p>${escapeHtml(line)}</p>`)
+      .join('');
+  };
+
+  const list = filtered
+    .map(entry => `
+      <li class="action-log-entry">
+        <div class="action-log-entry-header">
+          <h3>${escapeHtml(entry.title || 'Event')}</h3>
+          <div class="action-log-chips">
+            ${buildOutcomeChip(entry)}
+            <span class="action-log-chip action-log-chip-kind">${entry.kind === 'environment' ? 'Environment' : 'Message'}</span>
+          </div>
+        </div>
+        ${buildMeta(entry)}
+        ${buildDescription(entry)}
+      </li>
+    `)
+    .join('');
+
+  const typeOptions = [
+    { value: 'all', label: 'All events' },
+    { value: 'environment', label: 'Environment' },
+    { value: 'message', label: 'Messages' },
+  ]
+    .map(option => `<option value="${option.value}"${option.value === actionLogFilterState.type ? ' selected' : ''}>${escapeHtml(option.label)}</option>`)
+    .join('');
+
+  const outcomeOptions = [
+    { value: 'all', label: 'All outcomes' },
+    { value: 'success', label: 'Success' },
+    { value: 'partial', label: 'Partial' },
+    { value: 'failure', label: 'Failure' },
+  ]
+    .map(option => `<option value="${option.value}"${option.value === actionLogFilterState.outcome ? ' selected' : ''}>${escapeHtml(option.label)}</option>`)
+    .join('');
+
+  const citySelectOptions = ['all', ...cityOptions]
+    .map(value => {
+      const label = value === 'all' ? 'All cities' : value;
+      const selected = value === actionLogFilterState.city ? ' selected' : '';
+      return `<option value="${escapeHtml(value)}"${selected}>${escapeHtml(label)}</option>`;
+    })
+    .join('');
+
+  const html = `
+    <div class="action-log-screen">
+      <h1>Action Log</h1>
+      <div class="action-log-filters">
+        <label>
+          <span>Event type</span>
+          <select id="action-log-filter-type">${typeOptions}</select>
+        </label>
+        <label>
+          <span>Outcome</span>
+          <select id="action-log-filter-outcome">${outcomeOptions}</select>
+        </label>
+        <label>
+          <span>City</span>
+          <select id="action-log-filter-city">${citySelectOptions}</select>
+        </label>
+      </div>
+      ${filtered.length
+        ? `<ul class="action-log-list">${list}</ul>`
+        : '<p class="action-log-empty">No actions recorded yet.</p>'}
+    </div>
+  `;
+
+  setMainHTML(html);
+  const filterContainer = document.querySelector('.action-log-filters');
+  if (filterContainer) {
+    filterContainer.addEventListener('change', event => {
+      const select = event.target.closest('select');
+      if (!select) return;
+      if (select.id === 'action-log-filter-type') {
+        actionLogFilterState = { ...actionLogFilterState, type: select.value };
+      } else if (select.id === 'action-log-filter-outcome') {
+        actionLogFilterState = { ...actionLogFilterState, outcome: select.value };
+      } else if (select.id === 'action-log-filter-city') {
+        actionLogFilterState = { ...actionLogFilterState, city: select.value };
+      }
+      showActionLogUI();
+    });
+  }
+  updateMenuHeight();
+}
+
 function showQuestLogUI() {
   updateTopMenuIndicators();
   if (!currentCharacter) return;
   showBackButton();
   const questLog = ensureQuestLog(currentCharacter);
+  const questHistory = ensureQuestHistory(currentCharacter);
+  const uniqueValues = entries => Array.from(new Set(entries.filter(Boolean))).sort((a, b) => a.localeCompare(b));
   const normalizeStatus = status => {
     if (!status) return '';
     const normalized = String(status).toLowerCase();
@@ -10149,8 +10608,125 @@ function showQuestLogUI() {
       : '<p class="quest-log-empty">No completed quests yet.</p>';
     html += '</section>';
   }
+  const historyCities = uniqueValues(questHistory.map(entry => entry.nearestCity || entry.location || null));
+  if (questHistoryFilterState.city !== 'all' && !historyCities.includes(questHistoryFilterState.city)) {
+    questHistoryFilterState = { ...questHistoryFilterState, city: 'all' };
+  }
+  const historyBoards = uniqueValues(questHistory.map(entry => entry.board || null));
+  if (questHistoryFilterState.board !== 'all' && !historyBoards.includes(questHistoryFilterState.board)) {
+    questHistoryFilterState = { ...questHistoryFilterState, board: 'all' };
+  }
+
+  const filteredHistory = questHistory.filter(entry => {
+    if (questHistoryFilterState.city !== 'all') {
+      const city = entry.nearestCity || null;
+      if (!city || city !== questHistoryFilterState.city) return false;
+    }
+    if (questHistoryFilterState.board !== 'all') {
+      if (!entry.board || entry.board !== questHistoryFilterState.board) return false;
+    }
+    if (questHistoryFilterState.outcome === 'success' && entry.success !== true) return false;
+    if (questHistoryFilterState.outcome === 'failure' && entry.success !== false) return false;
+    return true;
+  });
+
+  const buildHistoryOutcome = entry => {
+    if (entry.success === true) return '<span class="quest-history-chip quest-history-chip-success">Success</span>';
+    if (entry.success === false) return '<span class="quest-history-chip quest-history-chip-failure">Failure</span>';
+    return entry.outcome
+      ? `<span class="quest-history-chip">${escapeHtml(entry.outcome)}</span>`
+      : '<span class="quest-history-chip quest-history-chip-unknown">Unknown</span>';
+  };
+
+  const buildHistoryMeta = entry => {
+    const parts = [];
+    if (entry.dateLabel) parts.push(`<span>📅 ${escapeHtml(entry.dateLabel)}</span>`);
+    if (entry.location) parts.push(`<span>📍 ${escapeHtml(entry.location)}</span>`);
+    if (entry.reward) parts.push(`<span>💰 ${escapeHtml(entry.reward)}</span>`);
+    if (entry.npc?.name) parts.push(`<span>🧭 ${escapeHtml(entry.npc.name)}</span>`);
+    return parts.length ? `<div class="quest-history-meta">${parts.join('')}</div>` : '';
+  };
+
+  const historyList = filteredHistory
+    .map(entry => `
+      <li class="quest-history-entry">
+        <div class="quest-history-header">
+          <h3>${escapeHtml(entry.title || 'Quest')}</h3>
+          <div class="quest-history-chips">
+            ${buildHistoryOutcome(entry)}
+            ${entry.board ? `<span class="quest-history-chip quest-history-chip-board">${escapeHtml(entry.board)}</span>` : ''}
+          </div>
+        </div>
+        ${buildHistoryMeta(entry)}
+        ${entry.narrative ? `<p class="quest-history-narrative">${escapeHtml(entry.narrative)}</p>` : ''}
+      </li>
+    `)
+    .join('');
+
+  const cityFilterOptions = ['all', ...historyCities]
+    .map(value => {
+      const label = value === 'all' ? 'All cities' : value;
+      const selected = value === questHistoryFilterState.city ? ' selected' : '';
+      return `<option value="${escapeHtml(value)}"${selected}>${escapeHtml(label)}</option>`;
+    })
+    .join('');
+
+  const outcomeFilterOptions = [
+    { value: 'all', label: 'All outcomes' },
+    { value: 'success', label: 'Success' },
+    { value: 'failure', label: 'Failure' },
+  ]
+    .map(option => `<option value="${option.value}"${option.value === questHistoryFilterState.outcome ? ' selected' : ''}>${escapeHtml(option.label)}</option>`)
+    .join('');
+
+  const boardFilterOptions = ['all', ...historyBoards]
+    .map(value => {
+      const label = value === 'all' ? 'All boards' : value;
+      const selected = value === questHistoryFilterState.board ? ' selected' : '';
+      return `<option value="${escapeHtml(value)}"${selected}>${escapeHtml(label)}</option>`;
+    })
+    .join('');
+
+  html += `
+    <section class="quest-history-section">
+      <h2>Quest History</h2>
+      <div class="quest-history-filters">
+        <label>
+          <span>Nearest city</span>
+          <select id="quest-history-filter-city">${cityFilterOptions}</select>
+        </label>
+        <label>
+          <span>Outcome</span>
+          <select id="quest-history-filter-outcome">${outcomeFilterOptions}</select>
+        </label>
+        <label>
+          <span>Quest board</span>
+          <select id="quest-history-filter-board">${boardFilterOptions}</select>
+        </label>
+      </div>
+      ${filteredHistory.length
+        ? `<ul class="quest-history-list">${historyList}</ul>`
+        : '<p class="quest-history-empty">No quest history entries match the selected filters.</p>'}
+    </section>
+  `;
+
   html += '</div>';
   setMainHTML(html);
+  const historyFilters = document.querySelector('.quest-history-filters');
+  if (historyFilters) {
+    historyFilters.addEventListener('change', event => {
+      const select = event.target.closest('select');
+      if (!select) return;
+      if (select.id === 'quest-history-filter-city') {
+        questHistoryFilterState = { ...questHistoryFilterState, city: select.value };
+      } else if (select.id === 'quest-history-filter-outcome') {
+        questHistoryFilterState = { ...questHistoryFilterState, outcome: select.value };
+      } else if (select.id === 'quest-history-filter-board') {
+        questHistoryFilterState = { ...questHistoryFilterState, board: select.value };
+      }
+      showQuestLogUI();
+    });
+  }
   updateMenuHeight();
 }
 
@@ -11315,6 +11891,7 @@ function finalizeCharacter(character) {
   ensureCollections(newChar);
   ensureQuestLog(newChar);
   ensureQuestHistory(newChar);
+  ensureActionLog(newChar);
   ensureCharacterClock(newChar);
   currentProfile.characters[id] = newChar;
   currentProfile.lastCharacter = id;
@@ -11340,6 +11917,7 @@ function loadCharacter() {
     ensureCollections(currentCharacter);
     ensureQuestLog(currentCharacter);
     ensureQuestHistory(currentCharacter);
+    ensureActionLog(currentCharacter);
     ensureCharacterClock(currentCharacter);
     showCharacter();
   } else if (safeStorage.getItem(TEMP_CHARACTER_KEY)) {
@@ -11535,6 +12113,8 @@ if (characterMenu) {
       showBuildingsUI();
     } else if (action === 'quests') {
       showQuestLogUI();
+    } else if (action === 'action-log') {
+      showActionLogUI();
     } else {
       showBackButton();
       setMainHTML(`<div class="no-character"><h1>${action} not implemented</h1></div>`);
