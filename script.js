@@ -3319,6 +3319,8 @@ const ENVIRONMENT_TOOL_KEYWORDS = {
     /halberd/i,
     /staff/i,
   ],
+  woodcutting: [/axe/i, /hatchet/i, /saw/i, /logging/i, /lumber/i],
+  mining: [/pick/i, /pickaxe/i, /hammer/i, /chisel/i, /mattock/i],
 };
 
 const ENVIRONMENT_RANGED_WEAPONS = [/bow/i, /crossbow/i, /sling/i, /dart/i, /arquebus/i, /gun/i];
@@ -3522,6 +3524,68 @@ function pickRandomUnique(array, count) {
   return result;
 }
 
+function randomInRange(min, max) {
+  if (!Number.isFinite(min) || !Number.isFinite(max)) {
+    return Number.isFinite(min) ? min : Number.isFinite(max) ? max : 0;
+  }
+  if (max < min) return randomInRange(max, min);
+  return Math.random() * (max - min) + min;
+}
+
+function determineActionTime(actionDef) {
+  if (Array.isArray(actionDef?.timeRangeHours) && actionDef.timeRangeHours.length >= 2) {
+    const [min, max] = actionDef.timeRangeHours;
+    return Math.max(0, randomInRange(min, max));
+  }
+  if (Number.isFinite(actionDef?.timeHours)) {
+    return actionDef.timeHours;
+  }
+  return 1;
+}
+
+function pickWeightedRandom(list) {
+  if (!Array.isArray(list) || list.length === 0) return null;
+  let total = 0;
+  list.forEach(item => {
+    total += Number.isFinite(item?.weight) ? Math.max(0, item.weight) : 1;
+  });
+  if (total <= 0) return list[list.length - 1];
+  let roll = Math.random() * total;
+  for (const item of list) {
+    const weight = Number.isFinite(item?.weight) ? Math.max(0, item.weight) : 1;
+    if (weight <= 0) continue;
+    if (roll < weight) return item;
+    roll -= weight;
+  }
+  return list[list.length - 1];
+}
+
+function resolveLootSpecs(specs, draws = 1) {
+  if (!Array.isArray(specs) || specs.length === 0) return { loot: [], awarded: [] };
+  const loot = [];
+  const awarded = [];
+  for (let i = 0; i < draws; i += 1) {
+    const spec = pickWeightedRandom(specs);
+    if (!spec) continue;
+    const qtyRange = Array.isArray(spec.qtyRange) && spec.qtyRange.length >= 2 ? spec.qtyRange : null;
+    const minQty = qtyRange ? qtyRange[0] : Number.isFinite(spec.qty) ? spec.qty : 1;
+    const maxQty = qtyRange ? qtyRange[1] : Number.isFinite(spec.qty) ? spec.qty : minQty;
+    const qty = randomInt(Math.max(1, Math.floor(minQty)), Math.max(1, Math.floor(maxQty)));
+    const name = spec.name || 'Salvaged item';
+    addItemToInventory({
+      name,
+      category: spec.category || 'Miscellaneous',
+      price: spec.price || 0,
+      profit: spec.profit || 0,
+      qty,
+      baseItem: spec.baseItem,
+    });
+    loot.push({ name, qty });
+    awarded.push(spec);
+  }
+  return { loot, awarded };
+}
+
 function joinWithAnd(items) {
   const filtered = (items || []).filter(Boolean);
   if (!filtered.length) return '';
@@ -3709,14 +3773,27 @@ function buildEnvironmentActionContext(pos) {
 }
 
 async function resolveEnvironmentAction(actionType, definition, actionDef, context) {
-  if (actionType === 'forage') {
-    return resolveForage(definition, actionDef, context);
+  const baseType = actionDef?.baseAction || actionType;
+  if (baseType === 'forage') {
+    return resolveForage(definition, actionDef, context, actionType);
   }
-  if (actionType === 'fish') {
-    return resolveFish(definition, actionDef, context);
+  if (baseType === 'fish') {
+    return resolveFish(definition, actionDef, context, actionType);
   }
-  if (actionType === 'hunt') {
-    return resolveHunt(definition, actionDef, context);
+  if (baseType === 'hunt') {
+    return resolveHunt(definition, actionDef, context, actionType);
+  }
+  if (baseType === 'look' || baseType === 'explore' || baseType === 'dive' || baseType === 'swim' || baseType === 'event') {
+    return resolveObservationAction(actionType, definition, actionDef, context);
+  }
+  if (baseType === 'search') {
+    return resolveSearchAction(actionType, definition, actionDef, context);
+  }
+  if (baseType === 'fish_gather') {
+    return resolveFishGatherAction(actionType, definition, actionDef, context);
+  }
+  if (baseType === 'loot' || baseType === 'mine' || baseType === 'fell_tree') {
+    return resolveLootAction(actionType, definition, actionDef, context);
   }
   return {
     title: composeEnvironmentTitle(actionType, definition, actionDef || {}),
@@ -3740,6 +3817,201 @@ function composeEnvironmentTitle(actionType, definition, actionDef) {
   const includesLocation = phrase.toLowerCase().includes(location.toLowerCase());
   const connector = includesLocation ? '' : ` of ${location}`;
   return `You ${phrase}${connector}.`;
+}
+
+function buildDefaultOutcome(success, durationText, actionType) {
+  if (success) {
+    if (actionType === 'look') return `After ${durationText}, you notice a few details you had previously missed.`;
+    if (actionType === 'explore') return `After ${durationText}, you uncover fresh leads in the area.`;
+    return `After ${durationText}, you feel more familiar with the surroundings.`;
+  }
+  return `Despite your efforts, ${durationText} passes without anything noteworthy.`;
+}
+
+function combineModifiers(base = {}, extra = {}) {
+  if (!base && !extra) return undefined;
+  if (!base) return { ...extra };
+  if (!extra) return { ...base };
+  return { ...base, ...extra };
+}
+
+async function resolveObservationAction(actionType, definition, actionDef = {}, context) {
+  const baseChance = Math.max(0, Math.min(1, actionDef.eventChance ?? actionDef.baseChance ?? 0.3));
+  const roll = Math.random();
+  const success = roll < baseChance;
+  let timeSpent = determineActionTime(actionDef);
+  const event = success ? pickWeightedRandom(actionDef.randomEvents || []) : null;
+  if (event?.extraTimeHours) {
+    timeSpent += Math.max(0, event.extraTimeHours);
+  }
+  const timeResult = advanceCharacterTime(timeSpent);
+  const durationText = describeHoursDuration(timeSpent);
+  const lootResult = event?.loot ? resolveLootSpecs(event.loot, event.lootRolls || 1) : { loot: [], awarded: [] };
+  const sceneText = (event?.scene || actionDef.narrative || '').trim();
+  const outcomeText = event?.outcome
+    ? event.outcome
+    : buildDefaultOutcome(success, durationText, actionType);
+  return {
+    type: actionType,
+    title: composeEnvironmentTitle(actionType, definition, actionDef),
+    success,
+    narrative: { scene: sceneText, outcome: outcomeText },
+    rollInfo: { chance: baseChance, roll, modifiers: [] },
+    loot: lootResult.loot,
+    skillProgress: null,
+    weather: context.weather,
+    season: context.season,
+    timeLabel: context.timeLabel,
+    timeSpentHours: timeSpent,
+    timeAfter: timeResult,
+  };
+}
+
+async function resolveSearchAction(actionType, definition, actionDef = {}, context) {
+  const categories = Array.isArray(actionDef.categories) ? actionDef.categories.filter(Boolean) : [];
+  if (!categories.length) {
+    return resolveObservationAction(actionType, definition, actionDef, context);
+  }
+  let choice = categories[0];
+  if (typeof prompt === 'function') {
+    const promptLines = categories.map((cat, idx) => `${idx + 1}. ${cat.label || cat.key || 'Option'}`);
+    const response = prompt(`What will you search for?\n${promptLines.join('\n')}`);
+    if (response) {
+      const trimmed = response.trim();
+      const index = Number.parseInt(trimmed, 10);
+      if (Number.isFinite(index) && index >= 1 && index <= categories.length) {
+        choice = categories[index - 1];
+      } else {
+        const lower = trimmed.toLowerCase();
+        const found = categories.find(cat => (cat.key || '').toLowerCase() === lower || (cat.label || '').toLowerCase() === lower);
+        if (found) choice = found;
+      }
+    }
+  }
+  const merged = { ...actionDef, ...choice };
+  delete merged.categories;
+  merged.label = choice.label || merged.label;
+  merged.narrative = choice.narrative || merged.narrative || actionDef.narrative;
+  merged.baseAction = choice.baseAction || merged.baseAction;
+  merged.baseChance = Number.isFinite(choice.baseChance) ? choice.baseChance : merged.baseChance;
+  merged.timeHours = Number.isFinite(choice.timeHours) ? choice.timeHours : merged.timeHours;
+  merged.timeRangeHours = Array.isArray(choice.timeRangeHours) ? choice.timeRangeHours : merged.timeRangeHours;
+  merged.weatherModifiers = combineModifiers(actionDef.weatherModifiers, choice.weatherModifiers);
+  const baseType = merged.baseAction || 'event';
+  if (baseType === 'forage') {
+    return resolveForage(definition, merged, context, actionType);
+  }
+  if (baseType === 'fish') {
+    return resolveFish(definition, merged, context, actionType);
+  }
+  if (baseType === 'hunt') {
+    return resolveHunt(definition, merged, context, actionType);
+  }
+  if (baseType === 'loot' || baseType === 'mine' || baseType === 'fell_tree') {
+    return resolveLootAction(actionType, definition, merged, context);
+  }
+  return resolveObservationAction(actionType, definition, merged, context);
+}
+
+async function resolveFishGatherAction(actionType, definition, actionDef = {}, context) {
+  const modes = Array.isArray(actionDef.modes) ? actionDef.modes.filter(Boolean) : [];
+  if (!modes.length) {
+    return resolveFish(definition, actionDef, context, actionType);
+  }
+  let mode = modes[0];
+  if (typeof prompt === 'function') {
+    const promptLines = modes.map((entry, idx) => `${idx + 1}. ${entry.label || entry.key || 'Option'}`);
+    const response = prompt(`How will you proceed?\n${promptLines.join('\n')}`);
+    if (response) {
+      const trimmed = response.trim();
+      const index = Number.parseInt(trimmed, 10);
+      if (Number.isFinite(index) && index >= 1 && index <= modes.length) {
+        mode = modes[index - 1];
+      } else {
+        const lower = trimmed.toLowerCase();
+        const found = modes.find(entry => (entry.key || '').toLowerCase() === lower || (entry.label || '').toLowerCase() === lower);
+        if (found) mode = found;
+      }
+    }
+  }
+  const merged = { ...actionDef, ...mode };
+  delete merged.modes;
+  merged.label = mode.label || merged.label;
+  merged.narrative = mode.narrative || merged.narrative || actionDef.narrative;
+  const baseChance = Number.isFinite(mode.baseChance)
+    ? mode.baseChance
+    : Math.max(0, Math.min(1, (actionDef.baseChance ?? 0.5) + (mode.baseChanceModifier ?? 0)));
+  merged.baseChance = baseChance;
+  merged.baseAction = mode.baseAction || merged.baseAction || 'fish';
+  merged.weatherModifiers = combineModifiers(actionDef.weatherModifiers, mode.weatherModifiers);
+  if (merged.baseAction === 'forage') {
+    return resolveForage(definition, merged, context, actionType);
+  }
+  if (merged.baseAction === 'fish') {
+    return resolveFish(definition, merged, context, actionType);
+  }
+  if (merged.baseAction === 'hunt') {
+    return resolveHunt(definition, merged, context, actionType);
+  }
+  return resolveObservationAction(actionType, definition, merged, context);
+}
+
+async function resolveLootAction(actionType, definition, actionDef = {}, context) {
+  const toolCheck = hasToolRequirement(actionDef.tool, currentCharacter);
+  if (!toolCheck.ok && actionDef.tool) {
+    const timeSpent = 0;
+    return {
+      type: actionType,
+      title: composeEnvironmentTitle(actionType, definition, actionDef),
+      success: false,
+      narrative: {
+        scene: (actionDef.narrative || '').trim(),
+        outcome: actionDef.tool?.message || 'You lack the proper tools for this work.',
+      },
+      requirementMessage: actionDef.tool?.message || 'You need proper tools.',
+      rollInfo: null,
+      loot: [],
+      skillProgress: null,
+      weather: context.weather,
+      season: context.season,
+      timeLabel: context.timeLabel,
+      timeSpentHours: timeSpent,
+      timeAfter: { days: 0, timeOfDay: currentCharacter.timeOfDay },
+    };
+  }
+
+  const chanceInfo = computeActionChance(actionDef, context, {});
+  const roll = Math.random();
+  const success = roll < chanceInfo.chance;
+  const timeSpent = determineActionTime(actionDef);
+  const timeResult = advanceCharacterTime(timeSpent);
+  const durationText = describeHoursDuration(timeSpent);
+  let loot = [];
+  if (success) {
+    const draws = Math.max(1, Number.isFinite(actionDef.lootRolls) ? Math.floor(actionDef.lootRolls) : 1);
+    loot = resolveLootSpecs(actionDef.lootTable || [], draws).loot;
+  }
+  const sceneText = (actionDef.narrative || '').trim();
+  const lootNames = loot.map(entry => entry.name);
+  const listText = lootNames.length ? joinWithAnd(lootNames) : 'nothing tangible';
+  const outcomeText = success
+    ? (actionDef.successText || `After ${durationText}, you haul back ${listText}.`)
+    : (actionDef.failureText || `Despite your labor, ${durationText} passes with little to show.`);
+  return {
+    type: actionType,
+    title: composeEnvironmentTitle(actionType, definition, actionDef),
+    success,
+    narrative: { scene: sceneText, outcome: outcomeText },
+    rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
+    loot,
+    skillProgress: null,
+    weather: context.weather,
+    season: context.season,
+    timeLabel: context.timeLabel,
+    timeSpentHours: timeSpent,
+    timeAfter: timeResult,
+    requirementMessage: null,
+  };
 }
 
 function describeHoursDuration(hours) {
@@ -3833,7 +4105,7 @@ function formatSkillTooltip(progress) {
   return `${progress.label}: ${before.toFixed(2)} → ${after.toFixed(2)} (${gain})`;
 }
 
-async function resolveForage(definition, actionDef, context) {
+async function resolveForage(definition, actionDef, context, actionType = 'forage') {
   await loadPlantsCatalog();
   ensurePlantsCatalogIndex();
   const chanceInfo = computeActionChance(actionDef, context, {
@@ -3882,8 +4154,8 @@ async function resolveForage(definition, actionDef, context) {
     : `Despite careful searching, ${durationText} passes before you leave empty-handed.`;
 
   return {
-    type: 'forage',
-    title: composeEnvironmentTitle('forage', definition, actionDef),
+    type: actionType,
+    title: composeEnvironmentTitle(actionType, definition, actionDef),
     success: found,
     narrative: { scene: sceneText, outcome: outcomeText },
     rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
@@ -3897,7 +4169,7 @@ async function resolveForage(definition, actionDef, context) {
   };
 }
 
-async function resolveFish(definition, actionDef, context) {
+async function resolveFish(definition, actionDef, context, actionType = 'fish') {
   await loadAnimalsCatalog();
   ensureAnimalsCatalogIndex();
   const toolCheck = hasToolRequirement(actionDef.tool, currentCharacter);
@@ -3910,8 +4182,8 @@ async function resolveFish(definition, actionDef, context) {
     const sceneText = (actionDef.narrative || '').trim();
     const outcomeText = 'Without proper tackle the fish keep their distance.';
     return {
-      type: 'fish',
-      title: composeEnvironmentTitle('fish', definition, actionDef),
+      type: actionType,
+      title: composeEnvironmentTitle(actionType, definition, actionDef),
       success: false,
       narrative: { scene: sceneText, outcome: outcomeText },
       requirementMessage: actionDef.tool?.message || 'You lack the gear to fish here.',
@@ -3983,8 +4255,8 @@ async function resolveFish(definition, actionDef, context) {
   }
 
   return {
-    type: 'fish',
-    title: composeEnvironmentTitle('fish', definition, actionDef),
+    type: actionType,
+    title: composeEnvironmentTitle(actionType, definition, actionDef),
     success,
     partialSuccess: success && usingFallback,
     narrative: { scene: baseScene, outcome: narrative },
@@ -4000,7 +4272,7 @@ async function resolveFish(definition, actionDef, context) {
   };
 }
 
-async function resolveHunt(definition, actionDef, context) {
+async function resolveHunt(definition, actionDef, context, actionType = 'hunt') {
   await loadAnimalsCatalog();
   ensureAnimalsCatalogIndex();
 
@@ -4027,8 +4299,8 @@ async function resolveHunt(definition, actionDef, context) {
     const sceneText = (actionDef.narrative || '').trim();
     const outcomeText = `Without a proper hunting weapon, ${durationText} passes and the wildlife scatters before you can strike.`;
     return {
-      type: 'hunt',
-      title: composeEnvironmentTitle('hunt', definition, actionDef),
+      type: actionType,
+      title: composeEnvironmentTitle(actionType, definition, actionDef),
       success: false,
       narrative: { scene: sceneText, outcome: outcomeText },
       requirementMessage: actionDef.tool?.message || 'You need a suitable hunting weapon.',
@@ -4073,8 +4345,8 @@ async function resolveHunt(definition, actionDef, context) {
     const sceneText = (actionDef.handPrey?.narrative || 'You rely on quick reflexes.').trim();
     const outcomeText = `After ${durationText}, you manage to grab ${prey.common_name}.`;
     return {
-      type: 'hunt',
-      title: composeEnvironmentTitle('hunt', definition, actionDef),
+      type: actionType,
+      title: composeEnvironmentTitle(actionType, definition, actionDef),
       success: true,
       partialSuccess: true,
       narrative: { scene: sceneText, outcome: outcomeText },
@@ -4161,8 +4433,8 @@ async function resolveHunt(definition, actionDef, context) {
       : `Despite patient stalking, ${durationText} passes before ${preyLabel} slips away.`;
 
     return {
-      type: 'hunt',
-      title: composeEnvironmentTitle('hunt', definition, actionDef),
+      type: actionType,
+      title: composeEnvironmentTitle(actionType, definition, actionDef),
       success: finalSuccess,
       narrative: { scene: sceneText, outcome: outcomeText },
       rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
@@ -4184,8 +4456,8 @@ async function resolveHunt(definition, actionDef, context) {
   const sceneText = (actionDef.narrative || '').trim();
   const outcomeText = `Despite patient searching, ${durationText} passes but nothing stirs today.`;
   return {
-    type: 'hunt',
-    title: composeEnvironmentTitle('hunt', definition, actionDef),
+    type: actionType,
+    title: composeEnvironmentTitle(actionType, definition, actionDef),
     success: false,
     narrative: { scene: sceneText, outcome: outcomeText },
     rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
@@ -8075,6 +8347,7 @@ function showNavigation() {
           type: 'interaction',
           action: actionId,
           name: envAction.label || describeEnvironmentAction(envAction.type),
+          icon: envAction.icon,
           extraClass: 'environment-action',
         }),
       );
