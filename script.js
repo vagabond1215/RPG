@@ -665,6 +665,11 @@ function escapeHtml(value) {
     .replace(/'/g, '&#39;');
 }
 
+function escapeAttribute(value) {
+  if (value == null) return '';
+  return escapeHtml(value).replace(/\r?\n/g, '&#10;');
+}
+
 function titleize(value) {
   if (value == null) return '';
   return String(value)
@@ -1048,6 +1053,9 @@ const menuMoneyLabel = document.getElementById('menu-money');
 const menuTimeDisplay = document.getElementById('menu-time');
 const menuTimeLabelText = menuTimeDisplay ? menuTimeDisplay.querySelector('.time-label') : null;
 const menuTimeClockText = menuTimeDisplay ? menuTimeDisplay.querySelector('.time-clock') : null;
+const menuTimeIcon = document.getElementById('menu-time-icon');
+const menuSeasonIcon = document.getElementById('menu-season-icon');
+const menuWeatherIcon = document.getElementById('menu-weather-icon');
 const TIME_BAND_CLASS_MAP = {
   night: 'time-band-night',
   preDawn: 'time-band-predawn',
@@ -1058,6 +1066,21 @@ const TIME_BAND_CLASS_MAP = {
   dusk: 'time-band-dusk',
 };
 const TIME_BAND_CLASSES = Array.from(new Set(Object.values(TIME_BAND_CLASS_MAP)));
+const TIME_BAND_ICON_MAP = {
+  night: '🌙',
+  preDawn: '🌄',
+  dawn: '🌅',
+  morning: '🌤️',
+  day: '☀️',
+  afternoon: '🌞',
+  dusk: '🌇',
+};
+const SEASON_ICON_MAP = {
+  Winter: '❄️',
+  Spring: '🌱',
+  Summer: '🌞',
+  Autumn: '🍂',
+};
 const mapContainer = document.createElement('div');
 mapContainer.id = 'map-container';
 mapContainer.style.display = 'none';
@@ -1181,9 +1204,81 @@ function handleTrainingAction(pos, craft) {
   showNavigation();
 }
 
+function resolveWeatherForPosition(position) {
+  const today = worldCalendar.today();
+  let region = 'waves_break';
+  let habitat = 'urban';
+  if (position) {
+    if (position.city && CITY_SLUGS[position.city]) {
+      region = CITY_SLUGS[position.city];
+    }
+    try {
+      const env = getEnvironmentDefinition(position.city, position.district, position.building);
+      if (env) {
+        if (env.region) region = env.region;
+        habitat = env.weatherHabitat || env.habitat || habitat;
+      }
+    } catch {
+      // ignore lookup failures and fall back to defaults
+    }
+  }
+  try {
+    return weatherSystem.getDailyWeather(region, habitat, today);
+  } catch {
+    return null;
+  }
+}
+
+function buildTimeTooltip(label, clock) {
+  const parts = [];
+  if (label) parts.push(`Time: ${label}`);
+  if (clock) parts.push(`Clock: ${clock}`);
+  return parts.join('\n');
+}
+
+function buildSeasonTooltip(season, dateText) {
+  const parts = [];
+  if (season) parts.push(`Season: ${season}`);
+  if (dateText) parts.push(`Date: ${dateText}`);
+  return parts.join('\n');
+}
+
+function resolveWeatherIcon(weather) {
+  if (!weather) {
+    return { icon: '—', label: 'Weather data unavailable' };
+  }
+  if (weather.storm) {
+    return { icon: '⛈️', label: 'Storm' };
+  }
+  const condition = (weather.condition || '').toLowerCase();
+  if (condition.includes('snow')) return { icon: '🌨️', label: 'Snow' };
+  if (condition.includes('sleet')) return { icon: '🌨️', label: 'Sleet' };
+  if (condition.includes('rain')) return { icon: '🌧️', label: 'Rain' };
+  if (condition.includes('drizzle')) return { icon: '🌦️', label: 'Drizzle' };
+  if (condition.includes('fog')) return { icon: '🌫️', label: 'Fog' };
+  if (condition.includes('partly')) return { icon: '🌤️', label: toTitleCase(condition) };
+  if (condition.includes('cloud')) return { icon: '☁️', label: 'Cloudy' };
+  if (condition.includes('clear')) return { icon: '☀️', label: 'Clear' };
+  const label = condition ? toTitleCase(condition) : 'Fair weather';
+  return { icon: '🌤️', label };
+}
+
+function buildWeatherTooltip(weather) {
+  if (!weather) return 'Weather data unavailable.';
+  const parts = [];
+  const iconInfo = resolveWeatherIcon(weather);
+  if (iconInfo.label) parts.push(`Condition: ${iconInfo.label}`);
+  if (Number.isFinite(weather.temperatureC)) parts.push(`Temperature: ${weather.temperatureC}°C`);
+  if (Number.isFinite(weather.humidity)) parts.push(`Humidity: ${weather.humidity}%`);
+  if (weather.narrative) parts.push(weather.narrative);
+  return parts.join('\n');
+}
+
 function updateTopMenuIndicators() {
+  const currentDate = worldCalendar.formatCurrentDate();
+  const today = worldCalendar.today();
+  const season = getSeasonForDate(today);
   if (menuDateLabel) {
-    const currentDate = worldCalendar.formatCurrentDate();
     menuDateLabel.textContent = currentDate;
     menuDateLabel.setAttribute('title', `Date: ${currentDate}`);
     menuDateLabel.setAttribute('aria-label', `Current date: ${currentDate}`);
@@ -1206,7 +1301,8 @@ function updateTopMenuIndicators() {
       const normalized = ((hours % 24) + 24) % 24;
       const rotation = (normalized / 24) * 360;
       menuTimeDisplay.style.setProperty('--time-rotation', `${rotation}deg`);
-      const band = TIME_BAND_CLASS_MAP[timeBandForHour(hours)];
+      const bandKey = timeBandForHour(hours);
+      const band = TIME_BAND_CLASS_MAP[bandKey];
       menuTimeDisplay.classList.remove(...TIME_BAND_CLASSES);
       if (band) {
         menuTimeDisplay.classList.add(band);
@@ -1215,6 +1311,12 @@ function updateTopMenuIndicators() {
       const clock = formatClockTime(hours);
       if (menuTimeLabelText) menuTimeLabelText.textContent = label || '—';
       if (menuTimeClockText) menuTimeClockText.textContent = clock;
+      if (menuTimeIcon) {
+        const icon = TIME_BAND_ICON_MAP[bandKey] || '🕰️';
+        menuTimeIcon.textContent = icon;
+        menuTimeIcon.setAttribute('data-tooltip', buildTimeTooltip(label, clock));
+        menuTimeIcon.setAttribute('aria-label', label ? `Time of day: ${label}` : 'Time of day');
+      }
       menuTimeDisplay.setAttribute('title', `Time: ${label} (${clock})`);
       menuTimeDisplay.setAttribute('aria-label', `Current time: ${label} at ${clock}`);
     } else {
@@ -1222,9 +1324,33 @@ function updateTopMenuIndicators() {
       menuTimeDisplay.style.removeProperty('--time-rotation');
       if (menuTimeLabelText) menuTimeLabelText.textContent = '—';
       if (menuTimeClockText) menuTimeClockText.textContent = '—';
+      if (menuTimeIcon) {
+        menuTimeIcon.textContent = '—';
+        menuTimeIcon.setAttribute('data-tooltip', '');
+        menuTimeIcon.setAttribute('aria-label', 'Time of day unavailable');
+      }
       menuTimeDisplay.setAttribute('title', 'Current time unavailable');
       menuTimeDisplay.setAttribute('aria-label', 'Current time unavailable');
     }
+  }
+  if (menuSeasonIcon) {
+    if (season) {
+      const icon = SEASON_ICON_MAP[season] || '🗓️';
+      menuSeasonIcon.textContent = icon;
+      menuSeasonIcon.setAttribute('data-tooltip', buildSeasonTooltip(season, currentDate));
+      menuSeasonIcon.setAttribute('aria-label', `Current season: ${season}`);
+    } else {
+      menuSeasonIcon.textContent = '—';
+      menuSeasonIcon.setAttribute('data-tooltip', '');
+      menuSeasonIcon.setAttribute('aria-label', 'Season information unavailable');
+    }
+  }
+  if (menuWeatherIcon) {
+    const weather = resolveWeatherForPosition(currentCharacter?.position || null);
+    const iconInfo = resolveWeatherIcon(weather);
+    menuWeatherIcon.textContent = iconInfo.icon;
+    menuWeatherIcon.setAttribute('data-tooltip', buildWeatherTooltip(weather));
+    menuWeatherIcon.setAttribute('aria-label', iconInfo.label || 'Weather information');
   }
   if (menuMoneyLabel) {
     if (currentCharacter) {
@@ -3279,14 +3405,118 @@ async function resolveEnvironmentAction(actionType, definition, actionDef, conte
     return resolveHunt(definition, actionDef, context);
   }
   return {
-    title: `${definition.location} – ${describeEnvironmentAction(actionType)}`,
+    title: composeEnvironmentTitle(actionType, definition, actionDef || {}),
     success: false,
-    narrative: 'Nothing happens.',
+    narrative: { scene: `${definition.location} remains quiet.`, outcome: 'Nothing happens.' },
     timeLabel: context.timeLabel,
     season: context.season,
     weather: context.weather,
     timeSpentHours: 0,
   };
+}
+
+function composeEnvironmentTitle(actionType, definition, actionDef) {
+  const location = definition?.location || 'the wilds';
+  let label = (actionDef?.label || describeEnvironmentAction(actionType) || '').trim();
+  if (!label) {
+    return `You explore ${location}.`;
+  }
+  label = label.replace(/\.+$/, '');
+  const phrase = label.charAt(0).toLowerCase() + label.slice(1);
+  const includesLocation = phrase.toLowerCase().includes(location.toLowerCase());
+  const connector = includesLocation ? '' : ` of ${location}`;
+  return `You ${phrase}${connector}.`;
+}
+
+function describeHoursDuration(hours) {
+  if (!Number.isFinite(hours) || hours <= 0) return 'a short while';
+  const minutes = Math.round(hours * 60);
+  const hrs = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  const numberWords = {
+    0: 'zero',
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    7: 'seven',
+    8: 'eight',
+    9: 'nine',
+    10: 'ten',
+    11: 'eleven',
+    12: 'twelve',
+  };
+  if (hrs === 0) {
+    if (mins === 30) return 'half an hour';
+    if (mins === 45) return 'three quarters of an hour';
+    if (mins === 15) return 'fifteen minutes';
+    if (mins === 1) return 'a minute';
+    if (mins === 0) return 'a short while';
+    return `${mins} minutes`;
+  }
+  if (mins === 0) {
+    if (hrs === 1) return 'an hour';
+    const word = numberWords[hrs] || `${hrs}`;
+    return `${word} hours`;
+  }
+  if (mins === 30) {
+    if (hrs === 1) return 'an hour and a half';
+    const word = numberWords[hrs] || `${hrs}`;
+    return `${word} and a half hours`;
+  }
+  const hourPart = hrs === 1 ? 'an hour' : `${numberWords[hrs] || `${hrs}`} hours`;
+  let minutePart;
+  if (mins === 15) {
+    minutePart = 'fifteen minutes';
+  } else if (mins === 45) {
+    minutePart = 'forty-five minutes';
+  } else if (mins === 1) {
+    minutePart = 'a minute';
+  } else {
+    minutePart = `${mins} minutes`;
+  }
+  return `${hourPart} and ${minutePart}`;
+}
+
+function formatPercentValue(value) {
+  const pct = Math.round(value * 1000) / 10;
+  const sign = pct >= 0 ? '+' : '';
+  return `${sign}${pct}%`;
+}
+
+function formatRollTooltip(rollInfo) {
+  if (!rollInfo) return '';
+  const chancePct = Math.round(rollInfo.chance * 1000) / 10;
+  const rollPct = Math.round(rollInfo.roll * 1000) / 10;
+  const lines = [`Find chance ${chancePct}% — rolled ${rollPct}%.`];
+  if (Array.isArray(rollInfo.modifiers)) {
+    rollInfo.modifiers.forEach(mod => {
+      if (!mod || mod.value == null) return;
+      lines.push(`${mod.label}: ${formatPercentValue(mod.value)}`);
+    });
+  }
+  return lines.join('\n');
+}
+
+function createInfoIconMarkup(tooltip, label = 'Additional details') {
+  if (!tooltip) return '';
+  return `<span class="info-icon tooltip-anchor" tabindex="0" role="img" aria-label="${escapeHtml(label)}" data-tooltip="${escapeAttribute(tooltip)}">ⓘ</span>`;
+}
+
+function buildSkillNarrative(label) {
+  if (!label) return 'You feel more skilled.';
+  return `You feel more skilled at ${label}.`;
+}
+
+function formatSkillTooltip(progress) {
+  if (!progress) return '';
+  const before = Number(progress.before) || 0;
+  const after = Number(progress.after) || 0;
+  const delta = Number(progress.delta) || 0;
+  const gain = `${delta >= 0 ? '+' : ''}${delta.toFixed(2)}`;
+  return `${progress.label}: ${before.toFixed(2)} → ${after.toFixed(2)} (${gain})`;
 }
 
 async function resolveForage(definition, actionDef, context) {
@@ -3299,6 +3529,7 @@ async function resolveForage(definition, actionDef, context) {
   const found = roll < chanceInfo.chance;
   const timeSpent = actionDef.timeHours ?? 1;
   const timeResult = advanceCharacterTime(timeSpent);
+  const durationText = describeHoursDuration(timeSpent);
 
   let plants = [];
   if (found) {
@@ -3330,15 +3561,17 @@ async function resolveForage(definition, actionDef, context) {
   const delta = Math.round((after - before) * 100) / 100;
 
   const gatheredNames = gathered.map(entry => entry.common_name);
-  const narrative = found
-    ? `${actionDef.narrative} You gather ${joinWithAnd(gatheredNames.length ? gatheredNames : ['wild herbs'])}.`
-    : `${actionDef.narrative} Despite careful searching, you leave empty-handed.`;
+  const sceneText = (actionDef.narrative || '').trim();
+  const gatheredList = joinWithAnd(gatheredNames.length ? gatheredNames : ['wild herbs']);
+  const outcomeText = found
+    ? `After ${durationText}, you gather ${gatheredList}.`
+    : `Despite careful searching, ${durationText} passes before you leave empty-handed.`;
 
   return {
     type: 'forage',
-    title: `${definition.location} – ${actionDef.label}`,
+    title: composeEnvironmentTitle('forage', definition, actionDef),
     success: found,
-    narrative,
+    narrative: { scene: sceneText, outcome: outcomeText },
     rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
     loot,
     skillProgress: { key: skillKey, label: toTitleCase(skillKey), before, after, delta },
@@ -3360,11 +3593,13 @@ async function resolveFish(definition, actionDef, context) {
     const before = Number(currentCharacter[skillKey]) || 0;
     const after = performGathering(currentCharacter, skillKey, { success: false });
     const delta = Math.round((after - before) * 100) / 100;
+    const sceneText = (actionDef.narrative || '').trim();
+    const outcomeText = 'Without proper tackle the fish keep their distance.';
     return {
       type: 'fish',
-      title: `${definition.location} – ${actionDef.label}`,
+      title: composeEnvironmentTitle('fish', definition, actionDef),
       success: false,
-      narrative: `${actionDef.narrative} Without proper tackle the fish keep their distance.`,
+      narrative: { scene: sceneText, outcome: outcomeText },
       requirementMessage: actionDef.tool?.message || 'You lack the gear to fish here.',
       rollInfo: null,
       loot: [],
@@ -3388,6 +3623,7 @@ async function resolveFish(definition, actionDef, context) {
   const success = roll < chanceInfo.chance;
   const timeSpent = actionDef.timeHours ?? 2;
   const timeResult = advanceCharacterTime(timeSpent);
+  const durationText = describeHoursDuration(timeSpent);
 
   let fauna = [];
   if (success) {
@@ -3417,24 +3653,27 @@ async function resolveFish(definition, actionDef, context) {
   const delta = Math.round((after - before) * 100) / 100;
 
   const names = catchList.map(entry => entry.common_name);
+  const baseScene = usingFallback
+    ? (actionDef.handGatherable?.narrative || 'You scour the shallows by hand.')
+    : (actionDef.narrative || '').trim();
   let narrative;
   if (success) {
     const listText = names.length ? joinWithAnd(names) : 'a modest haul';
     narrative = usingFallback
-      ? `${actionDef.handGatherable?.narrative || 'You scour the shallows by hand.'} You pry up ${listText}.`
-      : `${actionDef.narrative} You haul in ${listText}.`;
+      ? `After ${durationText}, you pry up ${listText}.`
+      : `After ${durationText}, you haul in ${listText}.`;
   } else {
     narrative = usingFallback
-      ? `${actionDef.handGatherable?.narrative || 'You scour the shallows by hand.'} The shellfish slip free.`
-      : `${actionDef.narrative} The fish ignore your efforts today.`;
+      ? `Despite your careful work, ${durationText} passes before the shellfish slip free.`
+      : `Despite your patience, ${durationText} passes before the fish ignore your efforts today.`;
   }
 
   return {
     type: 'fish',
-    title: `${definition.location} – ${actionDef.label}`,
+    title: composeEnvironmentTitle('fish', definition, actionDef),
     success,
     partialSuccess: success && usingFallback,
-    narrative,
+    narrative: { scene: baseScene, outcome: narrative },
     rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
     loot,
     skillProgress: { key: skillKey, label: toTitleCase(skillKey), before, after, delta },
@@ -3466,15 +3705,18 @@ async function resolveHunt(definition, actionDef, context) {
   const located = roll < chanceInfo.chance;
   const timeSpent = actionDef.timeHours ?? 3;
   const timeResult = advanceCharacterTime(timeSpent);
+  const durationText = describeHoursDuration(timeSpent);
 
   if (!toolCheck.ok && !usingFallback) {
     const before = Number(currentCharacter[skillKey]) || 0;
     const after = performHunt(currentCharacter, 1, { success: false });
+    const sceneText = (actionDef.narrative || '').trim();
+    const outcomeText = `Without a proper hunting weapon, ${durationText} passes and the wildlife scatters before you can strike.`;
     return {
       type: 'hunt',
-      title: `${definition.location} – ${actionDef.label}`,
+      title: composeEnvironmentTitle('hunt', definition, actionDef),
       success: false,
-      narrative: `${actionDef.narrative} Without a proper hunting weapon, the wildlife scatters long before you can strike.`,
+      narrative: { scene: sceneText, outcome: outcomeText },
       requirementMessage: actionDef.tool?.message || 'You need a suitable hunting weapon.',
       rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
       loot: [],
@@ -3514,12 +3756,14 @@ async function resolveHunt(definition, actionDef, context) {
     const qty = 1;
     const name = `Hand-caught ${prey.common_name}`;
     addItemToInventory({ name, category: 'Game Meat', price: 0, profit: 0, qty, baseItem: prey.common_name });
+    const sceneText = (actionDef.handPrey?.narrative || 'You rely on quick reflexes.').trim();
+    const outcomeText = `After ${durationText}, you manage to grab ${prey.common_name}.`;
     return {
       type: 'hunt',
-      title: `${definition.location} – ${actionDef.label}`,
+      title: composeEnvironmentTitle('hunt', definition, actionDef),
       success: true,
       partialSuccess: true,
-      narrative: `${actionDef.handPrey?.narrative || 'You rely on quick reflexes.'} You manage to grab a ${prey.common_name}.`,
+      narrative: { scene: sceneText, outcome: outcomeText },
       rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
       loot: [{ name, qty }],
       stages: [
@@ -3596,15 +3840,17 @@ async function resolveHunt(definition, actionDef, context) {
       loot.push({ name, qty });
     }
 
-    const narrative = finalSuccess
-      ? `${actionDef.narrative} After a tense stalk you fell a ${prey.common_name}.`
-      : `${actionDef.narrative} You glimpse a ${prey?.common_name || 'shape'} but it escapes before you land a clean hit.`;
+    const sceneText = (actionDef.narrative || '').trim();
+    const preyLabel = prey?.common_name ? `the ${prey.common_name}` : 'your quarry';
+    const outcomeText = finalSuccess
+      ? `After ${durationText} of tense stalking, you fell ${preyLabel}.`
+      : `Despite patient stalking, ${durationText} passes before ${preyLabel} slips away.`;
 
     return {
       type: 'hunt',
-      title: `${definition.location} – ${actionDef.label}`,
+      title: composeEnvironmentTitle('hunt', definition, actionDef),
       success: finalSuccess,
-      narrative,
+      narrative: { scene: sceneText, outcome: outcomeText },
       rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
       loot,
       stages,
@@ -3621,11 +3867,13 @@ async function resolveHunt(definition, actionDef, context) {
 
   const before = Number(currentCharacter[skillKey]) || 0;
   const after = performHunt(currentCharacter, 1, { success: false });
+  const sceneText = (actionDef.narrative || '').trim();
+  const outcomeText = `Despite patient searching, ${durationText} passes but nothing stirs today.`;
   return {
     type: 'hunt',
-    title: `${definition.location} – ${actionDef.label}`,
+    title: composeEnvironmentTitle('hunt', definition, actionDef),
     success: false,
-    narrative: `${actionDef.narrative} Nothing stirs today.`,
+    narrative: { scene: sceneText, outcome: outcomeText },
     rollInfo: { chance: chanceInfo.chance, roll, modifiers: chanceInfo.modifiers },
     loot: [],
     stages,
@@ -3650,26 +3898,28 @@ function buildEnvironmentOutcomeHTML(result) {
   }
   const title = result.title ? escapeHtml(result.title) : 'Outdoor encounter';
   const pieces = [`<article class="${classes.join(' ')}"><h3>${title}</h3>`];
-  if (result.narrative) {
-    pieces.push(`<p>${escapeHtml(result.narrative)}</p>`);
+  let sceneText = '';
+  let outcomeText = '';
+  if (typeof result.narrative === 'string') {
+    outcomeText = result.narrative;
+  } else if (result.narrative && typeof result.narrative === 'object') {
+    sceneText = (result.narrative.scene || '').trim();
+    outcomeText = (result.narrative.outcome || '').trim();
+  }
+  const rollTooltip = formatRollTooltip(result.rollInfo);
+  const outcomeIcon = createInfoIconMarkup(rollTooltip, 'Outcome details');
+  if (sceneText) {
+    pieces.push(`<p class="environment-scene">${escapeHtml(sceneText)}</p>`);
+  }
+  if (outcomeText) {
+    pieces.push(
+      `<p class="environment-outcome">${escapeHtml(outcomeText)}${outcomeIcon ? ` ${outcomeIcon}` : ''}</p>`
+    );
+  } else if (outcomeIcon) {
+    pieces.push(`<p class="environment-outcome">${outcomeIcon}</p>`);
   }
   if (result.requirementMessage && !result.success && !result.partialSuccess) {
     pieces.push(`<p class="environment-requirement">${escapeHtml(result.requirementMessage)}</p>`);
-  }
-  if (result.rollInfo) {
-    const chancePct = Math.round(result.rollInfo.chance * 100);
-    const rollPct = Math.round(result.rollInfo.roll * 1000) / 10;
-    pieces.push(`<p class="environment-roll">Find chance ${chancePct}% — rolled ${rollPct}%.</p>`);
-    if (Array.isArray(result.rollInfo.modifiers) && result.rollInfo.modifiers.length) {
-      const modifierItems = result.rollInfo.modifiers
-        .map(mod => {
-          const pct = Math.round(mod.value * 1000) / 10;
-          const sign = pct >= 0 ? '+' : '';
-          return `<li>${escapeHtml(mod.label)}: ${sign}${pct}%</li>`;
-        })
-        .join('');
-      pieces.push(`<ul class="environment-modifiers">${modifierItems}</ul>`);
-    }
   }
   if (Array.isArray(result.stages) && result.stages.length) {
     const stageItems = result.stages
@@ -3689,9 +3939,15 @@ function buildEnvironmentOutcomeHTML(result) {
     pieces.push(`<ul class="environment-loot">${lootItems}</ul>`);
   }
   if (result.skillProgress) {
-    const { label, after, delta } = result.skillProgress;
-    const changeText = Number.isFinite(delta) && delta > 0 ? ` (+${delta.toFixed(2)})` : ' (no progress)';
-    pieces.push(`<p class="environment-skill">${escapeHtml(label)} ${after.toFixed(2)}${changeText}</p>`);
+    const { label, delta } = result.skillProgress;
+    if (Number.isFinite(delta) && delta > 0) {
+      const skillText = buildSkillNarrative(label);
+      const tooltip = formatSkillTooltip(result.skillProgress);
+      const skillIcon = createInfoIconMarkup(tooltip, `${label} progress details`);
+      pieces.push(
+        `<p class="environment-skill">${escapeHtml(skillText)}${skillIcon ? ` ${skillIcon}` : ''}</p>`
+      );
+    }
   }
   const contextParts = [];
   if (result.season) contextParts.push(`Season: ${result.season}`);
@@ -3702,7 +3958,8 @@ function buildEnvironmentOutcomeHTML(result) {
   }
   const metaParts = [];
   if (result.timeSpentHours != null) {
-    metaParts.push(`Time spent: ${result.timeSpentHours}h`);
+    const durationLabel = describeHoursDuration(result.timeSpentHours);
+    metaParts.push(`Time spent: ${durationLabel}`);
   }
   if (result.timeAfter && Number.isFinite(result.timeAfter.timeOfDay)) {
     const afterLabel = toTitleCase(describeTimeOfDay(result.timeAfter.timeOfDay));

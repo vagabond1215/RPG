@@ -34,6 +34,18 @@ body {
   overflow-x: hidden;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 #app {
   position: relative;
   display: flex;
@@ -192,8 +204,36 @@ main {
 
 .time-display .time-line {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.35rem;
+}
+
+.time-display .time-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.time-display .time-icon {
+  font-size: 1.1em;
+  line-height: 1;
+  min-width: 1.2em;
+  text-align: center;
+  border-radius: 0.35rem;
+  padding: 0.1rem 0.2rem;
+  color: var(--menu-color-dark);
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 0 0 1px rgba(51, 51, 51, 0.15);
+}
+
+.time-display .time-icon.tooltip-anchor {
+  cursor: default;
+}
+
+body.theme-dark .time-display .time-icon {
+  background: rgba(20, 28, 48, 0.7);
+  box-shadow: inset 0 0 0 1px rgba(220, 230, 255, 0.22);
+  color: var(--menu-color-light);
 }
 
 .time-display .time-date,
@@ -1064,6 +1104,75 @@ body.theme-sepia .location-log-entry {
 .location-log-entry h3 {
   margin: 0;
   font-size: 1.05em;
+}
+
+.tooltip-anchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip-anchor::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translate(-50%, 0.4rem);
+  background: rgba(18, 22, 32, 0.92);
+  color: #ffffff;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.4rem;
+  font-size: 0.7rem;
+  line-height: 1.3;
+  min-width: 9rem;
+  max-width: 18rem;
+  white-space: pre-wrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 40;
+}
+
+.tooltip-anchor[data-tooltip='']::after {
+  display: none;
+}
+
+.tooltip-anchor:hover::after,
+.tooltip-anchor:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, -0.2rem);
+}
+
+body.theme-dark .tooltip-anchor::after {
+  background: rgba(240, 244, 255, 0.95);
+  color: #0e1324;
+  box-shadow: 0 4px 14px rgba(10, 12, 24, 0.35);
+}
+
+.info-icon {
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 50%;
+  font-size: 0.85em;
+  font-weight: 700;
+  background: rgba(70, 100, 150, 0.18);
+  color: #1a2a44;
+  box-shadow: inset 0 0 0 1px rgba(26, 42, 68, 0.3);
+  margin-left: 0.4rem;
+  cursor: help;
+}
+
+.info-icon:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+body.theme-dark .info-icon {
+  background: rgba(110, 150, 220, 0.18);
+  color: #dbe6ff;
+  box-shadow: inset 0 0 0 1px rgba(219, 230, 255, 0.35);
 }
 
 .location-log-entry p {
