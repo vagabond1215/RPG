@@ -6460,10 +6460,10 @@ const BUILDING_OVERVIEW_BLUEPRINTS = {
   farm: (context, fragments) => {
     const entryAction = chooseOverviewFragment(
       {
-        "weather:rain": "follow muddy cart ruts between sodden rows while rain beads on broad leaves",
-        "weather:fog": "walk the damp lanes while distant bells mark time over the fields",
-        "weather:snow": "crunch across frost-hardened furrows toward the working sheds",
-        default: "walk along furrows lined with low stone walls and the scent of tilled earth",
+        "weather:rain": "scan muddy cart ruts between sodden rows for anyone flagging you down",
+        "weather:fog": "look along the damp lanes while distant bells mark time over the fields",
+        "weather:snow": "search across frost-hardened furrows for crews still working",
+        default: "look over furrows lined with low stone walls for the field reeve or spare hands",
       },
       fragments,
     );
