@@ -9285,11 +9285,6 @@ function lowercaseFirst(text) {
   return text.charAt(0).toLowerCase() + text.slice(1);
 }
 
-function capitalize(text) {
-  if (!text) return '';
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
 function describeQuestTravelFlavor(story) {
   const lines = [];
   if (!story) return lines;
