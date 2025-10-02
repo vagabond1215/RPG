@@ -8943,6 +8943,180 @@ function questValueToText(value, joiner = ', ') {
   return parts.join(joiner);
 }
 
+function questStringsFrom(value, max = Infinity) {
+  const list = questValueToList(value)
+    .map(entry => (entry == null ? '' : String(entry).trim()))
+    .filter(Boolean);
+  return Number.isFinite(max) ? list.slice(0, max) : list;
+}
+
+function questSkillRequirementStrings(quest, max = Infinity) {
+  if (!quest || !Array.isArray(quest.skillRequirements)) return [];
+  const list = quest.skillRequirements
+    .map(req => (req && req.raw ? String(req.raw).trim() : ''))
+    .filter(Boolean);
+  return Number.isFinite(max) ? list.slice(0, max) : list;
+}
+
+function joinWithConjunction(list, conjunction = 'and') {
+  if (!Array.isArray(list) || list.length === 0) return '';
+  if (list.length === 1) return list[0];
+  if (list.length === 2) return `${list[0]} ${conjunction} ${list[1]}`;
+  const head = list.slice(0, -1).join(', ');
+  const tail = list[list.length - 1];
+  return `${head}, ${conjunction} ${tail}`;
+}
+
+function titleCaseWords(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/[_-]+/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+function lowercaseFirst(text) {
+  if (!text) return '';
+  return text.charAt(0).toLowerCase() + text.slice(1);
+}
+
+function capitalize(text) {
+  if (!text) return '';
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function describeQuestTravelFlavor(story) {
+  const lines = [];
+  if (!story) return lines;
+  const destination = story.destination || {};
+  const quest = story.quest || {};
+  const binding = destination.binding || {};
+  const region = binding.region ? titleCaseWords(binding.region) : null;
+  const habitat = binding.habitat ? titleCaseWords(binding.habitat) : null;
+  if (region && habitat) {
+    lines.push(`The contract is registered through the ${region} offices for ${habitat.toLowerCase()} work.`);
+  } else if (region) {
+    lines.push(`The posting originates with the ${region} charter office.`);
+  } else if (habitat) {
+    lines.push(`Briefings warn that ${habitat.toLowerCase()} conditions shape the assignment.`);
+  }
+  const district = destination.district && destination.district !== story?.previousPosition?.district
+    ? destination.district
+    : null;
+  if (district) {
+    lines.push(`You weave through the ${district} district toward the work site.`);
+  }
+  const conditions = questStringsFrom(quest.conditions, 1);
+  if (conditions.length) {
+    lines.push(`Job notes flag ongoing conditions: ${conditions[0]}.`);
+  }
+  const risks = questStringsFrom(quest.risks, 1);
+  if (risks.length) {
+    lines.push(`Risk alerts cite ${risks[0]}.`);
+  }
+  const timeline = questStringsFrom(quest.timeline, 1);
+  if (timeline.length) {
+    lines.push(`Schedule guidance: ${timeline[0]}.`);
+  }
+  return lines;
+}
+
+function describeQuestBriefingFlavor(story) {
+  const lines = [];
+  if (!story) return lines;
+  const quest = story.quest || {};
+  if (quest.issuer) {
+    lines.push(`They speak on behalf of ${quest.issuer}.`);
+  }
+  const timeline = questStringsFrom(quest.timeline, 1);
+  if (timeline.length) {
+    lines.push(`Timing focus: ${timeline[0]}.`);
+  }
+  const skillReqs = questSkillRequirementStrings(quest, 3);
+  const genericReqs = questStringsFrom(quest.requirements, 3);
+  const requirements = skillReqs.length ? skillReqs : genericReqs;
+  if (requirements.length) {
+    lines.push(`They stress ${joinWithConjunction(requirements, 'and')}.`);
+  }
+  const risks = questStringsFrom(quest.risks, 2);
+  if (risks.length) {
+    lines.push(`Known complications include ${joinWithConjunction(risks, 'and')}.`);
+  }
+  const notes = questStringsFrom(quest.notes, 1);
+  if (notes.length) {
+    lines.push(notes[0]);
+  }
+  return lines;
+}
+
+function describeQuestApproachFlavor(story) {
+  const lines = [];
+  if (!story) return lines;
+  const quest = story.quest || {};
+  const conditions = questStringsFrom(quest.conditions, 2);
+  if (conditions.length) {
+    lines.push(`Working conditions: ${joinWithConjunction(conditions, 'and')}.`);
+  }
+  const risks = questStringsFrom(quest.risks, 2);
+  if (risks.length) {
+    lines.push(`Crew warnings: ${joinWithConjunction(risks, 'and')}.`);
+  }
+  const skillReqs = questSkillRequirementStrings(quest, 3);
+  if (skillReqs.length) {
+    lines.push(`Demanded proficiencies: ${joinWithConjunction(skillReqs, 'and')}.`);
+  } else {
+    const genericReqs = questStringsFrom(quest.requirements, 2);
+    if (genericReqs.length) {
+      lines.push(`Expect to prove ${joinWithConjunction(genericReqs, 'and')}.`);
+    }
+  }
+  if (quest.highPriority) {
+    lines.push('The notice bears a crimson ribbon—guild priority work.');
+  }
+  if (story.duration?.overnight) {
+    lines.push('Overnight rotation protocols are in effect for this posting.');
+  }
+  return lines;
+}
+
+function describeQuestOutcomeFlavor(story, success, choice) {
+  const lines = [];
+  if (!story) return lines;
+  const quest = story.quest || {};
+  const approach = choice?.label ? lowercaseFirst(choice.label.replace(/[.]+$/, '')) : null;
+  if (approach) {
+    lines.push(success
+      ? `Your choice to ${approach} proves sound as the crew follows your lead.`
+      : `Your plan to ${approach} struggles against the day's demands.`);
+  }
+  const risks = questStringsFrom(quest.risks, 2);
+  if (success && risks.length) {
+    lines.push(`You steer the team clear of ${joinWithConjunction(risks, 'and')}.`);
+  } else if (!success && risks.length) {
+    lines.push(`${capitalize(risks[0])} overtakes the effort before the shift ends.`);
+  }
+  const skillReqs = questSkillRequirementStrings(quest, 2);
+  if (success && skillReqs.length) {
+    lines.push(`Meeting expectations in ${joinWithConjunction(skillReqs, 'and')} earns nods from veterans on site.`);
+  } else if (!success && skillReqs.length) {
+    lines.push(`Without firmer command of ${joinWithConjunction(skillReqs, 'and')}, the job slips away from you.`);
+  }
+  const conditions = questStringsFrom(quest.conditions, 2);
+  if (conditions.length) {
+    lines.push(`Conditions reported: ${joinWithConjunction(conditions, 'and')}.`);
+  }
+  const notes = questStringsFrom(quest.notes, 1);
+  if (notes.length) {
+    lines.push(notes[0]);
+  }
+  if (quest.issuer) {
+    lines.push(`${quest.issuer} will expect your account of the shift.`);
+  }
+  return lines;
+}
+
 function extractFirstSentence(text) {
   if (!text) return '';
   const normalized = String(text).replace(/\s+/g, ' ').trim();
@@ -9070,6 +9244,55 @@ function calculateTravelHours(destination) {
 
 function generateQuestApproachOptions(quest) {
   const context = `${questValueToText(quest.description, ' ')} ${questValueToText(quest.timeline, ' ')}`.toLowerCase();
+  if (/(healer|healing|clinic|infirmary|medicine|medical|apothecary|herbal|alchemist|sick|wound|injur|triage|patients?)/.test(context)) {
+    return [
+      { key: 'gentle-care', label: 'Tend to patients with gentle bedside care', successMod: 0.12, narrative: 'You steady shaking hands and ease worried folk with practiced words.' },
+      { key: 'triage', label: 'Drive the triage line to stabilize the worst cases', successMod: -0.04, narrative: 'You push the crew to focus on the direst wounds first, working under pressure.' },
+      { key: 'brew-tonics', label: 'Brew tonics and salves to keep supplies flowing', successMod: 0.05, narrative: 'You grind herbs and decant tonics so healers never lack for remedies.' },
+    ];
+  }
+  if (/(archive|library|records?|record-keepers?|scrib|research|survey|catalog|index|ledger|clerks?|academ|scholar)/.test(context)) {
+    return [
+      { key: 'methodical', label: 'Organize the archives methodically', successMod: 0.1, narrative: 'You file folios and cross-check references until the shelves gleam with order.' },
+      { key: 'insight', label: 'Hunt for hidden insights between the lines', successMod: -0.03, narrative: 'You chase obscure citations and uncover stray marginalia for the scholars.' },
+      { key: 'mentor', label: 'Coach junior scribes through the workflow', successMod: 0.04, narrative: 'You guide apprentices with patient instruction and spare quills.' },
+    ];
+  }
+  if (/(cargo|shipment|warehouse|inventory|logistics|supply|manifest|caravan|freight|barge|stocktake|ledger)/.test(context)) {
+    return [
+      { key: 'marshal', label: 'Marshal crews to keep cargo moving', successMod: 0.08, narrative: 'You whistle signals and keep the loading lanes clear of confusion.' },
+      { key: 'audit', label: 'Audit every crate and tally meticulously', successMod: 0.06, narrative: 'You double-check manifests and stamp each load with official seals.' },
+      { key: 'risk-push', label: 'Rush the schedule to beat the tide or caravan', successMod: -0.05, narrative: 'You gamble on speed, stacking pallets high and urging haulers to run.' },
+    ];
+  }
+  if (/(festival|banquet|feast|celebration|procession|hospitality|kitchen|tavern|innkeep|brewing|cook|patrons?)/.test(context)) {
+    return [
+      { key: 'hosting', label: 'Host guests with polished etiquette', successMod: 0.09, narrative: 'You charm patrons, anticipate needs, and keep the mood bright.' },
+      { key: 'hearth', label: 'Hold the hearth together behind the scenes', successMod: 0.04, narrative: 'You juggle ovens, barrels, and supply lines to feed everyone in turn.' },
+      { key: 'revel', label: 'Lean into the revelry to lift spirits', successMod: -0.04, narrative: 'You belt songs, pour strong cups, and risk letting discipline fray.' },
+    ];
+  }
+  if (/(ritual|arcane|mage|spell|ward|occult|circle|conjure|summon|sigil|runic)/.test(context)) {
+    return [
+      { key: 'attune', label: 'Attune the wards with calm focus', successMod: 0.11, narrative: 'You steady the chant and trace sigils until the energies hum in unison.' },
+      { key: 'experiment', label: 'Experiment with daring arcane shortcuts', successMod: -0.07, narrative: 'You weave bold variations into the pattern, courting volatile backlash.' },
+      { key: 'support-ritual', label: 'Support the ritualists with grounding tasks', successMod: 0.03, narrative: 'You prepare reagents, maintain circles, and guard against stray influences.' },
+    ];
+  }
+  if (/(negotiation|parley|council|delegation|audience|petition|diplom|mediati|envoy|court|noble|magistrate)/.test(context)) {
+    return [
+      { key: 'protocol', label: 'Uphold strict protocol and decorum', successMod: 0.08, narrative: 'You keep voices civil, cite precedent, and ensure every form is honored.' },
+      { key: 'bargain', label: 'Press for bold concessions', successMod: -0.06, narrative: 'You push the talks toward ambitious terms, risking fragile goodwill.' },
+      { key: 'whisper', label: 'Work the room with quiet whispers', successMod: 0.04, narrative: 'You share counsel in corners, bridging factions before they clash.' },
+    ];
+  }
+  if (/(trail|scout|tracking|wilderness|forest|wilds|beast|hunt|expedition|ridge|pass|outpost|range|marsh|swamp|bog)/.test(context)) {
+    return [
+      { key: 'scout', label: 'Scout ahead and mark safe routes', successMod: 0.1, narrative: 'You move ahead of the party, leaving clear signposts for the others to follow.' },
+      { key: 'forage', label: 'Forage for supplies to sustain the team', successMod: 0.02, narrative: 'You gather edible shoots and patch gear with wild resources.' },
+      { key: 'press-on', label: 'Press deeper to chase the quarry quickly', successMod: -0.05, narrative: 'You urge a fast pace through uncertain ground, accepting higher risk.' },
+    ];
+  }
   if (/(harvest|gather|orchard|field|crop|garden)/.test(context)) {
     return [
       { key: 'careful', label: 'Pick carefully to protect the crop', successMod: 0.15, narrative: 'You take slow, careful cuts to protect every stem.' },
@@ -9178,6 +9401,7 @@ function renderQuestStoryline() {
       const weatherSummary = story.weather.narrative || formatWeatherSummary(story.weather);
       lines.push(`The weather along the way: ${weatherSummary}`);
     }
+    describeQuestTravelFlavor(story).forEach(line => lines.push(line));
     bodyHTML = narrativeParagraphs(lines);
     actions = [
       `<button data-action="quest-storyline-arrive">Arrive at ${escapeHtml(locationLabel)}</button>`,
@@ -9186,6 +9410,7 @@ function renderQuestStoryline() {
     const lines = [];
     lines.push(`${npcName} greets you at ${locationLabel}.`);
     lines.push(`${story.npc.role || 'Overseer'}: "We need help for ${story.duration.label}. Can you spare the time?"`);
+    describeQuestBriefingFlavor(story).forEach(line => lines.push(line));
     bodyHTML = narrativeParagraphs(lines);
     actions = [
       '<button data-action="quest-storyline-accept">Accept the shift</button>',
@@ -9194,6 +9419,7 @@ function renderQuestStoryline() {
   } else if (story.phase === 'approach') {
     const lines = [];
     lines.push(`${npcName} outlines the tasks for ${story.duration.label}. How will you proceed?`);
+    describeQuestApproachFlavor(story).forEach(line => lines.push(line));
     bodyHTML = narrativeParagraphs(lines);
     actions = story.choices.map(choice => `<button data-action="quest-storyline-choice" data-choice="${escapeHtml(choice.key)}">${escapeHtml(choice.label)}</button>`);
   } else if (story.phase === 'results') {
@@ -9337,6 +9563,7 @@ function resolveQuestOutcome(story, choiceKey) {
   } else {
     lines.push(`Despite your efforts, complications force ${story.npc.fullName} to revise the plan.`);
   }
+  describeQuestOutcomeFlavor(story, success, choice).forEach(line => lines.push(line));
   const rewardStrings = questValueToList(story.quest?.reward);
   let totalIron = 0;
   rewardStrings.forEach(text => {
