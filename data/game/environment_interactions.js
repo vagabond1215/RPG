@@ -19,15 +19,24 @@ const ACTION_ORDER = [
 const ACTION_METADATA = {
   look: {
     label: 'Look Around',
-    icon: 'assets/images/icons/actions/Look Around 1.png',
+    icon: [
+      'assets/images/icons/actions/Look Around 1.png',
+      'assets/images/icons/actions/Look Around 2.png',
+    ],
   },
   explore: {
     label: 'Explore',
-    icon: 'assets/images/icons/actions/Explore 1.png',
+    icon: [
+      'assets/images/icons/actions/Explore 1.png',
+      'assets/images/icons/actions/Explore 2.png',
+    ],
   },
   search: {
     label: 'Search',
-    icon: 'assets/images/icons/actions/Search 1.png',
+    icon: [
+      'assets/images/icons/actions/Search 1.png',
+      'assets/images/icons/actions/Search 2.png',
+    ],
   },
   forage: {
     label: 'Gather',
@@ -54,6 +63,26 @@ const ACTION_METADATA = {
     icon: 'assets/images/icons/actions/Tidepooling.png',
   },
 };
+
+function pickIconVariant(value) {
+  if (!value) return null;
+  if (Array.isArray(value)) {
+    const options = value.filter(Boolean);
+    if (!options.length) return null;
+    const index = Math.floor(Math.random() * options.length);
+    return options[index] || null;
+  }
+  if (typeof value === 'string') return value;
+  return null;
+}
+
+function resolveActionIcon(...values) {
+  for (const value of values) {
+    const icon = pickIconVariant(value);
+    if (icon) return icon;
+  }
+  return null;
+}
 
 const WATER_ACCESS_TAGS = new Set([
   'coastal',
@@ -1078,6 +1107,137 @@ const ENVIRONMENT_NODES = [
   {
     city: "Wave's Break",
     district: "The Farmlands",
+    location: 'Harvest Rows',
+    region: 'waves_break',
+    weatherHabitat: 'farmland',
+    tags: ['farmland', 'fields', 'crop'],
+    actions: {
+      look: {
+        baseAction: 'look',
+        label: 'Look across the rows',
+        narrative: 'You shade your eyes and scan the open fields for anyone waving you over.',
+        baseChance: 0.34,
+        timeRangeHours: [0.05, 0.12],
+        eventChance: 0.32,
+        randomEvents: [
+          {
+            weight: 2,
+            scene: 'A field reeve stands atop a wagon, guiding an ox team through the furrows.',
+            outcome: 'He spots you and motions that extra hands will be welcome at sundown tallies.',
+          },
+          {
+            weight: 1,
+            scene: 'A courier jogs past with a ledger tucked beneath one arm.',
+            outcome: 'She shares a rumor about a neighboring farm needing runners for the next market day.',
+          },
+          {
+            weight: 1,
+            scene: 'Wind bends the grain to reveal a stash of bundled herbs resting near a marker stone.',
+            outcome: 'You gather the forgotten bundle before it wilts in the sun.',
+            loot: [
+              { name: 'Field Herb Bundle', category: 'Provisions', qtyRange: [1, 1], baseItem: 'Herb Bundle' },
+            ],
+          },
+        ],
+      },
+      search: {
+        baseAction: 'search',
+        label: 'Search for someone to approach',
+        narrative:
+          'You see a tall reeve driving an ox team and a young laborer tilling a furrow; you could also head toward the homestead.',
+        baseChance: 0.56,
+        timeRangeHours: [0.4, 1],
+        categories: [
+          {
+            key: 'reeve',
+            label: 'Approach the reeve guiding the oxen',
+            baseAction: 'event',
+            baseChance: 0.58,
+            timeHours: 0.7,
+            narrative: 'You wave to the reeve atop the wagon and fall into step beside the ox team.',
+            randomEvents: [
+              {
+                weight: 2,
+                scene: 'The reeve reins in long enough to ask about your skills.',
+                outcome: 'He offers directions to day-labor postings at the mill and notes your name in his ledger.',
+              },
+              {
+                weight: 1,
+                scene: 'He presses a sealed chit into your palm, asking you to deliver it to the grain factor.',
+                outcome: 'Completing the errand later could earn you a small favor.',
+                loot: [
+                  { name: 'Reeve’s Sealed Chit', category: 'Curios', qtyRange: [1, 1] },
+                ],
+              },
+            ],
+          },
+          {
+            key: 'laborer',
+            label: 'Speak with the young laborer tilling a furrow',
+            baseAction: 'event',
+            baseChance: 0.6,
+            timeHours: 0.6,
+            narrative: 'You match pace with the farmhand, offering a quick greeting over the hum of insects.',
+            randomEvents: [
+              {
+                weight: 2,
+                scene: 'The laborer happily trades gossip about nearby contracts.',
+                outcome: 'You learn which crews pay on the barrelhead and where extra watch shifts are posted.',
+              },
+              {
+                weight: 1,
+                scene: 'She passes you a bundle of fresh greens to thank you for sharpening her hoe.',
+                outcome: 'The simple meal will keep you moving through the afternoon.',
+                loot: [
+                  { name: 'Bundle of Field Greens', category: 'Provisions', qtyRange: [1, 1], baseItem: 'Greens' },
+                ],
+              },
+            ],
+          },
+          {
+            key: 'homestead',
+            label: 'Head toward the farmhouse porch',
+            baseAction: 'event',
+            baseChance: 0.52,
+            timeHours: 0.9,
+            narrative: 'You make for the homestead, boots thudding on the packed earth of the main lane.',
+            randomEvents: [
+              {
+                weight: 2,
+                scene: 'The matron looks up from her ledger as you arrive.',
+                outcome: 'She directs you to the storehouse steward who always needs reliable runners.',
+              },
+              {
+                weight: 1,
+                scene: 'A younger sibling rushes out with a tray of cool cider.',
+                outcome: 'You share a drink and leave with a corked bottle for the road.',
+                loot: [
+                  { name: 'Bottle of Farmstead Cider', category: 'Provisions', qtyRange: [1, 1], baseItem: 'Cider' },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      forage: {
+        label: 'Gather gleaned stalks',
+        narrative: 'Once crews pass through, gleaners comb the rows for stray grain and medicinal shoots.',
+        baseChance: 0.6,
+        timeHours: 1.1,
+        gatherSkill: 'foraging',
+        floraHabitats: ['farmland', 'grassland'],
+        floraRegions: ['terrestrial'],
+        attributes: ['WIS', 'INT'],
+        seasonModifiers: { Winter: -0.08, Autumn: 0.05, Spring: 0.04 },
+        timeModifiers: { morning: 0.03, dusk: 0.04 },
+        weatherModifiers: { storm: -0.25, rain: -0.05, fog: -0.03 },
+        fallbackFlora: 'gleaned grains',
+      },
+    },
+  },
+  {
+    city: "Wave's Break",
+    district: "The Farmlands",
     location: "Forest Edge",
     region: 'waves_break',
     weatherHabitat: 'farmland',
@@ -1622,7 +1782,11 @@ export function listEnvironmentActions(city, district, location, context = {}) {
     if (!actionMakesSense(baseType, action, def, tags, actionContext)) return;
     const label =
       action.label || inferActionLabel(actionType, tags) || describeEnvironmentAction(actionType) || describeEnvironmentAction(baseType);
-    const icon = action.icon || ACTION_METADATA[actionType]?.icon || ACTION_METADATA[baseType]?.icon || null;
+    const icon = resolveActionIcon(
+      action.icon,
+      ACTION_METADATA[actionType]?.icon,
+      ACTION_METADATA[baseType]?.icon,
+    );
     entries.push({ type: actionType, label, narrative: action.narrative, icon });
   });
   return entries;
