@@ -12125,6 +12125,201 @@ if (backButton && dropdownMenu && characterMenu) {
   });
 }
 
+function enhanceTooltips() {
+  const processedAnchors = new WeakSet();
+  let tooltipEl = null;
+  let activeAnchor = null;
+  const VIEWPORT_PADDING = 8;
+
+  const ensureTooltipElement = () => {
+    if (!tooltipEl) {
+      tooltipEl = document.createElement('div');
+      tooltipEl.className = 'tooltip-bubble';
+      tooltipEl.setAttribute('role', 'tooltip');
+      tooltipEl.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(tooltipEl);
+    }
+    return tooltipEl;
+  };
+
+  const updateTheme = () => {
+    if (!tooltipEl) return;
+    const isDarkTheme = document.body.classList.contains('theme-dark');
+    tooltipEl.dataset.theme = isDarkTheme ? 'dark' : 'light';
+  };
+
+  const positionTooltip = () => {
+    if (!activeAnchor || !tooltipEl || !tooltipEl.classList.contains('is-visible')) {
+      return;
+    }
+
+    updateTheme();
+
+    const bubble = tooltipEl;
+    const availableWidth = window.innerWidth - VIEWPORT_PADDING * 2;
+    const maxWidth = availableWidth > 0 ? Math.min(288, availableWidth) : 288;
+    bubble.style.maxWidth = `${maxWidth}px`;
+    if (availableWidth > 0 && availableWidth < 144) {
+      bubble.style.minWidth = `${availableWidth}px`;
+    } else if (availableWidth <= 0) {
+      bubble.style.minWidth = '0';
+    } else {
+      bubble.style.minWidth = '9rem';
+    }
+
+    // Reset position so measurements are not affected by previous placement.
+    bubble.style.left = '0px';
+    bubble.style.top = '0px';
+
+    const anchorRect = activeAnchor.getBoundingClientRect();
+    const bubbleRect = bubble.getBoundingClientRect();
+
+    let top = anchorRect.bottom + VIEWPORT_PADDING;
+    let placement = 'below';
+
+    const bottomBoundary = window.innerHeight - VIEWPORT_PADDING;
+    if (top + bubbleRect.height > bottomBoundary) {
+      const aboveTop = anchorRect.top - VIEWPORT_PADDING - bubbleRect.height;
+      if (aboveTop >= VIEWPORT_PADDING) {
+        top = aboveTop;
+        placement = 'above';
+      } else {
+        top = Math.max(VIEWPORT_PADDING, bottomBoundary - bubbleRect.height);
+      }
+    }
+
+    let left = anchorRect.left + anchorRect.width / 2 - bubbleRect.width / 2;
+    const minLeft = VIEWPORT_PADDING;
+    const maxLeft = window.innerWidth - bubbleRect.width - VIEWPORT_PADDING;
+    if (maxLeft < minLeft) {
+      left = Math.max(minLeft, window.innerWidth / 2 - bubbleRect.width / 2);
+    } else {
+      left = Math.min(Math.max(left, minLeft), maxLeft);
+    }
+
+    bubble.style.left = `${Math.round(left)}px`;
+    bubble.style.top = `${Math.round(top)}px`;
+    bubble.dataset.placement = placement;
+  };
+
+  const hideTooltip = () => {
+    if (!tooltipEl) return;
+    tooltipEl.classList.remove('is-visible');
+    tooltipEl.removeAttribute('data-placement');
+    tooltipEl.setAttribute('aria-hidden', 'true');
+    activeAnchor = null;
+  };
+
+  const showTooltip = (anchor) => {
+    const text = anchor.getAttribute('data-tooltip');
+    if (!text) {
+      if (activeAnchor === anchor) {
+        hideTooltip();
+      }
+      return;
+    }
+
+    activeAnchor = anchor;
+    const bubble = ensureTooltipElement();
+    bubble.textContent = text;
+    bubble.classList.add('is-measuring');
+    bubble.classList.add('is-visible');
+    bubble.setAttribute('aria-hidden', 'false');
+    bubble.style.visibility = 'hidden';
+    positionTooltip();
+    bubble.style.visibility = '';
+    requestAnimationFrame(() => {
+      bubble.classList.remove('is-measuring');
+    });
+  };
+
+  const prepareAnchor = (anchor) => {
+    if (processedAnchors.has(anchor)) return;
+    processedAnchors.add(anchor);
+    anchor.classList.add('tooltip-anchor--js');
+
+    anchor.addEventListener('mouseenter', () => showTooltip(anchor));
+    anchor.addEventListener('mouseleave', () => {
+      if (activeAnchor === anchor) {
+        hideTooltip();
+      }
+    });
+    anchor.addEventListener('focus', () => showTooltip(anchor));
+    anchor.addEventListener('blur', () => {
+      if (activeAnchor === anchor) {
+        hideTooltip();
+      }
+    });
+    anchor.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && activeAnchor === anchor) {
+        hideTooltip();
+        anchor.blur();
+      }
+    });
+  };
+
+  const prepareAnchorsInTree = (root) => {
+    if (root.classList && root.classList.contains('tooltip-anchor')) {
+      prepareAnchor(root);
+    }
+    root.querySelectorAll?.('.tooltip-anchor').forEach(prepareAnchor);
+  };
+
+  prepareAnchorsInTree(document.body);
+
+  const mutationObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+        prepareAnchorsInTree(node);
+      });
+
+      mutation.removedNodes.forEach((node) => {
+        if (
+          activeAnchor &&
+          node.nodeType === Node.ELEMENT_NODE &&
+          (node === activeAnchor || node.contains(activeAnchor))
+        ) {
+          hideTooltip();
+        }
+      });
+
+      if (
+        mutation.type === 'attributes' &&
+        mutation.target === activeAnchor &&
+        mutation.attributeName === 'data-tooltip'
+      ) {
+        showTooltip(activeAnchor);
+      }
+    });
+  });
+
+  mutationObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-tooltip'],
+  });
+
+  window.addEventListener('resize', positionTooltip);
+  window.addEventListener('orientationchange', positionTooltip);
+  window.addEventListener('scroll', positionTooltip, true);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      hideTooltip();
+    }
+  });
+
+  const themeObserver = new MutationObserver(updateTheme);
+  themeObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+}
+
+enhanceTooltips();
+
 // Initialization
 selectProfile();
 loadPreferences();
