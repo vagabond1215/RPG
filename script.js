@@ -4365,13 +4365,31 @@ async function resolveHunt(definition, actionDef, context, actionType = 'hunt') 
 
   const stages = [];
   let finalSuccess = false;
-  if (!located || !prey) {
+  let failureKind = null;
+  if (!located) {
+    failureKind = 'noTracks';
     stages.push({
       name: 'Search',
       chance: chanceInfo.chance,
       roll,
       success: false,
       failureText: 'You fail to find any promising tracks today.',
+    });
+  } else if (!prey) {
+    failureKind = 'noPrey';
+    stages.push({
+      name: 'Search',
+      chance: chanceInfo.chance,
+      roll,
+      success: true,
+      successText: 'You trail faint tracks through the reeds.',
+    });
+    stages.push({
+      name: 'Quarry',
+      chance: null,
+      roll: null,
+      success: false,
+      failureText: 'Every lead goes cold before a huntable creature reveals itself.',
     });
   } else if (usingFallback) {
     const before = Number(currentCharacter[skillKey]) || 0;
@@ -4465,10 +4483,16 @@ async function resolveHunt(definition, actionDef, context, actionType = 'hunt') 
     }
 
     const sceneText = (actionDef.narrative || '').trim();
-    const preyLabel = prey?.common_name ? `the ${prey.common_name}` : 'your quarry';
+    const preyLabel = prey?.common_name
+      ? `the ${prey.common_name}`
+      : failureKind === 'noPrey'
+        ? 'any quarry'
+        : 'your quarry';
     const outcomeText = finalSuccess
       ? `After ${durationText} of tense stalking, you fell ${preyLabel}.`
-      : `Despite patient stalking, ${durationText} passes before ${preyLabel} slips away.`;
+      : failureKind === 'noPrey'
+        ? `You follow several trails for ${durationText}, but each fades before you can take a shot.`
+        : `Despite patient stalking, ${durationText} passes before ${preyLabel} slips away.`;
 
     return {
       type: actionType,
@@ -4492,7 +4516,12 @@ async function resolveHunt(definition, actionDef, context, actionType = 'hunt') 
   const before = Number(currentCharacter[skillKey]) || 0;
   const after = performHunt(currentCharacter, 1, { success: false });
   const sceneText = (actionDef.narrative || '').trim();
-  const outcomeText = `Despite patient searching, ${durationText} passes but nothing stirs today.`;
+  let outcomeText;
+  if (failureKind === 'noPrey') {
+    outcomeText = `You pick up promising sign, but ${durationText} passes before anything huntable lingers.`;
+  } else {
+    outcomeText = `Despite patient searching, ${durationText} passes but nothing stirs today.`;
+  }
   return {
     type: actionType,
     title: composeEnvironmentTitle(actionType, definition, actionDef),
@@ -4548,11 +4577,17 @@ function buildEnvironmentOutcomeHTML(result) {
   if (Array.isArray(result.stages) && result.stages.length) {
     const stageItems = result.stages
       .map(stage => {
-        const chancePct = Math.round(stage.chance * 100);
-        const rollPct = Math.round(stage.roll * 1000) / 10;
         const text = stage.success ? stage.successText : stage.failureText;
-        return `<li><strong>${escapeHtml(stage.name)}:</strong> ${escapeHtml(text)} <span class="environment-stage-roll">(${chancePct}% vs ${rollPct}%)</span></li>`;
+        if (!text) return '';
+        let rollInfo = '';
+        if (Number.isFinite(stage.chance) && Number.isFinite(stage.roll)) {
+          const chancePct = Math.round(stage.chance * 100);
+          const rollPct = Math.round(stage.roll * 1000) / 10;
+          rollInfo = ` <span class="environment-stage-roll">(${chancePct}% vs ${rollPct}%)</span>`;
+        }
+        return `<li><strong>${escapeHtml(stage.name)}:</strong> ${escapeHtml(text)}${rollInfo}</li>`;
       })
+      .filter(Boolean)
       .join('');
     pieces.push(`<details class="environment-stages"><summary>Encounter details</summary><ol>${stageItems}</ol></details>`);
   }
