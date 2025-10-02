@@ -41,35 +41,37 @@
     <span id="menu-character-name" class="top-menu-item" aria-label="Active character" title="Active character">—</span>
     <span id="menu-money" class="top-menu-item currency" aria-label="Available funds" title="Available funds">—</span>
   </div>
-  <div id="menu-time" class="time-display" aria-label="Current time" title="Current time">
-    <div class="time-meta">
-      <span id="menu-date" class="time-date" aria-label="Current date" title="Current date">—</span>
-      <span class="time-meta-separator" aria-hidden="true">·</span>
-      <span class="time-clock">—</span>
+  <div class="top-menu-right">
+    <div id="menu-time" class="time-display" aria-label="Current time" title="Current time">
+      <div class="time-meta">
+        <span id="menu-date" class="time-date" aria-label="Current date" title="Current date">—</span>
+        <span class="time-meta-separator" aria-hidden="true">·</span>
+        <span class="time-clock">—</span>
+      </div>
+      <span class="time-label sr-only">—</span>
+      <div class="time-icons">
+        <span id="menu-time-icon" class="time-icon time-of-day-icon tooltip-anchor" role="img" aria-label="Time of day">—</span>
+        <span id="menu-season-icon" class="time-icon season-icon tooltip-anchor" role="img" aria-label="Season">—</span>
+        <span id="menu-weather-icon" class="time-icon weather-icon tooltip-anchor" role="img" aria-label="Weather">—</span>
+      </div>
     </div>
-    <span class="time-label sr-only">—</span>
-    <div class="time-icons">
-      <span id="menu-time-icon" class="time-icon time-of-day-icon tooltip-anchor" role="img" aria-label="Time of day">—</span>
-      <span id="menu-season-icon" class="time-icon season-icon tooltip-anchor" role="img" aria-label="Season">—</span>
-      <span id="menu-weather-icon" class="time-icon weather-icon tooltip-anchor" role="img" aria-label="Weather">—</span>
-    </div>
-  </div>
-  <div class="top-menu-resource-bars" role="group" aria-label="Character resources" hidden>
-    <div class="top-resource-bar hp tooltip-anchor" data-resource="hp" role="progressbar" aria-label="Hit points" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
-      <span class="top-resource-label">HP</span>
-      <div class="top-resource-track"><div class="top-resource-fill"></div></div>
-    </div>
-    <div class="top-resource-bar mp tooltip-anchor" data-resource="mp" role="progressbar" aria-label="Mana" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
-      <span class="top-resource-label">MP</span>
-      <div class="top-resource-track"><div class="top-resource-fill"></div></div>
-    </div>
-    <div class="top-resource-bar stamina tooltip-anchor" data-resource="stamina" role="progressbar" aria-label="Stamina" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
-      <span class="top-resource-label">ST</span>
-      <div class="top-resource-track"><div class="top-resource-fill"></div></div>
-    </div>
-    <div class="top-resource-bar xp tooltip-anchor" data-resource="xp" role="progressbar" aria-label="Experience" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
-      <span class="top-resource-label">XP</span>
-      <div class="top-resource-track"><div class="top-resource-fill"></div></div>
+    <div class="top-menu-resource-bars" role="group" aria-label="Character resources" hidden>
+      <div class="top-resource-bar hp tooltip-anchor" data-resource="hp" role="progressbar" aria-label="Hit points" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
+        <span class="top-resource-label">HP</span>
+        <div class="top-resource-track"><div class="top-resource-fill"></div></div>
+      </div>
+      <div class="top-resource-bar mp tooltip-anchor" data-resource="mp" role="progressbar" aria-label="Mana" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
+        <span class="top-resource-label">MP</span>
+        <div class="top-resource-track"><div class="top-resource-fill"></div></div>
+      </div>
+      <div class="top-resource-bar stamina tooltip-anchor" data-resource="stamina" role="progressbar" aria-label="Stamina" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
+        <span class="top-resource-label">ST</span>
+        <div class="top-resource-track"><div class="top-resource-fill"></div></div>
+      </div>
+      <div class="top-resource-bar xp tooltip-anchor" data-resource="xp" role="progressbar" aria-label="Experience" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
+        <span class="top-resource-label">XP</span>
+        <div class="top-resource-track"><div class="top-resource-fill"></div></div>
+      </div>
     </div>
   </div>
   </nav>
