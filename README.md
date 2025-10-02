@@ -60,6 +60,10 @@ The UI sanitizes partially specified saves and Codex entries through helpers suc
 
 `docs/economy_catalog.md` documents the CSV importer fields in depth, `docs/hex_grid.md` captures the hex coordinate workflow, and the `tests/` folder illustrates the invariants we expect across data sets. Browsing those files before large edits will save time chasing validation or test failures.
 
+### Stamina intensity system and menu indicators
+
+Outdoor actions now drain or replenish stamina according to intensity and recovery factors defined in `script.js`. Conventional recovery tapers off once a character has been awake for more than 24 hours unless aided by unconventional means, so plan long expeditions around magical support or crafted elixirs. The top navigation menu renders hanging HP, MP, stamina, and XP bars with hover tooltips that reflect these realtime changes, keeping vital statistics visible while exploring.
+
 ## Structure
 
 - `index.html` – entry point for the game UI
