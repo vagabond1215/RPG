@@ -3676,6 +3676,38 @@ function buildEnvironmentContext(definition, actionDef, pos) {
   };
 }
 
+function buildEnvironmentActionContext(pos) {
+  const definition = getEnvironmentDefinition(pos.city, pos.district, pos.building);
+  if (!definition) return null;
+  const today = worldCalendar.today();
+  const season = getSeasonForDate(today);
+  const timeOfDay = currentCharacter ? ensureCharacterClock(currentCharacter) : null;
+  let timeKey = null;
+  if (timeOfDay != null) {
+    const timeLabel = describeTimeOfDay(timeOfDay);
+    timeKey = normalizeTimeKey(timeLabel);
+  }
+  const habitat = definition.weatherHabitat || definition.habitat || 'farmland';
+  let weather = null;
+  let weatherKey = null;
+  if (definition.region && habitat) {
+    try {
+      weather = weatherSystem.getDailyWeather(definition.region, habitat, today);
+      weatherKey = normalizeWeatherKey(weather);
+    } catch (err) {
+      weather = null;
+      weatherKey = null;
+    }
+  }
+  return {
+    season,
+    timeKey,
+    weatherKey,
+    weather,
+    timeOfDay,
+  };
+}
+
 async function resolveEnvironmentAction(actionType, definition, actionDef, context) {
   if (actionType === 'forage') {
     return resolveForage(definition, actionDef, context);
@@ -8024,7 +8056,13 @@ function showNavigation() {
         }),
       );
     });
-    const environmentActions = listEnvironmentActions(pos.city, pos.district, pos.building);
+    const environmentContext = buildEnvironmentActionContext(pos);
+    const environmentActions = listEnvironmentActions(
+      pos.city,
+      pos.district,
+      pos.building,
+      environmentContext || undefined,
+    );
     environmentActions.forEach(envAction => {
       const actionId = buildEnvironmentActionId(
         envAction.type,

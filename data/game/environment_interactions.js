@@ -2,6 +2,207 @@ const ACTION_PREFIX = 'environment';
 
 const ACTION_ORDER = ['forage', 'fish', 'hunt'];
 
+const WATER_ACCESS_TAGS = new Set([
+  'coastal',
+  'tidal',
+  'river',
+  'rivers',
+  'riverbank',
+  'riverlands',
+  'stream',
+  'streams',
+  'brook',
+  'creek',
+  'wetland',
+  'marsh',
+  'bog',
+  'fen',
+  'swamp',
+  'pond',
+  'lake',
+  'lagoon',
+  'estuary',
+  'harbor',
+  'shallows',
+]);
+
+const WATER_EXCLUSION_TAGS = new Set([
+  'hotspring',
+  'hot_spring',
+  'sulfur_spring',
+  'thermal',
+  'cistern',
+  'well',
+]);
+
+const GATHERING_TAGS = new Set([
+  'tidal',
+  'beach',
+  'coastal',
+  'wetland',
+  'river',
+  'rivers',
+  'riverlands',
+  'forest',
+  'wood',
+  'pine',
+  'edge',
+  'grassland',
+  'prairie',
+  'farmland',
+  'meadow',
+  'hills',
+]);
+
+const WILDLIFE_TAGS = new Set([
+  'tidal',
+  'beach',
+  'coastal',
+  'wetland',
+  'river',
+  'rivers',
+  'riverlands',
+  'forest',
+  'wood',
+  'edge',
+  'grassland',
+  'prairie',
+  'farmland',
+  'meadow',
+  'hills',
+  'mountain',
+  'ridge',
+]);
+
+const MINIMUM_PRESENTABLE_CHANCE = 0.15;
+
+function toTitleCase(text) {
+  if (!text) return '';
+  return String(text)
+    .split(/[\s_-]+/)
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function hasAnyTag(tags, testSet) {
+  for (const tag of tags) {
+    if (testSet.has(tag)) return true;
+  }
+  return false;
+}
+
+function expandTimeKeys(timeKey) {
+  if (!timeKey) return [];
+  const lower = timeKey.toLowerCase();
+  const keys = [lower];
+  if (lower.includes('morning') && lower !== 'morning') keys.push('morning');
+  if (lower.includes('afternoon') && lower !== 'afternoon') keys.push('afternoon');
+  if (lower.includes('evening') && lower !== 'evening') keys.push('evening');
+  if (lower.includes('dawn') && lower !== 'dawn') keys.push('dawn');
+  if (lower.includes('dusk') && lower !== 'dusk') keys.push('dusk');
+  if (lower === 'predawn') {
+    keys.push('dawn');
+    keys.push('night');
+  }
+  if (lower === 'night') keys.push('evening');
+  if (lower === 'day') {
+    keys.push('afternoon');
+    keys.push('morning');
+  }
+  keys.push('default');
+  return keys;
+}
+
+function expandWeatherKeys(weatherKey) {
+  if (!weatherKey) return [];
+  const lower = weatherKey.toLowerCase();
+  const keys = [lower];
+  if (lower === 'snow' || lower === 'sleet' || lower === 'ice') keys.push('storm');
+  if (lower === 'cloud') keys.push('rain');
+  keys.push('default');
+  return keys;
+}
+
+function modifierForKey(map, keys) {
+  if (!map || !keys || !keys.length) return 0;
+  for (const key of keys) {
+    if (key && Object.prototype.hasOwnProperty.call(map, key)) {
+      return map[key] ?? 0;
+    }
+  }
+  return 0;
+}
+
+function estimateActionChance(action, context = {}) {
+  let chance = typeof action.baseChance === 'number' ? action.baseChance : 0;
+  if (context.season && action.seasonModifiers) {
+    chance += action.seasonModifiers[context.season] ?? 0;
+  }
+  if (action.timeModifiers) {
+    const timeKeys = expandTimeKeys(context.timeKey);
+    chance += modifierForKey(action.timeModifiers, timeKeys);
+  }
+  if (action.weatherModifiers) {
+    const weatherKeys = expandWeatherKeys(context.weatherKey);
+    chance += modifierForKey(action.weatherModifiers, weatherKeys);
+  }
+  if (chance < 0) return 0;
+  if (chance > 1) return 1;
+  return chance;
+}
+
+function actionMakesSense(actionType, action, def, tags, context = {}) {
+  if (!action) return false;
+
+  if (actionType === 'fish') {
+    if (!hasAnyTag(tags, WATER_ACCESS_TAGS)) return false;
+    if (hasAnyTag(tags, WATER_EXCLUSION_TAGS)) return false;
+    if (context.weatherKey === 'storm') return false;
+  }
+
+  if (actionType === 'forage') {
+    const hasGathering = hasAnyTag(tags, GATHERING_TAGS) || hasAnyTag(tags, WATER_ACCESS_TAGS);
+    if (!hasGathering) return false;
+    if (context.weatherKey === 'storm' && !tags.has('tidal')) return false;
+  }
+
+  if (actionType === 'hunt') {
+    if (!hasAnyTag(tags, WILDLIFE_TAGS)) return false;
+    if (context.weatherKey === 'storm') return false;
+  }
+
+  const chance = estimateActionChance(action, context);
+  return chance >= MINIMUM_PRESENTABLE_CHANCE;
+}
+
+function inferActionLabel(actionType, tags) {
+  if (actionType === 'forage') {
+    if (tags.has('tidal') || tags.has('tidepool')) return 'Tidepooling';
+    if (tags.has('beach') || tags.has('shore')) return 'Beachcombing';
+    if (hasAnyTag(tags, WATER_ACCESS_TAGS)) return 'Fish & Gather';
+    if (tags.has('farmland') || tags.has('prairie') || tags.has('grassland')) return 'Harvest';
+    return 'Gathering';
+  }
+  if (actionType === 'fish') {
+    if (tags.has('tidal') || tags.has('coastal')) return 'Surf Fishing';
+    if (tags.has('harbor') || tags.has('estuary') || tags.has('lagoon')) return 'Harbor Fishing';
+    if (tags.has('river') || tags.has('rivers') || tags.has('riverlands') || tags.has('stream') || tags.has('creek')) {
+      return 'River Fishing';
+    }
+    if (tags.has('pond') || tags.has('lake')) return 'Stillwater Fishing';
+    return 'Fishing';
+  }
+  if (actionType === 'hunt') {
+    if (tags.has('tidal') || tags.has('beach')) return 'Shore Hunt';
+    if (tags.has('coastal') && tags.has('forest')) return 'Coastal Hunt';
+    if (tags.has('grassland') || tags.has('prairie') || tags.has('farmland')) return 'Open-Range Hunt';
+    if (tags.has('forest') || tags.has('wood')) return 'Woodland Hunt';
+    if (tags.has('hills') || tags.has('ridge') || tags.has('mountain')) return 'Highland Hunt';
+    return 'Hunt';
+  }
+  return toTitleCase(actionType);
+}
+
 const ENVIRONMENT_NODES = [
   {
     city: "Wave's Break",
@@ -416,15 +617,23 @@ export function getEnvironmentDefinition(city, district, location) {
   return ENVIRONMENT_INDEX.get(environmentKey(city, district, location)) || null;
 }
 
-export function listEnvironmentActions(city, district, location) {
+export function listEnvironmentActions(city, district, location, context = {}) {
   const def = getEnvironmentDefinition(city, district, location);
   if (!def) return [];
+  const tags = new Set((def.tags || []).map(tag => String(tag).toLowerCase()));
   const entries = [];
   ACTION_ORDER.forEach(actionType => {
-    if (def.actions && def.actions[actionType]) {
-      const action = def.actions[actionType];
-      entries.push({ type: actionType, label: action.label, narrative: action.narrative });
-    }
+    const action = def.actions?.[actionType];
+    if (!action) return;
+    const actionContext = {
+      ...context,
+      season: context.season || null,
+      timeKey: context.timeKey || null,
+      weatherKey: context.weatherKey || null,
+    };
+    if (!actionMakesSense(actionType, action, def, tags, actionContext)) return;
+    const label = inferActionLabel(actionType, tags) || action.label || describeEnvironmentAction(actionType);
+    entries.push({ type: actionType, label, narrative: action.narrative });
   });
   return entries;
 }
