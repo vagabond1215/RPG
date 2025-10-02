@@ -667,7 +667,7 @@ const ENVIRONMENT_NODES = [
           {
             weight: 1,
             scene: 'A rip current tugs unexpectedly at your legs.',
-            outcome: 'You fight free, losing a little time but gaining respect for the sea's pull.',
+            outcome: "You fight free, losing a little time but gaining respect for the sea's pull.",
             extraTimeHours: 0.2,
           },
         ],
