@@ -94,6 +94,7 @@ export const characterTemplate = {
   mp: 0,
   maxStamina: 0,
   stamina: 0,
+  hoursAwake: 0,
   attackPower: 0,
   rangedPower: 0,
   spellPower: 0,

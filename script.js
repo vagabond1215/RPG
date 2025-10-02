@@ -1067,6 +1067,15 @@ const menuTimeClockText = menuTimeDisplay ? menuTimeDisplay.querySelector('.time
 const menuTimeIcon = document.getElementById('menu-time-icon');
 const menuSeasonIcon = document.getElementById('menu-season-icon');
 const menuWeatherIcon = document.getElementById('menu-weather-icon');
+const menuResourceBarContainer = document.querySelector('.top-menu-resource-bars');
+const menuResourceBars = menuResourceBarContainer
+  ? {
+      hp: menuResourceBarContainer.querySelector('[data-resource="hp"]'),
+      mp: menuResourceBarContainer.querySelector('[data-resource="mp"]'),
+      stamina: menuResourceBarContainer.querySelector('[data-resource="stamina"]'),
+      xp: menuResourceBarContainer.querySelector('[data-resource="xp"]'),
+    }
+  : { hp: null, mp: null, stamina: null, xp: null };
 const TIME_BAND_CLASS_MAP = {
   night: 'time-band-night',
   preDawn: 'time-band-predawn',
@@ -1086,6 +1095,44 @@ const TIME_BAND_ICON_MAP = {
   afternoon: '🌞',
   dusk: '🌇',
 };
+
+const ACTION_STAMINA_PROFILES = {
+  look: { intensity: 0.18 },
+  search: { intensity: 0.32 },
+  explore: { intensity: 0.55 },
+  forage: { intensity: 0.6 },
+  fish_gather: { intensity: 0.62 },
+  fish: { intensity: 0.52 },
+  hunt: { intensity: 0.85 },
+  beachcomb: { intensity: 0.4 },
+  tidepool: { intensity: 0.42 },
+  dive: { intensity: 1.1 },
+  swim: { intensity: 0.9 },
+  mine: { intensity: 1.2 },
+  fell_tree: { intensity: 1.15 },
+  rest: { recovery: 1.15 },
+};
+
+const STAMINA_INTENSITY_RATE = 6;
+const STAMINA_RECOVERY_RATE = 8;
+const MIN_CONVENTIONAL_RECOVERY_MULTIPLIER = 0.12;
+
+function updateResourceBarElement(element, current, max, label) {
+  if (!element) return;
+  const normalizedCurrent = Math.max(0, Number(current) || 0);
+  const normalizedMax = Math.max(0, Number(max) || 0);
+  const pct = normalizedMax > 0 ? Math.min(100, Math.max(0, (normalizedCurrent / normalizedMax) * 100)) : 0;
+  const fill = element.querySelector('.top-resource-fill');
+  if (fill) {
+    fill.style.width = `${pct}%`;
+  }
+  element.setAttribute('aria-valuemin', '0');
+  element.setAttribute('aria-valuemax', `${Math.round(normalizedMax * 10) / 10}`);
+  element.setAttribute('aria-valuenow', `${Math.round(normalizedCurrent * 10) / 10}`);
+  const tooltip = `${label}: ${formatResourceNumber(normalizedCurrent)} / ${formatResourceNumber(normalizedMax)}`;
+  element.setAttribute('aria-valuetext', tooltip);
+  element.setAttribute('data-tooltip', tooltip);
+}
 
 const TIME_BAND_METADATA = {
   night: {
@@ -1620,6 +1667,39 @@ function updateTopMenuIndicators() {
     menuWeatherIcon.setAttribute('data-tooltip', buildWeatherTooltip(weather, weatherTooltipContext));
     menuWeatherIcon.setAttribute('aria-label', iconInfo.label || 'Weather information');
   }
+  if (menuResourceBarContainer) {
+    if (currentCharacter) {
+      ensureResourceBounds(currentCharacter);
+      if (topMenu) topMenu.classList.add('top-menu--resources-visible');
+      menuResourceBarContainer.removeAttribute('hidden');
+      updateResourceBarElement(menuResourceBars.hp, currentCharacter.hp, currentCharacter.maxHP, 'HP');
+      updateResourceBarElement(menuResourceBars.mp, currentCharacter.mp, currentCharacter.maxMP, 'MP');
+      updateResourceBarElement(
+        menuResourceBars.stamina,
+        currentCharacter.stamina,
+        currentCharacter.maxStamina,
+        'Stamina',
+      );
+      const level = Number(currentCharacter.level) || 1;
+      const totalXp = Math.max(0, Number(currentCharacter.xp) || 0);
+      const levelFloor = totalXpForLevel(level);
+      const xpIntoLevel = Math.max(0, totalXp - levelFloor);
+      const xpNeededRaw = xpForNextLevel(level);
+      const xpNeeded = xpNeededRaw > 0 ? xpNeededRaw : Math.max(1, xpIntoLevel || 1);
+      const xpCurrent = xpNeededRaw > 0 ? Math.min(xpIntoLevel, xpNeeded) : xpNeeded;
+      updateResourceBarElement(menuResourceBars.xp, xpCurrent, xpNeeded, `XP (Lv ${level})`);
+      const xpTooltip = xpNeededRaw > 0
+        ? `XP: ${formatResourceNumber(xpIntoLevel)} / ${formatResourceNumber(xpNeededRaw)} (Total ${formatResourceNumber(totalXp)})`
+        : `XP: ${formatResourceNumber(totalXp)} (Max level)`;
+      if (menuResourceBars.xp) {
+        menuResourceBars.xp.setAttribute('data-tooltip', xpTooltip);
+        menuResourceBars.xp.setAttribute('aria-valuetext', xpTooltip);
+      }
+    } else {
+      if (topMenu) topMenu.classList.remove('top-menu--resources-visible');
+      menuResourceBarContainer.setAttribute('hidden', '');
+    }
+  }
   if (menuMoneyLabel) {
     if (currentCharacter) {
       const money = currentCharacter.money || createEmptyCurrency();
@@ -1889,6 +1969,7 @@ function normalizeCharacterState(character) {
     character.timeOfDay = hours;
   }
   ensureActionLog(character);
+  ensureResourceBounds(character);
   return character;
 }
 
@@ -3581,6 +3662,144 @@ function determineActionTime(actionDef) {
   return 1;
 }
 
+function ensureResourceBounds(character) {
+  if (!character) return;
+  const pairs = [
+    ['hp', 'maxHP'],
+    ['mp', 'maxMP'],
+    ['stamina', 'maxStamina'],
+  ];
+  pairs.forEach(([currentKey, maxKey]) => {
+    const maxValue = Number(character[maxKey]);
+    const safeMax = Number.isFinite(maxValue) ? Math.max(0, maxValue) : 0;
+    character[maxKey] = Math.round(safeMax * 10) / 10;
+    const currentValue = Number(character[currentKey]);
+    const bounded = Number.isFinite(currentValue) ? Math.min(safeMax, Math.max(0, currentValue)) : safeMax;
+    const rounded = Math.round(bounded * 10) / 10;
+    character[currentKey] = rounded;
+  });
+  ensureHoursAwake(character);
+}
+
+function ensureHoursAwake(character) {
+  if (!character) return 0;
+  const value = Number(character.hoursAwake);
+  const normalized = Number.isFinite(value) && value > 0 ? Math.max(0, value) : 0;
+  character.hoursAwake = Math.round(normalized * 100) / 100;
+  return character.hoursAwake;
+}
+
+function computeConventionalRecoveryMultiplier(hoursAwake) {
+  if (!Number.isFinite(hoursAwake)) return 1;
+  if (hoursAwake <= 24) return 1;
+  const overtime = Math.max(0, hoursAwake - 24);
+  const falloff = 1 / (1 + overtime / 3);
+  return Math.max(MIN_CONVENTIONAL_RECOVERY_MULTIPLIER, Math.round(falloff * 100) / 100);
+}
+
+function resolveActionStaminaProfile(actionDef = {}, actionType) {
+  const baseType = actionDef.baseAction || actionType;
+  const merged = typeof actionDef.staminaProfile === 'object' ? { ...actionDef.staminaProfile } : {};
+  const defaults = ACTION_STAMINA_PROFILES[actionType] || ACTION_STAMINA_PROFILES[baseType] || {};
+  const intensitySource = actionDef.staminaIntensity ?? merged.intensity ?? defaults.intensity;
+  const recoverySource = actionDef.staminaRecovery ?? merged.recovery ?? defaults.recovery;
+  const profile = {
+    intensity: Number.isFinite(intensitySource) ? Math.max(0, intensitySource) : 0,
+    recovery: Number.isFinite(recoverySource) ? Math.max(0, recoverySource) : 0,
+    recoveryType: actionDef.staminaRecoveryType || merged.recoveryType || defaults.recoveryType || 'conventional',
+  };
+  if (profile.intensity <= 0 && profile.recovery <= 0) {
+    return null;
+  }
+  return profile;
+}
+
+function applyActionStaminaProfile(character, profile, hours = 0, options = {}) {
+  if (!character || !profile) return null;
+  const time = Math.max(0, Number(hours) || 0);
+  if (time <= 0) return null;
+  ensureResourceBounds(character);
+  const max = Number(character.maxStamina) || 0;
+  if (max <= 0) return null;
+
+  const before = Number(character.stamina) || 0;
+  const intensity = Math.max(0, Number(profile.intensity) || 0);
+  const recovery = Math.max(0, Number(profile.recovery) || 0);
+  if (intensity <= 0 && recovery <= 0) return null;
+
+  let delta = 0;
+  let intensityApplied = 0;
+  let recoveryApplied = 0;
+  if (intensity > 0) {
+    intensityApplied = intensity * STAMINA_INTENSITY_RATE * time;
+    delta -= intensityApplied;
+  }
+  let recoveryMultiplier = 1;
+  const overrideHoursAwake =
+    options.hoursAwakeOverride != null && Number.isFinite(options.hoursAwakeOverride)
+      ? Math.max(0, options.hoursAwakeOverride)
+      : null;
+  const baselineHoursAwake = overrideHoursAwake ?? character.hoursAwake;
+  if (recovery > 0) {
+    if (profile.recoveryType === 'unconventional') {
+      recoveryMultiplier = 1;
+    } else {
+      recoveryMultiplier = computeConventionalRecoveryMultiplier(baselineHoursAwake);
+    }
+    recoveryApplied = recovery * STAMINA_RECOVERY_RATE * time * recoveryMultiplier;
+    delta += recoveryApplied;
+  }
+
+  let next = before + delta;
+  next = Math.min(max, Math.max(0, next));
+  const normalizedNext = Math.round(next * 10) / 10;
+  const normalizedBefore = Math.round(before * 10) / 10;
+  const actualDelta = Math.round((normalizedNext - normalizedBefore) * 10) / 10;
+  character.stamina = normalizedNext;
+  return {
+    before: normalizedBefore,
+    after: normalizedNext,
+    delta: actualDelta,
+    intensityApplied: Math.round(intensityApplied * 10) / 10,
+    recoveryApplied: Math.round(recoveryApplied * 10) / 10,
+    recoveryMultiplier: Math.round(recoveryMultiplier * 100) / 100,
+    profile,
+    hoursAwake: ensureHoursAwake(character),
+    baselineHoursAwake: Math.round((baselineHoursAwake || 0) * 100) / 100,
+  };
+}
+
+function handleRestAction(pos, hours = 6) {
+  if (!currentCharacter) return;
+  const restHours = Math.max(1, Number(hours) || 6);
+  const profile =
+    resolveActionStaminaProfile({ baseAction: 'rest' }, 'rest') ||
+    { recovery: ACTION_STAMINA_PROFILES.rest?.recovery || 1, recoveryType: 'conventional' };
+  const preRestAwake = ensureHoursAwake(currentCharacter);
+  const timeResult = advanceCharacterTime(restHours, { countsAsAwake: false });
+  const staminaChange = applyActionStaminaProfile(currentCharacter, profile, restHours, {
+    hoursAwakeOverride: preRestAwake,
+  });
+  const durationText = describeHoursDuration(restHours);
+  const parts = [`You rest for ${durationText}.`];
+  let tone = 'info';
+  if (staminaChange && staminaChange.delta > 0) {
+    parts.push(
+      `Stamina ${staminaChange.delta > 0 ? '+' : ''}${formatResourceNumber(staminaChange.delta)} (now ${formatResourceNumber(currentCharacter.stamina)} / ${formatResourceNumber(currentCharacter.maxStamina)}).`,
+    );
+  } else {
+    tone = 'warning';
+    parts.push('Despite your effort, your stamina barely recovers.');
+  }
+  pushLocationLogEntry(pos, {
+    kind: 'message',
+    tone,
+    title: 'Rest complete',
+    body: parts.join(' '),
+    timeAfter: timeResult,
+  });
+}
+
 function pickWeightedRandom(list) {
   if (!Array.isArray(list) || list.length === 0) return null;
   let total = 0;
@@ -3747,6 +3966,14 @@ async function handleEnvironmentInteraction(actionId, pos) {
     showNavigation();
     return;
   }
+  const staminaProfile = resolveActionStaminaProfile(actionDef, parsed.actionType);
+  if (staminaProfile && result) {
+    const staminaChange = applyActionStaminaProfile(currentCharacter, staminaProfile, result.timeSpentHours || 0);
+    if (staminaChange) {
+      result.staminaChange = staminaChange;
+    }
+  }
+  updateTopMenuIndicators();
   pushLocationLogEntry(pos, { kind: 'environment', result });
   saveProfiles();
   showNavigation();
@@ -4110,6 +4337,12 @@ function formatPercentValue(value) {
   return `${sign}${pct}%`;
 }
 
+function formatResourceNumber(value) {
+  if (!Number.isFinite(value)) return '0';
+  const rounded = Math.round(value * 10) / 10;
+  return Number.isInteger(rounded) ? `${rounded}` : rounded.toFixed(1);
+}
+
 function formatRollTooltip(rollInfo) {
   if (!rollInfo) return '';
   const chancePct = Math.round(rollInfo.chance * 1000) / 10;
@@ -4120,6 +4353,35 @@ function formatRollTooltip(rollInfo) {
       if (!mod || mod.value == null) return;
       lines.push(`${mod.label}: ${formatPercentValue(mod.value)}`);
     });
+  }
+  return lines.join('\n');
+}
+
+function formatStaminaTooltip(info) {
+  if (!info) return '';
+  const lines = [];
+  if (Number.isFinite(info.before) && Number.isFinite(info.after)) {
+    lines.push(`Stamina: ${formatResourceNumber(info.before)} → ${formatResourceNumber(info.after)}`);
+  }
+  if (Number.isFinite(info.intensityApplied) && info.intensityApplied > 0) {
+    lines.push(`Effort cost: ${formatResourceNumber(info.intensityApplied)}`);
+  }
+  if (Number.isFinite(info.recoveryApplied) && info.recoveryApplied > 0) {
+    const recoveryLine = [`Recovery: ${formatResourceNumber(info.recoveryApplied)}`];
+    if (info.profile?.recoveryType !== 'unconventional' && Number.isFinite(info.recoveryMultiplier)) {
+      recoveryLine.push(`(×${info.recoveryMultiplier})`);
+    }
+    lines.push(recoveryLine.join(' '));
+  }
+  if (
+    Number.isFinite(info.baselineHoursAwake) &&
+    Number.isFinite(info.hoursAwake) &&
+    Math.abs(info.baselineHoursAwake - info.hoursAwake) > 0.01
+  ) {
+    lines.push(`Hours awake before: ${formatResourceNumber(info.baselineHoursAwake)}`);
+    lines.push(`Hours awake after: ${formatResourceNumber(info.hoursAwake)}`);
+  } else if (Number.isFinite(info.hoursAwake)) {
+    lines.push(`Hours awake: ${formatResourceNumber(info.hoursAwake)}`);
   }
   return lines.join('\n');
 }
@@ -4596,6 +4858,15 @@ function buildEnvironmentOutcomeHTML(result) {
       .map(item => `<li>${escapeHtml(item.name)} x${item.qty}</li>`)
       .join('');
     pieces.push(`<ul class="environment-loot">${lootItems}</ul>`);
+  }
+  if (result.staminaChange && Number.isFinite(result.staminaChange.delta)) {
+    const delta = result.staminaChange.delta;
+    const deltaText = delta > 0 ? `+${formatResourceNumber(delta)}` : formatResourceNumber(delta);
+    const tooltip = formatStaminaTooltip(result.staminaChange);
+    const icon = createInfoIconMarkup(tooltip, 'Stamina change details');
+    pieces.push(
+      `<p class="environment-stamina">Stamina ${escapeHtml(deltaText)}${icon ? ` ${icon}` : ''}</p>`
+    );
   }
   if (result.skillProgress) {
     const { label, delta } = result.skillProgress;
@@ -8309,6 +8580,7 @@ function showNavigation() {
     const safeName = escapeHtml(name || '');
     const defaultIcon = NAV_ICONS[type] || '📍';
     const usesDefaultAsset = typeof icon === 'string' && /\/Default\.png$/i.test(icon);
+    const hasActionIcon = typeof icon === 'string' && /\/actions\//i.test(icon);
     const iconHTML = icon
       ? `<img src="${icon}" alt="" class="nav-icon">`
       : `<span class="nav-icon">${defaultIcon}</span>`;
@@ -8316,8 +8588,9 @@ function showNavigation() {
     const aria = prompt ? `${prompt} ${name}` : name;
     const ariaLabel = escapeHtml(aria || '');
     const cls = extraClass ? ` ${extraClass}` : '';
+    const hideLabel = hasActionIcon && type === 'interaction';
     const labelNeeded =
-      !icon || usesDefaultAsset || (type === 'interaction' && !['shop', 'sell'].includes(action));
+      !hideLabel && (!icon || usesDefaultAsset || (type === 'interaction' && !['shop', 'sell'].includes(action)));
     const labelHTML = labelNeeded ? `<span class="street-sign">${safeName}</span>` : '';
     const attrParts = [`data-type="${type}"`];
     if (action) {
@@ -8848,6 +9121,8 @@ function showNavigation() {
             } else if (action.startsWith('environment:')) {
               handleEnvironmentInteraction(action, pos).catch(console.error);
               return;
+            } else if (action === 'rest') {
+              handleRestAction(pos);
             } else {
               showBackButton();
               setMainHTML(`<div class="no-character"><h1>${btn.textContent} not implemented</h1></div>`);
@@ -9558,11 +9833,12 @@ function ensureCharacterClock(character) {
   return character.timeOfDay;
 }
 
-function advanceCharacterTime(hours = 0) {
+function advanceCharacterTime(hours = 0, options = {}) {
   if (!currentCharacter) {
     return { days: 0, timeOfDay: 0 };
   }
   ensureCharacterClock(currentCharacter);
+  ensureHoursAwake(currentCharacter);
   const increment = Number(hours);
   if (!Number.isFinite(increment) || increment <= 0) {
     return { days: 0, timeOfDay: currentCharacter.timeOfDay };
@@ -9574,6 +9850,15 @@ function advanceCharacterTime(hours = 0) {
     days += 1;
   }
   currentCharacter.timeOfDay = Math.max(0, Math.min(24, Math.round(total * 100) / 100));
+  const countsAsAwake = options.countsAsAwake !== false;
+  if (countsAsAwake) {
+    currentCharacter.hoursAwake = Math.round((currentCharacter.hoursAwake + increment) * 100) / 100;
+  } else {
+    currentCharacter.hoursAwake = Math.max(
+      0,
+      Math.round((currentCharacter.hoursAwake - increment) * 100) / 100,
+    );
+  }
   if (days > 0) {
     worldCalendar.advance(days);
   }
@@ -12196,6 +12481,7 @@ function finalizeCharacter(character) {
     mp: resources.maxMP,
     maxStamina: resources.maxStamina,
     stamina: resources.maxStamina,
+    hoursAwake: 0,
     advancedClass: buildEntry?.advanced,
     id,
   });
