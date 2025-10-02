@@ -3893,8 +3893,11 @@ function filterAnimalsForAction(actionDef, extra = {}) {
     if (extra.taxonGroups && !extra.taxonGroups.some(g => animal.taxon_group === g)) {
       return false;
     }
-    if (extra.sizeClasses && !extra.sizeClasses.some(s => animal.size_class === s)) {
-      return false;
+    if (extra.sizeClasses) {
+      if (!animal.size_class) return false;
+      if (!extra.sizeClasses.some(s => animal.size_class === s)) {
+        return false;
+      }
     }
     if (extra.edibleOnly !== false) {
       if (animal.edibility && animal.edibility.edible === false) return false;
@@ -4436,7 +4439,7 @@ async function resolveForage(definition, actionDef, context, actionType = 'forag
   const loot = [];
   gathered.forEach(entry => {
     const qty = randomInt(1, 2);
-    const name = `Foraged ${entry.common_name}`;
+    const name = entry.common_name;
     addItemToInventory({ name, category: 'Gathered Goods', price: 0, profit: 0, qty, baseItem: entry.common_name });
     loot.push({ name, qty });
   });
@@ -4529,7 +4532,7 @@ async function resolveFish(definition, actionDef, context, actionType = 'fish') 
   const loot = [];
   catchList.forEach(entry => {
     const qty = randomInt(1, usingFallback ? 1 : 3);
-    const name = usingFallback ? `Handful of ${entry.common_name}` : `Catch of ${entry.common_name}`;
+    const name = entry.common_name;
     addItemToInventory({ name, category: 'Fresh Catch', price: 0, profit: 0, qty, baseItem: entry.common_name });
     loot.push({ name, qty });
   });
@@ -4658,7 +4661,7 @@ async function resolveHunt(definition, actionDef, context, actionType = 'hunt') 
     const after = performHunt(currentCharacter, HUNT_DIFFICULTY_BY_SIZE[prey.size_class] || 1, { success: true });
     const delta = Math.round((after - before) * 100) / 100;
     const qty = 1;
-    const name = `Hand-caught ${prey.common_name}`;
+    const name = prey.common_name;
     addItemToInventory({ name, category: 'Game Meat', price: 0, profit: 0, qty, baseItem: prey.common_name });
     const sceneText = (actionDef.handPrey?.narrative || 'You rely on quick reflexes.').trim();
     const outcomeText = `After ${durationText}, you manage to grab ${prey.common_name}.`;
