@@ -416,7 +416,7 @@ body.theme-dark .top-menu-character::after {
   width: 100%;
   max-width: 100%;
   margin: 0;
-  padding: 0.35rem 0.75rem 0.35rem 0.55rem;
+  padding: 0.55rem 0.75rem 0.55rem 0.55rem;
   font-size: calc(var(--menu-button-size) * 0.32 + 1px);
   line-height: 1.1;
   font-weight: 600;
@@ -436,12 +436,14 @@ body.theme-dark .top-menu-character::after {
 .top-menu-primary > .time-icons {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: clamp(0.2rem, calc(var(--menu-button-size) * 0.18), 0.45rem);
   row-gap: clamp(0.2rem, calc(var(--menu-button-size) * 0.18), 0.45rem);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-left: auto;
-  padding: 0.35rem calc(var(--top-menu-padding-right) + var(--time-icon-padding)) 0.35rem 0.35rem;
+  padding: 0.55rem calc(var(--top-menu-padding-right) + var(--time-icon-padding)) 0.55rem 0.55rem;
+  flex: 1 1 20rem;
+  min-width: min(100%, 16rem);
   border: 1px solid var(--surface-chip-border);
   border-left: 0;
   border-radius: 0 1.5rem 1.5rem 0;
@@ -468,13 +470,13 @@ body.theme-dark .top-menu-character::after {
 
   .top-menu-primary .time-display {
     flex: 1 1 100%;
-    padding: 0.35rem 0.75rem 0.35rem 0.55rem;
+    padding: 0.55rem 0.75rem 0.55rem 0.55rem;
   }
 
   .top-menu-primary > .time-icons {
     margin-left: 0;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .top-menu-actions {
