@@ -5678,6 +5678,20 @@ function sentenceFromSlug(slug) {
   return text;
 }
 
+function stripTerminalPunctuation(text) {
+  if (!text) return '';
+  return text.replace(/[.!?]+$/, '');
+}
+
+function mergeSentencesWithConnector(primary, secondary, connector = 'while') {
+  const first = stripTerminalPunctuation(primary);
+  const second = stripTerminalPunctuation(secondary);
+  if (!first) return sentenceFromSlug(second);
+  if (!second) return sentenceFromSlug(first);
+  const clause = `${first} ${connector} ${lowercaseFirst(second)}`;
+  return sentenceFromSlug(clause);
+}
+
 function joinOverviewParts(...parts) {
   const filtered = parts.filter(Boolean).join(', ');
   return filtered ? sentenceFromSlug(filtered) : '';
@@ -5757,11 +5771,22 @@ const BUILDING_OVERVIEW_BLUEPRINTS = {
       },
       fragments,
     );
-    return [
-      entryAction ? sentenceFromSlug(`You ${entryAction}`) : '',
-      sentenceFromSlug(ambient),
-      sentenceFromSlug(feature),
-    ].filter(Boolean);
+    const entrySentence = entryAction ? `You ${entryAction}` : '';
+    const ambientSentence = ambient || '';
+    const featureSentence = feature || '';
+    const sentences = [];
+    const combined = mergeSentencesWithConnector(entrySentence, ambientSentence, 'while');
+    if (combined) {
+      sentences.push(combined);
+    } else {
+      if (entrySentence) sentences.push(sentenceFromSlug(entrySentence));
+      if (!entrySentence && ambientSentence) sentences.push(sentenceFromSlug(ambientSentence));
+    }
+    const featureClean = stripTerminalPunctuation(featureSentence);
+    if (featureClean) {
+      sentences.push(sentenceFromSlug(featureClean));
+    }
+    return sentences.filter(Boolean);
   },
   port: (context, fragments) => {
     const entryAction = chooseOverviewFragment(
@@ -7433,7 +7458,7 @@ function buildingWaitingNarration(buildingName, workers) {
     if (/library|records|archive/.test(lower)) {
       return 'You pause by the entry desk where only a single scribe minds the hushed stacks.';
     }
-    return 'You wait by the entrance, crossing paths with only a lone caretaker.';
+    return '';
   }
   const descriptor = workerCountDescriptor(workers);
   if (/wharf|pier|dock|quay/.test(lower)) {
@@ -7766,6 +7791,17 @@ function outdoorWildlifeActivity(context) {
   return sentenceFromSlug(chooseRandom(options, rng) || options[0]);
 }
 
+function mergeOutdoorDetails(presence, wildlife) {
+  const presenceClean = stripTerminalPunctuation(presence || '');
+  const wildlifeClean = stripTerminalPunctuation(wildlife || '');
+  if (presenceClean && wildlifeClean) {
+    return sentenceFromSlug(`${presenceClean}, while ${lowercaseFirst(wildlifeClean)}`);
+  }
+  if (presenceClean) return sentenceFromSlug(presenceClean);
+  if (wildlifeClean) return sentenceFromSlug(wildlifeClean);
+  return '';
+}
+
 function buildingSceneParagraphs(context) {
   const { building, buildingName, businessProfile, timeLabel, weather, workers, rng, habitat, season, district } = context;
   const paragraphs = [];
@@ -7795,7 +7831,6 @@ function buildingSceneParagraphs(context) {
       habitat,
       district
     });
-    if (presence) paragraphs.push(presence);
     const wildlife = outdoorWildlifeActivity({
       building,
       buildingName: displayName,
@@ -7805,7 +7840,8 @@ function buildingSceneParagraphs(context) {
       rng,
       habitat
     });
-    if (wildlife) paragraphs.push(wildlife);
+    const mergedDetails = mergeOutdoorDetails(presence, wildlife);
+    if (mergedDetails) paragraphs.push(mergedDetails);
     return paragraphs;
   }
   if (displayName === "Merchants' Wharf") {
