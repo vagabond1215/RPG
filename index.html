@@ -17,41 +17,40 @@
         <span class="time-clock">—</span>
       </div>
       <span class="time-label sr-only">—</span>
-      <div class="time-icons">
+      <div class="time-icons" role="group" aria-label="Time, season, weather, and controls">
         <span id="menu-time-icon" class="time-icon time-of-day-icon tooltip-anchor" role="img" aria-label="Time of day">—</span>
         <span id="menu-season-icon" class="time-icon season-icon tooltip-anchor" role="img" aria-label="Season">—</span>
         <span id="menu-weather-icon" class="time-icon weather-icon tooltip-anchor" role="img" aria-label="Weather">—</span>
+        <button id="menu-button" class="time-icon time-action-button" aria-label="Menu" title="Menu">
+          <img src="assets/images/icons/Menu.png" alt="">
+        </button>
+        <div class="time-action settings-action">
+          <button id="settings-button" class="time-icon time-action-button" aria-label="Settings" title="Settings">
+            <img src="assets/images/icons/Settings.png" alt="">
+          </button>
+          <div id="settings-panel" class="time-settings-panel">
+            <button id="theme-toggle" aria-label="Toggle theme">
+              <img src="assets/images/icons/Theme.png" alt="Theme">
+            </button>
+            <button id="scale-dec" aria-label="Decrease UI size">
+              <img src="assets/images/icons/Minus.png" alt="Decrease">
+            </button>
+            <button id="scale-inc" aria-label="Increase UI size">
+              <img src="assets/images/icons/Plus.png" alt="Increase">
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="top-menu-actions">
-      <button id="menu-button" aria-label="Menu">
-        <img src="assets/images/icons/Menu.png" alt="Menu">
-      </button>
       <button id="back-button" aria-label="Back" style="display:none;">
         <img src="assets/images/icons/Back Arrow.png" alt="Back">
       </button>
-      <div class="settings-group">
-        <button id="settings-button" aria-label="Settings">
-          <img src="assets/images/icons/Settings.png" alt="Settings">
-        </button>
-        <div id="settings-panel">
-          <button id="theme-toggle" aria-label="Toggle theme">
-            <img src="assets/images/icons/Theme.png" alt="Theme">
-          </button>
-          <button id="scale-dec" aria-label="Decrease UI size">
-            <img src="assets/images/icons/Minus.png" alt="Decrease">
-          </button>
-          <button id="scale-inc" aria-label="Increase UI size">
-            <img src="assets/images/icons/Plus.png" alt="Increase">
-          </button>
-        </div>
-      </div>
     </div>
   </div>
   <div class="top-menu-status" aria-live="polite">
     <button id="character-button" class="top-menu-character" aria-label="Open character menu" title="Open character menu" style="display:none;">
       <span class="top-menu-character-header">
-        <img id="character-icon" src="assets/images/icons/Character Menu Male.png" alt="" aria-hidden="true">
         <span id="menu-character-name" class="top-menu-item" aria-label="Active character" title="Active character">—</span>
       </span>
       <span id="menu-money" class="top-menu-item currency" aria-label="Available funds" title="Available funds">—</span>

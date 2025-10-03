@@ -12713,13 +12713,6 @@ function updateCharacterButton() {
     mapContainer.style.display = 'none';
     return;
   }
-  const iconFile = currentCharacter.sex === 'Male'
-    ? 'Character Menu Male.png'
-    : 'Character Menu Female.png';
-  const characterIcon = document.getElementById('character-icon');
-  if (characterIcon) {
-    characterIcon.src = `assets/images/icons/${iconFile}`;
-  }
   characterButton.style.display = 'inline-flex';
 }
 
