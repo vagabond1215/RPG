@@ -10,12 +10,19 @@
   <div id="app">
 <nav class="top-menu">
   <div class="top-menu-main">
-    <div id="menu-time" class="time-display" aria-label="Current time" title="Current time">
-      <div class="time-meta">
-        <span id="menu-date" class="time-date" aria-label="Current date" title="Current date">—</span>
-        <span class="time-meta-separator" aria-hidden="true">·</span>
-        <span class="time-clock">—</span>
-      </div>
+    <div class="top-menu-primary">
+      <button id="character-button" class="top-menu-character" aria-label="Open character menu" title="Open character menu" aria-live="polite" style="display:none;">
+        <span class="top-menu-character-header">
+          <span id="menu-character-name" class="top-menu-item" aria-label="Active character" title="Active character">—</span>
+        </span>
+        <span id="menu-money" class="top-menu-item currency" aria-label="Available funds" title="Available funds">—</span>
+      </button>
+      <div id="menu-time" class="time-display" aria-label="Current time" title="Current time">
+        <div class="time-meta">
+          <span id="menu-date" class="time-date" aria-label="Current date" title="Current date">—</span>
+          <span class="time-meta-separator" aria-hidden="true">·</span>
+          <span class="time-clock">—</span>
+        </div>
       <span class="time-label sr-only">—</span>
       <div class="time-icons" role="group" aria-label="Time, season, weather, and controls">
         <span id="menu-time-icon" class="time-icon time-of-day-icon tooltip-anchor" role="img" aria-label="Time of day">—</span>
@@ -42,20 +49,15 @@
         </div>
       </div>
     </div>
+    </div>
     <div class="top-menu-actions">
       <button id="back-button" aria-label="Back" style="display:none;">
         <img src="assets/images/icons/Back Arrow.png" alt="Back">
       </button>
     </div>
   </div>
-  <div class="top-menu-status" aria-live="polite">
-    <button id="character-button" class="top-menu-character" aria-label="Open character menu" title="Open character menu" style="display:none;">
-      <span class="top-menu-character-header">
-        <span id="menu-character-name" class="top-menu-item" aria-label="Active character" title="Active character">—</span>
-      </span>
-      <span id="menu-money" class="top-menu-item currency" aria-label="Available funds" title="Available funds">—</span>
-    </button>
-    <div class="top-menu-resource-bars" role="group" aria-label="Character resources" hidden>
+  <div class="top-menu-status">
+    <div class="top-menu-resource-bars" role="group" aria-label="Character resources" aria-live="polite" hidden>
       <div class="top-resource-bar hp tooltip-anchor" data-resource="hp" role="progressbar" aria-label="Hit points" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
         <span class="top-resource-label">HP</span>
         <div class="top-resource-track"><div class="top-resource-fill"></div></div>
