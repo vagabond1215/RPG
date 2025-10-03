@@ -23,6 +23,7 @@
   --settings-panel-width: calc(3 * var(--menu-button-size) + 2 * var(--settings-panel-gap));
   --settings-panel-buffer: 0.5rem;
   --top-menu-padding-right: 0.25rem;
+  --top-menu-character-extra-width: 25px;
   --time-icon-size: calc(var(--menu-button-size) * 0.7);
   --time-icon-padding: calc(var(--time-icon-size) * 0.12);
   --surface-glass-bg: rgba(255, 255, 255, 0.92);
@@ -318,6 +319,7 @@ main {
   text-align: left;
   min-width: 0;
   padding: 0.35rem 1.35rem;
+  padding-right: calc(1.35rem + var(--top-menu-character-extra-width));
   border-radius: 1.5rem 0 0 1.5rem;
   border: 1px solid var(--surface-chip-border);
   border-right: 0;
@@ -396,7 +398,7 @@ body.theme-dark .top-menu-character::after {
 .time-display {
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 0.65rem;
   flex-wrap: wrap;
   min-width: 0;
@@ -405,7 +407,7 @@ body.theme-dark .top-menu-character::after {
   width: 100%;
   max-width: 100%;
   margin: 0;
-  padding: 0.35rem calc(var(--top-menu-padding-right) + 0.25rem) 0.35rem 0.55rem;
+  padding: 0.35rem calc(var(--top-menu-padding-right) + var(--time-icon-padding)) 0.35rem 0.55rem;
   font-size: calc(var(--menu-button-size) * 0.32);
   line-height: 1.1;
   font-weight: 600;
@@ -436,7 +438,7 @@ body.theme-dark .top-menu-character::after {
 
   .top-menu-primary .time-display {
     flex: 1 1 100%;
-    padding: 0.35rem calc(var(--top-menu-padding-right) + 0.25rem) 0.35rem 0.55rem;
+    padding: 0.35rem calc(var(--top-menu-padding-right) + var(--time-icon-padding)) 0.35rem 0.55rem;
   }
 
   .top-menu-actions {
@@ -469,15 +471,18 @@ body.theme-dark .top-menu-character::after {
 
 .time-display .time-meta {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: 0.35rem;
   white-space: nowrap;
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
 }
 
 @supports selector(:has(*)) {
   .top-menu-main:has(.top-menu-actions button:not([hidden]):not([style*="display: none"])) .time-display {
-    padding-right: calc(var(--top-menu-padding-right) + var(--settings-panel-width));
+    padding-right: calc(var(--top-menu-padding-right) + var(--time-icon-padding) + var(--settings-panel-width));
   }
 
   .top-menu-actions:not(:has(button:not([hidden]):not([style*="display: none"]))) {
@@ -496,6 +501,8 @@ body.theme-dark .top-menu-character::after {
   gap: clamp(0.2rem, calc(var(--menu-button-size) * 0.18), 0.45rem);
   row-gap: clamp(0.2rem, calc(var(--menu-button-size) * 0.18), 0.45rem);
   flex-wrap: wrap;
+  margin-left: auto;
+  padding-right: var(--time-icon-padding);
 }
 
 .time-display .time-icon {
@@ -683,6 +690,8 @@ body.theme-sepia .top-resource-label {
 
   .time-display .time-icons {
     justify-content: center;
+    margin-left: 0;
+    padding-right: 0;
   }
 
   .top-menu-actions {
@@ -713,14 +722,15 @@ body.theme-sepia .top-resource-label {
   overflow: hidden;
   position: absolute;
   pointer-events: none;
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease;
   z-index: 350;
   flex-direction: row;
-  top: 0;
-  left: 100%;
-  margin-left: 0.0625rem;
-  transform: scaleX(0);
-  transform-origin: left;
+  top: calc(100% + var(--settings-panel-gap));
+  right: 0;
+  left: auto;
+  transform: translateY(-0.5rem) scaleY(0);
+  transform-origin: top right;
+  opacity: 0;
   padding: 0.35rem;
   border-radius: calc(var(--menu-button-size) * 0.4);
   border: 1px solid var(--surface-chip-border);
@@ -737,7 +747,8 @@ body.theme-sepia .top-resource-label {
 
 #settings-panel.active {
   pointer-events: auto;
-  transform: scaleX(1);
+  transform: translateY(0) scaleY(1);
+  opacity: 1;
 }
 
 #settings-panel button {
@@ -773,14 +784,15 @@ body.theme-dark #settings-panel button {
   position: absolute;
   top: var(--menu-height);
   left: 0;
+  right: auto;
   width: 14rem;
   background: var(--surface-glass-bg);
   border: 1px solid var(--surface-glass-border);
   box-shadow: var(--surface-glass-shadow);
   display: flex;
   flex-direction: column;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateY(-0.75rem);
+  transition: transform 0.25s ease, opacity 0.25s ease;
   z-index: 200;
   pointer-events: none;
   opacity: 0;
@@ -788,10 +800,12 @@ body.theme-dark #settings-panel button {
   overflow: hidden;
   backdrop-filter: blur(var(--surface-glass-blur));
   -webkit-backdrop-filter: blur(var(--surface-glass-blur));
+  max-height: calc(100vh - var(--menu-height) - 1rem);
+  overflow-y: auto;
 }
 
 #dropdownMenu.active {
-  transform: translateX(0);
+  transform: translateY(0);
   pointer-events: auto;
   opacity: 1;
 }
@@ -812,13 +826,16 @@ body.theme-dark #settings-panel button {
 #characterMenu {
   position: absolute;
   top: var(--menu-height);
+  left: 0;
+  right: auto;
   width: 14rem;
   background: var(--surface-glass-bg);
   border: 1px solid var(--surface-glass-border);
   box-shadow: var(--surface-glass-shadow);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateY(-0.75rem);
+  transition: transform 0.25s ease, opacity 0.25s ease;
   z-index: 200;
   pointer-events: none;
   opacity: 0;
@@ -826,15 +843,12 @@ body.theme-dark #settings-panel button {
   overflow: hidden;
   backdrop-filter: blur(var(--surface-glass-blur));
   -webkit-backdrop-filter: blur(var(--surface-glass-blur));
-}
-
-#characterMenu {
-  left: 0;
-  transform: translateX(-100%);
+  max-height: calc(100vh - var(--menu-height) - 1rem);
+  overflow-y: auto;
 }
 
 #characterMenu.active {
-  transform: translateX(0);
+  transform: translateY(0);
   pointer-events: auto;
   opacity: 1;
 }
@@ -916,15 +930,6 @@ button:not(:disabled):hover,
   fill: none;
   stroke-width: 2;
 }
-
-/* Positions for slide-out menus */
-#dropdownMenu,
-#characterMenu {
-  top: var(--menu-height);
-  left: 0;
-  height: calc(100% - var(--menu-height));
-}
-
 
 .portrait-grid {
   display: flex;

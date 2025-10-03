@@ -68,6 +68,7 @@ applyWavesBreakRegistry(LOCATIONS);
 
 const worldCalendar = new TidefallCalendar();
 const weatherSystem = createDefaultWeatherGenerator(worldCalendar.today());
+const appContainer = document.getElementById('app');
 
 function totalXpForLevel(level) {
   return Math.floor((4 * Math.pow(level, 3)) / 5);
@@ -12947,6 +12948,7 @@ const updateScale = () => {
   document.documentElement.style.setProperty('--ui-scale', uiScale);
   savePreference('uiScale', uiScale);
   updateMenuHeight();
+  repositionFloatingMenus();
 };
 const scaleDecButton = document.getElementById('scale-dec');
 const scaleIncButton = document.getElementById('scale-inc');
@@ -12968,6 +12970,25 @@ const menuButton = document.getElementById('menu-button');
 const characterButton = document.getElementById('character-button');
 const dropdownMenu = document.getElementById('dropdownMenu');
 const characterMenu = document.getElementById('characterMenu');
+
+function positionFloatingMenu(menuEl, triggerEl, alignment = 'left') {
+  if (!menuEl || !triggerEl || !appContainer) return;
+  const appRect = appContainer.getBoundingClientRect();
+  const triggerRect = triggerEl.getBoundingClientRect();
+  const top = Math.max(triggerRect.bottom - appRect.top, 0);
+
+  menuEl.style.top = `${top}px`;
+  menuEl.style.left = 'auto';
+  menuEl.style.right = 'auto';
+
+  if (alignment === 'right') {
+    const rightOffset = Math.max(appRect.right - triggerRect.right, 0);
+    menuEl.style.right = `${rightOffset}px`;
+  } else {
+    const leftOffset = Math.max(triggerRect.left - appRect.left, 0);
+    menuEl.style.left = `${leftOffset}px`;
+  }
+}
 function toggleCityMap(btn) {
   if (!currentCharacter) return;
   if (mapContainer.style.display === 'flex') {
@@ -12999,16 +13020,38 @@ function updateCharacterButton() {
 
 if (menuButton && dropdownMenu && characterMenu) {
   menuButton.addEventListener('click', () => {
-    dropdownMenu.classList.toggle('active');
+    const willOpen = !dropdownMenu.classList.contains('active');
+    dropdownMenu.classList.remove('active');
     characterMenu.classList.remove('active');
+    if (willOpen) {
+      positionFloatingMenu(dropdownMenu, menuButton, 'right');
+      requestAnimationFrame(() => dropdownMenu.classList.add('active'));
+    }
   });
 }
 if (characterButton && dropdownMenu && characterMenu) {
   characterButton.addEventListener('click', () => {
+    const willOpen = !characterMenu.classList.contains('active');
     dropdownMenu.classList.remove('active');
-    characterMenu.classList.toggle('active');
+    characterMenu.classList.remove('active');
+    if (willOpen) {
+      positionFloatingMenu(characterMenu, characterButton, 'left');
+      requestAnimationFrame(() => characterMenu.classList.add('active'));
+    }
   });
 }
+
+const repositionFloatingMenus = () => {
+  if (dropdownMenu && menuButton && dropdownMenu.classList.contains('active')) {
+    positionFloatingMenu(dropdownMenu, menuButton, 'right');
+  }
+  if (characterMenu && characterButton && characterMenu.classList.contains('active')) {
+    positionFloatingMenu(characterMenu, characterButton, 'left');
+  }
+};
+
+window.addEventListener('resize', repositionFloatingMenus);
+window.addEventListener('scroll', repositionFloatingMenus, true);
 
 if (dropdownMenu) {
   dropdownMenu.addEventListener('click', e => {
