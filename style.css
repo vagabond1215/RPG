@@ -158,7 +158,7 @@ main {
 .top-menu-main {
   display: flex;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 1rem;
   flex-wrap: wrap;
 }
@@ -169,7 +169,7 @@ main {
   justify-content: flex-start;
   column-gap: 0;
   row-gap: 0.75rem;
-  flex: 1 1 32rem;
+  flex: 0 1 auto;
   min-width: 0;
 }
 
@@ -178,7 +178,7 @@ main {
 }
 
 .top-menu-primary .time-display {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
 }
 
 .top-menu-actions {
@@ -188,6 +188,7 @@ main {
   gap: var(--settings-panel-gap);
   flex: 0 0 auto;
   flex-wrap: wrap;
+  margin-left: auto;
 }
 
 .top-menu-status {
@@ -212,7 +213,7 @@ main {
   -webkit-backdrop-filter: blur(var(--surface-glass-blur));
   margin: 0 auto;
   flex: 0 1 auto;
-  width: min(100%, var(--top-menu-content-width));
+  max-width: min(100%, var(--top-menu-content-width));
   box-sizing: border-box;
   transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 250;
@@ -417,6 +418,19 @@ body.theme-dark .top-menu-character::after {
 @media (max-width: 720px) {
   .top-menu-primary {
     column-gap: 0.75rem;
+    flex: 1 1 100%;
+  }
+
+  .top-menu-primary .time-display {
+    flex: 1 1 100%;
+  }
+
+  .top-menu-actions {
+    margin-left: 0;
+  }
+
+  .top-menu-resource-bars {
+    width: 100%;
   }
 
   .top-menu-character,
@@ -647,6 +661,7 @@ body.theme-sepia .top-resource-label {
 
   .top-menu-actions {
     justify-content: center;
+    margin-left: 0;
   }
 
   .top-menu-character {
