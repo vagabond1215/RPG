@@ -9,39 +9,7 @@
 <body class="theme-light">
   <div id="app">
 <nav class="top-menu">
-  <div class="top-menu-left">
-    <button id="menu-button" aria-label="Menu">
-      <img src="assets/images/icons/Menu.png" alt="Menu">
-    </button>
-    <button id="back-button" aria-label="Back" style="display:none;">
-      <img src="assets/images/icons/Back Arrow.png" alt="Back">
-    </button>
-    <button id="character-button" aria-label="Character" style="display:none;">
-      <img id="character-icon" src="assets/images/icons/Character Menu Male.png" alt="Character">
-    </button>
-    <div class="settings-group">
-      <button id="settings-button" aria-label="Settings">
-        <img src="assets/images/icons/Settings.png" alt="Settings">
-      </button>
-      <div id="settings-panel">
-        <button id="theme-toggle" aria-label="Toggle theme">
-          <img src="assets/images/icons/Theme.png" alt="Theme">
-        </button>
-        <button id="scale-dec" aria-label="Decrease UI size">
-          <img src="assets/images/icons/Minus.png" alt="Decrease">
-        </button>
-        <button id="scale-inc" aria-label="Increase UI size">
-          <img src="assets/images/icons/Plus.png" alt="Increase">
-        </button>
-      </div>
-    </div>
-    <div class="settings-buffer" aria-hidden="true"></div>
-  </div>
-  <div class="top-menu-center" aria-live="polite">
-    <span id="menu-character-name" class="top-menu-item" aria-label="Active character" title="Active character">—</span>
-    <span id="menu-money" class="top-menu-item currency" aria-label="Available funds" title="Available funds">—</span>
-  </div>
-  <div class="top-menu-right">
+  <div class="top-menu-main">
     <div id="menu-time" class="time-display" aria-label="Current time" title="Current time">
       <div class="time-meta">
         <span id="menu-date" class="time-date" aria-label="Current date" title="Current date">—</span>
@@ -54,6 +22,39 @@
         <span id="menu-season-icon" class="time-icon season-icon tooltip-anchor" role="img" aria-label="Season">—</span>
         <span id="menu-weather-icon" class="time-icon weather-icon tooltip-anchor" role="img" aria-label="Weather">—</span>
       </div>
+    </div>
+    <div class="top-menu-actions">
+      <button id="menu-button" aria-label="Menu">
+        <img src="assets/images/icons/Menu.png" alt="Menu">
+      </button>
+      <button id="back-button" aria-label="Back" style="display:none;">
+        <img src="assets/images/icons/Back Arrow.png" alt="Back">
+      </button>
+      <button id="character-button" aria-label="Character" style="display:none;">
+        <img id="character-icon" src="assets/images/icons/Character Menu Male.png" alt="Character">
+      </button>
+      <div class="settings-group">
+        <button id="settings-button" aria-label="Settings">
+          <img src="assets/images/icons/Settings.png" alt="Settings">
+        </button>
+        <div id="settings-panel">
+          <button id="theme-toggle" aria-label="Toggle theme">
+            <img src="assets/images/icons/Theme.png" alt="Theme">
+          </button>
+          <button id="scale-dec" aria-label="Decrease UI size">
+            <img src="assets/images/icons/Minus.png" alt="Decrease">
+          </button>
+          <button id="scale-inc" aria-label="Increase UI size">
+            <img src="assets/images/icons/Plus.png" alt="Increase">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="top-menu-status" aria-live="polite">
+    <div class="top-menu-character">
+      <span id="menu-character-name" class="top-menu-item" aria-label="Active character" title="Active character">—</span>
+      <span id="menu-money" class="top-menu-item currency" aria-label="Available funds" title="Available funds">—</span>
     </div>
     <div class="top-menu-resource-bars" role="group" aria-label="Character resources" hidden>
       <div class="top-resource-bar hp tooltip-anchor" data-resource="hp" role="progressbar" aria-label="Hit points" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
