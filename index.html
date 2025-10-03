@@ -30,9 +30,6 @@
       <button id="back-button" aria-label="Back" style="display:none;">
         <img src="assets/images/icons/Back Arrow.png" alt="Back">
       </button>
-      <button id="character-button" aria-label="Character" style="display:none;">
-        <img id="character-icon" src="assets/images/icons/Character Menu Male.png" alt="Character">
-      </button>
       <div class="settings-group">
         <button id="settings-button" aria-label="Settings">
           <img src="assets/images/icons/Settings.png" alt="Settings">
@@ -52,10 +49,13 @@
     </div>
   </div>
   <div class="top-menu-status" aria-live="polite">
-    <div class="top-menu-character">
-      <span id="menu-character-name" class="top-menu-item" aria-label="Active character" title="Active character">—</span>
+    <button id="character-button" class="top-menu-character" aria-label="Open character menu" title="Open character menu" style="display:none;">
+      <span class="top-menu-character-header">
+        <img id="character-icon" src="assets/images/icons/Character Menu Male.png" alt="" aria-hidden="true">
+        <span id="menu-character-name" class="top-menu-item" aria-label="Active character" title="Active character">—</span>
+      </span>
       <span id="menu-money" class="top-menu-item currency" aria-label="Available funds" title="Available funds">—</span>
-    </div>
+    </button>
     <div class="top-menu-resource-bars" role="group" aria-label="Character resources" hidden>
       <div class="top-resource-bar hp tooltip-anchor" data-resource="hp" role="progressbar" aria-label="Hit points" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0" data-tooltip="">
         <span class="top-resource-label">HP</span>
