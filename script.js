@@ -7864,6 +7864,144 @@ function defaultPersonaLabel(role) {
   return `the ${lower}`;
 }
 
+function hashString(value) {
+  const text = String(value || '');
+  let hash = 0;
+  for (let i = 0; i < text.length; i += 1) {
+    hash = (hash * 31 + text.charCodeAt(i)) >>> 0; // eslint-disable-line no-bitwise
+  }
+  return hash >>> 0; // eslint-disable-line no-bitwise
+}
+
+const ROLE_SYNONYMS = {
+  owner: ['owner', 'proprietor', 'landholder'],
+  manager: ['manager', 'supervisor', 'site manager'],
+  steward: ['steward', 'caretaker', 'attendant'],
+  foreman: ['foreman', 'crew chief', 'work boss'],
+  administrator: ['administrator', 'registrar', 'clerk'],
+  keeper: ['keeper', 'custodian', 'tender'],
+  warden: ['warden', 'overseer', 'watcher'],
+  captain: ['captain', 'marshal', 'chief'],
+  dockmaster: ['dockmaster', 'harbormaster', 'pier master'],
+  master: ['master', 'mistress', 'guildmaster'],
+  factor: ['factor', 'agent', 'quartermaster'],
+  operator: ['operator', 'attendant', 'tender'],
+  innkeeper: ['innkeeper', 'host', 'housekeeper'],
+  quartermaster: ['quartermaster', 'supply chief', 'stores master'],
+  leader: ['point contact', 'crew lead', 'site lead'],
+};
+
+function normalizeRoleKey(role) {
+  const lower = String(role || '').toLowerCase();
+  if (!lower) return 'leader';
+  if (lower.includes('owner') || lower.includes('proprietor')) return 'owner';
+  if (lower.includes('innkeep')) return 'innkeeper';
+  if (lower.includes('manager') || lower.includes('supervisor')) return 'manager';
+  if (lower.includes('foreman') || lower.includes('overseer') || lower.includes('crew chief')) return 'foreman';
+  if (lower.includes('administrator') || lower.includes('registrar') || lower.includes('clerk')) return 'administrator';
+  if (lower.includes('steward') || lower.includes('caretaker')) return 'steward';
+  if (lower.includes('keeper')) return 'keeper';
+  if (lower.includes('warden')) return 'warden';
+  if (lower.includes('captain')) return 'captain';
+  if (lower.includes('dockmaster') || lower.includes('harbor')) return 'dockmaster';
+  if (lower.includes('master')) return 'master';
+  if (lower.includes('factor')) return 'factor';
+  if (lower.includes('quartermaster')) return 'quartermaster';
+  if (lower.includes('operator')) return 'operator';
+  return 'leader';
+}
+
+function chooseFromList(options, seed) {
+  if (!options || !options.length) return '';
+  const index = hashString(seed) % options.length;
+  return options[index];
+}
+
+function roleNounForKey(roleKey, seed) {
+  const options = ROLE_SYNONYMS[roleKey] || [roleKey];
+  return chooseFromList(options, seed);
+}
+
+function roleTitleFor(role, seed, descriptor) {
+  const key = normalizeRoleKey(role);
+  const noun = roleNounForKey(key, `${seed}:${role}`) || 'leader';
+  const trimmed = noun.startsWith('the ') ? noun.slice(4) : noun;
+  let qualified = trimmed;
+  if (descriptor && !trimmed.toLowerCase().includes(descriptor.toLowerCase())) {
+    qualified = `${descriptor} ${trimmed}`;
+  }
+  return qualified.startsWith('the ') ? qualified : `the ${qualified}`;
+}
+
+const SEARCH_LABEL_PATTERNS = [
+  title => `Look for ${title}`,
+  title => `Ask around for ${title}`,
+  title => `Seek out ${title}`,
+  title => `Track down ${title}`,
+];
+
+const REQUEST_LABEL_PATTERNS = [
+  title => `Ask ${title} about available work`,
+  title => `Consult with ${title} about available work`,
+  title => `Request an assignment from ${title}`,
+  title => `Inquire with ${title} about available work`,
+];
+
+function selectSearchLabel(title, seed) {
+  const pattern = chooseFromList(SEARCH_LABEL_PATTERNS, `search:${seed}`) || SEARCH_LABEL_PATTERNS[0];
+  return pattern(title);
+}
+
+function selectRequestLabel(title, seed) {
+  const pattern = chooseFromList(REQUEST_LABEL_PATTERNS, `request:${seed}`) || REQUEST_LABEL_PATTERNS[0];
+  return pattern(title);
+}
+
+function rankPersonaRole(role) {
+  const key = normalizeRoleKey(role);
+  switch (key) {
+    case 'owner':
+      return 0;
+    case 'manager':
+      return 1;
+    case 'foreman':
+      return 2;
+    case 'administrator':
+      return 3;
+    case 'steward':
+      return 4;
+    default:
+      return 5;
+  }
+}
+
+function primaryPersona(context, fallbackRole) {
+  const personas = buildPersonaCandidates(context);
+  if (!personas.length) {
+    if (fallbackRole) {
+      return { name: '', role: fallbackRole, style: inferPersonaStyle(fallbackRole) };
+    }
+    return null;
+  }
+  let best = personas[0];
+  for (let i = 1; i < personas.length; i += 1) {
+    const candidate = personas[i];
+    if (rankPersonaRole(candidate.role) < rankPersonaRole(best.role)) {
+      best = candidate;
+    }
+  }
+  if (
+    fallbackRole &&
+    best &&
+    normalizeRoleKey(best.role) === 'steward' &&
+    best.name === 'the steward' &&
+    normalizeRoleKey(fallbackRole) !== 'steward'
+  ) {
+    return { name: best.name, role: fallbackRole, style: inferPersonaStyle(fallbackRole) };
+  }
+  return best;
+}
+
 function buildPersonaCandidates(context) {
   const buildingName = context.building?.name || context.buildingName || '';
   const city = context.city;
@@ -8212,6 +8350,90 @@ function buildingHasFieldCrews(context) {
   return isRuralHabitat && !buildingHasHomestead(context);
 }
 
+const ENVIRONMENT_STEWARD_RULES = [
+  {
+    tags: ['forest', 'wood', 'grove', 'pine', 'timber'],
+    tone: 'forest',
+    suppressKnock: true,
+    fallbackRole: 'forest warden',
+    descriptor: 'forest',
+  },
+  {
+    tags: ['coastal', 'beach', 'shore', 'tidal', 'tidepool'],
+    tone: 'coastal',
+    suppressKnock: true,
+    fallbackRole: 'dockmaster',
+    descriptor: 'pier',
+  },
+  {
+    tags: ['river', 'rivers', 'riverbank', 'riverlands', 'stream', 'streams', 'brook', 'creek'],
+    tone: 'waterside',
+    suppressKnock: true,
+    fallbackRole: 'river warden',
+    descriptor: 'river',
+  },
+  {
+    tags: ['wetland', 'marsh', 'bog', 'fen', 'swamp'],
+    tone: 'wetland',
+    suppressKnock: true,
+    fallbackRole: 'marsh warden',
+    descriptor: 'marsh',
+  },
+  {
+    tags: ['grassland', 'prairie', 'meadow', 'hills', 'ridge'],
+    tone: 'grassland',
+    suppressKnock: true,
+    fallbackRole: 'range foreman',
+    descriptor: 'range',
+  },
+  {
+    tags: ['quarry', 'mine', 'stone', 'cliff'],
+    tone: 'industrial',
+    suppressKnock: true,
+    fallbackRole: 'quarry foreman',
+    descriptor: 'quarry',
+  },
+  {
+    tags: ['farmland', 'fields', 'crop', 'orchard', 'pasture', 'hayfield', 'paddock'],
+    tone: 'rural',
+    suppressKnock: true,
+    fallbackRole: 'field overseer',
+    descriptor: 'field',
+    categories: ['agriculture'],
+  },
+];
+
+function inferEnvironmentStewardInteraction(context) {
+  if (!context || !context.city || !context.district || !context.building) return null;
+  const buildingName = context.building?.name || context.buildingName || '';
+  const definition = getEnvironmentDefinition(context.city, context.district, buildingName);
+  if (!definition) return null;
+  const rawTags = Array.isArray(definition.tags) ? definition.tags : [];
+  const tags = new Set(rawTags.map(tag => String(tag).toLowerCase()));
+  if (context.habitat) {
+    tags.add(String(context.habitat).toLowerCase());
+  }
+  const profile = getBusinessProfileByName(buildingName);
+  const category = (profile?.category || '').toLowerCase();
+  for (const rule of ENVIRONMENT_STEWARD_RULES) {
+    if (rule.categories && !rule.categories.includes(category)) continue;
+    if (rule.tags.some(tag => tags.has(tag))) {
+      return {
+        tone: rule.tone,
+        suppressKnock: rule.suppressKnock,
+        fallbackRole: rule.fallbackRole,
+        descriptor: rule.descriptor,
+      };
+    }
+  }
+  const homestead = buildingHasHomestead(context);
+  return {
+    tone: homestead ? 'rural' : 'urban',
+    suppressKnock: false,
+    fallbackRole: homestead ? 'house steward' : 'site manager',
+  };
+}
+
 function buildingInteractionLabels(context) {
   const buildingName = context.building?.name || context.buildingName || '';
   const name = buildingName.toLowerCase();
@@ -8228,22 +8450,47 @@ function buildingInteractionLabels(context) {
   const profile = getBusinessProfileByName(buildingName);
   const category = (profile?.category || '').toLowerCase();
 
+  const environmentSteward = inferEnvironmentStewardInteraction(context) || {};
   let knock = { label: 'Knock on the office door', tone: 'urban' };
-  let search = { label: 'Ask around for the supervisor', tone: 'urban' };
-  let request = 'Ask about available work';
-
-  if (hasRows && !hasFieldCrews) {
-    search = { label: 'Walk the row looking for someone in charge', tone: 'row' };
-    request = 'Ask about warehouse assignments';
+  if (environmentSteward.suppressKnock) {
+    knock = null;
   }
 
-  if (hasFieldCrews) {
-    search = { label: 'Walk the fields looking for a steward', tone: 'rural' };
+  let tone = environmentSteward.tone || (hasHomestead ? 'rural' : 'urban');
+  let descriptor = environmentSteward.descriptor || '';
+
+  if (hasRows && !hasFieldCrews) {
+    tone = 'row';
+    if (!descriptor) descriptor = 'row';
+  } else if (hasFieldCrews) {
+    tone = 'rural';
+    if (!descriptor) descriptor = 'field';
+  } else if (hasHomestead) {
+    tone = 'rural';
+  }
+
+  const personaInfo = primaryPersona(context, environmentSteward.fallbackRole);
+  const roleSource = personaInfo?.role || environmentSteward.fallbackRole || 'leader';
+  const seed = `${context.city || ''}:${context.district || ''}:${buildingName}:${roleSource}:${descriptor}`;
+  const roleTitle = roleTitleFor(roleSource, seed, descriptor);
+  const searchLabel = selectSearchLabel(roleTitle, seed);
+  const requestLabel = selectRequestLabel(roleTitle, seed);
+
+  const search = { label: searchLabel, tone, target: roleTitle };
+  let request = requestLabel;
+
+  if (hasRows && !hasFieldCrews) {
+    request = 'Ask about warehouse assignments';
+  } else if (hasFieldCrews) {
     request = 'Ask about field postings';
   }
 
   if (hasHomestead) {
-    knock = { label: 'Knock on the farmhouse door', tone: 'rural' };
+    const suppress =
+      environmentSteward && Object.prototype.hasOwnProperty.call(environmentSteward, 'suppressKnock')
+        ? environmentSteward.suppressKnock
+        : false;
+    knock = suppress ? null : { label: 'Knock on the farmhouse door', tone: 'rural' };
   } else if (hasFieldCrews) {
     knock = null;
   }
@@ -8446,6 +8693,54 @@ function handleBuildingKnock(position) {
   showNavigation();
 }
 
+const SEARCH_MISS_LINES_BY_TONE = {
+  rural: [
+    'A picker points you toward another field, promising %ROLE% is further upslope.',
+    'You flag down a hauler, but they shrug and send you deeper among the crops.',
+    'Another crew member shakes their head—they have crates to move and no authority to help.',
+  ],
+  row: [
+    'A porter waves you farther down the row, saying %ROLE% is tied up.',
+    'You check a warehouse office, but %ROLE% is already escorting another crew.',
+    'Someone at the next door shouts that %ROLE% is out inspecting manifests.',
+  ],
+  coastal: [
+    'You pace the shoreline, but %ROLE% is tending nets farther along the surf.',
+    'Spray stings your face as fishers wave you toward another stretch of beach.',
+    'Gulls scatter as someone calls out that %ROLE% is checking tidepools down the coast.',
+  ],
+  waterside: [
+    'You follow the riverbank, yet locals say %ROLE% is clearing a snag upstream.',
+    'A fisher gestures downstream—apparently %ROLE% is inspecting eel pots there.',
+    'Reeds rustle in the wind while farmers insist %ROLE% already headed toward the next bend.',
+  ],
+  wetland: [
+    'You slog through muck but only frogs answer; %ROLE% must be at another dike.',
+    'A bog worker points across the flats where %ROLE% is repairing sluice gates.',
+    'Dragonflies buzz as someone tells you %ROLE% is patrolling the far reeds.',
+  ],
+  forest: [
+    'You trail hoofprints beneath the boughs, yet %ROLE% remains out of sight.',
+    'A woodcutter nods deeper into the grove, saying %ROLE% is checking snares.',
+    'Birdsong is your only reply; %ROLE% must be ranging farther in.',
+  ],
+  grassland: [
+    'Wind whips your call away while drovers shout that %ROLE% rode toward another herd.',
+    'You crest a hill but only spot %ROLE% far off against the horizon.',
+    'A ranch hand waves you toward distant pens where %ROLE% is tallying stock.',
+  ],
+  industrial: [
+    'You circle the quarry terraces, but workers say %ROLE% is overseeing a cut below.',
+    'Stone dust swirls as a hauler shouts that %ROLE% climbed to the upper scaffolds.',
+    'Sparks spit from chisels while someone explains %ROLE% is inspecting the north face.',
+  ],
+  urban: [
+    'A clerk nods toward the back offices, suggesting you try again later.',
+    'You stop a porter, but they are too busy to fetch a supervisor right now.',
+    'Someone gestures upstairs, yet no one breaks away to meet you.',
+  ],
+};
+
 function handleBuildingSearch(position) {
   const context = createBuildingEncounterContext(position);
   if (!context) return;
@@ -8479,24 +8774,10 @@ function handleBuildingSearch(position) {
     state.remainingContacts = Math.max(1, remaining - 1);
   } else {
     const tone = labels.search.tone;
-    const missLines = tone === 'rural'
-      ? [
-          'A picker points you toward another field, promising the steward is further upslope.',
-          'You flag down a hauler, but they shrug and send you deeper among the crops.',
-          'Another crew member shakes their head—they have crates to move and no authority to help.',
-        ]
-      : tone === 'row'
-      ? [
-          'A porter waves you farther down the row, saying the quartermaster is tied up.',
-          'You check a warehouse office, but the steward is already escorting another crew.',
-          'Someone at the next door shouts that the supervisor is out inspecting manifests.',
-        ]
-      : [
-          'A clerk nods toward the back offices, suggesting you try again later.',
-          'You stop a porter, but they are too busy to fetch a supervisor right now.',
-          'Someone gestures upstairs, yet no one breaks away to meet you.',
-        ];
-    const miss = missLines[(state.searchAttempts - 1) % missLines.length];
+    const missLines = SEARCH_MISS_LINES_BY_TONE[tone] || SEARCH_MISS_LINES_BY_TONE.urban;
+    const template = missLines[(state.searchAttempts - 1) % missLines.length];
+    const target = labels.search.target || 'the supervisor';
+    const miss = template.includes('%ROLE%') ? template.replace(/%ROLE%/g, target) : template;
     state.narrative.push(miss);
     state.remainingContacts = Math.max(1, remaining - 1);
   }
