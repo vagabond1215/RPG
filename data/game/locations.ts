@@ -201,13 +201,54 @@ function addQuestBoards(loc: Location) {
   const banditPatrol = createQuest(
     "Patrol the main road",
     "Help the guards keep bandits away.",
-    { repeatable: true, highPriority: true },
+    {
+      location: `${loc.name} gate roads and perimeter lanes`,
+      requirements: [
+        "Martial weapon proficiency or Guard Auxilia training",
+        "Ability to march two night watches while carrying patrol kit",
+        "No outstanding warrants within the crown's courts",
+      ],
+      conditions: [
+        "Report to the Watch sergeant at sunset for route briefing",
+        "Complete two dusk-to-dawn patrol loops before relief",
+      ],
+      timeline: "Posted weekly; assignments run for a single tenday.",
+      risks: [
+        "Bandit ambushes or beasts along the verge",
+        "Cold rain and low visibility after the midnight bell",
+      ],
+      reward: "6 sp hazard stipend per patrol plus bounty shares",
+      postingStyle: "Watch Command Posting",
+      issuer: `${loc.name} City Watch`,
+      repeatable: true,
+      highPriority: true,
+    },
   );
 
   const prototypeBlade = createQuest(
     "Test prototype blade",
     "Check with Master Smith before testing.",
-    { requiresCheckIn: true },
+    {
+      location: `${loc.name} forge complex`,
+      requirements: [
+        "Sword or axe proficiency 35+ or Strength 12+",
+        "Familiarity with smithing terms to file feedback",
+        "Protective leathers and goggles must be worn",
+      ],
+      conditions: [
+        "Schedule two-hour trial block with the master smith",
+        "Return prototype and written report after tests",
+      ],
+      timeline: "Appointments booked within three days of posting.",
+      risks: [
+        "Prototype edges may chip or shatter under stress",
+        "Forge floor hazards from sparks and heavy tools",
+      ],
+      reward: "4 sp honorarium plus option to commission final blade at cost",
+      postingStyle: "Guild Hall Notice",
+      issuer: "Master Smiths' Guild",
+      requiresCheckIn: true,
+    },
   );
 
   if (loc.population?.districts) {
@@ -219,6 +260,23 @@ function addQuestBoards(loc: Location) {
           createQuest(
             `Assist ${d} locals`,
             `Handle tasks for residents of ${d}.`,
+            {
+              location: `${loc.name} – ${d}`,
+              requirements: [
+                "Basic familiarity with district bylaws and customs",
+                "Ability to lift and carry up to 40 lbs of household goods",
+              ],
+              conditions: [
+                "Report to the district steward by second bell for assignments",
+                "Complete posted chores before curfew and submit sign-off",
+              ],
+              timeline: "Assignments available daily; each lasts a single workday.",
+              risks: [
+                "Crowded markets and household disputes may cause minor injuries",
+              ],
+              reward: "1 sp day rate plus gratuities from satisfied residents",
+              issuer: `${d} District Steward`,
+            },
           ),
         ],
       );
@@ -231,6 +289,24 @@ function addQuestBoards(loc: Location) {
       createQuest(
         "Help set up market stalls",
         "Assist merchants in preparing stalls.",
+        {
+          location: `${loc.name} Town Plaza`,
+          requirements: [
+            "Strength to raise tent poles and haul crates",
+            "Market helper chit or guild sponsorship",
+          ],
+          conditions: [
+            "Arrive two hours before dawn bell for setup",
+            "Remain through closing sweep and return borrowed gear",
+          ],
+          timeline: "Active each market day during dawn preparations.",
+          risks: [
+            "Falling beams or overloaded carts during rush deliveries",
+            "Pickpockets working the pre-dawn crowds",
+          ],
+          reward: "8 cp setup stipend plus vendor meal chit",
+          issuer: `${loc.name} Market Steward`,
+        },
       ),
       banditPatrol,
       prototypeBlade,
@@ -243,6 +319,24 @@ function addQuestBoards(loc: Location) {
       createQuest(
         "Collect healing herbs",
         "Gather herbs requested by the clergy.",
+        {
+          location: `${loc.name} cloister gardens and nearby wetlands`,
+          requirements: [
+            "Herbalism Kit proficiency or Medicine 30+",
+            "Knowledge of sacred herb taxonomy",
+          ],
+          conditions: [
+            "Deliver bundled specimens before evening vespers",
+            "Keep roots clean and catalogued by scripture name",
+          ],
+          timeline: "Three-day collection window tied to the waning moon.",
+          risks: [
+            "Bog leeches and slick stones in the wetlands",
+            "Fines for damaging shrine plantings",
+          ],
+          reward: "10 cp per bundle plus a minor blessing",
+          issuer: `${loc.name} Healing Clergy`,
+        },
       ),
     ],
   );
@@ -253,6 +347,25 @@ function addQuestBoards(loc: Location) {
       createQuest(
         "Escort departing caravan",
         "Guard caravan until next waypoint.",
+        {
+          location: `${loc.name} city gate to first caravan waypoint`,
+          requirements: [
+            "Martial or ranged weapon proficiency 30+",
+            "Endurance to march alongside loaded wagons",
+            "Signed charter from the caravan master",
+          ],
+          conditions: [
+            "Report one hour before departure for guard briefing",
+            "Remain with caravan until relief at the first waystation",
+          ],
+          timeline: "Contracts depart twice weekly at dawn.",
+          risks: [
+            "Bandit raids, hungry beasts, or road washouts",
+            "Overnight camp exposure on open verges",
+          ],
+          reward: "9 sp hazard pay plus salvage share",
+          issuer: "Caravan Master's Guild",
+        },
       ),
       banditPatrol,
     ],
@@ -268,7 +381,28 @@ function addQuestBoards(loc: Location) {
       ensureBoard(
         boardName,
         [
-          createQuest("Gather iron ore", "Bring quality ore for smelting."),
+          createQuest(
+            "Gather iron ore",
+            "Bring quality ore for smelting.",
+            {
+              location: `${loc.name} chartered hills and contracted mines`,
+              requirements: [
+                "Mining experience or Strength 14+ to swing picks",
+                "Pack animal or cart capable of hauling ore",
+              ],
+              conditions: [
+                "Deliver a full cart (approx. 300 lb) within three days",
+                "Submit assay slips from the mine steward",
+              ],
+              timeline: "Open contract renewed each tenday.",
+              risks: [
+                "Cave-ins and bad air in narrow adits",
+                "Rockslides while hauling to the surface",
+              ],
+              reward: "12 sp per cart plus bonuses for high-grade ore",
+              issuer: `${loc.name} Smiths' Consortium`,
+            },
+          ),
           prototypeBlade,
         ],
       );
@@ -283,6 +417,24 @@ function addQuestBoards(loc: Location) {
           createQuest(
             "Harvest fine timber",
             "Collect seasoned wood from nearby forest.",
+            {
+              location: `${loc.name} managed grove lease`,
+              requirements: [
+                "Logging proficiency 30+ or Forestry Guild credential",
+                "Saw team of two or more — no lone cutters",
+              ],
+              conditions: [
+                "Follow marked trees and seasonal quotas",
+                "Debark and stack logs at the riverside skid site",
+              ],
+              timeline: "Cutting window open for five days after posting.",
+              risks: [
+                "Falling timber and axe injuries",
+                "Forest predators drawn to fresh cuts",
+              ],
+              reward: "10 sp per tall log plus travel rations",
+              issuer: `${loc.name} Foresters' Circle`,
+            },
           ),
         ],
       );
@@ -293,6 +445,24 @@ function addQuestBoards(loc: Location) {
           createQuest(
             "Collect rare herbs",
             "Fetch ingredients for experimental potion.",
+            {
+              location: `${loc.name} alchemy ward and surrounding glades`,
+              requirements: [
+                "Herbalism Kit proficiency 40+ or Nature 12+",
+                "Protective satchels to keep reagents separate",
+              ],
+              conditions: [
+                "Return samples before sunset for distillation",
+                "Record habitat notes for each specimen",
+              ],
+              timeline: "Seven-day contract tied to brewing schedule.",
+              risks: [
+                "Toxic pollen or hallucinogenic spores",
+                "Encounters with territorial fey or beasts",
+              ],
+              reward: "15 sp per complete satchel plus potion draft",
+              issuer: `${loc.name} Alchemists' Guild`,
+            },
           ),
         ],
       );
@@ -303,6 +473,25 @@ function addQuestBoards(loc: Location) {
           createQuest(
             "Gather arcane crystals",
             "Acquire crystals from old ruins.",
+            {
+              location: `Ruin sites within a day's travel of ${loc.name}`,
+              requirements: [
+                "Arcana 40+ or spellcasting ability to safely locate foci",
+                "Tools to pry crystals without shattering them",
+                "Protective wards or counter-charms",
+              ],
+              conditions: [
+                "Submit crystals for resonance testing upon return",
+                "Sign guild waiver regarding latent curses",
+              ],
+              timeline: "Active for ten days following mage council requisition.",
+              risks: [
+                "Arcane feedback causing burns or vertigo",
+                "Construct guardians or lingering traps",
+              ],
+              reward: "25 sp per intact crystal plus enchantment credit",
+              issuer: `${loc.name} Enchanters' Collegium`,
+            },
           ),
         ],
       );
@@ -313,6 +502,22 @@ function addQuestBoards(loc: Location) {
           createQuest(
             `Assist ${b}`,
             `Help with tasks at ${b}.`,
+            {
+              location: `${b}, ${loc.name}`,
+              requirements: [
+                "Guild associate badge or sponsor signature",
+                `Journeyman trade credential (skill tier 30+) for duties at ${b}`,
+              ],
+              conditions: [
+                "Follow guildmaster directives and confidentiality codes",
+              ],
+              timeline: "Assignments run one to three workdays as scheduled.",
+              risks: [
+                `Workshop accidents related to operations at ${b}.`,
+              ],
+              reward: "Baseline 5 sp per day plus applicable guild credit",
+              issuer: `${b} Steward`,
+            },
           ),
         ],
       );
