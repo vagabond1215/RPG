@@ -26,6 +26,17 @@
   --top-menu-character-extra-width: 25px;
   --time-icon-size: calc(var(--menu-button-size) * 0.7);
   --time-icon-padding: calc(var(--time-icon-size) * 0.12);
+  --time-icon-gap: clamp(0.2rem, calc(var(--menu-button-size) * 0.18), 0.45rem);
+  --time-icons-padding-inline: 0.55rem;
+  --time-icons-padding-inline-end: calc(var(--top-menu-padding-right) + var(--time-icons-padding-inline));
+  --time-icon-count: 6;
+  --time-icons-calculated-width: calc(
+    var(--time-icon-count) * var(--time-icon-size) +
+      (var(--time-icon-count) - 1) * var(--time-icon-gap) +
+      var(--time-icons-padding-inline) +
+      var(--time-icons-padding-inline-end)
+  );
+  --time-icons-width: max(16rem, var(--time-icons-calculated-width));
   --surface-glass-bg: rgba(255, 255, 255, 0.92);
   --surface-glass-border: rgba(0, 0, 0, 0.08);
   --surface-glass-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
@@ -437,13 +448,15 @@ body.theme-dark .top-menu-character::after {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(0.2rem, calc(var(--menu-button-size) * 0.18), 0.45rem);
-  row-gap: clamp(0.2rem, calc(var(--menu-button-size) * 0.18), 0.45rem);
+  gap: var(--time-icon-gap);
+  row-gap: var(--time-icon-gap);
   flex-wrap: nowrap;
   margin-left: auto;
-  padding: 0.55rem calc(var(--top-menu-padding-right) + var(--time-icon-padding)) 0.55rem 0.55rem;
-  flex: 1 1 20rem;
-  min-width: min(100%, 16rem);
+  padding: var(--time-icons-padding-inline) var(--time-icons-padding-inline-end)
+    var(--time-icons-padding-inline) var(--time-icons-padding-inline);
+  flex: 1 1 var(--time-icons-width);
+  width: min(100%, var(--time-icons-width));
+  min-width: min(100%, var(--time-icons-width));
   border: 1px solid var(--surface-chip-border);
   border-left: 0;
   border-radius: 0 1.5rem 1.5rem 0;
@@ -578,7 +591,7 @@ body.theme-dark .top-menu-character::after {
   border: none;
   color: inherit;
   background: none;
-  padding: var(--time-icon-padding);
+  padding: 0;
   width: var(--time-icon-size);
   height: var(--time-icon-size);
   display: inline-flex;
