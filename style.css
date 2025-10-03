@@ -28,7 +28,7 @@
   --time-icon-padding: calc(var(--time-icon-size) * 0.12);
   --time-icon-gap: clamp(0.2rem, calc(var(--menu-button-size) * 0.18), 0.45rem);
   --time-icons-padding-inline: 0.55rem;
-  --time-icons-padding-inline-end: calc(var(--top-menu-padding-right) + var(--time-icons-padding-inline));
+  --time-icons-padding-inline-end: var(--time-icons-padding-inline);
   --time-icon-count: 6;
   --time-icons-calculated-width: calc(
     var(--time-icon-count) * var(--time-icon-size) +
