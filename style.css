@@ -24,19 +24,19 @@
   --settings-panel-buffer: 0.5rem;
   --top-menu-padding-right: 0.25rem;
   --top-menu-character-extra-width: 25px;
-  --time-icon-size: calc(var(--menu-button-size) * 0.7);
+  --time-icon-size: 30px;
   --time-icon-padding: calc(var(--time-icon-size) * 0.12);
-  --time-icon-gap: clamp(0.2rem, calc(var(--menu-button-size) * 0.18), 0.45rem);
-  --time-icons-padding-inline: 0.55rem;
-  --time-icons-padding-inline-end: var(--time-icons-padding-inline);
-  --time-icon-count: 6;
+  --time-icon-gap: 5px;
+  --time-icons-padding-inline: 10px;
+  --time-icons-padding-inline-end: 10px;
+  --time-icon-count: 5;
   --time-icons-calculated-width: calc(
     var(--time-icon-count) * var(--time-icon-size) +
       (var(--time-icon-count) - 1) * var(--time-icon-gap) +
       var(--time-icons-padding-inline) +
       var(--time-icons-padding-inline-end)
   );
-  --time-icons-width: max(16rem, var(--time-icons-calculated-width));
+  --time-icons-width: var(--time-icons-calculated-width);
   --surface-glass-bg: rgba(255, 255, 255, 0.92);
   --surface-glass-border: rgba(0, 0, 0, 0.08);
   --surface-glass-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
@@ -229,7 +229,7 @@ main {
   -webkit-backdrop-filter: blur(var(--surface-glass-blur));
   margin: 0 auto;
   flex: 0 1 auto;
-  width: min(100%, var(--top-menu-content-width));
+  width: min(100%, var(--time-icons-width));
   max-width: 100%;
   box-sizing: border-box;
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -447,13 +447,13 @@ body.theme-dark .top-menu-character::after {
 .top-menu-primary > .time-icons {
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: var(--time-icon-gap);
   row-gap: var(--time-icon-gap);
   flex-wrap: nowrap;
   margin-left: auto;
-  padding: var(--time-icons-padding-inline) var(--time-icons-padding-inline-end)
-    var(--time-icons-padding-inline) var(--time-icons-padding-inline);
+  padding: 5px var(--time-icons-padding-inline-end) 5px
+    var(--time-icons-padding-inline);
   flex: 1 1 var(--time-icons-width);
   width: min(100%, var(--time-icons-width));
   min-width: min(100%, var(--time-icons-width));
@@ -489,7 +489,7 @@ body.theme-dark .top-menu-character::after {
   .top-menu-primary > .time-icons {
     margin-left: 0;
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   .top-menu-actions {
