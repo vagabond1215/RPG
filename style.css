@@ -37,6 +37,13 @@
       var(--time-icons-padding-inline-end)
   );
   --time-icons-width: var(--time-icons-calculated-width);
+  --top-menu-chip-radius: 1.75rem;
+  --top-menu-chip-padding: 0.55rem;
+  --top-menu-chip-bg: rgba(255, 255, 255, 0.68);
+  --top-menu-chip-border: rgba(15, 23, 42, 0.16);
+  --top-menu-chip-divider: rgba(255, 255, 255, 0.5);
+  --top-menu-chip-surface: linear-gradient(160deg, rgba(255, 255, 255, 0.82), rgba(246, 248, 255, 0.25));
+  --top-menu-chip-shadow: 0 22px 42px rgba(15, 23, 42, 0.18);
   --surface-glass-bg: rgba(255, 255, 255, 0.92);
   --surface-glass-border: rgba(0, 0, 0, 0.08);
   --surface-glass-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
@@ -171,16 +178,16 @@ main {
 }
 
 .top-menu-primary {
+  position: relative;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
-  column-gap: 0.75rem;
-  row-gap: 0.5rem;
   flex: 1 1 min(100%, var(--top-menu-content-width));
   width: min(100%, var(--top-menu-content-width));
   margin: 0 auto;
-  padding: 0;
-  border-radius: 0;
+  padding: var(--top-menu-chip-padding);
+  border-radius: var(--top-menu-chip-radius);
+  gap: 0;
   background: none;
   border: 0;
   box-shadow: none;
@@ -188,14 +195,59 @@ main {
   -webkit-backdrop-filter: none;
   box-sizing: border-box;
   min-width: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.top-menu-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--top-menu-chip-surface);
+  border: 1px solid var(--top-menu-chip-border);
+  box-shadow: var(--top-menu-chip-shadow);
+  backdrop-filter: blur(calc(var(--surface-glass-blur) * 1.1));
+  -webkit-backdrop-filter: blur(calc(var(--surface-glass-blur) * 1.1));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.top-menu-primary > * {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+}
+
+.top-menu-primary > *:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 18%;
+  bottom: 18%;
+  right: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--top-menu-chip-divider), transparent);
+  opacity: 0.9;
+  pointer-events: none;
 }
 
 .top-menu-primary .top-menu-character {
   flex: 0 0 auto;
+  padding: 0.65rem 1.35rem 0.65rem 1.1rem;
+  align-self: stretch;
 }
 
 .top-menu-primary .time-display {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
+  display: grid;
+  grid-auto-rows: min-content;
+  justify-items: center;
+  align-content: center;
+  row-gap: 0.4rem;
+  padding: 0.6rem 1.5rem 0;
+  box-sizing: border-box;
+  text-align: center;
+  min-width: 0;
 }
 
 .top-menu-actions {
@@ -219,27 +271,32 @@ main {
   flex-wrap: wrap;
 }
 
-.top-menu-xp {
-  align-self: stretch;
-  padding: 0 1rem 0.35rem;
-  box-sizing: border-box;
+.time-display-xp {
+  width: 100%;
+  margin-top: 0.35rem;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
+  padding: 0;
 }
 
-.top-menu-xp > .top-resource-bar {
-  width: min(100%, var(--top-menu-content-width));
+.time-display-xp[hidden] {
+  display: none !important;
+}
+
+.time-display-xp > .top-resource-bar {
+  width: 100%;
   margin: 0;
   gap: 0.4rem;
 }
 
-.top-menu-xp .top-resource-track {
+.time-display-xp .top-resource-track {
   height: 0.35rem;
   background: rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.18);
 }
 
-.top-menu-xp .top-resource-label {
+.time-display-xp .top-resource-label {
   font-size: 0.62rem;
   letter-spacing: 0.12em;
   opacity: 0.85;
@@ -355,8 +412,8 @@ main {
   color: var(--menu-color-dark);
   text-align: left;
   min-width: 0;
-  padding: 0.25rem 0.75rem;
-  padding-right: calc(0.75rem + var(--top-menu-character-extra-width));
+  padding: 0.65rem 1.35rem 0.65rem 1.1rem;
+  padding-right: calc(1.35rem + var(--top-menu-character-extra-width));
   border-radius: 0;
   border: 0;
   background: none;
@@ -370,8 +427,9 @@ main {
 }
 
 .top-menu-character:focus-visible {
-  outline: 3px solid var(--accent-color, rgba(80, 120, 200, 0.65));
-  outline-offset: 3px;
+  outline: 2px solid var(--accent-color, rgba(80, 120, 200, 0.65));
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
 }
 
 .top-menu-character-header {
@@ -455,15 +513,15 @@ main {
 .top-menu-primary > .time-icons {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: var(--time-icon-gap);
   row-gap: var(--time-icon-gap);
   flex-wrap: nowrap;
   margin-left: auto;
-  padding: 0.25rem var(--time-icons-padding-inline-end) 0.25rem var(--time-icons-padding-inline);
-  flex: 1 1 var(--time-icons-width);
-  width: min(100%, var(--time-icons-width));
-  min-width: min(100%, var(--time-icons-width));
+  padding: 0.6rem 1.25rem 0.6rem 1.1rem;
+  flex: 0 0 auto;
+  width: auto;
+  min-width: max-content;
   border: 0;
   border-radius: 0;
   background: none;
@@ -483,19 +541,20 @@ main {
   }
 
   .top-menu-primary {
-    column-gap: 0.75rem;
     flex: 1 1 100%;
+    padding: calc(var(--top-menu-chip-padding) * 0.9);
   }
 
   .top-menu-primary .time-display {
     flex: 1 1 100%;
     width: 100%;
+    padding: 0.55rem 1.25rem 0;
   }
 
   .top-menu-primary > .time-icons {
     margin-left: 0;
     width: 100%;
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .top-menu-actions {
@@ -512,13 +571,13 @@ main {
 .time-display .time-meta {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 0.35rem;
   white-space: nowrap;
   flex: 1 1 auto;
   min-width: 0;
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 
 .time-display .time-date,
@@ -666,12 +725,12 @@ body.theme-dark .top-resource-label {
   color: var(--menu-color-light);
 }
 
-body.theme-dark .top-menu-xp .top-resource-track {
+body.theme-dark .time-display-xp .top-resource-track {
   background: rgba(255, 255, 255, 0.25);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.35);
 }
 
-body.theme-dark .top-menu-xp .top-resource-label {
+body.theme-dark .time-display-xp .top-resource-label {
   color: var(--menu-color-light);
 }
 
@@ -688,12 +747,12 @@ body.theme-sepia .top-resource-label {
   color: #5a4028;
 }
 
-body.theme-sepia .top-menu-xp .top-resource-track {
+body.theme-sepia .time-display-xp .top-resource-track {
   background: rgba(140, 110, 70, 0.28);
   box-shadow: inset 0 1px 1px rgba(120, 90, 60, 0.32);
 }
 
-body.theme-sepia .top-menu-xp .top-resource-label {
+body.theme-sepia .time-display-xp .top-resource-label {
   color: #5a4028;
 }
 
@@ -1048,6 +1107,11 @@ body.theme-light {
   --surface-chip-border: rgba(0, 0, 0, 0.1);
   --surface-chip-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
   --surface-chip-hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+  --top-menu-chip-bg: rgba(255, 255, 255, 0.68);
+  --top-menu-chip-border: rgba(15, 23, 42, 0.16);
+  --top-menu-chip-divider: rgba(255, 255, 255, 0.5);
+  --top-menu-chip-surface: linear-gradient(160deg, rgba(255, 255, 255, 0.82), rgba(246, 248, 255, 0.25));
+  --top-menu-chip-shadow: 0 22px 42px rgba(15, 23, 42, 0.18);
 }
 
 body.theme-sepia {
@@ -1071,6 +1135,11 @@ body.theme-sepia {
   --surface-chip-border: rgba(140, 110, 70, 0.22);
   --surface-chip-shadow: 0 10px 20px rgba(120, 90, 60, 0.25);
   --surface-chip-hover-shadow: 0 14px 28px rgba(120, 90, 60, 0.32);
+  --top-menu-chip-bg: rgba(255, 245, 225, 0.72);
+  --top-menu-chip-border: rgba(120, 90, 60, 0.2);
+  --top-menu-chip-divider: rgba(255, 235, 210, 0.45);
+  --top-menu-chip-surface: linear-gradient(160deg, rgba(255, 248, 235, 0.82), rgba(230, 205, 175, 0.2));
+  --top-menu-chip-shadow: 0 20px 40px rgba(120, 90, 60, 0.28);
 }
 
 body.theme-dark {
@@ -1094,6 +1163,11 @@ body.theme-dark {
   --surface-chip-border: rgba(240, 244, 255, 0.14);
   --surface-chip-shadow: 0 12px 26px rgba(6, 10, 22, 0.4);
   --surface-chip-hover-shadow: 0 16px 32px rgba(6, 10, 22, 0.48);
+  --top-menu-chip-bg: rgba(20, 28, 46, 0.72);
+  --top-menu-chip-border: rgba(148, 163, 184, 0.24);
+  --top-menu-chip-divider: rgba(148, 163, 184, 0.26);
+  --top-menu-chip-surface: linear-gradient(160deg, rgba(148, 163, 184, 0.22), rgba(15, 23, 42, 0.78));
+  --top-menu-chip-shadow: 0 26px 46px rgba(2, 6, 23, 0.55);
 }
 
 /* Ensure menu icons blend with the background in dark mode */
