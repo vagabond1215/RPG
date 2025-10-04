@@ -458,6 +458,12 @@ main {
   width: 100%;
 }
 
+#menu-character-name {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
 .top-menu-character .currency {
   display: inline-flex;
   align-items: center;
