@@ -516,6 +516,12 @@ main {
   overflow: visible;
 }
 
+.time-display.time-band-night {
+  flex-basis: 21.875rem;
+  min-width: min(100%, 21.875rem);
+  max-width: 21.875rem;
+}
+
 .top-menu-primary > .time-icons {
   display: inline-flex;
   align-items: center;
