@@ -1069,19 +1069,14 @@ const menuTimeIcon = document.getElementById('menu-time-icon');
 const menuSeasonIcon = document.getElementById('menu-season-icon');
 const menuWeatherIcon = document.getElementById('menu-weather-icon');
 const menuResourceBarContainer = document.querySelector('.top-menu-resource-bars');
-const menuXpBar = menuTimeDisplay ? menuTimeDisplay.querySelector('[data-resource="xp"]') : null;
-const menuResourceBars = {
-  hp: menuResourceBarContainer
-    ? menuResourceBarContainer.querySelector('[data-resource="hp"]')
-    : null,
-  mp: menuResourceBarContainer
-    ? menuResourceBarContainer.querySelector('[data-resource="mp"]')
-    : null,
-  stamina: menuResourceBarContainer
-    ? menuResourceBarContainer.querySelector('[data-resource="stamina"]')
-    : null,
-  xp: menuXpBar,
-};
+const menuResourceBars = menuResourceBarContainer
+  ? {
+      hp: menuResourceBarContainer.querySelector('[data-resource="hp"]'),
+      mp: menuResourceBarContainer.querySelector('[data-resource="mp"]'),
+      stamina: menuResourceBarContainer.querySelector('[data-resource="stamina"]'),
+      xp: menuResourceBarContainer.querySelector('[data-resource="xp"]'),
+    }
+  : { hp: null, mp: null, stamina: null, xp: null };
 const TIME_BAND_CLASS_MAP = {
   night: 'time-band-night',
   preDawn: 'time-band-predawn',
@@ -1700,20 +1695,10 @@ function updateTopMenuIndicators() {
       if (menuResourceBars.xp) {
         menuResourceBars.xp.setAttribute('data-tooltip', xpTooltip);
         menuResourceBars.xp.setAttribute('aria-valuetext', xpTooltip);
-        menuResourceBars.xp.removeAttribute('hidden');
-      }
-      if (menuTimeDisplay) {
-        menuTimeDisplay.classList.add('time-display--xp-visible');
       }
     } else {
       if (topMenu) topMenu.classList.remove('top-menu--resources-visible');
       menuResourceBarContainer.setAttribute('hidden', '');
-      if (menuResourceBars.xp) {
-        menuResourceBars.xp.setAttribute('hidden', '');
-      }
-      if (menuTimeDisplay) {
-        menuTimeDisplay.classList.remove('time-display--xp-visible');
-      }
     }
   }
   if (menuMoneyLabel) {
