@@ -185,7 +185,7 @@ main {
   flex: 1 1 min(100%, var(--top-menu-content-width));
   width: min(100%, var(--top-menu-content-width));
   margin: 0 auto;
-  padding: var(--top-menu-chip-padding);
+  padding: 0;
   border-radius: var(--top-menu-chip-radius);
   gap: 0;
   background: none;
@@ -520,7 +520,7 @@ main {
   margin-left: auto;
   padding: 0.6rem 1.25rem 0.6rem 1.1rem;
   flex: 0 0 auto;
-  width: auto;
+  width: 190px;
   min-width: max-content;
   border: 0;
   border-radius: 0;
@@ -542,7 +542,7 @@ main {
 
   .top-menu-primary {
     flex: 1 1 100%;
-    padding: calc(var(--top-menu-chip-padding) * 0.9);
+    padding: 0;
   }
 
   .top-menu-primary .time-display {
