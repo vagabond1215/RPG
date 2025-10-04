@@ -1069,7 +1069,7 @@ const menuTimeIcon = document.getElementById('menu-time-icon');
 const menuSeasonIcon = document.getElementById('menu-season-icon');
 const menuWeatherIcon = document.getElementById('menu-weather-icon');
 const menuResourceBarContainer = document.querySelector('.top-menu-resource-bars');
-const menuXpBar = menuTimeDisplay ? menuTimeDisplay.querySelector('[data-resource="xp"]') : null;
+const menuXpBar = document.getElementById('menu-xp-bar');
 const menuResourceBars = {
   hp: menuResourceBarContainer
     ? menuResourceBarContainer.querySelector('[data-resource="hp"]')
@@ -1702,17 +1702,11 @@ function updateTopMenuIndicators() {
         menuResourceBars.xp.setAttribute('aria-valuetext', xpTooltip);
         menuResourceBars.xp.removeAttribute('hidden');
       }
-      if (menuTimeDisplay) {
-        menuTimeDisplay.classList.add('time-display--xp-visible');
-      }
     } else {
       if (topMenu) topMenu.classList.remove('top-menu--resources-visible');
       menuResourceBarContainer.setAttribute('hidden', '');
       if (menuResourceBars.xp) {
         menuResourceBars.xp.setAttribute('hidden', '');
-      }
-      if (menuTimeDisplay) {
-        menuTimeDisplay.classList.remove('time-display--xp-visible');
       }
     }
   }
