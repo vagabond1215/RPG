@@ -1063,6 +1063,7 @@ const menuDateLabel = document.getElementById('menu-date');
 const menuCharacterNameLabel = document.getElementById('menu-character-name');
 const menuMoneyLabel = document.getElementById('menu-money');
 const menuTimeDisplay = document.getElementById('menu-time');
+const menuXpSlot = menuTimeDisplay ? menuTimeDisplay.querySelector('.time-display-xp') : null;
 const menuTimeLabelText = menuTimeDisplay ? menuTimeDisplay.querySelector('.time-label') : null;
 const menuTimeClockText = menuTimeDisplay ? menuTimeDisplay.querySelector('.time-clock') : null;
 const menuTimeIcon = document.getElementById('menu-time-icon');
@@ -1702,11 +1703,17 @@ function updateTopMenuIndicators() {
         menuResourceBars.xp.setAttribute('aria-valuetext', xpTooltip);
         menuResourceBars.xp.removeAttribute('hidden');
       }
+      if (menuXpSlot) {
+        menuXpSlot.removeAttribute('hidden');
+      }
     } else {
       if (topMenu) topMenu.classList.remove('top-menu--resources-visible');
       menuResourceBarContainer.setAttribute('hidden', '');
       if (menuResourceBars.xp) {
         menuResourceBars.xp.setAttribute('hidden', '');
+      }
+      if (menuXpSlot) {
+        menuXpSlot.setAttribute('hidden', '');
       }
     }
   }
