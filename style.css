@@ -591,9 +591,7 @@ main {
   .top-menu-main:has(.top-menu-actions button:not([hidden]):not([style*="display: none"]))
     .top-menu-primary
     > .time-icons {
-    padding-right: calc(
-      var(--top-menu-padding-right) + var(--time-icon-padding) + var(--settings-panel-width)
-    );
+    padding-right: var(--time-icons-padding-inline-end);
   }
 
   .top-menu-actions:not(:has(button:not([hidden]):not([style*="display: none"]))) {
