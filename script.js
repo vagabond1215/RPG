@@ -8659,7 +8659,11 @@ function generateBuildingEncounter(buildingName, context) {
   );
   const envActionsByType = new Map(envActions.map(action => [action.type, action]));
   const consumedEnvironmentActions = new Set();
-  if (!state.managerFound) {
+  const activeQuestTitle = (questInfo?.quest?.title || '').trim();
+  const showEnvironmentInteractions =
+    !state.managerFound || activeQuestTitle === 'Guild Gate Stewards';
+
+  if (showEnvironmentInteractions) {
     ['look', 'explore', 'search'].forEach(type => {
       const envAction = envActionsByType.get(type);
       if (!envAction) return;
