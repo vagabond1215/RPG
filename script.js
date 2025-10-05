@@ -3364,12 +3364,19 @@ async function renderStreetVendorUI(city, district) {
     const saleQty = item.sale_quantity === 1 && item.unit === 'each'
       ? ''
       : `${item.sale_quantity} ${item.unit || ''}`.trim();
-    const priceLabel = `${cpToCoins(good.price, true, true)} (market ${cpToCoins(good.basePrice, true, true)})`;
+    const priceLabel = cpToCoins(good.price, true, true);
     const stockLabel = `Stock: ${good.quantity}`;
+    const metaParts = [];
+    if (saleQty) {
+      metaParts.push(`<span class="sale-qty">${saleQty}</span>`);
+    }
+    metaParts.push(`<span class="vendor-stock">${stockLabel}</span>`);
+    const metaHtml = metaParts.join('');
     html += `<li class="shop-item street-vendor-item">`
+      + `<div class="street-vendor-info">`
       + `<button class="item-name" data-i="${idx}">${escapeHtml(item.name)}</button>`
-      + `<span class="sale-qty">${saleQty}</span>`
-      + `<span class="vendor-stock">${stockLabel}</span>`
+      + `<div class="street-vendor-meta">${metaHtml}</div>`
+      + `</div>`
       + `<span class="item-price">${priceLabel}</span>`
       + `<input type="number" class="qty street-vendor-qty" value="1" min="1" max="${good.quantity}" data-i="${idx}">`
       + `<button class="buy-btn street-vendor-buy" data-i="${idx}">Buy</button>`
