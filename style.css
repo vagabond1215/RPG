@@ -174,6 +174,11 @@ main {
   position: relative;
   width: min(100%, var(--top-menu-content-width));
   margin: 0 auto;
+  overflow: visible;
+}
+
+.top-menu-main--back-visible {
+  overflow: visible;
 }
 
 .top-menu-primary {
@@ -253,13 +258,13 @@ main {
 .top-menu-actions {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: var(--settings-panel-gap);
   flex-wrap: wrap;
   position: absolute;
   top: 50%;
-  right: calc(var(--top-menu-padding-right) + 0.35rem);
-  transform: translateY(-50%);
+  left: 0;
+  transform: translate(-100%, -50%);
   margin-left: 0;
 }
 
@@ -572,7 +577,11 @@ main {
   .top-menu-actions {
     position: static;
     transform: none;
-    justify-content: flex-end;
+    justify-content: flex-start;
+  }
+
+  .top-menu-main--back-visible .top-menu-primary {
+    padding-left: calc(var(--menu-button-size) + 1rem);
   }
 
   .top-menu-resource-bars {
@@ -812,7 +821,7 @@ body.theme-sepia .time-display-xp .top-resource-label {
   }
 
   .top-menu-actions {
-    justify-content: center;
+    justify-content: flex-start;
     margin-left: 0;
   }
 
@@ -2027,6 +2036,14 @@ body.theme-dark .location-log-partial {
     box-shadow: 0 0 0 2px #2e8b57;
   }
 
+  .navigation .nav-item.nav-item--icon-only .street-sign {
+    display: none;
+  }
+
+  .navigation .nav-item.nav-item--icon-only {
+    gap: 0;
+  }
+
   @media (orientation: portrait) {
     .navigation .nav-header .nav-icon,
     .navigation .nav-header button,
@@ -3222,6 +3239,60 @@ body.theme-dark .quest-storyline-outcome-declined {
   align-items: center;
   gap: 0.5rem;
   width: 100%;
+}
+
+.street-vendor-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.street-vendor-icon {
+  width: clamp(2.75rem, 6vw, 3.5rem);
+  height: auto;
+  display: block;
+}
+
+.street-vendor-goods {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.street-vendor-item {
+  grid-template-columns:
+    minmax(0, 1fr)
+    max-content
+    max-content
+    max-content
+    minmax(3.25rem, 4rem)
+    minmax(3.25rem, 4rem);
+  gap: 0.35rem;
+}
+
+.street-vendor-item .sale-qty,
+.street-vendor-item .vendor-stock,
+.street-vendor-item .item-price {
+  justify-self: end;
+  white-space: nowrap;
+}
+
+.street-vendor-item .item-price {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.street-vendor-item .qty,
+.street-vendor-item .buy-btn {
+  width: 3.5rem;
+}
+
+.street-vendor-item .vendor-stock {
+  opacity: 0.85;
 }
 
 .shop-item .item-name {

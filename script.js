@@ -207,6 +207,7 @@ const STREET_VENDOR_THEMES = [
     discount: 0.85,
     maxQuantity: 3,
     names: ['Harbor Skillet', 'Gullwing Snacks', 'Brinepan Vendor'],
+    icon: "assets/images/icons/Economy/Street Vendor - Fish and Meat.png",
   },
   {
     id: 'fresh-produce',
@@ -226,6 +227,7 @@ const STREET_VENDOR_THEMES = [
     discount: 0.8,
     maxQuantity: 4,
     names: ['Morning Harvest Wagon', 'Sunrise Bushels', 'Greencrest Cart'],
+    icon: "assets/images/icons/Economy/Street Vendor - Produce.png",
   },
   {
     id: 'artisan-goods',
@@ -252,6 +254,7 @@ const STREET_VENDOR_THEMES = [
     discount: 0.88,
     maxQuantity: 2,
     names: ['Ribbon & Ring Stall', 'Silver Thread Bracelets', 'Market Trinket Rack'],
+    icon: "assets/images/icons/Economy/Street Vendor - Armor.png",
   },
   {
     id: 'travel-supplies',
@@ -277,6 +280,7 @@ const STREET_VENDOR_THEMES = [
     discount: 0.9,
     maxQuantity: 2,
     names: ['Roadside Outfitters', 'Pack & Patch Stand', 'Wayfarer’s Tray'],
+    icon: "assets/images/icons/Economy/Street Vendor - Weapons.png",
   },
   {
     id: 'herbal',
@@ -296,6 +300,7 @@ const STREET_VENDOR_THEMES = [
     discount: 0.87,
     maxQuantity: 3,
     names: ['Greensoul Remedies', 'Terrace Tinctures', 'Healing Herb Basket'],
+    icon: "assets/images/icons/Economy/Street Vendor - Produce.png",
   },
   {
     id: 'festival-sweets',
@@ -316,6 +321,7 @@ const STREET_VENDOR_THEMES = [
     maxQuantity: 3,
     eventOnly: true,
     names: ['Solstice Sweets', 'Festival Sugarworks', 'Courtly Delights'],
+    icon: "assets/images/icons/Economy/Street Vendor - Fish and Meat.png",
   },
 ];
 
@@ -916,7 +922,7 @@ function evaluateStreetVendor(city, district) {
     goods: [],
     goodsLoaded: false,
     description: theme.description || '',
-    icon: STREET_VENDOR_ICON,
+    icon: theme.icon || STREET_VENDOR_ICON,
     rngSeed: rngKey,
   };
   return state.vendor;
@@ -1058,6 +1064,7 @@ const body = document.body;
 const main = document.querySelector('main');
 const backButton = document.getElementById('back-button');
 const topMenu = document.querySelector('.top-menu');
+const topMenuMain = document.querySelector('.top-menu-main');
 const app = document.getElementById('app');
 const menuDateLabel = document.getElementById('menu-date');
 const menuCharacterNameLabel = document.getElementById('menu-character-name');
@@ -3060,14 +3067,22 @@ const formatHeight = cm => {
   return `${feet}' ${inches}"`;
 };
 
+const BACK_BUTTON_VISIBLE_CLASS = 'top-menu-main--back-visible';
+
 const showBackButton = () => {
   if (backButton) {
     backButton.style.display = 'inline-flex';
+  }
+  if (topMenuMain) {
+    topMenuMain.classList.add(BACK_BUTTON_VISIBLE_CLASS);
   }
 };
 const hideBackButton = () => {
   if (backButton) {
     backButton.style.display = 'none';
+  }
+  if (topMenuMain) {
+    topMenuMain.classList.remove(BACK_BUTTON_VISIBLE_CLASS);
   }
 };
 
@@ -3326,7 +3341,13 @@ async function renderStreetVendorUI(city, district) {
   await ensureStreetVendorInventory(vendor);
   const funds = formatCurrency(currentCharacter.money);
   const soldOut = streetVendorSoldOut(vendor);
-  let html = `<div class="shop-screen street-vendor"><h1>${escapeHtml(vendor.name)}</h1>`;
+  const vendorIcon = escapeHtml(vendor.icon || STREET_VENDOR_ICON);
+  let html =
+    `<div class="shop-screen street-vendor">` +
+    `<div class="street-vendor-header">` +
+    `<img src="${vendorIcon}" alt="" class="street-vendor-icon">` +
+    `<h1 class="sr-only">${escapeHtml(vendor.name)}</h1>` +
+    `</div>`;
   if (vendor.description) {
     html += `<p class="street-vendor-desc">${escapeHtml(vendor.description)}</p>`;
   }
@@ -3344,10 +3365,11 @@ async function renderStreetVendorUI(city, district) {
       ? ''
       : `${item.sale_quantity} ${item.unit || ''}`.trim();
     const priceLabel = `${cpToCoins(good.price, true, true)} (market ${cpToCoins(good.basePrice, true, true)})`;
+    const stockLabel = `Stock: ${good.quantity}`;
     html += `<li class="shop-item street-vendor-item">`
       + `<button class="item-name" data-i="${idx}">${escapeHtml(item.name)}</button>`
       + `<span class="sale-qty">${saleQty}</span>`
-      + `<span class="vendor-stock">Qty left: ${good.quantity}</span>`
+      + `<span class="vendor-stock">${stockLabel}</span>`
       + `<span class="item-price">${priceLabel}</span>`
       + `<input type="number" class="qty street-vendor-qty" value="1" min="1" max="${good.quantity}" data-i="${idx}">`
       + `<button class="buy-btn street-vendor-buy" data-i="${idx}">Buy</button>`
@@ -8976,11 +8998,13 @@ function showNavigation() {
     disabled,
     extraClass,
     tags,
+    hideLabel = false,
   }) => {
     const safeName = escapeHtml(name || '');
     const defaultIcon = NAV_ICONS[type] || '📍';
     const usesDefaultAsset = typeof icon === 'string' && /\/Default\.png$/i.test(icon);
     const hasActionIcon = typeof icon === 'string' && /\/actions\//i.test(icon);
+    const computedHideLabel = hideLabel || (hasActionIcon && type === 'interaction');
     const iconHTML = icon
       ? `<img src="${icon}" alt="" class="nav-icon">`
       : `<span class="nav-icon">${defaultIcon}</span>`;
@@ -8988,9 +9012,8 @@ function showNavigation() {
     const aria = prompt ? `${prompt} ${name}` : name;
     const ariaLabel = escapeHtml(aria || '');
     const cls = extraClass ? ` ${extraClass}` : '';
-    const hideLabel = hasActionIcon && type === 'interaction';
     const labelNeeded =
-      !hideLabel && (!icon || usesDefaultAsset || (type === 'interaction' && !['shop', 'sell'].includes(action)));
+      !computedHideLabel && (!icon || usesDefaultAsset || (type === 'interaction' && !['shop', 'sell'].includes(action)));
     const labelHTML = labelNeeded ? `<span class="street-sign">${safeName}</span>` : '';
     const attrParts = [`data-type="${type}"`];
     if (action) {
@@ -9002,6 +9025,9 @@ function showNavigation() {
       attrParts.push(`data-tags="${escapeHtml(tags.join(' '))}"`);
     }
     attrParts.push(`aria-label="${ariaLabel}"`);
+    if (ariaLabel) {
+      attrParts.push(`title="${ariaLabel}"`);
+    }
     if (disabled) {
       attrParts.push('disabled');
     }
@@ -9179,17 +9205,18 @@ function showNavigation() {
     const activeVendor = evaluateStreetVendor(pos.city, pos.district);
     if (activeVendor) {
       const soldOut = streetVendorSoldOut(activeVendor);
-      const vendorLabel = soldOut
-        ? `${activeVendor.name} (Sold Out)`
-        : `Street Vendor: ${activeVendor.name}`;
+      const vendorName = soldOut ? 'Street Vendor (Sold Out)' : 'Street Vendor';
+      const vendorPrompt = soldOut ? 'Street vendor (sold out)' : 'Visit street vendor';
       localButtons.push(
         createNavItem({
           type: 'interaction',
           action: 'street-vendor',
-          name: vendorLabel,
+          name: vendorName,
+          prompt: vendorPrompt,
           icon: activeVendor.icon,
           disabled: soldOut,
-          extraClass: 'street-vendor-option',
+          extraClass: 'street-vendor-option nav-item--icon-only',
+          hideLabel: true,
         })
       );
     }
