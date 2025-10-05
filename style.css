@@ -838,7 +838,7 @@ body.theme-sepia .time-display-xp .top-resource-label {
   position: absolute;
   pointer-events: none;
   transition: transform 0.25s ease, opacity 0.25s ease;
-  z-index: 350;
+  z-index: 450;
   flex-direction: row;
   top: calc(100% + var(--settings-panel-gap));
   right: 0;
