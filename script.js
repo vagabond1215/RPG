@@ -4013,6 +4013,16 @@ async function handleEnvironmentInteraction(actionId, pos) {
       result.staminaChange = staminaChange;
     }
   }
+  if (result && Array.isArray(result.effects)) {
+    result.effects.forEach(effect => {
+      if (
+        effect === 'merchants_wharf_generate_opportunity' ||
+        effect === 'merchants_wharf_clear_opportunity'
+      ) {
+        applyMerchantsWharfEnvironmentEffect(pos, effect, result);
+      }
+    });
+  }
   updateTopMenuIndicators();
   pushLocationLogEntry(pos, { kind: 'environment', result });
   saveProfiles();
@@ -4152,6 +4162,14 @@ async function resolveObservationAction(actionType, definition, actionDef = {}, 
   const timeResult = advanceCharacterTime(timeSpent);
   const durationText = describeHoursDuration(timeSpent);
   const lootResult = event?.loot ? resolveLootSpecs(event.loot, event.lootRolls || 1) : { loot: [], awarded: [] };
+  const effects = [];
+  if (event) {
+    if (Array.isArray(event.effects)) {
+      event.effects.filter(Boolean).forEach(effect => effects.push(effect));
+    } else if (event.effect) {
+      effects.push(event.effect);
+    }
+  }
   const sceneText = (event?.scene || actionDef.narrative || '').trim();
   const outcomeText = event?.outcome
     ? event.outcome
@@ -4163,6 +4181,7 @@ async function resolveObservationAction(actionType, definition, actionDef = {}, 
     narrative: { scene: sceneText, outcome: outcomeText },
     rollInfo: { chance: baseChance, roll, modifiers: [] },
     loot: lootResult.loot,
+    effects,
     skillProgress: null,
     weather: context.weather,
     season: context.season,
@@ -8011,7 +8030,7 @@ function roleTitleFor(role, seed, descriptor) {
 const SEARCH_LABEL_PATTERNS = [
   title => `Look for ${title}`,
   title => `Ask around for ${title}`,
-  title => `Seek out ${title}`,
+  title => `Check in with ${title}`,
   title => `Track down ${title}`,
 ];
 
@@ -8512,13 +8531,6 @@ function inferEnvironmentStewardInteraction(context) {
 function buildingInteractionLabels(context) {
   const buildingName = context.building?.name || context.buildingName || '';
   const name = buildingName.toLowerCase();
-  if (name === "merchants' wharf") {
-    return {
-      knock: { label: 'Signal the berth office', tone: 'urban' },
-      search: { label: 'Walk the pier looking for job opportunities', tone: 'pier' },
-      request: 'Ask about pier contracts',
-    };
-  }
   const hasHomestead = buildingHasHomestead(context);
   const hasFieldCrews = buildingHasFieldCrews(context);
   const hasRows = buildingHasRowLayout(context);
@@ -8637,18 +8649,7 @@ function generateBuildingEncounter(buildingName, context) {
   const questInfo = findAvailableQuestForBoards(combinedBoards);
   const interactions = [];
   const labels = buildingInteractionLabels(context);
-  const encounterBuildingName = context.building?.name || context.buildingName || '';
-  const isMerchantsWharf = encounterBuildingName.toLowerCase() === "merchants' wharf";
-  if (isMerchantsWharf) {
-    interactions.push({ action: 'merchants-walk-pier', name: 'Walk the pier looking for job opportunities' });
-    if (state.managerFound) {
-      interactions.push({
-        action: 'building-request-work',
-        name: questInfo?.quest?.title ? `Ask about “${questInfo.quest.title}”` : labels.request,
-        disabled: questInfo ? !questInfo.canOffer : false,
-      });
-    }
-  } else if (!state.managerFound) {
+  if (!state.managerFound) {
     if (labels.knock) {
       interactions.push({ action: 'building-knock', name: labels.knock.label });
     }
@@ -8676,46 +8677,69 @@ function generateBuildingEncounter(buildingName, context) {
   };
 }
 
-function handleMerchantsPierWalk(position) {
+function finalizeMerchantsWharfNoOpportunity(state, result) {
+  state.dynamicBoards = [];
+  state.dialogue = [];
+  state.persona = null;
+  state.managerFound = false;
+  state.lastOpportunity = null;
+  applyMerchantsWharfDynamicBoard(null);
+  const scene = result?.narrative?.scene || null;
+  const outcome = result?.narrative?.outcome || 'No crews break from their duties to offer new work along the pier.';
+  if (scene && !state.narrative.includes(scene)) {
+    state.narrative.push(scene);
+  }
+  if (outcome && outcome !== scene && !state.narrative.includes(outcome)) {
+    state.narrative.push(outcome);
+  }
+  state.message = 'No fresh postings surfaced during this sweep of the pier.';
+  state.messageType = 'info';
+}
+
+function applyMerchantsWharfEnvironmentEffect(position, effect, result) {
+  const buildingName = (position?.building || '').toLowerCase();
+  if (buildingName !== "merchants' wharf") return;
   const context = createBuildingEncounterContext(position);
   if (!context) return;
   const state = ensureBuildingEncounterState(context);
   state.message = null;
   state.messageType = null;
   state.pierWalks = (state.pierWalks || 0) + 1;
-  const opportunity = generateMerchantsWharfOpportunity(state);
-  if (!opportunity) {
-    state.narrative.push('You walk the length of the pier, but every crew keeps their heads down with no spare contracts today.');
-    state.dynamicBoards = [];
-    state.dialogue = [];
-    state.persona = null;
-    state.managerFound = false;
-    state.lastOpportunity = null;
-    applyMerchantsWharfDynamicBoard(null);
-    state.message = 'No fresh postings surfaced during this circuit of the pier.';
-    state.messageType = 'info';
-    setBuildingEncounterState(position.building, state);
-    showNavigation();
-    return;
+
+  if (effect === 'merchants_wharf_generate_opportunity') {
+    const opportunity = generateMerchantsWharfOpportunity(state);
+    if (!opportunity) {
+      finalizeMerchantsWharfNoOpportunity(state, result);
+    } else {
+      const { persona, quest, narrative, quote } = opportunity;
+      state.dynamicBoards = [
+        {
+          name: MERCHANTS_WHARF_DYNAMIC_BOARD,
+          quests: [quest],
+        },
+      ];
+      state.dialogue = [{ persona, quote }];
+      state.persona = persona;
+      state.managerFound = true;
+      state.entryMethod = 'sweep';
+      state.lastOpportunity = quest.title || opportunity.template?.key || null;
+      const scene = result?.narrative?.scene || narrative;
+      if (scene && !state.narrative.includes(scene)) {
+        state.narrative.push(scene);
+      }
+      const outcome = result?.narrative?.outcome;
+      if (outcome && outcome !== scene && !state.narrative.includes(outcome)) {
+        state.narrative.push(outcome);
+      }
+      state.message = `A new contract is on offer: “${quest.title}”.`;
+      state.messageType = 'info';
+      applyMerchantsWharfDynamicBoard(quest);
+    }
+  } else if (effect === 'merchants_wharf_clear_opportunity') {
+    finalizeMerchantsWharfNoOpportunity(state, result);
   }
-  const { persona, quest, narrative, quote } = opportunity;
-  state.dynamicBoards = [
-    {
-      name: MERCHANTS_WHARF_DYNAMIC_BOARD,
-      quests: [quest],
-    },
-  ];
-  state.dialogue = [{ persona, quote }];
-  state.narrative.push(narrative);
-  state.persona = persona;
-  state.managerFound = true;
-  state.entryMethod = 'pier';
-  state.lastOpportunity = quest.title || opportunity.template?.key || null;
-  state.message = `A new contract is on offer: “${quest.title}”.`;
-  state.messageType = 'info';
-  applyMerchantsWharfDynamicBoard(quest);
+
   setBuildingEncounterState(position.building, state);
-  showNavigation();
 }
 
 function handleBuildingKnock(position) {
@@ -9464,9 +9488,6 @@ function showNavigation() {
               return;
             } else if (action === 'train-enchanting') {
               handleTrainingAction(pos, 'enchanting');
-              return;
-            } else if (action === 'merchants-walk-pier') {
-              handleMerchantsPierWalk(pos);
               return;
             } else if (action === 'building-knock') {
               handleBuildingKnock(pos);
