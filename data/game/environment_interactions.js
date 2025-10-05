@@ -349,7 +349,7 @@ const ENVIRONMENT_NODES = [
     actions: {
       look: {
         baseAction: 'look',
-        label: 'Look along the surf',
+        label: 'Look Around',
         narrative:
           'Foam hisses over the sand as you pause, scanning for anything obvious the tide has delivered.',
         baseChance: 0.35,
@@ -381,7 +381,7 @@ const ENVIRONMENT_NODES = [
       },
       explore: {
         baseAction: 'explore',
-        label: 'Explore the dunes',
+        label: 'Explore',
         narrative:
           'You range along the salt dunes and tidal hollows, covering ground the waves have reshaped overnight.',
         baseChance: 0.72,
@@ -424,7 +424,7 @@ const ENVIRONMENT_NODES = [
       },
       search: {
         baseAction: 'search',
-        label: 'Search Saltwash Beach',
+        label: 'Search',
         narrative:
           'Plan a deliberate search of the tidal flats, deciding which prize to pursue first.',
         baseChance: 0.55,
@@ -713,7 +713,7 @@ const ENVIRONMENT_NODES = [
     actions: {
       look: {
         baseAction: 'look',
-        label: 'Look along the reeds',
+        label: 'Look Around',
         narrative: 'You scan the reedbeds and eddies for anything obvious.',
         baseChance: 0.32,
         timeRangeHours: [0.05, 0.1],
@@ -736,7 +736,7 @@ const ENVIRONMENT_NODES = [
       },
       explore: {
         baseAction: 'explore',
-        label: 'Explore the riverbank',
+        label: 'Explore',
         narrative: 'You follow the winding river, noting fresh debris and new channels.',
         baseChance: 0.6,
         timeRangeHours: [1.2, 2.5],
@@ -767,7 +767,7 @@ const ENVIRONMENT_NODES = [
       },
       search: {
         baseAction: 'search',
-        label: 'Search the riverbank',
+        label: 'Search',
         narrative: 'Choose a focus for your careful search along the Tidebreak.',
         baseChance: 0.52,
         timeRangeHours: [0.4, 1.6],
@@ -1114,7 +1114,7 @@ const ENVIRONMENT_NODES = [
     actions: {
       look: {
         baseAction: 'look',
-        label: 'Look across the rows',
+        label: 'Look Around',
         narrative: 'You shade your eyes and scan the open fields for anyone waving you over.',
         baseChance: 0.34,
         timeRangeHours: [0.05, 0.12],
@@ -1142,7 +1142,7 @@ const ENVIRONMENT_NODES = [
       },
       search: {
         baseAction: 'search',
-        label: 'Search for someone to approach',
+        label: 'Search',
         narrative:
           'You see a tall reeve driving an ox team and a young laborer tilling a furrow; you could also head toward the homestead.',
         baseChance: 0.56,
@@ -1245,7 +1245,7 @@ const ENVIRONMENT_NODES = [
     actions: {
       look: {
         baseAction: 'look',
-        label: 'Look across the edge',
+        label: 'Look Around',
         narrative: 'You scan the tree line where field meets wood for anything obvious.',
         baseChance: 0.3,
         timeRangeHours: [0.05, 0.1],
@@ -1268,7 +1268,7 @@ const ENVIRONMENT_NODES = [
       },
       explore: {
         baseAction: 'explore',
-        label: 'Explore the hedgerows',
+        label: 'Explore',
         narrative: 'You follow game trails and fencelines where farmland gives way to shade.',
         baseChance: 0.58,
         timeRangeHours: [1, 2.5],
@@ -1299,7 +1299,7 @@ const ENVIRONMENT_NODES = [
       },
       search: {
         baseAction: 'search',
-        label: 'Search the forest edge',
+        label: 'Search',
         narrative: 'Decide what to focus on among the hedgerows and pine shadows.',
         baseChance: 0.5,
         timeRangeHours: [0.4, 1.8],
@@ -1437,7 +1437,7 @@ const ENVIRONMENT_NODES = [
     actions: {
       look: {
         baseAction: 'look',
-        label: 'Look through the pines',
+        label: 'Look Around',
         narrative: 'Salt mist drifts through the trunks as you check for obvious movement or resources.',
         baseChance: 0.32,
         timeRangeHours: [0.05, 0.1],
@@ -1460,7 +1460,7 @@ const ENVIRONMENT_NODES = [
       },
       explore: {
         baseAction: 'explore',
-        label: 'Explore the coastal wood',
+        label: 'Explore',
         narrative: 'You weave between salt-twisted trunks and mossy hollows to map the wood’s secrets.',
         baseChance: 0.6,
         timeRangeHours: [1.2, 2.7],
@@ -1488,7 +1488,7 @@ const ENVIRONMENT_NODES = [
       },
       search: {
         baseAction: 'search',
-        label: 'Search the pinewood',
+        label: 'Search',
         narrative: 'Focus on what you most need from the misty pines.',
         baseChance: 0.52,
         timeRangeHours: [0.4, 1.9],
@@ -1616,6 +1616,97 @@ const ENVIRONMENT_NODES = [
   {
     city: "Wave's Break",
     district: "The Farmlands",
+    location: "Merchants' Wharf",
+    region: 'waves_break',
+    weatherHabitat: 'coastal',
+    tags: ['coastal', 'harbor', 'pier', 'tidal'],
+    actions: {
+      look: {
+        baseAction: 'look',
+        label: 'Look Around',
+        narrative:
+          'You linger beside the Harborwatch braziers, scanning chalkboards and berth crews for new notices.',
+        baseChance: 0.45,
+        timeRangeHours: [0.1, 0.25],
+        eventChance: 0.5,
+        randomEvents: [
+          {
+            weight: 3,
+            scene: 'A berth runner gestures discreetly toward a freshly chalked slate.',
+            outcome: 'They slip you the details of a contract needing hands before the tide turns.',
+            effects: ['merchants_wharf_generate_opportunity'],
+          },
+          {
+            weight: 2,
+            scene: 'You steady a stack of logbooks as spray gusts across the pier.',
+            outcome: 'Clerks nod their thanks but urge you to stay ready in case something opens.',
+          },
+          {
+            weight: 1,
+            scene: 'Supervisors keep a tight ring around the manifests this tide.',
+            outcome: 'No one is entertaining outside help right now.',
+            effects: ['merchants_wharf_clear_opportunity'],
+          },
+        ],
+      },
+      explore: {
+        baseAction: 'explore',
+        label: 'Explore',
+        narrative: 'You trace the pier from crane to crane, gauging which crews might have room for another set of hands.',
+        baseChance: 0.65,
+        timeRangeHours: [1.2, 2.5],
+        eventChance: 0.7,
+        randomEvents: [
+          {
+            weight: 3,
+            scene: 'A Harbor Guard corporal waves you toward a lantern-lit staging area.',
+            outcome: 'They outline a contract that needs an extra set of eyes before the tide changes.',
+            effects: ['merchants_wharf_generate_opportunity'],
+          },
+          {
+            weight: 2,
+            scene: 'You help a crane crew reset a swinging cargo net before it can spill its load.',
+            outcome: 'Grateful workers promise to mention your readiness to their overseer.',
+          },
+          {
+            weight: 1,
+            scene: 'Storm-delayed barges crowd the pier and stewards hurry you along.',
+            outcome: 'Everyone is too harried to speak about extra contracts.',
+            effects: ['merchants_wharf_clear_opportunity'],
+          },
+        ],
+      },
+      search: {
+        baseAction: 'search',
+        label: 'Search',
+        narrative: 'You decide which berth leads and crane chiefs to approach first for fresh postings.',
+        baseChance: 0.55,
+        timeRangeHours: [0.6, 1.5],
+        randomEvents: [
+          {
+            weight: 3,
+            scene: 'You catch a manifest scribe hustling between berths with a sealed slate.',
+            outcome: 'They press it into your hand and tell you to move quickly before the offer closes.',
+            effects: ['merchants_wharf_generate_opportunity'],
+          },
+          {
+            weight: 2,
+            scene: 'A crane chief promises to remember your face when a crew needs relief.',
+            outcome: 'No immediate work surfaces, but you leave with a few new names to follow up on.',
+          },
+          {
+            weight: 1,
+            scene: 'Each inquiry meets polite refusals—crews are already rostered for this tide.',
+            outcome: 'You will need to check back later.',
+            effects: ['merchants_wharf_clear_opportunity'],
+          },
+        ],
+      },
+    },
+  },
+  {
+    city: "Wave's Break",
+    district: "The Farmlands",
     location: 'Cliffbreak Quarry',
     region: 'waves_break',
     weatherHabitat: 'coastal',
@@ -1646,7 +1737,7 @@ const ENVIRONMENT_NODES = [
       },
       explore: {
         baseAction: 'explore',
-        label: 'Explore the quarry paths',
+        label: 'Explore',
         narrative: 'You walk the switchbacks and chutes, checking spoil piles and side tunnels.',
         baseChance: 0.55,
         timeRangeHours: [1, 2.2],
@@ -1672,7 +1763,7 @@ const ENVIRONMENT_NODES = [
       },
       search: {
         baseAction: 'search',
-        label: 'Search the spoil heaps',
+        label: 'Search',
         narrative: 'Decide what to sift for among the broken stone and rubble.',
         baseChance: 0.48,
         timeRangeHours: [0.5, 1.8],
