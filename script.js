@@ -3889,6 +3889,26 @@ function filterPlantsForAction(actionDef) {
   });
 }
 
+function resolvePlantGatherName(plant) {
+  if (!plant) return '';
+
+  const skuNames = Array.isArray(plant.skus)
+    ? plant.skus.map(entry => entry && entry.sku).filter(Boolean)
+    : [];
+  if (skuNames.length) {
+    return pickRandom(skuNames);
+  }
+
+  const altNames = Array.isArray(plant.alt_names)
+    ? plant.alt_names.filter(Boolean)
+    : [];
+  if (altNames.length) {
+    return pickRandom(altNames);
+  }
+
+  return plant.common_name || plant.name || '';
+}
+
 function filterAnimalsForAction(actionDef, extra = {}) {
   const animals = animalsCatalogData || [];
   return animals.filter(animal => {
@@ -4454,11 +4474,14 @@ async function resolveForage(definition, actionDef, context, actionType = 'forag
     gathered = [{ common_name: fallbackName }];
   }
   const loot = [];
+  const gatheredNames = [];
   gathered.forEach(entry => {
     const qty = randomInt(1, 2);
-    const name = entry.common_name;
-    addItemToInventory({ name, category: 'Gathered Goods', price: 0, profit: 0, qty, baseItem: entry.common_name });
+    const name = resolvePlantGatherName(entry);
+    const baseItem = entry.common_name || name;
+    addItemToInventory({ name, category: 'Gathered Goods', price: 0, profit: 0, qty, baseItem });
     loot.push({ name, qty });
+    gatheredNames.push(name);
   });
 
   const skillKey = actionDef.gatherSkill || 'foraging';
@@ -4466,7 +4489,6 @@ async function resolveForage(definition, actionDef, context, actionType = 'forag
   const after = performGathering(currentCharacter, skillKey, { success: found });
   const delta = Math.round((after - before) * 100) / 100;
 
-  const gatheredNames = gathered.map(entry => entry.common_name);
   const sceneText = (actionDef.narrative || '').trim();
   const gatheredList = joinWithAnd(gatheredNames.length ? gatheredNames : ['wild herbs']);
   const outcomeText = found
