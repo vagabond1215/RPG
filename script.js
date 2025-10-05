@@ -8649,16 +8649,28 @@ function generateBuildingEncounter(buildingName, context) {
   const questInfo = findAvailableQuestForBoards(combinedBoards);
   const interactions = [];
   const labels = buildingInteractionLabels(context);
+  const envPosition = { city: context.city, district: context.district, building: buildingName };
+  const envContext = buildEnvironmentActionContext(envPosition);
+  const envActions = listEnvironmentActions(
+    context.city,
+    context.district,
+    buildingName,
+    envContext || undefined,
+  );
+  const envActionsByType = new Map(envActions.map(action => [action.type, action]));
+  const consumedEnvironmentActions = new Set();
   if (!state.managerFound) {
-    if (labels.knock) {
-      interactions.push({ action: 'building-knock', name: labels.knock.label });
-    }
-    if (labels.search) {
-      interactions.push({ action: 'building-search', name: labels.search.label });
-    }
-    if (!labels.knock && !labels.search) {
-      interactions.push({ action: 'building-search', name: 'Look around for whoever is in charge' });
-    }
+    ['look', 'explore', 'search'].forEach(type => {
+      const envAction = envActionsByType.get(type);
+      if (!envAction) return;
+      interactions.push({
+        action: buildEnvironmentActionId(type, context.city, context.district, buildingName),
+        name: envAction.label || describeEnvironmentAction(type),
+        icon: envAction.icon,
+        extraClass: 'environment-action',
+      });
+      consumedEnvironmentActions.add(type);
+    });
   } else {
     const requestLabel = questInfo?.quest?.title
       ? `Ask about “${questInfo.quest.title}”`
@@ -8674,6 +8686,7 @@ function generateBuildingEncounter(buildingName, context) {
     description: buildingDescriptionHTML(state, questInfo),
     interactions,
     questInfo,
+    consumedEnvironmentActionTypes: Array.from(consumedEnvironmentActions),
   };
 }
 
@@ -9057,6 +9070,7 @@ function showNavigation() {
         }),
       );
     });
+    const consumedEnvActionTypes = new Set(encounter?.consumedEnvironmentActionTypes || []);
     const environmentContext = buildEnvironmentActionContext(pos);
     const environmentActions = listEnvironmentActions(
       pos.city,
@@ -9065,6 +9079,7 @@ function showNavigation() {
       environmentContext || undefined,
     );
     environmentActions.forEach(envAction => {
+      if (consumedEnvActionTypes.has(envAction.type)) return;
       const actionId = buildEnvironmentActionId(
         envAction.type,
         pos.city,
