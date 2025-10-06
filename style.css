@@ -281,7 +281,8 @@ main {
   margin-top: 0.35rem;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  gap: 0.65rem;
   padding: 0;
 }
 
@@ -290,9 +291,11 @@ main {
 }
 
 .time-display-xp > .top-resource-bar {
-  width: 100%;
+  width: 200px;
   margin: 0;
-  gap: 0.4rem;
+  gap: 0;
+  grid-template-columns: 1fr;
+  flex: 0 0 auto;
 }
 
 .time-display-xp .top-resource-track {
@@ -301,12 +304,12 @@ main {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.18);
 }
 
-.time-display-xp .top-resource-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  opacity: 0.85;
-  justify-self: start;
-  text-align: left;
+.xp-job-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--menu-color-dark);
+  white-space: nowrap;
 }
 
 .top-menu-resource-bars {
