@@ -62,6 +62,14 @@ const ACTION_METADATA = {
     label: 'Tidepooling',
     icon: 'assets/images/icons/actions/Tidepooling.png',
   },
+  dive: {
+    label: 'Dive',
+    icon: 'assets/images/icons/actions/Diving.png',
+  },
+  swim: {
+    label: 'Swim',
+    icon: 'assets/images/icons/actions/Swimming.png',
+  },
 };
 
 function pickIconVariant(value) {
