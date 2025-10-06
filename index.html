@@ -161,6 +161,76 @@
 
 
 <main style="padding:1rem;"></main>
+
+  <!-- Character Creation Overlay -->
+  <section id="char-creator" class="cc is-hidden" aria-hidden="true">
+    <header class="cc-summary" aria-label="Character Summary">
+      <div class="cc-summary-left">
+        <div class="cc-portrait" aria-hidden="true"></div>
+        <div class="cc-id">
+          <label for="cc-name">Name</label>
+          <input id="cc-name" type="text" placeholder="Enter name" />
+          <div class="cc-row">
+            <label for="cc-class">Class</label>
+            <select id="cc-class"></select>
+          </div>
+          <div class="cc-row">
+            <span class="cc-level">Lv <span id="cc-level">1</span></span>
+            <div class="cc-xp">
+              <div class="cc-xp-bar" id="cc-xp-bar" style="--xp:0%"></div>
+              <span id="cc-xp-text">0 / 100</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cc-summary-stats" role="status" aria-live="polite">
+        <div class="cc-stat"><span>HP</span><strong id="cc-hp">100</strong></div>
+        <div class="cc-stat"><span>MP</span><strong id="cc-mp">50</strong></div>
+        <div class="cc-stat"><span>STR</span><strong id="cc-str">10</strong></div>
+        <div class="cc-stat"><span>DEX</span><strong id="cc-dex">8</strong></div>
+        <div class="cc-stat"><span>INT</span><strong id="cc-int">7</strong></div>
+      </div>
+
+      <!-- Settings button required during creation -->
+      <div class="cc-actions">
+        <button id="cc-settings" class="icon" title="Settings" aria-label="Settings">⚙️</button>
+        <button id="cc-save-draft">Save Draft</button>
+        <button id="cc-reset-draft" class="ghost">Reset Draft</button>
+        <button id="cc-exit" class="ghost">Exit</button>
+      </div>
+    </header>
+
+    <div class="cc-body">
+      <nav class="cc-nav" aria-label="Character Sections">
+        <button class="active" data-section="wizard">🧭 <span>Wizard</span></button>
+        <button data-section="profile">👤 <span>Profile</span></button>
+        <button data-section="stats">📊 <span>Stats</span></button>
+        <button data-section="abilities">✨ <span>Abilities</span></button>
+        <button data-section="spells">📜 <span>Spells</span></button>
+        <button data-section="equipment">🗡️ <span>Equipment</span></button>
+        <button data-section="proficiencies">🛠️ <span>Proficiencies</span></button>
+      </nav>
+
+      <main class="cc-detail" id="cc-detail" tabindex="-1">
+        <section id="cc-wizard" aria-label="Creation Wizard">
+          <div class="cc-steps" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1">
+            <div class="cc-step active" data-step="1">Profile</div>
+            <div class="cc-step" data-step="2">Class</div>
+            <div class="cc-step" data-step="3">Stats</div>
+            <div class="cc-step" data-step="4">Starter Kit</div>
+            <div class="cc-step" data-step="5">Confirm</div>
+          </div>
+          <div class="cc-step-body" id="cc-step-body"><!-- renderStep() injects here --></div>
+          <div class="cc-step-actions">
+            <button id="cc-prev" class="ghost" disabled>Back</button>
+            <button id="cc-next">Next</button>
+            <button id="cc-finish" disabled>Finish</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </section>
   </div>
 <script type="module" src="script.js"></script>
 <script>

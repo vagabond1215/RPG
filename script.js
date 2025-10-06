@@ -14275,3 +14275,325 @@ selectProfile();
 loadPreferences();
 loadCharacter();
 
+// ===== Character Creator Controller (additive) =====
+(() => {
+  const qs  = (s, r = document) => r.querySelector(s);
+  const qsa = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const byId = (id) => document.getElementById(id);
+
+  // Detect a plausible top toolbar. Try common ids/classes; fallback to first nav with vital bars.
+  const topToolbar =
+    qs('.top-menu') ||
+    qs('#top-toolbar') ||
+    qs('#topbar') ||
+    qs('.top-toolbar') ||
+    qs('nav[role="banner"]') ||
+    qs('header .top-toolbar') ||
+    // very defensive: any element that contains XP/HP/MP bars
+    qsa('*').find(el => /\b(HP|MP|XP|Stamina)\b/i.test(el.textContent || '') && el.closest('nav,header,div'));
+
+  const cc = byId('char-creator');
+  if (!cc) return;
+
+  const CLASS_OPTIONS = [
+    { value: '', label: '— Choose —' },
+    { value: 'warrior', label: 'Warrior' },
+    { value: 'ranger', label: 'Ranger' },
+    { value: 'mage', label: 'Mage' },
+  ];
+
+  const KIT_LABELS = {
+    balanced: 'Balanced',
+    offense: 'Offense',
+    defense: 'Defense',
+  };
+
+  const summaryNameInput = byId('cc-name');
+  const summaryClassSelect = byId('cc-class');
+
+  // State
+  const state = {
+    step: 1,
+    steps: 5,
+    name: '',
+    cls: '',
+    level: 1,
+    xp: 0,
+    base: { hp: 100, mp: 50, str: 10, dex: 8, int: 7 },
+    kit: 'balanced',
+    draftVersion: 1
+  };
+
+  function ensureClassOptions(select) {
+    if (!select || select.options.length) return;
+    CLASS_OPTIONS.forEach(({ value, label }) => {
+      const opt = document.createElement('option');
+      opt.value = value;
+      opt.textContent = label;
+      select.appendChild(opt);
+    });
+  }
+
+  ensureClassOptions(summaryClassSelect);
+
+  if (summaryNameInput) {
+    summaryNameInput.addEventListener('input', (event) => {
+      state.name = event.target.value;
+      syncSummary();
+    });
+  }
+
+  if (summaryClassSelect) {
+    summaryClassSelect.addEventListener('change', (event) => {
+      state.cls = event.target.value;
+      syncSummary();
+    });
+  }
+
+  // Draft persistence
+  const DRAFT_KEY = 'rpg.charCreator.draft';
+  function saveDraft() {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+  }
+  function loadDraft() {
+    const s = localStorage.getItem(DRAFT_KEY);
+    if (!s) return;
+    try {
+      const obj = JSON.parse(s);
+      Object.assign(state, obj);
+      if (!state.base) state.base = { hp: 100, mp: 50, str: 10, dex: 8, int: 7 };
+      if (!state.kit) state.kit = 'balanced';
+    } catch {}
+  }
+  function resetDraft() {
+    localStorage.removeItem(DRAFT_KEY);
+    Object.assign(state, {
+      step: 1,
+      name: '',
+      cls: '',
+      level: 1,
+      xp: 0,
+      base: { hp: 100, mp: 50, str: 10, dex: 8, int: 7 },
+      kit: 'balanced'
+    });
+    render();
+  }
+
+  // Toolbar visibility toggles
+  function hideTopToolbar() { if (topToolbar) topToolbar.classList.add('is-hidden'); }
+  function showTopToolbar() { if (topToolbar) topToolbar.classList.remove('is-hidden'); }
+
+  // Open/close
+  function startWizard() {
+    loadDraft();
+    ensureClassOptions(summaryClassSelect);
+    cc.classList.remove('is-hidden');
+    cc.setAttribute('aria-hidden', 'false');
+    hideTopToolbar(); // requirement: hide during creation
+    render();
+    // focus first input
+    const primaryInput = byId('cc-name-input') || summaryNameInput;
+    if (primaryInput) primaryInput.focus();
+  }
+  function closeWizard() {
+    cc.classList.add('is-hidden');
+    cc.setAttribute('aria-hidden', 'true');
+    showTopToolbar(); // restore on exit or finish
+  }
+
+  // Finish hook—integrate with existing app if needed
+  function finish() {
+    // Validate minimal fields
+    if (!state.name || state.name.length < 2) { alert('Please enter a name.'); return; }
+    if (!state.cls) { alert('Please choose a class.'); return; }
+    saveDraft();
+    // TODO: call your existing "create character" function if present
+    if (typeof window.createCharacter === 'function') {
+      window.createCharacter({ ...state });
+    }
+    closeWizard();
+  }
+
+  // UI bindings
+  function syncSummary() {
+    byId('cc-level').textContent = String(state.level);
+    byId('cc-xp-text').textContent = `${state.xp} / 100`;
+    byId('cc-xp-bar').style.setProperty('--xp', Math.min(100, state.xp) + '%');
+    if (summaryNameInput && summaryNameInput.value !== state.name) {
+      summaryNameInput.value = state.name || '';
+    }
+    if (summaryClassSelect) {
+      ensureClassOptions(summaryClassSelect);
+      if (summaryClassSelect.value !== state.cls) {
+        summaryClassSelect.value = state.cls || '';
+      }
+    }
+
+    byId('cc-hp').textContent = String(state.base.hp);
+    byId('cc-mp').textContent = String(state.base.mp);
+    byId('cc-str').textContent = String(state.base.str);
+    byId('cc-dex').textContent = String(state.base.dex);
+    byId('cc-int').textContent = String(state.base.int);
+
+    updateNavigationControls();
+  }
+
+  function renderStep(step) {
+    const host = byId('cc-step-body');
+    if (!host) return;
+    host.innerHTML = '';
+
+    const make = (html) => {
+      const temp = document.createElement('div'); temp.innerHTML = html.trim(); return temp.firstElementChild;
+    };
+
+    if (step === 1) {
+      host.append(
+        make(`<div class="cc-card">
+          <p>Introduce your hero and choose a name.</p>
+          <label for="cc-name-input">Name</label>
+          <input id="cc-name-input" type="text" value="${state.name || ''}" autocomplete="name" />
+          <p class="cc-hint">This syncs with the summary field above.</p>
+        </div>`)
+      );
+    } else if (step === 2) {
+      host.append(
+        make(`<div class="cc-card">
+          <p>Select a class:</p>
+          <label for="cc-class-select" class="sr-only">Class</label>
+          <select id="cc-class-select"></select>
+          <p class="cc-hint">Class choice updates the summary dropdown automatically.</p>
+        </div>`)
+      );
+    } else if (step === 3) {
+      host.append(
+        make(`<div class="cc-card">
+          <p>Allocate base stats (you can refine later):</p>
+          <div class="cc-grid">
+            ${['hp','mp','str','dex','int'].map(k => `
+              <label>${k.toUpperCase()}
+                <input data-stat="${k}" type="number" min="1" step="1" value="${state.base[k]}" />
+              </label>`).join('')}
+          </div>
+        </div>`)
+      );
+    } else if (step === 4) {
+      host.append(
+        make(`<div class="cc-card">
+          <p>Pick a starter kit:</p>
+          <label class="cc-radio"><input type="radio" name="kit" value="balanced"> Balanced</label>
+          <label class="cc-radio"><input type="radio" name="kit" value="offense"> Offense</label>
+          <label class="cc-radio"><input type="radio" name="kit" value="defense"> Defense</label>
+        </div>`)
+      );
+    } else if (step === 5) {
+      host.append(
+        make(`<div class="cc-card">
+          <h3>Confirm</h3>
+          <p><strong>Name:</strong> ${state.name || '—'}</p>
+          <p><strong>Class:</strong> ${state.cls || '—'}</p>
+          <p><strong>Stats:</strong> HP ${state.base.hp}, MP ${state.base.mp}, STR ${state.base.str}, DEX ${state.base.dex}, INT ${state.base.int}</p>
+          <p><strong>Starter Kit:</strong> ${KIT_LABELS[state.kit] || state.kit}</p>
+        </div>`)
+      );
+    }
+
+    // Wire inputs after render
+    const name = byId('cc-name-input');
+    if (name) {
+      name.addEventListener('input', (e) => {
+        state.name = e.target.value;
+        if (summaryNameInput && summaryNameInput.value !== state.name) {
+          summaryNameInput.value = state.name;
+        }
+        syncSummary();
+      });
+      name.focus();
+    }
+
+    const classSelect = byId('cc-class-select');
+    if (classSelect) {
+      ensureClassOptions(classSelect);
+      classSelect.value = state.cls || '';
+      classSelect.addEventListener('change', (e) => {
+        state.cls = e.target.value;
+        if (summaryClassSelect && summaryClassSelect.value !== state.cls) {
+          summaryClassSelect.value = state.cls;
+        }
+        syncSummary();
+      });
+      classSelect.focus();
+    }
+
+    qsa('input[data-stat]', host).forEach(inp => {
+      inp.addEventListener('input', (e) => {
+        const k = e.target.getAttribute('data-stat');
+        const v = parseInt(e.target.value || '0', 10);
+        if (Number.isFinite(v)) state.base[k] = v;
+        syncSummary();
+      });
+    });
+
+    qsa('input[name="kit"]', host).forEach(inp => {
+      inp.checked = inp.value === state.kit;
+      inp.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          state.kit = e.target.value;
+        }
+      });
+    });
+    const firstInteractive = host.querySelector('input, select, button');
+    if (firstInteractive && !firstInteractive.matches(':focus')) {
+      firstInteractive.focus();
+    }
+  }
+
+  function render() {
+    state.step = Math.min(Math.max(state.step, 1), state.steps);
+    // step pills
+    qsa('.cc-step').forEach(s => s.classList.toggle('active', Number(s.dataset.step) === state.step));
+    const stepsEl = qs('.cc-steps', cc);
+    if (stepsEl) {
+      stepsEl.setAttribute('aria-valuenow', String(state.step));
+      stepsEl.setAttribute('aria-valuetext', `Step ${state.step} of ${state.steps}`);
+    }
+    syncSummary();
+    renderStep(state.step);
+  }
+
+  function updateNavigationControls() {
+    const prev = byId('cc-prev');
+    const next = byId('cc-next');
+    const finishBtn = byId('cc-finish');
+    if (prev) prev.disabled = state.step <= 1;
+    if (next) next.disabled = state.step >= state.steps;
+    if (finishBtn) finishBtn.disabled = state.step !== state.steps || !(state.name?.length >= 2 && state.cls);
+  }
+
+  // Buttons
+  byId('cc-prev').addEventListener('click', () => { state.step = Math.max(1, state.step - 1); render(); });
+  byId('cc-next').addEventListener('click', () => { state.step = Math.min(state.steps, state.step + 1); render(); });
+  byId('cc-finish').addEventListener('click', finish);
+  byId('cc-save-draft').addEventListener('click', saveDraft);
+  byId('cc-reset-draft').addEventListener('click', resetDraft);
+  byId('cc-exit').addEventListener('click', closeWizard);
+
+  // Settings (placeholder: open your existing settings panel if any)
+  const settingsBtn = byId('cc-settings');
+  if (settingsBtn) settingsBtn.addEventListener('click', () => {
+    // TODO: integrate with real settings UI
+    alert('Settings panel coming soon.');
+  });
+
+  // Public API
+  window.charCreator = {
+    startWizard, finish, saveDraft, loadDraft, resetDraft
+  };
+
+  // Optionally auto-start if no character exists
+  if (!window.hasActiveCharacter) {
+    // Call this when "New Character" is clicked in your UI instead
+    // startWizard();
+  }
+})();
+
