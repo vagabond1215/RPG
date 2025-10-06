@@ -4111,8 +4111,20 @@ function evaluateRestEnvironment(pos = {}) {
 function handleRestAction(pos, hours = null) {
   if (!currentCharacter) return;
   ensureResourceBounds(currentCharacter);
+  const maxStamina = Number(currentCharacter.maxStamina) || 0;
+  const currentStamina = Number(currentCharacter.stamina) || 0;
+  const staminaShortfall = Math.max(0, Math.round((maxStamina - currentStamina) * 100) / 100);
+  if (maxStamina <= 0 || staminaShortfall <= 0) {
+    pushLocationLogEntry(pos, {
+      kind: 'message',
+      tone: 'info',
+      title: 'Rest unnecessary',
+      body: 'You are already at full stamina and lose no time to resting.',
+      timeAfter: { days: 0, timeOfDay: currentCharacter.timeOfDay },
+    });
+    return;
+  }
   const restContext = evaluateRestEnvironment(pos || {});
-  const restHours = Number.isFinite(hours) && hours > 0 ? Math.max(0.1, Number(hours)) : randomRestDurationHours();
   const baseProfile =
     resolveActionStaminaProfile({ baseAction: 'rest' }, 'rest') ||
     { recovery: ACTION_STAMINA_PROFILES.rest?.recovery || 1, recoveryType: 'conventional' };
@@ -4121,6 +4133,19 @@ function handleRestAction(pos, hours = null) {
     recovery: (baseProfile.recovery || 0) * restContext.recoveryMultiplier,
   };
   const preRestAwake = ensureHoursAwake(currentCharacter);
+  const recoveryMultiplier =
+    effectiveProfile.recoveryType === 'unconventional'
+      ? 1
+      : computeConventionalRecoveryMultiplier(preRestAwake);
+  const perHourRecovery = (effectiveProfile.recovery || 0) * STAMINA_RECOVERY_RATE * recoveryMultiplier;
+  let restHours = 0;
+  if (perHourRecovery > 0) {
+    restHours = staminaShortfall / perHourRecovery;
+  }
+  if (!Number.isFinite(restHours) || restHours <= 0) {
+    restHours = Number.isFinite(hours) && hours > 0 ? Math.max(0.1, Number(hours)) : randomRestDurationHours();
+  }
+  restHours = Math.max(1 / 3600, Math.round(restHours * 1000) / 1000);
   const timeResult = advanceCharacterTime(restHours, { countsAsAwake: false });
   const staminaChange = applyActionStaminaProfile(currentCharacter, effectiveProfile, restHours, {
     hoursAwakeOverride: preRestAwake,
@@ -4138,6 +4163,9 @@ function handleRestAction(pos, hours = null) {
   }
   let tone = 'info';
   if (staminaChange && staminaChange.delta > 0) {
+    if (staminaChange.after >= maxStamina - 0.01) {
+      parts.push('You rest only until your stamina is fully recovered.');
+    }
     parts.push(
       `Stamina ${staminaChange.delta > 0 ? '+' : ''}${formatResourceNumber(staminaChange.delta)} (now ${formatResourceNumber(currentCharacter.stamina)} / ${formatResourceNumber(currentCharacter.maxStamina)}).`,
     );
@@ -4777,10 +4805,7 @@ async function handleEnvironmentInteraction(actionId, pos) {
     const estimatedCost = estimateActionStaminaCost(staminaProfileForCheck, estimatedHours) * 1.1;
     const available = Number(currentCharacter?.stamina) || 0;
     if (estimatedCost > 0 && available < estimatedCost) {
-      const rawLabel =
-        resolvedActionDef.label || describeEnvironmentAction(parsed.actionType) || 'this action';
-      const labelText = String(rawLabel).trim() || 'this action';
-      const requirementMessage = `You estimate the effort to ${labelText.toLowerCase()} would cost about ${formatResourceNumber(estimatedCost)} stamina, but you only have ${formatResourceNumber(available)}.`;
+      const requirementMessage = 'You feel too exhausted and need to rest before attempting that.';
       pushLocationLogEntry(pos, {
         kind: 'message',
         tone: 'warning',
