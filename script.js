@@ -1074,6 +1074,7 @@ const menuCharacterNameLabel = document.getElementById('menu-character-name');
 const menuMoneyLabel = document.getElementById('menu-money');
 const menuTimeDisplay = document.getElementById('menu-time');
 const menuXpSlot = menuTimeDisplay ? menuTimeDisplay.querySelector('.time-display-xp') : null;
+const menuJobLevelLabel = document.getElementById('menu-job-level');
 const menuTimeLabelText = menuTimeDisplay ? menuTimeDisplay.querySelector('.time-label') : null;
 const menuTimeClockText = menuTimeDisplay ? menuTimeDisplay.querySelector('.time-clock') : null;
 const menuTimeIcon = document.getElementById('menu-time-icon');
@@ -1607,6 +1608,20 @@ function updateTopMenuIndicators() {
   const today = worldCalendar.today();
   const season = getSeasonForDate(today);
   let clock = null;
+  const jobName = currentCharacter ? (currentCharacter.class || '').trim() || 'Adventurer' : '';
+  const jobLabel = jobName || 'Adventurer';
+  const levelNumber = Math.max(1, Number(currentCharacter?.level) || 1);
+  if (menuJobLevelLabel) {
+    if (currentCharacter) {
+      menuJobLevelLabel.textContent = `${jobLabel} ${levelNumber}`;
+      menuJobLevelLabel.setAttribute('title', `${jobLabel} · Level ${levelNumber}`);
+      menuJobLevelLabel.setAttribute('aria-label', `Current vocation: ${jobLabel}, level ${levelNumber}`);
+    } else {
+      menuJobLevelLabel.textContent = '—';
+      menuJobLevelLabel.setAttribute('title', 'Class and level unavailable');
+      menuJobLevelLabel.setAttribute('aria-label', 'Class and level unavailable');
+    }
+  }
   if (menuDateLabel) {
     menuDateLabel.textContent = currentDate;
     menuDateLabel.setAttribute('title', `Date: ${currentDate}`);
@@ -1697,17 +1712,16 @@ function updateTopMenuIndicators() {
         currentCharacter.maxStamina,
         'Stamina',
       );
-      const level = Number(currentCharacter.level) || 1;
       const totalXp = Math.max(0, Number(currentCharacter.xp) || 0);
-      const levelFloor = totalXpForLevel(level);
+      const levelFloor = totalXpForLevel(levelNumber);
       const xpIntoLevel = Math.max(0, totalXp - levelFloor);
-      const xpNeededRaw = xpForNextLevel(level);
+      const xpNeededRaw = xpForNextLevel(levelNumber);
       const xpNeeded = xpNeededRaw > 0 ? xpNeededRaw : Math.max(1, xpIntoLevel || 1);
       const xpCurrent = xpNeededRaw > 0 ? Math.min(xpIntoLevel, xpNeeded) : xpNeeded;
-      updateResourceBarElement(menuResourceBars.xp, xpCurrent, xpNeeded, `XP (Lv ${level})`);
+      updateResourceBarElement(menuResourceBars.xp, xpCurrent, xpNeeded, 'Experience');
       const xpTooltip = xpNeededRaw > 0
-        ? `XP: ${formatResourceNumber(xpIntoLevel)} / ${formatResourceNumber(xpNeededRaw)} (Total ${formatResourceNumber(totalXp)})`
-        : `XP: ${formatResourceNumber(totalXp)} (Max level)`;
+        ? `${jobLabel} Lv ${levelNumber} · XP: ${formatResourceNumber(xpIntoLevel)} / ${formatResourceNumber(xpNeededRaw)} (Total ${formatResourceNumber(totalXp)})`
+        : `${jobLabel} Lv ${levelNumber} · XP: ${formatResourceNumber(totalXp)} (Max level)`;
       if (menuResourceBars.xp) {
         menuResourceBars.xp.setAttribute('data-tooltip', xpTooltip);
         menuResourceBars.xp.setAttribute('aria-valuetext', xpTooltip);
@@ -10467,22 +10481,7 @@ function showCharacterUI() {
   const statsList = ['STR','DEX','CON','VIT','AGI','INT','WIS','CHA','LCK']
     .map(attr => `<li>${attr}: ${stats[attr] ?? 0}</li>`)
     .join('');
-  const resourceBars = (() => {
-    const hpPct = c.maxHP ? (c.hp / c.maxHP) * 100 : 0;
-    const mpPct = c.maxMP ? (c.mp / c.maxMP) * 100 : 0;
-    const staPct = c.maxStamina ? (c.stamina / c.maxStamina) * 100 : 0;
-    const xpNeed = xpForNextLevel(c.level);
-    const hpColor = hpPct > 0 ? '#fff' : '#000';
-    const mpColor = mpPct > 0 ? '#fff' : '#000';
-    const stColor = staPct > 0 ? '#fff' : '#000';
-    return `
-      <div class="resource-bar hp"><div class="fill" style="width:${hpPct}%"></div><span class="value" style="color:${hpColor}">HP: ${c.hp} / ${c.maxHP}</span></div>
-      <div class="resource-bar mp"><div class="fill" style="width:${mpPct}%"></div><span class="value" style="color:${mpColor}">MP: ${c.mp} / ${c.maxMP}</span></div>
-      <div class="resource-bar stamina"><div class="fill" style="width:${staPct}%"></div><span class="value" style="color:${stColor}">ST: ${c.stamina} / ${c.maxStamina}</span></div>
-      <p class="xp-display">XP: ${c.xp} / ${xpNeed}</p>
-    `;
-  })();
-  const statsHTML = `<h2>Current Stats</h2><div class="stats-resource-grid"><ul class="stats-list">${statsList}</ul><div class="resource-column">${resourceBars}</div></div>`;
+  const statsHTML = `<h2>Current Stats</h2><ul class="stats-list">${statsList}</ul>`;
   const backstoryHTML = c.backstory
     ? `<div class="backstory-block"><h2>Backstory</h2><p><strong>${c.backstory.background}</strong> - ${c.backstory.past}</p><p>${c.backstory.narrative}</p></div>`
     : '';
