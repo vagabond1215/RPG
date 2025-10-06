@@ -3981,6 +3981,187 @@ function describeWeatherSummary(weather) {
   return parts.join(', ');
 }
 
+function formatHourValue(hours) {
+  const value = Number(hours);
+  if (!Number.isFinite(value) || value <= 0) return null;
+  if (value < 1) {
+    const minutes = Math.round(value * 60);
+    if (minutes <= 0) return null;
+    return `${minutes} min`;
+  }
+  const rounded = Math.round(value * 10) / 10;
+  if (Math.abs(rounded - Math.round(rounded)) < 0.05) {
+    const whole = Math.round(rounded);
+    return `${whole} hr${whole === 1 ? '' : 's'}`;
+  }
+  return `${rounded.toFixed(1)} hrs`;
+}
+
+function formatSearchTimeEstimate(actionDef = {}, category = {}) {
+  const range = Array.isArray(category.timeRangeHours)
+    ? category.timeRangeHours
+    : Array.isArray(actionDef.timeRangeHours)
+    ? actionDef.timeRangeHours
+    : null;
+  if (range && range.length >= 2) {
+    const minLabel = formatHourValue(range[0]);
+    const maxLabel = formatHourValue(range[1]);
+    if (minLabel && maxLabel) {
+      if (minLabel === maxLabel) return minLabel;
+      return `${minLabel} – ${maxLabel}`;
+    }
+  }
+  const hours = Number.isFinite(category.timeHours)
+    ? category.timeHours
+    : Number.isFinite(actionDef.timeHours)
+    ? actionDef.timeHours
+    : null;
+  const label = formatHourValue(hours);
+  return label || 'Varies';
+}
+
+function formatSearchChanceEstimate(actionDef = {}, category = {}) {
+  const chance = Number.isFinite(category.baseChance)
+    ? category.baseChance
+    : Number.isFinite(actionDef.baseChance)
+    ? actionDef.baseChance
+    : null;
+  if (!Number.isFinite(chance)) return null;
+  const bounded = Math.max(0, Math.min(1, chance));
+  return `${Math.round(bounded * 100)}% chance`;
+}
+
+function uniqueNonEmptyStrings(values) {
+  const seen = new Set();
+  const results = [];
+  values.filter(Boolean).forEach(value => {
+    if (!seen.has(value)) {
+      seen.add(value);
+      results.push(value);
+    }
+  });
+  return results;
+}
+
+function buildSearchMinigameHeader(definition, context, position) {
+  const locationName = definition.location || 'the area';
+  const localeParts = uniqueNonEmptyStrings([
+    position?.building && position.building !== locationName ? position.building : null,
+    position?.district,
+    position?.city,
+  ]);
+  const contextParts = [];
+  if (localeParts.length) contextParts.push(localeParts.join(' • '));
+  if (context?.timeLabel) contextParts.push(context.timeLabel);
+  if (context?.season) contextParts.push(context.season);
+  const weatherSummary = context?.weather ? formatWeatherSummary(context.weather) : null;
+  if (weatherSummary) contextParts.push(weatherSummary);
+  const contextHTML = contextParts.length
+    ? `<p class="search-minigame-context">${contextParts.map(part => escapeHtml(part)).join(' • ')}</p>`
+    : '';
+  const intro = actionDef =>
+    actionDef?.narrative
+      ? `<p class="search-minigame-intro">${escapeHtml(actionDef.narrative)}</p>`
+      : '';
+  return { locationName, contextHTML, intro };
+}
+
+function renderSearchMinigameHTML(definition, actionDef, categories, context, position) {
+  const { locationName, contextHTML, intro } = buildSearchMinigameHeader(definition, context, position);
+  const introHTML = intro(actionDef);
+  const optionsHTML = categories
+    .map((category, index) => {
+      const label = category.label || category.key || `Option ${index + 1}`;
+      const detail = category.narrative || '';
+      const timeEstimate = formatSearchTimeEstimate(actionDef, category);
+      const chanceEstimate = formatSearchChanceEstimate(actionDef, category);
+      const metrics = [];
+      if (timeEstimate) metrics.push(`<span class="search-minigame-badge">${escapeHtml(timeEstimate)}</span>`);
+      if (chanceEstimate) metrics.push(`<span class="search-minigame-badge">${escapeHtml(chanceEstimate)}</span>`);
+      const metricsHTML = metrics.length
+        ? `<div class="search-minigame-metrics">${metrics.join('')}</div>`
+        : '';
+      return `
+        <button type="button" class="search-minigame-choice" data-index="${index}">
+          <span class="search-minigame-choice-title">${escapeHtml(label)}</span>
+          ${detail ? `<span class="search-minigame-choice-text">${escapeHtml(detail)}</span>` : ''}
+          ${metricsHTML}
+        </button>
+      `;
+    })
+    .join('');
+  return `
+    <div class="search-minigame">
+      <div class="search-minigame-header">
+        <h2>Search ${escapeHtml(locationName)}</h2>
+        ${contextHTML}
+        ${introHTML}
+      </div>
+      <div class="search-minigame-grid">
+        ${optionsHTML}
+      </div>
+      <div class="search-minigame-actions">
+        <button type="button" class="search-minigame-cancel">Back</button>
+      </div>
+    </div>
+  `;
+}
+
+function presentSearchMinigame(definition, actionDef, categories, context, position) {
+  if (!Array.isArray(categories) || categories.length === 0) {
+    return Promise.resolve(null);
+  }
+  return new Promise(resolve => {
+    hideBackButton();
+    const html = renderSearchMinigameHTML(definition, actionDef, categories, context, position);
+    setMainHTML(html);
+    updateMenuHeight();
+    normalizeOptionButtonWidths();
+    if (main) {
+      try {
+        if (typeof main.scrollTo === 'function') {
+          main.scrollTo({ top: 0, behavior: 'auto' });
+        } else {
+          main.scrollTop = 0;
+        }
+      } catch (err) {
+        main.scrollTop = 0;
+      }
+    }
+    let settled = false;
+    const finalize = value => {
+      if (settled) return;
+      settled = true;
+      document.removeEventListener('keydown', handleKeydown, true);
+      resolve(value);
+    };
+    const handleKeydown = event => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        finalize(null);
+      }
+    };
+    document.addEventListener('keydown', handleKeydown, true);
+    const container = main;
+    if (!container) {
+      finalize(categories[0] || null);
+      return;
+    }
+    container.querySelectorAll('.search-minigame-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (settled) return;
+        const index = Number.parseInt(btn.dataset.index, 10);
+        const choice = Number.isInteger(index) ? categories[index] : null;
+        finalize(choice || null);
+      });
+    });
+    const cancelBtn = container.querySelector('.search-minigame-cancel');
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', () => finalize(null));
+    }
+  });
+}
+
 async function handleEnvironmentInteraction(actionId, pos) {
   if (!currentCharacter) return;
   const parsed = parseEnvironmentActionId(actionId);
@@ -4021,9 +4202,39 @@ async function handleEnvironmentInteraction(actionId, pos) {
   }
 
   const context = buildEnvironmentContext(definition, actionDef, pos);
+  let resolvedActionDef = actionDef;
+  const actionCategories = Array.isArray(actionDef.categories)
+    ? actionDef.categories.filter(Boolean)
+    : [];
+  const isSearchAction =
+    parsed.actionType === 'search' || actionDef.baseAction === 'search' || actionCategories.length > 0;
+  if (isSearchAction && actionCategories.length) {
+    let chosenCategory = null;
+    if (actionCategories.length === 1) {
+      chosenCategory = actionCategories[0];
+    } else {
+      try {
+        chosenCategory = await presentSearchMinigame(
+          definition,
+          actionDef,
+          actionCategories,
+          context,
+          pos,
+        );
+      } catch (err) {
+        console.error('Failed to present search minigame', err);
+        chosenCategory = null;
+      }
+    }
+    if (!chosenCategory) {
+      showNavigation();
+      return;
+    }
+    resolvedActionDef = { ...actionDef, selectedCategory: chosenCategory };
+  }
   let result;
   try {
-    result = await resolveEnvironmentAction(parsed.actionType, definition, actionDef, context);
+    result = await resolveEnvironmentAction(parsed.actionType, definition, resolvedActionDef, context);
   } catch (err) {
     console.error('Failed to resolve environment interaction', err);
     pushLocationLogEntry(pos, {
@@ -4225,24 +4436,20 @@ async function resolveSearchAction(actionType, definition, actionDef = {}, conte
   if (!categories.length) {
     return resolveObservationAction(actionType, definition, actionDef, context);
   }
-  let choice = categories[0];
-  if (typeof prompt === 'function') {
-    const promptLines = categories.map((cat, idx) => `${idx + 1}. ${cat.label || cat.key || 'Option'}`);
-    const response = prompt(`What will you search for?\n${promptLines.join('\n')}`);
-    if (response) {
-      const trimmed = response.trim();
-      const index = Number.parseInt(trimmed, 10);
-      if (Number.isFinite(index) && index >= 1 && index <= categories.length) {
-        choice = categories[index - 1];
-      } else {
-        const lower = trimmed.toLowerCase();
-        const found = categories.find(cat => (cat.key || '').toLowerCase() === lower || (cat.label || '').toLowerCase() === lower);
-        if (found) choice = found;
-      }
-    }
+  let choice = actionDef.selectedCategory || categories[0];
+  if (choice && typeof choice === 'string') {
+    const lowerKey = choice.toLowerCase();
+    const match = categories.find(
+      cat => (cat.key || '').toLowerCase() === lowerKey || (cat.label || '').toLowerCase() === lowerKey,
+    );
+    choice = match || choice;
+  }
+  if (!choice || typeof choice !== 'object') {
+    choice = categories[0];
   }
   const merged = { ...actionDef, ...choice };
   delete merged.categories;
+  delete merged.selectedCategory;
   merged.label = choice.label || merged.label;
   merged.narrative = choice.narrative || merged.narrative || actionDef.narrative;
   merged.baseAction = choice.baseAction || merged.baseAction;
