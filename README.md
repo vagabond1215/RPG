@@ -85,6 +85,10 @@ Outdoor actions now drain or replenish stamina according to intensity and recove
   - `data/game/party.ts` – party structs, resources, effects, and NPC proficiency policy
   - `data/game/locations.ts` – city and region definitions with map references
 
+### Referencing image assets
+
+When a UI feature depends on an image that is not yet available, keep the code pointed at the final path so the asset loads automatically once it is added. Commit an empty placeholder named for the missing file (for example, `rest.png.gitkeep`) so Git tracks the exact asset location without requiring temporary artwork.
+
 Additional functionality will be added over time.
 
 ### Trainers

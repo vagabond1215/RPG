@@ -114,6 +114,9 @@ const NAV_ICONS = {
 };
 
 const QUEST_BOARD_ICON = 'assets/images/icons/Quests.png';
+const REST_ACTION_ICON = 'assets/images/icons/actions/Rest.png';
+const REST_BASE_DURATION_MINUTES = 30;
+const REST_DURATION_VARIANCE_MINUTES = 8;
 
 const ADVENTURERS_GUILD_RANK_ORDER = [
   'None',
@@ -3697,6 +3700,32 @@ function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+function clampChance(value) {
+  if (!Number.isFinite(value)) return 0;
+  if (value < 0) return 0;
+  if (value > 1) return 1;
+  return value;
+}
+
+function adjustTimeRange(range, multiplier = 1, bonus = 0) {
+  if (!Array.isArray(range) || range.length < 2) return null;
+  let [min, max] = range;
+  min = Number.isFinite(min) ? min : 0;
+  max = Number.isFinite(max) ? max : min;
+  if (!Number.isFinite(min) && !Number.isFinite(max)) return null;
+  if (Number.isFinite(multiplier) && multiplier !== 1) {
+    min *= multiplier;
+    max *= multiplier;
+  }
+  if (Number.isFinite(bonus) && bonus !== 0) {
+    min += bonus;
+    max += bonus;
+  }
+  min = Math.max(0, min);
+  max = Math.max(min, max);
+  return [min, max];
+}
+
 function determineActionTime(actionDef) {
   if (Array.isArray(actionDef?.timeRangeHours) && actionDef.timeRangeHours.length >= 2) {
     const [min, max] = actionDef.timeRangeHours;
@@ -3706,6 +3735,29 @@ function determineActionTime(actionDef) {
     return actionDef.timeHours;
   }
   return 1;
+}
+
+function estimateActionDurationHours(actionDef = {}) {
+  if (Array.isArray(actionDef.timeRangeHours) && actionDef.timeRangeHours.length >= 2) {
+    const [min, max] = actionDef.timeRangeHours;
+    const low = Number.isFinite(min) ? Math.max(0, Number(min)) : 0;
+    const high = Number.isFinite(max) ? Math.max(0, Number(max)) : low;
+    if (low === high) return low;
+    return (low + high) / 2;
+  }
+  if (Number.isFinite(actionDef.timeHours)) {
+    return Math.max(0, Number(actionDef.timeHours));
+  }
+  return 1;
+}
+
+function estimateActionStaminaCost(profile, hours = 0) {
+  if (!profile) return 0;
+  const intensity = Math.max(0, Number(profile.intensity) || 0);
+  if (intensity <= 0) return 0;
+  const time = Math.max(0, Number(hours) || 0);
+  if (time <= 0) return 0;
+  return intensity * STAMINA_INTENSITY_RATE * time;
 }
 
 function ensureResourceBounds(character) {
@@ -3815,19 +3867,261 @@ function applyActionStaminaProfile(character, profile, hours = 0, options = {}) 
   };
 }
 
-function handleRestAction(pos, hours = 6) {
+function randomRestDurationHours() {
+  const variation = Math.round(
+    randomInRange(-REST_DURATION_VARIANCE_MINUTES, REST_DURATION_VARIANCE_MINUTES),
+  );
+  let minutes = REST_BASE_DURATION_MINUTES + variation;
+  if (!Number.isFinite(minutes)) minutes = REST_BASE_DURATION_MINUTES;
+  minutes = Math.max(20, Math.min(45, minutes));
+  return minutes / 60;
+}
+
+function evaluateRestEnvironment(pos = {}) {
+  const buildingName = pos.building || '';
+  const districtName = pos.district || '';
+  const cityName = pos.city || '';
+  const locationLabel = buildingName || districtName || cityName || 'here';
+  const definition = getEnvironmentDefinition(pos.city, pos.district, pos.building);
+  const rawTags = Array.isArray(definition?.tags) ? definition.tags : [];
+  const tags = new Set(rawTags.map(tag => String(tag).toLowerCase()));
+  const noteSet = new Set();
+  const addNote = text => {
+    if (text) noteSet.add(text);
+  };
+  const isSheltered = Boolean(buildingName) || tags.has('indoors') || tags.has('sheltered');
+  let comfort = isSheltered ? 1.15 : 0.95;
+  let risk = isSheltered ? 0.08 : 0.28;
+
+  const applyPatternModifiers = (name, modifiers) => {
+    if (!name) return;
+    const lower = String(name).toLowerCase();
+    modifiers.forEach(mod => {
+      if (!mod?.pattern) return;
+      if (mod.pattern.test(lower)) {
+        if (Number.isFinite(mod.comfort)) comfort += mod.comfort;
+        if (Number.isFinite(mod.risk)) risk += mod.risk;
+        addNote(mod.note);
+      }
+    });
+  };
+
+  const comfortableBuildingPatterns = [
+    {
+      pattern:
+        /(inn|tavern|rest|lodge|hotel|hostel|guest|manse|villa|estate|hall|bath|spa|sanctuary|temple|church|chapel|shrine)/i,
+      comfort: 0.35,
+      risk: -0.06,
+      note: 'Shelter and amenities promise a cozy respite.',
+    },
+    {
+      pattern: /(clinic|hospital|healer|infirmary|apothecary)/i,
+      comfort: 0.25,
+      risk: -0.05,
+      note: 'Healers keep a quiet watch while you recover.',
+    },
+  ];
+  const harshBuildingPatterns = [
+    {
+      pattern: /(forge|smith|mill|workshop|dock|warehouse|yard|barracks|garrison|armory|mine|quarry|pit|smelter|factory)/i,
+      comfort: -0.25,
+      risk: 0.08,
+      note: 'Noise and hard benches make it tough to relax.',
+    },
+    {
+      pattern: /(crypt|catacomb|tomb|ruin|cavern|cave|sewer)/i,
+      comfort: -0.3,
+      risk: 0.12,
+      note: 'Oppressive surroundings keep your senses sharp.',
+    },
+  ];
+  const comfortableDistrictPatterns = [
+    {
+      pattern: /(garden|park|plaza|temple|residential|campus|library|guild)/i,
+      comfort: 0.18,
+      risk: -0.05,
+      note: 'The district feels calm and secure.',
+    },
+    {
+      pattern: /(market|ward|square)/i,
+      comfort: 0.08,
+      risk: -0.02,
+      note: 'Familiar bustle provides a comforting backdrop.',
+    },
+  ];
+  const harshDistrictPatterns = [
+    {
+      pattern: /(dock|port|industrial|slum|yard|warehouse|barracks|armory|outskirts|alley|works)/i,
+      comfort: -0.22,
+      risk: 0.12,
+      note: 'The area is noisy and exposed.',
+    },
+    {
+      pattern: /(wild|ruin|crypt|catacomb)/i,
+      comfort: -0.26,
+      risk: 0.14,
+      note: 'Lingering dangers keep you from relaxing.',
+    },
+  ];
+
+  applyPatternModifiers(buildingName, comfortableBuildingPatterns);
+  applyPatternModifiers(buildingName, harshBuildingPatterns);
+  applyPatternModifiers(districtName, comfortableDistrictPatterns);
+  applyPatternModifiers(districtName, harshDistrictPatterns);
+
+  const tagModifiers = [
+    { tag: 'urban', comfort: 0.08, risk: -0.03, note: 'Urban comforts are close at hand.' },
+    { tag: 'residential', comfort: 0.12, risk: -0.05, note: 'Nearby homes lend a sense of security.' },
+    { tag: 'temple', comfort: 0.18, risk: -0.06, note: 'Sacred wards help you relax.' },
+    { tag: 'sanctuary', comfort: 0.22, risk: -0.08, note: 'Protective wards hush outside dangers.' },
+    { tag: 'guild', comfort: 0.08, risk: -0.03, note: 'Guild stewards keep a watchful eye on the area.' },
+    { tag: 'farmland', comfort: 0.07, risk: -0.04, note: 'Cultivated land feels orderly and safe.' },
+    { tag: 'garden', comfort: 0.12, risk: -0.04, note: 'Manicured paths soothe your senses.' },
+    { tag: 'park', comfort: 0.12, risk: -0.04, note: 'Green spaces make resting easy.' },
+    { tag: 'harbor', comfort: -0.08, risk: 0.08, note: 'Harbor winds and creaking docks keep you alert.' },
+    { tag: 'coastal', comfort: -0.08, risk: 0.08, note: 'Salt wind leaves you exposed.' },
+    { tag: 'tidal', comfort: -0.12, risk: 0.08, note: 'Shifting tides keep you wary.' },
+    { tag: 'beach', comfort: -0.09, risk: 0.06, note: 'Sand and surf make rest less comfortable.' },
+    { tag: 'wetland', comfort: -0.1, risk: 0.1, note: 'Damp ground saps restful sleep.' },
+    { tag: 'marsh', comfort: -0.1, risk: 0.1, note: 'Marsh sounds keep you alert.' },
+    { tag: 'swamp', comfort: -0.12, risk: 0.12, note: 'Swamp mists carry hidden dangers.' },
+    { tag: 'forest', comfort: -0.05, risk: 0.08, note: 'Forest sounds keep your senses pricked.' },
+    { tag: 'wilderness', comfort: -0.18, risk: 0.18, note: 'Untamed wilds hum with potential danger.' },
+    { tag: 'wild', comfort: -0.18, risk: 0.18, note: 'Untamed wilds hum with potential danger.' },
+    { tag: 'dangerous', comfort: -0.22, risk: 0.22, note: 'Recent threats keep you alert.' },
+    { tag: 'cave', comfort: -0.2, risk: 0.16, note: 'The dark cave presses in around you.' },
+    { tag: 'underground', comfort: -0.16, risk: 0.12, note: 'Subterranean echoes unsettle your nerves.' },
+    { tag: 'industrial', comfort: -0.16, risk: 0.1, note: 'Clanging machinery disrupts your rest.' },
+  ];
+
+  tagModifiers.forEach(mod => {
+    if (mod.tag && tags.has(mod.tag)) {
+      if (Number.isFinite(mod.comfort)) comfort += mod.comfort;
+      if (Number.isFinite(mod.risk)) risk += mod.risk;
+      addNote(mod.note);
+    }
+  });
+
+  const regionKey = definition?.region || CITY_SLUGS[cityName] || 'waves_break';
+  const habitat =
+    definition?.weatherHabitat || definition?.habitat || (isSheltered ? 'urban' : 'farmland');
+  let weather = null;
+  try {
+    weather = weatherSystem.getDailyWeather(regionKey, habitat, worldCalendar.today());
+  } catch (err) {
+    weather = null;
+  }
+  const weatherKey = weatherModifierKey(weather);
+  if (weatherKey) {
+    if (!isSheltered) {
+      if (weather?.storm || weatherKey === 'storm') {
+        comfort -= 0.35;
+        risk += 0.3;
+        addNote('A storm batters you without mercy.');
+      } else if (weatherKey === 'rain' || weatherKey === 'snow' || weatherKey === 'sleet') {
+        comfort -= 0.25;
+        risk += 0.15;
+        addNote('Steady precipitation makes resting miserable.');
+      } else if (weatherKey === 'fog') {
+        comfort -= 0.12;
+        risk += 0.08;
+        addNote('Clinging fog leaves you uneasy.');
+      } else if (weatherKey === 'clear') {
+        comfort += 0.08;
+        addNote('Clear skies make the break pleasant.');
+      }
+    } else {
+      if (weather?.storm || weatherKey === 'storm') {
+        addNote('Wind rattles the shutters outside while you stay dry.');
+      } else if (weatherKey === 'rain' || weatherKey === 'snow' || weatherKey === 'sleet') {
+        addNote('Weather patters against the walls as you rest in shelter.');
+      } else if (weatherKey === 'clear') {
+        comfort += 0.05;
+        addNote('Fair weather filters through the space.');
+      }
+    }
+  }
+
+  const timeOfDay = currentCharacter ? ensureCharacterClock(currentCharacter) : null;
+  const timeBand = timeBandForHour(timeOfDay);
+  if (!isSheltered) {
+    if (timeBand === 'night' || timeBand === 'preDawn') {
+      comfort -= 0.18;
+      risk += 0.12;
+      addNote('Nightfall keeps you alert for prowlers.');
+    } else if (timeBand === 'dusk') {
+      risk += 0.05;
+      addNote('Lengthening shadows make you wary.');
+    }
+  } else if (timeBand === 'night') {
+    addNote('Nightfall encourages deeper rest in the safety of shelter.');
+  }
+
+  comfort = clamp(comfort, 0.1, 1.8);
+  risk = clamp(risk, 0, 1.2);
+  const riskLevel = risk;
+  const recoveryMultiplier = clamp(comfort - risk, 0.25, 1.75);
+
+  if (riskLevel >= 0.45) {
+    addNote('You keep one eye open for trouble.');
+  } else if (riskLevel >= 0.3) {
+    addNote('You remain alert, listening for disturbances.');
+  }
+
+  const notes = Array.from(noteSet);
+  let qualityDescription;
+  if (recoveryMultiplier >= 1.4) {
+    qualityDescription = 'Shelter and calm surroundings grant you an excellent rest.';
+  } else if (recoveryMultiplier >= 1.15) {
+    qualityDescription = 'The setting is comfortable enough for a solid rest.';
+  } else if (recoveryMultiplier >= 0.9) {
+    qualityDescription = 'You catch your breath despite a few distractions.';
+  } else if (recoveryMultiplier >= 0.7) {
+    qualityDescription = 'Conditions keep you wary, yielding only a fitful rest.';
+  } else {
+    qualityDescription = 'The harsh conditions offer little meaningful rest.';
+  }
+
+  return {
+    locationLabel,
+    isSheltered,
+    weather,
+    weatherKey,
+    recoveryMultiplier,
+    riskLevel,
+    qualityDescription,
+    notes,
+  };
+}
+
+function handleRestAction(pos, hours = null) {
   if (!currentCharacter) return;
-  const restHours = Math.max(1, Number(hours) || 6);
-  const profile =
+  ensureResourceBounds(currentCharacter);
+  const restContext = evaluateRestEnvironment(pos || {});
+  const restHours = Number.isFinite(hours) && hours > 0 ? Math.max(0.1, Number(hours)) : randomRestDurationHours();
+  const baseProfile =
     resolveActionStaminaProfile({ baseAction: 'rest' }, 'rest') ||
     { recovery: ACTION_STAMINA_PROFILES.rest?.recovery || 1, recoveryType: 'conventional' };
+  const effectiveProfile = {
+    ...baseProfile,
+    recovery: (baseProfile.recovery || 0) * restContext.recoveryMultiplier,
+  };
   const preRestAwake = ensureHoursAwake(currentCharacter);
   const timeResult = advanceCharacterTime(restHours, { countsAsAwake: false });
-  const staminaChange = applyActionStaminaProfile(currentCharacter, profile, restHours, {
+  const staminaChange = applyActionStaminaProfile(currentCharacter, effectiveProfile, restHours, {
     hoursAwakeOverride: preRestAwake,
   });
+  if (staminaChange) {
+    staminaChange.restContext = restContext;
+  }
   const durationText = describeHoursDuration(restHours);
-  const parts = [`You rest for ${durationText}.`];
+  const restSentence = restContext.locationLabel
+    ? `You rest in ${restContext.locationLabel} for about ${durationText}.`
+    : `You rest for about ${durationText}.`;
+  const parts = [restSentence, restContext.qualityDescription];
+  if (restContext.notes.length) {
+    parts.push(restContext.notes.join(' '));
+  }
   let tone = 'info';
   if (staminaChange && staminaChange.delta > 0) {
     parts.push(
@@ -3835,7 +4129,7 @@ function handleRestAction(pos, hours = 6) {
     );
   } else {
     tone = 'warning';
-    parts.push('Despite your effort, your stamina barely recovers.');
+    parts.push('Despite the pause, you recover little stamina.');
   }
   pushLocationLogEntry(pos, {
     kind: 'message',
@@ -4043,6 +4337,142 @@ function uniqueNonEmptyStrings(values) {
   return results;
 }
 
+function buildQuestMinigameSubtitle(definition, context, position) {
+  const locationName = definition?.location || position?.building || 'the area';
+  const localeParts = uniqueNonEmptyStrings([
+    position?.building && position.building !== locationName ? position.building : null,
+    position?.district,
+    position?.city,
+  ]);
+  const summaryParts = [locationName];
+  if (localeParts.length) summaryParts.push(localeParts.join(' • '));
+  if (context?.timeLabel) summaryParts.push(context.timeLabel);
+  if (context?.season) summaryParts.push(context.season);
+  const weatherSummary = context?.weather ? formatWeatherSummary(context.weather) : null;
+  if (weatherSummary) summaryParts.push(weatherSummary);
+  return uniqueNonEmptyStrings(summaryParts).join(' • ');
+}
+
+function describeQuestMinigameBadges(choice) {
+  if (!choice) return [];
+  const badges = [];
+  if (Number.isFinite(choice.chanceBonus) && choice.chanceBonus !== 0) {
+    const pct = Math.round(choice.chanceBonus * 100);
+    const label = pct > 0 ? `Success +${pct}%` : `Success ${pct}%`;
+    badges.push(label);
+  }
+  if (Number.isFinite(choice.eventChanceBonus) && choice.eventChanceBonus !== 0) {
+    const pct = Math.round(choice.eventChanceBonus * 100);
+    const label = pct > 0 ? `Events +${pct}%` : `Events ${pct}%`;
+    badges.push(label);
+  }
+  if (Number.isFinite(choice.timeRangeMultiplier) && choice.timeRangeMultiplier !== 1) {
+    const pct = Math.round((choice.timeRangeMultiplier - 1) * 100);
+    const label = pct > 0 ? `Time +${pct}%` : `Time ${pct}%`;
+    badges.push(label);
+  }
+  if (Number.isFinite(choice.timeHoursMultiplier) && choice.timeHoursMultiplier !== 1) {
+    const pct = Math.round((choice.timeHoursMultiplier - 1) * 100);
+    const label = pct > 0 ? `Time +${pct}%` : `Time ${pct}%`;
+    badges.push(label);
+  }
+  return badges;
+}
+
+function renderQuestMinigameHTML(definition, actionDef, config, context, position) {
+  const subtitle = config.subtitle || buildQuestMinigameSubtitle(definition, context, position);
+  const introText = config.intro || actionDef?.narrative || '';
+  const choices = Array.isArray(config.choices) ? config.choices.filter(Boolean) : [];
+  const choiceButtons = choices
+    .map(choice => {
+      const detail = choice.detail ? `<span class="quest-minigame-choice-text">${escapeHtml(choice.detail)}</span>` : '';
+      const badges = describeQuestMinigameBadges(choice);
+      const metrics = badges.length
+        ? `<div class="quest-minigame-metrics">${badges
+            .map(badge => `<span class="quest-minigame-badge">${escapeHtml(badge)}</span>`)
+            .join('')}</div>`
+        : '';
+      return `
+        <button type="button" class="quest-minigame-choice" data-choice="${escapeHtml(choice.key || '')}">
+          <span class="quest-minigame-choice-title">${escapeHtml(choice.label || 'Approach')}</span>
+          ${detail}
+          ${metrics}
+        </button>
+      `;
+    })
+    .join('');
+  const cancelLabel = config.cancelLabel || 'Back';
+  return `
+    <div class="quest-storyline quest-minigame">
+      <header class="quest-storyline-header">
+        <h2>${escapeHtml(config.title || actionDef?.label || 'Plan Your Approach')}</h2>
+        <p class="quest-storyline-subtitle">${escapeHtml(subtitle)}</p>
+      </header>
+      <section class="quest-storyline-body quest-minigame-body">
+        ${introText ? `<p>${escapeHtml(introText)}</p>` : ''}
+        <div class="quest-minigame-grid">${choiceButtons}</div>
+      </section>
+      <footer class="quest-storyline-actions quest-minigame-actions">
+        <button type="button" class="quest-minigame-cancel">${escapeHtml(cancelLabel)}</button>
+      </footer>
+    </div>
+  `;
+}
+
+function presentQuestMinigame(definition, actionDef, config, context, position) {
+  if (!config || !Array.isArray(config.choices) || !config.choices.length) {
+    return Promise.resolve(null);
+  }
+  return new Promise(resolve => {
+    hideBackButton();
+    const html = renderQuestMinigameHTML(definition, actionDef, config, context, position);
+    setMainHTML(html);
+    updateMenuHeight();
+    if (main) {
+      try {
+        if (typeof main.scrollTo === 'function') {
+          main.scrollTo({ top: 0, behavior: 'auto' });
+        } else {
+          main.scrollTop = 0;
+        }
+      } catch (err) {
+        main.scrollTop = 0;
+      }
+    }
+    let settled = false;
+    const finalize = value => {
+      if (settled) return;
+      settled = true;
+      document.removeEventListener('keydown', handleKeydown, true);
+      resolve(value);
+    };
+    const handleKeydown = event => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        finalize(null);
+      }
+    };
+    document.addEventListener('keydown', handleKeydown, true);
+    if (!main) {
+      finalize(config.choices[0] || null);
+      return;
+    }
+    const buttons = main.querySelectorAll('.quest-minigame-choice');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (settled) return;
+        const key = btn.dataset.choice || '';
+        const choice = config.choices.find(option => (option.key || '') === key) || null;
+        finalize(choice || null);
+      });
+    });
+    const cancelBtn = main.querySelector('.quest-minigame-cancel');
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', () => finalize(null));
+    }
+  });
+}
+
 function buildSearchMinigameHeader(definition, context, position) {
   const locationName = definition.location || 'the area';
   const localeParts = uniqueNonEmptyStrings([
@@ -4162,6 +4592,85 @@ function presentSearchMinigame(definition, actionDef, categories, context, posit
   });
 }
 
+function cloneRandomEvents(events) {
+  if (!Array.isArray(events)) return [];
+  return events.map(event => {
+    const copy = { ...event };
+    if (Array.isArray(event.loot)) {
+      copy.loot = event.loot.map(item => ({ ...item }));
+    }
+    return copy;
+  });
+}
+
+function applyQuestMinigameChoice(actionDef, config, choice) {
+  if (!actionDef || !choice) return actionDef;
+  const updated = { ...actionDef };
+  if (Array.isArray(actionDef.randomEvents)) {
+    updated.randomEvents = cloneRandomEvents(actionDef.randomEvents);
+  }
+  if (Array.isArray(choice.addRandomEvents) && choice.addRandomEvents.length) {
+    const extras = cloneRandomEvents(choice.addRandomEvents);
+    updated.randomEvents = Array.isArray(updated.randomEvents)
+      ? updated.randomEvents.concat(extras)
+      : extras;
+  }
+  if (choice.narrative) {
+    updated.narrative = choice.narrative;
+  } else if (choice.narrativeAppend) {
+    const base = actionDef.narrative || '';
+    updated.narrative = `${choice.narrativeAppend} ${base}`.trim();
+  }
+  if (Number.isFinite(updated.baseChance)) {
+    let value = updated.baseChance;
+    if (Number.isFinite(choice.chanceMultiplier)) value *= choice.chanceMultiplier;
+    if (Number.isFinite(choice.chanceBonus)) value += choice.chanceBonus;
+    updated.baseChance = clampChance(value);
+  } else if (Number.isFinite(choice.baseChance)) {
+    updated.baseChance = clampChance(choice.baseChance);
+  }
+  if (Number.isFinite(updated.eventChance)) {
+    let eventChance = updated.eventChance;
+    if (Number.isFinite(choice.eventChanceMultiplier)) eventChance *= choice.eventChanceMultiplier;
+    if (Number.isFinite(choice.eventChanceBonus)) eventChance += choice.eventChanceBonus;
+    updated.eventChance = clampChance(eventChance);
+  } else if (Number.isFinite(choice.eventChance)) {
+    updated.eventChance = clampChance(choice.eventChance);
+  }
+  if (Array.isArray(updated.timeRangeHours) && updated.timeRangeHours.length >= 2) {
+    const adjusted = adjustTimeRange(
+      updated.timeRangeHours,
+      Number.isFinite(choice.timeRangeMultiplier) ? choice.timeRangeMultiplier : 1,
+      Number.isFinite(choice.timeRangeBonusHours) ? choice.timeRangeBonusHours : 0,
+    );
+    if (adjusted) {
+      updated.timeRangeHours = adjusted;
+    }
+  } else if (Number.isFinite(updated.timeHours)) {
+    let hours = updated.timeHours;
+    if (Number.isFinite(choice.timeHoursMultiplier)) hours *= choice.timeHoursMultiplier;
+    if (Number.isFinite(choice.timeHoursBonus)) hours += choice.timeHoursBonus;
+    updated.timeHours = Math.max(0, hours);
+  }
+  const selection = {
+    key: choice.key || null,
+    label: choice.label || null,
+    detail: choice.detail || null,
+    note: choice.resultNote || choice.note || null,
+    effects: Array.isArray(choice.effects) ? choice.effects.filter(Boolean) : [],
+  };
+  if (choice.appendOutcome) {
+    selection.appendOutcome = choice.appendOutcome;
+  }
+  updated.questMinigameSelection = selection;
+  if (config) {
+    updated.questMinigameSource = {
+      title: config.title || null,
+    };
+  }
+  return updated;
+}
+
 async function handleEnvironmentInteraction(actionId, pos) {
   if (!currentCharacter) return;
   const parsed = parseEnvironmentActionId(actionId);
@@ -4203,11 +4712,26 @@ async function handleEnvironmentInteraction(actionId, pos) {
 
   const context = buildEnvironmentContext(definition, actionDef, pos);
   let resolvedActionDef = actionDef;
-  const actionCategories = Array.isArray(actionDef.categories)
-    ? actionDef.categories.filter(Boolean)
+  const questMinigameConfig = actionDef.questMinigame;
+  if (questMinigameConfig && Array.isArray(questMinigameConfig.choices) && questMinigameConfig.choices.length) {
+    let questChoice = null;
+    try {
+      questChoice = await presentQuestMinigame(definition, actionDef, questMinigameConfig, context, pos);
+    } catch (err) {
+      console.error('Failed to present quest minigame', err);
+      questChoice = null;
+    }
+    if (!questChoice) {
+      showNavigation();
+      return;
+    }
+    resolvedActionDef = applyQuestMinigameChoice(resolvedActionDef, questMinigameConfig, questChoice);
+  }
+  const actionCategories = Array.isArray(resolvedActionDef.categories)
+    ? resolvedActionDef.categories.filter(Boolean)
     : [];
   const isSearchAction =
-    parsed.actionType === 'search' || actionDef.baseAction === 'search' || actionCategories.length > 0;
+    parsed.actionType === 'search' || resolvedActionDef.baseAction === 'search' || actionCategories.length > 0;
   if (isSearchAction && actionCategories.length) {
     let chosenCategory = null;
     if (actionCategories.length === 1) {
@@ -4216,7 +4740,7 @@ async function handleEnvironmentInteraction(actionId, pos) {
       try {
         chosenCategory = await presentSearchMinigame(
           definition,
-          actionDef,
+          resolvedActionDef,
           actionCategories,
           context,
           pos,
@@ -4230,8 +4754,30 @@ async function handleEnvironmentInteraction(actionId, pos) {
       showNavigation();
       return;
     }
-    resolvedActionDef = { ...actionDef, selectedCategory: chosenCategory };
+    resolvedActionDef = { ...resolvedActionDef, selectedCategory: chosenCategory };
   }
+  const staminaProfileForCheck = resolveActionStaminaProfile(resolvedActionDef, parsed.actionType);
+  if (staminaProfileForCheck && staminaProfileForCheck.intensity > 0) {
+    ensureResourceBounds(currentCharacter);
+    const estimatedHours = estimateActionDurationHours(resolvedActionDef);
+    const estimatedCost = estimateActionStaminaCost(staminaProfileForCheck, estimatedHours) * 1.1;
+    const available = Number(currentCharacter?.stamina) || 0;
+    if (estimatedCost > 0 && available < estimatedCost) {
+      const rawLabel =
+        resolvedActionDef.label || describeEnvironmentAction(parsed.actionType) || 'this action';
+      const labelText = String(rawLabel).trim() || 'this action';
+      const requirementMessage = `You estimate the effort to ${labelText.toLowerCase()} would cost about ${formatResourceNumber(estimatedCost)} stamina, but you only have ${formatResourceNumber(available)}.`;
+      pushLocationLogEntry(pos, {
+        kind: 'message',
+        tone: 'warning',
+        title: 'Too exhausted',
+        body: requirementMessage,
+      });
+      showNavigation();
+      return;
+    }
+  }
+
   let result;
   try {
     result = await resolveEnvironmentAction(parsed.actionType, definition, resolvedActionDef, context);
@@ -4246,7 +4792,42 @@ async function handleEnvironmentInteraction(actionId, pos) {
     showNavigation();
     return;
   }
-  const staminaProfile = resolveActionStaminaProfile(actionDef, parsed.actionType);
+  const questSelection = resolvedActionDef.questMinigameSelection;
+  if (questSelection && result) {
+    if (Array.isArray(questSelection.effects) && questSelection.effects.length) {
+      const extras = questSelection.effects.filter(Boolean);
+      if (extras.length) {
+        result.effects = Array.isArray(result.effects) ? result.effects.concat(extras) : extras.slice();
+      }
+    }
+    const preface = [];
+    if (questSelection.label) {
+      preface.push(`Approach: ${questSelection.label}.`);
+    }
+    if (questSelection.note) {
+      preface.push(questSelection.note);
+    }
+    if (preface.length) {
+      const prefixText = preface.join(' ');
+      if (result.narrative && typeof result.narrative === 'object') {
+        const existingScene = (result.narrative.scene || '').trim();
+        result.narrative.scene = existingScene ? `${prefixText}\n${existingScene}` : prefixText;
+      } else {
+        result.narrative = { scene: prefixText, outcome: result.success ? 'The plan plays out in your favor.' : 'The sea pushes back against your plan.' };
+      }
+      if (questSelection.appendOutcome && result.narrative) {
+        const outcome = (result.narrative.outcome || '').trim();
+        result.narrative.outcome = outcome
+          ? `${outcome} ${questSelection.appendOutcome}`.trim()
+          : questSelection.appendOutcome;
+      }
+    }
+    result.questMinigameChoice = {
+      key: questSelection.key,
+      label: questSelection.label,
+    };
+  }
+  const staminaProfile = resolveActionStaminaProfile(resolvedActionDef, parsed.actionType);
   if (staminaProfile && result) {
     const staminaChange = applyActionStaminaProfile(currentCharacter, staminaProfile, result.timeSpentHours || 0);
     if (staminaChange) {
@@ -9212,15 +9793,17 @@ function showNavigation() {
     disabled,
     extraClass,
     tags,
-    hideLabel = false,
+    hideLabel,
   }) => {
     const safeName = escapeHtml(name || '');
     const defaultIcon = NAV_ICONS[type] || '📍';
-    const usesDefaultAsset = typeof icon === 'string' && /\/Default\.png$/i.test(icon);
-    const hasActionIcon = typeof icon === 'string' && /\/actions\//i.test(icon);
-    const computedHideLabel = hideLabel || (hasActionIcon && type === 'interaction');
-    const iconHTML = icon
-      ? `<img src="${icon}" alt="" class="nav-icon">`
+    const iconSource = icon || (type === 'interaction' && action === 'rest' ? REST_ACTION_ICON : null);
+    const usesDefaultAsset = typeof iconSource === 'string' && /\/Default\.png$/i.test(iconSource);
+    const hasActionIcon = typeof iconSource === 'string' && /\/actions\//i.test(iconSource);
+    const computedHideLabel =
+      hideLabel === undefined ? hasActionIcon && type === 'interaction' : hideLabel;
+    const iconHTML = iconSource
+      ? `<img src="${iconSource}" alt="" class="nav-icon">`
       : `<span class="nav-icon">${defaultIcon}</span>`;
     const attrValue = action ? escapeHtml(action) : escapeHtml(target ?? '');
     const aria = prompt ? `${prompt} ${name}` : name;
@@ -9288,8 +9871,18 @@ function showNavigation() {
       );
     }
     if (questButtons.length) groups.push(questButtons);
-    const interactionButtons = [];
+    const interactionButtons = [
+      createNavItem({
+        type: 'interaction',
+        action: 'rest',
+        name: 'Rest',
+        icon: REST_ACTION_ICON,
+        extraClass: 'rest-action',
+        hideLabel: false,
+      }),
+    ];
     (building.interactions || []).forEach(i => {
+      if (i.action === 'rest') return;
       if (i.action === 'manage' && !canManageBuilding(pos.city, pos.building)) return;
       interactionButtons.push(
         createNavItem({ type: 'interaction', action: i.action, name: i.name, icon: i.icon, tags: i.tags })
@@ -9416,6 +10009,15 @@ function showNavigation() {
 
     const exitGroup = exits.map(makeButton);
     const localButtons = locals.map(makeButton);
+    const actionButtons = [
+      createNavItem({
+        type: 'interaction',
+        action: 'rest',
+        name: 'Rest',
+        icon: REST_ACTION_ICON,
+        extraClass: 'rest-action',
+      }),
+    ];
     const activeVendor = evaluateStreetVendor(pos.city, pos.district);
     if (activeVendor) {
       const soldOut = streetVendorSoldOut(activeVendor);
@@ -9554,6 +10156,9 @@ function showNavigation() {
     );
 
     const localSections = [];
+    if (actionButtons.length) {
+      localSections.push(`<div class="option-grid action-grid">${actionButtons.join('')}</div>`);
+    }
     if (questButtons.length) {
       localSections.push(
         `<div class="quest-board-section"><h3 class="quest-board-heading">Quest Boards</h3><div class="option-grid quest-board-grid">${questButtons.join('')}</div></div>`

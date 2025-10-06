@@ -3288,6 +3288,92 @@ body.theme-dark .quest-history-chip-unknown {
   color: rgba(46, 139, 87, 0.95);
 }
 
+.quest-storyline.quest-minigame {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 1.75rem;
+  gap: 1.25rem;
+}
+
+.quest-minigame-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.quest-minigame-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .quest-minigame-grid {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+}
+
+.quest-minigame-choice {
+  border: 1px solid rgba(46, 139, 87, 0.25);
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 0.85rem;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1.25rem rgba(46, 139, 87, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.quest-minigame-choice:hover,
+.quest-minigame-choice:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(46, 139, 87, 0.45);
+  box-shadow: 0 0.75rem 1.5rem rgba(46, 139, 87, 0.2);
+}
+
+.quest-minigame-choice:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline-offset: 2px;
+}
+
+.quest-minigame-choice-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.quest-minigame-choice-text {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: rgba(33, 37, 41, 0.78);
+}
+
+.quest-minigame-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.quest-minigame-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(46, 139, 87, 0.14);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(25, 83, 52, 0.95);
+}
+
+.quest-minigame-actions {
+  justify-content: flex-end;
+}
+
+.quest-minigame-actions .quest-minigame-cancel {
+  border-color: rgba(51, 51, 51, 0.2);
+}
+
 .quest-storyline-outcome {
   display: inline-block;
   padding: 0.35rem 0.75rem;
@@ -3320,6 +3406,32 @@ body.theme-dark .quest-history-chip-unknown {
 body.theme-dark .quest-storyline {
   background: rgba(20, 24, 32, 0.9);
   box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.5);
+}
+
+body.theme-dark .quest-storyline.quest-minigame {
+  background: rgba(18, 24, 34, 0.96);
+}
+
+body.theme-dark .quest-minigame-choice {
+  background: rgba(30, 36, 48, 0.95);
+  border-color: rgba(135, 206, 250, 0.25);
+  box-shadow: 0 0.65rem 1.4rem rgba(10, 16, 28, 0.65);
+  color: rgba(230, 240, 250, 0.92);
+}
+
+body.theme-dark .quest-minigame-choice:hover,
+body.theme-dark .quest-minigame-choice:focus-visible {
+  border-color: rgba(135, 206, 250, 0.55);
+  box-shadow: 0 0.85rem 1.6rem rgba(20, 30, 45, 0.75);
+}
+
+body.theme-dark .quest-minigame-choice-text {
+  color: rgba(210, 225, 240, 0.82);
+}
+
+body.theme-dark .quest-minigame-badge {
+  background: rgba(135, 206, 250, 0.22);
+  color: rgba(215, 235, 255, 0.95);
 }
 
 body.theme-dark .quest-storyline-subtitle {
