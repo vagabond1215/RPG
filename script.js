@@ -14457,6 +14457,8 @@ loadCharacter();
 
   const summaryNameInput = byId('cc-name');
   const summaryClassSelect = byId('cc-class');
+  const draftSaveButton = byId('cc-save-draft');
+  const draftResetButton = byId('cc-reset-draft');
 
   // State
   const state = {
@@ -14499,32 +14501,86 @@ loadCharacter();
 
   // Draft persistence
   const DRAFT_KEY = 'rpg.charCreator.draft';
-  function saveDraft() {
-    localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
-  }
-  function loadDraft() {
-    const s = localStorage.getItem(DRAFT_KEY);
-    if (!s) return;
-    try {
-      const obj = JSON.parse(s);
-      Object.assign(state, obj);
-      if (!state.base) state.base = { hp: 100, mp: 50, str: 10, dex: 8, int: 7 };
-      if (!state.kit) state.kit = 'balanced';
-    } catch {}
-  }
-  function resetDraft() {
-    localStorage.removeItem(DRAFT_KEY);
+  const defaultBaseStats = () => ({ hp: 100, mp: 50, str: 10, dex: 8, int: 7 });
+  function applyDefaultWizardState() {
     Object.assign(state, {
       step: 1,
       name: '',
       cls: '',
       level: 1,
       xp: 0,
-      base: { hp: 100, mp: 50, str: 10, dex: 8, int: 7 },
-      kit: 'balanced'
+      base: defaultBaseStats(),
+      kit: 'balanced',
     });
+  }
+  function updateDraftIndicators(hasDraft) {
+    const storageEnabled = safeStorage.isEnabled();
+    if (cc) {
+      cc.toggleAttribute('data-draft-available', storageEnabled && hasDraft);
+    }
+    if (draftSaveButton) {
+      draftSaveButton.disabled = !storageEnabled;
+      if (!storageEnabled) {
+        draftSaveButton.setAttribute('aria-disabled', 'true');
+      } else {
+        draftSaveButton.removeAttribute('aria-disabled');
+      }
+    }
+    if (draftResetButton) {
+      draftResetButton.disabled = !storageEnabled;
+      draftResetButton.classList.toggle('has-draft', storageEnabled && hasDraft);
+      if (!storageEnabled) {
+        draftResetButton.setAttribute('aria-disabled', 'true');
+      } else {
+        draftResetButton.removeAttribute('aria-disabled');
+      }
+    }
+  }
+  function clearDraftIndicators() {
+    updateDraftIndicators(false);
+  }
+  function saveDraft() {
+    if (!safeStorage.isEnabled()) {
+      clearDraftIndicators();
+      return;
+    }
+    const success = safeStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+    updateDraftIndicators(Boolean(success));
+  }
+  function loadDraft() {
+    if (!safeStorage.isEnabled()) {
+      clearDraftIndicators();
+      return;
+    }
+    const s = safeStorage.getItem(DRAFT_KEY);
+    if (!s) {
+      clearDraftIndicators();
+      return;
+    }
+    try {
+      const obj = JSON.parse(s);
+      Object.assign(state, obj);
+      if (!state.base) state.base = defaultBaseStats();
+      if (!state.kit) state.kit = 'balanced';
+      updateDraftIndicators(true);
+    } catch {
+      safeStorage.removeItem(DRAFT_KEY);
+      applyDefaultWizardState();
+      clearDraftIndicators();
+    }
+  }
+  function resetDraft() {
+    applyDefaultWizardState();
+    if (safeStorage.isEnabled()) {
+      safeStorage.removeItem(DRAFT_KEY);
+    }
+    clearDraftIndicators();
     render();
   }
+
+  updateDraftIndicators(
+    safeStorage.isEnabled() && Boolean(safeStorage.getItem(DRAFT_KEY))
+  );
 
   // Toolbar visibility toggles
   function hideTopToolbar() { if (topToolbar) topToolbar.classList.add('is-hidden'); }
