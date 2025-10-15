@@ -2939,6 +2939,141 @@ body.theme-dark .search-minigame-actions button:focus-visible {
   padding-left: 1rem;
 }
 
+.quest-choice-container {
+  margin: 0.75rem 0 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+body.theme-dark .quest-choice-container {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.quest-choice-container h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.quest-choice {
+  border-radius: 0.55rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+body.theme-dark .quest-choice {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.quest-choice + .quest-choice {
+  margin-top: 0.35rem;
+}
+
+.quest-choice summary {
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.65rem;
+  list-style: none;
+}
+
+.quest-choice summary::-webkit-details-marker {
+  display: none;
+}
+
+.quest-choice-label {
+  font-weight: 600;
+}
+
+.quest-choice-base {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(25, 83, 52, 0.85);
+}
+
+body.theme-dark .quest-choice-base {
+  color: rgba(186, 232, 205, 0.9);
+}
+
+.quest-choice-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.quest-choice-tag {
+  background: rgba(46, 139, 87, 0.18);
+  color: rgba(25, 83, 52, 0.95);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+}
+
+body.theme-dark .quest-choice-tag {
+  background: rgba(144, 238, 144, 0.2);
+  color: rgba(208, 255, 214, 0.95);
+}
+
+.quest-choice-body {
+  padding: 0 0.65rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.quest-choice-baseline {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+body.theme-dark .quest-choice-baseline {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.quest-choice-modifiers,
+.quest-choice-outcomes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+}
+
+.quest-choice-modifiers strong {
+  color: rgba(25, 83, 52, 0.95);
+}
+
+body.theme-dark .quest-choice-modifiers strong {
+  color: rgba(186, 232, 205, 0.95);
+}
+
+.quest-choice-condition {
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+body.theme-dark .quest-choice-condition {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.quest-choice-consequence {
+  color: rgba(139, 0, 0, 0.78);
+}
+
+body.theme-dark .quest-choice-consequence {
+  color: rgba(255, 160, 122, 0.85);
+}
+
 .quest-count {
   font-size: 0.8rem;
   color: rgba(25, 83, 52, 0.8);
