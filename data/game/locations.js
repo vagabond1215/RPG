@@ -1,4 +1,4 @@
-import { questHelper } from "./questHelper.js";
+import { questHelper, annotateQuestChoices } from "./questHelper.js";
 import { KINGDOM_HEX_GRID } from "./hexGrid.js";
 const MAP_BASE_PATH = "assets/images/Maps";
 export function createLocation(name, mapFile, description) {
@@ -25,8 +25,385 @@ export function createLocation(name, mapFile, description) {
         ownership: undefined,
     };
 }
+function flattenQuestText(value) {
+    if (Array.isArray(value)) {
+        return value.flatMap((entry) => flattenQuestText(entry));
+    }
+    if (typeof value === 'string') {
+        return [value];
+    }
+    return [];
+}
+function questAnalysisText(quest) {
+    return [
+        quest.title,
+        quest.description,
+        quest.timeline,
+        quest.reward,
+        quest.notes,
+        quest.conditions,
+        quest.requirements,
+        quest.risks,
+        quest.location,
+    ]
+        .flatMap((segment) => flattenQuestText(segment))
+        .map((segment) => segment.toLowerCase())
+        .join(' ');
+}
+function slugify(text) {
+    return (text
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 48) || 'approach');
+}
+function inferQuestHabitat(quest) {
+    const text = questAnalysisText(quest);
+    if (/(wharf|dock|pier|harbor|harbour|quay|tide|fleet|lighthouse|coast|beach|brine|mariner)/.test(text)) {
+        return 'coastal';
+    }
+    if (/(river|canal|sluice|lock|delta|marsh|wetland|bog|floodplain|sluiceway|ford|bridge)/.test(text)) {
+        return 'river';
+    }
+    if (/(field|farm|orchard|pasture|grain|mill|irrigation|plow|plough|harvest|barn|sheaf)/.test(text)) {
+        return 'farmland';
+    }
+    if (/(forest|grove|wood|thicket|trail|ranger|hunting|wilds|glade|copse|timber)/.test(text)) {
+        return 'woodland';
+    }
+    if (/(mountain|ridge|peak|cliff|mine|quarry|pass|crag|scree|highroad)/.test(text)) {
+        return 'mountain';
+    }
+    return 'urban';
+}
+function collectQuestProficiencies(quest) {
+    const matches = new Map();
+    (quest.skillRequirements || []).forEach((requirement) => {
+        requirement.proficiencies.forEach((match) => {
+            const existing = matches.get(match.id);
+            if (!existing) {
+                matches.set(match.id, Object.assign({}, match));
+            }
+            else if ((match.minimum ?? 0) > (existing.minimum ?? 0)) {
+                matches.set(match.id, Object.assign(Object.assign({}, existing), { minimum: match.minimum }));
+            }
+        });
+    });
+    return Array.from(matches.values());
+}
+function generateQuestChoices(quest, existing = []) {
+    const generated = [];
+    const existingKeys = new Set(existing.map((choice) => choice.key));
+    const proficiencies = collectQuestProficiencies(quest);
+    const assignmentLabel = quest.title ? quest.title.toLowerCase() : 'the assignment';
+    proficiencies.forEach((match) => {
+        const key = `focus-${slugify(match.name)}`;
+        if (existingKeys.has(key))
+            return;
+        existingKeys.add(key);
+        const minimumLabel = match.minimum ? `${match.minimum}+` : 'trained';
+        generated.push({
+            key,
+            label: `Leverage ${match.name}`,
+            description: `Apply ${match.name.toLowerCase()} techniques to ${assignmentLabel}.`,
+            proficiencies: [match.name],
+            baseChance: 0.55,
+            chanceModifiers: [
+                {
+                    label: `${match.name} expertise (${minimumLabel})`,
+                    modifier: 0.2,
+                    proficiencies: [match.name],
+                    minimum: match.minimum,
+                },
+                {
+                    label: `Untrained in ${match.name}`,
+                    modifier: -0.15,
+                    condition: 'If no party member knows this proficiency.',
+                },
+            ],
+            outcomes: [
+                {
+                    type: 'success',
+                    narrative: `Your ${match.name.toLowerCase()} mastery keeps the crew ahead of schedule.`,
+                },
+                {
+                    type: 'complication',
+                    narrative: `Improvising with ${match.name.toLowerCase()} knowledge creates extra work, but you hold the line.`,
+                },
+                {
+                    type: 'failure',
+                    narrative: `Without steady ${match.name.toLowerCase()} practice the job slips away from you.`,
+                },
+            ],
+        });
+    });
+    if (proficiencies.length >= 2 && !existingKeys.has('coordinate-specialists')) {
+        existingKeys.add('coordinate-specialists');
+        generated.push({
+            key: 'coordinate-specialists',
+            label: 'Coordinate specialists',
+            description: 'Pair listed experts together so each phase of the job is covered.',
+            proficiencies: proficiencies.map((match) => match.name),
+            baseChance: 0.6,
+            chanceModifiers: [
+                ...proficiencies.map((match) => ({
+                    label: `${match.name} on the team`,
+                    modifier: 0.08,
+                    proficiencies: [match.name],
+                    minimum: match.minimum,
+                })),
+                {
+                    label: 'Missing one of the specialists',
+                    modifier: -0.18,
+                    condition: 'If any listed proficiency is absent.',
+                },
+            ],
+            outcomes: [
+                {
+                    type: 'success',
+                    narrative: 'Specialists share notes and finish well before the deadline.',
+                },
+                {
+                    type: 'complication',
+                    narrative: 'Coverage gaps slow the work, but you deliver after a long shift.',
+                },
+                {
+                    type: 'failure',
+                    narrative: 'Too many gaps remain uncovered and the overseer calls the attempt off.',
+                },
+            ],
+        });
+    }
+    if (!existingKeys.has('flexible-support')) {
+        existingKeys.add('flexible-support');
+        generated.push({
+            key: 'flexible-support',
+            label: 'Provide flexible support',
+            description: 'Cover logistics, morale, and unexpected needs while others focus on the core task.',
+            baseChance: 0.48,
+            chanceModifiers: [
+                {
+                    label: 'Documented success with this post',
+                    modifier: 0.06,
+                    condition: 'If you carry commendations or references from this board.',
+                },
+                {
+                    label: 'Severe weather hampering the site',
+                    modifier: -0.1,
+                    condition: 'If storms, flood warnings, or heat waves are active.',
+                },
+            ],
+            outcomes: [
+                {
+                    type: 'success',
+                    narrative: 'You keep the crew supplied and motivated until the job is complete.',
+                },
+                {
+                    type: 'complication',
+                    narrative: 'Juggling every request costs extra time, but you bring the work in.',
+                },
+                {
+                    type: 'failure',
+                    narrative: 'Too many crises pile up and the contract is withdrawn.',
+                },
+            ],
+        });
+    }
+    return generated;
+}
+function detectSeasonPreferences(text) {
+    const seasons = new Set();
+    if (/(winter|snow|frost|ice|midwinter|yule|solstice)/.test(text))
+        seasons.add('Winter');
+    if (/(spring|thaw|bloom|seedling|planting|sprout)/.test(text))
+        seasons.add('Spring');
+    if (/(summer|heat|sun-baked|solstice|dry spell)/.test(text))
+        seasons.add('Summer');
+    if (/(autumn|fall|harvest|reaping|leaf-fall)/.test(text))
+        seasons.add('Autumn');
+    return Array.from(seasons);
+}
+function clampDemand(value) {
+    return Math.max(0.05, Math.min(0.95, value));
+}
+function createDefaultQuestVisibility(quest) {
+    const text = questAnalysisText(quest);
+    const seasons = detectSeasonPreferences(text);
+    const requiresStorm = /(storm|tempest|squall|lightning|gale|surge)/.test(text);
+    const requiresRain = /(rain|wetland|soak|mud|irrigation|bog|sluice|floodwork)/.test(text);
+    const avoidStorm = /(clear skies|fair weather|calm day|dry skies|steady skies)/.test(text);
+    const prefersCold = /(cold|chill|frost|ice|winter)/.test(text);
+    const prefersHeat = /(heat|hot|swelter|summer)/.test(text);
+    const mentionsHarvest = /(harvest|reaping|threshing)/.test(text);
+    const mentionsFestival = /(festival|celebration|parade|holiday|solstice|equinox)/.test(text);
+    const mentionsLunar = /(lunar|moon|waning|waxing)/.test(text);
+    const mentionsWeekly = /(weekly|tenday|once a week|twice weekly)/.test(text);
+    const cycle = mentionsFestival ? 'festival' : mentionsLunar ? 'lunar' : mentionsWeekly ? 'weekly' : null;
+    const eventTag = mentionsFestival
+        ? 'festival'
+        : requiresStorm
+            ? 'storm_response'
+            : requiresRain
+                ? 'rain_response'
+                : mentionsHarvest
+                    ? 'harvest'
+                    : undefined;
+    return ({ weather, date, random }) => {
+        if (seasons.length && !seasons.includes(weather.season)) {
+            return {
+                available: false,
+                demand: 0.1,
+                reason: `Work resumes in ${seasons.join(', ')}.`,
+                eventTag,
+            };
+        }
+        if (prefersCold && weather.season === 'Summer') {
+            return {
+                available: false,
+                demand: 0.1,
+                reason: 'Too hot for this assignment right now.',
+                eventTag,
+            };
+        }
+        if (prefersHeat && weather.season === 'Winter') {
+            return {
+                available: false,
+                demand: 0.1,
+                reason: 'Waiting for warmer days to continue.',
+                eventTag,
+            };
+        }
+        if (requiresStorm && !weather.storm) {
+            return {
+                available: false,
+                demand: 0.08,
+                reason: 'Awaiting storm conditions.',
+                eventTag,
+            };
+        }
+        if (requiresRain && !weather.storm && weather.precipitationMm < 1 && weather.condition !== 'rain') {
+            return {
+                available: false,
+                demand: 0.09,
+                reason: 'Work resumes once the rains arrive.',
+                eventTag,
+            };
+        }
+        if (avoidStorm && weather.storm) {
+            return {
+                available: false,
+                demand: 0.05,
+                reason: 'Postponed due to severe weather.',
+                eventTag,
+            };
+        }
+        let demand = 0.45 + random() * 0.35;
+        if (quest.highPriority)
+            demand += 0.15;
+        if (requiresRain && (weather.condition === 'rain' || weather.storm))
+            demand += 0.18;
+        if (avoidStorm && weather.condition === 'clear' && !weather.storm)
+            demand += 0.1;
+        if (weather.floodRisk === 'warning' && !requiresRain)
+            demand -= 0.12;
+        if (weather.droughtStage === 'warning' && requiresRain)
+            demand -= 0.08;
+        if (mentionsHarvest && weather.season === 'Autumn')
+            demand += 0.12;
+        if (mentionsHarvest && weather.season !== 'Autumn')
+            demand -= 0.08;
+        if (prefersCold && weather.temperatureC > 25)
+            demand -= 0.08;
+        if (prefersHeat && weather.temperatureC < 5)
+            demand -= 0.08;
+        if (cycle === 'weekly') {
+            const cycleIndex = (date.day + date.monthIndex) % 7;
+            if (cycleIndex >= 5) {
+                return {
+                    available: false,
+                    demand: 0.12,
+                    reason: 'Assignments rotate later in the week.',
+                    eventTag,
+                };
+            }
+            demand += 0.05;
+        }
+        else if (cycle === 'lunar') {
+            const cycleIndex = (date.day + date.monthIndex) % 8;
+            if (cycleIndex >= 6) {
+                return {
+                    available: false,
+                    demand: 0.1,
+                    reason: 'Waiting for the proper lunar phase.',
+                    eventTag,
+                };
+            }
+            demand += 0.04;
+        }
+        else if (cycle === 'festival') {
+            const window = (date.day + date.monthIndex) % 5;
+            if (window > 1) {
+                return {
+                    available: false,
+                    demand: 0.08,
+                    reason: 'Posting returns during festival days.',
+                    eventTag,
+                };
+            }
+            demand += 0.1;
+        }
+        const clamped = clampDemand(demand);
+        const reason = clamped >= 0.75
+            ? 'Urgent demand for crews today.'
+            : clamped >= 0.55
+                ? 'Steady work available.'
+                : 'Limited shifts remain.';
+        return {
+            available: true,
+            demand: clamped,
+            reason,
+            eventTag,
+        };
+    };
+}
+function extractPrimaryLocation(location) {
+    if (!location)
+        return undefined;
+    if (typeof location === 'string')
+        return location;
+    if (Array.isArray(location) && location.length > 0) {
+        const entry = location.find((value) => typeof value === 'string' && value.trim().length);
+        return entry || undefined;
+    }
+    return undefined;
+}
+function ensureQuestVisibilityBinding(quest) {
+    const binding = quest.visibilityBinding
+        ? Object.assign({}, quest.visibilityBinding)
+        : { region: 'waves_break', habitat: 'urban' };
+    if (!binding.region)
+        binding.region = 'waves_break';
+    if (!binding.habitat)
+        binding.habitat = inferQuestHabitat(quest);
+    if (!binding.location) {
+        const derived = extractPrimaryLocation(quest.location);
+        if (derived)
+            binding.location = derived;
+    }
+    quest.visibilityBinding = binding;
+    return binding;
+}
 function createQuest(title, description, opts = {}) {
-    return questHelper(Object.assign({ title, description }, opts));
+    const quest = questHelper(Object.assign({ title, description }, opts));
+    const baseChoices = Array.isArray(quest.choices) ? quest.choices : [];
+    const autoChoices = generateQuestChoices(quest, baseChoices);
+    const combined = annotateQuestChoices([...baseChoices, ...autoChoices]);
+    quest.choices = combined.length ? combined : undefined;
+    ensureQuestVisibilityBinding(quest);
+    if (!quest.visibility) {
+        quest.visibility = createDefaultQuestVisibility(quest);
+    }
+    return quest;
 }
 function addQuestBoards(loc) {
     var _a;

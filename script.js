@@ -13258,6 +13258,92 @@ function showQuestBoardDetails(boardIdentifier, options = {}) {
     if (value == null) return [];
     return [String(value)];
   };
+  const formatChancePercent = value => {
+    if (typeof value !== 'number' || !Number.isFinite(value)) return '';
+    return `${Math.round(value * 100)}%`;
+  };
+  const formatModifierPercent = value => {
+    if (typeof value !== 'number' || !Number.isFinite(value)) return '';
+    const rounded = Math.round(value * 100);
+    const prefix = rounded > 0 ? '+' : '';
+    return `${prefix}${rounded}%`;
+  };
+  const renderChoiceTags = names => {
+    if (!Array.isArray(names) || !names.length) return '';
+    const tags = names
+      .map(name => `<span class="quest-choice-tag">${sanitizeText(name)}</span>`)
+      .join('');
+    return tags ? `<span class="quest-choice-tags">${tags}</span>` : '';
+  };
+  const renderQuestChoice = (choice, index) => {
+    if (!choice || typeof choice !== 'object') return '';
+    const label = sanitizeText(choice.label || 'Approach');
+    const baseChance = formatChancePercent(choice.baseChance);
+    const helperMatches = Array.isArray(choice.helperMatches)
+      ? choice.helperMatches.map(match => match.name)
+      : Array.isArray(choice.proficiencies)
+        ? choice.proficiencies
+        : [];
+    const tags = renderChoiceTags(helperMatches);
+    const summaryMeta = [
+      baseChance ? `<span class="quest-choice-base">${escapeHtml(baseChance)}</span>` : '',
+      tags,
+    ]
+      .filter(Boolean)
+      .join('');
+    const openAttr = index === 0 ? ' open' : '';
+    const description = choice.description ? `<p>${sanitizeText(choice.description)}</p>` : '';
+    const modifiers = Array.isArray(choice.chanceModifiers) && choice.chanceModifiers.length
+      ? `<ul class="quest-choice-modifiers">${choice.chanceModifiers
+          .map(mod => {
+            const value = formatModifierPercent(mod?.modifier);
+            const labelText = sanitizeText(mod?.label || 'Modifier');
+            const condition = mod?.condition ? `<span class="quest-choice-condition">(${sanitizeText(mod.condition)})</span>` : '';
+            const profTags = renderChoiceTags(mod?.proficiencies);
+            return `<li><strong>${escapeHtml(value || '0%')}</strong> ${labelText}${condition}${profTags ? ` ${profTags}` : ''}</li>`;
+          })
+          .join('')}</ul>`
+      : '';
+    const outcomes = Array.isArray(choice.outcomes) && choice.outcomes.length
+      ? `<ul class="quest-choice-outcomes">${choice.outcomes
+          .map(outcome => {
+            const type = sanitizeText(capitalize(outcome?.type || 'Result'));
+            const narrative = sanitizeText(outcome?.narrative || 'Outcome uncertain.');
+            const rewardNote = outcome?.rewardNote ? ` <em>${sanitizeText(outcome.rewardNote)}</em>` : '';
+            const consequence = outcome?.consequence
+              ? ` <span class="quest-choice-consequence">${sanitizeText(outcome.consequence)}</span>`
+              : '';
+            return `<li><strong>${type}:</strong> ${narrative}${rewardNote}${consequence}</li>`;
+          })
+          .join('')}</ul>`
+      : '';
+    const baseLine = baseChance ? `<p class="quest-choice-baseline">Base success: ${escapeHtml(baseChance)}</p>` : '';
+    return `
+      <details class="quest-choice"${openAttr}>
+        <summary><span class="quest-choice-label">${label}</span>${summaryMeta}</summary>
+        <div class="quest-choice-body">
+          ${baseLine}
+          ${description}
+          ${modifiers}
+          ${outcomes}
+        </div>
+      </details>
+    `;
+  };
+  const renderQuestChoices = choices => {
+    if (!Array.isArray(choices) || !choices.length) return '';
+    const sections = choices
+      .map((choice, index) => renderQuestChoice(choice, index))
+      .filter(Boolean)
+      .join('');
+    if (!sections) return '';
+    return `
+      <div class="quest-choice-container">
+        <h4>Approach options</h4>
+        ${sections}
+      </div>
+    `;
+  };
   const removePromotionClauses = text => {
     if (!text) return '';
     let result = String(text);
@@ -13403,6 +13489,10 @@ function showQuestBoardDetails(boardIdentifier, options = {}) {
         itemHTML += `<li><strong>Accepted:</strong> ${escapeHtml(acceptedLabel)}</li>`;
       }
       itemHTML += '</ul>';
+      const choicesHTML = renderQuestChoices(quest.choices);
+      if (choicesHTML) {
+        itemHTML += choicesHTML;
+      }
       const boardAttr = escapeHtml(boardName);
       const questAttr = escapeHtml(quest.title || '');
       const groupAttr = escapeHtml(detailContext.boardKey || group.key);
