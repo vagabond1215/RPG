@@ -2076,6 +2076,310 @@ function normalizeCharacterState(character) {
   return character;
 }
 
+const trimTrailingNullish = values => {
+  let lastIndex = values.length - 1;
+  while (lastIndex >= 0) {
+    const value = values[lastIndex];
+    if (value === null || value === undefined) {
+      values.pop();
+      lastIndex -= 1;
+      continue;
+    }
+    break;
+  }
+  return values;
+};
+
+function flattenInventory(inventory) {
+  if (!Array.isArray(inventory) || !inventory.length) return [];
+  return inventory
+    .filter(item => item && typeof item === 'object')
+    .map(item => {
+      const extras = [];
+      Object.entries(item).forEach(([key, value]) => {
+        if (key === 'name' || key === 'qty') return;
+        if (value === undefined) return;
+        extras.push([key, value]);
+      });
+      const qtyNumber = Number(item.qty);
+      const qty = Number.isFinite(qtyNumber) ? Math.max(1, Math.round(qtyNumber)) : 1;
+      const entry = [item.name ?? null, qty];
+      if (extras.length) entry.push(extras);
+      return entry;
+    });
+}
+
+function inflateInventory(flat) {
+  if (!Array.isArray(flat)) return [];
+  return flat
+    .map(entry => {
+      if (!entry) return null;
+      if (Array.isArray(entry)) {
+        const [name, qtyRaw, extras] = entry;
+        const item = {};
+        if (Array.isArray(extras)) {
+          extras.forEach(([key, value]) => {
+            if (!key) return;
+            item[key] = value;
+          });
+        } else if (isPlainObject(extras)) {
+          Object.assign(item, extras);
+        }
+        if (name != null) {
+          item.name = typeof name === 'string' ? name : String(name);
+        }
+        const qty = Number(qtyRaw);
+        item.qty = Number.isFinite(qty) ? Math.max(1, Math.round(qty)) : 1;
+        return item;
+      }
+      if (isPlainObject(entry)) {
+        return { ...entry };
+      }
+      return null;
+    })
+    .filter(Boolean);
+}
+
+function flattenQuestLog(log) {
+  if (!Array.isArray(log) || !log.length) return [];
+  return log
+    .filter(entry => entry && typeof entry === 'object')
+    .map(entry => {
+      const values = [
+        entry.key ?? null,
+        entry.board ?? null,
+        entry.title ?? null,
+        entry.status && entry.status !== 'accepted' ? entry.status : null,
+        entry.location ?? null,
+        entry.acceptedOn ?? null,
+        entry.acceptedOnLabel && entry.acceptedOnLabel !== entry.acceptedOn
+          ? entry.acceptedOnLabel
+          : null,
+        entry.completedOn ?? null,
+        entry.completedOnLabel && entry.completedOnLabel !== entry.completedOn
+          ? entry.completedOnLabel
+          : null,
+        entry.outcome ?? null,
+        entry.reward ?? null,
+        entry.notes ?? null,
+        entry.npc ?? null,
+        entry.timesCompleted && Number.isFinite(entry.timesCompleted) && entry.timesCompleted > 0
+          ? Math.round(entry.timesCompleted)
+          : null,
+      ];
+      return trimTrailingNullish(values);
+    });
+}
+
+function inflateQuestLog(flat) {
+  if (!Array.isArray(flat)) return [];
+  return flat
+    .map(entry => {
+      if (!entry) return null;
+      if (Array.isArray(entry)) {
+        const [
+          key,
+          board,
+          title,
+          status,
+          location,
+          acceptedOn,
+          acceptedOnLabel,
+          completedOn,
+          completedOnLabel,
+          outcome,
+          reward,
+          notes,
+          npc,
+          timesCompleted,
+        ] = entry;
+        return {
+          key: key ?? null,
+          board: board ?? null,
+          title: typeof title === 'string' ? title : title != null ? String(title) : '',
+          status: typeof status === 'string' && status ? status : 'accepted',
+          location: location ?? null,
+          acceptedOn: acceptedOn ?? null,
+          acceptedOnLabel: acceptedOnLabel ?? acceptedOn ?? null,
+          completedOn: completedOn ?? null,
+          completedOnLabel: completedOnLabel ?? completedOn ?? null,
+          outcome: outcome ?? null,
+          reward: reward ?? null,
+          notes:
+            notes == null ? null : typeof notes === 'string' ? notes : String(notes),
+          npc: npc ?? null,
+          timesCompleted: Number.isFinite(timesCompleted) ? Math.max(0, Math.round(timesCompleted)) : 0,
+        };
+      }
+      if (isPlainObject(entry)) {
+        return { ...entry };
+      }
+      return null;
+    })
+    .filter(Boolean);
+}
+
+function flattenQuestHistory(history) {
+  if (!Array.isArray(history) || !history.length) return [];
+  return history
+    .filter(entry => entry && typeof entry === 'object')
+    .map(entry => {
+      const values = [
+        entry.key ?? null,
+        entry.title ?? null,
+        entry.board ?? null,
+        entry.location ?? null,
+        entry.nearestCity ?? null,
+        entry.npc ?? null,
+        entry.outcome ?? null,
+        entry.success === true ? 1 : entry.success === false ? 0 : null,
+        entry.reward ?? null,
+        entry.narrative ?? null,
+        entry.date ?? null,
+        entry.dateLabel && entry.dateLabel !== entry.date ? entry.dateLabel : null,
+        Number.isFinite(entry.hours) ? entry.hours : null,
+        Number.isFinite(entry.timeOfDay) ? entry.timeOfDay : null,
+        Number.isFinite(entry.daysElapsed) ? entry.daysElapsed : null,
+      ];
+      return trimTrailingNullish(values);
+    });
+}
+
+function inflateQuestHistory(flat) {
+  if (!Array.isArray(flat)) return [];
+  return flat
+    .map(entry => {
+      if (!entry) return null;
+      if (Array.isArray(entry)) {
+        const [
+          key,
+          title,
+          board,
+          location,
+          nearestCity,
+          npc,
+          outcome,
+          success,
+          reward,
+          narrative,
+          date,
+          dateLabel,
+          hours,
+          timeOfDay,
+          daysElapsed,
+        ] = entry;
+        return {
+          key: key ?? null,
+          title: typeof title === 'string' ? title : title != null ? String(title) : '',
+          board: board ?? null,
+          location: location ?? null,
+          nearestCity: nearestCity ?? null,
+          npc: npc ?? null,
+          outcome: outcome ?? null,
+          success: success === 1 || success === true,
+          reward: reward ?? null,
+          narrative: typeof narrative === 'string' ? narrative : narrative != null ? String(narrative) : '',
+          date: date ?? null,
+          dateLabel: dateLabel ?? date ?? null,
+          hours: Number.isFinite(hours) ? hours : null,
+          timeOfDay: Number.isFinite(timeOfDay) ? timeOfDay : null,
+          daysElapsed: Number.isFinite(daysElapsed) ? daysElapsed : null,
+        };
+      }
+      if (isPlainObject(entry)) {
+        return { ...entry };
+      }
+      return null;
+    })
+    .filter(Boolean);
+}
+
+function flattenCharacterForStorage(character) {
+  if (!isPlainObject(character)) return character;
+  const flattened = { ...character };
+  if (Array.isArray(character.inventory)) {
+    flattened.inventory = flattenInventory(character.inventory);
+  }
+  if (Array.isArray(character.questLog)) {
+    flattened.questLog = flattenQuestLog(character.questLog);
+  }
+  if (Array.isArray(character.questHistory)) {
+    flattened.questHistory = flattenQuestHistory(character.questHistory);
+  }
+  return flattened;
+}
+
+function inflateCharacterFromStorage(character) {
+  if (!isPlainObject(character)) return character;
+  const inflated = { ...character };
+  if (Array.isArray(character.inventory)) {
+    const hasFlatEntries = character.inventory.some(item => Array.isArray(item));
+    inflated.inventory = hasFlatEntries
+      ? inflateInventory(character.inventory)
+      : character.inventory.map(item => (isPlainObject(item) ? { ...item } : item));
+  } else if (
+    isPlainObject(character.inventory) &&
+    Array.isArray(character.inventory.items)
+  ) {
+    inflated.inventory = inflateInventory(character.inventory.items);
+  }
+  if (Array.isArray(character.questLog)) {
+    const hasFlatEntries = character.questLog.some(entry => Array.isArray(entry));
+    inflated.questLog = hasFlatEntries
+      ? inflateQuestLog(character.questLog)
+      : character.questLog.map(entry => (isPlainObject(entry) ? { ...entry } : entry));
+  }
+  if (Array.isArray(character.questHistory)) {
+    const hasFlatEntries = character.questHistory.some(entry => Array.isArray(entry));
+    inflated.questHistory = hasFlatEntries
+      ? inflateQuestHistory(character.questHistory)
+      : character.questHistory.map(entry => (isPlainObject(entry) ? { ...entry } : entry));
+  }
+  return inflated;
+}
+
+function flattenProfilesForStorage(profileMap) {
+  if (!isPlainObject(profileMap)) return {};
+  const flattenedProfiles = {};
+  for (const [profileId, profile] of Object.entries(profileMap)) {
+    if (!isPlainObject(profile)) continue;
+    const flattenedProfile = { ...profile };
+    flattenedProfile.preferences = isPlainObject(profile.preferences)
+      ? { ...profile.preferences }
+      : {};
+    const characters = isPlainObject(profile.characters) ? profile.characters : {};
+    const flattenedCharacters = {};
+    for (const [charId, character] of Object.entries(characters)) {
+      if (!isPlainObject(character)) continue;
+      flattenedCharacters[charId] = flattenCharacterForStorage(character);
+    }
+    flattenedProfile.characters = flattenedCharacters;
+    flattenedProfiles[profileId] = flattenedProfile;
+  }
+  return flattenedProfiles;
+}
+
+function inflateProfilesFromStorage(rawProfiles) {
+  if (!isPlainObject(rawProfiles)) return {};
+  const inflatedProfiles = {};
+  for (const [profileId, profile] of Object.entries(rawProfiles)) {
+    if (!isPlainObject(profile)) continue;
+    const inflatedProfile = { ...profile };
+    inflatedProfile.preferences = isPlainObject(profile.preferences)
+      ? { ...profile.preferences }
+      : {};
+    const characters = isPlainObject(profile.characters) ? profile.characters : {};
+    const inflatedCharacters = {};
+    for (const [charId, character] of Object.entries(characters)) {
+      if (!isPlainObject(character)) continue;
+      inflatedCharacters[charId] = inflateCharacterFromStorage(character);
+    }
+    inflatedProfile.characters = inflatedCharacters;
+    inflatedProfiles[profileId] = inflatedProfile;
+  }
+  return inflatedProfiles;
+}
+
 const sanitizeProfiles = raw => {
   if (!isPlainObject(raw)) return {};
   const sanitized = {};
@@ -2113,7 +2417,9 @@ profiles = {};
 const storedProfilesRaw = safeStorage.getItem(STORAGE_KEY);
 if (storedProfilesRaw) {
   try {
-    profiles = sanitizeProfiles(JSON.parse(storedProfilesRaw));
+    const parsed = JSON.parse(storedProfilesRaw);
+    const inflated = inflateProfilesFromStorage(parsed);
+    profiles = sanitizeProfiles(inflated);
   } catch {
     profiles = {};
   }
@@ -3135,7 +3441,8 @@ const saveProfiles = () => {
     }
     currentProfile.characters[currentCharacter.id] = currentCharacter;
   }
-  safeStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
+  const flattened = flattenProfilesForStorage(profiles);
+  safeStorage.setItem(STORAGE_KEY, JSON.stringify(flattened));
   updateTopMenuIndicators();
 };
 
