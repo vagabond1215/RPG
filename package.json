@@ -7,7 +7,9 @@
     "validate": "tsx scripts/validateData.ts",
     "build:indexes": "tsx scripts/buildIndexes.ts",
     "build:spellbook": "tsx scripts/generateSpellbook.ts",
-    "test": "vitest run tests/*.test.ts"
+    "test": "npm run test:unit && npm run test:economy",
+    "test:unit": "vitest run tests/*.test.ts",
+    "test:economy": "node --test tests/economy_import/*.test.js"
   },
   "keywords": [],
   "author": "",
