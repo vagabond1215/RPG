@@ -1495,6 +1495,68 @@ function resolveWeatherForPosition(position) {
   }
 }
 
+function buildAtmosphereNarrative(position, options = {}) {
+  const baseWeather = options.weather ?? resolveWeatherForPosition(position);
+  const today = options.date || worldCalendar.today();
+  const season = options.season || getSeasonForDate(today);
+  let timeLabel = options.timeLabel ? String(options.timeLabel).trim() : '';
+  let timeOfDay = null;
+  if (options.timeOfDay != null && options.timeOfDay !== '') {
+    const numericTime = Number(options.timeOfDay);
+    if (Number.isFinite(numericTime)) {
+      timeOfDay = numericTime;
+    }
+  }
+  if (!Number.isFinite(timeOfDay) && currentCharacter) {
+    timeOfDay = ensureCharacterClock(currentCharacter);
+  }
+  if (!timeLabel && Number.isFinite(timeOfDay)) {
+    timeLabel = describeTimeOfDay(timeOfDay);
+  }
+  const intro = baseWeather?.narrative ? baseWeather.narrative.trim() : '';
+  const temperature = Number.isFinite(baseWeather?.temperatureC) ? baseWeather.temperatureC : null;
+  const humidity = Number.isFinite(baseWeather?.humidity) ? baseWeather.humidity : null;
+  let temporalSentence = '';
+  if (timeLabel && season) {
+    temporalSentence = `It is the ${timeLabel} of ${season}.`;
+  } else if (timeLabel) {
+    temporalSentence = `It is the ${timeLabel}.`;
+  } else if (season) {
+    temporalSentence = `It is ${season}.`;
+  }
+  let climateSentence = '';
+  if (temperature != null && humidity != null) {
+    climateSentence = `The air sits at ${temperature}°C with ${humidity}% humidity.`;
+  } else if (temperature != null) {
+    climateSentence = `The air sits at ${temperature}°C.`;
+  } else if (humidity != null) {
+    climateSentence = `Humidity hovers near ${humidity}%.`;
+  }
+  const climateSummary = [temporalSentence, climateSentence].filter(Boolean).join(' ');
+  const hazardParts = [];
+  const droughtStage = baseWeather?.droughtStage && baseWeather.droughtStage !== 'none'
+    ? toTitleCase(baseWeather.droughtStage)
+    : null;
+  if (droughtStage) {
+    hazardParts.push(`${droughtStage} drought grips the area.`);
+  }
+  const floodRisk = baseWeather?.floodRisk && baseWeather.floodRisk !== 'none'
+    ? toTitleCase(baseWeather.floodRisk)
+    : null;
+  if (floodRisk) {
+    hazardParts.push(`Rising water presents a ${floodRisk} flood risk.`);
+  }
+  const hazards = hazardParts.length ? hazardParts.join(' ') : '';
+  return {
+    weather: baseWeather || null,
+    intro: intro || null,
+    climateSummary: climateSummary || null,
+    hazards: hazards || null,
+    season: season || null,
+    timeLabel: timeLabel || null,
+  };
+}
+
 function formatTimeBandRange(startHour, endHour) {
   if (!Number.isFinite(startHour) || !Number.isFinite(endHour)) return null;
   const normalize = value => ((value % 24) + 24) % 24;
@@ -6020,21 +6082,50 @@ function createBuildingEncounterContext(position, extras = {}) {
   };
 }
 
-function renderBuildingDescription(desc, character) {
+function renderBuildingDescription(desc, character, options = {}) {
+  const content = renderBuildingDescriptionContent(desc, character);
+  const atmosphere =
+    options.atmosphere || (options.position ? buildAtmosphereNarrative(options.position, options) : null);
+  const segments = [];
+  if (atmosphere?.intro) {
+    segments.push(
+      `<p class="location-atmosphere location-atmosphere--intro">${escapeHtml(atmosphere.intro)}</p>`,
+    );
+  }
+  if (content) {
+    segments.push(content);
+  }
+  if (atmosphere?.climateSummary) {
+    segments.push(
+      `<p class="location-atmosphere location-atmosphere--summary">${escapeHtml(
+        atmosphere.climateSummary,
+      )}</p>`,
+    );
+  }
+  if (atmosphere?.hazards) {
+    segments.push(
+      `<p class="location-atmosphere location-atmosphere--hazard">${escapeHtml(atmosphere.hazards)}</p>`,
+    );
+  }
+  if (!segments.length) return '';
+  return `<div class="building-description">${segments.join('')}</div>`;
+}
+
+function renderBuildingDescriptionContent(desc, character) {
   if (!desc) return '';
   if (typeof desc === 'object' && !Array.isArray(desc)) {
     if (typeof desc.html === 'string') {
-      return `<div class="building-description">${desc.html}</div>`;
+      return desc.html;
     }
     if (Array.isArray(desc.paragraphs)) {
-      return renderBuildingDescription(desc.paragraphs, character);
+      return renderBuildingDescriptionContent(desc.paragraphs, character);
     }
     if (typeof desc.text === 'string') {
-      return renderBuildingDescription(desc.text, character);
+      return renderBuildingDescriptionContent(desc.text, character);
     }
   }
   const parts = Array.isArray(desc) ? desc : [desc];
-  const html = parts
+  return parts
     .map(segment => {
       if (segment == null) return '';
       const replaced = replaceCharacterRefs(String(segment), character || {});
@@ -6052,7 +6143,6 @@ function renderBuildingDescription(desc, character) {
         .join('');
     })
     .join('');
-  return `<div class="building-description">${html}</div>`;
 }
 
 const BUILDING_PERSONA_DETAILS = {
@@ -9981,9 +10071,16 @@ function showNavigation() {
     });
     const hours = building.hours;
     const descContent = (encounter && encounter.description) || building.description;
-    const descriptionHTML = descContent
-      ? renderBuildingDescription(descContent, currentCharacter)
-      : '';
+    const buildingAtmosphere = buildAtmosphereNarrative(pos, {
+      weather: encounterContext?.weather,
+      timeLabel: encounterContext?.timeLabel,
+      timeOfDay: encounterContext?.timeOfDay,
+      date: encounterContext?.today,
+    });
+    const descriptionHTML = renderBuildingDescription(descContent, currentCharacter, {
+      position: pos,
+      atmosphere: buildingAtmosphere,
+    });
     const hoursText = hours
       ? hours.open === '00:00' && hours.close === '24:00'
         ? 'Open 24 hours'
@@ -10183,6 +10280,35 @@ function showNavigation() {
       description = district.descriptions[pos.previousDistrict];
     }
 
+    const atmosphere = buildAtmosphereNarrative(pos);
+    const descriptionParagraphs = [];
+    if (atmosphere?.intro) {
+      descriptionParagraphs.push({
+        className: 'location-atmosphere location-atmosphere--intro',
+        text: atmosphere.intro,
+      });
+    }
+    const baseDescription = description != null ? String(description).trim() : '';
+    if (baseDescription) {
+      descriptionParagraphs.push({ className: 'location-description', text: baseDescription });
+    }
+    if (atmosphere?.climateSummary) {
+      descriptionParagraphs.push({
+        className: 'location-atmosphere location-atmosphere--summary',
+        text: atmosphere.climateSummary,
+      });
+    }
+    if (atmosphere?.hazards) {
+      descriptionParagraphs.push({
+        className: 'location-atmosphere location-atmosphere--hazard',
+        text: atmosphere.hazards,
+      });
+    }
+
+    const descHTML = descriptionParagraphs
+      .map(paragraph => `<p class="${paragraph.className}">${escapeHtml(paragraph.text)}</p>`)
+      .join('');
+
     const questButtons = questBoards.map(board =>
       createNavItem({
         type: 'quests',
@@ -10207,9 +10333,6 @@ function showNavigation() {
       localSections.push(`<div class="option-grid">${localButtons.join('')}</div>`);
     }
     const localsHTML = localSections.join('');
-    const descHTML = description
-      ? `<p class="location-description">${description}</p>`
-      : '';
     const logHTML = renderLocationLogEntries(pos);
     setMainHTML(
       `<div class="navigation"><h2>${pos.district}</h2><div class="option-grid">${navButtons.join('')}</div>${descHTML}${localsHTML}${logHTML}</div>`
