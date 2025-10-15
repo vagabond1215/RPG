@@ -1,6 +1,10 @@
 import { getBusinessProfileByName } from "./buildings.js";
+import { computePrice, roundMoney } from "../economy/regional_pricing.js";
 
 let economyItemsPromise = null;
+
+let regionPolicyPromise = null;
+let armoryModulePromise = null;
 
 async function readEconomyItemsFromFs() {
   if (typeof process === "undefined" || !process?.versions?.node) return [];
@@ -131,6 +135,73 @@ async function loadEconomyItems() {
     })();
   }
   return economyItemsPromise;
+}
+
+async function readRegionPolicyFromFs() {
+  if (typeof process === "undefined" || !process?.versions?.node) return {};
+  try {
+    const fs = await import("fs/promises");
+    const url = new URL("../game/region_policy.json", import.meta.url);
+    const text = await fs.readFile(url, "utf8");
+    if (!text) return {};
+    const parsed = JSON.parse(text);
+    return normalizeRegionPolicy(parsed);
+  } catch (err) {
+    return {};
+  }
+}
+
+async function fetchRegionPolicyViaFetch() {
+  if (typeof fetch !== "function") return null;
+  try {
+    const res = await fetch("data/game/region_policy.json");
+    if (!res.ok) return null;
+    const text = await res.text();
+    if (!text) return {};
+    const parsed = JSON.parse(text);
+    return normalizeRegionPolicy(parsed);
+  } catch (err) {
+    return null;
+  }
+}
+
+function normalizeRegionPolicy(value) {
+  if (!Array.isArray(value)) return {};
+  return value.reduce((map, entry) => {
+    if (!entry || !entry.biome) return map;
+    const key = String(entry.biome).trim().toLowerCase();
+    if (!key) return map;
+    map[key] = entry;
+    return map;
+  }, {});
+}
+
+async function loadRegionPolicy() {
+  if (!regionPolicyPromise) {
+    regionPolicyPromise = (async () => {
+      const viaFetch = await fetchRegionPolicyViaFetch();
+      if (viaFetch !== null) return viaFetch;
+      return readRegionPolicyFromFs();
+    })();
+  }
+  return regionPolicyPromise;
+}
+
+async function loadArmoryModule() {
+  if (!armoryModulePromise) {
+    armoryModulePromise = (async () => {
+      try {
+        return await import("./armory.ts");
+      } catch (errTs) {
+        try {
+          return await import("./armory.js");
+        } catch (errJs) {
+          return null;
+        }
+      }
+    })();
+  }
+  return armoryModulePromise;
 }
 
 const CATEGORY_ALIASES = {
@@ -626,6 +697,305 @@ function filterByRegionTags(items, tags) {
     return normalized.some(tag => regions.includes(tag));
   });
   return filtered.length ? filtered : items;
+}
+
+const ARMORY_DEFAULT_CATEGORIES = ["swords", "daggers", "axes", "polearms"];
+
+const ARMORY_CATEGORY_RULES = [
+  {
+    match: context => /(bowyer|fletcher|archer|ranger|hunts?man|trapper)/.test(context.lower),
+    categories: ["ranged", "daggers"]
+  },
+  {
+    match: context => /(enchant|arcane|mana|rune|wizard|mage)/.test(context.lower),
+    categories: ["swords", "daggers", "staves", "martial"]
+  },
+  {
+    match: context => /(temple|monastery|abbey|church|cleric|chantry)/.test(context.lower),
+    categories: ["maces", "staves", "shields", "martial"]
+  },
+  {
+    match: context => /(guard|watch|garrison|barracks|militia|patrol)/.test(context.lower),
+    categories: ["swords", "polearms", "maces", "shields"]
+  },
+  {
+    match: context => /(ship|naval|dock|wharf|corsair|privateer|sailor)/.test(context.lower),
+    categories: ["swords", "axes", "ranged", "polearms"]
+  },
+  {
+    match: context => /(arena|pit|dojo|academy|trainer|school)/.test(context.lower),
+    categories: ["swords", "axes", "martial", "daggers"]
+  },
+  {
+    match: context => /(forge|smith|armory|smithy|foundry|blacksmith)/.test(context.lower),
+    categories: ["swords", "axes", "polearms", "maces", "shields"]
+  },
+  {
+    match: context => /(adventurer|guild|outfitter|mercenary|quartermaster)/.test(context.lower),
+    categories: ["swords", "daggers", "ranged", "chains", "martial", "axes"]
+  },
+  {
+    match: () => true,
+    categories: ARMORY_DEFAULT_CATEGORIES
+  }
+];
+
+const ARMORY_QUALITY_TIER = {
+  Standard: "Common",
+  Fine: "Fine",
+  Masterwork: "Luxury"
+};
+
+function armoryCategoriesForContext(context) {
+  const ctx = context || {};
+  const normalized = { ...ctx, lower: String(ctx.lower || "") };
+  for (const rule of ARMORY_CATEGORY_RULES) {
+    try {
+      if (rule.match(normalized)) return rule.categories;
+    } catch (err) {
+      continue;
+    }
+  }
+  return ARMORY_DEFAULT_CATEGORIES;
+}
+
+function convertArmoryRecords(records) {
+  return records.map(record => {
+    const display = record.quality === "Standard" ? record.name : `${record.quality} ${record.name}`;
+    const baseItem = record.descriptionFull || record.description || record.name;
+    const regions = record.region ? [record.region] : [];
+    return {
+      display_name: display,
+      internal_name: record.name,
+      quality_tier: ARMORY_QUALITY_TIER[record.quality] || "Common",
+      suggested_price_cp: record.priceCp,
+      sale_quantity: 1,
+      unit: "each",
+      net_profit_cp: 0,
+      category_key: "Weapons",
+      base_item: baseItem,
+      regions,
+      _armoryRecord: record
+    };
+  });
+}
+
+function pushUnique(list, value) {
+  if (!value) return;
+  const normalized = String(value).toLowerCase();
+  if (!normalized) return;
+  if (!list.some(entry => entry.toLowerCase() === normalized)) list.push(value);
+}
+
+function deriveSeasonalAdjustments(section, context) {
+  const adjustments = {
+    limitMultiplier: 1,
+    quantityMultiplier: 1,
+    priceMultiplier: 1,
+    preferKeywords: [],
+    avoidKeywords: [],
+    keywordHints: []
+  };
+  const key = String(section.inventoryKey || section.key || "").toLowerCase();
+  const season = String(context?.season || "").toLowerCase();
+  const weather = context?.weather || {};
+  const condition = String(weather.condition || "").toLowerCase();
+  const droughtStage = String(weather.droughtStage || "").toLowerCase();
+  const isDrought = droughtStage && droughtStage !== "none";
+  const isRain = weather.storm || condition.includes("rain");
+  const isSnow = condition.includes("snow") || condition.includes("sleet");
+
+  if (key === "produce") {
+    if (season === "winter") {
+      adjustments.limitMultiplier *= 0.7;
+      adjustments.quantityMultiplier *= 0.8;
+      ["root", "cellar", "pickled", "preserve", "dried"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      adjustments.priceMultiplier *= 1.08;
+    } else if (season === "spring") {
+      adjustments.limitMultiplier *= 1.1;
+      ["sprout", "green", "herb", "fresh"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+    } else if (season === "summer") {
+      adjustments.limitMultiplier *= 1.05;
+      ["berry", "fruit", "fresh"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+    } else if (season === "autumn" || season === "fall") {
+      adjustments.limitMultiplier *= 1.15;
+      ["grain", "harvest", "squash", "spice"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      adjustments.priceMultiplier *= 1.02;
+    }
+    if (isDrought) {
+      adjustments.limitMultiplier *= 0.7;
+      adjustments.quantityMultiplier *= 0.75;
+      ["dried", "grain", "preserve", "smoked"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      ["berry", "juicy", "fresh"].forEach(keyword => pushUnique(adjustments.avoidKeywords, keyword));
+      adjustments.priceMultiplier *= 1.12;
+    }
+    if (isRain) {
+      ["leaf", "greens", "herb", "mushroom"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      adjustments.priceMultiplier *= 0.97;
+    }
+    if (isSnow) {
+      adjustments.limitMultiplier *= 0.8;
+      ["root", "pickled", "cellared"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      adjustments.priceMultiplier *= 1.1;
+    }
+  } else if (key === "fooddrink" || key === "food & drink") {
+    if (season === "winter") {
+      adjustments.quantityMultiplier *= 1.2;
+      ["stew", "soup", "mulled", "spiced", "tea"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      adjustments.priceMultiplier *= 1.05;
+    } else if (season === "summer") {
+      adjustments.quantityMultiplier *= 1.1;
+      ["chilled", "iced", "fruit", "cider", "ale"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      adjustments.priceMultiplier *= 0.98;
+    } else if (season === "spring") {
+      ["fresh", "herb", "salad"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+    } else if (season === "autumn" || season === "fall") {
+      ["harvest", "preserve", "roast", "cider"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      adjustments.priceMultiplier *= 1.02;
+    }
+    if (isDrought) {
+      adjustments.limitMultiplier *= 0.85;
+      ["jerky", "ration", "dried", "pickled"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      adjustments.priceMultiplier *= 1.1;
+    }
+    if (isRain) {
+      ["stew", "soup", "tea", "broth"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      adjustments.priceMultiplier *= 1.03;
+    }
+    if (isSnow) {
+      adjustments.quantityMultiplier *= 1.15;
+      ["stew", "cider", "mulled", "porridge"].forEach(keyword => pushUnique(adjustments.preferKeywords, keyword));
+      adjustments.priceMultiplier *= 1.08;
+    }
+  }
+
+  adjustments.keywordHints = [...adjustments.preferKeywords];
+  adjustments.limitMultiplier = Math.max(0.5, Math.min(adjustments.limitMultiplier, 1.6));
+  adjustments.quantityMultiplier = Math.max(0.5, Math.min(adjustments.quantityMultiplier, 1.6));
+  adjustments.priceMultiplier = Math.max(0.6, Math.min(adjustments.priceMultiplier, 1.4));
+  return adjustments;
+}
+
+function applyPreferenceOrdering(items, preferKeywords, avoidKeywords) {
+  const prefer = normalizeKeywords(preferKeywords);
+  const avoid = normalizeKeywords(avoidKeywords);
+  if (!prefer.length && !avoid.length) return items;
+  return items
+    .map((item, index) => {
+      const haystack = (
+        (item.display_name || item.name || "") + " " +
+        (item.internal_name || "") + " " +
+        (item.base_item || "")
+      ).toLowerCase();
+      let score = 0;
+      prefer.forEach(keyword => {
+        if (haystack.includes(keyword)) score += 2;
+      });
+      avoid.forEach(keyword => {
+        if (haystack.includes(keyword)) score -= 2;
+      });
+      return { item, index, score };
+    })
+    .sort((a, b) => {
+      if (b.score === a.score) return a.index - b.index;
+      return b.score - a.score;
+    })
+    .map(entry => entry.item);
+}
+
+function determineDestinationBiome(section, context) {
+  const candidates = [];
+  const key = String(section.inventoryKey || section.key || "").toLowerCase();
+  const habitat = context?.habitat ? String(context.habitat).toLowerCase() : null;
+  const tags = Array.isArray(context?.regionTags) ? context.regionTags.map(tag => String(tag).toLowerCase()) : [];
+  if (key === "produce") {
+    if (tags.includes("farmland")) candidates.push("farmland");
+    if (tags.includes("grassland")) candidates.push("grassland");
+  }
+  if (habitat) candidates.push(habitat);
+  candidates.push(...tags);
+  const weather = context?.weather || {};
+  const condition = String(weather.condition || "").toLowerCase();
+  const droughtStage = String(weather.droughtStage || "").toLowerCase();
+  if (droughtStage && droughtStage !== "none") candidates.push("desert");
+  if (condition.includes("snow") || condition.includes("sleet")) candidates.push("tundra");
+  if (condition.includes("rain")) candidates.push("riverlands");
+  for (const candidate of candidates) {
+    const normalized = String(candidate || "").trim().toLowerCase();
+    if (normalized) return normalized;
+  }
+  return "urban";
+}
+
+function shouldUseArmory(section, context) {
+  const key = String(section.inventoryKey || section.key || "").toLowerCase();
+  if (key !== "weapons") return false;
+  const categories = armoryCategoriesForContext(context || {});
+  return Array.isArray(categories) && categories.length > 0;
+}
+
+function sortItemsForSection(items, section) {
+  if (section.preferBulk) return preferBulkSort(items);
+  if (section.preferBasics) return preferBasicsSort(items);
+  if (section.sort === "desc") return sortByPriceDesc(items);
+  if (section.sort === "asc") return preferBasicsSort(items);
+  return alphabeticalSort(items);
+}
+
+async function finalizeInventoryItems(items, section, context, adjustments) {
+  if (!items.length) return [];
+  const policy = await loadRegionPolicy();
+  const biome = determineDestinationBiome(section, context);
+  const priceMultiplier = adjustments?.priceMultiplier ?? 1;
+  const quantityMultiplier = adjustments?.quantityMultiplier ?? 1;
+
+  return items.map(item => {
+    const basePrice =
+      item.suggested_price_cp != null
+        ? item.suggested_price_cp
+        : item.market_value_cp != null
+          ? item.market_value_cp
+          : item.priceCp != null
+            ? item.priceCp
+            : 0;
+    let price = basePrice;
+    if (policy && biome) {
+      try {
+        price = computePrice(basePrice, item, biome, policy);
+      } catch (err) {
+        price = basePrice;
+      }
+    }
+    if (!Number.isFinite(price)) price = basePrice;
+    price = roundMoney(price * priceMultiplier);
+    if (!Number.isFinite(price)) price = roundMoney(basePrice);
+    const baseQuantity =
+      item.sale_quantity != null
+        ? item.sale_quantity
+        : item.saleQuantity != null
+          ? item.saleQuantity
+          : 1;
+    const saleQuantity = Math.max(1, Math.round(baseQuantity * quantityMultiplier));
+    const mapped = {
+      name: item.display_name || item.internal_name || item.name,
+      price: price,
+      profit: item.net_profit_cp || item.profit || 0,
+      category: section.inventoryKey,
+      sale_quantity: saleQuantity,
+      unit: item.unit || (item._armoryRecord ? "each" : undefined),
+      base_item: item.base_item || item.internal_name || item.name,
+      regions: Array.isArray(item.regions) ? item.regions : [],
+      bulk_discount_threshold: item.bulk_discount_threshold || 0,
+      bulk_discount_pct: item.bulk_discount_pct || 0
+    };
+    if (item._armoryRecord) {
+      mapped.base_item = item._armoryRecord.descriptionFull || item._armoryRecord.description || mapped.base_item;
+      mapped.regions = item._armoryRecord.region ? [item._armoryRecord.region] : mapped.regions;
+      mapped.quality = item._armoryRecord.quality;
+      mapped.source = "armory";
+    }
+    return mapped;
+  });
 }
 
 function finalizeSection(section, context) {
@@ -1356,10 +1726,25 @@ export function shopCategoriesForBuilding(name) {
 }
 
 export async function itemsByCategory(section, context) {
-  const limit = limitForSection(section, context);
+  let limit = limitForSection(section, context);
   if (limit <= 0) return [];
   const categories = expandCategoryKey(section.key);
   if (!categories.length) return [];
+  const adjustments = deriveSeasonalAdjustments(section, context);
+  if (limit > 0) {
+    const adjustedLimit = Math.max(1, Math.round(limit * adjustments.limitMultiplier));
+    limit = Math.max(1, adjustedLimit);
+  }
+
+  if (shouldUseArmory(section, context)) {
+    const armoryInventory = await buildArmoryInventory(section, context, limit, adjustments);
+    if (armoryInventory.length) return armoryInventory;
+  }
+
+  return buildEconomyInventory(section, context, categories, limit, adjustments);
+}
+
+async function buildEconomyInventory(section, context, categories, limit, adjustments) {
   const items = await loadEconomyItems();
   let filtered = items.filter(item => categories.includes(item.category_key));
   if (!filtered.length) return [];
@@ -1375,41 +1760,69 @@ export async function itemsByCategory(section, context) {
     filtered = items.filter(item => categories.includes(item.category_key) && fallback.includes(item.quality_tier));
   }
 
+  if (!filtered.length) return [];
+
   const extraKeywords = normalizeKeywords([
     ...(context.productKeywords || []),
     ...(context.productionGoods || []),
     ...((context.yields && Object.values(context.yields).flat()) || []),
   ]);
-  const combinedKeywords = Array.from(new Set([...(section.keywords || []), ...extraKeywords]));
+  const seasonalKeywords = normalizeKeywords(adjustments.keywordHints);
+  const combinedKeywords = Array.from(
+    new Set([...(section.keywords || []), ...extraKeywords, ...seasonalKeywords])
+  );
   filtered = filterByKeywords(filtered, combinedKeywords);
   filtered = filterByExclusions(filtered, section.excludeKeywords);
   filtered = filterByRegionTags(filtered, context.regionTags);
 
-  let sorted;
-  if (section.preferBulk) {
-    sorted = preferBulkSort(filtered);
-  } else if (section.preferBasics) {
-    sorted = preferBasicsSort(filtered);
-  } else if (section.sort === "desc") {
-    sorted = sortByPriceDesc(filtered);
-  } else if (section.sort === "asc") {
-    sorted = preferBasicsSort(filtered);
-  } else {
-    sorted = alphabeticalSort(filtered);
-  }
-
+  let sorted = sortItemsForSection(filtered, section);
+  sorted = applyPreferenceOrdering(sorted, adjustments.preferKeywords, adjustments.avoidKeywords);
   const trimmed = sorted.slice(0, limit);
-  return trimmed.map(item => ({
-    name: item.display_name || item.internal_name,
-    price: item.suggested_price_cp != null ? item.suggested_price_cp : item.market_value_cp,
-    profit: item.net_profit_cp || 0,
-    category: section.inventoryKey,
-    sale_quantity: item.sale_quantity != null ? item.sale_quantity : 1,
-    unit: item.unit,
-    base_item: item.base_item,
-    regions: item.regions,
-    bulk_discount_threshold: item.bulk_discount_threshold,
-    bulk_discount_pct: item.bulk_discount_pct
-  }));
+  return finalizeInventoryItems(trimmed, section, context, adjustments);
+}
+
+async function buildArmoryInventory(section, context, limit, adjustments) {
+  const module = await loadArmoryModule();
+  if (!module || !module.ARMORY) return [];
+  const categories = armoryCategoriesForContext(context || {});
+  const seen = new Set();
+  const pool = [];
+  for (const category of categories) {
+    const list = module.ARMORY[category] || [];
+    for (const record of list) {
+      if (!record) continue;
+      const key = `${record.name}|${record.quality}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      pool.push(record);
+    }
+  }
+  if (!pool.length) return [];
+  const converted = convertArmoryRecords(pool);
+  const qualities = qualityForSection(section, context);
+  let filtered = converted.filter(item => qualities.includes(item.quality_tier));
+  if (!filtered.length && section.allowQualityFallback !== false) {
+    const fallback = fallbackQualities(qualities, context);
+    filtered = converted.filter(item => fallback.includes(item.quality_tier));
+  }
+  if (!filtered.length) return [];
+
+  const extraKeywords = normalizeKeywords([
+    ...(context.productKeywords || []),
+    ...(context.productionGoods || []),
+    ...((context.yields && Object.values(context.yields).flat()) || []),
+  ]);
+  const seasonalKeywords = normalizeKeywords(adjustments.keywordHints);
+  const combinedKeywords = Array.from(
+    new Set([...(section.keywords || []), ...extraKeywords, ...seasonalKeywords])
+  );
+  filtered = filterByKeywords(filtered, combinedKeywords);
+  filtered = filterByExclusions(filtered, section.excludeKeywords);
+  filtered = filterByRegionTags(filtered, context.regionTags);
+
+  let sorted = sortItemsForSection(filtered, section);
+  sorted = applyPreferenceOrdering(sorted, adjustments.preferKeywords, adjustments.avoidKeywords);
+  const trimmed = sorted.slice(0, limit);
+  return finalizeInventoryItems(trimmed, section, context, adjustments);
 }
 
