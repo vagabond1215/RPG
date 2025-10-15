@@ -63,6 +63,7 @@ import {
 } from "./data/game/buildings.js";
 import { characterBuilds } from "./data/game/character_builds.js";
 import { shopCategoriesForBuilding, itemsByCategory } from "./data/game/shop.js";
+import { presentCombatEncounter, maybeTriggerCombatEncounter } from "./combat_minigame.js";
 
 applyWavesBreakRegistry(LOCATIONS);
 
@@ -1866,6 +1867,11 @@ function setMainHTML(html) {
     mapToggleButton = null;
   }
 }
+
+window.__rpgSetMainHTML = setMainHTML;
+window.__rpgHideBackButton = hideBackButton;
+window.__rpgShowBackButton = showBackButton;
+window.__rpgUpdateMenuHeight = updateMenuHeight;
 
 function isPortraitLayout() {
   return window.innerHeight > window.innerWidth;
@@ -4162,6 +4168,33 @@ function ensureResourceBounds(character) {
   ensureHoursAwake(character);
 }
 
+function applyCombatOutcomeToCharacter(outcome) {
+  if (!currentCharacter || !outcome) return;
+  const members = Array.isArray(outcome.partyState?.members)
+    ? outcome.partyState.members
+    : [];
+  const playerState =
+    members.find(member => member && member.isPlayer) ||
+    members.find(member => member && member.id === currentCharacter.id) ||
+    members[0];
+  if (playerState && playerState.resources) {
+    const { resources } = playerState;
+    if (Number.isFinite(resources.hp)) currentCharacter.hp = resources.hp;
+    if (Number.isFinite(resources.hpMax)) currentCharacter.maxHP = resources.hpMax;
+    if (Number.isFinite(resources.mp)) currentCharacter.mp = resources.mp;
+    if (Number.isFinite(resources.mpMax)) currentCharacter.maxMP = resources.mpMax;
+    if (Number.isFinite(resources.stamina)) currentCharacter.stamina = resources.stamina;
+    if (Number.isFinite(resources.staminaMax)) currentCharacter.maxStamina = resources.staminaMax;
+  }
+  if (Array.isArray(outcome.inventory)) {
+    currentCharacter.inventory = outcome.inventory.map(item => ({ ...item }));
+  }
+  if (Array.isArray(outcome.injuries)) {
+    currentCharacter.lastCombatInjuries = outcome.injuries.map(entry => ({ ...entry }));
+  }
+  ensureResourceBounds(currentCharacter);
+}
+
 function ensureHoursAwake(character) {
   if (!character) return 0;
   const value = Number(character.hoursAwake);
@@ -5200,6 +5233,58 @@ async function handleEnvironmentInteraction(actionId, pos) {
     showNavigation();
     return;
   }
+  if (result && result.pendingEncounter) {
+    try {
+      const encounterOutcome = await presentCombatEncounter({
+        character: currentCharacter,
+        encounter: result.pendingEncounter,
+        context,
+      });
+      if (encounterOutcome) {
+        result.encounter = encounterOutcome;
+        if (encounterOutcome.fled) {
+          result.partialSuccess = true;
+        }
+        if (encounterOutcome.success === false && !encounterOutcome.fled) {
+          result.success = false;
+        }
+        if (encounterOutcome.narrative && result.narrative && typeof result.narrative === 'object') {
+          const added = [result.narrative.scene || '', encounterOutcome.narrative.scene || '']
+            .filter(Boolean)
+            .join('\n');
+          result.narrative.scene = added;
+          if (encounterOutcome.narrative.outcome) {
+            result.narrative.outcome = encounterOutcome.narrative.outcome;
+          }
+        }
+        if (encounterOutcome.rewards) {
+          if (Array.isArray(encounterOutcome.rewards.loot) && encounterOutcome.rewards.loot.length) {
+            result.loot = Array.isArray(result.loot)
+              ? result.loot.concat(encounterOutcome.rewards.loot)
+              : encounterOutcome.rewards.loot.slice();
+          }
+          if (Number.isFinite(encounterOutcome.rewards.currency) && encounterOutcome.rewards.currency > 0) {
+            result.currencyReward = (result.currencyReward || 0) + encounterOutcome.rewards.currency;
+          }
+          if (Number.isFinite(encounterOutcome.rewards.xp) && encounterOutcome.rewards.xp > 0) {
+            result.xpReward = (result.xpReward || 0) + encounterOutcome.rewards.xp;
+          }
+        }
+        applyCombatOutcomeToCharacter(encounterOutcome);
+        updateTopMenuIndicators();
+        saveProfiles();
+      }
+    } catch (err) {
+      console.error('Failed to resolve combat encounter', err);
+      pushLocationLogEntry(pos, {
+        kind: 'message',
+        tone: 'error',
+        title: 'Encounter disrupted',
+        body: 'An unexpected error forced the skirmish to end early.',
+      });
+    }
+    delete result.pendingEncounter;
+  }
   const questSelection = resolvedActionDef.questMinigameSelection;
   if (questSelection && result) {
     if (Array.isArray(questSelection.effects) && questSelection.effects.length) {
@@ -5403,7 +5488,7 @@ async function resolveObservationAction(actionType, definition, actionDef = {}, 
   const outcomeText = event?.outcome
     ? event.outcome
     : buildDefaultOutcome(success, durationText, actionType);
-  return {
+  const result = {
     type: actionType,
     title: composeEnvironmentTitle(actionType, definition, actionDef),
     success,
@@ -5418,6 +5503,25 @@ async function resolveObservationAction(actionType, definition, actionDef = {}, 
     timeSpentHours: timeSpent,
     timeAfter: timeResult,
   };
+  try {
+    const encounter = maybeTriggerCombatEncounter({
+      actionType,
+      definition,
+      context,
+      character: currentCharacter,
+    });
+    if (encounter) {
+      result.pendingEncounter = encounter;
+      if (result.narrative && typeof result.narrative === 'object') {
+        const foreshadow = encounter.foreshadow || 'A prickling sense of danger creeps over you.';
+        const existingScene = (result.narrative.scene || '').trim();
+        result.narrative.scene = existingScene ? `${existingScene}\n${foreshadow}` : foreshadow;
+      }
+    }
+  } catch (err) {
+    console.error('Failed to evaluate combat encounter chance', err);
+  }
+  return result;
 }
 
 async function resolveSearchAction(actionType, definition, actionDef = {}, context) {
@@ -12178,25 +12282,90 @@ function renderQuestStoryline() {
       });
     }
     main.querySelectorAll('[data-action="quest-storyline-choice"]').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', async () => {
         const key = btn.dataset.choice || '';
-        resolveQuestOutcome(story, key);
+        await resolveQuestOutcome(story, key);
         story.phase = 'results';
         renderQuestStoryline();
       });
     });
     const finishBtn = main.querySelector('[data-action="quest-storyline-finish"]');
     if (finishBtn) {
-      finishBtn.addEventListener('click', () => {
-        finalizeQuestStoryline(story);
+      finishBtn.addEventListener('click', async () => {
+        await finalizeQuestStoryline(story);
       });
     }
   }
 }
 
-function resolveQuestOutcome(story, choiceKey) {
+function extractQuestCombatConfig(story, choice) {
+  if (choice?.combatEncounter) return choice.combatEncounter;
+  const effectMatch = Array.isArray(choice?.effects)
+    ? choice.effects.find(effect => {
+        if (typeof effect === 'string') return effect === 'combat_encounter';
+        if (effect && typeof effect === 'object') {
+          const type = (effect.type || effect.kind || '').toLowerCase();
+          return type === 'combatencounter' || type === 'combat_encounter';
+        }
+        return false;
+      })
+    : null;
+  if (effectMatch && typeof effectMatch === 'object') {
+    return effectMatch.config || effectMatch;
+  }
+  if (effectMatch === 'combat_encounter') {
+    return {};
+  }
+  if (story?.quest?.combatEncounter) return story.quest.combatEncounter;
+  return null;
+}
+
+async function resolveQuestOutcome(story, choiceKey) {
   if (!story || story.resolved) return story;
   const choice = (story.choices || []).find(opt => opt.key === choiceKey) || null;
+  let combatOutcome = null;
+  const combatConfig = extractQuestCombatConfig(story, choice);
+  if (combatConfig) {
+    const questDefinition = {
+      location: story.destination?.label || story.destination?.building || story.quest?.location || 'the site',
+      habitat: story.destination?.binding?.habitat || story.quest?.habitat || 'urban',
+      district: story.destination?.district || null,
+      region: story.destination?.binding?.region || null,
+    };
+    const questContext = {
+      timeOfDay: currentCharacter?.timeOfDay,
+      weather: story.weather || null,
+    };
+    let encounterSpec = maybeTriggerCombatEncounter({
+      actionType: 'quest',
+      definition: questDefinition,
+      context: questContext,
+      character: currentCharacter,
+      force: true,
+    });
+    if (!encounterSpec) {
+      encounterSpec = { id: 'quest-encounter', title: 'Quest Skirmish', summary: 'A perilous interruption.' };
+    }
+    if (combatConfig.title) encounterSpec.title = combatConfig.title;
+    if (combatConfig.summary) encounterSpec.summary = combatConfig.summary;
+    if (Array.isArray(combatConfig.enemies) && combatConfig.enemies.length) {
+      encounterSpec.enemies = combatConfig.enemies;
+    }
+    try {
+      combatOutcome = await presentCombatEncounter({
+        character: currentCharacter,
+        encounter: encounterSpec,
+        context: questContext,
+      });
+      if (combatOutcome) {
+        applyCombatOutcomeToCharacter(combatOutcome);
+        updateTopMenuIndicators();
+        saveProfiles();
+      }
+    } catch (err) {
+      console.error('Failed to resolve quest combat encounter', err);
+    }
+  }
   let chance = 0.6 + ((currentCharacter?.level || 1) * 0.02);
   if (story.quest?.highPriority) chance -= 0.05;
   if (Array.isArray(story.quest?.skillRequirements) && story.quest.skillRequirements.length) {
@@ -12206,7 +12375,14 @@ function resolveQuestOutcome(story, choiceKey) {
     chance += choice.successMod;
   }
   chance = Math.max(0.05, Math.min(0.95, chance));
-  const success = Math.random() < chance;
+  let success = Math.random() < chance;
+  if (combatOutcome) {
+    if (combatOutcome.success) {
+      success = true;
+    } else if (!combatOutcome.fled) {
+      success = false;
+    }
+  }
   const hoursWorked = (story.duration?.hours || 0) + (story.travelHours || 0);
   const timeResult = advanceCharacterTime(hoursWorked);
   const afterTime = timeResult.timeOfDay;
@@ -12224,6 +12400,10 @@ function resolveQuestOutcome(story, choiceKey) {
   if (weatherNote) {
     lines.push(`Conditions: ${weatherNote}`);
   }
+  if (combatOutcome && combatOutcome.narrative) {
+    if (combatOutcome.narrative.scene) lines.push(combatOutcome.narrative.scene);
+    if (combatOutcome.narrative.outcome) lines.push(combatOutcome.narrative.outcome);
+  }
   if (success) {
     lines.push(`The crew finishes the assignment with your help, earning nods from ${story.npc.fullName}.`);
   } else {
@@ -12236,6 +12416,9 @@ function resolveQuestOutcome(story, choiceKey) {
     const parsed = parseCurrency(text);
     totalIron += toIron(parsed);
   });
+  if (combatOutcome?.rewards?.currency) {
+    totalIron += Math.max(0, Math.round(Number(combatOutcome.rewards.currency)));
+  }
   if (success && totalIron > 0 && currentCharacter) {
     const walletIron = toIron(currentCharacter.money || createEmptyCurrency());
     const newWallet = fromIron(walletIron + totalIron);
@@ -12267,15 +12450,18 @@ function resolveQuestOutcome(story, choiceKey) {
       entry.timesCompleted = prevCount + 1;
     }
   }
+  if (combatOutcome) {
+    story.combatOutcome = combatOutcome;
+  }
   saveProfiles();
   updateTopMenuIndicators();
   return story;
 }
 
-function finalizeQuestStoryline(story) {
+async function finalizeQuestStoryline(story) {
   if (!story) return;
   if (!story.resolved && story.phase !== 'results') {
-    resolveQuestOutcome(story, story.choices?.[0]?.key || 'steady');
+    await resolveQuestOutcome(story, story.choices?.[0]?.key || 'steady');
   }
   const history = ensureQuestHistory(currentCharacter);
   if (!story.historyLogged) {
