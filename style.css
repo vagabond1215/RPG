@@ -22,6 +22,7 @@
   --settings-panel-gap: 0.0625rem;
   --settings-panel-width: calc(3 * var(--menu-button-size) + 2 * var(--settings-panel-gap));
   --settings-panel-buffer: 0.5rem;
+  --settings-panel-surface: linear-gradient(160deg, rgba(255, 255, 255, 0.97), rgba(246, 248, 255, 0.92));
   --top-menu-padding-right: 0.25rem;
   --time-icon-size: 30px;
   --time-icon-padding: calc(var(--time-icon-size) * 0.12);
@@ -850,7 +851,7 @@ body.theme-sepia .time-display-xp .top-resource-label {
   position: absolute;
   pointer-events: none;
   transition: transform 0.25s ease, opacity 0.25s ease;
-  z-index: 450;
+  z-index: 600;
   flex-direction: row;
   top: calc(100% + var(--settings-panel-gap));
   right: 0;
@@ -861,7 +862,7 @@ body.theme-sepia .time-display-xp .top-resource-label {
   padding: 0.35rem;
   border-radius: calc(var(--menu-button-size) * 0.4);
   border: 1px solid var(--top-menu-chip-border);
-  background: var(--top-menu-chip-surface);
+  background: var(--settings-panel-surface);
   box-shadow: var(--top-menu-chip-shadow);
   backdrop-filter: blur(calc(var(--surface-glass-blur) * 0.65));
   -webkit-backdrop-filter: blur(calc(var(--surface-glass-blur) * 0.65));
@@ -1136,6 +1137,7 @@ body.theme-light {
   --top-menu-chip-divider: rgba(255, 255, 255, 0.5);
   --top-menu-chip-surface: linear-gradient(160deg, rgba(255, 255, 255, 0.82), rgba(246, 248, 255, 0.25));
   --top-menu-chip-shadow: 0 22px 42px rgba(15, 23, 42, 0.18);
+  --settings-panel-surface: linear-gradient(160deg, rgba(255, 255, 255, 0.97), rgba(246, 248, 255, 0.92));
 }
 
 body.theme-sepia {
@@ -1164,6 +1166,7 @@ body.theme-sepia {
   --top-menu-chip-divider: rgba(255, 235, 210, 0.45);
   --top-menu-chip-surface: linear-gradient(160deg, rgba(255, 248, 235, 0.82), rgba(230, 205, 175, 0.2));
   --top-menu-chip-shadow: 0 20px 40px rgba(120, 90, 60, 0.28);
+  --settings-panel-surface: linear-gradient(160deg, rgba(255, 248, 235, 0.97), rgba(230, 205, 175, 0.9));
 }
 
 body.theme-dark {
@@ -1192,6 +1195,7 @@ body.theme-dark {
   --top-menu-chip-divider: rgba(148, 163, 184, 0.26);
   --top-menu-chip-surface: linear-gradient(160deg, rgba(148, 163, 184, 0.22), rgba(15, 23, 42, 0.78));
   --top-menu-chip-shadow: 0 26px 46px rgba(2, 6, 23, 0.55);
+  --settings-panel-surface: linear-gradient(160deg, rgba(40, 46, 62, 0.95), rgba(15, 23, 42, 0.94));
 }
 
 /* Ensure menu icons blend with the background in dark mode */
