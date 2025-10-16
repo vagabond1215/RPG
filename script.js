@@ -14047,12 +14047,20 @@ function startCharacterCreation() {
         const attrList = Object.entries(baseAttrs)
           .map(([k, v]) => `<li>${k}: ${v}</li>`)
           .join('');
-        const resourceBars = `
-          <div class="resource-bar hp"><div class="fill" style="width:100%"></div><span class="value">HP: ${resources.HP}</span></div>
-          <div class="resource-bar mp"><div class="fill" style="width:100%"></div><span class="value">MP: ${resources.MP}</span></div>
-          <div class="resource-bar stamina"><div class="fill" style="width:100%"></div><span class="value">ST: ${resources.ST}</span></div>
+        const resourceList = `
+          <ul class="resource-list resource-bars">
+            <li>
+              <div class="resource-bar hp"><div class="fill" style="width:100%"></div><span class="value">HP: ${resources.HP}</span></div>
+            </li>
+            <li>
+              <div class="resource-bar mp"><div class="fill" style="width:100%"></div><span class="value">MP: ${resources.MP}</span></div>
+            </li>
+            <li>
+              <div class="resource-bar stamina"><div class="fill" style="width:100%"></div><span class="value">ST: ${resources.ST}</span></div>
+            </li>
+          </ul>
         `;
-        const statsHTML = `<div class="race-stats"><h2>Starting Stats</h2><div class="stats-resource-grid"><ul class="stats-list">${attrList}</ul><div class="resource-column">${resourceBars}</div></div></div>`;
+        const statsHTML = `<div class="race-stats"><h2>Starting Stats</h2><div class="stats-resource-grid"><ul class="stats-list">${attrList}</ul><div class="resource-column">${resourceList}</div></div></div>`;
         const strengths = Object.entries(build.stats)
           .filter(([, v]) => v > 0)
           .map(([k]) => k)
@@ -14077,7 +14085,7 @@ function startCharacterCreation() {
       const resList = Object.entries(resources)
         .map(([k, v]) => `<li>${k}: ${v}</li>`)
         .join('');
-      const statsHTML = `<div class="race-stats"><ul>${attrList}</ul><ul>${resList}</ul></div>`;
+      const statsHTML = `<div class="race-stats"><div class="stats-resource-grid"><ul class="stats-list">${attrList}</ul><ul class="resource-list resource-column">${resList}</ul></div></div>`;
       const descHTML = `<div class="race-description">${RACE_DESCRIPTIONS[character.race] || ''}</div>`;
       return { statsHTML, descHTML };
     })();
