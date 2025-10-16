@@ -14634,11 +14634,15 @@ if (themeToggle) {
 
 // UI scale buttons
 let uiScale = 1;
+const scaleResetButton = document.getElementById('scale-reset');
 const updateScale = () => {
   document.documentElement.style.setProperty('--ui-scale', uiScale);
   savePreference('uiScale', uiScale);
   updateMenuHeight();
   repositionFloatingMenus();
+  if (scaleResetButton) {
+    scaleResetButton.textContent = `${Math.round(uiScale * 100)}%`;
+  }
 };
 const scaleDecButton = document.getElementById('scale-dec');
 const scaleIncButton = document.getElementById('scale-inc');
@@ -14651,6 +14655,12 @@ if (scaleDecButton) {
 if (scaleIncButton) {
   scaleIncButton.addEventListener('click', () => {
     uiScale = Math.min(2, uiScale + 0.1);
+    updateScale();
+  });
+}
+if (scaleResetButton) {
+  scaleResetButton.addEventListener('click', () => {
+    uiScale = 1;
     updateScale();
   });
 }

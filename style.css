@@ -20,7 +20,10 @@
   --menu-button-size: 2.625rem;
   --menu-height: var(--menu-button-size);
   --settings-panel-gap: 0.0625rem;
-  --settings-panel-width: calc(3 * var(--menu-button-size) + 2 * var(--settings-panel-gap));
+  --settings-panel-width: calc(
+    5 * (var(--menu-button-size) - 0.6rem) +
+    3 * var(--settings-panel-gap)
+  );
   --settings-panel-buffer: 0.5rem;
   --settings-panel-surface: linear-gradient(160deg, rgba(255, 255, 255, 0.97), rgba(246, 248, 255, 0.92));
   --top-menu-padding-right: 0.25rem;
@@ -896,6 +899,14 @@ body.theme-sepia .time-display-xp .top-resource-label {
   box-shadow: var(--surface-chip-shadow);
   color: inherit;
   cursor: pointer;
+}
+
+#settings-panel .settings-zoom-display {
+  width: calc(2 * (var(--menu-button-size) - 0.6rem));
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-size: 0.85rem;
+  line-height: 1;
 }
 
 #settings-panel button img {
