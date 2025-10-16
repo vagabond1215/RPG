@@ -14632,6 +14632,9 @@ function loadPreferences() {
   if (typeof prefs.uiScale === 'number') {
     uiScale = prefs.uiScale;
   }
+  if (prefs.unitSystem) {
+    applyUnitSystem(prefs.unitSystem);
+  }
   setTheme(currentThemeIndex);
   updateScale();
 }
@@ -14688,6 +14691,43 @@ if (themeToggle) {
     setTheme(currentThemeIndex);
   });
 }
+
+// Unit system toggle
+const UNIT_SYSTEM_OPTIONS = new Set(['imperial', 'metric']);
+const unitToggle = document.getElementById('unit-toggle');
+const unitToggleText = document.getElementById('unit-toggle-text');
+let unitSystem = 'imperial';
+
+const applyUnitSystem = system => {
+  const preferred = UNIT_SYSTEM_OPTIONS.has(system) ? system : 'imperial';
+  unitSystem = preferred;
+  const isMetric = preferred === 'metric';
+  if (unitToggle) {
+    unitToggle.checked = isMetric;
+    unitToggle.setAttribute('aria-checked', isMetric ? 'true' : 'false');
+  }
+  if (unitToggleText) {
+    const { imperial: imperialLabel = 'Imperial', metric: metricLabel = 'Metric' } = unitToggleText.dataset || {};
+    unitToggleText.textContent = isMetric ? metricLabel : imperialLabel;
+    unitToggleText.dataset.active = preferred;
+  }
+  document.documentElement.setAttribute('data-units', preferred);
+};
+
+const persistUnitSystem = system => {
+  applyUnitSystem(system);
+  savePreference('unitSystem', unitSystem);
+};
+
+if (unitToggle) {
+  unitToggle.addEventListener('change', () => {
+    persistUnitSystem(unitToggle.checked ? 'metric' : 'imperial');
+  });
+}
+
+window.getUnitSystem = () => unitSystem;
+window.setUnitSystemPreference = persistUnitSystem;
+applyUnitSystem(unitSystem);
 
 // UI scale buttons
 let uiScale = 1;
