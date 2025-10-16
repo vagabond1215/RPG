@@ -13934,6 +13934,37 @@ function startCharacterCreation() {
 
   renderStep();
 
+  function createWheelSelectorTemplate({
+    wrapperClass,
+    arrowClass,
+    contentHTML,
+    extraHTML = '',
+    displayClass = 'wheel-display',
+    rootAttributes = '',
+    extraContainerClass = 'wheel-extra-row',
+  }) {
+    const extraSection = extraHTML
+      ? `
+        <div class="${extraContainerClass}">
+          ${extraHTML}
+        </div>
+      `
+      : '';
+
+    return `
+      <div class="${wrapperClass} wheel-selector"${rootAttributes}>
+        <button class="${arrowClass} wheel-arrow left" aria-label="Previous">&#x2039;</button>
+        <div class="wheel-content">
+          <div class="${displayClass}">
+            ${contentHTML}
+          </div>
+          ${extraSection}
+        </div>
+        <button class="${arrowClass} wheel-arrow right" aria-label="Next">&#x203A;</button>
+      </div>
+    `;
+  }
+
   async function renderStep() {
     const activeFields = fields.filter(
       f => !f.races || f.races.includes(character.race)
@@ -14103,12 +14134,11 @@ function startCharacterCreation() {
             index = 0;
             character.location = options[0];
           }
-          inputHTML = `
-            <div class="location-carousel wheel-selector">
-              <button class="loc-arrow left" aria-label="Previous">&#x2039;</button>
-              <button class="option-button location-button">${character.location}</button>
-              <button class="loc-arrow right" aria-label="Next">&#x203A;</button>
-            </div>`;
+          inputHTML = createWheelSelectorTemplate({
+            wrapperClass: 'location-carousel',
+            arrowClass: 'loc-arrow',
+            contentHTML: `<button class="option-button location-button">${character.location}</button>`,
+          });
         } else if (field.key === 'race') {
           const options = field.options;
           let index = options.indexOf(character.race);
@@ -14116,12 +14146,11 @@ function startCharacterCreation() {
             index = 0;
             character.race = options[0];
           }
-          inputHTML = `
-            <div class="race-carousel wheel-selector">
-              <button class="race-arrow left" aria-label="Previous">&#x2039;</button>
-              <button class="option-button race-button">${character.race}</button>
-              <button class="race-arrow right" aria-label="Next">&#x203A;</button>
-            </div>`;
+          inputHTML = createWheelSelectorTemplate({
+            wrapperClass: 'race-carousel',
+            arrowClass: 'race-arrow',
+            contentHTML: `<button class="option-button race-button">${character.race}</button>`,
+          });
         } else if (field.key === 'sex') {
           const options = field.options;
           let index = options.indexOf(character.sex);
@@ -14129,12 +14158,11 @@ function startCharacterCreation() {
             index = 0;
             character.sex = options[0];
           }
-          inputHTML = `
-            <div class="sex-carousel wheel-selector">
-              <button class="sex-arrow left" aria-label="Previous">&#x2039;</button>
-              <button class="option-button sex-button">${character.sex}</button>
-              <button class="sex-arrow right" aria-label="Next">&#x203A;</button>
-            </div>`;
+          inputHTML = createWheelSelectorTemplate({
+            wrapperClass: 'sex-carousel',
+            arrowClass: 'sex-arrow',
+            contentHTML: `<button class="option-button sex-button">${character.sex}</button>`,
+          });
         } else if (field.key === 'class') {
           const options = field.options;
           let index = options.indexOf(character.class);
@@ -14142,12 +14170,11 @@ function startCharacterCreation() {
             index = 0;
             character.class = options[0];
           }
-          inputHTML = `
-            <div class="class-carousel wheel-selector">
-              <button class="class-arrow left" aria-label="Previous">&#x2039;</button>
-              <button class="option-button class-button">${character.class}</button>
-              <button class="class-arrow right" aria-label="Next">&#x203A;</button>
-            </div>`;
+          inputHTML = createWheelSelectorTemplate({
+            wrapperClass: 'class-carousel',
+            arrowClass: 'class-arrow',
+            contentHTML: `<button class="option-button class-button">${character.class}</button>`,
+          });
         } else if (field.key === 'backstory') {
           const options = availableBackstories.map(b => b.background);
           if (!options.length) {
@@ -14160,12 +14187,11 @@ function startCharacterCreation() {
               index = 0;
               character.backstory = options[0];
             }
-            inputHTML = `
-              <div class="backstory-carousel wheel-selector">
-                <button class="backstory-arrow left" aria-label="Previous">&#x2039;</button>
-                <button class="option-button backstory-button">${escapeHtml(character.backstory)}</button>
-                <button class="backstory-arrow right" aria-label="Next">&#x203A;</button>
-              </div>`;
+            inputHTML = createWheelSelectorTemplate({
+              wrapperClass: 'backstory-carousel',
+              arrowClass: 'backstory-arrow',
+              contentHTML: `<button class="option-button backstory-button">${escapeHtml(character.backstory)}</button>`,
+            });
           }
         } else if (field.key === 'characterImage') {
           const files = await getCharacterImages(character.race, character.sex);
@@ -14177,19 +14203,17 @@ function startCharacterCreation() {
             }
             const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
             const src = `${folder}/${character.characterImage || ''}`;
-            inputHTML = `
-              <div class="character-carousel wheel-selector">
-                <button class="character-arrow left" aria-label="Previous">&#x2039;</button>
-                <div class="portrait-wrapper">
-                  <img class="character-option" src="${src}" alt="Character">
-                  <div class="portrait-zoom">
-                    <button id="portrait-zoom-dec" class="portrait-zoom-dec" aria-label="Zoom out">-</button>
-                    <button id="portrait-zoom-reset" class="portrait-zoom-reset" aria-label="Reset zoom">100%</button>
-                    <button id="portrait-zoom-inc" class="portrait-zoom-inc" aria-label="Zoom in">+</button>
-                  </div>
-                </div>
-                <button class="character-arrow right" aria-label="Next">&#x203A;</button>
-              </div>`;
+            inputHTML = createWheelSelectorTemplate({
+              wrapperClass: 'character-carousel',
+              arrowClass: 'character-arrow',
+              displayClass: 'wheel-display portrait-display',
+              contentHTML: `<div class="portrait-wrapper"><img class="character-option" src="${src}" alt="Character"></div>`,
+              extraHTML:
+                '<button id="portrait-zoom-dec" class="portrait-zoom-dec" aria-label="Zoom out">-</button>' +
+                '<button id="portrait-zoom-reset" class="portrait-zoom-reset" aria-label="Reset zoom">100%</button>' +
+                '<button id="portrait-zoom-inc" class="portrait-zoom-inc" aria-label="Zoom in">+</button>',
+              extraContainerClass: 'wheel-extra-row portrait-zoom',
+            });
           } else {
             character.characterImage = null;
             safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
@@ -14221,14 +14245,15 @@ function startCharacterCreation() {
           character[field.key] = value;
         }
         const pickerId = `${field.key}-picker`;
-        inputHTML = `
-          <div class="color-carousel wheel-selector" data-field="${field.key}">
-            <button class="color-arrow left" aria-label="Previous">&#x2039;</button>
-            <button class="color-button" style="background:${value}" aria-label="${value}"></button>
-            <button class="color-arrow right" aria-label="Next">&#x203A;</button>
-            <button class="color-picker" aria-label="Pick color">🎨</button>
-            <input type="color" id="${pickerId}" value="${value}" style="display:none;">
-          </div>`;
+        inputHTML = createWheelSelectorTemplate({
+          wrapperClass: 'color-carousel',
+          arrowClass: 'color-arrow',
+          displayClass: 'wheel-display color-display',
+          contentHTML: `<button class="color-button" style="background:${value}" aria-label="${value}"></button>`,
+          extraHTML: `<button class="color-picker" aria-label="Pick color">🎨</button><input type="color" id="${pickerId}" value="${value}" style="display:none;">`,
+          extraContainerClass: 'wheel-extra-row color-controls',
+          rootAttributes: ` data-field="${field.key}"`,
+        });
       }
 
       setMainHTML(
