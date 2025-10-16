@@ -14122,7 +14122,11 @@ function startCharacterCreation() {
     })();
     const { statsHTML = '', descHTML = '' } = displayData;
     const statsSection =
-      field && (field.key === 'race' || field.key === 'class') ? statsHTML : '';
+      field &&
+      (field.key === 'race' || field.key === 'class') &&
+      statsHTML
+        ? `<aside class="cc-stats">${statsHTML}</aside>`
+        : '';
 
     if (field) {
       let inputHTML = '';
@@ -14257,7 +14261,7 @@ function startCharacterCreation() {
       }
 
       setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-right"><div class="cc-options">${inputHTML}</div>${statsSection}</div></div><div class="cc-info">${descHTML}</div></div>`
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-options">${inputHTML}</div>${statsSection}</div><div class="cc-info">${descHTML}</div></div>`
       );
       normalizeOptionButtonWidths();
 
@@ -14426,7 +14430,7 @@ function startCharacterCreation() {
         ] || [];
       const placeholderName = nameList[0] || 'Name';
       setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-right"><div class="cc-options name-entry"><input type="text" id="name-input" value="${nameVal}" placeholder="${placeholderName}"><button id="name-random" class="dice-button" aria-label="Randomize Name">🎲</button></div>${statsSection}</div></div><div class="cc-info">${descHTML}</div></div>`
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-options name-entry"><input type="text" id="name-input" value="${nameVal}" placeholder="${placeholderName}"><button id="name-random" class="dice-button" aria-label="Randomize Name">🎲</button></div>${statsSection}</div><div class="cc-info">${descHTML}</div></div>`
       );
       normalizeOptionButtonWidths();
       const nameInput = document.getElementById('name-input');
