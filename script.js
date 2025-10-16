@@ -3461,22 +3461,22 @@ const formatHeight = cm => {
 
 const BACK_BUTTON_VISIBLE_CLASS = 'top-menu-main--back-visible';
 
-const showBackButton = () => {
+function showBackButton() {
   if (backButton) {
     backButton.style.display = 'inline-flex';
   }
   if (topMenuMain) {
     topMenuMain.classList.add(BACK_BUTTON_VISIBLE_CLASS);
   }
-};
-const hideBackButton = () => {
+}
+function hideBackButton() {
   if (backButton) {
     backButton.style.display = 'none';
   }
   if (topMenuMain) {
     topMenuMain.classList.remove(BACK_BUTTON_VISIBLE_CLASS);
   }
-};
+}
 
 function showItemPopup(item) {
   const overlay = document.createElement('div');
