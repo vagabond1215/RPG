@@ -202,6 +202,7 @@ main {
   min-width: 0;
   overflow: visible;
   isolation: isolate;
+  z-index: 2;
 }
 
 .top-menu-primary::before {
@@ -275,6 +276,8 @@ main {
   justify-content: center;
   gap: 1.25rem;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
 .time-display-xp {
@@ -1202,6 +1205,10 @@ body.theme-dark {
 body.theme-dark .top-menu-actions button {
   color: var(--menu-color-light);
   -webkit-text-stroke: 0;
+}
+
+body.theme-dark .xp-job-label {
+  color: var(--menu-color-light);
 }
 
 body.theme-dark #dropdownMenu button,
