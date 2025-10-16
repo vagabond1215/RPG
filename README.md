@@ -5,6 +5,8 @@ This repository hosts a simple web-based text RPG prototype intended for deploym
 ## Setup
 
 1. Run `npm install` to install all dependencies.
+   - If you rely on an HTTP proxy, configure npm with the underscore-style environment variables (`npm_config_http_proxy` / `npm_config_https_proxy`) or add matching entries to `~/.npmrc`. The legacy dash-form names (`npm_config_http-proxy`) trigger warnings in npm 11 and will stop working in a future release.
+   - When adopting this repository in a new environment, upgrade npm itself with `npm install -g npm@latest` so the bundled CLI matches the current release.
 2. Use the maintenance scripts whenever you touch the shared data sets:
    - `npm run validate` checks the fauna and flora catalogs against their JSON schemas so broken entries never reach version control.
    - `npm run build:indexes` regenerates the derived Codex lookups under `dist/indexes/` after you edit animals or plants.
@@ -17,6 +19,10 @@ This repository hosts a simple web-based text RPG prototype intended for deploym
 ### Catalog validation
 
 `npm run validate` invokes `scripts/validateData.ts`, applying the schemas in `schemas/` to every animal and plant. Run the validator before committing catalog edits so the automated tests—and the Codex UI—only see structurally valid records.
+
+### Dependency maintenance
+
+Run `npm outdated` after large batches of work to identify ecosystem updates. When bumping packages, follow up with the validation and build scripts (`npm run validate`, `npm run build:indexes`, `npm run build:spellbook`) and the complete test suite to confirm the data pipelines still behave as expected.
 
 ### Spellbook data
 
