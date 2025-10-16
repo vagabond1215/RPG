@@ -20,9 +20,12 @@
   --menu-button-size: 2.625rem;
   --menu-height: var(--menu-button-size);
   --settings-panel-gap: 0.0625rem;
+  --settings-panel-padding: 0.35rem;
   --settings-panel-width: calc(
     5 * (var(--menu-button-size) - 0.6rem) +
-    3 * var(--settings-panel-gap)
+    3 * var(--settings-panel-gap) +
+    2 * var(--settings-panel-padding) +
+    2px
   );
   --settings-panel-buffer: 0.5rem;
   --settings-panel-surface: linear-gradient(160deg, rgba(255, 255, 255, 0.97), rgba(246, 248, 255, 0.92));
@@ -655,6 +658,12 @@ main {
   font-size: clamp(1rem, calc(var(--menu-button-size) * 0.45), 2rem);
 }
 
+.time-display--empty,
+.time-icons .time-icon--empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .time-icons .time-icon.tooltip-anchor {
   cursor: default;
 }
@@ -859,13 +868,13 @@ body.theme-sepia .time-display-xp .top-resource-label {
   transition: transform 0.25s ease, opacity 0.25s ease;
   z-index: 600;
   flex-direction: row;
-  top: calc(100% + var(--settings-panel-gap));
-  right: 0;
+  top: calc(100% + var(--settings-panel-gap) + var(--settings-panel-buffer));
+  right: calc(var(--time-icons-padding-inline-end) * -1);
   left: auto;
   transform: translateY(-0.5rem) scaleY(0);
   transform-origin: top right;
   opacity: 0;
-  padding: 0.35rem;
+  padding: var(--settings-panel-padding);
   border-radius: calc(var(--menu-button-size) * 0.4);
   border: 1px solid var(--top-menu-chip-border);
   background: var(--settings-panel-surface);
@@ -875,9 +884,9 @@ body.theme-sepia .time-display-xp .top-resource-label {
   width: var(--settings-panel-width);
   max-width: var(--settings-panel-width);
   box-sizing: border-box;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   color: var(--menu-color-dark);
+  justify-content: flex-start;
 }
 
 #settings-panel.active {

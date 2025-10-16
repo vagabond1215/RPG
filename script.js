@@ -1704,6 +1704,12 @@ function updateTopMenuIndicators() {
   }
   if (menuTimeDisplay) {
     if (currentCharacter) {
+      menuTimeDisplay.classList.remove('time-display--empty');
+      menuTimeDisplay.removeAttribute('aria-hidden');
+      if (menuTimeIcon) {
+        menuTimeIcon.classList.remove('time-icon--empty');
+        menuTimeIcon.removeAttribute('aria-hidden');
+      }
       const hours = ensureCharacterClock(currentCharacter);
       const bandKey = timeBandForHour(hours);
       const band = TIME_BAND_CLASS_MAP[bandKey];
@@ -1724,10 +1730,14 @@ function updateTopMenuIndicators() {
       menuTimeDisplay.setAttribute('title', `Time: ${label} (${clock})`);
       menuTimeDisplay.setAttribute('aria-label', `Current time: ${label} at ${clock}`);
     } else {
+      menuTimeDisplay.classList.add('time-display--empty');
+      menuTimeDisplay.setAttribute('aria-hidden', 'true');
       menuTimeDisplay.classList.remove(...TIME_BAND_CLASSES);
       if (menuTimeLabelText) menuTimeLabelText.textContent = '—';
       if (menuTimeClockText) menuTimeClockText.textContent = '—';
       if (menuTimeIcon) {
+        menuTimeIcon.classList.add('time-icon--empty');
+        menuTimeIcon.setAttribute('aria-hidden', 'true');
         menuTimeIcon.textContent = '—';
         menuTimeIcon.setAttribute('data-tooltip', '');
         menuTimeIcon.setAttribute('aria-label', 'Time of day unavailable');
@@ -1737,30 +1747,44 @@ function updateTopMenuIndicators() {
     }
   }
   if (menuSeasonIcon) {
-    if (season) {
+    if (currentCharacter && season) {
+      menuSeasonIcon.classList.remove('time-icon--empty');
+      menuSeasonIcon.removeAttribute('aria-hidden');
       const icon = SEASON_ICON_MAP[season] || '🗓️';
       menuSeasonIcon.textContent = icon;
       menuSeasonIcon.setAttribute('data-tooltip', buildSeasonTooltip(season, currentDate, today));
       menuSeasonIcon.setAttribute('aria-label', `Current season: ${season}`);
     } else {
+      menuSeasonIcon.classList.add('time-icon--empty');
+      menuSeasonIcon.setAttribute('aria-hidden', 'true');
       menuSeasonIcon.textContent = '—';
       menuSeasonIcon.setAttribute('data-tooltip', '');
       menuSeasonIcon.setAttribute('aria-label', 'Season information unavailable');
     }
   }
   if (menuWeatherIcon) {
-    const position = currentCharacter?.position || null;
-    const weather = resolveWeatherForPosition(position);
-    const iconInfo = resolveWeatherIcon(weather);
-    menuWeatherIcon.textContent = iconInfo.icon;
-    const weatherTooltipContext = {
-      city: position?.city || weather?.city || null,
-      district: position?.district || weather?.district || null,
-      dateLabel: currentDate,
-      clock,
-    };
-    menuWeatherIcon.setAttribute('data-tooltip', buildWeatherTooltip(weather, weatherTooltipContext));
-    menuWeatherIcon.setAttribute('aria-label', iconInfo.label || 'Weather information');
+    if (currentCharacter) {
+      menuWeatherIcon.classList.remove('time-icon--empty');
+      menuWeatherIcon.removeAttribute('aria-hidden');
+      const position = currentCharacter?.position || null;
+      const weather = resolveWeatherForPosition(position);
+      const iconInfo = resolveWeatherIcon(weather);
+      menuWeatherIcon.textContent = iconInfo.icon;
+      const weatherTooltipContext = {
+        city: position?.city || weather?.city || null,
+        district: position?.district || weather?.district || null,
+        dateLabel: currentDate,
+        clock,
+      };
+      menuWeatherIcon.setAttribute('data-tooltip', buildWeatherTooltip(weather, weatherTooltipContext));
+      menuWeatherIcon.setAttribute('aria-label', iconInfo.label || 'Weather information');
+    } else {
+      menuWeatherIcon.classList.add('time-icon--empty');
+      menuWeatherIcon.setAttribute('aria-hidden', 'true');
+      menuWeatherIcon.textContent = '—';
+      menuWeatherIcon.setAttribute('data-tooltip', '');
+      menuWeatherIcon.setAttribute('aria-label', 'Weather information unavailable');
+    }
   }
   if (menuResourceBarContainer) {
     if (currentCharacter) {
