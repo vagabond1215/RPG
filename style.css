@@ -1569,10 +1569,24 @@ body.theme-dark #characterMenu button.selected {
 
 
   .cc-top-row {
-    display: flex;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr minmax(0, auto) 1fr;
+    align-items: start;
     width: 100%;
     gap: 1.5rem;
+  }
+
+  .cc-top-row > .progress-container {
+    justify-self: end;
+  }
+
+  .cc-top-row > .cc-options {
+    justify-self: center;
+    min-width: 0;
+  }
+
+  .cc-top-row > .cc-stats {
+    justify-self: start;
   }
 
 
@@ -1583,15 +1597,6 @@ body.theme-dark #characterMenu button.selected {
     flex: 0 0 auto;
   }
 
-  .cc-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-left: auto;
-    gap: 1rem;
-  }
-
-
   .cc-options {
     display: flex;
     flex-direction: column;
@@ -1599,7 +1604,17 @@ body.theme-dark #characterMenu button.selected {
     justify-content: center;
     align-self: center;
     gap: 0.75rem;
-    width: 100%;
+    width: min(100%, 28rem);
+    min-width: 0;
+  }
+
+  .cc-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    width: min(100%, 16rem);
+    min-width: 0;
   }
 
 
@@ -2285,6 +2300,7 @@ body.theme-dark .location-log-partial {
   .location-carousel,
   .race-carousel,
   .sex-carousel,
+  .class-carousel,
   .color-carousel {
     display: flex;
     align-items: center;
@@ -2295,6 +2311,7 @@ body.theme-dark .location-log-partial {
   .location-button,
   .race-button,
   .sex-button,
+  .class-button,
   .backstory-button {
     position: relative;
     background: transparent;
@@ -2309,6 +2326,8 @@ body.theme-dark .location-log-partial {
   .race-button::after,
   .sex-button::before,
   .sex-button::after,
+  .class-button::before,
+  .class-button::after,
   .backstory-button::before,
   .backstory-button::after {
     content: '';
@@ -2334,9 +2353,10 @@ body.theme-dark .location-log-partial {
   }
 
   .wheel-selector {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: stretch;
+    justify-items: center;
     width: 100%;
     gap: 0.75rem;
     padding: 0.25rem 0.5rem;
@@ -2344,13 +2364,14 @@ body.theme-dark .location-log-partial {
   }
 
   .wheel-content {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     min-width: 0;
+    align-self: stretch;
+    width: 100%;
   }
 
   .wheel-display {
@@ -2382,12 +2403,14 @@ body.theme-dark .location-log-partial {
     font-size: 2rem;
     line-height: 1;
     padding: 0;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: inline-flex;
+    min-width: 2.5rem;
+    height: 100%;
+    min-height: 2.75rem;
+    display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    align-self: stretch;
   }
 
   .wheel-arrow:hover {
