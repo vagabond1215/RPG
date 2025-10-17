@@ -4547,3 +4547,30 @@ body.theme-dark .combat-minigame-tab {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.08);
 }
+
+.cc-backstory-obligations,
+.backstory-list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.5rem;
+  list-style: disc;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.cc-backstory-obligations li,
+.backstory-list li {
+  margin-bottom: 0.25rem;
+}
+
+.backstory-block h3 {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.backstory-block h4 {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-bright);
+}

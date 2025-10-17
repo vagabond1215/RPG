@@ -9,17 +9,8 @@ import {
   getProficiencyByKind,
 } from "../data/game/proficiencies.js";
 import { LOCATIONS } from "../data/game/locations.js";
-import { WAVES_BREAK_BACKSTORIES } from "../data/game/waves_break_backstories.ts";
-import { CREEKSIDE_BACKSTORIES } from "../data/game/creekside_backstories.ts";
-import { DRAGONS_REACH_ROAD_BACKSTORIES } from "../data/game/dragons_reach_road_backstories.ts";
-import { CORNER_STONE_BACKSTORIES } from "../data/game/corner_stone_backstories.ts";
-import { CORAL_KEEP_BACKSTORIES } from "../data/game/coral_keep_backstories.ts";
-import { CORONA_BACKSTORIES } from "../data/game/corona_backstories.ts";
-import { DANCING_PINES_BACKSTORIES } from "../data/game/dancing_pines_backstories.ts";
-import { MOUNTAIN_TOP_BACKSTORIES } from "../data/game/mountain_top_backstories.ts";
-import { TIMBER_GROVE_BACKSTORIES } from "../data/game/timber_grove_backstories.ts";
-import { WARM_SPRINGS_BACKSTORIES } from "../data/game/warm_springs_backstories.ts";
-import { WHITEHEART_BACKSTORIES } from "../data/game/whiteheart_backstories.ts";
+import { BACKSTORIES, BACKSTORY_BY_ID } from "../data/game/backstories.js";
+import { BACKSTORY_IDS_BY_LOCATION } from "../data/game/backstory_ids_by_location.js";
 
 describe("proficiency registry", () => {
   it("extracts herbalism from mixed requirement strings", () => {
@@ -152,42 +143,42 @@ describe("proficiency registry", () => {
     }
   });
 
-  it("maps backstory craft proficiencies to registered entries", () => {
-    const allBackstories = [
-      ...WAVES_BREAK_BACKSTORIES,
-      ...CREEKSIDE_BACKSTORIES,
-      ...DRAGONS_REACH_ROAD_BACKSTORIES,
-      ...CORNER_STONE_BACKSTORIES,
-      ...CORAL_KEEP_BACKSTORIES,
-      ...CORONA_BACKSTORIES,
-      ...DANCING_PINES_BACKSTORIES,
-      ...MOUNTAIN_TOP_BACKSTORIES,
-      ...TIMBER_GROVE_BACKSTORIES,
-      ...WARM_SPRINGS_BACKSTORIES,
-      ...WHITEHEART_BACKSTORIES,
-    ];
+  it("maps backstory crafting and gathering proficiencies to registered entries", () => {
+    const missing: { id: string; key: string }[] = [];
 
-    const missing: { background: string; key: string }[] = [];
-
-    for (const backstory of allBackstories) {
-      const craftProfs = backstory.craftProficiencies;
-      if (!craftProfs) continue;
-      for (const rawKey of Object.keys(craftProfs)) {
-        const keyMatches = findProficienciesByKey(rawKey);
-        const labelMatch = findProficiencyByLabel(rawKey);
-        const uniqueIds = new Set<string>();
-        if (labelMatch) uniqueIds.add(labelMatch.id);
-        for (const def of keyMatches) uniqueIds.add(def.id);
-        if (uniqueIds.size === 0) {
-          missing.push({
-            key: rawKey,
-            background: backstory.background ?? backstory.name ?? backstory.district ?? "unknown",
-          });
+    for (const backstory of BACKSTORIES) {
+      const loadout = backstory.loadout || {};
+      const tables = [
+        loadout.craftProficiencies || {},
+        loadout.gatheringProficiencies || {},
+      ];
+      for (const table of tables) {
+        for (const rawKey of Object.keys(table)) {
+          const keyMatches = findProficienciesByKey(rawKey);
+          const labelMatch = findProficiencyByLabel(rawKey);
+          const uniqueIds = new Set<string>();
+          if (labelMatch) uniqueIds.add(labelMatch.id);
+          for (const def of keyMatches) uniqueIds.add(def.id);
+          if (uniqueIds.size === 0) {
+            missing.push({ id: backstory.id, key: rawKey });
+          }
         }
       }
     }
 
     expect(missing).toEqual([]);
+  });
+
+  it("exposes valid backstories for every settlement", () => {
+    const invalid: { location: string; id: string }[] = [];
+    for (const [location, ids] of Object.entries(BACKSTORY_IDS_BY_LOCATION)) {
+      for (const id of ids) {
+        if (!BACKSTORY_BY_ID[id]) {
+          invalid.push({ location, id });
+        }
+      }
+    }
+    expect(invalid).toEqual([]);
   });
 
   it("exposes every ProficiencyKind through the registry", () => {

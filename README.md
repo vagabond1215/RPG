@@ -58,6 +58,18 @@ When adding businesses or ownership data, keep the curated registries—such as 
 
 Portrait prompts are composed by `data/game/image_prompts.js`, which stitches together race, theme, and palette data from `data/game/theme_colors.js`, `data/game/character_builds.js`, and `data/game/race_colors.js`. When introducing new races or outfit themes, provide matching color swatches and descriptors so `composeImagePrompt` can generate complete, on-brand art directions.
 
+### Backstories and character origins
+
+Narrative origins now live in the unified catalogue at `data/game/backstories.ts`. Each entry implements the `RichBackstory` interface, pairing a stable `id` and short `title` with expanded lore beats (`origin`, `currentSituation`, `motivation`), wardrobe hints, responsibilities, loadouts, and class biases. Preserve the previous display string by adding it to `legacyBackgrounds` so save files authored before the refactor can be migrated automatically.
+
+When you add or edit a backstory:
+
+- Update the location registries (for example, `data/game/waves_break_backstories.ts`) with the new backstory `id` wherever it should appear. Locations accept multiple overlapping origins, so reuse existing entries instead of duplicating similar lore.
+- Run `tsx scripts/buildBackstoriesJs.ts` to regenerate the runtime catalogue (`data/game/backstories.js`) and `tsx scripts/generateBackstoryCatalog.ts` if you need a refreshed `reports/backstory_catalog_summary.json` snapshot for documentation.
+- Execute `npm test` to rerun `tests/backstories.test.ts`, which verifies that loadouts, currency parsing, location filters, and legacy mappings remain consistent.
+
+Utility helpers exposed by the catalogue—such as pronoun substitution and currency parsing—can be reused in new systems. Use `applyPronouns` when authoring narrative copy with `${pronoun.*}` placeholders and `parseCurrency` / `currencyToCopper` when converting loadout strings into structured coin totals.
+
 ### Variable defaults and assumptions
 
 The UI sanitizes partially specified saves and Codex entries through helpers such as `normalizeCodexRecord`, `normalizeCodexCategory`, `ensureCollections`, and `ensureQuestLog` inside `script.js`. They coerce missing study levels to 1, ensure encountered lists are objects keyed by id, and populate quest logs with minimal fields. Supplying well-formed data prevents those fallbacks from masking mistakes, so prefer explicit numeric levels, booleans, and identifiers when touching serialized state.

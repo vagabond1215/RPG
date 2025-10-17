@@ -39,6 +39,7 @@ export function buildImagePrompt({
   themeDesc,
   colors,
   heads,
+  appearanceNotes = '',
 }) {
   const base = BASE_IMAGE_PROMPT_TEMPLATE
     .replace(/\{sex\}/g, sex.toLowerCase())
@@ -54,10 +55,11 @@ export function buildImagePrompt({
     .replace('{themeName}', themeName)
     .replace('{themeDesc}', themeDesc)
     .replace('{colors}', colors);
-  return racePart ? `${base} ${racePart}. ${addon}` : `${base} ${addon}`;
+  const appearance = appearanceNotes ? ` ${appearanceNotes.trim()}` : '';
+  return racePart ? `${base} ${racePart}. ${addon}${appearance}` : `${base} ${addon}${appearance}`;
 }
 
-export function composeImagePrompt(character) {
+export function composeImagePrompt(character, backstoryAppearance) {
   const themeIndex = themeColors.find(t => t.name === character.theme)?.index;
   const pictureTheme = getThemeColors(themeIndex);
   const descriptor = getBuildDescription(character.theme);
@@ -74,6 +76,21 @@ export function composeImagePrompt(character) {
   const themeDesc = descriptor || '';
   const colors = pictureTheme.join(', ');
   const heads = '7.5';
+  let appearanceNotes = '';
+
+  if (backstoryAppearance) {
+    const fragments = [];
+    if (backstoryAppearance.summary) {
+      fragments.push(backstoryAppearance.summary);
+    }
+    if (Array.isArray(backstoryAppearance.details) && backstoryAppearance.details.length) {
+      fragments.push(`Wardrobe highlights: ${backstoryAppearance.details.join(', ')}.`);
+    }
+    if (Array.isArray(backstoryAppearance.motifs) && backstoryAppearance.motifs.length) {
+      fragments.push(`Subtle motifs referencing ${backstoryAppearance.motifs.join(', ')}.`);
+    }
+    appearanceNotes = fragments.join(' ').trim();
+  }
 
   return buildImagePrompt({
     sex: character.sex,
@@ -86,5 +103,6 @@ export function composeImagePrompt(character) {
     themeDesc,
     colors,
     heads,
+    appearanceNotes,
   });
 }
