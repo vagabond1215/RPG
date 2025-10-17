@@ -107,7 +107,9 @@ main {
   flex-direction: column;
   align-items: stretch;
   gap: 0.35rem;
-  padding: 0.5rem 1rem 0.35rem;
+  --top-menu-side-padding: max(0.5rem, (100vw - var(--top-menu-content-width)) / 2);
+  padding: 0.5rem var(--top-menu-side-padding) 0.35rem;
+  box-sizing: border-box;
   min-height: var(--menu-button-size);
   z-index: 300;
   background: none;
@@ -813,8 +815,7 @@ body.theme-sepia .time-display-xp .top-resource-label {
   }
 
   .top-menu {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    --top-menu-side-padding: 0.5rem;
   }
 
   .top-menu-main,
@@ -2341,6 +2342,7 @@ body.theme-dark .location-log-partial {
   .location-button::before,
   .race-button::before,
   .sex-button::before,
+  .class-button::before,
   .backstory-button::before {
     top: 0;
   }
@@ -2348,6 +2350,7 @@ body.theme-dark .location-log-partial {
   .location-button::after,
   .race-button::after,
   .sex-button::after,
+  .class-button::after,
   .backstory-button::after {
     bottom: 0;
   }
