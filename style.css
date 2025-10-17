@@ -1570,23 +1570,25 @@ body.theme-dark #characterMenu button.selected {
 
   .cc-top-row {
     display: grid;
-    grid-template-columns: 1fr minmax(0, auto) 1fr;
+    grid-template-columns: max-content minmax(0, 1fr) max-content;
     align-items: start;
     width: 100%;
     gap: 1.5rem;
   }
 
   .cc-top-row > .progress-container {
-    justify-self: end;
+    justify-self: start;
   }
 
   .cc-top-row > .cc-options {
     justify-self: center;
     min-width: 0;
+    width: 100%;
+    max-width: 40rem;
   }
 
   .cc-top-row > .cc-stats {
-    justify-self: start;
+    justify-self: end;
   }
 
 
@@ -1595,6 +1597,7 @@ body.theme-dark #characterMenu button.selected {
     flex-direction: column;
     align-items: flex-start;
     flex: 0 0 auto;
+    width: max-content;
   }
 
   .cc-options {
@@ -1603,8 +1606,7 @@ body.theme-dark #characterMenu button.selected {
     align-items: center;
     justify-content: center;
     align-self: center;
-    gap: 0.75rem;
-    width: min(100%, 28rem);
+    gap: 1rem;
     min-width: 0;
   }
 
@@ -1613,7 +1615,7 @@ body.theme-dark #characterMenu button.selected {
     flex-direction: column;
     align-items: flex-end;
     gap: 1rem;
-    width: min(100%, 16rem);
+    width: max-content;
     min-width: 0;
   }
 
@@ -1659,12 +1661,10 @@ body.theme-dark #characterMenu button.selected {
     margin-left: 0.5rem;
   }
 
-  .cc-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .cc-description {
     width: 100%;
-    margin: 0.75rem auto 0;
+    text-align: left;
+    margin-top: 0.5rem;
   }
 
   .race-stats {

@@ -14261,7 +14261,7 @@ function startCharacterCreation() {
       }
 
       setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-options">${inputHTML}</div>${statsSection}</div><div class="cc-info">${descHTML}</div></div>`
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-options">${inputHTML}<div class="cc-description">${descHTML}</div></div>${statsSection}</div></div>`
       );
       normalizeOptionButtonWidths();
 
@@ -14430,7 +14430,7 @@ function startCharacterCreation() {
         ] || [];
       const placeholderName = nameList[0] || 'Name';
       setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-options name-entry"><input type="text" id="name-input" value="${nameVal}" placeholder="${placeholderName}"><button id="name-random" class="dice-button" aria-label="Randomize Name">🎲</button></div>${statsSection}</div><div class="cc-info">${descHTML}</div></div>`
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-options name-entry"><input type="text" id="name-input" value="${nameVal}" placeholder="${placeholderName}"><button id="name-random" class="dice-button" aria-label="Randomize Name">🎲</button><div class="cc-description">${descHTML}</div></div>${statsSection}</div></div>`
       );
       normalizeOptionButtonWidths();
       const nameInput = document.getElementById('name-input');
