@@ -2,8 +2,7 @@ import {
   renderBackstoryString,
   BACKSTORY_BY_ID,
   getBackstoriesByCriteria,
-  getRaceDescriptionTemplate,
-  getClassAlignmentInsertTemplate,
+  getRaceCadenceTemplate,
   getPronouns,
 } from "../data/game/backstories.js";
 import { getAnglesForRaceClass } from "../data/game/race_class_angles.js";
@@ -28,6 +27,11 @@ function capitalize(value) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
+function selectVerb(pronouns, singular, plural) {
+  const subject = pronouns?.subject?.toLowerCase();
+  return subject === "they" ? plural : singular;
+}
+
 function escapeRegex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -37,27 +41,6 @@ function isSentenceStart(text, offset) {
   const prior = text.slice(0, offset).trimEnd();
   if (!prior) return true;
   return /[.!?]$/.test(prior);
-}
-
-function reduceNameRepetition(paragraphs, fullName, shortName, pronouns) {
-  if (!fullName) return paragraphs;
-  const regex = new RegExp(escapeRegex(fullName), "g");
-  const alternatives = [shortName, pronouns ? capitalize(pronouns.subject) : "", pronouns ? pronouns.subject : ""]
-    .filter(Boolean);
-  if (!alternatives.length) return paragraphs;
-  let count = 0;
-  return paragraphs.map(paragraph =>
-    paragraph.replace(regex, (match, offset, text) => {
-      count += 1;
-      if (count === 1) return match;
-      const replacement = alternatives[(count - 2) % alternatives.length];
-      if (!replacement) return match;
-      if (isSentenceStart(text, offset)) {
-        return capitalize(replacement);
-      }
-      return replacement;
-    })
-  );
 }
 
 function capClassTokenUsage(paragraphs, className) {
@@ -104,83 +87,89 @@ function gatherNarrativeDefaults(character = {}, overrides = {}) {
   };
 }
 
-function buildClassAngleSummary(race, className, signatureTool, pronouns, shortName) {
+function buildClassPhilosophy(race, className, signatureTool, pronouns, shortName) {
   const angles = getAnglesForRaceClass(race, className);
   if (!angles.length) return "";
   const focus = shortName || capitalize(pronouns?.subject || "");
   const pronounSubject = pronouns?.subject ? capitalize(pronouns.subject) : "";
+  const pronounPossessive = pronouns?.possessive || "their";
+  const repeatVerb = pronouns?.subject && pronouns.subject.toLowerCase() === "they" ? "repeat" : "repeats";
   const fragments = [];
-  fragments.push(`${focus} treated ${angles[0]} as a daily ritual.`);
+  fragments.push(
+    `${focus} treated ${angles[0]} like a sunrise drill, steadying ${pronounPossessive} breath before the city stirred.`
+  );
   if (angles[1]) {
-    fragments.push(`${pronounSubject} tied ${angles[1]} to ${signatureTool}, letting repetition temper instinct.`);
+    fragments.push(
+      `${pronounSubject} bound ${angles[1]} to ${signatureTool}, promising every apprentice that craft mattered more than spectacle.`
+    );
   }
   if (angles[2]) {
-    fragments.push(`${pronounSubject} still quotes ${angles[2]} whenever apprentices ask for guidance.`);
+    fragments.push(`${pronounSubject} still ${repeatVerb} ${angles[2]} when dusk lessons drift toward doubt.`);
   }
   return fragments.join(" ").trim();
 }
 
-const ALIGNMENT_MEMORY_BUILDERS = {
+const ALIGNMENT_REFLECTION_BUILDERS = {
   "Lawful Good": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} once audited guild ledgers with ${context.signatureTool}, refusing to abandon ${context.bond} when a magistrate ordered silence. ${pronounSubject} called it ${context.virtue} in practice, and the margin notes still bear ${pronouns.possessive} steady script.`;
+    return `${subject} once audited guild ledgers with ${context.signatureTool}, refusing to abandon ${context.bond} when a magistrate ordered silence. ${pronounSubject} still ${selectVerb(pronouns, "believes", "believe")} ${context.virtue} only breathes when the law bends toward mercy.`;
   },
   "Neutral Good": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} diverted a shipment to feed ${context.bond} after a flood, trading ${context.signatureTool} repairs for loaves. ${pronounSubject} accepted the reprimand because ${pronouns.subject} believed ${context.virtue} outweighed decorum.`;
+    return `${subject} diverted a shipment to feed ${context.bond} after a flood, trading ${context.signatureTool} repairs for loaves. ${pronounSubject} still ${selectVerb(pronouns, "weighs", "weigh")} that night as proof that quiet kindness outruns protocol.`;
   },
   "Chaotic Good": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} broke a curfew bell with ${context.signatureTool} so refugees could slip through the gate, laughing when fines rained down. ${pronounSubject} later patched the damage and swore it kept ${context.virtue} alive in the district.`;
+    return `${subject} broke a curfew bell with ${context.signatureTool} so refugees could slip through the gate, laughing when fines rained down. ${pronounSubject} still ${selectVerb(pronouns, "grins", "grin")} at the scar and ${selectVerb(pronouns, "calls", "call")} it ${context.virtue} with teeth.`;
   },
   "Lawful Neutral": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} once enforced a tribunal verdict against ${context.bond}, polishing ${context.signatureTool} until the hall doors opened. ${pronounSubject} filed the appeal anyway, convinced that order only held if every clause was tested.`;
+    return `${subject} once enforced a tribunal verdict against ${context.bond}, polishing ${context.signatureTool} until the hall doors opened. ${pronounSubject} still ${selectVerb(pronouns, "studies", "study")} the paperwork, reminding ${pronouns.object} that order is only honest when questioned.`;
   },
   "True Neutral": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} weighed a smugglers' tithe against a flooded granary and split the haul, recording both debts beside ${context.signatureTool}. ${pronounSubject} slept soundly because the balance, not affection, guided the choice.`;
+    return `${subject} weighed a smugglers' tithe against a flooded granary and split the haul, recording both debts beside ${context.signatureTool}. ${pronounSubject} still ${selectVerb(pronouns, "keeps", "keep")} the ledger open to that page in case the balance tilts again.`;
   },
   "Chaotic Neutral": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} vanished from duty to chase a rumor tied to ${context.backstorySeed}, trusting ${context.signatureTool} to talk through any fallout. ${pronounSubject} shrugged off censure, claiming freedom kept the work honest.`;
+    return `${subject} vanished from duty to chase a rumor tied to ${context.backstorySeed}, trusting ${context.signatureTool} to talk through any fallout. ${pronounSubject} still ${selectVerb(pronouns, "shrugs", "shrug")} at the reprimand and ${selectVerb(pronouns, "calls", "call")} freedom the only honest compass.`;
   },
   "Lawful Evil": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} doctored warrants with ${context.signatureTool}, binding rivals to crushing debts in the name of stability. ${pronounSubject} logged every profit beside ${context.bond}, proof that dominance could masquerade as duty.`;
+    return `${subject} doctored warrants with ${context.signatureTool}, binding rivals to crushing debts in the name of stability. ${pronounSubject} still ${selectVerb(pronouns, "tallies", "tally")} the profits beside ${context.bond}, certain that dominance is just another clause.`;
   },
   "Neutral Evil": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} sold a patrol route for coin, financing personal schemes with ${context.signatureTool} tucked beneath a cloak. ${pronounSubject} called it pragmatism and let ${context.flaw} grow into a habit.`;
+    return `${subject} sold a patrol route for coin, financing personal schemes with ${context.signatureTool} tucked beneath a cloak. ${pronounSubject} still ${selectVerb(pronouns, "calls", "call")} it pragmatism and lets ${context.flaw} masquerade as foresight.`;
   },
   "Chaotic Evil": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} carved threats into dock pilings with ${context.signatureTool}, daring ${context.bond} to defy the new order. ${pronounSubject} reveled when fear eclipsed caution, wearing ${context.flaw} like armor.`;
+    return `${subject} carved threats into dock pilings with ${context.signatureTool}, daring ${context.bond} to defy the new order. ${pronounSubject} still ${selectVerb(pronouns, "enjoys", "enjoy")} how fear eclipsed caution and wears ${context.flaw} like armor.`;
   },
 };
 
-function createAlignmentMemory(context, pronouns, shortName) {
-  const builder = ALIGNMENT_MEMORY_BUILDERS[context.alignment] || ((ctx, pr, sn) => {
+function createAlignmentReflection(context, pronouns, shortName) {
+  const builder = ALIGNMENT_REFLECTION_BUILDERS[context.alignment] || ((ctx, pr, sn) => {
     const subject = sn || capitalize(pr.subject);
     const pronounSubject = capitalize(pr.subject);
-    return `${subject} brokered a quiet favor using ${ctx.signatureTool}, weighing ${ctx.virtue} against ${ctx.flaw}. ${pronounSubject} still studies the choice whenever whispers of ${ctx.backstorySeed} return.`;
+    return `${subject} brokered a quiet favor using ${ctx.signatureTool}, weighing ${ctx.virtue} against ${ctx.flaw}. ${pronounSubject} still ${selectVerb(pr, "replays", "replay")} the choice whenever whispers of ${ctx.backstorySeed} return.`;
   });
   return builder(context, pronouns, shortName);
 }
 
-function createEmberHook(context, pronouns, shortName) {
+function createLingeringRumor(context, pronouns, shortName) {
   const subject = shortName || capitalize(pronouns.subject);
   const pronounSubject = capitalize(pronouns.subject);
-  return `Rumor lingered around ${context.backstorySeed}, tucked where ${subject} believed only ${pronouns.possessive} ${context.signatureTool} would ever reach. ${pronounSubject} guarded ${context.secret} out of ${context.virtue}, even as ${pronouns.subject} feared ${context.flaw} would fracture ${context.bond}.`;
+  return `Rumors still coil around ${context.backstorySeed}, tucked where ${subject} trusted ${pronouns.possessive} ${context.signatureTool} to hide a promise. ${pronounSubject} still ${selectVerb(pronouns, "wonders", "wonder")} if naming ${context.secret} would heal ${context.bond} or scatter ${context.virtue}.`;
 }
 
 function postProcessParagraphs(paragraphs, context) {
@@ -192,19 +181,18 @@ function postProcessParagraphs(paragraphs, context) {
     if (merged) kept.push(merged);
     processed = kept;
   }
-  processed = reduceNameRepetition(processed, context.fullName, context.shortName, context.pronouns);
   processed = capClassTokenUsage(processed, context.className);
   return processed.filter(Boolean);
 }
 
-function resolveRaceDescriptionTemplate(backstory, character) {
+function resolveRaceCadenceTemplate(backstory, character) {
   const race = character?.race;
-  if (!race) return backstory?.raceDescription || "";
+  if (!race) return backstory?.raceCadence || "";
   const className = character?.class;
-  const descriptions = backstory?.raceDescriptions;
-  if (descriptions && typeof descriptions === "object") {
-    const directKey = race in descriptions ? race : Object.keys(descriptions).find(key => key.toLowerCase() === race.toLowerCase());
-    const direct = directKey ? descriptions[directKey] : undefined;
+  const cadences = backstory?.raceCadences;
+  if (cadences && typeof cadences === "object") {
+    const directKey = race in cadences ? race : Object.keys(cadences).find(key => key.toLowerCase() === race.toLowerCase());
+    const direct = directKey ? cadences[directKey] : undefined;
     if (typeof direct === "string") return direct;
     if (direct && typeof direct === "object") {
       if (className && direct[className]) return direct[className];
@@ -215,42 +203,14 @@ function resolveRaceDescriptionTemplate(backstory, character) {
       if (direct.default) return direct.default;
     }
   }
-  return getRaceDescriptionTemplate(race, className);
+  return getRaceCadenceTemplate(race, className);
 }
 
-function resolveClassAlignmentTemplate(backstory, character) {
-  const className = character?.class;
-  const alignment = character?.alignment;
-  if (!className || !alignment) return backstory?.classAlignmentInsert || "";
-  const inserts = backstory?.classAlignmentInserts;
-  if (inserts && typeof inserts === "object") {
-    const classKey = className in inserts ? className : Object.keys(inserts).find(key => key.toLowerCase() === className.toLowerCase());
-    const classEntry = classKey ? inserts[classKey] : undefined;
-    if (typeof classEntry === "string") return classEntry;
-    if (classEntry && typeof classEntry === "object") {
-      if (classEntry[alignment]) return classEntry[alignment];
-      const alignmentKey = Object.keys(classEntry).find(key => key.toLowerCase() === alignment.toLowerCase());
-      if (alignmentKey) return classEntry[alignmentKey];
-      if (classEntry.default) return classEntry.default;
-    }
-  }
-  return getClassAlignmentInsertTemplate(className, alignment);
-}
-
-function resolveRaceDescription(backstory, character, overrides = {}) {
-  const template = resolveRaceDescriptionTemplate(backstory, character);
+function resolveRaceCadence(backstory, character, overrides = {}) {
+  const template = resolveRaceCadenceTemplate(backstory, character);
   if (!template) return "";
   const contextOverrides = { ...overrides };
-  delete contextOverrides.raceDescription;
-  delete contextOverrides.classAlignmentInsert;
-  return renderBackstoryTextForCharacter(template, character, contextOverrides);
-}
-
-function resolveClassAlignmentInsert(backstory, character, overrides = {}) {
-  const template = resolveClassAlignmentTemplate(backstory, character);
-  if (!template) return "";
-  const contextOverrides = { ...overrides };
-  delete contextOverrides.classAlignmentInsert;
+  delete contextOverrides.raceCadence;
   return renderBackstoryTextForCharacter(template, character, contextOverrides);
 }
 
@@ -276,8 +236,6 @@ export function renderBackstoryTextForCharacter(text, character, overrides = {})
     sex: character?.sex,
     gender: character?.sex,
     spawnDistrict: overrides.spawnDistrict || character?.spawnDistrict,
-    raceDescription: overrides.raceDescription || character?.raceDescription,
-    classAlignmentInsert: overrides.classAlignmentInsert || character?.classAlignmentInsert,
     shortName: narrative.shortName,
     short_name: narrative.shortName,
     voiceTone: narrative.voiceTone,
@@ -287,9 +245,10 @@ export function renderBackstoryTextForCharacter(text, character, overrides = {})
     bond: narrative.bond,
     secret: narrative.secret,
     backstorySeed: narrative.backstorySeed,
-    classAngleSummary: overrides.classAngleSummary,
-    alignmentMemory: overrides.alignmentMemory,
-    emberHook: overrides.emberHook,
+    raceCadence: overrides.raceCadence || character?.raceCadence,
+    trainingPhilosophy: overrides.trainingPhilosophy || character?.trainingPhilosophy,
+    alignmentReflection: overrides.alignmentReflection || character?.alignmentReflection,
+    rumorEcho: overrides.rumorEcho || character?.rumorEcho,
   };
   Object.assign(context, overrides);
   return renderBackstoryString(text, context);
@@ -302,13 +261,7 @@ export function buildBackstoryInstance(backstory, character) {
   const pronouns = getPronouns(character?.sex);
   const requiredReady = hasRequiredBackstoryInputs(character);
 
-  let classAngleSummary = "";
-  let raceDescription = "";
-  let alignmentMemory = "";
-  let classAlignmentInsert = "";
-  let emberHook = "";
-
-  let overrides = {
+  const baseOverrides = {
     spawnDistrict,
     shortName: narrativeDefaults.shortName,
     voiceTone: narrativeDefaults.voiceTone,
@@ -320,10 +273,15 @@ export function buildBackstoryInstance(backstory, character) {
     backstorySeed: narrativeDefaults.backstorySeed,
   };
 
+  let raceCadence = "";
+  let trainingPhilosophy = "";
+  let alignmentReflection = "";
+  let rumorEcho = "";
   let biographyParagraphs = [];
 
   if (requiredReady) {
-    classAngleSummary = buildClassAngleSummary(
+    raceCadence = resolveRaceCadence(backstory, character, baseOverrides);
+    trainingPhilosophy = buildClassPhilosophy(
       character?.race,
       character?.class,
       narrativeDefaults.signatureTool,
@@ -331,38 +289,38 @@ export function buildBackstoryInstance(backstory, character) {
       narrativeDefaults.shortName
     );
 
-    const raceOverrides = { ...overrides, classAngleSummary };
-    raceDescription = resolveRaceDescription(backstory, character, raceOverrides);
-
     const alignmentContext = {
       ...narrativeDefaults,
       alignment: character?.alignment,
       spawnDistrict,
     };
-    alignmentMemory = createAlignmentMemory(alignmentContext, pronouns, narrativeDefaults.shortName);
+    alignmentReflection = createAlignmentReflection(alignmentContext, pronouns, narrativeDefaults.shortName);
+    rumorEcho = createLingeringRumor(alignmentContext, pronouns, narrativeDefaults.shortName);
 
-    classAlignmentInsert = resolveClassAlignmentInsert(backstory, character, {
-      ...raceOverrides,
-      raceDescription,
-      alignmentMemory,
-    });
-
-    emberHook = createEmberHook(alignmentContext, pronouns, narrativeDefaults.shortName);
-
-    overrides = {
-      ...raceOverrides,
-      raceDescription,
-      classAlignmentInsert,
-      alignmentMemory,
-      classAngleSummary,
-      emberHook,
+    const sharedOverrides = {
+      ...baseOverrides,
+      raceCadence,
+      trainingPhilosophy,
+      alignmentReflection,
+      rumorEcho,
     };
 
-    biographyParagraphs = Array.isArray(backstory.biographyParagraphs)
-      ? backstory.biographyParagraphs
-          .map(paragraph => renderBackstoryTextForCharacter(paragraph, character, overrides))
-          .filter(Boolean)
-      : [];
+    const beats = backstory.biographyBeats || {};
+    const combineBeat = (beat, ...additional) => {
+      const rendered = renderBackstoryTextForCharacter(beat, character, sharedOverrides);
+      return [rendered, ...additional]
+        .filter(Boolean)
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim();
+    };
+
+    biographyParagraphs = [
+      combineBeat(beats.earlyLife),
+      combineBeat(beats.training, raceCadence, trainingPhilosophy),
+      combineBeat(beats.moralTest, alignmentReflection),
+      combineBeat(beats.lingeringRumor, rumorEcho),
+    ];
 
     biographyParagraphs = postProcessParagraphs(biographyParagraphs, {
       fullName: character?.name,
@@ -376,23 +334,30 @@ export function buildBackstoryInstance(backstory, character) {
     ];
   }
 
+  const renderOverrides = {
+    ...baseOverrides,
+    raceCadence,
+    trainingPhilosophy,
+    alignmentReflection,
+    rumorEcho,
+  };
+
   const biography = biographyParagraphs.join("\n\n");
   return {
     id: backstory.id,
-    title: renderBackstoryTextForCharacter(backstory.title, character, overrides),
-    characterName: renderBackstoryTextForCharacter(backstory.characterName, character, overrides),
-    race: renderBackstoryTextForCharacter(backstory.race, character, overrides) || "",
-    class: renderBackstoryTextForCharacter(backstory.class, character, overrides) || "",
-    alignment: renderBackstoryTextForCharacter(backstory.alignment, character, overrides) || "",
+    title: renderBackstoryTextForCharacter(backstory.title, character, renderOverrides),
+    characterName: renderBackstoryTextForCharacter(backstory.characterName, character, renderOverrides),
+    race: renderBackstoryTextForCharacter(backstory.race, character, renderOverrides) || "",
+    class: renderBackstoryTextForCharacter(backstory.class, character, renderOverrides) || "",
+    alignment: renderBackstoryTextForCharacter(backstory.alignment, character, renderOverrides) || "",
     availableIn: [...(backstory.availableIn || [])],
     biography,
     biographyParagraphs,
     spawnDistrict,
-    raceDescription,
-    classAlignmentInsert,
-    alignmentMemory,
-    classAngleSummary,
-    emberHook,
+    raceCadence,
+    trainingPhilosophy,
+    alignmentReflection,
+    rumorEcho,
   };
 }
 
@@ -401,6 +366,15 @@ export function applyBackstoryLoadout(character, backstory, options = {}) {
   if (options.reset) {
     delete character.backstory;
     delete character.backstoryId;
+    delete character.raceDescription;
+    delete character.classAlignmentInsert;
+    delete character.alignmentMemory;
+    delete character.emberHook;
+    delete character.classAngleSummary;
+    delete character.raceCadence;
+    delete character.trainingPhilosophy;
+    delete character.alignmentReflection;
+    delete character.rumorEcho;
   }
   const districts = Array.isArray(backstory.spawnDistricts) ? backstory.spawnDistricts.filter(Boolean) : [];
   if (districts.length) {
@@ -418,28 +392,15 @@ export function applyBackstoryLoadout(character, backstory, options = {}) {
   } else if (options.reset) {
     delete character.spawnDistrict;
   }
-  const overrides = {
-    spawnDistrict: character.spawnDistrict,
-    raceDescription: resolveRaceDescription(backstory, character, {
-      spawnDistrict: character.spawnDistrict,
-    }),
-    classAlignmentInsert: resolveClassAlignmentInsert(backstory, character, {
-      spawnDistrict: character.spawnDistrict,
-    }),
-  };
-  if (overrides.raceDescription) {
-    character.raceDescription = overrides.raceDescription;
-  } else if (options.reset) {
-    delete character.raceDescription;
-  }
-  if (overrides.classAlignmentInsert) {
-    character.classAlignmentInsert = overrides.classAlignmentInsert;
-  } else if (options.reset) {
-    delete character.classAlignmentInsert;
-  }
   const instance = buildBackstoryInstance(backstory, character);
   character.backstoryId = backstory.id;
   character.backstory = instance;
+  if (instance) {
+    character.raceCadence = instance.raceCadence;
+    character.trainingPhilosophy = instance.trainingPhilosophy;
+    character.alignmentReflection = instance.alignmentReflection;
+    character.rumorEcho = instance.rumorEcho;
+  }
   return character;
 }
 
