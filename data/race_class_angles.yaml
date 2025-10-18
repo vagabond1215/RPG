@@ -1,0 +1,140 @@
+# Race to class angle guidance for narrative imagery
+default:
+  Knight:
+    - parades drilled under watchful captains
+    - shield lines practiced against dusk-lit ramparts
+    - ledgers of service exchanged after every patrol
+  Fighter:
+    - sparring bruises traded in communal yards
+    - callused hands gripping weighted practice blades
+    - breath timed to drum-led marches across cobbles
+  Barbarian:
+    - storm chants echoing off cliffside shrines
+    - trophy braids woven with tide-soaked charms
+    - roar lessons traded beside roaring hearths
+  Ronin:
+    - lone campfires set beneath disused gatehouses
+    - ledgers of favors inked in travel-stained books
+    - night watches shared with silent caravan guards
+  Raider:
+    - tide tables studied beside contraband crates
+    - boarding hooks filed to bite through wet railings
+    - hull maps chalked across tavern tabletops
+  Pirate:
+    - mast climbs raced beneath crackling lanterns
+    - coded shanties hummed before contested boardings
+    - spyglasses polished with salt-stained cloth
+  Scout:
+    - gull flights tracked from rooftop perches
+    - river reeds braided into silent whistles
+    - survey stakes hammered beside moonlit trails
+  Archer:
+    - fletching needles threaded by hearth-glow
+    - wind pennants read from cliff ramparts
+    - range markers chalked along pier pilings
+  Musketeer:
+    - powder measures leveled on brass scales
+    - firing lines drilled with echoing salutes
+    - ramrods tapped twice for tradition
+  Ninja:
+    - slate shingles crossed without a whisper
+    - lantern shutters adjusted to throw precise shadows
+    - coded knocks practiced behind market stalls
+  Martial Artist:
+    - balance drills held atop steaming stones
+    - palms hardened against lacquered posts
+    - breath matched to temple bell chimes
+  Swashbuckler:
+    - rapier flourishes mirrored in tavern windows
+    - silk sashes cinched before midnight duels
+    - balcony leaps rehearsed over empty courtyards
+  Mage:
+    - sigil chalk ground beside midnight lamps
+    - lecture margins packed with rune sketches
+    - ward candles rotated to follow stellar charts
+  Sorcerer:
+    - emotion scales scribbled in perfumed journals
+    - raw aether channeled through heirloom rings
+    - impromptu displays staged on rain-slick plazas
+  Acolyte:
+    - offering bowls polished before dawn prayers
+    - chant cadences kept with knotted cords
+    - pilgrim stories copied into communal ledgers
+  Druid:
+    - moss runes refreshed with spring water
+    - seed pouches tied to braided belts
+    - owl calls imitated along fogged treelines
+  Necromancer:
+    - bone runes traced with obsidian styluses
+    - memorial candles arranged in spiraled patterns
+    - epitaph rubbings stored in oilskin rolls
+  Minstrel:
+    - melody drafts inked on parchment scraps
+    - crowd tales swapped behind stage curtains
+    - instrument strings tuned beside city wells
+  Performer:
+    - costume seams reinforced with hidden pockets
+    - backstage cues whispered through paper fans
+    - stage chalk laid in sweeping arcs
+  Engineer:
+    - gear schematics sketched on slate tablets
+    - rivet hammers tested on copper scrap
+    - pressure valves adjusted by lantern light
+  Tamer:
+    - harness buckles polished with calming oils
+    - call whistles tuned beside stables
+    - travel crates packed with scented straw
+  Conjurer:
+    - summoning rings etched into exchange floors
+    - incense cones traded for quick bargains
+    - sigil chalk stored beside glass prisms
+  Templar:
+    - reliquaries weighed before tribunal sittings
+    - edicts copied in meticulous script
+    - patrol boots shined for shrine inspections
+  Dark Knight:
+    - oath scars traced beneath eclipse shrines
+    - shadow drills led in candlelit crypts
+    - grief-ledgers bound in iron clasps
+Cait Sith:
+  Fighter:
+    - footwork on slick planks rehearsed between tides
+    - shields timed to surf spray as bells tolled
+    - guild watch loyalty pledged over fishmonger stalls
+    - improvised dock weapons balanced with feline grace
+  Rogue:
+    - lanternlight reflections memorized as alley signals
+    - rooftop routes mapped along tiled ridges
+    - gossip economy cultivated through spice-hall favors
+    - padded escapes practiced over rope bridges
+  Cleric:
+    - tidewall saints invoked beside dripping icons
+    - sea rites rehearsed over tidal pools
+    - fishers' blessings exchanged for careful counsel
+    - stubborn mercy sworn amid pier vigils
+  Ranger:
+    - breakwaters walked as if they were wild ridges
+    - gull paths tracked across foglit skies
+    - currents read like whispered rumors
+    - reef markers tended with patient claws
+Dark Elf:
+  Mage:
+    - velvet folios opened under star-cranked lamps
+    - bells used as metronomes for sigil recitation
+    - rival salons debated over amber wine
+    - ghost-wards tuned in hushed corridors
+  Cleric:
+    - chapel arbitration held behind carved screens
+    - oath-fast bargains recorded on silver tablets
+    - penitent diplomacy practiced between rival houses
+    - incense braziers shielded from drafty halls
+  Fighter:
+    - cloister dueling forms paced beneath colored glass
+    - corridor armor polished to mirror stern mentors
+    - ritual scars traced as lessons in resolve
+    - silent marches led through subterranean vaults
+  Rogue:
+    - etiquette manuals studied like lockpicks
+    - shadow posture trained in mirror-lined halls
+    - reputation ledgers balanced against whispered debts
+    - corridor tapestries measured for hidden passages
