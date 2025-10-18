@@ -8,9 +8,19 @@ try {
   }
   anglesText = await response.text();
 } catch (error) {
-  if (anglesUrl.protocol === "file:") {
+  const isNodeLike =
+    typeof process !== "undefined" &&
+    process.versions?.node &&
+    typeof window === "undefined";
+
+  if (anglesUrl.protocol === "file:" && isNodeLike) {
     const { readFile } = await import("fs/promises");
     anglesText = await readFile(anglesUrl, "utf8");
+  } else if (anglesUrl.protocol === "file:") {
+    console.warn(
+      "Unable to load race_class_angles.yaml via fetch when running from the filesystem. Continuing without race/class angles."
+    );
+    anglesText = "";
   } else {
     throw error;
   }
