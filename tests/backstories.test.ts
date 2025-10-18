@@ -88,8 +88,8 @@ describe("backstory helpers", () => {
       alignment: "Neutral Good",
       sex: "Female",
       location: "Wave's Break",
-      spawnDistrict: "Harbor Ward",
-      homeTown: "Harbor Ward",
+      spawnDistrict: "Port District",
+      homeTown: "Port District",
       familyName: "Tidewatch",
       mentorName: "Captain Lysa",
       profession: "harbor sentinel",
@@ -97,7 +97,7 @@ describe("backstory helpers", () => {
       groupName: "Harbor Watch",
     };
     const singularRendered = renderBackstoryTextForCharacter(template, singularCharacter);
-    expect(singularRendered).toContain("Harbor Ward");
+    expect(singularRendered).toContain("Port District");
     expect(singularRendered).toContain("Tidewatch");
     expect(singularRendered).toContain("harbor sentinel");
     expect(singularRendered).toContain("storm vigil");
@@ -183,7 +183,7 @@ describe("backstory helpers", () => {
       race: "Human",
       className: "Fighter",
       alignment: "Neutral Good",
-      spawnDistrict: "Harbor Ward",
+      spawnDistrict: "Port District",
     });
     expect(strictMatches.length).toBeGreaterThan(0);
     expect(strictMatches[0].id).toBe("backstory_waves_break_tideward_1");
