@@ -1,4 +1,4 @@
-import rawData from "../backstories.json" assert { type: "json" };
+import rawData from "../backstories_data.js";
 
 const rawBackstories = Array.isArray(rawData?.backstories) ? rawData.backstories : [];
 const rawRaceDescriptions = rawData?.raceDescriptions || {};
