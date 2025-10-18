@@ -12,26 +12,26 @@ import {
   buildBackstoryInstance,
 } from "../src/backstory_helpers.js";
 import { composeImagePrompt } from "../data/game/image_prompts.js";
+import featuredSamples from "./fixtures/backstory_samples.js";
 
 describe("backstory helpers", () => {
   it("substitutes character metadata placeholders", () => {
     const template =
-      "{characterName} carried a {race} banner for the {classLower} while stationed in {spawnDistrict}. {shortName} kept a {voiceTone} cadence beside {signatureTool}. {raceDescription} Alignment: {alignment}. {alignmentMemory} {emberHook}";
+      "{characterName} carried a {race} banner for the {classLower} while stationed in {spawnDistrict}. {shortName} kept a {voiceTone} cadence beside {signatureTool}. {raceCadence} Alignment: {alignment}. {alignmentReflection} {rumorEcho}";
     const rendered = renderBackstoryString(template, {
       characterName: "Elira",
       race: "Elf",
       class: "Mage",
       sex: "Female",
       spawnDistrict: "Amberlight Annex",
-      raceDescription: "Elira catalogued moonlit vellums.",
+      raceCadence: "Elira catalogued moonlit vellums.",
       alignment: "Lawful Neutral",
-      classAlignmentInsert: "Elira balanced curiosity with caution.",
       classLower: "mage",
       shortName: "Elira",
       voiceTone: "measured",
       signatureTool: "vellum folio",
-      alignmentMemory: "Elira audited ledgers in secret.",
-      emberHook: "Rumor lingered around a ledger."
+      alignmentReflection: "Elira audited ledgers in secret.",
+      rumorEcho: "Rumor lingered around a ledger."
     });
     expect(rendered).toContain("Elira carried a Elf banner");
     expect(rendered).toContain("mage");
@@ -79,15 +79,21 @@ describe("backstory helpers", () => {
 
     expect(character.backstoryId).toBe("backstory_waves_break_tideward_1");
     expect(character.backstory?.biographyParagraphs?.length).toBe(4);
-    expect(character.backstory?.biographyParagraphs?.[0]).toContain("Marin");
+    expect(character.backstory?.biographyParagraphs?.[0]).toMatch(/tide charts/i);
     expect(character.spawnDistrict).toBe("Greensoul Hill");
     expect(character.backstory?.spawnDistrict).toBe("Greensoul Hill");
     expect(character.backstory?.biography).toContain("Greensoul Hill");
-    expect(character.backstory?.raceDescription).toBeTruthy();
-    expect(character.backstory?.classAlignmentInsert).toBeTruthy();
-    expect(character.backstory?.alignmentMemory).toMatch(/Marin/);
-    expect(character.backstory?.classAngleSummary).toMatch(/treated/);
+    expect(character.backstory?.raceCadence).toMatch(/Crowded wards/i);
+    expect(character.backstory?.trainingPhilosophy).toMatch(/sunrise drill/i);
+    expect(character.backstory?.alignmentReflection).toMatch(/still weighs/i);
+    expect(character.backstory?.rumorEcho).toMatch(/still wonders/i);
+    expect(character.backstory).not.toHaveProperty("classAlignmentInsert");
+    expect(character.backstory).not.toHaveProperty("alignmentMemory");
+    expect(character.backstory).not.toHaveProperty("emberHook");
     expect(character.backstory?.biography).not.toContain("{pronoun.");
+    expect(character.backstory?.biographyParagraphs?.[3]).toMatch(/still wonders/i);
+    expect(character.raceCadence).toEqual(character.backstory?.raceCadence);
+    expect(character.trainingPhilosophy).toEqual(character.backstory?.trainingPhilosophy);
   });
 
   it("ensures an instance can be rebuilt from an id", () => {
@@ -142,6 +148,24 @@ describe("backstory helpers", () => {
     expect(instance?.biographyParagraphs).toEqual([
       "Backstory locked: select race, sex, class, alignment, origin location, and district to reveal a tailored biography.",
     ]);
+  });
+
+  it("renders featured race samples with chronological flow", () => {
+    for (const sample of featuredSamples) {
+      const backstory = BACKSTORY_BY_ID[sample.backstoryId];
+      if (!backstory) throw new Error(`missing backstory for ${sample.backstoryId}`);
+      const character = {
+        ...JSON.parse(JSON.stringify(characterTemplate)),
+        ...sample.character,
+      };
+      const instance = buildBackstoryInstance(backstory, character);
+      expect(instance?.biographyParagraphs?.length).toBe(4);
+      expect(instance?.biographyParagraphs?.[0]).toMatch(sample.expectations.earlyLife);
+      expect(instance?.biographyParagraphs?.[1]).toMatch(sample.expectations.training);
+      expect(instance?.biographyParagraphs?.[2]).toMatch(sample.expectations.moralTest);
+      expect(instance?.biographyParagraphs?.[3]).toMatch(sample.expectations.rumor);
+      expect(instance?.biographyParagraphs?.[3]).toMatch(/still/i);
+    }
   });
 
   it("injects appearance details into image prompts", () => {

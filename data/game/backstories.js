@@ -1,8 +1,7 @@
 import rawData from "../backstories_data.js";
 
 const rawBackstories = Array.isArray(rawData?.backstories) ? rawData.backstories : [];
-const rawRaceDescriptions = rawData?.raceDescriptions || {};
-const rawClassAlignmentInserts = rawData?.classAlignmentInserts || {};
+const rawRaceCadences = rawData?.raceCadences || {};
 
 function normalizeWhitespace(text = "") {
   return text.replace(/\r\n/g, "\n").trim();
@@ -66,7 +65,7 @@ export function renderBackstoryString(template, context = {}) {
     "{origin_location}": context.originLocation || context.location || context.homeTown || "",
     "{shortName}": context.shortName || context.short_name || "",
     "{short_name}": context.shortName || context.short_name || "",
-    "{raceDescription}": context.raceDescription || "",
+    "{raceDescription}": context.raceDescription || context.raceCadence || "",
     "{spawnDistrict}": context.spawnDistrict || "",
     "{district}": context.spawnDistrict || "",
     "{voiceTone}": context.voiceTone || context.voice_tone || "",
@@ -76,9 +75,13 @@ export function renderBackstoryString(template, context = {}) {
     "{bond}": context.bond || "",
     "{secret}": context.secret || "",
     "{backstorySeed}": context.backstorySeed || context.backstory_seed || "",
-    "{classAngleSummary}": context.classAngleSummary || "",
-    "{alignmentMemory}": context.alignmentMemory || "",
-    "{emberHook}": context.emberHook || "",
+    "{classAngleSummary}": context.classAngleSummary || context.trainingPhilosophy || "",
+    "{alignmentMemory}": context.alignmentMemory || context.alignmentReflection || "",
+    "{emberHook}": context.emberHook || context.rumorEcho || "",
+    "{raceCadence}": context.raceCadence || "",
+    "{trainingPhilosophy}": context.trainingPhilosophy || "",
+    "{alignmentReflection}": context.alignmentReflection || "",
+    "{rumorEcho}": context.rumorEcho || "",
   };
   for (const [token, value] of Object.entries(replacements)) {
     const safeToken = escapeRegex(token);
@@ -138,7 +141,7 @@ function lookupCaseInsensitive(map = {}, key) {
   return map[matchKey];
 }
 
-function normalizeRaceDescriptions(source = {}) {
+function normalizeRaceCadences(source = {}) {
   const result = {};
   for (const [race, classMap] of Object.entries(source)) {
     const normalizedClassMap = {};
@@ -153,25 +156,19 @@ function normalizeRaceDescriptions(source = {}) {
   }
   return result;
 }
-
-function normalizeClassAlignmentInserts(source = {}) {
-  const result = {};
-  for (const [className, alignmentMap] of Object.entries(source)) {
-    const normalizedAlignmentMap = {};
-    if (alignmentMap && typeof alignmentMap === "object") {
-      for (const [alignment, template] of Object.entries(alignmentMap)) {
-        if (typeof template === "string" && template.trim()) {
-          normalizedAlignmentMap[alignment] = normalizeWhitespace(template);
-        }
-      }
+function normalizeBiographyBeats(entry = {}) {
+  const beats = entry?.biographyBeats;
+  if (!beats || typeof beats !== "object") return {};
+  const normalized = {};
+  for (const [key, value] of Object.entries(beats)) {
+    if (typeof value === "string" && value.trim()) {
+      normalized[key] = normalizeWhitespace(value);
     }
-    result[className] = normalizedAlignmentMap;
   }
-  return result;
+  return normalized;
 }
 
-export const RACE_DESCRIPTION_REPOSITORY = normalizeRaceDescriptions(rawRaceDescriptions);
-export const CLASS_ALIGNMENT_INSERT_REPOSITORY = normalizeClassAlignmentInserts(rawClassAlignmentInserts);
+export const RACE_CADENCE_REPOSITORY = normalizeRaceCadences(rawRaceCadences);
 
 export const BACKSTORIES = rawBackstories.map(entry => {
   const biographyParagraphs = normalizeBiographyParagraphs(entry);
@@ -181,6 +178,7 @@ export const BACKSTORIES = rawBackstories.map(entry => {
     biography,
     biographyParagraphs,
     spawnDistricts: normalizeSpawnDistricts(entry),
+    biographyBeats: normalizeBiographyBeats(entry),
   };
 });
 
@@ -208,21 +206,13 @@ export function getBackstoriesByCriteria(criteria = {}) {
   });
 }
 
-export function getRaceDescriptionTemplate(race, className) {
+export function getRaceCadenceTemplate(race, className) {
   if (!race) return "";
-  const raceEntry = lookupCaseInsensitive(RACE_DESCRIPTION_REPOSITORY, race) || {};
+  const raceEntry = lookupCaseInsensitive(RACE_CADENCE_REPOSITORY, race) || {};
   if (className) {
     const classTemplate = lookupCaseInsensitive(raceEntry, className);
     if (classTemplate) return classTemplate;
   }
   return lookupCaseInsensitive(raceEntry, "default") || "";
-}
-
-export function getClassAlignmentInsertTemplate(className, alignment) {
-  if (!className || !alignment) return "";
-  const classEntry = lookupCaseInsensitive(CLASS_ALIGNMENT_INSERT_REPOSITORY, className) || {};
-  const template = lookupCaseInsensitive(classEntry, alignment);
-  if (template) return template;
-  return lookupCaseInsensitive(classEntry, "default") || "";
 }
 
