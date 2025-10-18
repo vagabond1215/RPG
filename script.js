@@ -140,7 +140,7 @@ const ADVENTURERS_GUILD_RANK_ORDER = [
 ];
 
 const QUEST_DISTRICT_ALIASES = {
-  'Harbor Ward': 'The Port District',
+  'Port District': 'The Port District',
   'Upper Ward': 'The Upper Ward',
   'Little Terns': 'Little Terns',
   'Greensoul Hill': 'Greensoul Hill',
@@ -346,7 +346,7 @@ function resolveQuestBinding(quest, boardName) {
       source.habitat === 'farmland'
         ? 'Farmlands'
         : source.habitat === 'coastal'
-          ? 'Harbor Ward'
+          ? 'Port District'
           : "Wave's Break";
   }
   return source;
@@ -8553,7 +8553,7 @@ function generateMerchantsWharfOpportunity(state) {
   if (!binding.board) binding.board = MERCHANTS_WHARF_DYNAMIC_BOARD;
   if (!binding.business) binding.business = "Merchants' Wharf";
   if (!binding.location) binding.location = "Merchants' Wharf";
-  if (!binding.district) binding.district = 'Harbor Ward';
+  if (!binding.district) binding.district = 'Port District';
   if (!binding.habitat) binding.habitat = 'coastal';
   if (!binding.region) binding.region = 'waves_break';
   quest.visibilityBinding = binding;

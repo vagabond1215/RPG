@@ -12,7 +12,7 @@ export default {
         "Wave's Break"
       ],
       "spawnDistricts": [
-        "Harbor Ward",
+        "Port District",
         "Greensoul Hill",
         "Upper Ward"
       ],
