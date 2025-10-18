@@ -17,7 +17,7 @@ export default {
         "Upper Ward"
       ],
       "biographyParagraphs": [
-        "{characterName} traced Wave's Break tide charts by ear as lantern barges tolled past {spawnDistrict}'s piers. {shortName} soaked up {voiceTone} gossip from riggers and memorized Tidewall bells before {pronoun.subject} could read the guild ledgers.",
+        "{characterName} traced Wave's Break tide charts by ear as lantern barges tolled past {spawnDistrict}'s piers. {shortName} soaked up {voiceTone} gossip from riggers and memorized Tidewall bells before ${pronoun.subject} could read the guild ledgers.",
         "{raceDescription} {classAngleSummary}",
         "{classAlignmentInsert} {alignmentMemory}",
         "{emberHook}"
@@ -59,7 +59,7 @@ export default {
         "Steamward Market"
       ],
       "biographyParagraphs": [
-        "{characterName} breathed mineral steam long before {pronoun.subject} traced the hymns etched into Warm Springs bathhouse pillars. {shortName} learned to pace {voiceTone} chants with the geysers that crowned {spawnDistrict}'s terraces at dawn.",
+        "{characterName} breathed mineral steam long before ${pronoun.subject} traced the hymns etched into Warm Springs bathhouse pillars. {shortName} learned to pace {voiceTone} chants with the geysers that crowned {spawnDistrict}'s terraces at dawn.",
         "{raceDescription} {classAngleSummary}",
         "{classAlignmentInsert} {alignmentMemory}",
         "{emberHook}"
