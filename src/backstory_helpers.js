@@ -221,9 +221,67 @@ function resolveSpawnDistrict(backstory, character) {
   return districts[0] || "";
 }
 
+function coalesce(...values) {
+  for (const value of values) {
+    if (value !== undefined && value !== null) {
+      return value;
+    }
+  }
+  return undefined;
+}
+
+function determineIsGroupEntity(character = {}, overrides = {}) {
+  if (overrides?.isGroup !== undefined) return Boolean(overrides.isGroup);
+  if (overrides?.isPlural !== undefined) return Boolean(overrides.isPlural);
+  if (overrides?.pluralEntity !== undefined) return Boolean(overrides.pluralEntity);
+  if (character?.isGroup !== undefined) return Boolean(character.isGroup);
+  if (character?.isPlural !== undefined) return Boolean(character.isPlural);
+  if (character?.pluralEntity !== undefined) return Boolean(character.pluralEntity);
+  if (typeof overrides?.groupSize === "number") return overrides.groupSize > 1;
+  if (typeof character?.groupSize === "number") return character.groupSize > 1;
+  if (typeof overrides?.partySize === "number") return overrides.partySize > 1;
+  if (typeof character?.partySize === "number") return character.partySize > 1;
+  if (Array.isArray(overrides?.members) && overrides.members.length > 1) return true;
+  if (Array.isArray(character?.members) && character.members.length > 1) return true;
+  if (Array.isArray(character?.party) && character.party.length > 1) return true;
+  if (Array.isArray(character?.squad) && character.squad.length > 1) return true;
+  return false;
+}
+
 export function renderBackstoryTextForCharacter(text, character, overrides = {}) {
   if (!text) return "";
   const narrative = gatherNarrativeDefaults(character, overrides);
+  const homeTown =
+    coalesce(
+      overrides.homeTown,
+      overrides.hometown,
+      character?.homeTown,
+      character?.hometown,
+      overrides.originLocation,
+      character?.originLocation
+    ) || character?.location;
+  const familyName = coalesce(overrides.familyName, overrides.family_name, character?.familyName);
+  const mentorName = coalesce(overrides.mentorName, overrides.mentor_name, character?.mentorName);
+  const profession = coalesce(
+    overrides.profession,
+    overrides.occupation,
+    character?.profession,
+    character?.occupation
+  );
+  const notableEvent = coalesce(
+    overrides.notableEvent,
+    overrides.notable_event,
+    character?.notableEvent,
+    character?.notable_event
+  );
+  const groupName = coalesce(
+    overrides.groupName,
+    overrides.group_name,
+    character?.groupName,
+    character?.group_name,
+    character?.collectiveName
+  );
+  const isGroupEntity = determineIsGroupEntity(character, overrides);
   const context = {
     characterName: character?.name,
     name: character?.name,
@@ -232,7 +290,9 @@ export function renderBackstoryTextForCharacter(text, character, overrides = {})
     class: character?.class,
     alignment: character?.alignment,
     location: character?.location,
-    originLocation: character?.location,
+    originLocation: homeTown || character?.location,
+    homeTown,
+    hometown: homeTown,
     sex: character?.sex,
     gender: character?.sex,
     spawnDistrict: overrides.spawnDistrict || character?.spawnDistrict,
@@ -245,6 +305,19 @@ export function renderBackstoryTextForCharacter(text, character, overrides = {})
     bond: narrative.bond,
     secret: narrative.secret,
     backstorySeed: narrative.backstorySeed,
+    familyName,
+    family_name: familyName,
+    mentorName,
+    mentor_name: mentorName,
+    profession,
+    occupation: profession,
+    notableEvent,
+    notable_event: notableEvent,
+    groupName,
+    group_name: groupName,
+    isGroup: isGroupEntity,
+    isPluralEntity: overrides.isPluralEntity ?? character?.isPluralEntity ?? isGroupEntity,
+    groupSize: overrides.groupSize ?? character?.groupSize,
     raceCadence: overrides.raceCadence || character?.raceCadence,
     trainingPhilosophy: overrides.trainingPhilosophy || character?.trainingPhilosophy,
     alignmentReflection: overrides.alignmentReflection || character?.alignmentReflection,
