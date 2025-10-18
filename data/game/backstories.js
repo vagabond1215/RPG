@@ -51,9 +51,24 @@ export function applyPronouns(template = "", sex) {
   return result;
 }
 
+function isPluralEntity(context = {}) {
+  if (!context || typeof context !== "object") return false;
+  if (context.isPluralEntity !== undefined) return Boolean(context.isPluralEntity);
+  if (context.isGroup !== undefined) return Boolean(context.isGroup);
+  if (context.isPlural !== undefined) return Boolean(context.isPlural);
+  if (context.pluralEntity !== undefined) return Boolean(context.pluralEntity);
+  if (typeof context.groupSize === "number") return context.groupSize > 1;
+  if (typeof context.partySize === "number") return context.partySize > 1;
+  if (Array.isArray(context.members) && context.members.length > 1) return true;
+  if (Array.isArray(context.party) && context.party.length > 1) return true;
+  if (Array.isArray(context.squad) && context.squad.length > 1) return true;
+  return false;
+}
+
 export function renderBackstoryString(template, context = {}) {
   if (!template) return "";
   let result = template;
+  const plural = isPluralEntity(context);
   const replacements = {
     "{characterName}": context.characterName || context.name || "",
     "{race}": context.race || "",
@@ -63,6 +78,8 @@ export function renderBackstoryString(template, context = {}) {
     "{location}": context.location || context.homeTown || "",
     "{originLocation}": context.originLocation || context.location || context.homeTown || "",
     "{origin_location}": context.originLocation || context.location || context.homeTown || "",
+    "{homeTown}": context.homeTown || context.hometown || "",
+    "{hometown}": context.hometown || context.homeTown || "",
     "{shortName}": context.shortName || context.short_name || "",
     "{short_name}": context.shortName || context.short_name || "",
     "{raceDescription}": context.raceDescription || context.raceCadence || "",
@@ -75,6 +92,16 @@ export function renderBackstoryString(template, context = {}) {
     "{bond}": context.bond || "",
     "{secret}": context.secret || "",
     "{backstorySeed}": context.backstorySeed || context.backstory_seed || "",
+    "{familyName}": context.familyName || context.family_name || "",
+    "{family_name}": context.family_name || context.familyName || "",
+    "{mentorName}": context.mentorName || context.mentor_name || "",
+    "{mentor_name}": context.mentor_name || context.mentorName || "",
+    "{profession}": context.profession || context.occupation || "",
+    "{occupation}": context.occupation || context.profession || "",
+    "{notableEvent}": context.notableEvent || context.notable_event || "",
+    "{notable_event}": context.notable_event || context.notableEvent || "",
+    "{groupName}": context.groupName || context.group_name || "",
+    "{group_name}": context.group_name || context.groupName || "",
     "{classAngleSummary}": context.classAngleSummary || context.trainingPhilosophy || "",
     "{alignmentMemory}": context.alignmentMemory || context.alignmentReflection || "",
     "{emberHook}": context.emberHook || context.rumorEcho || "",
@@ -82,6 +109,14 @@ export function renderBackstoryString(template, context = {}) {
     "{trainingPhilosophy}": context.trainingPhilosophy || "",
     "{alignmentReflection}": context.alignmentReflection || "",
     "{rumorEcho}": context.rumorEcho || "",
+    "{is_are}": plural ? "are" : "is",
+    "{Is_are}": plural ? "Are" : "Is",
+    "{has_have}": plural ? "have" : "has",
+    "{Has_have}": plural ? "Have" : "Has",
+    "{does_do}": plural ? "do" : "does",
+    "{Does_do}": plural ? "Do" : "Does",
+    "{was_were}": plural ? "were" : "was",
+    "{Was_were}": plural ? "Were" : "Was",
   };
   for (const [token, value] of Object.entries(replacements)) {
     const safeToken = escapeRegex(token);

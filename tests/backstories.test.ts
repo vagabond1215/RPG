@@ -10,6 +10,7 @@ import {
   ensureBackstoryInstance,
   getBackstoriesForLocation,
   buildBackstoryInstance,
+  renderBackstoryTextForCharacter,
 } from "../src/backstory_helpers.js";
 import { composeImagePrompt } from "../data/game/image_prompts.js";
 import featuredSamples from "./fixtures/backstory_samples.js";
@@ -17,7 +18,7 @@ import featuredSamples from "./fixtures/backstory_samples.js";
 describe("backstory helpers", () => {
   it("substitutes character metadata placeholders", () => {
     const template =
-      "{characterName} carried a {race} banner for the {classLower} while stationed in {spawnDistrict}. {shortName} kept a {voiceTone} cadence beside {signatureTool}. {raceCadence} Alignment: {alignment}. {alignmentReflection} {rumorEcho}";
+      "{characterName} carried a {race} banner for the {classLower} while stationed in {spawnDistrict}. {shortName} kept a {voiceTone} cadence beside {signatureTool}. {raceCadence} Alignment: {alignment}. {alignmentReflection} {rumorEcho} {familyName} {mentorName} {profession} {notableEvent}";
     const rendered = renderBackstoryString(template, {
       characterName: "Elira",
       race: "Elf",
@@ -31,7 +32,11 @@ describe("backstory helpers", () => {
       voiceTone: "measured",
       signatureTool: "vellum folio",
       alignmentReflection: "Elira audited ledgers in secret.",
-      rumorEcho: "Rumor lingered around a ledger."
+      rumorEcho: "Rumor lingered around a ledger.",
+      familyName: "Lyrecrown",
+      mentorName: "Archivist Neral",
+      profession: "scribe",
+      notableEvent: "the ledger fire"
     });
     expect(rendered).toContain("Elira carried a Elf banner");
     expect(rendered).toContain("mage");
@@ -40,6 +45,65 @@ describe("backstory helpers", () => {
     expect(rendered).toContain("Lawful Neutral");
     expect(rendered).toContain("Elira audited ledgers in secret.");
     expect(rendered).toContain("Rumor lingered around a ledger.");
+    expect(rendered).toContain("Lyrecrown");
+    expect(rendered).toContain("Archivist Neral");
+    expect(rendered).toContain("scribe");
+    expect(rendered).toContain("ledger fire");
+  });
+
+  it("renders extended character metadata with plural-aware verbs", () => {
+    const template =
+      "{characterName} of the {familyName} line {is_are} {profession} from {hometown}. {pronoun.subject} {has_have} honored {mentorName} since {notableEvent}. {Is_are} {pronoun.object} still called the {groupName}?";
+    const groupCharacter = {
+      ...JSON.parse(JSON.stringify(characterTemplate)),
+      name: "The Ember Choir",
+      race: "Human",
+      class: "Bard",
+      alignment: "Chaotic Good",
+      sex: "Group",
+      location: "Wave's Break",
+      spawnDistrict: "Lantern Quay",
+      homeTown: "Lantern Quay",
+      familyName: "Ember",
+      mentorName: "Maestro Vel",
+      profession: "street performers",
+      notableEvent: "lantern uprising",
+      groupName: "Lantern Voices",
+      isGroup: true,
+    };
+    const groupRendered = renderBackstoryTextForCharacter(template, groupCharacter);
+    expect(groupRendered).toContain("Lantern Quay");
+    expect(groupRendered).toContain("Ember");
+    expect(groupRendered).toContain("street performers");
+    expect(groupRendered).toContain("lantern uprising");
+    expect(groupRendered).toMatch(/are/);
+    expect(groupRendered).toMatch(/have honored/);
+    expect(groupRendered).toMatch(/Are them/);
+
+    const singularCharacter = {
+      ...JSON.parse(JSON.stringify(characterTemplate)),
+      name: "Marin Tidewatch",
+      race: "Human",
+      class: "Fighter",
+      alignment: "Neutral Good",
+      sex: "Female",
+      location: "Wave's Break",
+      spawnDistrict: "Harbor Ward",
+      homeTown: "Harbor Ward",
+      familyName: "Tidewatch",
+      mentorName: "Captain Lysa",
+      profession: "harbor sentinel",
+      notableEvent: "the storm vigil",
+      groupName: "Harbor Watch",
+    };
+    const singularRendered = renderBackstoryTextForCharacter(template, singularCharacter);
+    expect(singularRendered).toContain("Harbor Ward");
+    expect(singularRendered).toContain("Tidewatch");
+    expect(singularRendered).toContain("harbor sentinel");
+    expect(singularRendered).toContain("storm vigil");
+    expect(singularRendered).toMatch(/is/);
+    expect(singularRendered).toMatch(/has honored/);
+    expect(singularRendered).toMatch(/Is her/);
   });
 
   it("parses simple currency expressions", () => {
