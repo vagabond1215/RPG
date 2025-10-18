@@ -87,6 +87,7 @@ describe("backstory helpers", () => {
     expect(character.backstory?.classAlignmentInsert).toBeTruthy();
     expect(character.backstory?.alignmentMemory).toMatch(/Marin/);
     expect(character.backstory?.classAngleSummary).toMatch(/treated/);
+    expect(character.backstory?.biography).not.toContain("{pronoun.");
   });
 
   it("ensures an instance can be rebuilt from an id", () => {

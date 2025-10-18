@@ -32,14 +32,24 @@ export function getPronouns(sex) {
   return { subject: "they", object: "them", possessive: "their", possessivePronoun: "theirs", reflexive: "themself" };
 }
 
-export function applyPronouns(template, sex) {
+export function applyPronouns(template = "", sex) {
+  const source = typeof template === "string" ? template : String(template ?? "");
+  if (!source) return "";
   const pronouns = getPronouns(sex);
-  return template
-    .replace(/\$\{pronoun\.subject\}/g, pronouns.subject)
-    .replace(/\$\{pronoun\.object\}/g, pronouns.object)
-    .replace(/\$\{pronoun\.possessive\}/g, pronouns.possessive)
-    .replace(/\$\{pronoun\.possessivePronoun\}/g, pronouns.possessivePronoun)
-    .replace(/\$\{pronoun\.reflexive\}/g, pronouns.reflexive);
+  const replacements = {
+    subject: pronouns.subject,
+    object: pronouns.object,
+    possessive: pronouns.possessive,
+    possessivePronoun: pronouns.possessivePronoun,
+    reflexive: pronouns.reflexive,
+  };
+
+  let result = source;
+  for (const [token, value] of Object.entries(replacements)) {
+    const pattern = new RegExp(`\\$?\\{pronoun\\.${token}\\}`, "g");
+    result = result.replace(pattern, value);
+  }
+  return result;
 }
 
 export function renderBackstoryString(template, context = {}) {
