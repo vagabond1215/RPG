@@ -2,7 +2,7 @@ import { SPELLBOOK, MILESTONES } from "./data/game/spells.js";
 import { WEAPON_SKILLS } from "./data/game/weapon_skills.js";
 import { characterTemplate } from "./data/game/core.js";
 import { gainProficiency, proficiencyCap } from "./data/game/proficiency_base.js";
-import { getRaceStartingAttributes, RACE_DESCRIPTIONS } from "./data/game/race_attrs.js";
+import { getRaceStartingAttributes } from "./data/game/race_attrs.js";
 import { maxHP, maxMP, maxStamina } from "./data/game/resources.js";
 import {
   DENOMINATIONS,
@@ -38,7 +38,6 @@ import { CITY_NAV } from "./data/game/city_nav.js";
 import { composeImagePrompt } from "./data/game/image_prompts.js";
 import { DEFAULT_NAMES } from "./data/game/names.js";
 import { BACKSTORY_BY_ID } from "./data/game/backstories.js";
-import { BACKSTORY_IDS_BY_LOCATION as BACKSTORY_IDS_BY_LOCATION_MAP } from "./data/game/backstory_ids_by_location.js";
 import {
   renderBackstoryTextForCharacter,
   buildBackstoryInstance,
@@ -173,13 +172,6 @@ const REGION_LABELS = Object.entries(CITY_SLUGS).reduce((map, [name, slug]) => {
   map[slug] = name;
   return map;
 }, {});
-
-const BACKSTORY_MAP = Object.fromEntries(
-  Object.keys(BACKSTORY_IDS_BY_LOCATION_MAP).map(location => [
-    location,
-    getBackstoriesForLocation(location, BACKSTORY_IDS_BY_LOCATION_MAP),
-  ])
-);
 
 const STREET_VENDOR_ICON = 'assets/images/icons/Economy/Sell.png';
 const STREET_VENDOR_SECURITY_MODIFIERS = { high: 0.25, medium: 0.75, low: 1.1 };
@@ -11081,30 +11073,19 @@ function showCharacterUI() {
   const statsHTML = `<h2>Current Stats</h2><ul class="stats-list">${statsList}</ul>`;
   const backstoryHTML = (() => {
     if (!c.backstory) return '';
-    const originSummary = c.backstory.origin?.summary;
-    const currentSummary = c.backstory.currentSituation?.summary || c.backstory.currentSituation?.sceneHook;
-    const motivations = Array.isArray(c.backstory.motivation) ? c.backstory.motivation : [];
-    const obligations = Array.isArray(c.backstory.currentSituation?.obligations)
-      ? c.backstory.currentSituation.obligations
+    const paragraphs = Array.isArray(c.backstory.biographyParagraphs)
+      ? c.backstory.biographyParagraphs
       : [];
-    const responsibilities = Array.isArray(c.backstory.responsibilities) ? c.backstory.responsibilities : [];
-
-    const listSection = (title, values) =>
-      values.length
-        ? `<h4>${escapeHtml(title)}</h4><ul class="backstory-list">${values
-            .map(item => `<li>${escapeHtml(item)}</li>`)
-            .join('')}</ul>`
-        : '';
-
+    const paragraphsHTML = paragraphs.map(text => `<p>${escapeHtml(text)}</p>`).join('');
+    const alignmentLine = c.backstory.alignment
+      ? `<p class="backstory-alignment"><strong>Alignment:</strong> ${escapeHtml(c.backstory.alignment)}</p>`
+      : '';
     return `
       <div class="backstory-block">
         <h2>Backstory</h2>
         <h3>${escapeHtml(c.backstory.title || '')}</h3>
-        ${originSummary ? `<p><strong>Origin:</strong> ${escapeHtml(originSummary)}</p>` : ''}
-        ${currentSummary ? `<p><strong>Current:</strong> ${escapeHtml(currentSummary)}</p>` : ''}
-        ${listSection('Motivations', motivations)}
-        ${listSection('Obligations', obligations)}
-        ${listSection('Responsibilities', responsibilities)}
+        ${alignmentLine}
+        ${paragraphsHTML}
       </div>
     `;
   })();
@@ -13916,6 +13897,28 @@ function startCharacterCreation() {
   }
   const character = saved.character || {};
   const buildEntries = Object.values(characterBuilds);
+  const ALIGNMENT_GRID = [
+    ['Lawful Good', 'Neutral Good', 'Chaotic Good'],
+    ['Lawful Neutral', 'True Neutral', 'Chaotic Neutral'],
+    ['Lawful Evil', 'Neutral Evil', 'Chaotic Evil'],
+  ];
+  const ALIGNMENT_SUMMARIES = {
+    'Lawful Good': 'Champions of community who trust oaths and institutions, using structure to deliver mercy and protection.',
+    'Neutral Good': 'Pragmatic helpers guided by conscience, weaving alliances wherever kindness can quietly flourish.',
+    'Chaotic Good': 'Free-spirited idealists who bend or break restrictive rules when compassion demands swifter justice.',
+    'Lawful Neutral': 'Keepers of tradition who believe order is the scaffold of civilization, even when its weight feels impersonal.',
+    'True Neutral': 'Stewards of balance who weigh each choice by its lasting harmony, avoiding extremes that tip the realm.',
+    'Chaotic Neutral': 'Instinctive wanderers who guard personal liberty, improvising solutions without pledging to crown or creed.',
+    'Lawful Evil': 'Calculating tacticians who weaponize law and contract, binding rivals through decrees that favor their ascent.',
+    'Neutral Evil': 'Unscrupulous opportunists pursuing ambition, aligning only with those who advance their immediate aims.',
+    'Chaotic Evil': 'Ruinous agitators who delight in disruption, scattering bonds and codes to seize what they desire.',
+  };
+  const splitAlignment = alignment => {
+    if (alignment === 'True Neutral') return ['Neutral', 'Neutral'];
+    const parts = alignment.split(' ');
+    if (parts.length === 1) return [parts[0], parts[0]];
+    return parts;
+  };
   const classField = {
     key: 'class',
     label: 'Choose your class',
@@ -13929,10 +13932,24 @@ function startCharacterCreation() {
     options: Object.keys(LOCATIONS).filter(l => l !== 'Duvilia Kingdom')
   };
 
+  const districtField = {
+    key: 'spawnDistrict',
+    label: 'Choose your district',
+    type: 'select',
+    options: []
+  };
+
   const backstoryField = {
     key: 'backstory',
     label: 'Choose your backstory',
     type: 'select'
+  };
+
+  const alignmentField = {
+    key: 'alignment',
+    label: 'Choose your alignment',
+    type: 'alignment',
+    options: ALIGNMENT_GRID,
   };
 
   const fields = [
@@ -13949,6 +13966,7 @@ function startCharacterCreation() {
       options: ['Male', 'Female']
     },
     classField,
+    alignmentField,
     { key: 'characterImage', label: 'Choose your character', type: 'select' }
   ];
 
@@ -13956,7 +13974,9 @@ function startCharacterCreation() {
     race: 'Race',
     sex: 'Sex',
     class: 'Class',
-    characterImage: 'Character'
+    alignment: 'Alignment',
+    characterImage: 'Character',
+    spawnDistrict: 'District'
   };
 
   let step = saved.step || 0;
@@ -14009,12 +14029,13 @@ function startCharacterCreation() {
     const activeFields = fields.filter(
       f => !f.races || f.races.includes(character.race)
     );
-    if (step > activeFields.length + 2) step = activeFields.length + 2;
+    if (step > activeFields.length + 3) step = activeFields.length + 3;
 
     let field;
     if (step < activeFields.length) field = activeFields[step];
     else if (step === activeFields.length + 1) field = locationField;
-    else if (step === activeFields.length + 2) field = backstoryField;
+    else if (step === activeFields.length + 2) field = districtField;
+    else if (step === activeFields.length + 3) field = backstoryField;
     if (field && field.key === 'race' && !character.race) {
       character.race = field.options[0];
       safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
@@ -14026,9 +14047,44 @@ function startCharacterCreation() {
     if (field && field.key === 'location' && !character.location) {
       character.location = locationField.options[0];
     }
-    const availableBackstories = (BACKSTORY_MAP[character.location] || []).filter(Boolean);
+    const locationBackstories = character.location
+      ? getBackstoriesForLocation(character.location, {})
+      : [];
+    const districtSet = new Set();
+    locationBackstories.forEach(entry => {
+      (entry.spawnDistricts || []).forEach(district => {
+        if (district) districtSet.add(district);
+      });
+    });
+    districtField.options = Array.from(districtSet);
+    if (districtField.options.length) {
+      if (!character.spawnDistrict || !districtField.options.includes(character.spawnDistrict)) {
+        character.spawnDistrict = districtField.options[0];
+        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      }
+    } else if (character.spawnDistrict) {
+      delete character.spawnDistrict;
+      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+    }
+    const backstoryPrerequisitesMet = Boolean(
+      character.name &&
+      character.race &&
+      character.sex &&
+      character.class &&
+      character.alignment &&
+      character.location &&
+      character.spawnDistrict
+    );
+    const availableBackstories = backstoryPrerequisitesMet
+      ? getBackstoriesForLocation(character.location, {
+          race: character.race,
+          className: character.class,
+          alignment: character.alignment,
+          spawnDistrict: character.spawnDistrict,
+        })
+      : [];
     if (field && field.key === 'backstory') {
-      if (!availableBackstories.length) {
+      if (!backstoryPrerequisitesMet || !availableBackstories.length) {
         if (character.backstory) {
           character.backstory = null;
           safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
@@ -14041,7 +14097,7 @@ function startCharacterCreation() {
 
     const stepLabels = activeFields
       .map(f => FIELD_STEP_LABELS[f.key])
-      .concat(['Name', 'Location', 'Backstory']);
+      .concat(['Name', 'Location', 'District', 'Backstory']);
     const isFieldComplete = field => {
       if (!field) return true;
       if (field.key === 'characterImage') {
@@ -14054,15 +14110,19 @@ function startCharacterCreation() {
       return Boolean(character[field.key]);
     };
     const isBackstoryComplete = () =>
-      availableBackstories.length === 0 ? true : Boolean(character.backstory);
+      !backstoryPrerequisitesMet || availableBackstories.length === 0
+        ? backstoryPrerequisitesMet
+        : Boolean(character.backstory);
     const isComplete = () =>
       activeFields.every(isFieldComplete) &&
       Boolean(character.name) &&
       Boolean(character.location) &&
+      backstoryPrerequisitesMet &&
       isBackstoryComplete();
     const progressHTML =
       stepLabels
         .map((label, i) => {
+          const isBackstoryStep = i === stepLabels.length - 1;
           const hasValue =
             i < activeFields.length
               ? isFieldComplete(activeFields[i])
@@ -14070,16 +14130,31 @@ function startCharacterCreation() {
               ? Boolean(character.name)
               : i === activeFields.length + 1
               ? Boolean(character.location)
+              : i === activeFields.length + 2
+              ? Boolean(character.spawnDistrict)
               : isBackstoryComplete();
-          let cls = 'clickable';
-          if (i === step) cls = 'current clickable';
-          else if (hasValue) cls = 'completed clickable';
+          let cls = isBackstoryStep && !backstoryPrerequisitesMet ? 'locked' : 'clickable';
+          if (i === step) cls = isBackstoryStep && !backstoryPrerequisitesMet ? 'locked current' : 'current clickable';
+          else if (hasValue && cls !== 'locked') cls = 'completed clickable';
           return `<div class="progress-step ${cls}" data-step="${i}"><div class="circle"></div><span>${label}</span></div>`;
         })
         .join('') +
       `<button id="cc-complete" class="complete-button" ${isComplete() ? '' : 'disabled'}></button>` +
       '<button id="cc-cancel" title="Cancel">✖</button>';
     const displayData = (() => {
+      if (field && field.key === 'alignment') {
+        const alignment = character.alignment;
+        if (alignment && ALIGNMENT_SUMMARIES[alignment]) {
+          const summary = escapeHtml(ALIGNMENT_SUMMARIES[alignment]);
+          const heading = escapeHtml(alignment);
+          const descHTML = `<div class="race-description"><h3>${heading}</h3><p>${summary}</p></div>`;
+          return { descHTML };
+        }
+        return {
+          descHTML:
+            '<div class="race-description"><p>Select an alignment to define the principles that guide your decisions.</p></div>'
+        };
+      }
       if (field && field.key === 'location' && character.location) {
         const loc = LOCATIONS[character.location];
         if (!loc) return {};
@@ -14087,35 +14162,32 @@ function startCharacterCreation() {
         return { descHTML };
       }
       if (field && field.key === 'backstory') {
+        if (!backstoryPrerequisitesMet) {
+          return {
+            descHTML:
+              '<div class="race-description"><p class="cc-backstory-locked">Select a name, race, sex, class, alignment, starting location, and district to unlock curated backstories.</p></div>'
+          };
+        }
         if (!availableBackstories.length) {
           const locationLabel = character.location
             ? escapeHtml(character.location)
             : 'this location';
           return {
-            descHTML: `<div class="race-description"><p>No backstories are available for ${locationLabel} yet.</p></div>`
+            descHTML: `<div class="race-description"><p>No backstories match the current choices for ${locationLabel}.</p></div>`
           };
         }
+        const builtEntries = availableBackstories.map(entry => buildBackstoryInstance(entry, character));
         const selected = character.backstory
-          ? BACKSTORY_BY_ID[character.backstory]
-          : availableBackstories[0];
+          ? builtEntries.find(item => item.id === character.backstory) || builtEntries[0]
+          : builtEntries[0];
         if (selected) {
-          const sceneHook = renderBackstoryTextForCharacter(
-            selected.currentSituation.sceneHook,
-            character
-          );
-          const obligations = (selected.responsibilities || [])
-            .map(text => renderBackstoryTextForCharacter(text, character))
-            .filter(Boolean);
-          const obligationsHTML = obligations.length
-            ? `<ul class="cc-backstory-obligations">${obligations
-                .map(item => `<li>${escapeHtml(item)}</li>`)
-                .join('')}</ul>`
-            : '';
+          const paragraphsHTML = selected.biographyParagraphs
+            .map(text => `<p>${escapeHtml(text)}</p>`)
+            .join('');
           const descHTML = `
             <div class="race-description">
               <h3>${escapeHtml(selected.title)}</h3>
-              <p>${escapeHtml(sceneHook)}</p>
-              ${obligationsHTML}
+              ${paragraphsHTML}
             </div>
           `;
           return { descHTML };
@@ -14175,8 +14247,7 @@ function startCharacterCreation() {
         .map(([k, v]) => `<li>${k}: ${v}</li>`)
         .join('');
       const statsHTML = `<div class="race-stats"><div class="stats-resource-grid"><ul class="stats-list">${attrList}</ul><ul class="resource-list resource-column">${resList}</ul></div></div>`;
-      const descHTML = `<div class="race-description">${RACE_DESCRIPTIONS[character.race] || ''}</div>`;
-      return { statsHTML, descHTML };
+      return { statsHTML };
     })();
     const { statsHTML = '', descHTML = '' } = displayData;
     const statsSection =
@@ -14237,30 +14308,49 @@ function startCharacterCreation() {
             arrowClass: 'class-arrow',
             contentHTML: `<button class="option-button class-button">${character.class}</button>`,
           });
-        } else if (field.key === 'backstory') {
-          const options = availableBackstories.map(b => b?.id).filter(Boolean);
+        } else if (field.key === 'spawnDistrict') {
+          const options = districtField.options;
           if (!options.length) {
-            inputHTML = `<div class="cc-empty-option">No backstories are available for ${escapeHtml(
-              character.location || 'this location'
-            )} yet.</div>`;
+            inputHTML = '<div class="cc-empty-option">Select a location to reveal its districts.</div>';
           } else {
-            let index = options.indexOf(character.backstory);
+            let index = options.indexOf(character.spawnDistrict);
             if (index === -1) {
               index = 0;
-              character.backstory = options[0];
+              character.spawnDistrict = options[0];
             }
-            const selectedEntry = BACKSTORY_BY_ID[character.backstory] || availableBackstories[index];
-            const summary = selectedEntry
-              ? renderBackstoryTextForCharacter(selectedEntry.currentSituation.sceneHook, character)
-              : '';
-            const buttonLabel = selectedEntry ? escapeHtml(selectedEntry.title) : 'Select';
             inputHTML = createWheelSelectorTemplate({
-              wrapperClass: 'backstory-carousel',
-              arrowClass: 'backstory-arrow',
-              contentHTML: `<button class="option-button backstory-button" title="${escapeHtml(
-                summary
-              )}">${buttonLabel}</button>`,
+              wrapperClass: 'district-carousel',
+              arrowClass: 'district-arrow',
+              contentHTML: `<button class="option-button district-button">${character.spawnDistrict}</button>`,
             });
+          }
+        } else if (field.key === 'backstory') {
+          if (!backstoryPrerequisitesMet) {
+            inputHTML = '<div class="cc-empty-option backstory-locked">Complete the required selections above to browse backstories.</div>';
+          } else {
+            const options = availableBackstories.map(b => b?.id).filter(Boolean);
+            if (!options.length) {
+              inputHTML = `<div class="cc-empty-option">No backstories are available for ${escapeHtml(
+                character.location || 'this location'
+              )} yet.</div>`;
+            } else {
+              let index = options.indexOf(character.backstory);
+              if (index === -1) {
+                index = 0;
+                character.backstory = options[0];
+              }
+              const selectedEntry = availableBackstories[index];
+              const instance = selectedEntry ? buildBackstoryInstance(selectedEntry, character) : null;
+              const summary = instance?.biographyParagraphs?.[0] || '';
+              const buttonLabel = instance ? escapeHtml(instance.title) : 'Select';
+              inputHTML = createWheelSelectorTemplate({
+                wrapperClass: 'backstory-carousel',
+                arrowClass: 'backstory-arrow',
+                contentHTML: `<button class="option-button backstory-button" data-value="${escapeHtml(
+                  character.backstory || options[index] || ''
+                )}" title="${escapeHtml(summary)}">${buttonLabel}</button>`,
+              });
+            }
           }
         } else if (field.key === 'characterImage') {
           const files = await getCharacterImages(character.race, character.sex);
@@ -14298,6 +14388,20 @@ function startCharacterCreation() {
             )
             .join('')}</div>`;
         }
+      } else if (field.type === 'alignment') {
+        const selected = character.alignment || '';
+        const gridHTML = ALIGNMENT_GRID.map(row => {
+          const rowHTML = row
+            .map(option => {
+              const [orderAxis, moralAxis] = splitAlignment(option);
+              const classes = ['alignment-choice'];
+              if (selected === option) classes.push('selected');
+              return `<button class="${classes.join(' ')}" data-value="${escapeHtml(option)}"><span class="alignment-axis">${escapeHtml(orderAxis)}</span><span class="alignment-axis">${escapeHtml(moralAxis)}</span></button>`;
+            })
+            .join('');
+          return `<div class="alignment-row">${rowHTML}</div>`;
+        }).join('');
+        inputHTML = `<div class="alignment-grid">${gridHTML}</div>`;
       } else if (field.type === 'color') {
         let colors = [];
         if (field.key === 'hairColor') {
@@ -14336,12 +14440,27 @@ function startCharacterCreation() {
         const change = dir => {
           index = (index + dir + options.length) % options.length;
           character.location = options[index];
+          delete character.spawnDistrict;
           delete character.backstory;
           safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
           renderStep();
         };
         document.querySelector('.loc-arrow.left').addEventListener('click', () => change(-1));
         document.querySelector('.loc-arrow.right').addEventListener('click', () => change(1));
+      } else if (field.key === 'spawnDistrict') {
+        const options = districtField.options;
+        if (options.length) {
+          let index = options.indexOf(character.spawnDistrict);
+          const change = dir => {
+            index = (index + dir + options.length) % options.length;
+            character.spawnDistrict = options[index];
+            delete character.backstory;
+            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            renderStep();
+          };
+          document.querySelector('.district-arrow.left').addEventListener('click', () => change(-1));
+          document.querySelector('.district-arrow.right').addEventListener('click', () => change(1));
+        }
       } else if (field.key === 'race') {
         const options = field.options;
         let index = options.indexOf(character.race);
@@ -14379,18 +14498,31 @@ function startCharacterCreation() {
         };
         document.querySelector('.class-arrow.left').addEventListener('click', () => change(-1));
         document.querySelector('.class-arrow.right').addEventListener('click', () => change(1));
-      } else if (field.key === 'backstory') {
-        const options = availableBackstories.map(b => b?.id).filter(Boolean);
-        if (options.length) {
-          let index = options.indexOf(character.backstory);
-          const change = dir => {
-            index = (index + dir + options.length) % options.length;
-            character.backstory = options[index];
+      } else if (field.key === 'alignment') {
+        document.querySelectorAll('.alignment-choice').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const value = btn.dataset.value;
+            if (!value) return;
+            character.alignment = value;
+            delete character.backstory;
             safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
             renderStep();
-          };
-          document.querySelector('.backstory-arrow.left').addEventListener('click', () => change(-1));
-          document.querySelector('.backstory-arrow.right').addEventListener('click', () => change(1));
+          });
+        });
+      } else if (field.key === 'backstory') {
+        if (backstoryPrerequisitesMet) {
+          const options = availableBackstories.map(b => b?.id).filter(Boolean);
+          if (options.length) {
+            let index = options.indexOf(character.backstory);
+            const change = dir => {
+              index = (index + dir + options.length) % options.length;
+              character.backstory = options[index];
+              safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+              renderStep();
+            };
+            document.querySelector('.backstory-arrow.left').addEventListener('click', () => change(-1));
+            document.querySelector('.backstory-arrow.right').addEventListener('click', () => change(1));
+          }
         }
       } else if (field.key === 'characterImage') {
         const files =
@@ -14536,6 +14668,7 @@ function startCharacterCreation() {
     document.querySelectorAll('.progress-step').forEach(el => {
       const index = parseInt(el.dataset.step, 10);
       el.addEventListener('click', () => {
+        if (el.classList.contains('locked')) return;
         step = index;
         safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
         renderStep();
@@ -14587,26 +14720,33 @@ function finalizeCharacter(character) {
     id,
   });
   newChar.guildRank = 'None';
-  const bsList = BACKSTORY_MAP[character.location];
+  const bsList = getBackstoriesForLocation(character.location, {
+    race: character.race,
+    className: character.class,
+    alignment: character.alignment,
+    spawnDistrict: character.spawnDistrict,
+  });
   const selectedBackstory = character.backstory
     ? BACKSTORY_BY_ID[character.backstory]
     : undefined;
   const resolvedBackstory = selectedBackstory || (bsList && bsList[0]);
   if (resolvedBackstory) {
     applyBackstoryLoadout(newChar, resolvedBackstory, { reset: true });
-    const cityData = CITY_NAV[character.location];
-    if (cityData) {
-      const hometown = newChar.backstory?.origin?.hometown;
-      const fallbackDistrict = Object.keys(cityData.districts || {})[0] || null;
-      newChar.position = {
-        city: character.location,
-        district: hometown || fallbackDistrict,
-        building: null,
-        previousDistrict: null,
-        previousBuilding: null,
-      };
-    }
   }
+  const cityData = CITY_NAV[character.location];
+  const fallbackDistrict = cityData ? Object.keys(cityData.districts || {})[0] || null : null;
+  const positionedDistrict =
+    newChar.spawnDistrict ||
+    newChar.backstory?.spawnDistrict ||
+    newChar.backstory?.origin?.hometown ||
+    fallbackDistrict;
+  newChar.position = {
+    city: character.location,
+    district: positionedDistrict || null,
+    building: null,
+    previousDistrict: null,
+    previousBuilding: null,
+  };
   normalizeCharacterState(newChar);
   assignMagicAptitudes(newChar);
   ensureCollections(newChar);

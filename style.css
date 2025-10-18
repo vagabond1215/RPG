@@ -1380,7 +1380,7 @@ body.theme-dark #characterMenu button.selected {
 
   .portrait-wrapper img {
     max-width: 100%;
-    max-height: 18rem;
+    max-height: 27rem;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -1611,6 +1611,56 @@ body.theme-dark #characterMenu button.selected {
     min-width: 0;
   }
 
+  .alignment-grid {
+    display: grid;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .alignment-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .alignment-choice {
+    display: grid;
+    place-items: center;
+    padding: 0.75rem 0.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    background: rgba(10, 14, 28, 0.55);
+    color: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    gap: 0.2rem;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .alignment-choice .alignment-axis {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .alignment-choice .alignment-axis:first-child {
+    font-size: 0.95rem;
+  }
+
+  .alignment-choice:hover,
+  .alignment-choice:focus-visible {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(22, 30, 52, 0.7);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .alignment-choice.selected {
+    border-color: var(--accent-primary);
+    background: color-mix(in srgb, var(--accent-primary) 20%, rgba(10, 14, 28, 0.9));
+    box-shadow: 0 0 0.5rem color-mix(in srgb, var(--accent-primary) 35%, transparent);
+  }
+
   .cc-stats {
     display: flex;
     flex-direction: column;
@@ -1630,6 +1680,16 @@ body.theme-dark #characterMenu button.selected {
 
   .progress-step.clickable {
     cursor: pointer;
+  }
+
+  .progress-step.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .progress-step.locked .circle {
+    border-style: dashed;
   }
 
   .progress-step .circle {
@@ -1660,6 +1720,15 @@ body.theme-dark #characterMenu button.selected {
 
   .progress-step span {
     margin-left: 0.5rem;
+  }
+
+  .cc-empty-option.backstory-locked,
+  .cc-backstory-locked {
+    opacity: 0.8;
+  }
+
+  .cc-backstory-locked {
+    font-style: italic;
   }
 
   .cc-description {
