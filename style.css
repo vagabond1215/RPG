@@ -3055,11 +3055,27 @@ body.theme-dark .location-log-partial {
 
 .name-entry {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.name-entry .cc-name-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.name-entry .cc-name-field label {
+  font-weight: 600;
+}
+
+.name-entry .cc-name-row {
+  display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.name-entry input {
+.name-entry .cc-name-row input {
   flex: 1;
 }
 

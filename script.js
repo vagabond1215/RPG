@@ -14205,8 +14205,41 @@ function startCharacterCreation() {
       delete character.spawnDistrict;
       persistState();
     }
+    if (typeof character.givenName !== 'string') {
+      character.givenName = character.givenName ? String(character.givenName) : '';
+    }
+    if (typeof character.familyName !== 'string') {
+      character.familyName = character.familyName ? String(character.familyName) : '';
+    }
+    if (!character.givenName && typeof character.name === 'string' && character.name.trim()) {
+      const parts = character.name.trim().split(/\s+/);
+      if (parts.length > 1) {
+        const familyPart = parts.pop();
+        if (!character.familyName) {
+          character.familyName = familyPart;
+        }
+        character.givenName = parts.join(' ');
+      } else {
+        character.givenName = parts[0];
+      }
+    }
+    const raceNameData = DEFAULT_NAMES[character.race] || DEFAULT_NAMES.Human || {};
+    const raceSupportsFamilyNames = Array.isArray(raceNameData.family) && raceNameData.family.length > 0;
+    const hasCompleteName = () => {
+      const given = (character.givenName || '').trim();
+      const family = (character.familyName || '').trim();
+      if (!given) return false;
+      if (raceSupportsFamilyNames) return Boolean(family);
+      return true;
+    };
+    if (!character.name) {
+      const combined = [character.givenName, character.familyName].filter(Boolean).join(' ').trim();
+      if (combined) {
+        character.name = combined;
+      }
+    }
     const backstoryPrerequisitesMet = Boolean(
-      character.name &&
+      hasCompleteName() &&
       character.race &&
       character.sex &&
       character.class &&
@@ -14260,7 +14293,7 @@ function startCharacterCreation() {
         : Boolean(character.backstory);
     const isComplete = () =>
       activeFields.every(isFieldComplete) &&
-      Boolean(character.name) &&
+      hasCompleteName() &&
       Boolean(character.location) &&
       backstoryPrerequisitesMet &&
       isBackstoryComplete();
@@ -14272,7 +14305,7 @@ function startCharacterCreation() {
             i < activeFields.length
               ? isFieldComplete(activeFields[i])
               : i === activeFields.length
-              ? Boolean(character.name)
+              ? hasCompleteName()
               : i === activeFields.length + 1
               ? Boolean(character.location)
               : i === activeFields.length + 2
@@ -14774,39 +14807,80 @@ function startCharacterCreation() {
         });
       }
     } else {
-      const nameVal = character.name || '';
-      const nameList =
-        DEFAULT_NAMES[character.race]?.[
-          character.sex === 'Male' ? 'male' : 'female'
-        ] || [];
-      const placeholderName = nameList[0] || 'Name';
+      const givenMap = raceNameData?.given || {};
+      const sexKey =
+        character.sex && Array.isArray(givenMap[character.sex])
+          ? character.sex
+          : Object.keys(givenMap).find(key => Array.isArray(givenMap[key]) && givenMap[key].length) || 'Female';
+      let givenList = Array.isArray(givenMap[sexKey]) ? givenMap[sexKey] : [];
+      if (!givenList.length) {
+        const fallback = Object.values(givenMap).find(list => Array.isArray(list) && list.length);
+        if (fallback) givenList = fallback;
+      }
+      const familyList = Array.isArray(raceNameData.family) ? raceNameData.family : [];
+      const placeholderGiven = givenList[0] || 'First name';
+      const placeholderFamily = familyList[0] || 'Family name';
+      const givenValue = escapeAttribute(character.givenName || '');
+      const familyValue = escapeAttribute(character.familyName || '');
+      const givenRandomAttrs = givenList.length ? '' : 'disabled aria-disabled="true"';
+      const familyRandomAttrs = familyList.length ? '' : 'disabled aria-disabled="true"';
       setMainHTML(
-        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-options name-entry"><input type="text" id="name-input" value="${nameVal}" placeholder="${placeholderName}"><button id="name-random" class="dice-button" aria-label="Randomize Name">🎲</button><div class="cc-description">${descHTML}</div></div>${statsSection}</div></div>`
+        `<div class="character-creation"><div class="cc-top-row"><div class="progress-container">${progressHTML}</div><div class="cc-options name-entry"><div class="cc-name-field"><label for="given-name-input">First Name</label><div class="cc-name-row"><input type="text" id="given-name-input" value="${givenValue}" placeholder="${escapeAttribute(placeholderGiven)}" autocomplete="given-name"><button id="given-name-random" class="dice-button" aria-label="Randomize first name" ${givenRandomAttrs}>🎲</button></div></div>${
+          raceSupportsFamilyNames
+            ? `<div class="cc-name-field"><label for="family-name-input">Family Name</label><div class="cc-name-row"><input type="text" id="family-name-input" value="${familyValue}" placeholder="${escapeAttribute(placeholderFamily)}" autocomplete="family-name"><button id="family-name-random" class="dice-button" aria-label="Randomize family name" ${familyRandomAttrs}>🎲</button></div></div>`
+            : ''
+        }<div class="cc-description">${descHTML}</div></div>${statsSection}</div></div>`
       );
       normalizeOptionButtonWidths();
-      const nameInput = document.getElementById('name-input');
-      const randomBtn = document.getElementById('name-random');
+      const givenInput = document.getElementById('given-name-input');
+      const familyInput = document.getElementById('family-name-input');
+      const randomGivenBtn = document.getElementById('given-name-random');
+      const randomFamilyBtn = document.getElementById('family-name-random');
       const updateName = () => {
-        character.name = nameInput.value.trim();
+        character.givenName = givenInput.value.trim();
+        if (familyInput) {
+          character.familyName = familyInput.value.trim();
+        } else if (!raceSupportsFamilyNames) {
+          character.familyName = '';
+        }
+        character.name = [character.givenName, character.familyName]
+          .filter(Boolean)
+          .join(' ')
+          .trim();
         persistState();
         const completeBtn = document.getElementById('cc-complete');
         const nameStepEl = document.querySelector(`.progress-step[data-step="${activeFields.length}"]`);
-        if (character.name) {
+        if (hasCompleteName()) {
           nameStepEl?.classList.add('completed');
         } else {
           nameStepEl?.classList.remove('completed');
         }
-        if (isComplete()) completeBtn.removeAttribute('disabled');
-        else completeBtn.setAttribute('disabled', '');
+        if (completeBtn) {
+          if (isComplete()) completeBtn.removeAttribute('disabled');
+          else completeBtn.setAttribute('disabled', '');
+        }
       };
-      const randomizeName = () => {
-        if (!nameList.length) return;
-        const newName = nameList[Math.floor(Math.random() * nameList.length)];
-        nameInput.value = newName;
-        updateName();
-      };
-      randomBtn.addEventListener('click', randomizeName);
-      nameInput.addEventListener('input', updateName);
+      if (randomGivenBtn && givenList.length) {
+        randomGivenBtn.addEventListener('click', () => {
+          const newName = givenList[Math.floor(Math.random() * givenList.length)];
+          if (!newName) return;
+          givenInput.value = newName;
+          updateName();
+          givenInput.focus();
+        });
+      }
+      if (randomFamilyBtn && familyList.length) {
+        randomFamilyBtn.addEventListener('click', () => {
+          const newName = familyList[Math.floor(Math.random() * familyList.length)];
+          if (!newName) return;
+          familyInput.value = newName;
+          updateName();
+          familyInput.focus();
+        });
+      }
+      givenInput.addEventListener('input', updateName);
+      familyInput?.addEventListener('input', updateName);
+      givenInput.focus();
       updateName();
     }
 
