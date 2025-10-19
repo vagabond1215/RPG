@@ -3,7 +3,8 @@ export default {
   "backstories": [
     {
       "id": "backstory_waves_break_tideward_1",
-      "title": "{characterName} — {race} {classLower}, {alignment} ({location}, {spawnDistrict})",
+      "title": "{characterName}",
+      "hook": "Harbor Archivist",
       "characterName": "{characterName}",
       "race": "{race}",
       "class": "{class}",
@@ -25,7 +26,8 @@ export default {
     },
     {
       "id": "backstory_coral_keep_athenaeum_1",
-      "title": "{characterName} — {race} {classLower}, {alignment} ({location}, {spawnDistrict})",
+      "title": "{characterName}",
+      "hook": "Athenaeum Scholar",
       "characterName": "{characterName}",
       "race": "{race}",
       "class": "{class}",
@@ -46,7 +48,8 @@ export default {
     },
     {
       "id": "backstory_warm_springs_forge_1",
-      "title": "{characterName} — {race} {classLower}, {alignment} ({location}, {spawnDistrict})",
+      "title": "{characterName}",
+      "hook": "Steamward Acolyte",
       "characterName": "{characterName}",
       "race": "{race}",
       "class": "{class}",
@@ -67,7 +70,8 @@ export default {
     },
     {
       "id": "backstory_creekside_whisper_1",
-      "title": "{characterName} — {race} {classLower}, {alignment} ({location}, {spawnDistrict})",
+      "title": "{characterName}",
+      "hook": "Canal Whisper",
       "characterName": "{characterName}",
       "race": "{race}",
       "class": "{class}",

@@ -11076,12 +11076,14 @@ function showCharacterUI() {
     if (!activeBackstory) return '';
     const paragraphs = extractBackstoryParagraphs(activeBackstory);
     if (!paragraphs.length) return '';
-    const headerText = activeBackstory.title || `${c.name} — ${c.race} ${c.class}`;
+    const biographyName = activeBackstory.characterName || activeBackstory.title || c.name || '';
+    const biographyHook = activeBackstory.hook ? `<p class="narrative-biography-hook">${escapeHtml(activeBackstory.hook)}</p>` : '';
     const paragraphsHTML = paragraphs.map(text => `<p>${escapeHtml(text)}</p>`).join('');
     return `
       <div class="narrative-biography-block">
         <h2>Biography</h2>
-        <h3>${escapeHtml(headerText)}</h3>
+        ${biographyName ? `<h3>${escapeHtml(biographyName)}</h3>` : ''}
+        ${biographyHook}
         ${paragraphsHTML}
       </div>
     `;
@@ -11099,16 +11101,27 @@ function showCharacterUI() {
         <p class="backstory-district"><strong>Origin District:</strong> ${escapeHtml(activeBackstory.spawnDistrict)}</p>
       `);
     }
+    if (activeBackstory.hookDetail) {
+      details.push(`
+        <p class="backstory-hook-detail">${escapeHtml(activeBackstory.hookDetail)}</p>
+      `);
+    }
     if (activeBackstory.rumorEcho) {
       details.push(`
         <p class="backstory-rumor"><strong>Rumor:</strong> ${escapeHtml(activeBackstory.rumorEcho)}</p>
       `);
     }
+    if (activeBackstory.districtFlair) {
+      details.push(`
+        <p class="backstory-flair">${escapeHtml(activeBackstory.districtFlair)}</p>
+      `);
+    }
     if (!details.length) return '';
+    const headerLabel = activeBackstory.hook || activeBackstory.title || '';
     return `
       <div class="backstory-block">
         <h2>Curated Backstory</h2>
-        <h3>${escapeHtml(activeBackstory.title || '')}</h3>
+        ${headerLabel ? `<h3>${escapeHtml(headerLabel)}</h3>` : ''}
         ${details.join('')}
       </div>
     `;
@@ -14159,9 +14172,12 @@ function startCharacterCreation() {
   const renderNarrativeBiographyPreview = backstory => {
     const paragraphs = extractBackstoryParagraphs(backstory);
     if (!paragraphs.length) return '';
-    const headerHTML = backstory?.title
-      ? `<h3 class="cc-biography-title">${escapeHtml(backstory.title)}</h3>`
-      : '';
+    const name = backstory?.characterName || backstory?.title || '';
+    const hookLabel = backstory?.hook || '';
+    const headerParts = [];
+    if (name) headerParts.push(`<h3 class="cc-biography-title">${escapeHtml(name)}</h3>`);
+    if (hookLabel) headerParts.push(`<p class="cc-biography-hook">${escapeHtml(hookLabel)}</p>`);
+    const headerHTML = headerParts.join('');
     const paragraphsHTML = paragraphs
       .map(text => `<p>${escapeHtml(text)}</p>`)
       .join('');
@@ -14503,24 +14519,19 @@ function startCharacterCreation() {
               const selectedRecord = availableBackstoryInstances.find(({ entry }) => entry?.id === selectedId);
               const instance = selectedRecord?.instance || character.backstory;
               const paragraphs = extractBackstoryParagraphs(instance);
-              const snippetSource = paragraphs[0] || instance?.title || '';
-              const normalizedSnippet = snippetSource
-                .replace(/\s+/g, ' ')
-                .trim();
+              const hookLabel = instance?.hook || '';
+              const snippetSource = paragraphs[0] || instance?.characterName || hookLabel || '';
               const totalBackstories = options.length;
               const indexLabel = totalBackstories > 1 ? `${index + 1}/${totalBackstories} · ` : '';
-              const truncatedSnippet = normalizedSnippet.length > 80
-                ? `${normalizedSnippet.slice(0, 77)}…`
-                : normalizedSnippet;
               const buttonLabel = instance
-                ? escapeHtml(`${indexLabel}${truncatedSnippet || instance.title || 'Select'}`)
+                ? escapeHtml(`${indexLabel}${hookLabel || 'Select'}`)
                 : 'Select';
               inputHTML = createWheelSelectorTemplate({
                 wrapperClass: 'backstory-carousel',
                 arrowClass: 'backstory-arrow',
                 contentHTML: `<button class="option-button backstory-button" data-value="${escapeHtml(
                   selectedId || options[index] || ''
-                )}" title="${escapeHtml(paragraphs[0] || '')}">${buttonLabel}</button>`,
+                )}" title="${escapeHtml(snippetSource)}">${buttonLabel}</button>`,
               });
             }
           }

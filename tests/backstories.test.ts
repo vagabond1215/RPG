@@ -18,7 +18,7 @@ import featuredSamples from "./fixtures/backstory_samples.js";
 describe("backstory helpers", () => {
   it("substitutes character metadata placeholders", () => {
     const template =
-      "{characterName} carried a {race} banner for the {classLower} while stationed in {spawnDistrict}. {shortName} kept a {voiceTone} cadence beside {signatureTool}. {raceCadence} Alignment: {alignment}. {alignmentReflection} {rumorEcho} {familyName} {mentorName} {profession} {notableEvent}";
+      "{characterName} carried a {race} banner for the {classLower} while stationed in {spawnDistrict}. {shortName} kept a {voiceTone} cadence beside {signatureTool}. {raceCadence} Alignment: {alignment}. {alignmentReflection} {rumorEcho} {familyName} {mentorName} {profession} {notableEvent} {hook} {hookDetail} {districtFlair} {disciplineTag}";
     const rendered = renderBackstoryString(template, {
       characterName: "Elira",
       race: "Elf",
@@ -36,7 +36,11 @@ describe("backstory helpers", () => {
       familyName: "Lyrecrown",
       mentorName: "Archivist Neral",
       profession: "scribe",
-      notableEvent: "the ledger fire"
+      notableEvent: "the ledger fire",
+      hook: "Harbor Archivist",
+      hookDetail: "guiding the tide vault",
+      districtFlair: "stone terraces",
+      disciplineTag: "scholar",
     });
     expect(rendered).toContain("Elira carried a Elf banner");
     expect(rendered).toContain("mage");
@@ -49,6 +53,10 @@ describe("backstory helpers", () => {
     expect(rendered).toContain("Archivist Neral");
     expect(rendered).toContain("scribe");
     expect(rendered).toContain("ledger fire");
+    expect(rendered).toContain("Harbor Archivist");
+    expect(rendered).toContain("guiding the tide vault");
+    expect(rendered).toContain("stone terraces");
+    expect(rendered).toContain("scholar");
   });
 
   it("renders extended character metadata with plural-aware verbs", () => {
@@ -167,10 +175,14 @@ describe("backstory helpers", () => {
 
     expect(character.backstoryId).toBe("backstory_waves_break_tideward_1");
     expect(character.backstory?.biographyParagraphs?.length).toBe(4);
-    expect(character.backstory?.biographyParagraphs?.[0]).toMatch(/tide charts/i);
+    expect(character.backstory?.biographyParagraphs?.[0]).toMatch(/patrol rotations/i);
+    expect(character.backstory?.biographyParagraphs?.[0]).not.toMatch(/tide charts/i);
     expect(character.spawnDistrict).toBe("Greensoul Hill");
     expect(character.backstory?.spawnDistrict).toBe("Greensoul Hill");
     expect(character.backstory?.biography).toContain("Greensoul Hill");
+    expect(character.backstory?.hook).toBe("Harbor Archivist");
+    expect(character.backstory?.hookDetail).toMatch(/signal crews/i);
+    expect(character.backstory?.districtFlair).toMatch(/garrison yards/i);
     expect(character.backstory?.raceCadence).toMatch(/Crowded wards/i);
     expect(character.backstory?.trainingPhilosophy).toMatch(/sunrise drill/i);
     expect(character.backstory?.alignmentReflection).toMatch(/still weighs/i);
@@ -182,6 +194,10 @@ describe("backstory helpers", () => {
     expect(character.backstory?.biographyParagraphs?.[3]).toMatch(/still wonders/i);
     expect(character.raceCadence).toEqual(character.backstory?.raceCadence);
     expect(character.trainingPhilosophy).toEqual(character.backstory?.trainingPhilosophy);
+    expect(character.hook).toEqual(character.backstory?.hook);
+    expect(character.hookDetail).toEqual(character.backstory?.hookDetail);
+    expect(character.districtFlair).toEqual(character.backstory?.districtFlair);
+    expect(character.disciplineTag).toEqual(character.backstory?.disciplineTag);
   });
 
   it("ensures an instance can be rebuilt from an id", () => {

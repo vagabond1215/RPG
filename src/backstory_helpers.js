@@ -214,13 +214,6 @@ function resolveRaceCadence(backstory, character, overrides = {}) {
   return renderBackstoryTextForCharacter(template, character, contextOverrides);
 }
 
-function resolveSpawnDistrict(backstory, character) {
-  const existing = character?.spawnDistrict;
-  if (existing) return existing;
-  const districts = Array.isArray(backstory?.spawnDistricts) ? backstory.spawnDistricts : [];
-  return districts[0] || "";
-}
-
 function coalesce(...values) {
   for (const value of values) {
     if (value !== undefined && value !== null) {
@@ -228,6 +221,403 @@ function coalesce(...values) {
     }
   }
   return undefined;
+}
+
+const CLASS_DISCIPLINE_RULES = [
+  { key: "maritime", patterns: [/pirate/i, /corsair/i, /raider/i, /sailor/i, /captain/i, /navigator/i, /boatswain/i, /privateer/i, /harpoon/i] },
+  { key: "scholar", patterns: [/wizard/i, /mage/i, /sorcerer/i, /sage/i, /scholar/i, /alchemist/i, /artificer/i, /engineer/i, /scribe/i, /arcanist/i, /psion/i, /loremaster/i, /occultist/i, /chronomancer/i] },
+  { key: "devout", patterns: [/cleric/i, /priest/i, /acolyte/i, /oracle/i, /templar/i, /monk/i, /paladin/i, /inquisitor/i, /prophet/i, /cantor/i] },
+  { key: "outdoors", patterns: [/ranger/i, /scout/i, /hunter/i, /tracker/i, /pathfinder/i, /druid/i, /forager/i, /warden/i, /nomad/i] },
+  { key: "rogue", patterns: [/rogue/i, /thief/i, /assassin/i, /smuggler/i, /spy/i, /shadow/i, /cutpurse/i, /swashbuckler/i, /trickster/i, /vagabond/i, /bard/i] },
+  { key: "martial", patterns: [/fighter/i, /warrior/i, /barbarian/i, /knight/i, /samurai/i, /soldier/i, /guardian/i, /mercenary/i, /legion/i, /berserker/i, /champion/i, /gladiator/i, /sentinel/i, /duelist/i, /lancer/i] },
+  { key: "artisan", patterns: [/artisan/i, /smith/i, /brewer/i, /cook/i, /craft/i, /tinker/i, /wright/i, /mason/i, /herbalist/i, /apothecary/i, /alchemist/i] },
+];
+
+const BACKSTORY_HOOK_LIBRARY = {
+  backstory_waves_break_tideward_1: {
+    label: "Harbor Archivist",
+    defaultDistrict: "Greensoul Hill",
+    baseHookDetail: "keeping the watch on speaking terms with the Tidewall bells",
+    baseDistrictFlair: "weathered seawalls and lantern masts rattling above the quay",
+    baseExtras: [
+      "Neighbors still call {shortName} the {hook} whenever a squall leans against the harbor gates.",
+    ],
+    disciplineFlavors: {
+      maritime: {
+        district: "Port District",
+        hookDetail: "reading tide boards aloud for skippers whenever the sky turned iron",
+        districtFlair: "lantern-strung docks where crews trade weather wagers",
+        extra: [
+          "Dock captains still slip {shortName} salt-stained charts, trusting the {hook} more than any brass barometer.",
+        ],
+      },
+      scholar: {
+        district: "Upper Ward",
+        hookDetail: "decoding the Tidewall's ciphered ledgers faster than the vault archivists",
+        districtFlair: "observatory balconies humming with brass tide instruments",
+        extra: [
+          "Archivists summon the {hook} whenever a navigational proof refuses tidy arithmetic.",
+        ],
+      },
+      martial: {
+        district: "Greensoul Hill",
+        hookDetail: "drilling signal crews until patrols could march by the bells alone",
+        districtFlair: "garrison yards and signal horns echoing over the ridge",
+        replacements: [
+          { pattern: /tide charts/gi, replace: "patrol rotations" },
+          { pattern: /guild ledgers/gi, replace: "watch rosters" },
+        ],
+        extra: [
+          "Sergeants still mutter that the {hook} feels a weather turn before the horns sound.",
+        ],
+      },
+      rogue: {
+        district: "Port District",
+        hookDetail: "timing smugglers' lantern codes so the watch always missed the handoff",
+        districtFlair: "shadowed piers trading in half-whistled passwords",
+        replacements: [
+          { pattern: /tide charts/gi, replace: "smugglers' lantern codes" },
+          { pattern: /guild ledgers/gi, replace: "ledger margins where bribes lived" },
+        ],
+        extra: [
+          "Fence brokers whisper that the {hook} can hear a false harbor bell a street away.",
+        ],
+      },
+      outdoors: {
+        district: "Port District",
+        hookDetail: "plotting tides for marsh scouts slipping between patrol routes",
+        districtFlair: "bog-sweet breezes rolling over the harbor wetlands",
+        replacements: [{ pattern: /tide charts/gi, replace: "tide crossings" }],
+        extra: [
+          "Wardens swear the {hook} can sense a riptide before ${pronoun.subject} even sees whitecaps on the bay.",
+        ],
+      },
+      artisan: {
+        district: "Greensoul Hill",
+        hookDetail: "keeping harbor scribes honest about which bells the watch should obey",
+        districtFlair: "stone terraces where patrol flags snap in the saltwind",
+        replacements: [
+          { pattern: /tide charts/gi, replace: "watch schedules" },
+          { pattern: /guild ledgers/gi, replace: "dockyard ledgers" },
+        ],
+      },
+      default: {
+        district: "Greensoul Hill",
+        hookDetail: "keeping harbor scribes honest about which bells the watch should obey",
+        districtFlair: "stone terraces where patrol flags snap in the saltwind",
+        replacements: [
+          { pattern: /tide charts/gi, replace: "watch schedules" },
+          { pattern: /guild ledgers/gi, replace: "city ledgers" },
+        ],
+      },
+    },
+  },
+  backstory_coral_keep_athenaeum_1: {
+    label: "Athenaeum Scholar",
+    defaultDistrict: "The South Docks & Steel Docks",
+    baseHookDetail: "keeping the Auric stacks aligned with every edict from the crown",
+    baseDistrictFlair: "crystal spires reflecting sea-light into the study halls",
+    baseExtras: [
+      "The Auric Athenaeum staff still defer to the {hook} when research drifts toward the forbidden stacks.",
+    ],
+    disciplineFlavors: {
+      scholar: {
+        district: "The South Docks & Steel Docks",
+        hookDetail: "deciphering doctrine for battlemages stationed above the docks",
+        districtFlair: "armored cloisters ringing with chimes and lecture bells",
+        extra: [
+          "Students race to reserve a desk when the {hook} promises to annotate a lecture.",
+        ],
+      },
+      martial: {
+        district: "The Military Ward",
+        hookDetail: "translating battle diagrams into drills the garrison could actually execute",
+        districtFlair: "marching courts lined with etched tactical reliefs",
+        replacements: [
+          { pattern: /lecture balconies/gi, replace: "drill terraces" },
+          { pattern: /archivists/gi, replace: "tacticians" },
+          { pattern: /Auric Athenaeum/gi, replace: "Auric war archives" },
+        ],
+        extra: [
+          "Commanders keep the {hook} on retainer whenever campaign briefs threaten to drown in jargon.",
+        ],
+      },
+      maritime: {
+        district: "The South Docks & Steel Docks",
+        hookDetail: "indexing shipwright schematics so flotillas could launch on dawn's first bell",
+        districtFlair: "forge piers where hammer-sparks mingle with harbor mist",
+        replacements: [
+          { pattern: /lecture balconies/gi, replace: "shipwright gantries" },
+          { pattern: /archivists/gi, replace: "dockmasters" },
+        ],
+        extra: [
+          "Dock engineers still haul the {hook} to drydocks when a hull problem needs someone who can quote the archives.",
+        ],
+      },
+      rogue: {
+        district: "The South Docks & Steel Docks",
+        hookDetail: "slipping embargoed treatises to information brokers before the censor could blink",
+        districtFlair: "sealed basements trading in coded theses and contraband schematics",
+        replacements: [
+          { pattern: /archivists/gi, replace: "scribes and whisper brokers" },
+        ],
+        extra: [
+          "Informants whisper that the {hook} can find a redacted line faster than any royal inspector.",
+        ],
+      },
+      devout: {
+        district: "The Military Ward",
+        hookDetail: "balancing doctrine scrolls with field liturgies for the chaplain corps",
+        districtFlair: "incense-laced chapels tucked beneath the Athenaeum's cloisters",
+        replacements: [
+          { pattern: /archivists/gi, replace: "chaplains" },
+        ],
+        extra: [
+          "Procession leaders still consult the {hook} when a sermon must march in lockstep with the guard.",
+        ],
+      },
+      outdoors: {
+        district: "The South Docks & Steel Docks",
+        hookDetail: "charting wind drafts so gryphon scouts could ride the thermals cleanly",
+        districtFlair: "skybridges lashed with signal flags over the steelworks",
+        replacements: [
+          { pattern: /lecture balconies/gi, replace: "skybridges" },
+        ],
+      },
+      artisan: {
+        district: "The South Docks & Steel Docks",
+        hookDetail: "calibrating furnace diagrams for armorers who never set foot in the archive",
+        districtFlair: "heat-hazed halls stacked with etched steel tablets",
+        replacements: [
+          { pattern: /archivists/gi, replace: "guild scribes" },
+        ],
+      },
+      default: {
+        district: "The South Docks & Steel Docks",
+        hookDetail: "keeping civic decrees synchronized with the Athenaeum ledgers",
+        districtFlair: "crystal towers mirrored in the tidal flats",
+      },
+    },
+  },
+  backstory_warm_springs_forge_1: {
+    label: "Steamward Acolyte",
+    defaultDistrict: "Shrine Terrace",
+    baseHookDetail: "tending the vents that keep the terraces from boiling over",
+    baseDistrictFlair: "mineral clouds curling through prayer gardens",
+    baseExtras: [
+      "Pilgrims still trust the {hook} to judge when the springs can spare another blessing.",
+    ],
+    disciplineFlavors: {
+      devout: {
+        district: "Shrine Terrace",
+        hookDetail: "leading sunrise liturgies timed to the breath of the vents",
+        districtFlair: "stone basins ringing as geysers answer each hymn",
+        extra: [
+          "Temple elders save the most delicate rites for the {hook}'s steady cadence.",
+        ],
+      },
+      artisan: {
+        district: "Steamward Market",
+        hookDetail: "channeling steamflow to keep forge hammers and bathhouses balanced",
+        districtFlair: "coilwork stalls dripping with condensed heat",
+        replacements: [
+          { pattern: /hymns/gi, replace: "work songs" },
+          { pattern: /chants/gi, replace: "hammer rhythms" },
+        ],
+        extra: [
+          "Guild ventmasters still offer the {hook} first pick of alloy orders when pressures spike.",
+        ],
+      },
+      martial: {
+        district: "Steamward Market",
+        hookDetail: "cycling the barracks baths so soldiers marched out limbered and ready",
+        districtFlair: "training yards rimmed with steaming troughs",
+        replacements: [
+          { pattern: /chants/gi, replace: "drills" },
+          { pattern: /Temple elders/gi, replace: "Watch captains" },
+        ],
+        extra: [
+          "Captains still ask the {hook} to pace recovery shifts between long campaigns.",
+        ],
+      },
+      scholar: {
+        district: "Shrine Terrace",
+        hookDetail: "noting mineral compositions so healers could prescribe the right steam",
+        districtFlair: "ledgered baths catalogued by alchemical sigils",
+        replacements: [
+          { pattern: /chants/gi, replace: "recitations" },
+        ],
+        extra: [
+          "Herbalists court the {hook} for data whenever a new infusion is tested.",
+        ],
+      },
+      rogue: {
+        district: "Steamward Market",
+        hookDetail: "guiding clandestine meetings through fog-thick alleys without a single watcher noticing",
+        districtFlair: "steam-veiled stalls where whispers travel faster than coin",
+        replacements: [
+          { pattern: /chants/gi, replace: "signals" },
+        ],
+        extra: [
+          "Couriers swear the {hook} can vanish into a plume before a guard even coughs.",
+        ],
+      },
+      outdoors: {
+        district: "Shrine Terrace",
+        hookDetail: "reading the terraces' mineral bloom to predict how the valley breathes",
+        districtFlair: "terraced pools overflowing into fern-fed ravines",
+      },
+      default: {
+        district: "Shrine Terrace",
+        hookDetail: "keeping the geysers steady enough that merchants and pilgrims both felt welcome",
+        districtFlair: "stone colonnades awash in warm mist",
+      },
+    },
+  },
+  backstory_creekside_whisper_1: {
+    label: "Canal Whisper",
+    defaultDistrict: "Perfumer's Row",
+    baseHookDetail: "keeping shrineboats trading in favors instead of coin",
+    baseDistrictFlair: "night-blooming jasmine threading every canal",
+    baseExtras: [
+      "Boatmen still drop their oars when the {hook} raises a hand along the quay.",
+    ],
+    disciplineFlavors: {
+      rogue: {
+        district: "Lantern Quay",
+        hookDetail: "trading coded knocks that kept the canal peace stitched together",
+        districtFlair: "lantern-lit barges drifting between painted shrines",
+        extra: [
+          "Canal wardens whisper that the {hook} can name who crossed a bridge simply from the ripples left behind.",
+        ],
+      },
+      artisan: {
+        district: "Perfumer's Row",
+        hookDetail: "matching scent shipments with the river's moods so nothing spoiled",
+        districtFlair: "hanging distilleries fogging the alleys with exotic notes",
+        replacements: [
+          { pattern: /reed flutes/gi, replace: "glass stills" },
+          { pattern: /spirits who preferred wit over coin/gi, replace: "merchants who trusted craft over coin" },
+        ],
+        extra: [
+          "Perfumers still press sealed phials into the {hook}'s hands before festival nights.",
+        ],
+      },
+      scholar: {
+        district: "Riddle-Market Canals",
+        hookDetail: "mapping rumor routes through the canals faster than any courier",
+        districtFlair: "question-sellers debating beside puzzle bridges",
+        replacements: [
+          { pattern: /reed flutes/gi, replace: "cipher wheels" },
+        ],
+        extra: [
+          "Archivists send riddles downstream just to see how the {hook} will answer.",
+        ],
+      },
+      devout: {
+        district: "Lantern Quay",
+        hookDetail: "leading vigil boats through moonlit offerings without disturbing a single ripple",
+        districtFlair: "glow-shrines mirrored in the blackwater",
+        replacements: [
+          { pattern: /spirits who preferred wit over coin/gi, replace: "river spirits who favored humble prayers" },
+        ],
+        extra: [
+          "Priests still ask the {hook} to set the pace whenever a procession leaves the quay.",
+        ],
+      },
+      outdoors: {
+        district: "Riddle-Market Canals",
+        hookDetail: "charting reed mazes that smugglers and wardens both rely on",
+        districtFlair: "fog-silk rafts gliding between willow shadows",
+        extra: [
+          "River scouts swear the {hook} can read the current like a book margin.",
+        ],
+      },
+      maritime: {
+        district: "Lantern Quay",
+        hookDetail: "teaching barge crews which eddies will flip a keel in storm season",
+        districtFlair: "mossy pilings studded with carved warding charms",
+        extra: [
+          "Pilots still tap the {hook}'s shoulder before dawn departures.",
+        ],
+      },
+      default: {
+        district: "Perfumer's Row",
+        hookDetail: "keeping the canal's many favors ledgered in whispers instead of ink",
+        districtFlair: "hushed arcades draped in festival silks",
+      },
+    },
+  },
+};
+
+function detectCharacterDiscipline(character = {}) {
+  const parts = [character.class, character.background, character.profession, character.occupation]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  if (!parts) return "default";
+  for (const rule of CLASS_DISCIPLINE_RULES) {
+    if (rule.patterns.some(pattern => pattern.test(parts))) {
+      return rule.key;
+    }
+  }
+  return "default";
+}
+
+function applyHookReplacements(paragraphs = [], replacements = []) {
+  if (!Array.isArray(paragraphs) || !Array.isArray(replacements) || !replacements.length) {
+    return paragraphs;
+  }
+  return paragraphs.map((text, index, all) => {
+    let updated = text;
+    for (const entry of replacements) {
+      if (!entry?.pattern) continue;
+      const target = entry.target || "all";
+      if (target === "first" && index !== 0) continue;
+      if (target === "last" && index !== all.length - 1) continue;
+      updated = updated.replace(entry.pattern, entry.replace);
+    }
+    return updated;
+  });
+}
+
+function buildHookPersonalization({
+  paragraphs,
+  hookConfig,
+  flavor,
+  character,
+  overrides,
+}) {
+  if (!hookConfig) {
+    return { paragraphs, hookDetail: undefined, districtFlair: undefined };
+  }
+  const applied = applyHookReplacements(paragraphs, [
+    ...(hookConfig.commonReplacements || []),
+    ...((flavor && flavor.replacements) || []),
+  ]);
+
+  const hookDetail = flavor?.hookDetail || hookConfig.baseHookDetail || overrides.hookDetail;
+  const districtFlair = flavor?.districtFlair || hookConfig.baseDistrictFlair || overrides.districtFlair;
+  const extras = [
+    ...((hookConfig.baseExtras || [])),
+    ...((flavor && flavor.extra) || []),
+  ];
+  if (extras.length) {
+    const extraContext = {
+      ...overrides,
+      hook: flavor?.label || hookConfig.label,
+      hookDetail,
+      districtFlair,
+    };
+    const renderedExtras = extras
+      .map(template => renderBackstoryTextForCharacter(template, character, extraContext))
+      .filter(Boolean)
+      .join(" ");
+    if (renderedExtras) {
+      applied[0] = `${applied[0]} ${renderedExtras}`.replace(/\s+/g, " ").trim();
+    }
+  }
+  return { paragraphs: applied, hookDetail, districtFlair };
 }
 
 function determineIsGroupEntity(character = {}, overrides = {}) {
@@ -281,6 +671,28 @@ export function renderBackstoryTextForCharacter(text, character, overrides = {})
     character?.group_name,
     character?.collectiveName
   );
+  const hookLabel = coalesce(overrides.hook, character?.hook, character?.backstory?.hook);
+  const hookDetail = coalesce(
+    overrides.hookDetail,
+    overrides.hook_detail,
+    character?.hookDetail,
+    character?.hook_detail,
+    character?.backstory?.hookDetail
+  );
+  const districtFlair = coalesce(
+    overrides.districtFlair,
+    overrides.district_flair,
+    character?.districtFlair,
+    character?.district_flair,
+    character?.backstory?.districtFlair
+  );
+  const disciplineTag = coalesce(
+    overrides.disciplineTag,
+    overrides.discipline_tag,
+    character?.disciplineTag,
+    character?.discipline_tag,
+    character?.backstory?.disciplineTag
+  );
   const isGroupEntity = determineIsGroupEntity(character, overrides);
   const context = {
     characterName: character?.name,
@@ -316,6 +728,13 @@ export function renderBackstoryTextForCharacter(text, character, overrides = {})
     notable_event: notableEvent,
     groupName,
     group_name: groupName,
+    hook: hookLabel,
+    hookDetail,
+    hook_detail: hookDetail,
+    districtFlair,
+    district_flair: districtFlair,
+    disciplineTag,
+    discipline_tag: disciplineTag,
     isGroup: isGroupEntity,
     isPluralEntity: overrides.isPluralEntity ?? character?.isPluralEntity ?? isGroupEntity,
     groupSize: overrides.groupSize ?? character?.groupSize,
@@ -330,10 +749,28 @@ export function renderBackstoryTextForCharacter(text, character, overrides = {})
 
 export function buildBackstoryInstance(backstory, character) {
   if (!backstory) return null;
-  const spawnDistrict = character?.spawnDistrict || resolveSpawnDistrict(backstory, character);
+  const hookConfig = BACKSTORY_HOOK_LIBRARY[backstory.id];
+  const discipline = detectCharacterDiscipline(character);
+  const flavor =
+    hookConfig?.disciplineFlavors?.[discipline] ||
+    hookConfig?.disciplineFlavors?.default ||
+    null;
+  const availableDistricts = Array.isArray(backstory?.spawnDistricts)
+    ? backstory.spawnDistricts.filter(Boolean)
+    : [];
+  let spawnDistrict =
+    flavor?.district ||
+    character?.spawnDistrict ||
+    availableDistricts[0] ||
+    "";
   const narrativeDefaults = gatherNarrativeDefaults(character, { spawnDistrict });
   const pronouns = getPronouns(character?.sex);
   const requiredReady = hasRequiredBackstoryInputs(character);
+
+  let hookLabel = flavor?.label || hookConfig?.label || "";
+  let hookDetail = flavor?.hookDetail || hookConfig?.baseHookDetail || "";
+  let districtFlair = flavor?.districtFlair || hookConfig?.baseDistrictFlair || "";
+  let disciplineTag = flavor?.disciplineTag || discipline;
 
   const baseOverrides = {
     spawnDistrict,
@@ -345,6 +782,10 @@ export function buildBackstoryInstance(backstory, character) {
     bond: narrativeDefaults.bond,
     secret: narrativeDefaults.secret,
     backstorySeed: narrativeDefaults.backstorySeed,
+    hook: hookLabel,
+    hookDetail,
+    districtFlair,
+    disciplineTag,
   };
 
   let raceCadence = "";
@@ -396,6 +837,21 @@ export function buildBackstoryInstance(backstory, character) {
       combineBeat(beats.lingeringRumor, rumorEcho),
     ];
 
+    const personalization = buildHookPersonalization({
+      paragraphs: biographyParagraphs,
+      hookConfig,
+      flavor,
+      character,
+      overrides: sharedOverrides,
+    });
+    biographyParagraphs = personalization.paragraphs;
+    if (personalization.hookDetail) hookDetail = personalization.hookDetail;
+    if (personalization.districtFlair) districtFlair = personalization.districtFlair;
+    sharedOverrides.hookDetail = hookDetail;
+    sharedOverrides.districtFlair = districtFlair;
+    baseOverrides.hookDetail = hookDetail;
+    baseOverrides.districtFlair = districtFlair;
+
     biographyParagraphs = postProcessParagraphs(biographyParagraphs, {
       fullName: character?.name,
       shortName: narrativeDefaults.shortName,
@@ -428,6 +884,10 @@ export function buildBackstoryInstance(backstory, character) {
     biography,
     biographyParagraphs,
     spawnDistrict,
+    hook: hookLabel,
+    hookDetail,
+    districtFlair,
+    disciplineTag,
     raceCadence,
     trainingPhilosophy,
     alignmentReflection,
@@ -474,6 +934,10 @@ export function applyBackstoryLoadout(character, backstory, options = {}) {
     character.trainingPhilosophy = instance.trainingPhilosophy;
     character.alignmentReflection = instance.alignmentReflection;
     character.rumorEcho = instance.rumorEcho;
+    character.hook = instance.hook;
+    character.hookDetail = instance.hookDetail;
+    character.districtFlair = instance.districtFlair;
+    character.disciplineTag = instance.disciplineTag;
   }
   return character;
 }
