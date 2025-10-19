@@ -13995,13 +13995,6 @@ function startCharacterCreation() {
     options: Object.keys(LOCATIONS).filter(l => l !== 'Duvilia Kingdom')
   };
 
-  const districtField = {
-    key: 'spawnDistrict',
-    label: 'Choose your district',
-    type: 'select',
-    options: []
-  };
-
   const backstoryField = {
     key: 'backstory',
     label: 'Choose your backstory',
@@ -14038,8 +14031,7 @@ function startCharacterCreation() {
     sex: 'Sex',
     class: 'Class',
     alignment: 'Alignment',
-    characterImage: 'Character',
-    spawnDistrict: 'District'
+    characterImage: 'Character'
   };
 
   let step = saved.step || 0;
@@ -14098,6 +14090,44 @@ function startCharacterCreation() {
         </div>
       </div>
     `;
+  };
+
+  const clearBackstorySelection = () => {
+    if (!character || typeof character !== 'object') return false;
+    const removableKeys = [
+      'backstoryId',
+      'backstory',
+      'raceDescription',
+      'classAlignmentInsert',
+      'alignmentMemory',
+      'emberHook',
+      'classAngleSummary',
+      'raceCadence',
+      'trainingPhilosophy',
+      'alignmentReflection',
+      'rumorEcho',
+      'spawnDistrict'
+    ];
+    let changed = false;
+    for (const key of removableKeys) {
+      if (Object.prototype.hasOwnProperty.call(character, key)) {
+        delete character[key];
+        changed = true;
+      }
+    }
+    return changed;
+  };
+
+  const syncBackstoryInstanceFields = instance => {
+    if (!instance || typeof instance !== 'object') return;
+    character.backstory = instance;
+    character.backstoryId = instance.id;
+    if (instance.spawnDistrict) character.spawnDistrict = instance.spawnDistrict;
+    else if (Object.prototype.hasOwnProperty.call(character, 'spawnDistrict')) delete character.spawnDistrict;
+    character.raceCadence = instance.raceCadence;
+    character.trainingPhilosophy = instance.trainingPhilosophy;
+    character.alignmentReflection = instance.alignmentReflection;
+    character.rumorEcho = instance.rumorEcho;
   };
 
   const resetCharacterCreationState = () => {
@@ -14167,13 +14197,12 @@ function startCharacterCreation() {
     const activeFields = fields.filter(
       f => !f.races || f.races.includes(character.race)
     );
-    if (step > activeFields.length + 3) step = activeFields.length + 3;
+    if (step > activeFields.length + 2) step = activeFields.length + 2;
 
     let field;
     if (step < activeFields.length) field = activeFields[step];
     else if (step === activeFields.length + 1) field = locationField;
-    else if (step === activeFields.length + 2) field = districtField;
-    else if (step === activeFields.length + 3) field = backstoryField;
+    else if (step === activeFields.length + 2) field = backstoryField;
     if (field && field.key === 'race' && !character.race) {
       character.race = field.options[0];
       persistState();
@@ -14184,25 +14213,6 @@ function startCharacterCreation() {
     }
     if (field && field.key === 'location' && !character.location) {
       character.location = locationField.options[0];
-      persistState();
-    }
-    const locationBackstories = character.location
-      ? getBackstoriesForLocation(character.location, {})
-      : [];
-    const districtSet = new Set();
-    locationBackstories.forEach(entry => {
-      (entry.spawnDistricts || []).forEach(district => {
-        if (district) districtSet.add(district);
-      });
-    });
-    districtField.options = Array.from(districtSet);
-    if (districtField.options.length) {
-      if (!character.spawnDistrict || !districtField.options.includes(character.spawnDistrict)) {
-        character.spawnDistrict = districtField.options[0];
-        persistState();
-      }
-    } else if (character.spawnDistrict) {
-      delete character.spawnDistrict;
       persistState();
     }
     if (typeof character.givenName !== 'string') {
@@ -14244,38 +14254,78 @@ function startCharacterCreation() {
       character.sex &&
       character.class &&
       character.alignment &&
-      character.location &&
-      character.spawnDistrict
+      character.location
     );
     const availableBackstories = backstoryPrerequisitesMet
       ? getBackstoriesForLocation(character.location, {
           race: character.race,
           className: character.class,
           alignment: character.alignment,
-          spawnDistrict: character.spawnDistrict,
         })
       : [];
-    const narrativeBiography = backstoryPrerequisitesMet
-      ? generateNarrativeBiography(character, {
-          locationOrigin: character.location,
-          spawnDistrict: character.spawnDistrict,
-        })
-      : null;
-    if (field && field.key === 'backstory') {
-      if (!backstoryPrerequisitesMet || !availableBackstories.length) {
-        if (character.backstory) {
-          character.backstory = null;
+
+    if (!backstoryPrerequisitesMet || !availableBackstories.length) {
+      if (clearBackstorySelection()) {
+        persistState();
+      }
+    } else {
+      const validIds = availableBackstories.map(entry => entry?.id).filter(Boolean);
+      let targetId = character.backstoryId && validIds.includes(character.backstoryId)
+        ? character.backstoryId
+        : validIds[0];
+      if (!targetId) {
+        if (clearBackstorySelection()) {
           persistState();
         }
-      } else if (!character.backstory) {
-        character.backstory = availableBackstories[0].id;
-        persistState();
+      } else {
+        const selectedEntry = availableBackstories.find(entry => entry?.id === targetId);
+        if (!selectedEntry) {
+          if (clearBackstorySelection()) {
+            persistState();
+          }
+        } else if (
+          character.backstoryId !== targetId ||
+          !character.backstory ||
+          character.backstory.id !== targetId
+        ) {
+          applyBackstoryLoadout(character, selectedEntry, { reset: true });
+          persistState();
+        } else {
+          const refreshedInstance = buildBackstoryInstance(selectedEntry, character);
+          const previous = character.backstory;
+          const hasChanged =
+            !previous ||
+            previous.biography !== refreshedInstance.biography ||
+            previous.title !== refreshedInstance.title ||
+            previous.spawnDistrict !== refreshedInstance.spawnDistrict;
+          syncBackstoryInstanceFields(refreshedInstance);
+          if (hasChanged) {
+            persistState();
+          }
+        }
       }
     }
 
+    const narrativeBiography = backstoryPrerequisitesMet
+      ? generateNarrativeBiography(character, {
+          locationOrigin: character.location,
+          spawnDistrict: character.backstory?.spawnDistrict || character.spawnDistrict,
+        })
+      : null;
+
+    const availableBackstoryInstances = backstoryPrerequisitesMet
+      ? availableBackstories.map(entry => ({
+          entry,
+          instance:
+            character.backstory && character.backstory.id === entry?.id
+              ? character.backstory
+              : buildBackstoryInstance(entry, character),
+        }))
+      : [];
+
     const stepLabels = activeFields
       .map(f => FIELD_STEP_LABELS[f.key])
-      .concat(['Name', 'Location', 'District', 'Backstory']);
+      .concat(['Name', 'Location', 'Backstory']);
     const isFieldComplete = field => {
       if (!field) return true;
       if (field.key === 'characterImage') {
@@ -14290,7 +14340,7 @@ function startCharacterCreation() {
     const isBackstoryComplete = () =>
       !backstoryPrerequisitesMet || availableBackstories.length === 0
         ? backstoryPrerequisitesMet
-        : Boolean(character.backstory);
+        : Boolean(character.backstoryId);
     const isComplete = () =>
       activeFields.every(isFieldComplete) &&
       hasCompleteName() &&
@@ -14308,8 +14358,6 @@ function startCharacterCreation() {
               ? hasCompleteName()
               : i === activeFields.length + 1
               ? Boolean(character.location)
-              : i === activeFields.length + 2
-              ? Boolean(character.spawnDistrict)
               : isBackstoryComplete();
           let cls = isBackstoryStep && !backstoryPrerequisitesMet ? 'locked' : 'clickable';
           if (i === step) cls = isBackstoryStep && !backstoryPrerequisitesMet ? 'locked current' : 'current clickable';
@@ -14340,47 +14388,46 @@ function startCharacterCreation() {
         return { descHTML };
       }
       if (field && field.key === 'backstory') {
-      if (!backstoryPrerequisitesMet) {
-        return {
-          descHTML:
-            '<div class="race-description"><p class="cc-backstory-locked">Select a name, race, sex, class, alignment, starting location, and district to unlock curated backstories.</p></div>'
-        };
+        if (!backstoryPrerequisitesMet) {
+          return {
+            descHTML:
+              '<div class="race-description"><p class="cc-backstory-locked">Select a name, race, sex, class, alignment, and starting location to unlock curated backstories.</p></div>'
+          };
+        }
+        if (!availableBackstories.length) {
+          const locationLabel = character.location
+            ? escapeHtml(character.location)
+            : 'this location';
+          const biographySection = renderNarrativeBiographyPreview(narrativeBiography);
+          const message = `<p class="cc-backstory-note">No curated backstories match the current choices for ${locationLabel} yet.</p>`;
+          return {
+            descHTML: `<div class="race-description">${biographySection || ''}${message}</div>`
+          };
+        }
+        const selectedInstance = character.backstory && character.backstory.id
+          ? character.backstory
+          : availableBackstoryInstances[0]?.instance;
+        if (selectedInstance) {
+          const biographySection = renderNarrativeBiographyPreview(narrativeBiography);
+          const curatedParagraphs = (selectedInstance.biographyParagraphs || [])
+            .map(text => `<p>${escapeHtml(text)}</p>`)
+            .join('');
+          const curatedSection = `
+            <section class="cc-backstory-preview">
+              <h4 class="cc-backstory-heading">Curated Backstory Preview</h4>
+              <h3>${escapeHtml(selectedInstance.title)}</h3>
+              ${curatedParagraphs}
+            </section>
+          `;
+          const descHTML = `
+            <div class="race-description">
+              ${biographySection || ''}
+              ${curatedSection}
+            </div>
+          `;
+          return { descHTML };
+        }
       }
-      if (!availableBackstories.length) {
-        const locationLabel = character.location
-          ? escapeHtml(character.location)
-          : 'this location';
-        const biographySection = renderNarrativeBiographyPreview(narrativeBiography);
-        const message = `<p class="cc-backstory-note">No curated backstories match the current choices for ${locationLabel} yet.</p>`;
-        return {
-          descHTML: `<div class="race-description">${biographySection || ''}${message}</div>`
-        };
-      }
-      const builtEntries = availableBackstories.map(entry => buildBackstoryInstance(entry, character));
-      const selected = character.backstory
-        ? builtEntries.find(item => item.id === character.backstory) || builtEntries[0]
-        : builtEntries[0];
-      if (selected) {
-        const biographySection = renderNarrativeBiographyPreview(narrativeBiography);
-        const curatedParagraphs = selected.biographyParagraphs
-          .map(text => `<p>${escapeHtml(text)}</p>`)
-          .join('');
-        const curatedSection = `
-          <section class="cc-backstory-preview">
-            <h4 class="cc-backstory-heading">Curated Backstory Preview</h4>
-            <h3>${escapeHtml(selected.title)}</h3>
-            ${curatedParagraphs}
-          </section>
-        `;
-        const descHTML = `
-          <div class="race-description">
-            ${biographySection || ''}
-            ${curatedSection}
-          </div>
-        `;
-        return { descHTML };
-      }
-    }
       if (field && field.key === 'class' && character.class) {
         const build = buildEntries.find(b => b.primary === character.class);
         if (!build) return {};
@@ -14475,22 +14522,6 @@ function startCharacterCreation() {
             arrowClass: 'class-arrow',
             contentHTML: `<button class="option-button class-button">${character.class}</button>`,
           });
-        } else if (field.key === 'spawnDistrict') {
-          const options = districtField.options;
-          if (!options.length) {
-            inputHTML = '<div class="cc-empty-option">Select a location to reveal its districts.</div>';
-          } else {
-            let index = options.indexOf(character.spawnDistrict);
-            if (index === -1) {
-              index = 0;
-              character.spawnDistrict = options[0];
-            }
-            inputHTML = createWheelSelectorTemplate({
-              wrapperClass: 'district-carousel',
-              arrowClass: 'district-arrow',
-              contentHTML: `<button class="option-button district-button">${character.spawnDistrict}</button>`,
-            });
-          }
         } else if (field.key === 'backstory') {
           if (!backstoryPrerequisitesMet) {
             inputHTML = '<div class="cc-empty-option backstory-locked">Complete the required selections above to browse backstories.</div>';
@@ -14501,13 +14532,13 @@ function startCharacterCreation() {
                 character.location || 'this location'
               )} yet.</div>`;
             } else {
-              let index = options.indexOf(character.backstory);
+              let index = options.indexOf(character.backstoryId);
               if (index === -1) {
                 index = 0;
-                character.backstory = options[0];
               }
-              const selectedEntry = availableBackstories[index];
-              const instance = selectedEntry ? buildBackstoryInstance(selectedEntry, character) : null;
+              const selectedId = options[index];
+              const selectedRecord = availableBackstoryInstances.find(({ entry }) => entry?.id === selectedId);
+              const instance = selectedRecord?.instance || character.backstory;
               const summary = narrativeBiography?.summaryHook || instance?.biographyParagraphs?.[0] || '';
               const firstParagraph = Array.isArray(instance?.biographyParagraphs)
                 ? instance.biographyParagraphs.find(text => typeof text === 'string' && text.trim())
@@ -14527,7 +14558,7 @@ function startCharacterCreation() {
                 wrapperClass: 'backstory-carousel',
                 arrowClass: 'backstory-arrow',
                 contentHTML: `<button class="option-button backstory-button" data-value="${escapeHtml(
-                  character.backstory || options[index] || ''
+                  selectedId || options[index] || ''
                 )}" title="${escapeHtml(summary)}">${buttonLabel}</button>`,
               });
             }
@@ -14621,27 +14652,12 @@ function startCharacterCreation() {
         const change = dir => {
           index = (index + dir + options.length) % options.length;
           character.location = options[index];
-          delete character.spawnDistrict;
-          delete character.backstory;
+          clearBackstorySelection();
           persistState();
           renderStep();
         };
         document.querySelector('.loc-arrow.left').addEventListener('click', () => change(-1));
         document.querySelector('.loc-arrow.right').addEventListener('click', () => change(1));
-      } else if (field.key === 'spawnDistrict') {
-        const options = districtField.options;
-        if (options.length) {
-          let index = options.indexOf(character.spawnDistrict);
-          const change = dir => {
-            index = (index + dir + options.length) % options.length;
-            character.spawnDistrict = options[index];
-            delete character.backstory;
-            persistState();
-            renderStep();
-          };
-          document.querySelector('.district-arrow.left').addEventListener('click', () => change(-1));
-          document.querySelector('.district-arrow.right').addEventListener('click', () => change(1));
-        }
       } else if (field.key === 'race') {
         const options = field.options;
         let index = options.indexOf(character.race);
@@ -14651,6 +14667,7 @@ function startCharacterCreation() {
           if (character.race !== 'Cait Sith') delete character.accentColor;
           if (character.race !== 'Salamander') delete character.scaleColor;
           delete character.characterImage;
+          clearBackstorySelection();
           persistState();
           renderStep();
         };
@@ -14663,6 +14680,7 @@ function startCharacterCreation() {
           index = (index + dir + options.length) % options.length;
           character.sex = options[index];
           delete character.characterImage;
+          clearBackstorySelection();
           persistState();
           renderStep();
         };
@@ -14674,6 +14692,7 @@ function startCharacterCreation() {
         const change = dir => {
           index = (index + dir + options.length) % options.length;
           character.class = options[index];
+          clearBackstorySelection();
           persistState();
           renderStep();
         };
@@ -14685,7 +14704,7 @@ function startCharacterCreation() {
             const value = btn.dataset.value;
             if (!value) return;
             character.alignment = value;
-            delete character.backstory;
+            clearBackstorySelection();
             persistState();
             renderStep();
           });
@@ -14694,10 +14713,13 @@ function startCharacterCreation() {
         if (backstoryPrerequisitesMet) {
           const options = availableBackstories.map(b => b?.id).filter(Boolean);
           if (options.length) {
-            let index = options.indexOf(character.backstory);
+            let index = options.indexOf(character.backstoryId);
             const change = dir => {
               index = (index + dir + options.length) % options.length;
-              character.backstory = options[index];
+              const selectedId = options[index];
+              const selectedEntry = availableBackstories.find(entry => entry?.id === selectedId);
+              if (!selectedEntry) return;
+              applyBackstoryLoadout(character, selectedEntry, { reset: true });
               persistState();
               renderStep();
             };
@@ -14952,10 +14974,10 @@ function finalizeCharacter(character) {
     race: character.race,
     className: character.class,
     alignment: character.alignment,
-    spawnDistrict: character.spawnDistrict,
   });
-  const selectedBackstory = character.backstory
-    ? BACKSTORY_BY_ID[character.backstory]
+  const selectedBackstoryId = character.backstoryId || character.backstory?.id;
+  const selectedBackstory = selectedBackstoryId
+    ? BACKSTORY_BY_ID[selectedBackstoryId]
     : undefined;
   const resolvedBackstory = selectedBackstory || (bsList && bsList[0]);
   if (resolvedBackstory) {
