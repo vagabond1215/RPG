@@ -5,7 +5,6 @@ import {
   getRaceCadenceTemplate,
   getPronouns,
   createBiographyBeatContext,
-  chooseBiographyBeatOption,
   registerBiographyBeatTags,
 } from "../data/game/backstories.js";
 import { getAnglesForRaceClass } from "../data/game/race_class_angles.js";
@@ -160,19 +159,102 @@ const ALIGNMENT_REFLECTION_BUILDERS = {
   },
 };
 
-function createAlignmentReflection(context, pronouns, shortName) {
+function createAlignmentReflection(context, pronouns, shortName, selectedBeatText) {
   const builder = ALIGNMENT_REFLECTION_BUILDERS[context.alignment] || ((ctx, pr, sn) => {
     const subject = sn || capitalize(pr.subject);
     const pronounSubject = capitalize(pr.subject);
     return `${subject} brokered a quiet favor using ${ctx.signatureTool}, weighing ${ctx.virtue} against ${ctx.flaw}. ${pronounSubject} still ${selectVerb(pr, "replays", "replay")} the choice whenever whispers of ${ctx.backstorySeed} return.`;
   });
-  return builder(context, pronouns, shortName);
+  const reflection = builder(context, pronouns, shortName);
+  if (!selectedBeatText) {
+    return reflection;
+  }
+  const combined = `${selectedBeatText} ${reflection}`.replace(/\s+/g, " ").trim();
+  return combined || reflection;
 }
 
-function createLingeringRumor(context, pronouns, shortName) {
+function createLingeringRumor(context, pronouns, shortName, selectedBeatText) {
   const subject = shortName || capitalize(pronouns.subject);
   const pronounSubject = capitalize(pronouns.subject);
-  return `Rumors still coil around ${context.backstorySeed}, tucked where ${subject} trusted ${pronouns.possessive} ${context.signatureTool} to hide a promise. ${pronounSubject} still ${selectVerb(pronouns, "wonders", "wonder")} if naming ${context.secret} would heal ${context.bond} or scatter ${context.virtue}.`;
+  const rumor = `Rumors still coil around ${context.backstorySeed}, tucked where ${subject} trusted ${pronouns.possessive} ${context.signatureTool} to hide a promise. ${pronounSubject} still ${selectVerb(pronouns, "wonders", "wonder")} if naming ${context.secret} would heal ${context.bond} or scatter ${context.virtue}.`;
+  if (!selectedBeatText) {
+    return rumor;
+  }
+  const combined = `${selectedBeatText} ${rumor}`.replace(/\s+/g, " ").trim();
+  return combined || rumor;
+}
+
+function normalizeBeatGroups(beat) {
+  if (!beat) return [];
+  if (Array.isArray(beat)) {
+    const containsNested = beat.some(entry => Array.isArray(entry));
+    if (containsNested) {
+      return beat.flatMap(entry => normalizeBeatGroups(entry)).filter(group => group.length);
+    }
+    return [beat.filter(Boolean)];
+  }
+  return [[beat]].filter(group => group.length && group[0]);
+}
+
+function getSelectionStore(character) {
+  if (!character || typeof character !== "object") return {};
+  const existing = character.backstorySelectionIndices || character.backstorySelections;
+  if (existing && typeof existing === "object") {
+    return { ...existing };
+  }
+  const nested = character.backstory && typeof character.backstory === "object" ? character.backstory.selectedBeatIndices : null;
+  if (nested && typeof nested === "object") {
+    return { ...nested };
+  }
+  return {};
+}
+
+function normalizeSelectionValue(value) {
+  if (Array.isArray(value)) {
+    return value.map(entry => (typeof entry === "number" && Number.isInteger(entry) ? entry : null));
+  }
+  if (typeof value === "number" && Number.isInteger(value)) {
+    return [value];
+  }
+  return [];
+}
+
+function updateSelectionStore(store, key, indices) {
+  if (!store) return;
+  if (!Array.isArray(indices)) {
+    store[key] = [];
+    return;
+  }
+  store[key] = indices.map(index => (typeof index === "number" && Number.isInteger(index) ? index : null));
+}
+
+function registerContextTags(beatContextTags, ...sources) {
+  sources.flat().filter(Boolean).forEach(tag => {
+    registerBiographyBeatTags(beatContextTags, [tag]);
+  });
+}
+
+function evaluateBeatGroup(options, contextTags) {
+  if (!Array.isArray(options) || !options.length) return [];
+  return options.map((option, index) => {
+    const normalizedTags = Array.isArray(option?.tags)
+      ? option.tags
+          .map(tag => (typeof tag === "string" || typeof tag === "number" ? String(tag).trim() : ""))
+          .filter(Boolean)
+      : [];
+    const matches = normalizedTags.some(tag => contextTags?.has(tag.toLowerCase().replace(/[^a-z0-9]+/g, "-")));
+    return {
+      index,
+      option,
+      matches,
+      tags: normalizedTags,
+    };
+  });
+}
+
+function renderBeatOption(option, character, overrides) {
+  if (!option) return "";
+  return renderBackstoryTextForCharacter(option.text, character, overrides);
 }
 
 function postProcessParagraphs(paragraphs, context) {
@@ -366,44 +448,130 @@ export function buildBackstoryInstance(backstory, character) {
       narrativeDefaults.shortName
     );
 
+    const sharedOverrides = {
+      ...baseOverrides,
+      raceCadence,
+      trainingPhilosophy,
+    };
+
+    const beats = backstory.biographyBeats || {};
+    const beatContextTags = createBiographyBeatContext(backstory, character, sharedOverrides);
+    registerContextTags(
+      beatContextTags,
+      backstory?.hook,
+      backstory?.availableIn,
+      character?.class,
+      character?.race,
+      character?.alignment,
+      character?.sex
+    );
+
+    const selectionStore = getSelectionStore(character);
+    const beatChoices = {};
+    const selectedBeatIndices = {};
+
+    const selectBeatGroup = (key, beat) => {
+      const groups = normalizeBeatGroups(beat);
+      if (!groups.length) {
+        beatChoices[key] = { groups: [], selectedIndices: [] };
+        selectedBeatIndices[key] = [];
+        return [];
+      }
+
+      const storedSelections = normalizeSelectionValue(selectionStore[key]);
+      const renderedGroups = [];
+      const indices = [];
+      const metadataGroups = [];
+
+      groups.forEach((options, groupIndex) => {
+        if (!Array.isArray(options) || !options.length) {
+          indices[groupIndex] = null;
+          metadataGroups.push({ options: [], selectedIndex: null });
+          return;
+        }
+
+        const evaluated = evaluateBeatGroup(options, beatContextTags);
+        if (!evaluated.length) {
+          indices[groupIndex] = null;
+          metadataGroups.push({ options: [], selectedIndex: null });
+          return;
+        }
+
+        const matching = evaluated.filter(entry => entry.matches);
+        const candidatePool = matching.length ? matching : evaluated;
+
+        let storedIndex = storedSelections[groupIndex];
+        if (storedIndex != null && (!Number.isInteger(storedIndex) || storedIndex < 0 || storedIndex >= evaluated.length)) {
+          storedIndex = null;
+        }
+
+        let selected = storedIndex != null ? evaluated.find(entry => entry.index === storedIndex) : null;
+        if (!selected && storedIndex != null) {
+          selected = evaluated[storedIndex] ? evaluated[storedIndex] : null;
+        }
+        if (!selected) {
+          selected = candidatePool[0] || evaluated[0];
+        }
+
+        const selectedIndex = selected ? selected.index : null;
+        indices[groupIndex] = selectedIndex;
+
+        if (selected?.option?.tags) {
+          registerBiographyBeatTags(beatContextTags, selected.option.tags);
+        }
+
+        const renderedText = selected ? renderBeatOption(selected.option, character, sharedOverrides) : "";
+        if (renderedText) {
+          renderedGroups.push(renderedText);
+        }
+
+        const renderedCandidates = candidatePool.map(entry => ({
+          index: entry.index,
+          matches: entry.matches,
+          tags: entry.tags.slice(),
+          text: renderBeatOption(entry.option, character, sharedOverrides),
+        }));
+
+        metadataGroups.push({ options: renderedCandidates, selectedIndex });
+      });
+
+      updateSelectionStore(selectionStore, key, indices);
+      beatChoices[key] = { groups: metadataGroups, selectedIndices: indices.slice() };
+      selectedBeatIndices[key] = indices.slice();
+      return renderedGroups;
+    };
+
+    const earlyLifeTexts = selectBeatGroup("earlyLife", beats.earlyLife);
+    const trainingTexts = selectBeatGroup("training", beats.training);
+    const moralTestTexts = selectBeatGroup("moralTest", beats.moralTest);
+    const lingeringRumorTexts = selectBeatGroup("lingeringRumor", beats.lingeringRumor);
+
     const alignmentContext = {
       ...narrativeDefaults,
       alignment: character?.alignment,
       spawnDistrict,
     };
-    alignmentReflection = createAlignmentReflection(alignmentContext, pronouns, narrativeDefaults.shortName);
-    rumorEcho = createLingeringRumor(alignmentContext, pronouns, narrativeDefaults.shortName);
 
-    const sharedOverrides = {
-      ...baseOverrides,
-      raceCadence,
-      trainingPhilosophy,
-      alignmentReflection,
-      rumorEcho,
-    };
+    const selectedMoralText = moralTestTexts.join(" ").trim();
+    alignmentReflection = createAlignmentReflection(
+      alignmentContext,
+      pronouns,
+      narrativeDefaults.shortName,
+      selectedMoralText
+    );
 
-    const beats = backstory.biographyBeats || {};
-    const beatContextTags = createBiographyBeatContext(backstory, character, sharedOverrides);
-    const combineBeat = (beat, ...additional) => {
-      const selected = chooseBiographyBeatOption(beat, beatContextTags);
-      if (selected?.tags) {
-        registerBiographyBeatTags(beatContextTags, selected.tags);
-      }
-      const rendered = selected
-        ? renderBackstoryTextForCharacter(selected.text, character, sharedOverrides)
-        : "";
-      return [rendered, ...additional]
+    const selectedRumorText = lingeringRumorTexts.join(" ").trim();
+    rumorEcho = createLingeringRumor(alignmentContext, pronouns, narrativeDefaults.shortName, selectedRumorText);
+
+    biographyParagraphs = [
+      earlyLifeTexts.join(" ").trim(),
+      [trainingTexts.join(" ").trim(), raceCadence, trainingPhilosophy]
         .filter(Boolean)
         .join(" ")
         .replace(/\s+/g, " ")
-        .trim();
-    };
-
-    biographyParagraphs = [
-      combineBeat(beats.earlyLife),
-      combineBeat(beats.training, raceCadence, trainingPhilosophy),
-      combineBeat(beats.moralTest, alignmentReflection),
-      combineBeat(beats.lingeringRumor, rumorEcho),
+        .trim(),
+      alignmentReflection,
+      rumorEcho,
     ];
 
     biographyParagraphs = postProcessParagraphs(biographyParagraphs, {
@@ -412,6 +580,14 @@ export function buildBackstoryInstance(backstory, character) {
       pronouns,
       className: character?.class,
     });
+
+    if (character && typeof character === "object") {
+      character.backstorySelectionIndices = selectionStore;
+      character.backstorySelections = selectionStore;
+    }
+
+    baseOverrides.selectedBeatIndices = selectedBeatIndices;
+    baseOverrides.beatChoices = beatChoices;
   } else {
     biographyParagraphs = [
       "Backstory locked: select race, sex, class, alignment, and origin location to reveal a tailored biography.",
@@ -442,6 +618,8 @@ export function buildBackstoryInstance(backstory, character) {
     trainingPhilosophy,
     alignmentReflection,
     rumorEcho,
+    selectedBeatIndices: renderOverrides.selectedBeatIndices || {},
+    beatChoices: renderOverrides.beatChoices || null,
   };
 }
 
