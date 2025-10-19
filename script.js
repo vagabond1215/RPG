@@ -13982,6 +13982,54 @@ function startCharacterCreation() {
   let step = saved.step || 0;
   let ccPortraitZoom = 1;
 
+  const renderResourceBars = resources => {
+    if (!resources || typeof resources !== 'object') return '';
+    const RESOURCE_CONFIG = [
+      { key: 'HP', className: 'hp', label: 'HP' },
+      { key: 'MP', className: 'mp', label: 'MP' },
+      { key: 'ST', className: 'stamina', label: 'ST' },
+    ];
+    const items = RESOURCE_CONFIG.map(({ key, className, label }) => {
+      if (!Number.isFinite(resources[key])) return '';
+      const value = resources[key];
+      return `
+        <li>
+          <div class="resource-bar ${className}">
+            <div class="fill" style="width:100%"></div>
+            <span class="value">${label}: ${value}</span>
+          </div>
+        </li>
+      `;
+    })
+      .filter(Boolean)
+      .join('');
+    if (!items) return '';
+    return `
+      <div class="resource-column">
+        <ul class="resource-list resource-bars">
+          ${items}
+        </ul>
+      </div>
+    `;
+  };
+
+  const renderStartingStats = (attributes, resources) => {
+    if (!attributes || typeof attributes !== 'object') return '';
+    const attrList = Object.entries(attributes)
+      .map(([k, v]) => `<li>${k}: ${v}</li>`)
+      .join('');
+    const resourceBarsHTML = renderResourceBars(resources);
+    return `
+      <div class="race-stats">
+        <h2>Starting Stats</h2>
+        <div class="stats-resource-grid">
+          ${resourceBarsHTML}
+          <ul class="stats-list">${attrList}</ul>
+        </div>
+      </div>
+    `;
+  };
+
   const resetCharacterCreationState = () => {
     saved = {};
     step = 0;
@@ -14205,23 +14253,7 @@ function startCharacterCreation() {
           MP: maxMP(baseAttrs.WIS, 1),
           ST: maxStamina(baseAttrs.CON, 1),
         };
-        const attrList = Object.entries(baseAttrs)
-          .map(([k, v]) => `<li>${k}: ${v}</li>`)
-          .join('');
-        const resourceList = `
-          <ul class="resource-list resource-bars">
-            <li>
-              <div class="resource-bar hp"><div class="fill" style="width:100%"></div><span class="value">HP: ${resources.HP}</span></div>
-            </li>
-            <li>
-              <div class="resource-bar mp"><div class="fill" style="width:100%"></div><span class="value">MP: ${resources.MP}</span></div>
-            </li>
-            <li>
-              <div class="resource-bar stamina"><div class="fill" style="width:100%"></div><span class="value">ST: ${resources.ST}</span></div>
-            </li>
-          </ul>
-        `;
-        const statsHTML = `<div class="race-stats"><h2>Starting Stats</h2><div class="stats-resource-grid"><ul class="stats-list">${attrList}</ul><div class="resource-column">${resourceList}</div></div></div>`;
+        const statsHTML = renderStartingStats(baseAttrs, resources);
         const strengths = Object.entries(build.stats)
           .filter(([, v]) => v > 0)
           .map(([k]) => k)
@@ -14240,13 +14272,8 @@ function startCharacterCreation() {
         MP: maxMP(attrs.WIS, 1),
         ST: maxStamina(attrs.CON, 1),
       };
-      const attrList = Object.entries({ ...attrs, LCK: 10 })
-        .map(([k, v]) => `<li>${k}: ${v}</li>`)
-        .join('');
-      const resList = Object.entries(resources)
-        .map(([k, v]) => `<li>${k}: ${v}</li>`)
-        .join('');
-      const statsHTML = `<div class="race-stats"><div class="stats-resource-grid"><ul class="stats-list">${attrList}</ul><ul class="resource-list resource-column">${resList}</ul></div></div>`;
+      const displayAttrs = { ...attrs, LCK: 10 };
+      const statsHTML = renderStartingStats(displayAttrs, resources);
       return { statsHTML };
     })();
     const { statsHTML = '', descHTML = '' } = displayData;
