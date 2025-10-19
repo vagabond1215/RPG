@@ -4410,12 +4410,12 @@ body.theme-dark .codex-entry:hover {
 
 :root{
   --accent: #d44; /* tweak if needed */
-  --cc-bg: rgba(16,16,18,0.96);
-  --cc-panel: #1b1d22;
-  --cc-border: #2a2d33;
-  --cc-soft: #8b90a0;
+  --cc-bg: rgba(30,34,40,0.92);
+  --cc-panel: #20242d;
+  --cc-border: #3a3f50;
+  --cc-soft: #9fa7ba;
   --cc-gap: 12px;
-  --cc-radius: 12px;
+  --cc-radius: 16px;
 }
 
 .is-hidden{ display:none !important; }
