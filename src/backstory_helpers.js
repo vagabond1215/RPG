@@ -7,7 +7,7 @@ import {
 } from "../data/game/backstories.js";
 import { getAnglesForRaceClass } from "../data/game/race_class_angles.js";
 
-const REQUIRED_BACKSTORY_INPUTS = ["name", "race", "sex", "class", "alignment", "location", "spawnDistrict"];
+const REQUIRED_BACKSTORY_INPUTS = ["name", "race", "sex", "class", "alignment", "location"];
 
 function hasRequiredBackstoryInputs(character) {
   if (!character) return false;
@@ -295,7 +295,8 @@ export function renderBackstoryTextForCharacter(text, character, overrides = {})
     hometown: homeTown,
     sex: character?.sex,
     gender: character?.sex,
-    spawnDistrict: overrides.spawnDistrict || character?.spawnDistrict,
+    spawnDistrict:
+      overrides.spawnDistrict || character?.spawnDistrict || character?.backstory?.spawnDistrict,
     shortName: narrative.shortName,
     short_name: narrative.shortName,
     voiceTone: narrative.voiceTone,
@@ -403,7 +404,7 @@ export function buildBackstoryInstance(backstory, character) {
     });
   } else {
     biographyParagraphs = [
-      "Backstory locked: select race, sex, class, alignment, origin location, and district to reveal a tailored biography.",
+      "Backstory locked: select race, sex, class, alignment, and origin location to reveal a tailored biography.",
     ];
   }
 
@@ -509,12 +510,8 @@ export function getBackstoriesForLocation(location, criteria = {}) {
     race: criteria.race,
     className: criteria.className,
     alignment: criteria.alignment,
-    spawnDistrict: criteria.spawnDistrict,
   });
-  if (
-    primary.length ||
-    (!criteria.race && !criteria.className && !criteria.alignment && !criteria.spawnDistrict)
-  ) {
+  if (primary.length || (!criteria.race && !criteria.className && !criteria.alignment)) {
     return primary;
   }
   return getBackstoriesByCriteria({ location });
