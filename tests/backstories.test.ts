@@ -106,6 +106,30 @@ describe("backstory helpers", () => {
     expect(singularRendered).toMatch(/Is her/);
   });
 
+  it("falls back to the applied backstory for spawn district context", () => {
+    const character = {
+      ...JSON.parse(JSON.stringify(characterTemplate)),
+      name: "Aerin Skyvault",
+      race: "Elf",
+      class: "Mage",
+      alignment: "Lawful Neutral",
+      sex: "Female",
+      location: "Coral Keep",
+      backstory: {
+        id: "backstory_coral_keep_athenaeum_1",
+        spawnDistrict: "Auric Heights",
+      },
+    };
+    delete character.spawnDistrict;
+
+    const rendered = renderBackstoryTextForCharacter(
+      "{characterName} trains in {spawnDistrict}.",
+      character
+    );
+
+    expect(rendered).toContain("Auric Heights");
+  });
+
   it("parses simple currency expressions", () => {
     const parsed = parseCurrency("7 gp 15 sp 22 cp");
     expect(parsed.gold).toBe(7);
@@ -183,7 +207,6 @@ describe("backstory helpers", () => {
       race: "Human",
       className: "Fighter",
       alignment: "Neutral Good",
-      spawnDistrict: "Port District",
     });
     expect(strictMatches.length).toBeGreaterThan(0);
     expect(strictMatches[0].id).toBe("backstory_waves_break_tideward_1");
@@ -206,11 +229,10 @@ describe("backstory helpers", () => {
       class: "Mage",
       alignment: "Neutral Good",
       sex: "Male",
-      location: "Coral Keep",
     };
     const instance = buildBackstoryInstance(backstory, partialCharacter);
     expect(instance?.biographyParagraphs).toEqual([
-      "Backstory locked: select race, sex, class, alignment, origin location, and district to reveal a tailored biography.",
+      "Backstory locked: select race, sex, class, alignment, and origin location to reveal a tailored biography.",
     ]);
   });
 

@@ -224,19 +224,9 @@ export const BACKSTORY_BY_ID = Object.fromEntries(
 export const LEGACY_BACKSTORY_LOOKUP = new Map();
 
 export function getBackstoriesByCriteria(criteria = {}) {
-  const { location, spawnDistrict } = criteria;
+  const { location } = criteria;
   return BACKSTORIES.filter(entry => {
     if (location && !entry.availableIn.includes(location)) return false;
-    if (spawnDistrict) {
-      const districts = Array.isArray(entry.spawnDistricts) ? entry.spawnDistricts : [];
-      const lower = spawnDistrict.toLowerCase();
-      if (
-        districts.length &&
-        !districts.some(district => typeof district === "string" && district.toLowerCase() === lower)
-      ) {
-        return false;
-      }
-    }
     return true;
   });
 }

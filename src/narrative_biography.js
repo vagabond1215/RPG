@@ -226,7 +226,12 @@ export function generateNarrativeBiography(character = {}, options = {}) {
     options.locationOrigin ||
     options.originLocation ||
     "Wave's Break";
-  const district = character.spawnDistrict || options.spawnDistrict || character.district || options.district;
+  const district =
+    character.spawnDistrict ||
+    character.backstory?.spawnDistrict ||
+    options.spawnDistrict ||
+    character.district ||
+    options.district;
   const background = character.background || options.background || "";
   const gender = character.gender || character.sex || options.gender || options.sex;
   const pronouns = getPronouns(gender);
