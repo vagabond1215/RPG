@@ -167,6 +167,66 @@ function normalizeBiographyParagraphs(entry = {}) {
   return splitParagraphs(biography);
 }
 
+function normalizeBeatTagValue(value) {
+  if (value === undefined || value === null) return undefined;
+  const text = String(value).trim();
+  if (!text) return undefined;
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+}
+
+function addBeatContextTag(target, value) {
+  if (!target || !value) return;
+  if (Array.isArray(value)) {
+    value.forEach(entry => addBeatContextTag(target, entry));
+    return;
+  }
+  const normalized = normalizeBeatTagValue(value);
+  if (normalized) target.add(normalized);
+}
+
+function coerceBeatOption(option) {
+  if (!option) return null;
+  if (typeof option === "string") {
+    const text = normalizeWhitespace(option);
+    if (!text) return null;
+    return { text };
+  }
+  if (typeof option === "object") {
+    const rawText = option.text || option.summary;
+    if (typeof rawText !== "string") return null;
+    const text = normalizeWhitespace(rawText);
+    if (!text) return null;
+    const tags = Array.isArray(option.tags)
+      ? option.tags
+          .map(tag => (typeof tag === "string" || typeof tag === "number" ? String(tag).trim() : ""))
+          .filter(Boolean)
+      : undefined;
+    return tags && tags.length ? { text, tags } : { text };
+  }
+  return null;
+}
+
+function normalizeBeatOptions(value) {
+  if (Array.isArray(value)) {
+    return value.map(option => coerceBeatOption(option)).filter(Boolean);
+  }
+  const option = coerceBeatOption(value);
+  return option ? [option] : [];
+}
+
+function normalizeBiographyBeats(entry = {}) {
+  const beats = entry?.biographyBeats;
+  if (!beats || typeof beats !== "object") return {};
+  const normalized = {};
+  for (const [key, value] of Object.entries(beats)) {
+    const options = normalizeBeatOptions(value);
+    if (options.length) {
+      normalized[key] = options;
+    }
+  }
+  return normalized;
+}
+
 function lookupCaseInsensitive(map = {}, key) {
   if (!key) return undefined;
   if (key in map) return map[key];
@@ -191,16 +251,36 @@ function normalizeRaceCadences(source = {}) {
   }
   return result;
 }
-function normalizeBiographyBeats(entry = {}) {
-  const beats = entry?.biographyBeats;
-  if (!beats || typeof beats !== "object") return {};
-  const normalized = {};
-  for (const [key, value] of Object.entries(beats)) {
-    if (typeof value === "string" && value.trim()) {
-      normalized[key] = normalizeWhitespace(value);
-    }
+
+function gatherBeatContextTags(backstory = {}, character = {}, overrides = {}) {
+  const tags = new Set();
+  addBeatContextTag(tags, backstory.hook);
+  addBeatContextTag(tags, backstory.availableIn);
+  addBeatContextTag(tags, backstory.spawnDistricts);
+  addBeatContextTag(tags, character?.location);
+  addBeatContextTag(tags, character?.originLocation);
+  addBeatContextTag(tags, character?.homeTown || character?.hometown);
+  addBeatContextTag(tags, character?.spawnDistrict);
+  addBeatContextTag(tags, overrides?.location);
+  addBeatContextTag(tags, overrides?.originLocation);
+  addBeatContextTag(tags, overrides?.homeTown || overrides?.hometown);
+  addBeatContextTag(tags, overrides?.spawnDistrict);
+  return tags;
+}
+
+function selectBeatOption(beat, contextTags) {
+  if (!beat) return null;
+  const options = normalizeBeatOptions(beat);
+  if (!options.length) return null;
+  if (contextTags && contextTags.size) {
+    const prioritized = options.find(option =>
+      Array.isArray(option.tags)
+        ? option.tags.some(tag => contextTags.has(normalizeBeatTagValue(tag)))
+        : false
+    );
+    if (prioritized) return prioritized;
   }
-  return normalized;
+  return options[0];
 }
 
 export const RACE_CADENCE_REPOSITORY = normalizeRaceCadences(rawRaceCadences);
@@ -239,5 +319,21 @@ export function getRaceCadenceTemplate(race, className) {
     if (classTemplate) return classTemplate;
   }
   return lookupCaseInsensitive(raceEntry, "default") || "";
+}
+
+export function createBiographyBeatContext(backstory, character, overrides = {}) {
+  return gatherBeatContextTags(backstory, character, overrides);
+}
+
+export function chooseBiographyBeatOption(beat, contextTags) {
+  return selectBeatOption(beat, contextTags);
+}
+
+export function registerBiographyBeatTags(contextTags, tags) {
+  if (!contextTags || !Array.isArray(tags)) return;
+  for (const tag of tags) {
+    const normalized = normalizeBeatTagValue(tag);
+    if (normalized) contextTags.add(normalized);
+  }
 }
 
