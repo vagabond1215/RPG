@@ -45,6 +45,7 @@ import {
   ensureBackstoryInstance,
   getBackstoriesForLocation,
 } from "./src/backstory_helpers.js";
+import { generateNarrativeBiography } from "./src/narrative_biography.js";
 import {
   elementalProficiencyMap,
   schoolProficiencyMap,
@@ -11071,6 +11072,25 @@ function showCharacterUI() {
     .map(attr => `<li>${attr}: ${stats[attr] ?? 0}</li>`)
     .join('');
   const statsHTML = `<h2>Current Stats</h2><ul class="stats-list">${statsList}</ul>`;
+  const biographyData = ensureNarrativeBiography(c);
+  const biographyHTML = (() => {
+    if (!biographyData?.paragraphs?.length) return '';
+    const hookHTML = biographyData.summaryHook
+      ? `<p class="biography-hook">${escapeHtml(biographyData.summaryHook)}</p>`
+      : '';
+    const paragraphsHTML = biographyData.paragraphs
+      .map(text => `<p>${escapeHtml(text)}</p>`)
+      .join('');
+    const headerText = biographyData.header || `${c.name} — ${c.race} ${c.class}`;
+    return `
+      <div class="narrative-biography-block">
+        <h2>Biography</h2>
+        <h3>${escapeHtml(headerText)}</h3>
+        ${hookHTML}
+        ${paragraphsHTML}
+      </div>
+    `;
+  })();
   const backstoryHTML = (() => {
     if (!c.backstory) return '';
     const paragraphs = Array.isArray(c.backstory.biographyParagraphs)
@@ -11082,7 +11102,7 @@ function showCharacterUI() {
       : '';
     return `
       <div class="backstory-block">
-        <h2>Backstory</h2>
+        <h2>Curated Backstory</h2>
         <h3>${escapeHtml(c.backstory.title || '')}</h3>
         ${alignmentLine}
         ${paragraphsHTML}
@@ -11119,6 +11139,7 @@ function showCharacterUI() {
         <div>
           ${info}
           ${statsHTML}
+          ${biographyHTML}
           ${backstoryHTML}
           ${employmentHTML}
         </div>
@@ -11679,6 +11700,43 @@ function ensureCharacterClock(character) {
     character.timeOfDay = hours;
   }
   return character.timeOfDay;
+}
+
+function ensureNarrativeBiography(character, { force = false } = {}) {
+  if (!character) return null;
+  const existing =
+    character.narrativeBiography && typeof character.narrativeBiography === 'object'
+      ? character.narrativeBiography
+      : null;
+  if (!force && existing?.header) {
+    return existing;
+  }
+  const name = character.name?.trim();
+  const race = character.race?.trim();
+  const className = (character.class || character.className || '').trim();
+  const location =
+    character.locationOrigin ||
+    character.originLocation ||
+    character.location ||
+    character.homeTown ||
+    '';
+  if (!name || !race || !className || !location) {
+    if (force) character.narrativeBiography = null;
+    return existing && !force ? existing : null;
+  }
+  const district =
+    character.spawnDistrict ||
+    character.district ||
+    character.position?.district ||
+    null;
+  const biography = generateNarrativeBiography(character, {
+    locationOrigin: location,
+    originLocation: location,
+    spawnDistrict: district || undefined,
+    district: district || undefined,
+  });
+  character.narrativeBiography = biography;
+  return biography;
 }
 
 function advanceCharacterTime(hours = 0, options = {}) {
@@ -14085,6 +14143,26 @@ function startCharacterCreation() {
     `;
   }
 
+  const renderNarrativeBiographyPreview = biography => {
+    if (!biography?.paragraphs?.length) return '';
+    const headerHTML = biography.header
+      ? `<h3 class="cc-biography-title">${escapeHtml(biography.header)}</h3>`
+      : '';
+    const hookHTML = biography.summaryHook
+      ? `<p class="cc-biography-hook">${escapeHtml(biography.summaryHook)}</p>`
+      : '';
+    const paragraphsHTML = biography.paragraphs
+      .map(text => `<p>${escapeHtml(text)}</p>`)
+      .join('');
+    return `
+      <section class="cc-biography">
+        ${headerHTML}
+        ${hookHTML}
+        ${paragraphsHTML}
+      </section>
+    `;
+  };
+
   async function renderStep() {
     const activeFields = fields.filter(
       f => !f.races || f.races.includes(character.race)
@@ -14144,6 +14222,12 @@ function startCharacterCreation() {
           spawnDistrict: character.spawnDistrict,
         })
       : [];
+    const narrativeBiography = backstoryPrerequisitesMet
+      ? generateNarrativeBiography(character, {
+          locationOrigin: character.location,
+          spawnDistrict: character.spawnDistrict,
+        })
+      : null;
     if (field && field.key === 'backstory') {
       if (!backstoryPrerequisitesMet || !availableBackstories.length) {
         if (character.backstory) {
@@ -14223,37 +14307,47 @@ function startCharacterCreation() {
         return { descHTML };
       }
       if (field && field.key === 'backstory') {
-        if (!backstoryPrerequisitesMet) {
-          return {
-            descHTML:
-              '<div class="race-description"><p class="cc-backstory-locked">Select a name, race, sex, class, alignment, starting location, and district to unlock curated backstories.</p></div>'
-          };
-        }
-        if (!availableBackstories.length) {
-          const locationLabel = character.location
-            ? escapeHtml(character.location)
-            : 'this location';
-          return {
-            descHTML: `<div class="race-description"><p>No backstories match the current choices for ${locationLabel}.</p></div>`
-          };
-        }
-        const builtEntries = availableBackstories.map(entry => buildBackstoryInstance(entry, character));
-        const selected = character.backstory
-          ? builtEntries.find(item => item.id === character.backstory) || builtEntries[0]
-          : builtEntries[0];
-        if (selected) {
-          const paragraphsHTML = selected.biographyParagraphs
-            .map(text => `<p>${escapeHtml(text)}</p>`)
-            .join('');
-          const descHTML = `
-            <div class="race-description">
-              <h3>${escapeHtml(selected.title)}</h3>
-              ${paragraphsHTML}
-            </div>
-          `;
-          return { descHTML };
-        }
+      if (!backstoryPrerequisitesMet) {
+        return {
+          descHTML:
+            '<div class="race-description"><p class="cc-backstory-locked">Select a name, race, sex, class, alignment, starting location, and district to unlock curated backstories.</p></div>'
+        };
       }
+      if (!availableBackstories.length) {
+        const locationLabel = character.location
+          ? escapeHtml(character.location)
+          : 'this location';
+        const biographySection = renderNarrativeBiographyPreview(narrativeBiography);
+        const message = `<p class="cc-backstory-note">No curated backstories match the current choices for ${locationLabel} yet.</p>`;
+        return {
+          descHTML: `<div class="race-description">${biographySection || ''}${message}</div>`
+        };
+      }
+      const builtEntries = availableBackstories.map(entry => buildBackstoryInstance(entry, character));
+      const selected = character.backstory
+        ? builtEntries.find(item => item.id === character.backstory) || builtEntries[0]
+        : builtEntries[0];
+      if (selected) {
+        const biographySection = renderNarrativeBiographyPreview(narrativeBiography);
+        const curatedParagraphs = selected.biographyParagraphs
+          .map(text => `<p>${escapeHtml(text)}</p>`)
+          .join('');
+        const curatedSection = `
+          <section class="cc-backstory-preview">
+            <h4 class="cc-backstory-heading">Curated Backstory Preview</h4>
+            <h3>${escapeHtml(selected.title)}</h3>
+            ${curatedParagraphs}
+          </section>
+        `;
+        const descHTML = `
+          <div class="race-description">
+            ${biographySection || ''}
+            ${curatedSection}
+          </div>
+        `;
+        return { descHTML };
+      }
+    }
       if (field && field.key === 'class' && character.class) {
         const build = buildEntries.find(b => b.primary === character.class);
         if (!build) return {};
@@ -14381,7 +14475,7 @@ function startCharacterCreation() {
               }
               const selectedEntry = availableBackstories[index];
               const instance = selectedEntry ? buildBackstoryInstance(selectedEntry, character) : null;
-              const summary = instance?.biographyParagraphs?.[0] || '';
+              const summary = narrativeBiography?.summaryHook || instance?.biographyParagraphs?.[0] || '';
               const buttonLabel = instance ? escapeHtml(instance.title) : 'Select';
               inputHTML = createWheelSelectorTemplate({
                 wrapperClass: 'backstory-carousel',
@@ -14795,6 +14889,7 @@ function finalizeCharacter(character) {
     previousBuilding: null,
   };
   normalizeCharacterState(newChar);
+  ensureNarrativeBiography(newChar, { force: true });
   assignMagicAptitudes(newChar);
   ensureCollections(newChar);
   ensureQuestLog(newChar);
@@ -14821,6 +14916,7 @@ function loadCharacter() {
     });
     ensureBackstoryInstance(loadedCharacter);
     normalizeCharacterState(loadedCharacter);
+    ensureNarrativeBiography(loadedCharacter);
     currentCharacter = loadedCharacter;
     resetLocationLogs();
     ensureCollections(currentCharacter);

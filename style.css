@@ -1737,6 +1737,89 @@ body.theme-dark #characterMenu button.selected {
     margin-top: 0.5rem;
   }
 
+  .cc-biography {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: 0.85rem;
+    background: rgba(15, 20, 36, 0.55);
+    box-shadow: 0 0.75rem 2.25rem rgba(6, 8, 14, 0.32);
+    backdrop-filter: blur(6px);
+  }
+
+  .cc-biography:last-child {
+    margin-bottom: 0;
+  }
+
+  .cc-biography-title {
+    margin: 0 0 0.35rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  .cc-biography-hook {
+    margin: 0 0 0.85rem;
+    font-style: italic;
+    color: color-mix(in srgb, var(--foreground) 70%, transparent);
+  }
+
+  .cc-biography p {
+    margin: 0 0 0.75rem;
+    line-height: 1.55;
+  }
+
+  .cc-biography p:last-child {
+    margin-bottom: 0;
+  }
+
+  .cc-backstory-preview {
+    padding: 1rem 1.25rem;
+    border-radius: 0.85rem;
+    background: rgba(12, 16, 28, 0.35);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .cc-backstory-preview h3 {
+    margin: 0.35rem 0 0.75rem;
+    font-size: 1.05rem;
+  }
+
+  .cc-backstory-preview p {
+    margin: 0 0 0.75rem;
+    line-height: 1.5;
+  }
+
+  .cc-backstory-preview p:last-child {
+    margin-bottom: 0;
+  }
+
+  .cc-backstory-heading {
+    margin: 0;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--foreground) 65%, transparent);
+  }
+
+  .cc-backstory-note {
+    margin-top: 0.75rem;
+    font-style: italic;
+    color: color-mix(in srgb, var(--foreground) 65%, transparent);
+  }
+
+  body.theme-light .cc-biography {
+    background: rgba(246, 248, 255, 0.9);
+    box-shadow: 0 0.75rem 2rem rgba(15, 22, 46, 0.15);
+  }
+
+  body.theme-light .cc-backstory-preview {
+    background: rgba(246, 248, 255, 0.78);
+    box-shadow: inset 0 0 0 1px rgba(15, 22, 46, 0.08);
+  }
+
+  body.theme-light .cc-backstory-note {
+    color: color-mix(in srgb, var(--foreground) 55%, transparent);
+  }
+
   .race-stats {
     flex: 0 0 12rem;
     display: flex;
@@ -3935,6 +4018,49 @@ body.theme-dark .quest-storyline-outcome-declined {
 
 .backstory-block {
   margin-top: 1rem;
+}
+
+.narrative-biography-block {
+  margin-top: 1.25rem;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  background: rgba(12, 16, 28, 0.35);
+  box-shadow: 0 1.25rem 2.75rem rgba(6, 8, 14, 0.35);
+  backdrop-filter: blur(8px);
+  text-align: left;
+}
+
+body.theme-light .narrative-biography-block {
+  background: rgba(246, 248, 255, 0.9);
+  box-shadow: 0 1rem 2.5rem rgba(15, 22, 46, 0.18);
+}
+
+.narrative-biography-block h2 {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
+}
+
+.narrative-biography-block h3 {
+  margin: 0 0 0.85rem;
+  font-size: 1.15rem;
+}
+
+.biography-hook {
+  margin: 0 0 1rem;
+  font-style: italic;
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
+}
+
+.narrative-biography-block p {
+  margin: 0 0 0.85rem;
+  line-height: 1.6;
+}
+
+.narrative-biography-block p:last-child {
+  margin-bottom: 0;
 }
 
 .shop-item {
