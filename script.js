@@ -13895,6 +13895,11 @@ function startCharacterCreation() {
   } catch {
     saved = {};
   }
+  const DEFAULT_CC_PORTRAIT_ZOOM = 1.5;
+  const sanitizePortraitZoom = value => {
+    if (!Number.isFinite(value) || value <= 0) return DEFAULT_CC_PORTRAIT_ZOOM;
+    return Math.max(0.1, Math.round(value * 100) / 100);
+  };
   const character = saved.character || {};
   const buildEntries = Object.values(characterBuilds);
   const ALIGNMENT_GRID = [
@@ -13980,7 +13985,14 @@ function startCharacterCreation() {
   };
 
   let step = saved.step || 0;
-  let ccPortraitZoom = 1;
+  let ccPortraitZoom = sanitizePortraitZoom(saved.portraitZoom);
+  const persistState = () => {
+    ccPortraitZoom = sanitizePortraitZoom(ccPortraitZoom);
+    safeStorage.setItem(
+      TEMP_CHARACTER_KEY,
+      JSON.stringify({ step, character, portraitZoom: ccPortraitZoom })
+    );
+  };
 
   const renderResourceBars = resources => {
     if (!resources || typeof resources !== 'object') return '';
@@ -14033,7 +14045,7 @@ function startCharacterCreation() {
   const resetCharacterCreationState = () => {
     saved = {};
     step = 0;
-    ccPortraitZoom = 1;
+    ccPortraitZoom = DEFAULT_CC_PORTRAIT_ZOOM;
     if (character && typeof character === 'object') {
       Object.keys(character).forEach(key => delete character[key]);
     }
@@ -14086,14 +14098,15 @@ function startCharacterCreation() {
     else if (step === activeFields.length + 3) field = backstoryField;
     if (field && field.key === 'race' && !character.race) {
       character.race = field.options[0];
-      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      persistState();
     }
     if (field && field.key === 'class' && !character.class) {
       character.class = classField.options[0];
-      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      persistState();
     }
     if (field && field.key === 'location' && !character.location) {
       character.location = locationField.options[0];
+      persistState();
     }
     const locationBackstories = character.location
       ? getBackstoriesForLocation(character.location, {})
@@ -14108,11 +14121,11 @@ function startCharacterCreation() {
     if (districtField.options.length) {
       if (!character.spawnDistrict || !districtField.options.includes(character.spawnDistrict)) {
         character.spawnDistrict = districtField.options[0];
-        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        persistState();
       }
     } else if (character.spawnDistrict) {
       delete character.spawnDistrict;
-      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      persistState();
     }
     const backstoryPrerequisitesMet = Boolean(
       character.name &&
@@ -14135,11 +14148,11 @@ function startCharacterCreation() {
       if (!backstoryPrerequisitesMet || !availableBackstories.length) {
         if (character.backstory) {
           character.backstory = null;
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          persistState();
         }
       } else if (!character.backstory) {
         character.backstory = availableBackstories[0].id;
-        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        persistState();
       }
     }
 
@@ -14386,6 +14399,7 @@ function startCharacterCreation() {
             if (index === -1) {
               index = 0;
               character.characterImage = files[0];
+              persistState();
             }
             const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
             const src = `${folder}/${character.characterImage || ''}`;
@@ -14402,7 +14416,7 @@ function startCharacterCreation() {
             });
           } else {
             character.characterImage = null;
-            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            persistState();
             inputHTML = `<div class="cc-empty-option">No portraits are available for this selection yet.</div>`;
           }
         } else {
@@ -14469,7 +14483,7 @@ function startCharacterCreation() {
           character.location = options[index];
           delete character.spawnDistrict;
           delete character.backstory;
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          persistState();
           renderStep();
         };
         document.querySelector('.loc-arrow.left').addEventListener('click', () => change(-1));
@@ -14482,7 +14496,7 @@ function startCharacterCreation() {
             index = (index + dir + options.length) % options.length;
             character.spawnDistrict = options[index];
             delete character.backstory;
-            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            persistState();
             renderStep();
           };
           document.querySelector('.district-arrow.left').addEventListener('click', () => change(-1));
@@ -14497,7 +14511,7 @@ function startCharacterCreation() {
           if (character.race !== 'Cait Sith') delete character.accentColor;
           if (character.race !== 'Salamander') delete character.scaleColor;
           delete character.characterImage;
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          persistState();
           renderStep();
         };
         document.querySelector('.race-arrow.left').addEventListener('click', () => change(-1));
@@ -14509,7 +14523,7 @@ function startCharacterCreation() {
           index = (index + dir + options.length) % options.length;
           character.sex = options[index];
           delete character.characterImage;
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          persistState();
           renderStep();
         };
         document.querySelector('.sex-arrow.left').addEventListener('click', () => change(-1));
@@ -14520,7 +14534,7 @@ function startCharacterCreation() {
         const change = dir => {
           index = (index + dir + options.length) % options.length;
           character.class = options[index];
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          persistState();
           renderStep();
         };
         document.querySelector('.class-arrow.left').addEventListener('click', () => change(-1));
@@ -14532,7 +14546,7 @@ function startCharacterCreation() {
             if (!value) return;
             character.alignment = value;
             delete character.backstory;
-            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            persistState();
             renderStep();
           });
         });
@@ -14544,7 +14558,7 @@ function startCharacterCreation() {
             const change = dir => {
               index = (index + dir + options.length) % options.length;
               character.backstory = options[index];
-              safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+              persistState();
               renderStep();
             };
             document.querySelector('.backstory-arrow.left').addEventListener('click', () => change(-1));
@@ -14556,14 +14570,15 @@ function startCharacterCreation() {
           (CHARACTER_IMAGE_FILES[character.race] || {})[character.sex] || [];
         if (files.length) {
           let index = files.indexOf(character.characterImage);
+          if (index === -1) {
+            index = 0;
+            character.characterImage = files[index];
+            persistState();
+          }
           const change = dir => {
             index = (index + dir + files.length) % files.length;
             character.characterImage = files[index];
-            ccPortraitZoom = 1;
-            safeStorage.setItem(
-              TEMP_CHARACTER_KEY,
-              JSON.stringify({ step, character })
-            );
+            persistState();
             renderStep();
           };
           document
@@ -14586,19 +14601,24 @@ function startCharacterCreation() {
             zoomControls.style.marginTop = `${offset}px`;
           }
 
+          const updateZoomAndPersist = () => {
+            persistState();
+            updateZoom();
+          };
+
           zoomDec.addEventListener('click', () => {
             ccPortraitZoom = Math.max(0.1, ccPortraitZoom - 0.1);
-            updateZoom();
+            updateZoomAndPersist();
           });
 
           zoomInc.addEventListener('click', () => {
             ccPortraitZoom += 0.1;
-            updateZoom();
+            updateZoomAndPersist();
           });
 
           zoomReset.addEventListener('click', () => {
-            ccPortraitZoom = 1;
-            updateZoom();
+            ccPortraitZoom = DEFAULT_CC_PORTRAIT_ZOOM;
+            updateZoomAndPersist();
           });
 
           if (portraitImg.complete) updateZoom();
@@ -14608,7 +14628,7 @@ function startCharacterCreation() {
         document.querySelectorAll('.option-button').forEach(btn => {
           btn.addEventListener('click', () => {
             character[field.key] = btn.dataset.value;
-            safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+            persistState();
             renderStep();
           });
         });
@@ -14631,7 +14651,7 @@ function startCharacterCreation() {
           btn.style.background = character[field.key];
           btn.setAttribute('aria-label', character[field.key]);
           pickerInput.value = character[field.key];
-          safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+          persistState();
         };
         const change = dir => {
           index = (index + dir + colors.length) % colors.length;
@@ -14661,7 +14681,7 @@ function startCharacterCreation() {
       const randomBtn = document.getElementById('name-random');
       const updateName = () => {
         character.name = nameInput.value.trim();
-        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        persistState();
         const completeBtn = document.getElementById('cc-complete');
         const nameStepEl = document.querySelector(`.progress-step[data-step="${activeFields.length}"]`);
         if (character.name) {
@@ -14685,7 +14705,7 @@ function startCharacterCreation() {
 
     document.getElementById('cc-complete').addEventListener('click', () => {
       if (!isComplete()) return;
-      safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+      persistState();
       const folder = `assets/images/Race Photos/${character.race} ${character.sex}`;
       character.image = character.characterImage ? `${folder}/${character.characterImage}` : '';
       finalizeCharacter(character);
@@ -14697,7 +14717,7 @@ function startCharacterCreation() {
       el.addEventListener('click', () => {
         if (el.classList.contains('locked')) return;
         step = index;
-        safeStorage.setItem(TEMP_CHARACTER_KEY, JSON.stringify({ step, character }));
+        persistState();
         renderStep();
       });
     });
