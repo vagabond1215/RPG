@@ -4,6 +4,9 @@ import {
   getBackstoriesByCriteria,
   getRaceCadenceTemplate,
   getPronouns,
+  createBiographyBeatContext,
+  chooseBiographyBeatOption,
+  registerBiographyBeatTags,
 } from "../data/game/backstories.js";
 import { getAnglesForRaceClass } from "../data/game/race_class_angles.js";
 
@@ -380,8 +383,15 @@ export function buildBackstoryInstance(backstory, character) {
     };
 
     const beats = backstory.biographyBeats || {};
+    const beatContextTags = createBiographyBeatContext(backstory, character, sharedOverrides);
     const combineBeat = (beat, ...additional) => {
-      const rendered = renderBackstoryTextForCharacter(beat, character, sharedOverrides);
+      const selected = chooseBiographyBeatOption(beat, beatContextTags);
+      if (selected?.tags) {
+        registerBiographyBeatTags(beatContextTags, selected.tags);
+      }
+      const rendered = selected
+        ? renderBackstoryTextForCharacter(selected.text, character, sharedOverrides)
+        : "";
       return [rendered, ...additional]
         .filter(Boolean)
         .join(" ")
