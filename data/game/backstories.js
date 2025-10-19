@@ -192,16 +192,30 @@ function coerceBeatOption(option) {
     return { text };
   }
   if (typeof option === "object") {
-    const rawText = option.text || option.summary;
+    const result = { ...option };
+    const rawText = typeof option.text === "string" ? option.text : option.summary;
     if (typeof rawText !== "string") return null;
     const text = normalizeWhitespace(rawText);
     if (!text) return null;
-    const tags = Array.isArray(option.tags)
-      ? option.tags
-          .map(tag => (typeof tag === "string" || typeof tag === "number" ? String(tag).trim() : ""))
-          .filter(Boolean)
-      : undefined;
-    return tags && tags.length ? { text, tags } : { text };
+    result.text = text;
+    if ("summary" in result && result.summary === rawText) {
+      delete result.summary;
+    }
+
+    if (Array.isArray(option.tags)) {
+      const normalizedTags = option.tags
+        .map(tag => (typeof tag === "string" || typeof tag === "number" ? String(tag).trim() : ""))
+        .filter(Boolean);
+      if (normalizedTags.length) {
+        result.tags = normalizedTags;
+      } else {
+        delete result.tags;
+      }
+    } else if ("tags" in result && !Array.isArray(result.tags)) {
+      delete result.tags;
+    }
+
+    return result;
   }
   return null;
 }
@@ -288,8 +302,10 @@ export const RACE_CADENCE_REPOSITORY = normalizeRaceCadences(rawRaceCadences);
 export const BACKSTORIES = rawBackstories.map(entry => {
   const biographyParagraphs = normalizeBiographyParagraphs(entry);
   const biography = biographyParagraphs.join("\n\n");
+  const hook = typeof entry.hook === "string" ? entry.hook.trim() : entry.hook;
   return {
     ...entry,
+    hook,
     biography,
     biographyParagraphs,
     spawnDistricts: normalizeSpawnDistricts(entry),
