@@ -14476,7 +14476,20 @@ function startCharacterCreation() {
               const selectedEntry = availableBackstories[index];
               const instance = selectedEntry ? buildBackstoryInstance(selectedEntry, character) : null;
               const summary = narrativeBiography?.summaryHook || instance?.biographyParagraphs?.[0] || '';
-              const buttonLabel = instance ? escapeHtml(instance.title) : 'Select';
+              const firstParagraph = Array.isArray(instance?.biographyParagraphs)
+                ? instance.biographyParagraphs.find(text => typeof text === 'string' && text.trim())
+                : '';
+              const normalizedSnippet = (firstParagraph || summary || instance?.title || '')
+                .replace(/\s+/g, ' ')
+                .trim();
+              const totalBackstories = options.length;
+              const indexLabel = totalBackstories > 1 ? `${index + 1}/${totalBackstories} · ` : '';
+              const truncatedSnippet = normalizedSnippet.length > 80
+                ? `${normalizedSnippet.slice(0, 77)}…`
+                : normalizedSnippet;
+              const buttonLabel = instance
+                ? escapeHtml(`${indexLabel}${truncatedSnippet || instance.title || 'Select'}`)
+                : 'Select';
               inputHTML = createWheelSelectorTemplate({
                 wrapperClass: 'backstory-carousel',
                 arrowClass: 'backstory-arrow',
