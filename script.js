@@ -45,7 +45,6 @@ import {
   ensureBackstoryInstance,
   getBackstoriesForLocation,
 } from "./src/backstory_helpers.js";
-import { generateNarrativeBiography } from "./src/narrative_biography.js";
 import {
   elementalProficiencyMap,
   schoolProficiencyMap,
@@ -11072,40 +11071,45 @@ function showCharacterUI() {
     .map(attr => `<li>${attr}: ${stats[attr] ?? 0}</li>`)
     .join('');
   const statsHTML = `<h2>Current Stats</h2><ul class="stats-list">${statsList}</ul>`;
-  const biographyData = ensureNarrativeBiography(c);
+  const activeBackstory = ensureBackstoryInstance(c);
   const biographyHTML = (() => {
-    if (!biographyData?.paragraphs?.length) return '';
-    const hookHTML = biographyData.summaryHook
-      ? `<p class="biography-hook">${escapeHtml(biographyData.summaryHook)}</p>`
-      : '';
-    const paragraphsHTML = biographyData.paragraphs
-      .map(text => `<p>${escapeHtml(text)}</p>`)
-      .join('');
-    const headerText = biographyData.header || `${c.name} — ${c.race} ${c.class}`;
+    if (!activeBackstory) return '';
+    const paragraphs = extractBackstoryParagraphs(activeBackstory);
+    if (!paragraphs.length) return '';
+    const headerText = activeBackstory.title || `${c.name} — ${c.race} ${c.class}`;
+    const paragraphsHTML = paragraphs.map(text => `<p>${escapeHtml(text)}</p>`).join('');
     return `
       <div class="narrative-biography-block">
         <h2>Biography</h2>
         <h3>${escapeHtml(headerText)}</h3>
-        ${hookHTML}
         ${paragraphsHTML}
       </div>
     `;
   })();
   const backstoryHTML = (() => {
-    if (!c.backstory) return '';
-    const paragraphs = Array.isArray(c.backstory.biographyParagraphs)
-      ? c.backstory.biographyParagraphs
-      : [];
-    const paragraphsHTML = paragraphs.map(text => `<p>${escapeHtml(text)}</p>`).join('');
-    const alignmentLine = c.backstory.alignment
-      ? `<p class="backstory-alignment"><strong>Alignment:</strong> ${escapeHtml(c.backstory.alignment)}</p>`
-      : '';
+    if (!activeBackstory) return '';
+    const details = [];
+    if (activeBackstory.alignment) {
+      details.push(`
+        <p class="backstory-alignment"><strong>Alignment:</strong> ${escapeHtml(activeBackstory.alignment)}</p>
+      `);
+    }
+    if (activeBackstory.spawnDistrict) {
+      details.push(`
+        <p class="backstory-district"><strong>Origin District:</strong> ${escapeHtml(activeBackstory.spawnDistrict)}</p>
+      `);
+    }
+    if (activeBackstory.rumorEcho) {
+      details.push(`
+        <p class="backstory-rumor"><strong>Rumor:</strong> ${escapeHtml(activeBackstory.rumorEcho)}</p>
+      `);
+    }
+    if (!details.length) return '';
     return `
       <div class="backstory-block">
         <h2>Curated Backstory</h2>
-        <h3>${escapeHtml(c.backstory.title || '')}</h3>
-        ${alignmentLine}
-        ${paragraphsHTML}
+        <h3>${escapeHtml(activeBackstory.title || '')}</h3>
+        ${details.join('')}
       </div>
     `;
   })();
@@ -11702,41 +11706,20 @@ function ensureCharacterClock(character) {
   return character.timeOfDay;
 }
 
-function ensureNarrativeBiography(character, { force = false } = {}) {
-  if (!character) return null;
-  const existing =
-    character.narrativeBiography && typeof character.narrativeBiography === 'object'
-      ? character.narrativeBiography
-      : null;
-  if (!force && existing?.header) {
-    return existing;
+function extractBackstoryParagraphs(backstory) {
+  if (!backstory) return [];
+  if (Array.isArray(backstory.biographyParagraphs)) {
+    return backstory.biographyParagraphs
+      .map(text => (typeof text === 'string' ? text.trim() : ''))
+      .filter(Boolean);
   }
-  const name = character.name?.trim();
-  const race = character.race?.trim();
-  const className = (character.class || character.className || '').trim();
-  const location =
-    character.locationOrigin ||
-    character.originLocation ||
-    character.location ||
-    character.homeTown ||
-    '';
-  if (!name || !race || !className || !location) {
-    if (force) character.narrativeBiography = null;
-    return existing && !force ? existing : null;
+  if (typeof backstory.biography === 'string') {
+    return backstory.biography
+      .split(/\r?\n\s*\r?\n|\n{2,}/)
+      .map(text => text.trim())
+      .filter(Boolean);
   }
-  const district =
-    character.spawnDistrict ||
-    character.district ||
-    character.position?.district ||
-    null;
-  const biography = generateNarrativeBiography(character, {
-    locationOrigin: location,
-    originLocation: location,
-    spawnDistrict: district || undefined,
-    district: district || undefined,
-  });
-  character.narrativeBiography = biography;
-  return biography;
+  return [];
 }
 
 function advanceCharacterTime(hours = 0, options = {}) {
@@ -14173,21 +14156,18 @@ function startCharacterCreation() {
     `;
   }
 
-  const renderNarrativeBiographyPreview = biography => {
-    if (!biography?.paragraphs?.length) return '';
-    const headerHTML = biography.header
-      ? `<h3 class="cc-biography-title">${escapeHtml(biography.header)}</h3>`
+  const renderNarrativeBiographyPreview = backstory => {
+    const paragraphs = extractBackstoryParagraphs(backstory);
+    if (!paragraphs.length) return '';
+    const headerHTML = backstory?.title
+      ? `<h3 class="cc-biography-title">${escapeHtml(backstory.title)}</h3>`
       : '';
-    const hookHTML = biography.summaryHook
-      ? `<p class="cc-biography-hook">${escapeHtml(biography.summaryHook)}</p>`
-      : '';
-    const paragraphsHTML = biography.paragraphs
+    const paragraphsHTML = paragraphs
       .map(text => `<p>${escapeHtml(text)}</p>`)
       .join('');
     return `
       <section class="cc-biography">
         ${headerHTML}
-        ${hookHTML}
         ${paragraphsHTML}
       </section>
     `;
@@ -14306,13 +14286,6 @@ function startCharacterCreation() {
       }
     }
 
-    const narrativeBiography = backstoryPrerequisitesMet
-      ? generateNarrativeBiography(character, {
-          locationOrigin: character.location,
-          spawnDistrict: character.backstory?.spawnDistrict || character.spawnDistrict,
-        })
-      : null;
-
     const availableBackstoryInstances = backstoryPrerequisitesMet
       ? availableBackstories.map(entry => ({
           entry,
@@ -14398,34 +14371,24 @@ function startCharacterCreation() {
           const locationLabel = character.location
             ? escapeHtml(character.location)
             : 'this location';
-          const biographySection = renderNarrativeBiographyPreview(narrativeBiography);
           const message = `<p class="cc-backstory-note">No curated backstories match the current choices for ${locationLabel} yet.</p>`;
           return {
-            descHTML: `<div class="race-description">${biographySection || ''}${message}</div>`
+            descHTML: `<div class="race-description">${message}</div>`
           };
         }
         const selectedInstance = character.backstory && character.backstory.id
           ? character.backstory
           : availableBackstoryInstances[0]?.instance;
         if (selectedInstance) {
-          const biographySection = renderNarrativeBiographyPreview(narrativeBiography);
-          const curatedParagraphs = (selectedInstance.biographyParagraphs || [])
-            .map(text => `<p>${escapeHtml(text)}</p>`)
-            .join('');
-          const curatedSection = `
-            <section class="cc-backstory-preview">
-              <h4 class="cc-backstory-heading">Curated Backstory Preview</h4>
-              <h3>${escapeHtml(selectedInstance.title)}</h3>
-              ${curatedParagraphs}
-            </section>
-          `;
-          const descHTML = `
-            <div class="race-description">
-              ${biographySection || ''}
-              ${curatedSection}
-            </div>
-          `;
-          return { descHTML };
+          const biographySection = renderNarrativeBiographyPreview(selectedInstance);
+          if (biographySection) {
+            const descHTML = `
+              <div class="race-description">
+                ${biographySection}
+              </div>
+            `;
+            return { descHTML };
+          }
         }
       }
       if (field && field.key === 'class' && character.class) {
@@ -14539,11 +14502,9 @@ function startCharacterCreation() {
               const selectedId = options[index];
               const selectedRecord = availableBackstoryInstances.find(({ entry }) => entry?.id === selectedId);
               const instance = selectedRecord?.instance || character.backstory;
-              const summary = narrativeBiography?.summaryHook || instance?.biographyParagraphs?.[0] || '';
-              const firstParagraph = Array.isArray(instance?.biographyParagraphs)
-                ? instance.biographyParagraphs.find(text => typeof text === 'string' && text.trim())
-                : '';
-              const normalizedSnippet = (firstParagraph || summary || instance?.title || '')
+              const paragraphs = extractBackstoryParagraphs(instance);
+              const snippetSource = paragraphs[0] || instance?.title || '';
+              const normalizedSnippet = snippetSource
                 .replace(/\s+/g, ' ')
                 .trim();
               const totalBackstories = options.length;
@@ -14559,7 +14520,7 @@ function startCharacterCreation() {
                 arrowClass: 'backstory-arrow',
                 contentHTML: `<button class="option-button backstory-button" data-value="${escapeHtml(
                   selectedId || options[index] || ''
-                )}" title="${escapeHtml(summary)}">${buttonLabel}</button>`,
+                )}" title="${escapeHtml(paragraphs[0] || '')}">${buttonLabel}</button>`,
               });
             }
           }
@@ -14998,7 +14959,6 @@ function finalizeCharacter(character) {
     previousBuilding: null,
   };
   normalizeCharacterState(newChar);
-  ensureNarrativeBiography(newChar, { force: true });
   assignMagicAptitudes(newChar);
   ensureCollections(newChar);
   ensureQuestLog(newChar);
@@ -15025,7 +14985,6 @@ function loadCharacter() {
     });
     ensureBackstoryInstance(loadedCharacter);
     normalizeCharacterState(loadedCharacter);
-    ensureNarrativeBiography(loadedCharacter);
     currentCharacter = loadedCharacter;
     resetLocationLogs();
     ensureCollections(currentCharacter);
