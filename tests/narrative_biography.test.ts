@@ -14,7 +14,7 @@ describe("generateNarrativeBiography", () => {
       background: "a courier's trade",
     });
 
-    expect(result.header).toBe("Ysoria Tidewatch — Human Ninja, True Neutral (Wave's Break)");
+    expect(result.header).toBe("Ysoria Tidewatch");
     expect(result.paragraphs.length).toBe(4);
     expect(result.summaryHook).toMatch(/ninja from Wave's Break/i);
     result.paragraphs.forEach(paragraph => {
