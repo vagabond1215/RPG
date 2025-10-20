@@ -68,17 +68,17 @@ function detectLocationThemes(description = "") {
   const lower = description.toLowerCase();
   const themes = [];
   const checks = [
-    { pattern: /(sea|harbor|harbour|port|tide|ship|fleet|coast|quay)/, phrase: "salt wind carrying work songs between piers" },
-    { pattern: /(mountain|peak|ridge|cliff|slope)/, phrase: "shadow of serrated ridges pressed close" },
-    { pattern: /(forest|grove|wood|pine|timber|thicket)/, phrase: "resin-sweet air rolling off the woods" },
-    { pattern: /(river|canal|delta|lock|sluice|marsh|wetland|barge)/, phrase: "water traffic measuring the hours" },
-    { pattern: /(desert|dune|sand|oasis)/, phrase: "wind-scoured avenues humming with grit" },
-    { pattern: /(capital|crown|palace|court|royal)/, phrase: "crown heralds watching every procession" },
-    { pattern: /(forge|smith|anvil|ore|mine)/, phrase: "forge-light turning faces bronze by dusk" },
-    { pattern: /(library|scholar|archive|academy|lecture)/, phrase: "lectures spilling through open colonnades" },
-    { pattern: /(market|trade|merchant|guild|bazaar)/, phrase: "bargaining voices weaving through market rows" },
-    { pattern: /(temple|shrine|priest|altar|incense)/, phrase: "incense drifting from shrine doors" },
-    { pattern: /(field|farm|pasture|grain|harvest)/, phrase: "carts of produce rumbling over the paving" },
+    { pattern: /(sea|harbor|harbour|port|tide|ship|fleet|coast|quay)/, phrase: "salt winds carry work songs between the piers" },
+    { pattern: /(mountain|peak|ridge|cliff|slope)/, phrase: "the shadows of serrated ridges press close" },
+    { pattern: /(forest|grove|wood|pine|timber|thicket)/, phrase: "resin-sweet air rolls in from the woods" },
+    { pattern: /(river|canal|delta|lock|sluice|marsh|wetland|barge)/, phrase: "river traffic marks the passing hours" },
+    { pattern: /(desert|dune|sand|oasis)/, phrase: "wind-scoured streets hum with restless grit" },
+    { pattern: /(capital|crown|palace|court|royal)/, phrase: "royal heralds watch every procession" },
+    { pattern: /(forge|smith|anvil|ore|mine)/, phrase: "forge-light turns faces bronze by dusk" },
+    { pattern: /(library|scholar|archive|academy|lecture)/, phrase: "lectures spill through open colonnades" },
+    { pattern: /(market|trade|merchant|guild|bazaar)/, phrase: "traders weave bargains through the market rows" },
+    { pattern: /(temple|shrine|priest|altar|incense)/, phrase: "incense drifts beyond the shrine doors" },
+    { pattern: /(field|farm|pasture|grain|harvest)/, phrase: "carts of fresh harvest rumble over the paving" },
   ];
   for (const entry of checks) {
     if (entry.pattern.test(lower)) themes.push(entry.phrase);
@@ -113,7 +113,7 @@ function craftEarlyLifeParagraph(context) {
 
   const sentences = [];
   const placeLabel = district ? `${district} in ${locationName}` : locationName;
-  const themeFragment = themes.length ? `where ${themes[0]}` : "where daily rhythms rarely slowed";
+  const themeFragment = themes.length ? `where ${themes[0]}` : "where daily rhythms rarely slow";
   sentences.push(`${name} grew up in ${placeLabel}, ${themeFragment}.`);
   if (communityNotes) {
     sentences.push(`${capitalize(pronouns.subject)} shared stoops with ${communityNotes}, learning their measure of the day.`);
@@ -122,7 +122,9 @@ function craftEarlyLifeParagraph(context) {
     sentences.push(`${capitalize(pronouns.subject)} carried stories of ${background}, letting them temper ${pronouns.possessive} outlook.`);
   }
   if (points.length) {
-    sentences.push(`Even childhood errands wound past landmarks like ${points[0]}, sketches ${shortName} still keeps in memory.`);
+    sentences.push(
+      `${capitalize(pronouns.subject)} remembers passing ${points[0]} on every small errand, and those familiar paths still guide ${pronouns.object} toward the life ${pronouns.possessive} heart now follows.`
+    );
   }
   return sentences.join(" ");
 }
@@ -256,7 +258,7 @@ export function generateNarrativeBiography(character = {}, options = {}) {
   ];
 
   const biography = paragraphs.join("\n\n");
-  const header = `${name} — ${race} ${className}, ${alignment} (${locationName})`;
+  const header = name;
   const summaryHook = buildSummaryHook(context);
 
   return { header, summaryHook, paragraphs, biography };
