@@ -1746,6 +1746,28 @@ body.theme-dark #characterMenu button.selected {
     backdrop-filter: blur(6px);
   }
 
+  .cc-hook-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .cc-hook-wheel {
+    min-width: 6rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    text-align: center;
+  }
+
+  #cc-backstory-hook-wheel {
+    overflow: visible;
+    max-height: 3rem;
+    line-height: 3rem;
+  }
+
   .cc-biography:last-child {
     margin-bottom: 0;
   }
@@ -1760,6 +1782,11 @@ body.theme-dark #characterMenu button.selected {
     margin: 0 0 0.85rem;
     font-style: italic;
     color: color-mix(in srgb, var(--foreground) 70%, transparent);
+  }
+
+  .cc-biography-note {
+    font-style: italic;
+    color: color-mix(in srgb, var(--foreground) 65%, transparent);
   }
 
   .cc-biography p {
