@@ -4,6 +4,7 @@ import { characterTemplate } from "./data/game/core.js";
 import { gainProficiency, proficiencyCap } from "./data/game/proficiency_base.js";
 import { getRaceStartingAttributes } from "./data/game/race_attrs.js";
 import { maxHP, maxMP, maxStamina } from "./data/game/resources.js";
+import { totalXpForLevel, xpForNextLevel } from "./data/game/experience.js";
 import {
   DENOMINATIONS,
   CURRENCY_VALUES,
@@ -77,14 +78,6 @@ applyWavesBreakRegistry(LOCATIONS);
 const worldCalendar = new TidefallCalendar();
 const weatherSystem = createDefaultWeatherGenerator(worldCalendar.today());
 const appContainer = document.getElementById('app');
-
-function totalXpForLevel(level) {
-  return Math.floor((4 * Math.pow(level, 3)) / 5);
-}
-
-function xpForNextLevel(level) {
-  return totalXpForLevel(level + 1) - totalXpForLevel(level);
-}
 
 window.SPELLBOOK = SPELLBOOK;
 window.WEAPON_SKILLS = WEAPON_SKILLS;
