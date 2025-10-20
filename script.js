@@ -11722,6 +11722,30 @@ function extractBackstoryParagraphs(backstory) {
   return [];
 }
 
+function getBackstoryHookLabel(backstory) {
+  const hook = backstory?.hook;
+  if (typeof hook !== 'string') return '';
+  const trimmed = hook.trim();
+  if (!trimmed) return '';
+  const words = trimmed
+    .replace(/_/g, ' ')
+    .split(/\s+/)
+    .map(word =>
+      word
+        .split('-')
+        .map(segment => {
+          if (!segment) return '';
+          const first = segment.charAt(0);
+          const rest = segment.slice(1);
+          if (!first) return '';
+          return first.toUpperCase() + rest;
+        })
+        .join('-')
+    );
+  const label = words.join(' ').trim();
+  return label;
+}
+
 function advanceCharacterTime(hours = 0, options = {}) {
   if (!currentCharacter) {
     return { days: 0, timeOfDay: 0 };
@@ -14159,8 +14183,10 @@ function startCharacterCreation() {
   const renderNarrativeBiographyPreview = backstory => {
     const paragraphs = extractBackstoryParagraphs(backstory);
     if (!paragraphs.length) return '';
-    const headerHTML = backstory?.title
-      ? `<h3 class="cc-biography-title">${escapeHtml(backstory.title)}</h3>`
+    const hookLabel = getBackstoryHookLabel(backstory);
+    const headerSource = hookLabel || backstory?.title;
+    const headerHTML = headerSource
+      ? `<h3 class="cc-biography-title">${escapeHtml(headerSource)}</h3>`
       : '';
     const paragraphsHTML = paragraphs
       .map(text => `<p>${escapeHtml(text)}</p>`)
@@ -14503,17 +14529,19 @@ function startCharacterCreation() {
               const selectedRecord = availableBackstoryInstances.find(({ entry }) => entry?.id === selectedId);
               const instance = selectedRecord?.instance || character.backstory;
               const paragraphs = extractBackstoryParagraphs(instance);
-              const snippetSource = paragraphs[0] || instance?.title || '';
-              const normalizedSnippet = snippetSource
+              const hookLabel = getBackstoryHookLabel(instance);
+              const fallbackSource = paragraphs[0] || instance?.title || '';
+              const normalizedFallback = fallbackSource
                 .replace(/\s+/g, ' ')
                 .trim();
               const totalBackstories = options.length;
               const indexLabel = totalBackstories > 1 ? `${index + 1}/${totalBackstories} · ` : '';
-              const truncatedSnippet = normalizedSnippet.length > 80
-                ? `${normalizedSnippet.slice(0, 77)}…`
-                : normalizedSnippet;
+              const truncatedFallback = normalizedFallback.length > 80
+                ? `${normalizedFallback.slice(0, 77)}…`
+                : normalizedFallback;
+              const displayLabel = hookLabel || truncatedFallback || 'Select';
               const buttonLabel = instance
-                ? escapeHtml(`${indexLabel}${truncatedSnippet || instance.title || 'Select'}`)
+                ? escapeHtml(`${indexLabel}${displayLabel}`)
                 : 'Select';
               inputHTML = createWheelSelectorTemplate({
                 wrapperClass: 'backstory-carousel',
