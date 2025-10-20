@@ -241,6 +241,91 @@ function normalizeBiographyBeats(entry = {}) {
   return normalized;
 }
 
+function formatHookLabel(value) {
+  if (!value) return "";
+  const trimmed = String(value).trim();
+  if (!trimmed) return "";
+  return trimmed
+    .replace(/_/g, " ")
+    .split(/\s+/)
+    .map(word =>
+      word
+        .split("-")
+        .map(segment => {
+          if (!segment) return "";
+          const first = segment.charAt(0).toUpperCase();
+          const rest = segment.slice(1);
+          return `${first}${rest}`;
+        })
+        .join("-")
+    )
+    .join(" ")
+    .trim();
+}
+
+function normalizeHookEntry(entry, index, fallbackId) {
+  if (!entry) return null;
+  if (typeof entry === "string") {
+    const text = entry.trim();
+    if (!text) return null;
+    const label = formatHookLabel(text) || text;
+    return { id: text || `${fallbackId}-${index}`, label };
+  }
+  if (typeof entry === "object") {
+    const rawId = typeof entry.id === "string" && entry.id.trim()
+      ? entry.id.trim()
+      : typeof entry.key === "string" && entry.key.trim()
+      ? entry.key.trim()
+      : typeof entry.name === "string" && entry.name.trim()
+      ? entry.name.trim()
+      : "";
+    const rawLabel = typeof entry.label === "string" && entry.label.trim()
+      ? entry.label.trim()
+      : typeof entry.name === "string" && entry.name.trim()
+      ? entry.name.trim()
+      : typeof entry.hook === "string" && entry.hook.trim()
+      ? entry.hook.trim()
+      : "";
+    const label = formatHookLabel(rawLabel || rawId) || rawLabel || rawId || "Hook";
+    const idBase = rawId || rawLabel || label;
+    const normalizedId = idBase ? idBase.replace(/\s+/g, "-").toLowerCase() : `${fallbackId}-${index}`;
+    const hook = { id: normalizedId, label };
+    const vars = entry.vars || entry.variables;
+    if (vars && typeof vars === "object") {
+      hook.vars = vars;
+    }
+    return hook;
+  }
+  return null;
+}
+
+function normalizeHooks(entry = {}) {
+  const fallbackId = entry?.id || "hook";
+  const collections = [
+    Array.isArray(entry.hooks) ? entry.hooks : null,
+    Array.isArray(entry.hookOptions) ? entry.hookOptions : null,
+    Array.isArray(entry.story_hooks) ? entry.story_hooks : null,
+    Array.isArray(entry.plan?.hooks) ? entry.plan.hooks : null,
+  ].filter(Boolean);
+
+  const normalized = [];
+  collections.forEach(collection => {
+    collection.forEach((hookEntry, index) => {
+      const hook = normalizeHookEntry(hookEntry, index, fallbackId);
+      if (hook) normalized.push(hook);
+    });
+  });
+
+  if (!normalized.length) {
+    const hook = typeof entry.hook === "string" ? entry.hook.trim() : "";
+    if (hook) {
+      normalized.push({ id: hook.replace(/\s+/g, "-").toLowerCase() || `${fallbackId}-0`, label: formatHookLabel(hook) || hook });
+    }
+  }
+
+  return normalized;
+}
+
 function lookupCaseInsensitive(map = {}, key) {
   if (!key) return undefined;
   if (key in map) return map[key];
@@ -303,12 +388,15 @@ export const BACKSTORIES = rawBackstories.map(entry => {
   const biographyParagraphs = normalizeBiographyParagraphs(entry);
   const biography = biographyParagraphs.join("\n\n");
   const hook = typeof entry.hook === "string" ? entry.hook.trim() : entry.hook;
+  const allowedDistricts = normalizeSpawnDistricts(entry);
   return {
     ...entry,
     hook,
+    hooks: normalizeHooks(entry),
     biography,
     biographyParagraphs,
-    spawnDistricts: normalizeSpawnDistricts(entry),
+    spawnDistricts: allowedDistricts,
+    allowedDistricts,
     biographyBeats: normalizeBiographyBeats(entry),
   };
 });

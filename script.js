@@ -45,6 +45,8 @@ import {
   ensureBackstoryInstance,
   getBackstoriesForLocation,
 } from "./src/backstory_helpers.js";
+import { composeBiography } from "./src/bio/composeBiography.js";
+import { initHookWheel } from "./src/ui/hooksWheel.js";
 import {
   elementalProficiencyMap,
   schoolProficiencyMap,
@@ -14113,7 +14115,8 @@ function startCharacterCreation() {
       'trainingPhilosophy',
       'alignmentReflection',
       'rumorEcho',
-      'spawnDistrict'
+      'spawnDistrict',
+      'backstoryHookIndex'
     ];
     let changed = false;
     for (const key of removableKeys) {
@@ -14179,25 +14182,6 @@ function startCharacterCreation() {
       </div>
     `;
   }
-
-  const renderNarrativeBiographyPreview = backstory => {
-    const paragraphs = extractBackstoryParagraphs(backstory);
-    if (!paragraphs.length) return '';
-    const hookLabel = getBackstoryHookLabel(backstory);
-    const headerSource = hookLabel || backstory?.title;
-    const headerHTML = headerSource
-      ? `<h3 class="cc-biography-title">${escapeHtml(headerSource)}</h3>`
-      : '';
-    const paragraphsHTML = paragraphs
-      .map(text => `<p>${escapeHtml(text)}</p>`)
-      .join('');
-    return `
-      <section class="cc-biography">
-        ${headerHTML}
-        ${paragraphsHTML}
-      </section>
-    `;
-  };
 
   async function renderStep() {
     const activeFields = fields.filter(
@@ -14402,19 +14386,29 @@ function startCharacterCreation() {
             descHTML: `<div class="race-description">${message}</div>`
           };
         }
-        const selectedInstance = character.backstory && character.backstory.id
-          ? character.backstory
-          : availableBackstoryInstances[0]?.instance;
-        if (selectedInstance) {
-          const biographySection = renderNarrativeBiographyPreview(selectedInstance);
-          if (biographySection) {
-            const descHTML = `
-              <div class="race-description">
-                ${biographySection}
+        const selectedRecord = availableBackstoryInstances.find(
+          ({ entry }) => entry?.id === character.backstoryId
+        ) || availableBackstoryInstances[0];
+        if (selectedRecord?.entry) {
+          const hooks = Array.isArray(selectedRecord.entry.hooks) ? selectedRecord.entry.hooks : [];
+          const hasHookRow = hooks.length || selectedRecord.entry.hook;
+          const hookRow = hasHookRow
+            ? `
+              <div class="cc-hook-row">
+                <span class="cc-backstory-heading">Hook</span>
+                <div id="cc-backstory-hook-wheel" class="cc-hook-wheel" role="listbox" aria-label="Backstory hook"></div>
               </div>
-            `;
-            return { descHTML };
-          }
+            `
+            : '';
+          const descHTML = `
+            <div class="race-description">
+              <section class="cc-backstory-preview">
+                ${hookRow}
+                <div id="cc-biography-output" class="cc-biography" aria-live="polite"></div>
+              </section>
+            </div>
+          `;
+          return { descHTML };
         }
       }
       if (field && field.key === 'class' && character.class) {
@@ -14709,11 +14703,134 @@ function startCharacterCreation() {
               const selectedEntry = availableBackstories.find(entry => entry?.id === selectedId);
               if (!selectedEntry) return;
               applyBackstoryLoadout(character, selectedEntry, { reset: true });
+              character.backstoryHookIndex = 0;
               persistState();
               renderStep();
             };
             document.querySelector('.backstory-arrow.left').addEventListener('click', () => change(-1));
             document.querySelector('.backstory-arrow.right').addEventListener('click', () => change(1));
+          }
+
+          const previewContainer = document.getElementById('cc-biography-output');
+          const hookWheelEl = document.getElementById('cc-backstory-hook-wheel');
+          if (previewContainer) {
+            let lastBioSignature = '';
+            const getActiveRecord = () =>
+              availableBackstoryInstances.find(({ entry }) => entry?.id === character.backstoryId) ||
+              availableBackstoryInstances[0] ||
+              null;
+
+            const getHooks = () => {
+              const record = getActiveRecord();
+              if (!record?.entry) return [];
+              if (Array.isArray(record.entry.hooks) && record.entry.hooks.length) {
+                return record.entry.hooks;
+              }
+              const fallback = typeof record.entry.hook === 'string' ? record.entry.hook.trim() : '';
+              if (!fallback) return [];
+              return [
+                {
+                  id: fallback.replace(/\s+/g, '-').toLowerCase() || `${record.entry.id}-hook`,
+                  label: getBackstoryHookLabel(record.entry) || fallback,
+                },
+              ];
+            };
+
+            let wheelControl = null;
+
+            const renderBio = () => {
+              const record = getActiveRecord();
+              if (!record?.entry) {
+                previewContainer.innerHTML = '';
+                lastBioSignature = '';
+                return;
+              }
+
+              const hooks = getHooks();
+              let hookIndex = character.backstoryHookIndex ?? 0;
+              if (hooks.length) {
+                if (!Number.isInteger(hookIndex) || hookIndex < 0 || hookIndex >= hooks.length) {
+                  hookIndex = Math.min(Math.max(hookIndex, 0), hooks.length - 1);
+                  character.backstoryHookIndex = hookIndex;
+                  wheelControl?.setIndex(hookIndex);
+                  persistState();
+                }
+              } else {
+                hookIndex = 0;
+                if (character.backstoryHookIndex) {
+                  character.backstoryHookIndex = 0;
+                  persistState();
+                }
+                wheelControl?.setIndex(0);
+              }
+
+              const hook = hooks[hookIndex] || null;
+              const districtId =
+                character.spawnDistrict ||
+                (Array.isArray(record.entry.allowedDistricts) && record.entry.allowedDistricts[0]) ||
+                (Array.isArray(record.entry.spawnDistricts) && record.entry.spawnDistricts[0]) ||
+                'Upper Ward';
+
+              const ctx = {
+                cityId: 'waves_break',
+                districtId,
+                character: {
+                  name:
+                    character.name ||
+                    [character.givenName, character.familyName].filter(Boolean).join(' ').trim(),
+                  race: character.race || '',
+                  sex: character.sex || '',
+                  clazz: character.class || '',
+                  alignment: character.alignment || '',
+                },
+                backstory: record.entry,
+                hook,
+              };
+
+              const biographyText = composeBiography(ctx) || '';
+              const signature = `${record.entry.id || 'backstory'}::${hook?.id || 'default'}::${biographyText}`;
+              if (signature === lastBioSignature) {
+                return;
+              }
+              lastBioSignature = signature;
+
+              const paragraphs = biographyText
+                .split(/\n\s*\n/)
+                .map(paragraph => paragraph.trim())
+                .filter(Boolean);
+
+              const headerSource =
+                hook?.label || record.instance?.title || record.entry.title || record.entry.characterName || '';
+
+              let content = '';
+              if (headerSource) {
+                content += `<h3 class="cc-biography-title">${escapeHtml(headerSource)}</h3>`;
+              }
+              if (hook?.label) {
+                content += `<p class="cc-biography-hook">${escapeHtml(hook.label)}</p>`;
+              }
+              if (paragraphs.length) {
+                content += paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
+              } else {
+                content += '<p class="cc-biography-note">Biography preview will appear once generation data is available.</p>';
+              }
+              previewContainer.innerHTML = content;
+            };
+
+            if (hookWheelEl) {
+              wheelControl = initHookWheel(
+                hookWheelEl,
+                () => getHooks(),
+                index => {
+                  character.backstoryHookIndex = index;
+                  persistState();
+                  renderBio();
+                },
+                character.backstoryHookIndex ?? 0
+              );
+            }
+
+            renderBio();
           }
         }
       } else if (field.key === 'characterImage') {
@@ -14971,6 +15088,57 @@ function finalizeCharacter(character) {
   const resolvedBackstory = selectedBackstory || (bsList && bsList[0]);
   if (resolvedBackstory) {
     applyBackstoryLoadout(newChar, resolvedBackstory, { reset: true });
+    if (character.spawnDistrict) {
+      newChar.spawnDistrict = character.spawnDistrict;
+    }
+
+    const hooks = (() => {
+      if (Array.isArray(resolvedBackstory.hooks) && resolvedBackstory.hooks.length) {
+        return resolvedBackstory.hooks;
+      }
+      const fallback = typeof resolvedBackstory.hook === 'string' ? resolvedBackstory.hook.trim() : '';
+      if (!fallback) return [];
+      return [
+        {
+          id: fallback.replace(/\s+/g, '-').toLowerCase() || `${resolvedBackstory.id}-hook`,
+          label: getBackstoryHookLabel(resolvedBackstory) || fallback,
+        },
+      ];
+    })();
+
+    const hookIndex = Math.min(
+      Math.max(Number.isInteger(character.backstoryHookIndex) ? character.backstoryHookIndex : 0, 0),
+      hooks.length ? hooks.length - 1 : 0
+    );
+    const selectedHook = hooks[hookIndex] || null;
+    const biographyText = composeBiography({
+      cityId: 'waves_break',
+      districtId:
+        newChar.spawnDistrict ||
+        (Array.isArray(resolvedBackstory.allowedDistricts) && resolvedBackstory.allowedDistricts[0]) ||
+        (Array.isArray(resolvedBackstory.spawnDistricts) && resolvedBackstory.spawnDistricts[0]) ||
+        'Upper Ward',
+      character: {
+        name: newChar.name,
+        race: newChar.race,
+        sex: newChar.sex,
+        clazz: newChar.class,
+        alignment: newChar.alignment,
+      },
+      backstory: resolvedBackstory,
+      hook: selectedHook,
+    });
+    if (newChar.backstory && biographyText) {
+      const paragraphs = biographyText
+        .split(/\n\s*\n/)
+        .map(paragraph => paragraph.trim())
+        .filter(Boolean);
+      newChar.backstory.biography = biographyText;
+      newChar.backstory.biographyParagraphs = paragraphs;
+    }
+    if (selectedHook?.id) {
+      newChar.backstoryHookId = selectedHook.id;
+    }
   }
   const cityData = CITY_NAV[character.location];
   const fallbackDistrict = cityData ? Object.keys(cityData.districts || {})[0] || null : null;

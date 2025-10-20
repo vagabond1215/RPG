@@ -299,11 +299,23 @@ function resolveRaceCadence(backstory, character, overrides = {}) {
   return renderBackstoryTextForCharacter(template, character, contextOverrides);
 }
 
+function pickSpawnDistrict(backstory, cityDefault = "") {
+  const allowed = Array.isArray(backstory?.allowedDistricts)
+    ? backstory.allowedDistricts.filter(Boolean)
+    : [];
+  const fallback = Array.isArray(backstory?.spawnDistricts)
+    ? backstory.spawnDistricts.filter(Boolean)
+    : [];
+  const pool = allowed.length ? allowed : fallback.length ? fallback : cityDefault ? [cityDefault] : [];
+  if (!pool.length) return "";
+  const index = Math.floor(Math.random() * pool.length);
+  return pool[index];
+}
+
 function resolveSpawnDistrict(backstory, character) {
   const existing = character?.spawnDistrict;
   if (existing) return existing;
-  const districts = Array.isArray(backstory?.spawnDistricts) ? backstory.spawnDistricts : [];
-  return districts[0] || "";
+  return pickSpawnDistrict(backstory, "Upper Ward");
 }
 
 function coalesce(...values) {
@@ -620,6 +632,7 @@ export function buildBackstoryInstance(backstory, character) {
     rumorEcho,
     selectedBeatIndices: renderOverrides.selectedBeatIndices || {},
     beatChoices: renderOverrides.beatChoices || null,
+    hooks: Array.isArray(backstory.hooks) ? backstory.hooks.map(hook => ({ ...hook })) : [],
   };
 }
 
@@ -637,8 +650,12 @@ export function applyBackstoryLoadout(character, backstory, options = {}) {
     delete character.trainingPhilosophy;
     delete character.alignmentReflection;
     delete character.rumorEcho;
+    delete character.backstoryHookIndex;
   }
-  const districts = Array.isArray(backstory.spawnDistricts) ? backstory.spawnDistricts.filter(Boolean) : [];
+  const districtsSource = Array.isArray(backstory.allowedDistricts) && backstory.allowedDistricts.length
+    ? backstory.allowedDistricts
+    : backstory.spawnDistricts;
+  const districts = Array.isArray(districtsSource) ? districtsSource.filter(Boolean) : [];
   if (districts.length) {
     const existing = character.spawnDistrict;
     const lowerExisting = existing ? existing.toLowerCase() : null;
@@ -648,8 +665,7 @@ export function applyBackstoryLoadout(character, backstory, options = {}) {
     if (matched) {
       character.spawnDistrict = matched;
     } else {
-      const index = Math.floor(Math.random() * districts.length);
-      character.spawnDistrict = districts[index];
+      character.spawnDistrict = pickSpawnDistrict({ allowedDistricts: districts });
     }
   } else if (options.reset) {
     delete character.spawnDistrict;
