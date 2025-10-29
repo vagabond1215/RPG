@@ -187,10 +187,6 @@ function splitParagraphs(text = "") {
     .filter(Boolean);
 }
 
-function escapeRegex(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
 export function getPronouns(sex) {
   const normalized = sex ? sex.toLowerCase() : undefined;
   if (normalized === "male" || normalized === "m") {
@@ -236,9 +232,11 @@ function isPluralEntity(context = {}) {
   return false;
 }
 
+const BACKSTORY_TOKEN_PATTERN = /\{[A-Za-z_][A-Za-z0-9_]*\}/g;
+
 export function renderBackstoryString(template, context = {}) {
   if (!template) return "";
-  let result = template;
+  const source = typeof template === "string" ? template : String(template ?? "");
   const plural = isPluralEntity(context);
   const replacements = {
     "{characterName}": context.characterName || context.name || "",
@@ -289,10 +287,12 @@ export function renderBackstoryString(template, context = {}) {
     "{was_were}": plural ? "were" : "was",
     "{Was_were}": plural ? "Were" : "Was",
   };
-  for (const [token, value] of Object.entries(replacements)) {
-    const safeToken = escapeRegex(token);
-    result = result.replace(new RegExp(safeToken, "g"), value);
-  }
+  let result = source.replace(BACKSTORY_TOKEN_PATTERN, token => {
+    if (Object.prototype.hasOwnProperty.call(replacements, token)) {
+      return replacements[token];
+    }
+    return token;
+  });
   if (context.sex || context.gender) {
     result = applyPronouns(result, context.sex || context.gender);
   }
