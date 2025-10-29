@@ -1,3 +1,4 @@
+import { performance } from "node:perf_hooks";
 import { describe, it, expect } from "vitest";
 import { characterTemplate } from "../data/game/core.js";
 import {
@@ -105,6 +106,39 @@ describe("backstory helpers", () => {
     expect(singularRendered).toMatch(/is/);
     expect(singularRendered).toMatch(/has honored/);
     expect(singularRendered).toMatch(/Is her/);
+  });
+
+  it("renders large batches of biographies efficiently", () => {
+    const template =
+      "{characterName} {has_have} kept ${pronoun.possessive} {signatureTool} ready in {location} while ${pronoun.subject} {does_do} guard duty in {hometown}.";
+    const contexts = Array.from({ length: 5000 }, (_, index) => {
+      const isGroup = index % 15 === 0;
+      const baseSex = index % 3 === 0 ? "Female" : index % 3 === 1 ? "Male" : "Nonbinary";
+      const sex = isGroup ? "Group" : baseSex;
+      return {
+        characterName: `Sentinel ${index}`,
+        hometown: `District ${index % 27}`,
+        location: `Outpost ${index % 19}`,
+        signatureTool: index % 2 === 0 ? "signal horn" : "ledger",
+        profession: index % 2 === 0 ? "watcher" : "scribe",
+        notableEvent: `Skirmish ${index % 13}`,
+        mentorName: `Captain ${index % 11}`,
+        groupName: `Wardens ${index % 7}`,
+        isGroup,
+        sex,
+      };
+    });
+
+    const start = performance.now();
+    const rendered = contexts.map(context => renderBackstoryString(template, context));
+    const elapsed = performance.now() - start;
+
+    expect(rendered).toHaveLength(contexts.length);
+    expect(rendered[0]).toContain("have kept");
+    expect(rendered[0]).toContain("their");
+    expect(rendered[1]).toContain("has kept");
+    expect(rendered[1]).toMatch(/his|her|their/);
+    expect(elapsed).toBeLessThan(1500);
   });
 
   it("falls back to the applied backstory for spawn district context", () => {
