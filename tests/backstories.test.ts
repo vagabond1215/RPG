@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { characterTemplate } from "../data/game/core.js";
 import {
   BACKSTORY_BY_ID,
+  getBackstoriesByCriteria,
   parseCurrency,
   renderBackstoryString,
 } from "../data/game/backstories.js";
@@ -267,16 +268,24 @@ describe("backstory helpers", () => {
       className: "Fighter",
       alignment: "Neutral Good",
     });
-    expect(strictMatches.length).toBeGreaterThan(0);
+    expect(strictMatches).toHaveLength(1);
     expect(strictMatches[0].id).toBe("backstory_waves_break_tideward_1");
+
+    const filteredOut = getBackstoriesByCriteria({
+      location: "Wave's Break",
+      race: "Gnome",
+      className: "Mage",
+      alignment: "Lawful Evil",
+    });
+    expect(filteredOut).toHaveLength(0);
 
     const fallbackMatches = getBackstoriesForLocation("Wave's Break", {
       race: "Gnome",
       className: "Mage",
       alignment: "Lawful Evil",
     });
-    expect(fallbackMatches.length).toBeGreaterThan(0);
-    expect(fallbackMatches.some(entry => entry.id === "backstory_waves_break_tideward_1")).toBe(true);
+    expect(fallbackMatches).toHaveLength(1);
+    expect(fallbackMatches[0].id).toBe("backstory_waves_break_tideward_1");
   });
 
   it("returns a placeholder when required inputs are missing", () => {
