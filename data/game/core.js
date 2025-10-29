@@ -117,6 +117,10 @@ export const characterTemplate = {
     tags: []
   },
   money: createEmptyCurrency(),
+  skills: [],
+  craftProficiencies: {},
+  gatheringProficiencies: {},
+  combatTraining: [],
   inventory: [],
   buildings: [],
   employment: [],
