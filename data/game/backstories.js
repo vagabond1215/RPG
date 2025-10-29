@@ -1,10 +1,181 @@
 import rawData from "../backstories_data.js";
+import { LOCATION_FILTER_METADATA } from "./backstory_filter_metadata.js";
 
 const rawBackstories = Array.isArray(rawData?.backstories) ? rawData.backstories : [];
 const rawRaceCadences = rawData?.raceCadences || {};
 
+const BACKSTORY_RACE_TAGS = {
+  backstory_waves_break_tideward_1: ["human", "half-elf"],
+  backstory_coral_keep_athenaeum_1: ["elf", "half-elf"],
+  backstory_warm_springs_forge_1: ["dwarf", "human"],
+  backstory_creekside_whisper_1: ["human", "halfling"],
+};
+
 function normalizeWhitespace(text = "") {
   return text.replace(/\r\n/g, "\n").trim();
+}
+
+function normalizeSimpleToken(value) {
+  if (typeof value !== "string") return "";
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function normalizeRaceTag(value) {
+  if (typeof value !== "string") return "";
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[\s_]+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+}
+
+function normalizeRaceTags(entry = {}) {
+  const explicit = Array.isArray(entry.raceTags) ? entry.raceTags : null;
+  const configured = BACKSTORY_RACE_TAGS[entry.id];
+  const tags = explicit ?? configured ?? [];
+  const normalized = [];
+  tags.forEach(tag => {
+    if (typeof tag !== "string") return;
+    tag
+      .split(/[\\/,]/)
+      .map(segment => normalizeRaceTag(segment))
+      .filter(Boolean)
+      .forEach(segment => {
+        if (!normalized.includes(segment)) normalized.push(segment);
+      });
+  });
+  return normalized;
+}
+
+const LOCATION_FILTER_CACHE = new Map(
+  Object.entries(LOCATION_FILTER_METADATA || {}).map(([location, info]) => [
+    location,
+    {
+      classTokens: new Set(
+        Array.isArray(info?.classes)
+          ? info.classes.map(token => normalizeSimpleToken(token)).filter(Boolean)
+          : []
+      ),
+      lawVsChaos: new Set(
+        Array.isArray(info?.lawVsChaos)
+          ? info.lawVsChaos.map(value => normalizeSimpleToken(value)).filter(Boolean)
+          : []
+      ),
+      goodVsEvil: new Set(
+        Array.isArray(info?.goodVsEvil)
+          ? info.goodVsEvil.map(value => normalizeSimpleToken(value)).filter(Boolean)
+          : []
+      ),
+    },
+  ])
+);
+
+const ALIGNMENT_LAW_VALUES = new Set(["lawful", "neutral", "chaotic"]);
+const ALIGNMENT_GOOD_VALUES = new Set(["good", "neutral", "evil"]);
+
+function normalizeClassName(value) {
+  return normalizeSimpleToken(value);
+}
+
+function normalizeRaceName(value) {
+  if (typeof value !== "string") return "";
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[\s_]+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+}
+
+function parseAlignmentCriteria(alignment) {
+  if (typeof alignment !== "string") return null;
+  const tokens = alignment
+    .toLowerCase()
+    .replace(/[^a-z\s]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean);
+  if (!tokens.length) return null;
+
+  let lawAxis = "";
+  let goodAxis = "";
+
+  for (const token of tokens) {
+    if (!lawAxis && ALIGNMENT_LAW_VALUES.has(token)) {
+      lawAxis = token;
+      continue;
+    }
+    if (!goodAxis && ALIGNMENT_GOOD_VALUES.has(token)) {
+      goodAxis = token;
+      continue;
+    }
+  }
+
+  if (!lawAxis && tokens.includes("neutral")) lawAxis = "neutral";
+  if (!goodAxis && tokens.includes("neutral")) goodAxis = "neutral";
+
+  if (!lawAxis && !goodAxis) return null;
+  return {
+    lawVsChaos: lawAxis || "",
+    goodVsEvil: goodAxis || "",
+  };
+}
+
+function raceMatches(entry, normalizedRace) {
+  if (!normalizedRace) return true;
+  const tags = Array.isArray(entry?.raceTags) ? entry.raceTags : [];
+  if (!tags.length) return true;
+  return tags.includes(normalizedRace);
+}
+
+function matchesClass(entry, normalizedClass) {
+  if (!normalizedClass) return true;
+  let sawMetadata = false;
+  for (const location of entry?.availableIn || []) {
+    const metadata = LOCATION_FILTER_CACHE.get(location);
+    if (!metadata) continue;
+    if (metadata.classTokens && metadata.classTokens.size) {
+      sawMetadata = true;
+      if (metadata.classTokens.has(normalizedClass)) {
+        return true;
+      }
+    }
+  }
+  return !sawMetadata;
+}
+
+function evaluateLocationAlignment(metadata, criteria) {
+  let determined = false;
+  if (criteria.lawVsChaos) {
+    if (!metadata?.lawVsChaos || !metadata.lawVsChaos.size) return "unknown";
+    determined = true;
+    if (!metadata.lawVsChaos.has(criteria.lawVsChaos)) return "mismatch";
+  }
+  if (criteria.goodVsEvil) {
+    if (!metadata?.goodVsEvil || !metadata.goodVsEvil.size) return "unknown";
+    determined = true;
+    if (!metadata.goodVsEvil.has(criteria.goodVsEvil)) return "mismatch";
+  }
+  return determined ? "match" : "unknown";
+}
+
+function matchesAlignment(entry, alignmentCriteria) {
+  if (!alignmentCriteria) return true;
+  let sawMetadata = false;
+  for (const location of entry?.availableIn || []) {
+    const metadata = LOCATION_FILTER_CACHE.get(location);
+    if (!metadata) continue;
+    const outcome = evaluateLocationAlignment(metadata, alignmentCriteria);
+    if (outcome === "match") {
+      return true;
+    }
+    if (outcome === "mismatch") {
+      sawMetadata = true;
+    }
+  }
+  return !sawMetadata;
 }
 
 function splitParagraphs(text = "") {
@@ -398,6 +569,7 @@ export const BACKSTORIES = rawBackstories.map(entry => {
     spawnDistricts: allowedDistricts,
     allowedDistricts,
     biographyBeats: normalizeBiographyBeats(entry),
+    raceTags: normalizeRaceTags(entry),
   };
 });
 
@@ -409,8 +581,15 @@ export const LEGACY_BACKSTORY_LOOKUP = new Map();
 
 export function getBackstoriesByCriteria(criteria = {}) {
   const { location } = criteria;
+  const raceRequirement = normalizeRaceName(criteria?.race);
+  const classRequirement = normalizeClassName(criteria?.className);
+  const alignmentRequirement = parseAlignmentCriteria(criteria?.alignment);
+
   return BACKSTORIES.filter(entry => {
     if (location && !entry.availableIn.includes(location)) return false;
+    if (raceRequirement && !raceMatches(entry, raceRequirement)) return false;
+    if (classRequirement && !matchesClass(entry, classRequirement)) return false;
+    if (alignmentRequirement && !matchesAlignment(entry, alignmentRequirement)) return false;
     return true;
   });
 }
