@@ -7,6 +7,13 @@ import {
   createBiographyBeatContext,
   registerBiographyBeatTags,
 } from "../data/game/backstories.js";
+import {
+  createEmptyCurrency,
+  DENOMINATIONS,
+  convertCurrency,
+  fromIron,
+  parseCurrency,
+} from "../data/economy/currency.js";
 import { getAnglesForRaceClass } from "../data/game/race_class_angles.js";
 
 const REQUIRED_BACKSTORY_INPUTS = ["name", "race", "sex", "class", "alignment", "location"];
@@ -14,6 +21,10 @@ const REQUIRED_BACKSTORY_INPUTS = ["name", "race", "sex", "class", "alignment", 
 function hasRequiredBackstoryInputs(character) {
   if (!character) return false;
   return REQUIRED_BACKSTORY_INPUTS.every(key => Boolean(character[key]));
+}
+
+function isPlainObject(value) {
+  return value != null && typeof value === "object" && !Array.isArray(value);
 }
 
 function computeShortName(name) {
@@ -60,6 +71,172 @@ function capClassTokenUsage(paragraphs, className) {
       if (isSentenceStart(text, offset)) replacement = capitalize(replacement);
       return replacement;
     })
+  );
+}
+
+const CURRENCY_KEY_ALIASES = {
+  ci: "coldIron",
+  st: "steel",
+  cp: "copper",
+  sp: "silver",
+  gp: "gold",
+  pp: "platinum",
+};
+
+function sanitizeCurrencyRecord(value) {
+  if (!isPlainObject(value)) {
+    return createEmptyCurrency();
+  }
+  const sanitized = createEmptyCurrency();
+  for (const denom of DENOMINATIONS) {
+    const amount = Number(value[denom]);
+    sanitized[denom] = Number.isFinite(amount) && amount > 0 ? Math.floor(amount) : 0;
+  }
+  return sanitized;
+}
+
+function normalizeCurrencyValue(value) {
+  if (isPlainObject(value)) {
+    const normalized = createEmptyCurrency();
+    for (const [key, rawAmount] of Object.entries(value)) {
+      const denom = DENOMINATIONS.includes(key) ? key : CURRENCY_KEY_ALIASES[key] || null;
+      if (!denom) continue;
+      const amount = Number(rawAmount);
+      if (!Number.isFinite(amount)) continue;
+      normalized[denom] = Math.max(0, Math.floor(amount));
+    }
+    return normalized;
+  }
+  if (typeof value === "string") {
+    const parsed = parseCurrency(value);
+    return { ...createEmptyCurrency(), ...parsed };
+  }
+  if (typeof value === "number" && Number.isFinite(value)) {
+    const iron = convertCurrency(Math.max(0, value), "copper", "coldIron");
+    if (typeof iron === "number" && Number.isFinite(iron)) {
+      return { ...createEmptyCurrency(), ...fromIron(Math.floor(Math.max(0, iron))) };
+    }
+  }
+  return createEmptyCurrency();
+}
+
+function mergeStringList(existing, additions) {
+  const result = [];
+  const seen = new Set();
+  const append = value => {
+    if (typeof value !== "string") return;
+    const trimmed = value.trim();
+    if (!trimmed) return;
+    const key = trimmed.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    result.push(trimmed);
+  };
+  if (Array.isArray(existing)) {
+    existing.forEach(append);
+  }
+  if (Array.isArray(additions)) {
+    additions.forEach(append);
+  }
+  return result;
+}
+
+function mergeNumericTable(existing, updates) {
+  const result = {};
+  if (isPlainObject(existing)) {
+    for (const [rawKey, rawValue] of Object.entries(existing)) {
+      if (typeof rawKey !== "string") continue;
+      const key = rawKey.trim();
+      if (!key) continue;
+      const numeric = Number(rawValue);
+      if (!Number.isFinite(numeric)) continue;
+      result[key] = Math.max(0, Math.floor(numeric));
+    }
+  }
+  if (isPlainObject(updates)) {
+    for (const [rawKey, rawValue] of Object.entries(updates)) {
+      if (typeof rawKey !== "string") continue;
+      const key = rawKey.trim();
+      if (!key) continue;
+      const numeric = Number(rawValue);
+      if (!Number.isFinite(numeric)) continue;
+      const coerced = Math.max(0, Math.floor(numeric));
+      result[key] = result[key] ? Math.max(result[key], coerced) : coerced;
+    }
+  }
+  return result;
+}
+
+function applyLoadoutToCharacter(character, loadout = {}, options = {}) {
+  if (!character || !isPlainObject(loadout)) {
+    return;
+  }
+
+  character.money = sanitizeCurrencyRecord(character.money);
+  if (loadout.currency) {
+    const grant = normalizeCurrencyValue(loadout.currency);
+    if (options.reset) {
+      character.money = { ...grant };
+    } else {
+      for (const denom of DENOMINATIONS) {
+        character.money[denom] += grant[denom] || 0;
+      }
+    }
+  }
+
+  const inventory = Array.isArray(character.inventory) ? [...character.inventory] : [];
+  const inventorySet = new Set(
+    inventory
+      .filter(item => typeof item === "string")
+      .map(item => item.trim().toLowerCase())
+      .filter(Boolean)
+  );
+
+  if (options.reset) {
+    const deduped = [];
+    const dedupSet = new Set();
+    for (const entry of inventory) {
+      if (typeof entry === "string") {
+        const trimmed = entry.trim();
+        if (!trimmed) continue;
+        const key = trimmed.toLowerCase();
+        if (dedupSet.has(key)) continue;
+        dedupSet.add(key);
+        deduped.push(trimmed);
+      } else {
+        deduped.push(entry);
+      }
+    }
+    inventory.length = 0;
+    inventory.push(...deduped);
+    inventorySet.clear();
+    deduped
+      .filter(item => typeof item === "string")
+      .forEach(item => inventorySet.add(item.toLowerCase()));
+  }
+
+  const loadoutItems = [];
+  if (Array.isArray(loadout.items)) loadout.items.forEach(item => loadoutItems.push(item));
+  if (Array.isArray(loadout.equipment)) loadout.equipment.forEach(item => loadoutItems.push(item));
+
+  for (const entry of loadoutItems) {
+    if (typeof entry !== "string") continue;
+    const trimmed = entry.trim();
+    if (!trimmed) continue;
+    const key = trimmed.toLowerCase();
+    if (inventorySet.has(key)) continue;
+    inventory.push(trimmed);
+    inventorySet.add(key);
+  }
+
+  character.inventory = inventory;
+
+  character.skills = mergeStringList(character.skills, loadout.skills);
+  character.combatTraining = mergeStringList(character.combatTraining, loadout.combatTraining);
+  character.craftProficiencies = mergeNumericTable(character.craftProficiencies, loadout.craftProficiencies);
+  character.gatheringProficiencies = mergeNumericTable(
+    character.gatheringProficiencies,
+    loadout.gatheringProficiencies
   );
 }
 
@@ -678,6 +855,9 @@ export function applyBackstoryLoadout(character, backstory, options = {}) {
     character.trainingPhilosophy = instance.trainingPhilosophy;
     character.alignmentReflection = instance.alignmentReflection;
     character.rumorEcho = instance.rumorEcho;
+  }
+  if (backstory.loadout) {
+    applyLoadoutToCharacter(character, backstory.loadout, options);
   }
   return character;
 }

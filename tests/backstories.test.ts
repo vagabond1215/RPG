@@ -184,6 +184,65 @@ describe("backstory helpers", () => {
     expect(character.trainingPhilosophy).toEqual(character.backstory?.trainingPhilosophy);
   });
 
+  it("grants loadout currency, items, and proficiencies", () => {
+    const baseBackstory = BACKSTORY_BY_ID["backstory_waves_break_tideward_1"];
+    if (!baseBackstory) throw new Error("missing test backstory");
+
+    const loadoutBackstory = {
+      ...JSON.parse(JSON.stringify(baseBackstory)),
+      loadout: {
+        currency: "3 gp 17 sp 42 cp",
+        items: ["Seafarer's ledger", "Tidewall lantern"],
+        equipment: ["Short sword"],
+        skills: ["Navigation", "Tide charts"],
+        craftProficiencies: { "Cartography ": 18 },
+        gatheringProficiencies: { foraging: "12" },
+        combatTraining: ["Sword drills", "Shield forms"],
+      },
+    };
+
+    const character = {
+      ...JSON.parse(JSON.stringify(characterTemplate)),
+      name: "Marin",
+      race: "Human",
+      class: "Fighter",
+      alignment: "Neutral Good",
+      sex: "Female",
+      location: "Wave's Break",
+      voiceTone: "steady",
+      signatureTool: "harbor shield",
+      virtue: "resolve",
+      flaw: "stubbornness",
+      bond: "dockworkers",
+      secret: "an uncashed letter",
+      backstorySeed: "a tidewall ledger",
+      money: { ...characterTemplate.money, gold: 1 },
+      inventory: ["Tidewall lantern", "tidewall lantern", { name: "Notebook" }],
+      skills: ["Navigation"],
+      craftProficiencies: { Cartography: 10 },
+      gatheringProficiencies: {},
+      combatTraining: ["Sword drills"],
+    };
+
+    applyBackstoryLoadout(character, loadoutBackstory, { reset: true });
+
+    expect(character.money.gold).toBe(3);
+    expect(character.money.silver).toBe(17);
+    expect(character.money.copper).toBe(42);
+
+    expect(character.inventory.filter(item => typeof item === "string")).toEqual([
+      "Tidewall lantern",
+      "Seafarer's ledger",
+      "Short sword",
+    ]);
+    expect(character.inventory.find(item => typeof item === "object" && item?.name === "Notebook")).toBeTruthy();
+
+    expect(character.skills).toEqual(["Navigation", "Tide charts"]);
+    expect(character.craftProficiencies).toHaveProperty("Cartography", 18);
+    expect(character.gatheringProficiencies).toHaveProperty("foraging", 12);
+    expect(character.combatTraining).toEqual(["Sword drills", "Shield forms"]);
+  });
+
   it("ensures an instance can be rebuilt from an id", () => {
     const character = {
       ...JSON.parse(JSON.stringify(characterTemplate)),
