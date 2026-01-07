@@ -15385,6 +15385,8 @@ if (menuButton && dropdownMenu && characterMenu) {
     const willOpen = !dropdownMenu.classList.contains('active');
     dropdownMenu.classList.remove('active');
     characterMenu.classList.remove('active');
+    menuButton.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    characterButton?.setAttribute('aria-expanded', 'false');
     if (willOpen) {
       positionFloatingMenu(dropdownMenu, menuButton, 'right');
       requestAnimationFrame(() => dropdownMenu.classList.add('active'));
@@ -15396,6 +15398,8 @@ if (characterButton && dropdownMenu && characterMenu) {
     const willOpen = !characterMenu.classList.contains('active');
     dropdownMenu.classList.remove('active');
     characterMenu.classList.remove('active');
+    characterButton.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    menuButton?.setAttribute('aria-expanded', 'false');
     if (willOpen) {
       positionFloatingMenu(characterMenu, characterButton, 'left');
       requestAnimationFrame(() => characterMenu.classList.add('active'));
@@ -15422,6 +15426,7 @@ if (dropdownMenu) {
     const action = button.dataset.action;
     if (!action) return;
     dropdownMenu.classList.remove('active');
+    menuButton?.setAttribute('aria-expanded', 'false');
     if (action === 'new-character') {
       startCharacterCreation();
     } else if (action === 'character-select') {
@@ -15442,6 +15447,7 @@ if (characterMenu) {
     const action = button.dataset.action;
     if (!action) return;
     characterMenu.classList.remove('active');
+    characterButton?.setAttribute('aria-expanded', 'false');
     if (action === 'profile') {
       showCharacterUI();
     } else if (action === 'equipment') {
@@ -15473,6 +15479,8 @@ if (backButton && dropdownMenu && characterMenu) {
   backButton.addEventListener('click', () => {
     dropdownMenu.classList.remove('active');
     characterMenu.classList.remove('active');
+    menuButton?.setAttribute('aria-expanded', 'false');
+    characterButton?.setAttribute('aria-expanded', 'false');
     showMainUI();
   });
 }
