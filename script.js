@@ -15901,59 +15901,147 @@ loadCharacter();
     if (!host) return;
     host.innerHTML = '';
 
-    const make = (html) => {
-      const temp = document.createElement('div'); temp.innerHTML = html.trim(); return temp.firstElementChild;
-    };
-
     if (step === 1) {
-      host.append(
-        make(`<div class="cc-card">
-          <p>Introduce your hero and choose a name.</p>
-          <label for="cc-name-input">Name</label>
-          <input id="cc-name-input" type="text" value="${state.name || ''}" autocomplete="name" />
-          <p class="cc-hint">This syncs with the summary field above.</p>
-        </div>`)
-      );
+      const card = document.createElement('div');
+      card.className = 'cc-card';
+
+      const intro = document.createElement('p');
+      intro.textContent = 'Introduce your hero and choose a name.';
+      card.append(intro);
+
+      const label = document.createElement('label');
+      label.setAttribute('for', 'cc-name-input');
+      label.textContent = 'Name';
+      card.append(label);
+
+      const input = document.createElement('input');
+      input.id = 'cc-name-input';
+      input.type = 'text';
+      input.autocomplete = 'name';
+      input.value = state.name || '';
+      card.append(input);
+
+      const hint = document.createElement('p');
+      hint.className = 'cc-hint';
+      hint.textContent = 'This syncs with the summary field above.';
+      card.append(hint);
+
+      host.append(card);
     } else if (step === 2) {
-      host.append(
-        make(`<div class="cc-card">
-          <p>Select a class:</p>
-          <label for="cc-class-select" class="sr-only">Class</label>
-          <select id="cc-class-select"></select>
-          <p class="cc-hint">Class choice updates the summary dropdown automatically.</p>
-        </div>`)
-      );
+      const card = document.createElement('div');
+      card.className = 'cc-card';
+
+      const intro = document.createElement('p');
+      intro.textContent = 'Select a class:';
+      card.append(intro);
+
+      const label = document.createElement('label');
+      label.setAttribute('for', 'cc-class-select');
+      label.className = 'sr-only';
+      label.textContent = 'Class';
+      card.append(label);
+
+      const select = document.createElement('select');
+      select.id = 'cc-class-select';
+      card.append(select);
+
+      const hint = document.createElement('p');
+      hint.className = 'cc-hint';
+      hint.textContent = 'Class choice updates the summary dropdown automatically.';
+      card.append(hint);
+
+      host.append(card);
     } else if (step === 3) {
-      host.append(
-        make(`<div class="cc-card">
-          <p>Allocate base stats (you can refine later):</p>
-          <div class="cc-grid">
-            ${['hp','mp','str','dex','int'].map(k => `
-              <label>${k.toUpperCase()}
-                <input data-stat="${k}" type="number" min="1" step="1" value="${state.base[k]}" />
-              </label>`).join('')}
-          </div>
-        </div>`)
-      );
+      const card = document.createElement('div');
+      card.className = 'cc-card';
+
+      const intro = document.createElement('p');
+      intro.textContent = 'Allocate base stats (you can refine later):';
+      card.append(intro);
+
+      const grid = document.createElement('div');
+      grid.className = 'cc-grid';
+      ['hp', 'mp', 'str', 'dex', 'int'].forEach((k) => {
+        const label = document.createElement('label');
+        label.append(document.createTextNode(k.toUpperCase()));
+
+        const input = document.createElement('input');
+        input.dataset.stat = k;
+        input.type = 'number';
+        input.min = '1';
+        input.step = '1';
+        input.value = String(state.base[k] ?? '');
+        label.append(input);
+
+        grid.append(label);
+      });
+      card.append(grid);
+
+      host.append(card);
     } else if (step === 4) {
-      host.append(
-        make(`<div class="cc-card">
-          <p>Pick a starter kit:</p>
-          <label class="cc-radio"><input type="radio" name="kit" value="balanced"> Balanced</label>
-          <label class="cc-radio"><input type="radio" name="kit" value="offense"> Offense</label>
-          <label class="cc-radio"><input type="radio" name="kit" value="defense"> Defense</label>
-        </div>`)
-      );
+      const card = document.createElement('div');
+      card.className = 'cc-card';
+
+      const intro = document.createElement('p');
+      intro.textContent = 'Pick a starter kit:';
+      card.append(intro);
+
+      [
+        { value: 'balanced', label: 'Balanced' },
+        { value: 'offense', label: 'Offense' },
+        { value: 'defense', label: 'Defense' }
+      ].forEach((kit) => {
+        const label = document.createElement('label');
+        label.className = 'cc-radio';
+
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'kit';
+        input.value = kit.value;
+
+        label.append(input, document.createTextNode(` ${kit.label}`));
+        card.append(label);
+      });
+
+      host.append(card);
     } else if (step === 5) {
-      host.append(
-        make(`<div class="cc-card">
-          <h3>Confirm</h3>
-          <p><strong>Name:</strong> ${state.name || '—'}</p>
-          <p><strong>Class:</strong> ${state.cls || '—'}</p>
-          <p><strong>Stats:</strong> HP ${state.base.hp}, MP ${state.base.mp}, STR ${state.base.str}, DEX ${state.base.dex}, INT ${state.base.int}</p>
-          <p><strong>Starter Kit:</strong> ${KIT_LABELS[state.kit] || state.kit}</p>
-        </div>`)
+      const card = document.createElement('div');
+      card.className = 'cc-card';
+
+      const heading = document.createElement('h3');
+      heading.textContent = 'Confirm';
+      card.append(heading);
+
+      const nameLine = document.createElement('p');
+      const nameLabel = document.createElement('strong');
+      nameLabel.textContent = 'Name:';
+      nameLine.append(nameLabel, document.createTextNode(` ${state.name || '—'}`));
+      card.append(nameLine);
+
+      const classLine = document.createElement('p');
+      const classLabel = document.createElement('strong');
+      classLabel.textContent = 'Class:';
+      classLine.append(classLabel, document.createTextNode(` ${state.cls || '—'}`));
+      card.append(classLine);
+
+      const statsLine = document.createElement('p');
+      const statsLabel = document.createElement('strong');
+      statsLabel.textContent = 'Stats:';
+      statsLine.append(
+        statsLabel,
+        document.createTextNode(
+          ` HP ${state.base.hp}, MP ${state.base.mp}, STR ${state.base.str}, DEX ${state.base.dex}, INT ${state.base.int}`
+        )
       );
+      card.append(statsLine);
+
+      const kitLine = document.createElement('p');
+      const kitLabel = document.createElement('strong');
+      kitLabel.textContent = 'Starter Kit:';
+      kitLine.append(kitLabel, document.createTextNode(` ${KIT_LABELS[state.kit] || state.kit || '—'}`));
+      card.append(kitLine);
+
+      host.append(card);
     }
 
     // Wire inputs after render
@@ -16054,4 +16142,3 @@ loadCharacter();
     // startWizard();
   }
 })();
-
