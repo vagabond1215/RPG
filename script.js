@@ -15691,16 +15691,14 @@ loadCharacter();
   const qsa = (s, r = document) => Array.from(r.querySelectorAll(s));
   const byId = (id) => document.getElementById(id);
 
-  // Detect a plausible top toolbar. Try common ids/classes; fallback to first nav with vital bars.
+  // Detect a plausible top toolbar. Try common ids/classes.
   const topToolbar =
-    qs('.top-menu') ||
     qs('#top-toolbar') ||
+    qs('.top-menu') ||
     qs('#topbar') ||
     qs('.top-toolbar') ||
     qs('nav[role="banner"]') ||
-    qs('header .top-toolbar') ||
-    // very defensive: any element that contains XP/HP/MP bars
-    qsa('*').find(el => /\b(HP|MP|XP|Stamina)\b/i.test(el.textContent || '') && el.closest('nav,header,div'));
+    qs('header .top-toolbar');
 
   const cc = byId('char-creator');
   if (!cc) return;
