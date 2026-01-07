@@ -36,6 +36,10 @@ If you update spell definitions or milestones in `data/game/spell_catalog.ts`, r
 
 No build steps are required. After publishing the repository with GitHub Pages, visit the generated site or open `index.html` directly in a browser.
 
+### Character Creator
+
+Use the **New Character** menu entry to open the character creation wizard UI. The wizard persists draft progress in local storage under the `rpg.charCreator.draft` key, and you can clear it with the reset controls inside the wizard. Summary fields update live as you move through the steps, and the flow will call `window.createCharacter` if it is provided. See `index.html` for the wizard markup and `script.js` for the controller logic.
+
 ## Data maintenance guidelines
 
 ### Animals and plants catalogs
