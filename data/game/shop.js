@@ -439,6 +439,7 @@ function extendContextWithProfile(baseContext, profile) {
   if (!profile) return { ...baseContext };
   const productionGoods = new Set((baseContext.productionGoods || []).map(value => String(value).toLowerCase()).filter(Boolean));
   const productKeywords = new Set((baseContext.productKeywords || []).map(value => String(value).toLowerCase()).filter(Boolean));
+  const supplyProfiles = Array.isArray(profile?.supplyProfiles) ? profile.supplyProfiles : baseContext.supplyProfiles;
   const addProductKeyword = value => {
     const normalized = String(value || "").trim().toLowerCase();
     if (!normalized) return;
@@ -474,7 +475,8 @@ function extendContextWithProfile(baseContext, profile) {
   const extended = {
     ...baseContext,
     productionGoods: Array.from(productionGoods),
-    productKeywords: Array.from(productKeywords)
+    productKeywords: Array.from(productKeywords),
+    supplyProfiles
   };
   if (regionTags.length) extended.regionTags = regionTags;
   if (Object.keys(yields).length) extended.yields = yields;
@@ -697,6 +699,78 @@ function filterByRegionTags(items, tags) {
     return normalized.some(tag => regions.includes(tag));
   });
   return filtered.length ? filtered : items;
+}
+
+function normalizeSupplyProfiles(profiles) {
+  if (!Array.isArray(profiles)) return [];
+  return profiles
+    .filter(profile => profile && profile.inventoryKey)
+    .map(profile => ({
+      inventoryKey: String(profile.inventoryKey).trim(),
+      items: Array.isArray(profile.items) ? profile.items.filter(Boolean) : [],
+      baseItems: Array.isArray(profile.baseItems) ? profile.baseItems.filter(Boolean) : [],
+      limit: typeof profile.limit === "number" ? profile.limit : null
+    }));
+}
+
+function supplyProfilesForSection(section, context) {
+  const profiles = normalizeSupplyProfiles(context?.supplyProfiles);
+  if (!profiles.length) return [];
+  const sectionKeys = new Set([
+    section.inventoryKey,
+    section.key,
+    ...expandCategoryKey(section.key)
+  ].map(value => String(value || "").trim().toLowerCase()));
+  return profiles.filter(profile => sectionKeys.has(String(profile.inventoryKey).trim().toLowerCase()));
+}
+
+function collectSupplyMatches(items, profiles, qualities) {
+  if (!profiles.length) return [];
+  const qualitySet = qualities && qualities.length
+    ? new Set(qualities.map(value => String(value).trim().toLowerCase()))
+    : null;
+  const byInternal = new Map();
+  const byBase = new Map();
+  items.forEach(item => {
+    const internal = String(item.internal_name || "").trim().toLowerCase();
+    if (internal) byInternal.set(internal, item);
+    const base = String(item.base_item || "").trim().toLowerCase();
+    if (base) {
+      if (!byBase.has(base)) byBase.set(base, []);
+      byBase.get(base).push(item);
+    }
+  });
+  const matches = [];
+  const seen = new Set();
+  const addItem = item => {
+    if (!item) return;
+    const internal = String(item.internal_name || "").trim().toLowerCase();
+    if (!internal || seen.has(internal)) return;
+    if (qualitySet) {
+      const tier = String(item.quality_tier || "").trim().toLowerCase();
+      if (!qualitySet.has(tier)) return;
+    }
+    seen.add(internal);
+    matches.push(item);
+  };
+  profiles.forEach(profile => {
+    const profileMatches = [];
+    profile.items.forEach(name => {
+      const normalized = String(name || "").trim().toLowerCase();
+      if (!normalized) return;
+      const item = byInternal.get(normalized);
+      if (item) profileMatches.push(item);
+    });
+    profile.baseItems.forEach(baseItem => {
+      const normalized = String(baseItem || "").trim().toLowerCase();
+      if (!normalized) return;
+      const list = byBase.get(normalized);
+      if (list) profileMatches.push(...list);
+    });
+    const limited = profile.limit != null ? profileMatches.slice(0, profile.limit) : profileMatches;
+    limited.forEach(addItem);
+  });
+  return matches;
 }
 
 const ARMORY_DEFAULT_CATEGORIES = ["swords", "daggers", "axes", "polearms"];
@@ -1753,7 +1827,20 @@ async function buildEconomyInventory(section, context, categories, limit, adjust
     filtered = filtered.filter(item => (item.bulk_discount_threshold || 0) === 0);
   }
 
+  const supplyProfiles = supplyProfilesForSection(section, context);
   const qualities = qualityForSection(section, context);
+  let supplyMatches = collectSupplyMatches(filtered, supplyProfiles, qualities);
+  if (!supplyMatches.length && section.allowQualityFallback !== false) {
+    const fallback = fallbackQualities(qualities, context);
+    supplyMatches = collectSupplyMatches(filtered, supplyProfiles, fallback);
+  }
+  const supplyInternal = new Set(
+    supplyMatches.map(item => String(item.internal_name || "").trim().toLowerCase()).filter(Boolean)
+  );
+  if (supplyInternal.size) {
+    filtered = filtered.filter(item => !supplyInternal.has(String(item.internal_name || "").trim().toLowerCase()));
+  }
+
   filtered = filtered.filter(item => qualities.includes(item.quality_tier));
   if (!filtered.length && section.allowQualityFallback !== false) {
     const fallback = fallbackQualities(qualities, context);
@@ -1777,8 +1864,10 @@ async function buildEconomyInventory(section, context, categories, limit, adjust
 
   let sorted = sortItemsForSection(filtered, section);
   sorted = applyPreferenceOrdering(sorted, adjustments.preferKeywords, adjustments.avoidKeywords);
-  const trimmed = sorted.slice(0, limit);
-  return finalizeInventoryItems(trimmed, section, context, adjustments);
+  const remaining = Math.max(0, limit - supplyMatches.length);
+  const trimmed = remaining > 0 ? sorted.slice(0, remaining) : [];
+  const combined = supplyMatches.slice(0, limit).concat(trimmed);
+  return finalizeInventoryItems(combined, section, context, adjustments);
 }
 
 async function buildArmoryInventory(section, context, limit, adjustments) {
@@ -1825,4 +1914,3 @@ async function buildArmoryInventory(section, context, limit, adjustments) {
   const trimmed = sorted.slice(0, limit);
   return finalizeInventoryItems(trimmed, section, context, adjustments);
 }
-

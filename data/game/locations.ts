@@ -144,6 +144,14 @@ export interface BusinessScale {
   output: string;
 }
 
+export interface SupplyProfile {
+  inventoryKey: string;
+  items?: string[];
+  baseItems?: string[];
+  limit?: number;
+  notes?: string;
+}
+
 export interface BusinessProfile {
   name: string;
   category: 'agriculture' | 'craft' | 'processing' | 'security' | 'logistics' | 'support';
@@ -154,6 +162,7 @@ export interface BusinessProfile {
   quests: Quest[];
   ownership?: OwnershipDetail;
   vendorType?: VendorType;
+  supplyProfiles?: SupplyProfile[];
 }
 
 export function createLocation(
@@ -6532,6 +6541,21 @@ const WAVES_BREAK_LOWER_GARDENS_BUSINESSES: BusinessProfile[] = [
       notes:
         "Market stewards balance stall assignments, security, and sanitation amid daily crowds.",
     },
+    supplyProfiles: [
+      {
+        inventoryKey: "Produce",
+        items: ["plums-(basket)-(common)", "apricots-(basket)-(common)"],
+        baseItems: ["Plums (basket)", "Apricots (basket)", "Oranges (dozen)"],
+        notes: "Highlight orchard baskets and citrus shipments before the dawn auction.",
+      },
+      {
+        inventoryKey: "FoodDrink",
+        items: ["bread-loaf-(1-lb)-(common)"],
+        baseItems: ["Bread, loaf (1 lb)", "Stew & bread"],
+        limit: 3,
+        notes: "Bakery stalls set aside staple loaves and dawn stew plates.",
+      },
+    ],
     workforce: {
       description:
         "Porters, hawkers, and stewards keep the market orderly while vendors rotate goods at dawn.",
@@ -6634,6 +6658,21 @@ const WAVES_BREAK_LOWER_GARDENS_BUSINESSES: BusinessProfile[] = [
       notes:
         "Porters, brokers, and guards coordinate caravans leaving the city each day.",
     },
+    supplyProfiles: [
+      {
+        inventoryKey: "FoodDrink",
+        items: ["bread-loaf-(1-lb)-(common)", "ale-tankard-(common)"],
+        baseItems: ["Stew & bread"],
+        limit: 4,
+        notes: "Caravan factor loads cheap rations and table ale for outbound wagons.",
+      },
+      {
+        inventoryKey: "Tools",
+        baseItems: ["Pickaxe", "Hammer (carpenter's)"],
+        limit: 2,
+        notes: "Gate crews keep picks and hammers on hand for last-minute wagon repairs.",
+      },
+    ],
     workforce: {
       description:
         "Caravan brokers, porters, and gate guards coordinate schedules to keep caravans moving.",
@@ -9157,4 +9196,3 @@ Corona rises at the kingdom's heart as the royal capital and the mustering groun
 applyVendorDefaults(LOCATIONS);
 
 Object.keys(LOCATIONS).forEach((name) => addQuestBoards(LOCATIONS[name]));
-
