@@ -20,6 +20,8 @@ This repository hosts a simple web-based text RPG prototype intended for deploym
 
 `npm run validate` invokes `scripts/validateData.ts`, applying the schemas in `schemas/` to every animal and plant. Run the validator before committing catalog edits so the automated tests—and the Codex UI—only see structurally valid records.
 
+`tests/crossrefs.test.ts` also validates that animal/plant byproducts can be reconciled with economy items using normalized token matching (punctuation-stripped, lowercased, with a few synonym rules) and category hints. When you add new byproducts or expand the economy catalog, update the byproduct cross-reference expectations in that test so gaps stay intentional and visible.
+
 ### Dependency maintenance
 
 Run `npm outdated` after large batches of work to identify ecosystem updates. When bumping packages, follow up with the validation and build scripts (`npm run validate`, `npm run build:indexes`, `npm run build:spellbook`) and the complete test suite to confirm the data pipelines still behave as expected.
