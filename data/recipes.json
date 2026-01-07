@@ -1,0 +1,90 @@
+[
+  {
+    "id": "hearth-bread",
+    "name": "Hearth Bread",
+    "ingredients": [
+      {
+        "byproduct": "grain",
+        "quantity": 2,
+        "source": {
+          "type": "plant",
+          "id": "wheat"
+        }
+      },
+      {
+        "economy_item": "water-clean-(skin)-(common)",
+        "quantity": 1
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "bread-loaf-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "soft-cheese",
+    "name": "Soft Cheese",
+    "ingredients": [
+      {
+        "byproduct": "cow milk",
+        "quantity": 3,
+        "source": {
+          "type": "animal",
+          "id": "cattle"
+        }
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "cheese-soft-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "turnip-stew",
+    "name": "Turnip Stew",
+    "ingredients": [
+      {
+        "byproduct": "beef",
+        "quantity": 2,
+        "source": {
+          "type": "animal",
+          "id": "cattle"
+        }
+      },
+      {
+        "byproduct": "root",
+        "quantity": 3,
+        "source": {
+          "type": "plant",
+          "id": "bavarian_field_turnip"
+        }
+      },
+      {
+        "economy_item": "water-clean-(skin)-(common)",
+        "quantity": 1
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "stew-and-bread-(common)",
+        "quantity": 1
+      }
+    ]
+  }
+]
