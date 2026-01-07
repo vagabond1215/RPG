@@ -2,6 +2,9 @@
   {
     "id": "hearth-bread",
     "name": "Hearth Bread",
+    "complexity": "simple",
+    "luxury": "humble",
+    "region": "farmland",
     "ingredients": [
       {
         "byproduct": "grain",
@@ -30,6 +33,9 @@
   {
     "id": "soft-cheese",
     "name": "Soft Cheese",
+    "complexity": "simple",
+    "luxury": "humble",
+    "region": "grassland",
     "ingredients": [
       {
         "byproduct": "cow milk",
@@ -54,6 +60,9 @@
   {
     "id": "turnip-stew",
     "name": "Turnip Stew",
+    "complexity": "simple",
+    "luxury": "comfort",
+    "region": "riverlands",
     "ingredients": [
       {
         "byproduct": "beef",
@@ -83,6 +92,188 @@
     "outputs": [
       {
         "economy_item": "stew-and-bread-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "butter-churn",
+    "name": "Farmhouse Butter",
+    "complexity": "simple",
+    "luxury": "comfort",
+    "region": "farmland",
+    "ingredients": [
+      {
+        "byproduct": "cow milk",
+        "quantity": 4,
+        "source": {
+          "type": "animal",
+          "id": "cattle"
+        }
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "butter-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "salted-ham",
+    "name": "Salted Ham",
+    "complexity": "moderate",
+    "luxury": "comfort",
+    "region": "hills",
+    "ingredients": [
+      {
+        "byproduct": "pork",
+        "quantity": 3,
+        "source": {
+          "type": "animal",
+          "id": "pig"
+        }
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "ham-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "sausage-links",
+    "name": "Peppered Sausage Links",
+    "complexity": "moderate",
+    "luxury": "common",
+    "region": "grassland",
+    "ingredients": [
+      {
+        "byproduct": "pork",
+        "quantity": 3,
+        "source": {
+          "type": "animal",
+          "id": "pig"
+        }
+      },
+      {
+        "economy_item": "peppercorns-(4-oz)-(common)",
+        "quantity": 1
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "sausage-links-(dozen)-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "riverland-ale",
+    "name": "Riverland Ale",
+    "complexity": "moderate",
+    "luxury": "common",
+    "region": "riverlands",
+    "ingredients": [
+      {
+        "byproduct": "grain",
+        "quantity": 3,
+        "source": {
+          "type": "plant",
+          "id": "barley"
+        }
+      },
+      {
+        "economy_item": "water-clean-(skin)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "ale-tankard-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "sea-grape-wine",
+    "name": "Sea Grape Table Wine",
+    "complexity": "complex",
+    "luxury": "fine",
+    "region": "coastal",
+    "ingredients": [
+      {
+        "byproduct": "fruit",
+        "quantity": 4,
+        "source": {
+          "type": "plant",
+          "id": "caribbean_sea_grape"
+        }
+      },
+      {
+        "economy_item": "water-clean-(skin)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "wine-bottle-(table)-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "peppercorn-stew",
+    "name": "Peppercorn Beef Stew",
+    "complexity": "complex",
+    "luxury": "fine",
+    "region": "urban",
+    "ingredients": [
+      {
+        "byproduct": "beef",
+        "quantity": 3,
+        "source": {
+          "type": "animal",
+          "id": "cattle"
+        }
+      },
+      {
+        "byproduct": "root",
+        "quantity": 2,
+        "source": {
+          "type": "plant",
+          "id": "bavarian_field_turnip"
+        }
+      },
+      {
+        "economy_item": "peppercorns-(4-oz)-(common)",
+        "quantity": 1
+      },
+      {
+        "economy_item": "water-clean-(skin)-(common)",
+        "quantity": 1
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "stew-and-bread-(fine)",
         "quantity": 1
       }
     ]
