@@ -310,9 +310,9 @@ const PRODUCE_KEYWORD_DICTIONARY = {
   sheep: ["sheep", "wool", "mutton", "cheese"],
   cattle: ["beef", "leather", "tallow"],
   stockyard: ["beef", "mutton", "pork", "leather"],
-  pig: ["pork", "bacon", "ham"],
-  hog: ["pork", "bacon"],
-  boar: ["pork", "ham"],
+  pig: ["pork", "bacon", "ham", "pork ham", "pork sausage"],
+  hog: ["pork", "bacon", "pork ham", "pork sausage"],
+  boar: ["pork", "ham", "pork ham", "pork sausage"],
   chicken: ["chicken", "egg"],
   hen: ["chicken", "egg"],
   egg: ["egg"],
@@ -1498,7 +1498,7 @@ function butcherPlan(context) {
       key: "FoodDrink",
       label: "Cured Goods",
       limit: { small: 3, medium: 4, large: 6 },
-      keywords: ["smoked", "sausage", "jerky", "bacon", "ham"],
+      keywords: ["smoked", "sausage", "pork sausage", "jerky", "bacon", "ham", "pork ham"],
       preferBasics: true
     },
     {
