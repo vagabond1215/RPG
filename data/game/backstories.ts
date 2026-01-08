@@ -941,7 +941,7 @@ export const BACKSTORIES: RichBackstory[] = [
   },
   {
     "id": "fishmongers-assistant",
-    "title": "Fishmonger'S Hand",
+    "title": "Fishmonger'S Assistant",
     "legacyBackgrounds": [
       "Fishmonger's assistant"
     ],
