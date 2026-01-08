@@ -415,18 +415,18 @@
     ]
   },
   {
-    "id": "tidepool-octopus-skewers",
-    "name": "Tidepool Octopus Skewers",
+    "id": "lagoon-ray-skewers",
+    "name": "Lagoon Ray Skewers",
     "complexity": "moderate",
     "luxury": "common",
     "region": "coastal",
     "ingredients": [
       {
-        "byproduct": "elysian tidepool octopus",
+        "byproduct": "lagoon spotted ray meat",
         "quantity": 2,
         "source": {
           "type": "animal",
-          "id": "elysian_tidepool_octopus"
+          "id": "lagoon_spotted_ray"
         }
       },
       {
@@ -444,7 +444,7 @@
     ],
     "outputs": [
       {
-        "economy_item": "tidepool-octopus-skewers-(common)",
+        "economy_item": "lagoon-ray-skewers-(common)",
         "quantity": 1
       }
     ]

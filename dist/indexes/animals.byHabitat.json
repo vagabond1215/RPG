@@ -3,8 +3,10 @@
     "caribbean_hydrothermal_shrimp"
   ],
   "open_ocean": [
+    "albatross",
     "allis-shad",
     "anchovy",
+    "blue-whale",
     "brill",
     "caribbean_reef_shark",
     "cod",
@@ -53,6 +55,7 @@
     "aleutian_kelp_otter"
   ],
   "continental_shelves": [
+    "blue-whale",
     "haida_gwaii_humpback",
     "north_sea_codline"
   ],
@@ -62,6 +65,7 @@
     "quintana_roo_brown_pelican"
   ],
   "ocean_shores": [
+    "albatross",
     "baltic_gray_seal",
     "barnacle-goose",
     "clam",
@@ -330,6 +334,7 @@
     "xinjiang_bactrian_camel"
   ],
   "semi_arid_scrublands": [
+    "camel",
     "coyote",
     "donkey",
     "dromedary_camel",
@@ -492,7 +497,6 @@
     "aardvark",
     "aardwolf",
     "agouti",
-    "albatross",
     "alpine-ibex",
     "anaconda",
     "anole",
@@ -507,7 +511,6 @@
     "binturong",
     "black-mamba",
     "blackbird",
-    "blue-whale",
     "boar",
     "buzzard",
     "capercaillie",
@@ -701,6 +704,7 @@
     "goldfinch",
     "gopher",
     "horned_buffalo",
+    "horse",
     "hyena",
     "lark",
     "lion",
