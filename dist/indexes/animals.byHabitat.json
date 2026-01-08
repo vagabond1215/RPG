@@ -39,6 +39,7 @@
     "squid",
     "starfish",
     "thornback-ray",
+    "tuna",
     "twaite-shad",
     "uluwatu_sea_snake",
     "whale",
@@ -153,6 +154,7 @@
     "stickleback",
     "sturgeon",
     "tench",
+    "tilapia",
     "trout",
     "turtle",
     "wels-catfish"
@@ -172,12 +174,14 @@
     "peruvian_lake_grebe",
     "rainbow_trout",
     "swan",
+    "tilapia",
     "turtle",
     "whitefish"
   ],
   "ponds": [
     "duck",
-    "nam_song_rice_paddy_eel"
+    "nam_song_rice_paddy_eel",
+    "tilapia"
   ],
   "springs": [],
   "swamps": [
@@ -240,6 +244,7 @@
     "toad",
     "tonle_sap_siamese_crocodile",
     "upper_nile_shoebill",
+    "water_buffalo",
     "white-pelican",
     "whooper-swan",
     "wigeon",
@@ -265,7 +270,8 @@
     "lower_mekong_giant_barb",
     "nam_song_rice_paddy_eel",
     "nyasa_sitatunga",
-    "qinghai_steppe_crane"
+    "qinghai_steppe_crane",
+    "water_buffalo"
   ],
   "mangroves": [
     "mangrove_saltwater_crocodile"
@@ -452,6 +458,7 @@
     "cattle",
     "chicken",
     "city_terrier_dog",
+    "cow",
     "dachshund",
     "dog",
     "donkey",
@@ -477,6 +484,7 @@
     "lowland_hound_dog",
     "mule",
     "northern_husky_dog",
+    "ox",
     "partridge",
     "peafowl",
     "pheasant",
@@ -490,6 +498,7 @@
     "starling",
     "swallow",
     "tiny_companion_dog",
+    "water_buffalo",
     "water_retriever_dog",
     "working_shepherd_dog"
   ],
@@ -696,6 +705,7 @@
     "camelopard",
     "cattle",
     "chicken",
+    "cow",
     "coyote",
     "draft-horse",
     "elephant",
@@ -710,6 +720,7 @@
     "lion",
     "llama",
     "mole",
+    "ox",
     "plains_gnu",
     "prairie_dog",
     "quail",
