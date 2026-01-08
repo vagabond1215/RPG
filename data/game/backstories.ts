@@ -61,7 +61,6 @@ export interface RichBackstory {
   themes: string[];
   loadout: LoadoutDescriptor;
   responsibilities: string[];
-  defaultClassOptions: string[];
   alignmentBias: AlignmentBias;
   jobBranching: JobBranching;
 }
@@ -196,9 +195,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Monastery healing ward when dawn bells ring.",
       "Uphold expectations within Greensoul Hill."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -297,9 +293,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Alchemists' Hall bunk when dawn bells ring.",
       "Uphold expectations within The Lower Gardens, Craft Halls."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "good",
@@ -386,9 +379,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Ropewalk loft when dawn bells ring.",
       "Uphold expectations within The Port District."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -477,9 +467,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Terraced Hot Springs when dawn bells ring.",
       "Uphold expectations within The Springs."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -566,9 +553,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Caravanserai of the Hill bunk when dawn bells ring.",
       "Uphold expectations within The Hill."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "lawful",
       "goodVsEvil": "good",
@@ -653,9 +637,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Caravan Square stall when dawn bells ring.",
       "Uphold expectations within The High Road District."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -742,9 +723,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Merchant's Exchange stall when dawn bells ring.",
       "Uphold expectations within Central Plaza."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "lawful",
       "goodVsEvil": "good",
@@ -829,10 +807,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Cattle Yards corral when dawn bells ring.",
       "Uphold expectations within Greenford."
-    ],
-    "defaultClassOptions": [
-      "Martial Artist / Monk",
-      "Acolyte / Priest"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -922,10 +896,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Gatewatch Barracks bunk when dawn bells ring.",
       "Uphold expectations within The Upper Ward."
     ],
-    "defaultClassOptions": [
-      "Knight / Paladin",
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "lawful",
       "goodVsEvil": "good",
@@ -1012,9 +982,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Guild Palace workshop when dawn bells ring.",
       "Uphold expectations within Crown District."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -1104,10 +1071,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Cooper's Yard shed when dawn bells ring.",
       "Uphold expectations within Little Terns."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior",
-      "Templar / Inquisitor"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -1193,9 +1156,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Mine entrance camp when dawn bells ring.",
       "Uphold expectations within The Mine."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -1284,10 +1244,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Mithril Hall forge when dawn bells ring.",
       "Uphold expectations within Cherry Rock."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior",
-      "Templar / Inquisitor"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "good",
@@ -1374,9 +1330,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Exotic Fruit Press when dawn bells ring.",
       "Uphold expectations within The Artisan's Lane."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -1465,10 +1418,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Fishermen's Docks when dawn bells ring.",
       "Uphold expectations within The Lakeside Quarter."
     ],
-    "defaultClassOptions": [
-      "Knight / Paladin",
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -1555,10 +1504,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Fishmongers' Row stall when dawn bells ring.",
       "Uphold expectations within The Port District."
     ],
-    "defaultClassOptions": [
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -1643,9 +1588,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Riverside Warehouses dock when dawn bells ring.",
       "Uphold expectations within Everrise Bridge."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -1750,12 +1692,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Roadside camp near the city when dawn bells ring.",
       "Uphold expectations within Little Terns, The Farmlands."
     ],
-    "defaultClassOptions": [
-      "Scout / Ranger",
-      "Archer / Marksman",
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -1843,10 +1779,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Forager's Lodge when dawn bells ring.",
       "Uphold expectations within Residences & Community."
     ],
-    "defaultClassOptions": [
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "good",
@@ -1933,9 +1865,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Gardener's tool shed when dawn bells ring.",
       "Uphold expectations within The Lower Gardens."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -2021,9 +1950,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to East Gate watchtower when dawn bells ring.",
       "Uphold expectations within The High Road District."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "lawful",
@@ -2113,10 +2039,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Smiths' Yard forge when dawn bells ring.",
       "Uphold expectations within Greatwood Gate District."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior",
-      "Templar / Inquisitor"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -2202,9 +2124,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Great Glassworks dormitory when dawn bells ring.",
       "Uphold expectations within The Forge District."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -2293,9 +2212,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Glasswrights' Guildhouse dormitory when dawn bells ring.",
       "Uphold expectations within West Corona."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "good",
@@ -2383,9 +2299,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Grand Guildhall archives when dawn bells ring.",
       "Uphold expectations within Stoneknot."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -2469,10 +2382,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Shanty Markets alley when dawn bells ring.",
       "Uphold expectations within Western Slums."
-    ],
-    "defaultClassOptions": [
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -2562,11 +2471,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Greensoul Hill herb clearing when dawn bells ring.",
       "Uphold expectations within Greensoul Hill."
     ],
-    "defaultClassOptions": [
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist",
-      "Druid / Shaman"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -2653,9 +2557,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Barracks of the Iron Watch when dawn bells ring.",
       "Uphold expectations within Fortress Quarter."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "lawful",
       "goodVsEvil": "good",
@@ -2740,10 +2641,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Supply depot loft when dawn bells ring.",
       "Uphold expectations within The Military Ward."
-    ],
-    "defaultClassOptions": [
-      "Knight / Paladin",
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -2832,10 +2729,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Leatherwright's Hall workbench when dawn bells ring.",
       "Uphold expectations within Artisan's Row."
     ],
-    "defaultClassOptions": [
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -2919,9 +2812,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Riverside log jam when dawn bells ring.",
       "Uphold expectations within The Lumberworks."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -3010,9 +2900,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Great Market stall when dawn bells ring.",
       "Uphold expectations within Brightshade."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -3097,9 +2984,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Hall of Governance corridor when dawn bells ring.",
       "Uphold expectations within The Citadel Quarter."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -3189,10 +3073,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Greensoul Monastery cell when dawn bells ring.",
       "Uphold expectations within Greensoul Hill."
     ],
-    "defaultClassOptions": [
-      "Martial Artist / Monk",
-      "Acolyte / Priest"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -3277,10 +3157,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Fruit orchard camp when dawn bells ring.",
       "Uphold expectations within Surrounding Farmlands & Orchards."
-    ],
-    "defaultClassOptions": [
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -3368,9 +3244,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Rented attic in the Upper Ward when dawn bells ring.",
       "Uphold expectations within The Upper Ward."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -3456,10 +3329,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Steel Watch Naval Docks bunk when dawn bells ring.",
       "Uphold expectations within The South Docks & Steel Docks."
     ],
-    "defaultClassOptions": [
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -3544,10 +3413,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Guild Post steps when dawn bells ring.",
       "Uphold expectations within The Central Plaza."
-    ],
-    "defaultClassOptions": [
-      "Scout / Ranger",
-      "Archer / Marksman"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -3636,10 +3501,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Riverbank lean-to when dawn bells ring.",
       "Uphold expectations within The Farmlands."
     ],
-    "defaultClassOptions": [
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -3724,9 +3585,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Great Stone Bridge dock when dawn bells ring.",
       "Uphold expectations within Misty Crossing."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -3813,10 +3671,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Barracks bunk when dawn bells ring.",
       "Uphold expectations within The Barracks."
-    ],
-    "defaultClassOptions": [
-      "Scout / Ranger",
-      "Archer / Marksman"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -3905,9 +3759,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Orchard shed when dawn bells ring.",
       "Uphold expectations within Fields & Orchards."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -3993,9 +3844,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Sawmill bunkhouse when dawn bells ring.",
       "Uphold expectations within Lumberworks."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -4080,9 +3928,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Hall of Records scriptorium when dawn bells ring.",
       "Uphold expectations within The Upper Ward."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "lawful",
       "goodVsEvil": "good",
@@ -4166,9 +4011,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Thieves' Market shanty when dawn bells ring.",
       "Uphold expectations within The Northern Slums."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "chaotic",
@@ -4257,9 +4099,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Crystal Court Plaza when dawn bells ring.",
       "Uphold expectations within Stonecrest Town."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -4344,10 +4183,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Old Market Square stall when dawn bells ring.",
       "Uphold expectations within The Old City."
-    ],
-    "defaultClassOptions": [
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -4436,9 +4271,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Tea Gardens shack when dawn bells ring.",
       "Uphold expectations within Terraces & Farms."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -4526,9 +4358,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Tea stall by the Sunleaf Inn when dawn bells ring.",
       "Uphold expectations within The Lower Gardens."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -4615,10 +4444,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Hunter's Lodge bunk when dawn bells ring.",
       "Uphold expectations within Hunter's Quarter."
     ],
-    "defaultClassOptions": [
-      "Scout / Ranger",
-      "Archer / Marksman"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -4703,10 +4528,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Diamond Mine entrance when dawn bells ring.",
       "Uphold expectations within Diamond Mines."
     ],
-    "defaultClassOptions": [
-      "Ninja / Assassin",
-      "Swashbuckler / Duelist"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -4788,9 +4609,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Shrine of the Deep Current when dawn bells ring.",
       "Uphold expectations within The Port District."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "chaotic",
@@ -4878,10 +4696,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Bastion Fort ramparts when dawn bells ring.",
       "Uphold expectations within The Wetlands Wall."
     ],
-    "defaultClassOptions": [
-      "Knight / Paladin",
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "lawful",
       "goodVsEvil": "good",
@@ -4965,9 +4779,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Caravan staging yard wagon when dawn bells ring.",
       "Uphold expectations within The High Road District."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
@@ -5056,9 +4867,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Family farmstead when dawn bells ring.",
       "Uphold expectations within The Farmlands."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -5145,9 +4953,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "Report to Mine entrance barrack when dawn bells ring.",
       "Uphold expectations within The Mines."
     ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
-    ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
       "goodVsEvil": "neutral",
@@ -5232,9 +5037,6 @@ export const BACKSTORIES: RichBackstory[] = [
     "responsibilities": [
       "Report to Alleyway classroom when dawn bells ring.",
       "Uphold expectations within Little Terns."
-    ],
-    "defaultClassOptions": [
-      "Fighter / Warrior"
     ],
     "alignmentBias": {
       "lawVsChaos": "neutral",
