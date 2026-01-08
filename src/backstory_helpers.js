@@ -795,13 +795,16 @@ export function buildBackstoryInstance(backstory, character) {
   const biography = biographyParagraphs.join("\n\n");
   return {
     id: backstory.id,
-    jobId: backstory.jobId,
     title: renderBackstoryTextForCharacter(backstory.title, character, renderOverrides),
     characterName: renderBackstoryTextForCharacter(backstory.characterName, character, renderOverrides),
     race: renderBackstoryTextForCharacter(backstory.race, character, renderOverrides) || "",
     class: renderBackstoryTextForCharacter(backstory.class, character, renderOverrides) || "",
     alignment: renderBackstoryTextForCharacter(backstory.alignment, character, renderOverrides) || "",
     availableIn: [...(backstory.availableIn || [])],
+    allowedJobIds: Array.isArray(backstory.allowedJobIds) ? [...backstory.allowedJobIds] : undefined,
+    recommendedJobIds: Array.isArray(backstory.recommendedJobIds)
+      ? [...backstory.recommendedJobIds]
+      : undefined,
     biography,
     biographyParagraphs,
     spawnDistrict,
@@ -830,7 +833,6 @@ export function applyBackstoryLoadout(character, backstory, options = {}) {
     delete character.alignmentReflection;
     delete character.rumorEcho;
     delete character.backstoryHookIndex;
-    delete character.jobId;
   }
   const districtsSource = Array.isArray(backstory.allowedDistricts) && backstory.allowedDistricts.length
     ? backstory.allowedDistricts
@@ -853,16 +855,13 @@ export function applyBackstoryLoadout(character, backstory, options = {}) {
   const instance = buildBackstoryInstance(backstory, character);
   character.backstoryId = backstory.id;
   character.backstory = instance;
-  if (backstory.jobId) {
-    character.jobId = backstory.jobId;
-  }
   if (instance) {
     character.raceCadence = instance.raceCadence;
     character.trainingPhilosophy = instance.trainingPhilosophy;
     character.alignmentReflection = instance.alignmentReflection;
     character.rumorEcho = instance.rumorEcho;
   }
-  const job = backstory.jobId ? getJobById(backstory.jobId) : null;
+  const job = character.jobId ? getJobById(character.jobId) : null;
   if (job?.loadout) {
     applyLoadoutToCharacter(character, job.loadout, options);
   }
