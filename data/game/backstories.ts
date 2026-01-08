@@ -162,7 +162,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Greensoul Hill"
     },
-    "jobId": "Amnesiac Ward"
+    "jobId": "amnesiac-ward"
   },
   {
     "id": "apprentice-alchemist",
@@ -225,7 +225,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Lower Gardens, Craft Halls"
     },
-    "jobId": "Apprentice Alchemist"
+    "jobId": "apprentice-alchemist"
   },
   {
     "id": "apprentice-rope-maker",
@@ -280,7 +280,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Port District"
     },
-    "jobId": "Apprentice Rope Maker"
+    "jobId": "apprentice-rope-maker"
   },
   {
     "id": "bath-attendant",
@@ -335,7 +335,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Springs"
     },
-    "jobId": "Bath Attendant"
+    "jobId": "bath-attendant"
   },
   {
     "id": "caravan-guard",
@@ -389,7 +389,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Hill"
     },
-    "jobId": "Caravan Guard"
+    "jobId": "caravan-guard"
   },
   {
     "id": "caravan-merchant",
@@ -444,7 +444,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The High Road District"
     },
-    "jobId": "Caravan Merchant"
+    "jobId": "caravan-merchant"
   },
   {
     "id": "caravan-scribe",
@@ -499,7 +499,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in Central Plaza"
     },
-    "jobId": "Caravan Scribe"
+    "jobId": "caravan-scribe"
   },
   {
     "id": "cattle-drover",
@@ -554,7 +554,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Greenford"
     },
-    "jobId": "Cattle Drover"
+    "jobId": "cattle-drover"
   },
   {
     "id": "city-guard-recruit",
@@ -609,7 +609,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Upper Ward"
     },
-    "jobId": "City Guard Recruit"
+    "jobId": "city-guard-recruit"
   },
   {
     "id": "coin-engravers-child",
@@ -664,7 +664,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Crown District"
     },
-    "jobId": "Coin Engraver'S Child"
+    "jobId": "coin-engraver-s-child"
   },
   {
     "id": "coopers-yard-laborer",
@@ -718,7 +718,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Little Terns"
     },
-    "jobId": "Cooper'S Yard Laborer"
+    "jobId": "cooper-s-yard-laborer"
   },
   {
     "id": "crystal-prospector",
@@ -772,7 +772,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Mine"
     },
-    "jobId": "Crystal Prospector"
+    "jobId": "crystal-prospector"
   },
   {
     "id": "dwarven-smiths-apprentice",
@@ -827,7 +827,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in Cherry Rock"
     },
-    "jobId": "Dwarven Smith'S Apprentice"
+    "jobId": "dwarven-smith-s-apprentice"
   },
   {
     "id": "exotic-fruit-presser",
@@ -882,7 +882,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Artisan's Lane"
     },
-    "jobId": "Exotic Fruit Presser"
+    "jobId": "exotic-fruit-presser"
   },
   {
     "id": "fisher-scavenger",
@@ -937,7 +937,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Lakeside Quarter"
     },
-    "jobId": "Fisher Scavenger"
+    "jobId": "fisher-scavenger"
   },
   {
     "id": "fishmongers-assistant",
@@ -991,7 +991,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Port District"
     },
-    "jobId": "Fishmonger'S Assistant"
+    "jobId": "fishmonger-s-assistant"
   },
   {
     "id": "flatboat-pilot",
@@ -1046,7 +1046,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Everrise Bridge"
     },
-    "jobId": "Flatboat Pilot"
+    "jobId": "flatboat-pilot"
   },
   {
     "id": "fledgling-adventurer",
@@ -1109,7 +1109,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Little Terns, The Farmlands"
     },
-    "jobId": "Fledgling Adventurer"
+    "jobId": "fledgling-adventurer"
   },
   {
     "id": "foragers-apprentice",
@@ -1164,7 +1164,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in Residences & Community"
     },
-    "jobId": "Forager'S Apprentice"
+    "jobId": "forager-s-apprentice"
   },
   {
     "id": "gardener-laborer",
@@ -1218,7 +1218,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Lower Gardens"
     },
-    "jobId": "Gardener Laborer"
+    "jobId": "gardener-laborer"
   },
   {
     "id": "gate-guard",
@@ -1272,7 +1272,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The High Road District"
     },
-    "jobId": "Gate Guard"
+    "jobId": "gate-guard"
   },
   {
     "id": "gate-smith",
@@ -1326,7 +1326,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Greatwood Gate District"
     },
-    "jobId": "Gate Smith"
+    "jobId": "gate-smith"
   },
   {
     "id": "glassblowers-apprentice",
@@ -1380,7 +1380,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Forge District"
     },
-    "jobId": "Glassblower'S Apprentice"
+    "jobId": "glassblower-s-apprentice"
   },
   {
     "id": "glasswright-apprentice",
@@ -1435,7 +1435,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in West Corona"
     },
-    "jobId": "Glasswright Apprentice"
+    "jobId": "glasswright-apprentice"
   },
   {
     "id": "guild-clerk",
@@ -1490,7 +1490,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Stoneknot"
     },
-    "jobId": "Guild Clerk"
+    "jobId": "guild-clerk"
   },
   {
     "id": "gutter-orphan",
@@ -1544,7 +1544,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Western Slums"
     },
-    "jobId": "Gutter Orphan"
+    "jobId": "gutter-orphan"
   },
   {
     "id": "herbal-gatherer",
@@ -1599,7 +1599,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Greensoul Hill"
     },
-    "jobId": "Herbal Gatherer"
+    "jobId": "herbal-gatherer"
   },
   {
     "id": "iron-watch-recruit",
@@ -1653,7 +1653,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in Fortress Quarter"
     },
-    "jobId": "Iron Watch Recruit"
+    "jobId": "iron-watch-recruit"
   },
   {
     "id": "junior-quartermaster",
@@ -1708,7 +1708,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Military Ward"
     },
-    "jobId": "Junior Quartermaster"
+    "jobId": "junior-quartermaster"
   },
   {
     "id": "leatherwrights-journeyman",
@@ -1763,7 +1763,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Artisan's Row"
     },
-    "jobId": "Leatherwright'S Journeyman"
+    "jobId": "leatherwright-s-journeyman"
   },
   {
     "id": "log-driver",
@@ -1817,7 +1817,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Lumberworks"
     },
-    "jobId": "Log Driver"
+    "jobId": "log-driver"
   },
   {
     "id": "market-gardener",
@@ -1872,7 +1872,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Brightshade"
     },
-    "jobId": "Market Gardener"
+    "jobId": "market-gardener"
   },
   {
     "id": "messenger-page",
@@ -1927,7 +1927,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Citadel Quarter"
     },
-    "jobId": "Messenger Page"
+    "jobId": "messenger-page"
   },
   {
     "id": "monk-in-training",
@@ -1981,7 +1981,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Greensoul Hill"
     },
-    "jobId": "Monk-In-Training"
+    "jobId": "monk-in-training"
   },
   {
     "id": "orchard-picker",
@@ -2036,7 +2036,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Surrounding Farmlands & Orchards"
     },
-    "jobId": "Orchard Picker"
+    "jobId": "orchard-picker"
   },
   {
     "id": "ostracized-noble",
@@ -2090,7 +2090,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Upper Ward"
     },
-    "jobId": "Ostracized Noble"
+    "jobId": "ostracized-noble"
   },
   {
     "id": "pearl-diver",
@@ -2145,7 +2145,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The South Docks & Steel Docks"
     },
-    "jobId": "Pearl Diver"
+    "jobId": "pearl-diver"
   },
   {
     "id": "quest-board-runner",
@@ -2200,7 +2200,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Central Plaza"
     },
-    "jobId": "Quest Board Runner"
+    "jobId": "quest-board-runner"
   },
   {
     "id": "reed-gatherer",
@@ -2255,7 +2255,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Farmlands"
     },
-    "jobId": "Reed Gatherer"
+    "jobId": "reed-gatherer"
   },
   {
     "id": "river-trader",
@@ -2310,7 +2310,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Misty Crossing"
     },
-    "jobId": "River Trader"
+    "jobId": "river-trader"
   },
   {
     "id": "road-scout",
@@ -2364,7 +2364,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Barracks"
     },
-    "jobId": "Road Scout"
+    "jobId": "road-scout"
   },
   {
     "id": "sap-collector",
@@ -2419,7 +2419,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Fields & Orchards"
     },
-    "jobId": "Sap Collector"
+    "jobId": "sap-collector"
   },
   {
     "id": "sawyer",
@@ -2474,7 +2474,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Lumberworks"
     },
-    "jobId": "Sawyer"
+    "jobId": "sawyer"
   },
   {
     "id": "scribes-apprentice",
@@ -2528,7 +2528,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Upper Ward"
     },
-    "jobId": "Scribe'S Apprentice"
+    "jobId": "scribe-s-apprentice"
   },
   {
     "id": "smugglers-runner",
@@ -2582,7 +2582,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Northern Slums"
     },
-    "jobId": "Smuggler'S Runner"
+    "jobId": "smuggler-s-runner"
   },
   {
     "id": "street-artist",
@@ -2637,7 +2637,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Stonecrest Town"
     },
-    "jobId": "Street Artist"
+    "jobId": "street-artist"
   },
   {
     "id": "street-performer",
@@ -2692,7 +2692,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Old City"
     },
-    "jobId": "Street Performer"
+    "jobId": "street-performer"
   },
   {
     "id": "tea-picker",
@@ -2747,7 +2747,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Terraces & Farms"
     },
-    "jobId": "Tea Picker"
+    "jobId": "tea-picker"
   },
   {
     "id": "tea-stall-owner",
@@ -2802,7 +2802,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Lower Gardens"
     },
-    "jobId": "Tea Stall Owner"
+    "jobId": "tea-stall-owner"
   },
   {
     "id": "trapper",
@@ -2856,7 +2856,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Hunter's Quarter"
     },
-    "jobId": "Trapper"
+    "jobId": "trapper"
   },
   {
     "id": "tunnel-scout",
@@ -2910,7 +2910,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Diamond Mines"
     },
-    "jobId": "Tunnel Scout"
+    "jobId": "tunnel-scout"
   },
   {
     "id": "unemployed-vagrant",
@@ -2963,7 +2963,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Port District"
     },
-    "jobId": "Unemployed Vagrant"
+    "jobId": "unemployed-vagrant"
   },
   {
     "id": "veteran-watchman",
@@ -3017,7 +3017,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Wetlands Wall"
     },
-    "jobId": "Veteran Watchman"
+    "jobId": "veteran-watchman"
   },
   {
     "id": "wagoneer",
@@ -3071,7 +3071,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The High Road District"
     },
-    "jobId": "Wagoneer"
+    "jobId": "wagoneer"
   },
   {
     "id": "young-farmhand",
@@ -3126,7 +3126,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Farmlands"
     },
-    "jobId": "Young Farmhand"
+    "jobId": "young-farmhand"
   },
   {
     "id": "young-miner",
@@ -3180,7 +3180,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Mines"
     },
-    "jobId": "Young Miner"
+    "jobId": "young-miner"
   },
   {
     "id": "young-tutor",
@@ -3235,7 +3235,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Little Terns"
     },
-    "jobId": "Young Tutor"
+    "jobId": "young-tutor"
   }
 ];
 

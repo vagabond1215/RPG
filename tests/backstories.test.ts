@@ -223,7 +223,7 @@ describe("backstory helpers", () => {
   it("grants loadout currency, items, and proficiencies", () => {
     const baseBackstory = BACKSTORY_BY_ID["backstory_waves_break_tideward_1"];
     if (!baseBackstory) throw new Error("missing test backstory");
-    const job = getJobById("Caravan Guard");
+    const job = getJobById("caravan-guard");
     if (!job) throw new Error("missing test job");
 
     const loadoutBackstory = {
