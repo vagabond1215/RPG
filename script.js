@@ -48,6 +48,12 @@ import {
   getBackstoriesForLocation,
 } from "./src/backstory_helpers.js";
 import { composeBiography } from "./src/bio/composeBiography.js";
+import {
+  DEFAULT_JOB_ID,
+  LEGACY_JOB_ID_MAP,
+  migrateCharacter as migrateCharacterRecord,
+  migrateDraft as migrateCharacterDraft,
+} from "./src/character_migration.js";
 import { initHookWheel } from "./src/ui/hooksWheel.js";
 import {
   elementalProficiencyMap,
@@ -122,88 +128,26 @@ const REST_ACTION_ICON = 'assets/images/icons/actions/Rest.png';
 
 const CHARACTER_SCHEMA_VERSION = 1;
 const DRAFT_VERSION = 2;
-const DEFAULT_JOB_ID = 'fledgling-adventurer';
 const DEV_HOSTS = new Set(['localhost', '127.0.0.1', '::1']);
-
-const normalizeLegacyJobKey = value => String(value || '').trim().toLowerCase();
-
-const LEGACY_JOB_ID_MAP = (() => {
-  const map = new Map();
-  const entries = Object.values(BACKSTORY_BY_ID || {});
-  entries.forEach(entry => {
-    if (!entry || !entry.id) return;
-    const jobId = entry.id;
-    map.set(normalizeLegacyJobKey(jobId), jobId);
-    if (entry.title) {
-      map.set(normalizeLegacyJobKey(entry.title), jobId);
-    }
-    if (typeof entry.hook === 'string' && entry.hook.trim()) {
-      map.set(normalizeLegacyJobKey(entry.hook), jobId);
-    }
-    if (Array.isArray(entry.legacyBackgrounds)) {
-      entry.legacyBackgrounds.forEach(bg => {
-        if (bg) map.set(normalizeLegacyJobKey(bg), jobId);
-      });
-    }
-    if (Array.isArray(entry.hooks)) {
-      entry.hooks.forEach(hook => {
-        if (hook?.id) map.set(normalizeLegacyJobKey(hook.id), jobId);
-        if (hook?.label) map.set(normalizeLegacyJobKey(hook.label), jobId);
-      });
-    }
-  });
-  return map;
-})();
 
 const isDevBuild = () => DEV_HOSTS.has(window.location.hostname) || window.location.hostname.endsWith('.local');
 
-function resolveLegacyJobId(jobId) {
-  const normalized = normalizeLegacyJobKey(jobId);
-  if (!normalized) return null;
-  const mapped = LEGACY_JOB_ID_MAP.get(normalized);
-  if (mapped) return mapped;
-  if (getJobById(jobId)) return jobId;
-  return DEFAULT_JOB_ID;
-}
-
 function migrateCharacter(character) {
-  if (!character || typeof character !== 'object') return character;
-  const version = Number(character.schemaVersion ?? character.saveVersion ?? 0);
-  if (version < CHARACTER_SCHEMA_VERSION && character.jobId) {
-    const resolved = resolveLegacyJobId(character.jobId);
-    if (resolved && resolved !== character.jobId) {
-      const normalized = normalizeLegacyJobKey(character.jobId);
-      if (resolved === DEFAULT_JOB_ID && !LEGACY_JOB_ID_MAP.has(normalized) && isDevBuild()) {
-        console.warn(
-          `Unknown legacy jobId "${character.jobId}" detected. Defaulting to "${DEFAULT_JOB_ID}".`
-        );
-      }
-      character.jobId = resolved;
-    }
-  }
-  character.schemaVersion = CHARACTER_SCHEMA_VERSION;
-  return character;
+  return migrateCharacterRecord(character, {
+    legacyJobIdMap: LEGACY_JOB_ID_MAP,
+    schemaVersion: CHARACTER_SCHEMA_VERSION,
+    isDevBuild: isDevBuild(),
+    warn: console.warn,
+  });
 }
 
 function migrateDraft(draft) {
-  if (!draft || typeof draft !== 'object') return draft;
-  if (!draft.chosenJobId && draft.jobId) {
-    draft.chosenJobId = draft.jobId;
-  }
-  if (draft.chosenJobId) {
-    const resolved = resolveLegacyJobId(draft.chosenJobId);
-    if (resolved && resolved !== draft.chosenJobId) {
-      const normalized = normalizeLegacyJobKey(draft.chosenJobId);
-      if (resolved === DEFAULT_JOB_ID && !LEGACY_JOB_ID_MAP.has(normalized) && isDevBuild()) {
-        console.warn(
-          `Unknown legacy draft jobId "${draft.chosenJobId}" detected. Defaulting to "${DEFAULT_JOB_ID}".`
-        );
-      }
-      draft.chosenJobId = resolved;
-    }
-  }
-  draft.draftVersion = DRAFT_VERSION;
-  return draft;
+  return migrateCharacterDraft(draft, {
+    legacyJobIdMap: LEGACY_JOB_ID_MAP,
+    draftVersion: DRAFT_VERSION,
+    isDevBuild: isDevBuild(),
+    warn: console.warn,
+  });
 }
 const REST_BASE_DURATION_MINUTES = 30;
 const REST_DURATION_VARIANCE_MINUTES = 8;
