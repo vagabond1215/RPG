@@ -7,6 +7,7 @@ import {
   parseCurrency,
   renderBackstoryString,
 } from "../data/game/backstories.js";
+import { getJobById } from "../data/game/jobs.js";
 import {
   applyBackstoryLoadout,
   ensureBackstoryInstance,
@@ -222,18 +223,12 @@ describe("backstory helpers", () => {
   it("grants loadout currency, items, and proficiencies", () => {
     const baseBackstory = BACKSTORY_BY_ID["backstory_waves_break_tideward_1"];
     if (!baseBackstory) throw new Error("missing test backstory");
+    const job = getJobById("Caravan Guard");
+    if (!job) throw new Error("missing test job");
 
     const loadoutBackstory = {
       ...JSON.parse(JSON.stringify(baseBackstory)),
-      loadout: {
-        currency: "3 gp 17 sp 42 cp",
-        items: ["Seafarer's ledger", "Tidewall lantern"],
-        equipment: ["Short sword"],
-        skills: ["Navigation", "Tide charts"],
-        craftProficiencies: { "Cartography ": 18 },
-        gatheringProficiencies: { foraging: "12" },
-        combatTraining: ["Sword drills", "Shield forms"],
-      },
+      jobId: job.id,
     };
 
     const character = {
@@ -252,30 +247,42 @@ describe("backstory helpers", () => {
       secret: "an uncashed letter",
       backstorySeed: "a tidewall ledger",
       money: { ...characterTemplate.money, gold: 1 },
-      inventory: ["Tidewall lantern", "tidewall lantern", { name: "Notebook" }],
-      skills: ["Navigation"],
-      craftProficiencies: { Cartography: 10 },
+      inventory: [
+        ...(job.loadout.items?.slice(0, 1) ?? []),
+        job.loadout.items?.[0]?.toUpperCase?.() ?? "",
+        { name: "Notebook" },
+      ].filter(Boolean),
+      skills: [...(job.loadout.skills?.slice(0, 1) ?? [])],
+      craftProficiencies: { ...(job.loadout.craftProficiencies || {}) },
       gatheringProficiencies: {},
-      combatTraining: ["Sword drills"],
+      combatTraining: [...(job.loadout.combatTraining?.slice(0, 1) ?? [])],
     };
 
     applyBackstoryLoadout(character, loadoutBackstory, { reset: true });
 
-    expect(character.money.gold).toBe(3);
-    expect(character.money.silver).toBe(17);
-    expect(character.money.copper).toBe(42);
+    expect(character.jobId).toBe(job.id);
+    expect(character.money.gold).toBe(job.loadout.currency.gold);
+    expect(character.money.silver).toBe(job.loadout.currency.silver);
+    expect(character.money.copper).toBe(job.loadout.currency.copper);
 
-    expect(character.inventory.filter(item => typeof item === "string")).toEqual([
-      "Tidewall lantern",
-      "Seafarer's ledger",
-      "Short sword",
-    ]);
+    const inventoryStrings = character.inventory.filter(item => typeof item === "string");
+    const expectedItems = [
+      ...(job.loadout.items ?? []),
+      ...(job.loadout.equipment ?? []),
+    ];
+    for (const item of expectedItems) {
+      expect(inventoryStrings).toContain(item);
+    }
     expect(character.inventory.find(item => typeof item === "object" && item?.name === "Notebook")).toBeTruthy();
 
-    expect(character.skills).toEqual(["Navigation", "Tide charts"]);
-    expect(character.craftProficiencies).toHaveProperty("Cartography", 18);
-    expect(character.gatheringProficiencies).toHaveProperty("foraging", 12);
-    expect(character.combatTraining).toEqual(["Sword drills", "Shield forms"]);
+    expect(character.skills).toEqual(job.loadout.skills);
+    for (const [key, value] of Object.entries(job.loadout.craftProficiencies || {})) {
+      expect(character.craftProficiencies).toHaveProperty(key, value);
+    }
+    for (const [key, value] of Object.entries(job.loadout.gatheringProficiencies || {})) {
+      expect(character.gatheringProficiencies).toHaveProperty(key, value);
+    }
+    expect(character.combatTraining).toEqual(job.loadout.combatTraining || []);
   });
 
   it("ensures an instance can be rebuilt from an id", () => {

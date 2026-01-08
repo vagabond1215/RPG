@@ -11,6 +11,7 @@ import {
 import { LOCATIONS } from "../data/game/locations.js";
 import { BACKSTORIES, BACKSTORY_BY_ID } from "../data/game/backstories.js";
 import { BACKSTORY_IDS_BY_LOCATION } from "../data/game/backstory_ids_by_location.js";
+import { JOBS } from "../data/game/jobs.js";
 
 describe("proficiency registry", () => {
   it("extracts herbalism from mixed requirement strings", () => {
@@ -143,11 +144,11 @@ describe("proficiency registry", () => {
     }
   });
 
-  it("maps backstory crafting and gathering proficiencies to registered entries", () => {
+  it("maps job crafting and gathering proficiencies to registered entries", () => {
     const missing: { id: string; key: string }[] = [];
 
-    for (const backstory of BACKSTORIES) {
-      const loadout = backstory.loadout || {};
+    for (const job of JOBS) {
+      const loadout = job.loadout || {};
       const tables = [
         loadout.craftProficiencies || {},
         loadout.gatheringProficiencies || {},
@@ -160,7 +161,7 @@ describe("proficiency registry", () => {
           if (labelMatch) uniqueIds.add(labelMatch.id);
           for (const def of keyMatches) uniqueIds.add(def.id);
           if (uniqueIds.size === 0) {
-            missing.push({ id: backstory.id, key: rawKey });
+            missing.push({ id: job.id, key: rawKey });
           }
         }
       }
@@ -194,4 +195,3 @@ describe("proficiency registry", () => {
     expect(missing).toEqual([]);
   });
 });
-
