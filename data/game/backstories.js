@@ -55,11 +55,6 @@ const LOCATION_FILTER_CACHE = new Map(
   Object.entries(LOCATION_FILTER_METADATA || {}).map(([location, info]) => [
     location,
     {
-      classTokens: new Set(
-        Array.isArray(info?.classes)
-          ? info.classes.map(token => normalizeSimpleToken(token)).filter(Boolean)
-          : []
-      ),
       lawVsChaos: new Set(
         Array.isArray(info?.lawVsChaos)
           ? info.lawVsChaos.map(value => normalizeSimpleToken(value)).filter(Boolean)
@@ -76,10 +71,6 @@ const LOCATION_FILTER_CACHE = new Map(
 
 const ALIGNMENT_LAW_VALUES = new Set(["lawful", "neutral", "chaotic"]);
 const ALIGNMENT_GOOD_VALUES = new Set(["good", "neutral", "evil"]);
-
-function normalizeClassName(value) {
-  return normalizeSimpleToken(value);
-}
 
 function normalizeRaceName(value) {
   if (typeof value !== "string") return "";
@@ -128,22 +119,6 @@ function raceMatches(entry, normalizedRace) {
   const tags = Array.isArray(entry?.raceTags) ? entry.raceTags : [];
   if (!tags.length) return true;
   return tags.includes(normalizedRace);
-}
-
-function matchesClass(entry, normalizedClass) {
-  if (!normalizedClass) return true;
-  let sawMetadata = false;
-  for (const location of entry?.availableIn || []) {
-    const metadata = LOCATION_FILTER_CACHE.get(location);
-    if (!metadata) continue;
-    if (metadata.classTokens && metadata.classTokens.size) {
-      sawMetadata = true;
-      if (metadata.classTokens.has(normalizedClass)) {
-        return true;
-      }
-    }
-  }
-  return !sawMetadata;
 }
 
 function evaluateLocationAlignment(metadata, criteria) {
@@ -582,13 +557,11 @@ export const LEGACY_BACKSTORY_LOOKUP = new Map();
 export function getBackstoriesByCriteria(criteria = {}) {
   const { location } = criteria;
   const raceRequirement = normalizeRaceName(criteria?.race);
-  const classRequirement = normalizeClassName(criteria?.className);
   const alignmentRequirement = parseAlignmentCriteria(criteria?.alignment);
 
   return BACKSTORIES.filter(entry => {
     if (location && !entry.availableIn.includes(location)) return false;
     if (raceRequirement && !raceMatches(entry, raceRequirement)) return false;
-    if (classRequirement && !matchesClass(entry, classRequirement)) return false;
     if (alignmentRequirement && !matchesAlignment(entry, alignmentRequirement)) return false;
     return true;
   });
@@ -619,4 +592,3 @@ export function registerBiographyBeatTags(contextTags, tags) {
     if (normalized) contextTags.add(normalized);
   }
 }
-
