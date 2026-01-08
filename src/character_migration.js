@@ -1,12 +1,21 @@
 import { BACKSTORY_BY_ID } from "../data/game/backstories.js";
-import { getJobById } from "../data/game/jobs.js";
+import { JOBS, getJobById } from "../data/game/jobs.js";
 
 export const DEFAULT_JOB_ID = "fledgling-adventurer";
 
 export const normalizeLegacyJobKey = value => String(value || "").trim().toLowerCase();
 
-export function createLegacyJobIdMap(backstoryById = BACKSTORY_BY_ID) {
+export function createLegacyJobIdMap(backstoryById = BACKSTORY_BY_ID, jobs = JOBS) {
   const map = new Map();
+  if (Array.isArray(jobs)) {
+    jobs.forEach(job => {
+      if (!job?.id) return;
+      map.set(normalizeLegacyJobKey(job.id), job.id);
+      if (job.name) {
+        map.set(normalizeLegacyJobKey(job.name), job.id);
+      }
+    });
+  }
   const entries = Object.values(backstoryById || {});
   entries.forEach(entry => {
     if (!entry || !entry.id) return;
