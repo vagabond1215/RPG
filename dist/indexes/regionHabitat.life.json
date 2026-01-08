@@ -31,6 +31,7 @@
         "hippopotamus",
         "peruvian_lake_grebe",
         "rainbow_trout",
+        "tilapia",
         "turtle",
         "whitefish"
       ],
@@ -108,6 +109,7 @@
         "squid",
         "starfish",
         "thornback-ray",
+        "tuna",
         "twaite-shad",
         "whale",
         "whiting"
@@ -122,7 +124,8 @@
     },
     "ponds": {
       "animals": [
-        "nam_song_rice_paddy_eel"
+        "nam_song_rice_paddy_eel",
+        "tilapia"
       ],
       "plants": []
     },
@@ -174,6 +177,7 @@
         "stickleback",
         "sturgeon",
         "tench",
+        "tilapia",
         "trout",
         "turtle",
         "wels-catfish"
@@ -748,6 +752,7 @@
         "cattle",
         "chicken",
         "city_terrier_dog",
+        "cow",
         "dachshund",
         "dog",
         "donkey",
@@ -770,6 +775,7 @@
         "lowland_hound_dog",
         "mule",
         "northern_husky_dog",
+        "ox",
         "partridge",
         "peafowl",
         "pheasant",
@@ -783,6 +789,7 @@
         "starling",
         "swallow",
         "tiny_companion_dog",
+        "water_buffalo",
         "water_retriever_dog",
         "working_shepherd_dog"
       ],
@@ -1033,12 +1040,15 @@
         "yarrow",
         "yautia",
         "yorkshire_ryegrass_pasture",
-        "zagreb_plum_orchard"
+        "zagreb_plum_orchard",
+        "zenith_ember_pepper",
+        "zenith_moonlit_rice"
       ]
     },
     "floodplains": {
       "animals": [
-        "qinghai_steppe_crane"
+        "qinghai_steppe_crane",
+        "water_buffalo"
       ],
       "plants": []
     },
@@ -1365,7 +1375,11 @@
         "willow",
         "wood-sorrel",
         "woodland_bittersweet",
-        "yew"
+        "yew",
+        "yggdrasil_sapling",
+        "yurei_blossom",
+        "zenith_glowberry_vine",
+        "zenith_stamina_mushroom"
       ]
     },
     "grassland": {
@@ -1380,6 +1394,7 @@
         "camelopard",
         "cattle",
         "chicken",
+        "cow",
         "coyote",
         "draft-horse",
         "elephant",
@@ -1394,6 +1409,7 @@
         "lion",
         "llama",
         "mole",
+        "ox",
         "plains_gnu",
         "prairie_dog",
         "quail",
@@ -1458,7 +1474,8 @@
         "wheat",
         "wild-thyme",
         "wormwood",
-        "yorkshire_ryegrass_pasture"
+        "yorkshire_ryegrass_pasture",
+        "zenith_ember_pepper"
       ]
     },
     "hills": {
@@ -1504,7 +1521,9 @@
         "rhine_riesling_vine",
         "rye",
         "transylvanian_beech_mast",
-        "zagreb_plum_orchard"
+        "yggdrasil_sapling",
+        "zagreb_plum_orchard",
+        "zenith_glowberry_vine"
       ]
     },
     "hot_desert": {
@@ -1557,6 +1576,7 @@
         "stork",
         "teal",
         "toad",
+        "water_buffalo",
         "white-pelican",
         "whooper-swan",
         "wigeon",
@@ -1604,7 +1624,8 @@
         "bank_cress",
         "boxelder_maple",
         "california_sycamore",
-        "canyon_sycamore"
+        "canyon_sycamore",
+        "zenith_moonlit_rice"
       ]
     },
     "rivers": {
@@ -1790,7 +1811,8 @@
       "animals": [
         "duck",
         "goose",
-        "jinxian_rice_paddy_frog"
+        "jinxian_rice_paddy_frog",
+        "water_buffalo"
       ],
       "plants": []
     },
@@ -1809,7 +1831,8 @@
         "jinxian_rice_paddy_frog",
         "kafue_floodplain_lechwe",
         "laguna_capybara",
-        "nyasa_sitatunga"
+        "nyasa_sitatunga",
+        "water_buffalo"
       ],
       "plants": []
     },
@@ -1844,7 +1867,8 @@
         "kafue_floodplain_lechwe",
         "marshland_mongoose",
         "muskrat",
-        "okefenokee_bullfrog"
+        "okefenokee_bullfrog",
+        "water_buffalo"
       ],
       "plants": []
     },

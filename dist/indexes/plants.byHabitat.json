@@ -312,7 +312,9 @@
     "yarrow",
     "yautia",
     "yorkshire_ryegrass_pasture",
-    "zagreb_plum_orchard"
+    "zagreb_plum_orchard",
+    "zenith_ember_pepper",
+    "zenith_moonlit_rice"
   ],
   "forest": [
     "aconite",
@@ -450,7 +452,11 @@
     "winterberry_holly",
     "wood-sorrel",
     "woodland_bittersweet",
-    "yew"
+    "yew",
+    "yggdrasil_sapling",
+    "yurei_blossom",
+    "zenith_glowberry_vine",
+    "zenith_stamina_mushroom"
   ],
   "grassland": [
     "annual_sow_thistle",
@@ -507,7 +513,8 @@
     "wheat",
     "wild-thyme",
     "wormwood",
-    "yorkshire_ryegrass_pasture"
+    "yorkshire_ryegrass_pasture",
+    "zenith_ember_pepper"
   ],
   "hills": [
     "bitter_nightshade",
@@ -536,7 +543,9 @@
     "rhine_riesling_vine",
     "rye",
     "transylvanian_beech_mast",
-    "zagreb_plum_orchard"
+    "yggdrasil_sapling",
+    "zagreb_plum_orchard",
+    "zenith_glowberry_vine"
   ],
   "urban": [
     "black_nightshade",
@@ -595,7 +604,8 @@
     "ganges_floating_rice",
     "kinabatangan_water_spinach",
     "lowcountry_pawpaw",
-    "orinoco_sagittaria"
+    "orinoco_sagittaria",
+    "zenith_moonlit_rice"
   ],
   "lake": [
     "amazon_floating_pistia",
