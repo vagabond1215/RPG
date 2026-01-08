@@ -27,26 +27,10 @@ export interface AppearanceDescriptor {
   motifs: string[];
 }
 
-export interface LoadoutDescriptor {
-  currency: CurrencyValue;
-  items: string[];
-  equipment: string[];
-  skills: string[];
-  craftProficiencies?: Record<string, number>;
-  gatheringProficiencies?: Record<string, number>;
-  combatTraining?: string[];
-}
-
 export interface AlignmentBias {
   lawVsChaos: "lawful" | "neutral" | "chaotic";
   goodVsEvil: "good" | "neutral" | "evil";
   notes: string;
-}
-
-export interface JobBranching {
-  startingRole: string;
-  advancement: string[];
-  sidePaths: string[];
 }
 
 export interface RichBackstory {
@@ -59,10 +43,9 @@ export interface RichBackstory {
   motivation: string[];
   appearance: AppearanceDescriptor;
   themes: string[];
-  loadout: LoadoutDescriptor;
+  jobId: string;
   responsibilities: string[];
   alignmentBias: AlignmentBias;
-  jobBranching: JobBranching;
 }
 
 export function getPronouns(sex: string): PronounSet {
@@ -170,27 +153,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "greensoul hill",
       "amnesiac ward"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "scorched pendant"
-      ],
-      "equipment": [],
-      "skills": [
-        "sketching"
-      ],
-      "craftProficiencies": {
-        "drawing": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Monastery healing ward when dawn bells ring.",
       "Uphold expectations within Greensoul Hill."
@@ -200,16 +162,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Greensoul Hill"
     },
-    "jobBranching": {
-      "startingRole": "Amnesiac Ward",
-      "advancement": [
-        "Amnesiac Ward Veteran",
-        "Noted Amnesiac Ward"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Amnesiac Ward"
   },
   {
     "id": "apprentice-alchemist",
@@ -262,32 +215,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "craft halls",
       "apprentice alchemist"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 3,
-        "gold": 0
-      },
-      "items": [
-        "stained gloves",
-        "mixing kit",
-        "mixing spoon",
-        "pouch of salts"
-      ],
-      "equipment": [],
-      "skills": [
-        "potion brewing",
-        "measuring",
-        "precise measuring"
-      ],
-      "craftProficiencies": {
-        "alchemy": 20
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Emberflask workshop cot when dawn bells ring.",
       "Report to Alchemists' Hall bunk when dawn bells ring.",
@@ -298,16 +225,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Lower Gardens, Craft Halls"
     },
-    "jobBranching": {
-      "startingRole": "Apprentice Alchemist",
-      "advancement": [
-        "Journeyman Alchemist",
-        "Master Alchemist"
-      ],
-      "sidePaths": [
-        "Guild Instructor"
-      ]
-    }
+    "jobId": "Apprentice Alchemist"
   },
   {
     "id": "apprentice-rope-maker",
@@ -353,29 +271,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the port district",
       "apprentice rope maker"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 2,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "bone needle",
-        "spool of twine"
-      ],
-      "equipment": [],
-      "skills": [
-        "knot tying",
-        "net repair"
-      ],
-      "craftProficiencies": {
-        "rope": 20
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "No real experience"
-      ]
-    },
     "responsibilities": [
       "Report to Ropewalk loft when dawn bells ring.",
       "Uphold expectations within The Port District."
@@ -385,16 +280,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Port District"
     },
-    "jobBranching": {
-      "startingRole": "Apprentice Rope Maker",
-      "advancement": [
-        "Journeyman Rope Maker",
-        "Master Rope Maker"
-      ],
-      "sidePaths": [
-        "Guild Instructor"
-      ]
-    }
+    "jobId": "Apprentice Rope Maker"
   },
   {
     "id": "bath-attendant",
@@ -440,29 +326,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the springs",
       "bath attendant"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 4,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "towel bundle",
-        "vial of spring water"
-      ],
-      "equipment": [],
-      "skills": [
-        "massage",
-        "herbal lore"
-      ],
-      "craftProficiencies": {
-        "alchemy": 5
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Terraced Hot Springs when dawn bells ring.",
       "Uphold expectations within The Springs."
@@ -472,16 +335,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Springs"
     },
-    "jobBranching": {
-      "startingRole": "Bath Attendant",
-      "advancement": [
-        "Bath Attendant Veteran",
-        "Noted Bath Attendant"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Bath Attendant"
   },
   {
     "id": "caravan-guard",
@@ -526,29 +380,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the hill",
       "caravan guard"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 8,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "travel cloak",
-        "short sword"
-      ],
-      "equipment": [
-        "short sword"
-      ],
-      "skills": [
-        "guarding",
-        "intimidation"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Sword proficiency 20 (novice)"
-      ]
-    },
     "responsibilities": [
       "Report to Caravanserai of the Hill bunk when dawn bells ring.",
       "Uphold expectations within The Hill."
@@ -558,16 +389,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Hill"
     },
-    "jobBranching": {
-      "startingRole": "Caravan Guard",
-      "advancement": [
-        "Watch Sergeant",
-        "City Captain"
-      ],
-      "sidePaths": [
-        "Investigator"
-      ]
-    }
+    "jobId": "Caravan Guard"
   },
   {
     "id": "caravan-merchant",
@@ -613,27 +435,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the high road district",
       "caravan merchant"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 10,
-        "silver": 1,
-        "gold": 0
-      },
-      "items": [
-        "merchant's ledger",
-        "lockbox"
-      ],
-      "equipment": [],
-      "skills": [
-        "appraisal",
-        "negotiation"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Beginner"
-      ]
-    },
     "responsibilities": [
       "Report to Caravan Square stall when dawn bells ring.",
       "Uphold expectations within The High Road District."
@@ -643,16 +444,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The High Road District"
     },
-    "jobBranching": {
-      "startingRole": "Caravan Merchant",
-      "advancement": [
-        "Caravan Lead",
-        "Guild Factor"
-      ],
-      "sidePaths": [
-        "Quartermaster"
-      ]
-    }
+    "jobId": "Caravan Merchant"
   },
   {
     "id": "caravan-scribe",
@@ -698,27 +490,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "central plaza",
       "caravan scribe"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 6,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "quill",
-        "bundle of contracts"
-      ],
-      "equipment": [],
-      "skills": [
-        "record keeping",
-        "bargaining"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Merchant's Exchange stall when dawn bells ring.",
       "Uphold expectations within Central Plaza."
@@ -728,16 +499,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in Central Plaza"
     },
-    "jobBranching": {
-      "startingRole": "Caravan Scribe",
-      "advancement": [
-        "Caravan Scribe Veteran",
-        "Noted Caravan Scribe"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Caravan Scribe"
   },
   {
     "id": "cattle-drover",
@@ -783,27 +545,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "greenford",
       "cattle drover"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 4,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "crook",
-        "leather satchel"
-      ],
-      "equipment": [],
-      "skills": [
-        "animal handling",
-        "whistling"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Staff proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Cattle Yards corral when dawn bells ring.",
       "Uphold expectations within Greenford."
@@ -813,16 +554,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Greenford"
     },
-    "jobBranching": {
-      "startingRole": "Cattle Drover",
-      "advancement": [
-        "Cattle Drover Veteran",
-        "Noted Cattle Drover"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Cattle Drover"
   },
   {
     "id": "city-guard-recruit",
@@ -868,30 +600,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the upper ward",
       "city guard recruit"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 3,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "dented shield",
-        "short spear"
-      ],
-      "equipment": [
-        "dented shield",
-        "short spear"
-      ],
-      "skills": [
-        "spear drills",
-        "watchfulness"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Spear proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Gatewatch Barracks bunk when dawn bells ring.",
       "Uphold expectations within The Upper Ward."
@@ -901,16 +609,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Upper Ward"
     },
-    "jobBranching": {
-      "startingRole": "City Guard Recruit",
-      "advancement": [
-        "Watch Sergeant",
-        "City Captain"
-      ],
-      "sidePaths": [
-        "Investigator"
-      ]
-    }
+    "jobId": "City Guard Recruit"
   },
   {
     "id": "coin-engravers-child",
@@ -956,29 +655,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "crown district",
       "coin engraver's child"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 1,
-        "gold": 0
-      },
-      "items": [
-        "engraving chisel",
-        "wax tablet"
-      ],
-      "equipment": [],
-      "skills": [
-        "engraving",
-        "design"
-      ],
-      "craftProficiencies": {
-        "engraving": 15
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Guild Palace workshop when dawn bells ring.",
       "Uphold expectations within Crown District."
@@ -988,16 +664,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Crown District"
     },
-    "jobBranching": {
-      "startingRole": "Coin Engraver'S Child",
-      "advancement": [
-        "Coin Engraver'S Child Veteran",
-        "Noted Coin Engraver'S Child"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Coin Engraver'S Child"
   },
   {
     "id": "coopers-yard-laborer",
@@ -1042,31 +709,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "little terns",
       "cooper's yard laborer"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 6,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "barrel hoop belt",
-        "hammer"
-      ],
-      "equipment": [
-        "hammer"
-      ],
-      "skills": [
-        "heavy lifting",
-        "basic carpentry"
-      ],
-      "craftProficiencies": {
-        "carpentry": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Hammer proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Cooper's Yard shed when dawn bells ring.",
       "Uphold expectations within Little Terns."
@@ -1076,16 +718,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Little Terns"
     },
-    "jobBranching": {
-      "startingRole": "Cooper'S Yard Laborer",
-      "advancement": [
-        "Cooper'S Yard Laborer Veteran",
-        "Noted Cooper'S Yard Laborer"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Cooper'S Yard Laborer"
   },
   {
     "id": "crystal-prospector",
@@ -1130,29 +763,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the mine",
       "crystal prospector"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 5,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "pickaxe",
-        "glowstone shard"
-      ],
-      "equipment": [
-        "pickaxe"
-      ],
-      "skills": [
-        "mining",
-        "stone appraisal"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Pick proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Mine entrance camp when dawn bells ring.",
       "Uphold expectations within The Mine."
@@ -1162,16 +772,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Mine"
     },
-    "jobBranching": {
-      "startingRole": "Crystal Prospector",
-      "advancement": [
-        "Crystal Prospector Veteran",
-        "Noted Crystal Prospector"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Crystal Prospector"
   },
   {
     "id": "dwarven-smiths-apprentice",
@@ -1217,29 +818,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "cherry rock",
       "dwarven smith's apprentice"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 7,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "tongs",
-        "mithril scrap"
-      ],
-      "equipment": [],
-      "skills": [
-        "smithing",
-        "metal lore"
-      ],
-      "craftProficiencies": {
-        "smithing": 20
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Hammer proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Mithril Hall forge when dawn bells ring.",
       "Uphold expectations within Cherry Rock."
@@ -1249,16 +827,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in Cherry Rock"
     },
-    "jobBranching": {
-      "startingRole": "Dwarven Smith'S Apprentice",
-      "advancement": [
-        "Journeyman Dwarven Smith'S",
-        "Master Dwarven Smith'S"
-      ],
-      "sidePaths": [
-        "Guild Instructor"
-      ]
-    }
+    "jobId": "Dwarven Smith'S Apprentice"
   },
   {
     "id": "exotic-fruit-presser",
@@ -1304,29 +873,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the artisan's lane",
       "exotic fruit presser"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 2,
-        "gold": 0
-      },
-      "items": [
-        "wooden press",
-        "bottle of syrup"
-      ],
-      "equipment": [],
-      "skills": [
-        "pressing",
-        "flavoring"
-      ],
-      "craftProficiencies": {
-        "cooking": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Exotic Fruit Press when dawn bells ring.",
       "Uphold expectations within The Artisan's Lane."
@@ -1336,16 +882,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Artisan's Lane"
     },
-    "jobBranching": {
-      "startingRole": "Exotic Fruit Presser",
-      "advancement": [
-        "Exotic Fruit Presser Veteran",
-        "Noted Exotic Fruit Presser"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Exotic Fruit Presser"
   },
   {
     "id": "fisher-scavenger",
@@ -1391,29 +928,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the lakeside quarter",
       "fisher scavenger"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 3,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "net",
-        "scale pouch"
-      ],
-      "equipment": [],
-      "skills": [
-        "net casting",
-        "scavenging"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {
-        "fishing": 10
-      },
-      "combatTraining": [
-        "Spear proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Fishermen's Docks when dawn bells ring.",
       "Uphold expectations within The Lakeside Quarter."
@@ -1423,16 +937,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Lakeside Quarter"
     },
-    "jobBranching": {
-      "startingRole": "Fisher Scavenger",
-      "advancement": [
-        "Fisher Scavenger Veteran",
-        "Noted Fisher Scavenger"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Fisher Scavenger"
   },
   {
     "id": "fishmongers-assistant",
@@ -1477,29 +982,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the port district",
       "fishmonger's assistant"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 5,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "scale-stained apron",
-        "gutting knife"
-      ],
-      "equipment": [],
-      "skills": [
-        "filleting",
-        "haggling"
-      ],
-      "craftProficiencies": {
-        "cooking": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Knife proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Fishmongers' Row stall when dawn bells ring.",
       "Uphold expectations within The Port District."
@@ -1509,16 +991,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Port District"
     },
-    "jobBranching": {
-      "startingRole": "Fishmonger'S Assistant",
-      "advancement": [
-        "Fishmonger'S Assistant Veteran",
-        "Noted Fishmonger'S Assistant"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Fishmonger'S Assistant"
   },
   {
     "id": "flatboat-pilot",
@@ -1564,27 +1037,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "everrise bridge",
       "flatboat pilot"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 3,
-        "gold": 0
-      },
-      "items": [
-        "pole",
-        "river charts"
-      ],
-      "equipment": [],
-      "skills": [
-        "river navigation",
-        "bartering"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Riverside Warehouses dock when dawn bells ring.",
       "Uphold expectations within Everrise Bridge."
@@ -1594,16 +1046,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Everrise Bridge"
     },
-    "jobBranching": {
-      "startingRole": "Flatboat Pilot",
-      "advancement": [
-        "Flatboat Pilot Veteran",
-        "Noted Flatboat Pilot"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Flatboat Pilot"
   },
   {
     "id": "fledgling-adventurer",
@@ -1656,37 +1099,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the farmlands",
       "fledgling adventurer"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 4,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "patched cloak",
-        "worn dagger",
-        "short bow",
-        "small pack"
-      ],
-      "equipment": [
-        "worn dagger",
-        "short bow"
-      ],
-      "skills": [
-        "climbing",
-        "sneaking",
-        "tracking",
-        "fletching"
-      ],
-      "craftProficiencies": {
-        "fletching": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Dagger proficiency 10 (beginner)",
-        "Bow proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Rooftop hideout in Little Terns when dawn bells ring.",
       "Report to Roadside camp near the city when dawn bells ring.",
@@ -1697,16 +1109,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Little Terns, The Farmlands"
     },
-    "jobBranching": {
-      "startingRole": "Fledgling Adventurer",
-      "advancement": [
-        "Fledgling Adventurer Veteran",
-        "Noted Fledgling Adventurer"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Fledgling Adventurer"
   },
   {
     "id": "foragers-apprentice",
@@ -1752,29 +1155,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "residences & community",
       "forager's apprentice"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 2,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "foraging knife",
-        "basket"
-      ],
-      "equipment": [],
-      "skills": [
-        "herbalism",
-        "cooking"
-      ],
-      "craftProficiencies": {
-        "herbalism": 15
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Forager's Lodge when dawn bells ring.",
       "Uphold expectations within Residences & Community."
@@ -1784,16 +1164,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in Residences & Community"
     },
-    "jobBranching": {
-      "startingRole": "Forager'S Apprentice",
-      "advancement": [
-        "Journeyman Forager'S",
-        "Master Forager'S"
-      ],
-      "sidePaths": [
-        "Guild Instructor"
-      ]
-    }
+    "jobId": "Forager'S Apprentice"
   },
   {
     "id": "gardener-laborer",
@@ -1838,29 +1209,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the lower gardens",
       "gardener laborer"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 5,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "straw hat",
-        "spade"
-      ],
-      "equipment": [],
-      "skills": [
-        "pruning",
-        "irrigation"
-      ],
-      "craftProficiencies": {
-        "gardening": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Beginner"
-      ]
-    },
     "responsibilities": [
       "Report to Gardener's tool shed when dawn bells ring.",
       "Uphold expectations within The Lower Gardens."
@@ -1870,16 +1218,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Lower Gardens"
     },
-    "jobBranching": {
-      "startingRole": "Gardener Laborer",
-      "advancement": [
-        "Gardener Laborer Veteran",
-        "Noted Gardener Laborer"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Gardener Laborer"
   },
   {
     "id": "gate-guard",
@@ -1924,29 +1263,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the high road district",
       "gate guard"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 2,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "short sword",
-        "iron cap"
-      ],
-      "equipment": [
-        "short sword"
-      ],
-      "skills": [
-        "sword drills",
-        "gate protocols"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Sword proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to East Gate watchtower when dawn bells ring.",
       "Uphold expectations within The High Road District."
@@ -1956,16 +1272,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The High Road District"
     },
-    "jobBranching": {
-      "startingRole": "Gate Guard",
-      "advancement": [
-        "Watch Sergeant",
-        "City Captain"
-      ],
-      "sidePaths": [
-        "Investigator"
-      ]
-    }
+    "jobId": "Gate Guard"
   },
   {
     "id": "gate-smith",
@@ -2010,31 +1317,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "greatwood gate district",
       "gate smith"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 8,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "smith's hammer",
-        "bundle of nails"
-      ],
-      "equipment": [
-        "smith's hammer"
-      ],
-      "skills": [
-        "smithing",
-        "metal appraisal"
-      ],
-      "craftProficiencies": {
-        "smithing": 20
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Hammer proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Smiths' Yard forge when dawn bells ring.",
       "Uphold expectations within Greatwood Gate District."
@@ -2044,16 +1326,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Greatwood Gate District"
     },
-    "jobBranching": {
-      "startingRole": "Gate Smith",
-      "advancement": [
-        "Gate Smith Veteran",
-        "Noted Gate Smith"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Gate Smith"
   },
   {
     "id": "glassblowers-apprentice",
@@ -2098,29 +1371,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the forge district",
       "glassblower's apprentice"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 6,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "leather gloves",
-        "blowpipe"
-      ],
-      "equipment": [],
-      "skills": [
-        "glass blowing",
-        "kiln tending"
-      ],
-      "craftProficiencies": {
-        "glass": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Great Glassworks dormitory when dawn bells ring.",
       "Uphold expectations within The Forge District."
@@ -2130,16 +1380,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Forge District"
     },
-    "jobBranching": {
-      "startingRole": "Glassblower'S Apprentice",
-      "advancement": [
-        "Journeyman Glassblower'S",
-        "Master Glassblower'S"
-      ],
-      "sidePaths": [
-        "Guild Instructor"
-      ]
-    }
+    "jobId": "Glassblower'S Apprentice"
   },
   {
     "id": "glasswright-apprentice",
@@ -2185,29 +1426,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "west corona",
       "glasswright apprentice"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 4,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "blowpipe",
-        "goggles"
-      ],
-      "equipment": [],
-      "skills": [
-        "glass shaping",
-        "furnace tending"
-      ],
-      "craftProficiencies": {
-        "glass": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Glasswrights' Guildhouse dormitory when dawn bells ring.",
       "Uphold expectations within West Corona."
@@ -2217,16 +1435,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in West Corona"
     },
-    "jobBranching": {
-      "startingRole": "Glasswright Apprentice",
-      "advancement": [
-        "Journeyman Glasswright",
-        "Master Glasswright"
-      ],
-      "sidePaths": [
-        "Guild Instructor"
-      ]
-    }
+    "jobId": "Glasswright Apprentice"
   },
   {
     "id": "guild-clerk",
@@ -2272,29 +1481,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "stoneknot",
       "guild clerk"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 6,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "ink pot",
-        "quest ledger"
-      ],
-      "equipment": [],
-      "skills": [
-        "accounting",
-        "guild law"
-      ],
-      "craftProficiencies": {
-        "writing": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Grand Guildhall archives when dawn bells ring.",
       "Uphold expectations within Stoneknot."
@@ -2304,16 +1490,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Stoneknot"
     },
-    "jobBranching": {
-      "startingRole": "Guild Clerk",
-      "advancement": [
-        "Guild Clerk Veteran",
-        "Noted Guild Clerk"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Guild Clerk"
   },
   {
     "id": "gutter-orphan",
@@ -2358,27 +1535,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "western slums",
       "gutter orphan"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 2,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "patched cloak",
-        "rusty knife"
-      ],
-      "equipment": [],
-      "skills": [
-        "sneaking",
-        "streetwise"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Knife proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Shanty Markets alley when dawn bells ring.",
       "Uphold expectations within Western Slums."
@@ -2388,16 +1544,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Western Slums"
     },
-    "jobBranching": {
-      "startingRole": "Gutter Orphan",
-      "advancement": [
-        "Gutter Orphan Veteran",
-        "Noted Gutter Orphan"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Gutter Orphan"
   },
   {
     "id": "herbal-gatherer",
@@ -2443,30 +1590,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "greensoul hill",
       "herbal gatherer"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 2,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "herb satchel",
-        "small knife"
-      ],
-      "equipment": [],
-      "skills": [
-        "herb lore",
-        "tea brewing"
-      ],
-      "craftProficiencies": {
-        "herbalism": 10,
-        "brewing": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Knife proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Greensoul Hill herb clearing when dawn bells ring.",
       "Uphold expectations within Greensoul Hill."
@@ -2476,16 +1599,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Greensoul Hill"
     },
-    "jobBranching": {
-      "startingRole": "Herbal Gatherer",
-      "advancement": [
-        "Herbal Gatherer Veteran",
-        "Noted Herbal Gatherer"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Herbal Gatherer"
   },
   {
     "id": "iron-watch-recruit",
@@ -2530,29 +1644,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "fortress quarter",
       "iron watch recruit"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 2,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "dented helm",
-        "practice sword"
-      ],
-      "equipment": [
-        "practice sword"
-      ],
-      "skills": [
-        "drill formation",
-        "spotting"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Sword proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Barracks of the Iron Watch when dawn bells ring.",
       "Uphold expectations within Fortress Quarter."
@@ -2562,16 +1653,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in Fortress Quarter"
     },
-    "jobBranching": {
-      "startingRole": "Iron Watch Recruit",
-      "advancement": [
-        "Watch Sergeant",
-        "City Captain"
-      ],
-      "sidePaths": [
-        "Investigator"
-      ]
-    }
+    "jobId": "Iron Watch Recruit"
   },
   {
     "id": "junior-quartermaster",
@@ -2617,27 +1699,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the military ward",
       "junior quartermaster"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 5,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "ledger",
-        "stub of chalk"
-      ],
-      "equipment": [],
-      "skills": [
-        "inventory",
-        "marching drills"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Spear proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Supply depot loft when dawn bells ring.",
       "Uphold expectations within The Military Ward."
@@ -2647,16 +1708,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Military Ward"
     },
-    "jobBranching": {
-      "startingRole": "Junior Quartermaster",
-      "advancement": [
-        "Junior Quartermaster Veteran",
-        "Noted Junior Quartermaster"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Junior Quartermaster"
   },
   {
     "id": "leatherwrights-journeyman",
@@ -2702,29 +1754,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "artisan's row",
       "leatherwright's journeyman"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 7,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "awl",
-        "spool of thread"
-      ],
-      "equipment": [],
-      "skills": [
-        "stitching",
-        "design"
-      ],
-      "craftProficiencies": {
-        "leatherwork": 15
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Dagger proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Leatherwright's Hall workbench when dawn bells ring.",
       "Uphold expectations within Artisan's Row."
@@ -2734,16 +1763,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Artisan's Row"
     },
-    "jobBranching": {
-      "startingRole": "Leatherwright'S Journeyman",
-      "advancement": [
-        "Leatherwright'S Journeyman Veteran",
-        "Noted Leatherwright'S Journeyman"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Leatherwright'S Journeyman"
   },
   {
     "id": "log-driver",
@@ -2788,27 +1808,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the lumberworks",
       "log driver"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 3,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "waterlogged boots",
-        "peavey hook"
-      ],
-      "equipment": [],
-      "skills": [
-        "log rolling",
-        "river sense"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Axe proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Riverside log jam when dawn bells ring.",
       "Uphold expectations within The Lumberworks."
@@ -2818,16 +1817,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Lumberworks"
     },
-    "jobBranching": {
-      "startingRole": "Log Driver",
-      "advancement": [
-        "Log Driver Veteran",
-        "Noted Log Driver"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Log Driver"
   },
   {
     "id": "market-gardener",
@@ -2873,29 +1863,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "brightshade",
       "market gardener"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 6,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "hand rake",
-        "bundled greens"
-      ],
-      "equipment": [],
-      "skills": [
-        "horticulture",
-        "haggling"
-      ],
-      "craftProficiencies": {
-        "gardening": 15
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Great Market stall when dawn bells ring.",
       "Uphold expectations within Brightshade."
@@ -2905,16 +1872,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Brightshade"
     },
-    "jobBranching": {
-      "startingRole": "Market Gardener",
-      "advancement": [
-        "Market Gardener Veteran",
-        "Noted Market Gardener"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Market Gardener"
   },
   {
     "id": "messenger-page",
@@ -2960,27 +1918,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the citadel quarter",
       "messenger page"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 5,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "satchel",
-        "signet token"
-      ],
-      "equipment": [],
-      "skills": [
-        "swift running",
-        "protocol"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Hall of Governance corridor when dawn bells ring.",
       "Uphold expectations within The Citadel Quarter."
@@ -2990,16 +1927,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Citadel Quarter"
     },
-    "jobBranching": {
-      "startingRole": "Messenger Page",
-      "advancement": [
-        "Messenger Page Veteran",
-        "Noted Messenger Page"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Messenger Page"
   },
   {
     "id": "monk-in-training",
@@ -3044,31 +1972,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "greensoul hill",
       "monk-in-training"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "walking staff",
-        "prayer beads"
-      ],
-      "equipment": [
-        "walking staff"
-      ],
-      "skills": [
-        "meditation",
-        "brewing"
-      ],
-      "craftProficiencies": {
-        "brewing": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Staff proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Greensoul Monastery cell when dawn bells ring.",
       "Uphold expectations within Greensoul Hill."
@@ -3078,16 +1981,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Greensoul Hill"
     },
-    "jobBranching": {
-      "startingRole": "Monk-In-Training",
-      "advancement": [
-        "Senior Acolyte",
-        "Temple Steward"
-      ],
-      "sidePaths": [
-        "Hermit Scholar"
-      ]
-    }
+    "jobId": "Monk-In-Training"
   },
   {
     "id": "orchard-picker",
@@ -3133,27 +2027,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "surrounding farmlands & orchards",
       "orchard picker"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 5,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "fruit knife",
-        "woven basket"
-      ],
-      "equipment": [],
-      "skills": [
-        "harvesting",
-        "climbing"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Sling proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Fruit orchard camp when dawn bells ring.",
       "Uphold expectations within Surrounding Farmlands & Orchards."
@@ -3163,16 +2036,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Surrounding Farmlands & Orchards"
     },
-    "jobBranching": {
-      "startingRole": "Orchard Picker",
-      "advancement": [
-        "Orchard Picker Veteran",
-        "Noted Orchard Picker"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Orchard Picker"
   },
   {
     "id": "ostracized-noble",
@@ -3217,29 +2081,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the upper ward",
       "ostracized noble"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 1,
-        "gold": 0
-      },
-      "items": [
-        "travel cloak",
-        "tarnished signet ring"
-      ],
-      "equipment": [],
-      "skills": [
-        "etiquette",
-        "calligraphy"
-      ],
-      "craftProficiencies": {
-        "calligraphy": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Rapier proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Rented attic in the Upper Ward when dawn bells ring.",
       "Uphold expectations within The Upper Ward."
@@ -3249,16 +2090,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Upper Ward"
     },
-    "jobBranching": {
-      "startingRole": "Ostracized Noble",
-      "advancement": [
-        "Ostracized Noble Veteran",
-        "Noted Ostracized Noble"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Ostracized Noble"
   },
   {
     "id": "pearl-diver",
@@ -3304,27 +2136,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the south docks & steel docks",
       "pearl diver"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 2,
-        "gold": 0
-      },
-      "items": [
-        "diving knife",
-        "string of shells"
-      ],
-      "equipment": [],
-      "skills": [
-        "free diving",
-        "reef navigation"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Knife proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Steel Watch Naval Docks bunk when dawn bells ring.",
       "Uphold expectations within The South Docks & Steel Docks."
@@ -3334,16 +2145,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The South Docks & Steel Docks"
     },
-    "jobBranching": {
-      "startingRole": "Pearl Diver",
-      "advancement": [
-        "Pearl Diver Veteran",
-        "Noted Pearl Diver"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Pearl Diver"
   },
   {
     "id": "quest-board-runner",
@@ -3389,27 +2191,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the central plaza",
       "quest board runner"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 4,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "bundle of nails",
-        "quest parchment"
-      ],
-      "equipment": [],
-      "skills": [
-        "reading",
-        "rumor gathering"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Guild Post steps when dawn bells ring.",
       "Uphold expectations within The Central Plaza."
@@ -3419,16 +2200,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Central Plaza"
     },
-    "jobBranching": {
-      "startingRole": "Quest Board Runner",
-      "advancement": [
-        "Quest Board Runner Veteran",
-        "Noted Quest Board Runner"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Quest Board Runner"
   },
   {
     "id": "reed-gatherer",
@@ -3440,13 +2212,13 @@ export const BACKSTORIES: RichBackstory[] = [
       "Wave's Break"
     ],
     "origin": {
-      "summary": "Collects river reeds for weaving baskets sold within Wave’s Break.",
+      "summary": "Collects river reeds for weaving baskets sold within Wave\u2019s Break.",
       "hometown": "The Farmlands",
       "notes": []
     },
     "currentSituation": {
-      "summary": "You crawl from your riverbank lean-to as reeds sway in the early breeze, the water whispering toward Wave’s Break. A bundle of reeds and small knife are at hand with three coppers wrapped in cloth; the barge leaves at second bell so you hurry to harvest more.",
-      "sceneHook": "You crawl from your riverbank lean-to as reeds sway in the early breeze, the water whispering toward Wave’s Break.",
+      "summary": "You crawl from your riverbank lean-to as reeds sway in the early breeze, the water whispering toward Wave\u2019s Break. A bundle of reeds and small knife are at hand with three coppers wrapped in cloth; the barge leaves at second bell so you hurry to harvest more.",
+      "sceneHook": "You crawl from your riverbank lean-to as reeds sway in the early breeze, the water whispering toward Wave\u2019s Break.",
       "obligations": [
         "Report to Riverbank lean-to when dawn bells ring.",
         "Uphold expectations within The Farmlands."
@@ -3474,29 +2246,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the farmlands",
       "reed gatherer"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 3,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "bundle of reeds",
-        "small knife"
-      ],
-      "equipment": [],
-      "skills": [
-        "basket weaving",
-        "river navigation"
-      ],
-      "craftProficiencies": {
-        "weaving": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Knife proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Riverbank lean-to when dawn bells ring.",
       "Uphold expectations within The Farmlands."
@@ -3506,16 +2255,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Farmlands"
     },
-    "jobBranching": {
-      "startingRole": "Reed Gatherer",
-      "advancement": [
-        "Reed Gatherer Veteran",
-        "Noted Reed Gatherer"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Reed Gatherer"
   },
   {
     "id": "river-trader",
@@ -3561,27 +2301,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "misty crossing",
       "river trader"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 3,
-        "gold": 0
-      },
-      "items": [
-        "pole",
-        "ledger"
-      ],
-      "equipment": [],
-      "skills": [
-        "negotiation",
-        "river navigation"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Great Stone Bridge dock when dawn bells ring.",
       "Uphold expectations within Misty Crossing."
@@ -3591,16 +2310,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Misty Crossing"
     },
-    "jobBranching": {
-      "startingRole": "River Trader",
-      "advancement": [
-        "Caravan Lead",
-        "Guild Factor"
-      ],
-      "sidePaths": [
-        "Quartermaster"
-      ]
-    }
+    "jobId": "River Trader"
   },
   {
     "id": "road-scout",
@@ -3645,29 +2355,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the barracks",
       "road scout"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 3,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "worn boots",
-        "short bow"
-      ],
-      "equipment": [
-        "short bow"
-      ],
-      "skills": [
-        "tracking",
-        "mapping"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Bow proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Barracks bunk when dawn bells ring.",
       "Uphold expectations within The Barracks."
@@ -3677,16 +2364,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Barracks"
     },
-    "jobBranching": {
-      "startingRole": "Road Scout",
-      "advancement": [
-        "Road Scout Veteran",
-        "Noted Road Scout"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Road Scout"
   },
   {
     "id": "sap-collector",
@@ -3732,29 +2410,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "fields & orchards",
       "sap collector"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 2,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "drill",
-        "bucket of sap"
-      ],
-      "equipment": [],
-      "skills": [
-        "tree tapping",
-        "foraging"
-      ],
-      "craftProficiencies": {
-        "cooking": 5
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Orchard shed when dawn bells ring.",
       "Uphold expectations within Fields & Orchards."
@@ -3764,16 +2419,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Fields & Orchards"
     },
-    "jobBranching": {
-      "startingRole": "Sap Collector",
-      "advancement": [
-        "Sap Collector Veteran",
-        "Noted Sap Collector"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Sap Collector"
   },
   {
     "id": "sawyer",
@@ -3819,27 +2465,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "lumberworks",
       "sawyer"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 3,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "sawblade",
-        "earplugs"
-      ],
-      "equipment": [],
-      "skills": [
-        "timber cutting",
-        "balance"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Axe proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Sawmill bunkhouse when dawn bells ring.",
       "Uphold expectations within Lumberworks."
@@ -3849,16 +2474,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Lumberworks"
     },
-    "jobBranching": {
-      "startingRole": "Sawyer",
-      "advancement": [
-        "Sawyer Veteran",
-        "Noted Sawyer"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Sawyer"
   },
   {
     "id": "scribes-apprentice",
@@ -3903,27 +2519,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the upper ward",
       "scribe's apprentice"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 1,
-        "gold": 0
-      },
-      "items": [
-        "ink-stained gloves",
-        "quill set"
-      ],
-      "equipment": [],
-      "skills": [
-        "record keeping",
-        "languages"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Beginner"
-      ]
-    },
     "responsibilities": [
       "Report to Hall of Records scriptorium when dawn bells ring.",
       "Uphold expectations within The Upper Ward."
@@ -3933,16 +2528,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Upper Ward"
     },
-    "jobBranching": {
-      "startingRole": "Scribe'S Apprentice",
-      "advancement": [
-        "Journeyman Scribe'S",
-        "Master Scribe'S"
-      ],
-      "sidePaths": [
-        "Guild Instructor"
-      ]
-    }
+    "jobId": "Scribe'S Apprentice"
   },
   {
     "id": "smugglers-runner",
@@ -3987,27 +2573,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the northern slums",
       "smuggler's runner"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 3,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "cheap cloak",
-        "hidden satchel"
-      ],
-      "equipment": [],
-      "skills": [
-        "sneaking",
-        "streetwise"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Club proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Thieves' Market shanty when dawn bells ring.",
       "Uphold expectations within The Northern Slums."
@@ -4017,16 +2582,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Northern Slums"
     },
-    "jobBranching": {
-      "startingRole": "Smuggler'S Runner",
-      "advancement": [
-        "Smuggler'S Runner Veteran",
-        "Noted Smuggler'S Runner"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Smuggler'S Runner"
   },
   {
     "id": "street-artist",
@@ -4072,29 +2628,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "stonecrest town",
       "street artist"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 5,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "charcoal sticks",
-        "folded easel"
-      ],
-      "equipment": [],
-      "skills": [
-        "sketching",
-        "persuasion"
-      ],
-      "craftProficiencies": {
-        "drawing": 15
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Crystal Court Plaza when dawn bells ring.",
       "Uphold expectations within Stonecrest Town."
@@ -4104,16 +2637,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Stonecrest Town"
     },
-    "jobBranching": {
-      "startingRole": "Street Artist",
-      "advancement": [
-        "Street Artist Veteran",
-        "Noted Street Artist"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Street Artist"
   },
   {
     "id": "street-performer",
@@ -4159,27 +2683,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the old city",
       "street performer"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 4,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "lute",
-        "pouch of copper rings"
-      ],
-      "equipment": [],
-      "skills": [
-        "busking",
-        "pickpocketing"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Dagger proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Old Market Square stall when dawn bells ring.",
       "Uphold expectations within The Old City."
@@ -4189,16 +2692,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Old City"
     },
-    "jobBranching": {
-      "startingRole": "Street Performer",
-      "advancement": [
-        "Street Performer Veteran",
-        "Noted Street Performer"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Street Performer"
   },
   {
     "id": "tea-picker",
@@ -4244,29 +2738,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "terraces & farms",
       "tea picker"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 5,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "shears",
-        "satchel of tea leaves"
-      ],
-      "equipment": [],
-      "skills": [
-        "pruning",
-        "tea tasting"
-      ],
-      "craftProficiencies": {
-        "gardening": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Tea Gardens shack when dawn bells ring.",
       "Uphold expectations within Terraces & Farms."
@@ -4276,16 +2747,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Terraces & Farms"
     },
-    "jobBranching": {
-      "startingRole": "Tea Picker",
-      "advancement": [
-        "Tea Picker Veteran",
-        "Noted Tea Picker"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Tea Picker"
   },
   {
     "id": "tea-stall-owner",
@@ -4331,29 +2793,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the lower gardens",
       "tea stall owner"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 8,
-        "gold": 0
-      },
-      "items": [
-        "tea tins",
-        "ledger"
-      ],
-      "equipment": [],
-      "skills": [
-        "tea brewing",
-        "haggling"
-      ],
-      "craftProficiencies": {
-        "brewing": 20
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Beginner"
-      ]
-    },
     "responsibilities": [
       "Report to Tea stall by the Sunleaf Inn when dawn bells ring.",
       "Uphold expectations within The Lower Gardens."
@@ -4363,16 +2802,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Lower Gardens"
     },
-    "jobBranching": {
-      "startingRole": "Tea Stall Owner",
-      "advancement": [
-        "Tea Stall Owner Veteran",
-        "Noted Tea Stall Owner"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Tea Stall Owner"
   },
   {
     "id": "trapper",
@@ -4417,29 +2847,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "hunter's quarter",
       "trapper"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 4,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "fur-lined cloak",
-        "snare wire"
-      ],
-      "equipment": [],
-      "skills": [
-        "tracking",
-        "skinning"
-      ],
-      "craftProficiencies": {
-        "tanning": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Bow proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Hunter's Lodge bunk when dawn bells ring.",
       "Uphold expectations within Hunter's Quarter."
@@ -4449,16 +2856,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Hunter's Quarter"
     },
-    "jobBranching": {
-      "startingRole": "Trapper",
-      "advancement": [
-        "Trapper Veteran",
-        "Noted Trapper"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Trapper"
   },
   {
     "id": "tunnel-scout",
@@ -4503,27 +2901,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "diamond mines",
       "tunnel scout"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 5,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "hooded lantern",
-        "chalk line"
-      ],
-      "equipment": [],
-      "skills": [
-        "scouting",
-        "stone sense"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Dagger proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Diamond Mine entrance when dawn bells ring.",
       "Uphold expectations within Diamond Mines."
@@ -4533,16 +2910,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Diamond Mines"
     },
-    "jobBranching": {
-      "startingRole": "Tunnel Scout",
-      "advancement": [
-        "Tunnel Scout Veteran",
-        "Noted Tunnel Scout"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Tunnel Scout"
   },
   {
     "id": "unemployed-vagrant",
@@ -4559,7 +2927,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "notes": []
     },
     "currentSituation": {
-      "summary": "You blink up at the carved ceiling of the Shrine of the Deep Current, incense smoke drifting through the dawn stillness. Clutching the weathered locket—the only thing you own—you hear the distant surf and know the priests will send you out once prayers end.",
+      "summary": "You blink up at the carved ceiling of the Shrine of the Deep Current, incense smoke drifting through the dawn stillness. Clutching the weathered locket\u2014the only thing you own\u2014you hear the distant surf and know the priests will send you out once prayers end.",
       "sceneHook": "You blink up at the carved ceiling of the Shrine of the Deep Current, incense smoke drifting through the dawn stillness.",
       "obligations": [
         "Report to Shrine of the Deep Current when dawn bells ring.",
@@ -4586,26 +2954,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the port district",
       "unemployed vagrant"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "weathered locket"
-      ],
-      "equipment": [],
-      "skills": [
-        "swimming",
-        "sea songs"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Shrine of the Deep Current when dawn bells ring.",
       "Uphold expectations within The Port District."
@@ -4615,16 +2963,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Port District"
     },
-    "jobBranching": {
-      "startingRole": "Unemployed Vagrant",
-      "advancement": [
-        "Unemployed Vagrant Veteran",
-        "Noted Unemployed Vagrant"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Unemployed Vagrant"
   },
   {
     "id": "veteran-watchman",
@@ -4669,29 +3008,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the wetlands wall",
       "veteran watchman"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 0,
-        "silver": 1,
-        "gold": 0
-      },
-      "items": [
-        "weathered cloak",
-        "long spear"
-      ],
-      "equipment": [
-        "long spear"
-      ],
-      "skills": [
-        "tracking",
-        "endurance"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Spear proficiency 30 (adept)"
-      ]
-    },
     "responsibilities": [
       "Report to Bastion Fort ramparts when dawn bells ring.",
       "Uphold expectations within The Wetlands Wall."
@@ -4701,16 +3017,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "good",
       "notes": "Community roots in The Wetlands Wall"
     },
-    "jobBranching": {
-      "startingRole": "Veteran Watchman",
-      "advancement": [
-        "Watch Sergeant",
-        "City Captain"
-      ],
-      "sidePaths": [
-        "Investigator"
-      ]
-    }
+    "jobId": "Veteran Watchman"
   },
   {
     "id": "wagoneer",
@@ -4755,27 +3062,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the high road district",
       "wagoneer"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 7,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "sturdy gloves",
-        "horse brush"
-      ],
-      "equipment": [],
-      "skills": [
-        "animal handling",
-        "driving wagons"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Beginner"
-      ]
-    },
     "responsibilities": [
       "Report to Caravan staging yard wagon when dawn bells ring.",
       "Uphold expectations within The High Road District."
@@ -4785,16 +3071,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The High Road District"
     },
-    "jobBranching": {
-      "startingRole": "Wagoneer",
-      "advancement": [
-        "Wagoneer Veteran",
-        "Noted Wagoneer"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Wagoneer"
   },
   {
     "id": "young-farmhand",
@@ -4840,29 +3117,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the farmlands",
       "young farmhand"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 1,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "hoe",
-        "seed pouch"
-      ],
-      "equipment": [],
-      "skills": [
-        "crop rotation",
-        "animal care"
-      ],
-      "craftProficiencies": {
-        "farming": 10
-      },
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Family farmstead when dawn bells ring.",
       "Uphold expectations within The Farmlands."
@@ -4872,16 +3126,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Farmlands"
     },
-    "jobBranching": {
-      "startingRole": "Young Farmhand",
-      "advancement": [
-        "Young Farmhand Veteran",
-        "Noted Young Farmhand"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Young Farmhand"
   },
   {
     "id": "young-miner",
@@ -4926,29 +3171,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "the mines",
       "young miner"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 3,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "short pick",
-        "dusty lantern"
-      ],
-      "equipment": [
-        "short pick"
-      ],
-      "skills": [
-        "tunneling",
-        "endurance"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Pick proficiency 10 (beginner)"
-      ]
-    },
     "responsibilities": [
       "Report to Mine entrance barrack when dawn bells ring.",
       "Uphold expectations within The Mines."
@@ -4958,16 +3180,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in The Mines"
     },
-    "jobBranching": {
-      "startingRole": "Young Miner",
-      "advancement": [
-        "Young Miner Veteran",
-        "Noted Young Miner"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Young Miner"
   },
   {
     "id": "young-tutor",
@@ -5013,27 +3226,6 @@ export const BACKSTORIES: RichBackstory[] = [
       "little terns",
       "young tutor"
     ],
-    "loadout": {
-      "currency": {
-        "copper": 1,
-        "silver": 0,
-        "gold": 0
-      },
-      "items": [
-        "chalk",
-        "primer book"
-      ],
-      "equipment": [],
-      "skills": [
-        "teaching",
-        "arithmetic"
-      ],
-      "craftProficiencies": {},
-      "gatheringProficiencies": {},
-      "combatTraining": [
-        "Untrained"
-      ]
-    },
     "responsibilities": [
       "Report to Alleyway classroom when dawn bells ring.",
       "Uphold expectations within Little Terns."
@@ -5043,16 +3235,7 @@ export const BACKSTORIES: RichBackstory[] = [
       "goodVsEvil": "neutral",
       "notes": "Community roots in Little Terns"
     },
-    "jobBranching": {
-      "startingRole": "Young Tutor",
-      "advancement": [
-        "Young Tutor Veteran",
-        "Noted Young Tutor"
-      ],
-      "sidePaths": [
-        "Freelancer"
-      ]
-    }
+    "jobId": "Young Tutor"
   }
 ];
 
