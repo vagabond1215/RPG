@@ -277,5 +277,176 @@
         "quantity": 1
       }
     ]
+  },
+  {
+    "id": "saffron-flower-fritters",
+    "name": "Saffron Flower Fritters",
+    "complexity": "simple",
+    "luxury": "comfort",
+    "region": "farmland",
+    "ingredients": [
+      {
+        "byproduct": "flower",
+        "quantity": 2,
+        "source": {
+          "type": "plant",
+          "id": "catalan_saffron_crocus"
+        }
+      },
+      {
+        "byproduct": "grain",
+        "quantity": 2,
+        "source": {
+          "type": "plant",
+          "id": "wheat"
+        }
+      },
+      {
+        "economy_item": "butter-(1-lb)-(common)",
+        "quantity": 1
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "saffron-flower-fritters-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "sheep-milk-yogurt",
+    "name": "Sheep Milk Yogurt",
+    "complexity": "simple",
+    "luxury": "humble",
+    "region": "grassland",
+    "ingredients": [
+      {
+        "byproduct": "sheep milk",
+        "quantity": 3,
+        "source": {
+          "type": "animal",
+          "id": "sheep"
+        }
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "sheep-milk-yogurt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "chanterelle-stew",
+    "name": "Chanterelle Stew",
+    "complexity": "simple",
+    "luxury": "comfort",
+    "region": "hills",
+    "ingredients": [
+      {
+        "byproduct": "mushroom",
+        "quantity": 3,
+        "source": {
+          "type": "plant",
+          "id": "chanterelle"
+        }
+      },
+      {
+        "byproduct": "grain",
+        "quantity": 2,
+        "source": {
+          "type": "plant",
+          "id": "rye"
+        }
+      },
+      {
+        "economy_item": "water-clean-(skin)-(common)",
+        "quantity": 1
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "chanterelle-stew-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "watercaltrop-porridge",
+    "name": "Water Caltrop Porridge",
+    "complexity": "simple",
+    "luxury": "humble",
+    "region": "riverlands",
+    "ingredients": [
+      {
+        "byproduct": "nut",
+        "quantity": 3,
+        "source": {
+          "type": "plant",
+          "id": "danube_water_caltrop"
+        }
+      },
+      {
+        "economy_item": "water-clean-(skin)-(common)",
+        "quantity": 1
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "watercaltrop-porridge-(common)",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "lagoon-ray-skewers",
+    "name": "Lagoon Ray Skewers",
+    "complexity": "moderate",
+    "luxury": "common",
+    "region": "coastal",
+    "ingredients": [
+      {
+        "byproduct": "lagoon spotted ray meat",
+        "quantity": 2,
+        "source": {
+          "type": "animal",
+          "id": "lagoon_spotted_ray"
+        }
+      },
+      {
+        "byproduct": "leaf",
+        "quantity": 1,
+        "source": {
+          "type": "plant",
+          "id": "atlantic_dulse_rack"
+        }
+      },
+      {
+        "economy_item": "salt-(1-lb)-(common)",
+        "quantity": 1
+      }
+    ],
+    "outputs": [
+      {
+        "economy_item": "lagoon-ray-skewers-(common)",
+        "quantity": 1
+      }
+    ]
   }
 ]

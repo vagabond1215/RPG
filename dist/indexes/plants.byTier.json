@@ -2,33 +2,59 @@
   "food": {
     "Low Inn": [],
     "Common": [
+      "alentejo_winter_barley",
       "apple-tree",
       "barley",
+      "buckwheat",
       "cabbage",
       "carrot",
+      "cassava",
       "chanterelle",
       "flax",
+      "foxtail-millet",
+      "ganges_floating_rice",
       "garlic",
+      "kailash_highland_barley",
       "lentil",
+      "millet",
       "oats",
       "onion",
       "oyster-mushroom",
+      "paddy_rice",
       "pea",
+      "potato",
+      "proso-millet",
+      "rice",
       "rye",
+      "savanna_rice",
+      "silesian_potato_patch",
+      "sorghum",
       "turnip",
-      "wheat"
+      "wheat",
+      "yam",
+      "zagreb_plum_orchard"
     ],
     "Fine": [
       "apple-tree",
       "chanterelle",
+      "dalmatian_fig_orchard",
+      "ganges_floating_rice",
       "garlic",
+      "kailash_highland_barley",
       "oyster-mushroom",
-      "wheat"
+      "paddy_rice",
+      "rice",
+      "savanna_rice",
+      "wheat",
+      "yam",
+      "zagreb_plum_orchard"
     ],
     "High Table": [
       "apple-tree",
       "chanterelle",
-      "saffron"
+      "dalmatian_fig_orchard",
+      "saffron",
+      "zagreb_plum_orchard"
     ]
   },
   "luxury": {

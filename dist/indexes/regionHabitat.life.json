@@ -1,5 +1,11 @@
 {
   "aquatic": {
+    "continental_shelves": {
+      "animals": [
+        "blue-whale"
+      ],
+      "plants": []
+    },
     "coral_reefs": {
       "animals": [
         "sea-sponge"
@@ -41,6 +47,7 @@
     },
     "ocean_shores": {
       "animals": [
+        "albatross",
         "clam",
         "cockle",
         "crab",
@@ -71,8 +78,10 @@
     },
     "open_ocean": {
       "animals": [
+        "albatross",
         "allis-shad",
         "anchovy",
+        "blue-whale",
         "brill",
         "cod",
         "conger-eel",
@@ -435,6 +444,7 @@
     },
     "ocean_shores": {
       "animals": [
+        "albatross",
         "baltic_gray_seal",
         "cormorant",
         "darwin_blue_footed_booby",
@@ -448,6 +458,7 @@
     },
     "open_ocean": {
       "animals": [
+        "albatross",
         "caribbean_reef_shark",
         "feroe_stormy_petrel",
         "haida_gwaii_humpback",
@@ -798,7 +809,6 @@
         "barley",
         "basil",
         "bavarian_field_turnip",
-        "bay-laurel",
         "bay_laurel",
         "beets",
         "begonia",
@@ -829,7 +839,6 @@
         "cardamom",
         "carrot",
         "carrot_weed",
-        "carrots",
         "cart_track_plant",
         "cassava",
         "castor-bean",
@@ -843,11 +852,9 @@
         "cherry",
         "chervil",
         "chestnut",
-        "chestnuts",
         "chia",
         "chickling-vetch",
         "chickpea",
-        "chickpeas",
         "chives",
         "chrysanthemum",
         "cinnamon",
@@ -874,7 +881,6 @@
         "fennel",
         "fenugreek",
         "feverfew",
-        "fig",
         "figs",
         "flax",
         "fodder-vetch",
@@ -907,11 +913,9 @@
         "kumquat",
         "lavender",
         "leek",
-        "leeks",
         "lemon",
         "lemongrass",
         "lentil",
-        "lentils",
         "lettuce",
         "licorice",
         "loquat",
@@ -938,13 +942,10 @@
         "nigella-black-cumin",
         "novgorod_flax_field",
         "nutmeg",
-        "oat",
         "oats",
         "okra",
-        "olive",
         "olives",
         "onion",
-        "onions",
         "orange",
         "oregano",
         "oyster-mushroom",
@@ -957,7 +958,6 @@
         "peach",
         "peanut",
         "pears",
-        "peas",
         "peppercorn",
         "peppermint",
         "peppery_cress",
@@ -968,7 +968,6 @@
         "potato",
         "proso-millet",
         "purslane",
-        "quince",
         "quinces",
         "quinoa",
         "radish",
@@ -1017,7 +1016,6 @@
         "true_cinnamon",
         "turmeric",
         "turnip",
-        "turnips",
         "tuscan_rosemary_hedge",
         "ube",
         "umbria_fava_trellis",
@@ -1025,7 +1023,6 @@
         "vanilla",
         "walloon_endive_forcer",
         "walnut",
-        "walnuts",
         "wasabi",
         "watermelon",
         "weld-dyers-rocket",
@@ -1050,7 +1047,6 @@
         "aardvark",
         "aardwolf",
         "agouti",
-        "albatross",
         "alpine-ibex",
         "anaconda",
         "anole",
@@ -1065,7 +1061,6 @@
         "binturong",
         "black-mamba",
         "blackbird",
-        "blue-whale",
         "boar",
         "buzzard",
         "capercaillie",
@@ -1393,6 +1388,7 @@
         "goldfinch",
         "gopher",
         "horned_buffalo",
+        "horse",
         "hyena",
         "lark",
         "lion",
@@ -1450,7 +1446,6 @@
         "meadow_nightshade",
         "meadowsweet",
         "mugwort",
-        "nettles",
         "pansy",
         "peony",
         "plantain",
@@ -1635,6 +1630,7 @@
     },
     "semi_arid_scrublands": {
       "animals": [
+        "camel",
         "coyote",
         "donkey",
         "dromedary_camel",
