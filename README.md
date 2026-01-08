@@ -66,7 +66,7 @@ Portrait prompts are composed by `data/game/image_prompts.js`, which stitches to
 
 ### Backstories and character origins
 
-Narrative origins now live in the unified catalogue at `data/game/backstories.ts`. Each entry implements the `RichBackstory` interface, pairing a stable `id` and short `title` with expanded lore beats (`origin`, `currentSituation`, `motivation`), wardrobe hints, responsibilities, loadouts, and class biases. Preserve the previous display string by adding it to `legacyBackgrounds` so save files authored before the refactor can be migrated automatically.
+Narrative origins now live in the unified catalogue at `data/game/backstories.ts`. Each entry implements the `RichBackstory` interface, pairing a stable `id` and short `title` with expanded lore beats (`origin`, `currentSituation`, `motivation`), wardrobe hints, responsibilities, and alignment biases, while `jobId` links to the canonical job loadout in `data/game/jobs.ts`. Preserve the previous display string by adding it to `legacyBackgrounds` so save files authored before the refactor can be migrated automatically.
 
 When you add or edit a backstory:
 
