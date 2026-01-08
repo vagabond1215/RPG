@@ -228,7 +228,6 @@ describe("backstory helpers", () => {
 
     const loadoutBackstory = {
       ...JSON.parse(JSON.stringify(baseBackstory)),
-      jobId: job.id,
     };
 
     const character = {
@@ -239,6 +238,7 @@ describe("backstory helpers", () => {
       alignment: "Neutral Good",
       sex: "Female",
       location: "Wave's Break",
+      jobId: job.id,
       voiceTone: "steady",
       signatureTool: "harbor shield",
       virtue: "resolve",
