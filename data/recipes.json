@@ -125,7 +125,7 @@
   },
   {
     "id": "salted-ham",
-    "name": "Salted Ham",
+    "name": "Salted Pork Ham",
     "complexity": "moderate",
     "luxury": "comfort",
     "region": "hills",
@@ -152,7 +152,7 @@
   },
   {
     "id": "sausage-links",
-    "name": "Peppered Sausage Links",
+    "name": "Peppered Pork Sausage Links",
     "complexity": "moderate",
     "luxury": "common",
     "region": "grassland",
