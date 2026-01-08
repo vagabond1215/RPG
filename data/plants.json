@@ -16293,6 +16293,165 @@
     ]
   },
   {
+    "id": "yggdrasil_sapling",
+    "common_name": "Yggdrasil Sapling",
+    "growth_form": "tree",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "hills"
+    ],
+    "cultivated": false,
+    "edible": false,
+    "byproducts": [
+      {
+        "type": "sap"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where forest and hill hold sway, stands the Yggdrasil Sapling, a tree of note. It springs forth unbidden, owing nothing to the care of humankind. Though its flesh is shunned at table, its sap is treasured by wayfarers who speak of world-trees in epic sagas and fantasy chronicles. From its body folk derive sap, a boon to trade and craft. Thus the Yggdrasil Sapling marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "medicinal": false,
+    "toxic": false,
+    "foraging_notes": "Sap tapped sparingly from mature boughs in early spring."
+  },
+  {
+    "id": "yurei_blossom",
+    "common_name": "Yurei Blossom",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "flower"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where forest holds sway, stands the Yurei Blossom, a herb of note. It springs forth unbidden, owing nothing to the care of humankind. Its petals are steeped in quiet teas by travelers who trade tales of spirit-bound gardens found in manga and old folklore alike. From its body folk derive flower, a boon to trade and craft. Thus the Yurei Blossom marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "flower"
+    ],
+    "culinary_uses": [
+      "tea",
+      "garnish"
+    ],
+    "medicinal": true,
+    "toxic": false
+  },
+  {
+    "id": "zenith_ember_pepper",
+    "common_name": "Zenith Ember Pepper",
+    "growth_form": "herb",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland",
+      "grassland"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "spice"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the farmland and grassland hold sway, stands the Zenith Ember Pepper, a herb of note. Tilled and tended by folk, it answers well to plough and garden row. Its fiery pods are favored by survivalist cooks who swear by heat-warming meals before a long night in the wild. From its body folk derive spice, a boon to trade and craft. Thus the Zenith Ember Pepper marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "seasoning",
+      "stew"
+    ]
+  },
+  {
+    "id": "zenith_glowberry_vine",
+    "common_name": "Zenith Glowberry Vine",
+    "growth_form": "vine",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest",
+      "hills"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "fruit"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where forest and hill hold sway, stands the Zenith Glowberry Vine, a vine of note. It springs forth unbidden, owing nothing to the care of humankind. Its luminous fruit are prized by delvers and crafters of survival tales who need a soft light in the dark. From its body folk derive fruit, a boon to trade and craft. Thus the Zenith Glowberry Vine marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "fruit"
+    ],
+    "culinary_uses": [
+      "fresh eating",
+      "preserve"
+    ]
+  },
+  {
+    "id": "zenith_moonlit_rice",
+    "common_name": "Zenith Moonlit Rice",
+    "growth_form": "grass",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "farmland",
+      "riverlands"
+    ],
+    "cultivated": true,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "grain"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where the farmland and riverlands hold sway, stands the Zenith Moonlit Rice, a grass of note. Tilled and tended by folk, it answers well to plough and garden row. Its grain is served at moon-viewing festivals in tavern tales and slice-of-life epics, a soft staple for long journeys. From its body folk derive grain, a boon to trade and craft. Thus the Zenith Moonlit Rice marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "grain"
+    ],
+    "culinary_uses": [
+      "porridge",
+      "stew"
+    ]
+  },
+  {
+    "id": "zenith_stamina_mushroom",
+    "common_name": "Zenith Stamina Mushroom",
+    "growth_form": "mushroom",
+    "regions": [
+      "terrestrial"
+    ],
+    "habitats": [
+      "forest"
+    ],
+    "cultivated": false,
+    "edible": true,
+    "byproducts": [
+      {
+        "type": "mushroom"
+      }
+    ],
+    "narrative": "In the terrestrial realms, where forest holds sway, stands the Zenith Stamina Mushroom, a mushroom of note. It springs forth unbidden, owing nothing to the care of humankind. Its cap is sought by wandering heroes in adventure games and quest sagas, who claim it restores vigor after grueling climbs. From its body folk derive mushroom, a boon to trade and craft. Thus the Zenith Stamina Mushroom marks the turning of the seasons and gives haven to small beasts within its shade. This additional detail underscores the complex relationship between people and the natural world, inviting further observation and study.",
+    "edible_parts": [
+      "mushroom"
+    ],
+    "culinary_uses": [
+      "stew"
+    ],
+    "medicinal": true,
+    "toxic": false
+  },
+  {
     "id": "zagreb_plum_orchard",
     "common_name": "Zagreb Plum Orchard",
     "growth_form": "tree",
