@@ -39,6 +39,7 @@ import { CITY_NAV } from "./data/game/city_nav.js";
 import { composeImagePrompt } from "./data/game/image_prompts.js";
 import { DEFAULT_NAMES } from "./data/game/names.js";
 import { BACKSTORY_BY_ID } from "./data/game/backstories.js";
+import { getJobById } from "./data/game/jobs.js";
 import {
   renderBackstoryTextForCharacter,
   buildBackstoryInstance,
@@ -118,6 +119,89 @@ const NAV_ICONS = {
 
 const QUEST_BOARD_ICON = 'assets/images/icons/Quests.png';
 const REST_ACTION_ICON = 'assets/images/icons/actions/Rest.png';
+
+const CHARACTER_SCHEMA_VERSION = 1;
+const DRAFT_VERSION = 2;
+const DEFAULT_JOB_ID = 'fledgling-adventurer';
+const DEV_HOSTS = new Set(['localhost', '127.0.0.1', '::1']);
+
+const normalizeLegacyJobKey = value => String(value || '').trim().toLowerCase();
+
+const LEGACY_JOB_ID_MAP = (() => {
+  const map = new Map();
+  const entries = Object.values(BACKSTORY_BY_ID || {});
+  entries.forEach(entry => {
+    if (!entry || !entry.id) return;
+    const jobId = entry.id;
+    map.set(normalizeLegacyJobKey(jobId), jobId);
+    if (entry.title) {
+      map.set(normalizeLegacyJobKey(entry.title), jobId);
+    }
+    if (typeof entry.hook === 'string' && entry.hook.trim()) {
+      map.set(normalizeLegacyJobKey(entry.hook), jobId);
+    }
+    if (Array.isArray(entry.legacyBackgrounds)) {
+      entry.legacyBackgrounds.forEach(bg => {
+        if (bg) map.set(normalizeLegacyJobKey(bg), jobId);
+      });
+    }
+    if (Array.isArray(entry.hooks)) {
+      entry.hooks.forEach(hook => {
+        if (hook?.id) map.set(normalizeLegacyJobKey(hook.id), jobId);
+        if (hook?.label) map.set(normalizeLegacyJobKey(hook.label), jobId);
+      });
+    }
+  });
+  return map;
+})();
+
+const isDevBuild = () => DEV_HOSTS.has(window.location.hostname) || window.location.hostname.endsWith('.local');
+
+function resolveLegacyJobId(jobId) {
+  const normalized = normalizeLegacyJobKey(jobId);
+  if (!normalized) return null;
+  const mapped = LEGACY_JOB_ID_MAP.get(normalized);
+  if (mapped) return mapped;
+  if (getJobById(jobId)) return jobId;
+  return DEFAULT_JOB_ID;
+}
+
+function migrateCharacter(character) {
+  if (!character || typeof character !== 'object') return character;
+  const version = Number(character.schemaVersion ?? character.saveVersion ?? 0);
+  if (version < CHARACTER_SCHEMA_VERSION && character.jobId) {
+    const resolved = resolveLegacyJobId(character.jobId);
+    if (resolved && resolved !== character.jobId) {
+      const normalized = normalizeLegacyJobKey(character.jobId);
+      if (resolved === DEFAULT_JOB_ID && !LEGACY_JOB_ID_MAP.has(normalized) && isDevBuild()) {
+        console.warn(
+          `Unknown legacy jobId "${character.jobId}" detected. Defaulting to "${DEFAULT_JOB_ID}".`
+        );
+      }
+      character.jobId = resolved;
+    }
+  }
+  character.schemaVersion = CHARACTER_SCHEMA_VERSION;
+  return character;
+}
+
+function migrateDraft(draft) {
+  if (!draft || typeof draft !== 'object') return draft;
+  if (draft.jobId) {
+    const resolved = resolveLegacyJobId(draft.jobId);
+    if (resolved && resolved !== draft.jobId) {
+      const normalized = normalizeLegacyJobKey(draft.jobId);
+      if (resolved === DEFAULT_JOB_ID && !LEGACY_JOB_ID_MAP.has(normalized) && isDevBuild()) {
+        console.warn(
+          `Unknown legacy draft jobId "${draft.jobId}" detected. Defaulting to "${DEFAULT_JOB_ID}".`
+        );
+      }
+      draft.jobId = resolved;
+    }
+  }
+  draft.draftVersion = DRAFT_VERSION;
+  return draft;
+}
 const REST_BASE_DURATION_MINUTES = 30;
 const REST_DURATION_VARIANCE_MINUTES = 8;
 
@@ -15068,6 +15152,7 @@ function finalizeCharacter(character) {
     advancedClass: buildEntry?.advanced,
     id,
   });
+  newChar.schemaVersion = CHARACTER_SCHEMA_VERSION;
   newChar.guildRank = 'None';
   const bsList = getBackstoriesForLocation(character.location, {
     race: character.race,
@@ -15167,14 +15252,15 @@ function finalizeCharacter(character) {
 function loadCharacter() {
   const charId = currentProfile?.lastCharacter;
   if (charId && currentProfile.characters && currentProfile.characters[charId]) {
-    const loadedCharacter = migrateProficiencies({
+    const loadedCharacter = migrateCharacter(migrateProficiencies({
       ...JSON.parse(JSON.stringify(characterTemplate)),
       ...defaultProficiencies,
       ...currentProfile.characters[charId]
-    });
+    }));
     ensureBackstoryInstance(loadedCharacter);
     normalizeCharacterState(loadedCharacter);
     currentCharacter = loadedCharacter;
+    currentProfile.characters[charId] = loadedCharacter;
     resetLocationLogs();
     ensureCollections(currentCharacter);
     ensureQuestLog(currentCharacter);
@@ -15731,7 +15817,7 @@ loadCharacter();
     xp: 0,
     base: { hp: 100, mp: 50, str: 10, dex: 8, int: 7 },
     kit: 'balanced',
-    draftVersion: 1
+    draftVersion: DRAFT_VERSION
   };
 
   function ensureClassOptions(select) {
@@ -15772,6 +15858,7 @@ loadCharacter();
       xp: 0,
       base: defaultBaseStats(),
       kit: 'balanced',
+      draftVersion: DRAFT_VERSION,
     });
   }
   function updateDraftIndicators(hasDraft) {
@@ -15805,6 +15892,7 @@ loadCharacter();
       clearDraftIndicators();
       return;
     }
+    state.draftVersion = DRAFT_VERSION;
     const success = safeStorage.setItem(DRAFT_KEY, JSON.stringify(state));
     updateDraftIndicators(Boolean(success));
   }
@@ -15819,11 +15907,14 @@ loadCharacter();
       return;
     }
     try {
-      const obj = JSON.parse(s);
+      const obj = migrateDraft(JSON.parse(s));
       Object.assign(state, obj);
       if (!state.base) state.base = defaultBaseStats();
       if (!state.kit) state.kit = 'balanced';
       updateDraftIndicators(true);
+      if (safeStorage.isEnabled()) {
+        safeStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+      }
     } catch {
       safeStorage.removeItem(DRAFT_KEY);
       applyDefaultWizardState();

@@ -55,6 +55,7 @@ export const CONTEXT = ["practice","spar","battle"];
 // ---- Character Template ----
 export const characterTemplate = {
   id: "",
+  schemaVersion: 1,
   name: "",
   race: "",
   sex: "",
