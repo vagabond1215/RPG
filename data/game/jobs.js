@@ -1,7 +1,7 @@
 // Auto-generated job catalog
 export const JOBS = [
   {
-    "id": "Amnesiac Ward",
+    "id": "amnesiac-ward",
     "name": "Amnesiac Ward",
     "role": "background",
     "primaryStats": [],
@@ -46,10 +46,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Apprentice Alchemist",
+    "id": "apprentice-alchemist",
     "name": "Apprentice Alchemist",
     "role": "background",
     "primaryStats": [],
@@ -101,10 +102,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Guild Instructor"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Apprentice Rope Maker",
+    "id": "apprentice-rope-maker",
     "name": "Apprentice Rope Maker",
     "role": "background",
     "primaryStats": [],
@@ -152,10 +154,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Guild Instructor"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Bath Attendant",
+    "id": "bath-attendant",
     "name": "Bath Attendant",
     "role": "background",
     "primaryStats": [],
@@ -203,10 +206,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Caravan Guard",
+    "id": "caravan-guard",
     "name": "Caravan Guard",
     "role": "background",
     "primaryStats": [],
@@ -254,10 +258,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Investigator"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Caravan Merchant",
+    "id": "caravan-merchant",
     "name": "Caravan Merchant",
     "role": "background",
     "primaryStats": [],
@@ -301,10 +306,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Quartermaster"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Caravan Scribe",
+    "id": "caravan-scribe",
     "name": "Caravan Scribe",
     "role": "background",
     "primaryStats": [],
@@ -348,10 +354,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Cattle Drover",
+    "id": "cattle-drover",
     "name": "Cattle Drover",
     "role": "background",
     "primaryStats": [],
@@ -395,10 +402,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "City Guard Recruit",
+    "id": "city-guard-recruit",
     "name": "City Guard Recruit",
     "role": "background",
     "primaryStats": [],
@@ -448,10 +456,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Investigator"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Coin Engraver'S Child",
+    "id": "coin-engraver-s-child",
     "name": "Coin Engraver'S Child",
     "role": "background",
     "primaryStats": [],
@@ -499,10 +508,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Cooper'S Yard Laborer",
+    "id": "cooper-s-yard-laborer",
     "name": "Cooper'S Yard Laborer",
     "role": "background",
     "primaryStats": [],
@@ -554,10 +564,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Crystal Prospector",
+    "id": "crystal-prospector",
     "name": "Crystal Prospector",
     "role": "background",
     "primaryStats": [],
@@ -605,10 +616,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Dwarven Smith'S Apprentice",
+    "id": "dwarven-smith-s-apprentice",
     "name": "Dwarven Smith'S Apprentice",
     "role": "background",
     "primaryStats": [],
@@ -656,10 +668,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Guild Instructor"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Exotic Fruit Presser",
+    "id": "exotic-fruit-presser",
     "name": "Exotic Fruit Presser",
     "role": "background",
     "primaryStats": [],
@@ -707,10 +720,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Fisher Scavenger",
+    "id": "fisher-scavenger",
     "name": "Fisher Scavenger",
     "role": "background",
     "primaryStats": [],
@@ -758,10 +772,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Fishmonger'S Assistant",
+    "id": "fishmonger-s-assistant",
     "name": "Fishmonger'S Assistant",
     "role": "background",
     "primaryStats": [],
@@ -809,10 +824,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Flatboat Pilot",
+    "id": "flatboat-pilot",
     "name": "Flatboat Pilot",
     "role": "background",
     "primaryStats": [],
@@ -856,10 +872,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Fledgling Adventurer",
+    "id": "fledgling-adventurer",
     "name": "Fledgling Adventurer",
     "role": "background",
     "primaryStats": [],
@@ -921,10 +938,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Forager'S Apprentice",
+    "id": "forager-s-apprentice",
     "name": "Forager'S Apprentice",
     "role": "background",
     "primaryStats": [],
@@ -972,10 +990,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Guild Instructor"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Gardener Laborer",
+    "id": "gardener-laborer",
     "name": "Gardener Laborer",
     "role": "background",
     "primaryStats": [],
@@ -1023,10 +1042,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Gate Guard",
+    "id": "gate-guard",
     "name": "Gate Guard",
     "role": "background",
     "primaryStats": [],
@@ -1074,10 +1094,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Investigator"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Gate Smith",
+    "id": "gate-smith",
     "name": "Gate Smith",
     "role": "background",
     "primaryStats": [],
@@ -1129,10 +1150,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Glassblower'S Apprentice",
+    "id": "glassblower-s-apprentice",
     "name": "Glassblower'S Apprentice",
     "role": "background",
     "primaryStats": [],
@@ -1180,10 +1202,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Guild Instructor"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Glasswright Apprentice",
+    "id": "glasswright-apprentice",
     "name": "Glasswright Apprentice",
     "role": "background",
     "primaryStats": [],
@@ -1231,10 +1254,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Guild Instructor"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Guild Clerk",
+    "id": "guild-clerk",
     "name": "Guild Clerk",
     "role": "background",
     "primaryStats": [],
@@ -1282,10 +1306,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Gutter Orphan",
+    "id": "gutter-orphan",
     "name": "Gutter Orphan",
     "role": "background",
     "primaryStats": [],
@@ -1329,10 +1354,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Herbal Gatherer",
+    "id": "herbal-gatherer",
     "name": "Herbal Gatherer",
     "role": "background",
     "primaryStats": [],
@@ -1382,10 +1408,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Iron Watch Recruit",
+    "id": "iron-watch-recruit",
     "name": "Iron Watch Recruit",
     "role": "background",
     "primaryStats": [],
@@ -1433,10 +1460,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Investigator"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Junior Quartermaster",
+    "id": "junior-quartermaster",
     "name": "Junior Quartermaster",
     "role": "background",
     "primaryStats": [],
@@ -1480,10 +1508,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Leatherwright'S Journeyman",
+    "id": "leatherwright-s-journeyman",
     "name": "Leatherwright'S Journeyman",
     "role": "background",
     "primaryStats": [],
@@ -1531,10 +1560,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Log Driver",
+    "id": "log-driver",
     "name": "Log Driver",
     "role": "background",
     "primaryStats": [],
@@ -1578,10 +1608,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Market Gardener",
+    "id": "market-gardener",
     "name": "Market Gardener",
     "role": "background",
     "primaryStats": [],
@@ -1629,10 +1660,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Messenger Page",
+    "id": "messenger-page",
     "name": "Messenger Page",
     "role": "background",
     "primaryStats": [],
@@ -1676,10 +1708,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Monk-In-Training",
+    "id": "monk-in-training",
     "name": "Monk-In-Training",
     "role": "background",
     "primaryStats": [],
@@ -1731,10 +1764,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Hermit Scholar"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Orchard Picker",
+    "id": "orchard-picker",
     "name": "Orchard Picker",
     "role": "background",
     "primaryStats": [],
@@ -1778,10 +1812,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Ostracized Noble",
+    "id": "ostracized-noble",
     "name": "Ostracized Noble",
     "role": "background",
     "primaryStats": [],
@@ -1829,10 +1864,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Pearl Diver",
+    "id": "pearl-diver",
     "name": "Pearl Diver",
     "role": "background",
     "primaryStats": [],
@@ -1876,10 +1912,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Quest Board Runner",
+    "id": "quest-board-runner",
     "name": "Quest Board Runner",
     "role": "background",
     "primaryStats": [],
@@ -1923,10 +1960,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Reed Gatherer",
+    "id": "reed-gatherer",
     "name": "Reed Gatherer",
     "role": "background",
     "primaryStats": [],
@@ -1974,10 +2012,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "River Trader",
+    "id": "river-trader",
     "name": "River Trader",
     "role": "background",
     "primaryStats": [],
@@ -2021,10 +2060,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Quartermaster"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Road Scout",
+    "id": "road-scout",
     "name": "Road Scout",
     "role": "background",
     "primaryStats": [],
@@ -2072,10 +2112,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Sap Collector",
+    "id": "sap-collector",
     "name": "Sap Collector",
     "role": "background",
     "primaryStats": [],
@@ -2123,10 +2164,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Sawyer",
+    "id": "sawyer",
     "name": "Sawyer",
     "role": "background",
     "primaryStats": [],
@@ -2170,10 +2212,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Scribe'S Apprentice",
+    "id": "scribe-s-apprentice",
     "name": "Scribe'S Apprentice",
     "role": "background",
     "primaryStats": [],
@@ -2217,10 +2260,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Guild Instructor"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Smuggler'S Runner",
+    "id": "smuggler-s-runner",
     "name": "Smuggler'S Runner",
     "role": "background",
     "primaryStats": [],
@@ -2264,10 +2308,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Street Artist",
+    "id": "street-artist",
     "name": "Street Artist",
     "role": "background",
     "primaryStats": [],
@@ -2315,10 +2360,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Street Performer",
+    "id": "street-performer",
     "name": "Street Performer",
     "role": "background",
     "primaryStats": [],
@@ -2362,10 +2408,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Tea Picker",
+    "id": "tea-picker",
     "name": "Tea Picker",
     "role": "background",
     "primaryStats": [],
@@ -2413,10 +2460,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Tea Stall Owner",
+    "id": "tea-stall-owner",
     "name": "Tea Stall Owner",
     "role": "background",
     "primaryStats": [],
@@ -2464,10 +2512,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Trapper",
+    "id": "trapper",
     "name": "Trapper",
     "role": "background",
     "primaryStats": [],
@@ -2515,10 +2564,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Tunnel Scout",
+    "id": "tunnel-scout",
     "name": "Tunnel Scout",
     "role": "background",
     "primaryStats": [],
@@ -2562,10 +2612,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Unemployed Vagrant",
+    "id": "unemployed-vagrant",
     "name": "Unemployed Vagrant",
     "role": "background",
     "primaryStats": [],
@@ -2608,10 +2659,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Veteran Watchman",
+    "id": "veteran-watchman",
     "name": "Veteran Watchman",
     "role": "background",
     "primaryStats": [],
@@ -2659,10 +2711,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Investigator"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Wagoneer",
+    "id": "wagoneer",
     "name": "Wagoneer",
     "role": "background",
     "primaryStats": [],
@@ -2706,10 +2759,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Young Farmhand",
+    "id": "young-farmhand",
     "name": "Young Farmhand",
     "role": "background",
     "primaryStats": [],
@@ -2757,10 +2811,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Young Miner",
+    "id": "young-miner",
     "name": "Young Miner",
     "role": "background",
     "primaryStats": [],
@@ -2808,10 +2863,11 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   },
   {
-    "id": "Young Tutor",
+    "id": "young-tutor",
     "name": "Young Tutor",
     "role": "background",
     "primaryStats": [],
@@ -2855,11 +2911,27 @@ export const JOBS = [
     ],
     "sidePaths": [
       "Freelancer"
-    ]
+    ],
+    "description": ""
   }
 ];
 
+const JOB_ID_FORMAT = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
+
 export const JOB_BY_ID = Object.fromEntries(JOBS.map(job => [job.id, job]));
+
+export function assertValidJobsCatalog() {
+  const seen = new Set();
+  for (const job of JOBS) {
+    if (!JOB_ID_FORMAT.test(job.id)) {
+      throw new Error(`Invalid job id format: ${job.id}`);
+    }
+    if (seen.has(job.id)) {
+      throw new Error(`Duplicate job id: ${job.id}`);
+    }
+    seen.add(job.id);
+  }
+}
 
 export function getJobById(id) {
   return JOB_BY_ID[id] || null;
