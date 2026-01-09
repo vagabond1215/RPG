@@ -62,13 +62,19 @@ export function migrateCharacter(
     legacyJobIdMap = LEGACY_JOB_ID_MAP,
     defaultJobId = DEFAULT_JOB_ID,
     getJobByIdFn = getJobById,
-    schemaVersion = 1,
+    schemaVersion = 2,
     isDevBuild = false,
     warn = console.warn,
   } = {}
 ) {
   if (!character || typeof character !== "object") return character;
   const version = Number(character.schemaVersion ?? character.saveVersion ?? 0);
+  if (version < 2) {
+    delete character.class;
+    character.classId = null;
+    delete character.jobId;
+    delete character.chosenJobId;
+  }
   if (version < schemaVersion && character.jobId) {
     const resolved = resolveLegacyJobId(character.jobId, {
       legacyJobIdMap,
@@ -93,30 +99,18 @@ export function migrateDraft(
     legacyJobIdMap = LEGACY_JOB_ID_MAP,
     defaultJobId = DEFAULT_JOB_ID,
     getJobByIdFn = getJobById,
-    draftVersion = 2,
+    draftVersion = 3,
     isDevBuild = false,
     warn = console.warn,
   } = {}
 ) {
   if (!draft || typeof draft !== "object") return draft;
-  if (!draft.chosenJobId && draft.jobId) {
-    draft.chosenJobId = draft.jobId;
-  }
-  if (draft.chosenJobId) {
-    const resolved = resolveLegacyJobId(draft.chosenJobId, {
-      legacyJobIdMap,
-      defaultJobId,
-      getJobByIdFn,
-    });
-    if (resolved && resolved !== draft.chosenJobId) {
-      const normalized = normalizeLegacyJobKey(draft.chosenJobId);
-      if (resolved === defaultJobId && !legacyJobIdMap.has(normalized) && isDevBuild) {
-        warn(
-          `Unknown legacy draft jobId "${draft.chosenJobId}" detected. Defaulting to "${defaultJobId}".`
-        );
-      }
-      draft.chosenJobId = resolved;
-    }
+  const version = Number(draft.draftVersion ?? draft.schemaVersion ?? 0);
+  if (version < 3) {
+    delete draft.class;
+    draft.classId = null;
+    delete draft.jobId;
+    delete draft.chosenJobId;
   }
   draft.draftVersion = draftVersion;
   return draft;

@@ -185,16 +185,8 @@
           <label for="cc-name">Name</label>
           <input id="cc-name" type="text" placeholder="Enter name" />
           <div class="cc-row">
-            <label for="cc-class">Class</label>
-            <select id="cc-class"></select>
-          </div>
-          <div class="cc-row">
             <label for="cc-backstory">Backstory</label>
             <select id="cc-backstory"></select>
-          </div>
-          <div class="cc-row">
-            <label for="cc-job">Job</label>
-            <select id="cc-job"></select>
           </div>
           <div class="cc-row">
             <span class="cc-level">Lv <span id="cc-level">1</span></span>
@@ -236,14 +228,12 @@
 
       <main class="cc-detail" id="cc-detail" tabindex="-1">
         <section id="cc-wizard" aria-label="Creation Wizard">
-          <div class="cc-steps" role="progressbar" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1">
+          <div class="cc-steps" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1">
             <div class="cc-step active" data-step="1">Profile</div>
-            <div class="cc-step" data-step="2">Class</div>
-            <div class="cc-step" data-step="3">Backstory</div>
-            <div class="cc-step" data-step="4">Job</div>
-            <div class="cc-step" data-step="5">Stats</div>
-            <div class="cc-step" data-step="6">Starter Kit</div>
-            <div class="cc-step" data-step="7">Confirm</div>
+            <div class="cc-step" data-step="2">Backstory</div>
+            <div class="cc-step" data-step="3">Stats</div>
+            <div class="cc-step" data-step="4">Starter Kit</div>
+            <div class="cc-step" data-step="5">Confirm</div>
           </div>
           <div class="cc-step-body" id="cc-step-body"><!-- renderStep() injects here --></div>
           <div class="cc-step-actions">
