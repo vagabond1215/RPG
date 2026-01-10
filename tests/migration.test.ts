@@ -29,4 +29,18 @@ describe("legacy jobId migration", () => {
     expect(migrated.classId).toBeNull();
     expect(migrated.draftVersion).toBe(3);
   });
+
+  it("drops legacy job/class ids while preserving backstory", () => {
+    const draft = {
+      jobId: "Amnesiac Ward",
+      classId: "knight",
+      backstoryId: "amnesiac-ward",
+      draftVersion: 1,
+    };
+    const migrated = migrateDraft(draft, { isDevBuild: false, warn: silentWarn });
+    expect(migrated.jobId).toBeUndefined();
+    expect(migrated.classId).toBeNull();
+    expect(migrated.backstoryId).toBe("amnesiac-ward");
+    expect(migrated.draftVersion).toBe(3);
+  });
 });
