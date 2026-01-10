@@ -66,7 +66,7 @@ Portrait prompts are composed by `data/game/image_prompts.js`, which stitches to
 
 ### Backstories and character origins
 
-Narrative origins now live in the unified catalogue at `data/game/backstories.ts`. Each entry implements the `RichBackstory` interface with a stable, slug-style `id`, a `title`, `legacyBackgrounds`, location coverage (`locations`), narrative beats (`origin`, `currentSituation`, `motivation`), appearance cues, responsibilities, and alignment biases. Optional `allowedJobIds` / `recommendedJobIds` lists reference the canonical job loadouts in `data/game/jobs.ts`, where every job uses a stable slug `id` for cross-references.
+Narrative origins now live in the unified catalogue at `data/game/backstories.ts`. Each entry implements the `RichBackstory` interface with a stable, slug-style `id`, a `title`, `legacyBackgrounds`, location coverage (`locations`), narrative beats (`origin`, `currentSituation`, `motivation`), appearance cues, responsibilities, and alignment biases. Optional `recommendedProfessionIds` lists capture profession affinity without binding the backstory to a specific job loadout.
 
 Character creation persists both the chosen `backstoryId` and `jobId` so saves can rehydrate narrative context and loadouts independently. Versioned migration in `script.js` maps legacy job labels, hooks, and `legacyBackgrounds` to the current job ids; unknown legacy values fall back to the default job id to keep older saves safe. Preserve prior display strings by adding them to `legacyBackgrounds` so migration can resolve them.
 
