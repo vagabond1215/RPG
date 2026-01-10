@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import {
-  DEFAULT_JOB_ID,
   LEGACY_JOB_ID_MAP,
   migrateCharacter,
   migrateDraft,
@@ -18,14 +17,16 @@ describe("legacy jobId migration", () => {
   it("falls back to safe defaults for unknown job ids", () => {
     const character = { jobId: "unknown job", schemaVersion: 0 };
     const migrated = migrateCharacter(character, { isDevBuild: false, warn: silentWarn });
-    expect(migrated.jobId).toBe(DEFAULT_JOB_ID);
-    expect(migrated.schemaVersion).toBe(1);
+    expect(migrated.jobId).toBeUndefined();
+    expect(migrated.classId).toBeNull();
+    expect(migrated.schemaVersion).toBe(2);
   });
 
   it("migrates draft job ids into chosenJobId", () => {
     const draft = { jobId: "Amnesiac Ward" };
     const migrated = migrateDraft(draft, { isDevBuild: false, warn: silentWarn });
-    expect(migrated.chosenJobId).toBe("amnesiac-ward");
-    expect(migrated.draftVersion).toBe(2);
+    expect(migrated.chosenJobId).toBeUndefined();
+    expect(migrated.classId).toBeNull();
+    expect(migrated.draftVersion).toBe(3);
   });
 });
