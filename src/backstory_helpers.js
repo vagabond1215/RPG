@@ -7,7 +7,6 @@ import {
   createBiographyBeatContext,
   registerBiographyBeatTags,
 } from "../data/game/backstories.js";
-import { getJobById } from "../data/game/jobs.js";
 import {
   createEmptyCurrency,
   DENOMINATIONS,
@@ -801,9 +800,8 @@ export function buildBackstoryInstance(backstory, character) {
     class: renderBackstoryTextForCharacter(backstory.class, character, renderOverrides) || "",
     alignment: renderBackstoryTextForCharacter(backstory.alignment, character, renderOverrides) || "",
     availableIn: [...(backstory.availableIn || [])],
-    allowedJobIds: Array.isArray(backstory.allowedJobIds) ? [...backstory.allowedJobIds] : undefined,
-    recommendedJobIds: Array.isArray(backstory.recommendedJobIds)
-      ? [...backstory.recommendedJobIds]
+    recommendedProfessionIds: Array.isArray(backstory.recommendedProfessionIds)
+      ? [...backstory.recommendedProfessionIds]
       : undefined,
     biography,
     biographyParagraphs,
@@ -860,10 +858,6 @@ export function applyBackstoryLoadout(character, backstory, options = {}) {
     character.trainingPhilosophy = instance.trainingPhilosophy;
     character.alignmentReflection = instance.alignmentReflection;
     character.rumorEcho = instance.rumorEcho;
-  }
-  const job = character.jobId ? getJobById(character.jobId) : null;
-  if (job?.loadout) {
-    applyLoadoutToCharacter(character, job.loadout, options);
   }
   return character;
 }

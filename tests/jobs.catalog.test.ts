@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { JOBS, JOB_BY_ID } from "../data/game/jobs.js";
-import { BACKSTORIES } from "../data/game/backstories.js";
+import { JOBS } from "../data/game/jobs.js";
 
 const JOB_ID_FORMAT = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -12,15 +11,5 @@ describe("jobs catalog", () => {
     for (const id of ids) {
       expect(JOB_ID_FORMAT.test(id)).toBe(true);
     }
-  });
-
-  it("backs allowed/recommended job ids with catalog entries", () => {
-    for (const backstory of BACKSTORIES) {
-      const allowed = backstory.allowedJobIds ?? [];
-      const recommended = backstory.recommendedJobIds ?? [];
-      for (const id of [...allowed, ...recommended]) {
-        expect(JOB_BY_ID[id]).toBeTruthy();
-      }
-    }
-  });
+});
 });

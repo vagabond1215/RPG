@@ -18,7 +18,7 @@ Backstories now render through a four-beat pipeline so Codex biographies read li
 
 - Backstory entries in `data/game/backstories.ts` use a stable, slug-style `id` and a short `title`, plus `legacyBackgrounds` to preserve prior display names for migration.
 - Narrative context lives in `origin`, `currentSituation`, and `motivation`, while `appearance`, `themes`, `responsibilities`, and `alignmentBias` round out the roleplay metadata.
-- Optional `allowedJobIds` and `recommendedJobIds` must reference stable slug ids from `data/game/jobs.ts`—never embed job definitions inside backstory entries.
+- Optional `recommendedProfessionIds` should capture profession affinity without binding a backstory to a specific job loadout.
 - Character creation persists both `backstoryId` and `jobId` in the save payload so the narrative and loadout can be restored independently.
 - Migration in `script.js` resolves legacy job strings (titles, hooks, `legacyBackgrounds`) to current job ids, defaulting to the fallback job when no match is found.
 

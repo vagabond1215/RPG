@@ -66,7 +66,7 @@ export function addCurrency(a, b) {
 }
 `;
 
-const sanitizedBackstories = BACKSTORIES.map(({ allowedJobIds, recommendedJobIds, ...rest }) => rest);
+const sanitizedBackstories = BACKSTORIES;
 const json = JSON.stringify(sanitizedBackstories, null, 2);
 const body = `${helpers}\nexport const BACKSTORIES = ${json};\n\nexport const BACKSTORY_BY_ID = Object.fromEntries(BACKSTORIES.map(backstory => [backstory.id, backstory]));\n\nexport const LEGACY_BACKSTORY_LOOKUP = new Map(\n  BACKSTORIES.flatMap(backstory => backstory.legacyBackgrounds.map(name => [name, backstory]))\n);\n`;
 
