@@ -48,12 +48,7 @@ import {
   getBackstoriesForLocation,
 } from "./src/backstory_helpers.js";
 import { composeBiography } from "./src/bio/composeBiography.js";
-import {
-  DEFAULT_JOB_ID,
-  LEGACY_JOB_ID_MAP,
-  migrateCharacter as migrateCharacterRecord,
-  migrateDraft as migrateCharacterDraft,
-} from "./src/character_migration.js";
+import { migrateCharacter as migrateCharacterRecord, migrateDraft as migrateCharacterDraft } from "./src/character_migration.js";
 import { initHookWheel } from "./src/ui/hooksWheel.js";
 import {
   elementalProficiencyMap,
@@ -135,19 +130,13 @@ const isDevBuild = () => DEV_HOSTS.has(window.location.hostname) || window.locat
 
 function migrateCharacter(character) {
   return migrateCharacterRecord(character, {
-    legacyJobIdMap: LEGACY_JOB_ID_MAP,
     schemaVersion: CHARACTER_SCHEMA_VERSION,
-    isDevBuild: isDevBuild(),
-    warn: console.warn,
   });
 }
 
 function migrateDraft(draft) {
   return migrateCharacterDraft(draft, {
-    legacyJobIdMap: LEGACY_JOB_ID_MAP,
     draftVersion: DRAFT_VERSION,
-    isDevBuild: isDevBuild(),
-    warn: console.warn,
   });
 }
 const REST_BASE_DURATION_MINUTES = 30;
