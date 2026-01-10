@@ -126,8 +126,8 @@ const NAV_ICONS = {
 const QUEST_BOARD_ICON = 'assets/images/icons/Quests.png';
 const REST_ACTION_ICON = 'assets/images/icons/actions/Rest.png';
 
-const CHARACTER_SCHEMA_VERSION = 1;
-const DRAFT_VERSION = 2;
+const CHARACTER_SCHEMA_VERSION = 2;
+const DRAFT_VERSION = 3;
 const DEV_HOSTS = new Set(['localhost', '127.0.0.1', '::1']);
 
 const isDevBuild = () => DEV_HOSTS.has(window.location.hostname) || window.location.hostname.endsWith('.local');
@@ -15086,6 +15086,8 @@ function finalizeCharacter(character) {
     ...template,
     ...defaultProficiencies,
     ...character,
+    classId: null,
+    classTier: 0,
     homeTown: character.location,
     location: character.location,
     attributes: { base: { ...attrBlock }, current: { ...attrBlock } },
@@ -15736,13 +15738,6 @@ loadCharacter();
   const cc = byId('char-creator');
   if (!cc) return;
 
-  const CLASS_OPTIONS = [
-    { value: '', label: '— Choose —' },
-    { value: 'warrior', label: 'Warrior' },
-    { value: 'ranger', label: 'Ranger' },
-    { value: 'mage', label: 'Mage' },
-  ];
-
   const KIT_LABELS = {
     balanced: 'Balanced',
     offense: 'Offense',
@@ -15750,9 +15745,7 @@ loadCharacter();
   };
 
   const summaryNameInput = byId('cc-name');
-  const summaryClassSelect = byId('cc-class');
   const summaryBackstorySelect = byId('cc-backstory');
-  const summaryJobSelect = byId('cc-job');
   const draftSaveButton = byId('cc-save-draft');
   const draftResetButton = byId('cc-reset-draft');
 
@@ -15770,50 +15763,19 @@ loadCharacter();
     (id && BACKSTORY_BY_ID && BACKSTORY_BY_ID[id]) ||
     backstoryEntries.find(entry => entry?.id === id) ||
     null;
-  const getJobOptionsForBackstory = backstoryId => {
-    const backstory = getBackstoryById(backstoryId);
-    const allowedIds =
-      Array.isArray(backstory?.allowedJobIds) && backstory.allowedJobIds.length
-        ? new Set(backstory.allowedJobIds)
-        : null;
-    const recommendedIds = Array.isArray(backstory?.recommendedJobIds)
-      ? backstory.recommendedJobIds
-      : [];
-    const recommendedSet = new Set(recommendedIds);
-    const baseJobs = JOBS.filter(job => !allowedIds || allowedIds.has(job.id));
-    const recommendedJobs = recommendedIds
-      .map(id => baseJobs.find(job => job.id === id))
-      .filter(Boolean);
-    const remainingJobs = baseJobs.filter(job => !recommendedSet.has(job.id));
-    return [...recommendedJobs, ...remainingJobs];
-  };
 
   // State
   const state = {
     step: 1,
-    steps: 7,
+    steps: 5,
     name: '',
-    cls: '',
     chosenBackstoryId: '',
-    chosenJobId: '',
     level: 1,
     xp: 0,
     base: { hp: 100, mp: 50, str: 10, dex: 8, int: 7 },
     kit: 'balanced',
     draftVersion: DRAFT_VERSION
   };
-
-  function ensureClassOptions(select) {
-    if (!select || select.options.length) return;
-    CLASS_OPTIONS.forEach(({ value, label }) => {
-      const opt = document.createElement('option');
-      opt.value = value;
-      opt.textContent = label;
-      select.appendChild(opt);
-    });
-  }
-
-  ensureClassOptions(summaryClassSelect);
 
   if (summaryNameInput) {
     summaryNameInput.addEventListener('input', (event) => {
@@ -15822,23 +15784,11 @@ loadCharacter();
     });
   }
 
-  if (summaryClassSelect) {
-    summaryClassSelect.addEventListener('change', (event) => {
-      state.cls = event.target.value;
-      syncSummary();
-    });
-  }
   if (summaryBackstorySelect) {
     summaryBackstorySelect.addEventListener('change', (event) => {
       state.chosenBackstoryId = event.target.value;
-      syncBackstoryAndJobs();
+      syncBackstorySelection();
       render();
-    });
-  }
-  if (summaryJobSelect) {
-    summaryJobSelect.addEventListener('change', (event) => {
-      state.chosenJobId = event.target.value;
-      syncSummary();
     });
   }
 
@@ -15847,14 +15797,10 @@ loadCharacter();
   const defaultBaseStats = () => ({ hp: 100, mp: 50, str: 10, dex: 8, int: 7 });
   function applyDefaultWizardState() {
     const defaultBackstoryId = backstoryEntries[0]?.id || '';
-    const defaultJobs = getJobOptionsForBackstory(defaultBackstoryId);
-    const defaultJobId = defaultJobs[0]?.id || '';
     Object.assign(state, {
       step: 1,
       name: '',
-      cls: '',
       chosenBackstoryId: defaultBackstoryId,
-      chosenJobId: defaultJobId,
       level: 1,
       xp: 0,
       base: defaultBaseStats(),
@@ -15912,7 +15858,7 @@ loadCharacter();
       Object.assign(state, obj);
       if (!state.base) state.base = defaultBaseStats();
       if (!state.kit) state.kit = 'balanced';
-      syncBackstoryAndJobs();
+      syncBackstorySelection();
       updateDraftIndicators(true);
       if (safeStorage.isEnabled()) {
         safeStorage.setItem(DRAFT_KEY, JSON.stringify(state));
@@ -15932,13 +15878,9 @@ loadCharacter();
     render();
   }
 
-  function syncBackstoryAndJobs() {
+  function syncBackstorySelection() {
     if (!state.chosenBackstoryId || !backstoryIds.has(state.chosenBackstoryId)) {
       state.chosenBackstoryId = backstoryEntries[0]?.id || '';
-    }
-    const availableJobs = getJobOptionsForBackstory(state.chosenBackstoryId);
-    if (!state.chosenJobId || !availableJobs.some(job => job.id === state.chosenJobId)) {
-      state.chosenJobId = availableJobs[0]?.id || '';
     }
   }
 
@@ -15953,7 +15895,6 @@ loadCharacter();
   // Open/close
   function startWizard() {
     loadDraft();
-    ensureClassOptions(summaryClassSelect);
     cc.classList.remove('is-hidden');
     cc.setAttribute('aria-hidden', 'false');
     hideTopToolbar(); // requirement: hide during creation
@@ -15972,16 +15913,13 @@ loadCharacter();
   function finish() {
     // Validate minimal fields
     if (!state.name || state.name.length < 2) { alert('Please enter a name.'); return; }
-    if (!state.cls) { alert('Please choose a class.'); return; }
     if (!state.chosenBackstoryId) { alert('Please choose a backstory.'); return; }
-    if (!state.chosenJobId) { alert('Please choose a job.'); return; }
     saveDraft();
     // TODO: call your existing "create character" function if present
     if (typeof window.createCharacter === 'function') {
       window.createCharacter({
         ...state,
-        backstoryId: state.chosenBackstoryId,
-        jobId: state.chosenJobId
+        backstoryId: state.chosenBackstoryId
       });
     }
     closeWizard();
@@ -15989,18 +15927,12 @@ loadCharacter();
 
   // UI bindings
   function syncSummary() {
-    syncBackstoryAndJobs();
+    syncBackstorySelection();
     byId('cc-level').textContent = String(state.level);
     byId('cc-xp-text').textContent = `${state.xp} / 100`;
     byId('cc-xp-bar').style.setProperty('--xp', Math.min(100, state.xp) + '%');
     if (summaryNameInput && summaryNameInput.value !== state.name) {
       summaryNameInput.value = state.name || '';
-    }
-    if (summaryClassSelect) {
-      ensureClassOptions(summaryClassSelect);
-      if (summaryClassSelect.value !== state.cls) {
-        summaryClassSelect.value = state.cls || '';
-      }
     }
     if (summaryBackstorySelect) {
       summaryBackstorySelect.innerHTML = '';
@@ -16015,21 +15947,6 @@ loadCharacter();
         summaryBackstorySelect.appendChild(opt);
       });
       summaryBackstorySelect.value = state.chosenBackstoryId || '';
-    }
-    if (summaryJobSelect) {
-      summaryJobSelect.innerHTML = '';
-      const placeholder = document.createElement('option');
-      placeholder.value = '';
-      placeholder.textContent = '— Choose —';
-      summaryJobSelect.appendChild(placeholder);
-      const jobs = getJobOptionsForBackstory(state.chosenBackstoryId);
-      jobs.forEach(job => {
-        const opt = document.createElement('option');
-        opt.value = job.id;
-        opt.textContent = job.name || job.id;
-        summaryJobSelect.appendChild(opt);
-      });
-      summaryJobSelect.value = state.chosenJobId || '';
     }
 
     byId('cc-hp').textContent = String(state.base.hp);
@@ -16077,30 +15994,6 @@ loadCharacter();
       card.className = 'cc-card';
 
       const intro = document.createElement('p');
-      intro.textContent = 'Select a class:';
-      card.append(intro);
-
-      const label = document.createElement('label');
-      label.setAttribute('for', 'cc-class-select');
-      label.className = 'sr-only';
-      label.textContent = 'Class';
-      card.append(label);
-
-      const select = document.createElement('select');
-      select.id = 'cc-class-select';
-      card.append(select);
-
-      const hint = document.createElement('p');
-      hint.className = 'cc-hint';
-      hint.textContent = 'Class choice updates the summary dropdown automatically.';
-      card.append(hint);
-
-      host.append(card);
-    } else if (step === 3) {
-      const card = document.createElement('div');
-      card.className = 'cc-card';
-
-      const intro = document.createElement('p');
       intro.textContent = 'Choose a backstory:';
       card.append(intro);
 
@@ -16116,35 +16009,11 @@ loadCharacter();
 
       const hint = document.createElement('p');
       hint.className = 'cc-hint';
-      hint.textContent = 'Backstory selection shapes the recommended jobs.';
+      hint.textContent = 'Backstory selection helps ground your origin story.';
       card.append(hint);
 
       host.append(card);
-    } else if (step === 4) {
-      const card = document.createElement('div');
-      card.className = 'cc-card';
-
-      const intro = document.createElement('p');
-      intro.textContent = 'Select a job:';
-      card.append(intro);
-
-      const label = document.createElement('label');
-      label.setAttribute('for', 'cc-job-select');
-      label.className = 'sr-only';
-      label.textContent = 'Job';
-      card.append(label);
-
-      const select = document.createElement('select');
-      select.id = 'cc-job-select';
-      card.append(select);
-
-      const hint = document.createElement('p');
-      hint.className = 'cc-hint';
-      hint.textContent = 'Recommended jobs appear first for the chosen backstory.';
-      card.append(hint);
-
-      host.append(card);
-    } else if (step === 5) {
+    } else if (step === 3) {
       const card = document.createElement('div');
       card.className = 'cc-card';
 
@@ -16171,7 +16040,7 @@ loadCharacter();
       card.append(grid);
 
       host.append(card);
-    } else if (step === 6) {
+    } else if (step === 4) {
       const card = document.createElement('div');
       card.className = 'cc-card';
 
@@ -16197,7 +16066,7 @@ loadCharacter();
       });
 
       host.append(card);
-    } else if (step === 7) {
+    } else if (step === 5) {
       const card = document.createElement('div');
       card.className = 'cc-card';
 
@@ -16211,12 +16080,6 @@ loadCharacter();
       nameLine.append(nameLabel, document.createTextNode(` ${state.name || '—'}`));
       card.append(nameLine);
 
-      const classLine = document.createElement('p');
-      const classLabel = document.createElement('strong');
-      classLabel.textContent = 'Class:';
-      classLine.append(classLabel, document.createTextNode(` ${state.cls || '—'}`));
-      card.append(classLine);
-
       const backstoryLine = document.createElement('p');
       const backstoryLabel = document.createElement('strong');
       backstoryLabel.textContent = 'Backstory:';
@@ -16224,13 +16087,6 @@ loadCharacter();
         getBackstoryLabel(getBackstoryById(state.chosenBackstoryId)) || '—';
       backstoryLine.append(backstoryLabel, document.createTextNode(` ${backstoryName}`));
       card.append(backstoryLine);
-
-      const jobLine = document.createElement('p');
-      const jobLabel = document.createElement('strong');
-      jobLabel.textContent = 'Job:';
-      const jobName = getJobById(state.chosenJobId)?.name || state.chosenJobId || '—';
-      jobLine.append(jobLabel, document.createTextNode(` ${jobName}`));
-      card.append(jobLine);
 
       const statsLine = document.createElement('p');
       const statsLabel = document.createElement('strong');
@@ -16265,20 +16121,6 @@ loadCharacter();
       name.focus();
     }
 
-    const classSelect = byId('cc-class-select');
-    if (classSelect) {
-      ensureClassOptions(classSelect);
-      classSelect.value = state.cls || '';
-      classSelect.addEventListener('change', (e) => {
-        state.cls = e.target.value;
-        if (summaryClassSelect && summaryClassSelect.value !== state.cls) {
-          summaryClassSelect.value = state.cls;
-        }
-        syncSummary();
-      });
-      classSelect.focus();
-    }
-
     const backstorySelect = byId('cc-backstory-select');
     if (backstorySelect) {
       backstorySelect.innerHTML = '';
@@ -16295,32 +16137,10 @@ loadCharacter();
       backstorySelect.value = state.chosenBackstoryId || '';
       backstorySelect.addEventListener('change', (e) => {
         state.chosenBackstoryId = e.target.value;
-        syncBackstoryAndJobs();
+        syncBackstorySelection();
         render();
       });
       backstorySelect.focus();
-    }
-
-    const jobSelect = byId('cc-job-select');
-    if (jobSelect) {
-      jobSelect.innerHTML = '';
-      const placeholder = document.createElement('option');
-      placeholder.value = '';
-      placeholder.textContent = '— Choose —';
-      jobSelect.appendChild(placeholder);
-      const jobs = getJobOptionsForBackstory(state.chosenBackstoryId);
-      jobs.forEach(job => {
-        const opt = document.createElement('option');
-        opt.value = job.id;
-        opt.textContent = job.name || job.id;
-        jobSelect.appendChild(opt);
-      });
-      jobSelect.value = state.chosenJobId || '';
-      jobSelect.addEventListener('change', (e) => {
-        state.chosenJobId = e.target.value;
-        syncSummary();
-      });
-      jobSelect.focus();
     }
 
     qsa('input[data-stat]', host).forEach(inp => {
@@ -16368,9 +16188,7 @@ loadCharacter();
     if (finishBtn) {
       finishBtn.disabled = state.step !== state.steps || !(
         state.name?.length >= 2 &&
-        state.cls &&
-        state.chosenBackstoryId &&
-        state.chosenJobId
+        state.chosenBackstoryId
       );
     }
   }
