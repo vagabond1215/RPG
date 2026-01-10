@@ -1,46 +1,18 @@
 import { describe, expect, it } from "vitest";
-import {
-  LEGACY_JOB_ID_MAP,
-  migrateCharacter,
-  migrateDraft,
-  resolveLegacyJobId,
-} from "../src/character_migration.js";
+import { migrateCharacter, migrateDraft } from "../src/character_migration.js";
 
-const silentWarn = () => {};
-
-describe("legacy jobId migration", () => {
-  it("maps legacy backstory labels to job ids", () => {
-    const resolved = resolveLegacyJobId("Amnesiac ward", { legacyJobIdMap: LEGACY_JOB_ID_MAP });
-    expect(resolved).toBe("amnesiac-ward");
-  });
-
-  it("falls back to safe defaults for unknown job ids", () => {
+describe("character migration", () => {
+  it("stamps the current schema version without altering other fields", () => {
     const character = { jobId: "unknown job", schemaVersion: 0 };
-    const migrated = migrateCharacter(character, { isDevBuild: false, warn: silentWarn });
-    expect(migrated.jobId).toBeUndefined();
-    expect(migrated.classId).toBeNull();
+    const migrated = migrateCharacter(character, { schemaVersion: 2 });
+    expect(migrated.jobId).toBe("unknown job");
     expect(migrated.schemaVersion).toBe(2);
   });
 
-  it("migrates draft job ids into chosenJobId", () => {
-    const draft = { jobId: "Amnesiac Ward" };
-    const migrated = migrateDraft(draft, { isDevBuild: false, warn: silentWarn });
-    expect(migrated.chosenJobId).toBeUndefined();
-    expect(migrated.classId).toBeNull();
-    expect(migrated.draftVersion).toBe(3);
-  });
-
-  it("drops legacy job/class ids while preserving backstory", () => {
-    const draft = {
-      jobId: "Amnesiac Ward",
-      classId: "knight",
-      backstoryId: "amnesiac-ward",
-      draftVersion: 1,
-    };
-    const migrated = migrateDraft(draft, { isDevBuild: false, warn: silentWarn });
-    expect(migrated.jobId).toBeUndefined();
-    expect(migrated.classId).toBeNull();
-    expect(migrated.backstoryId).toBe("amnesiac-ward");
+  it("stamps the current draft version without altering other fields", () => {
+    const draft = { jobId: "Amnesiac Ward", draftVersion: 0 };
+    const migrated = migrateDraft(draft, { draftVersion: 3 });
+    expect(migrated.jobId).toBe("Amnesiac Ward");
     expect(migrated.draftVersion).toBe(3);
   });
 });

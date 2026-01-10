@@ -36,7 +36,6 @@ export interface AlignmentBias {
 export interface RichBackstory {
   id: string;
   title: string;
-  legacyBackgrounds: string[];
   locations: string[];
   origin: NarrativeBeat;
   currentSituation: NarrativeBeat & { sceneHook: string };
@@ -115,9 +114,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "amnesiac-ward",
     "title": "Amnesiac Ward",
-    "legacyBackgrounds": [
-      "Amnesiac ward"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -167,9 +163,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "apprentice-alchemist",
     "title": "Apprentice Alchemist",
-    "legacyBackgrounds": [
-      "Apprentice alchemist"
-    ],
     "locations": [
       "Wave's Break",
       "Warm Springs"
@@ -230,9 +223,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "apprentice-rope-maker",
     "title": "Apprentice Rope Maker",
-    "legacyBackgrounds": [
-      "Apprentice rope maker"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -285,9 +275,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "bath-attendant",
     "title": "Bath Attendant",
-    "legacyBackgrounds": [
-      "Bath attendant"
-    ],
     "locations": [
       "Warm Springs"
     ],
@@ -340,9 +327,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "caravan-guard",
     "title": "Caravan Guard",
-    "legacyBackgrounds": [
-      "Caravan guard"
-    ],
     "locations": [
       "Corner Stone"
     ],
@@ -394,9 +378,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "caravan-merchant",
     "title": "Caravan Merchant",
-    "legacyBackgrounds": [
-      "Caravan merchant"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -449,9 +430,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "caravan-scribe",
     "title": "Caravan Scribe",
-    "legacyBackgrounds": [
-      "Caravan scribe"
-    ],
     "locations": [
       "Mountain Top"
     ],
@@ -504,9 +482,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "cattle-drover",
     "title": "Cattle Drover",
-    "legacyBackgrounds": [
-      "Cattle drover"
-    ],
     "locations": [
       "Creekside"
     ],
@@ -559,9 +534,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "city-guard-recruit",
     "title": "City Guard Recruit",
-    "legacyBackgrounds": [
-      "City guard recruit"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -614,9 +586,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "coin-engravers-child",
     "title": "Coin Engraver'S Child",
-    "legacyBackgrounds": [
-      "Coin engraver's child"
-    ],
     "locations": [
       "Corner Stone"
     ],
@@ -669,9 +638,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "coopers-yard-laborer",
     "title": "Cooper'S Yard Laborer",
-    "legacyBackgrounds": [
-      "Cooper's yard laborer"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -723,9 +689,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "crystal-prospector",
     "title": "Crystal Prospector",
-    "legacyBackgrounds": [
-      "Crystal prospector"
-    ],
     "locations": [
       "Timber Grove"
     ],
@@ -777,9 +740,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "dwarven-smiths-apprentice",
     "title": "Dwarven Smith'S Apprentice",
-    "legacyBackgrounds": [
-      "Dwarven smith's apprentice"
-    ],
     "locations": [
       "Corner Stone"
     ],
@@ -832,9 +792,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "exotic-fruit-presser",
     "title": "Exotic Fruit Presser",
-    "legacyBackgrounds": [
-      "Exotic fruit presser"
-    ],
     "locations": [
       "Dragon's Reach Road"
     ],
@@ -887,9 +844,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "fisher-scavenger",
     "title": "Fisher Scavenger",
-    "legacyBackgrounds": [
-      "Fisher scavenger"
-    ],
     "locations": [
       "Dragon's Reach Road"
     ],
@@ -942,9 +896,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "fishmongers-assistant",
     "title": "Fishmonger'S Assistant",
-    "legacyBackgrounds": [
-      "Fishmonger's assistant"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -996,9 +947,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "flatboat-pilot",
     "title": "Flatboat Pilot",
-    "legacyBackgrounds": [
-      "Flatboat pilot"
-    ],
     "locations": [
       "Creekside"
     ],
@@ -1051,9 +999,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "fledgling-adventurer",
     "title": "Fledgling Adventurer",
-    "legacyBackgrounds": [
-      "Fledgling adventurer"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -1114,9 +1059,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "foragers-apprentice",
     "title": "Forager'S Apprentice",
-    "legacyBackgrounds": [
-      "Forager's apprentice"
-    ],
     "locations": [
       "Whiteheart"
     ],
@@ -1169,9 +1111,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "gardener-laborer",
     "title": "Gardener Laborer",
-    "legacyBackgrounds": [
-      "Gardener laborer"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -1223,9 +1162,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "gate-guard",
     "title": "Gate Guard",
-    "legacyBackgrounds": [
-      "Gate guard"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -1277,9 +1213,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "gate-smith",
     "title": "Gate Smith",
-    "legacyBackgrounds": [
-      "Gate smith"
-    ],
     "locations": [
       "Corona"
     ],
@@ -1331,9 +1264,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "glassblowers-apprentice",
     "title": "Glassblower'S Apprentice",
-    "legacyBackgrounds": [
-      "Glassblower's apprentice"
-    ],
     "locations": [
       "Coral Keep"
     ],
@@ -1385,9 +1315,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "glasswright-apprentice",
     "title": "Glasswright Apprentice",
-    "legacyBackgrounds": [
-      "Glasswright apprentice"
-    ],
     "locations": [
       "Corona"
     ],
@@ -1440,9 +1367,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "guild-clerk",
     "title": "Guild Clerk",
-    "legacyBackgrounds": [
-      "Guild clerk"
-    ],
     "locations": [
       "Creekside"
     ],
@@ -1495,9 +1419,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "gutter-orphan",
     "title": "Gutter Orphan",
-    "legacyBackgrounds": [
-      "Gutter orphan"
-    ],
     "locations": [
       "Corona"
     ],
@@ -1549,9 +1470,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "herbal-gatherer",
     "title": "Herbal Gatherer",
-    "legacyBackgrounds": [
-      "Herbal gatherer"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -1604,9 +1522,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "iron-watch-recruit",
     "title": "Iron Watch Recruit",
-    "legacyBackgrounds": [
-      "Iron Watch recruit"
-    ],
     "locations": [
       "Mountain Top"
     ],
@@ -1658,9 +1573,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "junior-quartermaster",
     "title": "Junior Quartermaster",
-    "legacyBackgrounds": [
-      "Junior quartermaster"
-    ],
     "locations": [
       "Coral Keep"
     ],
@@ -1713,9 +1625,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "leatherwrights-journeyman",
     "title": "Leatherwright'S Journeyman",
-    "legacyBackgrounds": [
-      "Leatherwright's journeyman"
-    ],
     "locations": [
       "Mountain Top"
     ],
@@ -1768,9 +1677,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "log-driver",
     "title": "Log Driver",
-    "legacyBackgrounds": [
-      "Log driver"
-    ],
     "locations": [
       "Timber Grove"
     ],
@@ -1822,9 +1728,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "market-gardener",
     "title": "Market Gardener",
-    "legacyBackgrounds": [
-      "Market gardener"
-    ],
     "locations": [
       "Corona"
     ],
@@ -1877,9 +1780,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "messenger-page",
     "title": "Messenger Page",
-    "legacyBackgrounds": [
-      "Messenger page"
-    ],
     "locations": [
       "Corona"
     ],
@@ -1932,9 +1832,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "monk-in-training",
     "title": "Monk-In-Training",
-    "legacyBackgrounds": [
-      "Monk-in-training"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -1986,9 +1883,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "orchard-picker",
     "title": "Orchard Picker",
-    "legacyBackgrounds": [
-      "Orchard picker"
-    ],
     "locations": [
       "Creekside"
     ],
@@ -2041,9 +1935,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "ostracized-noble",
     "title": "Ostracized Noble",
-    "legacyBackgrounds": [
-      "Ostracized noble"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -2095,9 +1986,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "pearl-diver",
     "title": "Pearl Diver",
-    "legacyBackgrounds": [
-      "Pearl diver"
-    ],
     "locations": [
       "Coral Keep"
     ],
@@ -2150,9 +2038,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "quest-board-runner",
     "title": "Quest Board Runner",
-    "legacyBackgrounds": [
-      "Quest board runner"
-    ],
     "locations": [
       "Dragon's Reach Road"
     ],
@@ -2205,9 +2090,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "reed-gatherer",
     "title": "Reed Gatherer",
-    "legacyBackgrounds": [
-      "Reed gatherer"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -2260,9 +2142,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "river-trader",
     "title": "River Trader",
-    "legacyBackgrounds": [
-      "River trader"
-    ],
     "locations": [
       "Corner Stone"
     ],
@@ -2315,9 +2194,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "road-scout",
     "title": "Road Scout",
-    "legacyBackgrounds": [
-      "Road scout"
-    ],
     "locations": [
       "Whiteheart"
     ],
@@ -2369,9 +2245,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "sap-collector",
     "title": "Sap Collector",
-    "legacyBackgrounds": [
-      "Sap collector"
-    ],
     "locations": [
       "Timber Grove"
     ],
@@ -2424,9 +2297,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "sawyer",
     "title": "Sawyer",
-    "legacyBackgrounds": [
-      "Sawyer"
-    ],
     "locations": [
       "Dancing Pines"
     ],
@@ -2479,9 +2349,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "scribes-apprentice",
     "title": "Scribe'S Apprentice",
-    "legacyBackgrounds": [
-      "Scribe's apprentice"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -2533,9 +2400,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "smugglers-runner",
     "title": "Smuggler'S Runner",
-    "legacyBackgrounds": [
-      "Smuggler's runner"
-    ],
     "locations": [
       "Coral Keep"
     ],
@@ -2587,9 +2451,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "street-artist",
     "title": "Street Artist",
-    "legacyBackgrounds": [
-      "Street artist"
-    ],
     "locations": [
       "Corner Stone"
     ],
@@ -2642,9 +2503,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "street-performer",
     "title": "Street Performer",
-    "legacyBackgrounds": [
-      "Street performer"
-    ],
     "locations": [
       "Coral Keep"
     ],
@@ -2697,9 +2555,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "tea-picker",
     "title": "Tea Picker",
-    "legacyBackgrounds": [
-      "Tea picker"
-    ],
     "locations": [
       "Mountain Top"
     ],
@@ -2752,9 +2607,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "tea-stall-owner",
     "title": "Tea Stall Owner",
-    "legacyBackgrounds": [
-      "Tea stall owner"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -2807,9 +2659,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "trapper",
     "title": "Trapper",
-    "legacyBackgrounds": [
-      "Trapper"
-    ],
     "locations": [
       "Dancing Pines"
     ],
@@ -2861,9 +2710,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "tunnel-scout",
     "title": "Tunnel Scout",
-    "legacyBackgrounds": [
-      "Tunnel scout"
-    ],
     "locations": [
       "Dancing Pines"
     ],
@@ -2915,9 +2761,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "unemployed-vagrant",
     "title": "Unemployed Vagrant",
-    "legacyBackgrounds": [
-      "Unemployed vagrant"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -2968,9 +2811,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "veteran-watchman",
     "title": "Veteran Watchman",
-    "legacyBackgrounds": [
-      "Veteran watchman"
-    ],
     "locations": [
       "Corona"
     ],
@@ -3022,9 +2862,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "wagoneer",
     "title": "Wagoneer",
-    "legacyBackgrounds": [
-      "Wagoneer"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -3076,9 +2913,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "young-farmhand",
     "title": "Young Farmhand",
-    "legacyBackgrounds": [
-      "Young farmhand"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -3131,9 +2965,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "young-miner",
     "title": "Young Miner",
-    "legacyBackgrounds": [
-      "Young miner"
-    ],
     "locations": [
       "Warm Springs"
     ],
@@ -3185,9 +3016,6 @@ export const BACKSTORIES: RichBackstory[] = [
   {
     "id": "young-tutor",
     "title": "Young Tutor",
-    "legacyBackgrounds": [
-      "Young tutor"
-    ],
     "locations": [
       "Wave's Break"
     ],
@@ -3241,6 +3069,3 @@ export const BACKSTORIES: RichBackstory[] = [
 
 export const BACKSTORY_BY_ID = Object.fromEntries(BACKSTORIES.map(backstory => [backstory.id, backstory] as const));
 
-export const LEGACY_BACKSTORY_LOOKUP = new Map<string, RichBackstory>(
-  BACKSTORIES.flatMap(backstory => backstory.legacyBackgrounds.map(name => [name, backstory] as const))
-);

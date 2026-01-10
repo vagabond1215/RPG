@@ -552,7 +552,6 @@ export const BACKSTORY_BY_ID = Object.fromEntries(
   BACKSTORIES.map(entry => [entry.id, entry])
 );
 
-export const LEGACY_BACKSTORY_LOOKUP = new Map();
 
 export function getBackstoriesByCriteria(criteria = {}) {
   const { location } = criteria;
