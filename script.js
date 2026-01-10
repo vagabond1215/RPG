@@ -14100,7 +14100,6 @@ function startCharacterCreation() {
       type: 'select',
       options: ['Male', 'Female']
     },
-    classField,
     alignmentField,
     { key: 'characterImage', label: 'Choose your character', type: 'select' }
   ];
@@ -14108,7 +14107,6 @@ function startCharacterCreation() {
   const FIELD_STEP_LABELS = {
     race: 'Race',
     sex: 'Sex',
-    class: 'Class',
     alignment: 'Alignment',
     characterImage: 'Character'
   };
@@ -14122,6 +14120,10 @@ function startCharacterCreation() {
       JSON.stringify({ step, character, portraitZoom: ccPortraitZoom })
     );
   };
+  if (!character.class && classField.options.length) {
+    character.class = classField.options[0];
+    persistState();
+  }
 
   const renderResourceBars = resources => {
     if (!resources || typeof resources !== 'object') return '';
@@ -14265,10 +14267,6 @@ function startCharacterCreation() {
     else if (step === activeFields.length + 2) field = backstoryField;
     if (field && field.key === 'race' && !character.race) {
       character.race = field.options[0];
-      persistState();
-    }
-    if (field && field.key === 'class' && !character.class) {
-      character.class = classField.options[0];
       persistState();
     }
     if (field && field.key === 'location' && !character.location) {
@@ -14444,7 +14442,7 @@ function startCharacterCreation() {
         if (!backstoryPrerequisitesMet) {
           return {
             descHTML:
-              '<div class="race-description"><p class="cc-backstory-locked">Select a name, race, sex, class, alignment, and starting location to unlock curated backstories.</p></div>'
+              '<div class="race-description"><p class="cc-backstory-locked">Select a name, race, sex, alignment, and starting location to unlock curated backstories.</p></div>'
           };
         }
         if (!availableBackstories.length) {
@@ -14481,30 +14479,6 @@ function startCharacterCreation() {
           return { descHTML };
         }
       }
-      if (field && field.key === 'class' && character.class) {
-        const build = buildEntries.find(b => b.primary === character.class);
-        if (!build) return {};
-        const baseAttrs = { ...getRaceStartingAttributes(character.race), LCK: 10 };
-        for (const [k, v] of Object.entries(build.stats)) {
-          baseAttrs[k] = (baseAttrs[k] || 0) + v;
-        }
-        const resources = {
-          HP: maxHP(baseAttrs.VIT, baseAttrs.CON, 1),
-          MP: maxMP(baseAttrs.WIS, 1),
-          ST: maxStamina(baseAttrs.CON, 1),
-        };
-        const statsHTML = renderStartingStats(baseAttrs, resources);
-        const strengths = Object.entries(build.stats)
-          .filter(([, v]) => v > 0)
-          .map(([k]) => k)
-          .join(', ') || 'None';
-        const weaknesses = Object.entries(build.stats)
-          .filter(([, v]) => v < 0)
-          .map(([k]) => k)
-          .join(', ') || 'None';
-        const descHTML = `<div class="race-description"><p><strong>Skills & Abilities:</strong> ${build.description}</p><p><strong>Strengths:</strong> ${strengths}</p><p><strong>Weaknesses:</strong> ${weaknesses}</p><p><strong>Advancement:</strong> ${build.advanced}</p></div>`;
-        return { statsHTML, descHTML };
-      }
       if (!character.race) return {};
       const attrs = getRaceStartingAttributes(character.race);
       const resources = {
@@ -14519,7 +14493,7 @@ function startCharacterCreation() {
     const { statsHTML = '', descHTML = '' } = displayData;
     const statsSection =
       field &&
-      (field.key === 'race' || field.key === 'class') &&
+      field.key === 'race' &&
       statsHTML
         ? `<aside class="cc-stats">${statsHTML}</aside>`
         : '';
@@ -14562,18 +14536,6 @@ function startCharacterCreation() {
             wrapperClass: 'sex-carousel',
             arrowClass: 'sex-arrow',
             contentHTML: `<button class="option-button sex-button">${character.sex}</button>`,
-          });
-        } else if (field.key === 'class') {
-          const options = field.options;
-          let index = options.indexOf(character.class);
-          if (index === -1) {
-            index = 0;
-            character.class = options[0];
-          }
-          inputHTML = createWheelSelectorTemplate({
-            wrapperClass: 'class-carousel',
-            arrowClass: 'class-arrow',
-            contentHTML: `<button class="option-button class-button">${character.class}</button>`,
           });
         } else if (field.key === 'backstory') {
           if (!backstoryPrerequisitesMet) {
@@ -14739,18 +14701,6 @@ function startCharacterCreation() {
         };
         document.querySelector('.sex-arrow.left').addEventListener('click', () => change(-1));
         document.querySelector('.sex-arrow.right').addEventListener('click', () => change(1));
-      } else if (field.key === 'class') {
-        const options = field.options;
-        let index = options.indexOf(character.class);
-        const change = dir => {
-          index = (index + dir + options.length) % options.length;
-          character.class = options[index];
-          clearBackstorySelection();
-          persistState();
-          renderStep();
-        };
-        document.querySelector('.class-arrow.left').addEventListener('click', () => change(-1));
-        document.querySelector('.class-arrow.right').addEventListener('click', () => change(1));
       } else if (field.key === 'alignment') {
         document.querySelectorAll('.alignment-choice').forEach(btn => {
           btn.addEventListener('click', () => {
