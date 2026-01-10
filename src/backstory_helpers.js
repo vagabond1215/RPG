@@ -292,47 +292,47 @@ const ALIGNMENT_REFLECTION_BUILDERS = {
   "Lawful Good": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} once audited guild ledgers with ${context.signatureTool}, refusing to abandon ${context.bond} when a magistrate ordered silence. ${pronounSubject} still ${selectVerb(pronouns, "believes", "believe")} ${context.virtue} only breathes when the law bends toward mercy.`;
+    return `${subject} once audited guild ledgers with ${context.signatureTool}, refusing to abandon ${context.bond} when a magistrate ordered silence. ${pronounSubject} now ${selectVerb(pronouns, "steers", "steer")} the law toward mercy and ${selectVerb(pronouns, "keeps", "keep")} ${context.virtue} close when fear rises. If ${context.backstorySeed} resurfaces, ${pronounSubject} will answer it with steadier hands.`;
   },
   "Neutral Good": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} diverted a shipment to feed ${context.bond} after a flood, trading ${context.signatureTool} repairs for loaves. ${pronounSubject} still ${selectVerb(pronouns, "weighs", "weigh")} that night as proof that quiet kindness outruns protocol.`;
+    return `${subject} diverted a shipment to feed ${context.bond} after a flood, trading ${context.signatureTool} repairs for loaves. ${pronounSubject} now ${selectVerb(pronouns, "puts", "put")} help before protocol and ${selectVerb(pronouns, "keeps", "keep")} a promise to return what was borrowed. ${pronounSubject} hopes ${context.backstorySeed} becomes a sign that kindness circles back.`;
   },
   "Chaotic Good": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} broke a curfew bell with ${context.signatureTool} so refugees could slip through the gate, laughing when fines rained down. ${pronounSubject} still ${selectVerb(pronouns, "grins", "grin")} at the scar and ${selectVerb(pronouns, "calls", "call")} it ${context.virtue} with teeth.`;
+    return `${subject} broke a curfew bell with ${context.signatureTool} so refugees could slip through the gate, laughing when fines rained down. ${pronounSubject} now ${selectVerb(pronouns, "calls", "call")} freedom the only honest compass and ${selectVerb(pronouns, "keeps", "keep")} ${context.virtue} close when the city tightens its grip. Someday, ${pronounSubject} wants ${context.bond} to remember that night as the start of wider doors.`;
   },
   "Lawful Neutral": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} once enforced a tribunal verdict against ${context.bond}, polishing ${context.signatureTool} until the hall doors opened. ${pronounSubject} still ${selectVerb(pronouns, "studies", "study")} the paperwork, reminding ${pronouns.object} that order is only honest when questioned.`;
+    return `${subject} once enforced a tribunal verdict against ${context.bond}, polishing ${context.signatureTool} until the hall doors opened. ${pronounSubject} now ${selectVerb(pronouns, "studies", "study")} the paperwork and ${selectVerb(pronouns, "insists", "insist")} order stays honest only when questioned. If ${context.backstorySeed} returns, ${pronounSubject} will weigh it against the rules in full light.`;
   },
   "True Neutral": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} weighed a smugglers' tithe against a flooded granary and split the haul, recording both debts beside ${context.signatureTool}. ${pronounSubject} still ${selectVerb(pronouns, "keeps", "keep")} the ledger open to that page in case the balance tilts again.`;
+    return `${subject} weighed a smugglers' tithe against a flooded granary and split the haul, recording both debts beside ${context.signatureTool}. ${pronounSubject} now ${selectVerb(pronouns, "keeps", "keep")} the ledger open to that page, watching for the balance to tilt again. When it does, ${pronounSubject} plans to steady ${context.bond} without choosing sides.`;
   },
   "Chaotic Neutral": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} vanished from duty to chase a rumor tied to ${context.backstorySeed}, trusting ${context.signatureTool} to talk through any fallout. ${pronounSubject} still ${selectVerb(pronouns, "shrugs", "shrug")} at the reprimand and ${selectVerb(pronouns, "calls", "call")} freedom the only honest compass.`;
+    return `${subject} slipped from duty to chase a rumor tied to ${context.backstorySeed}, trusting ${context.signatureTool} to smooth the fallout. ${pronounSubject} now ${selectVerb(pronouns, "shrugs", "shrug")} at the reprimand and ${selectVerb(pronouns, "calls", "call")} freedom the only honest compass. If the rumor proves true, ${pronounSubject} will follow it past any border.`;
   },
   "Lawful Evil": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} doctored warrants with ${context.signatureTool}, binding rivals to crushing debts in the name of stability. ${pronounSubject} still ${selectVerb(pronouns, "tallies", "tally")} the profits beside ${context.bond}, certain that dominance is just another clause.`;
+    return `${subject} doctored warrants with ${context.signatureTool}, binding rivals to crushing debts in the name of stability. ${pronounSubject} now ${selectVerb(pronouns, "tallies", "tally")} the profits beside ${context.bond} and treats dominance as just another clause. The next dispute over ${context.backstorySeed} will only sharpen that grip.`;
   },
   "Neutral Evil": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} sold a patrol route for coin, financing personal schemes with ${context.signatureTool} tucked beneath a cloak. ${pronounSubject} still ${selectVerb(pronouns, "calls", "call")} it pragmatism and lets ${context.flaw} masquerade as foresight.`;
+    return `${subject} sold a patrol route for coin, financing personal schemes with ${context.signatureTool} tucked beneath a cloak. ${pronounSubject} now ${selectVerb(pronouns, "calls", "call")} it pragmatism and lets ${context.flaw} masquerade as foresight. ${pronounSubject} expects ${context.backstorySeed} to open the next door worth taking.`;
   },
   "Chaotic Evil": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} carved threats into dock pilings with ${context.signatureTool}, daring ${context.bond} to defy the new order. ${pronounSubject} still ${selectVerb(pronouns, "enjoys", "enjoy")} how fear eclipsed caution and wears ${context.flaw} like armor.`;
+    return `${subject} carved threats into dock pilings with ${context.signatureTool}, daring ${context.bond} to defy the new order. ${pronounSubject} now ${selectVerb(pronouns, "enjoys", "enjoy")} how fear eclipsed caution and wears ${context.flaw} like armor. When ${context.backstorySeed} stirs again, ${pronounSubject} will make it a warning.`;
   },
 };
 
@@ -353,7 +353,7 @@ function createAlignmentReflection(context, pronouns, shortName, selectedBeatTex
 function createLingeringRumor(context, pronouns, shortName, selectedBeatText) {
   const subject = shortName || capitalize(pronouns.subject);
   const pronounSubject = capitalize(pronouns.subject);
-  const rumor = `Rumors still coil around ${context.backstorySeed}, tucked where ${subject} trusted ${pronouns.possessive} ${context.signatureTool} to hide a promise. ${pronounSubject} still ${selectVerb(pronouns, "wonders", "wonder")} if naming ${context.secret} would heal ${context.bond} or scatter ${context.virtue}.`;
+  const rumor = `Whispers keep circling ${context.backstorySeed}, tucked where ${subject} hid ${pronouns.possessive} ${context.signatureTool} after a promise. The tale follows ${pronouns.object} among ${context.bond}, and ${pronounSubject} ${selectVerb(pronouns, "suspects", "suspect")} that naming ${context.secret} could mend old rifts or set a new journey in motion.`;
   if (!selectedBeatText) {
     return rumor;
   }

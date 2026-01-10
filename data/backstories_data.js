@@ -3,7 +3,7 @@ export default {
   "backstories": [
     {
       "id": "backstory_waves_break_tideward_1",
-      "title": "{characterName} — {race} {classLower}, {alignment} ({location}, {spawnDistrict})",
+      "title": "Tidevault Initiate",
       "characterName": "{characterName}",
       "race": "{race}",
       "class": "{class}",
@@ -120,7 +120,7 @@ export default {
     },
     {
       "id": "backstory_coral_keep_athenaeum_1",
-      "title": "{characterName} — {race} {classLower}, {alignment} ({location}, {spawnDistrict})",
+      "title": "Auric Archivist",
       "characterName": "{characterName}",
       "race": "{race}",
       "class": "{class}",
@@ -236,7 +236,7 @@ export default {
     },
     {
       "id": "backstory_warm_springs_forge_1",
-      "title": "{characterName} — {race} {classLower}, {alignment} ({location}, {spawnDistrict})",
+      "title": "Geyser Cantor",
       "characterName": "{characterName}",
       "race": "{race}",
       "class": "{class}",
@@ -352,7 +352,7 @@ export default {
     },
     {
       "id": "backstory_creekside_whisper_1",
-      "title": "{characterName} — {race} {classLower}, {alignment} ({location}, {spawnDistrict})",
+      "title": "Lantern Whisper Courier",
       "characterName": "{characterName}",
       "race": "{race}",
       "class": "{class}",
@@ -401,7 +401,7 @@ export default {
             ]
           },
           {
-            "text": "Lantern Quay watchers sent {shortName} to Wave's Break's Port District to drill with tidevault lookouts, blending harbor bell codes with canal signal fans.",
+            "text": "Lantern Quay watchers sent {shortName} to Wave's Break Port District to drill with tidevault lookouts, blending harbor bell codes with canal signal fans.",
             "tags": [
               "waves-break",
               "training",
@@ -488,7 +488,7 @@ export default {
       "default": "Festival courtyards in {spawnDistrict} kept {characterName} nimble, so {shortName} layers neighborly humor over every {classLower} stance until tense rooms remember to breathe."
     },
     "Human": {
-      "default": "Crowded wards across {spawnDistrict} demanded versatility from {characterName}, and {shortName} now switches between {classLower} disciplines with the steady, {voiceTone} calm of someone raised to adapt."
+      "default": "Crowded wards across {spawnDistrict} demanded versatility from {characterName}, and {shortName} now moves through {classLower} disciplines with the steady, {voiceTone} calm of someone raised to adapt."
     },
     "Salamander": {
       "default": "Steam-scarred elders beside {spawnDistrict}'s vents drilled {characterName} to anchor breath against heat, leaving {shortName} to channel each {classLower} lesson through that blazing composure."
