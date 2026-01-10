@@ -292,12 +292,13 @@ const ALIGNMENT_REFLECTION_BUILDERS = {
   "Lawful Good": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} once audited guild ledgers with ${context.signatureTool}, refusing to abandon ${context.bond} when a magistrate ordered silence. ${pronounSubject} now ${selectVerb(pronouns, "steers", "steer")} the law toward mercy and ${selectVerb(pronouns, "keeps", "keep")} ${context.virtue} close when fear rises. If ${context.backstorySeed} resurfaces, ${pronounSubject} will answer it with steadier hands.`;
+    const pronounSubjectLower = pronouns.subject || "they";
+    return `${subject} once audited guild ledgers with ${context.signatureTool}, refusing to abandon ${context.bond} when a magistrate ordered silence. ${pronounSubject} still ${selectVerb(pronouns, "believes", "believe")} ${context.virtue} matters most and ${selectVerb(pronouns, "steers", "steer")} the law toward mercy when fear rises. If ${context.backstorySeed} resurfaces, ${pronounSubjectLower} will answer it with steadier hands.`;
   },
   "Neutral Good": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} diverted a shipment to feed ${context.bond} after a flood, trading ${context.signatureTool} repairs for loaves. ${pronounSubject} now ${selectVerb(pronouns, "puts", "put")} help before protocol and ${selectVerb(pronouns, "keeps", "keep")} a promise to return what was borrowed. ${pronounSubject} hopes ${context.backstorySeed} becomes a sign that kindness circles back.`;
+    return `${subject} diverted a shipment to feed ${context.bond} after a flood, trading ${context.signatureTool} repairs for loaves. ${pronounSubject} still ${selectVerb(pronouns, "weighs", "weigh")} that night as proof that quiet kindness outruns protocol, and ${selectVerb(pronouns, "puts", "put")} help before rules when it matters. ${pronounSubject} hopes ${context.backstorySeed} becomes a sign that kindness circles back.`;
   },
   "Chaotic Good": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
@@ -307,7 +308,7 @@ const ALIGNMENT_REFLECTION_BUILDERS = {
   "Lawful Neutral": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
     const pronounSubject = capitalize(pronouns.subject);
-    return `${subject} once enforced a tribunal verdict against ${context.bond}, polishing ${context.signatureTool} until the hall doors opened. ${pronounSubject} now ${selectVerb(pronouns, "studies", "study")} the paperwork and ${selectVerb(pronouns, "insists", "insist")} order stays honest only when questioned. If ${context.backstorySeed} returns, ${pronounSubject} will weigh it against the rules in full light.`;
+    return `${subject} once enforced a tribunal verdict against ${context.bond}, polishing ${context.signatureTool} until the hall doors opened. ${pronounSubject} still ${selectVerb(pronouns, "studies", "study")} the paperwork and ${selectVerb(pronouns, "insists", "insist")} order stays honest only when questioned. If ${context.backstorySeed} returns, ${pronounSubject} will weigh it against the rules in full light.`;
   },
   "True Neutral": (context, pronouns, shortName) => {
     const subject = shortName || capitalize(pronouns.subject);
@@ -353,7 +354,7 @@ function createAlignmentReflection(context, pronouns, shortName, selectedBeatTex
 function createLingeringRumor(context, pronouns, shortName, selectedBeatText) {
   const subject = shortName || capitalize(pronouns.subject);
   const pronounSubject = capitalize(pronouns.subject);
-  const rumor = `Whispers keep circling ${context.backstorySeed}, tucked where ${subject} hid ${pronouns.possessive} ${context.signatureTool} after a promise. The tale follows ${pronouns.object} among ${context.bond}, and ${pronounSubject} ${selectVerb(pronouns, "suspects", "suspect")} that naming ${context.secret} could mend old rifts or set a new journey in motion.`;
+  const rumor = `Whispers keep circling ${context.backstorySeed}, tucked where ${subject} hid ${pronouns.possessive} ${context.signatureTool} after a promise. The tale follows ${pronouns.object} among ${context.bond}, and ${pronounSubject} still ${selectVerb(pronouns, "wonders", "wonder")} if naming ${context.secret} could mend old rifts or set a new journey in motion.`;
   if (!selectedBeatText) {
     return rumor;
   }
