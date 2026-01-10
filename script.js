@@ -79,6 +79,7 @@ import {
 import { characterBuilds } from "./data/game/character_builds.js";
 import { shopCategoriesForBuilding, itemsByCategory } from "./data/game/shop.js";
 import { presentCombatEncounter, maybeTriggerCombatEncounter } from "./combat_minigame.js";
+import { attemptGuildEntry } from "./src/guild_acquisition.js";
 
 applyWavesBreakRegistry(LOCATIONS);
 
@@ -10002,6 +10003,22 @@ function buildingInteractionLabels(context) {
   return { knock, search, request };
 }
 
+function guildIdForBuilding(buildingName) {
+  if (!buildingName) return null;
+  const lower = buildingName.toLowerCase();
+  if (!lower.includes('guild')) return null;
+  if (/(adventurer|adventurers')/.test(lower)) return 'adventurers_guild';
+  if (/(merchant|trader|exchange)/.test(lower)) return 'merchant_guild';
+  if (/(worker|labor|labour)/.test(lower)) return 'workers_guild';
+  if (/(agricultur|farmer|harvest|orchard|ranch|farm)/.test(lower)) return 'agricultural_guild';
+  return 'crafting_guild';
+}
+
+function guildEntryLabel(buildingName) {
+  if (!buildingName) return 'Request guild entry';
+  return `Request entry to ${buildingName}`;
+}
+
 function scoreQuestCandidate(info) {
   if (!info) return -Infinity;
   let score = 0;
@@ -10357,6 +10374,32 @@ function handleBuildingQuestRequest(position) {
     showNavigation();
   }
 }
+
+function handleGuildEntry(position, guildId) {
+  const context = createBuildingEncounterContext(position);
+  if (!context) return;
+  const state = ensureBuildingEncounterState(context);
+  const resolvedGuildId = guildId || guildIdForBuilding(position?.building);
+  const result = attemptGuildEntry(resolvedGuildId, currentCharacter);
+  const message = result.message || (result.ok ? 'Guild entry accepted.' : 'Guild entry unavailable.');
+  state.message = message;
+  state.messageType = result.ok ? 'success' : 'info';
+  setBuildingEncounterState(position.building, state);
+  recordCharacterAction(position, {
+    kind: 'message',
+    title: 'Guild Entry',
+    body: message,
+    tone: result.ok ? 'success' : 'info',
+  });
+  if (resolvedGuildId) {
+    console.info(`Guild entry attempt for ${resolvedGuildId}: ${message}`);
+  } else {
+    console.info(`Guild entry attempt: ${message}`);
+  }
+  saveProfiles();
+  showNavigation();
+}
+
 function showNavigation() {
   updateTopMenuIndicators();
   if (!currentCharacter) return;
@@ -10477,6 +10520,16 @@ function showNavigation() {
         hideLabel: false,
       }),
     ];
+    const guildId = guildIdForBuilding(pos.building);
+    if (guildId) {
+      interactionButtons.push(
+        createNavItem({
+          type: 'interaction',
+          action: `guild-entry:${guildId}`,
+          name: guildEntryLabel(pos.building),
+        })
+      );
+    }
     (building.interactions || []).forEach(i => {
       if (i.action === 'rest') return;
       if (i.action === 'manage' && !canManageBuilding(pos.city, pos.building)) return;
@@ -10991,6 +11044,10 @@ function showNavigation() {
               return;
             } else if (action === 'building-request-work') {
               handleBuildingQuestRequest(pos);
+              return;
+            } else if (action.startsWith('guild-entry:')) {
+              const guildId = action.slice('guild-entry:'.length);
+              handleGuildEntry(pos, guildId || null);
               return;
             } else if (action.startsWith('environment:')) {
               handleEnvironmentInteraction(action, pos).catch(console.error);
