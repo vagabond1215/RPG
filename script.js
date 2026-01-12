@@ -14470,10 +14470,8 @@ function startCharacterCreation() {
             : '';
           const descHTML = `
             <div class="race-description">
-              <section class="cc-backstory-preview">
-                ${hookRow}
-                <div id="cc-biography-output" class="cc-biography" aria-live="polite"></div>
-              </section>
+              ${hookRow}
+              <div id="cc-biography-output" class="cc-biography" aria-live="polite"></div>
             </div>
           `;
           return { descHTML };
@@ -14819,16 +14817,7 @@ function startCharacterCreation() {
                 .map(paragraph => paragraph.trim())
                 .filter(Boolean);
 
-              const headerSource =
-                hook?.label || record.instance?.title || record.entry.title || record.entry.characterName || '';
-
               let content = '';
-              if (headerSource) {
-                content += `<h3 class="cc-biography-title">${escapeHtml(headerSource)}</h3>`;
-              }
-              if (hook?.label) {
-                content += `<p class="cc-biography-hook">${escapeHtml(hook.label)}</p>`;
-              }
               if (paragraphs.length) {
                 content += paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
               } else {
