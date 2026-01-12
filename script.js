@@ -14729,6 +14729,8 @@ function startCharacterCreation() {
           const hookWheelEl = document.getElementById('cc-backstory-hook-wheel');
           if (previewContainer) {
             let lastBioSignature = '';
+            let lastHookCount = null;
+            let lastBackstoryId = null;
             const getActiveRecord = () =>
               availableBackstoryInstances.find(({ entry }) => entry?.id === character.backstoryId) ||
               availableBackstoryInstances[0] ||
@@ -14761,22 +14763,29 @@ function startCharacterCreation() {
               }
 
               const hooks = getHooks();
-              let hookIndex = character.backstoryHookIndex ?? 0;
+              const normalizedHookIndex = Number(character.backstoryHookIndex);
+              let hookIndex = Number.isInteger(normalizedHookIndex) ? normalizedHookIndex : 0;
+              const backstoryId = record.entry.id ?? null;
+              const hooksChanged = lastBackstoryId !== backstoryId || lastHookCount !== hooks.length;
               if (hooks.length) {
-                if (!Number.isInteger(hookIndex) || hookIndex < 0 || hookIndex >= hooks.length) {
-                  hookIndex = Math.min(Math.max(hookIndex, 0), hooks.length - 1);
+                const clampedIndex = Math.min(Math.max(hookIndex, 0), hooks.length - 1);
+                const indexOutOfRange = hookIndex < 0 || hookIndex >= hooks.length;
+                if (indexOutOfRange || !Number.isInteger(normalizedHookIndex) || hooksChanged) {
+                  hookIndex = clampedIndex;
                   character.backstoryHookIndex = hookIndex;
                   wheelControl?.setIndex(hookIndex);
+                  wheelControl?.refresh();
                   persistState();
                 }
               } else {
                 hookIndex = 0;
-                if (character.backstoryHookIndex) {
-                  character.backstoryHookIndex = 0;
-                  persistState();
+                if (hooksChanged) {
+                  wheelControl?.setIndex(0);
+                  wheelControl?.refresh();
                 }
-                wheelControl?.setIndex(0);
               }
+              lastBackstoryId = backstoryId;
+              lastHookCount = hooks.length;
 
               const hook = hooks[hookIndex] || null;
               const districtId =
@@ -14831,7 +14840,9 @@ function startCharacterCreation() {
                   persistState();
                   renderBio();
                 },
-                character.backstoryHookIndex ?? 0
+                Number.isInteger(Number(character.backstoryHookIndex))
+                  ? Number(character.backstoryHookIndex)
+                  : 0
               );
             }
 
