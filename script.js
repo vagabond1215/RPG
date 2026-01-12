@@ -14553,17 +14553,13 @@ function startCharacterCreation() {
               const selectedRecord = availableBackstoryInstances.find(({ entry }) => entry?.id === selectedId);
               const instance = selectedRecord?.instance || character.backstory;
               const paragraphs = extractBackstoryParagraphs(instance);
-              const hookLabel = getBackstoryHookLabel(instance);
-              const fallbackSource = paragraphs[0] || instance?.title || '';
-              const normalizedFallback = fallbackSource
-                .replace(/\s+/g, ' ')
-                .trim();
+              const hooks = Array.isArray(selectedRecord?.entry?.hooks) ? selectedRecord.entry.hooks : [];
+              const hookIndex = Number.isInteger(character.backstoryHookIndex) ? character.backstoryHookIndex : 0;
+              const selectedHookLabel = hooks[hookIndex]?.label;
+              const hookLabel = selectedHookLabel || hooks[0]?.label || getBackstoryHookLabel(selectedRecord?.entry);
               const totalBackstories = options.length;
               const indexLabel = totalBackstories > 1 ? `${index + 1}/${totalBackstories} · ` : '';
-              const truncatedFallback = normalizedFallback.length > 80
-                ? `${normalizedFallback.slice(0, 77)}…`
-                : normalizedFallback;
-              const displayLabel = hookLabel || truncatedFallback || 'Select';
+              const displayLabel = hookLabel || selectedRecord?.entry?.title || 'Select';
               const buttonLabel = instance
                 ? escapeHtml(`${indexLabel}${displayLabel}`)
                 : 'Select';
@@ -14572,7 +14568,7 @@ function startCharacterCreation() {
                 arrowClass: 'backstory-arrow',
                 contentHTML: `<button class="option-button backstory-button" data-value="${escapeHtml(
                   selectedId || options[index] || ''
-                )}" title="${escapeHtml(paragraphs[0] || '')}">${buttonLabel}</button>`,
+                )}" title="${escapeHtml(paragraphs[0] || instance?.title || '')}">${buttonLabel}</button>`,
               });
             }
           }
