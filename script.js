@@ -14463,7 +14463,6 @@ function startCharacterCreation() {
           const hookRow = hasHookRow
             ? `
               <div class="cc-hook-row">
-                <span class="cc-backstory-heading">Hook</span>
                 <div id="cc-backstory-hook-wheel" class="cc-hook-wheel" role="listbox" aria-label="Backstory hook"></div>
               </div>
             `
