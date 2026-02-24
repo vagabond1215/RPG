@@ -1,13 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "esnext",
-    "lib": ["es2017", "dom"],
-    "moduleResolution": "node",
-    "strict": false,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "allowJs": true
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true
   },
-  "include": ["data/**/*.ts","src/**/*.ts","scripts/**/*.ts","tests/**/*.ts"]
+  "include": ["src/**/*"]
 }
