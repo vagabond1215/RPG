@@ -1,29 +1,11 @@
 {
-  "name": "rpg",
-  "version": "1.0.0",
-  "description": "This repository hosts a simple web-based text RPG prototype intended for deployment via [GitHub Pages](https://pages.github.com/).",
-  "main": "script.js",
-  "scripts": {
-    "validate": "tsx scripts/validateData.ts",
-    "build:indexes": "tsx scripts/buildIndexes.ts",
-    "build:spellbook": "tsx scripts/generateSpellbook.ts",
-    "test": "npm run test:unit && npm run test:economy",
-    "test:unit": "vitest run tests/*.test.ts",
-    "test:economy": "node --test tests/economy_import/*.test.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "rpg-refactor-base",
+  "private": true,
   "type": "module",
-  "dependencies": {
-    "csv-parse": "^6.1.0",
-    "slugify": "^1.6.6"
+  "scripts": {
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "acorn": "^8.15.0",
-    "ajv": "^8.17.1",
-    "tsx": "^4.20.6",
-    "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
+    "typescript": "^5.9.2"
   }
 }
